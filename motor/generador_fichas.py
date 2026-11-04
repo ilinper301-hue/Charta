@@ -2649,9 +2649,50 @@ Claves rep: """ + ", ".join(CAT) + """
 Opción común: --color amarillo|rosa|azul|verde (color del marco; si no, según el tipo de ficha)
 Salida: /mnt/user-data/outputs/ (la clave de respuestas se imprime en consola, no en el PDF)."""
 
+USO_FICHA = """Nueva API (fichas compuestas):
+  python generador_fichas.py ficha <modelo>[:op=v,op=v] [<modelo2>[:...]] [--alumnos "Ana,Luis"] [--distintas]
+                                   [--copias N] [--seed N] [--titulo "..."] [--color rosa|rosa,azul] [--salida archivo.pdf]
+  ej.: python generador_fichas.py ficha sumar.h20:nivel=con restar.recta:rango=20 --alumnos "Ana,Luis" --distintas
+  python generador_fichas.py modelos      (lista de modelos y sus opciones)"""
+
+def _valor(v):
+    if v.lower() in ("si", "sí", "true"): return True
+    if v.lower() in ("no", "false"): return False
+    try: return int(v)
+    except ValueError: return v
+
+def cli_ficha(a):
+    """Línea de órdenes sobre generar(): imprime la clave y guarda el PDF."""
+    opt = lambda k, d=None: a[a.index(k) + 1] if k in a else d
+    con_valor = ("--alumnos", "--copias", "--seed", "--titulo", "--color", "--salida")
+    pos = [x for k, x in enumerate(a) if not x.startswith("--") and not (k > 0 and a[k - 1] in con_valor)]
+    acts = []
+    for t in pos:
+        mid, _, ops = t.partition(":")
+        acts.append({"modelo": mid, **{k: _valor(v) for k, v in (o.split("=", 1) for o in ops.split(",") if o)}})
+    col = opt("--color"); col = col.split(",") if col and "," in col else col
+    spec = {"actividades": acts, "alumnos": [x for x in (opt("--alumnos") or "").split(",")],
+            "variaciones": "distintas" if "--distintas" in a else "iguales", "copias": int(opt("--copias", 1)),
+            "semilla": int(opt("--seed", 1)), "titulo": opt("--titulo"), "color": col}
+    pdf, clave = generar(spec)
+    ruta = opt("--salida") or OUT + "ficha_" + "_".join(x["modelo"].replace(".", "-") for x in acts) + ".pdf"
+    with open(ruta, "wb") as f: f.write(pdf)
+    print(f"{ruta} · {len(clave['paginas'])} página(s) · {clave['titulo']}")
+    for pg in clave["paginas"] if spec["variaciones"] == "distintas" else clave["paginas"][:1]:
+        print((pg["alumno"] or "(todas)") + ":"); [print("  ", k) for k in pg["claves"]]
+    return ruta, clave
+
+def cli_modelos():
+    for m in MOD.MODELOS:
+        ops = "; ".join(f"{o['id']}=" + ("|".join(str(v["valor"]) for v in o["valores"] if v["valor"] is not None) if o["tipo"] == "opcion"
+                        else f"{o['min']}..{o['max']}" if o["tipo"] == "numero" else "si|no") for o in m["opciones"])
+        print(f"{m['id']:<24} {m['nombre']:<38} rango={'|'.join(map(str, m['rangos'])) or '-'}  {'media' if 'media' in m['tamanos'] else 'solo completa'}" + (f"  [{ops}]" if ops else ""))
+
 if __name__ == "__main__":
     a = sys.argv[1:]
-    if not a: print(USO); sys.exit()
+    if not a: print(USO); print(USO_FICHA); sys.exit()
+    if a[0] == "ficha": cli_ficha(a[1:]); sys.exit()
+    if a[0] == "modelos": cli_modelos(); sys.exit()
     seed = int(a[a.index("--seed") + 1]) if "--seed" in a else 1
     if "--color" in a: COLOR = a[a.index("--color") + 1]
     pos = [x for k, x in enumerate(a) if not x.startswith("--") and not (k > 0 and a[k - 1] in ("--seed", "--huecos", "--modo", "--n", "--nivel", "--color"))]

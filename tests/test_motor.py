@@ -1,4 +1,5 @@
 """Prueba de regresión del motor de Charta.
+Comprueba también MODELOS, actividades (completa y media), compositor, generar() y la línea de órdenes.
 Uso:  python3 tests/test_motor.py          (rápida: 2 semillas)
       python3 tests/test_motor.py --full   (completa: 5 semillas, todos los niveles)
 Genera todas las fichas en una carpeta temporal y comprueba:
@@ -139,6 +140,19 @@ for var in ("iguales", "distintas"):
 pdf, k = g.generar({"actividades": [{"modelo": "rep.dado"}], "copias": 3, "color": "rosa"})
 if _np(pdf) != 3 or any(p["alumno"] for p in k["paginas"]): err += 1; print("COPIAS")
 if g.generar(dict(base, semilla=5))[1] == g.generar(base)[1]: err += 1; print("OTRA VARIANTE IGUAL")
+
+# ---- línea de órdenes (paso 1.5): orden nueva «ficha», «modelos» y una antigua
+import subprocess
+GEN = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "motor", "generador_fichas.py")
+for args, debe in ((["ficha", "sumar.h20:nivel=con", "restar.recta:rango=20", "--alumnos", "Ana,Luis", "--distintas",
+                     "--salida", OUT + "cli.pdf"], "2 página(s)"),
+                   (["ficha", "geometria.figuras", "--copias", "2", "--color", "verde", "--salida", OUT + "cli2.pdf"], "2 página(s)"),
+                   (["modelos"], "sumar.h20"), (["sumar", "h20", "20", "--seed", "2"], "h20 1-20:")):
+    r = subprocess.run([sys.executable, GEN] + args, capture_output=True, text=True, cwd=OUT); fichas += 1
+    if r.returncode or debe not in r.stdout: err += 1; print("CLI", args, r.stderr[-300:])
+    for x in EXP.finditer(r.stdout):
+        ops += 1
+        if eval(x.group(1).replace("−", "-").replace("–", "-")) != int(x.group(2)): err += 1; print("MAL CLI", x.group(0))
 
 print(f"Fichas: {fichas} | operaciones comprobadas: {ops} | errores: {err} | modelos: {len(mo.MODELOS)}")
 sys.exit(1 if err else 0)

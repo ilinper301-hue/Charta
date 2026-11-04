@@ -21,7 +21,8 @@
   - Hecho: `pagina(cv, acts, rnd, titulo, nombre, colores)`. Título por defecto «X y y». Si dos paneles salen del mismo color, el segundo pasa al siguiente de la paleta. Error claro si un modelo de solo página completa va en una hoja de dos.
 - [x] 1.4 API única `generar(spec) -> (pdf_bytes, clave)`. `spec`: actividades con sus parámetros, alumnos (lista o vacía), variaciones (`iguales` o `distintas`: semilla por alumno), color y título. Un PDF con una página por alumno.
   - Hecho: `generar(spec)`. Sin alumnos, `copias` páginas con nombre en blanco. Semilla de cada página = semilla×1000003 (+ nº de alumno si `distintas`): reproducible. Clave: `{"titulo", "variaciones", "paginas": [{"alumno", "claves"}]}`.
-- [ ] 1.5 Mantener la línea de órdenes actual sobre la nueva API; ampliar `tests/test_motor.py` (combinaciones, nombres, variaciones). Ejecutar `--full`.
+- [x] 1.5 Mantener la línea de órdenes actual sobre la nueva API; ampliar `tests/test_motor.py` (combinaciones, nombres, variaciones). Ejecutar `--full`.
+  - Hecho: órdenes nuevas `ficha` (sobre `generar()`) y `modelos`; las antiguas siguen igual. `--full`: 6.326 fichas, 29.505 operaciones, 0 errores. **Fase 1 cerrada.**
 
 ## Fase 2 · Prototipo en Android (medir Pyodide)
 - [ ] 2.1 `app/index.html` mínimo: carga Pyodide + ReportLab + motor, un selector de modelo, botón Generar, vista previa del PDF, Descargar/Compartir.

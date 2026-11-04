@@ -53,6 +53,11 @@ python3 motor/generador_fichas.py <familia> <clave> <máx> [opciones]
 familias: rep, combinada, suma, conteo, orden, valor, sumar, restar, juegos, geometria (sin rango), medida, estadistica
 comunes: --seed N · --color amarillo|rosa|azul|verde
 ```
+Nueva (sobre `generar()`):
+```
+python3 motor/generador_fichas.py ficha sumar.h20:nivel=con restar.recta:rango=20 --alumnos "Ana,Luis" --distintas [--copias N] [--seed N] [--titulo ...] [--color rosa|rosa,azul] [--salida f.pdf]
+python3 motor/generador_fichas.py modelos     (lista de modelos, rangos, tamaños y opciones)
+```
 Ejecutar sin argumentos para ver todas las claves y opciones.
 
 ## Catálogo actual (1.º, Matemáticas)
