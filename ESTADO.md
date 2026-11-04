@@ -8,8 +8,8 @@
 
 ## Fase 0 · Preparación (Iván)
 - [x] Crear el repositorio `ilinper301-hue/Charta` y subir el paquete inicial.
-- [ ] Activar GitHub Pages (Iván, desde Settings → Pages: rama main, carpeta raíz). Claude no puede hacerlo desde su conexión.
-- [ ] Añadir `Andika-Regular.ttf` y `Andika-Bold.ttf` (Google Fonts) a `motor/`.
+- [x] Activar GitHub Pages (Iván, desde Settings → Pages: rama main, carpeta raíz). Claude no puede hacerlo desde su conexión.
+- [x] Añadir `Andika-Regular.ttf` y `Andika-Bold.ttf` (Google Fonts) a `motor/`.
 - [x] Conectar el repositorio para que Claude suba los cambios directamente a main.
 
 ## Fase 1 · Motor de actividades combinables
