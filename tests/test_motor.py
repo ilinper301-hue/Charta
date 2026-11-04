@@ -107,5 +107,25 @@ for m in mo.MODELOS:
             for seed in SEEDS: run_act(m, p, seed, tam)
     CV.showPage()
 
+# ---- compositor de página (paso 1.3): combinaciones al azar, con y sin nombre, y errores esperados
+rp = random.Random(7); medias = [m["id"] for m in mo.MODELOS if "media" in m["tamanos"]]
+solo = [m["id"] for m in mo.MODELOS if m["tamanos"] == ("completa",)]
+CVP = canvas.Canvas(OUT + "paginas.pdf", pagesize=g.A4)
+for i in range(60 if FULL else 25):
+    acts = [{"modelo": x} for x in (rp.sample(medias, 2) if i % 3 else [rp.choice(medias + solo)])]
+    try:
+        claves = g.pagina(CVP, acts, random.Random(i), nombre=("Alumno Número %d" % i) if i % 2 else ""); fichas += 1
+        if len(claves) != len(acts): err += 1; print("CLAVES", acts)
+        for x in EXP.finditer(" ".join(claves)):
+            ops += 1
+            if eval(x.group(1).replace("−", "-").replace("–", "-")) != int(x.group(2)): err += 1; print("MAL", acts, x.group(0))
+    except Exception as e:
+        err += 1; print("ERROR página", acts, repr(e))
+    CVP.showPage()
+for acts in ([{"modelo": solo[0]}, {"modelo": medias[0]}], [], [{"modelo": medias[0]}]*3):
+    try: g.pagina(CVP, acts, random.Random(1)); err += 1; print("DEBERÍA FALLAR", acts)
+    except ValueError: pass
+CVP.save()
+
 print(f"Fichas: {fichas} | operaciones comprobadas: {ops} | errores: {err} | modelos: {len(mo.MODELOS)}")
 sys.exit(1 if err else 0)

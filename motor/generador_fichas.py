@@ -2551,6 +2551,48 @@ def actividad(cv, rect, params, rnd, num=1, color=None, tamano="completa"):
     finally:
         cv.restoreState(); _ACT = None; PARTE = 1.0
 
+# ------------------------------------------------------------ COMPOSITOR DE PÁGINA (paso 1.3)
+ORDEN_COLOR = ["amarillo", "rosa", "azul", "verde"]
+
+def color_modelo(m):
+    """Color del panel según la familia (el mismo que tiene su ficha suelta)."""
+    return color_familia({"combinada": "que_numero_es", "suma": "suma_y_dibuja"}.get(m["familia"], m["familia"]))
+
+def titulo_pagina(acts):
+    """Título por defecto: el del modelo; con dos, «X y y» (el segundo en minúscula)."""
+    ts = [_titulo(titulo_modelo(MOD.modelo(a["modelo"]), a)) for a in acts]
+    if len(ts) == 1 or ts[0] == ts[1]: return ts[0]
+    return ts[0] + " y " + ts[1][0].lower() + ts[1][1:]
+
+def pagina(cv, acts, rnd, titulo=None, nombre="", colores=None):
+    """Una página A4: Nombre (impreso o en blanco), Fecha, título y 1 o 2 actividades,
+    cada una en su panel de color y con su número, como la ficha de muestra.
+    acts = [{"modelo": id, ...params}, ...]; colores = lista opcional (None = automático).
+    Devuelve la lista de claves (una por actividad). No llama a showPage()."""
+    global c
+    if not 1 <= len(acts) <= 2: raise ValueError("Una página lleva 1 o 2 actividades.")
+    tam = "completa" if len(acts) == 1 else "media"
+    for a in acts:
+        m = MOD.modelo(a["modelo"])
+        if tam not in m["tamanos"]: raise ValueError(f"«{m['nombre']}» solo cabe en una página completa.")
+    c = cv
+    tit = titulo or titulo_pagina(acts)
+    encabezado(tit, nombre)
+    cols, usados = [], []
+    for i, a in enumerate(acts):
+        k = (colores or [None]*2)[i] or color_modelo(MOD.modelo(a["modelo"]))
+        if k in usados and not (colores and colores[i]):     # dos paneles seguidos, colores distintos
+            k = next(x for x in ORDEN_COLOR[ORDEN_COLOR.index(k) + 1:] + ORDEN_COLOR if x not in usados)
+        cols.append(k); usados.append(k)
+    if tam == "completa":
+        rects = [PANEL_COMPLETO]
+    else:
+        x, y, w, h = PANEL_COMPLETO; GAP = 12; hh = (h - GAP)/2
+        rects = [(x, y + hh + GAP, w, hh), (x, y, w, hh)]
+    claves = [actividad(cv, r, a, rnd, num=i + 1, color=k, tamano=tam) for i, (a, r, k) in enumerate(zip(acts, rects, cols))]
+    c = cv
+    return claves
+
 # ------------------------------------------------------------ CLI
 USO = """Uso:
   python generador_fichas.py rep <clave|todas> <máx> [--lectura] [--seed N]
