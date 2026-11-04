@@ -20,6 +20,8 @@ src/nucleo/tipos.js   registro: registrar(t), tipo(id), hayTipo, listaTipos
 src/nucleo/ficha.js   modelo, porDefecto, validar, capitalizar, tituloModelo, tituloPagina, coloresPagina, generar(opciones, semilla)
 src/nucleo/lector.js  erroresFicha(f), paginasVariante(f, v), letraVariante — sin dependencias (Tabula/Fori)
 src/nucleo/catalogo.js  GENERADO por tools/catalogo.py (MODELOS + titulo + color); no editar
+src/rep/index.js      16 representaciones en SVG: rep(nombre, n, {i, vacio, rango}) y plantilla() → {w, h, svg} (caja en puntos PDF, y hacia abajo, centrada como el motor); svgCompleto(), nombreNumero(). Anchuras de Andika incrustadas
+tests/test_rep.js     pruebas de las representaciones · tools/comparar_rep.py: hoja motor vs JS en PNG
 src/tipos/index.js    importa todos los tipos; src/tipos/<id>.js uno por tipo (p. ej. sumar.h20.js)
 tools/build.py        src/ → dist/index.html (un solo archivo); --js = solo el paquete
 dist/index.html       la app construida (se sube al repositorio: la sirve Pages)
