@@ -52,3 +52,5 @@
 - Entregar **solo los archivos que cambien**. No renderizar muestras salvo cambios de diseño o petición expresa (y entonces una imagen a baja resolución).
 - Si Iván escribe **"Continúa"**: leer ESTADO.md y retomar desde el primer paso sin marcar.
 - Actualizar ESTADO.md al terminar cada paso.
+- **Delegar** en Sonnet o Haiku (subagentes) las tareas largas y mecánicas para ahorrar tokens; lo que necesita el contexto del chat, hacerlo directamente.
+- **Avisar** a Iván cuando el chat se alargue demasiado y convenga abrir uno nuevo (con INICIO_CHAT.md), y decirle el **nivel de esfuerzo recomendado** para el siguiente paso.

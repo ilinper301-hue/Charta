@@ -37,7 +37,8 @@ salida/               PDF generados por la línea de órdenes (se crea sola)
 | 2387 | Bloque 11 **estadística** · `ESTAD` l.2494 · `ficha_estadistica()` l.2501 |
 | 2515 | **Actividades**: `_llamar()`, `titulo_modelo()`, **`actividad(cv, rect, params, rnd, num, color, tamano)`** l.2539 → clave |
 | 2554 | **Compositor**: `color_modelo()`, `titulo_pagina()`, **`pagina(cv, acts, rnd, titulo, nombre, colores)`** l.2567 → claves (1 actividad: completa; 2: media página cada una; colores distintos si coinciden) |
-| 2596 | Línea de órdenes (CLI) y ayuda |
+| 2596 | **API única**: **`generar(spec)`** → `(pdf_bytes, clave)`; una página por alumno, `iguales`/`distintas`, `copias`, `semilla`, `titulo`, `color` |
+| 2625 | Línea de órdenes (CLI) y ayuda |
 
 ## Patrón de cada familia (importante para la refactorización)
 - **Actividad** (paso 1.2): `actividad()` pone el motor en modo actividad (`_ACT`); la `ficha_<familia>()` de siempre dibuja en el canvas dado, `cabecera()` dibuja solo el panel en `rect` (con recorte) y `_fin()` devuelve la clave sin guardar. La ficha de la línea de órdenes sale idéntica.

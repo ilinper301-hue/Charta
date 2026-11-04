@@ -127,5 +127,18 @@ for acts in ([{"modelo": solo[0]}, {"modelo": medias[0]}], [], [{"modelo": media
     except ValueError: pass
 CVP.save()
 
+# ---- API generar (paso 1.4): alumnos, iguales/distintas, copias, reproducible
+def _np(pdf): return len(re.findall(rb"/Type /Page\b", pdf))
+base = {"actividades": [{"modelo": "sumar.h20"}, {"modelo": "restar.r20"}], "alumnos": ["Ana", "Luis", "", "Marta"], "semilla": 4}
+for var in ("iguales", "distintas"):
+    pdf, k = g.generar(dict(base, variaciones=var)); fichas += 1
+    if _np(pdf) != 3 or len(k["paginas"]) != 3: err += 1; print("PÁGINAS", var, _np(pdf))
+    dif = len({str(p["claves"]) for p in k["paginas"]})
+    if (var == "iguales") != (dif == 1): err += 1; print("VARIACIONES", var, dif)
+    if g.generar(dict(base, variaciones=var))[1] != k: err += 1; print("NO REPRODUCIBLE", var)
+pdf, k = g.generar({"actividades": [{"modelo": "rep.dado"}], "copias": 3, "color": "rosa"})
+if _np(pdf) != 3 or any(p["alumno"] for p in k["paginas"]): err += 1; print("COPIAS")
+if g.generar(dict(base, semilla=5))[1] == g.generar(base)[1]: err += 1; print("OTRA VARIANTE IGUAL")
+
 print(f"Fichas: {fichas} | operaciones comprobadas: {ops} | errores: {err} | modelos: {len(mo.MODELOS)}")
 sys.exit(1 if err else 0)

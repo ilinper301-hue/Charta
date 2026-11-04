@@ -19,7 +19,8 @@
   - Hecho: `actividad(cv, rect, params, rnd, num, color, tamano)`. Media página = mismo diseño con la mitad de filas (no encogido: al 41 % no se leía). 82 modelos admiten media; solo completa: tablas, camino, laberinto, une, colorea, copia, calendario, pictograma, barras, cuenta figuras, recuento y la opción «clasificar» de pares. Ficha de línea de órdenes idéntica (comprobado píxel a píxel).
 - [x] 1.3 Compositor de página: cabecera (Nombre con o sin nombre impreso, Fecha, título) + 1 o 2 actividades, cada una con su panel de color y su número (1, 2…), como en `referencia/ficha_muestra.pdf`.
   - Hecho: `pagina(cv, acts, rnd, titulo, nombre, colores)`. Título por defecto «X y y». Si dos paneles salen del mismo color, el segundo pasa al siguiente de la paleta. Error claro si un modelo de solo página completa va en una hoja de dos.
-- [ ] 1.4 API única `generar(spec) -> (pdf_bytes, clave)`. `spec`: actividades con sus parámetros, alumnos (lista o vacía), variaciones (`iguales` o `distintas`: semilla por alumno), color y título. Un PDF con una página por alumno.
+- [x] 1.4 API única `generar(spec) -> (pdf_bytes, clave)`. `spec`: actividades con sus parámetros, alumnos (lista o vacía), variaciones (`iguales` o `distintas`: semilla por alumno), color y título. Un PDF con una página por alumno.
+  - Hecho: `generar(spec)`. Sin alumnos, `copias` páginas con nombre en blanco. Semilla de cada página = semilla×1000003 (+ nº de alumno si `distintas`): reproducible. Clave: `{"titulo", "variaciones", "paginas": [{"alumno", "claves"}]}`.
 - [ ] 1.5 Mantener la línea de órdenes actual sobre la nueva API; ampliar `tests/test_motor.py` (combinaciones, nombres, variaciones). Ejecutar `--full`.
 
 ## Fase 2 · Prototipo en Android (medir Pyodide)

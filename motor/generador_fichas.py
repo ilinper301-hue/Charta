@@ -2593,6 +2593,35 @@ def pagina(cv, acts, rnd, titulo=None, nombre="", colores=None):
     c = cv
     return claves
 
+# ------------------------------------------------------------ API ÚNICA (paso 1.4)
+def generar(spec):
+    """Genera el PDF completo. spec = {
+        "actividades": [{"modelo": "sumar.h20", "rango": 20, ...}, ...]   (1 o 2),
+        "alumnos": ["Ana", "Luis", ...]     (vacía o ausente: una ficha con la línea de nombre en blanco),
+        "copias": 1                         (solo sin alumnos: cuántas páginas),
+        "variaciones": "iguales" | "distintas"   (distintas: otros números en cada página),
+        "semilla": 1,                        (otra variante = otra semilla)
+        "titulo": None, "color": None | "azul" | ["rosa", "azul"] }
+    Devuelve (pdf_bytes, clave). clave = {"titulo", "paginas": [{"alumno", "claves": [...]}, ...]};
+    con fichas iguales todas las páginas comparten la misma clave. La clave no va en el PDF."""
+    import io
+    acts = spec.get("actividades") or []
+    alumnos = [a.strip() for a in (spec.get("alumnos") or []) if a and a.strip()]
+    nombres = alumnos or [""]*max(1, int(spec.get("copias") or 1))
+    distintas = spec.get("variaciones", "iguales") == "distintas"
+    semilla = int(spec.get("semilla") or 1)
+    col = spec.get("color"); colores = [col]*len(acts) if isinstance(col, str) else col
+    titulo = spec.get("titulo") or titulo_pagina(acts) if acts else None
+    buf = io.BytesIO()
+    cv = canvas.Canvas(buf, pagesize=A4); cv.setTitle(titulo or "Charta"); cv.setAuthor("Charta")
+    paginas = []
+    for i, nom in enumerate(nombres):
+        rnd = random.Random(semilla*1000003 + (i if distintas else 0))
+        claves = pagina(cv, acts, rnd, titulo=titulo, nombre=nom, colores=colores)
+        cv.showPage(); paginas.append({"alumno": nom, "claves": claves})
+    cv.setTitle(titulo or "Charta"); cv.save()
+    return buf.getvalue(), {"titulo": titulo, "variaciones": "distintas" if distintas else "iguales", "paginas": paginas}
+
 # ------------------------------------------------------------ CLI
 USO = """Uso:
   python generador_fichas.py rep <clave|todas> <máx> [--lectura] [--seed N]
