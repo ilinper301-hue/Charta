@@ -7,9 +7,10 @@
 - [x] Prueba de regresión `tests/test_motor.py` (0 errores; la versión completa comprueba unas 24.000 operaciones).
 
 ## Fase 0 · Preparación (Iván)
-- [ ] Crear el repositorio `ilinper301-hue/Charta` en GitHub, subir este paquete y activar GitHub Pages (rama main, carpeta raíz).
+- [x] Crear el repositorio `ilinper301-hue/Charta` y subir el paquete inicial.
+- [ ] Activar GitHub Pages (Iván, desde Settings → Pages: rama main, carpeta raíz). Claude no puede hacerlo desde su conexión.
 - [ ] Añadir `Andika-Regular.ttf` y `Andika-Bold.ttf` (Google Fonts) a `motor/`.
-- [ ] Conectar el repositorio al chat para que Claude suba los cambios directamente a main.
+- [x] Conectar el repositorio para que Claude suba los cambios directamente a main.
 
 ## Fase 1 · Motor de actividades combinables
 - [ ] 1.1 Tabla `MODELOS`: id, curso, materia, bloque, nombre visible, descripción corta, opciones (tipo, valores, valor por defecto), rango mínimo y tamaños admitidos (`completa`, `media`). La app montará sus menús a partir de esta tabla.
