@@ -4,9 +4,9 @@ Copia y pega esto en el chat nuevo, con el repositorio `Charta` conectado (o sub
 
 ---
 
-Vamos a construir **Charta**, mi app de fichas educativas personalizadas (PWA para Android y navegador, color verde oscuro). Antes de nada, lee **CONTEXT.md**, **CODEMAP.md** y **ESTADO.md**, y sigue su forma de trabajar: respuestas breves y por partes, no abras el motor entero, prueba cada cambio con `tests/test_motor.py` y entrega solo los archivos que cambien.
+Vamos a construir **Charta**, mi app de fichas educativas personalizadas (PWA para Android y navegador, color verde oscuro). Antes de nada, lee **CONTEXT.md**, **ESTADO.md**, **ESQUEMA.md** y **CODEMAP.md**, y sigue su forma de trabajar: respuestas breves y por partes, no abras el motor de referencia entero, prueba cada cambio y entrega solo los archivos que cambien. Delega en Sonnet o Haiku lo largo y mecánico, y avísame cuando el chat se alargue (con el nivel de esfuerzo recomendado).
 
-Empieza por el primer paso sin marcar de ESTADO.md (Fase 1: motor de actividades combinables). Cuando termines cada paso, márcalo en ESTADO.md.
+Empieza por el primer paso sin marcar de ESTADO.md (Fase 2: núcleo JSON y renderizado HTML). Cuando termines cada paso, márcalo en ESTADO.md.
 
 Si escribo "Continúa", retoma desde el primer paso sin marcar.
 

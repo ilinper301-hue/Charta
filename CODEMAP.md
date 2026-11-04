@@ -5,12 +5,13 @@
 CONTEXT.md            visión, decisiones, diseño, forma de trabajar
 CODEMAP.md            este mapa
 ESTADO.md             hoja de ruta con pasos marcables
+ESQUEMA.md            esquema JSON v1 de ficha, actividad y ejercicio
 INICIO_CHAT.md        mensaje para empezar un chat nuevo
-motor/generador_fichas.py   motor de fichas (Python + ReportLab), ~2.500 líneas
+motor/generador_fichas.py   motor de REFERENCIA (Python + ReportLab), ~2.700 líneas: diseño aprobado y reglas
 motor/modelos.py      catálogo MODELOS para la app (solo datos): menu(), por_defecto(), validar(), a_json()
 tests/test_motor.py   regresión: genera todo y comprueba la aritmética
 referencia/ficha_muestra.pdf  ficha de muestra de Iván (marco a imitar)
-app/                  (vacía) aquí irá la PWA
+src/ → dist/          (fase 2) la app: núcleo y renderizado en JavaScript
 salida/               PDF generados por la línea de órdenes (se crea sola)
 ```
 

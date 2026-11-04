@@ -12,7 +12,7 @@
 - [x] Añadir `Andika-Regular.ttf` y `Andika-Bold.ttf` (Google Fonts) a `motor/`.
 - [x] Conectar el repositorio para que Claude suba los cambios directamente a main.
 
-## Fase 1 · Motor de actividades combinables
+## Fase 1 · Motor de actividades combinables (motor de referencia en Python)
 - [x] 1.1 Tabla `MODELOS`: id, curso, materia, bloque, nombre visible, descripción corta, opciones (tipo, valores, valor por defecto), rango mínimo y tamaños admitidos (`completa`, `media`). La app montará sus menús a partir de esta tabla.
   - Hecho en `motor/modelos.py` (solo datos, sin ReportLab): 94 modelos, `menu()`, `por_defecto()`, `validar()`, `a_json()`. La prueba comprueba que cubre el motor y genera cada opción. `tamanos` es provisional: revisar en 1.2.
 - [x] 1.2 Convertir cada modelo en **actividad**: `actividad(c, rect, params, rnd) -> clave`, que dibuje dentro de un rectángulo (reutilizando el escalado de `cabecera()`). Mantener idéntico el diseño de cada actividad.
@@ -24,27 +24,39 @@
 - [x] 1.5 Mantener la línea de órdenes actual sobre la nueva API; ampliar `tests/test_motor.py` (combinaciones, nombres, variaciones). Ejecutar `--full`.
   - Hecho: órdenes nuevas `ficha` (sobre `generar()`) y `modelos`; las antiguas siguen igual. `--full`: 6.326 fichas, 29.505 operaciones, 0 errores. **Fase 1 cerrada.**
 
-## Fase 2 · Prototipo en Android (medir Pyodide)
-- [ ] 2.1 `app/index.html` mínimo: carga Pyodide + ReportLab + motor, un selector de modelo, botón Generar, vista previa del PDF, Descargar/Compartir.
-- [ ] 2.2 Iván lo prueba en su Android: tiempo de la primera carga, de las siguientes y de cada ficha. **Decidir**: seguir con Pyodide o plan B en JavaScript.
-- [ ] 2.3 Service worker: funcionamiento sin conexión y caché de Pyodide.
+> **5-11-2026: cambio de arquitectura** (ver CONTEXT.md): ficha = JSON; núcleo y renderizado en JavaScript; sin Pyodide. La fase 1 queda como **motor de referencia** en Python.
 
-## Fase 3 · App completa (PWA, verde oscuro)
-- [ ] 3.1 Flujo: curso → materia → bloque → modelo (tarjetas con miniatura) → opciones (solo las válidas, en lenguaje de maestro).
-- [ ] 3.2 Compositor: añadir, ordenar y quitar actividades de una ficha; vista previa.
-- [ ] 3.3 Alumnos: escribir o pegar la lista (y después importarla de Tabula); fichas iguales o distintas; un PDF con todas.
-- [ ] 3.4 "Otra variante", "Ver soluciones" en pantalla, favoritos o recientes.
-- [ ] 3.5 Icono, nombre y manifiesto para instalar desde Chrome; modo tableta horizontal.
+## Fase 2 · Núcleo JSON y renderizado HTML (corte vertical)
+- [ ] 2.1 Estructura `src/` + `tools/build.py` → `dist/index.html` (como sus otras apps; mirar Lectori/Tabula). Registro de tipos, PRNG con semilla (p. ej. mulberry32), `generar(opciones, semilla)` según ESQUEMA.md. Pruebas en Node.
+- [ ] 2.2 Componentes SVG de las 16 representaciones del número, copiando el dibujo de `motor/` (comparar con sus PDF).
+- [ ] 2.3 Primeros 8 tipos, uno por cada patrón de dibujo: rep.dado, rep.marco, conteo.serie1, orden.signos, sumar.h20, sumar.vertical, restar.recta, medida.reloj (completa y media).
+- [ ] 2.4 Plantilla A4 (`@media print`): cabecera (nombre o línea en blanco), Fecha, título y 1–2 paneles; un alumno por página; solucionario en pantalla. Opción blanco y negro.
+- [ ] 2.5 Fichas doradas e invariantes aritméticas (reutilizar las reglas de `tests/test_motor.py`).
+- [ ] 2.6 Iván lo prueba en su Android: rapidez, Imprimir → Guardar como PDF y parecido con el PDF de referencia. **Decidir** si el aspecto vale.
 
-## Fase 4 · Integración con Tabula
-- [ ] 4.1 Firebase compartido + inicio de sesión con Google.
-- [ ] 4.2 Leer los grupos y alumnos de Tabula.
-- [ ] 4.3 Botón "Crear ficha" en Tabula (enlace con parámetros) y guardar el PDF en sus documentos.
+## Fase 3 · Resto de tipos
+- [ ] Portar los 86 modelos restantes por lotes (delegar en Sonnet: motor Python + PDF de referencia como modelo), con sus pruebas.
 
-## Fase 5 · Ampliación de contenidos
+## Fase 4 · App completa (PWA, verde oscuro)
+- [ ] 4.1 Flujo: curso → materia → bloque → modelo (tarjetas con miniatura) → opciones (en lenguaje de maestro, desde `MODELOS`).
+- [ ] 4.2 Compositor: añadir, ordenar y quitar actividades; vista previa.
+- [ ] 4.3 Alumnos (escribir o pegar; después desde Tabula); fichas iguales o variantes A/B…; impresión de todas.
+- [ ] 4.4 "Otra variante", "Ver soluciones", favoritos o recientes.
+- [ ] 4.5 Service worker (scope `/Charta/`, sin conexión), prefijo `charta:`, icono, manifiesto, modo tableta.
+
+## Fase 5 · Tabula y Fori
+- [ ] 5.1 Firebase compartido + Google; guardar en `/apps/charta/fichas/{id}` (sin nombres de alumnos).
+- [ ] 5.2 Tabula: listas de alumnos, botón "Crear ficha", referencia por id en documentos, vínculo a sesión/tarea/criterios.
+- [ ] 5.3 Fori: `?ficha={id}`, modo proyección ejercicio a ejercicio, solución paso a paso, capa de anotaciones.
+
+## Fase 6 · Metadatos y accesibilidad
+- [ ] Saberes básicos y criterios LOMLOE de Andalucía por modelo (verificados con la normativa), dificultad, tiempo estimado, etiquetas.
+- [ ] Lectura fácil y pictogramas; tamaños grandes para 1.º.
+
+## Fase 7 · Ampliación de contenidos
 - [ ] Bloque 8: problemas (con plantillas de nombres y objetos).
-- [ ] Otros cursos de Matemáticas (2.º a 6.º).
-- [ ] Lengua (bancos de palabras y sílabas como datos aparte).
+- [ ] Barri (modelo de barras) y Calculi (estrategias) como tipos.
+- [ ] Otros cursos de Matemáticas (2.º a 6.º) y Lengua.
 
-## Fase 6 · Opcional
+## Fase 8 · Opcional
 - [ ] Publicar en Google Play (TWA).

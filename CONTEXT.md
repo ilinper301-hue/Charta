@@ -20,11 +20,19 @@
 
 ## Decisiones tomadas
 - **App aparte, conectada a Tabula** (no módulo dentro). Motivos: peso del motor, riesgo de romper el cuaderno y chats más pequeños (menos tokens).
-  - Integración prevista: mismo proyecto de Firebase e inicio de sesión con Google que sus otras apps; botón "Crear ficha" en Tabula que abre Charta con el grupo elegido; Charta lee las listas de alumnos de Tabula; los PDF pueden guardarse en la sección de documentos de Tabula.
-- **Motor**: el mismo `generador_fichas.py` (Python + ReportLab) ejecutado **en el navegador con Pyodide**. ReportLab 4/5 es Python puro (`py3-none-any`, comprobado); dependencias: pillow y charset-normalizer, que están en Pyodide. Ventaja: una sola base de código, ya probada. Coste: primera carga de unos 15-20 MB y algunos segundos; después funciona sin conexión.
-  - **Pendiente de medir en el Android de Iván** (prototipo de la fase 2). Si fuera demasiado lento, plan B: portar el motor a JavaScript.
-- **Privacidad**: el PDF se genera en el dispositivo; los nombres de los alumnos no salen a ningún servidor externo.
-- **Alojamiento**: GitHub Pages, repositorio `ilinper301-hue/Charta` (por crear), como sus otras apps (Barri: ilinper301-hue.github.io/Barri/, Lectori: ilinper301-hue.github.io/Educacion/). Publicación en Google Play opcional en el futuro (TWA, sin reescribir).
+  - Integración prevista: mismo proyecto de Firebase e inicio de sesión con Google que sus otras apps; botón "Crear ficha" en Tabula que abre Charta con el grupo elegido; Charta lee las listas de alumnos de Tabula; la ficha (JSON) se guarda en Firestore y Tabula la referencia por id.
+- **Arquitectura (decidida el 5-11-2026, sustituye a "Pyodide + ReportLab")**: la ficha es **datos** (JSON con `schemaVersion`, ver ESQUEMA.md). Motivo: Tabula y Fori deben leerla sin motor, y Fori necesita verla en HTML vectorial, ejercicio a ejercicio y con la solución paso a paso, cosa imposible con un PDF de ReportLab.
+  - **Núcleo y renderizado en JavaScript** (módulos ES, sin dependencias): `generar(opciones, semilla) → JSON` y plantillas HTML/SVG (A4 con `@media print`; pantalla para Fori; solucionario). El PDF sale de **imprimir desde el navegador** (Chrome Android: Guardar como PDF).
+  - **Sin Pyodide**: si el dibujo es HTML/JS, el único beneficio de Pyodide era reutilizar el Python, pero ese código mezcla datos y dibujo y habría que reescribirlo igual. En JS: carga instantánea (sin 10–20 MB), un solo lenguaje y Tabula y Fori pueden importar el mismo módulo de lectura.
+  - **El motor Python (`motor/`) queda como referencia**: diseño aprobado (sus PDF son el modelo visual que hay que imitar), reglas aritméticas y catálogo `MODELOS`. Se mantiene y sigue probándose, pero no va en la app.
+  - Tipos de ejercicio = módulos independientes en un registro (ids iguales a los de `MODELOS`). Semilla: mismas opciones + semilla = misma ficha.
+  - Pruebas con **Node** en el contenedor de Claude: fichas doradas (opciones + semilla → JSON esperado) e invariantes aritméticas.
+- **Ecosistema** (Lectori, Barri, Calculi para el alumnado; Fori pizarra; Tabula cuaderno docente; Charta fichas). Todas en ilinper301-hue.github.io → **mismo origen**: prefijo `charta:` en localStorage/IndexedDB y service worker con scope `/Charta/`. Un único proyecto de Firebase (Google): datos en `/apps/charta/…`, usuarios en `/usuarios/{uid}`. Estilo basado en Lectori. Flujo: `src/` → `python3 tools/build.py` → `dist/index.html`.
+  - **Tabula**: Charta guarda la ficha en `/apps/charta/fichas/{id}`; Tabula la referencia por id en documentos para imprimir y la vincula a sesión, tarea o actividad evaluable (criterios de los metadatos). Futuro: resultados por alumno.
+  - **Fori**: abre `?ficha={id}`; modo proyección (un ejercicio cada vez, solución paso a paso, corrección en gran grupo); anotaciones en capa aparte.
+- **Impresión**: a color (paneles pastel, aprobados) con opción de **blanco y negro / ahorro de tinta**.
+- **Privacidad**: la ficha se genera e imprime en el dispositivo. Los nombres de los alumnos solo se usan al imprimir: nunca se guardan en el JSON ni en Firestore.
+- **Alojamiento**: GitHub Pages, repositorio `ilinper301-hue/Charta`, como sus otras apps (Barri: ilinper301-hue.github.io/Barri/, Lectori: ilinper301-hue.github.io/Educacion/). Publicación en Google Play opcional en el futuro (TWA, sin reescribir).
 
 ## Diseño
 - **Interfaz de la app**: profesional y minimalista (en la línea de Lectori, Barri, Calculi y Tabula). **Color principal: verde oscuro**.
@@ -48,7 +56,7 @@
 - Iván se queda sin cuota pronto: **respuestas breves y por partes**, en español de España, tuteando.
 - No pedir confirmación para cosas pequeñas: implementarlas y probarlas.
 - Leer CONTEXT.md, CODEMAP.md y ESTADO.md antes de nada. **No abrir el motor entero** (unas 2.500 líneas): ir a la sección concreta con el número de línea de CODEMAP.md.
-- Tras cada cambio: `python3 tests/test_motor.py` (rápida) y, al cerrar una fase, `--full`.
+- Tras cada cambio: las pruebas de lo tocado (`node tests/…` para la app; `python3 tests/test_motor.py` si se toca el motor de referencia) y, al cerrar una fase, la completa.
 - Entregar **solo los archivos que cambien**. No renderizar muestras salvo cambios de diseño o petición expresa (y entonces una imagen a baja resolución).
 - Si Iván escribe **"Continúa"**: leer ESTADO.md y retomar desde el primer paso sin marcar.
 - Actualizar ESTADO.md al terminar cada paso.
