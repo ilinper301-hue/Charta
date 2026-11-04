@@ -14,8 +14,7 @@
   "creada": "2026-11-05T10:00:00Z", "autor": "uid de Firebase",
   "semilla": 1234,
   "variantes": 1,                  // 1 = todas iguales; N = N variantes (A, B, C…)
-  "metadatos": {
-    "saberes": [], "criterios": [], // códigos LOMLOE Andalucía (se rellenan en su fase, verificados)
+  "metadatos": {                    // opcionales; sin códigos LOMLOE (decisión de Iván)
     "dificultad": 1,                // 1 refuerzo · 2 estándar · 3 ampliación
     "minutos": 15, "etiquetas": ["suma", "llevadas"]
   },

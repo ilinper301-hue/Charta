@@ -46,11 +46,11 @@
 
 ## Fase 5 · Tabula y Fori
 - [ ] 5.1 Firebase compartido + Google; guardar en `/apps/charta/fichas/{id}` (sin nombres de alumnos).
-- [ ] 5.2 Tabula: listas de alumnos, botón "Crear ficha", referencia por id en documentos, vínculo a sesión/tarea/criterios.
+- [ ] 5.2 Tabula: listas de alumnos, botón "Crear ficha", referencia por id en documentos, vínculo a sesión o tarea.
 - [ ] 5.3 Fori: `?ficha={id}`, modo proyección ejercicio a ejercicio, solución paso a paso, capa de anotaciones.
 
-## Fase 6 · Metadatos y accesibilidad
-- [ ] Saberes básicos y criterios LOMLOE de Andalucía por modelo (verificados con la normativa), dificultad, tiempo estimado, etiquetas.
+## Fase 6 · Accesibilidad y metadatos propios
+- [ ] Dificultad, tiempo estimado y etiquetas por modelo (sin LOMLOE: decisión de Iván, 5-11-2026).
 - [ ] Lectura fácil y pictogramas; tamaños grandes para 1.º.
 
 ## Fase 7 · Ampliación de contenidos

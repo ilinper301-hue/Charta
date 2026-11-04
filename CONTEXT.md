@@ -28,8 +28,9 @@
   - Tipos de ejercicio = módulos independientes en un registro (ids iguales a los de `MODELOS`). Semilla: mismas opciones + semilla = misma ficha.
   - Pruebas con **Node** en el contenedor de Claude: fichas doradas (opciones + semilla → JSON esperado) e invariantes aritméticas.
 - **Ecosistema** (Lectori, Barri, Calculi para el alumnado; Fori pizarra; Tabula cuaderno docente; Charta fichas). Todas en ilinper301-hue.github.io → **mismo origen**: prefijo `charta:` en localStorage/IndexedDB y service worker con scope `/Charta/`. Un único proyecto de Firebase (Google): datos en `/apps/charta/…`, usuarios en `/usuarios/{uid}`. Estilo basado en Lectori. Flujo: `src/` → `python3 tools/build.py` → `dist/index.html`.
-  - **Tabula**: Charta guarda la ficha en `/apps/charta/fichas/{id}`; Tabula la referencia por id en documentos para imprimir y la vincula a sesión, tarea o actividad evaluable (criterios de los metadatos). Futuro: resultados por alumno.
+  - **Tabula**: Charta guarda la ficha en `/apps/charta/fichas/{id}`; Tabula la referencia por id en documentos para imprimir y la vincula a sesión, tarea o actividad evaluable. Futuro: resultados por alumno.
   - **Fori**: abre `?ficha={id}`; modo proyección (un ejercicio cada vez, solución paso a paso, corrección en gran grupo); anotaciones en capa aparte.
+- **Sin metadatos LOMLOE** (saberes, criterios): la normativa cambia a menudo; quizá en el futuro. Solo metadatos propios opcionales (dificultad, minutos, etiquetas).
 - **Impresión**: a color (paneles pastel, aprobados) con opción de **blanco y negro / ahorro de tinta**.
 - **Privacidad**: la ficha se genera e imprime en el dispositivo. Los nombres de los alumnos solo se usan al imprimir: nunca se guardan en el JSON ni en Firestore.
 - **Alojamiento**: GitHub Pages, repositorio `ilinper301-hue/Charta`, como sus otras apps (Barri: ilinper301-hue.github.io/Barri/, Lectori: ilinper301-hue.github.io/Educacion/). Publicación en Google Play opcional en el futuro (TWA, sin reescribir).
