@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#1B4D3E">
+<title>Charta</title>
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<header class="barra"><h1>Charta</h1><span class="sub">Fichas educativas</span></header>
+<main>
+  <section class="tarjeta">
+    <label>Modelo <select id="modelo"></select></label>
+    <div id="opciones"></div>
+    <label>Semilla <input id="semilla" type="number" value="1" min="1"></label>
+    <div class="botones">
+      <button id="generar" class="primario">Generar</button>
+      <button id="variante">Otra variante</button>
+    </div>
+    <p id="error" class="error" hidden></p>
+  </section>
+  <section class="tarjeta">
+    <h2 id="titulo">—</h2>
+    <ol id="soluciones" class="soluciones"></ol>
+    <details><summary>JSON de la ficha</summary><pre id="json"></pre></details>
+  </section>
+</main>
+<script type="module" src="app.js"></script>
+</body>
+</html>

@@ -27,7 +27,8 @@
 > **5-11-2026: cambio de arquitectura** (ver CONTEXT.md): ficha = JSON; núcleo y renderizado en JavaScript; sin Pyodide. La fase 1 queda como **motor de referencia** en Python.
 
 ## Fase 2 · Núcleo JSON y renderizado HTML (corte vertical)
-- [ ] 2.1 Estructura `src/` + `tools/build.py` → `dist/index.html` (como sus otras apps; mirar Lectori/Tabula). Registro de tipos, PRNG con semilla (p. ej. mulberry32), `generar(opciones, semilla)` según ESQUEMA.md. Pruebas en Node.
+- [x] 2.1 Estructura `src/` + `tools/build.py` → `dist/index.html` (como sus otras apps; mirar Lectori/Tabula). Registro de tipos, PRNG con semilla (p. ej. mulberry32), `generar(opciones, semilla)` según ESQUEMA.md. Pruebas en Node.
+  - Hecho: `src/nucleo/` (azar mulberry32, registro de tipos, `generar()`/`validar()` portados del motor, `lector.js` sin dependencias para Tabula/Fori), catálogo generado (`tools/catalogo.py`), tipo de muestra `sumar.h20` (solo datos), app mínima y `build.py` (empaquetador propio, sin dependencias). `node tests/test_nucleo.js`: 10 pruebas OK; comprobado en Chrome sin errores. La raíz redirige a `dist/`.
 - [ ] 2.2 Componentes SVG de las 16 representaciones del número, copiando el dibujo de `motor/` (comparar con sus PDF).
 - [ ] 2.3 Primeros 8 tipos, uno por cada patrón de dibujo: rep.dado, rep.marco, conteo.serie1, orden.signos, sumar.h20, sumar.vertical, restar.recta, medida.reloj (completa y media).
 - [ ] 2.4 Plantilla A4 (`@media print`): cabecera (nombre o línea en blanco), Fecha, título y 1–2 paneles; un alumno por página; solucionario en pantalla. Opción blanco y negro.

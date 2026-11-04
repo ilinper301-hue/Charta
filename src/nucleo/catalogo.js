@@ -1,0 +1,3211 @@
+// GENERADO por tools/catalogo.py desde motor/modelos.py. No editar a mano.
+export const CATALOGO = {
+ "cursos": {
+  "1": "1.º de Primaria"
+ },
+ "materias": {
+  "matematicas": "Matemáticas"
+ },
+ "bloques": {
+  "1": "Los números y sus representaciones",
+  "2": "Contar y series",
+  "3": "Orden y comparación",
+  "4": "Valor posicional",
+  "5": "Sumar",
+  "6": "Restar",
+  "7": "Juegos numéricos",
+  "9": "Geometría",
+  "10": "Medida",
+  "11": "Estadística y patrones"
+ },
+ "modelos": [
+  {
+   "id": "rep.dedos",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 1,
+   "familia": "rep",
+   "clave": "dedos",
+   "nombre": "Los dedos",
+   "descripcion": "Leer y dibujar números con los dedos de las manos.",
+   "opciones": [
+    {
+     "id": "lectura",
+     "etiqueta": "Solo leer (sin la fila de dibujar)",
+     "tipo": "si_no",
+     "defecto": false
+    }
+   ],
+   "rangos": [
+    10
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "LOS DEDOS",
+   "color": "azul"
+  },
+  {
+   "id": "rep.dado",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 1,
+   "familia": "rep",
+   "clave": "dado",
+   "nombre": "El dado",
+   "descripcion": "Leer y dibujar números con puntos de uno o dos dados.",
+   "opciones": [
+    {
+     "id": "lectura",
+     "etiqueta": "Solo leer (sin la fila de dibujar)",
+     "tipo": "si_no",
+     "defecto": false
+    }
+   ],
+   "rangos": [
+    10,
+    20
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "EL DADO",
+   "color": "azul"
+  },
+  {
+   "id": "rep.domino",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 1,
+   "familia": "rep",
+   "clave": "domino",
+   "nombre": "El dominó",
+   "descripcion": "Leer y dibujar números como fichas de dominó.",
+   "opciones": [
+    {
+     "id": "lectura",
+     "etiqueta": "Solo leer (sin la fila de dibujar)",
+     "tipo": "si_no",
+     "defecto": false
+    }
+   ],
+   "rangos": [
+    10,
+    20
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "EL DOMINÓ",
+   "color": "azul"
+  },
+  {
+   "id": "rep.marco",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 1,
+   "familia": "rep",
+   "clave": "marco",
+   "nombre": "El marco de diez",
+   "descripcion": "Leer y rellenar marcos de diez.",
+   "opciones": [
+    {
+     "id": "lectura",
+     "etiqueta": "Solo leer (sin la fila de dibujar)",
+     "tipo": "si_no",
+     "defecto": false
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "EL MARCO DE DIEZ",
+   "color": "azul"
+  },
+  {
+   "id": "rep.palotes",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 1,
+   "familia": "rep",
+   "clave": "palotes",
+   "nombre": "Los palotes",
+   "descripcion": "Contar y dibujar palotes en grupos de cinco.",
+   "opciones": [
+    {
+     "id": "lectura",
+     "etiqueta": "Solo leer (sin la fila de dibujar)",
+     "tipo": "si_no",
+     "defecto": false
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "LOS PALOTES",
+   "color": "azul"
+  },
+  {
+   "id": "rep.objetos",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 1,
+   "familia": "rep",
+   "clave": "objetos",
+   "nombre": "Los objetos",
+   "descripcion": "Contar y dibujar colecciones de objetos.",
+   "opciones": [
+    {
+     "id": "lectura",
+     "etiqueta": "Solo leer (sin la fila de dibujar)",
+     "tipo": "si_no",
+     "defecto": false
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "LOS OBJETOS",
+   "color": "azul"
+  },
+  {
+   "id": "rep.regletas",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 1,
+   "familia": "rep",
+   "clave": "regletas",
+   "nombre": "Las regletas",
+   "descripcion": "Leer y dibujar números con regletas.",
+   "opciones": [
+    {
+     "id": "lectura",
+     "etiqueta": "Solo leer (sin la fila de dibujar)",
+     "tipo": "si_no",
+     "defecto": false
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "LAS REGLETAS",
+   "color": "azul"
+  },
+  {
+   "id": "rep.descomp",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 1,
+   "familia": "rep",
+   "clave": "descomp",
+   "nombre": "La descomposición",
+   "descripcion": "Descomponer números en sumas.",
+   "opciones": [
+    {
+     "id": "lectura",
+     "etiqueta": "Solo leer (sin la fila de dibujar)",
+     "tipo": "si_no",
+     "defecto": false
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "LA DESCOMPOSICIÓN",
+   "color": "azul"
+  },
+  {
+   "id": "rep.letras",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 1,
+   "familia": "rep",
+   "clave": "letras",
+   "nombre": "El número en letras",
+   "descripcion": "Pasar de número a letras y al revés.",
+   "opciones": [
+    {
+     "id": "lectura",
+     "etiqueta": "Solo leer (sin la fila de dibujar)",
+     "tipo": "si_no",
+     "defecto": false
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "EL NÚMERO EN LETRAS",
+   "color": "azul"
+  },
+  {
+   "id": "rep.recta",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 1,
+   "familia": "rep",
+   "clave": "recta",
+   "nombre": "La recta numérica",
+   "descripcion": "Leer y marcar números en la recta.",
+   "opciones": [
+    {
+     "id": "lectura",
+     "etiqueta": "Solo leer (sin la fila de dibujar)",
+     "tipo": "si_no",
+     "defecto": false
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "LA RECTA NUMÉRICA",
+   "color": "azul"
+  },
+  {
+   "id": "rep.bloques",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 1,
+   "familia": "rep",
+   "clave": "bloques",
+   "nombre": "Los bloques de base diez",
+   "descripcion": "Leer y dibujar números con barras y cubos.",
+   "opciones": [
+    {
+     "id": "lectura",
+     "etiqueta": "Solo leer (sin la fila de dibujar)",
+     "tipo": "si_no",
+     "defecto": false
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "LOS BLOQUES DE BASE DIEZ",
+   "color": "azul"
+  },
+  {
+   "id": "rep.cuadricula",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 1,
+   "familia": "rep",
+   "clave": "cuadricula",
+   "nombre": "La cuadrícula de 100",
+   "descripcion": "Leer y colorear números en la cuadrícula.",
+   "opciones": [
+    {
+     "id": "lectura",
+     "etiqueta": "Solo leer (sin la fila de dibujar)",
+     "tipo": "si_no",
+     "defecto": false
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "LA CUADRÍCULA DE 100",
+   "color": "azul"
+  },
+  {
+   "id": "rep.monedas",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 1,
+   "familia": "rep",
+   "clave": "monedas",
+   "nombre": "Las monedas",
+   "descripcion": "Leer y dibujar cantidades con monedas.",
+   "opciones": [
+    {
+     "id": "lectura",
+     "etiqueta": "Solo leer (sin la fila de dibujar)",
+     "tipo": "si_no",
+     "defecto": false
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "LAS MONEDAS",
+   "color": "azul"
+  },
+  {
+   "id": "rep.abaco",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 1,
+   "familia": "rep",
+   "clave": "abaco",
+   "nombre": "El ábaco",
+   "descripcion": "Leer y dibujar números en el ábaco.",
+   "opciones": [
+    {
+     "id": "lectura",
+     "etiqueta": "Solo leer (sin la fila de dibujar)",
+     "tipo": "si_no",
+     "defecto": false
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "EL ÁBACO",
+   "color": "azul"
+  },
+  {
+   "id": "rep.du",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 1,
+   "familia": "rep",
+   "clave": "du",
+   "nombre": "Las decenas y unidades",
+   "descripcion": "Leer y completar decenas y unidades.",
+   "opciones": [
+    {
+     "id": "lectura",
+     "etiqueta": "Solo leer (sin la fila de dibujar)",
+     "tipo": "si_no",
+     "defecto": false
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "LAS DECENAS Y UNIDADES",
+   "color": "azul"
+  },
+  {
+   "id": "rep.atados",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 1,
+   "familia": "rep",
+   "clave": "atados",
+   "nombre": "Los palitos y atados",
+   "descripcion": "Leer y dibujar números con atados de diez.",
+   "opciones": [
+    {
+     "id": "lectura",
+     "etiqueta": "Solo leer (sin la fila de dibujar)",
+     "tipo": "si_no",
+     "defecto": false
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "LOS PALITOS Y ATADOS",
+   "color": "azul"
+  },
+  {
+   "id": "combinada.combinada",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 1,
+   "familia": "combinada",
+   "clave": "combinada",
+   "nombre": "¿Qué número es?",
+   "descripcion": "Cada casilla, una representación distinta: escribir el número.",
+   "opciones": [],
+   "rangos": [
+    20,
+    30,
+    100
+   ],
+   "rango": 20,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "¿QUÉ NÚMERO ES?",
+   "color": "verde"
+  },
+  {
+   "id": "suma.suma",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 1,
+   "familia": "suma",
+   "clave": "suma",
+   "nombre": "Suma y dibuja",
+   "descripcion": "Sumar dos representaciones y dibujar el resultado.",
+   "opciones": [],
+   "rangos": [
+    20,
+    30,
+    100
+   ],
+   "rango": 20,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "SUMA Y DIBUJA",
+   "color": "rosa"
+  },
+  {
+   "id": "conteo.cuenta",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 2,
+   "familia": "conteo",
+   "clave": "cuenta",
+   "nombre": "Cuenta y escribe",
+   "descripcion": "Contar dibujos y escribir el número.",
+   "opciones": [],
+   "rangos": [
+    10,
+    20,
+    30
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "CUENTA Y ESCRIBE",
+   "color": "amarillo"
+  },
+  {
+   "id": "conteo.anterior",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 2,
+   "familia": "conteo",
+   "clave": "anterior",
+   "nombre": "Anterior y posterior",
+   "descripcion": "Escribir el número de antes y el de después.",
+   "opciones": [
+    {
+     "id": "modo",
+     "etiqueta": "Qué se escribe",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Anterior y posterior"
+      },
+      {
+       "valor": "anterior",
+       "etiqueta": "Solo el anterior"
+      },
+      {
+       "valor": "posterior",
+       "etiqueta": "Solo el posterior"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "ANTERIOR Y POSTERIOR",
+   "color": "amarillo"
+  },
+  {
+   "id": "conteo.falta",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 2,
+   "familia": "conteo",
+   "clave": "falta",
+   "nombre": "El número que falta",
+   "descripcion": "Completar el número que falta en una fila.",
+   "opciones": [
+    {
+     "id": "huecos",
+     "etiqueta": "Cuadros vacíos",
+     "tipo": "numero",
+     "min": 1,
+     "max": 3,
+     "defecto": 1
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "EL NÚMERO QUE FALTA",
+   "color": "amarillo"
+  },
+  {
+   "id": "conteo.serie1",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 2,
+   "familia": "conteo",
+   "clave": "serie1",
+   "nombre": "Series de 1 en 1",
+   "descripcion": "Completar series de uno en uno.",
+   "opciones": [
+    {
+     "id": "huecos",
+     "etiqueta": "Cuadros vacíos",
+     "tipo": "numero",
+     "min": 1,
+     "max": 4,
+     "defecto": 3
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "SERIES DE 1 EN 1",
+   "color": "amarillo"
+  },
+  {
+   "id": "conteo.serie2",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 2,
+   "familia": "conteo",
+   "clave": "serie2",
+   "nombre": "Series de 2 en 2",
+   "descripcion": "Completar series de dos en dos.",
+   "opciones": [
+    {
+     "id": "huecos",
+     "etiqueta": "Cuadros vacíos",
+     "tipo": "numero",
+     "min": 1,
+     "max": 4,
+     "defecto": 3
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "SERIES DE 2 EN 2",
+   "color": "amarillo"
+  },
+  {
+   "id": "conteo.serie5",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 2,
+   "familia": "conteo",
+   "clave": "serie5",
+   "nombre": "Series de 5 en 5",
+   "descripcion": "Completar series de cinco en cinco.",
+   "opciones": [
+    {
+     "id": "huecos",
+     "etiqueta": "Cuadros vacíos",
+     "tipo": "numero",
+     "min": 1,
+     "max": 4,
+     "defecto": 3
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "SERIES DE 5 EN 5",
+   "color": "amarillo"
+  },
+  {
+   "id": "conteo.serie10",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 2,
+   "familia": "conteo",
+   "clave": "serie10",
+   "nombre": "Series de 10 en 10",
+   "descripcion": "Completar series de diez en diez.",
+   "opciones": [
+    {
+     "id": "huecos",
+     "etiqueta": "Cuadros vacíos",
+     "tipo": "numero",
+     "min": 1,
+     "max": 4,
+     "defecto": 3
+    }
+   ],
+   "rangos": [
+    20,
+    30,
+    100
+   ],
+   "rango": 20,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "SERIES DE 10 EN 10",
+   "color": "amarillo"
+  },
+  {
+   "id": "conteo.series",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 2,
+   "familia": "conteo",
+   "clave": "series",
+   "nombre": "Series mixtas",
+   "descripcion": "Series con saltos distintos: descubrir el salto y completar.",
+   "opciones": [
+    {
+     "id": "huecos",
+     "etiqueta": "Cuadros vacíos",
+     "tipo": "numero",
+     "min": 1,
+     "max": 4,
+     "defecto": 3
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "SERIES MIXTAS",
+   "color": "amarillo"
+  },
+  {
+   "id": "conteo.tabla",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 2,
+   "familia": "conteo",
+   "clave": "tabla",
+   "nombre": "La tabla de números",
+   "descripcion": "Completar los números que faltan en la tabla.",
+   "opciones": [
+    {
+     "id": "huecos",
+     "etiqueta": "Cuadros vacíos",
+     "tipo": "numero",
+     "min": 3,
+     "max": 30,
+     "defecto": null
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa"
+   ],
+   "titulo": "LA TABLA DE NÚMEROS",
+   "color": "amarillo"
+  },
+  {
+   "id": "conteo.camino",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 2,
+   "familia": "conteo",
+   "clave": "camino",
+   "nombre": "El camino de números",
+   "descripcion": "Seguir las flechas y completar los números.",
+   "opciones": [
+    {
+     "id": "huecos",
+     "etiqueta": "Cuadros vacíos",
+     "tipo": "numero",
+     "min": 3,
+     "max": 20,
+     "defecto": null
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa"
+   ],
+   "titulo": "EL CAMINO DE NÚMEROS",
+   "color": "amarillo"
+  },
+  {
+   "id": "orden.mayor",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 3,
+   "familia": "orden",
+   "clave": "mayor",
+   "nombre": "Mayor o menor",
+   "descripcion": "Rodear el número mayor o el menor de cada pareja.",
+   "opciones": [
+    {
+     "id": "modo",
+     "etiqueta": "Qué se rodea",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Mezclado"
+      },
+      {
+       "valor": "mayor",
+       "etiqueta": "Solo el mayor"
+      },
+      {
+       "valor": "menor",
+       "etiqueta": "Solo el menor"
+      }
+     ]
+    },
+    {
+     "id": "cerca",
+     "etiqueta": "Números de la misma decena (más difícil, desde 20)",
+     "tipo": "si_no",
+     "defecto": false
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "MAYOR O MENOR",
+   "color": "verde"
+  },
+  {
+   "id": "orden.signos",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 3,
+   "familia": "orden",
+   "clave": "signos",
+   "nombre": "Los signos < > =",
+   "descripcion": "Escribir el signo entre dos números.",
+   "opciones": [
+    {
+     "id": "modo",
+     "etiqueta": "Parejas iguales",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Con algunas iguales (=)"
+      },
+      {
+       "valor": "sin",
+       "etiqueta": "Sin iguales"
+      }
+     ]
+    },
+    {
+     "id": "cerca",
+     "etiqueta": "Números de la misma decena (más difícil, desde 20)",
+     "tipo": "si_no",
+     "defecto": false
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "LOS SIGNOS < > =",
+   "color": "verde"
+  },
+  {
+   "id": "orden.grupo",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 3,
+   "familia": "orden",
+   "clave": "grupo",
+   "nombre": "El mayor y el menor",
+   "descripcion": "Escribir el mayor y el menor de cada grupo.",
+   "opciones": [
+    {
+     "id": "n",
+     "etiqueta": "Números por grupo",
+     "tipo": "numero",
+     "min": 3,
+     "max": 5,
+     "defecto": 4
+    },
+    {
+     "id": "cerca",
+     "etiqueta": "Números de la misma decena (más difícil, desde 20)",
+     "tipo": "si_no",
+     "defecto": false
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "EL MAYOR Y EL MENOR",
+   "color": "verde"
+  },
+  {
+   "id": "orden.ordena1",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 3,
+   "familia": "orden",
+   "clave": "ordena1",
+   "nombre": "Ordena de menor a mayor",
+   "descripcion": "Ordenar números de menor a mayor.",
+   "opciones": [
+    {
+     "id": "n",
+     "etiqueta": "Números por grupo",
+     "tipo": "numero",
+     "min": 3,
+     "max": 5,
+     "defecto": 4
+    },
+    {
+     "id": "cerca",
+     "etiqueta": "Números de la misma decena (más difícil, desde 20)",
+     "tipo": "si_no",
+     "defecto": false
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "ORDENA DE MENOR A MAYOR",
+   "color": "verde"
+  },
+  {
+   "id": "orden.ordena2",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 3,
+   "familia": "orden",
+   "clave": "ordena2",
+   "nombre": "Ordena de mayor a menor",
+   "descripcion": "Ordenar números de mayor a menor.",
+   "opciones": [
+    {
+     "id": "n",
+     "etiqueta": "Números por grupo",
+     "tipo": "numero",
+     "min": 3,
+     "max": 5,
+     "defecto": 4
+    },
+    {
+     "id": "cerca",
+     "etiqueta": "Números de la misma decena (más difícil, desde 20)",
+     "tipo": "si_no",
+     "defecto": false
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "ORDENA DE MAYOR A MENOR",
+   "color": "verde"
+  },
+  {
+   "id": "orden.entre",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 3,
+   "familia": "orden",
+   "clave": "entre",
+   "nombre": "Un número entre dos",
+   "descripcion": "Escribir un número que esté entre otros dos.",
+   "opciones": [],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "UN NÚMERO ENTRE DOS",
+   "color": "verde"
+  },
+  {
+   "id": "orden.ordinales",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 3,
+   "familia": "orden",
+   "clave": "ordinales",
+   "nombre": "Los ordinales",
+   "descripcion": "Primero, segundo, tercero…: colorear o decir el lugar.",
+   "opciones": [
+    {
+     "id": "modo",
+     "etiqueta": "Tarea",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Mezclado"
+      },
+      {
+       "valor": "colorea",
+       "etiqueta": "Colorear el que se pide"
+      },
+      {
+       "valor": "lugar",
+       "etiqueta": "Decir el lugar"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "LOS ORDINALES",
+   "color": "verde"
+  },
+  {
+   "id": "orden.cantidad",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 3,
+   "familia": "orden",
+   "clave": "cantidad",
+   "nombre": "Más, menos o igual",
+   "descripcion": "Comparar dos grupos de dibujos.",
+   "opciones": [
+    {
+     "id": "modo",
+     "etiqueta": "Qué se rodea",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Mezclado"
+      },
+      {
+       "valor": "mayor",
+       "etiqueta": "Solo el que tiene más"
+      },
+      {
+       "valor": "menor",
+       "etiqueta": "Solo el que tiene menos"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    10,
+    20
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "MÁS, MENOS O IGUAL",
+   "color": "verde"
+  },
+  {
+   "id": "valor.agrupa",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 4,
+   "familia": "valor",
+   "clave": "agrupa",
+   "nombre": "Agrupa en decenas",
+   "descripcion": "Rodear grupos de 10 y escribir decenas y unidades.",
+   "opciones": [],
+   "rangos": [
+    20,
+    30,
+    100
+   ],
+   "rango": 20,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "AGRUPA EN DECENAS",
+   "color": "rosa"
+  },
+  {
+   "id": "valor.canje",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 4,
+   "familia": "valor",
+   "clave": "canje",
+   "nombre": "Los canjes",
+   "descripcion": "Cambiar unidades por decenas.",
+   "opciones": [
+    {
+     "id": "nivel",
+     "etiqueta": "Números",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Decenas completas y otros"
+      },
+      {
+       "valor": "completas",
+       "etiqueta": "Solo decenas completas"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    20,
+    30,
+    100
+   ],
+   "rango": 20,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "LOS CANJES",
+   "color": "rosa"
+  },
+  {
+   "id": "valor.descdu",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 4,
+   "familia": "valor",
+   "clave": "descdu",
+   "nombre": "Descomposición en D y U",
+   "descripcion": "Descomponer números en decenas y unidades.",
+   "opciones": [
+    {
+     "id": "modo",
+     "etiqueta": "Forma",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Decenas y unidades (4 D + 3 U)"
+      },
+      {
+       "valor": "suma",
+       "etiqueta": "Suma (40 + 3)"
+      }
+     ]
+    },
+    {
+     "id": "nivel",
+     "etiqueta": "Números",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Decenas completas y otros"
+      },
+      {
+       "valor": "completas",
+       "etiqueta": "Solo decenas completas"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    30,
+    100
+   ],
+   "rango": 30,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "DESCOMPOSICIÓN EN D Y U",
+   "color": "rosa"
+  },
+  {
+   "id": "valor.dunum",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 4,
+   "familia": "valor",
+   "clave": "dunum",
+   "nombre": "Decenas, unidades y número",
+   "descripcion": "Pasar de decenas y unidades al número y al revés.",
+   "opciones": [
+    {
+     "id": "nivel",
+     "etiqueta": "Números",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Decenas completas y otros"
+      },
+      {
+       "valor": "completas",
+       "etiqueta": "Solo decenas completas"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    30,
+    100
+   ],
+   "rango": 30,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "DECENAS, UNIDADES Y NÚMERO",
+   "color": "rosa"
+  },
+  {
+   "id": "valor.pares",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 4,
+   "familia": "valor",
+   "clave": "pares",
+   "nombre": "Pares e impares",
+   "descripcion": "Distinguir números pares e impares.",
+   "opciones": [
+    {
+     "id": "modo",
+     "etiqueta": "Tarea",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Contar puntos y rodear"
+      },
+      {
+       "valor": "clasifica",
+       "etiqueta": "Clasificar en dos columnas",
+       "tamanos": [
+        "completa"
+       ]
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    10,
+    20
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "PARES E IMPARES",
+   "color": "rosa"
+  },
+  {
+   "id": "valor.cifra",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 4,
+   "familia": "valor",
+   "clave": "cifra",
+   "nombre": "El valor de la cifra",
+   "descripcion": "Escribir cuánto vale cada cifra.",
+   "opciones": [],
+   "rangos": [
+    30,
+    100
+   ],
+   "rango": 30,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "EL VALOR DE LA CIFRA",
+   "color": "rosa"
+  },
+  {
+   "id": "sumar.dibujos",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 5,
+   "familia": "sumar",
+   "clave": "dibujos",
+   "nombre": "Suma con dibujos",
+   "descripcion": "Contar dos grupos de dibujos y escribir el total.",
+   "opciones": [],
+   "rangos": [
+    10,
+    20
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "SUMA CON DIBUJOS",
+   "color": "azul"
+  },
+  {
+   "id": "sumar.recta",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 5,
+   "familia": "sumar",
+   "clave": "recta",
+   "nombre": "Suma en la recta numérica",
+   "descripcion": "Sumar dando saltos en la recta.",
+   "opciones": [],
+   "rangos": [
+    10,
+    20,
+    30
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "SUMA EN LA RECTA NUMÉRICA",
+   "color": "azul"
+  },
+  {
+   "id": "sumar.h10",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 5,
+   "familia": "sumar",
+   "clave": "h10",
+   "nombre": "Sumas hasta 10",
+   "descripcion": "Sumas horizontales con resultado hasta 10.",
+   "opciones": [],
+   "rangos": [
+    10
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "SUMAS HASTA 10",
+   "color": "azul"
+  },
+  {
+   "id": "sumar.h20",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 5,
+   "familia": "sumar",
+   "clave": "h20",
+   "nombre": "Sumas hasta 20",
+   "descripcion": "Sumas horizontales con resultado hasta 20.",
+   "opciones": [
+    {
+     "id": "nivel",
+     "etiqueta": "Llevadas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Sin llevadas"
+      },
+      {
+       "valor": "con",
+       "etiqueta": "Con llevadas"
+      },
+      {
+       "valor": "mezcla",
+       "etiqueta": "Mezcladas"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    20
+   ],
+   "rango": 20,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "SUMAS HASTA 20",
+   "color": "azul"
+  },
+  {
+   "id": "sumar.h100",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 5,
+   "familia": "sumar",
+   "clave": "h100",
+   "nombre": "Sumas hasta 100",
+   "descripcion": "Sumas horizontales de números de dos cifras.",
+   "opciones": [
+    {
+     "id": "nivel",
+     "etiqueta": "Llevadas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Sin llevadas"
+      },
+      {
+       "valor": "con",
+       "etiqueta": "Con llevadas"
+      },
+      {
+       "valor": "mezcla",
+       "etiqueta": "Mezcladas"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    30,
+    100
+   ],
+   "rango": 30,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "SUMAS HASTA 100",
+   "color": "azul"
+  },
+  {
+   "id": "sumar.vertical",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 5,
+   "familia": "sumar",
+   "clave": "vertical",
+   "nombre": "Sumas en vertical",
+   "descripcion": "Sumas colocadas en columna (D y U).",
+   "opciones": [
+    {
+     "id": "nivel",
+     "etiqueta": "Llevadas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Sin llevadas"
+      },
+      {
+       "valor": "con",
+       "etiqueta": "Con llevadas"
+      },
+      {
+       "valor": "mezcla",
+       "etiqueta": "Mezcladas"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    30,
+    100
+   ],
+   "rango": 30,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "SUMAS EN VERTICAL",
+   "color": "azul"
+  },
+  {
+   "id": "sumar.dobles",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 5,
+   "familia": "sumar",
+   "clave": "dobles",
+   "nombre": "Los dobles",
+   "descripcion": "Calcular el doble de un número.",
+   "opciones": [
+    {
+     "id": "modo",
+     "etiqueta": "Presentación",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Solo números"
+      },
+      {
+       "valor": "dibujo",
+       "etiqueta": "Con dibujos"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    10,
+    20
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "LOS DOBLES",
+   "color": "azul"
+  },
+  {
+   "id": "sumar.comp10",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 5,
+   "familia": "sumar",
+   "clave": "comp10",
+   "nombre": "Completa hasta 10",
+   "descripcion": "Lo que falta para llegar a 10.",
+   "opciones": [],
+   "rangos": [
+    10
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "COMPLETA HASTA 10",
+   "color": "azul"
+  },
+  {
+   "id": "sumar.comp20",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 5,
+   "familia": "sumar",
+   "clave": "comp20",
+   "nombre": "Completa hasta la decena",
+   "descripcion": "Lo que falta para llegar a la decena siguiente.",
+   "opciones": [],
+   "rangos": [
+    20,
+    30,
+    100
+   ],
+   "rango": 20,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "COMPLETA HASTA LA DECENA",
+   "color": "azul"
+  },
+  {
+   "id": "sumar.hueco",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 5,
+   "familia": "sumar",
+   "clave": "hueco",
+   "nombre": "Sumas con hueco",
+   "descripcion": "Sumas con un sumando desconocido.",
+   "opciones": [
+    {
+     "id": "nivel",
+     "etiqueta": "Llevadas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Sin llevadas"
+      },
+      {
+       "valor": "con",
+       "etiqueta": "Con llevadas"
+      },
+      {
+       "valor": "mezcla",
+       "etiqueta": "Mezcladas"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "SUMAS CON HUECO",
+   "color": "azul"
+  },
+  {
+   "id": "sumar.decenas",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 5,
+   "familia": "sumar",
+   "clave": "decenas",
+   "nombre": "Sumas de decenas",
+   "descripcion": "Sumar decenas completas (20 + 30).",
+   "opciones": [
+    {
+     "id": "modo",
+     "etiqueta": "Presentación",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Solo números"
+      },
+      {
+       "valor": "bloques",
+       "etiqueta": "Con bloques de base diez"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    30,
+    100
+   ],
+   "rango": 30,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "SUMAS DE DECENAS",
+   "color": "azul"
+  },
+  {
+   "id": "sumar.encadenadas",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 5,
+   "familia": "sumar",
+   "clave": "encadenadas",
+   "nombre": "Sumas encadenadas",
+   "descripcion": "Sumar tres números seguidos.",
+   "opciones": [],
+   "rangos": [
+    10,
+    20
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "SUMAS ENCADENADAS",
+   "color": "azul"
+  },
+  {
+   "id": "sumar.piramide",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 5,
+   "familia": "sumar",
+   "clave": "piramide",
+   "nombre": "Pirámides de sumas",
+   "descripcion": "Cada casilla es la suma de las dos de abajo.",
+   "opciones": [
+    {
+     "id": "huecos",
+     "etiqueta": "Cuadros vacíos",
+     "tipo": "numero",
+     "min": 1,
+     "max": 4,
+     "defecto": 3
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "PIRÁMIDES DE SUMAS",
+   "color": "azul"
+  },
+  {
+   "id": "sumar.tabla",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 5,
+   "familia": "sumar",
+   "clave": "tabla",
+   "nombre": "Tabla de sumar",
+   "descripcion": "Completar una tabla de doble entrada.",
+   "opciones": [
+    {
+     "id": "huecos",
+     "etiqueta": "Cuadros vacíos",
+     "tipo": "numero",
+     "min": 1,
+     "max": 36,
+     "defecto": null
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa"
+   ],
+   "titulo": "TABLA DE SUMAR",
+   "color": "azul"
+  },
+  {
+   "id": "restar.quita",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 6,
+   "familia": "restar",
+   "clave": "quita",
+   "nombre": "Resta con dibujos",
+   "descripcion": "Tachar dibujos y contar los que quedan.",
+   "opciones": [],
+   "rangos": [
+    10,
+    20
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "RESTA CON DIBUJOS",
+   "color": "verde"
+  },
+  {
+   "id": "restar.recta",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 6,
+   "familia": "restar",
+   "clave": "recta",
+   "nombre": "Resta en la recta numérica",
+   "descripcion": "Restar dando saltos hacia atrás.",
+   "opciones": [],
+   "rangos": [
+    10,
+    20,
+    30
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "RESTA EN LA RECTA NUMÉRICA",
+   "color": "verde"
+  },
+  {
+   "id": "restar.r10",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 6,
+   "familia": "restar",
+   "clave": "r10",
+   "nombre": "Restas hasta 10",
+   "descripcion": "Restas horizontales hasta 10.",
+   "opciones": [],
+   "rangos": [
+    10
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "RESTAS HASTA 10",
+   "color": "verde"
+  },
+  {
+   "id": "restar.r20",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 6,
+   "familia": "restar",
+   "clave": "r20",
+   "nombre": "Restas hasta 20",
+   "descripcion": "Restas horizontales hasta 20.",
+   "opciones": [
+    {
+     "id": "nivel",
+     "etiqueta": "Llevadas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Sin llevadas"
+      },
+      {
+       "valor": "con",
+       "etiqueta": "Con llevadas"
+      },
+      {
+       "valor": "mezcla",
+       "etiqueta": "Mezcladas"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    20
+   ],
+   "rango": 20,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "RESTAS HASTA 20",
+   "color": "verde"
+  },
+  {
+   "id": "restar.r100",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 6,
+   "familia": "restar",
+   "clave": "r100",
+   "nombre": "Restas hasta 100",
+   "descripcion": "Restas horizontales de números de dos cifras.",
+   "opciones": [
+    {
+     "id": "nivel",
+     "etiqueta": "Llevadas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Sin llevadas"
+      },
+      {
+       "valor": "con",
+       "etiqueta": "Con llevadas"
+      },
+      {
+       "valor": "mezcla",
+       "etiqueta": "Mezcladas"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    30,
+    100
+   ],
+   "rango": 30,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "RESTAS HASTA 100",
+   "color": "verde"
+  },
+  {
+   "id": "restar.vertical",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 6,
+   "familia": "restar",
+   "clave": "vertical",
+   "nombre": "Restas en vertical",
+   "descripcion": "Restas colocadas en columna (D y U).",
+   "opciones": [
+    {
+     "id": "nivel",
+     "etiqueta": "Llevadas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Sin llevadas"
+      },
+      {
+       "valor": "con",
+       "etiqueta": "Con llevadas"
+      },
+      {
+       "valor": "mezcla",
+       "etiqueta": "Mezcladas"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    30,
+    100
+   ],
+   "rango": 30,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "RESTAS EN VERTICAL",
+   "color": "verde"
+  },
+  {
+   "id": "restar.mitades",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 6,
+   "familia": "restar",
+   "clave": "mitades",
+   "nombre": "Las mitades",
+   "descripcion": "Calcular la mitad de un número par.",
+   "opciones": [
+    {
+     "id": "modo",
+     "etiqueta": "Presentación",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Solo números"
+      },
+      {
+       "valor": "dibujo",
+       "etiqueta": "Con dibujos"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    10,
+    20
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "LAS MITADES",
+   "color": "verde"
+  },
+  {
+   "id": "restar.faltan",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 6,
+   "familia": "restar",
+   "clave": "faltan",
+   "nombre": "¿Cuánto falta?",
+   "descripcion": "Lo que falta para llegar a un número.",
+   "opciones": [],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "¿CUÁNTO FALTA?",
+   "color": "verde"
+  },
+  {
+   "id": "restar.hueco",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 6,
+   "familia": "restar",
+   "clave": "hueco",
+   "nombre": "Restas con hueco",
+   "descripcion": "Restas con un término desconocido.",
+   "opciones": [
+    {
+     "id": "nivel",
+     "etiqueta": "Llevadas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Sin llevadas"
+      },
+      {
+       "valor": "con",
+       "etiqueta": "Con llevadas"
+      },
+      {
+       "valor": "mezcla",
+       "etiqueta": "Mezcladas"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "RESTAS CON HUECO",
+   "color": "verde"
+  },
+  {
+   "id": "restar.decenas",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 6,
+   "familia": "restar",
+   "clave": "decenas",
+   "nombre": "Restas de decenas",
+   "descripcion": "Restar decenas completas (50 − 20).",
+   "opciones": [
+    {
+     "id": "modo",
+     "etiqueta": "Presentación",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Solo números"
+      },
+      {
+       "valor": "bloques",
+       "etiqueta": "Con bloques de base diez"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    30,
+    100
+   ],
+   "rango": 30,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "RESTAS DE DECENAS",
+   "color": "verde"
+  },
+  {
+   "id": "restar.encadenadas",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 6,
+   "familia": "restar",
+   "clave": "encadenadas",
+   "nombre": "Restas encadenadas",
+   "descripcion": "Restar dos números seguidos.",
+   "opciones": [],
+   "rangos": [
+    10,
+    20
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "RESTAS ENCADENADAS",
+   "color": "verde"
+  },
+  {
+   "id": "restar.familia",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 6,
+   "familia": "restar",
+   "clave": "familia",
+   "nombre": "Familias de operaciones",
+   "descripcion": "Usar una suma para completar dos restas.",
+   "opciones": [
+    {
+     "id": "nivel",
+     "etiqueta": "Llevadas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Sin llevadas"
+      },
+      {
+       "valor": "con",
+       "etiqueta": "Con llevadas"
+      },
+      {
+       "valor": "mezcla",
+       "etiqueta": "Mezcladas"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "FAMILIAS DE OPERACIONES",
+   "color": "verde"
+  },
+  {
+   "id": "juegos.cuadrado",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 7,
+   "familia": "juegos",
+   "clave": "cuadrado",
+   "nombre": "Cuadrados mágicos",
+   "descripcion": "Completar un cuadrado mágico 3 × 3.",
+   "opciones": [
+    {
+     "id": "n",
+     "etiqueta": "Casillas vacías",
+     "tipo": "numero",
+     "min": 3,
+     "max": 5,
+     "defecto": 4
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "CUADRADOS MÁGICOS",
+   "color": "amarillo"
+  },
+  {
+   "id": "juegos.laberinto",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 7,
+   "familia": "juegos",
+   "clave": "laberinto",
+   "nombre": "Laberinto de números",
+   "descripcion": "Seguir una serie desde la salida hasta la meta.",
+   "opciones": [
+    {
+     "id": "n",
+     "etiqueta": "Salto",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "De 1 en 1"
+      },
+      {
+       "valor": 2,
+       "etiqueta": "De 2 en 2"
+      },
+      {
+       "valor": 5,
+       "etiqueta": "De 5 en 5"
+      },
+      {
+       "valor": 10,
+       "etiqueta": "De 10 en 10"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa"
+   ],
+   "titulo": "LABERINTO DE NÚMEROS",
+   "color": "amarillo"
+  },
+  {
+   "id": "juegos.une",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 7,
+   "familia": "juegos",
+   "clave": "une",
+   "nombre": "Une operaciones y resultados",
+   "descripcion": "Unir con flechas cada operación con su resultado.",
+   "opciones": [
+    {
+     "id": "modo",
+     "etiqueta": "Operaciones",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Sumas y restas"
+      },
+      {
+       "valor": "suma",
+       "etiqueta": "Solo sumas"
+      },
+      {
+       "valor": "resta",
+       "etiqueta": "Solo restas"
+      }
+     ]
+    },
+    {
+     "id": "nivel",
+     "etiqueta": "Llevadas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Sin llevadas"
+      },
+      {
+       "valor": "con",
+       "etiqueta": "Con llevadas"
+      },
+      {
+       "valor": "mezcla",
+       "etiqueta": "Mezcladas"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa"
+   ],
+   "titulo": "UNE OPERACIONES Y RESULTADOS",
+   "color": "amarillo"
+  },
+  {
+   "id": "juegos.cadena",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 7,
+   "familia": "juegos",
+   "clave": "cadena",
+   "nombre": "Cadenas de números",
+   "descripcion": "Seguir una cadena de operaciones.",
+   "opciones": [],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "CADENAS DE NÚMEROS",
+   "color": "amarillo"
+  },
+  {
+   "id": "juegos.oculto",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 7,
+   "familia": "juegos",
+   "clave": "oculto",
+   "nombre": "El número oculto",
+   "descripcion": "Adivinar un número a partir de pistas.",
+   "opciones": [],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "EL NÚMERO OCULTO",
+   "color": "amarillo"
+  },
+  {
+   "id": "juegos.colorea",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 7,
+   "familia": "juegos",
+   "clave": "colorea",
+   "nombre": "Colorea y descubre",
+   "descripcion": "Resolver y colorear para descubrir un dibujo.",
+   "opciones": [
+    {
+     "id": "modo",
+     "etiqueta": "Operaciones",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Sumas"
+      },
+      {
+       "valor": "resta",
+       "etiqueta": "Restas"
+      }
+     ]
+    },
+    {
+     "id": "nivel",
+     "etiqueta": "Llevadas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Sin llevadas"
+      },
+      {
+       "valor": "con",
+       "etiqueta": "Con llevadas"
+      },
+      {
+       "valor": "mezcla",
+       "etiqueta": "Mezcladas"
+      }
+     ]
+    },
+    {
+     "id": "n",
+     "etiqueta": "Dibujo",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Al azar"
+      },
+      {
+       "valor": 1,
+       "etiqueta": "Corazón"
+      },
+      {
+       "valor": 2,
+       "etiqueta": "Casa"
+      },
+      {
+       "valor": 3,
+       "etiqueta": "Árbol"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "Diamante"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa"
+   ],
+   "titulo": "COLOREA Y DESCUBRE",
+   "color": "amarillo"
+  },
+  {
+   "id": "geometria.figuras",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 9,
+   "familia": "geometria",
+   "clave": "figuras",
+   "nombre": "Las figuras planas",
+   "descripcion": "Reconocer círculo, cuadrado, triángulo y rectángulo.",
+   "opciones": [],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "LAS FIGURAS PLANAS",
+   "color": "rosa"
+  },
+  {
+   "id": "geometria.cuenta",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 9,
+   "familia": "geometria",
+   "clave": "cuenta",
+   "nombre": "Cuenta las figuras",
+   "descripcion": "Contar cuántas figuras hay de cada clase.",
+   "opciones": [],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa"
+   ],
+   "titulo": "CUENTA LAS FIGURAS",
+   "color": "rosa"
+  },
+  {
+   "id": "geometria.cuerpos",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 9,
+   "familia": "geometria",
+   "clave": "cuerpos",
+   "nombre": "Los cuerpos geométricos",
+   "descripcion": "Reconocer esfera, cubo, cilindro, cono…",
+   "opciones": [],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "LOS CUERPOS GEOMÉTRICOS",
+   "color": "rosa"
+  },
+  {
+   "id": "geometria.rueda",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 9,
+   "familia": "geometria",
+   "clave": "rueda",
+   "nombre": "¿Rueda o no rueda?",
+   "descripcion": "Clasificar cuerpos que ruedan y que no.",
+   "opciones": [],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "¿RUEDA O NO RUEDA?",
+   "color": "rosa"
+  },
+  {
+   "id": "geometria.lineas",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 9,
+   "familia": "geometria",
+   "clave": "lineas",
+   "nombre": "Las líneas",
+   "descripcion": "Recta, curva y quebrada, o abierta y cerrada.",
+   "opciones": [
+    {
+     "id": "modo",
+     "etiqueta": "Tipo",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Recta, curva o quebrada"
+      },
+      {
+       "valor": "cierre",
+       "etiqueta": "Abierta o cerrada"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "LAS LÍNEAS",
+   "color": "rosa"
+  },
+  {
+   "id": "geometria.posiciones",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 9,
+   "familia": "geometria",
+   "clave": "posiciones",
+   "nombre": "Encima, debajo, izquierda y derecha",
+   "descripcion": "Situar un objeto respecto a otro.",
+   "opciones": [],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "ENCIMA, DEBAJO, IZQUIERDA Y DERECHA",
+   "color": "rosa"
+  },
+  {
+   "id": "geometria.simetria",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 9,
+   "familia": "geometria",
+   "clave": "simetria",
+   "nombre": "La simetría",
+   "descripcion": "Completar la mitad simétrica de un dibujo.",
+   "opciones": [
+    {
+     "id": "n",
+     "etiqueta": "Tamaño del dibujo",
+     "tipo": "numero",
+     "min": 3,
+     "max": 5,
+     "defecto": 4
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "LA SIMETRÍA",
+   "color": "rosa"
+  },
+  {
+   "id": "geometria.copia",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 9,
+   "familia": "geometria",
+   "clave": "copia",
+   "nombre": "Copia el dibujo",
+   "descripcion": "Copiar un dibujo en la cuadrícula.",
+   "opciones": [],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa"
+   ],
+   "titulo": "COPIA EL DIBUJO",
+   "color": "rosa"
+  },
+  {
+   "id": "medida.dinero",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 10,
+   "familia": "medida",
+   "clave": "dinero",
+   "nombre": "Cuenta el dinero",
+   "descripcion": "Contar monedas y billetes.",
+   "opciones": [
+    {
+     "id": "modo",
+     "etiqueta": "Unidad",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Euros"
+      },
+      {
+       "valor": "centimos",
+       "etiqueta": "Céntimos"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    100
+   ],
+   "rango": 20,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "CUENTA EL DINERO",
+   "color": "azul"
+  },
+  {
+   "id": "medida.precios",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 10,
+   "familia": "medida",
+   "clave": "precios",
+   "nombre": "Las compras",
+   "descripcion": "Calcular el total de una compra o la vuelta.",
+   "opciones": [
+    {
+     "id": "modo",
+     "etiqueta": "Tarea",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Total de la compra"
+      },
+      {
+       "valor": "cambio",
+       "etiqueta": "La vuelta"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    10,
+    20
+   ],
+   "rango": 20,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "LAS COMPRAS",
+   "color": "azul"
+  },
+  {
+   "id": "medida.reloj",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 10,
+   "familia": "medida",
+   "clave": "reloj",
+   "nombre": "Los relojes",
+   "descripcion": "Leer la hora en relojes de agujas.",
+   "opciones": [
+    {
+     "id": "modo",
+     "etiqueta": "Horas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "En punto e y media"
+      },
+      {
+       "valor": "punto",
+       "etiqueta": "Solo en punto"
+      },
+      {
+       "valor": "media",
+       "etiqueta": "Solo y media"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "LOS RELOJES",
+   "color": "azul"
+  },
+  {
+   "id": "medida.reloj2",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 10,
+   "familia": "medida",
+   "clave": "reloj2",
+   "nombre": "Dibuja las agujas",
+   "descripcion": "Dibujar las agujas para marcar una hora.",
+   "opciones": [
+    {
+     "id": "modo",
+     "etiqueta": "Horas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "En punto e y media"
+      },
+      {
+       "valor": "punto",
+       "etiqueta": "Solo en punto"
+      },
+      {
+       "valor": "media",
+       "etiqueta": "Solo y media"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "DIBUJA LAS AGUJAS",
+   "color": "azul"
+  },
+  {
+   "id": "medida.calendario",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 10,
+   "familia": "medida",
+   "clave": "calendario",
+   "nombre": "El calendario",
+   "descripcion": "Leer un calendario mensual y contestar.",
+   "opciones": [
+    {
+     "id": "n",
+     "etiqueta": "Mes",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Al azar"
+      },
+      {
+       "valor": 1,
+       "etiqueta": "Enero"
+      },
+      {
+       "valor": 2,
+       "etiqueta": "Febrero"
+      },
+      {
+       "valor": 3,
+       "etiqueta": "Marzo"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "Abril"
+      },
+      {
+       "valor": 5,
+       "etiqueta": "Mayo"
+      },
+      {
+       "valor": 6,
+       "etiqueta": "Junio"
+      },
+      {
+       "valor": 7,
+       "etiqueta": "Julio"
+      },
+      {
+       "valor": 8,
+       "etiqueta": "Agosto"
+      },
+      {
+       "valor": 9,
+       "etiqueta": "Septiembre"
+      },
+      {
+       "valor": 10,
+       "etiqueta": "Octubre"
+      },
+      {
+       "valor": 11,
+       "etiqueta": "Noviembre"
+      },
+      {
+       "valor": 12,
+       "etiqueta": "Diciembre"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa"
+   ],
+   "titulo": "EL CALENDARIO",
+   "color": "azul"
+  },
+  {
+   "id": "medida.tiempo",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 10,
+   "familia": "medida",
+   "clave": "tiempo",
+   "nombre": "Días y meses",
+   "descripcion": "Orden de los días de la semana o de los meses.",
+   "opciones": [
+    {
+     "id": "modo",
+     "etiqueta": "Tema",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Días de la semana"
+      },
+      {
+       "valor": "meses",
+       "etiqueta": "Meses del año"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": {
+    "_": "LOS DÍAS DE LA SEMANA",
+    "meses": "LOS MESES DEL AÑO"
+   },
+   "color": "azul"
+  },
+  {
+   "id": "medida.longitud",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 10,
+   "familia": "medida",
+   "clave": "longitud",
+   "nombre": "Mide con cubitos",
+   "descripcion": "Medir longitudes con cubitos.",
+   "opciones": [
+    {
+     "id": "modo",
+     "etiqueta": "Tarea",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Medir y escribir"
+      },
+      {
+       "valor": "compara",
+       "etiqueta": "Medir y rodear el más largo"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "MIDE CON CUBITOS",
+   "color": "azul"
+  },
+  {
+   "id": "medida.capacidad",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 10,
+   "familia": "medida",
+   "clave": "capacidad",
+   "nombre": "¿Cuánto líquido hay?",
+   "descripcion": "Ordenar vasos según el líquido.",
+   "opciones": [],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "¿CUÁNTO LÍQUIDO HAY?",
+   "color": "azul"
+  },
+  {
+   "id": "estadistica.pictograma",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 11,
+   "familia": "estadistica",
+   "clave": "pictograma",
+   "nombre": "El pictograma",
+   "descripcion": "Leer un pictograma y contestar.",
+   "opciones": [
+    {
+     "id": "modo",
+     "etiqueta": "Valor del dibujo",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Cada dibujo vale 1"
+      },
+      {
+       "valor": "dos",
+       "etiqueta": "Cada dibujo vale 2"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    10
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa"
+   ],
+   "titulo": "EL PICTOGRAMA",
+   "color": "verde"
+  },
+  {
+   "id": "estadistica.recuento",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 11,
+   "familia": "estadistica",
+   "clave": "recuento",
+   "nombre": "Cuenta y anota",
+   "descripcion": "Contar con palotes y escribir el número.",
+   "opciones": [],
+   "rangos": [
+    10,
+    20,
+    30
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa"
+   ],
+   "titulo": "CUENTA Y ANOTA",
+   "color": "verde"
+  },
+  {
+   "id": "estadistica.barras",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 11,
+   "familia": "estadistica",
+   "clave": "barras",
+   "nombre": "El gráfico de barras",
+   "descripcion": "Hacer o leer un gráfico de barras.",
+   "opciones": [
+    {
+     "id": "modo",
+     "etiqueta": "Tarea",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Colorear el gráfico"
+      },
+      {
+       "valor": "lee",
+       "etiqueta": "Leer el gráfico"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    10
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa"
+   ],
+   "titulo": "EL GRÁFICO DE BARRAS",
+   "color": "verde"
+  },
+  {
+   "id": "estadistica.patrones",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 11,
+   "familia": "estadistica",
+   "clave": "patrones",
+   "nombre": "Los patrones",
+   "descripcion": "Continuar o completar series de figuras.",
+   "opciones": [
+    {
+     "id": "modo",
+     "etiqueta": "Tarea",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Continuar la serie"
+      },
+      {
+       "valor": "hueco",
+       "etiqueta": "Completar huecos"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "LOS PATRONES",
+   "color": "verde"
+  }
+ ]
+};
+export const POR_ID = Object.fromEntries(CATALOGO.modelos.map((m) => [m.id, m]));

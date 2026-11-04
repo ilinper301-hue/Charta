@@ -1,0 +1,10 @@
+{
+  "name": "charta",
+  "private": true,
+  "type": "module",
+  "description": "Charta: fichas educativas personalizadas. Sin dependencias; package.json solo para que Node trate src/ como módulos ES.",
+  "scripts": {
+    "test": "node tests/test_nucleo.js",
+    "build": "python3 tools/build.py"
+  }
+}

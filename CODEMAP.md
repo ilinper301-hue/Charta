@@ -11,9 +11,25 @@ motor/generador_fichas.py   motor de REFERENCIA (Python + ReportLab), ~2.700 lí
 motor/modelos.py      catálogo MODELOS para la app (solo datos): menu(), por_defecto(), validar(), a_json()
 tests/test_motor.py   regresión: genera todo y comprueba la aritmética
 referencia/ficha_muestra.pdf  ficha de muestra de Iván (marco a imitar)
-src/ → dist/          (fase 2) la app: núcleo y renderizado en JavaScript
+tests/test_nucleo.js  pruebas del núcleo JS (Node): `node tests/test_nucleo.js`
+index.html            redirige a dist/ (GitHub Pages sirve la raíz)
+package.json          solo "type": "module" para Node (sin dependencias)
+src/index.html, estilos.css, app.js   cascarón de la app (verde oscuro)
+src/nucleo/azar.js    mulberry32, mezclar(...ns) (semillas derivadas), crearAzar(s): entero, elegir, barajar, muestra, hijo
+src/nucleo/tipos.js   registro: registrar(t), tipo(id), hayTipo, listaTipos
+src/nucleo/ficha.js   modelo, porDefecto, validar, capitalizar, tituloModelo, tituloPagina, coloresPagina, generar(opciones, semilla)
+src/nucleo/lector.js  erroresFicha(f), paginasVariante(f, v), letraVariante — sin dependencias (Tabula/Fori)
+src/nucleo/catalogo.js  GENERADO por tools/catalogo.py (MODELOS + titulo + color); no editar
+src/tipos/index.js    importa todos los tipos; src/tipos/<id>.js uno por tipo (p. ej. sumar.h20.js)
+tools/build.py        src/ → dist/index.html (un solo archivo); --js = solo el paquete
+dist/index.html       la app construida (se sube al repositorio: la sirve Pages)
 salida/               PDF generados por la línea de órdenes (se crea sola)
 ```
+
+## Núcleo JS (fase 2)
+- `generar(opciones, semilla)`: 1 actividad → `completa`, 2 → `media`. Semilla de la variante v: `v=0 ? semilla : mezclar(semilla, v)`; azar de la actividad i: `mezclar(semillaVariante, i+1)`. No pone `id`, `creada` ni `autor` (se añaden al guardar).
+- Tipo nuevo: `src/tipos/<id>.js` con `registrar({id, version, generar(params, azar, {tamano})})` y la forma de `datos`/`solucion` documentada arriba; añadirlo a `src/tipos/index.js`.
+- `build.py` solo admite las formas de import/export de su cabecera (falla con mensaje claro si hay otra). Tras cambiar `src/`: `python3 tools/build.py`.
 
 ## Motor: `motor/generador_fichas.py` (números de línea aproximados)
 | Líneas | Sección |

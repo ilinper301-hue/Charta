@@ -11,3 +11,5 @@ Generar una ficha desde la línea de órdenes:
 python3 motor/generador_fichas.py sumar h20 20 --nivel mezcla
 ```
 Prueba de regresión: `python3 tests/test_motor.py` (`--full` para la completa).
+
+App (JavaScript): `python3 tools/build.py` → `dist/index.html`. Pruebas: `node tests/test_nucleo.js`.
