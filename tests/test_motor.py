@@ -60,21 +60,52 @@ for f, d in FAM.items():
 for f, k in ids:
     if f in FAM and k not in FAM[f]: err += 1; print("NO EXISTE EN EL MOTOR", f, k)
 
-def run_modelo(m, p, seed):
-    p = mo.validar(m["id"], p); R = p.pop("rango")
-    R = R or {"medida": 20, "estadistica": 10}.get(m["familia"])
-    a = (R,) if m["familia"] in ("combinada", "suma") else (m["clave"],) if R is None else (m["clave"], R)
-    run(FN[m["familia"]], *a, seed, **{k: v for k, v in p.items() if v is not None})
+# ---- actividades (paso 1.2): cada modelo y opción, en página completa y media, dentro de un rectángulo
+import random
+from reportlab.pdfgen import canvas
+CV = canvas.Canvas(OUT + "actividades.pdf", pagesize=g.A4)
+BASE = g.H - g.M - 76 - (g.H - 2*g.M - 76)*0.5    # en media página nada debe bajar de aquí
+low, spy_on = [1e9], [False]
+def _spy(name, ys):
+    f = getattr(CV, name)
+    def w(*a, **k):
+        if spy_on[0]:
+            try: low[0] = min(low[0], ys(a))
+            except Exception: pass
+        return f(*a, **k)
+    setattr(CV, name, w)
+for nm, ys in (("roundRect", lambda a: a[1]), ("rect", lambda a: a[1]), ("drawString", lambda a: a[1]), ("drawCentredString", lambda a: a[1]),
+               ("drawRightString", lambda a: a[1]), ("line", lambda a: min(a[1], a[3])), ("circle", lambda a: a[1] - a[2])):
+    _spy(nm, ys)
+_panel = g.panel
+def _panel_spy(*a, **k): _panel(*a, **k); spy_on[0] = True
+g.panel = _panel_spy
+
+def run_act(m, p, seed, tam):
+    global err, ops, fichas
+    low[0] = 1e9; spy_on[0] = False
+    try:
+        rect = (34, 26, g.W - 68, 640) if tam == "completa" else (34, 26, g.W - 68, 330)
+        clave = g.actividad(CV, rect, {"modelo": m["id"], **p}, random.Random(seed), tamano=tam); fichas += 1
+        for x in EXP.finditer(clave):
+            v = eval(x.group(1).replace("−", "-").replace("–", "-")); ops += 1
+            if v != int(x.group(2)) or v < 0: err += 1; print("MAL", m["id"], tam, p, x.group(0))
+        if tam == "media" and m["familia"] not in ("rep", "combinada", "suma") and low[0] < BASE - 2:
+            err += 1; print("SE SALE DE MEDIA PÁGINA", m["id"], p, round(BASE - low[0]))
+    except Exception as e:
+        err += 1; print("ERROR", m["id"], tam, p, repr(e))
+    spy_on[0] = False
 
 for m in mo.MODELOS:
-    variantes = [{}] + [{"rango": r} for r in m["rangos"][1:]]
-    for o in m["opciones"]:
-        vals = [x["valor"] for x in o["valores"]] if o["tipo"] == "opcion" else \
-               [o["min"], o["max"]] if o["tipo"] == "numero" else [True]
-        variantes += [{o["id"]: v, "rango": r} for v in vals for r in (m["rangos"] or [None])[-1:]]
-    for p in variantes:
-        if p.get("rango", 0) is None: p.pop("rango")
-        for seed in SEEDS[:1]: run_modelo(m, p, seed)
+    for tam in m["tamanos"]:
+        variantes = [{}] + [{"rango": r} for r in m["rangos"][1:]]
+        for o in m["opciones"]:
+            vals = [x["valor"] for x in o["valores"] if tam in x.get("tamanos", (tam,))] if o["tipo"] == "opcion" else \
+                   [o["min"], o["max"]] if o["tipo"] == "numero" else [True]
+            variantes += [{o["id"]: v, **({"rango": m["rangos"][-1]} if m["rangos"] else {})} for v in vals]
+        for p in variantes:
+            for seed in SEEDS: run_act(m, p, seed, tam)
+    CV.showPage()
 
 print(f"Fichas: {fichas} | operaciones comprobadas: {ops} | errores: {err} | modelos: {len(mo.MODELOS)}")
 sys.exit(1 if err else 0)

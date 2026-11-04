@@ -15,7 +15,8 @@
 ## Fase 1 · Motor de actividades combinables
 - [x] 1.1 Tabla `MODELOS`: id, curso, materia, bloque, nombre visible, descripción corta, opciones (tipo, valores, valor por defecto), rango mínimo y tamaños admitidos (`completa`, `media`). La app montará sus menús a partir de esta tabla.
   - Hecho en `motor/modelos.py` (solo datos, sin ReportLab): 94 modelos, `menu()`, `por_defecto()`, `validar()`, `a_json()`. La prueba comprueba que cubre el motor y genera cada opción. `tamanos` es provisional: revisar en 1.2.
-- [ ] 1.2 Convertir cada modelo en **actividad**: `actividad(c, rect, params, rnd) -> clave`, que dibuje dentro de un rectángulo (reutilizando el escalado de `cabecera()`). Mantener idéntico el diseño de cada actividad.
+- [x] 1.2 Convertir cada modelo en **actividad**: `actividad(c, rect, params, rnd) -> clave`, que dibuje dentro de un rectángulo (reutilizando el escalado de `cabecera()`). Mantener idéntico el diseño de cada actividad.
+  - Hecho: `actividad(cv, rect, params, rnd, num, color, tamano)`. Media página = mismo diseño con la mitad de filas (no encogido: al 41 % no se leía). 82 modelos admiten media; solo completa: tablas, camino, laberinto, une, colorea, copia, calendario, pictograma, barras, cuenta figuras, recuento y la opción «clasificar» de pares. Ficha de línea de órdenes idéntica (comprobado píxel a píxel).
 - [ ] 1.3 Compositor de página: cabecera (Nombre con o sin nombre impreso, Fecha, título) + 1 o 2 actividades, cada una con su panel de color y su número (1, 2…), como en `referencia/ficha_muestra.pdf`.
 - [ ] 1.4 API única `generar(spec) -> (pdf_bytes, clave)`. `spec`: actividades con sus parámetros, alumnos (lista o vacía), variaciones (`iguales` o `distintas`: semilla por alumno), color y título. Un PDF con una página por alumno.
 - [ ] 1.5 Mantener la línea de órdenes actual sobre la nueva API; ampliar `tests/test_motor.py` (combinaciones, nombres, variaciones). Ejecutar `--full`.

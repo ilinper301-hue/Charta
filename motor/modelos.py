@@ -16,8 +16,9 @@ Cada modelo es un dict:
                parámetro del motor: modo, nivel, huecos, n, cerca, lectura.
   rangos       valores admitidos de "hasta el número…" ([] = no lleva rango)
   rango        valor por defecto del rango (None si no lleva)
-  tamanos      ("completa", "media"): tamaños admitidos en la ficha
-               (provisional: se ajusta en el paso 1.2 al dibujar en media página)
+  tamanos      ("completa", "media"): tamaños admitidos en la ficha. En media página
+               se dibuja el mismo diseño con la mitad de filas (como la ficha de muestra).
+               Un valor de opción puede limitarse con su propio "tamanos".
 """
 
 CURSOS = {1: "1.º de Primaria"}
@@ -40,9 +41,10 @@ AMBOS, COMPLETA = ("completa", "media"), ("completa",)
 
 # ------------------------------------------------------------ tipos de opción
 def op(id, etiqueta, valores, defecto=None):
-    """Lista de valores: [(valor, etiqueta), ...]. None = valor por defecto del motor."""
-    return {"id": id, "etiqueta": etiqueta, "tipo": "opcion",
-            "valores": [{"valor": v, "etiqueta": e} for v, e in valores], "defecto": defecto}
+    """Lista de valores: [(valor, etiqueta[, tamaños]), ...]. None = valor por defecto del motor.
+    Un tercer elemento limita ese valor a ciertos tamaños, p. ej. COMPLETA."""
+    return {"id": id, "etiqueta": etiqueta, "tipo": "opcion", "defecto": defecto,
+            "valores": [{"valor": v[0], "etiqueta": v[1], **({"tamanos": v[2]} if len(v) > 2 else {})} for v in valores]}
 
 def num(id, etiqueta, minimo, maximo, defecto=None):
     """Número entero. defecto None = automático (lo decide el motor)."""
@@ -142,7 +144,7 @@ MODELOS += [
       [op("modo", "Forma", [(None, "Decenas y unidades (4 D + 3 U)"), ("suma", "Suma (40 + 3)")]), NIVEL_DU], rmin=30),
     M(4, "valor", "dunum", "Decenas, unidades y número", "Pasar de decenas y unidades al número y al revés.", [NIVEL_DU], rmin=30),
     M(4, "valor", "pares", "Pares e impares", "Distinguir números pares e impares.",
-      [op("modo", "Tarea", [(None, "Contar puntos y rodear"), ("clasifica", "Clasificar en dos columnas")])], rmax=20),
+      [op("modo", "Tarea", [(None, "Contar puntos y rodear"), ("clasifica", "Clasificar en dos columnas", COMPLETA)])], rmax=20),
     M(4, "valor", "cifra", "El valor de la cifra", "Escribir cuánto vale cada cifra.", rmin=30),
 ]
 
@@ -201,7 +203,7 @@ MODELOS += [
 # ------------------------------------------------------------ bloque 9 · geometría (sin rango)
 MODELOS += [
     M(9, "geometria", "figuras", "Las figuras planas", "Reconocer círculo, cuadrado, triángulo y rectángulo.", rmin=None),
-    M(9, "geometria", "cuenta", "Cuenta las figuras", "Contar cuántas figuras hay de cada clase.", rmin=None),
+    M(9, "geometria", "cuenta", "Cuenta las figuras", "Contar cuántas figuras hay de cada clase.", rmin=None, tam=COMPLETA),
     M(9, "geometria", "cuerpos", "Los cuerpos geométricos", "Reconocer esfera, cubo, cilindro, cono…", rmin=None),
     M(9, "geometria", "rueda", "¿Rueda o no rueda?", "Clasificar cuerpos que ruedan y que no.", rmin=None),
     M(9, "geometria", "lineas", "Las líneas", "Recta, curva y quebrada, o abierta y cerrada.",
@@ -233,7 +235,7 @@ MODELOS += [
 MODELOS += [
     M(11, "estadistica", "pictograma", "El pictograma", "Leer un pictograma y contestar.",
       [op("modo", "Valor del dibujo", [(None, "Cada dibujo vale 1"), ("dos", "Cada dibujo vale 2")])], rmax=10, tam=COMPLETA),
-    M(11, "estadistica", "recuento", "Cuenta y anota", "Contar con palotes y escribir el número.", rmax=30),
+    M(11, "estadistica", "recuento", "Cuenta y anota", "Contar con palotes y escribir el número.", rmax=30, tam=COMPLETA),
     M(11, "estadistica", "barras", "El gráfico de barras", "Hacer o leer un gráfico de barras.",
       [op("modo", "Tarea", [(None, "Colorear el gráfico"), ("lee", "Leer el gráfico")])], rmax=10, tam=COMPLETA),
     M(11, "estadistica", "patrones", "Los patrones", "Continuar o completar series de figuras.",
@@ -263,9 +265,10 @@ def por_defecto(id):
     p["rango"] = m["rango"]
     return p
 
-def validar(id, params):
+def validar(id, params, tamano="completa"):
     """Comprueba y completa los parámetros. Devuelve un dict nuevo o lanza ValueError."""
     m = POR_ID[id]; p = por_defecto(id); p.update(params or {})
+    if tamano not in m["tamanos"]: raise ValueError(f"{id}: no admite el tamaño '{tamano}'")
     ok = {o["id"]: o for o in m["opciones"]}
     for k, v in p.items():
         if k == "rango":
@@ -273,8 +276,10 @@ def validar(id, params):
             continue
         o = ok.get(k)
         if o is None: raise ValueError(f"{id}: opción desconocida '{k}'")
-        if o["tipo"] == "opcion" and v not in [x["valor"] for x in o["valores"]]:
-            raise ValueError(f"{id}: valor '{v}' no válido para {k}")
+        if o["tipo"] == "opcion":
+            x = next((x for x in o["valores"] if x["valor"] == v), None)
+            if x is None: raise ValueError(f"{id}: valor '{v}' no válido para {k}")
+            if tamano not in x.get("tamanos", (tamano,)): raise ValueError(f"{id}: '{x['etiqueta']}' solo en {x['tamanos']}")
         if o["tipo"] == "numero" and v is not None and not (o["min"] <= v <= o["max"]):
             raise ValueError(f"{id}: {k}={v} fuera de {o['min']}–{o['max']}")
         if o["tipo"] == "si_no" and not isinstance(v, bool): raise ValueError(f"{id}: {k} debe ser sí/no")

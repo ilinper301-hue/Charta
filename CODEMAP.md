@@ -22,22 +22,25 @@ salida/               PDF generados por la línea de órdenes (se crea sola)
 | 476 | `CAT`: catálogo de representaciones (nombre, función, rango mínimo) |
 | 503 | `OUT`: carpeta de salida por defecto (`salida/`); `M = 28` (margen) |
 | 510 | `pick()`: elige números para lectura y dibujo |
-| 525–574 | **Marco de página**: `PALETA`, `AZUL`, `COLOR` (forzar color), `FAMILIA` (color por familia según el nombre del archivo), `_titulo()`, `_tarjetas()` (convierte las casillas en tarjetas blancas), **`cabecera(titulo, lineas)`**: dibuja Nombre/Fecha, título, panel y enunciado, y **escala el contenido** para que quepa en el panel |
-| 580 | `ficha_rep()` (familia `rep`) |
-| 615 | `ficha_combinada()` (¿Qué número es?) |
-| 666 | `ficha_suma()` (Suma y dibuja) |
-| 720 | Bloque 2 **conteo** · `caja()` l.721 (hueco gris o número) · `CONTEO` l.884 · `ficha_conteo()` l.900 |
-| 913 | Bloque 3 **orden** · `_celdas()` l.932 (rejilla de casillas) · `_marco()` l.936 (tarjeta con número y etiqueta) · `ORDEN` l.1093 · `ficha_orden()` l.1106 |
-| 1119 | Bloque 4 **valor** · `_linea()` l.1132 (fila centrada de textos y huecos) · `VALOR` l.1248 · `ficha_valor()` l.1257 |
-| 1272 | Bloque 5 **sumar** · `T()`/`B()` l.1273 (texto / hueco para `_linea`) · `_pares_suma()` · `_pintar()` l.1301 (rejilla de operaciones) · `SUMAR` l.1495 · `ficha_sumar()` l.1512 |
-| 1526 | Bloque 6 **restar** · `MENOS` (signo −) · `_pares_resta()` · `RESTAR` l.1697 · `ficha_restar()` l.1712 |
-| 1726 | Bloque 7 **juegos** · `JUEGOS` l.1901 · `ficha_juegos()` l.1910 |
-| 1925 | Bloque 9 **geometría** · `_chips()` l.1973 (opciones para rodear) · `GEOM` l.2124 · `ficha_geometria()` l.2135 |
-| 2148 | Bloque 10 **medida** · `MEDIDA` l.2321 · `ficha_medida()` l.2332 |
-| 2348 | Bloque 11 **estadística** · `ESTAD` l.2455 · `ficha_estadistica()` l.2462 |
-| 2477 | Línea de órdenes (CLI) y ayuda |
+| 526–625 | **Marco de página**: `PALETA`, `AZUL`, `COLOR`, `FAMILIA`, `_titulo()`, `_tarjetas()` · `_ACT`/`_lienzo()`/`_fin()` l.552 (modo actividad: usar el canvas dado y devolver la clave) · `color_familia()` · **`encabezado(titulo, nombre)`** l.569 (Nombre/Fecha/título) · **`panel(rect, num, lineas, color)`** l.586 (panel, número, enunciado y escalado; con `PARTE`=0.5 encaja solo la mitad superior) · `PARTE`, **`_n(filas)`** l.608 (filas que se dibujan: todas o la mitad) · `cabecera()` l.612 |
+| 628 | `ficha_rep()` (familia `rep`) |
+| 683 | `ficha_combinada()` (¿Qué número es?) |
+| 730 | `ficha_suma()` (Suma y dibuja) |
+| 766 | Bloque 2 **conteo** · `caja()` l.767 · `CONTEO` l.930 · `ficha_conteo()` l.946 |
+| 958 | Bloque 3 **orden** · `_celdas()` l.977 (rejilla; respeta `_n`) · `ORDEN` l.1138 · `ficha_orden()` l.1151 |
+| 1163 | Bloque 4 **valor** · `_linea()` l.1176 · `VALOR` l.1292 · `ficha_valor()` l.1301 |
+| 1315 | Bloque 5 **sumar** · `_pintar()` l.1344 (rejilla de operaciones; respeta `_n`) · `SUMAR` l.1538 · `ficha_sumar()` l.1555 |
+| 1568 | Bloque 6 **restar** · `RESTAR` l.1739 · `ficha_restar()` l.1754 |
+| 1767 | Bloque 7 **juegos** · `JUEGOS` l.1942 · `ficha_juegos()` l.1951 |
+| 1965 | Bloque 9 **geometría** · `GEOM` l.2164 · `ficha_geometria()` l.2175 |
+| 2187 | Bloque 10 **medida** · `MEDIDA` l.2361 · `ficha_medida()` l.2372 |
+| 2387 | Bloque 11 **estadística** · `ESTAD` l.2494 · `ficha_estadistica()` l.2501 |
+| 2515 | **Actividades**: `_llamar()`, `titulo_modelo()`, **`actividad(cv, rect, params, rnd, num, color, tamano)`** l.2539 → clave |
+| 2554 | Línea de órdenes (CLI) y ayuda |
 
 ## Patrón de cada familia (importante para la refactorización)
+- **Actividad** (paso 1.2): `actividad()` pone el motor en modo actividad (`_ACT`); la `ficha_<familia>()` de siempre dibuja en el canvas dado, `cabecera()` dibuja solo el panel en `rect` (con recorte) y `_fin()` devuelve la clave sin guardar. La ficha de la línea de órdenes sale idéntica.
+- **Media página**: mismo diseño y casi mismo tamaño, con la mitad de filas (`_n()`), como la ficha de muestra. Un modelo nuevo debe usar `_celdas()`/`_pintar()` o `_n(filas)` en sus bucles; la prueba avisa si algo se sale.
 - Diccionario `FAMILIA = {clave: (TÍTULO, enunciado | lambda(modo), función, [rango_mín])}`.
 - `ficha_<familia>(clave, R, seed, …, outdir)`: crea el canvas global `c`, llama a `cabecera()`, después a `fn(top, R, rnd, …)`, que dibuja en **coordenadas de página completa** (de `M` a `W-M` y de `top` a `M`), y **devuelve la clave** (se imprime por consola).
 - Al escalar, `cabecera()` encaja ese área de página completa dentro del panel → base para convertir cada modelo en **actividad** que se dibuja en un rectángulo cualquiera (media página o página completa) con `c.saveState()` + `c.transform()`.

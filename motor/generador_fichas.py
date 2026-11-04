@@ -546,32 +546,78 @@ def _tarjetas(cv):
         else: orig(x, y, w, h, r, stroke=stroke, fill=fill)
     cv.roundRect = f
 
-def cabecera(titulo, lineas):
-    nom = os.path.basename(c._filename)
-    k = COLOR or next((v for p, v in FAMILIA.items() if nom.startswith(p)), "azul")
-    fill, borde = PALETA[k]
-    _tarjetas(c)
+_ACT = None      # modo actividad: {"rect": (x, y, w, h), "num": n, "color": c} (ver actividad())
+_NOMBRE = ""     # nombre del archivo de la ficha: da el color por familia
+
+def _lienzo(ruta):
+    """Canvas de la ficha: uno nuevo (línea de órdenes) o el de la actividad en curso."""
+    global _NOMBRE
+    _NOMBRE = os.path.basename(ruta)
+    return _ACT["cv"] if _ACT else canvas.Canvas(ruta, pagesize=A4)
+
+def _fin(*partes):
+    """Cierra la ficha y devuelve la clave de respuestas (en la línea de órdenes, además, la imprime)."""
+    txt = " ".join(str(p) for p in partes)
+    if not _ACT:
+        c.showPage(); c.save(); print(txt)
+    return txt
+
+def color_familia(nombre=None):
+    nom = _NOMBRE if nombre is None else nombre
+    return COLOR or next((v for p, v in FAMILIA.items() if nom.startswith(p)), "azul")
+
+def encabezado(titulo, nombre=""):
+    """Nombre (impreso o línea en blanco), Fecha y título centrado. Igual que la ficha de muestra."""
+    if not getattr(c, "_charta_tarjetas", False): _tarjetas(c); c._charta_tarjetas = True
     c.setFillGray(INK); c.setFont("PR", 10.5)
     c.drawString(34, H - 46, "Nombre:"); c.drawString(360, H - 46, "Fecha:")
     c.setLineWidth(0.8); c.setStrokeGray(0)
-    c.line(34 + pdfmetrics.stringWidth("Nombre: ", "PR", 10.5), H - 48, 332, H - 48)
+    x0 = 34 + pdfmetrics.stringWidth("Nombre: ", "PR", 10.5)
+    c.line(x0, H - 48, 332, H - 48)
     c.line(360 + pdfmetrics.stringWidth("Fecha: ", "PR", 10.5), H - 48, 533, H - 48)
+    if nombre:
+        fs = 12
+        while pdfmetrics.stringWidth(nombre, "PM", fs) > 332 - x0 - 8 and fs > 7: fs -= .5
+        c.setFillGray(INK); c.setFont("PM", fs); c.drawString(x0 + 4, H - 45, nombre)
     tt = _titulo(titulo); fs = 16
     while pdfmetrics.stringWidth(tt, "PB", fs) > W - 80 and fs > 10: fs -= .5
     c.setFillColorRGB(*AZUL); c.setFont("PB", fs); c.drawCentredString(W/2, H - 86, tt)
-    yT, yB = H - 108, 26; extra = 16*(len(lineas) - 1)
+
+def panel(rect, num, lineas, color):
+    """Panel pastel con su número y enunciado; después escala el área de página completa
+    (M..W-M, M..H-M-76) para que quepa dentro. Quien llama deshace la escala si hace falta."""
+    x, yB, w, h = rect; yT = yB + h
+    fill, borde = PALETA[color]; extra = 16*(len(lineas) - 1)
     c.setFillColorRGB(*fill); c.setStrokeColorRGB(*borde); c.setLineWidth(1)
-    c.roundRect(34, yB, W - 68, yT - yB, 14, stroke=1, fill=1)
-    c.setFillColorRGB(*AZUL); c.circle(58, yT - 22, 11, stroke=0, fill=1)
-    c.setFillGray(1); c.setFont("PB", 11); c.drawCentredString(58, yT - 26, "1")
+    c.roundRect(x, yB, w, h, 14, stroke=1, fill=1)
+    c.setFillColorRGB(*AZUL); c.circle(x + 24, yT - 22, 11, stroke=0, fill=1)
+    c.setFillGray(1); c.setFont("PB", 11); c.drawCentredString(x + 24, yT - 26, str(num))
     c.setFillGray(INK); fs = 11.5
-    while any(pdfmetrics.stringWidth(t, "PR", fs) > W - 34 - 79 - 14 for t in lineas) and fs > 8: fs -= .5
+    while any(pdfmetrics.stringWidth(t, "PR", fs) > w - 59 for t in lineas) and fs > 8: fs -= .5
     c.setFont("PR", fs)
-    for j, t in enumerate(lineas): c.drawString(79, yT - 26 - j*16, t)
+    for j, t in enumerate(lineas): c.drawString(x + 45, yT - 26 - j*16, t)
     hi = (yT - 43 - extra) - (yB + 14)
-    sc = min(496/(W - 2*M), hi/(H - 2*M - 76))
-    c.transform(sc, 0, 0, sc, (W - (W - 2*M)*sc)/2 - sc*M, (yB + 14) - sc*M)
+    alto = (H - 2*M - 76)*PARTE; base = H - M - 76 - alto      # zona de página que se encaja
+    sc = min((w - 31)/(W - 2*M), hi/alto)
+    c.transform(sc, 0, 0, sc, x + w/2 - (W - 2*M)*sc/2 - sc*M, (yB + 14) + ((hi - alto*sc) if PARTE < 1 else 0) - sc*base)
     c.setFillGray(INK); c.setStrokeGray(INK); c.setLineWidth(1.5)
+
+PANEL_COMPLETO = (34, 26, W - 68, H - 108 - 26)
+PARTE = 1.0      # fracción de la altura del contenido que se dibuja: 1 (completa) o 0.5 (media)
+
+def _n(filas):
+    """Filas que se dibujan: todas, o la mitad (hacia abajo) en media página, con el mismo alto."""
+    return filas if PARTE >= 1 else max(1, int(filas*PARTE))
+
+def cabecera(titulo, lineas):
+    if _ACT:   # modo actividad: solo el panel, dentro del rectángulo pedido
+        if not getattr(c, "_charta_tarjetas", False): _tarjetas(c); c._charta_tarjetas = True
+        c.saveState()
+        x, y, w, h = _ACT["rect"]; pth = c.beginPath(); pth.roundRect(x, y, w, h, 14); c.clipPath(pth, stroke=0, fill=0)
+        panel(_ACT["rect"], _ACT["num"], lineas, _ACT["color"] or color_familia())
+        return
+    encabezado(titulo)
+    panel(PANEL_COMPLETO, 1, lineas, color_familia())
 
 def cuadrito(x, y, cw, ch, q=30):
     stroke(1.5); c.setFillGray(0.9)
@@ -584,10 +630,10 @@ def ficha_rep(key, R, seed=1, lectura=False, outdir=OUT):
     RANGO = R
     d = CAT[key]
     hi = min(R, d[MAX])
-    nread, ndraw = (12, 0) if lectura else (9, 3)
+    nread, ndraw = ((12, 0) if lectura else (9, 3)) if PARTE >= 1 else ((6, 0) if lectura else (3, 3))
     read, draw = pick(d[MIN], hi, seed, nread, 3)
     if lectura: draw = []
-    c = canvas.Canvas(f"{outdir}{d[0]:02d}_{key}_hasta_{R}.pdf", pagesize=A4)
+    c = _lienzo(f"{outdir}{d[0]:02d}_{key}_hasta_{R}.pdf")
     c.setTitle(d[TIT].title())
     lin = ["Escribe en el cuadrito el número que representa cada casilla."]
     if not lectura: lin.append("En la última fila te toca a ti: haz lo que dice cada casilla.")
@@ -610,8 +656,7 @@ def ficha_rep(key, R, seed=1, lectura=False, outdir=OUT):
             c.setFillGray(0.3); c.setFont("PM", 8.5); c.drawString(x + 14, y + ch - 20, d[VERBO])
             c.setFillGray(INK); c.setFont("PB", 28); c.drawRightString(x + cw - 16, y + ch - 36, str(n))
             if d[TPL]: d[TPL](gx, gy, n, idx)
-    c.showPage(); c.save()
-    print(f"{key} 1-{R}: lectura {read} dibujar {draw}")
+    return _fin(f"{key} 1-{R}: lectura {read} dibujar {draw}")
 
 # ------------------------------------------------------------ 2) ¿QUÉ NÚMERO ES?
 def nums_combinada(keys, R, seed):
@@ -640,7 +685,8 @@ def ficha_combinada(R, seed=1, outdir=OUT):
     RANGO = R
     keys = COMB_30 if R <= 30 else COMB_100
     nums = nums_combinada(keys, R, seed)
-    c = canvas.Canvas(f"{outdir}que_numero_es_hasta_{R}.pdf", pagesize=A4)
+    if PARTE < 1: keys, nums = keys[:6], nums[:6]     # media página: 2 filas y sin reto
+    c = _lienzo(f"{outdir}que_numero_es_hasta_{R}.pdf")
     c.setTitle("¿Qué número es?")
     cabecera("¿QUÉ NÚMERO ES?", ["Observa cada casilla y escribe en el cuadrito el número que representa."])
     RETO_H = 74
@@ -654,6 +700,7 @@ def ficha_combinada(R, seed=1, outdir=OUT):
         c.setFillGray(0.3); c.setFont("PM", 8.5); c.drawString(x + 12, y + ch - 17, CAT[k][NOM].upper())
         cuadrito(x, y, cw, ch)
         CAT[k][READ](x + cw/2, y + ch*0.40, n, idx)
+    if PARTE < 1: return _fin("combinada 1-%d:" % R, [f"{CAT[k][NOM]}={n}" for k, n in zip(keys, nums)])
     stroke(1.5)
     c.roundRect(M, M, W - 2*M, RETO_H, 10, stroke=1, fill=0)
     c.setFillGray(INK); c.setFont("PB", 10.5); c.drawString(M + 16, M + RETO_H - 22, "RETO:")
@@ -661,8 +708,7 @@ def ficha_combinada(R, seed=1, outdir=OUT):
     c.setFont("PM", 10.5); c.drawString(M + 16 + wl, M + RETO_H - 22, "Elige una casilla y explica cómo has sabido qué número era.")
     stroke(1.0)
     c.line(M + 16, M + 26, W - M - 16, M + 26); c.line(M + 16, M + 40, W - M - 16, M + 40)
-    c.showPage(); c.save()
-    print("combinada 1-%d:" % R, [f"{CAT[k][NOM]}={n}" for k, n in zip(keys, nums)])
+    return _fin("combinada 1-%d:" % R, [f"{CAT[k][NOM]}={n}" for k, n in zip(keys, nums)])
 
 # ------------------------------------------------------------ 3) SUMA Y DIBUJA
 def filas_suma(R, seed):
@@ -685,11 +731,11 @@ def ficha_suma(R, seed=1, outdir=OUT):
     global c, RANGO
     RANGO = R
     filas = filas_suma(R, seed)
-    c = canvas.Canvas(f"{outdir}suma_y_dibuja_hasta_{R}.pdf", pagesize=A4)
+    c = _lienzo(f"{outdir}suma_y_dibuja_hasta_{R}.pdf")
     c.setTitle("Suma y dibuja")
     cabecera("SUMA Y DIBUJA", ["Suma las dos cantidades, escribe el resultado y dibújalo como se indica."])
     top = H - M - 72; n = len(filas); GY = 10; SYM = 28
-    bw = (W - 2*M - 2*SYM)/3; bh = (top - M - (n - 1)*GY)/n
+    bw = (W - 2*M - 2*SYM)/3; bh = (top - M - (n - 1)*GY)/n; filas = filas[:_n(n)]
 
     def esc_draw(fn, cx, cy, nn, ii, k):
         c.saveState(); c.translate(cx, cy); c.scale(k, k); fn(0, 0, nn, ii); c.restoreState()
@@ -715,8 +761,7 @@ def ficha_suma(R, seed=1, outdir=OUT):
         c.setFillGray(INK); c.setFont("PB", 26)
         c.drawCentredString(xs[0] + bw + SYM/2, y + bh/2 - 9, "+")
         c.drawCentredString(xs[1] + bw + SYM/2, y + bh/2 - 9, "=")
-    c.showPage(); c.save()
-    print("suma 1-%d:" % R, [f"{CAT[ak][NOM]} {a} + {CAT[bk][NOM]} {b} = {T} ({CAT[rk][NOM]})" for ak, a, bk, b, rk, T in filas])
+    return _fin("suma 1-%d:" % R, [f"{CAT[ak][NOM]} {a} + {CAT[bk][NOM]} {b} = {T} ({CAT[rk][NOM]})" for ak, a, bk, b, rk, T in filas])
 
 # ------------------------------------------------------------ 4) CONTEO Y SERIES (bloque 2)
 def caja(x, y, w, h, val=None, fs=22):
@@ -747,7 +792,7 @@ def flecha(x1, y1, x2, y2, hd=4.5):
     p.close(); c.drawPath(p, stroke=0, fill=1)
 
 def _c_cuenta(top, R, rnd, huecos, modo):
-    nums, _ = pick(1, min(R, 30), rnd.randint(0, 10**6), 12, 0)
+    nums, _ = pick(1, min(R, 30), rnd.randint(0, 10**6), 12, 0); nums = nums[:_n(4)*3]
     GX, GY = 10, 10
     cw = (W - 2*M - 2*GX)/3; ch = (top - M - 3*GY)/4
     for idx, n in enumerate(nums):
@@ -772,7 +817,7 @@ def _c_anterior(top, R, rnd, huecos, modo):
     lo, hi = {"ambos": (1, R - 1), "anterior": (1, R), "posterior": (0, R - 1)}[modo]
     nums = _uniq(lo, hi, 15, rnd)
     patron = {"ambos": "hnh", "anterior": "hn", "posterior": "nh"}[modo]
-    GX, GY, rows = 10, 10, 5
+    GX, GY, rows = 10, 10, 5; nums = nums[:_n(rows)*3]
     cw = (W - 2*M - 2*GX)/3; ch = (top - M - (rows - 1)*GY)/rows
     bw, bh, g = 40, 46, 7
     for idx, n in enumerate(nums):
@@ -793,7 +838,7 @@ def _c_falta(top, R, rnd, huecos, modo):
     cw = (W - 2*M - GX)/cols; ch = (top - M - (rows - 1)*GY)/rows
     bw, bh, g = 40, 44, 7
     res = []
-    for idx, a in enumerate(_uniq(1, max(1, R - L + 1), n, rnd)):
+    for idx, a in enumerate(_uniq(1, max(1, R - L + 1), n, rnd)[:_n(rows)*cols]):
         r_, k = divmod(idx, cols)
         x = M + k*(cw + GX); y = top - (r_ + 1)*ch - r_*GY
         stroke(1.5); c.roundRect(x, y, cw, ch, 10, stroke=1, fill=0)
@@ -811,7 +856,7 @@ def _c_series(top, R, rnd, huecos, pasos):
     rh = (top - M - (nrows - 1)*GY)/nrows
     bw, bh, g, lw = 52, 46, 8, 124
     usadas, res = set(), []
-    for i in range(nrows):
+    for i in range(_n(nrows)):
         s = rnd.choice(pasos) if len(pasos) > 1 else pasos[0]
         L = min(6, R//s + 1)
         if L < 3: raise ValueError(f"Esta serie necesita un rango máximo mayor (paso {s}, máx. {R}).")
@@ -904,12 +949,11 @@ def ficha_conteo(key, R, seed=1, huecos=None, modo=None, outdir=OUT):
     tit, ins, fn = CONTEO[key]
     if key == "anterior": ins = ANT_TXT[modo or "ambos"]
     rnd = random.Random(seed)
-    c = canvas.Canvas(f"{outdir}conteo_{key}_hasta_{R}.pdf", pagesize=A4)
+    c = _lienzo(f"{outdir}conteo_{key}_hasta_{R}.pdf")
     c.setTitle(tit.title())
     cabecera(tit, [ins])
     res = fn(H - M - 76, R, rnd, huecos, modo)
-    c.showPage(); c.save()
-    print(f"{key} 1-{R}: {res}")
+    return _fin(f"{key} 1-{R}: {res}")
 
 # ------------------------------------------------------------ 5) ORDEN Y COMPARACIÓN (bloque 3)
 def _grupo(k, R, rnd, cerca=False):
@@ -932,7 +976,7 @@ def _pares(cnt, R, rnd, cerca, iguales=0):
 
 def _celdas(top, cols, rows, GX=10, GY=10):
     cw = (W - 2*M - (cols - 1)*GX)/cols; ch = (top - M - (rows - 1)*GY)/rows
-    return [(M + k*(cw + GX), top - (r + 1)*ch - r*GY) for r in range(rows) for k in range(cols)], cw, ch
+    return [(M + k*(cw + GX), top - (r + 1)*ch - r*GY) for r in range(_n(rows)) for k in range(cols)], cw, ch
 
 def _marco(x, y, w, h, idx=None, lab=""):
     stroke(1.5); c.roundRect(x, y, w, h, 10, stroke=1, fill=0)
@@ -989,7 +1033,7 @@ def _o_ordena(top, R, rnd, n, modo, cerca, desc=False):
     rh = (top - M - (rows - 1)*GY)/rows
     bw, bh, g, lw = 44, 36, 16, 132
     res = []
-    for i in range(rows):
+    for i in range(_n(rows)):
         gr = _grupo(n, R, rnd, cerca)
         meta = sorted(gr, reverse=desc)
         while gr == meta: rnd.shuffle(gr)
@@ -1046,7 +1090,7 @@ def _nino(x, y):
 def _o_ordinales(top, R, rnd, n, modo, cerca):
     modo = modo or "mezcla"; rows = 6; GY = 8
     rh = (top - M - (rows - 1)*GY)/rows; pitch = 48; res = []
-    for i in range(rows):
+    for i in range(_n(rows)):
         y = top - (i + 1)*rh - i*GY
         tipo = "colorea" if (modo == "colorea" or (modo == "mezcla" and i % 2 == 0)) else "lugar"
         m = rnd.randint(7, 10); k = rnd.randint(1, m)
@@ -1110,12 +1154,11 @@ def ficha_orden(key, R, seed=1, n=None, modo=None, cerca=False, outdir=OUT):
     tit, ins, fn = ORDEN[key]
     if key == "mayor": ins = MAYOR_TXT[modo or "mezcla"]
     rnd = random.Random(seed)
-    c = canvas.Canvas(f"{outdir}orden_{key}_hasta_{R}.pdf", pagesize=A4)
+    c = _lienzo(f"{outdir}orden_{key}_hasta_{R}.pdf")
     c.setTitle(tit.title())
     cabecera(tit, [ins])
     res = fn(H - M - 76, R, rnd, n, modo, cerca)
-    c.showPage(); c.save()
-    print(f"{key} 1-{R}: {res}")
+    return _fin(f"{key} 1-{R}: {res}")
 
 # ------------------------------------------------------------ 6) VALOR POSICIONAL (bloque 4)
 def _muestra(pool, k, rnd):
@@ -1165,7 +1208,7 @@ def _v_agrupa(top, R, rnd, nivel, modo):
 def _v_canje(top, R, rnd, nivel, modo):
     if min(R, 99) < 20: raise ValueError("Los canjes necesitan un rango máximo de al menos 20.")
     nums = _nums_du(8, R, rnd, nivel)
-    rows, GY = 8, 8; rh = (top - M - (rows - 1)*GY)/rows
+    rows, GY = 8, 8; rh = (top - M - (rows - 1)*GY)/rows; nums = nums[:_n(rows)]
     for i, n in enumerate(nums):
         y = top - (i + 1)*rh - i*GY
         _marco(M, y, W - 2*M, rh)
@@ -1237,7 +1280,7 @@ def _v_cifra(top, R, rnd, nivel, modo):
     if R < 30: raise ValueError("El valor de la cifra necesita un rango máximo de al menos 30.")
     cand = [v for v in range(12, min(R, 99) + 1) if v % 10 and v//10 != v % 10]
     nums = rnd.sample(cand, 8)
-    rows, GY = 8, 8; rh = (top - M - (rows - 1)*GY)/rows
+    rows, GY = 8, 8; rh = (top - M - (rows - 1)*GY)/rows; nums = nums[:_n(rows)]
     for i, n in enumerate(nums):
         y = top - (i + 1)*rh - i*GY
         _marco(M, y, W - 2*M, rh)
@@ -1263,12 +1306,11 @@ def ficha_valor(key, R, seed=1, nivel=None, modo=None, outdir=OUT):
     if key == "pares": ins = "Escribe cada número en su columna: pares o impares." if modo == "clasifica" else "Cuenta los puntos de cada casilla y rodea si el número es par o impar."
     rnd = random.Random(seed)
     suf = f"_{modo}" if modo else ""
-    c = canvas.Canvas(f"{outdir}valor_{key}{suf}_hasta_{R}.pdf", pagesize=A4)
+    c = _lienzo(f"{outdir}valor_{key}{suf}_hasta_{R}.pdf")
     c.setTitle(tit.title())
     cabecera(tit, [ins])
     res = fn(H - M - 76, R, rnd, nivel, modo)
-    c.showPage(); c.save()
-    print(f"{key} 1-{R}: {res}")
+    return _fin(f"{key} 1-{R}: {res}")
 
 # ------------------------------------------------------------ 7) SUMA (bloque 5)
 def T(s, fs=19, f="PB"): return ("t", s, f, fs)
@@ -1300,7 +1342,7 @@ def _pares_suma(R, nivel, cnt, rnd):
     rnd.shuffle(out); return out
 
 def _pintar(top, cols, rows, entries, rows_ref=None):
-    GX, GY = 10, 8; rr = rows_ref or rows
+    GX, GY = 10, 8; rr = rows_ref or rows; entries = entries[:_n(rows)*cols]
     cw = (W - 2*M - (cols - 1)*GX)/cols; ch = (top - M - (rr - 1)*GY)/rr
     for i, (items, _) in enumerate(entries):
         r_, k = divmod(i, cols)
@@ -1324,7 +1366,7 @@ def _s_recta(top, R, rnd, nivel, modo, huecos):
     N = 10 if R <= 10 else 20 if R <= 20 else 30
     rows, GY = 6, 10; rh = (top - M - (rows - 1)*GY)/rows
     L = W - 2*M - 60; step = L/N; res = []
-    for i in range(rows):
+    for i in range(_n(rows)):
         b = rnd.randint(2, min(9, N - 2)); a = rnd.randint(1, N - b)
         y = top - (i + 1)*rh - i*GY; _marco(M, y, W - 2*M, rh)
         _linea(M, y + rh - 44, W - 2*M, 36, [T(f"{a} + {b} =", 19), B(54, 34)], 10)
@@ -1517,12 +1559,11 @@ def ficha_sumar(key, R, seed=1, nivel=None, modo=None, huecos=None, outdir=OUT):
     if R < rmin: raise ValueError(f"{tit.capitalize()} necesita un rango máximo de al menos {rmin}.")
     rnd = random.Random(seed)
     suf = (f"_{modo}" if modo else "") + (f"_{nivel}" if nivel else "")
-    c = canvas.Canvas(f"{outdir}sumar_{key}{suf}_hasta_{R}.pdf", pagesize=A4)
+    c = _lienzo(f"{outdir}sumar_{key}{suf}_hasta_{R}.pdf")
     c.setTitle(tit.title())
     cabecera(tit, [ins])
     res = fn(H - M - 76, R, rnd, nivel, modo, huecos)
-    c.showPage(); c.save()
-    print(f"{key} 1-{R}: {res}")
+    return _fin(f"{key} 1-{R}: {res}")
 
 # ------------------------------------------------------------ 8) RESTA (bloque 6)
 MENOS = "−" if all(0x2212 in pdfmetrics.getFont(n).face.charToGlyph for n in ("PB", "PM")) else "–"
@@ -1572,7 +1613,7 @@ def _r_recta(top, R, rnd, nivel, modo, huecos):
     N = 10 if R <= 10 else 20 if R <= 20 else 30
     rows, GY = 6, 10; rh = (top - M - (rows - 1)*GY)/rows
     L = W - 2*M - 60; step = L/N; res = []
-    for i in range(rows):
+    for i in range(_n(rows)):
         b = rnd.randint(2, min(9, N - 2)); a = rnd.randint(b + 1, N)
         y = top - (i + 1)*rh - i*GY; _marco(M, y, W - 2*M, rh)
         _linea(M, y + rh - 44, W - 2*M, 36, [T(f"{a} {MENOS} {b} =", 19), B(54, 34)], 10)
@@ -1717,12 +1758,11 @@ def ficha_restar(key, R, seed=1, nivel=None, modo=None, huecos=None, outdir=OUT)
     if R < rmin: raise ValueError(f"{tit.capitalize()} necesita un rango máximo de al menos {rmin}.")
     rnd = random.Random(seed)
     suf = (f"_{modo}" if modo else "") + (f"_{nivel}" if nivel else "")
-    c = canvas.Canvas(f"{outdir}restar_{key}{suf}_hasta_{R}.pdf", pagesize=A4)
+    c = _lienzo(f"{outdir}restar_{key}{suf}_hasta_{R}.pdf")
     c.setTitle(tit.title())
     cabecera(tit, [ins])
     res = fn(H - M - 76, R, rnd, nivel, modo, huecos)
-    c.showPage(); c.save()
-    print(f"{key} 1-{R}: {res}")
+    return _fin(f"{key} 1-{R}: {res}")
 
 # ------------------------------------------------------------ 9) JUEGOS (bloque 7)
 def _sim(m, k):
@@ -1818,7 +1858,7 @@ def _j_cadena(top, R, rnd, nivel, modo, n):
     cap = min(R, 99); mags = list(range(1, 6 if R <= 10 else 10)) + ([10] if R > 20 else [])
     rows, GY = 7, 8; rh = (top - M - (rows - 1)*GY)/rows
     bw, bh, g = 48, 42, 64; x0 = M + (W - 2*M - (5*bw + 4*g))/2; res = []
-    for i in range(rows):
+    for i in range(_n(rows)):
         v = rnd.randint(max(1, cap//5), cap - cap//5); vals, ops = [v], []
         for _ in range(4):
             op = [m for m in mags if v + m <= cap] + [-m for m in mags if v - m >= 0]
@@ -1916,12 +1956,11 @@ def ficha_juegos(key, R, seed=1, nivel=None, modo=None, n=None, outdir=OUT):
     if callable(ins): ins = ins(modo, n)
     rnd = random.Random(seed)
     suf = (f"_{modo}" if modo else "") + (f"_{nivel}" if nivel else "") + (f"_{n}" if n else "")
-    c = canvas.Canvas(f"{outdir}juegos_{key}{suf}_hasta_{R}.pdf", pagesize=A4)
+    c = _lienzo(f"{outdir}juegos_{key}{suf}_hasta_{R}.pdf")
     c.setTitle(tit.title())
     cabecera(tit, [ins])
     res = fn(H - M - 76, R, rnd, nivel, modo, n)
-    c.showPage(); c.save()
-    print(f"{key} 1-{R}: {res}")
+    return _fin(f"{key} 1-{R}: {res}")
 
 # ------------------------------------------------------------ 10) GEOMETRÍA (bloque 9)
 FIGS = ["circulo", "cuadrado", "rectangulo", "triangulo"]
@@ -2139,12 +2178,11 @@ def ficha_geometria(key, seed=1, modo=None, n=None, outdir=OUT):
     if callable(ins): ins = ins(modo, n)
     rnd = random.Random(seed)
     suf = (f"_{modo}" if modo else "") + (f"_{n}" if n else "")
-    c = canvas.Canvas(f"{outdir}geometria_{key}{suf}.pdf", pagesize=A4)
+    c = _lienzo(f"{outdir}geometria_{key}{suf}.pdf")
     c.setTitle(tit.title())
     cabecera(tit, [ins])
     res = fn(H - M - 76, rnd, modo, n)
-    c.showPage(); c.save()
-    print(f"{key}: {res}")
+    return _fin(f"{key}: {res}")
 
 # ------------------------------------------------------------ 11) MEDIDA Y DINERO (bloque 10)
 DIAS = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"]
@@ -2273,6 +2311,7 @@ def _m_tiempo(top, R, rnd, modo, n):
             r_, q = divmod(j, 4); x = M + 10 + q*colw; y = top - 20 - (r_ + 1)*88 + 22
             c.setFillGray(INK); c.setFont("PM", 12.5); c.drawCentredString(x + colw/2, y + 52, MESES[mm]); caja(x + colw/2 - 20, y + 12, 40, 34, None)
         cel, cw, ch = _celdas(top - fh - 10, 2, 3); res = []
+        if PARTE < 1: cel = []      # media página: solo ordenar los meses
         for i, ((x, y), mm) in enumerate(zip(cel, rnd.sample(range(12), 6))):
             sig = (mm + 1) % 12; _marco(x, y, cw, ch, i)
             c.setFillGray(INK); c.setFont("PR", 12); c.drawCentredString(x + cw/2, y + ch - 44, f"Después de {MESES[mm]} viene")
@@ -2280,7 +2319,7 @@ def _m_tiempo(top, R, rnd, modo, n):
             res.append(f"{MESES[mm]} -> {MESES[sig]}")
         return {"orden": [MESES[k] for k in ms], "siguientes": res}
     rows, GY = 6, 10; rh = (top - M - (rows - 1)*GY)/rows; colw = (W - 2*M - 20)/7; res = []
-    for i in range(rows):
+    for i in range(_n(rows)):
         ds = list(range(7))
         while ds == list(range(7)): rnd.shuffle(ds)
         y = top - (i + 1)*rh - i*GY; _marco(M, y, W - 2*M, rh)
@@ -2292,7 +2331,7 @@ def _m_tiempo(top, R, rnd, modo, n):
 def _m_longitud(top, R, rnd, modo, n):
     compara = modo == "compara"; rows, GY = 6, 10; rh = (top - M - (rows - 1)*GY)/rows; u = 26; res = []
     nombres = ["lápiz", "cinta", "tira", "palo", "cuerda", "pajita", "regla", "hoja"]; rnd.shuffle(nombres)
-    for i in range(rows):
+    for i in range(_n(rows)):
         y = top - (i + 1)*rh - i*GY; _marco(M, y, W - 2*M, rh); gx = M + 108
         n1 = rnd.randint(2, 12); n2 = rnd.choice([v for v in range(2, 13) if v != n1]); bars = [n1, n2] if compara else [n1]
         for j, nb in enumerate(bars):
@@ -2339,12 +2378,11 @@ def ficha_medida(key, R=20, seed=1, modo=None, n=None, outdir=OUT):
     if key in ("dinero", "precios") and R < 10: raise ValueError("Este modelo necesita un rango máximo de al menos 10.")
     rnd = random.Random(seed)
     suf = (f"_{modo}" if modo else "") + (f"_hasta_{R}" if key in ("dinero", "precios") else "")
-    c = canvas.Canvas(f"{outdir}medida_{key}{suf}.pdf", pagesize=A4)
+    c = _lienzo(f"{outdir}medida_{key}{suf}.pdf")
     c.setTitle(tit.title())
     cabecera(tit, [ins])
     res = fn(H - M - 76, R, rnd, modo, n)
-    c.showPage(); c.save()
-    print(f"{key}: {res}")
+    return _fin(f"{key}: {res}")
 
 # ------------------------------------------------------------ 12) ESTADÍSTICA Y PATRONES (bloque 11)
 NOMS = {"c": "círculos", "s": "estrellas", "q": "cuadrados", "t": "triángulos"}
@@ -2436,7 +2474,7 @@ PATRONES = ["AB", "AAB", "ABB", "ABC", "AABB", "AB", "ABC", "AAB"]
 
 def _e_patrones(top, R, rnd, modo, n):
     hueco = modo == "hueco"; rows, GY = 8, 8; rh = (top - M - (rows - 1)*GY)/rows; bs, g = 40, 6; res = []
-    pats = PATRONES[:]; rnd.shuffle(pats)
+    pats = PATRONES[:]; rnd.shuffle(pats); pats = pats[:_n(rows)]
     for i, p in enumerate(pats):
         ks = rnd.sample("csqt", len(set(p))); mp = dict(zip(sorted(set(p)), ks))
         L = 11 if not hueco else 10; seq = [mp[p[j % len(p)]] for j in range(L)]
@@ -2468,12 +2506,50 @@ def ficha_estadistica(key, R=10, seed=1, modo=None, n=None, outdir=OUT):
     if R < 10: raise ValueError("Este modelo necesita un rango máximo de al menos 10.")
     rnd = random.Random(seed)
     suf = (f"_{modo}" if modo else "") + (f"_hasta_{R}" if key != "patrones" else "")
-    c = canvas.Canvas(f"{outdir}estadistica_{key}{suf}.pdf", pagesize=A4)
+    c = _lienzo(f"{outdir}estadistica_{key}{suf}.pdf")
     c.setTitle(tit.title())
     cabecera(tit, [ins])
     res = fn(H - M - 76, R, rnd, modo, n)
-    c.showPage(); c.save()
-    print(f"{key}: {res}")
+    return _fin(f"{key}: {res}")
+
+# ------------------------------------------------------------ ACTIVIDADES (paso 1.2)
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import modelos as MOD
+
+_FICHA = {"rep": "ficha_rep", "combinada": "ficha_combinada", "suma": "ficha_suma", "conteo": "ficha_conteo",
+          "orden": "ficha_orden", "valor": "ficha_valor", "sumar": "ficha_sumar", "restar": "ficha_restar",
+          "juegos": "ficha_juegos", "geometria": "ficha_geometria", "medida": "ficha_medida", "estadistica": "ficha_estadistica"}
+_R_DEF = {"medida": 20, "estadistica": 10}   # rango interno de los modelos que no lo piden
+
+def _llamar(m, p, seed, **extra):
+    """Llama a la función de su familia con los parámetros ya validados (sin 'rango')."""
+    p = dict(p); R = p.pop("rango", None) or _R_DEF.get(m["familia"])
+    f = globals()[_FICHA[m["familia"]]]
+    a = (R,) if m["familia"] in ("combinada", "suma") else (m["clave"],) if R is None else (m["clave"], R)
+    return f(*a, seed, **{k: v for k, v in p.items() if v is not None}, **extra)
+
+def titulo_modelo(m, p):
+    """Título que pone el motor a la ficha de ese modelo (sin dibujar nada)."""
+    d = {"rep": CAT, "conteo": CONTEO, "orden": ORDEN, "valor": VALOR, "sumar": SUMAR, "restar": RESTAR, "juegos": JUEGOS,
+         "geometria": GEOM, "medida": MEDIDA, "estadistica": ESTAD}.get(m["familia"])
+    if d is None: return {"combinada": "¿QUÉ NÚMERO ES?", "suma": "SUMA Y DIBUJA"}[m["familia"]]
+    t = d[m["clave"]][TIT] if m["familia"] == "rep" else d[m["clave"]][0]
+    return t(p.get("modo")) if callable(t) else t
+
+def actividad(cv, rect, params, rnd, num=1, color=None, tamano="completa"):
+    """Dibuja un modelo como actividad dentro de `rect` = (x, y, ancho, alto) del canvas `cv`:
+    panel de color con su número y enunciado, y el contenido escalado dentro.
+    params = {"modelo": "sumar.h20", "rango": 20, "nivel": "con", ...}; rnd da la semilla.
+    Devuelve la clave de respuestas (texto). El diseño de cada modelo no cambia."""
+    global _ACT, c, PARTE
+    params = dict(params); m = MOD.modelo(params.pop("modelo"))
+    p = MOD.validar(m["id"], params, tamano)
+    _ACT = {"cv": cv, "rect": rect, "num": num, "color": color}
+    c = cv; PARTE = 0.5 if tamano == "media" else 1.0
+    try:
+        return _llamar(m, p, rnd.randrange(1 << 30), outdir="")
+    finally:
+        cv.restoreState(); _ACT = None; PARTE = 1.0
 
 # ------------------------------------------------------------ CLI
 USO = """Uso:
