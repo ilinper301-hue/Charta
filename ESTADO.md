@@ -13,7 +13,8 @@
 - [x] Conectar el repositorio para que Claude suba los cambios directamente a main.
 
 ## Fase 1 · Motor de actividades combinables
-- [ ] 1.1 Tabla `MODELOS`: id, curso, materia, bloque, nombre visible, descripción corta, opciones (tipo, valores, valor por defecto), rango mínimo y tamaños admitidos (`completa`, `media`). La app montará sus menús a partir de esta tabla.
+- [x] 1.1 Tabla `MODELOS`: id, curso, materia, bloque, nombre visible, descripción corta, opciones (tipo, valores, valor por defecto), rango mínimo y tamaños admitidos (`completa`, `media`). La app montará sus menús a partir de esta tabla.
+  - Hecho en `motor/modelos.py` (solo datos, sin ReportLab): 94 modelos, `menu()`, `por_defecto()`, `validar()`, `a_json()`. La prueba comprueba que cubre el motor y genera cada opción. `tamanos` es provisional: revisar en 1.2.
 - [ ] 1.2 Convertir cada modelo en **actividad**: `actividad(c, rect, params, rnd) -> clave`, que dibuje dentro de un rectángulo (reutilizando el escalado de `cabecera()`). Mantener idéntico el diseño de cada actividad.
 - [ ] 1.3 Compositor de página: cabecera (Nombre con o sin nombre impreso, Fecha, título) + 1 o 2 actividades, cada una con su panel de color y su número (1, 2…), como en `referencia/ficha_muestra.pdf`.
 - [ ] 1.4 API única `generar(spec) -> (pdf_bytes, clave)`. `spec`: actividades con sus parámetros, alumnos (lista o vacía), variaciones (`iguales` o `distintas`: semilla por alumno), color y título. Un PDF con una página por alumno.

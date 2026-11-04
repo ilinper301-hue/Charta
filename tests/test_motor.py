@@ -46,5 +46,35 @@ for seed in SEEDS:
     for k in g.GEOM: run(g.ficha_geometria, k, seed)
     for k in ("reloj", "reloj2", "calendario", "tiempo", "longitud", "capacidad"): run(g.ficha_medida, k, 20, seed)
 
-print(f"Fichas: {fichas} | operaciones comprobadas: {ops} | errores: {err}")
+# ---- catálogo MODELOS (paso 1.1): cubre el motor y cada opción funciona
+import modelos as mo
+FAM = {"rep": g.CAT, "conteo": g.CONTEO, "orden": g.ORDEN, "valor": g.VALOR, "sumar": g.SUMAR, "restar": g.RESTAR,
+       "juegos": g.JUEGOS, "geometria": g.GEOM, "medida": g.MEDIDA, "estadistica": g.ESTAD}
+FN = {"rep": g.ficha_rep, "combinada": g.ficha_combinada, "suma": g.ficha_suma, "conteo": g.ficha_conteo,
+      "orden": g.ficha_orden, "valor": g.ficha_valor, "sumar": g.ficha_sumar, "restar": g.ficha_restar,
+      "juegos": g.ficha_juegos, "geometria": g.ficha_geometria, "medida": g.ficha_medida, "estadistica": g.ficha_estadistica}
+ids = {(m["familia"], m["clave"]) for m in mo.MODELOS}
+for f, d in FAM.items():
+    for k in d:
+        if (f, k) not in ids: err += 1; print("FALTA EN MODELOS", f, k)
+for f, k in ids:
+    if f in FAM and k not in FAM[f]: err += 1; print("NO EXISTE EN EL MOTOR", f, k)
+
+def run_modelo(m, p, seed):
+    p = mo.validar(m["id"], p); R = p.pop("rango")
+    R = R or {"medida": 20, "estadistica": 10}.get(m["familia"])
+    a = (R,) if m["familia"] in ("combinada", "suma") else (m["clave"],) if R is None else (m["clave"], R)
+    run(FN[m["familia"]], *a, seed, **{k: v for k, v in p.items() if v is not None})
+
+for m in mo.MODELOS:
+    variantes = [{}] + [{"rango": r} for r in m["rangos"][1:]]
+    for o in m["opciones"]:
+        vals = [x["valor"] for x in o["valores"]] if o["tipo"] == "opcion" else \
+               [o["min"], o["max"]] if o["tipo"] == "numero" else [True]
+        variantes += [{o["id"]: v, "rango": r} for v in vals for r in (m["rangos"] or [None])[-1:]]
+    for p in variantes:
+        if p.get("rango", 0) is None: p.pop("rango")
+        for seed in SEEDS[:1]: run_modelo(m, p, seed)
+
+print(f"Fichas: {fichas} | operaciones comprobadas: {ops} | errores: {err} | modelos: {len(mo.MODELOS)}")
 sys.exit(1 if err else 0)
