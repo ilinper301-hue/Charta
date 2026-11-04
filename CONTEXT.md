@@ -1,0 +1,54 @@
+# Charta — Contexto del proyecto
+
+> Leer primero. Junto con CODEMAP.md y ESTADO.md basta para trabajar sin abrir el motor entero.
+
+## Qué es
+**Charta** ("hoja de papel", en latín) es la app definitiva de Iván para **crear fichas educativas personalizadas e imprimibles (PDF)**.
+- Autor: Iván Manuel Liñán Peregrina, maestro tutor de Primaria (Andalucía), CEIP Emilio Carmona. Este curso, 1.º (unos 20 alumnos, nunca más de 30).
+- Hoy: Matemáticas de 1.º (unos 75 modelos ya programados en Python).
+- Futuro: **todos los cursos de Primaria** y **varias materias (mínimo Matemáticas y Lengua)**.
+- Funciona **sin consumo de tokens y sin conexión**, en **Android (PWA instalable desde Chrome) y en el navegador**. Iván **no tiene ordenador**: todo debe funcionar desde el móvil o la tableta.
+
+## Requisitos de Iván
+1. Elegir **curso → materia → contenido → modelo → detalles** y generar la ficha.
+2. **Otra variante**: la misma ficha con otros números (semilla).
+3. **Nombre de los alumnos**: impreso en cada ficha o línea en blanco (opción).
+4. **Variaciones**: todas iguales o una distinta para cada alumno, en un único PDF.
+5. **Combinar varias actividades en una misma ficha** (como la ficha de muestra: actividad 1 + actividad 2, cada una en su panel de color).
+6. Clave de respuestas **solo en pantalla**, nunca en el PDF.
+7. Muchas opciones, pero **interfaz intuitiva**.
+
+## Decisiones tomadas
+- **App aparte, conectada a Tabula** (no módulo dentro). Motivos: peso del motor, riesgo de romper el cuaderno y chats más pequeños (menos tokens).
+  - Integración prevista: mismo proyecto de Firebase e inicio de sesión con Google que sus otras apps; botón "Crear ficha" en Tabula que abre Charta con el grupo elegido; Charta lee las listas de alumnos de Tabula; los PDF pueden guardarse en la sección de documentos de Tabula.
+- **Motor**: el mismo `generador_fichas.py` (Python + ReportLab) ejecutado **en el navegador con Pyodide**. ReportLab 4/5 es Python puro (`py3-none-any`, comprobado); dependencias: pillow y charset-normalizer, que están en Pyodide. Ventaja: una sola base de código, ya probada. Coste: primera carga de unos 15-20 MB y algunos segundos; después funciona sin conexión.
+  - **Pendiente de medir en el Android de Iván** (prototipo de la fase 2). Si fuera demasiado lento, plan B: portar el motor a JavaScript.
+- **Privacidad**: el PDF se genera en el dispositivo; los nombres de los alumnos no salen a ningún servidor externo.
+- **Alojamiento**: GitHub Pages, repositorio `ilinper301-hue/Charta` (por crear), como sus otras apps (Barri: ilinper301-hue.github.io/Barri/, Lectori: ilinper301-hue.github.io/Educacion/). Publicación en Google Play opcional en el futuro (TWA, sin reescribir).
+
+## Diseño
+- **Interfaz de la app**: profesional y minimalista (en la línea de Lectori, Barri, Calculi y Tabula). **Color principal: verde oscuro**.
+  - Propuesta de paleta (ajustable): primario `#1B4D3E`, primario oscuro `#133A2E`, fondo claro `#F4F7F5`, superficie `#FFFFFF`, verde suave `#E3EEE8`, texto `#1E2622`, texto secundario `#5B6B63`.
+- **Ficha (PDF)**: marco de la ficha de muestra (`referencia/ficha_muestra.pdf`), ya implementado en `cabecera()`:
+  - "Nombre:" y "Fecha:" con líneas arriba; título centrado en azul `#1F4E79`, en minúsculas con inicial mayúscula.
+  - Panel pastel con borde fino (amarillo, rosa, azul o verde) y enunciado numerado en un círculo azul.
+  - Casillas en tarjetas blancas con borde gris claro. Huecos para escribir: gris claro, esquinas redondeadas.
+  - Letra **Andika** (`Andika-Regular.ttf` y `Andika-Bold.ttf`, licencia OFL, se pueden incluir en la app). Si falta, Poppins.
+  - A4 vertical, una página por ficha; sin respuestas impresas ni explicaciones teóricas.
+- El diseño de cada actividad ya está aprobado por Iván: **no cambiarlo** sin que lo pida.
+
+## Reglas de corrección matemática
+- Dedos: máx. 10; del 1 al 4 se levantan índice a meñique con el pulgar plegado.
+- Dado: 1–6 un dado; 7–12 dos. Dominó: suma de las mitades, máx. 12.
+- Marco de diez 2×5, se rellena por filas. Palotes en grupos de 5 con tachado. Regletas: barras de 10 + resto. Ábaco: máx. 9 cuentas por varilla.
+- Número en letras con tildes correctas (dieciséis, veintidós…).
+- Ningún resultado supera el rango ni es negativo. Sin llevadas salvo que se pida.
+
+## Forma de trabajar (ahorro de tokens)
+- Iván se queda sin cuota pronto: **respuestas breves y por partes**, en español de España, tuteando.
+- No pedir confirmación para cosas pequeñas: implementarlas y probarlas.
+- Leer CONTEXT.md, CODEMAP.md y ESTADO.md antes de nada. **No abrir el motor entero** (unas 2.500 líneas): ir a la sección concreta con el número de línea de CODEMAP.md.
+- Tras cada cambio: `python3 tests/test_motor.py` (rápida) y, al cerrar una fase, `--full`.
+- Entregar **solo los archivos que cambien**. No renderizar muestras salvo cambios de diseño o petición expresa (y entonces una imagen a baja resolución).
+- Si Iván escribe **"Continúa"**: leer ESTADO.md y retomar desde el primer paso sin marcar.
+- Actualizar ESTADO.md al terminar cada paso.
