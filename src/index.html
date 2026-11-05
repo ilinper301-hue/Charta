@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#1B4D3E">
+<meta name="theme-color" content="#FAF9F5">
+<script>try { var t = localStorage.getItem("charta:tema"); if (t === "oscuro" || (t !== "claro" && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.tema = "oscuro"; } catch (e) {}</script>
 <title>Charta</title>
 <link rel="manifest" href="../manifest.webmanifest">
 <link rel="icon" type="image/png" href="../iconos/favicon.png">
@@ -11,7 +12,7 @@
 <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
-<header class="barra"><h1>Charta</h1><span class="sub">Fichas educativas</span></header>
+<header class="barra"><div class="marca"><svg class="logo" viewBox="0 0 512 512" aria-hidden="true"><rect width="512" height="512" rx="112" fill="#1B4D3E"/><path d="M112 160H210V304H351A49 49 0 0 1 351 402H161A49 49 0 0 1 112 353Z" fill="#9FD3B8"/><path d="M112 206C150 202 186 210 210 226V206Z" fill="#5FA584"/><path d="M112 206V250C140 236 180 232 210 244V206Z" fill="#5FA584" opacity=".6"/><rect x="112" y="110" width="288" height="98" rx="49" fill="#FAF9F5"/></svg><h1>Charta</h1><span class="sub">Fichas educativas</span></div><button id="tema" class="tema"></button></header>
 <main>
   <section class="tarjeta" id="guardadas" hidden>
     <div class="pestanas"><button id="pFav" class="activa">★ Favoritas</button><button id="pRec">Recientes</button></div>

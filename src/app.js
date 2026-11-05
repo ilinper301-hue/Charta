@@ -10,6 +10,7 @@ import { abrirSelector } from "./ui/selector.js";
 import { crearGuardadas } from "./ui/guardadas.js";
 import { leerAlumnos, numVariantes, MAX_ALUMNOS } from "./ui/alumnos.js";
 import { registrarSW } from "./pwa/registro.js";
+import { iniciarTema } from "./ui/tema.js";
 
 globalThis.Charta = { generar, modelo, erroresFicha, listaTipos, hojas, CATALOGO };
 
@@ -211,6 +212,7 @@ function iniciar() {
 }
 
 if (typeof document !== "undefined") {
+  iniciarTema($("tema"));
   iniciar();
   // Paso 4.5 · sin conexión. Si llega una versión nueva, se avisa (no se recarga solo: se perdería lo escrito).
   registrarSW(() => { $("aviso").hidden = false; $("recargar").onclick = () => location.reload(); });
