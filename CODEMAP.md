@@ -39,7 +39,10 @@ tests/test_invariantes.js  todas las combinaciones × semillas × variantes · `
 tests/test_doradas.js + doradas.json  fichas doradas (JSON + huella SVG); `--actualizar` solo si el cambio es intencionado (y subir `version` del tipo)
 tools/comparar_tipo.py  motor vs JS de un tipo en A4 → /tmp/cmp_<id>_<tamaño>.png (`--media`, `--solucion`)
 tools/ENCARGO_PORTAR.md  instrucciones para que un agente porte modelos del motor (fase 3; reutilizable para Lengua u otros cursos)
-tools/build.py        src/ → dist/index.html (un solo archivo); --js = solo el paquete
+tools/build.py        src/ → dist/index.html (un solo archivo) + sw.js y manifest.webmanifest en la raíz; --js = solo el paquete
+src/pwa/              sw.js (plantilla, __VERSION__), manifest.webmanifest, registro.js (registrarSW(avisar)) · paso 4.5
+sw.js, manifest.webmanifest   GENERADOS por build.py en la raíz (scope /Charta/); no editar
+tools/iconos.py       genera iconos/ (PNG normal, maskable, favicon, apple-touch)
 dist/index.html       la app construida (se sube al repositorio: la sirve Pages)
 salida/               PDF generados por la línea de órdenes (se crea sola)
 ```

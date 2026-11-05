@@ -1,4 +1,4 @@
-// Charta · app. 4.1: selector y opciones · 4.2: compositor · 4.3: alumnos y variantes · 4.4: favoritas y recientes.
+// Charta · app. 4.1: selector y opciones · 4.2: compositor · 4.3: alumnos y variantes · 4.4: favoritas y recientes · 4.5: PWA y tableta.
 import { CATALOGO } from "./nucleo/catalogo.js";
 import { generar, porDefecto, modelo } from "./nucleo/ficha.js";
 import { erroresFicha, letraVariante, paginasVariante } from "./nucleo/lector.js";
@@ -9,6 +9,7 @@ import { miniatura } from "./ui/navegacion.js";
 import { abrirSelector } from "./ui/selector.js";
 import { crearGuardadas } from "./ui/guardadas.js";
 import { leerAlumnos, numVariantes, MAX_ALUMNOS } from "./ui/alumnos.js";
+import { registrarSW } from "./pwa/registro.js";
 
 globalThis.Charta = { generar, modelo, erroresFicha, listaTipos, hojas, CATALOGO };
 
@@ -209,4 +210,8 @@ function iniciar() {
   if (!ultimo) abrirSelector({ tamano: "completa", alElegir: (n) => { editores[0].poner(n); guardarUltimo(n); pintar(); } });
 }
 
-if (typeof document !== "undefined") iniciar();
+if (typeof document !== "undefined") {
+  iniciar();
+  // Paso 4.5 · sin conexión. Si llega una versión nueva, se avisa (no se recarga solo: se perdería lo escrito).
+  registrarSW(() => { $("aviso").hidden = false; $("recargar").onclick = () => location.reload(); });
+}

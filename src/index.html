@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#1B4D3E">
 <title>Charta</title>
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="icon" type="image/png" href="../iconos/favicon.png">
+<link rel="apple-touch-icon" href="../iconos/apple-touch-icon.png">
 <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
@@ -41,6 +44,7 @@
     <p id="error" class="error" hidden></p>
     <p id="info" class="info"></p>
   </section>
+  <div class="lado">
   <section id="soluciones" class="tarjeta solucionario" hidden>
     <h2>Soluciones <small>(solo en pantalla)</small></h2>
     <div id="hojasSol" class="hojas"></div>
@@ -49,7 +53,9 @@
     <h2>Vista previa</h2>
     <div id="hojas" class="hojas"></div>
   </section>
+  </div>
 </main>
+<div id="aviso" class="aviso" hidden>Hay una versión nueva de Charta. <button id="recargar">Actualizar</button></div>
 <div id="impresion" class="impresion"></div>
 <script type="module" src="app.js"></script>
 </body>

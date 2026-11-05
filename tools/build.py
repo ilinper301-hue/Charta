@@ -1,5 +1,5 @@
 """Charta · src/ → dist/index.html (un solo archivo, sin dependencias).
-Uso:  python3 tools/build.py            (escribe dist/index.html)
+Uso:  python3 tools/build.py            (escribe dist/index.html, y sw.js y manifest.webmanifest en la raíz)
       python3 tools/build.py --js       (solo el JS empaquetado, a la salida estándar; lo usan las pruebas)
 
 Empaquetador mínimo de módulos ES: cada módulo va en una función y sus import/export se
@@ -83,6 +83,22 @@ def construir():
     os.makedirs(DIST, exist_ok=True)
     with open(os.path.join(DIST, "index.html"), "w", encoding="utf-8") as f: f.write(html)
     print(f"dist/index.html: {len(html.encode()) // 1024} KB")
+    pwa(html)
+
+def pwa(html):
+    """Paso 4.5 · manifiesto y service worker en la raíz (scope /Charta/). Versión = huella de la app e iconos."""
+    import hashlib, shutil
+    h = hashlib.sha256(html.encode())
+    man = os.path.join(SRC, "pwa", "manifest.webmanifest"); h.update(open(man, "rb").read())
+    ico = os.path.join(RAIZ, "iconos")
+    if not os.path.isdir(ico): sys.exit("build: faltan los iconos (python3 tools/iconos.py)")
+    for n in sorted(os.listdir(ico)): h.update(n.encode() + open(os.path.join(ico, n), "rb").read())
+    sw = open(os.path.join(SRC, "pwa", "sw.js"), encoding="utf-8").read()
+    if "__VERSION__" not in sw: sys.exit("build: src/pwa/sw.js sin __VERSION__")
+    version = h.hexdigest()[:12]
+    with open(os.path.join(RAIZ, "sw.js"), "w", encoding="utf-8") as f: f.write(sw.replace("__VERSION__", version))
+    shutil.copyfile(man, os.path.join(RAIZ, "manifest.webmanifest"))
+    print(f"sw.js + manifest.webmanifest: versión {version}")
 
 if __name__ == "__main__":
     if "--js" in sys.argv: sys.stdout.write(empaquetar("app.js"))
