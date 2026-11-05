@@ -1,4 +1,4 @@
-// Charta · app. Paso 4.1: selector curso → materia → bloque → modelo; opciones del modelo elegido.
+// Charta · app. 4.1: selector curso → materia → bloque → modelo y opciones · 4.2: compositor (añadir, ordenar, quitar).
 import { CATALOGO } from "./nucleo/catalogo.js";
 import { generar, porDefecto, modelo } from "./nucleo/ficha.js";
 import { erroresFicha, letraVariante, paginasVariante } from "./nucleo/lector.js";
@@ -14,16 +14,18 @@ const $ = (id) => document.getElementById(id);
 function el(tag, props = {}, ...hijos) { const e = Object.assign(document.createElement(tag), props); e.append(...hijos); return e; }
 
 /** Editor de una actividad: modelo elegido (con el selector) + sus opciones (desde MODELOS). */
-function editorActividad(num, id, { tamano, alQuitar, alCambiar }) {
+function editorActividad(id, { tamano, alCambiar }) {
   const caja = el("div", { className: "act" });
   const ops = el("div", { className: "ops" });
   const mini = el("div", { className: "mini" }), nombre = el("strong"), desc = el("small");
   const cambiar = el("button", { textContent: "Cambiar" });
   const elegido = el("div", { className: "elegido" }, mini, el("div", { className: "elegido-txt" }, nombre, desc), cambiar);
-  const cab = el("div", { className: "act-cab" }, `Actividad ${num}`);
-  if (alQuitar) { const b = el("button", { textContent: "Quitar" }); b.onclick = alQuitar; cab.append(b); }
+  const etq = el("span"), herr = el("div", { className: "act-herr" });
+  const cab = el("div", { className: "act-cab" }, etq, herr);
   caja.append(cab, elegido, ops);
-  const ed = { caja, id, leer, poner, refrescar: () => pintarOpciones(leer().params) };
+  const ed = { caja, id, leer, poner, refrescar: () => pintarOpciones(leer().params),
+    /** El compositor pone el número y los botones (subir, bajar, quitar). */
+    cabecera(num, botones) { etq.textContent = `Actividad ${num}`; herr.replaceChildren(...botones); } };
 
   function poner(nuevo) {
     ed.id = nuevo;
@@ -33,7 +35,7 @@ function editorActividad(num, id, { tamano, alQuitar, alCambiar }) {
     try { mini.innerHTML = miniatura(nuevo); } catch { mini.textContent = ""; }
     pintarOpciones();
   }
-  cambiar.onclick = () => abrirSelector({ actual: ed.id, tamano: tamano(), alElegir: (n) => { poner(n); guardarUltimo(n); alCambiar(); } });
+  cambiar.onclick = () => abrirSelector({ actual: ed.id, tamano: tamano(), alElegir: (n) => { poner(n); alCambiar(ed); } });
 
   // prev: valores que ya había (se conservan al pasar de página completa a media y al revés).
   function pintarOpciones(prev = {}) {
@@ -87,13 +89,21 @@ function iniciar() {
   const nombres = () => $("alumnos").value.split("\n").map((s) => s.trim()).filter(Boolean);
 
   const tamano = () => (editores.length > 1 ? "media" : "completa");
-  function nuevoEditor(id) {
-    const quitar = editores.length ? () => { editores.pop().caja.remove(); $("anadir").hidden = false; editores[0].refrescar(); pintar(); } : null;
-    const e = editorActividad(editores.length + 1, id, { tamano, alQuitar: quitar, alCambiar: pintar });
-    editores.push(e); $("acts").append(e.caja);
+  // Compositor (paso 4.2): añadir, ordenar y quitar actividades (1 o 2 por hoja).
+  const boton = (texto, titulo, f) => { const b = el("button", { textContent: texto, title: titulo }); b.onclick = f; return b; };
+  function recolocar() {
+    $("acts").replaceChildren(...editores.map((e) => e.caja));
+    editores.forEach((e, i) => e.cabecera(i + 1, [
+      ...(editores.length > 1 ? [i ? boton("↑ Subir", "Pasarla a actividad 1", () => mover(i, -1)) : boton("↓ Bajar", "Pasarla a actividad 2", () => mover(i, 1))] : []),
+      ...(editores.length > 1 ? [boton("Quitar", "Quitar esta actividad", () => quitar(i))] : []),
+    ]));
     $("anadir").hidden = editores.length >= 2;
-    editores[0].refrescar();
+    for (const e of editores) e.refrescar();
   }
+  function mover(i, d) { [editores[i], editores[i + d]] = [editores[i + d], editores[i]]; recolocar(); pintar(); }
+  function quitar(i) { editores.splice(i, 1); recolocar(); pintar(); }
+  function cambiado(e) { if (editores[0] === e) guardarUltimo(e.id); pintar(); }
+  function nuevoEditor(id) { editores.push(editorActividad(id, { tamano, alCambiar: cambiado })); recolocar(); }
 
   function pintar() {
     $("error").hidden = true;
@@ -119,9 +129,10 @@ function iniciar() {
   }
 
   $("anadir").onclick = () => abrirSelector({ tamano: "media", actual: editores[0].id,
-    alElegir: (id) => { guardarUltimo(id); nuevoEditor(id); pintar(); } });
+    alElegir: (id) => { nuevoEditor(id); pintar(); } });
   $("acts").addEventListener("change", pintar);
   for (const id of ["alumnos", "variaciones", "bn", "titulo"]) $(id).addEventListener("change", pintar);
+  $("irPrevia").onclick = () => $("previa").scrollIntoView({ behavior: "smooth" });
   $("variante").onclick = () => { semilla++; pintar(); };
   $("versol").onclick = () => { const s = $("soluciones"); s.hidden = !s.hidden; $("versol").textContent = s.hidden ? "Ver soluciones" : "Ocultar soluciones"; };
   $("imprimir").onclick = () => {

@@ -53,7 +53,8 @@
 ## Fase 4 · App completa (PWA, verde oscuro)
 - [x] 4.1 Flujo: curso → materia → bloque → modelo (tarjetas con miniatura) → opciones (en lenguaje de maestro, desde `MODELOS`).
   - Hecho: selector a pantalla completa (`src/ui/selector.js`; lógica sin DOM en `src/ui/navegacion.js`): migas, Atrás, niveles de una sola opción saltados solos; miniatura = la actividad con opciones por defecto. La primera vez la app abre el selector; después recuerda el último modelo (`charta:ultimoModelo`). En la 2.ª actividad, los de solo página completa salen desactivados, y las opciones que no caben en media también. «Rango» → «Números: hasta el N». `node tests/test_ui.js` (en `npm test`); probado en Chrome móvil sin errores.
-- [ ] 4.2 Compositor: añadir, ordenar y quitar actividades; vista previa.
+- [x] 4.2 Compositor: añadir, ordenar y quitar actividades; vista previa.
+  - Hecho: en `iniciar()` (app.js): `recolocar()` renumera y pone ↑ Subir / ↓ Bajar / Quitar (se puede quitar cualquiera); al reordenar se conservan las opciones y se recalculan título y colores; botón «Vista previa ↓». Solo la actividad 1 se recuerda como último modelo. Probado en Chrome móvil sin errores.
 - [ ] 4.3 Alumnos (escribir o pegar; después desde Tabula); fichas iguales o variantes A/B…; impresión de todas.
 - [ ] 4.4 "Otra variante", "Ver soluciones", favoritos o recientes.
 - [ ] 4.5 Service worker (scope `/Charta/`, sin conexión), prefijo `charta:`, icono, manifiesto, modo tableta.

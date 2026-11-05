@@ -14,6 +14,8 @@ main { max-width: 760px; margin: 0 auto; padding: 14px; display: grid; gap: 14px
 .act { border: 1px solid var(--suave); border-radius: 10px; padding: 10px; display: grid; gap: 8px; }
 .act-cab { display: flex; justify-content: space-between; align-items: center; font-weight: 600; color: var(--primario); }
 .act-cab button { padding: 4px 10px; }
+.act-herr { display: flex; gap: 6px; }
+.act-herr:empty { display: none; }
 label { display: grid; gap: 4px; font-size: .9rem; color: var(--texto-2); }
 label.check { display: flex; align-items: center; gap: 8px; }
 select, input, textarea { font: inherit; padding: 9px 10px; border: 1px solid #cfdcd5; border-radius: 8px; background: #fff; color: var(--texto); }
