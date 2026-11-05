@@ -203,3 +203,41 @@ import { crearGuardadas as crearG, limpiar as limp } from "../src/ui/guardadas.j
   assert.equal(CATALOGO.fuentes.lengua, "fredoka");
   console.log("test_ui: bloques y letra por materia OK");
 }
+
+// Paso 4.8 · pantalla de inicio: saludo, usos, accesos rápidos y «Seguir con la última» (sin DOM).
+{
+  const { saludo, fechaCorta, crearUsos, accesosRapidos, ultimaComposicion, materiasDisponibles, DEFECTO, MAX_RAPIDOS } = await import("../src/ui/inicio.js");
+  const { hayTipo } = await import("../src/nucleo/tipos.js");
+  assert.equal(saludo(9), "Buenos días"); assert.equal(saludo(13), "Buenas tardes"); assert.equal(saludo(17, "Iván Manuel Liñán"), "Buenas tardes, Iván");
+  assert.equal(saludo(21), "Buenas noches"); assert.equal(saludo(3, "  "), "Buenas noches"); assert.equal(saludo(6), "Buenos días");
+  assert.equal(fechaCorta("2026-11-05"), "5-11-2026"); assert.equal(fechaCorta(""), ""); assert.equal(fechaCorta("2026-11-05T10:00:00Z"), "5-11-2026");
+  const mem = new Map(), alm = { getItem: (k) => mem.get(k) ?? null, setItem: (k, v) => mem.set(k, v) };
+  const u = crearUsos(alm);
+  assert.deepEqual(u.mapa(), {});
+  u.anotar("sumar.h20"); u.anotar("sumar.h20"); u.anotar("rep.dado"); u.anotar(null);
+  assert.deepEqual(u.mapa(), { "sumar.h20": 2, "rep.dado": 1 });
+  mem.set("charta:usos", "{no es json"); assert.deepEqual(crearUsos(alm).mapa(), {});
+  for (let i = 0; i < 60; i++) u.anotar("x" + i); assert.ok(Object.keys(JSON.parse(mem.get("charta:usos"))).length <= 40);
+
+  // sin historial: los de DEFECTO que existan
+  const vacio = accesosRapidos({ hayTipo });
+  assert.equal(vacio.length, MAX_RAPIDOS); assert.deepEqual(vacio, DEFECTO.filter(hayTipo).slice(0, MAX_RAPIDOS));
+  // el más usado va primero; recientes y último modelo cuentan; no se repiten ni se cuelan tipos que no existen
+  const rec = [{ actividades: [{ tipo: "restar.recta" }, { tipo: "sumar.h20" }] }, { actividades: [{ tipo: "tipo.inexistente" }] }];
+  const r = accesosRapidos({ usos: { "rep.dado": 5, "sumar.h20": 1 }, recientes: rec, ultimo: "orden.signos", hayTipo });
+  assert.equal(r[0], "rep.dado"); assert.equal(new Set(r).size, r.length); assert.ok(r.every(hayTipo)); assert.equal(r.length, MAX_RAPIDOS);
+  assert.ok(r.includes("sumar.h20") && r.includes("restar.recta") && r.includes("orden.signos"));
+  assert.equal(accesosRapidos({ hayTipo, max: 2 }).length, 2);
+
+  // Seguir con la última: la última impresa con tipos existentes; si no, el último modelo; si no, nada
+  const buena = { actividades: [{ tipo: "sumar.h20", params: {} }], nombre: "A" };
+  assert.deepEqual(ultimaComposicion({ recientes: [{ actividades: [{ tipo: "nada.no" }] }, buena], ultimo: "rep.dado", hayTipo }), { composicion: buena });
+  assert.deepEqual(ultimaComposicion({ recientes: [], ultimo: "rep.dado", hayTipo }), { modelo: "rep.dado" });
+  assert.equal(ultimaComposicion({ recientes: [], ultimo: "nada.no", hayTipo }), null);
+  assert.equal(ultimaComposicion({ hayTipo }), null);
+
+  const ms = materiasDisponibles(cursos, materias);
+  assert.ok(ms.some((m) => m.id === "matematicas") && ms.some((m) => m.id === "lengua"), "Matemáticas y Lengua en el inicio");
+  assert.equal(new Set(ms.map((m) => m.id)).size, ms.length);
+  console.log("test_ui: inicio (saludo, usos, accesos rápidos, seguir) OK");
+}

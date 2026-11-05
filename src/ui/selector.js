@@ -10,10 +10,14 @@ function el(tag, props = {}, ...hijos) { const e = Object.assign(document.create
 const NIVELES = ["curso", "materia", "bloque", "modelo"];
 const TITULOS = { curso: "Elige el curso", materia: "Elige la materia", bloque: "Elige el contenido", modelo: "Elige el modelo" };
 
-export function abrirSelector({ actual = null, tamano = "completa", alElegir, alCerrar } = {}) {
-  // Ruta inicial: la del modelo actual (se abre en su bloque) o vacía.
+export function abrirSelector({ actual = null, tamano = "completa", ruta: inicial = null, alElegir, alCerrar } = {}) {
+  // Ruta inicial: la del modelo actual (se abre en su bloque), una parcial (p. ej. { materia } desde el inicio) o vacía.
   const ruta = {};
   if (actual) { const m = modelo(actual); Object.assign(ruta, { curso: m.curso, materia: m.materia, bloque: m.bloque }); }
+  else if (inicial) Object.assign(ruta, inicial);
+  // Si la materia pedida no existe en el curso elegido, se vuelve a preguntar.
+  const cuadra = () => { if (ruta.curso !== undefined && ruta.materia !== undefined && !materias(ruta.curso).some((m) => m.id === ruta.materia)) { delete ruta.materia; delete ruta.bloque; } };
+  cuadra();
 
   const migas = el("nav", { className: "migas" });
   const titulo = el("h2");
@@ -36,7 +40,7 @@ export function abrirSelector({ actual = null, tamano = "completa", alElegir, al
     for (const n of NIVELES.slice(0, 3)) {
       if (ruta[n] === undefined) {
         const os = opciones(n);
-        if (os.length === 1) ruta[n] = os[0].id; else return n;
+        if (os.length === 1) { ruta[n] = os[0].id; cuadra(); } else return n;
       }
     }
     return "modelo";
@@ -73,7 +77,7 @@ export function abrirSelector({ actual = null, tamano = "completa", alElegir, al
   function tarjetaNivel(nivel, o) {
     const b = el("button", { className: "sel-tarjeta" }, el("strong", { textContent: o.nombre }));
     if (o.n) b.append(el("small", { textContent: `${o.n} modelo${o.n > 1 ? "s" : ""}` }));
-    b.onclick = () => { ruta[nivel] = o.id; pintar(); };
+    b.onclick = () => { ruta[nivel] = o.id; cuadra(); pintar(); };
     return b;
   }
 

@@ -163,7 +163,7 @@ button:disabled { cursor: default; opacity: .5; }
 @page { size: A4 portrait; margin: 0; }
 @media print {
   body { background: #fff; }
-  .barra, main, .aviso { display: none !important; }
+  .barra, main, .inicio, .aviso { display: none !important; }
   .impresion { display: block; }
   .impresion .pag { width: 210mm; height: 297mm; overflow: hidden; break-after: page; page-break-after: always; }
   .impresion .pag:last-child { break-after: auto; page-break-after: auto; }
@@ -223,17 +223,69 @@ body.con-selector { overflow: hidden; }
   .aviso { bottom: 16px; }
 }
 @media (min-width: 1200px) { .lado .hojas { grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); } }
-@media (max-width: 520px) { .sub { display: none; } }
+@media (max-width: 520px) { .sub { display: none; } body[data-vista="diseno"] .barra h1 { display: none; } body[data-vista="diseno"] .cuenta { max-width: 36vw; } }
 @media (max-width: 380px) {
   .elegido { grid-template-columns: 72px minmax(0, 1fr); }
   .elegido > button { grid-column: 1 / -1; width: 100%; }
   .accion-principal button { font-size: .88rem; padding: 0 12px; }
 }
+
+/* ---------- Pantalla de inicio (paso 4.8) ---------- */
+.inicio { max-width: 640px; margin: 0 auto; padding: 18px 14px 40px; display: grid; gap: 14px; align-content: start; }
+.ini-cab h2 { font-size: 1.5rem; font-weight: 650; letter-spacing: -.02em; }
+.ini-cab p { margin: 4px 0 0; color: var(--apagado); font-size: .95rem; }
+.ini-crear { height: 56px; font-size: 1.05rem; border-radius: var(--r-lg); box-shadow: 0 1px 2px rgba(0, 0, 0, .12); }
+.ini-materias { display: grid; gap: 8px; padding: 12px; background: var(--acento-suave); border: 1px solid var(--acento-linea); border-radius: var(--r-lg); }
+.ini-materias > span { font-size: .82rem; font-weight: 600; color: var(--acento-texto); }
+.ini-materias > div { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; }
+.ini-materias button { height: 48px; font-size: .98rem; font-weight: 600; background: var(--superficie); }
+.ini-seguir { height: auto; width: 100%; padding: 12px; display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 12px; align-items: center;
+  justify-content: stretch; text-align: left; white-space: normal; border-radius: var(--r-lg); border-color: var(--borde); }
+.ini-seguir-txt { display: grid; gap: 2px; min-width: 0; }
+.ini-seguir-txt small:first-child { color: var(--acento-texto); font-weight: 600; font-size: .72rem; letter-spacing: .07em; text-transform: uppercase; }
+.ini-seguir-txt strong { font-weight: 600; font-size: .98rem; }
+.ini-seguir-txt small { color: var(--apagado); font-size: .8rem; line-height: 1.3; }
+.ini-rapidos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.ini-rapido { height: auto; padding: 8px; display: grid; gap: 6px; justify-content: stretch; text-align: left; white-space: normal; align-content: start; border-color: var(--borde); }
+.ini-rapido strong { font-weight: 600; font-size: .86rem; line-height: 1.25; }
+.ini-lista { max-height: none; }
+.ini-fila { display: grid; grid-template-columns: 60px minmax(0, 1fr); gap: 10px; align-items: center; }
+.ini-fila-txt { display: grid; gap: 1px; min-width: 0; }
+.ini-fila .mini { padding: 3px; border-radius: var(--r-sm); }
+.ini-lista li.info { padding: 6px 2px; }
+.ini-pie { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; }
+.ini-icono { height: var(--alto-sm); padding: 0 12px; border-radius: var(--r-sm); border: 1px solid transparent; background: transparent; color: var(--apagado);
+  font: inherit; font-size: .82rem; font-weight: 500; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; cursor: pointer; }
+.ini-icono:hover { background: var(--hover); color: var(--texto); }
+@media (min-width: 900px) {
+  .inicio { max-width: 760px; padding-top: 32px; }
+  .ini-rapidos { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
 </style>
 </head>
 <body>
-<header class="barra"><div class="marca"><svg class="logo" viewBox="0 0 512 512" aria-hidden="true"><rect width="512" height="512" rx="118" fill="#174543"/><path d="M251.2 88.5L237.4 89.7L221.8 92.5L203.1 98.0L191.1 102.9L175.8 110.9L164.7 118.3L151.9 128.7L138.4 142.5L130.4 152.6L121.5 166.4L114.4 180.2L107.7 197.7L104.0 210.9L100.6 229.3L99.1 246.5L99.1 265.2L100.9 283.6L104.0 299.3L107.7 312.8L114.1 329.6L120.9 343.1L131.6 359.7L140.8 371.0L151.9 382.1L174.6 399.3L191.7 408.5L201.5 412.5L217.2 417.4L231.9 420.4L250.3 422.6L267.2 422.6L292.4 419.8L317.2 413.1L340.5 402.3L361.1 388.5L380.1 370.4L393.9 352.3L397.3 345.0L399.4 335.8L399.4 325.6L397.9 318.6L392.7 307.2L388.7 302.0L381.9 295.9L369.4 289.4L362.3 287.9L353.1 287.6L344.8 289.1L334.4 293.7L322.7 303.5L302.5 323.8L289.3 331.5L280.7 334.5L266.6 337.3L253.1 337.3L238.7 334.5L226.1 329.3L213.5 320.4L203.1 309.1L194.5 294.3L189.0 277.8L186.8 263.1L187.1 244.3L191.1 224.7L198.2 208.5L203.4 200.5L212.9 190.0L220.6 183.9L228.2 179.3L239.9 174.7L247.9 172.9L268.1 171.9L281.9 174.4L292.7 178.4L300.3 182.7L310.8 190.7L327.0 206.9L336.8 213.4L348.8 217.0L358.0 217.3L366.0 216.1L373.0 213.7L380.1 209.7L390.5 199.6L393.9 194.3L397.3 186.1L398.8 178.7L398.8 168.3L397.6 162.1L393.9 152.6L382.8 138.5L364.4 121.6L341.7 106.9L322.1 98.3L300.6 92.2L276.4 88.8Z" fill="#459B89"/><path d="M395.7 313.1L390.5 304.5L384.1 297.7L371.5 290.4L360.8 287.9L351.6 287.9L339.3 291.3L332.2 295.3L325.5 301.1L243.3 383.9L234.7 391.0L223.3 397.4L210.8 401.7L202.8 402.9L193.3 402.9L183.8 401.4L182.8 403.2L195.7 410.0L215.7 416.7L235.0 420.7L253.1 422.6L274.6 422.0L291.4 419.8L308.3 415.8L324.6 410.0L342.4 401.1L360.5 388.8L373.3 377.5L389.6 358.5L395.7 348.3L399.1 336.7L399.4 326.9Z" fill="#83D7C0"/><path d="M384.4 298.0L377.3 293.1L367.5 289.1L360.5 287.9L351.9 287.9L338.1 291.9L330.7 296.5L326.7 300.5L322.1 307.2L316.3 320.1L303.1 371.0L294.2 392.2L284.4 405.7L275.8 413.7L265.0 420.4L265.4 422.0L277.3 421.7L294.5 419.2L311.1 414.9L323.0 410.6L333.2 406.0L348.8 397.1L362.3 387.3L375.5 375.0L382.2 367.7L393.3 352.9L396.3 346.8L399.1 336.4L399.1 325.0L396.7 315.5L392.7 307.5Z" fill="#B5F1DF"/></svg><h1>Charta</h1><span class="sub">Fichas educativas</span></div><div class="acciones"><button id="cuentaNube" class="cuenta">☁ Entrar</button><button id="tema" class="tema"></button></div></header>
-<main>
+<header class="barra"><div class="marca"><svg class="logo" viewBox="0 0 512 512" aria-hidden="true"><rect width="512" height="512" rx="118" fill="#174543"/><path d="M251.2 88.5L237.4 89.7L221.8 92.5L203.1 98.0L191.1 102.9L175.8 110.9L164.7 118.3L151.9 128.7L138.4 142.5L130.4 152.6L121.5 166.4L114.4 180.2L107.7 197.7L104.0 210.9L100.6 229.3L99.1 246.5L99.1 265.2L100.9 283.6L104.0 299.3L107.7 312.8L114.1 329.6L120.9 343.1L131.6 359.7L140.8 371.0L151.9 382.1L174.6 399.3L191.7 408.5L201.5 412.5L217.2 417.4L231.9 420.4L250.3 422.6L267.2 422.6L292.4 419.8L317.2 413.1L340.5 402.3L361.1 388.5L380.1 370.4L393.9 352.3L397.3 345.0L399.4 335.8L399.4 325.6L397.9 318.6L392.7 307.2L388.7 302.0L381.9 295.9L369.4 289.4L362.3 287.9L353.1 287.6L344.8 289.1L334.4 293.7L322.7 303.5L302.5 323.8L289.3 331.5L280.7 334.5L266.6 337.3L253.1 337.3L238.7 334.5L226.1 329.3L213.5 320.4L203.1 309.1L194.5 294.3L189.0 277.8L186.8 263.1L187.1 244.3L191.1 224.7L198.2 208.5L203.4 200.5L212.9 190.0L220.6 183.9L228.2 179.3L239.9 174.7L247.9 172.9L268.1 171.9L281.9 174.4L292.7 178.4L300.3 182.7L310.8 190.7L327.0 206.9L336.8 213.4L348.8 217.0L358.0 217.3L366.0 216.1L373.0 213.7L380.1 209.7L390.5 199.6L393.9 194.3L397.3 186.1L398.8 178.7L398.8 168.3L397.6 162.1L393.9 152.6L382.8 138.5L364.4 121.6L341.7 106.9L322.1 98.3L300.6 92.2L276.4 88.8Z" fill="#459B89"/><path d="M395.7 313.1L390.5 304.5L384.1 297.7L371.5 290.4L360.8 287.9L351.6 287.9L339.3 291.3L332.2 295.3L325.5 301.1L243.3 383.9L234.7 391.0L223.3 397.4L210.8 401.7L202.8 402.9L193.3 402.9L183.8 401.4L182.8 403.2L195.7 410.0L215.7 416.7L235.0 420.7L253.1 422.6L274.6 422.0L291.4 419.8L308.3 415.8L324.6 410.0L342.4 401.1L360.5 388.8L373.3 377.5L389.6 358.5L395.7 348.3L399.1 336.7L399.4 326.9Z" fill="#83D7C0"/><path d="M384.4 298.0L377.3 293.1L367.5 289.1L360.5 287.9L351.9 287.9L338.1 291.9L330.7 296.5L326.7 300.5L322.1 307.2L316.3 320.1L303.1 371.0L294.2 392.2L284.4 405.7L275.8 413.7L265.0 420.4L265.4 422.0L277.3 421.7L294.5 419.2L311.1 414.9L323.0 410.6L333.2 406.0L348.8 397.1L362.3 387.3L375.5 375.0L382.2 367.7L393.3 352.9L396.3 346.8L399.1 336.4L399.1 325.0L396.7 315.5L392.7 307.5Z" fill="#B5F1DF"/></svg><h1>Charta</h1><span class="sub">Fichas educativas</span></div><div class="acciones"><button id="aInicio" class="sutil" hidden title="Volver al inicio">← Inicio</button><button id="cuentaNube" class="cuenta">☁ Entrar</button><button id="tema" class="tema"></button></div></header>
+<section id="inicio" class="inicio">
+  <div class="ini-cab"><h2 id="iniSaludo">Hola</h2><p>¿Qué ficha preparamos hoy?</p></div>
+  <button id="iniCrear" class="primario ini-crear">+ Crear ficha</button>
+  <div id="iniMaterias" class="ini-materias" hidden><span>¿De qué materia?</span><div id="iniMateriasBtn"></div></div>
+  <button id="iniSeguir" class="ini-seguir" hidden><div class="mini" id="iniSeguirMini"></div><span class="ini-seguir-txt"><small>Seguir con la última</small><strong id="iniSeguirNombre"></strong><small id="iniSeguirDetalle"></small></span></button>
+  <section class="tarjeta" id="iniRapidos" hidden><div class="sec-cab"><h2>Accesos rápidos</h2></div><div id="iniRapidosLista" class="ini-rapidos"></div></section>
+  <section class="tarjeta" id="iniFichas"><div class="sec-cab"><h2>Mis fichas</h2></div>
+    <div class="pestanas"><button id="iFav" class="activa">★ Favoritas</button><button id="iRec">Recientes</button><button id="iNube" hidden>☁ En la nube</button></div>
+    <ul id="iniLista" class="lista-g ini-lista"></ul></section>
+  <nav class="ini-pie" aria-label="Más">
+    <a class="ini-icono" id="iniTabula" href="/tabula/" title="Abrir Tabula (grupos y planificación)"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg>Grupos</a>
+    <a class="ini-icono" id="iniFori" href="/Fori/" title="Abrir la pizarra Fori"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>Fori</a>
+    <button class="ini-icono" id="iniAjustesBtn" aria-expanded="false" title="Ajustes"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></svg>Ajustes</button>
+  </nav>
+  <section class="tarjeta" id="iniAjustes" hidden><div class="sec-cab"><h2>Ajustes</h2></div>
+    <label class="campo"><span>Letra por defecto</span><select id="iaFuente"></select></label>
+    <div class="interruptores"><label class="check"><input type="checkbox" id="iaBn"> <span>Blanco y negro por defecto <em>Ahorro de tinta en las fichas nuevas</em></span></label></div>
+    <div class="acciones-sec"><button id="iaTema">Cambiar tema</button><button id="iaCuenta">☁ Entrar</button></div>
+  </section>
+</section>
+<main hidden>
   <div class="col">
   <section class="tarjeta" id="guardadas" hidden>
     <div class="pestanas"><button id="pFav" class="activa">★ Favoritas</button><button id="pRec">Recientes</button><button id="pNube" hidden>☁ En la nube</button></div>
@@ -312,16 +364,18 @@ body.con-selector { overflow: hidden; }
 "use strict";
 const __mods = {
 "app.js": (__exp) => {
-// Charta · app. 4.1: selector y opciones · 4.2: compositor · 4.3: alumnos y variantes · 4.4: favoritas y recientes · 4.5: PWA y tableta · 5.1: nube · 5.2: Tabula · 5.3: Fori.
+// Charta · app. 4.8: pantalla de inicio · 4.1: selector y opciones · 4.2: compositor · 4.3: alumnos y variantes · 4.4: favoritas y recientes · 4.5: PWA y tableta · 5.1: nube · 5.2: Tabula · 5.3: Fori.
 const { CATALOGO } = __req("nucleo/catalogo.js");
 const { generar, porDefecto, modelo, metadatosDe } = __req("nucleo/ficha.js");
 const { erroresFicha, letraVariante, paginasVariante } = __req("nucleo/lector.js");
 const { listaTipos } = __req("tipos/index.js");
 const { hoja, hojas, estiloLectura, PALETA } = __req("render/hoja.js");
 const { hayTipo } = __req("nucleo/tipos.js");
-const { miniatura, fuenteMateria, materiaDe } = __req("ui/navegacion.js");
+const { miniatura, fuenteMateria, materiaDe, cursos, materias } = __req("ui/navegacion.js");
 const { abrirSelector } = __req("ui/selector.js");
 const { crearGuardadas } = __req("ui/guardadas.js");
+const { saludo, crearUsos, accesosRapidos, ultimaComposicion, materiasDisponibles, fechaCorta } = __req("ui/inicio.js");
+const { crearInicio } = __req("ui/inicio_vista.js");
 const { leerAlumnos, numVariantes, MAX_ALUMNOS } = __req("ui/alumnos.js");
 const { registrarSW } = __req("pwa/registro.js");
 const { iniciarTema } = __req("ui/tema.js");
@@ -419,8 +473,12 @@ const ULTIMO = "charta:ultimoModelo";
 function guardarUltimo(id) { try { localStorage.setItem(ULTIMO, id); } catch {} }
 function leerUltimo() { try { const id = localStorage.getItem(ULTIMO); return id && hayTipo(id) ? id : null; } catch { return null; } }
 
+const BN_DEFECTO = "charta:bnDefecto";
+const bnDefecto = () => { try { return localStorage.getItem(BN_DEFECTO) === "1"; } catch { return false; } };
+
 function iniciar() {
   let semilla = 1, ficha = null, paginas = [];
+  let vista = "diseno", inicioVista = null, pusheado = false;   // 4.8: "inicio" | "diseno"
   const editores = [];
   const nombres = () => leerAlumnos($("alumnos").value).slice(0, MAX_ALUMNOS);
   const copias = () => Math.max(1, Math.min(MAX_ALUMNOS, parseInt($("copias").value, 10) || 1));
@@ -452,7 +510,7 @@ function iniciar() {
     if (materia1 !== null) elegirFuente(fuenteMateria(editores[0].id));
     materia1 = m;
   }
-  function cambiado(e) { if (editores[0] === e) { guardarUltimo(e.id); letraMateria(); } pintar(); }
+  function cambiado(e) { if (editores[0] === e) { guardarUltimo(e.id); usos.anotar(e.id); letraMateria(); } pintar(); }
   function nuevoEditor(id) { editores.push(editorActividad(id, { tamano, alCambiar: cambiado })); recolocar(); }
 
   function pintar() {
@@ -540,6 +598,7 @@ function iniciar() {
     try { const f = guardadas.esFavorito(composicion()); $("favorito").textContent = f ? "★ Favorita" : "☆ Favorita"; $("favorito").classList.toggle("on", f); } catch {}
   }
   function abrirGuardada(c) {
+    aDiseno();
     editores.length = 0;
     for (const a of c.actividades) { const e = editorActividad(a.tipo, { tamano, alCambiar: cambiado }); editores.push(e); }
     recolocar();
@@ -598,7 +657,7 @@ function iniciar() {
   }
   async function leerNube() {
     try { enNube = await nube.listar(); } catch (e) { enNube = enNube || []; avisoNube(e.message, true); }
-    pintarGuardadas();
+    pintarGuardadas(); refrescarInicio();
   }
   function pintarCuenta(e) {
     const b = $("cuentaNube");
@@ -610,7 +669,7 @@ function iniciar() {
   nube.alCambiar((e) => {
     pintarCuenta(e);
     if (e.estado === "dentro" && !enNube) leerNube(); else if (e.estado !== "dentro") enNube = null;
-    pintarGuardadas();
+    pintarGuardadas(); refrescarInicio();
   });
   $("cuentaNube").onclick = async () => {
     const e = nube.estado();
@@ -687,12 +746,66 @@ function iniciar() {
     } catch (e) { avisoNube("No se ha podido preparar la ficha para Fori: " + e.message, true); }
   }
   $("aFori").onclick = proyectar;
+  // Paso 4.8 · pantalla de inicio: saludo, Crear ficha, Seguir con la última, accesos rápidos y Mis fichas.
+  const usos = crearUsos(almacen);
+  const nombreModelo = (id) => { try { return modelo(id).nombre; } catch { return id; } };
+  const colorDe = (id) => { try { return modelo(id).color; } catch { return "verde"; } };
+  const ultimaDeInicio = () => ultimaComposicion({ recientes: guardadas.recientes(), ultimo: leerUltimo(), hayTipo });
+  function estadoInicio() {
+    const rec = guardadas.recientes(), fav = guardadas.favoritos(), e = nube.estado(), dentro = e.estado === "dentro", u = ultimaDeInicio();
+    let seguir = null;
+    if (u?.composicion) {
+      const c = u.composicion, t = c.actividades[0].tipo;
+      seguir = { nombre: c.nombre || "Ficha", tipo: t, color: colorDe(t),
+        detalle: c.actividades.map((a) => nombreModelo(a.tipo)).join(" + ") + (c.fecha ? " · " + fechaCorta(c.fecha) : "") };
+    } else if (u?.modelo) seguir = { nombre: nombreModelo(u.modelo), tipo: u.modelo, color: colorDe(u.modelo), detalle: "Último modelo elegido" };
+    const rapidos = accesosRapidos({ usos: usos.mapa(), recientes: rec, ultimo: leerUltimo(), hayTipo })
+      .map((id) => ({ id, nombre: nombreModelo(id), color: colorDe(id) }));
+    return { saludo: saludo(new Date().getHours(), dentro ? e.usuario?.nombre : ""), seguir, rapidos, fav, rec, nube: dentro ? enNube : null, dentro };
+  }
+  function refrescarInicio() { if (vista === "inicio") inicioVista?.pintar(estadoInicio()); }
+  function mostrar(v) {
+    vista = v; document.body.dataset.vista = v;
+    $("inicio").hidden = v !== "inicio"; document.querySelector("main").hidden = v === "inicio"; $("aInicio").hidden = v === "inicio";
+    if (v === "inicio") { inicioVista.cerrarMaterias(); refrescarInicio(); }
+    window.scrollTo(0, 0);
+  }
+  // El botón «Atrás» de Android vuelve al inicio (se apunta una entrada de historial al entrar en el diseño desde el inicio).
+  function aDiseno() { if (vista === "diseno") return; history.pushState({ diseno: 1 }, ""); pusheado = true; mostrar("diseno"); }
+  function aInicio() { if (vista === "inicio") return; if (pusheado) history.back(); else mostrar("inicio"); }
+  addEventListener("popstate", () => { pusheado = !!history.state?.diseno; mostrar(pusheado ? "diseno" : "inicio"); });
+  $("aInicio").onclick = aInicio;
+  /** «Crear ficha»: una ficha nueva con el modelo elegido (la composición anterior no se toca: sigue en Recientes). */
+  function nuevaFicha(id) {
+    if (!id || !hayTipo(id)) return;
+    editores.splice(1); recolocar();
+    editores[0].poner(id);
+    semilla = 1; $("titulo").value = ""; $("bn").checked = bnDefecto();
+    usos.anotar(id); guardarUltimo(id); letraMateria();
+    aDiseno(); pintar();
+  }
+  inicioVista = crearInicio({
+    hayTipo, nombreModelo, colorDe,
+    materias: () => materiasDisponibles(cursos, materias),
+    crear: (materia) => abrirSelector({ tamano: "completa", ruta: materia ? { materia } : null, alElegir: nuevaFicha }),
+    crearModelo: nuevaFicha,
+    seguir: () => { const u = ultimaDeInicio(); if (u?.composicion) abrirGuardada(u.composicion); else if (u?.modelo) nuevaFicha(u.modelo); },
+    abrir: abrirGuardada,
+    leerNube: () => { if (!enNube) leerNube(); },
+    fuentes: () => ({ fuentes: todasLasFuentes(), fuente: $("fuente").value }),
+    ponerFuente: (id) => { elegirFuente(id); pintar(); },
+    bnDefecto,
+    ponerBn: (v) => { try { localStorage.setItem(BN_DEFECTO, v ? "1" : "0"); } catch {} $("bn").checked = v; pintar(); },
+  });
+
   pintarGuardadas();
   const ultimo = leerUltimo();
+  if (!entrada.comp && !idUrl) $("bn").checked = bnDefecto();
   nuevoEditor(entrada.comp?.actividades[0].tipo || ultimo || listaTipos()[0]); pintar();
   if (entrada.comp) { abrirGuardada(entrada.comp); if (aFori) proyectar(); }
-  // Primera vez: se empieza eligiendo la actividad (curso → materia → contenido → modelo).
-  else if (!ultimo) abrirSelector({ tamano: "completa", alElegir: (n) => { editores[0].poner(n); guardarUltimo(n); letraMateria(); pintar(); } });
+  // Los enlaces directos (?ficha=, ?comp=, ?grupo=, ?desde=tabula…) van al diseño; si no, la app abre en el inicio.
+  const directo = !!(idUrl || entrada.comp || entrada.grupo || entrada.desdeTabula || entrada.sesion || entrada.tarea);
+  mostrar(directo ? "diseno" : "inicio");
   materia1 ??= materiaDe(editores[0].id);   // al arrancar mandan la letra guardada o la de la composición abierta
 }
 
@@ -19619,6 +19732,183 @@ function crearGuardadas(almacen) {
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get MAX_RECIENTES() { return MAX_RECIENTES; }, get MAX_FAVORITOS() { return MAX_FAVORITOS; }, get limpiar() { return limpiar; }, get crearGuardadas() { return crearGuardadas; } }));
 },
+"ui/inicio.js": (__exp) => {
+// Charta · lógica de la pantalla de inicio (paso 4.8). Sin DOM: se prueba en Node.
+// Solo presentación y navegación; no toca la generación de fichas. Nunca guarda nombres de alumnos.
+
+/** Modelos que se ofrecen como accesos rápidos mientras no hay historial. */
+const DEFECTO = ["sumar.h20", "restar.r20", "orden.signos", "rep.dado"];
+const MAX_RAPIDOS = 4;
+const CLAVE_USOS = "charta:usos";
+
+/** «Buenos días / Buenas tardes / Buenas noches», con el nombre de pila si lo hay. */
+function saludo(hora, nombre) {
+  const h = Math.floor(+hora);
+  const s = h >= 6 && h < 13 ? "Buenos días" : h >= 13 && h < 21 ? "Buenas tardes" : "Buenas noches";
+  const n = String(nombre || "").trim().split(/\s+/)[0];
+  return n ? `${s}, ${n}` : s;
+}
+
+/** «2026-11-05» → «5-11-2026». */
+const fechaCorta = (f) => (f ? String(f).slice(0, 10).split("-").reverse().map(Number).join("-") : "");
+
+/** Cuántas veces se ha elegido cada modelo como actividad 1 (solo ids y números, en este dispositivo). */
+function crearUsos(almacen) {
+  const leer = () => { try { const v = JSON.parse(almacen.getItem(CLAVE_USOS) || "{}"); return v && typeof v === "object" && !Array.isArray(v) ? v : {}; } catch { return {}; } };
+  return {
+    mapa: leer,
+    anotar(id) {
+      if (!id) return;
+      const v = leer(); v[id] = (v[id] | 0) + 1;
+      // Se conservan los 40 más usados: el mapa no crece sin límite.
+      const top = Object.fromEntries(Object.entries(v).sort((a, b) => b[1] - a[1]).slice(0, 40));
+      try { almacen.setItem(CLAVE_USOS, JSON.stringify(top)); } catch {}
+    },
+  };
+}
+
+/** Hasta `max` modelos: los más usados (desempata el más reciente); si faltan, los de DEFECTO. Solo los que existen. */
+function accesosRapidos({ usos = {}, recientes = [], ultimo = null, hayTipo = () => true, max = MAX_RAPIDOS } = {}) {
+  const orden = [ultimo, ...recientes.flatMap((c) => (c.actividades || []).map((a) => a.tipo)), ...Object.keys(usos)].filter(Boolean);
+  const vistos = [...new Set(orden)].filter(hayTipo);
+  vistos.sort((a, b) => (usos[b] | 0) - (usos[a] | 0) || orden.indexOf(a) - orden.indexOf(b));
+  return [...new Set([...vistos, ...DEFECTO.filter(hayTipo)])].slice(0, max);
+}
+
+/** Qué abre «Seguir con la última»: la última impresa (si sus tipos siguen existiendo) o el último modelo elegido. */
+function ultimaComposicion({ recientes = [], ultimo = null, hayTipo = () => true } = {}) {
+  const c = recientes.find((r) => r.actividades?.length && r.actividades.every((a) => hayTipo(a.tipo)));
+  if (c) return { composicion: c };
+  return ultimo && hayTipo(ultimo) ? { modelo: ultimo } : null;
+}
+
+/** Materias disponibles (unión de todos los cursos), en el orden del catálogo: [{ id, nombre }]. */
+function materiasDisponibles(cursos, materias) {
+  const vistas = new Map();
+  for (const c of cursos()) for (const m of materias(c.id)) if (!vistas.has(m.id)) vistas.set(m.id, m);
+  return [...vistas.values()];
+}
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get DEFECTO() { return DEFECTO; }, get MAX_RAPIDOS() { return MAX_RAPIDOS; }, get saludo() { return saludo; }, get fechaCorta() { return fechaCorta; }, get crearUsos() { return crearUsos; }, get accesosRapidos() { return accesosRapidos; }, get ultimaComposicion() { return ultimaComposicion; }, get materiasDisponibles() { return materiasDisponibles; } }));
+},
+"ui/inicio_vista.js": (__exp) => {
+// Charta · vista de la pantalla de inicio (paso 4.8). Solo DOM: la lógica está en inicio.js.
+// crearInicio(cb) → { pintar(estado), cerrarMaterias() }. Todo lo que cambia la ficha lo hace app.js a través de cb.
+const { PALETA } = __req("render/hoja.js");
+const { miniatura } = __req("ui/navegacion.js");
+const { fechaCorta } = __req("ui/inicio.js");
+const $ = (id) => document.getElementById(id);
+function el(tag, props = {}, ...hijos) { const e = Object.assign(document.createElement(tag), props); e.append(...hijos); return e; }
+
+/** Miniaturas de una en una (no bloquean la pantalla); se cancelan si el inicio se repinta. */
+let tanda = 0;
+function cargarMiniaturas(raiz) {
+  const mi = ++tanda, pend = [...raiz.querySelectorAll(".mini[data-id]")].filter((m) => !m.firstChild);
+  const paso = () => {
+    const m = pend.shift();
+    if (!m || mi !== tanda) return;
+    if (m.isConnected) try { m.innerHTML = miniatura(m.dataset.id); } catch { m.textContent = ""; }
+    setTimeout(paso, 0);
+  };
+  setTimeout(paso, 0);
+}
+const miniCaja = (id, color) => {
+  const [fondo, borde] = PALETA[color] ?? PALETA.verde;
+  const m = el("div", { className: "mini" }); m.dataset.id = id; m.style.background = fondo; m.style.borderColor = borde;
+  return m;
+};
+
+function crearInicio(cb) {
+  let pestana = "favoritos", estado = null;
+
+  $("iniCrear").onclick = () => {
+    const ms = cb.materias();
+    if (ms.length <= 1) return cb.crear(ms[0]?.id ?? null);
+    const abierto = !$("iniMaterias").hidden;
+    $("iniMaterias").hidden = abierto;
+    if (!abierto) $("iniMateriasBtn").replaceChildren(...ms.map((m) => el("button", { textContent: m.nombre, onclick: () => cb.crear(m.id) })));
+  };
+  $("iniSeguir").onclick = () => cb.seguir();
+  $("iFav").onclick = () => { pestana = "favoritos"; pintarFichas(); };
+  $("iRec").onclick = () => { pestana = "recientes"; pintarFichas(); };
+  $("iNube").onclick = () => { pestana = "nube"; cb.leerNube(); pintarFichas(); };
+
+  // Ajustes discretos
+  $("iniAjustesBtn").onclick = () => {
+    const abrir = $("iniAjustes").hidden;
+    $("iniAjustes").hidden = !abrir; $("iniAjustesBtn").setAttribute("aria-expanded", String(abrir));
+    if (abrir) { pintarAjustes(); $("iniAjustes").scrollIntoView({ behavior: "smooth", block: "nearest" }); }
+  };
+  $("iaFuente").onchange = () => cb.ponerFuente($("iaFuente").value);
+  $("iaBn").onchange = () => cb.ponerBn($("iaBn").checked);
+  $("iaTema").onclick = () => $("tema").click();
+  $("iaCuenta").onclick = () => $("cuentaNube").click();
+  function pintarAjustes() {
+    const { fuentes, fuente } = cb.fuentes();
+    $("iaFuente").replaceChildren(...fuentes.map((f) => el("option", { value: f.id, textContent: f.nombre, selected: f.id === fuente })));
+    $("iaBn").checked = cb.bnDefecto();
+    $("iaCuenta").textContent = $("cuentaNube").textContent; $("iaCuenta").disabled = $("cuentaNube").disabled;
+  }
+
+  function pintarFichas() {
+    const { fav, rec, nube, dentro } = estado;
+    if (pestana === "nube" && !dentro) pestana = "favoritos";
+    if (pestana === "favoritos" && !fav.length) pestana = rec.length || !dentro ? "recientes" : "nube";
+    $("iFav").classList.toggle("activa", pestana === "favoritos"); $("iRec").classList.toggle("activa", pestana === "recientes");
+    $("iNube").classList.toggle("activa", pestana === "nube"); $("iNube").hidden = !dentro;
+    $("iFav").textContent = `★ Favoritas (${fav.length})`; $("iRec").textContent = `Recientes (${rec.length})`;
+    $("iNube").textContent = nube ? `☁ En la nube (${nube.length})` : "☁ En la nube";
+    const vacio = (t) => [el("li", { className: "info", textContent: t })];
+    let filas;
+    if (pestana === "nube") {
+      filas = !nube ? vacio("Cargando…") : !nube.length ? vacio("Aún no hay fichas en la nube: usa «☁ Guardar en la nube» al preparar una.")
+        : nube.slice(0, 12).map((x) => fila({ comp: x.composicion, nombre: x.titulo, fecha: x.creada }));
+    } else {
+      const lista = pestana === "favoritos" ? fav : rec;
+      filas = !lista.length ? vacio(pestana === "favoritos" ? "Marca una ficha con ☆ Favorita y la tendrás aquí." : "Las fichas que imprimas aparecerán aquí.")
+        : lista.slice(0, 12).map((c) => fila({ comp: c, nombre: c.nombre || "Ficha", fecha: c.fecha }));
+    }
+    $("iniLista").replaceChildren(...filas);
+    cargarMiniaturas($("inicio"));
+  }
+
+  function fila({ comp, nombre, fecha }) {
+    const acts = comp?.actividades || [];
+    const disp = acts.length > 0 && acts.every((a) => cb.hayTipo(a.tipo));
+    const mini = disp ? miniCaja(acts[0].tipo, cb.colorDe(acts[0].tipo)) : el("div", { className: "mini" });
+    const b = el("button", { className: "g-abrir ini-fila", disabled: !disp }, mini,
+      el("span", { className: "ini-fila-txt" }, el("strong", { textContent: nombre }),
+        el("small", { textContent: acts.map((a) => cb.nombreModelo(a.tipo)).join(" + ") + (fecha ? " · " + fechaCorta(fecha) : "") })));
+    b.onclick = () => cb.abrir(comp);
+    return el("li", {}, b);
+  }
+
+  return {
+    /** estado: { saludo, seguir: { nombre, detalle, tipo, color } | null, rapidos: [{ id, nombre, color }], fav, rec, nube, dentro } */
+    pintar(e) {
+      estado = e;
+      $("iniSaludo").textContent = e.saludo;
+      $("iniSeguir").hidden = !e.seguir;
+      if (e.seguir) {
+        $("iniSeguirNombre").textContent = e.seguir.nombre; $("iniSeguirDetalle").textContent = e.seguir.detalle;
+        const m = $("iniSeguirMini"), [fondo, borde] = PALETA[e.seguir.color] ?? PALETA.verde;
+        m.style.background = fondo; m.style.borderColor = borde; m.dataset.id = e.seguir.tipo; m.replaceChildren();
+      }
+      $("iniRapidos").hidden = !e.rapidos.length;
+      $("iniRapidosLista").replaceChildren(...e.rapidos.map((r) => {
+        const b = el("button", { className: "ini-rapido" }, miniCaja(r.id, r.color), el("strong", { textContent: r.nombre }));
+        b.onclick = () => cb.crearModelo(r.id);
+        return b;
+      }));
+      pintarFichas();
+      if (!$("iniAjustes").hidden) pintarAjustes();
+    },
+    cerrarMaterias() { $("iniMaterias").hidden = true; },
+  };
+}
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get crearInicio() { return crearInicio; } }));
+},
 "ui/navegacion.js": (__exp) => {
 // Charta · navegación del catálogo (paso 4.1): curso → materia → bloque → modelo.
 // Sin DOM (se prueba en Node). Solo ofrece modelos con tipo registrado en la app.
@@ -19679,10 +19969,14 @@ function el(tag, props = {}, ...hijos) { const e = Object.assign(document.create
 const NIVELES = ["curso", "materia", "bloque", "modelo"];
 const TITULOS = { curso: "Elige el curso", materia: "Elige la materia", bloque: "Elige el contenido", modelo: "Elige el modelo" };
 
-function abrirSelector({ actual = null, tamano = "completa", alElegir, alCerrar } = {}) {
-  // Ruta inicial: la del modelo actual (se abre en su bloque) o vacía.
+function abrirSelector({ actual = null, tamano = "completa", ruta: inicial = null, alElegir, alCerrar } = {}) {
+  // Ruta inicial: la del modelo actual (se abre en su bloque), una parcial (p. ej. { materia } desde el inicio) o vacía.
   const ruta = {};
   if (actual) { const m = modelo(actual); Object.assign(ruta, { curso: m.curso, materia: m.materia, bloque: m.bloque }); }
+  else if (inicial) Object.assign(ruta, inicial);
+  // Si la materia pedida no existe en el curso elegido, se vuelve a preguntar.
+  const cuadra = () => { if (ruta.curso !== undefined && ruta.materia !== undefined && !materias(ruta.curso).some((m) => m.id === ruta.materia)) { delete ruta.materia; delete ruta.bloque; } };
+  cuadra();
 
   const migas = el("nav", { className: "migas" });
   const titulo = el("h2");
@@ -19705,7 +19999,7 @@ function abrirSelector({ actual = null, tamano = "completa", alElegir, alCerrar 
     for (const n of NIVELES.slice(0, 3)) {
       if (ruta[n] === undefined) {
         const os = opciones(n);
-        if (os.length === 1) ruta[n] = os[0].id; else return n;
+        if (os.length === 1) { ruta[n] = os[0].id; cuadra(); } else return n;
       }
     }
     return "modelo";
@@ -19742,7 +20036,7 @@ function abrirSelector({ actual = null, tamano = "completa", alElegir, alCerrar 
   function tarjetaNivel(nivel, o) {
     const b = el("button", { className: "sel-tarjeta" }, el("strong", { textContent: o.nombre }));
     if (o.n) b.append(el("small", { textContent: `${o.n} modelo${o.n > 1 ? "s" : ""}` }));
-    b.onclick = () => { ruta[nivel] = o.id; pintar(); };
+    b.onclick = () => { ruta[nivel] = o.id; cuadra(); pintar(); };
     return b;
   }
 

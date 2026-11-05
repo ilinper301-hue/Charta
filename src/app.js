@@ -1,13 +1,15 @@
-// Charta · app. 4.1: selector y opciones · 4.2: compositor · 4.3: alumnos y variantes · 4.4: favoritas y recientes · 4.5: PWA y tableta · 5.1: nube · 5.2: Tabula · 5.3: Fori.
+// Charta · app. 4.8: pantalla de inicio · 4.1: selector y opciones · 4.2: compositor · 4.3: alumnos y variantes · 4.4: favoritas y recientes · 4.5: PWA y tableta · 5.1: nube · 5.2: Tabula · 5.3: Fori.
 import { CATALOGO } from "./nucleo/catalogo.js";
 import { generar, porDefecto, modelo, metadatosDe } from "./nucleo/ficha.js";
 import { erroresFicha, letraVariante, paginasVariante } from "./nucleo/lector.js";
 import { listaTipos } from "./tipos/index.js";
 import { hoja, hojas, estiloLectura, PALETA } from "./render/hoja.js";
 import { hayTipo } from "./nucleo/tipos.js";
-import { miniatura, fuenteMateria, materiaDe } from "./ui/navegacion.js";
+import { miniatura, fuenteMateria, materiaDe, cursos, materias } from "./ui/navegacion.js";
 import { abrirSelector } from "./ui/selector.js";
 import { crearGuardadas } from "./ui/guardadas.js";
+import { saludo, crearUsos, accesosRapidos, ultimaComposicion, materiasDisponibles, fechaCorta } from "./ui/inicio.js";
+import { crearInicio } from "./ui/inicio_vista.js";
 import { leerAlumnos, numVariantes, MAX_ALUMNOS } from "./ui/alumnos.js";
 import { registrarSW } from "./pwa/registro.js";
 import { iniciarTema } from "./ui/tema.js";
@@ -106,8 +108,12 @@ const ULTIMO = "charta:ultimoModelo";
 function guardarUltimo(id) { try { localStorage.setItem(ULTIMO, id); } catch {} }
 function leerUltimo() { try { const id = localStorage.getItem(ULTIMO); return id && hayTipo(id) ? id : null; } catch { return null; } }
 
+const BN_DEFECTO = "charta:bnDefecto";
+const bnDefecto = () => { try { return localStorage.getItem(BN_DEFECTO) === "1"; } catch { return false; } };
+
 function iniciar() {
   let semilla = 1, ficha = null, paginas = [];
+  let vista = "diseno", inicioVista = null, pusheado = false;   // 4.8: "inicio" | "diseno"
   const editores = [];
   const nombres = () => leerAlumnos($("alumnos").value).slice(0, MAX_ALUMNOS);
   const copias = () => Math.max(1, Math.min(MAX_ALUMNOS, parseInt($("copias").value, 10) || 1));
@@ -139,7 +145,7 @@ function iniciar() {
     if (materia1 !== null) elegirFuente(fuenteMateria(editores[0].id));
     materia1 = m;
   }
-  function cambiado(e) { if (editores[0] === e) { guardarUltimo(e.id); letraMateria(); } pintar(); }
+  function cambiado(e) { if (editores[0] === e) { guardarUltimo(e.id); usos.anotar(e.id); letraMateria(); } pintar(); }
   function nuevoEditor(id) { editores.push(editorActividad(id, { tamano, alCambiar: cambiado })); recolocar(); }
 
   function pintar() {
@@ -227,6 +233,7 @@ function iniciar() {
     try { const f = guardadas.esFavorito(composicion()); $("favorito").textContent = f ? "★ Favorita" : "☆ Favorita"; $("favorito").classList.toggle("on", f); } catch {}
   }
   function abrirGuardada(c) {
+    aDiseno();
     editores.length = 0;
     for (const a of c.actividades) { const e = editorActividad(a.tipo, { tamano, alCambiar: cambiado }); editores.push(e); }
     recolocar();
@@ -285,7 +292,7 @@ function iniciar() {
   }
   async function leerNube() {
     try { enNube = await nube.listar(); } catch (e) { enNube = enNube || []; avisoNube(e.message, true); }
-    pintarGuardadas();
+    pintarGuardadas(); refrescarInicio();
   }
   function pintarCuenta(e) {
     const b = $("cuentaNube");
@@ -297,7 +304,7 @@ function iniciar() {
   nube.alCambiar((e) => {
     pintarCuenta(e);
     if (e.estado === "dentro" && !enNube) leerNube(); else if (e.estado !== "dentro") enNube = null;
-    pintarGuardadas();
+    pintarGuardadas(); refrescarInicio();
   });
   $("cuentaNube").onclick = async () => {
     const e = nube.estado();
@@ -374,12 +381,66 @@ function iniciar() {
     } catch (e) { avisoNube("No se ha podido preparar la ficha para Fori: " + e.message, true); }
   }
   $("aFori").onclick = proyectar;
+  // Paso 4.8 · pantalla de inicio: saludo, Crear ficha, Seguir con la última, accesos rápidos y Mis fichas.
+  const usos = crearUsos(almacen);
+  const nombreModelo = (id) => { try { return modelo(id).nombre; } catch { return id; } };
+  const colorDe = (id) => { try { return modelo(id).color; } catch { return "verde"; } };
+  const ultimaDeInicio = () => ultimaComposicion({ recientes: guardadas.recientes(), ultimo: leerUltimo(), hayTipo });
+  function estadoInicio() {
+    const rec = guardadas.recientes(), fav = guardadas.favoritos(), e = nube.estado(), dentro = e.estado === "dentro", u = ultimaDeInicio();
+    let seguir = null;
+    if (u?.composicion) {
+      const c = u.composicion, t = c.actividades[0].tipo;
+      seguir = { nombre: c.nombre || "Ficha", tipo: t, color: colorDe(t),
+        detalle: c.actividades.map((a) => nombreModelo(a.tipo)).join(" + ") + (c.fecha ? " · " + fechaCorta(c.fecha) : "") };
+    } else if (u?.modelo) seguir = { nombre: nombreModelo(u.modelo), tipo: u.modelo, color: colorDe(u.modelo), detalle: "Último modelo elegido" };
+    const rapidos = accesosRapidos({ usos: usos.mapa(), recientes: rec, ultimo: leerUltimo(), hayTipo })
+      .map((id) => ({ id, nombre: nombreModelo(id), color: colorDe(id) }));
+    return { saludo: saludo(new Date().getHours(), dentro ? e.usuario?.nombre : ""), seguir, rapidos, fav, rec, nube: dentro ? enNube : null, dentro };
+  }
+  function refrescarInicio() { if (vista === "inicio") inicioVista?.pintar(estadoInicio()); }
+  function mostrar(v) {
+    vista = v; document.body.dataset.vista = v;
+    $("inicio").hidden = v !== "inicio"; document.querySelector("main").hidden = v === "inicio"; $("aInicio").hidden = v === "inicio";
+    if (v === "inicio") { inicioVista.cerrarMaterias(); refrescarInicio(); }
+    window.scrollTo(0, 0);
+  }
+  // El botón «Atrás» de Android vuelve al inicio (se apunta una entrada de historial al entrar en el diseño desde el inicio).
+  function aDiseno() { if (vista === "diseno") return; history.pushState({ diseno: 1 }, ""); pusheado = true; mostrar("diseno"); }
+  function aInicio() { if (vista === "inicio") return; if (pusheado) history.back(); else mostrar("inicio"); }
+  addEventListener("popstate", () => { pusheado = !!history.state?.diseno; mostrar(pusheado ? "diseno" : "inicio"); });
+  $("aInicio").onclick = aInicio;
+  /** «Crear ficha»: una ficha nueva con el modelo elegido (la composición anterior no se toca: sigue en Recientes). */
+  function nuevaFicha(id) {
+    if (!id || !hayTipo(id)) return;
+    editores.splice(1); recolocar();
+    editores[0].poner(id);
+    semilla = 1; $("titulo").value = ""; $("bn").checked = bnDefecto();
+    usos.anotar(id); guardarUltimo(id); letraMateria();
+    aDiseno(); pintar();
+  }
+  inicioVista = crearInicio({
+    hayTipo, nombreModelo, colorDe,
+    materias: () => materiasDisponibles(cursos, materias),
+    crear: (materia) => abrirSelector({ tamano: "completa", ruta: materia ? { materia } : null, alElegir: nuevaFicha }),
+    crearModelo: nuevaFicha,
+    seguir: () => { const u = ultimaDeInicio(); if (u?.composicion) abrirGuardada(u.composicion); else if (u?.modelo) nuevaFicha(u.modelo); },
+    abrir: abrirGuardada,
+    leerNube: () => { if (!enNube) leerNube(); },
+    fuentes: () => ({ fuentes: todasLasFuentes(), fuente: $("fuente").value }),
+    ponerFuente: (id) => { elegirFuente(id); pintar(); },
+    bnDefecto,
+    ponerBn: (v) => { try { localStorage.setItem(BN_DEFECTO, v ? "1" : "0"); } catch {} $("bn").checked = v; pintar(); },
+  });
+
   pintarGuardadas();
   const ultimo = leerUltimo();
+  if (!entrada.comp && !idUrl) $("bn").checked = bnDefecto();
   nuevoEditor(entrada.comp?.actividades[0].tipo || ultimo || listaTipos()[0]); pintar();
   if (entrada.comp) { abrirGuardada(entrada.comp); if (aFori) proyectar(); }
-  // Primera vez: se empieza eligiendo la actividad (curso → materia → contenido → modelo).
-  else if (!ultimo) abrirSelector({ tamano: "completa", alElegir: (n) => { editores[0].poner(n); guardarUltimo(n); letraMateria(); pintar(); } });
+  // Los enlaces directos (?ficha=, ?comp=, ?grupo=, ?desde=tabula…) van al diseño; si no, la app abre en el inicio.
+  const directo = !!(idUrl || entrada.comp || entrada.grupo || entrada.desdeTabula || entrada.sesion || entrada.tarea);
+  mostrar(directo ? "diseno" : "inicio");
   materia1 ??= materiaDe(editores[0].id);   // al arrancar mandan la letra guardada o la de la composición abierta
 }
 

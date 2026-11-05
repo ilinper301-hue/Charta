@@ -21,7 +21,9 @@ src/index.html, estilos.css, app.js   app: columna .col (Actividades, Alumnos, I
 src/ui/navegacion.js  cursos(), materias(c), bloques(c, m) (CATALOGO.bloques[materia]), modelos(c, m, b, tamano) (solo tipos registrados; `cabe`), miniatura(id), fuenteMateria(id), materiaDe(id) — sin DOM
 src/ui/alumnos.js     leerAlumnos(texto) (pegar listas, Séneca), numVariantes(opción, páginas), MAX_ALUMNOS — sin DOM
 src/ui/guardadas.js   crearGuardadas(almacén): recientes(), favoritos(), anotarReciente, alternarFavorito, esFavorito, quitar — sin nombres
-src/ui/selector.js    abrirSelector({ actual, tamano, alElegir, alCerrar }): pantalla curso → materia → bloque → modelo
+src/ui/selector.js    abrirSelector({ actual, tamano, ruta, alElegir, alCerrar }): pantalla curso → materia → bloque → modelo (`ruta` parcial, p. ej. { materia }, desde el inicio)
+src/ui/inicio.js      paso 4.8, sin DOM: saludo(hora, nombre), fechaCorta, crearUsos(almacén) (charta:usos), accesosRapidos, ultimaComposicion, materiasDisponibles, DEFECTO
+src/ui/inicio_vista.js  paso 4.8, DOM: crearInicio(cb) → { pintar(estado), cerrarMaterias() }; el marcado (#inicio…) está en src/index.html y la navegación (mostrar / aDiseno / aInicio, historial) en app.js
 tests/test_ui.js      navegación: todos los tipos alcanzables, miniaturas limpias
 src/nucleo/azar.js    mulberry32, mezclar(...ns) (semillas derivadas), crearAzar(s): entero, elegir, barajar, muestra, hijo
 src/nucleo/tipos.js   registro: registrar(t), tipo(id), hayTipo, listaTipos
