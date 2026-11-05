@@ -89,6 +89,7 @@ META = {
     # Bloque 8 · problemas
     "problemas.suma": (2, 15, "problemas sumar texto razonamiento"),
     "problemas.resta": (3, 15, "problemas restar texto razonamiento"),
+    "problemas.barras": (3, 20, "problemas barras modelo_de_barras singapur sumar restar razonamiento"),
     "problemas.mixtos": (3, 18, "problemas sumar restar texto razonamiento"),
     # Bloque 9 · geometría
     "geometria.figuras": (1, 8, "geometría figuras_planas"),

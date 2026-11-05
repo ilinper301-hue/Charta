@@ -4,7 +4,7 @@
 // solucion: { huecos: [a, op, b, resultado, resultado] }      (orden de las cajas de izquierda a derecha y de arriba abajo)
 // Todas las cantidades que aparecen y el resultado valen ≥ 2: así el plural del objeto es siempre correcto.
 // Completa: 4 problemas; media: 2 (la mitad de filas, como el resto de tipos).
-import { TOP, T, B, MENOS } from "../render/papel.js";
+import { TOP, T, B, MENOS, INK, COLOR_SOLUCION } from "../render/papel.js";
 
 export const NOMBRES = ["Ana", "Luis", "Marta", "Pablo", "Lucía", "Hugo", "Sara", "Daniel", "Carla", "Mario", "Paula", "Diego",
   "Elena", "Leo", "Irene", "Nico", "Julia", "Pedro", "Alba", "Sofía", "Martín", "Laura", "Hugo", "Noa"].filter((n, i, l) => l.indexOf(n) === i);
@@ -85,7 +85,7 @@ export function generarProblemas(clase, params, az, n) {
     const [obj, g] = objetos[i % objetos.length];
     const res = c === "suma" ? a + b : a - b;
     const texto = SITUACIONES[c][sit]({ N, M, a, b, o: obj, g }, az);
-    out.push({ texto, sit, a, b, op: OPERACION[c], obj, g, res });
+    out.push({ texto, sit, a, b, op: OPERACION[c], obj, g, res, nombres: [N, M] });
   }
   return out;
 }
@@ -124,5 +124,74 @@ export function ejerciciosProblemas(clase, params, az, tamano) {
   return generarProblemas(clase, params, az, tamano === "media" ? 2 : 4).map((d) => ({
     datos: { texto: d.texto, sit: d.sit, a: d.a, b: d.b, op: d.op, obj: d.obj },
     solucion: { huecos: [d.a, d.op, d.b, d.res, d.res] },
+  }));
+}
+
+// ---------------------------------------------------------------- modelo de barras (problemas.barras)
+const BARRA_W = 360, BARRA_H = 24;
+
+/** Llave sobre [x0, x1] a la altura y (por encima del trazo). */
+function llave(p, x0, x1, y, tinta) {
+  p.path([["M", x0, y], ["L", x0, y + 6], ["L", x1, y + 6], ["L", x1, y]], { lw: 1.2, stroke: tinta });
+}
+/** Segmento con su etiqueta: `val` = número, o null si es la incógnita («?»: la respuesta en rojo va solo en los huecos). */
+function segmento(p, x, y, w, h, val, res, tinta, relleno, hijos = null) {
+  p.rrect(x, y, w, h, 3, { lw: 1.4, fill: relleno, stroke: tinta });
+  p.text(x + w / 2, y + h / 2 - 5, val === null ? "?" : String(val), 15, { f: "PB", anchor: "middle", gris: INK });
+}
+/** Etiqueta del total (o «?») sobre la llave. */
+function etiquetaLlave(p, cx, y, val, res, tinta) {
+  p.text(cx, y, val === null ? "?" : String(val), 14, { f: "PB", anchor: "middle", gris: INK });
+}
+
+/** Barras del problema entre y (base) e y + ~48. `tinta`: INK (barras dadas) o COLOR_SOLUCION (trazo rojo: las dibuja el alumno). */
+function dibujarBarra(p, d, res, x, w, y, tinta) {
+  const x0 = d.sit === "comparar" ? x + 100 : x + (w - BARRA_W) / 2, h = BARRA_H, GR = [0.93, 0.84];
+  const fill = (k) => (tinta === COLOR_SOLUCION ? null : GR[k]);
+  const reparto = (u, v) => {                          // anchos proporcionales con un mínimo para que quepa la etiqueta
+    const min = 36, tot = BARRA_W; let wu = Math.max(min, (tot * u) / (u + v)); wu = Math.min(wu, tot - min); return [wu, tot - wu];
+  };
+  if (d.sit === "juntar" || d.sit === "anadir") {
+    const [wa, wb] = reparto(d.a, d.b), yb = y + 10;
+    segmento(p, x0, yb, wa, h, d.a, res, tinta, fill(0)); segmento(p, x0 + wa, yb, wb, h, d.b, res, tinta, fill(1));
+    llave(p, x0, x0 + BARRA_W, yb + h + 4, tinta); etiquetaLlave(p, x0 + BARRA_W / 2, yb + h + 14, null, res, tinta);
+  } else if (d.sit === "quitar" || d.sit === "faltar") {
+    const [wb, wr] = reparto(d.b, res), yb = y + 10;
+    segmento(p, x0, yb, wb, h, d.b, res, tinta, fill(0)); segmento(p, x0 + wb, yb, wr, h, null, res, tinta, fill(1));
+    llave(p, x0, x0 + BARRA_W, yb + h + 4, tinta); etiquetaLlave(p, x0 + BARRA_W / 2, yb + h + 14, d.a, res, tinta);
+  } else {                                              // comparar: dos barras, la diferencia es la incógnita
+    const h2 = 18, ya = y + 24, yb = y;
+    const wb = BARRA_W * d.b / d.a, wr = BARRA_W - wb;
+    const [n1, n2] = d.nombres;
+    p.text(x0 - 8, ya + h2 / 2 - 4, n1, 11, { f: "PR", anchor: "end", gris: INK });
+    p.text(x0 - 8, yb + h2 / 2 - 4, n2, 11, { f: "PR", anchor: "end", gris: INK });
+    p.rrect(x0, ya, wb, h2, 3, { lw: 1.4, fill: fill(0), stroke: tinta });
+    p.text(x0 + wb / 2, ya + h2 / 2 - 5, String(d.b), 14, { f: "PB", anchor: "middle", gris: INK });
+    segmento(p, x0 + wb, ya, wr, h2, null, res, tinta, fill(1));
+    p.rrect(x0, yb, wb, h2, 3, { lw: 1.4, fill: fill(0), stroke: tinta });
+    p.text(x0 + wb / 2, yb + h2 / 2 - 5, String(d.b), 14, { f: "PB", anchor: "middle", gris: INK });
+    llave(p, x0, x0 + BARRA_W, ya + h2 + 3, tinta); etiquetaLlave(p, x0 + BARRA_W / 2, ya + h2 + 13, d.a, res, tinta);
+  }
+}
+
+/** Como dibujarProblemas, con la barra debajo del enunciado (4 por página, 2 en media; enunciado de 1–2 líneas). */
+export function dibujarProblemasBarras(p, act) {
+  const es = act.ejercicios, filas = 4, enBlanco = act.params.barra === "blanco";
+  const { cel, cw, ch } = p.celdas(TOP, 1, filas);
+  es.slice(0, p.n(filas)).forEach((e, i) => p.ejercicio(e.id, () => {
+    const [x, y] = cel[i], d = e.datos, h = e.solucion.huecos;
+    p.marco(x, y, cw, ch, i);
+    const fs = 14, lineas = partir(p, d.texto, cw - 84, fs);
+    if (lineas.length > 2) throw new Error(`Enunciado de más de 2 líneas: ${d.texto}`);
+    lineas.forEach((l, j) => p.text(x + 44, y + ch - 30 - j * 18, l, fs, { f: "PR" }));
+    const yb = y + 56;                                       // base de la zona de la barra (≈ 56 … 112 sobre la tarjeta)
+    if (!enBlanco) dibujarBarra(p, d, h[3], x, cw, yb, INK);
+    else if (!p.solucion) {
+      p.rrect(x + 44, yb - 2, cw - 88, 52, 6, { lw: 0.8, fill: 1, stroke: 0.7 });
+      p.text(x + cw / 2, yb + 20, "Dibuja aquí la barra", 10.5, { f: "PR", anchor: "middle", gris: 0.65 });
+    } else dibujarBarra(p, d, h[3], x, cw, yb, COLOR_SOLUCION);
+    const hb = 36, fl = 12;
+    p.linea(x + 14, y + 6, cw - 28, hb + 4, [T("Operación:", fl, "PR"), B(40, hb, h[0]), B(30, hb, h[1]), B(40, hb, h[2]), T("=", 18), B(46, hb, h[3]),
+      T("Respuesta:", fl, "PR"), B(46, hb, h[4]), T(d.obj, fl, "PR")], 7);
   }));
 }

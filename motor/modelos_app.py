@@ -10,6 +10,9 @@ NIVEL_P = op("nivel", "Llevadas", [(None, "Sin llevadas"), ("con", "Con llevadas
 SIT_SUMA = op("situacion", "Situaciones", [(None, "Variadas"), ("juntar", "Juntar dos cantidades"), ("anadir", "Añadir a lo que hay")])
 SIT_RESTA = op("situacion", "Situaciones", [(None, "Variadas"), ("quitar", "Quitar o regalar"), ("comparar", "Comparar (cuántos más o menos)"), ("faltar", "Cuántos faltan")])
 
+OPERACION_P = op("operacion", "Operaciones", [(None, "Sumas y restas"), ("suma", "Solo sumar"), ("resta", "Solo restar")])
+BARRA = op("barra", "Barra", [(None, "Dibujada (con los números)"), ("blanco", "En blanco (la dibuja el alumno)")])
+
 def _p(clave, nombre, descripcion, opciones, titulo, color):
     # rmin=10: rangos 10…100; por defecto el 20 (en 1.º los problemas empiezan con números pequeños)
     return {**M(8, "problemas", clave, nombre, descripcion, opciones, rmin=10, rmax=100, tam=AMBOS, rango=20), "titulo": titulo, "color": color}
@@ -18,4 +21,6 @@ MODELOS_APP = [
     _p("suma", "Problemas de sumar", "Problemas de una operación: juntar o añadir. Nombres y objetos distintos en cada uno.", [SIT_SUMA, NIVEL_P], "PROBLEMAS DE SUMAR", "amarillo"),
     _p("resta", "Problemas de restar", "Problemas de una operación: quitar, comparar o cuántos faltan.", [SIT_RESTA, NIVEL_P], "PROBLEMAS DE RESTAR", "rosa"),
     _p("mixtos", "Problemas de sumar y restar", "Problemas mezclados: hay que decidir si se suma o se resta.", [NIVEL_P], "PROBLEMAS", "verde"),
+    _p("barras", "Problemas con barras", "Modelo de barras de Singapur (como Barri): enunciado, barra de partes y total o de comparación, operación y respuesta.",
+       [OPERACION_P, NIVEL_P, BARRA], "PROBLEMAS CON BARRAS", "azul"),
 ]

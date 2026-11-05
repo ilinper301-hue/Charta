@@ -4585,6 +4585,106 @@ export const CATALOGO = {
      "razonamiento"
     ]
    }
+  },
+  {
+   "id": "problemas.barras",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 8,
+   "familia": "problemas",
+   "clave": "barras",
+   "nombre": "Problemas con barras",
+   "descripcion": "Modelo de barras de Singapur (como Barri): enunciado, barra de partes y total o de comparación, operación y respuesta.",
+   "opciones": [
+    {
+     "id": "operacion",
+     "etiqueta": "Operaciones",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Sumas y restas"
+      },
+      {
+       "valor": "suma",
+       "etiqueta": "Solo sumar"
+      },
+      {
+       "valor": "resta",
+       "etiqueta": "Solo restar"
+      }
+     ]
+    },
+    {
+     "id": "nivel",
+     "etiqueta": "Llevadas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Sin llevadas"
+      },
+      {
+       "valor": "con",
+       "etiqueta": "Con llevadas"
+      },
+      {
+       "valor": "mezcla",
+       "etiqueta": "Mezcladas"
+      }
+     ]
+    },
+    {
+     "id": "barra",
+     "etiqueta": "Barra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Dibujada (con los números)"
+      },
+      {
+       "valor": "blanco",
+       "etiqueta": "En blanco (la dibuja el alumno)"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    40,
+    50,
+    60,
+    70,
+    80,
+    90,
+    100
+   ],
+   "rango": 20,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "PROBLEMAS CON BARRAS",
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 3,
+    "minutos": 20,
+    "etiquetas": [
+     "problemas",
+     "barras",
+     "modelo de barras",
+     "singapur",
+     "sumar",
+     "restar",
+     "razonamiento"
+    ]
+   }
   }
  ]
 };

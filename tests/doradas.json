@@ -10236,6 +10236,148 @@
    "728ef1fa6b874a37"
   ]
  },
+ "problemas.barras": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Problemas con barras",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "problemas.barras",
+       "tipoVersion": 1,
+       "params": {
+        "operacion": null,
+        "nivel": null,
+        "barra": null,
+        "rango": 20
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Mira la barra, escribe la operación y contesta.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "texto": "Diego tiene 10 juguetes. Luego compra 4 más. ¿Cuántos juguetes tiene ahora?",
+          "sit": "anadir",
+          "a": 10,
+          "b": 4,
+          "op": "+",
+          "obj": "juguetes",
+          "nombres": [
+           "Diego",
+           "Irene"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           10,
+           "+",
+           4,
+           14,
+           14
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "texto": "Sofía tiene 19 caramelos y Julia tiene 3. ¿Cuántos caramelos más tiene Sofía que Julia?",
+          "sit": "comparar",
+          "a": 19,
+          "b": 3,
+          "op": "−",
+          "obj": "caramelos",
+          "nombres": [
+           "Sofía",
+           "Julia"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           19,
+           "−",
+           3,
+           16,
+           16
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "texto": "En el cesto hay 5 flores. Se ponen 2 más. ¿Cuántas flores hay ahora en el cesto?",
+          "sit": "anadir",
+          "a": 5,
+          "b": 2,
+          "op": "+",
+          "obj": "flores",
+          "nombres": [
+           "Luis",
+           "Marta"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           "+",
+           2,
+           7,
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "texto": "Laura tiene 8 cromos y Carla tiene 5. ¿Cuántos cromos menos tiene Carla que Laura?",
+          "sit": "comparar",
+          "a": 8,
+          "b": 5,
+          "op": "−",
+          "obj": "cromos",
+          "nombres": [
+           "Laura",
+           "Carla"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           8,
+           "−",
+           5,
+           3,
+           3
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "94d9c0021db83a3b"
+  ],
+  "svgSolucion": [
+   "56d1e66ccf5a0051"
+  ]
+ },
  "problemas.mixtos": {
   "ficha": {
    "schemaVersion": 1,

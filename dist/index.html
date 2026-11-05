@@ -5512,6 +5512,106 @@ const CATALOGO = {
      "razonamiento"
     ]
    }
+  },
+  {
+   "id": "problemas.barras",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 8,
+   "familia": "problemas",
+   "clave": "barras",
+   "nombre": "Problemas con barras",
+   "descripcion": "Modelo de barras de Singapur (como Barri): enunciado, barra de partes y total o de comparación, operación y respuesta.",
+   "opciones": [
+    {
+     "id": "operacion",
+     "etiqueta": "Operaciones",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Sumas y restas"
+      },
+      {
+       "valor": "suma",
+       "etiqueta": "Solo sumar"
+      },
+      {
+       "valor": "resta",
+       "etiqueta": "Solo restar"
+      }
+     ]
+    },
+    {
+     "id": "nivel",
+     "etiqueta": "Llevadas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Sin llevadas"
+      },
+      {
+       "valor": "con",
+       "etiqueta": "Con llevadas"
+      },
+      {
+       "valor": "mezcla",
+       "etiqueta": "Mezcladas"
+      }
+     ]
+    },
+    {
+     "id": "barra",
+     "etiqueta": "Barra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Dibujada (con los números)"
+      },
+      {
+       "valor": "blanco",
+       "etiqueta": "En blanco (la dibuja el alumno)"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    40,
+    50,
+    60,
+    70,
+    80,
+    90,
+    100
+   ],
+   "rango": 20,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "PROBLEMAS CON BARRAS",
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 3,
+    "minutos": 20,
+    "etiquetas": [
+     "problemas",
+     "barras",
+     "modelo de barras",
+     "singapur",
+     "sumar",
+     "restar",
+     "razonamiento"
+    ]
+   }
   }
  ]
 };
@@ -6563,7 +6663,7 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get REPS() { r
 // solucion: { huecos: [a, op, b, resultado, resultado] }      (orden de las cajas de izquierda a derecha y de arriba abajo)
 // Todas las cantidades que aparecen y el resultado valen ≥ 2: así el plural del objeto es siempre correcto.
 // Completa: 4 problemas; media: 2 (la mitad de filas, como el resto de tipos).
-const { TOP, T, B, MENOS } = __req("render/papel.js");
+const { TOP, T, B, MENOS, INK, COLOR_SOLUCION } = __req("render/papel.js");
 const NOMBRES = ["Ana", "Luis", "Marta", "Pablo", "Lucía", "Hugo", "Sara", "Daniel", "Carla", "Mario", "Paula", "Diego",
   "Elena", "Leo", "Irene", "Nico", "Julia", "Pedro", "Alba", "Sofía", "Martín", "Laura", "Hugo", "Noa"].filter((n, i, l) => l.indexOf(n) === i);
 /** [plural, género]: f = femenino, m = masculino (para «cuántas» / «cuántos»). */
@@ -6643,7 +6743,7 @@ function generarProblemas(clase, params, az, n) {
     const [obj, g] = objetos[i % objetos.length];
     const res = c === "suma" ? a + b : a - b;
     const texto = SITUACIONES[c][sit]({ N, M, a, b, o: obj, g }, az);
-    out.push({ texto, sit, a, b, op: OPERACION[c], obj, g, res });
+    out.push({ texto, sit, a, b, op: OPERACION[c], obj, g, res, nombres: [N, M] });
   }
   return out;
 }
@@ -6685,7 +6785,76 @@ function ejerciciosProblemas(clase, params, az, tamano) {
   }));
 }
 
-Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get NOMBRES() { return NOMBRES; }, get OBJETOS() { return OBJETOS; }, get SITUACIONES() { return SITUACIONES; }, get generarProblemas() { return generarProblemas; }, get partir() { return partir; }, get dibujarProblemas() { return dibujarProblemas; }, get enunciadoProblemas() { return enunciadoProblemas; }, get ejerciciosProblemas() { return ejerciciosProblemas; } }));
+// ---------------------------------------------------------------- modelo de barras (problemas.barras)
+const BARRA_W = 360, BARRA_H = 24;
+
+/** Llave sobre [x0, x1] a la altura y (por encima del trazo). */
+function llave(p, x0, x1, y, tinta) {
+  p.path([["M", x0, y], ["L", x0, y + 6], ["L", x1, y + 6], ["L", x1, y]], { lw: 1.2, stroke: tinta });
+}
+/** Segmento con su etiqueta: `val` = número, o null si es la incógnita («?»: la respuesta en rojo va solo en los huecos). */
+function segmento(p, x, y, w, h, val, res, tinta, relleno, hijos = null) {
+  p.rrect(x, y, w, h, 3, { lw: 1.4, fill: relleno, stroke: tinta });
+  p.text(x + w / 2, y + h / 2 - 5, val === null ? "?" : String(val), 15, { f: "PB", anchor: "middle", gris: INK });
+}
+/** Etiqueta del total (o «?») sobre la llave. */
+function etiquetaLlave(p, cx, y, val, res, tinta) {
+  p.text(cx, y, val === null ? "?" : String(val), 14, { f: "PB", anchor: "middle", gris: INK });
+}
+
+/** Barras del problema entre y (base) e y + ~48. `tinta`: INK (barras dadas) o COLOR_SOLUCION (trazo rojo: las dibuja el alumno). */
+function dibujarBarra(p, d, res, x, w, y, tinta) {
+  const x0 = d.sit === "comparar" ? x + 100 : x + (w - BARRA_W) / 2, h = BARRA_H, GR = [0.93, 0.84];
+  const fill = (k) => (tinta === COLOR_SOLUCION ? null : GR[k]);
+  const reparto = (u, v) => {                          // anchos proporcionales con un mínimo para que quepa la etiqueta
+    const min = 36, tot = BARRA_W; let wu = Math.max(min, (tot * u) / (u + v)); wu = Math.min(wu, tot - min); return [wu, tot - wu];
+  };
+  if (d.sit === "juntar" || d.sit === "anadir") {
+    const [wa, wb] = reparto(d.a, d.b), yb = y + 10;
+    segmento(p, x0, yb, wa, h, d.a, res, tinta, fill(0)); segmento(p, x0 + wa, yb, wb, h, d.b, res, tinta, fill(1));
+    llave(p, x0, x0 + BARRA_W, yb + h + 4, tinta); etiquetaLlave(p, x0 + BARRA_W / 2, yb + h + 14, null, res, tinta);
+  } else if (d.sit === "quitar" || d.sit === "faltar") {
+    const [wb, wr] = reparto(d.b, res), yb = y + 10;
+    segmento(p, x0, yb, wb, h, d.b, res, tinta, fill(0)); segmento(p, x0 + wb, yb, wr, h, null, res, tinta, fill(1));
+    llave(p, x0, x0 + BARRA_W, yb + h + 4, tinta); etiquetaLlave(p, x0 + BARRA_W / 2, yb + h + 14, d.a, res, tinta);
+  } else {                                              // comparar: dos barras, la diferencia es la incógnita
+    const h2 = 18, ya = y + 24, yb = y;
+    const wb = BARRA_W * d.b / d.a, wr = BARRA_W - wb;
+    const [n1, n2] = d.nombres;
+    p.text(x0 - 8, ya + h2 / 2 - 4, n1, 11, { f: "PR", anchor: "end", gris: INK });
+    p.text(x0 - 8, yb + h2 / 2 - 4, n2, 11, { f: "PR", anchor: "end", gris: INK });
+    p.rrect(x0, ya, wb, h2, 3, { lw: 1.4, fill: fill(0), stroke: tinta });
+    p.text(x0 + wb / 2, ya + h2 / 2 - 5, String(d.b), 14, { f: "PB", anchor: "middle", gris: INK });
+    segmento(p, x0 + wb, ya, wr, h2, null, res, tinta, fill(1));
+    p.rrect(x0, yb, wb, h2, 3, { lw: 1.4, fill: fill(0), stroke: tinta });
+    p.text(x0 + wb / 2, yb + h2 / 2 - 5, String(d.b), 14, { f: "PB", anchor: "middle", gris: INK });
+    llave(p, x0, x0 + BARRA_W, ya + h2 + 3, tinta); etiquetaLlave(p, x0 + BARRA_W / 2, ya + h2 + 13, d.a, res, tinta);
+  }
+}
+
+/** Como dibujarProblemas, con la barra debajo del enunciado (4 por página, 2 en media; enunciado de 1–2 líneas). */
+function dibujarProblemasBarras(p, act) {
+  const es = act.ejercicios, filas = 4, enBlanco = act.params.barra === "blanco";
+  const { cel, cw, ch } = p.celdas(TOP, 1, filas);
+  es.slice(0, p.n(filas)).forEach((e, i) => p.ejercicio(e.id, () => {
+    const [x, y] = cel[i], d = e.datos, h = e.solucion.huecos;
+    p.marco(x, y, cw, ch, i);
+    const fs = 14, lineas = partir(p, d.texto, cw - 84, fs);
+    if (lineas.length > 2) throw new Error(`Enunciado de más de 2 líneas: ${d.texto}`);
+    lineas.forEach((l, j) => p.text(x + 44, y + ch - 30 - j * 18, l, fs, { f: "PR" }));
+    const yb = y + 56;                                       // base de la zona de la barra (≈ 56 … 112 sobre la tarjeta)
+    if (!enBlanco) dibujarBarra(p, d, h[3], x, cw, yb, INK);
+    else if (!p.solucion) {
+      p.rrect(x + 44, yb - 2, cw - 88, 52, 6, { lw: 0.8, fill: 1, stroke: 0.7 });
+      p.text(x + cw / 2, yb + 20, "Dibuja aquí la barra", 10.5, { f: "PR", anchor: "middle", gris: 0.65 });
+    } else dibujarBarra(p, d, h[3], x, cw, yb, COLOR_SOLUCION);
+    const hb = 36, fl = 12;
+    p.linea(x + 14, y + 6, cw - 28, hb + 4, [T("Operación:", fl, "PR"), B(40, hb, h[0]), B(30, hb, h[1]), B(40, hb, h[2]), T("=", 18), B(46, hb, h[3]),
+      T("Respuesta:", fl, "PR"), B(46, hb, h[4]), T(d.obj, fl, "PR")], 7);
+  }));
+}
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get NOMBRES() { return NOMBRES; }, get OBJETOS() { return OBJETOS; }, get SITUACIONES() { return SITUACIONES; }, get generarProblemas() { return generarProblemas; }, get partir() { return partir; }, get dibujarProblemas() { return dibujarProblemas; }, get enunciadoProblemas() { return enunciadoProblemas; }, get ejerciciosProblemas() { return ejerciciosProblemas; }, get dibujarProblemasBarras() { return dibujarProblemasBarras; } }));
 },
 "tipos/_rep.js": (__exp) => {
 // Charta · fábrica de los tipos «rep.*» (una representación del número: leer y dibujar).
@@ -7613,6 +7782,7 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({  }));
 __req("tipos/problemas.suma.js");
 __req("tipos/problemas.resta.js");
 __req("tipos/problemas.mixtos.js");
+__req("tipos/problemas.barras.js");
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({  }));
 },
 "tipos/familia.rep.js": (__exp) => {
@@ -9418,6 +9588,29 @@ const __default = registrar({
 });
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get grupo() { return grupo; }, get pares() { return pares; }, get default() { return __default; } }));
+},
+"tipos/problemas.barras.js": (__exp) => {
+// problemas.barras · Problemas con barras (modelo de Singapur, como Barri; modelo propio de la app).
+// Mismos enunciados y cantidades que problemas.suma/resta/mixtos (ver _problemas.js), con la barra de partes y total
+// (o de comparación) dibujada bajo el enunciado, o un recuadro en blanco para que la dibuje el alumno (opción `barra`).
+// datos:    { texto, sit, a, b, op, obj, nombres: [N, M] }   solucion: { huecos: [a, op, b, resultado, resultado] }
+const { registrar } = __req("nucleo/tipos.js");
+const { generarProblemas, dibujarProblemasBarras } = __req("tipos/_problemas.js");
+const __default = registrar({
+  id: "problemas.barras",
+  version: 1,
+  generar(params, azar, { tamano }) {
+    const clase = params.operacion === "suma" ? "suma" : params.operacion === "resta" ? "resta" : "mixtos";
+    const ejercicios = generarProblemas(clase, params, azar, tamano === "media" ? 2 : 4).map((d) => ({
+      datos: { texto: d.texto, sit: d.sit, a: d.a, b: d.b, op: d.op, obj: d.obj, nombres: d.nombres },
+      solucion: { huecos: [d.a, d.op, d.b, d.res, d.res] },
+    }));
+    return { enunciado: params.barra === "blanco" ? "Lee, dibuja la barra, escribe la operación y contesta." : "Mira la barra, escribe la operación y contesta.", ejercicios };
+  },
+  dibujar: dibujarProblemasBarras,
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
 },
 "tipos/problemas.mixtos.js": (__exp) => {
 // problemas.mixtos · Problemas de sumar y restar (modelo propio de la app; sin motor Python).

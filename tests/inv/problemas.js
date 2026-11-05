@@ -31,7 +31,18 @@ function problemas(clase) {
   };
 }
 
+/** problemas.barras: las mismas reglas que suma / resta / mixtos según `operacion`, y los nombres de la comparación. */
+function barras(act, tam) {
+  const clase = act.params.operacion === "suma" ? "suma" : act.params.operacion === "resta" ? "resta" : "mixtos";
+  problemas(clase)(act, tam);
+  for (const { datos: d } of act.ejercicios) {
+    assert.equal(d.nombres.length, 2); assert.notEqual(d.nombres[0], d.nombres[1]);
+    if (d.sit === "comparar") assert.ok(d.a > d.b && d.texto.includes(d.nombres[0]) && d.texto.includes(d.nombres[1]), "comparar: nombres");
+  }
+}
+
 export default {
+  "problemas.barras": barras,
   "problemas.suma": problemas("suma"),
   "problemas.resta": problemas("resta"),
   "problemas.mixtos": problemas("mixtos"),
