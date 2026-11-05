@@ -125,6 +125,7 @@ button:disabled { cursor: default; opacity: .5; }
 .fila-fuente { margin: -8px 0 -4px -8px; gap: 2px; }
 .acciones-sec { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 160px), 1fr)); gap: 8px; }
 .acciones-sec button { justify-content: flex-start; text-align: left; white-space: normal; height: auto; min-height: var(--alto); padding: 8px 12px; line-height: 1.2; }
+.acciones-sec button .ico-app { flex: none; margin-right: 8px; }
 #favorito.on { background: var(--acento-suave); color: var(--acento-texto); border-color: var(--acento-linea); }
 
 /* Acciones principales: barra fija abajo en móvil */

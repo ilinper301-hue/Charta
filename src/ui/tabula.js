@@ -5,7 +5,8 @@
 // Contrato de URL (igual en tabula/js/charta.js):
 //   Tabula → Charta  ../Charta/?desde=tabula[&grupo=G][&sesion=S][&tarea=T]   crear ficha
 //                    ../Charta/?ficha=ID | ?comp=B64 [&grupo=G]&desde=tabula     abrir una guardada
-//   Charta → Tabula  /tabula/?charta=B64( {v:1, id?, titulo, tipos, comp, grupo?, sesion?, tarea?} )
+//   Charta → Tabula  /tabula/?charta=B64( {v:1, id?, titulo, tipos, comp, grupo?, sesion?, tarea?, variantes?, minutos?, dificultad?, etiquetas?} )
+//                    + la miniatura de la hoja 1 (sin nombres) en localStorage["charta:aTabula"] = {v:1, titulo, miniatura} (5.4)
 
 export const URL_TABULA = "/tabula/"; // raíz del sitio (ilinper301-hue.github.io); la app está en /Charta/dist/
 
@@ -38,8 +39,10 @@ export function leerEntrada(search = "", hayTipo) {
 }
 
 /** URL para volver a Tabula con la ficha (sin nombres de alumnos). */
-export function urlVolver({ id, titulo, tipos, comp, grupo, sesion, tarea }, base = URL_TABULA) {
+export function urlVolver({ id, titulo, tipos, comp, grupo, sesion, tarea, variantes, minutos, dificultad, etiquetas }, base = URL_TABULA) {
   const datos = { v: 1, ...(id ? { id } : {}), titulo: String(titulo || "Ficha").slice(0, 200), tipos: tipos || [], comp,
+    ...(variantes > 1 ? { variantes } : {}), ...(minutos ? { minutos } : {}), ...(dificultad ? { dificultad } : {}),
+    ...(etiquetas?.length ? { etiquetas: etiquetas.slice(0, 6).map((t) => String(t).slice(0, 30)) } : {}),
     ...(grupo ? { grupo } : {}), ...(sesion ? { sesion } : {}), ...(tarea ? { tarea } : {}) };
   return `${base}?charta=${b64url(JSON.stringify(datos))}`;
 }

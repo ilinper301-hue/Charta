@@ -137,6 +137,7 @@ button:disabled { cursor: default; opacity: .5; }
 .fila-fuente { margin: -8px 0 -4px -8px; gap: 2px; }
 .acciones-sec { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 160px), 1fr)); gap: 8px; }
 .acciones-sec button { justify-content: flex-start; text-align: left; white-space: normal; height: auto; min-height: var(--alto); padding: 8px 12px; line-height: 1.2; }
+.acciones-sec button .ico-app { flex: none; margin-right: 8px; }
 #favorito.on { background: var(--acento-suave); color: var(--acento-texto); border-color: var(--acento-linea); }
 
 /* Acciones principales: barra fija abajo en móvil */
@@ -334,8 +335,8 @@ body.con-selector { overflow: hidden; }
       <button id="favorito">☆ Favorita</button>
       <button id="versol">Ver soluciones</button>
       <button id="guardarNube">☁ Guardar en la nube</button>
-      <button id="aTabula" title="Añadirla a Documentos de Tabula (sin nombres de alumnos)">↗ Enviar a Tabula</button>
-      <button id="aFori" title="Proyectar en la pizarra Fori: un ejercicio por página y la solución paso a paso">▶ Proyectar en Fori</button>
+      <button id="aTabula" title="Añadirla a Documentos de Tabula (sin nombres de alumnos)"><svg class="ico-app" viewBox="0 0 512 512" width="20" height="20" aria-hidden="true"><rect width="512" height="512" rx="110" fill="#2B4257"/><rect x="96" y="118" width="320" height="98" rx="49" fill="#FAF9F5"/><path d="M200 214H311V338A55.5 55.5 0 0 1 200 338Z" fill="#9CC0DE"/><path d="M200 216C232 201 262 189 290 191C311 193 328 203 343 216H322Q311 216 311 227V270C299 246 262 226 200 221Z" fill="#5F86A8"/></svg><span>Enviar a Tabula</span></button>
+      <button id="aFori" title="Proyectar en la pizarra Fori: un ejercicio por página y la solución paso a paso"><svg class="ico-app" viewBox="80 110 360 300" width="22" height="18" aria-hidden="true"><rect x="92" y="132" width="284" height="50" rx="25" fill="#27C1B0"/><rect x="376" y="132" width="50" height="196" rx="25" fill="#FFC845"/><rect x="140" y="324" width="286" height="50" rx="25" fill="#F4664A"/><rect x="92" y="182" width="50" height="192" rx="25" fill="#7444E0"/><path d="M172 274C196 226 214 214 226 214C238 214 226 254 244 254C258 254 276 238 292 228" fill="none" stroke="#FFFFFF" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/><g transform="rotate(39 360 306)"><rect x="296" y="284" width="136" height="44" rx="22" fill="#FFFFFF" stroke="#13214A" stroke-width="14" paint-order="stroke"/></g></svg><span>Proyectar en Fori</span></button>
     </div>
     <p id="estadoNube" class="info" hidden></p>
     <p id="error" class="error" hidden></p>
@@ -381,6 +382,7 @@ const { registrarSW } = __req("pwa/registro.js");
 const { iniciarTema } = __req("ui/tema.js");
 const { crearNube } = __req("nube/nube.js");
 const { leerEntrada, leerTabula, gruposDeTabula, urlVolver } = __req("ui/tabula.js");
+const { miniaturaDeSvg, dejarParaTabula } = __req("ui/miniatura_ficha.js");
 const { paqueteFori, URL_FORI, CLAVE_FORI } = __req("fori/diapositivas.js");
 const { fuentePorId, registrarFuenteUsuario, quitarFuenteUsuario, todasLasFuentes } = __req("render/fuentes.js");
 const { validarArchivo, crearAlmacenFuentes, instalarCss, aBase64 } = __req("ui/fuentes.js");
@@ -731,7 +733,14 @@ function iniciar() {
     // Con sesión, se guarda en la nube y Tabula la referencia por id (también la verá Fori); sin sesión, va la composición.
     // Si la nube falla, se envía igual (con la composición): Tabula no depende de la nube.
     if (nube.estado().estado === "dentro") try { if (!enNube) await leerNube(); id = (await nube.guardar(ficha, composicion())).id || null; } catch (e) { console.warn("Nube:", e.message); id = null; }
+    // Miniatura de la hoja 1 SIN nombre (Tabula la recoge de localStorage; si falla, el documento sale sin imagen).
+    try {
+      const m = await miniaturaDeSvg(hoja(paginasVariante(ficha, 0)[0], { titulo: ficha.titulo, bn: $("bn").checked, uid: "mt", ...estiloLectura(ficha) }));
+      dejarParaTabula(ficha.titulo, m);
+    } catch {}
+    const md = ficha.metadatos || {};
     location.href = urlVolver({ id, titulo: ficha.titulo, tipos: editores.map((e) => e.id), comp: composicion(),
+      variantes: ficha.variantes, minutos: md.minutos, dificultad: md.dificultad, etiquetas: md.etiquetas,
       grupo: $("grupoTabula").value || entrada.grupo, sesion: entrada.sesion, tarea: entrada.tarea });
   };
   // Paso 5.3 · Fori: diapositivas (variante A) por localStorage del mismo origen; Fori las convierte en páginas.
@@ -19909,6 +19918,47 @@ function crearInicio(cb) {
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get crearInicio() { return crearInicio; } }));
 },
+"ui/miniatura_ficha.js": (__exp) => {
+// Charta · miniatura de la hoja 1 para Documentos de Tabula (paso 5.4). SVG → imagen JPEG pequeña (data URL).
+// La hoja se dibuja SIN nombre de alumno: la miniatura nunca lleva nombres.
+const CLAVE_A_TABULA = "charta:aTabula";   // localStorage (mismo origen): { v:1, titulo, miniatura }
+const ANCHO_MINIATURA = 220;
+
+/** SVG (texto) → data URL JPEG de `ancho` px de ancho; null si el navegador no puede (sin DOM, error…). */
+function miniaturaDeSvg(svg, ancho = ANCHO_MINIATURA, calidad = 0.72) {
+  return new Promise((ok) => {
+    try {
+      if (typeof document === "undefined" || typeof Image === "undefined") return ok(null);
+      const img = new Image();
+      const fin = (v) => ok(v);
+      img.onload = () => {
+        try {
+          const r = img.naturalHeight / img.naturalWidth || 1.414;
+          const c = document.createElement("canvas");
+          c.width = ancho; c.height = Math.round(ancho * r);
+          const g = c.getContext("2d");
+          g.fillStyle = "#fff"; g.fillRect(0, 0, c.width, c.height);
+          g.drawImage(img, 0, 0, c.width, c.height);
+          fin(c.toDataURL("image/jpeg", calidad));
+        } catch { fin(null); }
+      };
+      img.onerror = () => fin(null);
+      img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+    } catch { ok(null); }
+  });
+}
+
+/** Deja la miniatura para que Tabula la recoja (mismo origen). Si no cabe en el almacén, se omite sin error. */
+function dejarParaTabula(titulo, miniatura, almacen = globalThis.localStorage) {
+  try {
+    if (!miniatura) { almacen?.removeItem(CLAVE_A_TABULA); return false; }
+    almacen.setItem(CLAVE_A_TABULA, JSON.stringify({ v: 1, titulo: String(titulo || ""), miniatura }));
+    return true;
+  } catch { return false; }
+}
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get CLAVE_A_TABULA() { return CLAVE_A_TABULA; }, get ANCHO_MINIATURA() { return ANCHO_MINIATURA; }, get miniaturaDeSvg() { return miniaturaDeSvg; }, get dejarParaTabula() { return dejarParaTabula; } }));
+},
 "ui/navegacion.js": (__exp) => {
 // Charta · navegación del catálogo (paso 4.1): curso → materia → bloque → modelo.
 // Sin DOM (se prueba en Node). Solo ofrece modelos con tipo registrado en la app.
@@ -20080,7 +20130,8 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get abrirSelec
 // Contrato de URL (igual en tabula/js/charta.js):
 //   Tabula → Charta  ../Charta/?desde=tabula[&grupo=G][&sesion=S][&tarea=T]   crear ficha
 //                    ../Charta/?ficha=ID | ?comp=B64 [&grupo=G]&desde=tabula     abrir una guardada
-//   Charta → Tabula  /tabula/?charta=B64( {v:1, id?, titulo, tipos, comp, grupo?, sesion?, tarea?} )
+//   Charta → Tabula  /tabula/?charta=B64( {v:1, id?, titulo, tipos, comp, grupo?, sesion?, tarea?, variantes?, minutos?, dificultad?, etiquetas?} )
+//                    + la miniatura de la hoja 1 (sin nombres) en localStorage["charta:aTabula"] = {v:1, titulo, miniatura} (5.4)
 
 const URL_TABULA = "/tabula/"; // raíz del sitio (ilinper301-hue.github.io); la app está en /Charta/dist/
 
@@ -20113,8 +20164,10 @@ function leerEntrada(search = "", hayTipo) {
 }
 
 /** URL para volver a Tabula con la ficha (sin nombres de alumnos). */
-function urlVolver({ id, titulo, tipos, comp, grupo, sesion, tarea }, base = URL_TABULA) {
+function urlVolver({ id, titulo, tipos, comp, grupo, sesion, tarea, variantes, minutos, dificultad, etiquetas }, base = URL_TABULA) {
   const datos = { v: 1, ...(id ? { id } : {}), titulo: String(titulo || "Ficha").slice(0, 200), tipos: tipos || [], comp,
+    ...(variantes > 1 ? { variantes } : {}), ...(minutos ? { minutos } : {}), ...(dificultad ? { dificultad } : {}),
+    ...(etiquetas?.length ? { etiquetas: etiquetas.slice(0, 6).map((t) => String(t).slice(0, 30)) } : {}),
     ...(grupo ? { grupo } : {}), ...(sesion ? { sesion } : {}), ...(tarea ? { tarea } : {}) };
   return `${base}?charta=${b64url(JSON.stringify(datos))}`;
 }
