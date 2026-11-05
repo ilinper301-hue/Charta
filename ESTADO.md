@@ -67,6 +67,14 @@
 
 - [x] 4.7 (petición de Iván, 5-11-2026) Rediseño visual de la pantalla principal, solo HTML/CSS (mismos ids, controles y lógica): cabecera compacta (52 px); una sola letra sans serif (sin serif); tarjetas sin cajas anidadas (las actividades separadas por una línea; opciones en rejilla); secciones «Actividades», «Alumnos», «Impresión» y «Más acciones»; casillas como interruptores; selectores, campos y botones con la misma altura (40 px) y radio (10 px); barra fija abajo en el móvil con «Vista previa» e «Imprimir / Guardar PDF» (en escritorio, pegada al pie de la columna izquierda). Probado en móvil (360 y 390 px) y escritorio, claro y oscuro; `npm test` OK.
 
+- [ ] 4.8 (petición de Iván, 5-11-2026) **Pantalla de inicio** sencilla antes de la de diseño (la de 4.7 queda igual, con un botón «← Inicio»). Solo presentación y navegación: no cambiar la lógica de fichas.
+  - Arriba: saludo según la hora («Buenas tardes»; con el nombre si hay sesión de Google) y botón grande **Crear ficha** → elegir materia (Matemáticas / Lengua) → selector → pantalla de diseño.
+  - **Seguir con la última**: abre la última composición (recientes / `charta:ultimoModelo`).
+  - **Accesos rápidos**: 3–4 modelos más usados o recientes (crear con un toque).
+  - **Mis fichas**: pestañas Favoritas · Recientes · En la nube (reutilizar `guardadas` y la nube), con miniatura y fecha.
+  - Discretos (iconos): grupo de Tabula, abrir en Fori, ajustes (tema, letra por defecto, B/N por defecto, cuenta). Línea de novedades opcional.
+  - La app abre en el inicio; los enlaces `?ficha=`, `?comp=`, `?grupo=` y la vuelta de Tabula/Fori siguen yendo directos al diseño. Probar móvil/escritorio, claro/oscuro; `npm test`.
+
 ## Fase 5 · Tabula y Fori
 - [x] 5.1 Firebase compartido + Google; guardar en `/apps/charta/fichas/{id}` (sin nombres de alumnos).
   - Hecho: `src/nube/` (config de Tabula, SDK 12.19.0 del CDN cargado solo si se usa la nube; sesión propia `charta`). Botón «☁ Entrar» en la cabecera, «☁ Guardar en la nube» (no repite la misma ficha; sin conexión queda pendiente y se sube sola) y pestaña «☁ En la nube» (abrir, borrar). `?ficha={id}` abre una ficha guardada. Documento: ficha como texto JSON + composición (ver ESQUEMA.md); lector `fichaDeDocumento()` para Tabula/Fori. Reglas: bloque Charta añadido a `tabula/firestore.rules` (copia en `firestore.rules`). SW: SDK en caché `charta-sdk`. `node tests/test_nube.js` (Firebase falso); probado en Chrome sin errores (sin acceso real a Firebase desde el contenedor). **Pendiente de Iván**: pegar `firestore.rules` en Firebase → Firestore → Reglas → Publicar, y probar Entrar + Guardar en el Android.
