@@ -28,6 +28,10 @@ src/render/hoja.js    hoja(pagina, {titulo, nombre, bn, modo}) → SVG A4 (encab
 src/fuentes/          Andika recortada (WOFF); build.py la incrusta en base64
 src/render/actividad.js  render(actividad, modo) → zona {x, y, w, h, svg} que encaja el panel (como panel() del motor); svgZona()
 tests/test_tipos.js   pruebas comunes de todos los tipos (todas las opciones, completa/media, SVG limpio, un grupo "ej" por ejercicio, una respuesta por hueco) · `--full`
+tests/comun.js        combinaciones(id), contador() (compartido por las pruebas)
+tests/invariantes.js  INVARIANTES[id](actividad, tamaño): reglas aritméticas de cada tipo (obligatoria al añadir un tipo) + comunes()
+tests/test_invariantes.js  todas las combinaciones × semillas × variantes · `--full`
+tests/test_doradas.js + doradas.json  fichas doradas (JSON + huella SVG); `--actualizar` solo si el cambio es intencionado (y subir `version` del tipo)
 tools/comparar_tipo.py  motor vs JS de un tipo en A4 → /tmp/cmp_<id>_<tamaño>.png (`--media`, `--solucion`)
 tools/build.py        src/ → dist/index.html (un solo archivo); --js = solo el paquete
 dist/index.html       la app construida (se sube al repositorio: la sirve Pages)
@@ -37,7 +41,7 @@ salida/               PDF generados por la línea de órdenes (se crea sola)
 ## Núcleo JS (fase 2)
 - `generar(opciones, semilla)`: 1 actividad → `completa`, 2 → `media`. Semilla de la variante v: `v=0 ? semilla : mezclar(semilla, v)`; azar de la actividad i: `mezclar(semillaVariante, i+1)`. No pone `id`, `creada` ni `autor` (se añaden al guardar).
 - Tipo nuevo: `src/tipos/<id>.js` con `registrar({id, version, generar(params, azar, {tamano}), dibujar(papel, actividad)})` y la forma de `datos`/`solucion` documentada arriba; añadirlo a `src/tipos/index.js`. `dibujar` es un port casi literal de la función del motor (mismas coordenadas); cada ejercicio en `p.ejercicio(id, …)` y cada hueco con su solución (`caja(…, null, fs, sol)`, `B(w, h, sol)`), en el orden de `solucion.huecos`. Enunciado de dos líneas: separadas por "\n".
-- Comprobar: `node tests/test_tipos.js` y `python3 tools/comparar_tipo.py <id> [--media]` (mirar el PNG).
+- Comprobar: añadir su regla en `tests/invariantes.js`, `npm test` (todas las pruebas JS) y `python3 tools/comparar_tipo.py <id> [--media]` (mirar el PNG). Si se añade el tipo, `node tests/test_doradas.js --actualizar` (crea su dorada; las demás no deben cambiar).
 - `build.py` solo admite las formas de import/export de su cabecera y **una declaración por `export const`** (falla con mensaje claro si hay otra). Tras cambiar `src/`: `python3 tools/build.py`.
 
 ## Motor: `motor/generador_fichas.py` (números de línea aproximados)

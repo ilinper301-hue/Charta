@@ -28,20 +28,8 @@ function xmlBienFormado(s) {
   assert.deepEqual(pila, [], "etiquetas sin cerrar");
 }
 
-/** Todas las combinaciones de opciones (rangos × valores; números: mín, defecto y máx). */
-export function combinaciones(id) {
-  const m = modelo(id);
-  let out = [{}];
-  const ejes = [];
-  if (m.rangos.length) ejes.push(["rango", m.rangos]);
-  for (const o of m.opciones) {
-    if (o.tipo === "opcion") ejes.push([o.id, o.valores.map((v) => v.valor)]);
-    else if (o.tipo === "si_no") ejes.push([o.id, [false, true]]);
-    else ejes.push([o.id, [...new Set([o.min, o.defecto ?? o.min, o.max])]]);
-  }
-  for (const [k, vs] of ejes) out = out.flatMap((p) => vs.map((v) => ({ ...p, [k]: v })));
-  return out;
-}
+import { combinaciones } from "./comun.js";
+export { combinaciones };
 
 function comprobar(id, params, tam, s) {
   const acts = tam === "media" ? [{ tipo: id, params }, { tipo: id, params }] : [{ tipo: id, params }];

@@ -35,7 +35,8 @@
   - Hecho: `src/render/papel.js` (lienzo en coordenadas del motor) y `render(actividad, modo)` (`papel` / `solucion`, respuestas en rojo); cada tipo = `generar` + `dibujar`; `_rep.js` sirve para las 16 rep.*. `node tests/test_tipos.js --full`: 8 tipos, 4.400 fichas OK. Comparados con el motor (`tools/comparar_tipo.py`): misma maqueta. Media de orden.signos y medida.reloj genera solo lo que se dibuja (mantiene la proporción de iguales / en punto–y media).
 - [x] 2.4 Plantilla A4 (`@media print`): cabecera (nombre o línea en blanco), Fecha, título y 1–2 paneles; un alumno por página; solucionario en pantalla. Opción blanco y negro.
   - Hecho: `src/render/hoja.js` (`hoja()`, `hojas()`: port de encabezado/panel/pagina; alumno i → variante i % N). App: 1–2 actividades, alumnos, iguales/distintas, B/N, título, Imprimir (solo las fichas; el solucionario nunca se imprime), Otra variante, Ver soluciones. Andika recortada a WOFF (13 KB c/u, `src/fuentes/`) e incrustada por build.py. Probado en Chrome: PDF de 3 páginas A4 sin errores. Arreglado build.py: `export const A = …, B = …` perdía B (ahora da error).
-- [ ] 2.5 Fichas doradas e invariantes aritméticas (reutilizar las reglas de `tests/test_motor.py`).
+- [x] 2.5 Fichas doradas e invariantes aritméticas (reutilizar las reglas de `tests/test_motor.py`).
+  - Hecho: `tests/invariantes.js` (una regla por tipo: solución sacada de los datos, rangos, sin negativos, niveles sin/con/mezcla, nº de ejercicios, repeticiones; obligatoria para cada tipo nuevo) y `test_invariantes.js` (`--full`: 157.000 ejercicios, 0 errores). `test_doradas.js` + `doradas.json`: 12 casos (JSON + huella del SVG papel/solución; `--actualizar` solo si el cambio es intencionado). Comprobado que detectan errores a propósito. `npm test` ejecuta todo.
 - [ ] 2.6 Iván lo prueba en su Android: rapidez, Imprimir → Guardar como PDF y parecido con el PDF de referencia. **Decidir** si el aspecto vale.
 
 ## Fase 3 · Resto de tipos

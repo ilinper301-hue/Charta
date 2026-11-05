@@ -1,0 +1,3254 @@
+{
+ "conteo.serie1": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Series de 1 en 1",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "conteo.serie1",
+       "tipoVersion": 1,
+       "params": {
+        "huecos": 3,
+        "rango": 10
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Completa cada serie escribiendo los números que faltan en los cuadros grises.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "paso": 1,
+          "valores": [
+           3,
+           4,
+           5,
+           6,
+           7,
+           8
+          ],
+          "huecos": [
+           0,
+           3,
+           5
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           6,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "paso": 1,
+          "valores": [
+           6,
+           5,
+           4,
+           3,
+           2,
+           1
+          ],
+          "huecos": [
+           0,
+           2,
+           5
+          ],
+          "sube": false
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           4,
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "paso": 1,
+          "valores": [
+           4,
+           5,
+           6,
+           7,
+           8,
+           9
+          ],
+          "huecos": [
+           0,
+           1,
+           2
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           5,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "paso": 1,
+          "valores": [
+           7,
+           6,
+           5,
+           4,
+           3,
+           2
+          ],
+          "huecos": [
+           1,
+           2,
+           3
+          ],
+          "sube": false
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           5,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "paso": 1,
+          "valores": [
+           5,
+           6,
+           7,
+           8,
+           9,
+           10
+          ],
+          "huecos": [
+           2,
+           3,
+           5
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           8,
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "paso": 1,
+          "valores": [
+           10,
+           9,
+           8,
+           7,
+           6,
+           5
+          ],
+          "huecos": [
+           1,
+           2,
+           4
+          ],
+          "sube": false
+         },
+         "solucion": {
+          "huecos": [
+           9,
+           8,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "paso": 1,
+          "valores": [
+           4,
+           5,
+           6,
+           7,
+           8,
+           9
+          ],
+          "huecos": [
+           3,
+           4,
+           5
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           8,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "paso": 1,
+          "valores": [
+           9,
+           8,
+           7,
+           6,
+           5,
+           4
+          ],
+          "huecos": [
+           2,
+           4,
+           5
+          ],
+          "sube": false
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           5,
+           4
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "a4c92d1f935fe263"
+  ],
+  "svgSolucion": [
+   "b2126dd72fdd24f5"
+  ]
+ },
+ "medida.reloj": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Los relojes",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "medida.reloj",
+       "tipoVersion": 1,
+       "params": {
+        "modo": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Escribe la hora que marca cada reloj.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "h": 4,
+          "m": 0
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           "00"
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "h": 12,
+          "m": 30
+         },
+         "solucion": {
+          "huecos": [
+           12,
+           "30"
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "h": 8,
+          "m": 0
+         },
+         "solucion": {
+          "huecos": [
+           8,
+           "00"
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "h": 1,
+          "m": 0
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           "00"
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "h": 4,
+          "m": 30
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           "30"
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "h": 2,
+          "m": 0
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           "00"
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "h": 1,
+          "m": 30
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           "30"
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "h": 3,
+          "m": 30
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           "30"
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "h": 2,
+          "m": 30
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           "30"
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "h": 12,
+          "m": 0
+         },
+         "solucion": {
+          "huecos": [
+           12,
+           "00"
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "h": 5,
+          "m": 0
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           "00"
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "h": 7,
+          "m": 30
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           "30"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "5939fb4566900f4e"
+  ],
+  "svgSolucion": [
+   "1b944f4ca0850d11"
+  ]
+ },
+ "orden.signos": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Los signos < > =",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "orden.signos",
+       "tipoVersion": 1,
+       "params": {
+        "modo": null,
+        "cerca": false,
+        "rango": 10
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Escribe <, > o = en el cuadro gris.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "a": 6,
+          "b": 2
+         },
+         "solucion": {
+          "huecos": [
+           ">"
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "a": 4,
+          "b": 7
+         },
+         "solucion": {
+          "huecos": [
+           "<"
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "a": 2,
+          "b": 8
+         },
+         "solucion": {
+          "huecos": [
+           "<"
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": 1,
+          "b": 5
+         },
+         "solucion": {
+          "huecos": [
+           "<"
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "a": 1,
+          "b": 7
+         },
+         "solucion": {
+          "huecos": [
+           "<"
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": 3,
+          "b": 3
+         },
+         "solucion": {
+          "huecos": [
+           "="
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "a": 1,
+          "b": 3
+         },
+         "solucion": {
+          "huecos": [
+           "<"
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "a": 5,
+          "b": 6
+         },
+         "solucion": {
+          "huecos": [
+           "<"
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "a": 10,
+          "b": 7
+         },
+         "solucion": {
+          "huecos": [
+           ">"
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "a": 8,
+          "b": 8
+         },
+         "solucion": {
+          "huecos": [
+           "="
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "a": 8,
+          "b": 1
+         },
+         "solucion": {
+          "huecos": [
+           ">"
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "a": 2,
+          "b": 2
+         },
+         "solucion": {
+          "huecos": [
+           "="
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "a": 2,
+          "b": 9
+         },
+         "solucion": {
+          "huecos": [
+           "<"
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "a": 1,
+          "b": 10
+         },
+         "solucion": {
+          "huecos": [
+           "<"
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "a": 3,
+          "b": 8
+         },
+         "solucion": {
+          "huecos": [
+           "<"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "b0d28eaf9d053f15"
+  ],
+  "svgSolucion": [
+   "728ef1fa6b874a37"
+  ]
+ },
+ "rep.dado": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "El dado",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "rep.dado",
+       "tipoVersion": 1,
+       "params": {
+        "lectura": false,
+        "rango": 10
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Escribe en el cuadrito el número que representa cada casilla.\nEn la última fila te toca a ti: haz lo que dice cada casilla.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "rep": "dado",
+          "n": 3,
+          "accion": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "rep": "dado",
+          "n": 5,
+          "accion": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "rep": "dado",
+          "n": 10,
+          "accion": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "rep": "dado",
+          "n": 6,
+          "accion": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "rep": "dado",
+          "n": 1,
+          "accion": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "rep": "dado",
+          "n": 9,
+          "accion": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "rep": "dado",
+          "n": 7,
+          "accion": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "rep": "dado",
+          "n": 2,
+          "accion": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "rep": "dado",
+          "n": 4,
+          "accion": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "rep": "dado",
+          "n": 8,
+          "accion": "dibujar"
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "rep": "dado",
+          "n": 3,
+          "accion": "dibujar"
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "rep": "dado",
+          "n": 6,
+          "accion": "dibujar"
+         },
+         "solucion": {
+          "huecos": []
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "776836bd073ce21a"
+  ],
+  "svgSolucion": [
+   "0399e1d6005d2579"
+  ]
+ },
+ "rep.marco": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "El marco de diez",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "rep.marco",
+       "tipoVersion": 1,
+       "params": {
+        "lectura": false,
+        "rango": 10
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Escribe en el cuadrito el número que representa cada casilla.\nEn la última fila te toca a ti: haz lo que dice cada casilla.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "rep": "marco",
+          "n": 3,
+          "accion": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "rep": "marco",
+          "n": 5,
+          "accion": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "rep": "marco",
+          "n": 10,
+          "accion": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "rep": "marco",
+          "n": 6,
+          "accion": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "rep": "marco",
+          "n": 1,
+          "accion": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "rep": "marco",
+          "n": 9,
+          "accion": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "rep": "marco",
+          "n": 7,
+          "accion": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "rep": "marco",
+          "n": 2,
+          "accion": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "rep": "marco",
+          "n": 4,
+          "accion": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "rep": "marco",
+          "n": 8,
+          "accion": "dibujar"
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "rep": "marco",
+          "n": 3,
+          "accion": "dibujar"
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "rep": "marco",
+          "n": 6,
+          "accion": "dibujar"
+         },
+         "solucion": {
+          "huecos": []
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "1de18f881dd6c17d"
+  ],
+  "svgSolucion": [
+   "9ebc66a44e733283"
+  ]
+ },
+ "restar.recta": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Resta en la recta numérica",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "restar.recta",
+       "tipoVersion": 1,
+       "params": {
+        "rango": 10
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Salta hacia atrás en la recta y escribe el resultado.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "a": 8,
+          "b": 5,
+          "N": 10
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "a": 6,
+          "b": 3,
+          "N": 10
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "a": 9,
+          "b": 3,
+          "N": 10
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": 7,
+          "b": 2,
+          "N": 10
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "a": 6,
+          "b": 3,
+          "N": 10
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": 9,
+          "b": 8,
+          "N": 10
+         },
+         "solucion": {
+          "huecos": [
+           1
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "4aad93a3a1952b46"
+  ],
+  "svgSolucion": [
+   "a4a9676fee5bff10"
+  ]
+ },
+ "sumar.h20": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Sumas hasta 20",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "sumar.h20",
+       "tipoVersion": 1,
+       "params": {
+        "nivel": null,
+        "rango": 20
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Calcula y escribe el resultado en el cuadro gris.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "a": 4,
+          "b": 15,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           19
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "a": 4,
+          "b": 4,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "a": 8,
+          "b": 1,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": 14,
+          "b": 6,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           20
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "a": 15,
+          "b": 4,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           19
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": 1,
+          "b": 9,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "a": 2,
+          "b": 11,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           13
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "a": 13,
+          "b": 2,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           15
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "a": 12,
+          "b": 1,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           13
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "a": 2,
+          "b": 16,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           18
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "a": 7,
+          "b": 3,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "a": 3,
+          "b": 6,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "a": 13,
+          "b": 5,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           18
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "a": 4,
+          "b": 3,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "a": 10,
+          "b": 10,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           20
+          ]
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "a": 17,
+          "b": 3,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           20
+          ]
+         }
+        },
+        {
+         "id": "a1e17",
+         "datos": {
+          "a": 4,
+          "b": 10,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           14
+          ]
+         }
+        },
+        {
+         "id": "a1e18",
+         "datos": {
+          "a": 1,
+          "b": 7,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e19",
+         "datos": {
+          "a": 2,
+          "b": 3,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e20",
+         "datos": {
+          "a": 1,
+          "b": 16,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           17
+          ]
+         }
+        },
+        {
+         "id": "a1e21",
+         "datos": {
+          "a": 3,
+          "b": 4,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e22",
+         "datos": {
+          "a": 6,
+          "b": 1,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e23",
+         "datos": {
+          "a": 5,
+          "b": 12,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           17
+          ]
+         }
+        },
+        {
+         "id": "a1e24",
+         "datos": {
+          "a": 3,
+          "b": 13,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           16
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "42f3cc46ec3b8e09"
+  ],
+  "svgSolucion": [
+   "14937808d6cdf5a0"
+  ]
+ },
+ "sumar.vertical": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Sumas en vertical",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "sumar.vertical",
+       "tipoVersion": 1,
+       "params": {
+        "nivel": null,
+        "rango": 30
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Suma primero las unidades y después las decenas.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "a": 14,
+          "b": 3
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "a": 15,
+          "b": 3
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "a": 12,
+          "b": 17
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": 13,
+          "b": 10
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "a": 16,
+          "b": 13
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": 18,
+          "b": 1
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "a": 13,
+          "b": 2
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "a": 11,
+          "b": 7
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "a": 14,
+          "b": 2
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "a": 26,
+          "b": 3
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "a": 13,
+          "b": 1
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "a": 23,
+          "b": 3
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           6
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "ceb03f622d27b0bc"
+  ],
+  "svgSolucion": [
+   "420eed72b22ec92e"
+  ]
+ },
+ "dos actividades": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Sumas hasta 20 y resta en la recta numérica",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "sumar.h20",
+       "tipoVersion": 1,
+       "params": {
+        "nivel": "con",
+        "rango": 20
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Calcula y escribe el resultado en el cuadro gris.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "a": 6,
+          "b": 7,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           13
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "a": 9,
+          "b": 4,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           13
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "a": 4,
+          "b": 9,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           13
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": 6,
+          "b": 8,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           14
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "a": 2,
+          "b": 9,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           11
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": 9,
+          "b": 9,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           18
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "a": 5,
+          "b": 8,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           13
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "a": 4,
+          "b": 8,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           12
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "a": 5,
+          "b": 7,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           12
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "a": 9,
+          "b": 3,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           12
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "a": 9,
+          "b": 2,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           11
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "a": 9,
+          "b": 8,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           17
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "restar.recta",
+       "tipoVersion": 1,
+       "params": {
+        "rango": 20
+       },
+       "tamano": "media",
+       "color": "verde",
+       "enunciado": "Salta hacia atrás en la recta y escribe el resultado.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "a": 12,
+          "b": 9,
+          "N": 20
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "a": 18,
+          "b": 6,
+          "N": 20
+         },
+         "solucion": {
+          "huecos": [
+           12
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "a": 13,
+          "b": 4,
+          "N": 20
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "252ee7027666dd9d"
+  ],
+  "svgSolucion": [
+   "55a124a0e0db25de"
+  ]
+ },
+ "mismo color corregido": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Los signos < > = y series de 1 en 1",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 3,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "orden.signos",
+       "tipoVersion": 1,
+       "params": {
+        "modo": null,
+        "cerca": false,
+        "rango": 10
+       },
+       "tamano": "media",
+       "color": "rosa",
+       "enunciado": "Escribe <, > o = en el cuadro gris.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "a": 9,
+          "b": 9
+         },
+         "solucion": {
+          "huecos": [
+           "="
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "a": 10,
+          "b": 7
+         },
+         "solucion": {
+          "huecos": [
+           ">"
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "a": 4,
+          "b": 10
+         },
+         "solucion": {
+          "huecos": [
+           "<"
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": 9,
+          "b": 8
+         },
+         "solucion": {
+          "huecos": [
+           ">"
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "a": 10,
+          "b": 9
+         },
+         "solucion": {
+          "huecos": [
+           ">"
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": 10,
+          "b": 5
+         },
+         "solucion": {
+          "huecos": [
+           ">"
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "conteo.serie1",
+       "tipoVersion": 1,
+       "params": {
+        "huecos": 3,
+        "rango": 10
+       },
+       "tamano": "media",
+       "color": "rosa",
+       "enunciado": "Completa cada serie escribiendo los números que faltan en los cuadros grises.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "paso": 1,
+          "valores": [
+           3,
+           4,
+           5,
+           6,
+           7,
+           8
+          ],
+          "huecos": [
+           0,
+           1,
+           3
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           4,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "paso": 1,
+          "valores": [
+           9,
+           8,
+           7,
+           6,
+           5,
+           4
+          ],
+          "huecos": [
+           2,
+           3,
+           4
+          ],
+          "sube": false
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           6,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "paso": 1,
+          "valores": [
+           5,
+           6,
+           7,
+           8,
+           9,
+           10
+          ],
+          "huecos": [
+           1,
+           3,
+           4
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           8,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "paso": 1,
+          "valores": [
+           6,
+           5,
+           4,
+           3,
+           2,
+           1
+          ],
+          "huecos": [
+           2,
+           3,
+           4
+          ],
+          "sube": false
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           3,
+           2
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "139c826153f884eb"
+  ],
+  "svgSolucion": [
+   "aa11bec1a3118723"
+  ]
+ },
+ "variantes y título": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Repaso del lunes",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 42,
+   "variantes": 3,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "sumar.vertical",
+       "tipoVersion": 1,
+       "params": {
+        "nivel": "mezcla",
+        "rango": 100
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Suma primero las unidades y después las decenas.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "a": 22,
+          "b": 38
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "a": 31,
+          "b": 40
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "a": 26,
+          "b": 43
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": 75,
+          "b": 24
+         },
+         "solucion": {
+          "huecos": [
+           9,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "a": 65,
+          "b": 8
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": 39,
+          "b": 16
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           5
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "medida.reloj",
+       "tipoVersion": 1,
+       "params": {
+        "modo": "media",
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "verde",
+       "enunciado": "Escribe la hora que marca cada reloj.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "h": 11,
+          "m": 30
+         },
+         "solucion": {
+          "huecos": [
+           11,
+           "30"
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "h": 12,
+          "m": 30
+         },
+         "solucion": {
+          "huecos": [
+           12,
+           "30"
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "h": 3,
+          "m": 30
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           "30"
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "h": 7,
+          "m": 30
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           "30"
+          ]
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "h": 2,
+          "m": 30
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           "30"
+          ]
+         }
+        },
+        {
+         "id": "a2e6",
+         "datos": {
+          "h": 1,
+          "m": 30
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           "30"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [
+    {
+     "semilla": 3342183102,
+     "paginas": [
+      {
+       "actividades": [
+        {
+         "n": 1,
+         "tipo": "sumar.vertical",
+         "tipoVersion": 1,
+         "params": {
+          "nivel": "mezcla",
+          "rango": 100
+         },
+         "tamano": "media",
+         "color": "azul",
+         "enunciado": "Suma primero las unidades y después las decenas.",
+         "ejemplo": null,
+         "ejercicios": [
+          {
+           "id": "a1e1",
+           "datos": {
+            "a": 16,
+            "b": 64
+           },
+           "solucion": {
+            "huecos": [
+             8,
+             0
+            ]
+           }
+          },
+          {
+           "id": "a1e2",
+           "datos": {
+            "a": 72,
+            "b": 13
+           },
+           "solucion": {
+            "huecos": [
+             8,
+             5
+            ]
+           }
+          },
+          {
+           "id": "a1e3",
+           "datos": {
+            "a": 12,
+            "b": 76
+           },
+           "solucion": {
+            "huecos": [
+             8,
+             8
+            ]
+           }
+          },
+          {
+           "id": "a1e4",
+           "datos": {
+            "a": 45,
+            "b": 18
+           },
+           "solucion": {
+            "huecos": [
+             6,
+             3
+            ]
+           }
+          },
+          {
+           "id": "a1e5",
+           "datos": {
+            "a": 40,
+            "b": 35
+           },
+           "solucion": {
+            "huecos": [
+             7,
+             5
+            ]
+           }
+          },
+          {
+           "id": "a1e6",
+           "datos": {
+            "a": 19,
+            "b": 44
+           },
+           "solucion": {
+            "huecos": [
+             6,
+             3
+            ]
+           }
+          }
+         ]
+        },
+        {
+         "n": 2,
+         "tipo": "medida.reloj",
+         "tipoVersion": 1,
+         "params": {
+          "modo": "media",
+          "rango": null
+         },
+         "tamano": "media",
+         "color": "verde",
+         "enunciado": "Escribe la hora que marca cada reloj.",
+         "ejemplo": null,
+         "ejercicios": [
+          {
+           "id": "a2e1",
+           "datos": {
+            "h": 5,
+            "m": 30
+           },
+           "solucion": {
+            "huecos": [
+             5,
+             "30"
+            ]
+           }
+          },
+          {
+           "id": "a2e2",
+           "datos": {
+            "h": 7,
+            "m": 30
+           },
+           "solucion": {
+            "huecos": [
+             7,
+             "30"
+            ]
+           }
+          },
+          {
+           "id": "a2e3",
+           "datos": {
+            "h": 6,
+            "m": 30
+           },
+           "solucion": {
+            "huecos": [
+             6,
+             "30"
+            ]
+           }
+          },
+          {
+           "id": "a2e4",
+           "datos": {
+            "h": 11,
+            "m": 30
+           },
+           "solucion": {
+            "huecos": [
+             11,
+             "30"
+            ]
+           }
+          },
+          {
+           "id": "a2e5",
+           "datos": {
+            "h": 10,
+            "m": 30
+           },
+           "solucion": {
+            "huecos": [
+             10,
+             "30"
+            ]
+           }
+          },
+          {
+           "id": "a2e6",
+           "datos": {
+            "h": 12,
+            "m": 30
+           },
+           "solucion": {
+            "huecos": [
+             12,
+             "30"
+            ]
+           }
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "semilla": 3987764636,
+     "paginas": [
+      {
+       "actividades": [
+        {
+         "n": 1,
+         "tipo": "sumar.vertical",
+         "tipoVersion": 1,
+         "params": {
+          "nivel": "mezcla",
+          "rango": 100
+         },
+         "tamano": "media",
+         "color": "azul",
+         "enunciado": "Suma primero las unidades y después las decenas.",
+         "ejemplo": null,
+         "ejercicios": [
+          {
+           "id": "a1e1",
+           "datos": {
+            "a": 44,
+            "b": 10
+           },
+           "solucion": {
+            "huecos": [
+             5,
+             4
+            ]
+           }
+          },
+          {
+           "id": "a1e2",
+           "datos": {
+            "a": 37,
+            "b": 25
+           },
+           "solucion": {
+            "huecos": [
+             6,
+             2
+            ]
+           }
+          },
+          {
+           "id": "a1e3",
+           "datos": {
+            "a": 28,
+            "b": 45
+           },
+           "solucion": {
+            "huecos": [
+             7,
+             3
+            ]
+           }
+          },
+          {
+           "id": "a1e4",
+           "datos": {
+            "a": 13,
+            "b": 12
+           },
+           "solucion": {
+            "huecos": [
+             2,
+             5
+            ]
+           }
+          },
+          {
+           "id": "a1e5",
+           "datos": {
+            "a": 57,
+            "b": 17
+           },
+           "solucion": {
+            "huecos": [
+             7,
+             4
+            ]
+           }
+          },
+          {
+           "id": "a1e6",
+           "datos": {
+            "a": 36,
+            "b": 30
+           },
+           "solucion": {
+            "huecos": [
+             6,
+             6
+            ]
+           }
+          }
+         ]
+        },
+        {
+         "n": 2,
+         "tipo": "medida.reloj",
+         "tipoVersion": 1,
+         "params": {
+          "modo": "media",
+          "rango": null
+         },
+         "tamano": "media",
+         "color": "verde",
+         "enunciado": "Escribe la hora que marca cada reloj.",
+         "ejemplo": null,
+         "ejercicios": [
+          {
+           "id": "a2e1",
+           "datos": {
+            "h": 7,
+            "m": 30
+           },
+           "solucion": {
+            "huecos": [
+             7,
+             "30"
+            ]
+           }
+          },
+          {
+           "id": "a2e2",
+           "datos": {
+            "h": 6,
+            "m": 30
+           },
+           "solucion": {
+            "huecos": [
+             6,
+             "30"
+            ]
+           }
+          },
+          {
+           "id": "a2e3",
+           "datos": {
+            "h": 2,
+            "m": 30
+           },
+           "solucion": {
+            "huecos": [
+             2,
+             "30"
+            ]
+           }
+          },
+          {
+           "id": "a2e4",
+           "datos": {
+            "h": 11,
+            "m": 30
+           },
+           "solucion": {
+            "huecos": [
+             11,
+             "30"
+            ]
+           }
+          },
+          {
+           "id": "a2e5",
+           "datos": {
+            "h": 1,
+            "m": 30
+           },
+           "solucion": {
+            "huecos": [
+             1,
+             "30"
+            ]
+           }
+          },
+          {
+           "id": "a2e6",
+           "datos": {
+            "h": 4,
+            "m": 30
+           },
+           "solucion": {
+            "huecos": [
+             4,
+             "30"
+            ]
+           }
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  "svgPapel": [
+   "3453a34f21e7d92d"
+  ],
+  "svgSolucion": [
+   "78c5df4dabfb7a70"
+  ]
+ },
+ "nombres y B/N": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "El dado y el marco de diez",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 5,
+   "variantes": 2,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "rep.dado",
+       "tipoVersion": 1,
+       "params": {
+        "lectura": true,
+        "rango": 10
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Escribe en el cuadrito el número que representa cada casilla.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "rep": "dado",
+          "n": 5,
+          "accion": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "rep": "dado",
+          "n": 6,
+          "accion": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "rep": "dado",
+          "n": 10,
+          "accion": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "rep": "dado",
+          "n": 2,
+          "accion": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "rep": "dado",
+          "n": 1,
+          "accion": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "rep": "dado",
+          "n": 9,
+          "accion": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "rep.marco",
+       "tipoVersion": 1,
+       "params": {
+        "lectura": false,
+        "rango": 20
+       },
+       "tamano": "media",
+       "color": "verde",
+       "enunciado": "Escribe en el cuadrito el número que representa cada casilla.\nEn la última fila te toca a ti: haz lo que dice cada casilla.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "rep": "marco",
+          "n": 8,
+          "accion": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           8
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "rep": "marco",
+          "n": 2,
+          "accion": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           2
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "rep": "marco",
+          "n": 20,
+          "accion": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           20
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "rep": "marco",
+          "n": 3,
+          "accion": "dibujar"
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "rep": "marco",
+          "n": 11,
+          "accion": "dibujar"
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a2e6",
+         "datos": {
+          "rep": "marco",
+          "n": 16,
+          "accion": "dibujar"
+         },
+         "solucion": {
+          "huecos": []
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [
+    {
+     "semilla": 3343352171,
+     "paginas": [
+      {
+       "actividades": [
+        {
+         "n": 1,
+         "tipo": "rep.dado",
+         "tipoVersion": 1,
+         "params": {
+          "lectura": true,
+          "rango": 10
+         },
+         "tamano": "media",
+         "color": "azul",
+         "enunciado": "Escribe en el cuadrito el número que representa cada casilla.",
+         "ejemplo": null,
+         "ejercicios": [
+          {
+           "id": "a1e1",
+           "datos": {
+            "rep": "dado",
+            "n": 10,
+            "accion": "leer"
+           },
+           "solucion": {
+            "huecos": [
+             10
+            ]
+           }
+          },
+          {
+           "id": "a1e2",
+           "datos": {
+            "rep": "dado",
+            "n": 5,
+            "accion": "leer"
+           },
+           "solucion": {
+            "huecos": [
+             5
+            ]
+           }
+          },
+          {
+           "id": "a1e3",
+           "datos": {
+            "rep": "dado",
+            "n": 7,
+            "accion": "leer"
+           },
+           "solucion": {
+            "huecos": [
+             7
+            ]
+           }
+          },
+          {
+           "id": "a1e4",
+           "datos": {
+            "rep": "dado",
+            "n": 1,
+            "accion": "leer"
+           },
+           "solucion": {
+            "huecos": [
+             1
+            ]
+           }
+          },
+          {
+           "id": "a1e5",
+           "datos": {
+            "rep": "dado",
+            "n": 2,
+            "accion": "leer"
+           },
+           "solucion": {
+            "huecos": [
+             2
+            ]
+           }
+          },
+          {
+           "id": "a1e6",
+           "datos": {
+            "rep": "dado",
+            "n": 4,
+            "accion": "leer"
+           },
+           "solucion": {
+            "huecos": [
+             4
+            ]
+           }
+          }
+         ]
+        },
+        {
+         "n": 2,
+         "tipo": "rep.marco",
+         "tipoVersion": 1,
+         "params": {
+          "lectura": false,
+          "rango": 20
+         },
+         "tamano": "media",
+         "color": "verde",
+         "enunciado": "Escribe en el cuadrito el número que representa cada casilla.\nEn la última fila te toca a ti: haz lo que dice cada casilla.",
+         "ejemplo": null,
+         "ejercicios": [
+          {
+           "id": "a2e1",
+           "datos": {
+            "rep": "marco",
+            "n": 20,
+            "accion": "leer"
+           },
+           "solucion": {
+            "huecos": [
+             20
+            ]
+           }
+          },
+          {
+           "id": "a2e2",
+           "datos": {
+            "rep": "marco",
+            "n": 8,
+            "accion": "leer"
+           },
+           "solucion": {
+            "huecos": [
+             8
+            ]
+           }
+          },
+          {
+           "id": "a2e3",
+           "datos": {
+            "rep": "marco",
+            "n": 6,
+            "accion": "leer"
+           },
+           "solucion": {
+            "huecos": [
+             6
+            ]
+           }
+          },
+          {
+           "id": "a2e4",
+           "datos": {
+            "rep": "marco",
+            "n": 1,
+            "accion": "dibujar"
+           },
+           "solucion": {
+            "huecos": []
+           }
+          },
+          {
+           "id": "a2e5",
+           "datos": {
+            "rep": "marco",
+            "n": 9,
+            "accion": "dibujar"
+           },
+           "solucion": {
+            "huecos": []
+           }
+          },
+          {
+           "id": "a2e6",
+           "datos": {
+            "rep": "marco",
+            "n": 18,
+            "accion": "dibujar"
+           },
+           "solucion": {
+            "huecos": []
+           }
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  "svgPapel": [
+   "875833f2b2acb3fe",
+   "2359aa9a517d97b6",
+   "3626104206e2731b"
+  ],
+  "svgSolucion": [
+   "3ab97142ce22afa0",
+   "1de4a59560268ef5",
+   "e518a5cf0d16cfda"
+  ]
+ }
+}
