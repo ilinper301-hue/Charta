@@ -86,6 +86,7 @@
 - [x] Calculi (estrategias) como tipos: **solo los que faltan en 1.º** (decidido el 5-11-2026): ±1, casi dobles, usar el 5, +9, ±10, el orden no importa, restar pensando en sumar, descomponer hasta 10. El resto ya existe (dobles, completar a 10 y a la decena, familias, decenas).
   - Hecho: familia `trucos` (bloque 12 «Trucos de cálculo mental»), 8 tipos `trucos.<clave>` con la fábrica `src/tipos/_trucos.js`: filas con cuadro gris (3 columnas; 18–24 operaciones por hoja, la mitad en media), sin repetir; el enunciado lleva el truco de Calculi («Truco: sumo 10 y quito 1…»). Opciones: números hasta, operaciones/ejercicios según el truco. Invariantes en `tests/inv/trucos.js` (cada fila es una igualdad cierta). 106 tipos; `npm test`, `--full` y `test_motor.py` OK. Se pueden añadir los trucos de 2.º–6.º de Calculi con la misma fábrica.
 - [ ] Otros cursos de Matemáticas (2.º a 6.º) y Lengua.
+  - Lengua 1.º: primero el guion de tipología (LENGUA_1.md, en chat aparte con Opus). **Decisión de Iván (5-11-2026): la letra de las fichas de Lengua será Fredoka** (como Barri y Calculi; OFL, ya está en `fonts/` de Barri). Comprobar al diseñar: la «a» y la «g» que ve el alumno en las palabras de lectura, y la pauta de caligrafía (Fredoka no es letra de escritura a mano).
 
 ## Fase 8 · Opcional
 - [ ] Publicar en Google Play (TWA).
