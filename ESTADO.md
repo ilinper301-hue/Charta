@@ -90,6 +90,7 @@
   3. Probable alcance: miniatura (SVG de la hoja 1, sin nombres) guardada en el documento; botón «Enviar a Documentos» claro desde el diseño, también desde el inicio (Recientes/Favoritas); en Tabula, filtro «Fichas de Charta», «Reimprimir» con el grupo y «Editar en Charta»; opción de enviar con o sin nube.
   4. Reglas que no cambian: nunca viajan nombres de alumnos; contrato de `ESQUEMA.md` («Enlace con Tabula por URL»); si cambia, subir `v` y mantener compatibilidad. Pruebas en ambos repositorios y prueba de ida y vuelta en Chrome.
   5. Documentar en `ESQUEMA.md`/`CODEMAP.md` y marcar aquí.
+  - 5-11-2026 (Iván: no veía el botón y la nube rechazaba): «↗ Enviar a Tabula» siempre visible (antes solo si Charta leía grupos de Tabula); si la nube falla, se envía igual con la composición. Rechazo de la nube = reglas sin el bloque Charta publicadas en Firebase (pendiente de Iván).
 
 ## Fase 6 · Accesibilidad y metadatos propios
 - [x] Dificultad, tiempo estimado y etiquetas por modelo (sin LOMLOE: decisión de Iván, 5-11-2026).

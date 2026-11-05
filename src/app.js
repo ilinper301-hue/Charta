@@ -356,16 +356,16 @@ function iniciar() {
   leerTabula().then((t) => {
     grupos = t ? gruposDeTabula(t.groups, t.students) : [];
     $("filaTabula").hidden = !grupos.length;
-    $("aTabula").hidden = !grupos.length && !entrada.desdeTabula;
     for (const g of grupos) $("grupoTabula").add(new Option(`${g.nombre} (${g.alumnos.length})`, g.id));
     if (entrada.grupo && grupos.some((g) => g.id === entrada.grupo)) { $("grupoTabula").value = entrada.grupo; $("grupoTabula").onchange(); }
-  }).catch(() => { $("aTabula").hidden = !entrada.desdeTabula; });
+  }).catch(() => {});
   $("aTabula").onclick = async () => {
     if (!ficha) return;
     avisoNube("");
     let id = null;
     // Con sesión, se guarda en la nube y Tabula la referencia por id (también la verá Fori); sin sesión, va la composición.
-    if (nube.estado().estado === "dentro") try { if (!enNube) await leerNube(); id = (await nube.guardar(ficha, composicion())).id; } catch (e) { avisoNube(e.message, true); return; }
+    // Si la nube falla, se envía igual (con la composición): Tabula no depende de la nube.
+    if (nube.estado().estado === "dentro") try { if (!enNube) await leerNube(); id = (await nube.guardar(ficha, composicion())).id || null; } catch (e) { console.warn("Nube:", e.message); id = null; }
     location.href = urlVolver({ id, titulo: ficha.titulo, tipos: editores.map((e) => e.id), comp: composicion(),
       grupo: $("grupoTabula").value || entrada.grupo, sesion: entrada.sesion, tarea: entrada.tarea });
   };
