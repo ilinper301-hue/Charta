@@ -45,7 +45,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "LOS DEDOS",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 8,
+    "etiquetas": [
+     "números",
+     "representación",
+     "dedos"
+    ]
+   }
   },
   {
    "id": "rep.dado",
@@ -74,7 +83,17 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "EL DADO",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 8,
+    "etiquetas": [
+     "números",
+     "representación",
+     "dado",
+     "puntos"
+    ]
+   }
   },
   {
    "id": "rep.domino",
@@ -103,7 +122,17 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "EL DOMINÓ",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 10,
+    "etiquetas": [
+     "números",
+     "representación",
+     "dominó",
+     "puntos"
+    ]
+   }
   },
   {
    "id": "rep.marco",
@@ -134,7 +163,17 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "EL MARCO DE DIEZ",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 8,
+    "etiquetas": [
+     "números",
+     "representación",
+     "marco",
+     "decenas"
+    ]
+   }
   },
   {
    "id": "rep.palotes",
@@ -164,7 +203,17 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "LOS PALOTES",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 8,
+    "etiquetas": [
+     "números",
+     "representación",
+     "palotes",
+     "contar"
+    ]
+   }
   },
   {
    "id": "rep.objetos",
@@ -194,7 +243,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "LOS OBJETOS",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 8,
+    "etiquetas": [
+     "números",
+     "representación",
+     "contar objetos"
+    ]
+   }
   },
   {
    "id": "rep.regletas",
@@ -224,7 +282,17 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "LAS REGLETAS",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "números",
+     "representación",
+     "regletas",
+     "decenas"
+    ]
+   }
   },
   {
    "id": "rep.descomp",
@@ -261,7 +329,17 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "LA DESCOMPOSICIÓN",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 12,
+    "etiquetas": [
+     "números",
+     "representación",
+     "descomposición",
+     "decenas unidades"
+    ]
+   }
   },
   {
    "id": "rep.letras",
@@ -298,7 +376,17 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "EL NÚMERO EN LETRAS",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 12,
+    "etiquetas": [
+     "números",
+     "representación",
+     "escritura",
+     "letras"
+    ]
+   }
   },
   {
    "id": "rep.recta",
@@ -335,7 +423,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "LA RECTA NUMÉRICA",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "números",
+     "representación",
+     "recta numérica"
+    ]
+   }
   },
   {
    "id": "rep.bloques",
@@ -372,7 +469,17 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "LOS BLOQUES DE BASE DIEZ",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 12,
+    "etiquetas": [
+     "números",
+     "representación",
+     "bloques",
+     "decenas unidades"
+    ]
+   }
   },
   {
    "id": "rep.cuadricula",
@@ -409,7 +516,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "LA CUADRÍCULA DE 100",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "números",
+     "representación",
+     "cuadrícula cien"
+    ]
+   }
   },
   {
    "id": "rep.monedas",
@@ -443,7 +559,17 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "LAS MONEDAS",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 12,
+    "etiquetas": [
+     "números",
+     "representación",
+     "monedas",
+     "dinero"
+    ]
+   }
   },
   {
    "id": "rep.abaco",
@@ -480,7 +606,17 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "EL ÁBACO",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 12,
+    "etiquetas": [
+     "números",
+     "representación",
+     "ábaco",
+     "decenas unidades"
+    ]
+   }
   },
   {
    "id": "rep.du",
@@ -517,7 +653,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "LAS DECENAS Y UNIDADES",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "números",
+     "representación",
+     "decenas unidades"
+    ]
+   }
   },
   {
    "id": "rep.atados",
@@ -551,7 +696,17 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "LOS PALITOS Y ATADOS",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 12,
+    "etiquetas": [
+     "números",
+     "representación",
+     "decenas",
+     "atados"
+    ]
+   }
   },
   {
    "id": "combinada.combinada",
@@ -580,7 +735,17 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "¿QUÉ NÚMERO ES?",
-   "color": "verde"
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 3,
+    "minutos": 20,
+    "etiquetas": [
+     "números",
+     "representación",
+     "repaso",
+     "mezcla"
+    ]
+   }
   },
   {
    "id": "suma.suma",
@@ -609,7 +774,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "SUMA Y DIBUJA",
-   "color": "rosa"
+   "color": "rosa",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 10,
+    "etiquetas": [
+     "sumar",
+     "dibujos",
+     "representación"
+    ]
+   }
   },
   {
    "id": "conteo.cuenta",
@@ -632,7 +806,15 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "CUENTA Y ESCRIBE",
-   "color": "amarillo"
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 8,
+    "etiquetas": [
+     "contar",
+     "números"
+    ]
+   }
   },
   {
    "id": "conteo.anterior",
@@ -683,7 +865,17 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "ANTERIOR Y POSTERIOR",
-   "color": "amarillo"
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 8,
+    "etiquetas": [
+     "contar",
+     "anterior",
+     "posterior",
+     "orden"
+    ]
+   }
   },
   {
    "id": "conteo.falta",
@@ -722,7 +914,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "EL NÚMERO QUE FALTA",
-   "color": "amarillo"
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 8,
+    "etiquetas": [
+     "contar",
+     "series",
+     "número que falta"
+    ]
+   }
   },
   {
    "id": "conteo.serie1",
@@ -761,7 +962,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "SERIES DE 1 EN 1",
-   "color": "amarillo"
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 8,
+    "etiquetas": [
+     "contar",
+     "series",
+     "de 1 en 1"
+    ]
+   }
   },
   {
    "id": "conteo.serie2",
@@ -800,7 +1010,17 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "SERIES DE 2 EN 2",
-   "color": "amarillo"
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "contar",
+     "series",
+     "de 2 en 2",
+     "pares"
+    ]
+   }
   },
   {
    "id": "conteo.serie5",
@@ -839,7 +1059,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "SERIES DE 5 EN 5",
-   "color": "amarillo"
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "contar",
+     "series",
+     "de 5 en 5"
+    ]
+   }
   },
   {
    "id": "conteo.serie10",
@@ -877,7 +1106,17 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "SERIES DE 10 EN 10",
-   "color": "amarillo"
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "contar",
+     "series",
+     "de 10 en 10",
+     "decenas"
+    ]
+   }
   },
   {
    "id": "conteo.series",
@@ -916,7 +1155,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "SERIES MIXTAS",
-   "color": "amarillo"
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 3,
+    "minutos": 12,
+    "etiquetas": [
+     "contar",
+     "series",
+     "mezcla"
+    ]
+   }
   },
   {
    "id": "conteo.tabla",
@@ -954,7 +1202,16 @@ export const CATALOGO = {
     "completa"
    ],
    "titulo": "LA TABLA DE NÚMEROS",
-   "color": "amarillo"
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 12,
+    "etiquetas": [
+     "contar",
+     "tabla del cien",
+     "series"
+    ]
+   }
   },
   {
    "id": "conteo.camino",
@@ -992,7 +1249,16 @@ export const CATALOGO = {
     "completa"
    ],
    "titulo": "EL CAMINO DE NÚMEROS",
-   "color": "amarillo"
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 12,
+    "etiquetas": [
+     "contar",
+     "series",
+     "camino"
+    ]
+   }
   },
   {
    "id": "orden.mayor",
@@ -1049,7 +1315,17 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "MAYOR O MENOR",
-   "color": "verde"
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 8,
+    "etiquetas": [
+     "orden",
+     "comparar",
+     "mayor",
+     "menor"
+    ]
+   }
   },
   {
    "id": "orden.signos",
@@ -1102,7 +1378,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "LOS SIGNOS < > =",
-   "color": "verde"
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "orden",
+     "comparar",
+     "signos"
+    ]
+   }
   },
   {
    "id": "orden.grupo",
@@ -1147,7 +1432,17 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "EL MAYOR Y EL MENOR",
-   "color": "verde"
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "orden",
+     "comparar",
+     "mayor",
+     "menor"
+    ]
+   }
   },
   {
    "id": "orden.ordena1",
@@ -1192,7 +1487,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "ORDENA DE MENOR A MAYOR",
-   "color": "verde"
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 12,
+    "etiquetas": [
+     "orden",
+     "ordenar",
+     "menor a mayor"
+    ]
+   }
   },
   {
    "id": "orden.ordena2",
@@ -1237,7 +1541,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "ORDENA DE MAYOR A MENOR",
-   "color": "verde"
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 12,
+    "etiquetas": [
+     "orden",
+     "ordenar",
+     "mayor a menor"
+    ]
+   }
   },
   {
    "id": "orden.entre",
@@ -1267,7 +1580,15 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "UN NÚMERO ENTRE DOS",
-   "color": "verde"
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 3,
+    "minutos": 10,
+    "etiquetas": [
+     "orden",
+     "número entre dos"
+    ]
+   }
   },
   {
    "id": "orden.ordinales",
@@ -1318,7 +1639,17 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "LOS ORDINALES",
-   "color": "verde"
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "orden",
+     "ordinales",
+     "primero",
+     "segundo"
+    ]
+   }
   },
   {
    "id": "orden.cantidad",
@@ -1361,7 +1692,17 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "MÁS, MENOS O IGUAL",
-   "color": "verde"
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 8,
+    "etiquetas": [
+     "orden",
+     "comparar",
+     "más menos igual",
+     "cantidad"
+    ]
+   }
   },
   {
    "id": "valor.agrupa",
@@ -1385,7 +1726,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "AGRUPA EN DECENAS",
-   "color": "rosa"
+   "color": "rosa",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 12,
+    "etiquetas": [
+     "valor posicional",
+     "decenas",
+     "agrupar"
+    ]
+   }
   },
   {
    "id": "valor.canje",
@@ -1431,7 +1781,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "LOS CANJES",
-   "color": "rosa"
+   "color": "rosa",
+   "metadatos": {
+    "dificultad": 3,
+    "minutos": 12,
+    "etiquetas": [
+     "valor posicional",
+     "canje",
+     "decenas unidades"
+    ]
+   }
   },
   {
    "id": "valor.descdu",
@@ -1492,7 +1851,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "DESCOMPOSICIÓN EN D Y U",
-   "color": "rosa"
+   "color": "rosa",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 12,
+    "etiquetas": [
+     "valor posicional",
+     "descomposición",
+     "decenas unidades"
+    ]
+   }
   },
   {
    "id": "valor.dunum",
@@ -1537,7 +1905,15 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "DECENAS, UNIDADES Y NÚMERO",
-   "color": "rosa"
+   "color": "rosa",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 12,
+    "etiquetas": [
+     "valor posicional",
+     "decenas unidades"
+    ]
+   }
   },
   {
    "id": "valor.pares",
@@ -1579,7 +1955,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "PARES E IMPARES",
-   "color": "rosa"
+   "color": "rosa",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 8,
+    "etiquetas": [
+     "valor",
+     "pares",
+     "impares"
+    ]
+   }
   },
   {
    "id": "valor.cifra",
@@ -1607,7 +1992,15 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "EL VALOR DE LA CIFRA",
-   "color": "rosa"
+   "color": "rosa",
+   "metadatos": {
+    "dificultad": 3,
+    "minutos": 12,
+    "etiquetas": [
+     "valor posicional",
+     "cifra"
+    ]
+   }
   },
   {
    "id": "sumar.dibujos",
@@ -1629,7 +2022,15 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "SUMA CON DIBUJOS",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 8,
+    "etiquetas": [
+     "sumar",
+     "dibujos"
+    ]
+   }
   },
   {
    "id": "sumar.recta",
@@ -1652,7 +2053,15 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "SUMA EN LA RECTA NUMÉRICA",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 10,
+    "etiquetas": [
+     "sumar",
+     "recta numérica"
+    ]
+   }
   },
   {
    "id": "sumar.h10",
@@ -1673,7 +2082,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "SUMAS HASTA 10",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 10,
+    "etiquetas": [
+     "sumar",
+     "hasta 10",
+     "cálculo"
+    ]
+   }
   },
   {
    "id": "sumar.h20",
@@ -1715,7 +2133,17 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "SUMAS HASTA 20",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 12,
+    "etiquetas": [
+     "sumar",
+     "hasta 20",
+     "cálculo",
+     "llevadas"
+    ]
+   }
   },
   {
    "id": "sumar.h100",
@@ -1764,7 +2192,17 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "SUMAS HASTA 100",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 3,
+    "minutos": 15,
+    "etiquetas": [
+     "sumar",
+     "hasta 100",
+     "cálculo",
+     "llevadas"
+    ]
+   }
   },
   {
    "id": "sumar.vertical",
@@ -1813,7 +2251,17 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "SUMAS EN VERTICAL",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 3,
+    "minutos": 15,
+    "etiquetas": [
+     "sumar",
+     "vertical",
+     "algoritmo",
+     "llevadas"
+    ]
+   }
   },
   {
    "id": "sumar.dobles",
@@ -1852,7 +2300,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "LOS DOBLES",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 8,
+    "etiquetas": [
+     "sumar",
+     "dobles",
+     "cálculo mental"
+    ]
+   }
   },
   {
    "id": "sumar.comp10",
@@ -1873,7 +2330,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "COMPLETA HASTA 10",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 8,
+    "etiquetas": [
+     "sumar",
+     "completar hasta 10",
+     "cálculo mental"
+    ]
+   }
   },
   {
    "id": "sumar.comp20",
@@ -1902,7 +2368,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "COMPLETA HASTA LA DECENA",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "sumar",
+     "completar hasta la decena",
+     "cálculo mental"
+    ]
+   }
   },
   {
    "id": "sumar.hueco",
@@ -1953,7 +2428,15 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "SUMAS CON HUECO",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 3,
+    "minutos": 12,
+    "etiquetas": [
+     "sumar",
+     "hueco cálculo"
+    ]
+   }
   },
   {
    "id": "sumar.decenas",
@@ -1991,7 +2474,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "SUMAS DE DECENAS",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "sumar",
+     "decenas",
+     "cálculo mental"
+    ]
+   }
   },
   {
    "id": "sumar.encadenadas",
@@ -2013,7 +2505,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "SUMAS ENCADENADAS",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 3,
+    "minutos": 12,
+    "etiquetas": [
+     "sumar",
+     "encadenadas",
+     "cálculo"
+    ]
+   }
   },
   {
    "id": "sumar.piramide",
@@ -2052,7 +2553,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "PIRÁMIDES DE SUMAS",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 3,
+    "minutos": 15,
+    "etiquetas": [
+     "sumar",
+     "pirámide",
+     "cálculo"
+    ]
+   }
   },
   {
    "id": "sumar.tabla",
@@ -2090,7 +2600,16 @@ export const CATALOGO = {
     "completa"
    ],
    "titulo": "TABLA DE SUMAR",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 12,
+    "etiquetas": [
+     "sumar",
+     "tabla",
+     "cálculo"
+    ]
+   }
   },
   {
    "id": "restar.quita",
@@ -2112,7 +2631,15 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "RESTA CON DIBUJOS",
-   "color": "verde"
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 8,
+    "etiquetas": [
+     "restar",
+     "dibujos"
+    ]
+   }
   },
   {
    "id": "restar.recta",
@@ -2135,7 +2662,15 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "RESTA EN LA RECTA NUMÉRICA",
-   "color": "verde"
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 10,
+    "etiquetas": [
+     "restar",
+     "recta numérica"
+    ]
+   }
   },
   {
    "id": "restar.r10",
@@ -2156,7 +2691,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "RESTAS HASTA 10",
-   "color": "verde"
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 10,
+    "etiquetas": [
+     "restar",
+     "hasta 10",
+     "cálculo"
+    ]
+   }
   },
   {
    "id": "restar.r20",
@@ -2198,7 +2742,17 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "RESTAS HASTA 20",
-   "color": "verde"
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 12,
+    "etiquetas": [
+     "restar",
+     "hasta 20",
+     "cálculo",
+     "llevadas"
+    ]
+   }
   },
   {
    "id": "restar.r100",
@@ -2247,7 +2801,17 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "RESTAS HASTA 100",
-   "color": "verde"
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 3,
+    "minutos": 15,
+    "etiquetas": [
+     "restar",
+     "hasta 100",
+     "cálculo",
+     "llevadas"
+    ]
+   }
   },
   {
    "id": "restar.vertical",
@@ -2296,7 +2860,17 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "RESTAS EN VERTICAL",
-   "color": "verde"
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 3,
+    "minutos": 15,
+    "etiquetas": [
+     "restar",
+     "vertical",
+     "algoritmo",
+     "llevadas"
+    ]
+   }
   },
   {
    "id": "restar.mitades",
@@ -2335,7 +2909,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "LAS MITADES",
-   "color": "verde"
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 8,
+    "etiquetas": [
+     "restar",
+     "mitades",
+     "cálculo mental"
+    ]
+   }
   },
   {
    "id": "restar.faltan",
@@ -2365,7 +2948,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "¿CUÁNTO FALTA?",
-   "color": "verde"
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "restar",
+     "cuánto falta",
+     "cálculo mental"
+    ]
+   }
   },
   {
    "id": "restar.hueco",
@@ -2416,7 +3008,15 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "RESTAS CON HUECO",
-   "color": "verde"
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 3,
+    "minutos": 12,
+    "etiquetas": [
+     "restar",
+     "hueco cálculo"
+    ]
+   }
   },
   {
    "id": "restar.decenas",
@@ -2454,7 +3054,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "RESTAS DE DECENAS",
-   "color": "verde"
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "restar",
+     "decenas",
+     "cálculo mental"
+    ]
+   }
   },
   {
    "id": "restar.encadenadas",
@@ -2476,7 +3085,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "RESTAS ENCADENADAS",
-   "color": "verde"
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 3,
+    "minutos": 12,
+    "etiquetas": [
+     "restar",
+     "encadenadas",
+     "cálculo"
+    ]
+   }
   },
   {
    "id": "restar.familia",
@@ -2527,7 +3145,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "FAMILIAS DE OPERACIONES",
-   "color": "verde"
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 3,
+    "minutos": 12,
+    "etiquetas": [
+     "sumar",
+     "restar",
+     "familia de operaciones"
+    ]
+   }
   },
   {
    "id": "juegos.cuadrado",
@@ -2566,7 +3193,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "CUADRADOS MÁGICOS",
-   "color": "amarillo"
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 3,
+    "minutos": 15,
+    "etiquetas": [
+     "juego",
+     "cuadrado mágico",
+     "sumar"
+    ]
+   }
   },
   {
    "id": "juegos.laberinto",
@@ -2620,7 +3256,16 @@ export const CATALOGO = {
     "completa"
    ],
    "titulo": "LABERINTO DE NÚMEROS",
-   "color": "amarillo"
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 12,
+    "etiquetas": [
+     "juego",
+     "laberinto",
+     "cálculo"
+    ]
+   }
   },
   {
    "id": "juegos.une",
@@ -2690,7 +3335,15 @@ export const CATALOGO = {
     "completa"
    ],
    "titulo": "UNE OPERACIONES Y RESULTADOS",
-   "color": "amarillo"
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "juego",
+     "unir operaciones resultados"
+    ]
+   }
   },
   {
    "id": "juegos.cadena",
@@ -2720,7 +3373,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "CADENAS DE NÚMEROS",
-   "color": "amarillo"
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 12,
+    "etiquetas": [
+     "juego",
+     "cadena",
+     "cálculo"
+    ]
+   }
   },
   {
    "id": "juegos.oculto",
@@ -2750,7 +3412,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "EL NÚMERO OCULTO",
-   "color": "amarillo"
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 3,
+    "minutos": 12,
+    "etiquetas": [
+     "juego",
+     "número oculto",
+     "razonamiento"
+    ]
+   }
   },
   {
    "id": "juegos.colorea",
@@ -2844,7 +3515,16 @@ export const CATALOGO = {
     "completa"
    ],
    "titulo": "COLOREA Y DESCUBRE",
-   "color": "amarillo"
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 15,
+    "etiquetas": [
+     "juego",
+     "colorear",
+     "cálculo"
+    ]
+   }
   },
   {
    "id": "geometria.figuras",
@@ -2863,7 +3543,15 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "LAS FIGURAS PLANAS",
-   "color": "rosa"
+   "color": "rosa",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 8,
+    "etiquetas": [
+     "geometría",
+     "figuras planas"
+    ]
+   }
   },
   {
    "id": "geometria.cuenta",
@@ -2881,7 +3569,16 @@ export const CATALOGO = {
     "completa"
    ],
    "titulo": "CUENTA LAS FIGURAS",
-   "color": "rosa"
+   "color": "rosa",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "geometría",
+     "figuras",
+     "contar"
+    ]
+   }
   },
   {
    "id": "geometria.cuerpos",
@@ -2900,7 +3597,15 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "LOS CUERPOS GEOMÉTRICOS",
-   "color": "rosa"
+   "color": "rosa",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "geometría",
+     "cuerpos geométricos"
+    ]
+   }
   },
   {
    "id": "geometria.rueda",
@@ -2919,7 +3624,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "¿RUEDA O NO RUEDA?",
-   "color": "rosa"
+   "color": "rosa",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 8,
+    "etiquetas": [
+     "geometría",
+     "cuerpos",
+     "rueda"
+    ]
+   }
   },
   {
    "id": "geometria.lineas",
@@ -2955,7 +3669,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "LAS LÍNEAS",
-   "color": "rosa"
+   "color": "rosa",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 8,
+    "etiquetas": [
+     "geometría",
+     "líneas",
+     "rectas curvas"
+    ]
+   }
   },
   {
    "id": "geometria.posiciones",
@@ -2974,7 +3697,17 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "ENCIMA, DEBAJO, IZQUIERDA Y DERECHA",
-   "color": "rosa"
+   "color": "rosa",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "geometría",
+     "posiciones",
+     "espacio",
+     "lateralidad"
+    ]
+   }
   },
   {
    "id": "geometria.simetria",
@@ -3002,7 +3735,15 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "LA SIMETRÍA",
-   "color": "rosa"
+   "color": "rosa",
+   "metadatos": {
+    "dificultad": 3,
+    "minutos": 12,
+    "etiquetas": [
+     "geometría",
+     "simetría"
+    ]
+   }
   },
   {
    "id": "geometria.copia",
@@ -3020,7 +3761,17 @@ export const CATALOGO = {
     "completa"
    ],
    "titulo": "COPIA EL DIBUJO",
-   "color": "rosa"
+   "color": "rosa",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 12,
+    "etiquetas": [
+     "geometría",
+     "copiar",
+     "dibujo",
+     "cuadrícula"
+    ]
+   }
   },
   {
    "id": "medida.dinero",
@@ -3067,7 +3818,17 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "CUENTA EL DINERO",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 12,
+    "etiquetas": [
+     "medida",
+     "dinero",
+     "monedas",
+     "euros"
+    ]
+   }
   },
   {
    "id": "medida.precios",
@@ -3106,7 +3867,17 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "LAS COMPRAS",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 3,
+    "minutos": 12,
+    "etiquetas": [
+     "medida",
+     "dinero",
+     "compras",
+     "precios"
+    ]
+   }
   },
   {
    "id": "medida.reloj",
@@ -3146,7 +3917,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "LOS RELOJES",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "medida",
+     "reloj",
+     "hora"
+    ]
+   }
   },
   {
    "id": "medida.reloj2",
@@ -3186,7 +3966,17 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "DIBUJA LAS AGUJAS",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 3,
+    "minutos": 12,
+    "etiquetas": [
+     "medida",
+     "reloj",
+     "hora",
+     "agujas"
+    ]
+   }
   },
   {
    "id": "medida.calendario",
@@ -3265,7 +4055,16 @@ export const CATALOGO = {
     "completa"
    ],
    "titulo": "EL CALENDARIO",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "medida",
+     "calendario",
+     "tiempo"
+    ]
+   }
   },
   {
    "id": "medida.tiempo",
@@ -3304,7 +4103,17 @@ export const CATALOGO = {
     "_": "LOS DÍAS DE LA SEMANA",
     "meses": "LOS MESES DEL AÑO"
    },
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "medida",
+     "tiempo",
+     "días",
+     "meses"
+    ]
+   }
   },
   {
    "id": "medida.longitud",
@@ -3340,7 +4149,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "MIDE CON CUBITOS",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 8,
+    "etiquetas": [
+     "medida",
+     "longitud",
+     "comparar"
+    ]
+   }
   },
   {
    "id": "medida.capacidad",
@@ -3359,7 +4177,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "¿CUÁNTO LÍQUIDO HAY?",
-   "color": "azul"
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 8,
+    "etiquetas": [
+     "medida",
+     "capacidad",
+     "líquido"
+    ]
+   }
   },
   {
    "id": "estadistica.pictograma",
@@ -3396,7 +4223,16 @@ export const CATALOGO = {
     "completa"
    ],
    "titulo": "EL PICTOGRAMA",
-   "color": "verde"
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 12,
+    "etiquetas": [
+     "estadística",
+     "pictograma",
+     "datos"
+    ]
+   }
   },
   {
    "id": "estadistica.recuento",
@@ -3418,7 +4254,17 @@ export const CATALOGO = {
     "completa"
    ],
    "titulo": "CUENTA Y ANOTA",
-   "color": "verde"
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 10,
+    "etiquetas": [
+     "estadística",
+     "recuento",
+     "datos",
+     "contar"
+    ]
+   }
   },
   {
    "id": "estadistica.barras",
@@ -3455,7 +4301,16 @@ export const CATALOGO = {
     "completa"
    ],
    "titulo": "EL GRÁFICO DE BARRAS",
-   "color": "verde"
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 12,
+    "etiquetas": [
+     "estadística",
+     "gráfico de barras",
+     "datos"
+    ]
+   }
   },
   {
    "id": "estadistica.patrones",
@@ -3491,7 +4346,16 @@ export const CATALOGO = {
     "media"
    ],
    "titulo": "LOS PATRONES",
-   "color": "verde"
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "patrones",
+     "series",
+     "razonamiento"
+    ]
+   }
   }
  ]
 };

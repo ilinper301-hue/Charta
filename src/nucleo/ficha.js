@@ -94,6 +94,17 @@ function pagina(acts, tamano, colores, semilla) {
   };
 }
 
+/** Metadatos propios de una ficha (sin LOMLOE): dificultad = la mayor, minutos = suma (media página ≈ la mitad), etiquetas sin repetir. */
+export function metadatosDe(ids) {
+  const ms = ids.map((id) => modelo(id).metadatos);
+  const mitad = ids.length > 1;
+  return {
+    dificultad: Math.max(...ms.map((m) => m.dificultad)),
+    minutos: ms.reduce((t, m) => t + (mitad ? Math.round(m.minutos / 2) : m.minutos), 0),
+    etiquetas: [...new Set(ms.flatMap((m) => m.etiquetas))],
+  };
+}
+
 /**
  * opciones = {
  *   actividades: [{ tipo: "sumar.h20", params?: {…}, color?: "azul" }, …]   (1 o 2),

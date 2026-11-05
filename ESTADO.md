@@ -72,7 +72,8 @@
   - Hecho: `src/fori/diapositivas.js` (diapositivas 1600×900: actividad entera + un ejercicio por página recortado con getBBox; pasos = rachas de marcas rojas, `class="cs pK"`). Botón «▶ Proyectar en Fori»: deja el paquete en `localStorage["charta:aFori"]` y abre `/Fori/?charta=1` (variante A, sin nombres). Fori (`src/js/05f-charta.js`): cada diapositiva es una página (fondo = ficha, tinta encima = anotaciones; se guarda en la pizarra y en lecciones) con barra **Solución** − k/n + Todo (oculta en modo libre). `?ficha=ID` o `?comp=` en Fori → Charta (`&a=fori`) → vuelta. Arreglado de paso: orden.mayor, orden.cantidad y valor.pares (rodear) no marcaban la solución; ahora rodean en rojo (versión 2, doradas actualizadas). `node tests/test_fori.js` (`--full`: 31.770 diapositivas OK); ida y vuelta probada en Chrome sin errores. **Pendiente de Iván**: probarlo en la PDI y confirmar que Fori abre en `/Fori/`.
 
 ## Fase 6 · Accesibilidad y metadatos propios
-- [ ] Dificultad, tiempo estimado y etiquetas por modelo (sin LOMLOE: decisión de Iván, 5-11-2026).
+- [x] Dificultad, tiempo estimado y etiquetas por modelo (sin LOMLOE: decisión de Iván, 5-11-2026).
+  - Hecho: `motor/metadatos.py` (`META`: dificultad 1–3, minutos y etiquetas de los 94 modelos; `tools/catalogo.py` los vuelca a `catalogo.js` como `metadatos`). `metadatosDe(ids)` en `ficha.js` (dificultad = la mayor, minutos = suma, media página ≈ la mitad, etiquetas sin repetir); la app los pone en `ficha.metadatos` (no en `generar()` por defecto: las doradas no cambian). Selector: «●○○ · 8 min» en cada tarjeta. `npm test` y `test_motor.py` OK. Los valores son una primera estimación: Iván puede ajustarlos en `META`.
 - [ ] Lectura fácil y pictogramas; tamaños grandes para 1.º.
 
 ## Fase 7 · Ampliación de contenidos

@@ -27,7 +27,7 @@ export function bloques(curso, materia) {
 /** Modelos de un bloque; `cabe` = false si no admite el tamaño pedido (p. ej. media página). */
 export function modelos(curso, materia, bloque, tamano = "completa") {
   return disponibles().filter((m) => m.curso === curso && m.materia === materia && m.bloque === bloque)
-    .map((m) => ({ id: m.id, nombre: m.nombre, descripcion: m.descripcion, color: m.color, cabe: m.tamanos.includes(tamano) }));
+    .map((m) => ({ id: m.id, nombre: m.nombre, descripcion: m.descripcion, color: m.color, ...m.metadatos, cabe: m.tamanos.includes(tamano) }));
 }
 
 const cache = new Map();

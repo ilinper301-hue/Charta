@@ -13,6 +13,9 @@ for (const c of cs) for (const m of materias(c.id)) for (const b of bloques(c.id
   assert.ok(b.nombre && !b.nombre.startsWith("Bloque "), `bloque ${b.id} sin nombre`);
   for (const x of ms) {
     assert.ok(x.nombre && x.descripcion, `${x.id}: falta nombre o descripción`);
+    assert.ok([1, 2, 3].includes(x.dificultad), `${x.id}: dificultad`);
+    assert.ok(Number.isInteger(x.minutos) && x.minutos >= 5 && x.minutos <= 30, `${x.id}: minutos`);
+    assert.ok(Array.isArray(x.etiquetas) && x.etiquetas.length >= 2 && x.etiquetas.every((t) => t === t.trim().toLowerCase()), `${x.id}: etiquetas`);
     const svg = miniatura(x.id);
     assert.ok(svg.startsWith("<svg") && svg.length > 200 && !/NaN|undefined/.test(svg), `${x.id}: miniatura`);
   }
@@ -105,4 +108,17 @@ import { b64url, deB64url, leerEntrada, urlVolver, gruposDeTabula, leerTabula, c
   assert.deepEqual(r2, { groups: [{ id: "g" }], students: [{ id: 1, groupId: "g" }] });
   assert.equal(await leerTabula(falsa(null), ls({})), null, "sin base de Tabula: no se crea");
   console.log("test_ui: enlace con Tabula OK");
+}
+
+// Fase 6 · metadatos propios de la ficha (dificultad = la mayor, minutos = suma, etiquetas sin repetir)
+import { metadatosDe } from "../src/nucleo/ficha.js";
+{
+  const uno = metadatosDe(["sumar.h10"]), dos = metadatosDe(["sumar.h10", "sumar.vertical"]);
+  assert.deepEqual(uno, { dificultad: 1, minutos: 10, etiquetas: ["sumar", "hasta 10", "cálculo"] });
+  assert.equal(dos.dificultad, 3);
+  assert.equal(dos.minutos, 5 + 8);
+  assert.equal(new Set(dos.etiquetas).size, dos.etiquetas.length);
+  const f = generar({ actividades: [{ tipo: "sumar.h10" }], metadatos: uno }, 1);
+  assert.deepEqual(f.metadatos, uno);
+  console.log("test_ui: metadatos OK");
 }

@@ -1,0 +1,116 @@
+"""Metadatos propios de cada modelo (decisión de Iván, 5-11-2026: sin LOMLOE).
+dificultad: 1 refuerzo · 2 estándar · 3 ampliación  (para 1.º con las opciones por defecto)
+minutos: tiempo estimado de una actividad a página completa (media página ≈ la mitad)
+etiquetas: palabras clave en minúscula; "_" une las palabras de una misma etiqueta."""
+
+# id: (dificultad, minutos, "etiqueta etiqueta …")
+META = {
+    # Bloque 1 · representaciones
+    "rep.dedos": (1, 8, "números representación dedos"),
+    "rep.dado": (1, 8, "números representación dado puntos"),
+    "rep.domino": (1, 10, "números representación dominó puntos"),
+    "rep.marco": (1, 8, "números representación marco decenas"),
+    "rep.palotes": (1, 8, "números representación palotes contar"),
+    "rep.objetos": (1, 8, "números representación contar_objetos"),
+    "rep.regletas": (2, 10, "números representación regletas decenas"),
+    "rep.descomp": (2, 12, "números representación descomposición decenas_unidades"),
+    "rep.letras": (2, 12, "números representación escritura letras"),
+    "rep.recta": (2, 10, "números representación recta_numérica"),
+    "rep.bloques": (2, 12, "números representación bloques decenas_unidades"),
+    "rep.cuadricula": (2, 10, "números representación cuadrícula_cien"),
+    "rep.monedas": (2, 12, "números representación monedas dinero"),
+    "rep.abaco": (2, 12, "números representación ábaco decenas_unidades"),
+    "rep.du": (2, 10, "números representación decenas_unidades"),
+    "rep.atados": (2, 12, "números representación decenas atados"),
+    "combinada.combinada": (3, 20, "números representación repaso mezcla"),
+    "suma.suma": (1, 10, "sumar dibujos representación"),
+    # Bloque 2 · contar y series
+    "conteo.cuenta": (1, 8, "contar números"),
+    "conteo.anterior": (1, 8, "contar anterior posterior orden"),
+    "conteo.falta": (1, 8, "contar series número_que_falta"),
+    "conteo.serie1": (1, 8, "contar series de_1_en_1"),
+    "conteo.serie2": (2, 10, "contar series de_2_en_2 pares"),
+    "conteo.serie5": (2, 10, "contar series de_5_en_5"),
+    "conteo.serie10": (2, 10, "contar series de_10_en_10 decenas"),
+    "conteo.series": (3, 12, "contar series mezcla"),
+    "conteo.tabla": (2, 12, "contar tabla_del_cien series"),
+    "conteo.camino": (2, 12, "contar series camino"),
+    # Bloque 3 · orden y comparación
+    "orden.mayor": (1, 8, "orden comparar mayor menor"),
+    "orden.signos": (2, 10, "orden comparar signos"),
+    "orden.grupo": (2, 10, "orden comparar mayor menor"),
+    "orden.ordena1": (2, 12, "orden ordenar menor_a_mayor"),
+    "orden.ordena2": (2, 12, "orden ordenar mayor_a_menor"),
+    "orden.entre": (3, 10, "orden número_entre_dos"),
+    "orden.ordinales": (2, 10, "orden ordinales primero segundo"),
+    "orden.cantidad": (1, 8, "orden comparar más_menos_igual cantidad"),
+    # Bloque 4 · valor posicional
+    "valor.agrupa": (2, 12, "valor_posicional decenas agrupar"),
+    "valor.canje": (3, 12, "valor_posicional canje decenas_unidades"),
+    "valor.descdu": (2, 12, "valor_posicional descomposición decenas_unidades"),
+    "valor.dunum": (2, 12, "valor_posicional decenas_unidades"),
+    "valor.pares": (1, 8, "valor pares impares"),
+    "valor.cifra": (3, 12, "valor_posicional cifra"),
+    # Bloque 5 · sumar
+    "sumar.dibujos": (1, 8, "sumar dibujos"),
+    "sumar.recta": (1, 10, "sumar recta_numérica"),
+    "sumar.h10": (1, 10, "sumar hasta_10 cálculo"),
+    "sumar.h20": (2, 12, "sumar hasta_20 cálculo llevadas"),
+    "sumar.h100": (3, 15, "sumar hasta_100 cálculo llevadas"),
+    "sumar.vertical": (3, 15, "sumar vertical algoritmo llevadas"),
+    "sumar.dobles": (2, 8, "sumar dobles cálculo_mental"),
+    "sumar.comp10": (1, 8, "sumar completar_hasta_10 cálculo_mental"),
+    "sumar.comp20": (2, 10, "sumar completar_hasta_la_decena cálculo_mental"),
+    "sumar.hueco": (3, 12, "sumar hueco_cálculo"),
+    "sumar.decenas": (2, 10, "sumar decenas cálculo_mental"),
+    "sumar.encadenadas": (3, 12, "sumar encadenadas cálculo"),
+    "sumar.piramide": (3, 15, "sumar pirámide cálculo"),
+    "sumar.tabla": (2, 12, "sumar tabla cálculo"),
+    # Bloque 6 · restar
+    "restar.quita": (1, 8, "restar dibujos"),
+    "restar.recta": (1, 10, "restar recta_numérica"),
+    "restar.r10": (1, 10, "restar hasta_10 cálculo"),
+    "restar.r20": (2, 12, "restar hasta_20 cálculo llevadas"),
+    "restar.r100": (3, 15, "restar hasta_100 cálculo llevadas"),
+    "restar.vertical": (3, 15, "restar vertical algoritmo llevadas"),
+    "restar.mitades": (2, 8, "restar mitades cálculo_mental"),
+    "restar.faltan": (2, 10, "restar cuánto_falta cálculo_mental"),
+    "restar.hueco": (3, 12, "restar hueco_cálculo"),
+    "restar.decenas": (2, 10, "restar decenas cálculo_mental"),
+    "restar.encadenadas": (3, 12, "restar encadenadas cálculo"),
+    "restar.familia": (3, 12, "sumar restar familia_de_operaciones"),
+    # Bloque 7 · juegos numéricos
+    "juegos.cuadrado": (3, 15, "juego cuadrado_mágico sumar"),
+    "juegos.laberinto": (2, 12, "juego laberinto cálculo"),
+    "juegos.une": (2, 10, "juego unir_operaciones_resultados"),
+    "juegos.cadena": (2, 12, "juego cadena cálculo"),
+    "juegos.oculto": (3, 12, "juego número_oculto razonamiento"),
+    "juegos.colorea": (2, 15, "juego colorear cálculo"),
+    # Bloque 9 · geometría
+    "geometria.figuras": (1, 8, "geometría figuras_planas"),
+    "geometria.cuenta": (2, 10, "geometría figuras contar"),
+    "geometria.cuerpos": (2, 10, "geometría cuerpos_geométricos"),
+    "geometria.rueda": (1, 8, "geometría cuerpos rueda"),
+    "geometria.lineas": (1, 8, "geometría líneas rectas_curvas"),
+    "geometria.posiciones": (2, 10, "geometría posiciones espacio lateralidad"),
+    "geometria.simetria": (3, 12, "geometría simetría"),
+    "geometria.copia": (2, 12, "geometría copiar dibujo cuadrícula"),
+    # Bloque 10 · medida
+    "medida.dinero": (2, 12, "medida dinero monedas euros"),
+    "medida.precios": (3, 12, "medida dinero compras precios"),
+    "medida.reloj": (2, 10, "medida reloj hora"),
+    "medida.reloj2": (3, 12, "medida reloj hora agujas"),
+    "medida.calendario": (2, 10, "medida calendario tiempo"),
+    "medida.tiempo": (2, 10, "medida tiempo días meses"),
+    "medida.longitud": (1, 8, "medida longitud comparar"),
+    "medida.capacidad": (1, 8, "medida capacidad líquido"),
+    # Bloque 11 · estadística y patrones
+    "estadistica.pictograma": (2, 12, "estadística pictograma datos"),
+    "estadistica.recuento": (1, 10, "estadística recuento datos contar"),
+    "estadistica.barras": (2, 12, "estadística gráfico_de_barras datos"),
+    "estadistica.patrones": (2, 10, "patrones series razonamiento"),
+}
+
+def metadatos(id):
+    d, m, t = META[id]
+    return {"dificultad": d, "minutos": m, "etiquetas": [x.replace("_", " ") for x in t.split()]}

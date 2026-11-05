@@ -83,7 +83,8 @@ export function abrirSelector({ actual = null, tamano = "completa", alElegir, al
     mini.style.background = fondo; mini.style.borderColor = borde;
     mini.dataset.id = o.id;
     const b = el("button", { className: "sel-tarjeta modelo" + (o.id === actual ? " actual" : ""), disabled: !o.cabe },
-      mini, el("strong", { textContent: o.nombre }), el("small", { textContent: o.cabe ? o.descripcion : "Solo en página completa (una actividad)." }));
+      mini, el("strong", { textContent: o.nombre }), el("small", { textContent: o.cabe ? o.descripcion : "Solo en página completa (una actividad)." }),
+      el("small", { className: "meta", textContent: `${"●".repeat(o.dificultad)}${"○".repeat(3 - o.dificultad)} · ${o.minutos} min`, title: `Dificultad ${o.dificultad} de 3 (${["refuerzo", "estándar", "ampliación"][o.dificultad - 1]}) · unos ${o.minutos} minutos` }));
     b.onclick = () => fin(o.id);
     return b;
   }

@@ -1,6 +1,6 @@
 // Charta · app. 4.1: selector y opciones · 4.2: compositor · 4.3: alumnos y variantes · 4.4: favoritas y recientes · 4.5: PWA y tableta · 5.1: nube · 5.2: Tabula · 5.3: Fori.
 import { CATALOGO } from "./nucleo/catalogo.js";
-import { generar, porDefecto, modelo } from "./nucleo/ficha.js";
+import { generar, porDefecto, modelo, metadatosDe } from "./nucleo/ficha.js";
 import { erroresFicha, letraVariante, paginasVariante } from "./nucleo/lector.js";
 import { listaTipos } from "./tipos/index.js";
 import { hoja, hojas, PALETA } from "./render/hoja.js";
@@ -138,8 +138,10 @@ function iniciar() {
     try {
       contar();
       const ns = nombres(), total = ns.length || copias();
+      const acts = editores.map((e) => e.leer());
       ficha = generar({
-        actividades: editores.map((e) => e.leer()),
+        actividades: acts,
+        metadatos: metadatosDe(acts.map((a) => a.tipo)),
         titulo: $("titulo").value.trim() || undefined,
         variantes: numVariantes($("variaciones").value, total),
         presentacion: { color: !$("bn").checked },

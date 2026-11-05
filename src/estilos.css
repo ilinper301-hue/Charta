@@ -119,6 +119,7 @@ body.con-selector { overflow: hidden; }
 .sel-tarjeta strong { font-family: var(--serif); font-weight: 600; font-size: 1.05rem; color: var(--texto); }
 .sel-tarjeta.modelo { padding: 8px; }
 .sel-tarjeta.modelo strong { font-family: var(--sans); font-size: .92rem; }
+.sel-tarjeta .meta { color: var(--primario); letter-spacing: .06em; font-weight: 600; }
 .sel-tarjeta.actual { border: 2px solid var(--primario); }
 .sel-tarjeta:disabled { opacity: .45; }
 .sel-tarjeta:hover:not(:disabled) { border-color: var(--acento-linea); background: var(--superficie); }
