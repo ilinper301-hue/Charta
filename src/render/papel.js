@@ -2,7 +2,8 @@
 // Mismas coordenadas que el motor de referencia: puntos PDF, A4, origen abajo a la izquierda, y hacia ARRIBA.
 // Así cada tipo se porta casi línea a línea desde motor/generador_fichas.py. Al emitir SVG se invierte y (H − y).
 // Port de stroke(), caja(), cuadrito(), _marco(), _celdas(), _linea(), T(), B() y _n() del motor.
-import { rep as repSVG, plantilla as tplSVG, ancho as anchoAndika, esc } from "../rep/index.js";
+import { rep as repSVG, plantilla as tplSVG, esc } from "../rep/index.js";
+import { FUENTE_POR_DEFECTO, ANDIKA_CSS } from "./fuentes.js";
 
 export const W = 595.2756;
 export const H = 841.8898;
@@ -14,7 +15,7 @@ export const TOP_REP = H - M - 90;
 export const ZONA = { x: M, w: W - 2 * M, yArriba: H - M - 76, alto: H - 2 * M - 76 };
 export const INK = 0.12;
 export const COLOR_SOLUCION = "#C62828";
-export const FUENTE = "Andika, Poppins, sans-serif";
+export const FUENTE = ANDIKA_CSS;
 export const MENOS = "−";
 
 const f2 = (x) => { const v = Math.round(x * 100) / 100; return String(Object.is(v, -0) ? 0 : v); };
@@ -33,8 +34,8 @@ export const B = (w = 44, h = 38, sol = null) => ({ t: "b", w, h, sol });
 
 export class Papel {
   /** modo: "papel" (huecos vacíos) o "solucion" (huecos con la respuesta en rojo). parte: 1 o 0.5. */
-  constructor({ modo = "papel", parte = 1 } = {}) {
-    this.o = []; this.modo = modo; this.parte = parte;
+  constructor({ modo = "papel", parte = 1, fuente = FUENTE_POR_DEFECTO } = {}) {
+    this.o = []; this.modo = modo; this.parte = parte; this.fuente = fuente;
   }
   get solucion() { return this.modo === "solucion"; }
   Y(y) { return f2(H - y); }
@@ -64,16 +65,17 @@ export class Papel {
   }
   /** anchor: "start" (drawString), "middle" (drawCentredString), "end" (drawRightString). */
   text(x, y, t, fs, { f = "PB", anchor = "start", gris = INK } = {}) {
-    this.o.push(`<text x="${f2(x)}" y="${this.Y(y)}"${anchor !== "start" ? ` text-anchor="${anchor}"` : ""} font-family="${FUENTE}" font-size="${f2(fs)}"` +
+    this.o.push(`<text x="${f2(x)}" y="${this.Y(y)}"${anchor !== "start" ? ` text-anchor="${anchor}"` : ""} font-family="${this.fuente.css.replaceAll('"', "&quot;")}" font-size="${f2(fs)}"` +
       (negrita(f) ? ` font-weight="bold"` : "") + ` fill="${color(gris)}">${esc(t)}</text>`);
   }
-  ancho(t, f, fs) { return anchoAndika(String(t), negrita(f), fs); }
+  ancho(t, f, fs) { return this.fuente.ancho(String(t), negrita(f), fs); }
   /** Representación del número centrada en (cx, cy), como CAT[k][READ](cx, cy, n, i) del motor. */
   rep(nombre, n, cx, cy, { i = 0, vacio = false, rango, escala = 1 } = {}) { this._svg(repSVG(nombre, n, { i, vacio, rango }), cx, cy, escala); }
   plantilla(nombre, n, cx, cy, { i = 0, rango, escala = 1 } = {}) {
     const r = tplSVG(nombre, n, { i, rango }); if (r) this._svg(r, cx, cy, escala);
   }
   _svg({ w, h, svg }, cx, cy, k) {
+    if (this.fuente.css !== FUENTE) svg = svg.replaceAll(`font-family="${FUENTE}"`, `font-family="${this.fuente.css.replaceAll('"', "&quot;")}"`);   // las representaciones también usan la letra elegida
     this.o.push(`<g transform="translate(${f2(cx)} ${this.Y(cy)})${k !== 1 ? ` scale(${f2(k)})` : ""} translate(${f2(-w / 2)} ${f2(-h / 2)})">${svg}</g>`);
   }
 

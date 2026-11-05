@@ -1,9 +1,10 @@
 // Charta · paso 2.4 · página A4 completa en SVG: Nombre (impreso o línea en blanco), Fecha, título
 // y 1 o 2 paneles con su actividad. Port de encabezado(), panel() y pagina() del motor.
-// opciones: { titulo, nombre = "", bn = false (blanco y negro / ahorro de tinta), modo = "papel" | "solucion", uid,
+// opciones: { titulo, nombre = "", bn = false (blanco y negro / ahorro de tinta), modo = "papel" | "solucion", uid, fuente (de fuentes.js; por defecto Andika),
 //   grande = false (letra grande en cabecera y enunciado), facil = false (lectura fácil: letra grande + una frase por línea) }
 import { Papel, W, H, M, INK, ZONA } from "./papel.js";
 import { render } from "./actividad.js";
+import { fuenteDe, FUENTE_POR_DEFECTO } from "./fuentes.js";
 
 export const AZUL = "#1F4E79";
 /** PALETA del motor: [relleno, borde] de cada panel. */
@@ -59,7 +60,7 @@ function enunciadoLineas(p, texto, ancho, grande, facil) {
   return { lineas: partidas, fs, lh: fs * 1.4 };
 }
 
-function panel(p, act, rect, { bn, modo, clip, grande, facil }) {
+function panel(p, act, rect, { bn, modo, clip, grande, facil, fuente }) {
   const [x, yB, w, h] = rect, yT = yB + h;
   const en = enunciadoLineas(p, act.enunciado, w - 72, grande, facil);
   const lineas = en.lineas, extra = en.lh * (lineas.length - 1);
@@ -72,7 +73,7 @@ function panel(p, act, rect, { bn, modo, clip, grande, facil }) {
   while (lineas.some((t) => p.ancho(t, "PR", fs) > w - 59) && fs > 8) fs -= 0.5;
   lineas.forEach((t, j) => p.text(x + 45, yT - 26 - j * en.lh, t, fs, { f: "PR" }));
   // Encaje de la zona de página (como panel()): punto (X, Y) → (sc·X + e, sc·Y + fy), y hacia arriba.
-  const z = render(act, modo), parte = act.tamano === "media" ? 0.5 : 1;
+  const z = render(act, modo, fuente), parte = act.tamano === "media" ? 0.5 : 1;
   const hi = (yT - 43 - extra) - (yB + 14), alto = ZONA.alto * parte, base = ZONA.yArriba - alto;
   const sc = Math.min((w - 31) / ZONA.w, hi / alto);
   const e = x + w / 2 - ZONA.w * sc / 2 - sc * M, fy = (yB + 14) + (parte < 1 ? hi - alto * sc : 0) - sc * base;
@@ -81,22 +82,22 @@ function panel(p, act, rect, { bn, modo, clip, grande, facil }) {
 }
 
 /** SVG de una página (pagina = { actividades: [...] } de la ficha). */
-export function hoja(pagina, { titulo, nombre = "", bn = false, modo = "papel", uid = "h", grande = false, facil = false } = {}) {
+export function hoja(pagina, { titulo, nombre = "", bn = false, modo = "papel", uid = "h", grande = false, facil = false, fuente = FUENTE_POR_DEFECTO } = {}) {
   grande = grande || facil;
   const acts = pagina.actividades;
   if (acts.length < 1 || acts.length > 2) throw new Error("Una página lleva 1 o 2 actividades.");
-  const p = new Papel({ modo });
+  const p = new Papel({ modo, fuente });
   encabezado(p, titulo, nombre, bn, grande);
   const rects = rectsPanel(acts.length);
-  acts.forEach((a, i) => panel(p, a, rects[i], { bn, modo, clip: `${uid}c${i}`, grande, facil }));
+  acts.forEach((a, i) => panel(p, a, rects[i], { bn, modo, clip: `${uid}c${i}`, grande, facil, fuente }));
   return `<svg xmlns="http://www.w3.org/2000/svg" class="hoja-svg" viewBox="0 0 ${f2(W)} ${f2(H)}" width="210mm" height="297mm">` +
     `<rect width="${f2(W)}" height="${f2(H)}" fill="#fff"/><g stroke-linecap="round" stroke-linejoin="round">${p.o.join("")}</g></svg>`;
 }
 
-/** Opciones de lectura de la ficha (`presentacion.letraGrande` / `lecturaFacil`). */
+/** Opciones de lectura y letra de la ficha (`presentacion.letraGrande` / `lecturaFacil` / `fuente`). */
 export function estiloLectura(ficha) {
   const p = ficha.presentacion || {};
-  return { grande: !!p.letraGrande, facil: !!p.lecturaFacil };
+  return { grande: !!p.letraGrande, facil: !!p.lecturaFacil, fuente: fuenteDe(ficha) };
 }
 
 /**

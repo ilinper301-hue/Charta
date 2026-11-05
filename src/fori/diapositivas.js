@@ -6,8 +6,9 @@
 //   svg: imagen 1600×900 con la solución dibujada; cada paso de la solución lleva class="cs pK" (K = 0…n−1)
 //   y el <style> contiene el marcador /*PASOS*/, que Fori sustituye por cssPasos(k, n) para mostrar k pasos.
 import { render } from "../render/actividad.js";
-import { ancho, esc } from "../rep/index.js";
-import { COLOR_SOLUCION, FUENTE } from "../render/papel.js";
+import { esc } from "../rep/index.js";
+import { COLOR_SOLUCION } from "../render/papel.js";
+import { fuenteDe } from "../render/fuentes.js";
 import { AZUL } from "../render/hoja.js";
 import { paginasVariante } from "../nucleo/lector.js";
 
@@ -53,17 +54,18 @@ export function marcarPasos(svg, ej = null) {
 }
 
 /** Enunciado en líneas que caben en `max` px (Andika), con su tamaño de letra. */
-function lineasEnunciado(texto, max) {
+function lineasEnunciado(texto, max, fuente) {
   const lineas = texto.split("\n");
   let fs = 40;
-  while (fs > 22 && lineas.some((t) => ancho(t, false, fs) > max)) fs -= 2;
+  while (fs > 22 && lineas.some((t) => fuente.ancho(t, false, fs) > max)) fs -= 2;
   return { lineas, fs };
 }
 
 /** Una diapositiva: cabecera (número + enunciado [+ etiqueta]) y la caja `c` de la zona encajada debajo. */
-function diapositiva(act, zona, c, ej, etiqueta, fuentes) {
+function diapositiva(act, zona, c, ej, etiqueta, fuentes, fuente) {
+  const FUENTE = fuente.css.replaceAll('"', "&quot;");
   const { svg, n } = marcarPasos(zona.svg, ej);
-  const { lineas, fs } = lineasEnunciado(act.enunciado, etiqueta ? 1150 : 1440);
+  const { lineas, fs } = lineasEnunciado(act.enunciado, etiqueta ? 1150 : 1440, fuente);
   const alto = 34 + lineas.length * fs * 1.25;
   const top = Math.max(110, alto + 28), pad = 10;
   const bx = c.x - pad, by = c.y - pad, bw = c.w + 2 * pad, bh = c.h + 2 * pad;
@@ -92,14 +94,14 @@ function diapositiva(act, zona, c, ej, etiqueta, fuentes) {
  */
 export function diapositivas(ficha, { cajas, fuentes = "", variante = 0 } = {}) {
   if (typeof cajas !== "function") throw new Error("Faltan las cajas de los ejercicios.");
-  const out = [];
+  const out = [], fuente = fuenteDe(ficha);
   for (const pag of paginasVariante(ficha, variante)) for (const act of pag.actividades) {
-    const zona = render(act, "solucion"), cs = cajas(zona);
+    const zona = render(act, "solucion", fuente), cs = cajas(zona);
     const ids = act.ejercicios.map((e) => e.id).filter((id) => cs[id] && cs[id].w > 0 && cs[id].h > 0);
-    out.push({ etq: `Actividad ${act.n}`, ...diapositiva(act, zona, { x: zona.x, y: zona.y, w: zona.w, h: zona.h }, null, "", fuentes) });
+    out.push({ etq: `Actividad ${act.n}`, ...diapositiva(act, zona, { x: zona.x, y: zona.y, w: zona.w, h: zona.h }, null, "", fuentes, fuente) });
     if (ids.length > 1) ids.forEach((id, i) => {
       const etq = `Ejercicio ${i + 1} de ${ids.length}`;
-      out.push({ etq: `Actividad ${act.n} · ${etq}`, ...diapositiva(act, zona, cs[id], id, etq, fuentes) });
+      out.push({ etq: `Actividad ${act.n} · ${etq}`, ...diapositiva(act, zona, cs[id], id, etq, fuentes, fuente) });
     });
   }
   return out;

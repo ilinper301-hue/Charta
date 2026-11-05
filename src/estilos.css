@@ -1,6 +1,7 @@
 [hidden] { display: none !important; }
 @font-face { font-family: Andika; src: url("fuentes/Andika-Regular.woff") format("woff"); font-weight: 400; }
 @font-face { font-family: Andika; src: url("fuentes/Andika-Bold.woff") format("woff"); font-weight: 700; }
+@font-face { font-family: Fredoka; src: url("fuentes/Fredoka.woff") format("woff"); font-weight: 400 700; }
 
 /* Sistema de diseño (en la línea de Tabula: fondo crema, serif en títulos, un único acento: el verde de Charta) */
 :root {
@@ -151,3 +152,6 @@ body.con-selector { overflow: hidden; }
 }
 @media (min-width: 1200px) { .lado .hojas { grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); } }
 @media (max-width: 420px) { .sub { display: none; } }
+
+.fila-fuente { display: flex; flex-wrap: wrap; gap: 8px; }
+.apagado { color: var(--apagado); line-height: 1.35; }

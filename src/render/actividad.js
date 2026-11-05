@@ -5,11 +5,11 @@
 import { tipo } from "../nucleo/tipos.js";
 import { Papel } from "./papel.js";
 
-export function render(actividad, modo = "papel") {
+export function render(actividad, modo = "papel", fuente) {
   const T = tipo(actividad.tipo);
   if (!T) throw new Error(`Tipo no disponible: «${actividad.tipo}»`);
   if (typeof T.dibujar !== "function") throw new Error(`${actividad.tipo}: falta dibujar()`);
-  const p = new Papel({ modo, parte: actividad.tamano === "media" ? 0.5 : 1 });
+  const p = new Papel({ modo, parte: actividad.tamano === "media" ? 0.5 : 1, ...(fuente && { fuente }) });
   T.dibujar(p, actividad);
   return p.resultado();
 }

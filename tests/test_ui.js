@@ -129,7 +129,7 @@ import { hoja, estiloLectura } from "../src/render/hoja.js";
   let n = 0;
   for (const m of CATALOGO.modelos) {
     const f = generar({ actividades: [{ tipo: m.id }], presentacion: { lecturaFacil: true } }, 5);
-    assert.deepEqual(estiloLectura(f), { grande: false, facil: true });
+    const el = estiloLectura(f); assert.equal(el.grande, false); assert.equal(el.facil, true); assert.equal(el.fuente.id, "andika");
     const normal = hoja(f.paginas[0], { titulo: f.titulo });
     for (const est of [{ grande: true }, { facil: true }]) {
       const g = hoja(f.paginas[0], { titulo: f.titulo, ...est });
@@ -141,4 +141,54 @@ import { hoja, estiloLectura } from "../src/render/hoja.js";
   const f = generar({ actividades: [{ tipo: "sumar.h20" }, { tipo: "restar.r20" }], presentacion: { letraGrande: true } }, 2);
   assert.ok(hoja(f.paginas[0], { titulo: f.titulo, ...estiloLectura(f) }).includes("font-size"));
   console.log(`test_ui: letra grande y lectura fácil OK (${n} modelos)`);
+}
+
+// Letra de las fichas: Andika, Fredoka y las subidas por la maestra
+import { fuentePorId, fuenteDe, registrarFuenteUsuario, quitarFuenteUsuario, nombreFuente, todasLasFuentes } from "../src/render/fuentes.js";
+import { validarArchivo, cssFuente, MAX_BYTES, MAX_FUENTES } from "../src/ui/fuentes.js";
+import { crearGuardadas as crearG, limpiar as limp } from "../src/ui/guardadas.js";
+{
+  // nombres y validación de archivos
+  assert.equal(nombreFuente("Mi_Letra-Bonita (1).ttf"), "Mi Letra-Bonita 1");
+  assert.equal(nombreFuente("###.ttf"), "Mi letra");
+  assert.equal(validarArchivo({ name: "a.ttf", size: 1000 }).formato, "truetype");
+  assert.equal(validarArchivo({ name: "a.woff2", size: 1000 }).mime, "font/woff2");
+  assert.equal(validarArchivo({ name: "a.pdf", size: 1000 }).ok, false);
+  assert.equal(validarArchivo({ name: "a.ttf", size: MAX_BYTES + 1 }).ok, false);
+  assert.equal(validarArchivo({ name: "a.ttf", size: 0 }).ok, false);
+  const llenas = Array.from({ length: MAX_FUENTES }, (_, i) => "L" + i);
+  assert.equal(validarArchivo({ name: "nueva.ttf", size: 10 }, llenas).ok, false);
+  assert.equal(validarArchivo({ name: "L1.ttf", size: 10 }, llenas).ok, true, "reemplazar una existente sí se puede");
+  assert.ok(cssFuente({ nombre: "X", formato: "woff", mime: "font/woff", b64: "AAAA" }).includes('font-family:"X"'));
+
+  // Fredoka y letra de usuario en las fichas: todos los modelos se dibujan y la ficha solo guarda el id
+  assert.equal(fuentePorId("fredoka").nombre, "Fredoka");
+  assert.equal(fuentePorId("usuario:No existe").id, "andika", "letra desconocida → Andika");
+  const f1 = fuentePorId("fredoka"), a1 = fuentePorId("andika");
+  assert.ok(f1.ancho("Hola", false, 20) > 0 && Math.abs(f1.ancho("Hola", true, 20) / f1.ancho("Hola", false, 20) - 1) < 0.1);   // la negrita de Fredoka casi no cambia el ancho
+  assert.notEqual(f1.ancho("Lengua", false, 20), a1.ancho("Lengua", false, 20));
+  registrarFuenteUsuario("Mi letra");
+  assert.equal(fuentePorId("usuario:Mi letra").usuario, true);
+  let n = 0;
+  for (const m of CATALOGO.modelos) {
+    const por = (fuente) => generar({ actividades: [{ tipo: m.id }], presentacion: fuente ? { fuente } : {} }, 3);
+    const fr = por("fredoka"), us = por("usuario:Mi letra"), base = por();
+    assert.equal(base.presentacion.fuente, undefined);
+    assert.equal(fr.presentacion.fuente, "fredoka"); assert.equal(fuenteDe(fr).id, "fredoka");
+    const sFr = hojas(fr)[0].svg, sUs = hojas(us)[0].svg, sBase = hojas(base)[0].svg;
+    assert.ok(sFr.includes("Fredoka") && !sFr.includes("Andika, Poppins"), `${m.id}: Fredoka en el SVG`);
+    assert.ok(sUs.includes("&quot;Mi letra&quot;") && !/NaN|undefined/.test(sUs), `${m.id}: letra subida`);
+    assert.ok(sBase.includes("Andika, Poppins") && !sBase.includes("Fredoka"), `${m.id}: Andika por defecto`);
+    n++;
+  }
+  quitarFuenteUsuario("Mi letra");
+  assert.equal(todasLasFuentes().some((f) => f.usuario), false);
+
+  // favoritas: la letra se guarda como nombre; las guardadas antes (sin campos nuevos) se siguen reconociendo
+  assert.equal(limp({ actividades: [], fuente: "andika" }).fuente, undefined);
+  assert.equal(limp({ actividades: [], fuente: "fredoka" }).fuente, "fredoka");
+  const mem = new Map(), alm = { getItem: (k) => mem.get(k) ?? null, setItem: (k, v) => mem.set(k, v) };
+  mem.set("charta:favoritos", JSON.stringify([{ actividades: [{ tipo: "sumar.h20", params: {} }], semilla: 4, titulo: "", variaciones: "iguales", bn: false, nombre: "x", fecha: "2026-11-01" }]));
+  assert.equal(crearG(alm).esFavorito({ actividades: [{ tipo: "sumar.h20", params: {} }], semilla: 4, titulo: "", variaciones: "iguales", bn: false, grande: false, facil: false, fuente: "andika" }), true);
+  console.log(`test_ui: letras (Andika, Fredoka, subida) OK en ${n} modelos`);
 }

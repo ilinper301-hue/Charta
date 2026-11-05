@@ -38,6 +38,13 @@
     <label class="check"><input type="checkbox" id="bn"> Blanco y negro (ahorro de tinta)</label>
     <label class="check"><input type="checkbox" id="grande"> Letra grande (cabecera y enunciado)</label>
     <label class="check"><input type="checkbox" id="facil"> Lectura fácil (letra grande y una frase por línea)</label>
+    <label>Letra <select id="fuente"></select></label>
+    <div class="fila-fuente">
+      <button type="button" id="subirFuente">Subir letra…</button>
+      <button type="button" id="quitarFuente" hidden>Quitar esta letra</button>
+      <input type="file" id="archivoFuente" accept=".ttf,.otf,.woff,.woff2" hidden>
+    </div>
+    <small id="infoFuente" class="apagado">Las letras que subas se guardan solo en este dispositivo. Usa solo letras cuya licencia lo permita.</small>
     <label>Título (opcional) <input id="titulo" placeholder="Automático"></label>
     <div class="botones">
       <button id="imprimir" class="primario">Imprimir / Guardar PDF</button>

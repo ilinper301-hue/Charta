@@ -14,6 +14,8 @@ import { iniciarTema } from "./ui/tema.js";
 import { crearNube } from "./nube/nube.js";
 import { leerEntrada, leerTabula, gruposDeTabula, urlVolver } from "./ui/tabula.js";
 import { paqueteFori, URL_FORI, CLAVE_FORI } from "./fori/diapositivas.js";
+import { fuentePorId, registrarFuenteUsuario, quitarFuenteUsuario, todasLasFuentes } from "./render/fuentes.js";
+import { validarArchivo, crearAlmacenFuentes, instalarCss, aBase64 } from "./ui/fuentes.js";
 
 globalThis.Charta = { generar, modelo, erroresFicha, listaTipos, hojas, CATALOGO };
 
@@ -30,8 +32,9 @@ function cajasEjercicios(zona) {
   s.remove();
   return out;
 }
-const cssFuentes = () => [...document.styleSheets].flatMap((h) => { try { return [...h.cssRules]; } catch { return []; } })
-  .filter((r) => r instanceof CSSFontFaceRule && /data:font/.test(r.cssText)).map((r) => r.cssText).join("");
+/** @font-face incrustados (data:) de las letras que usa la ficha: Andika siempre y, si es otra, la elegida. */
+const cssFuentes = (usadas = ["Andika"]) => [...document.styleSheets].flatMap((h) => { try { return [...h.cssRules]; } catch { return []; } })
+  .filter((r) => r instanceof CSSFontFaceRule && /data:/.test(r.cssText) && usadas.includes(r.style.getPropertyValue("font-family").replace(/["']/g, "").trim())).map((r) => r.cssText).join("");
 
 /** Editor de una actividad: modelo elegido (con el selector) + sus opciones (desde MODELOS). */
 function editorActividad(id, { tamano, alCambiar }) {
@@ -144,7 +147,7 @@ function iniciar() {
         metadatos: metadatosDe(acts.map((a) => a.tipo)),
         titulo: $("titulo").value.trim() || undefined,
         variantes: numVariantes($("variaciones").value, total),
-        presentacion: { color: !$("bn").checked, ...($("grande").checked && { letraGrande: true }), ...($("facil").checked && { lecturaFacil: true }) },
+        presentacion: { color: !$("bn").checked, ...($("fuente").value !== "andika" && { fuente: $("fuente").value }), ...($("grande").checked && { letraGrande: true }), ...($("facil").checked && { lecturaFacil: true }) },
       }, semilla);
       const bn = $("bn").checked;
       paginas = hojas(ficha, { nombres: ns, copias: total, bn });
@@ -164,6 +167,41 @@ function iniciar() {
     alElegir: (id) => { nuevoEditor(id); pintar(); } });
   $("acts").addEventListener("change", pintar);
   for (const id of ["alumnos", "copias", "variaciones", "bn", "grande", "facil", "titulo"]) $(id).addEventListener("change", pintar);
+
+  // Letra de las fichas: Andika, Fredoka y las que suba la maestra (guardadas en este dispositivo).
+  const CLAVE_FUENTE = "charta:fuente", INFO_FUENTE = $("infoFuente").textContent;
+  const almacenFuentes = (() => { try { return crearAlmacenFuentes(); } catch { return null; } })();
+  const NOTAS = { andika: " (la de Matemáticas)", fredoka: " (redondeada)" };
+  function elegirFuente(id) {
+    const f = fuentePorId(id);
+    $("fuente").replaceChildren(...todasLasFuentes().map((x) => el("option", { value: x.id, textContent: x.nombre + (x.usuario ? " (subida)" : NOTAS[x.id] || "") })));
+    $("fuente").value = f.id; $("quitarFuente").hidden = !f.usuario; $("infoFuente").textContent = INFO_FUENTE;
+    try { localStorage.setItem(CLAVE_FUENTE, f.id); } catch {}
+  }
+  $("fuente").addEventListener("change", () => { elegirFuente($("fuente").value); pintar(); });
+  $("subirFuente").onclick = () => $("archivoFuente").click();
+  $("archivoFuente").onchange = async () => {
+    const f = $("archivoFuente").files[0]; $("archivoFuente").value = "";
+    if (!f) return;
+    const v = validarArchivo(f, todasLasFuentes().filter((x) => x.usuario).map((x) => x.nombre));
+    if (!v.ok) { $("infoFuente").textContent = v.error; return; }
+    try {
+      const rec = { nombre: v.nombre, formato: v.formato, mime: v.mime, b64: aBase64(await f.arrayBuffer()) };
+      await instalarCss(rec); await almacenFuentes?.poner(rec);
+      registrarFuenteUsuario(rec.nombre); elegirFuente("usuario:" + rec.nombre); pintar();
+    } catch (e) { $("infoFuente").textContent = "No se ha podido guardar la letra: " + (e.message || e); }
+  };
+  $("quitarFuente").onclick = async () => {
+    const f = fuentePorId($("fuente").value); if (!f.usuario) return;
+    await almacenFuentes?.quitar(f.nombre).catch(() => {}); instalarCss(null, f.nombre); quitarFuenteUsuario(f.nombre);
+    elegirFuente("andika"); pintar();
+  };
+  let guardada = "andika"; try { guardada = localStorage.getItem(CLAVE_FUENTE) || "andika"; } catch {}
+  elegirFuente(guardada);
+  almacenFuentes?.todas().then(async (recs) => {
+    for (const r of recs) { await instalarCss(r); registrarFuenteUsuario(r.nombre); }
+    if (recs.length) { elegirFuente(guardada); pintar(); }
+  }).catch(() => {});
   $("alumnos").addEventListener("input", contar);
   $("irPrevia").onclick = () => $("previa").scrollIntoView({ behavior: "smooth" });
   $("variante").onclick = () => { semilla++; pintar(); };
@@ -177,7 +215,7 @@ function iniciar() {
   const guardadas = crearGuardadas(almacen);
   let pestana = "favoritos";
   const composicion = () => ({ actividades: editores.map((e) => e.leer()), semilla, titulo: $("titulo").value.trim(),
-    variaciones: $("variaciones").value, bn: $("bn").checked, grande: $("grande").checked, facil: $("facil").checked });
+    variaciones: $("variaciones").value, bn: $("bn").checked, grande: $("grande").checked, facil: $("facil").checked, fuente: $("fuente").value });
   function marcarFavorito() {
     try { const f = guardadas.esFavorito(composicion()); $("favorito").textContent = f ? "★ Favorita" : "☆ Favorita"; $("favorito").classList.toggle("on", f); } catch {}
   }
@@ -187,6 +225,7 @@ function iniciar() {
     recolocar();
     c.actividades.forEach((a, i) => editores[i].poner(a.tipo, a.params));
     semilla = c.semilla || 1; $("titulo").value = c.titulo || ""; $("variaciones").value = c.variaciones || "iguales"; $("bn").checked = !!c.bn; $("grande").checked = !!c.grande; $("facil").checked = !!c.facil;
+    if (c.fuente && fuentePorId(c.fuente).id === c.fuente) elegirFuente(c.fuente); else if (c.fuente) $("infoFuente").textContent = `Esta ficha usaba la letra «${c.fuente.replace("usuario:", "")}», que no está en este dispositivo: se usa Andika. Puedes subirla otra vez.`;
     pintar(); $("acts").scrollIntoView({ behavior: "smooth" });
   }
   function pintarGuardadas() {
@@ -320,7 +359,7 @@ function iniciar() {
     avisoNube("");
     try {
       await document.fonts.ready;
-      const p = paqueteFori(ficha, { cajas: cajasEjercicios, fuentes: cssFuentes() });
+      const p = paqueteFori(ficha, { cajas: cajasEjercicios, fuentes: cssFuentes(["Andika", fuentePorId(ficha.presentacion?.fuente).nombre]) });
       localStorage.setItem(CLAVE_FORI, JSON.stringify(p));
       location.href = URL_FORI + "?charta=1";
     } catch (e) { avisoNube("No se ha podido preparar la ficha para Fori: " + e.message, true); }

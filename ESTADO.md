@@ -88,5 +88,10 @@
 - [ ] Otros cursos de Matemáticas (2.º a 6.º) y Lengua.
   - Lengua 1.º: primero el guion de tipología (LENGUA_1.md, en chat aparte con Opus). **Decisión de Iván (5-11-2026): la letra de las fichas de Lengua será Fredoka** (como Barri y Calculi; OFL, ya está en `fonts/` de Barri). Comprobar al diseñar: la «a» y la «g» que ve el alumno en las palabras de lectura, y la pauta de caligrafía (Fredoka no es letra de escritura a mano).
 
+## Selector de letra (pedido por Iván, 5-11-2026)
+- [x] Letra de las fichas elegible: **Andika** (por defecto, Matemáticas), **Fredoka** (incrustada, 34 KB; OFL en `src/fuentes/`) y **letras subidas** por la maestra.
+  - Hecho: `src/render/fuentes.js` (registro; anchuras de Andika y de Fredoka —`tools/anchos_fuente.py`—; las subidas se miden con canvas) y `src/ui/fuentes.js` (validación .ttf/.otf/.woff/.woff2, máx. 600 KB y 8 letras; IndexedDB `charta-fuentes`, solo en el dispositivo). `ficha.presentacion.fuente` = `"fredoka"` o `"usuario:<Nombre>"` (solo si no es Andika: las fichas anteriores no cambian; en otro dispositivo sin esa letra sale Andika con aviso). Se guarda en favoritos/recientes y en Fori (se incrustan solo Andika y la elegida). Las representaciones (`rep.*`) también usan la letra elegida. Probado en Chrome (elegir, subir, recargar, quitar; sin errores). 
+  - **Pendiente**: que Lengua use Fredoka por defecto (cuando existan sus modelos: letra por materia). Fredoka no es letra de escritura: la pauta de caligrafía de Lengua puede necesitar otra letra.
+
 ## Fase 8 · Opcional
 - [ ] Publicar en Google Play (TWA).

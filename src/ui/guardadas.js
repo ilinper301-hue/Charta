@@ -9,9 +9,11 @@ export function limpiar(c) {
   return {
     actividades: c.actividades.map((a) => ({ tipo: a.tipo, params: { ...a.params } })),
     semilla: c.semilla | 0, titulo: c.titulo || "", variaciones: c.variaciones || "iguales", bn: !!c.bn, grande: !!c.grande, facil: !!c.facil,
+    ...(c.fuente && c.fuente !== "andika" && { fuente: String(c.fuente) }),     // solo el nombre; la letra no viaja
   };
 }
-const igualSinSemilla = (a, b) => JSON.stringify({ ...a, semilla: 0, nombre: 0, fecha: 0 }) === JSON.stringify({ ...b, semilla: 0, nombre: 0, fecha: 0 });
+// Se comparan normalizadas con limpiar(): las favoritas guardadas antes (sin los campos nuevos) siguen reconociéndose.
+const igualSinSemilla = (a, b) => JSON.stringify({ ...limpiar(a), semilla: 0 }) === JSON.stringify({ ...limpiar(b), semilla: 0 });
 const igual = (a, b) => igualSinSemilla(a, b) && a.semilla === b.semilla;
 
 export function crearGuardadas(almacen) {
