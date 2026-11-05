@@ -53,6 +53,8 @@ body { margin: 0; font-family: var(--sans); font-size: 15px; line-height: 1.45; 
 .tema { display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border-radius: 999px; border: 1px solid var(--borde);
   background: var(--superficie); color: var(--texto-2); }
 .tema:hover { background: var(--hover); }
+.acciones { display: flex; align-items: center; gap: 8px; }
+.cuenta { height: 40px; padding: 0 14px; border-radius: 999px; font-size: .88rem; max-width: 46vw; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 main { max-width: 760px; margin: 0 auto; padding: 16px; display: grid; gap: 16px; }
 .tarjeta { background: var(--superficie); border: 1px solid var(--borde); border-radius: var(--r-lg); padding: 18px; display: grid; gap: 12px;
@@ -135,7 +137,7 @@ body.con-selector { overflow: hidden; }
 .sel-tarjeta:active:not(:disabled) { background: var(--acento-suave); color: var(--texto); }
 
 /* Paso 4.4 · favoritas y recientes */
-.pestanas { display: flex; gap: 6px; }
+.pestanas { display: flex; gap: 6px; flex-wrap: wrap; }
 .pestanas button { padding: 6px 14px; border-radius: 999px; font-size: .88rem; }
 .pestanas button.activa { background: var(--acento-suave); color: var(--acento-texto); border-color: var(--acento-linea); }
 .lista-g { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; max-height: 260px; overflow-y: auto; }
@@ -163,10 +165,10 @@ body.con-selector { overflow: hidden; }
 </style>
 </head>
 <body>
-<header class="barra"><div class="marca"><svg class="logo" viewBox="0 0 512 512" aria-hidden="true"><rect width="512" height="512" rx="112" fill="#1B4D3E"/><g transform="translate(70 404) rotate(-16)"><rect x="0" y="-232" width="110" height="232" rx="26" fill="#6DB592"/></g><g transform="translate(108 392) rotate(-9)"><rect x="0" y="-254" width="110" height="254" rx="26" fill="#CFE8DA"/></g><g transform="translate(146 376) rotate(-3)"><rect x="0" y="-286" width="110" height="286" rx="28" fill="#9FD3B8"/></g><path d="M409.7 191.3A112 112 0 1 0 409.7 326.7" fill="none" stroke="#1B4D3E" stroke-width="100" stroke-linecap="round"/><path d="M409.7 191.3A112 112 0 1 0 409.7 326.7" fill="none" stroke="#FAF9F5" stroke-width="80" stroke-linecap="round"/></svg><h1>Charta</h1><span class="sub">Fichas educativas</span></div><button id="tema" class="tema"></button></header>
+<header class="barra"><div class="marca"><svg class="logo" viewBox="0 0 512 512" aria-hidden="true"><rect width="512" height="512" rx="112" fill="#1B4D3E"/><g transform="translate(70 404) rotate(-16)"><rect x="0" y="-232" width="110" height="232" rx="26" fill="#6DB592"/></g><g transform="translate(108 392) rotate(-9)"><rect x="0" y="-254" width="110" height="254" rx="26" fill="#CFE8DA"/></g><g transform="translate(146 376) rotate(-3)"><rect x="0" y="-286" width="110" height="286" rx="28" fill="#9FD3B8"/></g><path d="M409.7 191.3A112 112 0 1 0 409.7 326.7" fill="none" stroke="#1B4D3E" stroke-width="100" stroke-linecap="round"/><path d="M409.7 191.3A112 112 0 1 0 409.7 326.7" fill="none" stroke="#FAF9F5" stroke-width="80" stroke-linecap="round"/></svg><h1>Charta</h1><span class="sub">Fichas educativas</span></div><div class="acciones"><button id="cuentaNube" class="cuenta">☁ Entrar</button><button id="tema" class="tema"></button></div></header>
 <main>
   <section class="tarjeta" id="guardadas" hidden>
-    <div class="pestanas"><button id="pFav" class="activa">★ Favoritas</button><button id="pRec">Recientes</button></div>
+    <div class="pestanas"><button id="pFav" class="activa">★ Favoritas</button><button id="pRec">Recientes</button><button id="pNube" hidden>☁ En la nube</button></div>
     <ul id="listaGuardadas" class="lista-g"></ul>
   </section>
   <section class="tarjeta">
@@ -191,8 +193,10 @@ body.con-selector { overflow: hidden; }
       <button id="imprimir" class="primario">Imprimir / Guardar PDF</button>
       <button id="variante">Otra variante</button>
       <button id="favorito">☆ Favorita</button>
+      <button id="guardarNube">☁ Guardar en la nube</button>
       <button id="versol">Ver soluciones</button>
     </div>
+    <p id="estadoNube" class="info" hidden></p>
     <p id="error" class="error" hidden></p>
     <p id="info" class="info"></p>
   </section>
@@ -227,6 +231,7 @@ const { crearGuardadas } = __req("ui/guardadas.js");
 const { leerAlumnos, numVariantes, MAX_ALUMNOS } = __req("ui/alumnos.js");
 const { registrarSW } = __req("pwa/registro.js");
 const { iniciarTema } = __req("ui/tema.js");
+const { crearNube } = __req("nube/nube.js");
 globalThis.Charta = { generar, modelo, erroresFicha, listaTipos, hojas, CATALOGO };
 
 const $ = (id) => document.getElementById(id);
@@ -387,12 +392,17 @@ function iniciar() {
     pintar(); $("acts").scrollIntoView({ behavior: "smooth" });
   }
   function pintarGuardadas() {
-    const fav = guardadas.favoritos(), rec = guardadas.recientes();
-    $("guardadas").hidden = !fav.length && !rec.length;
-    if (!fav.length && pestana === "favoritos") pestana = "recientes";
-    if (!rec.length && pestana === "recientes") pestana = "favoritos";
+    const fav = guardadas.favoritos(), rec = guardadas.recientes(), dentro = nube.estado().estado === "dentro";
+    const nubeLista = dentro ? enNube || [] : [];
+    $("guardadas").hidden = !fav.length && !rec.length && !dentro;
+    if (pestana === "nube" && !dentro) pestana = "favoritos";
+    if (!fav.length && pestana === "favoritos") pestana = dentro ? "nube" : "recientes";
+    if (!rec.length && pestana === "recientes") pestana = fav.length || !dentro ? "favoritos" : "nube";
     $("pFav").classList.toggle("activa", pestana === "favoritos"); $("pRec").classList.toggle("activa", pestana === "recientes");
+    $("pNube").classList.toggle("activa", pestana === "nube"); $("pNube").hidden = !dentro;
     $("pFav").textContent = `★ Favoritas (${fav.length})`; $("pRec").textContent = `Recientes (${rec.length})`;
+    $("pNube").textContent = enNube ? `☁ En la nube (${nubeLista.length})` : "☁ En la nube";
+    if (pestana === "nube") return pintarNube(nubeLista);
     const lista = pestana === "favoritos" ? fav : rec;
     $("listaGuardadas").replaceChildren(...lista.map((c, i) => {
       const disp = c.actividades.every((a) => hayTipo(a.tipo));
@@ -405,6 +415,69 @@ function iniciar() {
       return el("li", {}, abrir, x);
     }));
   }
+  // Paso 5.1 · nube: inicio de sesión con Google y fichas en /apps/charta/fichas/{id} (sin nombres de alumnos).
+  const nube = crearNube({ almacen });
+  let enNube = null; // lista de la nube (null = sin leer)
+  const avisoNube = (t, error) => { $("estadoNube").textContent = t || ""; $("estadoNube").classList.toggle("error", !!error); $("estadoNube").hidden = !t; };
+  const nombreModelos = (c) => (c?.actividades || []).map((a) => { try { return modelo(a.tipo).nombre; } catch { return a.tipo; } }).join(" + ");
+  function pintarNube(lista) {
+    if (!enNube) { $("listaGuardadas").replaceChildren(el("li", { className: "info", textContent: "Cargando…" })); return; }
+    if (!lista.length) { $("listaGuardadas").replaceChildren(el("li", { className: "info", textContent: "Aún no hay fichas en la nube: usa «☁ Guardar en la nube»." })); return; }
+    $("listaGuardadas").replaceChildren(...lista.map((x) => {
+      const disp = !!x.composicion && x.composicion.actividades.every((a) => hayTipo(a.tipo));
+      const abrir = el("button", { className: "g-abrir", disabled: !disp },
+        el("strong", { textContent: x.titulo }),
+        el("small", { textContent: nombreModelos(x.composicion) + (x.creada ? " · " + x.creada.slice(0, 10).split("-").reverse().map(Number).join("-") : "") }));
+      abrir.onclick = () => abrirGuardada(x.composicion);
+      const b = el("button", { className: "g-quitar", textContent: "✕", title: "Borrar de la nube" });
+      b.onclick = async () => {
+        if (!confirm(`¿Borrar «${x.titulo}» de la nube? Tabula y Fori dejarán de verla.`)) return;
+        try { await nube.borrar(x.id); enNube = enNube.filter((y) => y.id !== x.id); pintarGuardadas(); } catch (e) { avisoNube(e.message, true); }
+      };
+      return el("li", {}, abrir, b);
+    }));
+  }
+  async function leerNube() {
+    try { enNube = await nube.listar(); } catch (e) { enNube = enNube || []; avisoNube(e.message, true); }
+    pintarGuardadas();
+  }
+  function pintarCuenta(e) {
+    const b = $("cuentaNube");
+    b.disabled = e.estado === "cargando";
+    b.textContent = e.estado === "dentro" ? "☁ " + (e.usuario.nombre.split(" ")[0] || "Mi cuenta") : e.estado === "cargando" ? "☁ …" : "☁ Entrar";
+    b.title = e.estado === "dentro" ? `Sesión de ${e.usuario.correo}. Pulsa para cerrarla.` : "Iniciar sesión con Google para guardar fichas en la nube";
+    if (e.error) avisoNube(e.error, true);
+  }
+  nube.alCambiar((e) => {
+    pintarCuenta(e);
+    if (e.estado === "dentro" && !enNube) leerNube(); else if (e.estado !== "dentro") enNube = null;
+    pintarGuardadas();
+  });
+  $("cuentaNube").onclick = async () => {
+    const e = nube.estado();
+    if (e.estado === "dentro") { if (confirm(`¿Cerrar la sesión de ${e.usuario.correo}? Las fichas siguen en la nube.`)) await nube.salir(); return; }
+    try { await nube.entrar(); } catch {}
+  };
+  $("guardarNube").onclick = async () => {
+    if (!ficha) return;
+    avisoNube("");
+    try {
+      if (nube.estado().estado !== "dentro") { await nube.entrar(); if (nube.estado().estado !== "dentro") return; }
+      if (!enNube) await leerNube();
+      const r = await nube.guardar(ficha, composicion());
+      avisoNube(r.repetida ? "Esta ficha ya estaba en la nube." : r.pendiente ? "Guardada en este dispositivo; se subirá a la nube cuando haya conexión." : "Guardada en la nube (sin nombres de alumnos).");
+      if (!r.repetida && !r.pendiente) enNube = await nube.listar().catch(() => enNube);
+      pestana = "nube"; pintarGuardadas();
+    } catch (e) { avisoNube(e.message, true); }
+  };
+  $("pNube").onclick = () => { pestana = "nube"; pintarGuardadas(); if (!enNube) leerNube(); };
+  // ?ficha={id}: abrir una ficha de la nube (enlace desde Tabula)
+  const idUrl = new URLSearchParams(location.search).get("ficha");
+  if (nube.recordada() || idUrl) nube.iniciar().then(async () => {
+    if (!idUrl) return;
+    if (nube.estado().estado !== "dentro") { avisoNube("Inicia sesión (☁ Entrar) para abrir la ficha enlazada."); return; }
+    try { const x = await nube.abrir(idUrl); if (x.composicion) abrirGuardada(x.composicion); } catch (e) { avisoNube(e.message, true); }
+  }).catch(() => {});
   $("pFav").onclick = () => { pestana = "favoritos"; pintarGuardadas(); };
   $("pRec").onclick = () => { pestana = "recientes"; pintarGuardadas(); };
   $("favorito").onclick = () => {
@@ -434,6 +507,191 @@ if (typeof document !== "undefined") {
 }
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({  }));
+},
+"nube/config.js": (__exp) => {
+// Charta · configuración de Firebase (paso 5.1)
+// Proyecto compartido con Tabula, Barri, Lectori y Calculi ("mis-apps-educativas"). Estos valores identifican
+// el proyecto; no son secretos. La seguridad la dan las reglas de Firestore (bloque de Charta en firestore.rules).
+const firebaseConfig = {
+  apiKey: "AIzaSyC00dEFMyJ48KM--iClXSFUbbMtoHV3ejc",
+  authDomain: "mis-apps-educativas.firebaseapp.com",
+  projectId: "mis-apps-educativas",
+  storageBucket: "mis-apps-educativas.firebasestorage.app",
+  messagingSenderId: "98830326152",
+  appId: "1:98830326152:web:bd3ff75a1f83ac5fd2c23d",
+};
+
+/** Versión del SDK (CDN oficial de Google; la misma que Tabula). El service worker la guarda para usarla sin conexión. */
+const FIREBASE_SDK = "12.19.0";
+
+/** Ruta de las fichas: /apps/charta/fichas/{id}. */
+const RUTA_FICHAS = ["apps", "charta", "fichas"];
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get firebaseConfig() { return firebaseConfig; }, get FIREBASE_SDK() { return FIREBASE_SDK; }, get RUTA_FICHAS() { return RUTA_FICHAS; } }));
+},
+"nube/documento.js": (__exp) => {
+// Charta · ficha ⇄ documento de Firestore (paso 5.1). Sin dependencias del SDK: se prueba en Node.
+// Documento /apps/charta/fichas/{id}:
+//   { schemaVersion, app: "charta", autor, titulo, creada, tipos, variantes, ficha, composicion }
+//   ficha        = JSON de la ficha (texto: Firestore no admite listas dentro de listas)
+//   composicion  = JSON de lo que hace falta para reabrirla y editarla en Charta (como las favoritas)
+// NUNCA lleva nombres de alumnos: la ficha se comprueba con erroresFicha() y la composición pasa por limpiar().
+const { erroresFicha, fichaDeDocumento } = __req("nucleo/lector.js");
+const { limpiar } = __req("ui/guardadas.js");
+/** Tamaño máximo del texto de la ficha (Firestore: 1 MiB por documento). */
+const TAM_MAX = 900000;
+const CAMPOS = ["schemaVersion", "app", "autor", "titulo", "creada", "tipos", "variantes", "ficha", "composicion"];
+
+function aDocumento(ficha, comp, uid, ahora = new Date()) {
+  if (!uid) throw new Error("Hay que iniciar sesión para guardar en la nube.");
+  const e = erroresFicha(ficha);
+  if (e.length) throw new Error("Ficha no válida: " + e[0]);
+  const creada = ahora.toISOString().replace(/\.\d{3}Z$/, "Z");
+  const f = { ...ficha, autor: uid, creada };
+  delete f.id; // el id lo da Firestore (es el del documento)
+  const texto = JSON.stringify(f);
+  if (texto.length > TAM_MAX) throw new Error("La ficha es demasiado grande para guardarla en la nube (prueba con menos variantes).");
+  const tipos = [...new Set(f.paginas.flatMap((p) => p.actividades.map((a) => a.tipo)))];
+  return { schemaVersion: f.schemaVersion, app: "charta", autor: uid, titulo: f.titulo, creada, tipos,
+    variantes: f.variantes, ficha: texto, composicion: JSON.stringify(limpiar(comp)) };
+}
+
+/** Documento → { id, titulo, creada, tipos, composicion, ficha() } (la ficha se lee solo si hace falta). */
+function deDocumento(id, d) {
+  let composicion = null;
+  try { composicion = limpiar(JSON.parse(d.composicion)); } catch {}
+  return { id, titulo: d.titulo || "Ficha", creada: d.creada || "", tipos: Array.isArray(d.tipos) ? d.tipos : [],
+    composicion, ficha: () => fichaDeDocumento(d, id) };
+}
+
+/** ¿Misma composición (y misma semilla)? Para no guardar dos veces la misma ficha. */
+const mismaComposicion = (a, b) => !!a && !!b && JSON.stringify(limpiar(a)) === JSON.stringify(limpiar(b));
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get TAM_MAX() { return TAM_MAX; }, get CAMPOS() { return CAMPOS; }, get aDocumento() { return aDocumento; }, get deDocumento() { return deDocumento; }, get mismaComposicion() { return mismaComposicion; } }));
+},
+"nube/nube.js": (__exp) => {
+// Charta · nube (paso 5.1): inicio de sesión con Google y fichas en /apps/charta/fichas/{id}.
+// El SDK de Firebase se carga del CDN de Google SOLO si se usa la nube (sin sesión, la app no se conecta a nada).
+// Mismo proyecto que Tabula, Barri, Lectori y Calculi. Reglas: cada docente solo ve y toca sus fichas.
+// Sin DOM: el SDK y el almacén se inyectan (las pruebas usan uno falso).
+const { firebaseConfig, FIREBASE_SDK, RUTA_FICHAS } = __req("nube/config.js");
+const { aDocumento, deDocumento, mismaComposicion } = __req("nube/documento.js");
+const BANDERA = "charta:nube"; // "1" = hubo sesión en este dispositivo → reconectar al abrir
+const imp = (u) => import(u);
+async function cargarSdk() {
+  const base = `https://www.gstatic.com/firebasejs/${FIREBASE_SDK}`;
+  const [app, auth, fs] = await Promise.all([imp(`${base}/firebase-app.js`), imp(`${base}/firebase-auth.js`), imp(`${base}/firebase-firestore.js`)]);
+  return { app, auth, fs };
+}
+
+function mensajeError(e) {
+  const c = (e && e.code) || "";
+  if (c.includes("permission-denied")) return "La nube ha rechazado el acceso. Revisa que las reglas de Firestore incluyan el bloque de Charta.";
+  if (c.includes("unauthorized-domain")) return "Este dominio no está autorizado en Firebase → Authentication → Dominios autorizados.";
+  if (c.includes("popup-closed") || c.includes("cancelled-popup")) return "Se cerró la ventana de inicio de sesión.";
+  if (c.includes("network") || c.includes("unavailable")) return "No hay conexión. Inténtalo cuando vuelva la red.";
+  if (c.includes("not-found")) return "Esa ficha ya no está en la nube.";
+  return (e && e.message) || "Error desconocido";
+}
+
+function crearNube({ cargar = cargarSdk, almacen = null, esperaMs = 4000 } = {}) {
+  let fb = null, auth = null, db = null, arranque = null, cache = null;
+  let estado = { estado: "apagada", usuario: null, error: null }; // apagada | cargando | fuera | dentro | error
+  const oyentes = new Set();
+  const poner = (p) => { estado = { ...estado, ...p }; oyentes.forEach((f) => { try { f({ ...estado }); } catch (e) { console.error(e); } }); };
+  const bandera = (v) => { try { v ? almacen?.setItem(BANDERA, "1") : almacen?.removeItem?.(BANDERA); } catch {} };
+  const uid = () => auth?.currentUser?.uid || null;
+  const col = () => fb.fs.collection(db, ...RUTA_FICHAS);
+
+  function iniciar() {
+    if (arranque) return arranque;
+    poner({ estado: "cargando", error: null });
+    arranque = (async () => {
+      try { fb = await cargar(); } catch { arranque = null; poner({ estado: "error", error: "No se pudo cargar Firebase. Revisa la conexión." }); throw new Error(estado.error); }
+      const app = fb.app.initializeApp(firebaseConfig, "charta");
+      try {
+        db = fb.fs.initializeFirestore(app, { localCache: fb.fs.persistentLocalCache({ tabManager: fb.fs.persistentMultipleTabManager() }), ignoreUndefinedProperties: true });
+      } catch { db = fb.fs.initializeFirestore(app, { localCache: fb.fs.memoryLocalCache(), ignoreUndefinedProperties: true }); }
+      auth = fb.auth.getAuth(app); auth.languageCode = "es";
+      try { await fb.auth.getRedirectResult(auth); } catch (e) { poner({ error: mensajeError(e) }); }
+      await new Promise((listo) => {
+        let primera = true;
+        fb.auth.onAuthStateChanged(auth, (u) => {
+          cache = null;
+          if (u) { bandera(true); poner({ estado: "dentro", usuario: { nombre: u.displayName || "", correo: u.email || "", foto: u.photoURL || "" } }); }
+          else poner({ estado: "fuera", usuario: null });
+          if (primera) { primera = false; listo(); }
+        });
+      });
+    })();
+    return arranque;
+  }
+
+  return {
+    estado: () => ({ ...estado }),
+    alCambiar(f) { oyentes.add(f); return () => oyentes.delete(f); },
+    /** ¿Hubo sesión en este dispositivo? Entonces conviene llamar a iniciar() al abrir la app. */
+    recordada() { try { return almacen?.getItem(BANDERA) === "1"; } catch { return false; } },
+    iniciar,
+    async entrar() {
+      await iniciar();
+      if (uid()) return;
+      const p = new fb.auth.GoogleAuthProvider(); p.setCustomParameters({ prompt: "select_account" });
+      poner({ error: null });
+      try { await fb.auth.signInWithPopup(auth, p); }
+      catch (e) {
+        const c = e.code || "";
+        if (c.includes("popup-blocked") || c.includes("operation-not-supported")) { await fb.auth.signInWithRedirect(auth, p); return; }
+        poner({ error: mensajeError(e) }); throw new Error(mensajeError(e));
+      }
+    },
+    async salir() {
+      if (!auth) return;
+      bandera(false); cache = null;
+      await fb.auth.signOut(auth);
+    },
+    /** Lista de fichas del docente, la más nueva primero (sin índice compuesto: se ordena aquí). */
+    async listar() {
+      await iniciar();
+      const u = uid(); if (!u) return [];
+      try {
+        const r = await fb.fs.getDocs(fb.fs.query(col(), fb.fs.where("autor", "==", u), fb.fs.limit(300)));
+        cache = r.docs.map((d) => deDocumento(d.id, d.data())).sort((a, b) => (a.creada < b.creada ? 1 : a.creada > b.creada ? -1 : 0));
+        return cache;
+      } catch (e) { throw new Error(mensajeError(e)); }
+    },
+    /** Guarda la ficha (sin nombres). Devuelve { id, repetida, pendiente }: pendiente = sin conexión, se subirá sola. */
+    async guardar(ficha, comp) {
+      await iniciar();
+      const u = uid(); if (!u) throw new Error("Hay que iniciar sesión para guardar en la nube.");
+      const ya = (cache || []).find((x) => mismaComposicion(x.composicion, comp));
+      if (ya) return { id: ya.id, repetida: true, pendiente: false };
+      const datos = aDocumento(ficha, comp, u);
+      const ref = fb.fs.doc(col());
+      let error = null;
+      const escrito = fb.fs.setDoc(ref, datos).then(() => "ok", (e) => { error = e; return "error"; });
+      const r = await Promise.race([escrito, new Promise((ok) => setTimeout(() => ok("pendiente"), esperaMs))]);
+      if (r === "error") throw new Error(mensajeError(error));
+      if (cache) cache.unshift(deDocumento(ref.id, datos));
+      return { id: ref.id, repetida: false, pendiente: r === "pendiente" };
+    },
+    async abrir(id) {
+      await iniciar();
+      try {
+        const d = await fb.fs.getDoc(fb.fs.doc(db, ...RUTA_FICHAS, id));
+        if (!d.exists()) throw Object.assign(new Error(), { code: "not-found" });
+        return deDocumento(d.id, d.data());
+      } catch (e) { throw new Error(mensajeError(e)); }
+    },
+    async borrar(id) {
+      await iniciar();
+      try { await fb.fs.deleteDoc(fb.fs.doc(db, ...RUTA_FICHAS, id)); } catch (e) { throw new Error(mensajeError(e)); }
+      if (cache) cache = cache.filter((x) => x.id !== id);
+    },
+  };
+}
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get cargarSdk() { return cargarSdk; }, get mensajeError() { return mensajeError; }, get crearNube() { return crearNube; } }));
 },
 "nucleo/azar.js": (__exp) => {
 // Charta · azar con semilla (mulberry32). Mismas opciones + misma semilla = misma ficha.
@@ -4179,7 +4437,21 @@ function paginasVariante(f, v = 0) {
 /** Letra de la variante: 0 → "A". */
 const letraVariante = (v) => String.fromCharCode(65 + v);
 
-Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get VERSIONES_LEIDAS() { return VERSIONES_LEIDAS; }, get erroresFicha() { return erroresFicha; }, get paginasVariante() { return paginasVariante; }, get letraVariante() { return letraVariante; } }));
+/**
+ * Ficha guardada en Firestore (/apps/charta/fichas/{id}) → ficha JSON, o error claro.
+ * El documento guarda la ficha como texto en `ficha` (Firestore no admite listas dentro de listas).
+ */
+function fichaDeDocumento(datos, id) {
+  if (!datos || typeof datos.ficha !== "string") throw new Error("El documento no contiene una ficha de Charta.");
+  let f;
+  try { f = JSON.parse(datos.ficha); } catch { throw new Error("La ficha guardada está dañada."); }
+  if (id) f.id = id;
+  const e = erroresFicha(f);
+  if (e.length) throw new Error("Ficha no válida: " + e[0]);
+  return f;
+}
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get VERSIONES_LEIDAS() { return VERSIONES_LEIDAS; }, get erroresFicha() { return erroresFicha; }, get paginasVariante() { return paginasVariante; }, get letraVariante() { return letraVariante; }, get fichaDeDocumento() { return fichaDeDocumento; } }));
 },
 "nucleo/tipos.js": (__exp) => {
 // Charta · registro de tipos de ejercicio. Cada tipo es un módulo con:

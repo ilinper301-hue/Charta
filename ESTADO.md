@@ -64,7 +64,8 @@
 - [x] 4.6 (petición de Iván) Modo oscuro y diseño en la línea de Tabula: fondo crema, títulos con serifa, verde como único acento, cabecera con logotipo y botón de tema (automático · claro · oscuro, `charta:tema`). El papel de la vista previa sigue blanco. Logo: el que eligió Iván (C crema con tres hojas en abanico), pasado a vector con los colores de la app, en `src/pwa/logo.svg`; los iconos salen de él (`tools/iconos.py`).
 
 ## Fase 5 · Tabula y Fori
-- [ ] 5.1 Firebase compartido + Google; guardar en `/apps/charta/fichas/{id}` (sin nombres de alumnos).
+- [x] 5.1 Firebase compartido + Google; guardar en `/apps/charta/fichas/{id}` (sin nombres de alumnos).
+  - Hecho: `src/nube/` (config de Tabula, SDK 12.19.0 del CDN cargado solo si se usa la nube; sesión propia `charta`). Botón «☁ Entrar» en la cabecera, «☁ Guardar en la nube» (no repite la misma ficha; sin conexión queda pendiente y se sube sola) y pestaña «☁ En la nube» (abrir, borrar). `?ficha={id}` abre una ficha guardada. Documento: ficha como texto JSON + composición (ver ESQUEMA.md); lector `fichaDeDocumento()` para Tabula/Fori. Reglas: bloque Charta añadido a `tabula/firestore.rules` (copia en `firestore.rules`). SW: SDK en caché `charta-sdk`. `node tests/test_nube.js` (Firebase falso); probado en Chrome sin errores (sin acceso real a Firebase desde el contenedor). **Pendiente de Iván**: pegar `firestore.rules` en Firebase → Firestore → Reglas → Publicar, y probar Entrar + Guardar en el Android.
 - [ ] 5.2 Tabula: listas de alumnos, botón "Crear ficha", referencia por id en documentos, vínculo a sesión o tarea.
 - [ ] 5.3 Fori: `?ficha={id}`, modo proyección ejercicio a ejercicio, solución paso a paso, capa de anotaciones.
 

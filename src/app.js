@@ -11,6 +11,7 @@ import { crearGuardadas } from "./ui/guardadas.js";
 import { leerAlumnos, numVariantes, MAX_ALUMNOS } from "./ui/alumnos.js";
 import { registrarSW } from "./pwa/registro.js";
 import { iniciarTema } from "./ui/tema.js";
+import { crearNube } from "./nube/nube.js";
 
 globalThis.Charta = { generar, modelo, erroresFicha, listaTipos, hojas, CATALOGO };
 
@@ -172,12 +173,17 @@ function iniciar() {
     pintar(); $("acts").scrollIntoView({ behavior: "smooth" });
   }
   function pintarGuardadas() {
-    const fav = guardadas.favoritos(), rec = guardadas.recientes();
-    $("guardadas").hidden = !fav.length && !rec.length;
-    if (!fav.length && pestana === "favoritos") pestana = "recientes";
-    if (!rec.length && pestana === "recientes") pestana = "favoritos";
+    const fav = guardadas.favoritos(), rec = guardadas.recientes(), dentro = nube.estado().estado === "dentro";
+    const nubeLista = dentro ? enNube || [] : [];
+    $("guardadas").hidden = !fav.length && !rec.length && !dentro;
+    if (pestana === "nube" && !dentro) pestana = "favoritos";
+    if (!fav.length && pestana === "favoritos") pestana = dentro ? "nube" : "recientes";
+    if (!rec.length && pestana === "recientes") pestana = fav.length || !dentro ? "favoritos" : "nube";
     $("pFav").classList.toggle("activa", pestana === "favoritos"); $("pRec").classList.toggle("activa", pestana === "recientes");
+    $("pNube").classList.toggle("activa", pestana === "nube"); $("pNube").hidden = !dentro;
     $("pFav").textContent = `★ Favoritas (${fav.length})`; $("pRec").textContent = `Recientes (${rec.length})`;
+    $("pNube").textContent = enNube ? `☁ En la nube (${nubeLista.length})` : "☁ En la nube";
+    if (pestana === "nube") return pintarNube(nubeLista);
     const lista = pestana === "favoritos" ? fav : rec;
     $("listaGuardadas").replaceChildren(...lista.map((c, i) => {
       const disp = c.actividades.every((a) => hayTipo(a.tipo));
@@ -190,6 +196,69 @@ function iniciar() {
       return el("li", {}, abrir, x);
     }));
   }
+  // Paso 5.1 · nube: inicio de sesión con Google y fichas en /apps/charta/fichas/{id} (sin nombres de alumnos).
+  const nube = crearNube({ almacen });
+  let enNube = null; // lista de la nube (null = sin leer)
+  const avisoNube = (t, error) => { $("estadoNube").textContent = t || ""; $("estadoNube").classList.toggle("error", !!error); $("estadoNube").hidden = !t; };
+  const nombreModelos = (c) => (c?.actividades || []).map((a) => { try { return modelo(a.tipo).nombre; } catch { return a.tipo; } }).join(" + ");
+  function pintarNube(lista) {
+    if (!enNube) { $("listaGuardadas").replaceChildren(el("li", { className: "info", textContent: "Cargando…" })); return; }
+    if (!lista.length) { $("listaGuardadas").replaceChildren(el("li", { className: "info", textContent: "Aún no hay fichas en la nube: usa «☁ Guardar en la nube»." })); return; }
+    $("listaGuardadas").replaceChildren(...lista.map((x) => {
+      const disp = !!x.composicion && x.composicion.actividades.every((a) => hayTipo(a.tipo));
+      const abrir = el("button", { className: "g-abrir", disabled: !disp },
+        el("strong", { textContent: x.titulo }),
+        el("small", { textContent: nombreModelos(x.composicion) + (x.creada ? " · " + x.creada.slice(0, 10).split("-").reverse().map(Number).join("-") : "") }));
+      abrir.onclick = () => abrirGuardada(x.composicion);
+      const b = el("button", { className: "g-quitar", textContent: "✕", title: "Borrar de la nube" });
+      b.onclick = async () => {
+        if (!confirm(`¿Borrar «${x.titulo}» de la nube? Tabula y Fori dejarán de verla.`)) return;
+        try { await nube.borrar(x.id); enNube = enNube.filter((y) => y.id !== x.id); pintarGuardadas(); } catch (e) { avisoNube(e.message, true); }
+      };
+      return el("li", {}, abrir, b);
+    }));
+  }
+  async function leerNube() {
+    try { enNube = await nube.listar(); } catch (e) { enNube = enNube || []; avisoNube(e.message, true); }
+    pintarGuardadas();
+  }
+  function pintarCuenta(e) {
+    const b = $("cuentaNube");
+    b.disabled = e.estado === "cargando";
+    b.textContent = e.estado === "dentro" ? "☁ " + (e.usuario.nombre.split(" ")[0] || "Mi cuenta") : e.estado === "cargando" ? "☁ …" : "☁ Entrar";
+    b.title = e.estado === "dentro" ? `Sesión de ${e.usuario.correo}. Pulsa para cerrarla.` : "Iniciar sesión con Google para guardar fichas en la nube";
+    if (e.error) avisoNube(e.error, true);
+  }
+  nube.alCambiar((e) => {
+    pintarCuenta(e);
+    if (e.estado === "dentro" && !enNube) leerNube(); else if (e.estado !== "dentro") enNube = null;
+    pintarGuardadas();
+  });
+  $("cuentaNube").onclick = async () => {
+    const e = nube.estado();
+    if (e.estado === "dentro") { if (confirm(`¿Cerrar la sesión de ${e.usuario.correo}? Las fichas siguen en la nube.`)) await nube.salir(); return; }
+    try { await nube.entrar(); } catch {}
+  };
+  $("guardarNube").onclick = async () => {
+    if (!ficha) return;
+    avisoNube("");
+    try {
+      if (nube.estado().estado !== "dentro") { await nube.entrar(); if (nube.estado().estado !== "dentro") return; }
+      if (!enNube) await leerNube();
+      const r = await nube.guardar(ficha, composicion());
+      avisoNube(r.repetida ? "Esta ficha ya estaba en la nube." : r.pendiente ? "Guardada en este dispositivo; se subirá a la nube cuando haya conexión." : "Guardada en la nube (sin nombres de alumnos).");
+      if (!r.repetida && !r.pendiente) enNube = await nube.listar().catch(() => enNube);
+      pestana = "nube"; pintarGuardadas();
+    } catch (e) { avisoNube(e.message, true); }
+  };
+  $("pNube").onclick = () => { pestana = "nube"; pintarGuardadas(); if (!enNube) leerNube(); };
+  // ?ficha={id}: abrir una ficha de la nube (enlace desde Tabula)
+  const idUrl = new URLSearchParams(location.search).get("ficha");
+  if (nube.recordada() || idUrl) nube.iniciar().then(async () => {
+    if (!idUrl) return;
+    if (nube.estado().estado !== "dentro") { avisoNube("Inicia sesión (☁ Entrar) para abrir la ficha enlazada."); return; }
+    try { const x = await nube.abrir(idUrl); if (x.composicion) abrirGuardada(x.composicion); } catch (e) { avisoNube(e.message, true); }
+  }).catch(() => {});
   $("pFav").onclick = () => { pestana = "favoritos"; pintarGuardadas(); };
   $("pRec").onclick = () => { pestana = "recientes"; pintarGuardadas(); };
   $("favorito").onclick = () => {

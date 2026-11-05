@@ -41,3 +41,17 @@ export function paginasVariante(f, v = 0) {
 
 /** Letra de la variante: 0 → "A". */
 export const letraVariante = (v) => String.fromCharCode(65 + v);
+
+/**
+ * Ficha guardada en Firestore (/apps/charta/fichas/{id}) → ficha JSON, o error claro.
+ * El documento guarda la ficha como texto en `ficha` (Firestore no admite listas dentro de listas).
+ */
+export function fichaDeDocumento(datos, id) {
+  if (!datos || typeof datos.ficha !== "string") throw new Error("El documento no contiene una ficha de Charta.");
+  let f;
+  try { f = JSON.parse(datos.ficha); } catch { throw new Error("La ficha guardada está dañada."); }
+  if (id) f.id = id;
+  const e = erroresFicha(f);
+  if (e.length) throw new Error("Ficha no válida: " + e[0]);
+  return f;
+}

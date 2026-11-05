@@ -58,3 +58,14 @@
 Componentes SVG reutilizables (dedos, dado, dominó, marco de diez, palotes, objetos, regletas,
 descomposición, letras, recta, bloques, cuadrícula, monedas, ábaco, D/U, atados):
 `{"rep": "marco", "n": 7}` dentro de `datos`. También servirán a Barri, Calculi y Fori.
+
+## Documento en Firestore (paso 5.1)
+`/apps/charta/fichas/{id}` (id = el del documento; la ficha lleva `id`, `autor` y `creada` al leerla):
+```json
+{ "schemaVersion": 1, "app": "charta", "autor": "uid", "titulo": "…", "creada": "2026-11-05T10:00:00Z",
+  "tipos": ["sumar.h20"], "variantes": 2,
+  "ficha": "{…JSON de la ficha…}",      // texto: Firestore no admite listas dentro de listas
+  "composicion": "{…}" }                // actividades + opciones, semilla, título, variaciones, B/N (para reabrirla en Charta)
+```
+- Leer (Tabula, Fori): `fichaDeDocumento(datos, id)` de `src/nucleo/lector.js` → ficha comprobada con `erroresFicha()`.
+- Reglas: bloque «Charta» de `firestore.rules` (copia de `tabula/firestore.rules`): solo el autor (Google) lee, cambia y borra; campos y tamaños fijos (ficha ≤ 900.000 caracteres; 30 variantes ≈ 110 KB).

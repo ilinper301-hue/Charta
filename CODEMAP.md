@@ -42,6 +42,11 @@ tools/ENCARGO_PORTAR.md  instrucciones para que un agente porte modelos del moto
 tools/build.py        src/ → dist/index.html (un solo archivo) + sw.js y manifest.webmanifest en la raíz; --js = solo el paquete
 src/pwa/              sw.js (plantilla, __VERSION__), manifest.webmanifest, registro.js (registrarSW(avisar)), logo.svg (fuente del logo y los iconos) · paso 4.5
 src/ui/tema.js        iniciarTema(botón): sistema/claro/oscuro en charta:tema → html[data-tema="oscuro"]; variables en estilos.css (como Tabula)
+src/nube/config.js    firebaseConfig (proyecto compartido "mis-apps-educativas"), FIREBASE_SDK, RUTA_FICHAS · paso 5.1
+src/nube/documento.js aDocumento(ficha, comp, uid), deDocumento(id, datos), mismaComposicion — ficha ⇄ documento, sin SDK
+src/nube/nube.js      crearNube({cargar, almacen}): iniciar, entrar (Google), salir, listar, guardar, abrir, borrar; SDK del CDN solo si se usa (charta:nube = hubo sesión)
+tests/test_nube.js    con un Firebase falso que aplica las reglas
+firestore.rules       reglas COMPLETAS del proyecto (copia de tabula/firestore.rules: mantener iguales)
 sw.js, manifest.webmanifest   GENERADOS por build.py en la raíz (scope /Charta/); no editar
 tools/iconos.py       iconos/ desde src/pwa/logo.svg con rsvg-convert (normal, maskable al 80 %, favicon, apple-touch)
 dist/index.html       la app construida (se sube al repositorio: la sirve Pages)
