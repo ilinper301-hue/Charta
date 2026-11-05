@@ -1,7 +1,7 @@
 // Charta · service worker (paso 4.5). PLANTILLA: build.py la copia a la raíz (/Charta/sw.js, scope /Charta/)
-// poniendo d86ac496fd39 = huella de la app; si la app cambia, cambia este archivo y el navegador lo actualiza.
+// poniendo caffe6058018 = huella de la app; si la app cambia, cambia este archivo y el navegador lo actualiza.
 // Mismo origen que Lectori, Tabula, Fori…: solo se tocan las cachés que empiezan por "charta-".
-const VERSION = "d86ac496fd39";
+const VERSION = "caffe6058018";
 const CACHE = "charta-" + VERSION;
 const ARCHIVOS = ["./", "./index.html", "./dist/", "./dist/index.html", "./manifest.webmanifest",
   "./iconos/icono-192.png", "./iconos/icono-512.png", "./iconos/maskable-192.png", "./iconos/maskable-512.png",
