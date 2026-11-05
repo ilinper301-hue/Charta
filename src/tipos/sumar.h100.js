@@ -18,6 +18,7 @@ export function paresSuma(R, nivel, cnt, azar) {
     const sin = [], con = [];
     for (let a = 1; a < 20; a++) for (let b = 1; b < 20; b++) if (a + b <= 20 && !(a < 10 && b < 10 && a + b > 10)) sin.push([a, b]);
     for (let a = 2; a < 10; a++) for (let b = 2; b < 10; b++) if (a + b > 10) con.push([a, b]);
+    con.lleva = true;   // pares(): no rellenar con otro tipo de grupo
     grupos = { sin: [sin], con: [con], mezcla: [sin, con] }[nivel];
   } else {
     const cap = Math.min(R, 99), ten = []; for (let v = 10; v <= cap; v += 10) ten.push(v);
@@ -27,6 +28,7 @@ export function paresSuma(R, nivel, cnt, azar) {
     for (const [a, b] of du.slice()) du.push([b, a]);
     for (let a = 11; a < cap; a++) if (a % 10) uu.push(a);
     for (const a of uu) for (let b = 1; b < 10; b++) if (a + b <= cap) (a % 10 + b < 10 ? s : k).push([a, b]);
+    k.lleva = true;   // pares(): no rellenar con otro tipo de grupo
     grupos = { sin: [dd, du, s], con: [k], mezcla: [dd, du, s, k] }[nivel];
   }
   return pares(grupos, cnt, azar);

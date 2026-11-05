@@ -16,6 +16,7 @@ export function gruposResta(R, nivel) {
   if (R <= 20) {
     const sin = prod(r(2, 20), r(1, 19), (a, b) => b < a && (a <= 10 || a - b >= 10));
     const con = prod(r(11, 19), r(2, 9), (a, b) => b < a && a - b < 10);
+    con.lleva = true;   // pares(): no rellenar con otro tipo de grupo
     return { sin: [sin], con: [con], mezcla: [sin, con] }[nivel];
   }
   const cap = Math.min(R, 99), ten = r(10, cap, 10), uu = r(11, cap).filter((a) => a % 10);
@@ -23,6 +24,7 @@ export function gruposResta(R, nivel) {
   const du = prod(uu, r(1, 9), (a, b) => b <= a % 10 && b < a);
   const dudu = uu.flatMap((a) => r(11, a - 1).filter((b) => b % 10 <= a % 10).map((b) => [a, b]));
   const con = prod(r(11, cap), r(2, 9), (a, b) => a % 10 < b);
+  con.lleva = true;   // pares(): no rellenar con otro tipo de grupo
   return { sin: [dd, du, dudu], con: [con], mezcla: [dd, du, dudu, con] }[nivel];
 }
 export const paresResta = (R, nivel, cnt, azar) => pares(gruposResta(R, nivel), cnt, azar);

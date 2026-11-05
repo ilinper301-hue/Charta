@@ -22,6 +22,7 @@ export function paresSuma(R, nivel, cnt, azar) {
   else if (R <= 20) {
     const sin = rango(1, 20).flatMap((a) => rango(1, 20).filter((b) => a + b <= 20 && !(a < 10 && b < 10 && a + b > 10)).map((b) => [a, b]));
     const con = rango(2, 10).flatMap((a) => rango(2, 10).filter((b) => a + b > 10).map((b) => [a, b]));
+    con.lleva = true;   // pares(): no rellenar con otro tipo de grupo
     grupos = { sin: [sin], con: [con], mezcla: [sin, con] }[nivel];
   } else {
     const cap = Math.min(R, 99), ten = rango(10, cap + 1, 10);
@@ -30,6 +31,7 @@ export function paresSuma(R, nivel, cnt, azar) {
     const uu = rango(11, cap).filter((a) => a % 10);
     const s = uu.flatMap((a) => rango(1, 10).filter((b) => (a % 10) + b < 10 && a + b <= cap).map((b) => [a, b]));
     const k = uu.flatMap((a) => rango(1, 10).filter((b) => (a % 10) + b >= 10 && a + b <= cap).map((b) => [a, b]));
+    k.lleva = true;   // pares(): no rellenar con otro tipo de grupo
     grupos = { sin: [dd, du, s], con: [k], mezcla: [dd, du, s, k] }[nivel];
   }
   const vistos = new Set();
@@ -43,6 +45,7 @@ export function paresResta(R, nivel, cnt, azar) {
   else if (R <= 20) {
     const sin = rango(2, 21).flatMap((a) => rango(1, a).filter((b) => a <= 10 || a - b >= 10).map((b) => [a, b]));
     const con = rango(11, 20).flatMap((a) => rango(2, 10).filter((b) => b < a && a - b < 10).map((b) => [a, b]));
+    con.lleva = true;   // pares(): no rellenar con otro tipo de grupo
     grupos = { sin: [sin], con: [con], mezcla: [sin, con] }[nivel];
   } else {
     const cap = Math.min(R, 99), ten = rango(10, cap + 1, 10);
@@ -51,6 +54,7 @@ export function paresResta(R, nivel, cnt, azar) {
     const du = uu.flatMap((a) => rango(1, 10).filter((b) => b <= a % 10 && b < a).map((b) => [a, b]));
     const dudu = uu.flatMap((a) => rango(11, a).filter((b) => b % 10 <= a % 10).map((b) => [a, b]));
     const con = rango(11, cap + 1).flatMap((a) => rango(2, 10).filter((b) => a % 10 < b).map((b) => [a, b]));
+    con.lleva = true;   // pares(): no rellenar con otro tipo de grupo
     grupos = { sin: [dd, du, dudu], con: [con], mezcla: [dd, du, dudu, con] }[nivel];
   }
   const vistos = new Set();

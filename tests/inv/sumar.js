@@ -4,7 +4,7 @@ import assert from "node:assert/strict";
 import { ent, unicos, cuantos, mitad } from "./_ayuda.js";
 
 /** Con rango 30 y niveles sin/mezcla los grupos son tan pequeños que el motor repite sumas (no hay forma de evitarlo). */
-const pocas = (act) => (act.params.rango ?? 10) > 20 && (act.params.rango ?? 10) <= 30 && (act.params.nivel || "sin") !== "con";
+const pocas = () => false;   // sin repetidos en ningún rango (pares() ya no repite si hay sumas libres)
 const lleva = ({ datos: { a, b } }) => (a % 10) + (b % 10) >= 10;
 /** Sumas horizontales por rango y nivel (reglas de _pares_suma del motor). */
 function horiz(R, tam, act, hastaCap) {

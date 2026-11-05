@@ -16,6 +16,7 @@ function gruposSuma(R, nivel) {
   if (R <= 20) {
     const sin = prod(r(1, 19), r(1, 19), (a, b) => a + b <= 20 && !(a < 10 && b < 10 && a + b > 10));
     const con = prod(r(2, 9), r(2, 9), (a, b) => a + b > 10);
+    con.lleva = true;   // pares(): no rellenar con otro tipo de grupo
     return { sin: [sin], con: [con], mezcla: [sin, con] }[nivel];
   }
   const cap = Math.min(R, 99), ten = r(10, cap, 10), uu = r(11, cap - 1).filter((a) => a % 10);
@@ -23,6 +24,7 @@ function gruposSuma(R, nivel) {
   const du0 = prod(ten, r(1, 9), (a, b) => a + b <= cap), du = [...du0, ...du0.map(([a, b]) => [b, a])];
   const s = prod(uu, r(1, 9), (a, b) => a % 10 + b < 10 && a + b <= cap);
   const k = prod(uu, r(1, 9), (a, b) => a % 10 + b >= 10 && a + b <= cap);
+  k.lleva = true;   // pares(): no rellenar con otro tipo de grupo
   return { sin: [dd, du, s], con: [k], mezcla: [dd, du, s, k] }[nivel];
 }
 

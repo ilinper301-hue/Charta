@@ -15898,112 +15898,8 @@
         {
          "id": "a1e1",
          "datos": {
-          "a": 16,
-          "b": 6,
-          "op": "−"
-         },
-         "solucion": {
-          "huecos": [
-           10
-          ]
-         }
-        },
-        {
-         "id": "a1e2",
-         "datos": {
-          "a": 25,
-          "b": 5,
-          "op": "−"
-         },
-         "solucion": {
-          "huecos": [
-           20
-          ]
-         }
-        },
-        {
-         "id": "a1e3",
-         "datos": {
-          "a": 20,
-          "b": 10,
-          "op": "−"
-         },
-         "solucion": {
-          "huecos": [
-           10
-          ]
-         }
-        },
-        {
-         "id": "a1e4",
-         "datos": {
-          "a": 30,
-          "b": 10,
-          "op": "−"
-         },
-         "solucion": {
-          "huecos": [
-           20
-          ]
-         }
-        },
-        {
-         "id": "a1e5",
-         "datos": {
-          "a": 30,
-          "b": 10,
-          "op": "−"
-         },
-         "solucion": {
-          "huecos": [
-           20
-          ]
-         }
-        },
-        {
-         "id": "a1e6",
-         "datos": {
-          "a": 20,
-          "b": 10,
-          "op": "−"
-         },
-         "solucion": {
-          "huecos": [
-           10
-          ]
-         }
-        },
-        {
-         "id": "a1e7",
-         "datos": {
-          "a": 20,
-          "b": 10,
-          "op": "−"
-         },
-         "solucion": {
-          "huecos": [
-           10
-          ]
-         }
-        },
-        {
-         "id": "a1e8",
-         "datos": {
-          "a": 30,
-          "b": 20,
-          "op": "−"
-         },
-         "solucion": {
-          "huecos": [
-           10
-          ]
-         }
-        },
-        {
-         "id": "a1e9",
-         "datos": {
-          "a": 13,
-          "b": 11,
+          "a": 28,
+          "b": 26,
           "op": "−"
          },
          "solucion": {
@@ -16013,85 +15909,46 @@
          }
         },
         {
-         "id": "a1e10",
+         "id": "a1e2",
          "datos": {
-          "a": 30,
-          "b": 10,
+          "a": 26,
+          "b": 1,
           "op": "−"
          },
          "solucion": {
           "huecos": [
-           20
+           25
           ]
          }
         },
         {
-         "id": "a1e11",
+         "id": "a1e3",
          "datos": {
-          "a": 27,
-          "b": 24,
+          "a": 24,
+          "b": 3,
           "op": "−"
          },
          "solucion": {
           "huecos": [
-           3
+           21
           ]
          }
         },
         {
-         "id": "a1e12",
+         "id": "a1e4",
          "datos": {
-          "a": 17,
-          "b": 2,
+          "a": 24,
+          "b": 22,
           "op": "−"
          },
          "solucion": {
           "huecos": [
-           15
+           2
           ]
          }
         },
         {
-         "id": "a1e13",
-         "datos": {
-          "a": 19,
-          "b": 16,
-          "op": "−"
-         },
-         "solucion": {
-          "huecos": [
-           3
-          ]
-         }
-        },
-        {
-         "id": "a1e14",
-         "datos": {
-          "a": 19,
-          "b": 6,
-          "op": "−"
-         },
-         "solucion": {
-          "huecos": [
-           13
-          ]
-         }
-        },
-        {
-         "id": "a1e15",
-         "datos": {
-          "a": 21,
-          "b": 11,
-          "op": "−"
-         },
-         "solucion": {
-          "huecos": [
-           10
-          ]
-         }
-        },
-        {
-         "id": "a1e16",
+         "id": "a1e5",
          "datos": {
           "a": 25,
           "b": 21,
@@ -16104,46 +15961,150 @@
          }
         },
         {
-         "id": "a1e17",
+         "id": "a1e6",
          "datos": {
-          "a": 29,
-          "b": 4,
+          "a": 27,
+          "b": 17,
           "op": "−"
          },
          "solucion": {
           "huecos": [
-           25
+           10
           ]
          }
         },
         {
-         "id": "a1e18",
-         "datos": {
-          "a": 18,
-          "b": 4,
-          "op": "−"
-         },
-         "solucion": {
-          "huecos": [
-           14
-          ]
-         }
-        },
-        {
-         "id": "a1e19",
+         "id": "a1e7",
          "datos": {
           "a": 17,
+          "b": 12,
+          "op": "−"
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "a": 18,
+          "b": 3,
+          "op": "−"
+         },
+         "solucion": {
+          "huecos": [
+           15
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "a": 17,
+          "b": 2,
+          "op": "−"
+         },
+         "solucion": {
+          "huecos": [
+           15
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "a": 15,
+          "b": 12,
+          "op": "−"
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "a": 19,
+          "b": 6,
+          "op": "−"
+         },
+         "solucion": {
+          "huecos": [
+           13
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "a": 27,
           "b": 1,
           "op": "−"
          },
          "solucion": {
           "huecos": [
-           16
+           26
           ]
          }
         },
         {
-         "id": "a1e20",
+         "id": "a1e13",
+         "datos": {
+          "a": 18,
+          "b": 12,
+          "op": "−"
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "a": 25,
+          "b": 15,
+          "op": "−"
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "a": 26,
+          "b": 11,
+          "op": "−"
+         },
+         "solucion": {
+          "huecos": [
+           15
+          ]
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "a": 25,
+          "b": 3,
+          "op": "−"
+         },
+         "solucion": {
+          "huecos": [
+           22
+          ]
+         }
+        },
+        {
+         "id": "a1e17",
          "datos": {
           "a": 30,
           "b": 10,
@@ -16156,10 +16117,49 @@
          }
         },
         {
+         "id": "a1e18",
+         "datos": {
+          "a": 30,
+          "b": 20,
+          "op": "−"
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e19",
+         "datos": {
+          "a": 18,
+          "b": 4,
+          "op": "−"
+         },
+         "solucion": {
+          "huecos": [
+           14
+          ]
+         }
+        },
+        {
+         "id": "a1e20",
+         "datos": {
+          "a": 20,
+          "b": 10,
+          "op": "−"
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
          "id": "a1e21",
          "datos": {
-          "a": 25,
-          "b": 22,
+          "a": 19,
+          "b": 16,
           "op": "−"
          },
          "solucion": {
@@ -16171,21 +16171,8 @@
         {
          "id": "a1e22",
          "datos": {
-          "a": 28,
-          "b": 26,
-          "op": "−"
-         },
-         "solucion": {
-          "huecos": [
-           2
-          ]
-         }
-        },
-        {
-         "id": "a1e23",
-         "datos": {
-          "a": 23,
-          "b": 2,
+          "a": 26,
+          "b": 5,
           "op": "−"
          },
          "solucion": {
@@ -16195,15 +16182,28 @@
          }
         },
         {
-         "id": "a1e24",
+         "id": "a1e23",
          "datos": {
-          "a": 27,
-          "b": 21,
+          "a": 17,
+          "b": 14,
           "op": "−"
          },
          "solucion": {
           "huecos": [
-           6
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e24",
+         "datos": {
+          "a": 18,
+          "b": 1,
+          "op": "−"
+         },
+         "solucion": {
+          "huecos": [
+           17
           ]
          }
         }
@@ -16215,10 +16215,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "90bf6a4d18231ddb"
+   "0b7499289afd0c44"
   ],
   "svgSolucion": [
-   "46c49583ecb5f9a4"
+   "351c99f1566300f2"
   ]
  },
  "restar.r20": {
@@ -19241,252 +19241,18 @@
         {
          "id": "a1e1",
          "datos": {
-          "a": 10,
-          "b": 20,
-          "op": "+"
-         },
-         "solucion": {
-          "huecos": [
-           30
-          ]
-         }
-        },
-        {
-         "id": "a1e2",
-         "datos": {
-          "a": 10,
-          "b": 10,
-          "op": "+"
-         },
-         "solucion": {
-          "huecos": [
-           20
-          ]
-         }
-        },
-        {
-         "id": "a1e3",
-         "datos": {
-          "a": 20,
-          "b": 10,
-          "op": "+"
-         },
-         "solucion": {
-          "huecos": [
-           30
-          ]
-         }
-        },
-        {
-         "id": "a1e4",
-         "datos": {
-          "a": 20,
-          "b": 8,
-          "op": "+"
-         },
-         "solucion": {
-          "huecos": [
-           28
-          ]
-         }
-        },
-        {
-         "id": "a1e5",
-         "datos": {
-          "a": 10,
-          "b": 9,
-          "op": "+"
-         },
-         "solucion": {
-          "huecos": [
-           19
-          ]
-         }
-        },
-        {
-         "id": "a1e6",
-         "datos": {
-          "a": 11,
-          "b": 8,
-          "op": "+"
-         },
-         "solucion": {
-          "huecos": [
-           19
-          ]
-         }
-        },
-        {
-         "id": "a1e7",
-         "datos": {
-          "a": 2,
-          "b": 10,
-          "op": "+"
-         },
-         "solucion": {
-          "huecos": [
-           12
-          ]
-         }
-        },
-        {
-         "id": "a1e8",
-         "datos": {
-          "a": 11,
-          "b": 1,
-          "op": "+"
-         },
-         "solucion": {
-          "huecos": [
-           12
-          ]
-         }
-        },
-        {
-         "id": "a1e9",
-         "datos": {
-          "a": 20,
-          "b": 10,
-          "op": "+"
-         },
-         "solucion": {
-          "huecos": [
-           30
-          ]
-         }
-        },
-        {
-         "id": "a1e10",
-         "datos": {
-          "a": 20,
-          "b": 4,
-          "op": "+"
-         },
-         "solucion": {
-          "huecos": [
-           24
-          ]
-         }
-        },
-        {
-         "id": "a1e11",
-         "datos": {
-          "a": 20,
+          "a": 14,
           "b": 2,
           "op": "+"
          },
          "solucion": {
           "huecos": [
-           22
+           16
           ]
          }
         },
         {
-         "id": "a1e12",
-         "datos": {
-          "a": 10,
-          "b": 20,
-          "op": "+"
-         },
-         "solucion": {
-          "huecos": [
-           30
-          ]
-         }
-        },
-        {
-         "id": "a1e13",
-         "datos": {
-          "a": 20,
-          "b": 1,
-          "op": "+"
-         },
-         "solucion": {
-          "huecos": [
-           21
-          ]
-         }
-        },
-        {
-         "id": "a1e14",
-         "datos": {
-          "a": 21,
-          "b": 6,
-          "op": "+"
-         },
-         "solucion": {
-          "huecos": [
-           27
-          ]
-         }
-        },
-        {
-         "id": "a1e15",
-         "datos": {
-          "a": 10,
-          "b": 20,
-          "op": "+"
-         },
-         "solucion": {
-          "huecos": [
-           30
-          ]
-         }
-        },
-        {
-         "id": "a1e16",
-         "datos": {
-          "a": 13,
-          "b": 5,
-          "op": "+"
-         },
-         "solucion": {
-          "huecos": [
-           18
-          ]
-         }
-        },
-        {
-         "id": "a1e17",
-         "datos": {
-          "a": 7,
-          "b": 10,
-          "op": "+"
-         },
-         "solucion": {
-          "huecos": [
-           17
-          ]
-         }
-        },
-        {
-         "id": "a1e18",
-         "datos": {
-          "a": 10,
-          "b": 20,
-          "op": "+"
-         },
-         "solucion": {
-          "huecos": [
-           30
-          ]
-         }
-        },
-        {
-         "id": "a1e19",
-         "datos": {
-          "a": 10,
-          "b": 1,
-          "op": "+"
-         },
-         "solucion": {
-          "huecos": [
-           11
-          ]
-         }
-        },
-        {
-         "id": "a1e20",
+         "id": "a1e2",
          "datos": {
           "a": 18,
           "b": 1,
@@ -19499,10 +19265,205 @@
          }
         },
         {
-         "id": "a1e21",
+         "id": "a1e3",
          "datos": {
-          "a": 23,
+          "a": 20,
           "b": 1,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           21
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": 12,
+          "b": 2,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           14
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "a": 20,
+          "b": 3,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           23
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": 24,
+          "b": 4,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           28
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "a": 7,
+          "b": 10,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           17
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "a": 5,
+          "b": 10,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           15
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "a": 22,
+          "b": 5,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           27
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "a": 20,
+          "b": 8,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           28
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "a": 13,
+          "b": 4,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           17
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "a": 9,
+          "b": 10,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           19
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "a": 1,
+          "b": 20,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           21
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "a": 11,
+          "b": 5,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           16
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "a": 21,
+          "b": 7,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           28
+          ]
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "a": 10,
+          "b": 20,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           30
+          ]
+         }
+        },
+        {
+         "id": "a1e17",
+         "datos": {
+          "a": 20,
+          "b": 10,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           30
+          ]
+         }
+        },
+        {
+         "id": "a1e18",
+         "datos": {
+          "a": 20,
+          "b": 4,
           "op": "+"
          },
          "solucion": {
@@ -19512,20 +19473,7 @@
          }
         },
         {
-         "id": "a1e22",
-         "datos": {
-          "a": 21,
-          "b": 1,
-          "op": "+"
-         },
-         "solucion": {
-          "huecos": [
-           22
-          ]
-         }
-        },
-        {
-         "id": "a1e23",
+         "id": "a1e19",
          "datos": {
           "a": 10,
           "b": 10,
@@ -19538,15 +19486,67 @@
          }
         },
         {
-         "id": "a1e24",
+         "id": "a1e20",
          "datos": {
-          "a": 24,
-          "b": 4,
+          "a": 13,
+          "b": 5,
           "op": "+"
          },
          "solucion": {
           "huecos": [
-           28
+           18
+          ]
+         }
+        },
+        {
+         "id": "a1e21",
+         "datos": {
+          "a": 21,
+          "b": 2,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           23
+          ]
+         }
+        },
+        {
+         "id": "a1e22",
+         "datos": {
+          "a": 21,
+          "b": 3,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           24
+          ]
+         }
+        },
+        {
+         "id": "a1e23",
+         "datos": {
+          "a": 20,
+          "b": 7,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           27
+          ]
+         }
+        },
+        {
+         "id": "a1e24",
+         "datos": {
+          "a": 8,
+          "b": 10,
+          "op": "+"
+         },
+         "solucion": {
+          "huecos": [
+           18
           ]
          }
         }
@@ -19558,10 +19558,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "86a8fdf4489d8688"
+   "4c0cc31c5a3a9a97"
   ],
   "svgSolucion": [
-   "5999d4035cd67e18"
+   "c52ff9e10dbce1a0"
   ]
  },
  "sumar.h20": {

@@ -35,7 +35,7 @@ BLOQUES = {
     10: "Medida",
     11: "Estadística y patrones",
 }
-RANGOS = (10, 20, 30, 100)
+RANGOS = (10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
 AMBOS, COMPLETA = ("completa", "media"), ("completa",)
 
 
