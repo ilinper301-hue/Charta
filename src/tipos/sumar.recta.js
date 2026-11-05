@@ -3,6 +3,7 @@
 // solucion: { huecos: [a + b] }
 // Completa: 6 sumas (una por fila); media: 3.
 import { registrar } from "../nucleo/tipos.js";
+import { salto } from "./restar.recta.js";
 import { TOP, M, W, T, B, INK } from "../render/papel.js";
 
 export default registrar({
@@ -28,11 +29,7 @@ export default registrar({
         p.line(x0 + k * step, y0 - 4, x0 + k * step, y0 + 4, { lw: 1.2 });
         p.text(x0 + k * step, y0 - 14, String(k), 7.5, { f: "PM", anchor: "middle" });
       }
-      const xa = x0 + a * step, xb = x0 + (a + b) * step;
-      p.path([["M", xa, y0 + 3], ["C", xa, y0 + 30, xb, y0 + 30, xb, y0 + 7]], { lw: 1.8 });
-      p.path([["M", xb, y0 + 2], ["L", xb - 4, y0 + 9], ["L", xb + 4, y0 + 9], ["Z"]], { fill: INK, stroke: null });
-      p.circle(xa, y0, 3, { fill: INK, stroke: null });
-      p.text((xa + xb) / 2, y0 + 26, `+${b}`, 9, { f: "PM", anchor: "middle" });
+      salto(p, x0 + a * step, x0 + (a + b) * step, y0, `+${b}`);
     }));
   },
 });

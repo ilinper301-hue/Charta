@@ -45,6 +45,7 @@
   - Letra **Andika** (`Andika-Regular.ttf` y `Andika-Bold.ttf`, licencia OFL, se pueden incluir en la app). Si falta, Poppins.
   - A4 vertical, una página por ficha; sin respuestas impresas ni explicaciones teóricas.
 - El diseño de cada actividad ya está aprobado por Iván: **no cambiarlo** sin que lo pida.
+  - Cambios pedidos por Iván después (la app manda; el motor Python no se actualiza): sumas y restas en la recta sin el salto dibujado en la ficha (daba la respuesta); solo el punto de partida, y el salto en rojo en soluciones (5-11-2026).
 
 ## Reglas de corrección matemática
 - Dedos: máx. 10; del 1 al 4 se levantan índice a meñique con el pulgar plegado.
