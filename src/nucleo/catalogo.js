@@ -14,6 +14,7 @@ export const CATALOGO = {
   "5": "Sumar",
   "6": "Restar",
   "7": "Juegos numéricos",
+  "8": "Problemas",
   "9": "Geometría",
   "10": "Medida",
   "11": "Estadística y patrones"
@@ -4353,6 +4354,234 @@ export const CATALOGO = {
     "etiquetas": [
      "patrones",
      "series",
+     "razonamiento"
+    ]
+   }
+  },
+  {
+   "id": "problemas.suma",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 8,
+   "familia": "problemas",
+   "clave": "suma",
+   "nombre": "Problemas de sumar",
+   "descripcion": "Problemas de una operación: juntar o añadir. Nombres y objetos distintos en cada uno.",
+   "opciones": [
+    {
+     "id": "situacion",
+     "etiqueta": "Situaciones",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Variadas"
+      },
+      {
+       "valor": "juntar",
+       "etiqueta": "Juntar dos cantidades"
+      },
+      {
+       "valor": "anadir",
+       "etiqueta": "Añadir a lo que hay"
+      }
+     ]
+    },
+    {
+     "id": "nivel",
+     "etiqueta": "Llevadas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Sin llevadas"
+      },
+      {
+       "valor": "con",
+       "etiqueta": "Con llevadas"
+      },
+      {
+       "valor": "mezcla",
+       "etiqueta": "Mezcladas"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    40,
+    50,
+    60,
+    70,
+    80,
+    90,
+    100
+   ],
+   "rango": 20,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "PROBLEMAS DE SUMAR",
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 15,
+    "etiquetas": [
+     "problemas",
+     "sumar",
+     "texto",
+     "razonamiento"
+    ]
+   }
+  },
+  {
+   "id": "problemas.resta",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 8,
+   "familia": "problemas",
+   "clave": "resta",
+   "nombre": "Problemas de restar",
+   "descripcion": "Problemas de una operación: quitar, comparar o cuántos faltan.",
+   "opciones": [
+    {
+     "id": "situacion",
+     "etiqueta": "Situaciones",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Variadas"
+      },
+      {
+       "valor": "quitar",
+       "etiqueta": "Quitar o regalar"
+      },
+      {
+       "valor": "comparar",
+       "etiqueta": "Comparar (cuántos más o menos)"
+      },
+      {
+       "valor": "faltar",
+       "etiqueta": "Cuántos faltan"
+      }
+     ]
+    },
+    {
+     "id": "nivel",
+     "etiqueta": "Llevadas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Sin llevadas"
+      },
+      {
+       "valor": "con",
+       "etiqueta": "Con llevadas"
+      },
+      {
+       "valor": "mezcla",
+       "etiqueta": "Mezcladas"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    40,
+    50,
+    60,
+    70,
+    80,
+    90,
+    100
+   ],
+   "rango": 20,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "PROBLEMAS DE RESTAR",
+   "color": "rosa",
+   "metadatos": {
+    "dificultad": 3,
+    "minutos": 15,
+    "etiquetas": [
+     "problemas",
+     "restar",
+     "texto",
+     "razonamiento"
+    ]
+   }
+  },
+  {
+   "id": "problemas.mixtos",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 8,
+   "familia": "problemas",
+   "clave": "mixtos",
+   "nombre": "Problemas de sumar y restar",
+   "descripcion": "Problemas mezclados: hay que decidir si se suma o se resta.",
+   "opciones": [
+    {
+     "id": "nivel",
+     "etiqueta": "Llevadas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Sin llevadas"
+      },
+      {
+       "valor": "con",
+       "etiqueta": "Con llevadas"
+      },
+      {
+       "valor": "mezcla",
+       "etiqueta": "Mezcladas"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    40,
+    50,
+    60,
+    70,
+    80,
+    90,
+    100
+   ],
+   "rango": 20,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "PROBLEMAS",
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 3,
+    "minutos": 18,
+    "etiquetas": [
+     "problemas",
+     "sumar",
+     "restar",
+     "texto",
      "razonamiento"
     ]
    }

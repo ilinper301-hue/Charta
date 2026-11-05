@@ -7,6 +7,7 @@ import "./familia.valor.js";
 import "./familia.sumar.js";
 import "./familia.restar.js";
 import "./familia.juegos.js";
+import "./familia.problemas.js";
 import "./familia.geometria.js";
 import "./familia.medida.js";
 import "./familia.estadistica.js";

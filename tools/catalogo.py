@@ -7,6 +7,7 @@ sys.path.insert(0, os.path.join(RAIZ, "motor"))
 import modelos as MOD
 import generador_fichas as g
 import metadatos as META
+import modelos_app as APP
 
 def titulo(m):
     modo = next((o for o in m["opciones"] if o["id"] == "modo" and o["tipo"] == "opcion"), None)
@@ -15,7 +16,9 @@ def titulo(m):
     return ts["_"] if len(set(ts.values())) == 1 and "_" in ts else ts
 
 modelos = [{**m, "tamanos": list(m["tamanos"]), "titulo": titulo(m), "color": g.color_modelo(m), "metadatos": META.metadatos(m["id"])} for m in MOD.MODELOS]
-datos = {"cursos": MOD.CURSOS, "materias": MOD.MATERIAS, "bloques": MOD.BLOQUES, "modelos": modelos}
+# Modelos solo de la app (motor/modelos_app.py): sin motor Python que dé título y color.
+modelos += [{**m, "tamanos": list(m["tamanos"]), "metadatos": META.metadatos(m["id"])} for m in APP.MODELOS_APP]
+datos = {"cursos": MOD.CURSOS, "materias": MOD.MATERIAS, "bloques": dict(sorted({**MOD.BLOQUES, **APP.BLOQUES}.items())), "modelos": modelos}
 js = ("// GENERADO por tools/catalogo.py desde motor/modelos.py. No editar a mano.\n"
       "export const CATALOGO = " + json.dumps(datos, ensure_ascii=False, indent=1) + ";\n"
       "export const POR_ID = Object.fromEntries(CATALOGO.modelos.map((m) => [m.id, m]));\n")

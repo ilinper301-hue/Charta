@@ -86,6 +86,10 @@ META = {
     "juegos.cadena": (2, 12, "juego cadena cálculo"),
     "juegos.oculto": (3, 12, "juego número_oculto razonamiento"),
     "juegos.colorea": (2, 15, "juego colorear cálculo"),
+    # Bloque 8 · problemas
+    "problemas.suma": (2, 15, "problemas sumar texto razonamiento"),
+    "problemas.resta": (3, 15, "problemas restar texto razonamiento"),
+    "problemas.mixtos": (3, 18, "problemas sumar restar texto razonamiento"),
     # Bloque 9 · geometría
     "geometria.figuras": (1, 8, "geometría figuras_planas"),
     "geometria.cuenta": (2, 10, "geometría figuras contar"),

@@ -941,6 +941,7 @@ const CATALOGO = {
   "5": "Sumar",
   "6": "Restar",
   "7": "Juegos numéricos",
+  "8": "Problemas",
   "9": "Geometría",
   "10": "Medida",
   "11": "Estadística y patrones"
@@ -5283,6 +5284,234 @@ const CATALOGO = {
      "razonamiento"
     ]
    }
+  },
+  {
+   "id": "problemas.suma",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 8,
+   "familia": "problemas",
+   "clave": "suma",
+   "nombre": "Problemas de sumar",
+   "descripcion": "Problemas de una operación: juntar o añadir. Nombres y objetos distintos en cada uno.",
+   "opciones": [
+    {
+     "id": "situacion",
+     "etiqueta": "Situaciones",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Variadas"
+      },
+      {
+       "valor": "juntar",
+       "etiqueta": "Juntar dos cantidades"
+      },
+      {
+       "valor": "anadir",
+       "etiqueta": "Añadir a lo que hay"
+      }
+     ]
+    },
+    {
+     "id": "nivel",
+     "etiqueta": "Llevadas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Sin llevadas"
+      },
+      {
+       "valor": "con",
+       "etiqueta": "Con llevadas"
+      },
+      {
+       "valor": "mezcla",
+       "etiqueta": "Mezcladas"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    40,
+    50,
+    60,
+    70,
+    80,
+    90,
+    100
+   ],
+   "rango": 20,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "PROBLEMAS DE SUMAR",
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 15,
+    "etiquetas": [
+     "problemas",
+     "sumar",
+     "texto",
+     "razonamiento"
+    ]
+   }
+  },
+  {
+   "id": "problemas.resta",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 8,
+   "familia": "problemas",
+   "clave": "resta",
+   "nombre": "Problemas de restar",
+   "descripcion": "Problemas de una operación: quitar, comparar o cuántos faltan.",
+   "opciones": [
+    {
+     "id": "situacion",
+     "etiqueta": "Situaciones",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Variadas"
+      },
+      {
+       "valor": "quitar",
+       "etiqueta": "Quitar o regalar"
+      },
+      {
+       "valor": "comparar",
+       "etiqueta": "Comparar (cuántos más o menos)"
+      },
+      {
+       "valor": "faltar",
+       "etiqueta": "Cuántos faltan"
+      }
+     ]
+    },
+    {
+     "id": "nivel",
+     "etiqueta": "Llevadas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Sin llevadas"
+      },
+      {
+       "valor": "con",
+       "etiqueta": "Con llevadas"
+      },
+      {
+       "valor": "mezcla",
+       "etiqueta": "Mezcladas"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    40,
+    50,
+    60,
+    70,
+    80,
+    90,
+    100
+   ],
+   "rango": 20,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "PROBLEMAS DE RESTAR",
+   "color": "rosa",
+   "metadatos": {
+    "dificultad": 3,
+    "minutos": 15,
+    "etiquetas": [
+     "problemas",
+     "restar",
+     "texto",
+     "razonamiento"
+    ]
+   }
+  },
+  {
+   "id": "problemas.mixtos",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 8,
+   "familia": "problemas",
+   "clave": "mixtos",
+   "nombre": "Problemas de sumar y restar",
+   "descripcion": "Problemas mezclados: hay que decidir si se suma o se resta.",
+   "opciones": [
+    {
+     "id": "nivel",
+     "etiqueta": "Llevadas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Sin llevadas"
+      },
+      {
+       "valor": "con",
+       "etiqueta": "Con llevadas"
+      },
+      {
+       "valor": "mezcla",
+       "etiqueta": "Mezcladas"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    10,
+    20,
+    30,
+    40,
+    50,
+    60,
+    70,
+    80,
+    90,
+    100
+   ],
+   "rango": 20,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "PROBLEMAS",
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 3,
+    "minutos": 18,
+    "etiquetas": [
+     "problemas",
+     "sumar",
+     "restar",
+     "texto",
+     "razonamiento"
+    ]
+   }
   }
  ]
 };
@@ -6327,6 +6556,137 @@ function svgCompleto({ w, h, svg }, margen = 2) {
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get REPS() { return REPS; }, get RANGOS() { return RANGOS; }, get VACIAS() { return VACIAS; }, get PLANTILLAS() { return PLANTILLAS; }, get ancho() { return ancho; }, get esc() { return esc; }, get nombreNumero() { return nombreNumero; }, get rep() { return rep; }, get plantilla() { return plantilla; }, get svgCompleto() { return svgCompleto; } }));
 },
+"tipos/_problemas.js": (__exp) => {
+// Charta · núcleo común de los problemas de 1.º (bloque 8): plantillas con nombres y objetos, y dibujo.
+// Cada problema = un enunciado en prosa + «Operación:» (a ? b = resultado) + «Respuesta:» (número y objeto).
+// datos:    { texto, sit, a, b, op: "+" | "−", obj }          (obj = nombre plural del objeto)
+// solucion: { huecos: [a, op, b, resultado, resultado] }      (orden de las cajas de izquierda a derecha y de arriba abajo)
+// Todas las cantidades que aparecen y el resultado valen ≥ 2: así el plural del objeto es siempre correcto.
+// Completa: 4 problemas; media: 2 (la mitad de filas, como el resto de tipos).
+const { TOP, T, B, MENOS } = __req("render/papel.js");
+const NOMBRES = ["Ana", "Luis", "Marta", "Pablo", "Lucía", "Hugo", "Sara", "Daniel", "Carla", "Mario", "Paula", "Diego",
+  "Elena", "Leo", "Irene", "Nico", "Julia", "Pedro", "Alba", "Sofía", "Martín", "Laura", "Hugo", "Noa"].filter((n, i, l) => l.indexOf(n) === i);
+/** [plural, género]: f = femenino, m = masculino (para «cuántas» / «cuántos»). */
+const OBJETOS = [["manzanas", "f"], ["peras", "f"], ["galletas", "f"], ["pegatinas", "f"], ["canicas", "f"], ["flores", "f"], ["pelotas", "f"],
+  ["cartas", "f"], ["fresas", "f"], ["cromos", "m"], ["lápices", "m"], ["globos", "m"], ["libros", "m"], ["caramelos", "m"], ["coches", "m"],
+  ["bombones", "m"], ["plátanos", "m"], ["huevos", "m"], ["botones", "m"], ["juguetes", "m"]];
+
+const cuantos = (g) => (g === "f" ? "Cuántas" : "Cuántos");
+const cuantosMin = (g) => (g === "f" ? "cuántas" : "cuántos");
+const VERBOS_ANADIR = ["compra", "encuentra", "recibe", "consigue"];
+const VERBOS_QUITAR = (b) => [`Regala ${b}.`, `Pierde ${b}.`, `Da ${b} a un amigo.`];
+
+/** Situaciones: cada una da { texto, op, a, b } a partir de (N, M, a, b, o, g) con el mayor primero cuando resta. */
+const SITUACIONES = {
+  suma: {
+    juntar: ({ N, M, a, b, o, g }, az) => az.elegir([
+      `${N} tiene ${a} ${o} y ${M} tiene ${b}. ¿${cuantos(g)} ${o} tienen entre ${N} y ${M}?`,
+      `En una caja hay ${a} ${o} y en otra hay ${b}. ¿${cuantos(g)} ${o} hay en total?`,
+    ]),
+    anadir: ({ N, a, b, o, g }, az) => az.elegir([
+      `${N} tiene ${a} ${o}. Luego ${az.elegir(VERBOS_ANADIR)} ${b} más. ¿${cuantos(g)} ${o} tiene ahora?`,
+      `En el cesto hay ${a} ${o}. Se ponen ${b} más. ¿${cuantos(g)} ${o} hay ahora en el cesto?`,
+    ]),
+  },
+  resta: {
+    quitar: ({ N, a, b, o, g }, az) => az.elegir([
+      `${N} tiene ${a} ${o}. ${az.elegir(VERBOS_QUITAR(b))} ¿${cuantos(g)} ${o} le quedan?`,
+      `En la caja hay ${a} ${o}. Se sacan ${b}. ¿${cuantos(g)} ${o} quedan en la caja?`,
+    ]),
+    comparar: ({ N, M, a, b, o, g }, az) => az.elegir([
+      `${N} tiene ${a} ${o} y ${M} tiene ${b}. ¿${cuantos(g)} ${o} más tiene ${N} que ${M}?`,
+      `${N} tiene ${a} ${o} y ${M} tiene ${b}. ¿${cuantos(g)} ${o} menos tiene ${M} que ${N}?`,
+    ]),
+    faltar: ({ N, a, b, o, g }) =>
+      `${N} necesita ${a} ${o} para completar su colección. Ya tiene ${b}. ¿${cuantos(g)} ${o} le faltan?`,
+  },
+};
+const SITS = { suma: ["juntar", "anadir"], resta: ["quitar", "comparar", "faltar"] };
+const OPERACION = { suma: "+", resta: MENOS };
+
+/** Cantidades según rango y nivel de llevadas (sumar: a + b ≤ R; restar: a ≤ R, a − b ≥ 2). Todas ≥ 2. */
+function cantidades(op, R, nivel, az) {
+  const lleva = op === "suma" ? (a, b) => (a % 10) + (b % 10) >= 10 : (a, b) => a % 10 < b % 10;
+  const par = [];
+  for (let a = 2; a <= R; a++) for (let b = 2; b <= R; b++) {
+    if (op === "suma" ? a + b > R || a + b < 4 : a - b < 2) continue;
+    par.push([a, b]);
+  }
+  const con = par.filter(([a, b]) => lleva(a, b)), sin = par.filter(([a, b]) => !lleva(a, b));
+  const lista = { sin, con, mezcla: par }[nivel || "sin"];
+  if (!lista.length || (nivel === "mezcla" && (!con.length || !sin.length)) || (nivel === "con" && !con.length))
+    throw new Error(`Con llevadas necesita números hasta 20 o más.`);
+  return { lista, con, sin };
+}
+
+/** Genera `n` problemas del tipo "suma" | "resta" | "mixtos". */
+function generarProblemas(clase, params, az, n) {
+  const R = params.rango || 20, nivel = params.nivel || "sin";
+  const clases = clase === "mixtos" ? ["suma", "resta"] : [clase];
+  const pools = Object.fromEntries(clases.map((c) => [c, cantidades(c, R, nivel, az)]));
+  const sitsPermitidas = (c) => (params.situacion ? [params.situacion] : SITS[c]);
+  const nombres = az.barajar(NOMBRES), objetos = az.barajar(OBJETOS);
+  const vistos = new Set(), out = [];
+  for (let i = 0; i < n; i++) {
+    const c = clases[i % clases.length];          // mixtos: alterna suma y resta
+    const { lista, con, sin } = pools[c];
+    // mezcla: alterna con y sin llevada
+    const origen = nivel === "mezcla" ? (i % 2 === 0 ? con : sin) : lista;
+    let a, b, sit;
+    for (let k = 0; k < 60; k++) {
+      [a, b] = az.elegir(origen.length ? origen : lista);
+      sit = az.elegir(sitsPermitidas(c));
+      if (!vistos.has(`${c}${a},${b}`)) break;
+    }
+    vistos.add(`${c}${a},${b}`);
+    const N = nombres[(2 * i) % nombres.length], M = nombres[(2 * i + 1) % nombres.length];
+    const [obj, g] = objetos[i % objetos.length];
+    const res = c === "suma" ? a + b : a - b;
+    const texto = SITUACIONES[c][sit]({ N, M, a, b, o: obj, g }, az);
+    out.push({ texto, sit, a, b, op: OPERACION[c], obj, g, res });
+  }
+  return out;
+}
+
+/** Parte el texto en líneas que quepan en `ancho` con la letra `fs`. */
+function partir(p, texto, ancho, fs) {
+  const lineas = []; let actual = "";
+  for (const pal of texto.split(" ")) {
+    const prueba = actual ? actual + " " + pal : pal;
+    if (actual && p.ancho(prueba, "PR", fs) > ancho) { lineas.push(actual); actual = pal; } else actual = prueba;
+  }
+  if (actual) lineas.push(actual);
+  return lineas;
+}
+
+/** Dibujo común: una tarjeta por problema (4 en completa, 2 en media). */
+function dibujarProblemas(p, act) {
+  const es = act.ejercicios, filas = 4;
+  const { cel, cw, ch } = p.celdas(TOP, 1, filas);
+  es.slice(0, p.n(filas)).forEach((e, i) => p.ejercicio(e.id, () => {
+    const [x, y] = cel[i], d = e.datos, h = e.solucion.huecos;
+    p.marco(x, y, cw, ch, i);
+    const fs = 14.5, lineas = partir(p, d.texto, cw - 84, fs);
+    lineas.forEach((l, j) => p.text(x + 44, y + ch - 32 - j * 20, l, fs, { f: "PR" }));
+    const hb = 38;
+    // «Operación:  [a] [+] [b] = [resultado]»
+    p.linea(x + 20, y + 56, cw - 40, hb + 4, [T("Operación:", 13, "PR"), B(46, hb, h[0]), B(36, hb, h[1]), B(46, hb, h[2]), T("=", 19), B(52, hb, h[3])], 10);
+    // «Respuesta:  [resultado] manzanas»
+    p.linea(x + 20, y + 8, cw - 40, hb + 4, [T("Respuesta:", 13, "PR"), B(52, hb, h[4]), T(d.obj, 13, "PR")], 10);
+  }));
+}
+
+/** Fábrica de tipo: problemas.<clase>. */
+const enunciadoProblemas = "Lee, escribe la operación y contesta.";
+function ejerciciosProblemas(clase, params, az, tamano) {
+  return generarProblemas(clase, params, az, tamano === "media" ? 2 : 4).map((d) => ({
+    datos: { texto: d.texto, sit: d.sit, a: d.a, b: d.b, op: d.op, obj: d.obj },
+    solucion: { huecos: [d.a, d.op, d.b, d.res, d.res] },
+  }));
+}
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get NOMBRES() { return NOMBRES; }, get OBJETOS() { return OBJETOS; }, get SITUACIONES() { return SITUACIONES; }, get generarProblemas() { return generarProblemas; }, get partir() { return partir; }, get dibujarProblemas() { return dibujarProblemas; }, get enunciadoProblemas() { return enunciadoProblemas; }, get ejerciciosProblemas() { return ejerciciosProblemas; } }));
+},
 "tipos/_rep.js": (__exp) => {
 // Charta · fábrica de los tipos «rep.*» (una representación del número: leer y dibujar).
 // Port de ficha_rep() + pick() + tercios() del motor. NO es un tipo: cada rep.<nombre>.js la llama una vez.
@@ -7248,6 +7608,13 @@ __req("tipos/orden.ordinales.js");
 __req("tipos/orden.cantidad.js");
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({  }));
 },
+"tipos/familia.problemas.js": (__exp) => {
+// Charta · tipos de la familia «problemas» (bloque 8). Añadir aquí cada módulo nuevo de la familia.
+__req("tipos/problemas.suma.js");
+__req("tipos/problemas.resta.js");
+__req("tipos/problemas.mixtos.js");
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({  }));
+},
 "tipos/familia.rep.js": (__exp) => {
 // Charta · tipos de la familia «rep». Añadir aquí cada módulo nuevo de la familia.
 __req("tipos/rep.dado.js");
@@ -7774,6 +8141,7 @@ __req("tipos/familia.valor.js");
 __req("tipos/familia.sumar.js");
 __req("tipos/familia.restar.js");
 __req("tipos/familia.juegos.js");
+__req("tipos/familia.problemas.js");
 __req("tipos/familia.geometria.js");
 __req("tipos/familia.medida.js");
 __req("tipos/familia.estadistica.js");
@@ -9050,6 +9418,54 @@ const __default = registrar({
 });
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get grupo() { return grupo; }, get pares() { return pares; }, get default() { return __default; } }));
+},
+"tipos/problemas.mixtos.js": (__exp) => {
+// problemas.mixtos · Problemas de sumar y restar (modelo propio de la app; sin motor Python).
+// Ver _problemas.js: datos { texto, sit, a, b, op, obj }, solucion { huecos: [a, op, b, resultado, resultado] }.
+const { registrar } = __req("nucleo/tipos.js");
+const { ejerciciosProblemas, enunciadoProblemas, dibujarProblemas } = __req("tipos/_problemas.js");
+const __default = registrar({
+  id: "problemas.mixtos",
+  version: 1,
+  generar(params, azar, { tamano }) {
+    return { enunciado: enunciadoProblemas, ejercicios: ejerciciosProblemas("mixtos", params, azar, tamano) };
+  },
+  dibujar: dibujarProblemas,
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/problemas.resta.js": (__exp) => {
+// problemas.resta · Problemas de restar (modelo propio de la app; sin motor Python).
+// Ver _problemas.js: datos { texto, sit, a, b, op, obj }, solucion { huecos: [a, op, b, resultado, resultado] }.
+const { registrar } = __req("nucleo/tipos.js");
+const { ejerciciosProblemas, enunciadoProblemas, dibujarProblemas } = __req("tipos/_problemas.js");
+const __default = registrar({
+  id: "problemas.resta",
+  version: 1,
+  generar(params, azar, { tamano }) {
+    return { enunciado: enunciadoProblemas, ejercicios: ejerciciosProblemas("resta", params, azar, tamano) };
+  },
+  dibujar: dibujarProblemas,
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/problemas.suma.js": (__exp) => {
+// problemas.suma · Problemas de sumar (modelo propio de la app; sin motor Python).
+// Ver _problemas.js: datos { texto, sit, a, b, op, obj }, solucion { huecos: [a, op, b, resultado, resultado] }.
+const { registrar } = __req("nucleo/tipos.js");
+const { ejerciciosProblemas, enunciadoProblemas, dibujarProblemas } = __req("tipos/_problemas.js");
+const __default = registrar({
+  id: "problemas.suma",
+  version: 1,
+  generar(params, azar, { tamano }) {
+    return { enunciado: enunciadoProblemas, ejercicios: ejerciciosProblemas("suma", params, azar, tamano) };
+  },
+  dibujar: dibujarProblemas,
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
 },
 "tipos/rep.abaco.js": (__exp) => {
 // rep.abaco · Leer y dibujar números con abaco. Ver _rep.js.

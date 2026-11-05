@@ -8,6 +8,8 @@ ESTADO.md             hoja de ruta con pasos marcables
 ESQUEMA.md            esquema JSON v1 de ficha, actividad y ejercicio
 INICIO_CHAT.md        mensaje para empezar un chat nuevo
 motor/generador_fichas.py   motor de REFERENCIA (Python + ReportLab), ~2.700 líneas: diseño aprobado y reglas
+motor/modelos_app.py  modelos SOLO de la app (bloque 8 problemas…): MODELOS_APP con titulo y color; tools/catalogo.py los añade tras los del motor
+motor/metadatos.py    META: dificultad, minutos y etiquetas de cada modelo (también los de la app)
 motor/modelos.py      catálogo MODELOS para la app (solo datos): menu(), por_defecto(), validar(), a_json()
 tests/test_motor.py   regresión: genera todo y comprueba la aritmética
 referencia/ficha_muestra.pdf  ficha de muestra de Iván (marco a imitar)
@@ -27,6 +29,7 @@ src/nucleo/lector.js  erroresFicha(f), paginasVariante(f, v), letraVariante — 
 src/nucleo/catalogo.js  GENERADO por tools/catalogo.py (MODELOS + titulo + color); no editar
 src/rep/index.js      16 representaciones en SVG: rep(nombre, n, {i, vacio, rango}) y plantilla() → {w, h, svg} (caja en puntos PDF, y hacia abajo, centrada como el motor); svgCompleto(), nombreNumero(). Anchuras de Andika incrustadas
 tests/test_rep.js     pruebas de las representaciones · tools/comparar_rep.py: hoja motor vs JS en PNG
+src/tipos/_problemas.js  problemas del bloque 8: NOMBRES, OBJETOS, SITUACIONES, generarProblemas(), dibujarProblemas() (tipos problemas.suma/resta/mixtos)
 src/tipos/index.js    importa familia.<f>.js (cada uno, los tipos de su familia); src/tipos/<id>.js uno por tipo (p. ej. sumar.h20.js); _rep.js = fábrica común de rep.*
 src/render/papel.js   lienzo Papel en coordenadas del MOTOR (pt, y hacia arriba): primitivas + port de caja, cuadrito, _marco, _celdas, _linea, T/B, _pintar, _n. TOP = H−M−76 (TOP_REP = H−M−90). Modo "solucion": huecos con la respuesta en rojo
 src/render/hoja.js    hoja(pagina, {titulo, nombre, bn, modo}) → SVG A4 (encabezado + paneles, como el motor); hojas(ficha, {nombres, bn, modo}) → una por alumno

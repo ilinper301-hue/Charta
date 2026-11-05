@@ -10236,6 +10236,380 @@
    "728ef1fa6b874a37"
   ]
  },
+ "problemas.mixtos": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Problemas",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "problemas.mixtos",
+       "tipoVersion": 1,
+       "params": {
+        "nivel": null,
+        "rango": 20
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Lee, escribe la operación y contesta.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "texto": "Diego tiene 10 juguetes. Luego compra 4 más. ¿Cuántos juguetes tiene ahora?",
+          "sit": "anadir",
+          "a": 10,
+          "b": 4,
+          "op": "+",
+          "obj": "juguetes"
+         },
+         "solucion": {
+          "huecos": [
+           10,
+           "+",
+           4,
+           14,
+           14
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "texto": "Sofía tiene 19 caramelos y Julia tiene 3. ¿Cuántos caramelos más tiene Sofía que Julia?",
+          "sit": "comparar",
+          "a": 19,
+          "b": 3,
+          "op": "−",
+          "obj": "caramelos"
+         },
+         "solucion": {
+          "huecos": [
+           19,
+           "−",
+           3,
+           16,
+           16
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "texto": "En el cesto hay 5 flores. Se ponen 2 más. ¿Cuántas flores hay ahora en el cesto?",
+          "sit": "anadir",
+          "a": 5,
+          "b": 2,
+          "op": "+",
+          "obj": "flores"
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           "+",
+           2,
+           7,
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "texto": "Laura tiene 8 cromos y Carla tiene 5. ¿Cuántos cromos menos tiene Carla que Laura?",
+          "sit": "comparar",
+          "a": 8,
+          "b": 5,
+          "op": "−",
+          "obj": "cromos"
+         },
+         "solucion": {
+          "huecos": [
+           8,
+           "−",
+           5,
+           3,
+           3
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "e8de5ae243998321"
+  ],
+  "svgSolucion": [
+   "ee534a337aa132ff"
+  ]
+ },
+ "problemas.resta": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Problemas de restar",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "problemas.resta",
+       "tipoVersion": 1,
+       "params": {
+        "situacion": null,
+        "nivel": null,
+        "rango": 20
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Lee, escribe la operación y contesta.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "texto": "Diego necesita 17 juguetes para completar su colección. Ya tiene 12. ¿Cuántos juguetes le faltan?",
+          "sit": "faltar",
+          "a": 17,
+          "b": 12,
+          "op": "−",
+          "obj": "juguetes"
+         },
+         "solucion": {
+          "huecos": [
+           17,
+           "−",
+           12,
+           5,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "texto": "En la caja hay 9 caramelos. Se sacan 2. ¿Cuántos caramelos quedan en la caja?",
+          "sit": "quitar",
+          "a": 9,
+          "b": 2,
+          "op": "−",
+          "obj": "caramelos"
+         },
+         "solucion": {
+          "huecos": [
+           9,
+           "−",
+           2,
+           7,
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "texto": "Luis tiene 16 flores y Marta tiene 2. ¿Cuántas flores menos tiene Marta que Luis?",
+          "sit": "comparar",
+          "a": 16,
+          "b": 2,
+          "op": "−",
+          "obj": "flores"
+         },
+         "solucion": {
+          "huecos": [
+           16,
+           "−",
+           2,
+           14,
+           14
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "texto": "Laura necesita 18 cromos para completar su colección. Ya tiene 14. ¿Cuántos cromos le faltan?",
+          "sit": "faltar",
+          "a": 18,
+          "b": 14,
+          "op": "−",
+          "obj": "cromos"
+         },
+         "solucion": {
+          "huecos": [
+           18,
+           "−",
+           14,
+           4,
+           4
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "c8fa5e203c63ffe0"
+  ],
+  "svgSolucion": [
+   "bdd387ff6bacb052"
+  ]
+ },
+ "problemas.suma": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Problemas de sumar",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "problemas.suma",
+       "tipoVersion": 1,
+       "params": {
+        "situacion": null,
+        "nivel": null,
+        "rango": 20
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Lee, escribe la operación y contesta.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "texto": "Diego tiene 10 juguetes. Luego compra 4 más. ¿Cuántos juguetes tiene ahora?",
+          "sit": "anadir",
+          "a": 10,
+          "b": 4,
+          "op": "+",
+          "obj": "juguetes"
+         },
+         "solucion": {
+          "huecos": [
+           10,
+           "+",
+           4,
+           14,
+           14
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "texto": "Sofía tiene 12 caramelos. Luego encuentra 7 más. ¿Cuántos caramelos tiene ahora?",
+          "sit": "anadir",
+          "a": 12,
+          "b": 7,
+          "op": "+",
+          "obj": "caramelos"
+         },
+         "solucion": {
+          "huecos": [
+           12,
+           "+",
+           7,
+           19,
+           19
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "texto": "Luis tiene 10 flores. Luego consigue 6 más. ¿Cuántas flores tiene ahora?",
+          "sit": "anadir",
+          "a": 10,
+          "b": 6,
+          "op": "+",
+          "obj": "flores"
+         },
+         "solucion": {
+          "huecos": [
+           10,
+           "+",
+           6,
+           16,
+           16
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "texto": "En el cesto hay 7 cromos. Se ponen 12 más. ¿Cuántos cromos hay ahora en el cesto?",
+          "sit": "anadir",
+          "a": 7,
+          "b": 12,
+          "op": "+",
+          "obj": "cromos"
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           "+",
+           12,
+           19,
+           19
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "978e53395bb52a6f"
+  ],
+  "svgSolucion": [
+   "36124bd989916800"
+  ]
+ },
  "rep.abaco": {
   "ficha": {
    "schemaVersion": 1,

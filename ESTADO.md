@@ -79,7 +79,8 @@
 - [ ] Pictogramas (decidir con Iván: de dónde salen y dónde se ponen).
 
 ## Fase 7 · Ampliación de contenidos
-- [ ] Bloque 8: problemas (con plantillas de nombres y objetos).
+- [x] Bloque 8: problemas (con plantillas de nombres y objetos).
+  - Hecho: 3 modelos propios de la app (`motor/modelos_app.py`, no entran en `modelos.MODELOS` para no tocar `test_motor.py`): `problemas.suma` (juntar, añadir), `problemas.resta` (quitar, comparar, faltar) y `problemas.mixtos`. Opciones: números hasta 10–100 (20 por defecto), situaciones, llevadas. 4 problemas por página (2 en media): enunciado + «Operación: [a] [±] [b] = [ ]» + «Respuesta: [ ] objeto». Todas las cantidades y el resultado ≥ 2 (el plural siempre es correcto); 24 nombres y 20 objetos con su género. `src/tipos/_problemas.js` (núcleo común), invariantes en `tests/inv/problemas.js`. 97 tipos; `npm test` OK. **Ampliable**: más situaciones (igualar, cambio con incógnita), problemas de dos pasos y plantillas por contexto (escuela, parque…).
 - [ ] Barri (modelo de barras) y Calculi (estrategias) como tipos.
 - [ ] Otros cursos de Matemáticas (2.º a 6.º) y Lengua.
 
