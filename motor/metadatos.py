@@ -135,6 +135,22 @@ META = {
     "silaba.separa": (2, 12, "lengua sílabas separar palabras"),
     "silaba.ordena": (2, 10, "lengua sílabas ordenar palabras"),
     "silaba.falta": (2, 10, "lengua sílabas palabras completar"),
+    "palabra.intrusa": (2, 8, "lengua palabras campos_léxicos rodear clasificar"),
+    "palabra.clasifica": (2, 12, "lengua palabras campos_léxicos clasificar escribir"),
+    "palabra.letras": (2, 10, "lengua palabras letras ordenar escribir"),
+    "palabra.cuenta": (1, 8, "lengua palabras letras contar"),
+    "palabra.articulo": (2, 10, "lengua palabras artículos género número"),
+    "palabra.plural": (2, 10, "lengua palabras plural singular escribir"),
+    "palabra.contrarios": (2, 10, "lengua palabras vocabulario contrarios unir"),
+    "palabra.sopa": (2, 15, "lengua palabras sopa_de_letras vocabulario"),
+    "fono.silabas": (1, 8, "lengua conciencia_fonológica sílabas palmadas contar"),
+    "fono.inicial": (1, 8, "lengua conciencia_fonológica letras sonido inicial rodear"),
+    "fono.posicion": (2, 8, "lengua conciencia_fonológica letras sonido posición"),
+    "fono.rimas": (2, 8, "lengua conciencia_fonológica rimas unir"),
+    "fono.quita": (2, 10, "lengua conciencia_fonológica sílabas quitar palabras"),
+    "fono.larga": (1, 8, "lengua conciencia_fonológica sílabas comparar rodear"),
+    "orto.elige": (2, 10, "lengua ortografía letras palabras completar"),
+    "orto.mayuscula": (2, 8, "lengua ortografía mayúsculas nombres propios"),
 }
 
 def metadatos(id):

@@ -3262,6 +3262,1016 @@
    "55148e48aadb2558"
   ]
  },
+ "fono.inicial": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "¿Con qué letra suena?",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "fono.inicial",
+       "tipoVersion": 1,
+       "params": {
+        "posicion": null,
+        "letras": null,
+        "tipo": null,
+        "caso": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Rodea la letra que falta al principio de la palabra.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "palabra": "goma",
+          "pos": 0,
+          "opciones": [
+           "l",
+           "m",
+           "g"
+          ],
+          "posicion": "principio"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 2
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "palabra": "cómodo",
+          "pos": 0,
+          "opciones": [
+           "e",
+           "i",
+           "c"
+          ],
+          "posicion": "principio"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 2
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "palabra": "suelo",
+          "pos": 0,
+          "opciones": [
+           "z",
+           "s",
+           "m"
+          ],
+          "posicion": "principio"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 1
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "palabra": "cuchara",
+          "pos": 0,
+          "opciones": [
+           "d",
+           "m",
+           "c"
+          ],
+          "posicion": "principio"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 2
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "palabra": "pecera",
+          "pos": 0,
+          "opciones": [
+           "p",
+           "n",
+           "o"
+          ],
+          "posicion": "principio"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 0
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "palabra": "rey",
+          "pos": 0,
+          "opciones": [
+           "r",
+           "n",
+           "s"
+          ],
+          "posicion": "principio"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 0
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "palabra": "ducha",
+          "pos": 0,
+          "opciones": [
+           "d",
+           "b",
+           "t"
+          ],
+          "posicion": "principio"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 0
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "palabra": "camarero",
+          "pos": 0,
+          "opciones": [
+           "d",
+           "c",
+           "r"
+          ],
+          "posicion": "principio"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 1
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "palabra": "mágico",
+          "pos": 0,
+          "opciones": [
+           "m",
+           "i",
+           "d"
+          ],
+          "posicion": "principio"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 0
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "palabra": "aro",
+          "pos": 0,
+          "opciones": [
+           "n",
+           "f",
+           "a"
+          ],
+          "posicion": "principio"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 2
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "9da53d4942d961f6"
+  ],
+  "svgSolucion": [
+   "d317afbf76d25f4f"
+  ]
+ },
+ "fono.larga": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "La palabra más larga",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "fono.larga",
+       "tipoVersion": 1,
+       "params": {
+        "cual": null,
+        "tipo": null,
+        "caso": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Rodea la palabra que tiene MÁS sílabas.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "palabras": [
+           "vaso",
+           "correa",
+           "panadera"
+          ],
+          "cual": "mas"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 2
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "palabras": [
+           "gasolina",
+           "goma",
+           "violeta"
+          ],
+          "cual": "mas"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 0
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "palabras": [
+           "chocolate",
+           "suelo",
+           "pie"
+          ],
+          "cual": "mas"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 0
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "palabras": [
+           "mágico",
+           "té",
+           "sueño"
+          ],
+          "cual": "mas"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 0
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "palabras": [
+           "toro",
+           "rey",
+           "cuchillo"
+          ],
+          "cual": "mas"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 2
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "palabras": [
+           "mecánico",
+           "tesoro",
+           "chico"
+          ],
+          "cual": "mas"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 0
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "palabras": [
+           "mariposa",
+           "señora",
+           "medio"
+          ],
+          "cual": "mas"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 0
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "palabras": [
+           "limonero",
+           "suma",
+           "maraca"
+          ],
+          "cual": "mas"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 0
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "palabras": [
+           "desayuno",
+           "rubio",
+           "otoño"
+          ],
+          "cual": "mas"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 0
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "palabras": [
+           "regalo",
+           "monedero",
+           "sano"
+          ],
+          "cual": "mas"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 1
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "b174ab4a24b342dd"
+  ],
+  "svgSolucion": [
+   "62aacffc36f53767"
+  ]
+ },
+ "fono.posicion": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "¿Dónde está el sonido?",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "fono.posicion",
+       "tipoVersion": 1,
+       "params": {
+        "largo": null,
+        "tipo": null,
+        "caso": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Lee la palabra y marca con una cruz\ndónde está la letra del cuadro.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "palabra": "nota",
+          "letra": "n"
+         },
+         "solucion": {
+          "huecos": [],
+          "marca": 0
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "palabra": "palacio",
+          "letra": "p"
+         },
+         "solucion": {
+          "huecos": [],
+          "marca": 0
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "palabra": "mucho",
+          "letra": "m"
+         },
+         "solucion": {
+          "huecos": [],
+          "marca": 0
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "palabra": "músico",
+          "letra": "m"
+         },
+         "solucion": {
+          "huecos": [],
+          "marca": 0
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "palabra": "diminuto",
+          "letra": "o"
+         },
+         "solucion": {
+          "huecos": [],
+          "marca": 2
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "palabra": "boli",
+          "letra": "l"
+         },
+         "solucion": {
+          "huecos": [],
+          "marca": 1
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "palabra": "hoguera",
+          "letra": "r"
+         },
+         "solucion": {
+          "huecos": [],
+          "marca": 1
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "palabra": "juego",
+          "letra": "o"
+         },
+         "solucion": {
+          "huecos": [],
+          "marca": 2
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "palabra": "juguete",
+          "letra": "t"
+         },
+         "solucion": {
+          "huecos": [],
+          "marca": 1
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "palabra": "etiqueta",
+          "letra": "a"
+         },
+         "solucion": {
+          "huecos": [],
+          "marca": 2
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "ad00296d47bc616a"
+  ],
+  "svgSolucion": [
+   "329437a5144e8d1b"
+  ]
+ },
+ "fono.quita": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Quita una sílaba",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "fono.quita",
+       "tipoVersion": 1,
+       "params": {
+        "quitar": null,
+        "largo": null,
+        "tipo": null,
+        "caso": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Quita la sílaba y escribe lo que queda.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "silabas": [
+           "hi",
+           "ja"
+          ],
+          "k": 0
+         },
+         "solucion": {
+          "huecos": [
+           "ja"
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "silabas": [
+           "ka",
+           "ra",
+           "te"
+          ],
+          "k": 0
+         },
+         "solucion": {
+          "huecos": [
+           "rate"
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "silabas": [
+           "du",
+           "cha"
+          ],
+          "k": 0
+         },
+         "solucion": {
+          "huecos": [
+           "cha"
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "silabas": [
+           "cu",
+           "cha",
+           "ra"
+          ],
+          "k": 0
+         },
+         "solucion": {
+          "huecos": [
+           "chara"
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "silabas": [
+           "re",
+           "ga",
+           "de",
+           "ra"
+          ],
+          "k": 0
+         },
+         "solucion": {
+          "huecos": [
+           "gadera"
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "silabas": [
+           "go",
+           "ma"
+          ],
+          "k": 0
+         },
+         "solucion": {
+          "huecos": [
+           "ma"
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "silabas": [
+           "pe",
+           "ce",
+           "ra"
+          ],
+          "k": 0
+         },
+         "solucion": {
+          "huecos": [
+           "cera"
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "silabas": [
+           "sue",
+           "lo"
+          ],
+          "k": 0
+         },
+         "solucion": {
+          "huecos": [
+           "lo"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "8686bb249c3c3a79"
+  ],
+  "svgSolucion": [
+   "3cf3f6f1897ac8c6"
+  ]
+ },
+ "fono.rimas": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Une las que riman",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "fono.rimas",
+       "tipoVersion": 1,
+       "params": {
+        "rima": null,
+        "parejas": null,
+        "tipo": null,
+        "caso": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Une con una línea las palabras que riman\n(las que terminan igual).",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "izq": "lava",
+          "derecha": "higo"
+         },
+         "solucion": {
+          "huecos": [],
+          "une": 2
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "izq": "pozo",
+          "derecha": "jarra"
+         },
+         "solucion": {
+          "huecos": [],
+          "une": 3
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "izq": "moreno",
+          "derecha": "cueva"
+         },
+         "solucion": {
+          "huecos": [],
+          "une": 4
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "izq": "gorra",
+          "derecha": "erizo"
+         },
+         "solucion": {
+          "huecos": [],
+          "une": 1
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "izq": "amigo",
+          "derecha": "camino"
+         },
+         "solucion": {
+          "huecos": [],
+          "une": 0
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "60c5b5e99a508dde"
+  ],
+  "svgSolucion": [
+   "288eec095a5fa826"
+  ]
+ },
+ "fono.silabas": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Cuenta las sílabas",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "fono.silabas",
+       "tipoVersion": 1,
+       "params": {
+        "respuesta": null,
+        "largo": null,
+        "tipo": null,
+        "caso": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Da una palmada por cada sílaba\ny colorea una casilla por cada palmada.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "palabra": "ducha",
+          "n": 2,
+          "respuesta": "colorea"
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": 2
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "palabra": "zapatero",
+          "n": 4,
+          "respuesta": "colorea"
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": 4
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "palabra": "cuchara",
+          "n": 3,
+          "respuesta": "colorea"
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": 3
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "palabra": "hija",
+          "n": 2,
+          "respuesta": "colorea"
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": 2
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "palabra": "pie",
+          "n": 1,
+          "respuesta": "colorea"
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": 1
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "palabra": "aro",
+          "n": 2,
+          "respuesta": "colorea"
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": 2
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "palabra": "regadera",
+          "n": 4,
+          "respuesta": "colorea"
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": 4
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "palabra": "karate",
+          "n": 3,
+          "respuesta": "colorea"
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": 3
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "palabra": "goma",
+          "n": 2,
+          "respuesta": "colorea"
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": 2
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "palabra": "pecera",
+          "n": 3,
+          "respuesta": "colorea"
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": 3
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "8d654198f489d5fe"
+  ],
+  "svgSolucion": [
+   "f1b96ef6013cfe99"
+  ]
+ },
  "geometria.copia": {
   "ficha": {
    "schemaVersion": 1,
@@ -11831,6 +12841,1993 @@
   ],
   "svgSolucion": [
    "728ef1fa6b874a37"
+  ]
+ },
+ "orto.elige": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Elige la letra",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "orto.elige",
+       "tipoVersion": 1,
+       "params": {
+        "regla": null,
+        "ayuda": null,
+        "caso": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Elige lo que falta y escríbelo\nen el cuadro gris.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "palabra": "jugoso",
+          "pos": 2,
+          "largo": 1,
+          "regla": "ggu",
+          "opciones": [
+           "g",
+           "gu"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "g"
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "palabra": "zapatero",
+          "pos": 0,
+          "largo": 1,
+          "regla": "cz",
+          "opciones": [
+           "z",
+           "c"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "z"
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "palabra": "esquí",
+          "pos": 2,
+          "largo": 2,
+          "regla": "cqu",
+          "opciones": [
+           "c",
+           "qu"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "qu"
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "palabra": "cavar",
+          "pos": 0,
+          "largo": 1,
+          "regla": "cqu",
+          "opciones": [
+           "c",
+           "qu"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "c"
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "palabra": "castillo",
+          "pos": 0,
+          "largo": 1,
+          "regla": "cqu",
+          "opciones": [
+           "qu",
+           "c"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "c"
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "palabra": "ganar",
+          "pos": 0,
+          "largo": 1,
+          "regla": "ggu",
+          "opciones": [
+           "g",
+           "gu"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "g"
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "palabra": "sombra",
+          "pos": 2,
+          "largo": 1,
+          "regla": "mpb",
+          "opciones": [
+           "n",
+           "m"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "m"
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "palabra": "ombligo",
+          "pos": 1,
+          "largo": 1,
+          "regla": "mpb",
+          "opciones": [
+           "m",
+           "n"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "m"
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "palabra": "hombre",
+          "pos": 2,
+          "largo": 1,
+          "regla": "mpb",
+          "opciones": [
+           "m",
+           "n"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "m"
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "palabra": "tierra",
+          "pos": 3,
+          "largo": 2,
+          "regla": "r",
+          "opciones": [
+           "r",
+           "rr"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "rr"
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "palabra": "esperar",
+          "pos": 4,
+          "largo": 1,
+          "regla": "r",
+          "opciones": [
+           "rr",
+           "r"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "r"
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "palabra": "zumo",
+          "pos": 0,
+          "largo": 1,
+          "regla": "cz",
+          "opciones": [
+           "z",
+           "c"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "z"
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "palabra": "ceja",
+          "pos": 0,
+          "largo": 1,
+          "regla": "cz",
+          "opciones": [
+           "c",
+           "z"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "c"
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "palabra": "cera",
+          "pos": 2,
+          "largo": 1,
+          "regla": "r",
+          "opciones": [
+           "rr",
+           "r"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "r"
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "palabra": "gominola",
+          "pos": 0,
+          "largo": 1,
+          "regla": "ggu",
+          "opciones": [
+           "g",
+           "gu"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "g"
+          ]
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "palabra": "limpio",
+          "pos": 2,
+          "largo": 1,
+          "regla": "mpb",
+          "opciones": [
+           "m",
+           "n"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "m"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "e922a5f408008b46"
+  ],
+  "svgSolucion": [
+   "c467c87ecfcf6828"
+  ]
+ },
+ "orto.mayuscula": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Nombres con mayúscula",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "orto.mayuscula",
+       "tipoVersion": 1,
+       "params": {
+        "tarea": null,
+        "nombres": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Rodea las palabras que llevan mayúscula.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "palabras": [
+           "Pablo",
+           "Pepa",
+           "pelota"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           0,
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "palabras": [
+           "Sara",
+           "Eva",
+           "bikini"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           0,
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "palabras": [
+           "tarea",
+           "Toledo",
+           "lleno"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "palabras": [
+           "Peta",
+           "pato",
+           "Bruno"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           0,
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "palabras": [
+           "Mimi",
+           "Noa",
+           "vaca"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           0,
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "palabras": [
+           "Paula",
+           "música",
+           "Toni"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           0,
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "palabras": [
+           "Laura",
+           "jaula",
+           "mejilla"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "palabras": [
+           "Sevilla",
+           "roca",
+           "botella"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "palabras": [
+           "Málaga",
+           "bueno",
+           "chico"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "palabras": [
+           "pozo",
+           "garaje",
+           "Mónica"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "palabras": [
+           "camino",
+           "nata",
+           "Antequera"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "palabras": [
+           "Cádiz",
+           "café",
+           "Nuria"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           0,
+           2
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "e627054d070b1b57"
+  ],
+  "svgSolucion": [
+   "57defc749c9f8f45"
+  ]
+ },
+ "palabra.articulo": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "El, la, los, las",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "palabra.articulo",
+       "tipoVersion": 1,
+       "params": {
+        "articulos": null,
+        "caso": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Escribe el o la delante de cada nombre.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "palabra": "puerto",
+          "numero": "s",
+          "genero": "m"
+         },
+         "solucion": {
+          "huecos": [
+           "el"
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "palabra": "pregunta",
+          "numero": "s",
+          "genero": "f"
+         },
+         "solucion": {
+          "huecos": [
+           "la"
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "palabra": "fresa",
+          "numero": "s",
+          "genero": "f"
+         },
+         "solucion": {
+          "huecos": [
+           "la"
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "palabra": "dado",
+          "numero": "s",
+          "genero": "m"
+         },
+         "solucion": {
+          "huecos": [
+           "el"
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "palabra": "cadena",
+          "numero": "s",
+          "genero": "f"
+         },
+         "solucion": {
+          "huecos": [
+           "la"
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "palabra": "vaso",
+          "numero": "s",
+          "genero": "m"
+         },
+         "solucion": {
+          "huecos": [
+           "el"
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "palabra": "cuarto",
+          "numero": "s",
+          "genero": "m"
+         },
+         "solucion": {
+          "huecos": [
+           "el"
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "palabra": "espejo",
+          "numero": "s",
+          "genero": "m"
+         },
+         "solucion": {
+          "huecos": [
+           "el"
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "palabra": "cazuela",
+          "numero": "s",
+          "genero": "f"
+         },
+         "solucion": {
+          "huecos": [
+           "la"
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "palabra": "frente",
+          "numero": "s",
+          "genero": "f"
+         },
+         "solucion": {
+          "huecos": [
+           "la"
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "palabra": "gasolina",
+          "numero": "s",
+          "genero": "f"
+         },
+         "solucion": {
+          "huecos": [
+           "la"
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "palabra": "sello",
+          "numero": "s",
+          "genero": "m"
+         },
+         "solucion": {
+          "huecos": [
+           "el"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "80dc9880531eece1"
+  ],
+  "svgSolucion": [
+   "ef860eb43ed76bc6"
+  ]
+ },
+ "palabra.clasifica": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Cada palabra en su caja",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "palabra.clasifica",
+       "tipoVersion": 1,
+       "params": {
+        "cajas": null,
+        "caso": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Escribe cada palabra en su caja.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "banco": [
+           "sofá",
+           "rosa",
+           "cuchara",
+           "alfombra",
+           "blanco",
+           "dorado",
+           "pasillo",
+           "amarillo"
+          ],
+          "cajas": [
+           "Colores",
+           "Casa"
+          ],
+          "n": 4
+         },
+         "solucion": {
+          "huecos": [
+           "rosa",
+           "blanco",
+           "dorado",
+           "amarillo",
+           "sofá",
+           "cuchara",
+           "alfombra",
+           "pasillo"
+          ],
+          "clasifica": [
+           [
+            "rosa",
+            "blanco",
+            "dorado",
+            "amarillo"
+           ],
+           [
+            "sofá",
+            "cuchara",
+            "alfombra",
+            "pasillo"
+           ]
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "banco": [
+           "gasolina",
+           "atardecer",
+           "arcoíris",
+           "barro",
+           "selva",
+           "túnel",
+           "freno",
+           "yate"
+          ],
+          "cajas": [
+           "Naturaleza",
+           "Transportes"
+          ],
+          "n": 4
+         },
+         "solucion": {
+          "huecos": [
+           "atardecer",
+           "arcoíris",
+           "barro",
+           "selva",
+           "gasolina",
+           "túnel",
+           "freno",
+           "yate"
+          ],
+          "clasifica": [
+           [
+            "atardecer",
+            "arcoíris",
+            "barro",
+            "selva"
+           ],
+           [
+            "gasolina",
+            "túnel",
+            "freno",
+            "yate"
+           ]
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "banco": [
+           "oso",
+           "pestaña",
+           "voz",
+           "tigre",
+           "rizo",
+           "gallina",
+           "koala",
+           "risa"
+          ],
+          "cajas": [
+           "Animales",
+           "Cuerpo"
+          ],
+          "n": 4
+         },
+         "solucion": {
+          "huecos": [
+           "oso",
+           "tigre",
+           "gallina",
+           "koala",
+           "pestaña",
+           "voz",
+           "rizo",
+           "risa"
+          ],
+          "clasifica": [
+           [
+            "oso",
+            "tigre",
+            "gallina",
+            "koala"
+           ],
+           [
+            "pestaña",
+            "voz",
+            "rizo",
+            "risa"
+           ]
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "36a30d5a84a74a50"
+  ],
+  "svgSolucion": [
+   "bba27fd7eaf0f197"
+  ]
+ },
+ "palabra.contrarios": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Los contrarios",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "palabra.contrarios",
+       "tipoVersion": 1,
+       "params": {
+        "tarea": null,
+        "caso": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Une cada palabra con su contrario.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "izq": "poner",
+          "derecha": "delante"
+         },
+         "solucion": {
+          "huecos": [],
+          "une": 3
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "izq": "antes",
+          "derecha": "blando"
+         },
+         "solucion": {
+          "huecos": [],
+          "une": 2
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "izq": "último",
+          "derecha": "después"
+         },
+         "solucion": {
+          "huecos": [],
+          "une": 5
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "izq": "detrás",
+          "derecha": "quitar"
+         },
+         "solucion": {
+          "huecos": [],
+          "une": 0
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "izq": "ligero",
+          "derecha": "blanco"
+         },
+         "solucion": {
+          "huecos": [],
+          "une": 6
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "izq": "duro",
+          "derecha": "primero"
+         },
+         "solucion": {
+          "huecos": [],
+          "une": 1
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "izq": "cerrar",
+          "derecha": "pesado"
+         },
+         "solucion": {
+          "huecos": [],
+          "une": 7
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "izq": "negro",
+          "derecha": "abrir"
+         },
+         "solucion": {
+          "huecos": [],
+          "une": 4
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "500ec6aac2f675a1"
+  ],
+  "svgSolucion": [
+   "b2216c5b9f27f783"
+  ]
+ },
+ "palabra.cuenta": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "¿Cuántas letras?",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "palabra.cuenta",
+       "tipoVersion": 1,
+       "params": {
+        "letras": null,
+        "respuesta": null,
+        "tipo": null,
+        "caso": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Cuenta las letras de cada palabra\ny escribe cuántas tiene.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "palabra": "tío",
+          "n": 3,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "palabra": "seguro",
+          "n": 6,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "palabra": "llavero",
+          "n": 7,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "palabra": "rey",
+          "n": 3,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "palabra": "cazuela",
+          "n": 7,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "palabra": "tierra",
+          "n": 6,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "palabra": "muela",
+          "n": 5,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "palabra": "tiza",
+          "n": 4,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "palabra": "nota",
+          "n": 4,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "palabra": "viaje",
+          "n": 5,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "13f3a91a568655f6"
+  ],
+  "svgSolucion": [
+   "271c0627e0d313b0"
+  ]
+ },
+ "palabra.intrusa": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "La que no es del grupo",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "palabra.intrusa",
+       "tipoVersion": 1,
+       "params": {
+        "campo": null,
+        "caso": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Rodea la palabra que no es del grupo.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "palabras": [
+           "negro",
+           "rojo",
+           "guante",
+           "verde"
+          ],
+          "campo": "colores"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 2
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "palabras": [
+           "sol",
+           "pared",
+           "ducha",
+           "tendedero"
+          ],
+          "campo": "casa"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 0
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "palabras": [
+           "cueva",
+           "isla",
+           "primavera",
+           "pájaro"
+          ],
+          "campo": "naturaleza"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 3
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "palabras": [
+           "motor",
+           "submarino",
+           "grúa",
+           "baraja"
+          ],
+          "campo": "transportes"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 3
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "palabras": [
+           "peine",
+           "pingüino",
+           "tigre",
+           "gorila"
+          ],
+          "campo": "animales"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 0
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "palabras": [
+           "pelo",
+           "sopa",
+           "hombro",
+           "pestaña"
+          ],
+          "campo": "cuerpo"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 1
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "palabras": [
+           "abeja",
+           "melocotón",
+           "lechuga",
+           "churro"
+          ],
+          "campo": "comida"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 0
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "palabras": [
+           "chico",
+           "tía",
+           "pecho",
+           "hijo"
+          ],
+          "campo": "familia"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 2
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "976c3af004b94192"
+  ],
+  "svgSolucion": [
+   "28f6132099f9d634"
+  ]
+ },
+ "palabra.letras": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Ordena las letras",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "palabra.letras",
+       "tipoVersion": 1,
+       "params": {
+        "letras": null,
+        "marca": null,
+        "tipo": null,
+        "caso": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Ordena las letras y escribe la palabra.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "letras": [
+           "e",
+           "i",
+           "p"
+          ],
+          "palabra": "pie",
+          "marca": false
+         },
+         "solucion": {
+          "huecos": [
+           "pie"
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "letras": [
+           "f",
+           "o",
+           "o",
+           "t"
+          ],
+          "palabra": "foto",
+          "marca": false
+         },
+         "solucion": {
+          "huecos": [
+           "foto"
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "letras": [
+           "a",
+           "r",
+           "e",
+           "n",
+           "i"
+          ],
+          "palabra": "reina",
+          "marca": false
+         },
+         "solucion": {
+          "huecos": [
+           "reina"
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "letras": [
+           "h",
+           "a",
+           "o",
+           "r"
+          ],
+          "palabra": "hora",
+          "marca": false
+         },
+         "solucion": {
+          "huecos": [
+           "hora"
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "letras": [
+           "t",
+           "o",
+           "m",
+           "o"
+          ],
+          "palabra": "moto",
+          "marca": false
+         },
+         "solucion": {
+          "huecos": [
+           "moto"
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "letras": [
+           "n",
+           "p",
+           "i",
+           "o",
+           "a"
+          ],
+          "palabra": "piano",
+          "marca": false
+         },
+         "solucion": {
+          "huecos": [
+           "piano"
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "letras": [
+           "r",
+           "a",
+           "o"
+          ],
+          "palabra": "aro",
+          "marca": false
+         },
+         "solucion": {
+          "huecos": [
+           "aro"
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "letras": [
+           "o",
+           "e",
+           "p",
+           "l"
+          ],
+          "palabra": "pelo",
+          "marca": false
+         },
+         "solucion": {
+          "huecos": [
+           "pelo"
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "letras": [
+           "j",
+           "o",
+           "a"
+          ],
+          "palabra": "ajo",
+          "marca": false
+         },
+         "solucion": {
+          "huecos": [
+           "ajo"
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "letras": [
+           "o",
+           "z",
+           "o"
+          ],
+          "palabra": "zoo",
+          "marca": false
+         },
+         "solucion": {
+          "huecos": [
+           "zoo"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "99b0972cdb8a998a"
+  ],
+  "svgSolucion": [
+   "f10c82646068d06a"
+  ]
+ },
+ "palabra.plural": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Uno y muchos",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "palabra.plural",
+       "tipoVersion": 1,
+       "params": {
+        "plural": null,
+        "sentido": null,
+        "caso": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Escribe cada palabra en plural:\nmuchas cosas.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "palabra": "pera",
+          "sentido": "plural"
+         },
+         "solucion": {
+          "huecos": [
+           "peras"
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "palabra": "medalla",
+          "sentido": "plural"
+         },
+         "solucion": {
+          "huecos": [
+           "medallas"
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "palabra": "panadero",
+          "sentido": "plural"
+         },
+         "solucion": {
+          "huecos": [
+           "panaderos"
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "palabra": "capa",
+          "sentido": "plural"
+         },
+         "solucion": {
+          "huecos": [
+           "capas"
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "palabra": "tejado",
+          "sentido": "plural"
+         },
+         "solucion": {
+          "huecos": [
+           "tejados"
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "palabra": "zoo",
+          "sentido": "plural"
+         },
+         "solucion": {
+          "huecos": [
+           "zoos"
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "palabra": "xilófono",
+          "sentido": "plural"
+         },
+         "solucion": {
+          "huecos": [
+           "xilófonos"
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "palabra": "teléfono",
+          "sentido": "plural"
+         },
+         "solucion": {
+          "huecos": [
+           "teléfonos"
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "palabra": "pizarra",
+          "sentido": "plural"
+         },
+         "solucion": {
+          "huecos": [
+           "pizarras"
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "palabra": "hoja",
+          "sentido": "plural"
+         },
+         "solucion": {
+          "huecos": [
+           "hojas"
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "palabra": "tigre",
+          "sentido": "plural"
+         },
+         "solucion": {
+          "huecos": [
+           "tigres"
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "palabra": "filete",
+          "sentido": "plural"
+         },
+         "solucion": {
+          "huecos": [
+           "filetes"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "e9a6669726f085bb"
+  ],
+  "svgSolucion": [
+   "e195bd83ae43e04e"
+  ]
+ },
+ "palabra.sopa": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Sopa de letras",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "palabra.sopa",
+       "tipoVersion": 1,
+       "params": {
+        "campo": null,
+        "palabras": null,
+        "direcciones": null,
+        "minus": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Busca las 8 palabras en la sopa de letras y rodéalas.\nEstán en horizontal (→) y en vertical (↓).",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "n": 10,
+          "filas": [
+           "SNDSIDADOC",
+           "SSJLNDOROP",
+           "TSZFLDISPI",
+           "DOUEOTAAAR",
+           "CVARITASLA",
+           "ORUINZLIAT",
+           "HPFEEDDSOA",
+           "EPEONZAORM",
+           "TRCUERDAEA",
+           "EEPENTFIYP"
+          ],
+          "palabras": [
+           "CUERDA",
+           "REY",
+           "PIRATA",
+           "DADO",
+           "VARITA",
+           "PEONZA",
+           "PALA",
+           "COHETE"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "sopa": [
+           {
+            "p": "VARITA",
+            "f": 4,
+            "c": 1,
+            "dir": "h"
+           },
+           {
+            "p": "PIRATA",
+            "f": 1,
+            "c": 9,
+            "dir": "v"
+           },
+           {
+            "p": "PEONZA",
+            "f": 7,
+            "c": 1,
+            "dir": "h"
+           },
+           {
+            "p": "CUERDA",
+            "f": 8,
+            "c": 2,
+            "dir": "h"
+           },
+           {
+            "p": "COHETE",
+            "f": 4,
+            "c": 0,
+            "dir": "v"
+           },
+           {
+            "p": "DADO",
+            "f": 0,
+            "c": 5,
+            "dir": "h"
+           },
+           {
+            "p": "PALA",
+            "f": 2,
+            "c": 8,
+            "dir": "v"
+           },
+           {
+            "p": "REY",
+            "f": 7,
+            "c": 8,
+            "dir": "v"
+           }
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "7e23ec72de102f7e"
+  ],
+  "svgSolucion": [
+   "a9d3f24f70bcb2d6"
   ]
  },
  "problemas.barras": {

@@ -81,3 +81,77 @@ MODELOS_LENGUA += [
         op("hueco", "Sílaba que falta", [(None, "Cualquiera"), ("primera", "La primera"), ("ultima", "La última")]), LARGO_2_4, TIPO, CASO],
        "PON LA SÍLABA QUE FALTA", "azul"),
 ]
+
+# ------------------------------------------------------------------ lote 2 · fono.* (bloque 1)
+MODELOS_LENGUA += [
+    # >>> FONO (agente fono)
+    _l(1, "fono", "silabas", "Cuenta las sílabas", "Una palabra y casillas: una palmada por sílaba; colorear una casilla por palmada o escribir el número.",
+       [op("respuesta", "Respuesta", [(None, "Colorear una casilla por sílaba"), ("numero", "Escribir el número")]), LARGO_1_4, TIPO, CASO],
+       "CUENTA LAS SÍLABAS", "azul"),
+    _l(1, "fono", "inicial", "¿Con qué letra suena?", "Palabra con la primera (o la última) letra en hueco y tres letras para rodear la que falta.",
+       [op("posicion", "Letra que falta", [(None, "La del principio"), ("final", "La del final")]),
+        op("letras", "Letras para elegir", [(None, "Todas"), ("vocales", "Solo vocales"), ("consonantes", "Solo consonantes")]), TIPO, CASO],
+       "¿CON QUÉ LETRA SUENA?", "rosa"),
+    _l(1, "fono", "posicion", "¿Dónde está el sonido?", "Una palabra y una letra: marcar si está al principio, en medio o al final.",
+       [LARGO_2_4, TIPO, CASO],
+       "¿DÓNDE ESTÁ EL SONIDO?", "verde"),
+    _l(1, "fono", "rimas", "Une las que riman", "Dos columnas de palabras: unir las que terminan igual (gato – pato).",
+       [op("rima", "Rima", [(None, "Misma última sílaba (gato – pato)"), ("vocal", "Desde la vocal fuerte (ratón – camión)")]),
+        op("parejas", "Parejas", [(None, "5 parejas"), (4, "4 parejas"), (6, "6 parejas")]), TIPO, CASO],
+       "UNE LAS QUE RIMAN", "amarillo", COMPLETA),
+    _l(1, "fono", "quita", "Quita una sílaba", "«Si a ca-sa le quito ca, queda…»: escribir lo que queda al quitar la primera o la última sílaba.",
+       [op("quitar", "Sílaba que se quita", [(None, "La primera"), ("ultima", "La última"), ("mezcla", "La primera o la última")]), LARGO_2_4, TIPO, CASO],
+       "QUITA UNA SÍLABA", "azul"),
+    _l(1, "fono", "larga", "La palabra más larga", "Grupos de tres palabras: rodear la que tiene más (o menos) sílabas.",
+       [op("cual", "Rodear la que tiene", [(None, "Más sílabas"), ("menos", "Menos sílabas"), ("mezcla", "Más o menos (se indica en cada grupo)")]), TIPO, CASO],
+       "LA PALABRA MÁS LARGA", "rosa"),
+    # <<< FONO
+]
+# ------------------------------------------------------------------ lote 2 · palabra.* (bloque 4)
+MODELOS_LENGUA += [
+    # >>> PALABRA (agente palabra)
+    _l(4, "palabra", "intrusa", "La que no es del grupo", "Filas de cuatro palabras de un campo (animales, comida…) con una intrusa: rodearla.",
+       [op("campo", "Campo de las palabras", [(None, "Varios (uno distinto en cada fila)")] + [(c, c.capitalize()) for c in ("animales", "comida", "ropa", "casa", "escuela", "cuerpo", "juguetes", "transportes", "familia", "naturaleza")]), CASO],
+       "LA QUE NO ES DEL GRUPO", "rosa"),
+    _l(4, "palabra", "clasifica", "Cada palabra en su caja", "Un banco de palabras y dos o tres cajas con el nombre del grupo: escribir cada palabra donde va.",
+       [op("cajas", "Cajas", [(None, "2 cajas"), (3, "3 cajas")]), CASO],
+       "CADA PALABRA EN SU CAJA", "verde", COMPLETA),
+    _l(4, "palabra", "letras", "Ordena las letras", "Letras desordenadas (o · g · t · a): escribir la palabra, con la primera letra marcada o sin marcar.",
+       [op("letras", "Letras de cada palabra", [(None, "3 a 5 (variadas)"), (3, "3 letras"), (4, "4 letras"), (5, "5 letras")]),
+        op("marca", "Primera letra", [(None, "Sin marcar"), ("primera", "Marcada")]), TIPO, CASO],
+       "ORDENA LAS LETRAS", "azul"),
+    _l(4, "palabra", "cuenta", "¿Cuántas letras?", "Una palabra y un hueco para el número de letras, o casillas (una por letra) y el número.",
+       [op("letras", "Letras de cada palabra", [(None, "3 a 7 (variadas)"), (3, "3 letras"), (4, "4 letras"), (5, "5 letras"), (6, "6 letras")]),
+        op("respuesta", "Respuesta", [(None, "Solo el número"), ("casillas", "Casillas y número")]), TIPO, CASO],
+       "¿CUÁNTAS LETRAS?", "amarillo"),
+    _l(4, "palabra", "articulo", "el, la, los, las", "Poner el artículo que va con cada nombre (___ gato).",
+       [op("articulos", "Artículos", [(None, "el, la"), ("un", "un, una"), ("plural", "el, la, los, las"), ("unplural", "un, una, unos, unas")]), CASO_LETRA],
+       "EL, LA, LOS, LAS", "rosa"),
+    _l(4, "palabra", "plural", "Uno y muchos", "Escribir el plural de cada nombre (gato, gatos; flor, flores), o el singular a partir del plural.",
+       [op("plural", "Plurales", [(None, "Solo -s"), ("es", "-s y -es")]),
+        op("sentido", "Sentido", [(None, "De uno a muchos"), ("alreves", "De muchos a uno")]), CASO_LETRA],
+       "UNO Y MUCHOS", "verde"),
+    _l(4, "palabra", "contrarios", "Los contrarios", "Unir cada palabra con su contrario (grande, pequeño) o escribirlo. Banco fijo de unos 40 pares.",
+       [op("tarea", "Tarea", [(None, "Unir con flechas"), ("escribe", "Escribir el contrario")]), CASO],
+       "LOS CONTRARIOS", "azul"),
+    _l(4, "palabra", "sopa", "Sopa de letras", "Una sopa de letras con 6 a 8 palabras de un campo; horizontal y vertical (y diagonal si se quiere).",
+       [op("campo", "Campo de las palabras", [(None, "Al azar")] + [(c, c.capitalize()) for c in ("animales", "comida", "ropa", "casa", "escuela", "cuerpo", "juguetes", "transportes", "familia", "naturaleza", "colores")]),
+        op("palabras", "Palabras escondidas", [(None, "8 palabras"), (7, "7 palabras"), (6, "6 palabras")]),
+        op("direcciones", "Direcciones", [(None, "Horizontal y vertical"), ("diagonal", "También en diagonal")]),
+        op("minus", "Letra", [(None, "MAYÚSCULAS"), ("minus", "minúscula")])],
+       "SOPA DE LETRAS", "amarillo", COMPLETA),
+    # <<< PALABRA
+]
+# ------------------------------------------------------------------ lote 2 · orto.* (bloque 6)
+MODELOS_LENGUA += [
+    # >>> ORTO (agente orto)
+    _l(6, "orto", "elige", "Elige la letra", "Palabras con un hueco de ortografía (ca_po, pe_o, _eso): elegir entre dos opciones o escribir sin ayuda.",
+       [op("regla", "Regla", [(None, "Mezcladas"), ("mpb", "m antes de p y b"), ("r", "r / rr"), ("cqu", "c / qu"), ("ggu", "g / gu"), ("cz", "c / z")]),
+        op("ayuda", "Ayuda", [(None, "Con las dos opciones para elegir"), ("sin", "Sin ayuda")]), CASO],
+       "ELIGE LA LETRA", "amarillo"),
+    _l(6, "orto", "mayuscula", "Nombres con mayúscula", "Nombres de personas, mascotas y pueblos: rodear las palabras que llevan mayúscula o escribirlas bien.",
+       [op("tarea", "Tarea", [(None, "Rodear los nombres con mayúscula"), ("escribe", "Escribirlos con mayúscula")]),
+        op("nombres", "Nombres", [(None, "Mezclados"), ("personas", "De personas"), ("mascotas", "De mascotas"), ("lugares", "De pueblos y ciudades")])],
+       "NOMBRES CON MAYÚSCULA", "rosa"),
+    # <<< ORTO
+]

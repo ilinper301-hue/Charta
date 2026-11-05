@@ -6425,6 +6425,1585 @@ export const CATALOGO = {
      "completar"
     ]
    }
+  },
+  {
+   "id": "fono.silabas",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 1,
+   "familia": "fono",
+   "clave": "silabas",
+   "nombre": "Cuenta las sílabas",
+   "descripcion": "Una palabra y casillas: una palmada por sílaba; colorear una casilla por palmada o escribir el número.",
+   "opciones": [
+    {
+     "id": "respuesta",
+     "etiqueta": "Respuesta",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Colorear una casilla por sílaba"
+      },
+      {
+       "valor": "numero",
+       "etiqueta": "Escribir el número"
+      }
+     ]
+    },
+    {
+     "id": "largo",
+     "etiqueta": "Sílabas de cada palabra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Variadas"
+      },
+      {
+       "valor": 1,
+       "etiqueta": "1 sílaba"
+      },
+      {
+       "valor": 2,
+       "etiqueta": "2 sílabas"
+      },
+      {
+       "valor": 3,
+       "etiqueta": "3 sílabas"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 sílabas"
+      }
+     ]
+    },
+    {
+     "id": "tipo",
+     "etiqueta": "Tipo de sílabas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Directas (ma, pe)"
+      },
+      {
+       "valor": "inversas",
+       "etiqueta": "Con inversas (al, en)"
+      },
+      {
+       "valor": "trabadas",
+       "etiqueta": "Con trabadas (pla, bra)"
+      },
+      {
+       "valor": "mixtas",
+       "etiqueta": "Con mixtas (con, sol)"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "inicial",
+       "etiqueta": "Mayúscula inicial"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULAS"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "CUENTA LAS SÍLABAS",
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 8,
+    "etiquetas": [
+     "lengua",
+     "conciencia fonológica",
+     "sílabas",
+     "palmadas",
+     "contar"
+    ]
+   }
+  },
+  {
+   "id": "fono.inicial",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 1,
+   "familia": "fono",
+   "clave": "inicial",
+   "nombre": "¿Con qué letra suena?",
+   "descripcion": "Palabra con la primera (o la última) letra en hueco y tres letras para rodear la que falta.",
+   "opciones": [
+    {
+     "id": "posicion",
+     "etiqueta": "Letra que falta",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "La del principio"
+      },
+      {
+       "valor": "final",
+       "etiqueta": "La del final"
+      }
+     ]
+    },
+    {
+     "id": "letras",
+     "etiqueta": "Letras para elegir",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Todas"
+      },
+      {
+       "valor": "vocales",
+       "etiqueta": "Solo vocales"
+      },
+      {
+       "valor": "consonantes",
+       "etiqueta": "Solo consonantes"
+      }
+     ]
+    },
+    {
+     "id": "tipo",
+     "etiqueta": "Tipo de sílabas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Directas (ma, pe)"
+      },
+      {
+       "valor": "inversas",
+       "etiqueta": "Con inversas (al, en)"
+      },
+      {
+       "valor": "trabadas",
+       "etiqueta": "Con trabadas (pla, bra)"
+      },
+      {
+       "valor": "mixtas",
+       "etiqueta": "Con mixtas (con, sol)"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "inicial",
+       "etiqueta": "Mayúscula inicial"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULAS"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "¿CON QUÉ LETRA SUENA?",
+   "color": "rosa",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 8,
+    "etiquetas": [
+     "lengua",
+     "conciencia fonológica",
+     "letras",
+     "sonido",
+     "inicial",
+     "rodear"
+    ]
+   }
+  },
+  {
+   "id": "fono.posicion",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 1,
+   "familia": "fono",
+   "clave": "posicion",
+   "nombre": "¿Dónde está el sonido?",
+   "descripcion": "Una palabra y una letra: marcar si está al principio, en medio o al final.",
+   "opciones": [
+    {
+     "id": "largo",
+     "etiqueta": "Sílabas de cada palabra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Variadas"
+      },
+      {
+       "valor": 2,
+       "etiqueta": "2 sílabas"
+      },
+      {
+       "valor": 3,
+       "etiqueta": "3 sílabas"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 sílabas"
+      }
+     ]
+    },
+    {
+     "id": "tipo",
+     "etiqueta": "Tipo de sílabas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Directas (ma, pe)"
+      },
+      {
+       "valor": "inversas",
+       "etiqueta": "Con inversas (al, en)"
+      },
+      {
+       "valor": "trabadas",
+       "etiqueta": "Con trabadas (pla, bra)"
+      },
+      {
+       "valor": "mixtas",
+       "etiqueta": "Con mixtas (con, sol)"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "inicial",
+       "etiqueta": "Mayúscula inicial"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULAS"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "¿DÓNDE ESTÁ EL SONIDO?",
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 8,
+    "etiquetas": [
+     "lengua",
+     "conciencia fonológica",
+     "letras",
+     "sonido",
+     "posición"
+    ]
+   }
+  },
+  {
+   "id": "fono.rimas",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 1,
+   "familia": "fono",
+   "clave": "rimas",
+   "nombre": "Une las que riman",
+   "descripcion": "Dos columnas de palabras: unir las que terminan igual (gato – pato).",
+   "opciones": [
+    {
+     "id": "rima",
+     "etiqueta": "Rima",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Misma última sílaba (gato – pato)"
+      },
+      {
+       "valor": "vocal",
+       "etiqueta": "Desde la vocal fuerte (ratón – camión)"
+      }
+     ]
+    },
+    {
+     "id": "parejas",
+     "etiqueta": "Parejas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "5 parejas"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 parejas"
+      },
+      {
+       "valor": 6,
+       "etiqueta": "6 parejas"
+      }
+     ]
+    },
+    {
+     "id": "tipo",
+     "etiqueta": "Tipo de sílabas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Directas (ma, pe)"
+      },
+      {
+       "valor": "inversas",
+       "etiqueta": "Con inversas (al, en)"
+      },
+      {
+       "valor": "trabadas",
+       "etiqueta": "Con trabadas (pla, bra)"
+      },
+      {
+       "valor": "mixtas",
+       "etiqueta": "Con mixtas (con, sol)"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "inicial",
+       "etiqueta": "Mayúscula inicial"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULAS"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa"
+   ],
+   "titulo": "UNE LAS QUE RIMAN",
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 8,
+    "etiquetas": [
+     "lengua",
+     "conciencia fonológica",
+     "rimas",
+     "unir"
+    ]
+   }
+  },
+  {
+   "id": "fono.quita",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 1,
+   "familia": "fono",
+   "clave": "quita",
+   "nombre": "Quita una sílaba",
+   "descripcion": "«Si a ca-sa le quito ca, queda…»: escribir lo que queda al quitar la primera o la última sílaba.",
+   "opciones": [
+    {
+     "id": "quitar",
+     "etiqueta": "Sílaba que se quita",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "La primera"
+      },
+      {
+       "valor": "ultima",
+       "etiqueta": "La última"
+      },
+      {
+       "valor": "mezcla",
+       "etiqueta": "La primera o la última"
+      }
+     ]
+    },
+    {
+     "id": "largo",
+     "etiqueta": "Sílabas de cada palabra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Variadas"
+      },
+      {
+       "valor": 2,
+       "etiqueta": "2 sílabas"
+      },
+      {
+       "valor": 3,
+       "etiqueta": "3 sílabas"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 sílabas"
+      }
+     ]
+    },
+    {
+     "id": "tipo",
+     "etiqueta": "Tipo de sílabas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Directas (ma, pe)"
+      },
+      {
+       "valor": "inversas",
+       "etiqueta": "Con inversas (al, en)"
+      },
+      {
+       "valor": "trabadas",
+       "etiqueta": "Con trabadas (pla, bra)"
+      },
+      {
+       "valor": "mixtas",
+       "etiqueta": "Con mixtas (con, sol)"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "inicial",
+       "etiqueta": "Mayúscula inicial"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULAS"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "QUITA UNA SÍLABA",
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "lengua",
+     "conciencia fonológica",
+     "sílabas",
+     "quitar",
+     "palabras"
+    ]
+   }
+  },
+  {
+   "id": "fono.larga",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 1,
+   "familia": "fono",
+   "clave": "larga",
+   "nombre": "La palabra más larga",
+   "descripcion": "Grupos de tres palabras: rodear la que tiene más (o menos) sílabas.",
+   "opciones": [
+    {
+     "id": "cual",
+     "etiqueta": "Rodear la que tiene",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Más sílabas"
+      },
+      {
+       "valor": "menos",
+       "etiqueta": "Menos sílabas"
+      },
+      {
+       "valor": "mezcla",
+       "etiqueta": "Más o menos (se indica en cada grupo)"
+      }
+     ]
+    },
+    {
+     "id": "tipo",
+     "etiqueta": "Tipo de sílabas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Directas (ma, pe)"
+      },
+      {
+       "valor": "inversas",
+       "etiqueta": "Con inversas (al, en)"
+      },
+      {
+       "valor": "trabadas",
+       "etiqueta": "Con trabadas (pla, bra)"
+      },
+      {
+       "valor": "mixtas",
+       "etiqueta": "Con mixtas (con, sol)"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "inicial",
+       "etiqueta": "Mayúscula inicial"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULAS"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "LA PALABRA MÁS LARGA",
+   "color": "rosa",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 8,
+    "etiquetas": [
+     "lengua",
+     "conciencia fonológica",
+     "sílabas",
+     "comparar",
+     "rodear"
+    ]
+   }
+  },
+  {
+   "id": "palabra.intrusa",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 4,
+   "familia": "palabra",
+   "clave": "intrusa",
+   "nombre": "La que no es del grupo",
+   "descripcion": "Filas de cuatro palabras de un campo (animales, comida…) con una intrusa: rodearla.",
+   "opciones": [
+    {
+     "id": "campo",
+     "etiqueta": "Campo de las palabras",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Varios (uno distinto en cada fila)"
+      },
+      {
+       "valor": "animales",
+       "etiqueta": "Animales"
+      },
+      {
+       "valor": "comida",
+       "etiqueta": "Comida"
+      },
+      {
+       "valor": "ropa",
+       "etiqueta": "Ropa"
+      },
+      {
+       "valor": "casa",
+       "etiqueta": "Casa"
+      },
+      {
+       "valor": "escuela",
+       "etiqueta": "Escuela"
+      },
+      {
+       "valor": "cuerpo",
+       "etiqueta": "Cuerpo"
+      },
+      {
+       "valor": "juguetes",
+       "etiqueta": "Juguetes"
+      },
+      {
+       "valor": "transportes",
+       "etiqueta": "Transportes"
+      },
+      {
+       "valor": "familia",
+       "etiqueta": "Familia"
+      },
+      {
+       "valor": "naturaleza",
+       "etiqueta": "Naturaleza"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "inicial",
+       "etiqueta": "Mayúscula inicial"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULAS"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "LA QUE NO ES DEL GRUPO",
+   "color": "rosa",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 8,
+    "etiquetas": [
+     "lengua",
+     "palabras",
+     "campos léxicos",
+     "rodear",
+     "clasificar"
+    ]
+   }
+  },
+  {
+   "id": "palabra.clasifica",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 4,
+   "familia": "palabra",
+   "clave": "clasifica",
+   "nombre": "Cada palabra en su caja",
+   "descripcion": "Un banco de palabras y dos o tres cajas con el nombre del grupo: escribir cada palabra donde va.",
+   "opciones": [
+    {
+     "id": "cajas",
+     "etiqueta": "Cajas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "2 cajas"
+      },
+      {
+       "valor": 3,
+       "etiqueta": "3 cajas"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "inicial",
+       "etiqueta": "Mayúscula inicial"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULAS"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa"
+   ],
+   "titulo": "CADA PALABRA EN SU CAJA",
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 12,
+    "etiquetas": [
+     "lengua",
+     "palabras",
+     "campos léxicos",
+     "clasificar",
+     "escribir"
+    ]
+   }
+  },
+  {
+   "id": "palabra.letras",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 4,
+   "familia": "palabra",
+   "clave": "letras",
+   "nombre": "Ordena las letras",
+   "descripcion": "Letras desordenadas (o · g · t · a): escribir la palabra, con la primera letra marcada o sin marcar.",
+   "opciones": [
+    {
+     "id": "letras",
+     "etiqueta": "Letras de cada palabra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "3 a 5 (variadas)"
+      },
+      {
+       "valor": 3,
+       "etiqueta": "3 letras"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 letras"
+      },
+      {
+       "valor": 5,
+       "etiqueta": "5 letras"
+      }
+     ]
+    },
+    {
+     "id": "marca",
+     "etiqueta": "Primera letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Sin marcar"
+      },
+      {
+       "valor": "primera",
+       "etiqueta": "Marcada"
+      }
+     ]
+    },
+    {
+     "id": "tipo",
+     "etiqueta": "Tipo de sílabas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Directas (ma, pe)"
+      },
+      {
+       "valor": "inversas",
+       "etiqueta": "Con inversas (al, en)"
+      },
+      {
+       "valor": "trabadas",
+       "etiqueta": "Con trabadas (pla, bra)"
+      },
+      {
+       "valor": "mixtas",
+       "etiqueta": "Con mixtas (con, sol)"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "inicial",
+       "etiqueta": "Mayúscula inicial"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULAS"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "ORDENA LAS LETRAS",
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "lengua",
+     "palabras",
+     "letras",
+     "ordenar",
+     "escribir"
+    ]
+   }
+  },
+  {
+   "id": "palabra.cuenta",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 4,
+   "familia": "palabra",
+   "clave": "cuenta",
+   "nombre": "¿Cuántas letras?",
+   "descripcion": "Una palabra y un hueco para el número de letras, o casillas (una por letra) y el número.",
+   "opciones": [
+    {
+     "id": "letras",
+     "etiqueta": "Letras de cada palabra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "3 a 7 (variadas)"
+      },
+      {
+       "valor": 3,
+       "etiqueta": "3 letras"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 letras"
+      },
+      {
+       "valor": 5,
+       "etiqueta": "5 letras"
+      },
+      {
+       "valor": 6,
+       "etiqueta": "6 letras"
+      }
+     ]
+    },
+    {
+     "id": "respuesta",
+     "etiqueta": "Respuesta",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Solo el número"
+      },
+      {
+       "valor": "casillas",
+       "etiqueta": "Casillas y número"
+      }
+     ]
+    },
+    {
+     "id": "tipo",
+     "etiqueta": "Tipo de sílabas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Directas (ma, pe)"
+      },
+      {
+       "valor": "inversas",
+       "etiqueta": "Con inversas (al, en)"
+      },
+      {
+       "valor": "trabadas",
+       "etiqueta": "Con trabadas (pla, bra)"
+      },
+      {
+       "valor": "mixtas",
+       "etiqueta": "Con mixtas (con, sol)"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "inicial",
+       "etiqueta": "Mayúscula inicial"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULAS"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "¿CUÁNTAS LETRAS?",
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 8,
+    "etiquetas": [
+     "lengua",
+     "palabras",
+     "letras",
+     "contar"
+    ]
+   }
+  },
+  {
+   "id": "palabra.articulo",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 4,
+   "familia": "palabra",
+   "clave": "articulo",
+   "nombre": "el, la, los, las",
+   "descripcion": "Poner el artículo que va con cada nombre (___ gato).",
+   "opciones": [
+    {
+     "id": "articulos",
+     "etiqueta": "Artículos",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "el, la"
+      },
+      {
+       "valor": "un",
+       "etiqueta": "un, una"
+      },
+      {
+       "valor": "plural",
+       "etiqueta": "el, la, los, las"
+      },
+      {
+       "valor": "unplural",
+       "etiqueta": "un, una, unos, unas"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULA"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "EL, LA, LOS, LAS",
+   "color": "rosa",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "lengua",
+     "palabras",
+     "artículos",
+     "género",
+     "número"
+    ]
+   }
+  },
+  {
+   "id": "palabra.plural",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 4,
+   "familia": "palabra",
+   "clave": "plural",
+   "nombre": "Uno y muchos",
+   "descripcion": "Escribir el plural de cada nombre (gato, gatos; flor, flores), o el singular a partir del plural.",
+   "opciones": [
+    {
+     "id": "plural",
+     "etiqueta": "Plurales",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Solo -s"
+      },
+      {
+       "valor": "es",
+       "etiqueta": "-s y -es"
+      }
+     ]
+    },
+    {
+     "id": "sentido",
+     "etiqueta": "Sentido",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "De uno a muchos"
+      },
+      {
+       "valor": "alreves",
+       "etiqueta": "De muchos a uno"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULA"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "UNO Y MUCHOS",
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "lengua",
+     "palabras",
+     "plural",
+     "singular",
+     "escribir"
+    ]
+   }
+  },
+  {
+   "id": "palabra.contrarios",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 4,
+   "familia": "palabra",
+   "clave": "contrarios",
+   "nombre": "Los contrarios",
+   "descripcion": "Unir cada palabra con su contrario (grande, pequeño) o escribirlo. Banco fijo de unos 40 pares.",
+   "opciones": [
+    {
+     "id": "tarea",
+     "etiqueta": "Tarea",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Unir con flechas"
+      },
+      {
+       "valor": "escribe",
+       "etiqueta": "Escribir el contrario"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "inicial",
+       "etiqueta": "Mayúscula inicial"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULAS"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "LOS CONTRARIOS",
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "lengua",
+     "palabras",
+     "vocabulario",
+     "contrarios",
+     "unir"
+    ]
+   }
+  },
+  {
+   "id": "palabra.sopa",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 4,
+   "familia": "palabra",
+   "clave": "sopa",
+   "nombre": "Sopa de letras",
+   "descripcion": "Una sopa de letras con 6 a 8 palabras de un campo; horizontal y vertical (y diagonal si se quiere).",
+   "opciones": [
+    {
+     "id": "campo",
+     "etiqueta": "Campo de las palabras",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Al azar"
+      },
+      {
+       "valor": "animales",
+       "etiqueta": "Animales"
+      },
+      {
+       "valor": "comida",
+       "etiqueta": "Comida"
+      },
+      {
+       "valor": "ropa",
+       "etiqueta": "Ropa"
+      },
+      {
+       "valor": "casa",
+       "etiqueta": "Casa"
+      },
+      {
+       "valor": "escuela",
+       "etiqueta": "Escuela"
+      },
+      {
+       "valor": "cuerpo",
+       "etiqueta": "Cuerpo"
+      },
+      {
+       "valor": "juguetes",
+       "etiqueta": "Juguetes"
+      },
+      {
+       "valor": "transportes",
+       "etiqueta": "Transportes"
+      },
+      {
+       "valor": "familia",
+       "etiqueta": "Familia"
+      },
+      {
+       "valor": "naturaleza",
+       "etiqueta": "Naturaleza"
+      },
+      {
+       "valor": "colores",
+       "etiqueta": "Colores"
+      }
+     ]
+    },
+    {
+     "id": "palabras",
+     "etiqueta": "Palabras escondidas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "8 palabras"
+      },
+      {
+       "valor": 7,
+       "etiqueta": "7 palabras"
+      },
+      {
+       "valor": 6,
+       "etiqueta": "6 palabras"
+      }
+     ]
+    },
+    {
+     "id": "direcciones",
+     "etiqueta": "Direcciones",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Horizontal y vertical"
+      },
+      {
+       "valor": "diagonal",
+       "etiqueta": "También en diagonal"
+      }
+     ]
+    },
+    {
+     "id": "minus",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "MAYÚSCULAS"
+      },
+      {
+       "valor": "minus",
+       "etiqueta": "minúscula"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa"
+   ],
+   "titulo": "SOPA DE LETRAS",
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 15,
+    "etiquetas": [
+     "lengua",
+     "palabras",
+     "sopa de letras",
+     "vocabulario"
+    ]
+   }
+  },
+  {
+   "id": "orto.elige",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 6,
+   "familia": "orto",
+   "clave": "elige",
+   "nombre": "Elige la letra",
+   "descripcion": "Palabras con un hueco de ortografía (ca_po, pe_o, _eso): elegir entre dos opciones o escribir sin ayuda.",
+   "opciones": [
+    {
+     "id": "regla",
+     "etiqueta": "Regla",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Mezcladas"
+      },
+      {
+       "valor": "mpb",
+       "etiqueta": "m antes de p y b"
+      },
+      {
+       "valor": "r",
+       "etiqueta": "r / rr"
+      },
+      {
+       "valor": "cqu",
+       "etiqueta": "c / qu"
+      },
+      {
+       "valor": "ggu",
+       "etiqueta": "g / gu"
+      },
+      {
+       "valor": "cz",
+       "etiqueta": "c / z"
+      }
+     ]
+    },
+    {
+     "id": "ayuda",
+     "etiqueta": "Ayuda",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Con las dos opciones para elegir"
+      },
+      {
+       "valor": "sin",
+       "etiqueta": "Sin ayuda"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "inicial",
+       "etiqueta": "Mayúscula inicial"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULAS"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "ELIGE LA LETRA",
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "lengua",
+     "ortografía",
+     "letras",
+     "palabras",
+     "completar"
+    ]
+   }
+  },
+  {
+   "id": "orto.mayuscula",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 6,
+   "familia": "orto",
+   "clave": "mayuscula",
+   "nombre": "Nombres con mayúscula",
+   "descripcion": "Nombres de personas, mascotas y pueblos: rodear las palabras que llevan mayúscula o escribirlas bien.",
+   "opciones": [
+    {
+     "id": "tarea",
+     "etiqueta": "Tarea",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Rodear los nombres con mayúscula"
+      },
+      {
+       "valor": "escribe",
+       "etiqueta": "Escribirlos con mayúscula"
+      }
+     ]
+    },
+    {
+     "id": "nombres",
+     "etiqueta": "Nombres",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Mezclados"
+      },
+      {
+       "valor": "personas",
+       "etiqueta": "De personas"
+      },
+      {
+       "valor": "mascotas",
+       "etiqueta": "De mascotas"
+      },
+      {
+       "valor": "lugares",
+       "etiqueta": "De pueblos y ciudades"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "NOMBRES CON MAYÚSCULA",
+   "color": "rosa",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 8,
+    "etiquetas": [
+     "lengua",
+     "ortografía",
+     "mayúsculas",
+     "nombres",
+     "propios"
+    ]
+   }
   }
  ]
 };
