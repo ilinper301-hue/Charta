@@ -30,6 +30,7 @@
 - **Ecosistema** (Lectori, Barri, Calculi para el alumnado; Fori pizarra; Tabula cuaderno docente; Charta fichas). Todas en ilinper301-hue.github.io → **mismo origen**: prefijo `charta:` en localStorage/IndexedDB y service worker con scope `/Charta/`. Un único proyecto de Firebase (Google): datos en `/apps/charta/…`, usuarios en `/usuarios/{uid}`. Estilo basado en Lectori. Flujo: `src/` → `python3 tools/build.py` → `dist/index.html`.
   - **Tabula**: Charta guarda la ficha en `/apps/charta/fichas/{id}`; Tabula la referencia por id en documentos para imprimir y la vincula a sesión, tarea o actividad evaluable. Futuro: resultados por alumno.
   - **Fori**: abre `?ficha={id}`; modo proyección (un ejercicio cada vez, solución paso a paso, corrección en gran grupo); anotaciones en capa aparte.
+- **Sin pictogramas** (5-11-2026, abandonados; quizá más adelante). Si una ficha necesita un dibujo que Charta no hace, sale un recuadro con un mensaje pequeño («Pega aquí el dibujo») y Iván pega la imagen encima a mano.
 - **Sin metadatos LOMLOE** (saberes, criterios): la normativa cambia a menudo; quizá en el futuro. Solo metadatos propios opcionales (dificultad, minutos, etiquetas).
 - **Impresión**: a color (paneles pastel, aprobados) con opción de **blanco y negro / ahorro de tinta**.
 - **Privacidad**: la ficha se genera e imprime en el dispositivo. Los nombres de los alumnos solo se usan al imprimir: nunca se guardan en el JSON ni en Firestore.
