@@ -7,6 +7,7 @@ CODEMAP.md            este mapa
 ESTADO.md             hoja de ruta con pasos marcables
 ESQUEMA.md            esquema JSON v1 de ficha, actividad y ejercicio
 INICIO_CHAT.md        mensaje para empezar un chat nuevo
+LENGUA_1.md           guion de tipología de Lengua de 1.º (bloques, modelos, pauta Lamela, lotes)
 motor/generador_fichas.py   motor de REFERENCIA (Python + ReportLab), ~2.700 líneas: diseño aprobado y reglas
 motor/modelos_app.py  modelos SOLO de la app (bloque 8 problemas…): MODELOS_APP con titulo y color; tools/catalogo.py los añade tras los del motor
 motor/metadatos.py    META: dificultad, minutos y etiquetas de cada modelo (también los de la app)
