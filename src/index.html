@@ -11,21 +11,37 @@
 <header class="barra"><h1>Charta</h1><span class="sub">Fichas educativas</span></header>
 <main>
   <section class="tarjeta">
-    <label>Modelo <select id="modelo"></select></label>
-    <div id="opciones"></div>
-    <label>Semilla <input id="semilla" type="number" value="1" min="1"></label>
-    <div class="botones">
-      <button id="generar" class="primario">Generar</button>
-      <button id="variante">Otra variante</button>
-    </div>
-    <p id="error" class="error" hidden></p>
+    <h2>Actividades</h2>
+    <div id="acts"></div>
+    <div class="botones"><button id="anadir">+ Segunda actividad</button></div>
   </section>
   <section class="tarjeta">
-    <h2 id="titulo">—</h2>
-    <ol id="soluciones" class="soluciones"></ol>
-    <details><summary>JSON de la ficha</summary><pre id="json"></pre></details>
+    <h2>Alumnos e impresión</h2>
+    <label>Alumnos (uno por línea; vacío = línea en blanco para el nombre)
+      <textarea id="alumnos" rows="3" placeholder="Ana&#10;Luis"></textarea></label>
+    <label>Fichas <select id="variaciones">
+      <option value="iguales">Todas iguales</option>
+      <option value="distintas">Una distinta para cada alumno</option></select></label>
+    <label class="check"><input type="checkbox" id="bn"> Blanco y negro (ahorro de tinta)</label>
+    <label>Título (opcional) <input id="titulo" placeholder="Automático"></label>
+    <div class="botones">
+      <button id="imprimir" class="primario">Imprimir / Guardar PDF</button>
+      <button id="variante">Otra variante</button>
+      <button id="versol">Ver soluciones</button>
+    </div>
+    <p id="error" class="error" hidden></p>
+    <p id="info" class="info"></p>
+  </section>
+  <section id="soluciones" class="tarjeta solucionario" hidden>
+    <h2>Soluciones <small>(solo en pantalla)</small></h2>
+    <div id="hojasSol" class="hojas"></div>
+  </section>
+  <section class="tarjeta previa">
+    <h2>Vista previa</h2>
+    <div id="hojas" class="hojas"></div>
   </section>
 </main>
+<div id="impresion" class="impresion"></div>
 <script type="module" src="app.js"></script>
 </body>
 </html>

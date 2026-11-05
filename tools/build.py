@@ -53,6 +53,8 @@ def empaquetar(entrada="app.js"):
         cod = IMP_DEFECTO.sub(lambda m: f"const {m.group(1)} = {req(m.group(2))}.default;", cod)
         def decl(m):
             exps.append(f"get {m.group(2)}() {{ return {m.group(2)}; }}"); return f"{m.group(1)} {m.group(2)}"
+        multi = re.search(r'^export\s+(const|let)\s+[A-Za-z_$][\w$]*\s*=[^;\n]*,\s*[A-Za-z_$][\w$]*\s*=(?![^;\n]*=>)', cod, re.M)
+        if multi: sys.exit(f"build: una declaración por export en src/{r}: {multi.group(0)[:60]}…")
         cod = EXP_DECL.sub(decl, cod)
         if EXP_DEF.search(cod):
             cod = EXP_DEF.sub("const __default = ", cod, count=1); exps.append("get default() { return __default; }")
@@ -67,6 +69,13 @@ def empaquetar(entrada="app.js"):
 def construir():
     html = open(os.path.join(SRC, "index.html"), encoding="utf-8").read()
     css = open(os.path.join(SRC, "estilos.css"), encoding="utf-8").read()
+    # Fuentes incrustadas (sin conexión): url("fuentes/X.woff") → data:font/woff;base64,…
+    def fuente(m):
+        import base64
+        ruta = os.path.join(SRC, m.group(1))
+        if not os.path.isfile(ruta): sys.exit(f"build: no existe src/{m.group(1)}")
+        return 'url("data:font/woff;base64,' + base64.b64encode(open(ruta, "rb").read()).decode() + '")'
+    css = re.sub(r'url\("(fuentes/[^"]+\.woff)"\)', fuente, css)
     js = empaquetar("app.js").replace("</script", "<\\/script")
     html = html.replace('<link rel="stylesheet" href="estilos.css">', "<style>\n" + css + "</style>")
     html = html.replace('<script type="module" src="app.js"></script>', "<script>\n" + js + "</script>")

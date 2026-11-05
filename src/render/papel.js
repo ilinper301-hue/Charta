@@ -4,9 +4,12 @@
 // Port de stroke(), caja(), cuadrito(), _marco(), _celdas(), _linea(), T(), B() y _n() del motor.
 import { rep as repSVG, plantilla as tplSVG, ancho as anchoAndika, esc } from "../rep/index.js";
 
-export const W = 595.2756, H = 841.8898, M = 28;
+export const W = 595.2756;
+export const H = 841.8898;
+export const M = 28;
 /** `top` de las familias del motor: fn(H − M − 76, …). La familia rep usa H − M − 90 (TOP_REP). */
-export const TOP = H - M - 76, TOP_REP = H - M - 90;
+export const TOP = H - M - 76;
+export const TOP_REP = H - M - 90;
 /** Zona de página que el panel encaja: M..W−M × M..H−M−76 (alto × parte en media página). */
 export const ZONA = { x: M, w: W - 2 * M, yArriba: H - M - 76, alto: H - 2 * M - 76 };
 export const INK = 0.12;

@@ -1,3 +1,5 @@
+@font-face { font-family: Andika; src: url("fuentes/Andika-Regular.woff") format("woff"); font-weight: 400; }
+@font-face { font-family: Andika; src: url("fuentes/Andika-Bold.woff") format("woff"); font-weight: 700; }
 :root {
   --primario: #1B4D3E; --primario-osc: #133A2E; --fondo: #F4F7F5; --superficie: #FFFFFF;
   --suave: #E3EEE8; --texto: #1E2622; --texto-2: #5B6B63; --error: #A12A2A;
@@ -9,13 +11,33 @@ body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, san
 .sub { opacity: .8; font-size: .9rem; }
 main { max-width: 760px; margin: 0 auto; padding: 14px; display: grid; gap: 14px; }
 .tarjeta { background: var(--superficie); border: 1px solid var(--suave); border-radius: 12px; padding: 14px; display: grid; gap: 10px; }
+.act { border: 1px solid var(--suave); border-radius: 10px; padding: 10px; display: grid; gap: 8px; }
+.act-cab { display: flex; justify-content: space-between; align-items: center; font-weight: 600; color: var(--primario); }
+.act-cab button { padding: 4px 10px; }
 label { display: grid; gap: 4px; font-size: .9rem; color: var(--texto-2); }
-select, input { font: inherit; padding: 9px 10px; border: 1px solid #cfdcd5; border-radius: 8px; background: #fff; color: var(--texto); }
+label.check { display: flex; align-items: center; gap: 8px; }
+select, input, textarea { font: inherit; padding: 9px 10px; border: 1px solid #cfdcd5; border-radius: 8px; background: #fff; color: var(--texto); }
 .botones { display: flex; gap: 8px; flex-wrap: wrap; }
 button { font: inherit; padding: 10px 16px; border-radius: 8px; border: 1px solid var(--primario); background: #fff; color: var(--primario); cursor: pointer; }
 button.primario { background: var(--primario); color: #fff; }
 button:active { background: var(--primario-osc); color: #fff; }
 h2 { margin: 0; font-size: 1.1rem; color: var(--primario); }
-.soluciones { margin: 0; padding-left: 1.6em; columns: 3; font-variant-numeric: tabular-nums; }
+h2 small { font-weight: 400; color: var(--texto-2); font-size: .8rem; }
 .error { color: var(--error); margin: 0; }
-pre { overflow: auto; max-height: 50vh; font-size: .75rem; background: var(--fondo); padding: 8px; border-radius: 8px; }
+.info { color: var(--texto-2); margin: 0; font-size: .85rem; }
+.hojas { display: grid; gap: 12px; }
+.hoja { background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,.18); }
+.hoja svg { display: block; width: 100%; height: auto; }
+.hoja-etq { font-size: .8rem; color: var(--texto-2); margin: 0 0 4px; }
+.impresion { display: none; }
+
+@page { size: A4 portrait; margin: 0; }
+@media print {
+  body { background: #fff; }
+  .barra, main { display: none !important; }
+  .impresion { display: block; }
+  .impresion .pag { width: 210mm; height: 297mm; overflow: hidden; break-after: page; page-break-after: always; }
+  .impresion .pag:last-child { break-after: auto; page-break-after: auto; }
+  .impresion svg { display: block; width: 210mm; height: 297mm; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}

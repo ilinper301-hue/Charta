@@ -118,6 +118,12 @@ prueba("build.py: dist/index.html autocontenido y el paquete funciona", () => {
   const f = ctx.Charta.generar({ actividades: [{ tipo: "sumar.h20", params: { nivel: "mezcla" } }] }, 3);
   assert.deepEqual(JSON.parse(JSON.stringify(f)), generar({ actividades: [{ tipo: "sumar.h20", params: { nivel: "mezcla" } }] }, 3));
   assert.deepEqual([...ctx.Charta.erroresFicha(f)], []);
+  // El paquete dibuja igual que los módulos (detecta exports perdidos al empaquetar).
+  for (const t of ctx.Charta.listaTipos()) {
+    const g = ctx.Charta.generar({ actividades: [{ tipo: t }, { tipo: t }] }, 2);
+    const svg = ctx.Charta.hojas(g, { nombres: ["Ana"] })[0].svg;
+    assert.ok(!/NaN|undefined/.test(svg), `paquete: NaN/undefined en la hoja de ${t}`);
+  }
   execFileSync("python3", [raiz + "tools/build.py"]);
   const html = readFileSync(raiz + "dist/index.html", "utf-8");
   assert.ok(!/src="app\.js"|href="estilos\.css"|^\s*import\s/m.test(html), "quedan referencias externas o import");
