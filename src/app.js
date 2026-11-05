@@ -7,6 +7,7 @@ import { hoja, hojas, PALETA } from "./render/hoja.js";
 import { hayTipo } from "./nucleo/tipos.js";
 import { miniatura } from "./ui/navegacion.js";
 import { abrirSelector } from "./ui/selector.js";
+import { leerAlumnos, numVariantes, MAX_ALUMNOS } from "./ui/alumnos.js";
 
 globalThis.Charta = { generar, modelo, erroresFicha, listaTipos, hojas, CATALOGO };
 
@@ -86,7 +87,14 @@ function leerUltimo() { try { const id = localStorage.getItem(ULTIMO); return id
 function iniciar() {
   let semilla = 1, ficha = null, paginas = [];
   const editores = [];
-  const nombres = () => $("alumnos").value.split("\n").map((s) => s.trim()).filter(Boolean);
+  const nombres = () => leerAlumnos($("alumnos").value).slice(0, MAX_ALUMNOS);
+  const copias = () => Math.max(1, Math.min(MAX_ALUMNOS, parseInt($("copias").value, 10) || 1));
+  function contar() {
+    const todos = leerAlumnos($("alumnos").value), n = Math.min(todos.length, MAX_ALUMNOS);
+    $("filaCopias").hidden = n > 0;
+    $("cuenta").textContent = !n ? "Sin alumnos: la ficha sale con la línea del nombre en blanco."
+      : `${n} alumno${n > 1 ? "s" : ""}: una ficha con su nombre para cada uno.` + (todos.length > MAX_ALUMNOS ? ` (máximo ${MAX_ALUMNOS}; sobran ${todos.length - MAX_ALUMNOS})` : "");
+  }
 
   const tamano = () => (editores.length > 1 ? "media" : "completa");
   // Compositor (paso 4.2): añadir, ordenar y quitar actividades (1 o 2 por hoja).
@@ -108,15 +116,16 @@ function iniciar() {
   function pintar() {
     $("error").hidden = true;
     try {
-      const ns = nombres(), distintas = $("variaciones").value === "distintas";
+      contar();
+      const ns = nombres(), total = ns.length || copias();
       ficha = generar({
         actividades: editores.map((e) => e.leer()),
         titulo: $("titulo").value.trim() || undefined,
-        variantes: distintas ? Math.max(1, Math.min(30, ns.length)) : 1,
+        variantes: numVariantes($("variaciones").value, total),
         presentacion: { color: !$("bn").checked },
       }, semilla);
       const bn = $("bn").checked;
-      paginas = hojas(ficha, { nombres: ns, bn });
+      paginas = hojas(ficha, { nombres: ns, copias: total, bn });
       const etiqueta = (p) => (p.nombre || "Sin nombre") + (ficha.variantes > 1 ? ` · variante ${letraVariante(p.variante)}` : "");
       $("hojas").replaceChildren(...paginas.map((p) => el("div", {}, el("p", { className: "hoja-etq", textContent: etiqueta(p) }),
         Object.assign(el("div", { className: "hoja" }), { innerHTML: p.svg }))));
@@ -124,14 +133,16 @@ function iniciar() {
       const sol = Array.from({ length: ficha.variantes }, (_, v) => ({ svg: hoja(paginasVariante(ficha, v)[0], { titulo: ficha.titulo, bn, modo: "solucion", uid: `s${v}` }) }));
       $("hojasSol").replaceChildren(...sol.map((p, v) => el("div", {}, el("p", { className: "hoja-etq", textContent: ficha.variantes > 1 ? `Variante ${letraVariante(v)}` : "Soluciones" }),
         Object.assign(el("div", { className: "hoja" }), { innerHTML: p.svg }))));
-      $("info").textContent = `${paginas.length} página${paginas.length > 1 ? "s" : ""} · ${ficha.titulo}`;
+      $("info").textContent = `${paginas.length} página${paginas.length > 1 ? "s" : ""}` +
+        (ficha.variantes > 1 ? ` · variantes ${letraVariante(0)}–${letraVariante(ficha.variantes - 1)}` : "") + ` · ${ficha.titulo}`;
     } catch (e) { $("error").textContent = e.message; $("error").hidden = false; }
   }
 
   $("anadir").onclick = () => abrirSelector({ tamano: "media", actual: editores[0].id,
     alElegir: (id) => { nuevoEditor(id); pintar(); } });
   $("acts").addEventListener("change", pintar);
-  for (const id of ["alumnos", "variaciones", "bn", "titulo"]) $(id).addEventListener("change", pintar);
+  for (const id of ["alumnos", "copias", "variaciones", "bn", "titulo"]) $(id).addEventListener("change", pintar);
+  $("alumnos").addEventListener("input", contar);
   $("irPrevia").onclick = () => $("previa").scrollIntoView({ behavior: "smooth" });
   $("variante").onclick = () => { semilla++; pintar(); };
   $("versol").onclick = () => { const s = $("soluciones"); s.hidden = !s.hidden; $("versol").textContent = s.hidden ? "Ver soluciones" : "Ocultar soluciones"; };

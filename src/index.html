@@ -17,11 +17,15 @@
   </section>
   <section class="tarjeta">
     <h2>Alumnos e impresión</h2>
-    <label>Alumnos (uno por línea; vacío = línea en blanco para el nombre)
-      <textarea id="alumnos" rows="3" placeholder="Ana&#10;Luis"></textarea></label>
+    <label>Alumnos (escríbelos o pégalos: uno por línea, con comas o desde una hoja de cálculo)
+      <textarea id="alumnos" rows="4" placeholder="Ana&#10;Luis"></textarea></label>
+    <p id="cuenta" class="info">Sin alumnos: la ficha sale con la línea del nombre en blanco.</p>
+    <label id="filaCopias">Copias <input id="copias" type="number" min="1" max="30" value="1" inputmode="numeric"></label>
     <label>Fichas <select id="variaciones">
       <option value="iguales">Todas iguales</option>
-      <option value="distintas">Una distinta para cada alumno</option></select></label>
+      <option value="2">Dos variantes (A y B), alternas</option>
+      <option value="3">Tres variantes (A, B y C), alternas</option>
+      <option value="distintas">Una distinta para cada ficha</option></select></label>
     <label class="check"><input type="checkbox" id="bn"> Blanco y negro (ahorro de tinta)</label>
     <label>Título (opcional) <input id="titulo" placeholder="Automático"></label>
     <div class="botones">

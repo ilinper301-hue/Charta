@@ -23,3 +23,26 @@ assert.equal(total, listaTipos().length, "todos los tipos aparecen en el selecto
 const solo = CATALOGO.modelos.filter((m) => !m.tamanos.includes("media"));
 for (const m of solo) assert.equal(modelos(m.curso, m.materia, m.bloque, "media").find((x) => x.id === m.id).cabe, false);
 console.log(`test_ui: ${total} modelos navegables con miniatura · ${solo.length} solo página completa`);
+
+// Paso 4.3 · alumnos pegados y nº de variantes
+import { leerAlumnos, numVariantes } from "../src/ui/alumnos.js";
+import { generar } from "../src/nucleo/ficha.js";
+import { hojas } from "../src/render/hoja.js";
+assert.deepEqual(leerAlumnos("Ana\n\n  Luis  \n"), ["Ana", "Luis"]);
+assert.deepEqual(leerAlumnos("Ana, Luis; Eva"), ["Ana", "Luis", "Eva"]);
+assert.deepEqual(leerAlumnos("1. Ana García\n2) Luis\n- Eva\n• Iker"), ["Ana García", "Luis", "Eva", "Iker"]);
+assert.deepEqual(leerAlumnos("1\tGarcía Pérez\tAna\n2\tRuiz\tLuis"), ["García Pérez Ana", "Ruiz Luis"]);
+assert.deepEqual(leerAlumnos("María José\nJosé Mª"), ["María José", "José Mª"]);
+assert.deepEqual(leerAlumnos("García Pérez, Ana\nRuiz Gil, Luis María"), ["Ana García Pérez", "Luis María Ruiz Gil"]);
+assert.deepEqual(leerAlumnos("1. Ruiz, Luis\n2. Gil, Eva"), ["Luis Ruiz", "Eva Gil"]);
+assert.equal(numVariantes("iguales", 20), 1);
+assert.equal(numVariantes("2", 20), 2);
+assert.equal(numVariantes("3", 2), 2);
+assert.equal(numVariantes("distintas", 25), 25);
+assert.equal(numVariantes("distintas", 40), 30);
+const f = generar({ actividades: [{ tipo: "sumar.h20" }], variantes: 2 }, 5);
+const hs = hojas(f, { copias: 4 });
+assert.deepEqual(hs.map((h) => [h.nombre, h.variante]), [["", 0], ["", 1], ["", 0], ["", 1]]);
+assert.notEqual(hs[0].svg, hs[1].svg); assert.equal(hs[0].svg.replace(/h\d+p/g, ""), hs[2].svg.replace(/h\d+p/g, ""));
+assert.equal(hojas(f, { nombres: ["Ana", "Luis", "Eva"] }).length, 3);
+console.log("test_ui: alumnos y variantes OK");

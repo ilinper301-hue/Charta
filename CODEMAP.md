@@ -16,6 +16,7 @@ index.html            redirige a dist/ (GitHub Pages sirve la raíz)
 package.json          solo "type": "module" para Node (sin dependencias)
 src/index.html, estilos.css, app.js   app (verde oscuro): editores de actividad (modelo elegido + opciones), alumnos, impresión
 src/ui/navegacion.js  cursos(), materias(c), bloques(c, m), modelos(c, m, b, tamano) (solo tipos registrados; `cabe`), miniatura(id) — sin DOM
+src/ui/alumnos.js     leerAlumnos(texto) (pegar listas, Séneca), numVariantes(opción, páginas), MAX_ALUMNOS — sin DOM
 src/ui/selector.js    abrirSelector({ actual, tamano, alElegir, alCerrar }): pantalla curso → materia → bloque → modelo
 tests/test_ui.js      navegación: todos los tipos alcanzables, miniaturas limpias
 src/nucleo/azar.js    mulberry32, mezclar(...ns) (semillas derivadas), crearAzar(s): entero, elegir, barajar, muestra, hijo

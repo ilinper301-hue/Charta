@@ -1,3 +1,4 @@
+[hidden] { display: none !important; }
 @font-face { font-family: Andika; src: url("fuentes/Andika-Regular.woff") format("woff"); font-weight: 400; }
 @font-face { font-family: Andika; src: url("fuentes/Andika-Bold.woff") format("woff"); font-weight: 700; }
 :root {

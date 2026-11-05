@@ -71,13 +71,13 @@ export function hoja(pagina, { titulo, nombre = "", bn = false, modo = "papel", 
 }
 
 /**
- * Páginas para imprimir: una por alumno (o una sola con la línea en blanco si no hay alumnos).
+ * Páginas para imprimir: una por alumno (o `copias` con la línea en blanco si no hay alumnos).
  * Con variantes > 1, el alumno i recibe la variante i % variantes. Devuelve [{ nombre, variante, svg }].
  * Los nombres solo se usan aquí, en el dispositivo: nunca entran en la ficha.
  */
-export function hojas(ficha, { nombres = [], bn = false, modo = "papel" } = {}) {
+export function hojas(ficha, { nombres = [], copias = 1, bn = false, modo = "papel" } = {}) {
   const lista = nombres.map((s) => String(s).trim()).filter(Boolean);
-  const quienes = lista.length ? lista : [""];
+  const quienes = lista.length ? lista : Array(Math.max(1, copias | 0)).fill("");   // sin alumnos: copias con la línea en blanco
   return quienes.map((nombre, i) => {
     const v = i % ficha.variantes;
     const pag = (v === 0 ? ficha.paginas : ficha.variantesDatos[v - 1].paginas)[0];
