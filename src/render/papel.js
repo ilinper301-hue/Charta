@@ -17,6 +17,15 @@ export const INK = 0.12;
 export const COLOR_SOLUCION = "#C62828";
 export const FUENTE = ANDIKA_CSS;
 export const MENOS = "−";
+/** Puntos por milímetro (1 pt = 1/72 in). */
+export const MM = 72 / 25.4;
+/** Panel de la página (x, yAbajo, w, h) y separación entre dos medias: los usa hoja.js. */
+export const PANEL = { x: 34, y: 26, w: W - 68, h: H - 108 - 26, gap: 12 };
+/** Escala con que el panel encaja la zona (como panel() de hoja.js). extra = alto de las líneas de enunciado de más. */
+export function escalaPanel(parte = 1, extra = 0) {
+  const h = parte < 1 ? (PANEL.h - PANEL.gap) / 2 : PANEL.h;
+  return Math.min((PANEL.w - 31) / ZONA.w, (h - 57 - extra) / (ZONA.alto * parte));
+}
 
 const f2 = (x) => { const v = Math.round(x * 100) / 100; return String(Object.is(v, -0) ? 0 : v); };
 /** Gris de ReportLab (0 negro … 1 blanco) o color "#rrggbb" → color SVG. */
@@ -34,9 +43,12 @@ export const B = (w = 44, h = 38, sol = null) => ({ t: "b", w, h, sol });
 
 export class Papel {
   /** modo: "papel" (huecos vacíos) o "solucion" (huecos con la respuesta en rojo). parte: 1 o 0.5. */
-  constructor({ modo = "papel", parte = 1, fuente = FUENTE_POR_DEFECTO } = {}) {
-    this.o = []; this.modo = modo; this.parte = parte; this.fuente = fuente;
+  /** escala: la del panel donde irá (para medidas reales en mm; por defecto, la de un enunciado de una línea). */
+  constructor({ modo = "papel", parte = 1, fuente = FUENTE_POR_DEFECTO, escala } = {}) {
+    this.o = []; this.modo = modo; this.parte = parte; this.fuente = fuente; this.escala = escala || escalaPanel(parte);
   }
+  /** v milímetros reales en el papel impreso → unidades de la zona (compensa la escala del panel). */
+  mm(v) { return v * MM / this.escala; }
   get solucion() { return this.modo === "solucion"; }
   Y(y) { return f2(H - y); }
 
@@ -46,8 +58,8 @@ export class Papel {
   /** Agrupa lo que dibuja fn como un ejercicio (Fori lo mostrará de uno en uno). */
   ejercicio(id, fn) { this.abrir(`class="ej" data-ej="${esc(id)}"`); fn(); this.cerrar(); }
 
-  line(x1, y1, x2, y2, { lw = 1.6, gris = INK } = {}) {
-    this.o.push(`<line x1="${f2(x1)}" y1="${this.Y(y1)}" x2="${f2(x2)}" y2="${this.Y(y2)}" stroke="${color(gris)}" stroke-width="${f2(lw)}"/>`);
+  line(x1, y1, x2, y2, { lw = 1.6, gris = INK, dash = null } = {}) {
+    this.o.push(`<line x1="${f2(x1)}" y1="${this.Y(y1)}" x2="${f2(x2)}" y2="${this.Y(y2)}" stroke="${color(gris)}" stroke-width="${f2(lw)}"${dash ? ` stroke-dasharray="${dash.map(f2).join(" ")}"` : ""}/>`);
   }
   _est(lw, fill, stroke) {
     return `fill="${color(fill)}"` + (stroke === null ? "" : ` stroke="${color(stroke)}" stroke-width="${f2(lw)}"`);
@@ -59,9 +71,9 @@ export class Papel {
     this.o.push(`<circle cx="${f2(x)}" cy="${this.Y(y)}" r="${f2(r)}" ${this._est(lw, fill, stroke)}/>`);
   }
   /** cmds: [["M", x, y], ["L", x, y], ["C", x1, y1, x2, y2, x, y], ["Z"]] en coordenadas y-arriba. */
-  path(cmds, { lw = 1.5, fill = null, stroke = INK } = {}) {
+  path(cmds, { lw = 1.5, fill = null, stroke = INK, dash = null } = {}) {
     const d = cmds.map(([k, ...v]) => k + v.map((n, i) => (i % 2 ? this.Y(n) : f2(n))).join(" ")).join("");
-    this.o.push(`<path d="${d}" ${this._est(lw, fill, stroke)}/>`);
+    this.o.push(`<path d="${d}" ${this._est(lw, fill, stroke)}${dash ? ` stroke-dasharray="${dash.map(f2).join(" ")}"` : ""}/>`);
   }
   /** anchor: "start" (drawString), "middle" (drawCentredString), "end" (drawRightString). */
   text(x, y, t, fs, { f = "PB", anchor = "start", gris = INK } = {}) {

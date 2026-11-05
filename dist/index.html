@@ -11208,11 +11208,12 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get registrarS
 // modos: "papel" (huecos vacíos) · "solucion" (huecos con la respuesta). "pantalla" (Fori) llegará en la fase 5.
 const { tipo } = __req("nucleo/tipos.js");
 const { Papel } = __req("render/papel.js");
-function render(actividad, modo = "papel", fuente) {
+/** escala: la del panel (hoja.js la pasa; sin ella, la nominal). Solo la usan las medidas en mm (pauta). */
+function render(actividad, modo = "papel", fuente, escala) {
   const T = tipo(actividad.tipo);
   if (!T) throw new Error(`Tipo no disponible: «${actividad.tipo}»`);
   if (typeof T.dibujar !== "function") throw new Error(`${actividad.tipo}: falta dibujar()`);
-  const p = new Papel({ modo, parte: actividad.tamano === "media" ? 0.5 : 1, ...(fuente && { fuente }) });
+  const p = new Papel({ modo, parte: actividad.tamano === "media" ? 0.5 : 1, ...(fuente && { fuente }), ...(escala && { escala }) });
   T.dibujar(p, actividad);
   return p.resultado();
 }
@@ -11287,14 +11288,14 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get ANDIKA_CSS
 // y 1 o 2 paneles con su actividad. Port de encabezado(), panel() y pagina() del motor.
 // opciones: { titulo, nombre = "", bn = false (blanco y negro / ahorro de tinta), modo = "papel" | "solucion", uid, fuente (de fuentes.js; por defecto Andika),
 //   grande = false (letra grande en cabecera y enunciado), facil = false (lectura fácil: letra grande + una frase por línea) }
-const { Papel, W, H, M, INK, ZONA } = __req("render/papel.js");
+const { Papel, W, H, M, INK, ZONA, PANEL } = __req("render/papel.js");
 const { render } = __req("render/actividad.js");
 const { fuenteDe, FUENTE_POR_DEFECTO } = __req("render/fuentes.js");
 const AZUL = "#1F4E79";
 /** PALETA del motor: [relleno, borde] de cada panel. */
 const PALETA = { amarillo: ["#fff7e6", "#f7e7c4"], rosa: ["#fbeff3", "#f2d6df"], azul: ["#eef5fc", "#d1e2f3"], verde: ["#edf7ee", "#c7e0cc"] };
 /** PANEL_COMPLETO del motor (x, yAbajo, w, h); con dos actividades, dos mitades separadas 12 pt. */
-const PX = 34, PY = 26, PW = W - 68, PH = H - 108 - 26, GAP = 12;
+const { x: PX, y: PY, w: PW, h: PH, gap: GAP } = PANEL;
 function rectsPanel(n) {
   if (n === 1) return [[PX, PY, PW, PH]];
   const hh = (PH - GAP) / 2;
@@ -11357,9 +11358,10 @@ function panel(p, act, rect, { bn, modo, clip, grande, facil, fuente }) {
   while (lineas.some((t) => p.ancho(t, "PR", fs) > w - 59) && fs > 8) fs -= 0.5;
   lineas.forEach((t, j) => p.text(x + 45, yT - 26 - j * en.lh, t, fs, { f: "PR" }));
   // Encaje de la zona de página (como panel()): punto (X, Y) → (sc·X + e, sc·Y + fy), y hacia arriba.
-  const z = render(act, modo, fuente), parte = act.tamano === "media" ? 0.5 : 1;
+  const parte = act.tamano === "media" ? 0.5 : 1;
   const hi = (yT - 43 - extra) - (yB + 14), alto = ZONA.alto * parte, base = ZONA.yArriba - alto;
   const sc = Math.min((w - 31) / ZONA.w, hi / alto);
+  const z = render(act, modo, fuente, sc);
   const e = x + w / 2 - ZONA.w * sc / 2 - sc * M, fy = (yB + 14) + (parte < 1 ? hi - alto * sc : 0) - sc * base;
   p.o.push(`<clipPath id="${clip}"><rect x="${f2(x)}" y="${f2(H - yT)}" width="${f2(w)}" height="${f2(h)}" rx="14"/></clipPath>`);
   p.o.push(`<g clip-path="url(#${clip})" class="actividad" data-n="${act.n}"><g transform="translate(${f2(e)} ${f2(H - fy - sc * H)}) scale(${f2(sc)})">${z.svg}</g></g>`);
@@ -11420,6 +11422,15 @@ const INK = 0.12;
 const COLOR_SOLUCION = "#C62828";
 const FUENTE = ANDIKA_CSS;
 const MENOS = "−";
+/** Puntos por milímetro (1 pt = 1/72 in). */
+const MM = 72 / 25.4;
+/** Panel de la página (x, yAbajo, w, h) y separación entre dos medias: los usa hoja.js. */
+const PANEL = { x: 34, y: 26, w: W - 68, h: H - 108 - 26, gap: 12 };
+/** Escala con que el panel encaja la zona (como panel() de hoja.js). extra = alto de las líneas de enunciado de más. */
+function escalaPanel(parte = 1, extra = 0) {
+  const h = parte < 1 ? (PANEL.h - PANEL.gap) / 2 : PANEL.h;
+  return Math.min((PANEL.w - 31) / ZONA.w, (h - 57 - extra) / (ZONA.alto * parte));
+}
 
 const f2 = (x) => { const v = Math.round(x * 100) / 100; return String(Object.is(v, -0) ? 0 : v); };
 /** Gris de ReportLab (0 negro … 1 blanco) o color "#rrggbb" → color SVG. */
@@ -11437,9 +11448,12 @@ const B = (w = 44, h = 38, sol = null) => ({ t: "b", w, h, sol });
 
 class Papel {
   /** modo: "papel" (huecos vacíos) o "solucion" (huecos con la respuesta en rojo). parte: 1 o 0.5. */
-  constructor({ modo = "papel", parte = 1, fuente = FUENTE_POR_DEFECTO } = {}) {
-    this.o = []; this.modo = modo; this.parte = parte; this.fuente = fuente;
+  /** escala: la del panel donde irá (para medidas reales en mm; por defecto, la de un enunciado de una línea). */
+  constructor({ modo = "papel", parte = 1, fuente = FUENTE_POR_DEFECTO, escala } = {}) {
+    this.o = []; this.modo = modo; this.parte = parte; this.fuente = fuente; this.escala = escala || escalaPanel(parte);
   }
+  /** v milímetros reales en el papel impreso → unidades de la zona (compensa la escala del panel). */
+  mm(v) { return v * MM / this.escala; }
   get solucion() { return this.modo === "solucion"; }
   Y(y) { return f2(H - y); }
 
@@ -11449,8 +11463,8 @@ class Papel {
   /** Agrupa lo que dibuja fn como un ejercicio (Fori lo mostrará de uno en uno). */
   ejercicio(id, fn) { this.abrir(`class="ej" data-ej="${esc(id)}"`); fn(); this.cerrar(); }
 
-  line(x1, y1, x2, y2, { lw = 1.6, gris = INK } = {}) {
-    this.o.push(`<line x1="${f2(x1)}" y1="${this.Y(y1)}" x2="${f2(x2)}" y2="${this.Y(y2)}" stroke="${color(gris)}" stroke-width="${f2(lw)}"/>`);
+  line(x1, y1, x2, y2, { lw = 1.6, gris = INK, dash = null } = {}) {
+    this.o.push(`<line x1="${f2(x1)}" y1="${this.Y(y1)}" x2="${f2(x2)}" y2="${this.Y(y2)}" stroke="${color(gris)}" stroke-width="${f2(lw)}"${dash ? ` stroke-dasharray="${dash.map(f2).join(" ")}"` : ""}/>`);
   }
   _est(lw, fill, stroke) {
     return `fill="${color(fill)}"` + (stroke === null ? "" : ` stroke="${color(stroke)}" stroke-width="${f2(lw)}"`);
@@ -11462,9 +11476,9 @@ class Papel {
     this.o.push(`<circle cx="${f2(x)}" cy="${this.Y(y)}" r="${f2(r)}" ${this._est(lw, fill, stroke)}/>`);
   }
   /** cmds: [["M", x, y], ["L", x, y], ["C", x1, y1, x2, y2, x, y], ["Z"]] en coordenadas y-arriba. */
-  path(cmds, { lw = 1.5, fill = null, stroke = INK } = {}) {
+  path(cmds, { lw = 1.5, fill = null, stroke = INK, dash = null } = {}) {
     const d = cmds.map(([k, ...v]) => k + v.map((n, i) => (i % 2 ? this.Y(n) : f2(n))).join(" ")).join("");
-    this.o.push(`<path d="${d}" ${this._est(lw, fill, stroke)}/>`);
+    this.o.push(`<path d="${d}" ${this._est(lw, fill, stroke)}${dash ? ` stroke-dasharray="${dash.map(f2).join(" ")}"` : ""}/>`);
   }
   /** anchor: "start" (drawString), "middle" (drawCentredString), "end" (drawRightString). */
   text(x, y, t, fs, { f = "PB", anchor = "start", gris = INK } = {}) {
@@ -11545,7 +11559,7 @@ class Papel {
   }
 }
 
-Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get W() { return W; }, get H() { return H; }, get M() { return M; }, get TOP() { return TOP; }, get TOP_REP() { return TOP_REP; }, get ZONA() { return ZONA; }, get INK() { return INK; }, get COLOR_SOLUCION() { return COLOR_SOLUCION; }, get FUENTE() { return FUENTE; }, get MENOS() { return MENOS; }, get color() { return color; }, get T() { return T; }, get B() { return B; }, get Papel() { return Papel; } }));
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get W() { return W; }, get H() { return H; }, get M() { return M; }, get TOP() { return TOP; }, get TOP_REP() { return TOP_REP; }, get ZONA() { return ZONA; }, get INK() { return INK; }, get COLOR_SOLUCION() { return COLOR_SOLUCION; }, get FUENTE() { return FUENTE; }, get MENOS() { return MENOS; }, get MM() { return MM; }, get PANEL() { return PANEL; }, get escalaPanel() { return escalaPanel; }, get color() { return color; }, get T() { return T; }, get B() { return B; }, get Papel() { return Papel; } }));
 },
 "rep/index.js": (__exp) => {
 // Charta · paso 2.2 · las 16 representaciones del número como SVG.

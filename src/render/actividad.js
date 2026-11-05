@@ -5,11 +5,12 @@
 import { tipo } from "../nucleo/tipos.js";
 import { Papel } from "./papel.js";
 
-export function render(actividad, modo = "papel", fuente) {
+/** escala: la del panel (hoja.js la pasa; sin ella, la nominal). Solo la usan las medidas en mm (pauta). */
+export function render(actividad, modo = "papel", fuente, escala) {
   const T = tipo(actividad.tipo);
   if (!T) throw new Error(`Tipo no disponible: «${actividad.tipo}»`);
   if (typeof T.dibujar !== "function") throw new Error(`${actividad.tipo}: falta dibujar()`);
-  const p = new Papel({ modo, parte: actividad.tamano === "media" ? 0.5 : 1, ...(fuente && { fuente }) });
+  const p = new Papel({ modo, parte: actividad.tamano === "media" ? 0.5 : 1, ...(fuente && { fuente }), ...(escala && { escala }) });
   T.dibujar(p, actividad);
   return p.resultado();
 }

@@ -35,7 +35,7 @@ src/tipos/_trucos.js  fábrica trucoTipo({id, enunciado, filas, pool}) de los tr
 src/render/fuentes.js  registro de letras: fuentePorId, fuenteDe(ficha), registrarFuenteUsuario, nombreFuente; anchuras en anchos_fredoka.js (GENERADO por tools/anchos_fuente.py)
 src/ui/fuentes.js     letras subidas: validarArchivo, cssFuente, crearAlmacenFuentes (IndexedDB charta-fuentes), instalarCss
 src/tipos/index.js    importa familia.<f>.js (cada uno, los tipos de su familia); src/tipos/<id>.js uno por tipo (p. ej. sumar.h20.js); _rep.js = fábrica común de rep.*
-src/render/papel.js   lienzo Papel en coordenadas del MOTOR (pt, y hacia arriba): primitivas + port de caja, cuadrito, _marco, _celdas, _linea, T/B, _pintar, _n. TOP = H−M−76 (TOP_REP = H−M−90). Modo "solucion": huecos con la respuesta en rojo
+src/render/papel.js   lienzo Papel en coordenadas del MOTOR (pt, y hacia arriba); p.escala (la del panel) y p.mm(v) = v mm reales; PANEL, escalaPanel(parte, extra), MM; primitivas (line/path con dash) + port de caja, cuadrito, _marco, _celdas, _linea, T/B, _pintar, _n. TOP = H−M−76 (TOP_REP = H−M−90). Modo "solucion": huecos con la respuesta en rojo
 src/render/hoja.js    hoja(pagina, {titulo, nombre, bn, modo}) → SVG A4 (encabezado + paneles, como el motor); hojas(ficha, {nombres, bn, modo}) → una por alumno
 src/fuentes/          Andika recortada (WOFF); build.py la incrusta en base64
 src/render/actividad.js  render(actividad, modo) → zona {x, y, w, h, svg} que encaja el panel (como panel() del motor); svgZona()
@@ -54,6 +54,9 @@ src/lengua/dibujo.js  ayudantes en Papel: palabraHuecos, casillas (sol / rellena
 src/tipos/_lengua.js  ayudantes comunes de letra.* y silaba.* (lote 1 de Lengua) · tests/inv/_lengua.js
 src/tipos/_fono.js, _palabra.js, _orto.js  ayudantes de fono.*, palabra.* y orto.* (lote 2 de Lengua; _orto.js trae el banco de nombres propios) · tests/inv/{fono,palabra,orto}.js
 src/tipos/_frase.js, familia.frase.js  banco de frases con concordancia y ayudantes de frase.* (lote 3 de Lengua) · tests/inv/frase.js
+src/lengua/pauta.js   pauta Lamela (lote 4): renglones(p, x0, x1, yArriba, n, {mm, guia}) → {bases, c, paso}; medidasPauta, cabenRenglones, TAMANOS_PAUTA (5, 4, 3,5 mm). Medidas reales con Papel.mm()
+src/lengua/trazos.js  letras de una sola línea en unidades de la pauta (base 0, cuerpo 1, asta 1,8, rabo −0,8): LETRAS_TRAZO, trazoACurvas, anchoTrazos, escribirTrazos(p, texto, x, base, c, {estilo: modelo|repaso|punteado, punto, flechas})
+tests/test_pauta.js   escala real del panel, pauta y letras de trazo · tools/prueba_pauta.js → hoja de prueba para imprimir y medir
 tests/test_lengua.js  reglas (lista de control), léxico y ayudantes
 tools/build.py        src/ → dist/index.html (un solo archivo) + sw.js y manifest.webmanifest en la raíz; --js = solo el paquete
 src/pwa/              sw.js (plantilla, __VERSION__), manifest.webmanifest, registro.js (registrarSW(avisar)), logo.svg (fuente del logo y los iconos) · paso 4.5

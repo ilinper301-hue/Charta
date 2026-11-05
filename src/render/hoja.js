@@ -2,7 +2,7 @@
 // y 1 o 2 paneles con su actividad. Port de encabezado(), panel() y pagina() del motor.
 // opciones: { titulo, nombre = "", bn = false (blanco y negro / ahorro de tinta), modo = "papel" | "solucion", uid, fuente (de fuentes.js; por defecto Andika),
 //   grande = false (letra grande en cabecera y enunciado), facil = false (lectura fácil: letra grande + una frase por línea) }
-import { Papel, W, H, M, INK, ZONA } from "./papel.js";
+import { Papel, W, H, M, INK, ZONA, PANEL } from "./papel.js";
 import { render } from "./actividad.js";
 import { fuenteDe, FUENTE_POR_DEFECTO } from "./fuentes.js";
 
@@ -10,7 +10,7 @@ export const AZUL = "#1F4E79";
 /** PALETA del motor: [relleno, borde] de cada panel. */
 export const PALETA = { amarillo: ["#fff7e6", "#f7e7c4"], rosa: ["#fbeff3", "#f2d6df"], azul: ["#eef5fc", "#d1e2f3"], verde: ["#edf7ee", "#c7e0cc"] };
 /** PANEL_COMPLETO del motor (x, yAbajo, w, h); con dos actividades, dos mitades separadas 12 pt. */
-const PX = 34, PY = 26, PW = W - 68, PH = H - 108 - 26, GAP = 12;
+const { x: PX, y: PY, w: PW, h: PH, gap: GAP } = PANEL;
 export function rectsPanel(n) {
   if (n === 1) return [[PX, PY, PW, PH]];
   const hh = (PH - GAP) / 2;
@@ -73,9 +73,10 @@ function panel(p, act, rect, { bn, modo, clip, grande, facil, fuente }) {
   while (lineas.some((t) => p.ancho(t, "PR", fs) > w - 59) && fs > 8) fs -= 0.5;
   lineas.forEach((t, j) => p.text(x + 45, yT - 26 - j * en.lh, t, fs, { f: "PR" }));
   // Encaje de la zona de página (como panel()): punto (X, Y) → (sc·X + e, sc·Y + fy), y hacia arriba.
-  const z = render(act, modo, fuente), parte = act.tamano === "media" ? 0.5 : 1;
+  const parte = act.tamano === "media" ? 0.5 : 1;
   const hi = (yT - 43 - extra) - (yB + 14), alto = ZONA.alto * parte, base = ZONA.yArriba - alto;
   const sc = Math.min((w - 31) / ZONA.w, hi / alto);
+  const z = render(act, modo, fuente, sc);
   const e = x + w / 2 - ZONA.w * sc / 2 - sc * M, fy = (yB + 14) + (parte < 1 ? hi - alto * sc : 0) - sc * base;
   p.o.push(`<clipPath id="${clip}"><rect x="${f2(x)}" y="${f2(H - yT)}" width="${f2(w)}" height="${f2(h)}" rx="14"/></clipPath>`);
   p.o.push(`<g clip-path="url(#${clip})" class="actividad" data-n="${act.n}"><g transform="translate(${f2(e)} ${f2(H - fy - sc * H)}) scale(${f2(sc)})">${z.svg}</g></g>`);
