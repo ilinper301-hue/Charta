@@ -1,47 +1,69 @@
-// Charta · app (corte vertical de la fase 2: paso 2.4). La interfaz completa llega en la fase 4.
+// Charta · app. Paso 4.1: selector curso → materia → bloque → modelo; opciones del modelo elegido.
 import { CATALOGO } from "./nucleo/catalogo.js";
 import { generar, porDefecto, modelo } from "./nucleo/ficha.js";
 import { erroresFicha, letraVariante, paginasVariante } from "./nucleo/lector.js";
 import { listaTipos } from "./tipos/index.js";
-import { hoja, hojas } from "./render/hoja.js";
+import { hoja, hojas, PALETA } from "./render/hoja.js";
+import { hayTipo } from "./nucleo/tipos.js";
+import { miniatura } from "./ui/navegacion.js";
+import { abrirSelector } from "./ui/selector.js";
 
 globalThis.Charta = { generar, modelo, erroresFicha, listaTipos, hojas, CATALOGO };
 
 const $ = (id) => document.getElementById(id);
 function el(tag, props = {}, ...hijos) { const e = Object.assign(document.createElement(tag), props); e.append(...hijos); return e; }
 
-/** Editor de una actividad: modelo + opciones (desde MODELOS). */
-function editorActividad(num, alQuitar) {
+/** Editor de una actividad: modelo elegido (con el selector) + sus opciones (desde MODELOS). */
+function editorActividad(num, id, { tamano, alQuitar, alCambiar }) {
   const caja = el("div", { className: "act" });
-  const sel = el("select"), ops = el("div", { className: "ops" });
+  const ops = el("div", { className: "ops" });
+  const mini = el("div", { className: "mini" }), nombre = el("strong"), desc = el("small");
+  const cambiar = el("button", { textContent: "Cambiar" });
+  const elegido = el("div", { className: "elegido" }, mini, el("div", { className: "elegido-txt" }, nombre, desc), cambiar);
   const cab = el("div", { className: "act-cab" }, `Actividad ${num}`);
   if (alQuitar) { const b = el("button", { textContent: "Quitar" }); b.onclick = alQuitar; cab.append(b); }
-  for (const id of listaTipos()) sel.add(new Option(modelo(id).nombre, id));
-  caja.append(cab, el("label", {}, "Modelo", sel), ops);
+  caja.append(cab, elegido, ops);
+  const ed = { caja, id, leer, poner, refrescar: () => pintarOpciones(leer().params) };
 
-  function pintarOpciones() {
-    const m = modelo(sel.value), def = porDefecto(m.id);
+  function poner(nuevo) {
+    ed.id = nuevo;
+    const m = modelo(nuevo), [fondo, borde] = PALETA[m.color] ?? PALETA.verde;
+    nombre.textContent = m.nombre; desc.textContent = m.descripcion;
+    mini.style.background = fondo; mini.style.borderColor = borde;
+    try { mini.innerHTML = miniatura(nuevo); } catch { mini.textContent = ""; }
+    pintarOpciones();
+  }
+  cambiar.onclick = () => abrirSelector({ actual: ed.id, tamano: tamano(), alElegir: (n) => { poner(n); guardarUltimo(n); alCambiar(); } });
+
+  // prev: valores que ya había (se conservan al pasar de página completa a media y al revés).
+  function pintarOpciones(prev = {}) {
+    const m = modelo(ed.id), def = { ...porDefecto(m.id), ...prev }, t = tamano();
     ops.replaceChildren();
     const campo = (etq, control) => ops.append(el("label", {}, etq, control));
     if (m.rangos.length > 1) {
       const s = el("select"); s.dataset.op = "rango";
       for (const r of m.rangos) s.add(new Option(`Hasta el ${r}`, r, false, r === def.rango));
-      campo("Rango", s);
+      campo("Números", s);
     }
     for (const o of m.opciones) {
       let c;
       if (o.tipo === "opcion") {
         c = el("select");
-        o.valores.forEach((v, i) => c.add(new Option(v.etiqueta, i, false, v.valor === def[o.id])));
+        o.valores.forEach((v, i) => {
+          const op = new Option(v.etiqueta, i, false, v.valor === def[o.id]);
+          if (v.tamanos && !v.tamanos.includes(t)) { op.disabled = true; op.text += " (solo página completa)"; op.selected = false; }
+          c.add(op);
+        });
+        if (c.selectedOptions[0]?.disabled !== false) c.value = [...c.options].find((x) => !x.disabled)?.value ?? c.value;
       } else if (o.tipo === "si_no") {
         c = el("input", { type: "checkbox", checked: !!def[o.id] });
-      } else c = el("input", { type: "number", min: o.min, max: o.max, value: def[o.id] ?? "" });
+      } else c = el("input", { type: "number", min: o.min, max: o.max, value: def[o.id] ?? "", placeholder: "Automático", inputMode: "numeric" });
       c.dataset.op = o.id;
       if (o.tipo === "si_no") ops.append(el("label", { className: "check" }, c, " " + o.etiqueta)); else campo(o.etiqueta, c);
     }
   }
   function leer() {
-    const m = modelo(sel.value), p = {};
+    const m = modelo(ed.id), p = {};
     for (const c of ops.querySelectorAll("[data-op]")) {
       const k = c.dataset.op, o = m.opciones.find((x) => x.id === k);
       if (k === "rango") p.rango = +c.value;
@@ -49,26 +71,28 @@ function editorActividad(num, alQuitar) {
       else if (o.tipo === "si_no") p[k] = c.checked;
       else p[k] = c.value === "" ? null : +c.value;
     }
-    return { tipo: sel.value, params: p };
+    return { tipo: ed.id, params: p };
   }
-  sel.addEventListener("change", pintarOpciones);
-  pintarOpciones();
-  return { caja, leer, sel };
+  poner(id);
+  return ed;
 }
+
+const ULTIMO = "charta:ultimoModelo";
+function guardarUltimo(id) { try { localStorage.setItem(ULTIMO, id); } catch {} }
+function leerUltimo() { try { const id = localStorage.getItem(ULTIMO); return id && hayTipo(id) ? id : null; } catch { return null; } }
 
 function iniciar() {
   let semilla = 1, ficha = null, paginas = [];
   const editores = [];
   const nombres = () => $("alumnos").value.split("\n").map((s) => s.trim()).filter(Boolean);
 
-  function ponerEditores(n) {
-    while (editores.length > n) editores.pop().caja.remove();
-    while (editores.length < n) {
-      const e = editorActividad(editores.length + 1, editores.length ? () => { ponerEditores(1); pintar(); } : null);
-      if (editores.length) e.sel.value = editores[0].sel.value, e.sel.dispatchEvent(new Event("change"));
-      editores.push(e); $("acts").append(e.caja);
-    }
-    $("anadir").hidden = n >= 2;
+  const tamano = () => (editores.length > 1 ? "media" : "completa");
+  function nuevoEditor(id) {
+    const quitar = editores.length ? () => { editores.pop().caja.remove(); $("anadir").hidden = false; editores[0].refrescar(); pintar(); } : null;
+    const e = editorActividad(editores.length + 1, id, { tamano, alQuitar: quitar, alCambiar: pintar });
+    editores.push(e); $("acts").append(e.caja);
+    $("anadir").hidden = editores.length >= 2;
+    editores[0].refrescar();
   }
 
   function pintar() {
@@ -94,7 +118,8 @@ function iniciar() {
     } catch (e) { $("error").textContent = e.message; $("error").hidden = false; }
   }
 
-  $("anadir").onclick = () => { ponerEditores(2); pintar(); };
+  $("anadir").onclick = () => abrirSelector({ tamano: "media", actual: editores[0].id,
+    alElegir: (id) => { guardarUltimo(id); nuevoEditor(id); pintar(); } });
   $("acts").addEventListener("change", pintar);
   for (const id of ["alumnos", "variaciones", "bn", "titulo"]) $(id).addEventListener("change", pintar);
   $("variante").onclick = () => { semilla++; pintar(); };
@@ -106,7 +131,10 @@ function iniciar() {
     const t = document.title; document.title = ficha.titulo;
     document.fonts.ready.then(() => { window.print(); document.title = t; });
   };
-  ponerEditores(1); pintar();
+  const ultimo = leerUltimo();
+  nuevoEditor(ultimo || listaTipos()[0]); pintar();
+  // Primera vez: se empieza eligiendo la actividad (curso → materia → contenido → modelo).
+  if (!ultimo) abrirSelector({ tamano: "completa", alElegir: (n) => { editores[0].poner(n); guardarUltimo(n); pintar(); } });
 }
 
 if (typeof document !== "undefined") iniciar();

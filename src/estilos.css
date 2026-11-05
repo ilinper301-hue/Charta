@@ -41,3 +41,29 @@ h2 small { font-weight: 400; color: var(--texto-2); font-size: .8rem; }
   .impresion svg { display: block; width: 210mm; height: 297mm; }
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
+
+/* Paso 4.1 · actividad elegida y selector curso → materia → bloque → modelo */
+.elegido { display: grid; grid-template-columns: 84px 1fr auto; gap: 10px; align-items: center; }
+.elegido-txt { display: grid; gap: 2px; }
+.elegido-txt small, .sel-tarjeta small { color: var(--texto-2); font-size: .8rem; line-height: 1.3; }
+.mini { border: 1px solid var(--suave); border-radius: 8px; aspect-ratio: 4 / 3; overflow: hidden; display: grid; place-items: center; padding: 4px; }
+.mini svg { width: 100%; height: 100%; display: block; }
+.ops { display: grid; gap: 8px; }
+body.con-selector { overflow: hidden; }
+.selector { position: fixed; inset: 0; z-index: 10; background: var(--fondo); display: flex; flex-direction: column; }
+.sel-cab { background: var(--primario); color: #fff; display: flex; align-items: center; gap: 8px; padding: 8px 10px; }
+.sel-cab h2 { color: #fff; flex: 1; font-size: 1.05rem; }
+.sel-cab button { background: transparent; border: 0; color: #fff; font-size: 1.25rem; padding: 6px 12px; }
+.migas { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; padding: 8px 12px 0; color: var(--texto-2); font-size: .85rem; }
+.migas:empty { display: none; }
+.migas button { border: 0; background: var(--suave); padding: 4px 10px; border-radius: 999px; font-size: .85rem; }
+.rejilla { flex: 1; overflow-y: auto; padding: 12px; display: grid; gap: 10px; align-content: start;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); max-width: 1000px; width: 100%; margin: 0 auto; }
+.rejilla.modelos { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+.sel-tarjeta { display: grid; gap: 4px; text-align: left; align-content: start; background: var(--superficie); color: var(--texto);
+  border: 1px solid var(--suave); border-radius: 12px; padding: 14px; }
+.sel-tarjeta strong { color: var(--primario); }
+.sel-tarjeta.modelo { padding: 8px; }
+.sel-tarjeta.actual { border: 2px solid var(--primario); }
+.sel-tarjeta:disabled { opacity: .5; }
+.sel-tarjeta:active:not(:disabled) { background: var(--suave); color: var(--texto); }
