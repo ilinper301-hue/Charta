@@ -17,7 +17,7 @@ referencia/ficha_muestra.pdf  ficha de muestra de Iván (marco a imitar)
 tests/test_nucleo.js  pruebas del núcleo JS (Node): `node tests/test_nucleo.js`
 index.html            redirige a dist/ (GitHub Pages sirve la raíz)
 package.json          solo "type": "module" para Node (sin dependencias)
-src/index.html, estilos.css, app.js   app (verde oscuro): editores de actividad (modelo elegido + opciones), alumnos, impresión
+src/index.html, estilos.css, app.js   app: columna .col (Actividades, Alumnos, Impresión, Más acciones, barra .accion-principal) + .lado (vista previa); el CSS solo depende de los ids y clases que crea app.js
 src/ui/navegacion.js  cursos(), materias(c), bloques(c, m) (CATALOGO.bloques[materia]), modelos(c, m, b, tamano) (solo tipos registrados; `cabe`), miniatura(id), fuenteMateria(id), materiaDe(id) — sin DOM
 src/ui/alumnos.js     leerAlumnos(texto) (pegar listas, Séneca), numVariantes(opción, páginas), MAX_ALUMNOS — sin DOM
 src/ui/guardadas.js   crearGuardadas(almacén): recientes(), favoritos(), anotarReciente, alternarFavorito, esFavorito, quitar — sin nombres
