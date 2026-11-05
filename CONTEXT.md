@@ -37,7 +37,7 @@
 
 ## Diseño
 - **Interfaz de la app**: profesional y minimalista (en la línea de Lectori, Barri, Calculi y Tabula). **Color principal: verde oscuro**.
-  - Propuesta de paleta (ajustable): primario `#1B4D3E`, primario oscuro `#133A2E`, fondo claro `#F4F7F5`, superficie `#FFFFFF`, verde suave `#E3EEE8`, texto `#1E2622`, texto secundario `#5B6B63`.
+  - Paleta (5-11-2026, la del logo de Iván: verde azulado): primario `#1E524E`, primario oscuro `#153E3C`, C del logo `#419A88`, menta `#B8F3E1`; fondo crema `#FAF9F5` como Tabula. Variables en `src/estilos.css`.
 - **Ficha (PDF)**: marco de la ficha de muestra (`referencia/ficha_muestra.pdf`), ya implementado en `cabecera()`:
   - "Nombre:" y "Fecha:" con líneas arriba; título centrado en azul `#1F4E79`, en minúsculas con inicial mayúscula.
   - Panel pastel con borde fino (amarillo, rosa, azul o verde) y enunciado numerado en un círculo azul.

@@ -3,12 +3,12 @@
 @font-face { font-family: Andika; src: url("fuentes/Andika-Bold.woff") format("woff"); font-weight: 700; }
 @font-face { font-family: Fredoka; src: url("fuentes/Fredoka.woff") format("woff"); font-weight: 400 700; }
 
-/* Sistema de diseño (en la línea de Tabula: fondo crema, serif en títulos, un único acento: el verde de Charta) */
+/* Sistema de diseño (en la línea de Tabula: fondo crema, serif en títulos, un único acento: el verde azulado del logo) */
 :root {
   --fondo: #FAF9F5; --superficie: #FFFFFF; --superficie-2: #F4F3EE; --hover: #EEEDE6;
   --borde: #E8E6DD; --borde-fuerte: #D9D7CC;
   --texto: #141413; --texto-2: #3D3C38; --apagado: #66655F;
-  --primario: #1B4D3E; --primario-osc: #133A2E; --acento-texto: #1B5E4A; --acento-suave: #EAF3EE; --acento-linea: #CFE3D8;
+  --primario: #1E524E; --primario-osc: #153E3C; --acento-texto: #22655E; --acento-suave: #E5F4EF; --acento-linea: #BFE6DA;
   --sobre-acento: #FFFFFF; --error: #A63A2A;
   --serif: "Iowan Old Style", "Source Serif 4", Georgia, "Noto Serif", serif;
   --sans: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -17,10 +17,10 @@
   color-scheme: light;
 }
 :root[data-tema="oscuro"] {
-  --fondo: #1A1D1B; --superficie: #242826; --superficie-2: #202321; --hover: #2E3330;
-  --borde: #343935; --borde-fuerte: #434944;
-  --texto: #EEF1ED; --texto-2: #D3D8D3; --apagado: #9EA6A0;
-  --primario: #2E7A5C; --primario-osc: #3A8D6C; --acento-texto: #8FD0B2; --acento-suave: #243A30; --acento-linea: #33564A;
+  --fondo: #171C1C; --superficie: #212827; --superficie-2: #1D2322; --hover: #2A3332;
+  --borde: #313A39; --borde-fuerte: #3F4A48;
+  --texto: #EDF2F0; --texto-2: #D1D9D6; --apagado: #9AA7A3;
+  --primario: #2D8070; --primario-osc: #389483; --acento-texto: #8EDCC6; --acento-suave: #1E3936; --acento-linea: #2C5650;
   --error: #E58A78;
   --sombra-sm: 0 1px 2px rgba(0, 0, 0, .3); --sombra-md: 0 6px 24px rgba(0, 0, 0, .35); --sombra-papel: 0 2px 14px rgba(0, 0, 0, .5);
   color-scheme: dark;
