@@ -70,3 +70,15 @@ body.con-selector { overflow: hidden; }
 .sel-tarjeta.actual { border: 2px solid var(--primario); }
 .sel-tarjeta:disabled { opacity: .5; }
 .sel-tarjeta:active:not(:disabled) { background: var(--suave); color: var(--texto); }
+
+/* Paso 4.4 · favoritas y recientes */
+.pestanas { display: flex; gap: 6px; }
+.pestanas button { padding: 6px 12px; border-radius: 999px; border-color: var(--suave); }
+.pestanas button.activa { background: var(--primario); color: #fff; border-color: var(--primario); }
+.lista-g { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; max-height: 260px; overflow-y: auto; }
+.lista-g li { display: flex; gap: 6px; }
+.g-abrir { flex: 1; display: grid; gap: 2px; text-align: left; border-color: var(--suave); color: var(--texto); }
+.g-abrir strong { color: var(--primario); }
+.g-abrir small { color: var(--texto-2); font-size: .8rem; }
+.g-quitar { border-color: var(--suave); color: var(--texto-2); padding: 6px 12px; }
+#favorito.on { background: var(--suave); }

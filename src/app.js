@@ -1,4 +1,4 @@
-// Charta · app. 4.1: selector curso → materia → bloque → modelo y opciones · 4.2: compositor (añadir, ordenar, quitar).
+// Charta · app. 4.1: selector y opciones · 4.2: compositor · 4.3: alumnos y variantes · 4.4: favoritas y recientes.
 import { CATALOGO } from "./nucleo/catalogo.js";
 import { generar, porDefecto, modelo } from "./nucleo/ficha.js";
 import { erroresFicha, letraVariante, paginasVariante } from "./nucleo/lector.js";
@@ -7,6 +7,7 @@ import { hoja, hojas, PALETA } from "./render/hoja.js";
 import { hayTipo } from "./nucleo/tipos.js";
 import { miniatura } from "./ui/navegacion.js";
 import { abrirSelector } from "./ui/selector.js";
+import { crearGuardadas } from "./ui/guardadas.js";
 import { leerAlumnos, numVariantes, MAX_ALUMNOS } from "./ui/alumnos.js";
 
 globalThis.Charta = { generar, modelo, erroresFicha, listaTipos, hojas, CATALOGO };
@@ -28,13 +29,13 @@ function editorActividad(id, { tamano, alCambiar }) {
     /** El compositor pone el número y los botones (subir, bajar, quitar). */
     cabecera(num, botones) { etq.textContent = `Actividad ${num}`; herr.replaceChildren(...botones); } };
 
-  function poner(nuevo) {
+  function poner(nuevo, params) {
     ed.id = nuevo;
     const m = modelo(nuevo), [fondo, borde] = PALETA[m.color] ?? PALETA.verde;
     nombre.textContent = m.nombre; desc.textContent = m.descripcion;
     mini.style.background = fondo; mini.style.borderColor = borde;
     try { mini.innerHTML = miniatura(nuevo); } catch { mini.textContent = ""; }
-    pintarOpciones();
+    pintarOpciones(params);
   }
   cambiar.onclick = () => abrirSelector({ actual: ed.id, tamano: tamano(), alElegir: (n) => { poner(n); alCambiar(ed); } });
 
@@ -115,6 +116,7 @@ function iniciar() {
 
   function pintar() {
     $("error").hidden = true;
+    queueMicrotask(() => marcarFavorito());
     try {
       contar();
       const ns = nombres(), total = ns.length || copias();
@@ -145,14 +147,62 @@ function iniciar() {
   $("alumnos").addEventListener("input", contar);
   $("irPrevia").onclick = () => $("previa").scrollIntoView({ behavior: "smooth" });
   $("variante").onclick = () => { semilla++; pintar(); };
-  $("versol").onclick = () => { const s = $("soluciones"); s.hidden = !s.hidden; $("versol").textContent = s.hidden ? "Ver soluciones" : "Ocultar soluciones"; };
+  $("versol").onclick = () => {
+    const s = $("soluciones"); s.hidden = !s.hidden; $("versol").textContent = s.hidden ? "Ver soluciones" : "Ocultar soluciones";
+    if (!s.hidden) s.scrollIntoView({ behavior: "smooth" });
+  };
+
+  // Paso 4.4 · favoritas (con su semilla: sale la misma ficha) y recientes (al imprimir). Sin nombres de alumnos.
+  const almacen = (() => { try { return localStorage; } catch { return { getItem: () => null, setItem() {} }; } })();
+  const guardadas = crearGuardadas(almacen);
+  let pestana = "favoritos";
+  const composicion = () => ({ actividades: editores.map((e) => e.leer()), semilla, titulo: $("titulo").value.trim(),
+    variaciones: $("variaciones").value, bn: $("bn").checked });
+  function marcarFavorito() {
+    try { const f = guardadas.esFavorito(composicion()); $("favorito").textContent = f ? "★ Favorita" : "☆ Favorita"; $("favorito").classList.toggle("on", f); } catch {}
+  }
+  function abrirGuardada(c) {
+    editores.length = 0;
+    for (const a of c.actividades) { const e = editorActividad(a.tipo, { tamano, alCambiar: cambiado }); editores.push(e); }
+    recolocar();
+    c.actividades.forEach((a, i) => editores[i].poner(a.tipo, a.params));
+    semilla = c.semilla || 1; $("titulo").value = c.titulo || ""; $("variaciones").value = c.variaciones || "iguales"; $("bn").checked = !!c.bn;
+    pintar(); $("acts").scrollIntoView({ behavior: "smooth" });
+  }
+  function pintarGuardadas() {
+    const fav = guardadas.favoritos(), rec = guardadas.recientes();
+    $("guardadas").hidden = !fav.length && !rec.length;
+    if (!fav.length && pestana === "favoritos") pestana = "recientes";
+    if (!rec.length && pestana === "recientes") pestana = "favoritos";
+    $("pFav").classList.toggle("activa", pestana === "favoritos"); $("pRec").classList.toggle("activa", pestana === "recientes");
+    $("pFav").textContent = `★ Favoritas (${fav.length})`; $("pRec").textContent = `Recientes (${rec.length})`;
+    const lista = pestana === "favoritos" ? fav : rec;
+    $("listaGuardadas").replaceChildren(...lista.map((c, i) => {
+      const disp = c.actividades.every((a) => hayTipo(a.tipo));
+      const abrir = el("button", { className: "g-abrir", disabled: !disp },
+        el("strong", { textContent: c.nombre || "Ficha" }),
+        el("small", { textContent: c.actividades.map((a) => { try { return modelo(a.tipo).nombre; } catch { return a.tipo; } }).join(" + ") + (c.fecha ? " · " + c.fecha.split("-").reverse().map(Number).join("-") : "") }));
+      abrir.onclick = () => abrirGuardada(c);
+      const x = el("button", { className: "g-quitar", textContent: "✕", title: "Quitar de la lista" });
+      x.onclick = () => { guardadas.quitar(pestana, i); pintarGuardadas(); marcarFavorito(); };
+      return el("li", {}, abrir, x);
+    }));
+  }
+  $("pFav").onclick = () => { pestana = "favoritos"; pintarGuardadas(); };
+  $("pRec").onclick = () => { pestana = "recientes"; pintarGuardadas(); };
+  $("favorito").onclick = () => {
+    if (!ficha) return;
+    pestana = "favoritos"; guardadas.alternarFavorito(composicion(), ficha.titulo); marcarFavorito(); pintarGuardadas();
+  };
   $("imprimir").onclick = () => {
     if (!paginas.length) return;
     // Solo las fichas del alumnado: el solucionario nunca va al papel.
     $("impresion").replaceChildren(...paginas.map((p) => Object.assign(el("div", { className: "pag" }), { innerHTML: p.svg })));
+    guardadas.anotarReciente(composicion(), ficha.titulo); pintarGuardadas();
     const t = document.title; document.title = ficha.titulo;
     document.fonts.ready.then(() => { window.print(); document.title = t; });
   };
+  pintarGuardadas();
   const ultimo = leerUltimo();
   nuevoEditor(ultimo || listaTipos()[0]); pintar();
   // Primera vez: se empieza eligiendo la actividad (curso → materia → contenido → modelo).

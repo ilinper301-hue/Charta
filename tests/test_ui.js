@@ -46,3 +46,18 @@ assert.deepEqual(hs.map((h) => [h.nombre, h.variante]), [["", 0], ["", 1], ["", 
 assert.notEqual(hs[0].svg, hs[1].svg); assert.equal(hs[0].svg.replace(/h\d+p/g, ""), hs[2].svg.replace(/h\d+p/g, ""));
 assert.equal(hojas(f, { nombres: ["Ana", "Luis", "Eva"] }).length, 3);
 console.log("test_ui: alumnos y variantes OK");
+
+// Paso 4.4 · recientes y favoritos
+import { crearGuardadas, MAX_RECIENTES } from "../src/ui/guardadas.js";
+const mem = () => { const d = {}; return { getItem: (k) => d[k] ?? null, setItem: (k, v) => { d[k] = v; }, d }; };
+const al = mem(), g = crearGuardadas(al);
+const c1 = { actividades: [{ tipo: "sumar.h20", params: { nivel: "con" } }], semilla: 3, titulo: "", variaciones: "2", bn: false, nombres: ["Ana"] };
+g.anotarReciente(c1, "Sumas"); g.anotarReciente({ ...c1, semilla: 9 }, "Sumas");
+assert.equal(g.recientes().length, 1); assert.equal(g.recientes()[0].semilla, 9);
+assert.ok(!JSON.stringify(al.d).includes("Ana"), "nunca se guardan nombres");
+for (let i = 0; i < 12; i++) g.anotarReciente({ ...c1, titulo: "t" + i }, "x");
+assert.equal(g.recientes().length, MAX_RECIENTES); assert.equal(g.recientes()[0].titulo, "t11");
+assert.equal(g.alternarFavorito(c1, "Sumas"), true); assert.ok(g.esFavorito(c1)); assert.ok(!g.esFavorito({ ...c1, semilla: 4 }));
+assert.equal(g.alternarFavorito(c1, "Sumas"), false); assert.equal(g.favoritos().length, 0);
+al.setItem("charta:favoritos", "{roto"); assert.deepEqual(g.favoritos(), []);
+console.log("test_ui: recientes y favoritos OK");

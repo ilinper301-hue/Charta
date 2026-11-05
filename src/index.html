@@ -10,6 +10,10 @@
 <body>
 <header class="barra"><h1>Charta</h1><span class="sub">Fichas educativas</span></header>
 <main>
+  <section class="tarjeta" id="guardadas" hidden>
+    <div class="pestanas"><button id="pFav" class="activa">★ Favoritas</button><button id="pRec">Recientes</button></div>
+    <ul id="listaGuardadas" class="lista-g"></ul>
+  </section>
   <section class="tarjeta">
     <h2>Actividades</h2>
     <div id="acts"></div>
@@ -31,6 +35,7 @@
     <div class="botones">
       <button id="imprimir" class="primario">Imprimir / Guardar PDF</button>
       <button id="variante">Otra variante</button>
+      <button id="favorito">☆ Favorita</button>
       <button id="versol">Ver soluciones</button>
     </div>
     <p id="error" class="error" hidden></p>

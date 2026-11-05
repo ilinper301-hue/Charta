@@ -78,11 +78,27 @@ body.con-selector { overflow: hidden; }
 .sel-tarjeta.actual { border: 2px solid var(--primario); }
 .sel-tarjeta:disabled { opacity: .5; }
 .sel-tarjeta:active:not(:disabled) { background: var(--suave); color: var(--texto); }
+
+/* Paso 4.4 · favoritas y recientes */
+.pestanas { display: flex; gap: 6px; }
+.pestanas button { padding: 6px 12px; border-radius: 999px; border-color: var(--suave); }
+.pestanas button.activa { background: var(--primario); color: #fff; border-color: var(--primario); }
+.lista-g { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; max-height: 260px; overflow-y: auto; }
+.lista-g li { display: flex; gap: 6px; }
+.g-abrir { flex: 1; display: grid; gap: 2px; text-align: left; border-color: var(--suave); color: var(--texto); }
+.g-abrir strong { color: var(--primario); }
+.g-abrir small { color: var(--texto-2); font-size: .8rem; }
+.g-quitar { border-color: var(--suave); color: var(--texto-2); padding: 6px 12px; }
+#favorito.on { background: var(--suave); }
 </style>
 </head>
 <body>
 <header class="barra"><h1>Charta</h1><span class="sub">Fichas educativas</span></header>
 <main>
+  <section class="tarjeta" id="guardadas" hidden>
+    <div class="pestanas"><button id="pFav" class="activa">★ Favoritas</button><button id="pRec">Recientes</button></div>
+    <ul id="listaGuardadas" class="lista-g"></ul>
+  </section>
   <section class="tarjeta">
     <h2>Actividades</h2>
     <div id="acts"></div>
@@ -104,6 +120,7 @@ body.con-selector { overflow: hidden; }
     <div class="botones">
       <button id="imprimir" class="primario">Imprimir / Guardar PDF</button>
       <button id="variante">Otra variante</button>
+      <button id="favorito">☆ Favorita</button>
       <button id="versol">Ver soluciones</button>
     </div>
     <p id="error" class="error" hidden></p>
@@ -124,7 +141,7 @@ body.con-selector { overflow: hidden; }
 "use strict";
 const __mods = {
 "app.js": (__exp) => {
-// Charta · app. 4.1: selector curso → materia → bloque → modelo y opciones · 4.2: compositor (añadir, ordenar, quitar).
+// Charta · app. 4.1: selector y opciones · 4.2: compositor · 4.3: alumnos y variantes · 4.4: favoritas y recientes.
 const { CATALOGO } = __req("nucleo/catalogo.js");
 const { generar, porDefecto, modelo } = __req("nucleo/ficha.js");
 const { erroresFicha, letraVariante, paginasVariante } = __req("nucleo/lector.js");
@@ -133,6 +150,7 @@ const { hoja, hojas, PALETA } = __req("render/hoja.js");
 const { hayTipo } = __req("nucleo/tipos.js");
 const { miniatura } = __req("ui/navegacion.js");
 const { abrirSelector } = __req("ui/selector.js");
+const { crearGuardadas } = __req("ui/guardadas.js");
 const { leerAlumnos, numVariantes, MAX_ALUMNOS } = __req("ui/alumnos.js");
 globalThis.Charta = { generar, modelo, erroresFicha, listaTipos, hojas, CATALOGO };
 
@@ -153,13 +171,13 @@ function editorActividad(id, { tamano, alCambiar }) {
     /** El compositor pone el número y los botones (subir, bajar, quitar). */
     cabecera(num, botones) { etq.textContent = `Actividad ${num}`; herr.replaceChildren(...botones); } };
 
-  function poner(nuevo) {
+  function poner(nuevo, params) {
     ed.id = nuevo;
     const m = modelo(nuevo), [fondo, borde] = PALETA[m.color] ?? PALETA.verde;
     nombre.textContent = m.nombre; desc.textContent = m.descripcion;
     mini.style.background = fondo; mini.style.borderColor = borde;
     try { mini.innerHTML = miniatura(nuevo); } catch { mini.textContent = ""; }
-    pintarOpciones();
+    pintarOpciones(params);
   }
   cambiar.onclick = () => abrirSelector({ actual: ed.id, tamano: tamano(), alElegir: (n) => { poner(n); alCambiar(ed); } });
 
@@ -240,6 +258,7 @@ function iniciar() {
 
   function pintar() {
     $("error").hidden = true;
+    queueMicrotask(() => marcarFavorito());
     try {
       contar();
       const ns = nombres(), total = ns.length || copias();
@@ -270,14 +289,62 @@ function iniciar() {
   $("alumnos").addEventListener("input", contar);
   $("irPrevia").onclick = () => $("previa").scrollIntoView({ behavior: "smooth" });
   $("variante").onclick = () => { semilla++; pintar(); };
-  $("versol").onclick = () => { const s = $("soluciones"); s.hidden = !s.hidden; $("versol").textContent = s.hidden ? "Ver soluciones" : "Ocultar soluciones"; };
+  $("versol").onclick = () => {
+    const s = $("soluciones"); s.hidden = !s.hidden; $("versol").textContent = s.hidden ? "Ver soluciones" : "Ocultar soluciones";
+    if (!s.hidden) s.scrollIntoView({ behavior: "smooth" });
+  };
+
+  // Paso 4.4 · favoritas (con su semilla: sale la misma ficha) y recientes (al imprimir). Sin nombres de alumnos.
+  const almacen = (() => { try { return localStorage; } catch { return { getItem: () => null, setItem() {} }; } })();
+  const guardadas = crearGuardadas(almacen);
+  let pestana = "favoritos";
+  const composicion = () => ({ actividades: editores.map((e) => e.leer()), semilla, titulo: $("titulo").value.trim(),
+    variaciones: $("variaciones").value, bn: $("bn").checked });
+  function marcarFavorito() {
+    try { const f = guardadas.esFavorito(composicion()); $("favorito").textContent = f ? "★ Favorita" : "☆ Favorita"; $("favorito").classList.toggle("on", f); } catch {}
+  }
+  function abrirGuardada(c) {
+    editores.length = 0;
+    for (const a of c.actividades) { const e = editorActividad(a.tipo, { tamano, alCambiar: cambiado }); editores.push(e); }
+    recolocar();
+    c.actividades.forEach((a, i) => editores[i].poner(a.tipo, a.params));
+    semilla = c.semilla || 1; $("titulo").value = c.titulo || ""; $("variaciones").value = c.variaciones || "iguales"; $("bn").checked = !!c.bn;
+    pintar(); $("acts").scrollIntoView({ behavior: "smooth" });
+  }
+  function pintarGuardadas() {
+    const fav = guardadas.favoritos(), rec = guardadas.recientes();
+    $("guardadas").hidden = !fav.length && !rec.length;
+    if (!fav.length && pestana === "favoritos") pestana = "recientes";
+    if (!rec.length && pestana === "recientes") pestana = "favoritos";
+    $("pFav").classList.toggle("activa", pestana === "favoritos"); $("pRec").classList.toggle("activa", pestana === "recientes");
+    $("pFav").textContent = `★ Favoritas (${fav.length})`; $("pRec").textContent = `Recientes (${rec.length})`;
+    const lista = pestana === "favoritos" ? fav : rec;
+    $("listaGuardadas").replaceChildren(...lista.map((c, i) => {
+      const disp = c.actividades.every((a) => hayTipo(a.tipo));
+      const abrir = el("button", { className: "g-abrir", disabled: !disp },
+        el("strong", { textContent: c.nombre || "Ficha" }),
+        el("small", { textContent: c.actividades.map((a) => { try { return modelo(a.tipo).nombre; } catch { return a.tipo; } }).join(" + ") + (c.fecha ? " · " + c.fecha.split("-").reverse().map(Number).join("-") : "") }));
+      abrir.onclick = () => abrirGuardada(c);
+      const x = el("button", { className: "g-quitar", textContent: "✕", title: "Quitar de la lista" });
+      x.onclick = () => { guardadas.quitar(pestana, i); pintarGuardadas(); marcarFavorito(); };
+      return el("li", {}, abrir, x);
+    }));
+  }
+  $("pFav").onclick = () => { pestana = "favoritos"; pintarGuardadas(); };
+  $("pRec").onclick = () => { pestana = "recientes"; pintarGuardadas(); };
+  $("favorito").onclick = () => {
+    if (!ficha) return;
+    pestana = "favoritos"; guardadas.alternarFavorito(composicion(), ficha.titulo); marcarFavorito(); pintarGuardadas();
+  };
   $("imprimir").onclick = () => {
     if (!paginas.length) return;
     // Solo las fichas del alumnado: el solucionario nunca va al papel.
     $("impresion").replaceChildren(...paginas.map((p) => Object.assign(el("div", { className: "pag" }), { innerHTML: p.svg })));
+    guardadas.anotarReciente(composicion(), ficha.titulo); pintarGuardadas();
     const t = document.title; document.title = ficha.titulo;
     document.fonts.ready.then(() => { window.print(); document.title = t; });
   };
+  pintarGuardadas();
   const ultimo = leerUltimo();
   nuevoEditor(ultimo || listaTipos()[0]); pintar();
   // Primera vez: se empieza eligiendo la actividad (curso → materia → contenido → modelo).
@@ -9165,6 +9232,48 @@ function numVariantes(opcion, paginas) {
 }
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get MAX_ALUMNOS() { return MAX_ALUMNOS; }, get leerAlumnos() { return leerAlumnos; }, get numVariantes() { return numVariantes; } }));
+},
+"ui/guardadas.js": (__exp) => {
+// Charta · recientes y favoritos (paso 4.4). Sin DOM: el almacén se inyecta (localStorage en la app).
+// Se guarda la composición (actividades + opciones, semilla, título, variantes, B/N); NUNCA los nombres de los alumnos.
+const MAX_RECIENTES = 8;
+const MAX_FAVORITOS = 30;
+const CLAVES = { recientes: "charta:recientes", favoritos: "charta:favoritos" };
+
+/** Solo los campos permitidos (así ningún nombre de alumno puede colarse). */
+function limpiar(c) {
+  return {
+    actividades: c.actividades.map((a) => ({ tipo: a.tipo, params: { ...a.params } })),
+    semilla: c.semilla | 0, titulo: c.titulo || "", variaciones: c.variaciones || "iguales", bn: !!c.bn,
+  };
+}
+const igualSinSemilla = (a, b) => JSON.stringify({ ...a, semilla: 0, nombre: 0, fecha: 0 }) === JSON.stringify({ ...b, semilla: 0, nombre: 0, fecha: 0 });
+const igual = (a, b) => igualSinSemilla(a, b) && a.semilla === b.semilla;
+
+function crearGuardadas(almacen) {
+  const leer = (k) => { try { const v = JSON.parse(almacen.getItem(CLAVES[k]) || "[]"); return Array.isArray(v) ? v : []; } catch { return []; } };
+  const escribir = (k, v) => { try { almacen.setItem(CLAVES[k], JSON.stringify(v)); } catch {} };
+  return {
+    recientes: () => leer("recientes"),
+    favoritos: () => leer("favoritos"),
+    /** Al imprimir: la composición pasa la primera (sin repetir la misma con otra semilla). */
+    anotarReciente(c, nombre) {
+      const x = { ...limpiar(c), nombre, fecha: new Date().toISOString().slice(0, 10) };
+      escribir("recientes", [x, ...leer("recientes").filter((r) => !igualSinSemilla(r, x))].slice(0, MAX_RECIENTES));
+    },
+    esFavorito: (c) => leer("favoritos").some((f) => igual(f, limpiar(c))),
+    /** Añade o quita; devuelve true si queda en favoritos. Guarda la semilla: sale la misma ficha. */
+    alternarFavorito(c, nombre) {
+      const x = limpiar(c), fs = leer("favoritos");
+      if (fs.some((f) => igual(f, x))) { escribir("favoritos", fs.filter((f) => !igual(f, x))); return false; }
+      escribir("favoritos", [{ ...x, nombre, fecha: new Date().toISOString().slice(0, 10) }, ...fs].slice(0, MAX_FAVORITOS));
+      return true;
+    },
+    quitar(k, i) { const v = leer(k); v.splice(i, 1); escribir(k, v); },
+  };
+}
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get MAX_RECIENTES() { return MAX_RECIENTES; }, get MAX_FAVORITOS() { return MAX_FAVORITOS; }, get limpiar() { return limpiar; }, get crearGuardadas() { return crearGuardadas; } }));
 },
 "ui/navegacion.js": (__exp) => {
 // Charta · navegación del catálogo (paso 4.1): curso → materia → bloque → modelo.

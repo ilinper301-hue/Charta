@@ -57,7 +57,8 @@
   - Hecho: en `iniciar()` (app.js): `recolocar()` renumera y pone ↑ Subir / ↓ Bajar / Quitar (se puede quitar cualquiera); al reordenar se conservan las opciones y se recalculan título y colores; botón «Vista previa ↓». Solo la actividad 1 se recuerda como último modelo. Probado en Chrome móvil sin errores.
 - [x] 4.3 Alumnos (escribir o pegar; después desde Tabula); fichas iguales o variantes A/B…; impresión de todas.
   - Hecho: `src/ui/alumnos.js` (`leerAlumnos`: uno por línea, comas en una línea, listas numeradas, columnas de hoja de cálculo y «Apellidos, Nombre» de Séneca → «Nombre Apellidos»; máx. 30; `numVariantes`). Sin alumnos: «Copias» (1–30) con línea en blanco (`hojas(…, {copias})`). Fichas: iguales · 2 (A/B) o 3 (A/B/C) alternas · una distinta por ficha; solucionario por variante. Recuento en vivo. Nombres nunca guardados. Pruebas en `test_ui.js`; probado en Chrome (imprime todas las páginas).
-- [ ] 4.4 "Otra variante", "Ver soluciones", favoritos o recientes.
+- [x] 4.4 "Otra variante", "Ver soluciones", favoritos o recientes.
+  - Hecho: `src/ui/guardadas.js` (`crearGuardadas(almacén)`: `charta:favoritos` máx. 30, con semilla → misma ficha; `charta:recientes` máx. 8, se anotan al imprimir, sin repetir la misma composición). Solo se guardan actividades, opciones, semilla, título, variantes y B/N (`limpiar()`): nunca nombres. Botón ☆/★ Favorita; tarjeta con pestañas Favoritas/Recientes (abrir, quitar). «Ver soluciones» baja al solucionario. Pruebas en `test_ui.js`; probado en Chrome.
 - [ ] 4.5 Service worker (scope `/Charta/`, sin conexión), prefijo `charta:`, icono, manifiesto, modo tableta.
 
 ## Fase 5 · Tabula y Fori
