@@ -40,6 +40,7 @@ function comprobar(id, params, tam, s) {
   fichas++;
   assert.deepEqual(erroresFicha(f), []);
   assert.deepEqual(f, generar({ actividades: acts }, s), "determinista");
+  assert.deepEqual(JSON.parse(JSON.stringify(f)), f, "la ficha no sobrevive a JSON (−0, undefined, NaN…)");
   for (const a of f.paginas[0].actividades) {
     assert.ok(a.ejercicios.length > 0, "sin ejercicios");
     assert.ok(typeof a.enunciado === "string" && a.enunciado.length > 5, "enunciado");

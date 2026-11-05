@@ -132,5 +132,6 @@ export function generar(opciones, semilla = 1) {
     const s = semillaVariante(v);
     ficha.variantesDatos.push({ semilla: s, paginas: [pagina(acts, tamano, colores, s)] });
   }
-  return ficha;
+  // Normalizada a JSON (−0 → 0…): la ficha en memoria es idéntica a la guardada en Firestore o leída por Tabula/Fori.
+  return JSON.parse(JSON.stringify(ficha));
 }

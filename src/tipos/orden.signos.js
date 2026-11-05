@@ -7,7 +7,7 @@ import { registrar } from "../nucleo/tipos.js";
 import { TOP, B } from "../render/papel.js";
 
 /** _grupo(k): k números distintos de 1..R (con «cerca», de una misma decena si R ≥ 20). */
-function grupo(k, R, azar, cerca) {
+export function grupo(k, R, azar, cerca) {
   let lo = 1, hi = R;
   if (cerca && R >= 20) {
     const ds = []; for (let d = 0; d <= Math.floor(R / 10); d++) if (Math.min(R, d * 10 + 9) - Math.max(1, d * 10) + 1 >= k) ds.push(d);
@@ -18,7 +18,7 @@ function grupo(k, R, azar, cerca) {
 }
 
 /** _pares(): cnt parejas sin repetir, `iguales` de ellas con a = b. */
-function pares(cnt, R, azar, cerca, iguales = 0) {
+export function pares(cnt, R, azar, cerca, iguales = 0) {
   const eq = new Set(iguales ? azar.muestra([...Array(cnt).keys()], iguales) : []), out = [], vistos = new Set();
   for (let i = 0; i < cnt; i++) {
     let p;

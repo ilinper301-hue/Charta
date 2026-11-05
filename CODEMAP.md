@@ -33,6 +33,7 @@ tests/invariantes.js  INVARIANTES[id] (reúne tests/inv/<f>.js; ayudantes en tes
 tests/test_invariantes.js  todas las combinaciones × semillas × variantes · `--full`
 tests/test_doradas.js + doradas.json  fichas doradas (JSON + huella SVG); `--actualizar` solo si el cambio es intencionado (y subir `version` del tipo)
 tools/comparar_tipo.py  motor vs JS de un tipo en A4 → /tmp/cmp_<id>_<tamaño>.png (`--media`, `--solucion`)
+tools/ENCARGO_PORTAR.md  instrucciones para que un agente porte modelos del motor (fase 3; reutilizable para Lengua u otros cursos)
 tools/build.py        src/ → dist/index.html (un solo archivo); --js = solo el paquete
 dist/index.html       la app construida (se sube al repositorio: la sirve Pages)
 salida/               PDF generados por la línea de órdenes (se crea sola)

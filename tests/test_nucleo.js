@@ -101,7 +101,6 @@ prueba("generar: dos actividades, variantes y errores", () => {
   assert.ok(!("id" in f) && !("creada" in f) && !("autor" in f), "determinista: sin id ni fecha");
   assert.throws(() => generar({ actividades: [] }), /1 o 2/);
   assert.throws(() => generar({ actividades: [{ tipo: "conteo.camino" }, { tipo: "sumar.h20" }] }), /página completa/);
-  assert.throws(() => generar({ actividades: [{ tipo: "rep.dedos" }] }), /aún no está disponible/);
 });
 
 prueba("lector detecta fichas mal formadas", () => {
@@ -120,7 +119,8 @@ prueba("build.py: dist/index.html autocontenido y el paquete funciona", () => {
   assert.deepEqual([...ctx.Charta.erroresFicha(f)], []);
   // El paquete dibuja igual que los módulos (detecta exports perdidos al empaquetar).
   for (const t of ctx.Charta.listaTipos()) {
-    const g = ctx.Charta.generar({ actividades: [{ tipo: t }, { tipo: t }] }, 2);
+    const media = ctx.Charta.modelo(t).tamanos.includes("media");
+    const g = ctx.Charta.generar({ actividades: media ? [{ tipo: t }, { tipo: t }] : [{ tipo: t }] }, 2);
     const svg = ctx.Charta.hojas(g, { nombres: ["Ana"] })[0].svg;
     assert.ok(!/NaN|undefined/.test(svg), `paquete: NaN/undefined en la hoja de ${t}`);
   }

@@ -5,7 +5,7 @@ import { erroresFicha, letraVariante, paginasVariante } from "./nucleo/lector.js
 import { listaTipos } from "./tipos/index.js";
 import { hoja, hojas } from "./render/hoja.js";
 
-globalThis.Charta = { generar, erroresFicha, listaTipos, hojas, CATALOGO };
+globalThis.Charta = { generar, modelo, erroresFicha, listaTipos, hojas, CATALOGO };
 
 const $ = (id) => document.getElementById(id);
 function el(tag, props = {}, ...hijos) { const e = Object.assign(document.createElement(tag), props); e.append(...hijos); return e; }
