@@ -13,12 +13,13 @@ import inv_sumar from "./inv/sumar.js";
 import inv_restar from "./inv/restar.js";
 import inv_juegos from "./inv/juegos.js";
 import inv_problemas from "./inv/problemas.js";
+import inv_trucos from "./inv/trucos.js";
 import inv_geometria from "./inv/geometria.js";
 import inv_medida from "./inv/medida.js";
 import inv_estadistica from "./inv/estadistica.js";
 
 export const INVARIANTES = {
-  ...inv_rep, ...inv_combinada, ...inv_conteo, ...inv_orden, ...inv_valor, ...inv_sumar, ...inv_restar, ...inv_juegos, ...inv_problemas, ...inv_geometria, ...inv_medida, ...inv_estadistica,
+  ...inv_rep, ...inv_combinada, ...inv_conteo, ...inv_orden, ...inv_valor, ...inv_sumar, ...inv_restar, ...inv_juegos, ...inv_problemas, ...inv_trucos, ...inv_geometria, ...inv_medida, ...inv_estadistica,
   "rep.dado": rep("dado"),
   "rep.marco": rep("marco"),
 

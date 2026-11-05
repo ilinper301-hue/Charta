@@ -30,6 +30,7 @@ src/nucleo/catalogo.js  GENERADO por tools/catalogo.py (MODELOS + titulo + color
 src/rep/index.js      16 representaciones en SVG: rep(nombre, n, {i, vacio, rango}) y plantilla() → {w, h, svg} (caja en puntos PDF, y hacia abajo, centrada como el motor); svgCompleto(), nombreNumero(). Anchuras de Andika incrustadas
 tests/test_rep.js     pruebas de las representaciones · tools/comparar_rep.py: hoja motor vs JS en PNG
 src/tipos/_problemas.js  problemas del bloque 8: NOMBRES, OBJETOS, SITUACIONES, generarProblemas(), dibujarProblemas() (tipos problemas.suma/resta/mixtos)
+src/tipos/_trucos.js  fábrica trucoTipo({id, enunciado, filas, pool}) de los trucos de Calculi (bloque 12): filas con huecos, igualdades ciertas, sin repetir; tipos trucos.<clave>.js
 src/tipos/index.js    importa familia.<f>.js (cada uno, los tipos de su familia); src/tipos/<id>.js uno por tipo (p. ej. sumar.h20.js); _rep.js = fábrica común de rep.*
 src/render/papel.js   lienzo Papel en coordenadas del MOTOR (pt, y hacia arriba): primitivas + port de caja, cuadrito, _marco, _celdas, _linea, T/B, _pintar, _n. TOP = H−M−76 (TOP_REP = H−M−90). Modo "solucion": huecos con la respuesta en rojo
 src/render/hoja.js    hoja(pagina, {titulo, nombre, bn, modo}) → SVG A4 (encabezado + paneles, como el motor); hojas(ficha, {nombres, bn, modo}) → una por alumno

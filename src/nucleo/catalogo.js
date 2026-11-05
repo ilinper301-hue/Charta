@@ -17,7 +17,8 @@ export const CATALOGO = {
   "8": "Problemas",
   "9": "Geometría",
   "10": "Medida",
-  "11": "Estadística y patrones"
+  "11": "Estadística y patrones",
+  "12": "Trucos de cálculo mental"
  },
  "modelos": [
   {
@@ -4683,6 +4684,353 @@ export const CATALOGO = {
      "sumar",
      "restar",
      "razonamiento"
+    ]
+   }
+  },
+  {
+   "id": "trucos.masmenos1",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 12,
+   "familia": "trucos",
+   "clave": "masmenos1",
+   "nombre": "Uno más, uno menos",
+   "descripcion": "El vecino de cada número: sumar o restar 1 (truco de Calculi).",
+   "opciones": [
+    {
+     "id": "modo",
+     "etiqueta": "Operaciones",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Uno más y uno menos"
+      },
+      {
+       "valor": "mas",
+       "etiqueta": "Solo uno más"
+      },
+      {
+       "valor": "menos",
+       "etiqueta": "Solo uno menos"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    10,
+    20
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "UNO MÁS, UNO MENOS",
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 8,
+    "etiquetas": [
+     "cálculo mental",
+     "truco",
+     "sumar",
+     "restar",
+     "uno más uno menos"
+    ]
+   }
+  },
+  {
+   "id": "trucos.descomponer",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 12,
+   "familia": "trucos",
+   "clave": "descomponer",
+   "nombre": "Descomponer hasta 10",
+   "descripcion": "Partir un número en dos trozos y hallar el que falta (truco de Calculi).",
+   "opciones": [],
+   "rangos": [
+    10
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "DESCOMPONER HASTA 10",
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 8,
+    "etiquetas": [
+     "cálculo mental",
+     "truco",
+     "descomposición",
+     "hasta 10"
+    ]
+   }
+  },
+  {
+   "id": "trucos.orden",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 12,
+   "familia": "trucos",
+   "clave": "orden",
+   "nombre": "El orden no importa",
+   "descripcion": "Empezar por el número grande: igualdades y sumas giradas (truco de Calculi).",
+   "opciones": [
+    {
+     "id": "forma",
+     "etiqueta": "Ejercicios",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Variados"
+      },
+      {
+       "valor": "igualdad",
+       "etiqueta": "Completar la igualdad"
+      },
+      {
+       "valor": "calcula",
+       "etiqueta": "Calcular empezando por el grande"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    10,
+    20
+   ],
+   "rango": 10,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "EL ORDEN NO IMPORTA",
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 8,
+    "etiquetas": [
+     "cálculo mental",
+     "truco",
+     "sumar",
+     "propiedad conmutativa"
+    ]
+   }
+  },
+  {
+   "id": "trucos.usar5",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 12,
+   "familia": "trucos",
+   "clave": "usar5",
+   "nombre": "Usar el 5",
+   "descripcion": "Sumas de 5 a 9 separando la mano de 5 (truco de Calculi).",
+   "opciones": [
+    {
+     "id": "modo",
+     "etiqueta": "Ejercicios",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Variados"
+      },
+      {
+       "valor": "suma",
+       "etiqueta": "Solo sumas"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    20
+   ],
+   "rango": 20,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "USAR EL 5",
+   "color": "rosa",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "cálculo mental",
+     "truco",
+     "sumar",
+     "el 5"
+    ]
+   }
+  },
+  {
+   "id": "trucos.casidobles",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 12,
+   "familia": "trucos",
+   "clave": "casidobles",
+   "nombre": "Casi dobles",
+   "descripcion": "Sumas de dos números seguidos: el doble y uno más (truco de Calculi).",
+   "opciones": [],
+   "rangos": [
+    20
+   ],
+   "rango": 20,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "CASI DOBLES",
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 8,
+    "etiquetas": [
+     "cálculo mental",
+     "truco",
+     "sumar",
+     "casi dobles"
+    ]
+   }
+  },
+  {
+   "id": "trucos.sumar9",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 12,
+   "familia": "trucos",
+   "clave": "sumar9",
+   "nombre": "Sumar 9",
+   "descripcion": "Sumar 10 y quitar 1 (truco de Calculi).",
+   "opciones": [],
+   "rangos": [
+    20,
+    30,
+    40,
+    50,
+    60,
+    70,
+    80,
+    90,
+    100
+   ],
+   "rango": 30,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "SUMAR 9",
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 3,
+    "minutos": 10,
+    "etiquetas": [
+     "cálculo mental",
+     "truco",
+     "sumar",
+     "sumar 9"
+    ]
+   }
+  },
+  {
+   "id": "trucos.restarsumando",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 12,
+   "familia": "trucos",
+   "clave": "restarsumando",
+   "nombre": "Restar sumando",
+   "descripcion": "Restar contando lo que falta para llegar (truco de Calculi).",
+   "opciones": [],
+   "rangos": [
+    20
+   ],
+   "rango": 20,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "RESTAR SUMANDO",
+   "color": "rosa",
+   "metadatos": {
+    "dificultad": 3,
+    "minutos": 10,
+    "etiquetas": [
+     "cálculo mental",
+     "truco",
+     "restar",
+     "restar sumando"
+    ]
+   }
+  },
+  {
+   "id": "trucos.masmenos10",
+   "curso": 1,
+   "materia": "matematicas",
+   "bloque": 12,
+   "familia": "trucos",
+   "clave": "masmenos10",
+   "nombre": "Sumar y restar 10",
+   "descripcion": "Solo cambia la decena (truco de Calculi).",
+   "opciones": [
+    {
+     "id": "modo",
+     "etiqueta": "Operaciones",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Sumar y restar 10"
+      },
+      {
+       "valor": "suma",
+       "etiqueta": "Solo sumar 10"
+      },
+      {
+       "valor": "resta",
+       "etiqueta": "Solo restar 10"
+      }
+     ]
+    }
+   ],
+   "rangos": [
+    30,
+    40,
+    50,
+    60,
+    70,
+    80,
+    90,
+    100
+   ],
+   "rango": 50,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "SUMAR Y RESTAR 10",
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "cálculo mental",
+     "truco",
+     "sumar",
+     "restar",
+     "decenas"
     ]
    }
   }

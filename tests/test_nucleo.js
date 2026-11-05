@@ -31,7 +31,7 @@ prueba("mezclar y azar", () => {
 });
 
 prueba("catálogo generado desde modelos.py y modelos_app.py", () => {
-  assert.equal(CATALOGO.modelos.length, 98);   // 94 del motor + 4 solo de la app (problemas)
+  assert.equal(CATALOGO.modelos.length, 106);   // 94 del motor + 12 solo de la app (4 de problemas y 8 trucos de Calculi)
   for (const m of CATALOGO.modelos) {
     assert.ok(["amarillo", "rosa", "azul", "verde"].includes(m.color), m.id);
     assert.ok(m.titulo, m.id);
