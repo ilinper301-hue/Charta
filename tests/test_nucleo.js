@@ -101,7 +101,7 @@ prueba("generar: dos actividades, variantes y errores", () => {
   assert.ok(!("id" in f) && !("creada" in f) && !("autor" in f), "determinista: sin id ni fecha");
   assert.throws(() => generar({ actividades: [] }), /1 o 2/);
   assert.throws(() => generar({ actividades: [{ tipo: "conteo.camino" }, { tipo: "sumar.h20" }] }), /página completa/);
-  assert.throws(() => generar({ actividades: [{ tipo: "rep.dado" }] }), /aún no está disponible/);
+  assert.throws(() => generar({ actividades: [{ tipo: "rep.dedos" }] }), /aún no está disponible/);
 });
 
 prueba("lector detecta fichas mal formadas", () => {

@@ -4251,11 +4251,321 @@ function svgCompleto({ w, h, svg }, margen = 2) {
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get REPS() { return REPS; }, get RANGOS() { return RANGOS; }, get VACIAS() { return VACIAS; }, get PLANTILLAS() { return PLANTILLAS; }, get ancho() { return ancho; }, get esc() { return esc; }, get nombreNumero() { return nombreNumero; }, get rep() { return rep; }, get plantilla() { return plantilla; }, get svgCompleto() { return svgCompleto; } }));
 },
+"tipos/_rep.js": (__exp) => {
+// Charta · fábrica de los tipos «rep.*» (una representación del número: leer y dibujar).
+// Port de ficha_rep() + pick() + tercios() del motor. NO es un tipo: cada rep.<nombre>.js la llama una vez.
+// datos:    leer    → { rep, n, accion: "leer" }      solucion { huecos: [n] }   (cuadrito gris arriba a la derecha)
+//           dibujar → { rep, n, accion: "dibujar" }   solucion { huecos: [] }    (el alumno dibuja en la plantilla)
+// Completa: 9 de leer + 3 de dibujar (4 filas × 3), o 12 de leer con «lectura». Media: 3 + 3, o 6 de leer.
+// Las celdas son las de siempre (4 filas); en media solo se dibujan las dos primeras.
+const { registrar } = __req("nucleo/tipos.js");
+const { TOP_REP } = __req("render/papel.js");
+const { RANGOS } = __req("rep/index.js");
+/** Tres tercios consecutivos de lo..hi (como tercios() del motor). */
+function tercios(lo, hi) {
+  const span = []; for (let v = lo; v <= hi; v++) span.push(v);
+  const k = span.length, a = Math.floor(k / 3), b = Math.floor(2 * k / 3);
+  return [span.slice(0, a), span.slice(a, b), span.slice(b)];
+}
+
+/** pick() del motor: nread números para leer (repartidos por tercios) y, si ndraw > 0, uno por tercio para dibujar. */
+function pick(lo, hi, azar, nread = 9, ndraw = 3) {
+  const th = tercios(lo, hi), per = Math.floor(nread / 3);
+  let leer = [];
+  for (const t of th) leer = leer.concat(azar.muestra(t, Math.min(per, t.length)));
+  while (leer.length < nread) leer.push(azar.entero(lo, hi));
+  leer = azar.barajar(leer);
+  const dib = [];
+  for (const t of ndraw <= 3 ? th.slice(0, ndraw) : th) {
+    const cand = t.filter((x) => !leer.includes(x));
+    dib.push(azar.elegir(cand.length ? cand : t));
+  }
+  return [leer, azar.barajar(dib)];
+}
+
+/** Crea y registra el tipo rep.<nombre>. */
+function tipoRep(nombre, version = 1) {
+  const [lo, max] = RANGOS[nombre];
+  return registrar({
+    id: `rep.${nombre}`,
+    version,
+    generar(params, azar, { tamano }) {
+      const R = params.rango ?? 10, lectura = !!params.lectura, completa = tamano !== "media";
+      const hi = Math.min(R, max);
+      if (hi < lo) throw new Error(`Esta representación necesita un rango máximo mayor (máx. ${R}).`);
+      const nread = completa ? (lectura ? 12 : 9) : (lectura ? 6 : 3), ndraw = lectura ? 0 : 3;
+      const [leer, dib] = pick(lo, hi, azar, nread, ndraw);
+      return {
+        enunciado: "Escribe en el cuadrito el número que representa cada casilla." +
+          (lectura ? "" : "\nEn la última fila te toca a ti: haz lo que dice cada casilla."),
+        ejercicios: [
+          ...leer.map((n) => ({ datos: { rep: nombre, n, accion: "leer" }, solucion: { huecos: [n] } })),
+          ...dib.map((n) => ({ datos: { rep: nombre, n, accion: "dibujar" }, solucion: { huecos: [] } })),
+        ],
+      };
+    },
+    dibujar(p, act) {
+      const es = act.ejercicios, { cel, cw, ch } = p.celdas(TOP_REP, 3, 4, 10, 10);
+      es.forEach((e, idx) => p.ejercicio(e.id, () => {
+        const [x, y] = cel[idx], { n } = e.datos, gx = x + cw / 2, gy = y + ch * 0.40;
+        if (e.datos.accion === "leer") {
+          p.marco(x, y, cw, ch, idx);
+          p.cuadrito(x, y, cw, ch, 30, e.solucion.huecos[0]);
+          p.rep(nombre, n, gx, gy, { i: idx });
+        } else {
+          p.marco(x, y, cw, ch);
+          p.text(x + 14, y + ch - 20, "DIBUJA", 8.5, { f: "PM", gris: 0.3 });
+          p.text(x + cw - 16, y + ch - 36, String(n), 28, { f: "PB", anchor: "end" });
+          p.plantilla(nombre, n, gx, gy, { i: idx });
+        }
+      }));
+    },
+  });
+}
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get tercios() { return tercios; }, get pick() { return pick; }, get tipoRep() { return tipoRep; } }));
+},
+"tipos/conteo.serie1.js": (__exp) => {
+// conteo.serie1 · Series de 1 en 1 (port de _c_series(…, [1]) del motor).
+// datos:    { paso: 1, valores: [v…], huecos: [j…], sube }   (valores en el orden en que se ven, de izquierda a derecha;
+//           huecos = posiciones vacías; sube = true si la serie crece hacia la derecha)
+// solucion: { huecos: [valores de los huecos, de izquierda a derecha] }
+// Completa: 8 series; media: 4 (la mitad de filas). Cada serie tiene 6 números (opción «huecos»: 1–4 vacíos).
+const { registrar } = __req("nucleo/tipos.js");
+const { TOP, M, W, INK } = __req("render/papel.js");
+/** _huecos(n, h): h posiciones al azar de n (máx. n − 2). */
+function elegirHuecos(n, h, azar) {
+  return azar.muestra([...Array(n).keys()], Math.max(0, Math.min(h, n - 2))).sort((a, b) => a - b);
+}
+
+const __default = registrar({
+  id: "conteo.serie1",
+  version: 1,
+  generar(params, azar, { tamano }) {
+    const R = params.rango ?? 10, h = params.huecos ?? 3, s = 1;
+    const L = Math.min(6, Math.floor(R / s) + 1);
+    if (L < 3) throw new Error(`Esta serie necesita un rango máximo mayor (paso ${s}, máx. ${R}).`);
+    const filas = tamano === "media" ? 4 : 8, usadas = new Set(), ejercicios = [];
+    for (let i = 0; i < filas; i++) {
+      let cand = []; for (let a = 1; a <= R - (L - 1) * s; a++) cand.push(a);
+      cand = cand.filter((a) => !usadas.has(a)).length ? cand.filter((a) => !usadas.has(a)) : cand;
+      const a = azar.elegir(cand); usadas.add(a);
+      let vals = Array.from({ length: L }, (_, j) => a + j * s);
+      const sube = i % 2 === 0;
+      if (!sube) vals.reverse();
+      const huecos = elegirHuecos(L, Math.min(h, L - 2), azar);
+      ejercicios.push({ datos: { paso: s, valores: vals, huecos, sube }, solucion: { huecos: huecos.map((j) => vals[j]) } });
+    }
+    return { enunciado: "Completa cada serie escribiendo los números que faltan en los cuadros grises.", ejercicios };
+  },
+  dibujar(p, act) {
+    const nrows = 8, GY = 8, rh = (TOP - M - (nrows - 1) * GY) / nrows, bw = 52, bh = 46, g = 8, lw = 124;
+    act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
+      const { paso, valores, huecos, sube } = e.datos, L = valores.length;
+      const y = TOP - (i + 1) * rh - i * GY;
+      p.tarjeta(M, y, W - 2 * M, rh);
+      p.text(M + 16, y + rh / 2 + 2, `de ${paso} en ${paso}`, 12.5, { f: "PB" });
+      p.text(M + 34, y + rh / 2 - 14, sube ? "sube" : "baja", 9.5, { f: "PM", gris: 0.3 });
+      const ty = y + rh / 2 - 10.5;
+      p.path(sube ? [["M", M + 16, ty - 4], ["L", M + 28, ty - 4], ["L", M + 22, ty + 4], ["Z"]]
+                  : [["M", M + 16, ty + 4], ["L", M + 28, ty + 4], ["L", M + 22, ty - 4], ["Z"]], { fill: INK, stroke: null });
+      const bx = M + lw + (W - 2 * M - lw - (L * bw + (L - 1) * g)) / 2;
+      valores.forEach((v, j) => {
+        const k = huecos.indexOf(j);
+        p.caja(bx + j * (bw + g), y + (rh - bh) / 2, bw, bh, k >= 0 ? null : v, 22, k >= 0 ? e.solucion.huecos[k] : null);
+      });
+    }));
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get elegirHuecos() { return elegirHuecos; }, get default() { return __default; } }));
+},
 "tipos/index.js": (__exp) => {
 // Charta · todos los tipos disponibles en la app. Añadir aquí cada módulo nuevo.
 __req("tipos/sumar.h20.js");
+__req("tipos/rep.dado.js");
+__req("tipos/rep.marco.js");
+__req("tipos/conteo.serie1.js");
+__req("tipos/orden.signos.js");
+__req("tipos/sumar.vertical.js");
+__req("tipos/restar.recta.js");
+__req("tipos/medida.reloj.js");
 const __r1 = __req("nucleo/tipos.js");
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get tipo() { return __r1.tipo; }, get hayTipo() { return __r1.hayTipo; }, get listaTipos() { return __r1.listaTipos; } }));
+},
+"tipos/medida.reloj.js": (__exp) => {
+// medida.reloj · Los relojes de agujas (port de _reloj(), _horas() y _m_reloj() del motor).
+// datos:    { h (1–12), m (0 o 30) }
+// solucion: { huecos: [h, "00" | "30"] }
+// Opción modo: null (en punto y y media, mitad y mitad) | "punto" | "media".
+// Completa: 12 relojes (4 filas × 3, horas distintas por grupo); media: 6.
+const { registrar } = __req("nucleo/tipos.js");
+const { TOP, T, B, INK } = __req("render/papel.js");
+/** _reloj(): esfera con marcas, números y (si manos) las agujas. Ángulos como en el motor (12 arriba, sentido horario). */
+function dibujarReloj(p, cx, cy, r, h, m, manos = true) {
+  p.circle(cx, cy, r, { lw: 2.0 });
+  const rad = (g) => g * Math.PI / 180;
+  for (let k = 0; k < 12; k++) {
+    const a = rad(90 - 30 * k);
+    p.line(cx + (r - 4) * Math.cos(a), cy + (r - 4) * Math.sin(a), cx + r * Math.cos(a), cy + r * Math.sin(a), { lw: 1.0 });
+  }
+  for (let k = 1; k <= 12; k++) {
+    const a = rad(90 - 30 * k);
+    p.text(cx + r * 0.74 * Math.cos(a), cy + r * 0.74 * Math.sin(a) - r * 0.09, String(k), r * 0.27, { f: "PB", anchor: "middle" });
+  }
+  if (manos) {
+    let a = rad(90 - (30 * (h % 12) + m * 0.5));
+    p.line(cx, cy, cx + r * 0.42 * Math.cos(a), cy + r * 0.42 * Math.sin(a), { lw: 3.4 });
+    a = rad(90 - 6 * m);
+    p.line(cx, cy, cx + r * 0.64 * Math.cos(a), cy + r * 0.64 * Math.sin(a), { lw: 1.8 });
+  }
+  p.circle(cx, cy, 2.3, { fill: INK, stroke: null });
+}
+
+const horas = (k, azar) => azar.muestra(Array.from({ length: 12 }, (_, i) => i + 1), k);
+
+const __default = registrar({
+  id: "medida.reloj",
+  version: 1,
+  generar(params, azar, { tamano }) {
+    const cnt = tamano === "media" ? 6 : 12, modo = params.modo || "mezcla";
+    let hs;
+    if (modo === "punto") hs = horas(cnt, azar).map((h) => [h, 0]);
+    else if (modo === "media") hs = horas(cnt, azar).map((h) => [h, 30]);
+    else hs = azar.barajar([...horas(cnt / 2, azar).map((h) => [h, 0]), ...horas(cnt / 2, azar).map((h) => [h, 30])]);
+    return {
+      enunciado: "Escribe la hora que marca cada reloj.",
+      ejercicios: hs.map(([h, m]) => ({ datos: { h, m }, solucion: { huecos: [h, m ? "30" : "00"] } })),
+    };
+  },
+  dibujar(p, act) {
+    const { cel, cw, ch } = p.celdas(TOP, 3, 4);
+    act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
+      const [x, y] = cel[i], { h, m } = e.datos, [sh, sm] = e.solucion.huecos;
+      p.marco(x, y, cw, ch, i);
+      dibujarReloj(p, x + cw / 2, y + ch * 0.6, 44, h, m);
+      p.linea(x, y + 8, cw, 46, [B(42, 34, sh), T(":", 22), B(42, 34, sm)], 8);
+    }));
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get dibujarReloj() { return dibujarReloj; }, get default() { return __default; } }));
+},
+"tipos/orden.signos.js": (__exp) => {
+// orden.signos · Los signos < > = (port de _o_signos(), _pares() y _grupo() del motor).
+// datos:    { a, b }
+// solucion: { huecos: ["<" | ">" | "="] }
+// Opciones: modo null (con 3 parejas iguales) | "sin" (sin iguales); cerca (si_no): números de la misma decena (desde rango 20).
+// Completa: 15 parejas (5 filas × 3); media: 6 (con 1 igual: se conserva la proporción 3 de 15).
+const { registrar } = __req("nucleo/tipos.js");
+const { TOP, B } = __req("render/papel.js");
+/** _grupo(k): k números distintos de 1..R (con «cerca», de una misma decena si R ≥ 20). */
+function grupo(k, R, azar, cerca) {
+  let lo = 1, hi = R;
+  if (cerca && R >= 20) {
+    const ds = []; for (let d = 0; d <= Math.floor(R / 10); d++) if (Math.min(R, d * 10 + 9) - Math.max(1, d * 10) + 1 >= k) ds.push(d);
+    const d = azar.elegir(ds); lo = Math.max(1, d * 10); hi = Math.min(R, d * 10 + 9);
+  }
+  const l = []; for (let v = lo; v <= hi; v++) l.push(v);
+  return azar.muestra(l, k);
+}
+
+/** _pares(): cnt parejas sin repetir, `iguales` de ellas con a = b. */
+function pares(cnt, R, azar, cerca, iguales = 0) {
+  const eq = new Set(iguales ? azar.muestra([...Array(cnt).keys()], iguales) : []), out = [], vistos = new Set();
+  for (let i = 0; i < cnt; i++) {
+    let p;
+    for (let k = 0; k < 300; k++) {
+      if (eq.has(i)) { const a = azar.entero(1, R); p = [a, a]; } else p = grupo(2, R, azar, cerca);
+      if (!vistos.has(p.join())) break;
+    }
+    vistos.add(p.join()); out.push(p);
+  }
+  return out;
+}
+
+const __default = registrar({
+  id: "orden.signos",
+  version: 1,
+  generar(params, azar, { tamano }) {
+    const R = params.rango ?? 10, cnt = tamano === "media" ? 6 : 15, iguales = params.modo === "sin" ? 0 : Math.round(cnt / 5);
+    return {
+      enunciado: "Escribe <, > o = en el cuadro gris.",
+      ejercicios: pares(cnt, R, azar, !!params.cerca, iguales).map(([a, b]) => ({
+        datos: { a, b }, solucion: { huecos: [a < b ? "<" : a > b ? ">" : "="] },
+      })),
+    };
+  },
+  dibujar(p, act) {
+    const { cel, cw, ch } = p.celdas(TOP, 3, 5);
+    act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
+      const [x, y] = cel[i], { a, b } = e.datos;
+      p.marco(x, y, cw, ch, i);
+      const g = 8, bx = x + (cw - 132 - 2 * g) / 2, by = y + (ch - 46 - 10) / 2;
+      p.caja(bx, by, 46, 46, a, 22);
+      p.caja(bx + 46 + g, by, 40, 46, null, 22, e.solucion.huecos[0]);
+      p.caja(bx + 86 + 2 * g, by, 46, 46, b, 22);
+    }));
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/rep.dado.js": (__exp) => {
+// rep.dado · El dado: leer y dibujar números con puntos (1–6 un dado, 7–12 dos). Ver _rep.js.
+const { tipoRep } = __req("tipos/_rep.js");
+const __default = tipoRep("dado");
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/rep.marco.js": (__exp) => {
+// rep.marco · El marco de diez: leer y rellenar marcos (hasta 40). Ver _rep.js.
+const { tipoRep } = __req("tipos/_rep.js");
+const __default = tipoRep("marco");
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/restar.recta.js": (__exp) => {
+// restar.recta · Resta en la recta numérica, saltando hacia atrás (port de _r_recta() del motor).
+// datos:    { a, b, N }   (N = 10, 20 o 30: longitud de la recta; 2 ≤ b ≤ min(9, N − 2), b < a ≤ N)
+// solucion: { huecos: [a − b] }
+// Completa: 6 restas (una por fila); media: 3.
+const { registrar } = __req("nucleo/tipos.js");
+const { TOP, M, W, T, B, MENOS, INK } = __req("render/papel.js");
+const __default = registrar({
+  id: "restar.recta",
+  version: 1,
+  generar(params, azar, { tamano }) {
+    const R = params.rango ?? 10, N = R <= 10 ? 10 : R <= 20 ? 20 : 30;
+    const ejercicios = [];
+    for (let i = 0; i < (tamano === "media" ? 3 : 6); i++) {
+      const b = azar.entero(2, Math.min(9, N - 2)), a = azar.entero(b + 1, N);
+      ejercicios.push({ datos: { a, b, N }, solucion: { huecos: [a - b] } });
+    }
+    return { enunciado: "Salta hacia atrás en la recta y escribe el resultado.", ejercicios };
+  },
+  dibujar(p, act) {
+    const rows = 6, GY = 10, rh = (TOP - M - (rows - 1) * GY) / rows, L = W - 2 * M - 60;
+    act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
+      const { a, b, N } = e.datos, step = L / N, y = TOP - (i + 1) * rh - i * GY;
+      p.marco(M, y, W - 2 * M, rh);
+      p.linea(M, y + rh - 44, W - 2 * M, 36, [T(`${a} ${MENOS} ${b} =`, 19), B(54, 34, e.solucion.huecos[0])], 10);
+      const x0 = M + 30, y0 = y + 28;
+      p.line(x0 - 8, y0, x0 + L + 8, y0, { lw: 1.4 });
+      for (let k = 0; k <= N; k++) {
+        p.line(x0 + k * step, y0 - 4, x0 + k * step, y0 + 4, { lw: 1.2 });
+        p.text(x0 + k * step, y0 - 14, String(k), 7.5, { f: "PM", anchor: "middle" });
+      }
+      const xa = x0 + a * step, xb = x0 + (a - b) * step;
+      p.path([["M", xa, y0 + 3], ["C", xa, y0 + 30, xb, y0 + 30, xb, y0 + 7]], { lw: 1.8 });
+      p.path([["M", xb, y0 + 2], ["L", xb - 4, y0 + 9], ["L", xb + 4, y0 + 9], ["Z"]], { fill: INK, stroke: null });
+      p.circle(xa, y0, 3, { fill: INK, stroke: null });
+      p.text((xa + xb) / 2, y0 + 26, `${MENOS}${b}`, 9, { f: "PM", anchor: "middle" });
+    }));
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
 },
 "tipos/sumar.h20.js": (__exp) => {
 // sumar.h20 · Sumas hasta 20 (port de _pares_suma(20, nivel) del motor).
@@ -4299,6 +4609,55 @@ const __default = registrar({
 });
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get pares() { return pares; }, get default() { return __default; } }));
+},
+"tipos/sumar.vertical.js": (__exp) => {
+// sumar.vertical · Sumas en vertical, columnas D y U (port de _s_vertical() del motor).
+// datos:    { a, b }                (a ≥ 11, b ≥ 1, a + b ≤ min(rango, 99))
+// solucion: { huecos: [decenas, unidades] del resultado }   (hueco de D, después el de U)
+// Opción nivel: null/"sin" (sin llevadas), "con" (con llevada en las unidades), "mezcla" (alternadas).
+// Completa: 12 sumas (4 filas × 3); media: 6.
+const { registrar } = __req("nucleo/tipos.js");
+const { TOP } = __req("render/papel.js");
+const __default = registrar({
+  id: "sumar.vertical",
+  version: 1,
+  generar(params, azar, { tamano }) {
+    const cap = Math.min(params.rango ?? 30, 99), nivel = params.nivel || "sin", cnt = tamano === "media" ? 6 : 12;
+    const cand = { true: [], false: [] };       // por «lleva»
+    for (let a = 11; a <= cap - 1; a++) for (let b = 1; b <= cap - a; b++) cand[(a % 10) + (b % 10) >= 10].push([a, b]);
+    const ps = [], vistos = new Set();
+    while (ps.length < cnt) {
+      const con = nivel === "con" || (nivel === "mezcla" && ps.length % 2 === 1);
+      const lib = cand[con].filter((p) => !vistos.has(p.join()));
+      if (!lib.length) throw new Error("Esta ficha necesita un rango máximo mayor.");
+      const p = azar.elegir(lib); vistos.add(p.join()); ps.push(p);
+    }
+    return {
+      enunciado: "Suma primero las unidades y después las decenas.",
+      ejercicios: azar.barajar(ps).map(([a, b]) => ({ datos: { a, b }, solucion: { huecos: [Math.floor((a + b) / 10), (a + b) % 10] } })),
+    };
+  },
+  dibujar(p, act) {
+    const { cel, cw, ch } = p.celdas(TOP, 3, 4);
+    act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
+      const [x, y] = cel[i], { a, b } = e.datos, xt = x + cw / 2 - 17, xu = x + cw / 2 + 17;
+      p.marco(x, y, cw, ch, i);
+      p.text(xt, y + ch - 20, "D", 9, { f: "PM", anchor: "middle", gris: 0.3 });
+      p.text(xu, y + ch - 20, "U", 9, { f: "PM", anchor: "middle", gris: 0.3 });
+      [a, b].forEach((v, j) => {
+        const yy = y + ch - 56 - j * 34;
+        if (v >= 10) p.text(xt, yy, String(Math.floor(v / 10)), 24, { anchor: "middle" });
+        p.text(xu, yy, String(v % 10), 24, { anchor: "middle" });
+      });
+      p.text(xt - 38, y + ch - 90, "+", 24, { anchor: "middle" });
+      p.line(xt - 28, y + ch - 98, xu + 24, y + ch - 98, { lw: 1.6 });
+      p.caja(xt - 15, y + 14, 30, 40, null, 22, e.solucion.huecos[0]);
+      p.caja(xu - 15, y + 14, 30, 40, null, 22, e.solucion.huecos[1]);
+    }));
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
 }
 };
 const __cache = {};
