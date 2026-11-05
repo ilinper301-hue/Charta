@@ -1,4 +1,4 @@
-// Charta · app. 4.1: selector y opciones · 4.2: compositor · 4.3: alumnos y variantes · 4.4: favoritas y recientes · 4.5: PWA y tableta.
+// Charta · app. 4.1: selector y opciones · 4.2: compositor · 4.3: alumnos y variantes · 4.4: favoritas y recientes · 4.5: PWA y tableta · 5.1: nube · 5.2: Tabula.
 import { CATALOGO } from "./nucleo/catalogo.js";
 import { generar, porDefecto, modelo } from "./nucleo/ficha.js";
 import { erroresFicha, letraVariante, paginasVariante } from "./nucleo/lector.js";
@@ -12,6 +12,7 @@ import { leerAlumnos, numVariantes, MAX_ALUMNOS } from "./ui/alumnos.js";
 import { registrarSW } from "./pwa/registro.js";
 import { iniciarTema } from "./ui/tema.js";
 import { crearNube } from "./nube/nube.js";
+import { leerEntrada, leerTabula, gruposDeTabula, urlVolver } from "./ui/tabula.js";
 
 globalThis.Charta = { generar, modelo, erroresFicha, listaTipos, hojas, CATALOGO };
 
@@ -273,11 +274,35 @@ function iniciar() {
     const t = document.title; document.title = ficha.titulo;
     document.fonts.ready.then(() => { window.print(); document.title = t; });
   };
+  // Paso 5.2 · Tabula: grupos leídos de su almacén (mismo origen, solo lectura) y vuelta con la ficha por URL.
+  const entrada = leerEntrada(location.search, hayTipo);
+  let grupos = [];
+  $("grupoTabula").onchange = () => {
+    const g = grupos.find((x) => x.id === $("grupoTabula").value);
+    if (g) { $("alumnos").value = g.alumnos.join("\n"); pintar(); }
+  };
+  leerTabula().then((t) => {
+    grupos = t ? gruposDeTabula(t.groups, t.students) : [];
+    $("filaTabula").hidden = !grupos.length;
+    $("aTabula").hidden = !grupos.length && !entrada.desdeTabula;
+    for (const g of grupos) $("grupoTabula").add(new Option(`${g.nombre} (${g.alumnos.length})`, g.id));
+    if (entrada.grupo && grupos.some((g) => g.id === entrada.grupo)) { $("grupoTabula").value = entrada.grupo; $("grupoTabula").onchange(); }
+  }).catch(() => { $("aTabula").hidden = !entrada.desdeTabula; });
+  $("aTabula").onclick = async () => {
+    if (!ficha) return;
+    avisoNube("");
+    let id = null;
+    // Con sesión, se guarda en la nube y Tabula la referencia por id (también la verá Fori); sin sesión, va la composición.
+    if (nube.estado().estado === "dentro") try { if (!enNube) await leerNube(); id = (await nube.guardar(ficha, composicion())).id; } catch (e) { avisoNube(e.message, true); return; }
+    location.href = urlVolver({ id, titulo: ficha.titulo, tipos: editores.map((e) => e.id), comp: composicion(),
+      grupo: $("grupoTabula").value || entrada.grupo, sesion: entrada.sesion, tarea: entrada.tarea });
+  };
   pintarGuardadas();
   const ultimo = leerUltimo();
-  nuevoEditor(ultimo || listaTipos()[0]); pintar();
+  nuevoEditor(entrada.comp?.actividades[0].tipo || ultimo || listaTipos()[0]); pintar();
+  if (entrada.comp) abrirGuardada(entrada.comp);
   // Primera vez: se empieza eligiendo la actividad (curso → materia → contenido → modelo).
-  if (!ultimo) abrirSelector({ tamano: "completa", alElegir: (n) => { editores[0].poner(n); guardarUltimo(n); pintar(); } });
+  else if (!ultimo) abrirSelector({ tamano: "completa", alElegir: (n) => { editores[0].poner(n); guardarUltimo(n); pintar(); } });
 }
 
 if (typeof document !== "undefined") {

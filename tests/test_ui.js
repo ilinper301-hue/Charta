@@ -61,3 +61,48 @@ assert.equal(g.alternarFavorito(c1, "Sumas"), true); assert.ok(g.esFavorito(c1))
 assert.equal(g.alternarFavorito(c1, "Sumas"), false); assert.equal(g.favoritos().length, 0);
 al.setItem("charta:favoritos", "{roto"); assert.deepEqual(g.favoritos(), []);
 console.log("test_ui: recientes y favoritos OK");
+
+// Paso 5.2 · enlace con Tabula (mismo contrato que tabula/js/charta.js)
+import { b64url, deB64url, leerEntrada, urlVolver, gruposDeTabula, leerTabula, composicionValida } from "../src/ui/tabula.js";
+{
+  const t = "Señora Muñoz: «sumas» ¿qué? 😀";
+  assert.equal(deB64url(b64url(t)), t);
+  assert.ok(!/[+/=]/.test(b64url(t + "??>>")));
+  const comp = { actividades: [{ tipo: "sumar.h20", params: { rango: 20 } }], semilla: 7, titulo: "Sumas", variaciones: "iguales", bn: false };
+  const e = leerEntrada(`?desde=tabula&grupo=g1&sesion=s1&comp=${b64url(JSON.stringify(comp))}`);
+  assert.deepEqual([e.desdeTabula, e.grupo, e.sesion, e.tarea], [true, "g1", "s1", null]);
+  assert.deepEqual(e.comp, comp);
+  assert.equal(leerEntrada("?comp=%%%").comp, null);
+  assert.equal(leerEntrada(`?comp=${b64url('{"actividades":[]}')}`).comp, null);
+  assert.equal(composicionValida(comp, (id) => id !== "sumar.h20"), null, "tipo desconocido");
+  const u = urlVolver({ id: "f1", titulo: "Sumas", tipos: ["sumar.h20"], comp, grupo: "g1", sesion: null });
+  assert.ok(u.startsWith("/tabula/?charta="));
+  const p = JSON.parse(deB64url(new URLSearchParams(u.split("?")[1]).get("charta")));
+  assert.deepEqual(p, { v: 1, id: "f1", titulo: "Sumas", tipos: ["sumar.h20"], comp, grupo: "g1" });
+  assert.ok(!("id" in JSON.parse(deB64url(urlVolver({ titulo: "x", comp }).split("=")[1]))));
+  // Grupos: sin archivados, alumnado en su orden, «Nombre Apellidos»
+  const gs = gruposDeTabula(
+    [{ id: "b", nombre: "2º A", curso: 2 }, { id: "a", nombre: "1º A", curso: 1 }, { id: "z", nombre: "Viejo", archivado: true }],
+    [{ id: 1, groupId: "a", nombre: "Luis", apellidos: "Pérez", orden: 2 }, { id: 2, groupId: "a", nombre: "Ana", apellidos: "Ruiz López", orden: 1 },
+     { id: 3, groupId: "z", nombre: "X" }, { id: 4, groupId: "b", nombre: "Eva", apellidos: "" }]);
+  assert.deepEqual(gs, [{ id: "a", nombre: "1º A", alumnos: ["Ana Ruiz López", "Luis Pérez"] }, { id: "b", nombre: "2º A", alumnos: ["Eva"] }]);
+  assert.deepEqual(leerAlumnos(gs[0].alumnos.join("\n")), ["Ana Ruiz López", "Luis Pérez"], "los nombres pasan tal cual al cuadro de alumnos");
+  // Lectura del almacén: IndexedDB (sin crear la base si no existe) y, si no, localStorage
+  const ls = (o) => ({ getItem: (k) => o[k] ?? null });
+  const r1 = await leerTabula(null, ls({ "tabula:v1:groups": '[{"id":"a"}]', "tabula:v1:students": "[]" }));
+  assert.deepEqual(r1, { groups: [{ id: "a" }], students: [] });
+  assert.equal(await leerTabula(null, ls({})), null);
+  const falsa = (cols) => ({ open() {
+    const req = {}; let abortada = false;
+    setTimeout(() => {
+      if (!cols) { req.transaction = { abort() { abortada = true; } }; req.onupgradeneeded(); if (abortada) return req.onerror(); }
+      req.result = { close() {}, objectStoreNames: { contains: (n) => n === "cols" },
+        transaction: () => ({ objectStore: () => ({ get(k) { const g = {}; setTimeout(() => { g.result = cols[k]; g.onsuccess(); }); return g; } }) }) };
+      req.onsuccess();
+    });
+    return req; } });
+  const r2 = await leerTabula(falsa({ groups: [{ id: "g" }], students: [{ id: 1, groupId: "g" }] }), ls({}));
+  assert.deepEqual(r2, { groups: [{ id: "g" }], students: [{ id: 1, groupId: "g" }] });
+  assert.equal(await leerTabula(falsa(null), ls({})), null, "sin base de Tabula: no se crea");
+  console.log("test_ui: enlace con Tabula OK");
+}

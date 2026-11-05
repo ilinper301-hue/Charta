@@ -69,3 +69,8 @@ descomposición, letras, recta, bloques, cuadrícula, monedas, ábaco, D/U, atad
 ```
 - Leer (Tabula, Fori): `fichaDeDocumento(datos, id)` de `src/nucleo/lector.js` → ficha comprobada con `erroresFicha()`.
 - Reglas: bloque «Charta» de `firestore.rules` (copia de `tabula/firestore.rules`): solo el autor (Google) lee, cambia y borra; campos y tamaños fijos (ficha ≤ 900.000 caracteres; 30 variantes ≈ 110 KB).
+
+## Enlace con Tabula por URL (paso 5.2)
+- Tabula → Charta: `../Charta/?desde=tabula[&grupo=G][&sesion=S][&tarea=T]` (crear) · `?ficha=ID` o `?comp=B64[&grupo=G]` (abrir). Charta lee la lista del grupo en el almacén de Tabula: los nombres nunca van en la URL.
+- Charta → Tabula: `/tabula/?charta=B64` con `{ "v": 1, "id"?, "titulo", "tipos", "comp", "grupo"?, "sesion"?, "tarea"? }` (B64 = base64url de JSON UTF-8, sin «=»).
+- En Tabula, documento `{ tipo: "charta", charta: { id?, tipos, comp }, groupId, … }`; sesiones y tareas lo enlazan en `documentoIds`.

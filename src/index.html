@@ -25,6 +25,7 @@
   </section>
   <section class="tarjeta">
     <h2>Alumnos e impresión</h2>
+    <label id="filaTabula" hidden>Grupo de Tabula <select id="grupoTabula"><option value="">— Escribir o pegar la lista —</option></select></label>
     <label>Alumnos (escríbelos o pégalos: uno por línea, con comas o desde una hoja de cálculo)
       <textarea id="alumnos" rows="4" placeholder="Ana&#10;Luis"></textarea></label>
     <p id="cuenta" class="info">Sin alumnos: la ficha sale con la línea del nombre en blanco.</p>
@@ -41,6 +42,7 @@
       <button id="variante">Otra variante</button>
       <button id="favorito">☆ Favorita</button>
       <button id="guardarNube">☁ Guardar en la nube</button>
+      <button id="aTabula" hidden title="Añadirla a Documentos de Tabula (sin nombres de alumnos)">↗ Enviar a Tabula</button>
       <button id="versol">Ver soluciones</button>
     </div>
     <p id="estadoNube" class="info" hidden></p>
