@@ -4,7 +4,7 @@
 // Opciones: modo null (mezclado) | "mayor" | "menor"; cerca (si_no): números de la misma decena (desde rango 20).
 // Completa: 15 parejas (5 filas × 3); media: 6. En «mezclado», mitad «mayor» y mitad «menor» (8+7 de 15; 3+3 de 6), en orden barajado.
 import { registrar } from "../nucleo/tipos.js";
-import { TOP } from "../render/papel.js";
+import { TOP, COLOR_SOLUCION } from "../render/papel.js";
 import { pares } from "./orden.signos.js";
 
 const TXT = {
@@ -15,7 +15,7 @@ const TXT = {
 
 export default registrar({
   id: "orden.mayor",
-  version: 1,
+  version: 2,
   generar(params, azar, { tamano }) {
     const R = params.rango ?? 10, cnt = tamano === "media" ? 6 : 15, modo = params.modo || "mezcla";
     const ps = pares(cnt, R, azar, !!params.cerca);
@@ -38,6 +38,8 @@ export default registrar({
       p.marco(x, y, cw, ch, i, "RODEA EL " + pide.toUpperCase());
       const bx = x + (cw - 2 * bw - g) / 2;
       [a, b].forEach((v, j) => p.caja(bx + j * (bw + g), y + (ch - 26 - bh) / 2, bw, bh, v, 26));
+      // Solución: el número rodeado en rojo.
+      if (p.solucion) [a, b].forEach((v, j) => { if (v === e.solucion.rodea) p.rrect(bx + j * (bw + g) - 5, y + (ch - 26 - bh) / 2 - 5, bw + 10, bh + 10, 12, { lw: 2.4, stroke: COLOR_SOLUCION }); });
     }));
   },
 });

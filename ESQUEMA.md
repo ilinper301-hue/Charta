@@ -72,5 +72,6 @@ descomposición, letras, recta, bloques, cuadrícula, monedas, ábaco, D/U, atad
 
 ## Enlace con Tabula por URL (paso 5.2)
 - Tabula → Charta: `../Charta/?desde=tabula[&grupo=G][&sesion=S][&tarea=T]` (crear) · `?ficha=ID` o `?comp=B64[&grupo=G]` (abrir). Charta lee la lista del grupo en el almacén de Tabula: los nombres nunca van en la URL.
+- Fori (paso 5.3): Charta → `/fori/?charta=1` con `localStorage["charta:aFori"]` = `{ "v": 1, "app": "charta", "titulo", "diapositivas": [{ "etq", "svg", "n" }] }` (SVG 1600×900 con la solución; paso K = `class="cs pK"`; `/*PASOS*/` en su `<style>` ← `cssPasos(k, n)`). Fori → Charta: `../Charta/?ficha=ID|comp=B64&a=fori`. `pasos` de cada ejercicio sigue siendo opcional: Fori corrige con las marcas de la solución.
 - Charta → Tabula: `/tabula/?charta=B64` con `{ "v": 1, "id"?, "titulo", "tipos", "comp", "grupo"?, "sesion"?, "tarea"? }` (B64 = base64url de JSON UTF-8, sin «=»).
 - En Tabula, documento `{ tipo: "charta", charta: { id?, tipos, comp }, groupId, … }`; sesiones y tareas lo enlazan en `documentoIds`.

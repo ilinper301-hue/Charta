@@ -49,6 +49,8 @@ tests/test_nube.js    con un Firebase falso que aplica las reglas
 src/ui/tabula.js      paso 5.2: leerTabula() (IndexedDB «tabula-data», solo lectura), gruposDeTabula(), leerEntrada(?desde, grupo, sesion, tarea, comp), urlVolver() → /tabula/?charta=…; contrato igual que tabula/js/charta.js
 firestore.rules       reglas COMPLETAS del proyecto (copia de tabula/firestore.rules: mantener iguales)
 sw.js, manifest.webmanifest   GENERADOS por build.py en la raíz (scope /Charta/); no editar
+src/fori/diapositivas.js  paso 5.3: marcarPasos(svg, ej), diapositivas(ficha, {cajas, fuentes}), paqueteFori(), cssPasos(k, n); URL_FORI, CLAVE_FORI (contrato con fori/src/js/05f-charta.js)
+tests/test_fori.js    pasos de la solución y diapositivas de todos los tipos · `--full`
 tools/iconos.py       iconos/ desde src/pwa/logo.svg con rsvg-convert (normal, maskable al 80 %, favicon, apple-touch)
 dist/index.html       la app construida (se sube al repositorio: la sirve Pages)
 salida/               PDF generados por la línea de órdenes (se crea sola)

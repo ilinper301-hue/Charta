@@ -1,4 +1,4 @@
-// Charta · app. 4.1: selector y opciones · 4.2: compositor · 4.3: alumnos y variantes · 4.4: favoritas y recientes · 4.5: PWA y tableta · 5.1: nube · 5.2: Tabula.
+// Charta · app. 4.1: selector y opciones · 4.2: compositor · 4.3: alumnos y variantes · 4.4: favoritas y recientes · 4.5: PWA y tableta · 5.1: nube · 5.2: Tabula · 5.3: Fori.
 import { CATALOGO } from "./nucleo/catalogo.js";
 import { generar, porDefecto, modelo } from "./nucleo/ficha.js";
 import { erroresFicha, letraVariante, paginasVariante } from "./nucleo/lector.js";
@@ -13,11 +13,25 @@ import { registrarSW } from "./pwa/registro.js";
 import { iniciarTema } from "./ui/tema.js";
 import { crearNube } from "./nube/nube.js";
 import { leerEntrada, leerTabula, gruposDeTabula, urlVolver } from "./ui/tabula.js";
+import { paqueteFori, URL_FORI, CLAVE_FORI } from "./fori/diapositivas.js";
 
 globalThis.Charta = { generar, modelo, erroresFicha, listaTipos, hojas, CATALOGO };
 
 const $ = (id) => document.getElementById(id);
 function el(tag, props = {}, ...hijos) { const e = Object.assign(document.createElement(tag), props); e.append(...hijos); return e; }
+
+// Paso 5.3 · Fori: caja de cada ejercicio (getBBox en un SVG oculto) y fuentes incrustadas para las diapositivas.
+function cajasEjercicios(zona) {
+  const s = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  s.setAttribute("style", "position:absolute;left:-10000px;top:0;width:10px;height:10px;visibility:hidden");
+  s.innerHTML = zona.svg; document.body.append(s);
+  const out = {};
+  for (const g of s.querySelectorAll("g.ej")) { const b = g.getBBox(); out[g.getAttribute("data-ej")] = { x: b.x, y: b.y, w: b.width, h: b.height }; }
+  s.remove();
+  return out;
+}
+const cssFuentes = () => [...document.styleSheets].flatMap((h) => { try { return [...h.cssRules]; } catch { return []; } })
+  .filter((r) => r instanceof CSSFontFaceRule && /data:font/.test(r.cssText)).map((r) => r.cssText).join("");
 
 /** Editor de una actividad: modelo elegido (con el selector) + sus opciones (desde MODELOS). */
 function editorActividad(id, { tamano, alCambiar }) {
@@ -255,10 +269,11 @@ function iniciar() {
   $("pNube").onclick = () => { pestana = "nube"; pintarGuardadas(); if (!enNube) leerNube(); };
   // ?ficha={id}: abrir una ficha de la nube (enlace desde Tabula)
   const idUrl = new URLSearchParams(location.search).get("ficha");
+  const aFori = new URLSearchParams(location.search).get("a") === "fori";   // la pide Fori: abrirla y devolvérsela
   if (nube.recordada() || idUrl) nube.iniciar().then(async () => {
     if (!idUrl) return;
     if (nube.estado().estado !== "dentro") { avisoNube("Inicia sesión (☁ Entrar) para abrir la ficha enlazada."); return; }
-    try { const x = await nube.abrir(idUrl); if (x.composicion) abrirGuardada(x.composicion); } catch (e) { avisoNube(e.message, true); }
+    try { const x = await nube.abrir(idUrl); if (x.composicion) { abrirGuardada(x.composicion); if (aFori) proyectar(); } } catch (e) { avisoNube(e.message, true); }
   }).catch(() => {});
   $("pFav").onclick = () => { pestana = "favoritos"; pintarGuardadas(); };
   $("pRec").onclick = () => { pestana = "recientes"; pintarGuardadas(); };
@@ -297,10 +312,22 @@ function iniciar() {
     location.href = urlVolver({ id, titulo: ficha.titulo, tipos: editores.map((e) => e.id), comp: composicion(),
       grupo: $("grupoTabula").value || entrada.grupo, sesion: entrada.sesion, tarea: entrada.tarea });
   };
+  // Paso 5.3 · Fori: diapositivas (variante A) por localStorage del mismo origen; Fori las convierte en páginas.
+  async function proyectar() {
+    if (!ficha) return;
+    avisoNube("");
+    try {
+      await document.fonts.ready;
+      const p = paqueteFori(ficha, { cajas: cajasEjercicios, fuentes: cssFuentes() });
+      localStorage.setItem(CLAVE_FORI, JSON.stringify(p));
+      location.href = URL_FORI + "?charta=1";
+    } catch (e) { avisoNube("No se ha podido preparar la ficha para Fori: " + e.message, true); }
+  }
+  $("aFori").onclick = proyectar;
   pintarGuardadas();
   const ultimo = leerUltimo();
   nuevoEditor(entrada.comp?.actividades[0].tipo || ultimo || listaTipos()[0]); pintar();
-  if (entrada.comp) abrirGuardada(entrada.comp);
+  if (entrada.comp) { abrirGuardada(entrada.comp); if (aFori) proyectar(); }
   // Primera vez: se empieza eligiendo la actividad (curso → materia → contenido → modelo).
   else if (!ultimo) abrirSelector({ tamano: "completa", alElegir: (n) => { editores[0].poner(n); guardarUltimo(n); pintar(); } });
 }

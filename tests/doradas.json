@@ -8024,7 +8024,7 @@
       {
        "n": 1,
        "tipo": "orden.cantidad",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "modo": null,
         "rango": 10
@@ -8833,7 +8833,7 @@
    "1a5c27bd8b151cd3"
   ],
   "svgSolucion": [
-   "45928da698ff0a0c"
+   "c6cba3ec47467453"
   ]
  },
  "orden.entre": {
@@ -9354,7 +9354,7 @@
       {
        "n": 1,
        "tipo": "orden.mayor",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "modo": null,
         "cerca": false,
@@ -9556,7 +9556,7 @@
    "dca23e78b5535694"
   ],
   "svgSolucion": [
-   "fe032ebad9038a69"
+   "39c12fc942a3ba71"
   ]
  },
  "orden.ordena1": {
@@ -22136,7 +22136,7 @@
       {
        "n": 1,
        "tipo": "valor.pares",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "modo": null,
         "rango": 10
@@ -22277,7 +22277,7 @@
    "5aebd4da2501b2d5"
   ],
   "svgSolucion": [
-   "d2a62ab8f82f8801"
+   "82cc14e8f6f10a00"
   ]
  },
  "dos actividades": {

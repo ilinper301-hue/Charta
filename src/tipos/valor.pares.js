@@ -4,14 +4,14 @@
 // Modo "clasifica" (solo completa): UN ejercicio  datos { numeros: [..], pares: k, impares: k' }  (k, k' = min(6, nº de pares/impares ≤ R))
 //   solucion { huecos: [pares ordenados…, impares ordenados…] }   (primero los cuadros de la columna PARES, de arriba abajo; luego los de IMPARES)
 import { registrar } from "../nucleo/tipos.js";
-import { TOP, M, W, INK } from "../render/papel.js";
+import { TOP, M, W, INK, COLOR_SOLUCION } from "../render/papel.js";
 import { muestra } from "./valor.canje.js";
 
 const orden = (l) => l.slice().sort((a, b) => a - b);
 
 export default registrar({
   id: "valor.pares",
-  version: 1,
+  version: 2,
   generar(params, azar, { tamano }) {
     const R = params.rango ?? 10;
     if (params.modo === "clasifica") {
@@ -45,6 +45,7 @@ export default registrar({
         const bx = x + cw / 2 + (j - 1) * 70 + 3;
         p.rrect(bx, y + 14, 64, 30, 8);
         p.text(bx + 32, y + 25, lab, 11, { f: "PB", anchor: "middle" });
+        if (p.solucion && e.solucion.rodea === lab.toLowerCase()) p.rrect(bx - 4, y + 10, 72, 38, 11, { lw: 2.4, stroke: COLOR_SOLUCION });   // solución: rodeada en rojo
       });
     }));
   },

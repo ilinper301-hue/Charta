@@ -6,7 +6,7 @@
 // Opciones: modo null (mezclado) | "mayor" (siempre «más») | "menor" (siempre «menos»).
 // Completa: 8 casillas (4 filas × 2); media: 4. Iguales: 2 de 8 (1 de 4).
 import { registrar } from "../nucleo/tipos.js";
-import { TOP, M, W, INK } from "../render/papel.js";
+import { TOP, M, W, INK, COLOR_SOLUCION } from "../render/papel.js";
 
 const GX = 10, GY = 10, COLS = 2, ROWS = 4;
 const CW = (W - 2 * M - (COLS - 1) * GX) / COLS, CH = (TOP - M - (ROWS - 1) * GY) / ROWS;
@@ -42,7 +42,7 @@ function dispersar(n, azar) {
 
 export default registrar({
   id: "orden.cantidad",
-  version: 1,
+  version: 2,
   generar(params, azar, { tamano }) {
     const R = params.rango ?? 10, mx = Math.min(R, 12), modo = params.modo || "mezcla";
     const cnt = tamano === "media" ? 4 : 8, nIg = tamano === "media" ? 1 : 2;
@@ -71,6 +71,8 @@ export default registrar({
         const { cols, rows, sp } = rejilla(v, aw, ah), r = Math.min(11, sp * 0.3), jit = sp * 0.1;
         for (const [ri, ci, jx, jy] of pos[j])
           forma(p, kind, ax + aw / 2 + (ci - (cols - 1) / 2) * sp + jx * jit, ay + ah / 2 + ((rows - 1) / 2 - ri) * sp + jy * jit, r);
+        // Solución: el grupo rodeado en rojo (los dos si hay la misma cantidad).
+        if (p.solucion && (e.solucion.rodea === "ambos" || e.solucion.rodea === "ab"[j])) p.rrect(ax - 5, ay - 4, aw + 10, ah + 8, 14, { lw: 2.4, stroke: COLOR_SOLUCION });
       });
     }));
   },

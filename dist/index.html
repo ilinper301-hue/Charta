@@ -196,6 +196,7 @@ body.con-selector { overflow: hidden; }
       <button id="favorito">☆ Favorita</button>
       <button id="guardarNube">☁ Guardar en la nube</button>
       <button id="aTabula" hidden title="Añadirla a Documentos de Tabula (sin nombres de alumnos)">↗ Enviar a Tabula</button>
+      <button id="aFori" title="Proyectar en la pizarra Fori: un ejercicio por página y la solución paso a paso">▶ Proyectar en Fori</button>
       <button id="versol">Ver soluciones</button>
     </div>
     <p id="estadoNube" class="info" hidden></p>
@@ -220,7 +221,7 @@ body.con-selector { overflow: hidden; }
 "use strict";
 const __mods = {
 "app.js": (__exp) => {
-// Charta · app. 4.1: selector y opciones · 4.2: compositor · 4.3: alumnos y variantes · 4.4: favoritas y recientes · 4.5: PWA y tableta · 5.1: nube · 5.2: Tabula.
+// Charta · app. 4.1: selector y opciones · 4.2: compositor · 4.3: alumnos y variantes · 4.4: favoritas y recientes · 4.5: PWA y tableta · 5.1: nube · 5.2: Tabula · 5.3: Fori.
 const { CATALOGO } = __req("nucleo/catalogo.js");
 const { generar, porDefecto, modelo } = __req("nucleo/ficha.js");
 const { erroresFicha, letraVariante, paginasVariante } = __req("nucleo/lector.js");
@@ -235,10 +236,24 @@ const { registrarSW } = __req("pwa/registro.js");
 const { iniciarTema } = __req("ui/tema.js");
 const { crearNube } = __req("nube/nube.js");
 const { leerEntrada, leerTabula, gruposDeTabula, urlVolver } = __req("ui/tabula.js");
+const { paqueteFori, URL_FORI, CLAVE_FORI } = __req("fori/diapositivas.js");
 globalThis.Charta = { generar, modelo, erroresFicha, listaTipos, hojas, CATALOGO };
 
 const $ = (id) => document.getElementById(id);
 function el(tag, props = {}, ...hijos) { const e = Object.assign(document.createElement(tag), props); e.append(...hijos); return e; }
+
+// Paso 5.3 · Fori: caja de cada ejercicio (getBBox en un SVG oculto) y fuentes incrustadas para las diapositivas.
+function cajasEjercicios(zona) {
+  const s = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  s.setAttribute("style", "position:absolute;left:-10000px;top:0;width:10px;height:10px;visibility:hidden");
+  s.innerHTML = zona.svg; document.body.append(s);
+  const out = {};
+  for (const g of s.querySelectorAll("g.ej")) { const b = g.getBBox(); out[g.getAttribute("data-ej")] = { x: b.x, y: b.y, w: b.width, h: b.height }; }
+  s.remove();
+  return out;
+}
+const cssFuentes = () => [...document.styleSheets].flatMap((h) => { try { return [...h.cssRules]; } catch { return []; } })
+  .filter((r) => r instanceof CSSFontFaceRule && /data:font/.test(r.cssText)).map((r) => r.cssText).join("");
 
 /** Editor de una actividad: modelo elegido (con el selector) + sus opciones (desde MODELOS). */
 function editorActividad(id, { tamano, alCambiar }) {
@@ -476,10 +491,11 @@ function iniciar() {
   $("pNube").onclick = () => { pestana = "nube"; pintarGuardadas(); if (!enNube) leerNube(); };
   // ?ficha={id}: abrir una ficha de la nube (enlace desde Tabula)
   const idUrl = new URLSearchParams(location.search).get("ficha");
+  const aFori = new URLSearchParams(location.search).get("a") === "fori";   // la pide Fori: abrirla y devolvérsela
   if (nube.recordada() || idUrl) nube.iniciar().then(async () => {
     if (!idUrl) return;
     if (nube.estado().estado !== "dentro") { avisoNube("Inicia sesión (☁ Entrar) para abrir la ficha enlazada."); return; }
-    try { const x = await nube.abrir(idUrl); if (x.composicion) abrirGuardada(x.composicion); } catch (e) { avisoNube(e.message, true); }
+    try { const x = await nube.abrir(idUrl); if (x.composicion) { abrirGuardada(x.composicion); if (aFori) proyectar(); } } catch (e) { avisoNube(e.message, true); }
   }).catch(() => {});
   $("pFav").onclick = () => { pestana = "favoritos"; pintarGuardadas(); };
   $("pRec").onclick = () => { pestana = "recientes"; pintarGuardadas(); };
@@ -518,10 +534,22 @@ function iniciar() {
     location.href = urlVolver({ id, titulo: ficha.titulo, tipos: editores.map((e) => e.id), comp: composicion(),
       grupo: $("grupoTabula").value || entrada.grupo, sesion: entrada.sesion, tarea: entrada.tarea });
   };
+  // Paso 5.3 · Fori: diapositivas (variante A) por localStorage del mismo origen; Fori las convierte en páginas.
+  async function proyectar() {
+    if (!ficha) return;
+    avisoNube("");
+    try {
+      await document.fonts.ready;
+      const p = paqueteFori(ficha, { cajas: cajasEjercicios, fuentes: cssFuentes() });
+      localStorage.setItem(CLAVE_FORI, JSON.stringify(p));
+      location.href = URL_FORI + "?charta=1";
+    } catch (e) { avisoNube("No se ha podido preparar la ficha para Fori: " + e.message, true); }
+  }
+  $("aFori").onclick = proyectar;
   pintarGuardadas();
   const ultimo = leerUltimo();
   nuevoEditor(entrada.comp?.actividades[0].tipo || ultimo || listaTipos()[0]); pintar();
-  if (entrada.comp) abrirGuardada(entrada.comp);
+  if (entrada.comp) { abrirGuardada(entrada.comp); if (aFori) proyectar(); }
   // Primera vez: se empieza eligiendo la actividad (curso → materia → contenido → modelo).
   else if (!ultimo) abrirSelector({ tamano: "completa", alElegir: (n) => { editores[0].poner(n); guardarUltimo(n); pintar(); } });
 }
@@ -534,6 +562,120 @@ if (typeof document !== "undefined") {
 }
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({  }));
+},
+"fori/diapositivas.js": (__exp) => {
+// Charta · paso 5.3 · ficha → diapositivas para Fori (proyección ejercicio a ejercicio, solución paso a paso).
+// Sin DOM: las cajas de cada ejercicio (getBBox) las da quien llama (`cajas`), para poder probarlo en Node.
+//
+// Contrato con Fori (fori/src/js/05f-charta.js), por localStorage del mismo origen:
+//   CLAVE_FORI → { v: 1, app: "charta", titulo, diapositivas: [{ etq, svg, n }] }
+//   svg: imagen 1600×900 con la solución dibujada; cada paso de la solución lleva class="cs pK" (K = 0…n−1)
+//   y el <style> contiene el marcador /*PASOS*/, que Fori sustituye por cssPasos(k, n) para mostrar k pasos.
+const { render } = __req("render/actividad.js");
+const { ancho, esc } = __req("rep/index.js");
+const { COLOR_SOLUCION, FUENTE } = __req("render/papel.js");
+const { AZUL } = __req("render/hoja.js");
+const { paginasVariante } = __req("nucleo/lector.js");
+const URL_FORI = "/fori/";            // raíz del sitio (ilinper301-hue.github.io); Fori en /fori/
+const CLAVE_FORI = "charta:aFori";
+const ANCHO = 1600;
+const ALTO = 900;
+// Colores que solo aparecen en modo solución: rojo de las respuestas y rosas de colorear (colorea, simetría, barras).
+const COLORES_SOL = [COLOR_SOLUCION, "#F2B8B5", "#EF9A9A"].map((c) => c.toLowerCase());
+const HOJAS = new Set(["line", "rect", "circle", "ellipse", "path", "polyline", "polygon", "text", "use", "image"]);
+const r2 = (x) => String(Math.round(x * 100) / 100);
+
+/** CSS que deja ver los k primeros pasos de n (k ≥ n: toda la solución). Igual que en Fori. */
+function cssPasos(k, n) {
+  if (k >= n) return "";
+  return ".cs{visibility:hidden}" + (k > 0 ? Array.from({ length: k }, (_, i) => ".p" + i).join(",") + "{visibility:visible}" : "");
+}
+
+/**
+ * Marca los pasos de la solución en el SVG de una zona (render(…, "solucion")).
+ * Paso = racha de elementos rojos seguidos (p. ej. arco + punta de flecha del salto en la recta).
+ * ej: id del ejercicio cuyos pasos se numeran (null = todos). Los rojos de otros ejercicios llevan solo "cs".
+ */
+function marcarPasos(svg, ej = null) {
+  let n = 0, enRacha = false;
+  const pila = [];                     // por cada <g> abierto: id de ejercicio o null
+  const dentro = () => ej === null || pila.includes(ej);
+  const out = svg.replace(/<(\/?)([a-zA-Z]+)([^>]*?)(\/?)>/g, (tag, cierre, nombre, attrs, auto) => {
+    if (nombre === "g") {
+      if (cierre) pila.pop();
+      else if (!auto) { const m = / data-ej="([^"]*)"/.exec(attrs); pila.push(m && / class="ej"/.test(attrs) ? m[1] : null); }
+      return tag;
+    }
+    if (cierre || !HOJAS.has(nombre)) return tag;
+    const low = attrs.toLowerCase();
+    if (!COLORES_SOL.some((c) => low.includes(c))) { enRacha = false; return tag; }
+    let clase = "cs";
+    if (dentro()) { if (!enRacha) n++; clase += " p" + (n - 1); }
+    enRacha = true;
+    return `<${nombre} class="${clase}"${attrs}${auto}>`;
+  });
+  return { svg: out, n };
+}
+
+/** Enunciado en líneas que caben en `max` px (Andika), con su tamaño de letra. */
+function lineasEnunciado(texto, max) {
+  const lineas = texto.split("\n");
+  let fs = 40;
+  while (fs > 22 && lineas.some((t) => ancho(t, false, fs) > max)) fs -= 2;
+  return { lineas, fs };
+}
+
+/** Una diapositiva: cabecera (número + enunciado [+ etiqueta]) y la caja `c` de la zona encajada debajo. */
+function diapositiva(act, zona, c, ej, etiqueta, fuentes) {
+  const { svg, n } = marcarPasos(zona.svg, ej);
+  const { lineas, fs } = lineasEnunciado(act.enunciado, etiqueta ? 1150 : 1440);
+  const alto = 34 + lineas.length * fs * 1.25;
+  const top = Math.max(110, alto + 28), pad = 10;
+  const bx = c.x - pad, by = c.y - pad, bw = c.w + 2 * pad, bh = c.h + 2 * pad;
+  const aw = ANCHO - 80, ah = ALTO - top - 24;
+  const s = Math.min(aw / bw, ah / bh, 6);
+  const tx = 40 + (aw - bw * s) / 2, ty = top + (ah - bh * s) / 2;
+  const ocultar = ej === null ? "" : `g.ej:not([data-ej="${esc(ej)}"]){display:none}`;
+  const cab = [
+    `<circle cx="66" cy="62" r="32" fill="${AZUL}"/>`,
+    `<text x="66" y="75" text-anchor="middle" font-family="${FUENTE}" font-size="36" font-weight="bold" fill="#fff">${act.n}</text>`,
+    ...lineas.map((t, j) => `<text x="120" y="${r2(74 + j * fs * 1.25)}" font-family="${FUENTE}" font-size="${fs}" fill="#1f1f1f">${esc(t)}</text>`),
+    etiqueta ? `<text x="${ANCHO - 40}" y="74" text-anchor="end" font-family="${FUENTE}" font-size="28" fill="#6b6b6b">${esc(etiqueta)}</text>` : "",
+  ].join("");
+  return {
+    n,
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${ANCHO} ${ALTO}" width="${ANCHO}" height="${ALTO}">` +
+      `<style>${fuentes || ""}${ocultar}/*PASOS*/</style><rect width="${ANCHO}" height="${ALTO}" fill="#fff"/>${cab}` +
+      `<clipPath id="recorte"><rect x="${r2(bx)}" y="${r2(by)}" width="${r2(bw)}" height="${r2(bh)}"/></clipPath>` +
+      `<g transform="translate(${r2(tx)} ${r2(ty)}) scale(${r2(s)}) translate(${r2(-bx)} ${r2(-by)})" clip-path="url(#recorte)">${svg}</g></svg>`,
+  };
+}
+
+/**
+ * Diapositivas de una variante: por cada actividad, una con la actividad entera y, si tiene varios
+ * ejercicios, una por ejercicio (recortada a su caja). cajas(zona) → { idEjercicio: {x, y, w, h} } (coordenadas de la zona).
+ */
+function diapositivas(ficha, { cajas, fuentes = "", variante = 0 } = {}) {
+  if (typeof cajas !== "function") throw new Error("Faltan las cajas de los ejercicios.");
+  const out = [];
+  for (const pag of paginasVariante(ficha, variante)) for (const act of pag.actividades) {
+    const zona = render(act, "solucion"), cs = cajas(zona);
+    const ids = act.ejercicios.map((e) => e.id).filter((id) => cs[id] && cs[id].w > 0 && cs[id].h > 0);
+    out.push({ etq: `Actividad ${act.n}`, ...diapositiva(act, zona, { x: zona.x, y: zona.y, w: zona.w, h: zona.h }, null, "", fuentes) });
+    if (ids.length > 1) ids.forEach((id, i) => {
+      const etq = `Ejercicio ${i + 1} de ${ids.length}`;
+      out.push({ etq: `Actividad ${act.n} · ${etq}`, ...diapositiva(act, zona, cs[id], id, etq, fuentes) });
+    });
+  }
+  return out;
+}
+
+/** Paquete para Fori (sin nombres de alumnos: la ficha no los lleva). */
+function paqueteFori(ficha, opciones) {
+  return { v: 1, app: "charta", titulo: ficha.titulo, diapositivas: diapositivas(ficha, opciones) };
+}
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get URL_FORI() { return URL_FORI; }, get CLAVE_FORI() { return CLAVE_FORI; }, get ANCHO() { return ANCHO; }, get ALTO() { return ALTO; }, get cssPasos() { return cssPasos; }, get marcarPasos() { return marcarPasos; }, get diapositivas() { return diapositivas; }, get paqueteFori() { return paqueteFori; } }));
 },
 "nube/config.js": (__exp) => {
 // Charta · configuración de Firebase (paso 5.1)
@@ -7615,7 +7757,7 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get chips() { 
 // Opciones: modo null (mezclado) | "mayor" (siempre «más») | "menor" (siempre «menos»).
 // Completa: 8 casillas (4 filas × 2); media: 4. Iguales: 2 de 8 (1 de 4).
 const { registrar } = __req("nucleo/tipos.js");
-const { TOP, M, W, INK } = __req("render/papel.js");
+const { TOP, M, W, INK, COLOR_SOLUCION } = __req("render/papel.js");
 const GX = 10, GY = 10, COLS = 2, ROWS = 4;
 const CW = (W - 2 * M - (COLS - 1) * GX) / COLS, CH = (TOP - M - (ROWS - 1) * GY) / ROWS;
 const AW = CW / 2 - 24, AH = CH - 56;
@@ -7650,7 +7792,7 @@ function dispersar(n, azar) {
 
 const __default = registrar({
   id: "orden.cantidad",
-  version: 1,
+  version: 2,
   generar(params, azar, { tamano }) {
     const R = params.rango ?? 10, mx = Math.min(R, 12), modo = params.modo || "mezcla";
     const cnt = tamano === "media" ? 4 : 8, nIg = tamano === "media" ? 1 : 2;
@@ -7679,6 +7821,8 @@ const __default = registrar({
         const { cols, rows, sp } = rejilla(v, aw, ah), r = Math.min(11, sp * 0.3), jit = sp * 0.1;
         for (const [ri, ci, jx, jy] of pos[j])
           forma(p, kind, ax + aw / 2 + (ci - (cols - 1) / 2) * sp + jx * jit, ay + ah / 2 + ((rows - 1) / 2 - ri) * sp + jy * jit, r);
+        // Solución: el grupo rodeado en rojo (los dos si hay la misma cantidad).
+        if (p.solucion && (e.solucion.rodea === "ambos" || e.solucion.rodea === "ab"[j])) p.rrect(ax - 5, ay - 4, aw + 10, ah + 8, 14, { lw: 2.4, stroke: COLOR_SOLUCION });
       });
     }));
   },
@@ -7773,7 +7917,7 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() 
 // Opciones: modo null (mezclado) | "mayor" | "menor"; cerca (si_no): números de la misma decena (desde rango 20).
 // Completa: 15 parejas (5 filas × 3); media: 6. En «mezclado», mitad «mayor» y mitad «menor» (8+7 de 15; 3+3 de 6), en orden barajado.
 const { registrar } = __req("nucleo/tipos.js");
-const { TOP } = __req("render/papel.js");
+const { TOP, COLOR_SOLUCION } = __req("render/papel.js");
 const { pares } = __req("tipos/orden.signos.js");
 const TXT = {
   mayor: "Rodea el número mayor de cada pareja.",
@@ -7783,7 +7927,7 @@ const TXT = {
 
 const __default = registrar({
   id: "orden.mayor",
-  version: 1,
+  version: 2,
   generar(params, azar, { tamano }) {
     const R = params.rango ?? 10, cnt = tamano === "media" ? 6 : 15, modo = params.modo || "mezcla";
     const ps = pares(cnt, R, azar, !!params.cerca);
@@ -7806,6 +7950,8 @@ const __default = registrar({
       p.marco(x, y, cw, ch, i, "RODEA EL " + pide.toUpperCase());
       const bx = x + (cw - 2 * bw - g) / 2;
       [a, b].forEach((v, j) => p.caja(bx + j * (bw + g), y + (ch - 26 - bh) / 2, bw, bh, v, 26));
+      // Solución: el número rodeado en rojo.
+      if (p.solucion) [a, b].forEach((v, j) => { if (v === e.solucion.rodea) p.rrect(bx + j * (bw + g) - 5, y + (ch - 26 - bh) / 2 - 5, bw + 10, bh + 10, 12, { lw: 2.4, stroke: COLOR_SOLUCION }); });
     }));
   },
 });
@@ -9531,13 +9677,13 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() 
 // Modo "clasifica" (solo completa): UN ejercicio  datos { numeros: [..], pares: k, impares: k' }  (k, k' = min(6, nº de pares/impares ≤ R))
 //   solucion { huecos: [pares ordenados…, impares ordenados…] }   (primero los cuadros de la columna PARES, de arriba abajo; luego los de IMPARES)
 const { registrar } = __req("nucleo/tipos.js");
-const { TOP, M, W, INK } = __req("render/papel.js");
+const { TOP, M, W, INK, COLOR_SOLUCION } = __req("render/papel.js");
 const { muestra } = __req("tipos/valor.canje.js");
 const orden = (l) => l.slice().sort((a, b) => a - b);
 
 const __default = registrar({
   id: "valor.pares",
-  version: 1,
+  version: 2,
   generar(params, azar, { tamano }) {
     const R = params.rango ?? 10;
     if (params.modo === "clasifica") {
@@ -9571,6 +9717,7 @@ const __default = registrar({
         const bx = x + cw / 2 + (j - 1) * 70 + 3;
         p.rrect(bx, y + 14, 64, 30, 8);
         p.text(bx + 32, y + 25, lab, 11, { f: "PB", anchor: "middle" });
+        if (p.solucion && e.solucion.rodea === lab.toLowerCase()) p.rrect(bx - 4, y + 10, 72, 38, 11, { lw: 2.4, stroke: COLOR_SOLUCION });   // solución: rodeada en rojo
       });
     }));
   },
