@@ -47,7 +47,7 @@
   - [x] combinada, suma · conteo · orden · valor · sumar · restar · juegos · geometria · medida · estadistica (7 agentes Sonnet en paralelo con `tools/ENCARGO_PORTAR.md`; cada tipo comparado con el motor en PNG).
   - Resultado: **94 tipos**. `test_tipos --full`: 50.520 fichas; `test_invariantes --full`: 1,47 millones de ejercicios; 98 fichas doradas. 0 errores. Hoja de contactos de todas las medias revisada.
   - Decisiones: el azar del dibujo (posiciones, desvíos) va en `datos` (dibujo determinista). Donde el alumno rodea, une, colorea o dibuja: `huecos: []` y la respuesta en campos propios de `solucion` (`rodea`, `une`, `correcta`…), marcada en rojo con trazo. `generar()` devuelve la ficha normalizada a JSON (sin −0). En media se conserva la proporción de cada tipo.
-  - **Pendiente de Iván**: pirámide: máximo 3 huecos (con 4 no tenía solución única; decidido el 5-11-2026). Con rango 30, sumas y restas de decenas solo dan 3 ejercicios (como el motor). **Fase 3 cerrada.**
+  - **Pendiente de Iván**: pirámide: máximo 3 huecos (con 4 no tenía solución única; decidido el 5-11-2026). Sumas y restas de decenas: desde rango 100 (con 30 solo había 3 operaciones; decidido el 5-11-2026). **Fase 3 cerrada.**
 
 ## Fase 4 · App completa (PWA, verde oscuro)
 - [ ] 4.1 Flujo: curso → materia → bloque → modelo (tarjetas con miniatura) → opciones (en lenguaje de maestro, desde `MODELOS`).

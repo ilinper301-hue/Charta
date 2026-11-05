@@ -1778,10 +1778,9 @@ export const CATALOGO = {
     }
    ],
    "rangos": [
-    30,
     100
    ],
-   "rango": 30,
+   "rango": 100,
    "tamanos": [
     "completa",
     "media"
@@ -2206,10 +2205,9 @@ export const CATALOGO = {
     }
    ],
    "rangos": [
-    30,
     100
    ],
-   "rango": 30,
+   "rango": 100,
    "tamanos": [
     "completa",
     "media"

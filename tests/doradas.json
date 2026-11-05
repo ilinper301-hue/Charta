@@ -13363,7 +13363,7 @@
        "tipoVersion": 1,
        "params": {
         "modo": null,
-        "rango": 30
+        "rango": 100
        },
        "tamano": "completa",
        "color": "verde",
@@ -13373,22 +13373,22 @@
         {
          "id": "a1e1",
          "datos": {
-          "a": 20,
-          "b": 10,
-          "forma": 2
+          "a": 90,
+          "b": 80,
+          "forma": 1
          },
          "solucion": {
           "huecos": [
-           20
+           80
           ]
          }
         },
         {
          "id": "a1e2",
          "datos": {
-          "a": 30,
-          "b": 10,
-          "forma": 1
+          "a": 50,
+          "b": 40,
+          "forma": 0
          },
          "solucion": {
           "huecos": [
@@ -13399,20 +13399,20 @@
         {
          "id": "a1e3",
          "datos": {
-          "a": 20,
-          "b": 10,
+          "a": 60,
+          "b": 40,
           "forma": 0
          },
          "solucion": {
           "huecos": [
-           10
+           20
           ]
          }
         },
         {
          "id": "a1e4",
          "datos": {
-          "a": 30,
+          "a": 100,
           "b": 20,
           "forma": 1
          },
@@ -13425,9 +13425,22 @@
         {
          "id": "a1e5",
          "datos": {
-          "a": 30,
+          "a": 40,
           "b": 20,
-          "forma": 2
+          "forma": 1
+         },
+         "solucion": {
+          "huecos": [
+           20
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": 40,
+          "b": 30,
+          "forma": 1
          },
          "solucion": {
           "huecos": [
@@ -13436,20 +13449,85 @@
          }
         },
         {
-         "id": "a1e6",
+         "id": "a1e7",
          "datos": {
-          "a": 30,
+          "a": 40,
           "b": 20,
-          "forma": 0
+          "forma": 2
          },
          "solucion": {
           "huecos": [
-           10
+           40
           ]
          }
         },
         {
-         "id": "a1e7",
+         "id": "a1e8",
+         "datos": {
+          "a": 70,
+          "b": 30,
+          "forma": 2
+         },
+         "solucion": {
+          "huecos": [
+           70
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "a": 80,
+          "b": 30,
+          "forma": 1
+         },
+         "solucion": {
+          "huecos": [
+           30
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "a": 50,
+          "b": 30,
+          "forma": 2
+         },
+         "solucion": {
+          "huecos": [
+           50
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "a": 80,
+          "b": 30,
+          "forma": 0
+         },
+         "solucion": {
+          "huecos": [
+           50
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "a": 80,
+          "b": 30,
+          "forma": 2
+         },
+         "solucion": {
+          "huecos": [
+           80
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
          "datos": {
           "a": 20,
           "b": 10,
@@ -13462,10 +13540,75 @@
          }
         },
         {
-         "id": "a1e8",
+         "id": "a1e14",
+         "datos": {
+          "a": 70,
+          "b": 20,
+          "forma": 0
+         },
+         "solucion": {
+          "huecos": [
+           50
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
          "datos": {
           "a": 30,
-          "b": 10,
+          "b": 20,
+          "forma": 2
+         },
+         "solucion": {
+          "huecos": [
+           30
+          ]
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "a": 80,
+          "b": 50,
+          "forma": 2
+         },
+         "solucion": {
+          "huecos": [
+           80
+          ]
+         }
+        },
+        {
+         "id": "a1e17",
+         "datos": {
+          "a": 100,
+          "b": 30,
+          "forma": 2
+         },
+         "solucion": {
+          "huecos": [
+           100
+          ]
+         }
+        },
+        {
+         "id": "a1e18",
+         "datos": {
+          "a": 100,
+          "b": 70,
+          "forma": 0
+         },
+         "solucion": {
+          "huecos": [
+           30
+          ]
+         }
+        },
+        {
+         "id": "a1e19",
+         "datos": {
+          "a": 70,
+          "b": 50,
           "forma": 0
          },
          "solucion": {
@@ -13475,15 +13618,67 @@
          }
         },
         {
-         "id": "a1e9",
+         "id": "a1e20",
          "datos": {
-          "a": 30,
-          "b": 10,
+          "a": 90,
+          "b": 40,
+          "forma": 1
+         },
+         "solucion": {
+          "huecos": [
+           40
+          ]
+         }
+        },
+        {
+         "id": "a1e21",
+         "datos": {
+          "a": 90,
+          "b": 70,
+          "forma": 0
+         },
+         "solucion": {
+          "huecos": [
+           20
+          ]
+         }
+        },
+        {
+         "id": "a1e22",
+         "datos": {
+          "a": 90,
+          "b": 30,
+          "forma": 0
+         },
+         "solucion": {
+          "huecos": [
+           60
+          ]
+         }
+        },
+        {
+         "id": "a1e23",
+         "datos": {
+          "a": 100,
+          "b": 70,
           "forma": 2
          },
          "solucion": {
           "huecos": [
-           30
+           100
+          ]
+         }
+        },
+        {
+         "id": "a1e24",
+         "datos": {
+          "a": 80,
+          "b": 40,
+          "forma": 0
+         },
+         "solucion": {
+          "huecos": [
+           40
           ]
          }
         }
@@ -13495,10 +13690,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "9d440ac27c86c4e7"
+   "44429e6020c5f94f"
   ],
   "svgSolucion": [
-   "85970224fa736087"
+   "e60a2ee8fd227b56"
   ]
  },
  "restar.encadenadas": {
@@ -17413,7 +17608,7 @@
        "tipoVersion": 1,
        "params": {
         "modo": null,
-        "rango": 30
+        "rango": 100
        },
        "tamano": "completa",
        "color": "azul",
@@ -17423,9 +17618,9 @@
         {
          "id": "a1e1",
          "datos": {
-          "a": 10,
+          "a": 60,
           "b": 10,
-          "forma": 2
+          "forma": 1
          },
          "solucion": {
           "huecos": [
@@ -17436,58 +17631,6 @@
         {
          "id": "a1e2",
          "datos": {
-          "a": 10,
-          "b": 20,
-          "forma": 1
-         },
-         "solucion": {
-          "huecos": [
-           20
-          ]
-         }
-        },
-        {
-         "id": "a1e3",
-         "datos": {
-          "a": 10,
-          "b": 10,
-          "forma": 0
-         },
-         "solucion": {
-          "huecos": [
-           20
-          ]
-         }
-        },
-        {
-         "id": "a1e4",
-         "datos": {
-          "a": 20,
-          "b": 10,
-          "forma": 1
-         },
-         "solucion": {
-          "huecos": [
-           10
-          ]
-         }
-        },
-        {
-         "id": "a1e5",
-         "datos": {
-          "a": 20,
-          "b": 10,
-          "forma": 2
-         },
-         "solucion": {
-          "huecos": [
-           20
-          ]
-         }
-        },
-        {
-         "id": "a1e6",
-         "datos": {
           "a": 20,
           "b": 10,
           "forma": 0
@@ -17499,11 +17642,63 @@
          }
         },
         {
+         "id": "a1e3",
+         "datos": {
+          "a": 20,
+          "b": 50,
+          "forma": 0
+         },
+         "solucion": {
+          "huecos": [
+           70
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": 60,
+          "b": 30,
+          "forma": 1
+         },
+         "solucion": {
+          "huecos": [
+           30
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "a": 10,
+          "b": 50,
+          "forma": 1
+         },
+         "solucion": {
+          "huecos": [
+           50
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": 10,
+          "b": 60,
+          "forma": 1
+         },
+         "solucion": {
+          "huecos": [
+           60
+          ]
+         }
+        },
+        {
          "id": "a1e7",
          "datos": {
           "a": 10,
-          "b": 10,
-          "forma": 1
+          "b": 50,
+          "forma": 2
          },
          "solucion": {
           "huecos": [
@@ -17514,9 +17709,9 @@
         {
          "id": "a1e8",
          "datos": {
-          "a": 10,
-          "b": 20,
-          "forma": 0
+          "a": 30,
+          "b": 10,
+          "forma": 2
          },
          "solucion": {
           "huecos": [
@@ -17527,13 +17722,208 @@
         {
          "id": "a1e9",
          "datos": {
+          "a": 30,
+          "b": 70,
+          "forma": 1
+         },
+         "solucion": {
+          "huecos": [
+           70
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
           "a": 10,
-          "b": 20,
+          "b": 90,
           "forma": 2
          },
          "solucion": {
           "huecos": [
            10
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "a": 30,
+          "b": 70,
+          "forma": 0
+         },
+         "solucion": {
+          "huecos": [
+           100
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "a": 30,
+          "b": 70,
+          "forma": 2
+         },
+         "solucion": {
+          "huecos": [
+           30
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "a": 10,
+          "b": 10,
+          "forma": 1
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "a": 20,
+          "b": 80,
+          "forma": 0
+         },
+         "solucion": {
+          "huecos": [
+           100
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "a": 10,
+          "b": 30,
+          "forma": 2
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "a": 40,
+          "b": 20,
+          "forma": 2
+         },
+         "solucion": {
+          "huecos": [
+           40
+          ]
+         }
+        },
+        {
+         "id": "a1e17",
+         "datos": {
+          "a": 60,
+          "b": 40,
+          "forma": 2
+         },
+         "solucion": {
+          "huecos": [
+           60
+          ]
+         }
+        },
+        {
+         "id": "a1e18",
+         "datos": {
+          "a": 80,
+          "b": 10,
+          "forma": 0
+         },
+         "solucion": {
+          "huecos": [
+           90
+          ]
+         }
+        },
+        {
+         "id": "a1e19",
+         "datos": {
+          "a": 30,
+          "b": 30,
+          "forma": 0
+         },
+         "solucion": {
+          "huecos": [
+           60
+          ]
+         }
+        },
+        {
+         "id": "a1e20",
+         "datos": {
+          "a": 50,
+          "b": 20,
+          "forma": 1
+         },
+         "solucion": {
+          "huecos": [
+           20
+          ]
+         }
+        },
+        {
+         "id": "a1e21",
+         "datos": {
+          "a": 50,
+          "b": 50,
+          "forma": 0
+         },
+         "solucion": {
+          "huecos": [
+           100
+          ]
+         }
+        },
+        {
+         "id": "a1e22",
+         "datos": {
+          "a": 50,
+          "b": 10,
+          "forma": 0
+         },
+         "solucion": {
+          "huecos": [
+           60
+          ]
+         }
+        },
+        {
+         "id": "a1e23",
+         "datos": {
+          "a": 80,
+          "b": 10,
+          "forma": 2
+         },
+         "solucion": {
+          "huecos": [
+           80
+          ]
+         }
+        },
+        {
+         "id": "a1e24",
+         "datos": {
+          "a": 40,
+          "b": 10,
+          "forma": 0
+         },
+         "solucion": {
+          "huecos": [
+           50
           ]
          }
         }
@@ -17545,10 +17935,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "2627bbaf9fb91b53"
+   "217dd88dbddb39bc"
   ],
   "svgSolucion": [
-   "65f87e7938b94001"
+   "9fad069f7c27e79c"
   ]
  },
  "sumar.dibujos": {

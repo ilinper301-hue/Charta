@@ -162,7 +162,7 @@ MODELOS += [
     M(5, "sumar", "comp10", "Completa hasta 10", "Lo que falta para llegar a 10.", rmax=10),
     M(5, "sumar", "comp20", "Completa hasta la decena", "Lo que falta para llegar a la decena siguiente.", rmin=20),
     M(5, "sumar", "hueco", "Sumas con hueco", "Sumas con un sumando desconocido.", [NIVEL]),
-    M(5, "sumar", "decenas", "Sumas de decenas", "Sumar decenas completas (20 + 30).", [BLOQ], rmin=30),
+    M(5, "sumar", "decenas", "Sumas de decenas", "Sumar decenas completas (20 + 30).", [BLOQ], rmin=100),
     M(5, "sumar", "encadenadas", "Sumas encadenadas", "Sumar tres números seguidos.", rmax=20),
     M(5, "sumar", "piramide", "Pirámides de sumas", "Cada casilla es la suma de las dos de abajo.", [HUECOS(1, 3, 3)]),
     M(5, "sumar", "tabla", "Tabla de sumar", "Completar una tabla de doble entrada.", [HUECOS(1, 36)], tam=COMPLETA),
@@ -180,7 +180,7 @@ MODELOS += [
     M(6, "restar", "mitades", "Las mitades", "Calcular la mitad de un número par.", [DIBUJO_R], rmax=20),
     M(6, "restar", "faltan", "¿Cuánto falta?", "Lo que falta para llegar a un número."),
     M(6, "restar", "hueco", "Restas con hueco", "Restas con un término desconocido.", [NIVEL]),
-    M(6, "restar", "decenas", "Restas de decenas", "Restar decenas completas (50 − 20).", [BLOQ], rmin=30),
+    M(6, "restar", "decenas", "Restas de decenas", "Restar decenas completas (50 − 20).", [BLOQ], rmin=100),
     M(6, "restar", "encadenadas", "Restas encadenadas", "Restar dos números seguidos.", rmax=20),
     M(6, "restar", "familia", "Familias de operaciones", "Usar una suma para completar dos restas.", [NIVEL]),
 ]
