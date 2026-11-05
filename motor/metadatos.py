@@ -151,6 +151,11 @@ META = {
     "fono.larga": (1, 8, "lengua conciencia_fonológica sílabas comparar rodear"),
     "orto.elige": (2, 10, "lengua ortografía letras palabras completar"),
     "orto.mayuscula": (2, 8, "lengua ortografía mayúsculas nombres propios"),
+    "frase.ordena": (2, 10, "lengua frases ordenar palabras escribir"),
+    "frase.separa": (2, 8, "lengua frases separar palabras"),
+    "frase.completa": (2, 10, "lengua frases completar palabras"),
+    "frase.verdad": (1, 8, "lengua frases comprensión verdadero falso rodear"),
+    "frase.puntua": (2, 10, "lengua frases mayúsculas punto ortografía"),
 }
 
 def metadatos(id):

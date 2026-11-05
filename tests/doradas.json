@@ -4272,6 +4272,921 @@
    "f1b96ef6013cfe99"
   ]
  },
+ "frase.completa": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Completa la frase",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "frase.completa",
+       "tipoVersion": 1,
+       "params": {
+        "falta": null,
+        "ayuda": null,
+        "palabras": null,
+        "caso": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Elige la palabra que completa la frase\ny escríbela en el cuadro gris.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "antes": "La",
+          "despues": "dibuja.",
+          "opciones": [
+           "silla",
+           "cama",
+           "hermana"
+          ],
+          "falta": "sujeto"
+         },
+         "solucion": {
+          "huecos": [
+           "hermana"
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "antes": "El",
+          "despues": "nada.",
+          "opciones": [
+           "lápiz",
+           "sofá",
+           "pingüino"
+          ],
+          "falta": "sujeto"
+         },
+         "solucion": {
+          "huecos": [
+           "pingüino"
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "antes": "El",
+          "despues": "escribe en clase.",
+          "opciones": [
+           "espejo",
+           "zapato",
+           "amigo"
+          ],
+          "falta": "sujeto"
+         },
+         "solucion": {
+          "huecos": [
+           "amigo"
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "antes": "El",
+          "despues": "duerme mucho.",
+          "opciones": [
+           "zapato",
+           "espejo",
+           "conejo"
+          ],
+          "falta": "sujeto"
+         },
+         "solucion": {
+          "huecos": [
+           "conejo"
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "antes": "La",
+          "despues": "escribe en clase.",
+          "opciones": [
+           "maestra",
+           "mesa",
+           "lámpara"
+          ],
+          "falta": "sujeto"
+         },
+         "solucion": {
+          "huecos": [
+           "maestra"
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "antes": "La",
+          "despues": "bebe leche.",
+          "opciones": [
+           "amiga",
+           "cama",
+           "silla"
+          ],
+          "falta": "sujeto"
+         },
+         "solucion": {
+          "huecos": [
+           "amiga"
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "antes": "Las",
+          "despues": "caminan.",
+          "opciones": [
+           "mesas",
+           "lámparas",
+           "arañas"
+          ],
+          "falta": "sujeto"
+         },
+         "solucion": {
+          "huecos": [
+           "arañas"
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "antes": "Los",
+          "despues": "comen pan.",
+          "opciones": [
+           "zapatos",
+           "patos",
+           "lápices"
+          ],
+          "falta": "sujeto"
+         },
+         "solucion": {
+          "huecos": [
+           "patos"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "6fd5e2eadd752e25"
+  ],
+  "svgSolucion": [
+   "f738ca496ca93329"
+  ]
+ },
+ "frase.ordena": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Ordena la frase",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "frase.ordena",
+       "tipoVersion": 1,
+       "params": {
+        "palabras": null,
+        "marca": null,
+        "caso": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Ordena las palabras y escribe la frase.\nEmpieza por la palabra con mayúscula.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "palabras": [
+           "hermana",
+           "dibuja",
+           "La"
+          ],
+          "marca": true
+         },
+         "solucion": {
+          "huecos": [
+           "La hermana dibuja."
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "palabras": [
+           "pingüino",
+           "nada",
+           "El"
+          ],
+          "marca": true
+         },
+         "solucion": {
+          "huecos": [
+           "El pingüino nada."
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "palabras": [
+           "una",
+           "amiga",
+           "manzana",
+           "come",
+           "La"
+          ],
+          "marca": true
+         },
+         "solucion": {
+          "huecos": [
+           "La amiga come una manzana."
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "palabras": [
+           "mucho",
+           "oveja",
+           "La",
+           "camina"
+          ],
+          "marca": true
+         },
+         "solucion": {
+          "huecos": [
+           "La oveja camina mucho."
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "palabras": [
+           "tarta",
+           "La",
+           "una",
+           "cocinera",
+           "hace"
+          ],
+          "marca": true
+         },
+         "solucion": {
+          "huecos": [
+           "La cocinera hace una tarta."
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "palabras": [
+           "amigo",
+           "lee",
+           "cuentos",
+           "El"
+          ],
+          "marca": true
+         },
+         "solucion": {
+          "huecos": [
+           "El amigo lee cuentos."
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "palabras": [
+           "Las",
+           "caminan",
+           "arañas"
+          ],
+          "marca": true
+         },
+         "solucion": {
+          "huecos": [
+           "Las arañas caminan."
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "palabras": [
+           "están",
+           "gatos",
+           "dormidos",
+           "Los"
+          ],
+          "marca": true
+         },
+         "solucion": {
+          "huecos": [
+           "Los gatos están dormidos."
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "e20c3840ef772cfb"
+  ],
+  "svgSolucion": [
+   "e045f37d07c06b16"
+  ]
+ },
+ "frase.puntua": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Mayúscula y punto",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "frase.puntua",
+       "tipoVersion": 1,
+       "params": {
+        "tarea": null,
+        "falta": null,
+        "palabras": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Rodea la letra que debe ser mayúscula\ny pon el punto en el cuadro gris.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "frase": "la hermana dibuja",
+          "falta": "ambos",
+          "modo": "rodea"
+         },
+         "solucion": {
+          "huecos": [
+           "."
+          ],
+          "rodea": [
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "frase": "el pingüino nada",
+          "falta": "ambos",
+          "modo": "rodea"
+         },
+         "solucion": {
+          "huecos": [
+           "."
+          ],
+          "rodea": [
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "frase": "la amiga come una manzana",
+          "falta": "ambos",
+          "modo": "rodea"
+         },
+         "solucion": {
+          "huecos": [
+           "."
+          ],
+          "rodea": [
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "frase": "la oveja camina mucho",
+          "falta": "ambos",
+          "modo": "rodea"
+         },
+         "solucion": {
+          "huecos": [
+           "."
+          ],
+          "rodea": [
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "frase": "la cocinera hace una tarta",
+          "falta": "ambos",
+          "modo": "rodea"
+         },
+         "solucion": {
+          "huecos": [
+           "."
+          ],
+          "rodea": [
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "frase": "el amigo lee cuentos",
+          "falta": "ambos",
+          "modo": "rodea"
+         },
+         "solucion": {
+          "huecos": [
+           "."
+          ],
+          "rodea": [
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "frase": "las arañas caminan",
+          "falta": "ambos",
+          "modo": "rodea"
+         },
+         "solucion": {
+          "huecos": [
+           "."
+          ],
+          "rodea": [
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "frase": "los gatos están dormidos",
+          "falta": "ambos",
+          "modo": "rodea"
+         },
+         "solucion": {
+          "huecos": [
+           "."
+          ],
+          "rodea": [
+           0
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "3ba89fd2e998bc91"
+  ],
+  "svgSolucion": [
+   "500d50e627c5024c"
+  ]
+ },
+ "frase.separa": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Separa las palabras",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "frase.separa",
+       "tipoVersion": 1,
+       "params": {
+        "tarea": null,
+        "palabras": null,
+        "caso": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Traza una raya entre las palabras\nde cada frase.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "junta": "eldelfínsalta",
+          "modo": "rayas",
+          "n": 3
+         },
+         "solucion": {
+          "huecos": [],
+          "rayas": [
+           2,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "junta": "elpadrecamina",
+          "modo": "rayas",
+          "n": 3
+         },
+         "solucion": {
+          "huecos": [],
+          "rayas": [
+           2,
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "junta": "elratónsalta",
+          "modo": "rayas",
+          "n": 3
+         },
+         "solucion": {
+          "huecos": [],
+          "rayas": [
+           2,
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "junta": "elosoduerme",
+          "modo": "rayas",
+          "n": 3
+         },
+         "solucion": {
+          "huecos": [],
+          "rayas": [
+           2,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "junta": "lahermanapintauncuadro",
+          "modo": "rayas",
+          "n": 5
+         },
+         "solucion": {
+          "huecos": [],
+          "rayas": [
+           2,
+           9,
+           14,
+           16
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "junta": "lostigrescomencarne",
+          "modo": "rayas",
+          "n": 4
+         },
+         "solucion": {
+          "huecos": [],
+          "rayas": [
+           3,
+           9,
+           14
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "junta": "lasmaestrasestáncansadas",
+          "modo": "rayas",
+          "n": 4
+         },
+         "solucion": {
+          "huecos": [],
+          "rayas": [
+           3,
+           11,
+           16
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "junta": "losniñosabrenlapuerta",
+          "modo": "rayas",
+          "n": 5
+         },
+         "solucion": {
+          "huecos": [],
+          "rayas": [
+           3,
+           8,
+           13,
+           15
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "junta": "loshermanoscomensopa",
+          "modo": "rayas",
+          "n": 4
+         },
+         "solucion": {
+          "huecos": [],
+          "rayas": [
+           3,
+           11,
+           16
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "junta": "lasamigaslleganaclase",
+          "modo": "rayas",
+          "n": 5
+         },
+         "solucion": {
+          "huecos": [],
+          "rayas": [
+           3,
+           9,
+           15,
+           16
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "f2f07852eb2a282b"
+  ],
+  "svgSolucion": [
+   "254f9a77200d5645"
+  ]
+ },
+ "frase.verdad": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "¿Sí o no?",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "frase.verdad",
+       "tipoVersion": 1,
+       "params": {
+        "caso": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Lee la frase. Si es verdad, rodea Sí.\nSi no lo es, rodea No.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "frase": "El tigre salta."
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 0
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "frase": "El cocinero hace una tarta."
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 0
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "frase": "La mesa vuela."
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 1
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "frase": "El pingüino nada."
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 0
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "frase": "Los gatos comen una ventana."
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 1
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "frase": "Las ovejas beben una puerta."
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 1
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "frase": "El niño dibuja una flor."
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 0
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "frase": "El amigo come fruta."
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 0
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "frase": "El limón es azul."
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 1
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "frase": "El elefante es pequeño."
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 1
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "frase": "El abuelo come fruta."
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 0
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "frase": "Las sillas vuelan."
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 1
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "2474ebebbc57aa54"
+  ],
+  "svgSolucion": [
+   "4d1760ad3aae3e4c"
+  ]
+ },
  "geometria.copia": {
   "ficha": {
    "schemaVersion": 1,

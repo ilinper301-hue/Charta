@@ -155,3 +155,26 @@ MODELOS_LENGUA += [
        "NOMBRES CON MAYÚSCULA", "rosa"),
     # <<< ORTO
 ]
+# ------------------------------------------------------------------ lote 3 · frase.* (bloque 5)
+FRASE_LARGO = op("palabras", "Palabras de cada frase", [(None, "Variadas (3 a 5)"), (3, "3 palabras"), (4, "4 palabras"), (5, "5 palabras")])
+MODELOS_LENGUA += [
+    # >>> FRASE (agente frase)
+    _l(5, "frase", "ordena", "Ordena la frase", "Palabras desordenadas (come · gato · el): ordenarlas y escribir la frase.",
+       [FRASE_LARGO, op("marca", "Primera palabra", [(None, "Con mayúscula (de pista)"), ("sin", "Sin marcar")]), CASO_LETRA],
+       "ORDENA LA FRASE", "azul"),
+    _l(5, "frase", "separa", "Separa las palabras", "Frases escritas sin espacios (elgatocome): trazar rayas entre las palabras o reescribirlas separadas.",
+       [op("tarea", "Tarea", [(None, "Trazar rayas entre las palabras"), ("escribe", "Reescribir separando")]), FRASE_LARGO, CASO_LETRA],
+       "SEPARA LAS PALABRAS", "amarillo"),
+    _l(5, "frase", "completa", "Completa la frase", "Frases con una palabra que falta (El ___ ladra): elegir entre tres palabras o escribirla sin ayuda.",
+       [op("falta", "Qué falta", [(None, "El nombre del principio (El ___ ladra)"), ("objeto", "El nombre del final (El gato come ___)"), ("mezcla", "Los dos, mezclados")]),
+        op("ayuda", "Ayuda", [(None, "Con tres palabras para elegir"), ("sin", "Sin ayuda")]), FRASE_LARGO, CASO_LETRA],
+       "COMPLETA LA FRASE", "verde"),
+    _l(5, "frase", "verdad", "¿Sí o no?", "Frases que son verdad o mentira (El pez nada / La vaca vuela): rodear Sí o No.",
+       [CASO_LETRA],
+       "¿SÍ O NO?", "rosa"),
+    _l(5, "frase", "puntua", "Mayúscula y punto", "Frases a las que les falta la mayúscula o el punto (la niña salta): rodear la letra y poner el punto, o escribirlas bien.",
+       [op("tarea", "Tarea", [(None, "Rodear la letra y poner el punto"), ("escribe", "Escribirla bien")]),
+        op("falta", "Qué falta", [(None, "Las dos (mayúscula y punto)"), ("mayus", "Solo la mayúscula"), ("punto", "Solo el punto")]), FRASE_LARGO],
+       "MAYÚSCULA Y PUNTO", "azul"),
+    # <<< FRASE
+]

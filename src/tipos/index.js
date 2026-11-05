@@ -17,5 +17,6 @@ import "./familia.silaba.js";
 import "./familia.fono.js";
 import "./familia.palabra.js";
 import "./familia.orto.js";
+import "./familia.frase.js";
 
 export { tipo, hayTipo, listaTipos } from "../nucleo/tipos.js";

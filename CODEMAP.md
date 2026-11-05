@@ -53,6 +53,7 @@ src/lengua/palabras.js  buscar({cat, campos, nSilabas, tipo, letras, conLetra, d
 src/lengua/dibujo.js  ayudantes en Papel: palabraHuecos, casillas (sol / rellenar), rodear (rojo en solución), unir (líneas rojas), rotulo
 src/tipos/_lengua.js  ayudantes comunes de letra.* y silaba.* (lote 1 de Lengua) · tests/inv/_lengua.js
 src/tipos/_fono.js, _palabra.js, _orto.js  ayudantes de fono.*, palabra.* y orto.* (lote 2 de Lengua; _orto.js trae el banco de nombres propios) · tests/inv/{fono,palabra,orto}.js
+src/tipos/_frase.js, familia.frase.js  banco de frases con concordancia y ayudantes de frase.* (lote 3 de Lengua) · tests/inv/frase.js
 tests/test_lengua.js  reglas (lista de control), léxico y ayudantes
 tools/build.py        src/ → dist/index.html (un solo archivo) + sw.js y manifest.webmanifest en la raíz; --js = solo el paquete
 src/pwa/              sw.js (plantilla, __VERSION__), manifest.webmanifest, registro.js (registrarSW(avisar)), logo.svg (fuente del logo y los iconos) · paso 4.5

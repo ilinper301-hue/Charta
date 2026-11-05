@@ -8004,6 +8004,424 @@ export const CATALOGO = {
      "propios"
     ]
    }
+  },
+  {
+   "id": "frase.ordena",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 5,
+   "familia": "frase",
+   "clave": "ordena",
+   "nombre": "Ordena la frase",
+   "descripcion": "Palabras desordenadas (come · gato · el): ordenarlas y escribir la frase.",
+   "opciones": [
+    {
+     "id": "palabras",
+     "etiqueta": "Palabras de cada frase",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Variadas (3 a 5)"
+      },
+      {
+       "valor": 3,
+       "etiqueta": "3 palabras"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 palabras"
+      },
+      {
+       "valor": 5,
+       "etiqueta": "5 palabras"
+      }
+     ]
+    },
+    {
+     "id": "marca",
+     "etiqueta": "Primera palabra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Con mayúscula (de pista)"
+      },
+      {
+       "valor": "sin",
+       "etiqueta": "Sin marcar"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULA"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "ORDENA LA FRASE",
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "lengua",
+     "frases",
+     "ordenar",
+     "palabras",
+     "escribir"
+    ]
+   }
+  },
+  {
+   "id": "frase.separa",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 5,
+   "familia": "frase",
+   "clave": "separa",
+   "nombre": "Separa las palabras",
+   "descripcion": "Frases escritas sin espacios (elgatocome): trazar rayas entre las palabras o reescribirlas separadas.",
+   "opciones": [
+    {
+     "id": "tarea",
+     "etiqueta": "Tarea",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Trazar rayas entre las palabras"
+      },
+      {
+       "valor": "escribe",
+       "etiqueta": "Reescribir separando"
+      }
+     ]
+    },
+    {
+     "id": "palabras",
+     "etiqueta": "Palabras de cada frase",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Variadas (3 a 5)"
+      },
+      {
+       "valor": 3,
+       "etiqueta": "3 palabras"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 palabras"
+      },
+      {
+       "valor": 5,
+       "etiqueta": "5 palabras"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULA"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "SEPARA LAS PALABRAS",
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 8,
+    "etiquetas": [
+     "lengua",
+     "frases",
+     "separar",
+     "palabras"
+    ]
+   }
+  },
+  {
+   "id": "frase.completa",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 5,
+   "familia": "frase",
+   "clave": "completa",
+   "nombre": "Completa la frase",
+   "descripcion": "Frases con una palabra que falta (El ___ ladra): elegir entre tres palabras o escribirla sin ayuda.",
+   "opciones": [
+    {
+     "id": "falta",
+     "etiqueta": "Qué falta",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "El nombre del principio (El ___ ladra)"
+      },
+      {
+       "valor": "objeto",
+       "etiqueta": "El nombre del final (El gato come ___)"
+      },
+      {
+       "valor": "mezcla",
+       "etiqueta": "Los dos, mezclados"
+      }
+     ]
+    },
+    {
+     "id": "ayuda",
+     "etiqueta": "Ayuda",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Con tres palabras para elegir"
+      },
+      {
+       "valor": "sin",
+       "etiqueta": "Sin ayuda"
+      }
+     ]
+    },
+    {
+     "id": "palabras",
+     "etiqueta": "Palabras de cada frase",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Variadas (3 a 5)"
+      },
+      {
+       "valor": 3,
+       "etiqueta": "3 palabras"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 palabras"
+      },
+      {
+       "valor": 5,
+       "etiqueta": "5 palabras"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULA"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "COMPLETA LA FRASE",
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "lengua",
+     "frases",
+     "completar",
+     "palabras"
+    ]
+   }
+  },
+  {
+   "id": "frase.verdad",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 5,
+   "familia": "frase",
+   "clave": "verdad",
+   "nombre": "¿Sí o no?",
+   "descripcion": "Frases que son verdad o mentira (El pez nada / La vaca vuela): rodear Sí o No.",
+   "opciones": [
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULA"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "¿SÍ O NO?",
+   "color": "rosa",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 8,
+    "etiquetas": [
+     "lengua",
+     "frases",
+     "comprensión",
+     "verdadero",
+     "falso",
+     "rodear"
+    ]
+   }
+  },
+  {
+   "id": "frase.puntua",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 5,
+   "familia": "frase",
+   "clave": "puntua",
+   "nombre": "Mayúscula y punto",
+   "descripcion": "Frases a las que les falta la mayúscula o el punto (la niña salta): rodear la letra y poner el punto, o escribirlas bien.",
+   "opciones": [
+    {
+     "id": "tarea",
+     "etiqueta": "Tarea",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Rodear la letra y poner el punto"
+      },
+      {
+       "valor": "escribe",
+       "etiqueta": "Escribirla bien"
+      }
+     ]
+    },
+    {
+     "id": "falta",
+     "etiqueta": "Qué falta",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Las dos (mayúscula y punto)"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "Solo la mayúscula"
+      },
+      {
+       "valor": "punto",
+       "etiqueta": "Solo el punto"
+      }
+     ]
+    },
+    {
+     "id": "palabras",
+     "etiqueta": "Palabras de cada frase",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Variadas (3 a 5)"
+      },
+      {
+       "valor": 3,
+       "etiqueta": "3 palabras"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 palabras"
+      },
+      {
+       "valor": 5,
+       "etiqueta": "5 palabras"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "MAYÚSCULA Y PUNTO",
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "lengua",
+     "frases",
+     "mayúsculas",
+     "punto",
+     "ortografía"
+    ]
+   }
   }
  ]
 };
