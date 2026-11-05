@@ -233,7 +233,7 @@ Fredoka es letra de imprenta, pero es un **contorno** (al repasarla saldría un 
 
 Al cerrar cada lote: `npm test`, hoja de contactos de las medias y prueba de Iván en el Android.
 
-## 7. Pendiente de Iván
-- **Orden de las letras** de su método (para la opción «Letras: hasta la …»). Hasta entonces, «Todas».
-- **Pictogramas**: decidir en la Fase 6 (ARASAAC o dibujos propios).
-- **Tamaño de pauta** por defecto (propuesta: 5 mm) tras imprimir una prueba.
+## 7. Decidido y pendiente de Iván
+- **Tamaño de pauta**: 5 mm por defecto (decidido el 5-11-2026); 4 y 3,5 mm como opciones.
+- **Orden de las letras** de su método: lo pasará más adelante. Hasta entonces, «Letras: todas».
+- **Pictogramas**: aparcados (Fase 6). Los modelos 🖼 quedan fuera de los lotes 0–5.
