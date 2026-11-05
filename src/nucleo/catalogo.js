@@ -4,21 +4,37 @@ export const CATALOGO = {
   "1": "1.º de Primaria"
  },
  "materias": {
-  "matematicas": "Matemáticas"
+  "matematicas": "Matemáticas",
+  "lengua": "Lengua"
  },
  "bloques": {
-  "1": "Los números y sus representaciones",
-  "2": "Contar y series",
-  "3": "Orden y comparación",
-  "4": "Valor posicional",
-  "5": "Sumar",
-  "6": "Restar",
-  "7": "Juegos numéricos",
-  "8": "Problemas",
-  "9": "Geometría",
-  "10": "Medida",
-  "11": "Estadística y patrones",
-  "12": "Trucos de cálculo mental"
+  "matematicas": {
+   "1": "Los números y sus representaciones",
+   "2": "Contar y series",
+   "3": "Orden y comparación",
+   "4": "Valor posicional",
+   "5": "Sumar",
+   "6": "Restar",
+   "7": "Juegos numéricos",
+   "8": "Problemas",
+   "9": "Geometría",
+   "10": "Medida",
+   "11": "Estadística y patrones",
+   "12": "Trucos de cálculo mental"
+  },
+  "lengua": {
+   "1": "Conciencia fonológica",
+   "2": "Letras y sonidos",
+   "3": "Sílabas",
+   "4": "Palabras",
+   "5": "Frases",
+   "6": "Ortografía básica",
+   "7": "Comprensión lectora",
+   "8": "Escritura y caligrafía"
+  }
+ },
+ "fuentes": {
+  "lengua": "fredoka"
  },
  "modelos": [
   {

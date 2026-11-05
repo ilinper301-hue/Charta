@@ -242,7 +242,7 @@ const { erroresFicha, letraVariante, paginasVariante } = __req("nucleo/lector.js
 const { listaTipos } = __req("tipos/index.js");
 const { hoja, hojas, estiloLectura, PALETA } = __req("render/hoja.js");
 const { hayTipo } = __req("nucleo/tipos.js");
-const { miniatura } = __req("ui/navegacion.js");
+const { miniatura, fuenteMateria, materiaDe } = __req("ui/navegacion.js");
 const { abrirSelector } = __req("ui/selector.js");
 const { crearGuardadas } = __req("ui/guardadas.js");
 const { leerAlumnos, numVariantes, MAX_ALUMNOS } = __req("ui/alumnos.js");
@@ -366,9 +366,16 @@ function iniciar() {
     $("anadir").hidden = editores.length >= 2;
     for (const e of editores) e.refrescar();
   }
-  function mover(i, d) { [editores[i], editores[i + d]] = [editores[i + d], editores[i]]; recolocar(); pintar(); }
-  function quitar(i) { editores.splice(i, 1); recolocar(); pintar(); }
-  function cambiado(e) { if (editores[0] === e) guardarUltimo(e.id); pintar(); }
+  function mover(i, d) { [editores[i], editores[i + d]] = [editores[i + d], editores[i]]; recolocar(); letraMateria(); pintar(); }
+  function quitar(i) { editores.splice(i, 1); recolocar(); letraMateria(); pintar(); }
+  // Letra por materia: si la actividad 1 pasa a otra materia, se pone la letra de esa materia (Lengua → Fredoka).
+  let materia1 = null;
+  function letraMateria() {
+    const m = materiaDe(editores[0]?.id); if (m === materia1) return;
+    if (materia1 !== null) elegirFuente(fuenteMateria(editores[0].id));
+    materia1 = m;
+  }
+  function cambiado(e) { if (editores[0] === e) { guardarUltimo(e.id); letraMateria(); } pintar(); }
   function nuevoEditor(id) { editores.push(editorActividad(id, { tamano, alCambiar: cambiado })); recolocar(); }
 
   function pintar() {
@@ -461,7 +468,9 @@ function iniciar() {
     recolocar();
     c.actividades.forEach((a, i) => editores[i].poner(a.tipo, a.params));
     semilla = c.semilla || 1; $("titulo").value = c.titulo || ""; $("variaciones").value = c.variaciones || "iguales"; $("bn").checked = !!c.bn; $("grande").checked = !!c.grande; $("facil").checked = !!c.facil;
-    if (c.fuente && fuentePorId(c.fuente).id === c.fuente) elegirFuente(c.fuente); else if (c.fuente) $("infoFuente").textContent = `Esta ficha usaba la letra «${c.fuente.replace("usuario:", "")}», que no está en este dispositivo: se usa Andika. Puedes subirla otra vez.`;
+    if (!c.fuente || fuentePorId(c.fuente).id === c.fuente) elegirFuente(c.fuente || "andika");
+    else { elegirFuente("andika"); $("infoFuente").textContent = `Esta ficha usaba la letra «${c.fuente.replace("usuario:", "")}», que no está en este dispositivo: se usa Andika. Puedes subirla otra vez.`; }
+    materia1 = materiaDe(editores[0].id);
     pintar(); $("acts").scrollIntoView({ behavior: "smooth" });
   }
   function pintarGuardadas() {
@@ -606,7 +615,8 @@ function iniciar() {
   nuevoEditor(entrada.comp?.actividades[0].tipo || ultimo || listaTipos()[0]); pintar();
   if (entrada.comp) { abrirGuardada(entrada.comp); if (aFori) proyectar(); }
   // Primera vez: se empieza eligiendo la actividad (curso → materia → contenido → modelo).
-  else if (!ultimo) abrirSelector({ tamano: "completa", alElegir: (n) => { editores[0].poner(n); guardarUltimo(n); pintar(); } });
+  else if (!ultimo) abrirSelector({ tamano: "completa", alElegir: (n) => { editores[0].poner(n); guardarUltimo(n); letraMateria(); pintar(); } });
+  materia1 ??= materiaDe(editores[0].id);   // al arrancar mandan la letra guardada o la de la composición abierta
 }
 
 if (typeof document !== "undefined") {
@@ -983,21 +993,37 @@ const CATALOGO = {
   "1": "1.º de Primaria"
  },
  "materias": {
-  "matematicas": "Matemáticas"
+  "matematicas": "Matemáticas",
+  "lengua": "Lengua"
  },
  "bloques": {
-  "1": "Los números y sus representaciones",
-  "2": "Contar y series",
-  "3": "Orden y comparación",
-  "4": "Valor posicional",
-  "5": "Sumar",
-  "6": "Restar",
-  "7": "Juegos numéricos",
-  "8": "Problemas",
-  "9": "Geometría",
-  "10": "Medida",
-  "11": "Estadística y patrones",
-  "12": "Trucos de cálculo mental"
+  "matematicas": {
+   "1": "Los números y sus representaciones",
+   "2": "Contar y series",
+   "3": "Orden y comparación",
+   "4": "Valor posicional",
+   "5": "Sumar",
+   "6": "Restar",
+   "7": "Juegos numéricos",
+   "8": "Problemas",
+   "9": "Geometría",
+   "10": "Medida",
+   "11": "Estadística y patrones",
+   "12": "Trucos de cálculo mental"
+  },
+  "lengua": {
+   "1": "Conciencia fonológica",
+   "2": "Letras y sonidos",
+   "3": "Sílabas",
+   "4": "Palabras",
+   "5": "Frases",
+   "6": "Ortografía básica",
+   "7": "Comprensión lectora",
+   "8": "Escritura y caligrafía"
+  }
+ },
+ "fuentes": {
+  "lengua": "fredoka"
  },
  "modelos": [
   {
@@ -12045,7 +12071,7 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get MAX_RECIEN
 "ui/navegacion.js": (__exp) => {
 // Charta · navegación del catálogo (paso 4.1): curso → materia → bloque → modelo.
 // Sin DOM (se prueba en Node). Solo ofrece modelos con tipo registrado en la app.
-const { CATALOGO } = __req("nucleo/catalogo.js");
+const { CATALOGO, POR_ID } = __req("nucleo/catalogo.js");
 const { generar } = __req("nucleo/ficha.js");
 const { hayTipo } = __req("nucleo/tipos.js");
 const { render, svgZona } = __req("render/actividad.js");
@@ -12065,7 +12091,7 @@ function materias(curso) {
 function bloques(curso, materia) {
   const ms = disponibles().filter((m) => m.curso === curso && m.materia === materia);
   return unicos(ms.map((m) => m.bloque)).sort((a, b) => a - b)
-    .map((b) => ({ id: b, nombre: CATALOGO.bloques[b] ?? `Bloque ${b}`, n: ms.filter((m) => m.bloque === b).length }));
+    .map((b) => ({ id: b, nombre: CATALOGO.bloques[materia]?.[b] ?? `Bloque ${b}`, n: ms.filter((m) => m.bloque === b).length }));
 }
 
 /** Modelos de un bloque; `cabe` = false si no admite el tamaño pedido (p. ej. media página). */
@@ -12073,6 +12099,10 @@ function modelos(curso, materia, bloque, tamano = "completa") {
   return disponibles().filter((m) => m.curso === curso && m.materia === materia && m.bloque === bloque)
     .map((m) => ({ id: m.id, nombre: m.nombre, descripcion: m.descripcion, color: m.color, ...m.metadatos, cabe: m.tamanos.includes(tamano) }));
 }
+
+/** Letra por defecto de la materia de un modelo ("andika" si la materia no dice otra). */
+const fuenteMateria = (id) => CATALOGO.fuentes?.[POR_ID[id]?.materia] || "andika";
+const materiaDe = (id) => POR_ID[id]?.materia;
 
 const cache = new Map();
 /** Miniatura: la actividad con opciones por defecto (semilla fija) en SVG autónomo. */
@@ -12084,7 +12114,7 @@ function miniatura(id) {
   return cache.get(id);
 }
 
-Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get cursos() { return cursos; }, get materias() { return materias; }, get bloques() { return bloques; }, get modelos() { return modelos; }, get miniatura() { return miniatura; } }));
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get cursos() { return cursos; }, get materias() { return materias; }, get bloques() { return bloques; }, get modelos() { return modelos; }, get fuenteMateria() { return fuenteMateria; }, get materiaDe() { return materiaDe; }, get miniatura() { return miniatura; } }));
 },
 "ui/selector.js": (__exp) => {
 // Charta · selector de actividad a pantalla completa (paso 4.1).

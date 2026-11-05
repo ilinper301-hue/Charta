@@ -1,6 +1,6 @@
 // Charta · navegación del catálogo (paso 4.1): curso → materia → bloque → modelo.
 // Sin DOM (se prueba en Node). Solo ofrece modelos con tipo registrado en la app.
-import { CATALOGO } from "../nucleo/catalogo.js";
+import { CATALOGO, POR_ID } from "../nucleo/catalogo.js";
 import { generar } from "../nucleo/ficha.js";
 import { hayTipo } from "../nucleo/tipos.js";
 import { render, svgZona } from "../render/actividad.js";
@@ -21,7 +21,7 @@ export function materias(curso) {
 export function bloques(curso, materia) {
   const ms = disponibles().filter((m) => m.curso === curso && m.materia === materia);
   return unicos(ms.map((m) => m.bloque)).sort((a, b) => a - b)
-    .map((b) => ({ id: b, nombre: CATALOGO.bloques[b] ?? `Bloque ${b}`, n: ms.filter((m) => m.bloque === b).length }));
+    .map((b) => ({ id: b, nombre: CATALOGO.bloques[materia]?.[b] ?? `Bloque ${b}`, n: ms.filter((m) => m.bloque === b).length }));
 }
 
 /** Modelos de un bloque; `cabe` = false si no admite el tamaño pedido (p. ej. media página). */
@@ -29,6 +29,10 @@ export function modelos(curso, materia, bloque, tamano = "completa") {
   return disponibles().filter((m) => m.curso === curso && m.materia === materia && m.bloque === bloque)
     .map((m) => ({ id: m.id, nombre: m.nombre, descripcion: m.descripcion, color: m.color, ...m.metadatos, cabe: m.tamanos.includes(tamano) }));
 }
+
+/** Letra por defecto de la materia de un modelo ("andika" si la materia no dice otra). */
+export const fuenteMateria = (id) => CATALOGO.fuentes?.[POR_ID[id]?.materia] || "andika";
+export const materiaDe = (id) => POR_ID[id]?.materia;
 
 const cache = new Map();
 /** Miniatura: la actividad con opciones por defecto (semilla fija) en SVG autónomo. */

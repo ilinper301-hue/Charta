@@ -5,7 +5,7 @@ import { erroresFicha, letraVariante, paginasVariante } from "./nucleo/lector.js
 import { listaTipos } from "./tipos/index.js";
 import { hoja, hojas, estiloLectura, PALETA } from "./render/hoja.js";
 import { hayTipo } from "./nucleo/tipos.js";
-import { miniatura } from "./ui/navegacion.js";
+import { miniatura, fuenteMateria, materiaDe } from "./ui/navegacion.js";
 import { abrirSelector } from "./ui/selector.js";
 import { crearGuardadas } from "./ui/guardadas.js";
 import { leerAlumnos, numVariantes, MAX_ALUMNOS } from "./ui/alumnos.js";
@@ -130,9 +130,16 @@ function iniciar() {
     $("anadir").hidden = editores.length >= 2;
     for (const e of editores) e.refrescar();
   }
-  function mover(i, d) { [editores[i], editores[i + d]] = [editores[i + d], editores[i]]; recolocar(); pintar(); }
-  function quitar(i) { editores.splice(i, 1); recolocar(); pintar(); }
-  function cambiado(e) { if (editores[0] === e) guardarUltimo(e.id); pintar(); }
+  function mover(i, d) { [editores[i], editores[i + d]] = [editores[i + d], editores[i]]; recolocar(); letraMateria(); pintar(); }
+  function quitar(i) { editores.splice(i, 1); recolocar(); letraMateria(); pintar(); }
+  // Letra por materia: si la actividad 1 pasa a otra materia, se pone la letra de esa materia (Lengua → Fredoka).
+  let materia1 = null;
+  function letraMateria() {
+    const m = materiaDe(editores[0]?.id); if (m === materia1) return;
+    if (materia1 !== null) elegirFuente(fuenteMateria(editores[0].id));
+    materia1 = m;
+  }
+  function cambiado(e) { if (editores[0] === e) { guardarUltimo(e.id); letraMateria(); } pintar(); }
   function nuevoEditor(id) { editores.push(editorActividad(id, { tamano, alCambiar: cambiado })); recolocar(); }
 
   function pintar() {
@@ -225,7 +232,9 @@ function iniciar() {
     recolocar();
     c.actividades.forEach((a, i) => editores[i].poner(a.tipo, a.params));
     semilla = c.semilla || 1; $("titulo").value = c.titulo || ""; $("variaciones").value = c.variaciones || "iguales"; $("bn").checked = !!c.bn; $("grande").checked = !!c.grande; $("facil").checked = !!c.facil;
-    if (c.fuente && fuentePorId(c.fuente).id === c.fuente) elegirFuente(c.fuente); else if (c.fuente) $("infoFuente").textContent = `Esta ficha usaba la letra «${c.fuente.replace("usuario:", "")}», que no está en este dispositivo: se usa Andika. Puedes subirla otra vez.`;
+    if (!c.fuente || fuentePorId(c.fuente).id === c.fuente) elegirFuente(c.fuente || "andika");
+    else { elegirFuente("andika"); $("infoFuente").textContent = `Esta ficha usaba la letra «${c.fuente.replace("usuario:", "")}», que no está en este dispositivo: se usa Andika. Puedes subirla otra vez.`; }
+    materia1 = materiaDe(editores[0].id);
     pintar(); $("acts").scrollIntoView({ behavior: "smooth" });
   }
   function pintarGuardadas() {
@@ -370,7 +379,8 @@ function iniciar() {
   nuevoEditor(entrada.comp?.actividades[0].tipo || ultimo || listaTipos()[0]); pintar();
   if (entrada.comp) { abrirGuardada(entrada.comp); if (aFori) proyectar(); }
   // Primera vez: se empieza eligiendo la actividad (curso → materia → contenido → modelo).
-  else if (!ultimo) abrirSelector({ tamano: "completa", alElegir: (n) => { editores[0].poner(n); guardarUltimo(n); pintar(); } });
+  else if (!ultimo) abrirSelector({ tamano: "completa", alElegir: (n) => { editores[0].poner(n); guardarUltimo(n); letraMateria(); pintar(); } });
+  materia1 ??= materiaDe(editores[0].id);   // al arrancar mandan la letra guardada o la de la composición abierta
 }
 
 if (typeof document !== "undefined") {

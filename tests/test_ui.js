@@ -192,3 +192,14 @@ import { crearGuardadas as crearG, limpiar as limp } from "../src/ui/guardadas.j
   assert.equal(crearG(alm).esFavorito({ actividades: [{ tipo: "sumar.h20", params: {} }], semilla: 4, titulo: "", variaciones: "iguales", bn: false, grande: false, facil: false, fuente: "andika" }), true);
   console.log(`test_ui: letras (Andika, Fredoka, subida) OK en ${n} modelos`);
 }
+
+// Lengua (lote 0): bloques por materia y letra por materia.
+{
+  const { fuenteMateria } = await import("../src/ui/navegacion.js");
+  assert.equal(CATALOGO.materias.lengua, "Lengua");
+  assert.equal(CATALOGO.bloques.lengua[3], "Sílabas");
+  assert.equal(CATALOGO.bloques.matematicas[5], "Sumar");
+  assert.equal(fuenteMateria("sumar.h20"), "andika");
+  assert.equal(CATALOGO.fuentes.lengua, "fredoka");
+  console.log("test_ui: bloques y letra por materia OK");
+}

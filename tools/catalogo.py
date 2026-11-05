@@ -8,6 +8,7 @@ import modelos as MOD
 import generador_fichas as g
 import metadatos as META
 import modelos_app as APP
+import modelos_lengua as LEN
 
 def titulo(m):
     modo = next((o for o in m["opciones"] if o["id"] == "modo" and o["tipo"] == "opcion"), None)
@@ -18,7 +19,11 @@ def titulo(m):
 modelos = [{**m, "tamanos": list(m["tamanos"]), "titulo": titulo(m), "color": g.color_modelo(m), "metadatos": META.metadatos(m["id"])} for m in MOD.MODELOS]
 # Modelos solo de la app (motor/modelos_app.py): sin motor Python que dé título y color.
 modelos += [{**m, "tamanos": list(m["tamanos"]), "metadatos": META.metadatos(m["id"])} for m in APP.MODELOS_APP]
-datos = {"cursos": MOD.CURSOS, "materias": MOD.MATERIAS, "bloques": dict(sorted({**MOD.BLOQUES, **APP.BLOQUES}.items())), "modelos": modelos}
+modelos += [{**m, "tamanos": list(m["tamanos"]), "metadatos": META.metadatos(m["id"])} for m in LEN.MODELOS_LENGUA]
+# Bloques por materia (cada materia numera los suyos) y letra por defecto de cada materia (Andika si no se dice).
+datos = {"cursos": MOD.CURSOS, "materias": {**MOD.MATERIAS, LEN.MATERIA: LEN.NOMBRE},
+         "bloques": {"matematicas": dict(sorted({**MOD.BLOQUES, **APP.BLOQUES}.items())), LEN.MATERIA: LEN.BLOQUES},
+         "fuentes": {LEN.MATERIA: LEN.FUENTE}, "modelos": modelos}
 js = ("// GENERADO por tools/catalogo.py desde motor/modelos.py. No editar a mano.\n"
       "export const CATALOGO = " + json.dumps(datos, ensure_ascii=False, indent=1) + ";\n"
       "export const POR_ID = Object.fromEntries(CATALOGO.modelos.map((m) => [m.id, m]));\n")

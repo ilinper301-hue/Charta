@@ -18,7 +18,7 @@ tests/test_nucleo.js  pruebas del núcleo JS (Node): `node tests/test_nucleo.js`
 index.html            redirige a dist/ (GitHub Pages sirve la raíz)
 package.json          solo "type": "module" para Node (sin dependencias)
 src/index.html, estilos.css, app.js   app (verde oscuro): editores de actividad (modelo elegido + opciones), alumnos, impresión
-src/ui/navegacion.js  cursos(), materias(c), bloques(c, m), modelos(c, m, b, tamano) (solo tipos registrados; `cabe`), miniatura(id) — sin DOM
+src/ui/navegacion.js  cursos(), materias(c), bloques(c, m) (CATALOGO.bloques[materia]), modelos(c, m, b, tamano) (solo tipos registrados; `cabe`), miniatura(id), fuenteMateria(id), materiaDe(id) — sin DOM
 src/ui/alumnos.js     leerAlumnos(texto) (pegar listas, Séneca), numVariantes(opción, páginas), MAX_ALUMNOS — sin DOM
 src/ui/guardadas.js   crearGuardadas(almacén): recientes(), favoritos(), anotarReciente, alternarFavorito, esFavorito, quitar — sin nombres
 src/ui/selector.js    abrirSelector({ actual, tamano, alElegir, alCerrar }): pantalla curso → materia → bloque → modelo
@@ -46,6 +46,12 @@ tests/test_invariantes.js  todas las combinaciones × semillas × variantes · `
 tests/test_doradas.js + doradas.json  fichas doradas (JSON + huella SVG); `--actualizar` solo si el cambio es intencionado (y subir `version` del tipo)
 tools/comparar_tipo.py  motor vs JS de un tipo en A4 → /tmp/cmp_<id>_<tamaño>.png (`--media`, `--solucion`)
 tools/ENCARGO_PORTAR.md  instrucciones para que un agente porte modelos del motor (fase 3; reutilizable para Lengua u otros cursos)
+motor/modelos_lengua.py  Lengua: MATERIA, FUENTE (fredoka), BLOQUES (1–8 propios), MODELOS_LENGUA (por lotes; ver LENGUA_1.md)
+datos/lexico_1.tsv    léxico de Lengua de 1.º (palabra, cat, genero, campos, dibujo, frec, extra=3.ª persona de los verbos) → tools/lexico.py → src/lengua/lexico.js (GENERADO)
+src/lengua/reglas.js  silabas, tipoSilaba, TIPOS_SILABA, cabeTipo, tonica, acentuacion, rima, riman, plural, articulo, letras, soloLetras, llevaLetra, huecosOrto, REGLAS_ORTO, sinTildes
+src/lengua/palabras.js  buscar({cat, campos, nSilabas, tipo, letras, conLetra, dibujo, frec, sin, min/maxLetras}), elegirPalabras(azar, k, filtros), datosPalabra, CAMPOS_LEXICOS
+src/lengua/dibujo.js  ayudantes en Papel: palabraHuecos, casillas (sol / rellenar), rodear (rojo en solución), unir (líneas rojas), rotulo
+tests/test_lengua.js  reglas (lista de control), léxico y ayudantes
 tools/build.py        src/ → dist/index.html (un solo archivo) + sw.js y manifest.webmanifest en la raíz; --js = solo el paquete
 src/pwa/              sw.js (plantilla, __VERSION__), manifest.webmanifest, registro.js (registrarSW(avisar)), logo.svg (fuente del logo y los iconos) · paso 4.5
 src/ui/tema.js        iniciarTema(botón): sistema/claro/oscuro en charta:tema → html[data-tema="oscuro"]; variables en estilos.css (como Tabula)

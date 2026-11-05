@@ -1,6 +1,6 @@
 # Charta · Lengua de 1.º — Guion de tipología de fichas
 
-> Guion aprobado antes de programar (como se hizo con Matemáticas). Ningún modelo está programado todavía.
+> Guion aprobado antes de programar (como se hizo con Matemáticas). Lote 0 hecho (5-11-2026): catálogo por materia, léxico, reglas y ayudantes de dibujo (ver CODEMAP.md). Ningún modelo programado todavía.
 > Decisiones de Iván (5-11-2026): letra **Fredoka**; el alumnado escribe en **imprenta (script)** con **pauta doble (Lamela)**; sin LOMLOE (solo dificultad, minutos y etiquetas); todo en el dispositivo, sin conexión y sin tokens. El orden de las letras y los pictogramas, **pendientes**.
 
 ## Leyenda
