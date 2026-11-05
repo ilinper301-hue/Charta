@@ -1,8 +1,9 @@
 // sumar.h20 · Sumas hasta 20 (port de _pares_suma(20, nivel) del motor).
 // datos:    { a, b, op: "+" }
 // solucion: { huecos: [a + b] }
-// Completa: 24 sumas (8 filas × 3); media: 12 (la mitad de filas).
+// Completa: 24 sumas (8 filas × 3); media: 12 (la mitad de filas). Dibujo: _s_horiz() → _pintar().
 import { registrar } from "../nucleo/tipos.js";
+import { TOP, T, B } from "../render/papel.js";
 
 const SIN = [], CON = [];
 for (let a = 1; a < 20; a++) for (let b = 1; b < 20; b++)
@@ -31,5 +32,9 @@ export default registrar({
       enunciado: "Calcula y escribe el resultado en el cuadro gris.",
       ejercicios: ps.map(([a, b]) => ({ datos: { a, b, op: "+" }, solucion: { huecos: [a + b] } })),
     };
+  },
+  dibujar(p, act) {
+    const es = act.ejercicios;
+    p.pintar(TOP, 3, 8, es.map((e) => [T(`${e.datos.a} + ${e.datos.b} =`, 19), B(42, 38, e.solucion.huecos[0])]), es.map((e) => e.id));
   },
 });
