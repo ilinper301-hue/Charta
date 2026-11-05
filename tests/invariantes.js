@@ -17,9 +17,11 @@ import inv_trucos from "./inv/trucos.js";
 import inv_geometria from "./inv/geometria.js";
 import inv_medida from "./inv/medida.js";
 import inv_estadistica from "./inv/estadistica.js";
+import inv_letra from "./inv/letra.js";
+import inv_silaba from "./inv/silaba.js";
 
 export const INVARIANTES = {
-  ...inv_rep, ...inv_combinada, ...inv_conteo, ...inv_orden, ...inv_valor, ...inv_sumar, ...inv_restar, ...inv_juegos, ...inv_problemas, ...inv_trucos, ...inv_geometria, ...inv_medida, ...inv_estadistica,
+  ...inv_rep, ...inv_combinada, ...inv_conteo, ...inv_orden, ...inv_valor, ...inv_sumar, ...inv_restar, ...inv_juegos, ...inv_problemas, ...inv_trucos, ...inv_geometria, ...inv_medida, ...inv_estadistica, ...inv_letra, ...inv_silaba,
   "rep.dado": rep("dado"),
   "rep.marco": rep("marco"),
 

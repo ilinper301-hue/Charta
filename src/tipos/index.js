@@ -12,5 +12,7 @@ import "./familia.trucos.js";
 import "./familia.geometria.js";
 import "./familia.medida.js";
 import "./familia.estadistica.js";
+import "./familia.letra.js";
+import "./familia.silaba.js";
 
 export { tipo, hayTipo, listaTipos } from "../nucleo/tipos.js";

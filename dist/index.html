@@ -744,6 +744,1536 @@ function paqueteFori(ficha, opciones) {
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get URL_FORI() { return URL_FORI; }, get CLAVE_FORI() { return CLAVE_FORI; }, get ANCHO() { return ANCHO; }, get ALTO() { return ALTO; }, get cssPasos() { return cssPasos; }, get marcarPasos() { return marcarPasos; }, get diapositivas() { return diapositivas; }, get paqueteFori() { return paqueteFori; } }));
 },
+"lengua/dibujo.js": (__exp) => {
+// Charta · Lengua · ayudantes de dibujo comunes (lote 0 de LENGUA_1.md). Dibujan en un Papel (coordenadas del motor, y hacia arriba).
+// Mismo estilo que Matemáticas: tarjetas blancas, huecos grises redondeados y la solución en rojo (modo "solucion").
+// Cada ayudante dibuja dentro de la caja (x, y, w, h) y centra su contenido.
+const { INK, COLOR_SOLUCION } = __req("render/papel.js");
+const FS = 24;       // tamaño de letra de las palabras de lectura
+
+/** Ancho de un texto en negrita con la letra de la ficha. */
+const anchoB = (p, t, fs) => p.ancho(t, "PB", fs);
+
+/** Palabra con huecos: «m_sa». huecos = [{ pos, largo, sol }] (sol = lo que va; por defecto, las letras quitadas).
+ *  Cada hueco es una caja gris del ancho de una letra ancha (o de su solución, si es mayor). */
+function palabraHuecos(p, x, y, w, h, palabra, huecos, { fs = FS, anchoHueco } = {}) {
+  const trozos = []; let i = 0;
+  for (const hu of [...huecos].sort((a, b) => a.pos - b.pos)) {
+    if (hu.pos > i) trozos.push({ t: palabra.slice(i, hu.pos) });
+    const sol = hu.sol ?? palabra.slice(hu.pos, hu.pos + hu.largo);
+    trozos.push({ hueco: true, sol, w: anchoHueco ?? Math.max(fs * 0.95, anchoB(p, sol, fs) + fs * 0.45) });
+    i = hu.pos + hu.largo;
+  }
+  if (i < palabra.length) trozos.push({ t: palabra.slice(i) });
+  const ws = trozos.map((t) => (t.hueco ? t.w : anchoB(p, t.t, fs)));
+  const g = fs * 0.12, total = ws.reduce((a, b) => a + b, 0) + g * (trozos.length - 1);
+  let cx = x + (w - total) / 2;
+  const bh = fs * 1.3, by = y + (h - bh) / 2;
+  trozos.forEach((t, k) => {
+    if (t.hueco) p.caja(cx, by, t.w, bh, null, fs, t.sol);
+    else p.text(cx, y + h / 2 - fs * 0.35, t.t, fs, { f: "PB" });
+    cx += ws[k] + g;
+  });
+}
+
+/** Fila de n casillas centrada (sílabas, letras o palmadas).
+ *  sol: lista de textos (uno por casilla) que se ven en rojo en la solución; rellenar: nº de casillas que se colorean
+ *  (en la solución, en rojo suave: «colorea una por cada palmada»). */
+function casillas(p, x, y, w, h, n, { sol = null, rellenar = null, ancho = 46, alto = 40, gap = 8, fs = 20 } = {}) {
+  const total = n * ancho + (n - 1) * gap;
+  let cx = x + (w - total) / 2; const by = y + (h - alto) / 2;
+  for (let k = 0; k < n; k++) {
+    if (rellenar !== null) {
+      const pinta = p.solucion && k < rellenar;
+      p.rrect(cx, by, ancho, alto, 7, { lw: pinta ? 2.2 : 1.5, fill: pinta ? "#F6C9C9" : 1, stroke: pinta ? COLOR_SOLUCION : INK });
+    } else p.caja(cx, by, ancho, alto, null, fs, sol ? sol[k] : null);
+    cx += ancho + gap;
+  }
+}
+
+/** Opciones para rodear, en fila y centradas (letras, sílabas o palabras). En la solución, la correcta rodeada en rojo.
+ *  correcta: índice o lista de índices. Devuelve las cajas [{ x, y, w, h }] por si el tipo quiere dibujar algo encima. */
+function rodear(p, x, y, w, h, opciones, correcta, { fs = FS, gap = 22, tarjeta = false } = {}) {
+  const ok = new Set([].concat(correcta ?? []));
+  const pad = fs * 0.45, ws = opciones.map((o) => anchoB(p, o, fs) + 2 * pad);
+  const total = ws.reduce((a, b) => a + b, 0) + gap * (opciones.length - 1), bh = fs * 1.55;
+  let cx = x + (w - total) / 2; const by = y + (h - bh) / 2, cajas = [];
+  opciones.forEach((o, k) => {
+    if (tarjeta) p.rrect(cx, by, ws[k], bh, bh / 2, { lw: 0.8, fill: 1, stroke: 0.8 });
+    p.text(cx + ws[k] / 2, y + h / 2 - fs * 0.35, o, fs, { f: "PB", anchor: "middle" });
+    if (p.solucion && ok.has(k)) p.rrect(cx - 2, by - 2, ws[k] + 4, bh + 4, (bh + 4) / 2, { lw: 2.4, stroke: COLOR_SOLUCION });
+    cajas.push({ x: cx, y: by, w: ws[k], h: bh });
+    cx += ws[k] + gap;
+  });
+  return cajas;
+}
+
+/** Dos columnas para unir con flechas: izq[i] va con der[pares[i]]. Cada elemento lleva su punto de unión;
+ *  en la solución, la línea en rojo. Cada fila es un ejercicio (ids[i]), para Fori. */
+function unir(p, x, y, w, h, izq, der, pares, { fs = 22, ids = null } = {}) {
+  const n = izq.length, rh = h / n, cw = Math.min(200, w * 0.36), bh = Math.min(rh - 10, fs * 1.8);
+  const xi = x + w * 0.06, xd = x + w - w * 0.06 - cw;
+  const fila = (k) => y + h - (k + 1) * rh + (rh - bh) / 2;
+  der.forEach((d, k) => {
+    p.tarjeta(xd, fila(k), cw, bh);
+    p.text(xd + cw / 2, fila(k) + bh / 2 - fs * 0.35, d, fs, { f: "PB", anchor: "middle" });
+    p.circle(xd - 12, fila(k) + bh / 2, 4.5, { fill: INK, stroke: null });
+  });
+  izq.forEach((t, k) => {
+    const dib = () => {
+      p.tarjeta(xi, fila(k), cw, bh);
+      p.text(xi + cw / 2, fila(k) + bh / 2 - fs * 0.35, t, fs, { f: "PB", anchor: "middle" });
+      p.circle(xi + cw + 12, fila(k) + bh / 2, 4.5, { fill: INK, stroke: null });
+      if (p.solucion) p.line(xi + cw + 12, fila(k) + bh / 2, xd - 12, fila(pares[k]) + bh / 2, { lw: 2.4, gris: COLOR_SOLUCION });
+    };
+    if (ids) p.ejercicio(ids[k], dib); else dib();
+  });
+}
+
+/** Texto a la izquierda de la caja (una palabra, una frase con la sílaba en hueco…), en negrita, centrado en vertical. */
+function rotulo(p, x, y, h, texto, { fs = FS, anchor = "start", gris = INK } = {}) {
+  p.text(x, y + h / 2 - fs * 0.35, texto, fs, { f: "PB", anchor, gris });
+}
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get palabraHuecos() { return palabraHuecos; }, get casillas() { return casillas; }, get rodear() { return rodear; }, get unir() { return unir; }, get rotulo() { return rotulo; } }));
+},
+"lengua/lexico.js": (__exp) => {
+// GENERADO por tools/lexico.py desde datos/lexico_1.tsv. No editar a mano.
+// Cada palabra: p (palabra), c (n nombre, v verbo, a adjetivo, o otra), g (género de los nombres), k (campos léxicos),
+// d (1 = se puede dibujar), f (frecuencia 1–3), v3 (verbos: 3.ª persona del presente).
+const LEXICO = [
+{"p":"gato","c":"n","k":["animales"],"f":1,"g":"m","d":1},
+{"p":"perro","c":"n","k":["animales"],"f":1,"g":"m","d":1},
+{"p":"pato","c":"n","k":["animales"],"f":1,"g":"m","d":1},
+{"p":"pez","c":"n","k":["animales"],"f":1,"g":"m","d":1},
+{"p":"vaca","c":"n","k":["animales"],"f":1,"g":"f","d":1},
+{"p":"cerdo","c":"n","k":["animales"],"f":1,"g":"m","d":1},
+{"p":"caballo","c":"n","k":["animales"],"f":1,"g":"m","d":1},
+{"p":"oveja","c":"n","k":["animales"],"f":1,"g":"f","d":1},
+{"p":"gallina","c":"n","k":["animales"],"f":1,"g":"f","d":1},
+{"p":"pollo","c":"n","k":["animales"],"f":1,"g":"m","d":1},
+{"p":"conejo","c":"n","k":["animales"],"f":1,"g":"m","d":1},
+{"p":"ratón","c":"n","k":["animales"],"f":1,"g":"m","d":1},
+{"p":"mono","c":"n","k":["animales"],"f":1,"g":"m","d":1},
+{"p":"oso","c":"n","k":["animales"],"f":1,"g":"m","d":1},
+{"p":"león","c":"n","k":["animales"],"f":1,"g":"m","d":1},
+{"p":"tigre","c":"n","k":["animales"],"f":1,"g":"m","d":1},
+{"p":"elefante","c":"n","k":["animales"],"f":1,"g":"m","d":1},
+{"p":"jirafa","c":"n","k":["animales"],"f":1,"g":"f","d":1},
+{"p":"pájaro","c":"n","k":["animales"],"f":1,"g":"m","d":1},
+{"p":"abeja","c":"n","k":["animales"],"f":1,"g":"f","d":1},
+{"p":"mariposa","c":"n","k":["animales"],"f":1,"g":"f","d":1},
+{"p":"araña","c":"n","k":["animales"],"f":1,"g":"f","d":1},
+{"p":"rana","c":"n","k":["animales"],"f":1,"g":"f","d":1},
+{"p":"tortuga","c":"n","k":["animales"],"f":1,"g":"f","d":1},
+{"p":"lobo","c":"n","k":["animales"],"f":1,"g":"m","d":1},
+{"p":"burro","c":"n","k":["animales"],"f":1,"g":"m","d":1},
+{"p":"toro","c":"n","k":["animales"],"f":1,"g":"m","d":1},
+{"p":"animal","c":"n","k":["animales"],"f":1,"g":"m","d":1},
+{"p":"zorro","c":"n","k":["animales"],"f":1,"g":"m","d":1},
+{"p":"serpiente","c":"n","k":["animales"],"f":1,"g":"f","d":1},
+{"p":"hormiga","c":"n","k":["animales"],"f":1,"g":"f","d":1},
+{"p":"delfín","c":"n","k":["animales"],"f":2,"g":"m","d":1},
+{"p":"pingüino","c":"n","k":["animales"],"f":2,"g":"m","d":1},
+{"p":"cebra","c":"n","k":["animales"],"f":2,"g":"f","d":1},
+{"p":"canguro","c":"n","k":["animales"],"f":2,"g":"m","d":1},
+{"p":"koala","c":"n","k":["animales"],"f":2,"g":"f","d":1},
+{"p":"panda","c":"n","k":["animales"],"f":2,"g":"f","d":1},
+{"p":"gorila","c":"n","k":["animales"],"f":2,"g":"f","d":1},
+{"p":"cabra","c":"n","k":["animales"],"f":2,"g":"f","d":1},
+{"p":"cordero","c":"n","k":["animales"],"f":2,"g":"m","d":1},
+{"p":"gallo","c":"n","k":["animales"],"f":2,"g":"m","d":1},
+{"p":"cigüeña","c":"n","k":["animales"],"f":2,"g":"f","d":1},
+{"p":"pelícano","c":"n","k":["animales"],"f":2,"g":"m","d":1},
+{"p":"murciélago","c":"n","k":["animales"],"f":2,"g":"m","d":1},
+{"p":"erizo","c":"n","k":["animales"],"f":2,"g":"m","d":1},
+{"p":"hámster","c":"n","k":["animales"],"f":2,"g":"m","d":1},
+{"p":"gatito","c":"n","k":["animales"],"f":2,"g":"m","d":1},
+{"p":"perrito","c":"n","k":["animales"],"f":2,"g":"m","d":1},
+{"p":"cachorro","c":"n","k":["animales"],"f":2,"g":"m","d":1},
+{"p":"avispa","c":"n","k":["animales"],"f":2,"g":"f","d":1},
+{"p":"potro","c":"n","k":["animales"],"f":2,"g":"m","d":1},
+{"p":"pan","c":"n","k":["comida"],"f":1,"g":"m","d":1},
+{"p":"leche","c":"n","k":["comida"],"f":1,"g":"f","d":1},
+{"p":"huevo","c":"n","k":["comida"],"f":1,"g":"m","d":1},
+{"p":"queso","c":"n","k":["comida"],"f":1,"g":"m","d":1},
+{"p":"zumo","c":"n","k":["comida"],"f":1,"g":"m","d":1},
+{"p":"galleta","c":"n","k":["comida"],"f":1,"g":"f","d":1},
+{"p":"manzana","c":"n","k":["comida"],"f":1,"g":"f","d":1},
+{"p":"plátano","c":"n","k":["comida"],"f":1,"g":"m","d":1},
+{"p":"pera","c":"n","k":["comida"],"f":1,"g":"f","d":1},
+{"p":"fresa","c":"n","k":["comida"],"f":1,"g":"f","d":1},
+{"p":"uva","c":"n","k":["comida"],"f":1,"g":"f","d":1},
+{"p":"sandía","c":"n","k":["comida"],"f":1,"g":"f","d":1},
+{"p":"melón","c":"n","k":["comida"],"f":1,"g":"m","d":1},
+{"p":"limón","c":"n","k":["comida"],"f":1,"g":"m","d":1},
+{"p":"tomate","c":"n","k":["comida"],"f":1,"g":"m","d":1},
+{"p":"patata","c":"n","k":["comida"],"f":1,"g":"f","d":1},
+{"p":"zanahoria","c":"n","k":["comida"],"f":1,"g":"f","d":1},
+{"p":"lechuga","c":"n","k":["comida"],"f":1,"g":"f","d":1},
+{"p":"cebolla","c":"n","k":["comida"],"f":1,"g":"f","d":1},
+{"p":"carne","c":"n","k":["comida"],"f":1,"g":"f","d":1},
+{"p":"pescado","c":"n","k":["comida"],"f":1,"g":"m","d":1},
+{"p":"jamón","c":"n","k":["comida"],"f":1,"g":"m","d":1},
+{"p":"arroz","c":"n","k":["comida"],"f":1,"g":"m","d":1},
+{"p":"sopa","c":"n","k":["comida"],"f":1,"g":"f","d":1},
+{"p":"pasta","c":"n","k":["comida"],"f":1,"g":"f","d":1},
+{"p":"helado","c":"n","k":["comida"],"f":1,"g":"m","d":1},
+{"p":"tarta","c":"n","k":["comida"],"f":1,"g":"f","d":1},
+{"p":"chocolate","c":"n","k":["comida"],"f":1,"g":"m","d":1},
+{"p":"caramelo","c":"n","k":["comida"],"f":1,"g":"m","d":1},
+{"p":"yogur","c":"n","k":["comida"],"f":1,"g":"m","d":1},
+{"p":"sal","c":"n","k":["comida"],"f":1,"g":"f","d":1},
+{"p":"ajo","c":"n","k":["comida"],"f":2,"g":"m","d":1},
+{"p":"cacahuete","c":"n","k":["comida"],"f":2,"g":"m","d":1},
+{"p":"calabacín","c":"n","k":["comida"],"f":2,"g":"m","d":1},
+{"p":"espagueti","c":"n","k":["comida"],"f":2,"g":"m","d":1},
+{"p":"garbanzo","c":"n","k":["comida"],"f":2,"g":"m","d":1},
+{"p":"guisante","c":"n","k":["comida"],"f":2,"g":"m","d":1},
+{"p":"lenteja","c":"n","k":["comida"],"f":2,"g":"f","d":1},
+{"p":"mantequilla","c":"n","k":["comida"],"f":2,"g":"f","d":1},
+{"p":"nata","c":"n","k":["comida"],"f":2,"g":"f","d":1},
+{"p":"nuez","c":"n","k":["comida"],"f":2,"g":"f","d":1},
+{"p":"albaricoque","c":"n","k":["comida"],"f":2,"g":"m","d":1},
+{"p":"melocotón","c":"n","k":["comida"],"f":2,"g":"m","d":1},
+{"p":"piña","c":"n","k":["comida"],"f":2,"g":"f","d":1},
+{"p":"pomelo","c":"n","k":["comida"],"f":2,"g":"m","d":1},
+{"p":"higo","c":"n","k":["comida"],"f":2,"g":"m","d":1},
+{"p":"frambuesa","c":"n","k":["comida"],"f":2,"g":"f","d":1},
+{"p":"puré","c":"n","k":["comida"],"f":2,"g":"m","d":1},
+{"p":"salchicha","c":"n","k":["comida"],"f":2,"g":"f","d":1},
+{"p":"paella","c":"n","k":["comida"],"f":2,"g":"f","d":1},
+{"p":"merienda","c":"n","k":["comida"],"f":2,"g":"f","d":1},
+{"p":"desayuno","c":"n","k":["comida"],"f":2,"g":"m","d":1},
+{"p":"bollo","c":"n","k":["comida"],"f":2,"g":"m","d":1},
+{"p":"magdalena","c":"n","k":["comida"],"f":2,"g":"f","d":1},
+{"p":"gominola","c":"n","k":["comida"],"f":2,"g":"f","d":1},
+{"p":"almendra","c":"n","k":["comida"],"f":2,"g":"f","d":1},
+{"p":"avellana","c":"n","k":["comida"],"f":2,"g":"f","d":1},
+{"p":"fruta","c":"n","k":["comida"],"f":2,"g":"f","d":1},
+{"p":"filete","c":"n","k":["comida"],"f":2,"g":"m","d":1},
+{"p":"café","c":"n","k":["comida"],"f":2,"g":"m","d":1},
+{"p":"té","c":"n","k":["comida"],"f":2,"g":"m","d":1},
+{"p":"caldo","c":"n","k":["comida"],"f":2,"g":"m","d":1},
+{"p":"flan","c":"n","k":["comida"],"f":2,"g":"m","d":1},
+{"p":"churro","c":"n","k":["comida"],"f":2,"g":"m","d":1},
+{"p":"kiwi","c":"n","k":["comida"],"f":2,"g":"m","d":1},
+{"p":"camisa","c":"n","k":["ropa"],"f":1,"g":"f","d":1},
+{"p":"camiseta","c":"n","k":["ropa"],"f":1,"g":"f","d":1},
+{"p":"jersey","c":"n","k":["ropa"],"f":1,"g":"m","d":1},
+{"p":"pantalón","c":"n","k":["ropa"],"f":1,"g":"m","d":1},
+{"p":"falda","c":"n","k":["ropa"],"f":1,"g":"f","d":1},
+{"p":"vestido","c":"n","k":["ropa"],"f":1,"g":"m","d":1},
+{"p":"abrigo","c":"n","k":["ropa"],"f":1,"g":"m","d":1},
+{"p":"chaqueta","c":"n","k":["ropa"],"f":1,"g":"f","d":1},
+{"p":"chaleco","c":"n","k":["ropa"],"f":1,"g":"m","d":1},
+{"p":"calcetín","c":"n","k":["ropa"],"f":1,"g":"m","d":1},
+{"p":"zapato","c":"n","k":["ropa"],"f":1,"g":"m","d":1},
+{"p":"bota","c":"n","k":["ropa"],"f":1,"g":"f","d":1},
+{"p":"sandalia","c":"n","k":["ropa"],"f":1,"g":"f","d":1},
+{"p":"zapatilla","c":"n","k":["ropa"],"f":1,"g":"f","d":1},
+{"p":"gorro","c":"n","k":["ropa"],"f":1,"g":"m","d":1},
+{"p":"gorra","c":"n","k":["ropa"],"f":1,"g":"f","d":1},
+{"p":"sombrero","c":"n","k":["ropa"],"f":1,"g":"m","d":1},
+{"p":"bufanda","c":"n","k":["ropa"],"f":1,"g":"f","d":1},
+{"p":"guante","c":"n","k":["ropa"],"f":1,"g":"m","d":1},
+{"p":"pijama","c":"n","k":["ropa"],"f":1,"g":"m","d":1},
+{"p":"bañador","c":"n","k":["ropa"],"f":1,"g":"m","d":1},
+{"p":"bikini","c":"n","k":["ropa"],"f":1,"g":"m","d":1},
+{"p":"sudadera","c":"n","k":["ropa"],"f":1,"g":"f","d":1},
+{"p":"chándal","c":"n","k":["ropa"],"f":1,"g":"m","d":1},
+{"p":"cinturón","c":"n","k":["ropa"],"f":1,"g":"m","d":1},
+{"p":"corbata","c":"n","k":["ropa"],"f":1,"g":"f","d":1},
+{"p":"botón","c":"n","k":["ropa"],"f":1,"g":"m","d":1},
+{"p":"cremallera","c":"n","k":["ropa"],"f":1,"g":"f","d":1},
+{"p":"bolsillo","c":"n","k":["ropa"],"f":1,"g":"m","d":1},
+{"p":"cuello","c":"n","k":["ropa"],"f":1,"g":"m","d":1},
+{"p":"manga","c":"n","k":["ropa"],"f":1,"g":"f","d":1},
+{"p":"babi","c":"n","k":["ropa"],"f":1,"g":"m","d":1},
+{"p":"capa","c":"n","k":["ropa"],"f":2,"g":"f","d":1},
+{"p":"bata","c":"n","k":["ropa"],"f":2,"g":"f","d":1},
+{"p":"pañuelo","c":"n","k":["ropa"],"f":2,"g":"m","d":1},
+{"p":"pendiente","c":"n","k":["ropa"],"f":2,"g":"m","d":1},
+{"p":"collar","c":"n","k":["ropa"],"f":2,"g":"m","d":1},
+{"p":"mochila","c":"n","k":["ropa"],"f":2,"g":"f","d":1},
+{"p":"tela","c":"n","k":["ropa"],"f":2,"g":"f","d":1},
+{"p":"lana","c":"n","k":["ropa"],"f":2,"g":"f","d":1},
+{"p":"cordón","c":"n","k":["ropa"],"f":2,"g":"m","d":1},
+{"p":"suela","c":"n","k":["ropa"],"f":2,"g":"f","d":1},
+{"p":"casa","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"puerta","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"ventana","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"mesa","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"silla","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"sofá","c":"n","k":["casa"],"f":1,"g":"m","d":1},
+{"p":"cama","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"cuna","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"armario","c":"n","k":["casa"],"f":1,"g":"m","d":1},
+{"p":"cocina","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"baño","c":"n","k":["casa"],"f":1,"g":"m","d":1},
+{"p":"salón","c":"n","k":["casa"],"f":1,"g":"m","d":1},
+{"p":"habitación","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"pasillo","c":"n","k":["casa"],"f":1,"g":"m","d":1},
+{"p":"escalera","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"techo","c":"n","k":["casa"],"f":1,"g":"m","d":1},
+{"p":"suelo","c":"n","k":["casa"],"f":1,"g":"m","d":1},
+{"p":"pared","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"tejado","c":"n","k":["casa"],"f":1,"g":"m","d":1},
+{"p":"jardín","c":"n","k":["casa"],"f":1,"g":"m","d":1},
+{"p":"terraza","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"balcón","c":"n","k":["casa"],"f":1,"g":"m","d":1},
+{"p":"garaje","c":"n","k":["casa"],"f":1,"g":"m","d":1},
+{"p":"ascensor","c":"n","k":["casa"],"f":1,"g":"m","d":1},
+{"p":"piso","c":"n","k":["casa"],"f":1,"g":"m","d":1},
+{"p":"llave","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"lámpara","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"bombilla","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"luz","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"enchufe","c":"n","k":["casa"],"f":1,"g":"m","d":1},
+{"p":"cortina","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"alfombra","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"cojín","c":"n","k":["casa"],"f":1,"g":"m","d":1},
+{"p":"almohada","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"manta","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"sábana","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"espejo","c":"n","k":["casa"],"f":1,"g":"m","d":1},
+{"p":"cuadro","c":"n","k":["casa"],"f":1,"g":"m","d":1},
+{"p":"estantería","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"nevera","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"lavadora","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"horno","c":"n","k":["casa"],"f":1,"g":"m","d":1},
+{"p":"grifo","c":"n","k":["casa"],"f":1,"g":"m","d":1},
+{"p":"ducha","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"bañera","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"lavabo","c":"n","k":["casa"],"f":1,"g":"m","d":1},
+{"p":"toalla","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"jabón","c":"n","k":["casa"],"f":1,"g":"m","d":1},
+{"p":"escoba","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"basura","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"plato","c":"n","k":["casa"],"f":1,"g":"m","d":1},
+{"p":"vaso","c":"n","k":["casa"],"f":1,"g":"m","d":1},
+{"p":"cuchara","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"tenedor","c":"n","k":["casa"],"f":1,"g":"m","d":1},
+{"p":"cuchillo","c":"n","k":["casa"],"f":1,"g":"m","d":1},
+{"p":"taza","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"jarra","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"botella","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"olla","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"sartén","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"televisión","c":"n","k":["casa"],"f":1,"g":"f","d":1},
+{"p":"teléfono","c":"n","k":["casa"],"f":1,"g":"m","d":1},
+{"p":"ordenador","c":"n","k":["casa"],"f":1,"g":"m","d":1},
+{"p":"portal","c":"n","k":["casa"],"f":2,"g":"m","d":1},
+{"p":"cerradura","c":"n","k":["casa"],"f":2,"g":"f","d":1},
+{"p":"interruptor","c":"n","k":["casa"],"f":2,"g":"m","d":1},
+{"p":"microondas","c":"n","k":["casa"],"f":2,"g":"m","d":1},
+{"p":"fregadero","c":"n","k":["casa"],"f":2,"g":"m","d":1},
+{"p":"peine","c":"n","k":["casa"],"f":2,"g":"m","d":1},
+{"p":"fregona","c":"n","k":["casa"],"f":2,"g":"f","d":1},
+{"p":"papelera","c":"n","k":["casa"],"f":2,"g":"f","d":1},
+{"p":"cazuela","c":"n","k":["casa"],"f":2,"g":"f","d":1},
+{"p":"mesilla","c":"n","k":["casa"],"f":2,"g":"f","d":1},
+{"p":"calendario","c":"n","k":["casa"],"f":2,"g":"m","d":1},
+{"p":"plancha","c":"n","k":["casa"],"f":2,"g":"f","d":1},
+{"p":"tendedero","c":"n","k":["casa"],"f":2,"g":"m","d":1},
+{"p":"valla","c":"n","k":["casa"],"f":2,"g":"f","d":1},
+{"p":"clavo","c":"n","k":["casa"],"f":2,"g":"m","d":1},
+{"p":"cesta","c":"n","k":["casa"],"f":2,"g":"f","d":1},
+{"p":"despertador","c":"n","k":["casa"],"f":2,"g":"m","d":1},
+{"p":"reloj","c":"n","k":["casa"],"f":2,"g":"m","d":1},
+{"p":"cuarto","c":"n","k":["casa"],"f":2,"g":"m","d":1},
+{"p":"sillón","c":"n","k":["casa"],"f":2,"g":"m","d":1},
+{"p":"colegio","c":"n","k":["escuela"],"f":1,"g":"m","d":1},
+{"p":"clase","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"pizarra","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"lápiz","c":"n","k":["escuela"],"f":1,"g":"m","d":1},
+{"p":"rotulador","c":"n","k":["escuela"],"f":1,"g":"m","d":1},
+{"p":"goma","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"regla","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"sacapuntas","c":"n","k":["escuela"],"f":1,"g":"m","d":1},
+{"p":"tijera","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"pegamento","c":"n","k":["escuela"],"f":1,"g":"m","d":1},
+{"p":"cuaderno","c":"n","k":["escuela"],"f":1,"g":"m","d":1},
+{"p":"libro","c":"n","k":["escuela"],"f":1,"g":"m","d":1},
+{"p":"hoja","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"papel","c":"n","k":["escuela"],"f":1,"g":"m","d":1},
+{"p":"folio","c":"n","k":["escuela"],"f":1,"g":"m","d":1},
+{"p":"carpeta","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"estuche","c":"n","k":["escuela"],"f":1,"g":"m","d":1},
+{"p":"pincel","c":"n","k":["escuela"],"f":1,"g":"m","d":1},
+{"p":"pintura","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"cera","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"plastilina","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"tiza","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"borrador","c":"n","k":["escuela"],"f":1,"g":"m","d":1},
+{"p":"maestro","c":"n","k":["escuela"],"f":1,"g":"m","d":1},
+{"p":"maestra","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"patio","c":"n","k":["escuela"],"f":1,"g":"m","d":1},
+{"p":"recreo","c":"n","k":["escuela"],"f":1,"g":"m","d":1},
+{"p":"biblioteca","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"gimnasio","c":"n","k":["escuela"],"f":1,"g":"m","d":1},
+{"p":"comedor","c":"n","k":["escuela"],"f":1,"g":"m","d":1},
+{"p":"alumno","c":"n","k":["escuela"],"f":1,"g":"m","d":1},
+{"p":"alumna","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"compañero","c":"n","k":["escuela"],"f":1,"g":"m","d":1},
+{"p":"compañera","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"cartel","c":"n","k":["escuela"],"f":1,"g":"m","d":1},
+{"p":"mural","c":"n","k":["escuela"],"f":1,"g":"m","d":1},
+{"p":"mapa","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"abecedario","c":"n","k":["escuela"],"f":1,"g":"m","d":1},
+{"p":"pupitre","c":"n","k":["escuela"],"f":1,"g":"m","d":1},
+{"p":"agenda","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"compás","c":"n","k":["escuela"],"f":1,"g":"m","d":1},
+{"p":"calculadora","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"ábaco","c":"n","k":["escuela"],"f":1,"g":"m","d":1},
+{"p":"cartulina","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"diccionario","c":"n","k":["escuela"],"f":1,"g":"m","d":1},
+{"p":"cuento","c":"n","k":["escuela"],"f":1,"g":"m","d":1},
+{"p":"dibujo","c":"n","k":["escuela"],"f":1,"g":"m","d":1},
+{"p":"página","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"letra","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"palabra","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"número","c":"n","k":["escuela"],"f":1,"g":"m","d":1},
+{"p":"sílaba","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"frase","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"vocal","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"consonante","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"suma","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"resta","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"problema","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"tarea","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"ficha","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"examen","c":"n","k":["escuela"],"f":1,"g":"m","d":1},
+{"p":"nota","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"lectura","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"profesor","c":"n","k":["escuela"],"f":1,"g":"m","d":1},
+{"p":"director","c":"n","k":["escuela"],"f":1,"g":"m","d":1},
+{"p":"directora","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"pegatina","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"etiqueta","c":"n","k":["escuela"],"f":1,"g":"f","d":1},
+{"p":"bolígrafo","c":"n","k":["escuela"],"f":1,"g":"m","d":1},
+{"p":"boli","c":"n","k":["escuela"],"f":1,"g":"m","d":1},
+{"p":"témpera","c":"n","k":["escuela"],"f":2,"g":"f","d":1},
+{"p":"cabeza","c":"n","k":["cuerpo"],"f":1,"g":"f","d":1},
+{"p":"pelo","c":"n","k":["cuerpo"],"f":1,"g":"m","d":1},
+{"p":"cara","c":"n","k":["cuerpo"],"f":1,"g":"f","d":1},
+{"p":"ojo","c":"n","k":["cuerpo"],"f":1,"g":"m","d":1},
+{"p":"oreja","c":"n","k":["cuerpo"],"f":1,"g":"f","d":1},
+{"p":"nariz","c":"n","k":["cuerpo"],"f":1,"g":"f","d":1},
+{"p":"boca","c":"n","k":["cuerpo"],"f":1,"g":"f","d":1},
+{"p":"diente","c":"n","k":["cuerpo"],"f":1,"g":"m","d":1},
+{"p":"lengua","c":"n","k":["cuerpo"],"f":1,"g":"f","d":1},
+{"p":"labio","c":"n","k":["cuerpo"],"f":1,"g":"m","d":1},
+{"p":"hombro","c":"n","k":["cuerpo"],"f":1,"g":"m","d":1},
+{"p":"brazo","c":"n","k":["cuerpo"],"f":1,"g":"m","d":1},
+{"p":"codo","c":"n","k":["cuerpo"],"f":1,"g":"m","d":1},
+{"p":"mano","c":"n","k":["cuerpo"],"f":1,"g":"f","d":1},
+{"p":"dedo","c":"n","k":["cuerpo"],"f":1,"g":"m","d":1},
+{"p":"uña","c":"n","k":["cuerpo"],"f":1,"g":"f","d":1},
+{"p":"pecho","c":"n","k":["cuerpo"],"f":1,"g":"m","d":1},
+{"p":"barriga","c":"n","k":["cuerpo"],"f":1,"g":"f","d":1},
+{"p":"espalda","c":"n","k":["cuerpo"],"f":1,"g":"f","d":1},
+{"p":"cintura","c":"n","k":["cuerpo"],"f":1,"g":"f","d":1},
+{"p":"pierna","c":"n","k":["cuerpo"],"f":1,"g":"f","d":1},
+{"p":"rodilla","c":"n","k":["cuerpo"],"f":1,"g":"f","d":1},
+{"p":"pie","c":"n","k":["cuerpo"],"f":1,"g":"m","d":1},
+{"p":"talón","c":"n","k":["cuerpo"],"f":1,"g":"m","d":1},
+{"p":"ceja","c":"n","k":["cuerpo"],"f":1,"g":"f","d":1},
+{"p":"pestaña","c":"n","k":["cuerpo"],"f":1,"g":"f","d":1},
+{"p":"mejilla","c":"n","k":["cuerpo"],"f":1,"g":"f","d":1},
+{"p":"barbilla","c":"n","k":["cuerpo"],"f":1,"g":"f","d":1},
+{"p":"frente","c":"n","k":["cuerpo"],"f":1,"g":"f","d":1},
+{"p":"garganta","c":"n","k":["cuerpo"],"f":1,"g":"f","d":1},
+{"p":"corazón","c":"n","k":["cuerpo"],"f":1,"g":"m","d":1},
+{"p":"hueso","c":"n","k":["cuerpo"],"f":1,"g":"m","d":1},
+{"p":"piel","c":"n","k":["cuerpo"],"f":1,"g":"f","d":1},
+{"p":"músculo","c":"n","k":["cuerpo"],"f":1,"g":"m","d":1},
+{"p":"cerebro","c":"n","k":["cuerpo"],"f":1,"g":"m","d":1},
+{"p":"pulmón","c":"n","k":["cuerpo"],"f":1,"g":"m","d":1},
+{"p":"estómago","c":"n","k":["cuerpo"],"f":1,"g":"m","d":1},
+{"p":"bigote","c":"n","k":["cuerpo"],"f":1,"g":"m","d":1},
+{"p":"barba","c":"n","k":["cuerpo"],"f":1,"g":"f","d":1},
+{"p":"melena","c":"n","k":["cuerpo"],"f":1,"g":"f","d":1},
+{"p":"flequillo","c":"n","k":["cuerpo"],"f":1,"g":"m","d":1},
+{"p":"coleta","c":"n","k":["cuerpo"],"f":1,"g":"f","d":1},
+{"p":"trenza","c":"n","k":["cuerpo"],"f":1,"g":"f","d":1},
+{"p":"rizo","c":"n","k":["cuerpo"],"f":1,"g":"m","d":1},
+{"p":"ombligo","c":"n","k":["cuerpo"],"f":1,"g":"m","d":1},
+{"p":"puño","c":"n","k":["cuerpo"],"f":1,"g":"m","d":1},
+{"p":"palma","c":"n","k":["cuerpo"],"f":1,"g":"f","d":1},
+{"p":"muñeca","c":"n","k":["cuerpo"],"f":1,"g":"f","d":1},
+{"p":"muela","c":"n","k":["cuerpo"],"f":1,"g":"f","d":1},
+{"p":"encía","c":"n","k":["cuerpo"],"f":1,"g":"f","d":1},
+{"p":"tripa","c":"n","k":["cuerpo"],"f":1,"g":"f","d":1},
+{"p":"cuerpo","c":"n","k":["cuerpo"],"f":1,"g":"m","d":1},
+{"p":"rostro","c":"n","k":["cuerpo"],"f":1,"g":"m","d":1},
+{"p":"sonrisa","c":"n","k":["cuerpo"],"f":1,"g":"f","d":1},
+{"p":"risa","c":"n","k":["cuerpo"],"f":1,"g":"f","d":1},
+{"p":"voz","c":"n","k":["cuerpo"],"f":1,"g":"f","d":1},
+{"p":"huella","c":"n","k":["cuerpo"],"f":1,"g":"f","d":1},
+{"p":"tobillo","c":"n","k":["cuerpo"],"f":1,"g":"m","d":1},
+{"p":"cadera","c":"n","k":["cuerpo"],"f":1,"g":"f","d":1},
+{"p":"pelota","c":"n","k":["juguetes"],"f":1,"g":"f","d":1},
+{"p":"balón","c":"n","k":["juguetes"],"f":1,"g":"m","d":1},
+{"p":"peluche","c":"n","k":["juguetes"],"f":1,"g":"m","d":1},
+{"p":"bicicleta","c":"n","k":["juguetes"],"f":1,"g":"f","d":1},
+{"p":"patinete","c":"n","k":["juguetes"],"f":1,"g":"m","d":1},
+{"p":"patín","c":"n","k":["juguetes"],"f":1,"g":"m","d":1},
+{"p":"globo","c":"n","k":["juguetes"],"f":1,"g":"m","d":1},
+{"p":"pala","c":"n","k":["juguetes"],"f":1,"g":"f","d":1},
+{"p":"castillo","c":"n","k":["juguetes"],"f":1,"g":"m","d":1},
+{"p":"puzle","c":"n","k":["juguetes"],"f":1,"g":"m","d":1},
+{"p":"dado","c":"n","k":["juguetes"],"f":1,"g":"m","d":1},
+{"p":"carta","c":"n","k":["juguetes"],"f":1,"g":"f","d":1},
+{"p":"baraja","c":"n","k":["juguetes"],"f":1,"g":"f","d":1},
+{"p":"dominó","c":"n","k":["juguetes"],"f":1,"g":"m","d":1},
+{"p":"ajedrez","c":"n","k":["juguetes"],"f":1,"g":"m","d":1},
+{"p":"canica","c":"n","k":["juguetes"],"f":1,"g":"f","d":1},
+{"p":"peonza","c":"n","k":["juguetes"],"f":1,"g":"f","d":1},
+{"p":"yoyó","c":"n","k":["juguetes"],"f":1,"g":"m","d":1},
+{"p":"comba","c":"n","k":["juguetes"],"f":1,"g":"f","d":1},
+{"p":"aro","c":"n","k":["juguetes"],"f":1,"g":"m","d":1},
+{"p":"cuerda","c":"n","k":["juguetes"],"f":1,"g":"f","d":1},
+{"p":"tobogán","c":"n","k":["juguetes"],"f":1,"g":"m","d":1},
+{"p":"columpio","c":"n","k":["juguetes"],"f":1,"g":"m","d":1},
+{"p":"balancín","c":"n","k":["juguetes"],"f":1,"g":"m","d":1},
+{"p":"bloque","c":"n","k":["juguetes"],"f":1,"g":"m","d":1},
+{"p":"tambor","c":"n","k":["juguetes"],"f":1,"g":"m","d":1},
+{"p":"flauta","c":"n","k":["juguetes"],"f":1,"g":"f","d":1},
+{"p":"guitarra","c":"n","k":["juguetes"],"f":1,"g":"f","d":1},
+{"p":"piano","c":"n","k":["juguetes"],"f":1,"g":"m","d":1},
+{"p":"trompeta","c":"n","k":["juguetes"],"f":1,"g":"f","d":1},
+{"p":"xilófono","c":"n","k":["juguetes"],"f":1,"g":"m","d":1},
+{"p":"maraca","c":"n","k":["juguetes"],"f":1,"g":"f","d":1},
+{"p":"pandereta","c":"n","k":["juguetes"],"f":1,"g":"f","d":1},
+{"p":"sonajero","c":"n","k":["juguetes"],"f":1,"g":"m","d":1},
+{"p":"robot","c":"n","k":["juguetes"],"f":1,"g":"m","d":1},
+{"p":"cohete","c":"n","k":["juguetes"],"f":1,"g":"m","d":1},
+{"p":"muñeco","c":"n","k":["juguetes"],"f":1,"g":"m","d":1},
+{"p":"marioneta","c":"n","k":["juguetes"],"f":1,"g":"f","d":1},
+{"p":"títere","c":"n","k":["juguetes"],"f":1,"g":"m","d":1},
+{"p":"corona","c":"n","k":["juguetes"],"f":1,"g":"f","d":1},
+{"p":"varita","c":"n","k":["juguetes"],"f":1,"g":"f","d":1},
+{"p":"princesa","c":"n","k":["juguetes"],"f":1,"g":"f","d":1},
+{"p":"rey","c":"n","k":["juguetes"],"f":1,"g":"m","d":1},
+{"p":"reina","c":"n","k":["juguetes"],"f":1,"g":"f","d":1},
+{"p":"pirata","c":"n","k":["juguetes"],"f":1,"g":"m","d":1},
+{"p":"payaso","c":"n","k":["juguetes"],"f":1,"g":"m","d":1},
+{"p":"mago","c":"n","k":["juguetes"],"f":1,"g":"m","d":1},
+{"p":"juguete","c":"n","k":["juguetes"],"f":1,"g":"m","d":1},
+{"p":"juego","c":"n","k":["juguetes"],"f":1,"g":"m","d":1},
+{"p":"consola","c":"n","k":["juguetes"],"f":1,"g":"f","d":1},
+{"p":"videojuego","c":"n","k":["juguetes"],"f":1,"g":"m","d":1},
+{"p":"carrito","c":"n","k":["juguetes"],"f":1,"g":"m","d":1},
+{"p":"acordeón","c":"n","k":["juguetes"],"f":2,"g":"m","d":1},
+{"p":"armónica","c":"n","k":["juguetes"],"f":2,"g":"f","d":1},
+{"p":"coche","c":"n","k":["transportes"],"f":1,"g":"m","d":1},
+{"p":"autobús","c":"n","k":["transportes"],"f":1,"g":"m","d":1},
+{"p":"camión","c":"n","k":["transportes"],"f":1,"g":"m","d":1},
+{"p":"tren","c":"n","k":["transportes"],"f":1,"g":"m","d":1},
+{"p":"avión","c":"n","k":["transportes"],"f":1,"g":"m","d":1},
+{"p":"barco","c":"n","k":["transportes"],"f":1,"g":"m","d":1},
+{"p":"moto","c":"n","k":["transportes"],"f":1,"g":"f","d":1},
+{"p":"furgoneta","c":"n","k":["transportes"],"f":1,"g":"f","d":1},
+{"p":"tractor","c":"n","k":["transportes"],"f":1,"g":"m","d":1},
+{"p":"taxi","c":"n","k":["transportes"],"f":1,"g":"m","d":1},
+{"p":"ambulancia","c":"n","k":["transportes"],"f":1,"g":"f","d":1},
+{"p":"helicóptero","c":"n","k":["transportes"],"f":1,"g":"m","d":1},
+{"p":"metro","c":"n","k":["transportes"],"f":1,"g":"m","d":1},
+{"p":"tranvía","c":"n","k":["transportes"],"f":1,"g":"m","d":1},
+{"p":"velero","c":"n","k":["transportes"],"f":1,"g":"m","d":1},
+{"p":"submarino","c":"n","k":["transportes"],"f":1,"g":"m","d":1},
+{"p":"barca","c":"n","k":["transportes"],"f":1,"g":"f","d":1},
+{"p":"lancha","c":"n","k":["transportes"],"f":1,"g":"f","d":1},
+{"p":"canoa","c":"n","k":["transportes"],"f":1,"g":"f","d":1},
+{"p":"yate","c":"n","k":["transportes"],"f":1,"g":"m","d":1},
+{"p":"grúa","c":"n","k":["transportes"],"f":1,"g":"f","d":1},
+{"p":"excavadora","c":"n","k":["transportes"],"f":1,"g":"f","d":1},
+{"p":"carretera","c":"n","k":["transportes"],"f":1,"g":"f","d":1},
+{"p":"camino","c":"n","k":["transportes"],"f":1,"g":"m","d":1},
+{"p":"semáforo","c":"n","k":["transportes"],"f":1,"g":"m","d":1},
+{"p":"señal","c":"n","k":["transportes"],"f":1,"g":"f","d":1},
+{"p":"estación","c":"n","k":["transportes"],"f":1,"g":"f","d":1},
+{"p":"puerto","c":"n","k":["transportes"],"f":1,"g":"m","d":1},
+{"p":"aeropuerto","c":"n","k":["transportes"],"f":1,"g":"m","d":1},
+{"p":"parada","c":"n","k":["transportes"],"f":1,"g":"f","d":1},
+{"p":"andén","c":"n","k":["transportes"],"f":1,"g":"m","d":1},
+{"p":"vía","c":"n","k":["transportes"],"f":1,"g":"f","d":1},
+{"p":"billete","c":"n","k":["transportes"],"f":1,"g":"m","d":1},
+{"p":"maleta","c":"n","k":["transportes"],"f":1,"g":"f","d":1},
+{"p":"puente","c":"n","k":["transportes"],"f":1,"g":"m","d":1},
+{"p":"túnel","c":"n","k":["transportes"],"f":1,"g":"m","d":1},
+{"p":"rueda","c":"n","k":["transportes"],"f":1,"g":"f","d":1},
+{"p":"volante","c":"n","k":["transportes"],"f":1,"g":"m","d":1},
+{"p":"motor","c":"n","k":["transportes"],"f":1,"g":"m","d":1},
+{"p":"freno","c":"n","k":["transportes"],"f":1,"g":"m","d":1},
+{"p":"gasolina","c":"n","k":["transportes"],"f":1,"g":"f","d":1},
+{"p":"gasolinera","c":"n","k":["transportes"],"f":1,"g":"f","d":1},
+{"p":"casco","c":"n","k":["transportes"],"f":1,"g":"m","d":1},
+{"p":"bici","c":"n","k":["transportes"],"f":1,"g":"f","d":1},
+{"p":"mamá","c":"n","k":["familia"],"f":1,"g":"f","d":1},
+{"p":"papá","c":"n","k":["familia"],"f":1,"g":"m","d":1},
+{"p":"madre","c":"n","k":["familia"],"f":1,"g":"f","d":1},
+{"p":"padre","c":"n","k":["familia"],"f":1,"g":"m","d":1},
+{"p":"abuelo","c":"n","k":["familia"],"f":1,"g":"m","d":1},
+{"p":"abuela","c":"n","k":["familia"],"f":1,"g":"f","d":1},
+{"p":"hermano","c":"n","k":["familia"],"f":1,"g":"m","d":1},
+{"p":"hermana","c":"n","k":["familia"],"f":1,"g":"f","d":1},
+{"p":"tío","c":"n","k":["familia"],"f":1,"g":"m","d":1},
+{"p":"tía","c":"n","k":["familia"],"f":1,"g":"f","d":1},
+{"p":"primo","c":"n","k":["familia"],"f":1,"g":"m","d":1},
+{"p":"prima","c":"n","k":["familia"],"f":1,"g":"f","d":1},
+{"p":"niño","c":"n","k":["familia"],"f":1,"g":"m","d":1},
+{"p":"niña","c":"n","k":["familia"],"f":1,"g":"f","d":1},
+{"p":"hijo","c":"n","k":["familia"],"f":1,"g":"m","d":1},
+{"p":"hija","c":"n","k":["familia"],"f":1,"g":"f","d":1},
+{"p":"familia","c":"n","k":["familia"],"f":1,"g":"f","d":1},
+{"p":"nieto","c":"n","k":["familia"],"f":1,"g":"m","d":1},
+{"p":"nieta","c":"n","k":["familia"],"f":1,"g":"f","d":1},
+{"p":"amigo","c":"n","k":["familia"],"f":1,"g":"m","d":1},
+{"p":"amiga","c":"n","k":["familia"],"f":1,"g":"f","d":1},
+{"p":"vecino","c":"n","k":["familia"],"f":1,"g":"m","d":1},
+{"p":"vecina","c":"n","k":["familia"],"f":1,"g":"f","d":1},
+{"p":"padrino","c":"n","k":["familia"],"f":1,"g":"m","d":1},
+{"p":"madrina","c":"n","k":["familia"],"f":1,"g":"f","d":1},
+{"p":"gemelo","c":"n","k":["familia"],"f":1,"g":"m","d":1},
+{"p":"chico","c":"n","k":["familia"],"f":1,"g":"m","d":1},
+{"p":"chica","c":"n","k":["familia"],"f":1,"g":"f","d":1},
+{"p":"señor","c":"n","k":["familia"],"f":1,"g":"m","d":1},
+{"p":"señora","c":"n","k":["familia"],"f":1,"g":"f","d":1},
+{"p":"persona","c":"n","k":["familia"],"f":1,"g":"f","d":1},
+{"p":"hombre","c":"n","k":["familia"],"f":1,"g":"m","d":1},
+{"p":"mujer","c":"n","k":["familia"],"f":1,"g":"f","d":1},
+{"p":"adulto","c":"n","k":["familia"],"f":1,"g":"m","d":1},
+{"p":"bisabuelo","c":"n","k":["familia"],"f":1,"g":"m","d":1},
+{"p":"médico","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"médica","c":"n","k":["oficios"],"f":1,"g":"f","d":1},
+{"p":"doctor","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"enfermero","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"enfermera","c":"n","k":["oficios"],"f":1,"g":"f","d":1},
+{"p":"cocinero","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"cocinera","c":"n","k":["oficios"],"f":1,"g":"f","d":1},
+{"p":"panadero","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"panadera","c":"n","k":["oficios"],"f":1,"g":"f","d":1},
+{"p":"bombero","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"bombera","c":"n","k":["oficios"],"f":1,"g":"f","d":1},
+{"p":"cartero","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"granjero","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"pastor","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"pescador","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"camarero","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"conductor","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"piloto","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"veterinario","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"músico","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"científico","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"jardinero","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"mecánico","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"peluquero","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"pescadero","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"frutero","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"carnicero","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"lechero","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"zapatero","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"sastre","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"herrero","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"fontanero","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"basurero","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"barrendero","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"escritor","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"tendero","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"heladero","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"albañil","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"pintor","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"carpintero","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"marinero","c":"n","k":["oficios"],"f":1,"g":"m","d":1},
+{"p":"sol","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
+{"p":"luna","c":"n","k":["naturaleza"],"f":1,"g":"f","d":1},
+{"p":"estrella","c":"n","k":["naturaleza"],"f":1,"g":"f","d":1},
+{"p":"cielo","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
+{"p":"nube","c":"n","k":["naturaleza"],"f":1,"g":"f","d":1},
+{"p":"lluvia","c":"n","k":["naturaleza"],"f":1,"g":"f","d":1},
+{"p":"nieve","c":"n","k":["naturaleza"],"f":1,"g":"f","d":1},
+{"p":"viento","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
+{"p":"tormenta","c":"n","k":["naturaleza"],"f":1,"g":"f","d":1},
+{"p":"rayo","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
+{"p":"trueno","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
+{"p":"arcoíris","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
+{"p":"niebla","c":"n","k":["naturaleza"],"f":1,"g":"f","d":1},
+{"p":"hielo","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
+{"p":"fuego","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
+{"p":"tierra","c":"n","k":["naturaleza"],"f":1,"g":"f","d":1},
+{"p":"río","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
+{"p":"lago","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
+{"p":"charco","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
+{"p":"playa","c":"n","k":["naturaleza"],"f":1,"g":"f","d":1},
+{"p":"arena","c":"n","k":["naturaleza"],"f":1,"g":"f","d":1},
+{"p":"roca","c":"n","k":["naturaleza"],"f":1,"g":"f","d":1},
+{"p":"piedra","c":"n","k":["naturaleza"],"f":1,"g":"f","d":1},
+{"p":"montaña","c":"n","k":["naturaleza"],"f":1,"g":"f","d":1},
+{"p":"monte","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
+{"p":"valle","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
+{"p":"colina","c":"n","k":["naturaleza"],"f":1,"g":"f","d":1},
+{"p":"campo","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
+{"p":"bosque","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
+{"p":"selva","c":"n","k":["naturaleza"],"f":1,"g":"f","d":1},
+{"p":"desierto","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
+{"p":"isla","c":"n","k":["naturaleza"],"f":1,"g":"f","d":1},
+{"p":"volcán","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
+{"p":"cueva","c":"n","k":["naturaleza"],"f":1,"g":"f","d":1},
+{"p":"cascada","c":"n","k":["naturaleza"],"f":1,"g":"f","d":1},
+{"p":"ola","c":"n","k":["naturaleza"],"f":1,"g":"f","d":1},
+{"p":"orilla","c":"n","k":["naturaleza"],"f":1,"g":"f","d":1},
+{"p":"costa","c":"n","k":["naturaleza"],"f":1,"g":"f","d":1},
+{"p":"árbol","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
+{"p":"rama","c":"n","k":["naturaleza"],"f":1,"g":"f","d":1},
+{"p":"raíz","c":"n","k":["naturaleza"],"f":1,"g":"f","d":1},
+{"p":"tronco","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
+{"p":"flor","c":"n","k":["naturaleza"],"f":1,"g":"f","d":1},
+{"p":"planta","c":"n","k":["naturaleza"],"f":1,"g":"f","d":1},
+{"p":"hierba","c":"n","k":["naturaleza"],"f":1,"g":"f","d":1},
+{"p":"césped","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
+{"p":"semilla","c":"n","k":["naturaleza"],"f":1,"g":"f","d":1},
+{"p":"fruto","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
+{"p":"pino","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
+{"p":"palmera","c":"n","k":["naturaleza"],"f":1,"g":"f","d":1},
+{"p":"margarita","c":"n","k":["naturaleza"],"f":1,"g":"f","d":1},
+{"p":"tulipán","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
+{"p":"girasol","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
+{"p":"musgo","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
+{"p":"trébol","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
+{"p":"nido","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
+{"p":"barro","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
+{"p":"polvo","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
+{"p":"gota","c":"n","k":["naturaleza"],"f":1,"g":"f","d":1},
+{"p":"planeta","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
+{"p":"mundo","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
+{"p":"sombra","c":"n","k":["naturaleza"],"f":1,"g":"f","d":1},
+{"p":"primavera","c":"n","k":["naturaleza"],"f":1,"g":"f","d":1},
+{"p":"verano","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
+{"p":"otoño","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
+{"p":"invierno","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
+{"p":"frío","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1},
+{"p":"amanecer","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1},
+{"p":"atardecer","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1},
+{"p":"pétalo","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1},
+{"p":"tallo","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1},
+{"p":"limonero","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1},
+{"p":"olivo","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1},
+{"p":"abeto","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1},
+{"p":"nenúfar","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1},
+{"p":"concha","c":"n","k":["naturaleza"],"f":2,"g":"f","d":1},
+{"p":"caracola","c":"n","k":["naturaleza"],"f":2,"g":"f","d":1},
+{"p":"granja","c":"n","k":["naturaleza"],"f":2,"g":"f","d":1},
+{"p":"pozo","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1},
+{"p":"trigo","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1},
+{"p":"lava","c":"n","k":["naturaleza"],"f":2,"g":"f","d":1},
+{"p":"ceniza","c":"n","k":["naturaleza"],"f":2,"g":"f","d":1},
+{"p":"hoguera","c":"n","k":["naturaleza"],"f":2,"g":"f","d":1},
+{"p":"lata","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"frasco","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"bote","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"paquete","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"sobre","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"sello","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"periódico","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"revista","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"letrero","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"bandera","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"escudo","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"trofeo","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"medalla","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"copa","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"jarrón","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"florero","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"vela","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"farol","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"tubo","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"palo","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"bastón","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"azada","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"rastrillo","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"regadera","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"manguera","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"carretilla","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"ancla","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"timón","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"mástil","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"linterna","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"llavero","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"lupa","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"brújula","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"telescopio","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"imán","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"pila","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"cable","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"cámara","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"foto","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"cartera","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"monedero","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"balanza","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"regalo","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"cinta","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"saco","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"jaula","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"pecera","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"correa","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"tapa","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"tapón","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"cadena","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"ciudad","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"pueblo","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"calle","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"plaza","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"parque","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"zoo","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"circo","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"cine","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"teatro","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"museo","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"hospital","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"farmacia","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"tienda","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"mercado","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"supermercado","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"panadería","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"carnicería","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"pescadería","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"frutería","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"librería","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"juguetería","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"zapatería","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"peluquería","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"estadio","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"piscina","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"fábrica","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"taller","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"palacio","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"torre","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"iglesia","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"hotel","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"campamento","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"fútbol","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"baloncesto","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"tenis","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"natación","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"carrera","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"gol","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"portería","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"equipo","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"deporte","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"boxeo","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"karate","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"judo","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"ciclismo","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"patinaje","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"esquí","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"fiesta","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"cumpleaños","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"tarjeta","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"tiempo","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"hora","c":"n","k":["otros"],"f":1,"g":"f"},
+{"p":"semana","c":"n","k":["otros"],"f":1,"g":"f"},
+{"p":"mes","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"año","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"día","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"lunes","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"martes","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"miércoles","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"jueves","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"viernes","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"sábado","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"domingo","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"mañana","c":"n","k":["otros"],"f":1,"g":"f"},
+{"p":"tarde","c":"n","k":["otros"],"f":1,"g":"f"},
+{"p":"noche","c":"n","k":["otros"],"f":1,"g":"f"},
+{"p":"música","c":"n","k":["otros"],"f":1,"g":"f"},
+{"p":"canción","c":"n","k":["otros"],"f":1,"g":"f"},
+{"p":"baile","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"historia","c":"n","k":["otros"],"f":1,"g":"f"},
+{"p":"sueño","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"idea","c":"n","k":["otros"],"f":1,"g":"f"},
+{"p":"nombre","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"dinero","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"moneda","c":"n","k":["otros"],"f":1,"g":"f"},
+{"p":"euro","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"país","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"fotografía","c":"n","k":["otros"],"f":1,"g":"f"},
+{"p":"color","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"forma","c":"n","k":["otros"],"f":1,"g":"f"},
+{"p":"círculo","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"cuadrado","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"triángulo","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"rectángulo","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"línea","c":"n","k":["otros"],"f":1,"g":"f"},
+{"p":"punto","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"esquina","c":"n","k":["otros"],"f":1,"g":"f"},
+{"p":"centro","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"lado","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"fin","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"principio","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"ejemplo","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"pregunta","c":"n","k":["otros"],"f":1,"g":"f"},
+{"p":"respuesta","c":"n","k":["otros"],"f":1,"g":"f"},
+{"p":"ayuda","c":"n","k":["otros"],"f":1,"g":"f"},
+{"p":"favor","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"miedo","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"alegría","c":"n","k":["otros"],"f":1,"g":"f"},
+{"p":"amor","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"paz","c":"n","k":["otros"],"f":1,"g":"f"},
+{"p":"secreto","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"sorpresa","c":"n","k":["otros"],"f":1,"g":"f"},
+{"p":"premio","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"tesoro","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"aventura","c":"n","k":["otros"],"f":1,"g":"f"},
+{"p":"viaje","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"ruido","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"silencio","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"sonido","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"olor","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"sabor","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"vez","c":"n","k":["otros"],"f":1,"g":"f"},
+{"p":"cosa","c":"n","k":["otros"],"f":1,"g":"f"},
+{"p":"lugar","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"trozo","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"parte","c":"n","k":["otros"],"f":1,"g":"f"},
+{"p":"pareja","c":"n","k":["otros"],"f":1,"g":"f"},
+{"p":"grupo","c":"n","k":["otros"],"f":1,"g":"m"},
+{"p":"fila","c":"n","k":["otros"],"f":1,"g":"f"},
+{"p":"naranja","c":"n","k":["comida","colores"],"f":1,"g":"f","d":1},
+{"p":"rosa","c":"n","k":["naturaleza","colores"],"f":1,"g":"f","d":1},
+{"p":"comer","c":"v","k":["acciones"],"f":1,"d":1,"v3":"come"},
+{"p":"beber","c":"v","k":["acciones"],"f":1,"d":1,"v3":"bebe"},
+{"p":"dormir","c":"v","k":["acciones"],"f":1,"d":1,"v3":"dorme"},
+{"p":"correr","c":"v","k":["acciones"],"f":1,"d":1,"v3":"corre"},
+{"p":"saltar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"salta"},
+{"p":"jugar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"juga"},
+{"p":"leer","c":"v","k":["acciones"],"f":1,"d":1,"v3":"lee"},
+{"p":"escribir","c":"v","k":["acciones"],"f":1,"d":1,"v3":"escribe"},
+{"p":"dibujar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"dibuja"},
+{"p":"pintar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"pinta"},
+{"p":"cantar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"canta"},
+{"p":"bailar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"baila"},
+{"p":"nadar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"nada"},
+{"p":"volar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"vuela"},
+{"p":"andar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"anda"},
+{"p":"caminar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"camina"},
+{"p":"abrir","c":"v","k":["acciones"],"f":1,"d":1,"v3":"abre"},
+{"p":"cerrar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"cerra"},
+{"p":"lavar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"lava"},
+{"p":"peinar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"peina"},
+{"p":"vestir","c":"v","k":["acciones"],"f":1,"d":1,"v3":"viste"},
+{"p":"reír","c":"v","k":["acciones"],"f":1,"d":1,"v3":"ríe"},
+{"p":"subir","c":"v","k":["acciones"],"f":1,"d":1,"v3":"sube"},
+{"p":"bajar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"baja"},
+{"p":"coger","c":"v","k":["acciones"],"f":1,"d":1,"v3":"coge"},
+{"p":"tirar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"tira"},
+{"p":"lanzar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"lanza"},
+{"p":"empujar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"empuja"},
+{"p":"cortar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"corta"},
+{"p":"romper","c":"v","k":["acciones"],"f":1,"d":1,"v3":"rompe"},
+{"p":"construir","c":"v","k":["acciones"],"f":1,"d":1,"v3":"construye"},
+{"p":"cocinar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"cocina"},
+{"p":"regar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"riega"},
+{"p":"barrer","c":"v","k":["acciones"],"f":1,"d":1,"v3":"barre"},
+{"p":"fregar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"friega"},
+{"p":"limpiar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"limpia"},
+{"p":"ordenar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"ordena"},
+{"p":"recoger","c":"v","k":["acciones"],"f":1,"d":1,"v3":"recoge"},
+{"p":"guardar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"guarda"},
+{"p":"llevar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"lleva"},
+{"p":"poner","c":"v","k":["acciones"],"f":1,"d":1,"v3":"pone"},
+{"p":"mirar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"mira"},
+{"p":"hablar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"habla"},
+{"p":"gritar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"grita"},
+{"p":"besar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"besa"},
+{"p":"abrazar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"abraza"},
+{"p":"sonreír","c":"v","k":["acciones"],"f":1,"d":1,"v3":"sonríe"},
+{"p":"levantar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"levanta"},
+{"p":"sentar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"sienta"},
+{"p":"plantar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"planta"},
+{"p":"cavar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"cava"},
+{"p":"colgar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"cuelga"},
+{"p":"traer","c":"v","k":["acciones"],"f":2,"d":1,"v3":"trae"},
+{"p":"dar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"da"},
+{"p":"quitar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"quita"},
+{"p":"montar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"monta"},
+{"p":"conducir","c":"v","k":["acciones"],"f":2,"d":1,"v3":"conduce"},
+{"p":"viajar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"viaja"},
+{"p":"pasear","c":"v","k":["acciones"],"f":2,"d":1,"v3":"pasea"},
+{"p":"trepar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"trepa"},
+{"p":"rodar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"rueda"},
+{"p":"girar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"gira"},
+{"p":"botar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"bota"},
+{"p":"chutar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"chuta"},
+{"p":"ganar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"gana"},
+{"p":"perder","c":"v","k":["acciones"],"f":2,"d":1,"v3":"pierde"},
+{"p":"buscar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"busca"},
+{"p":"encontrar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"encuentra"},
+{"p":"ver","c":"v","k":["acciones"],"f":2,"d":1,"v3":"ve"},
+{"p":"tocar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"toca"},
+{"p":"oler","c":"v","k":["acciones"],"f":2,"d":1,"v3":"huele"},
+{"p":"probar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"prueba"},
+{"p":"masticar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"mastica"},
+{"p":"tragar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"traga"},
+{"p":"soplar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"sopla"},
+{"p":"silbar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"silba"},
+{"p":"aplaudir","c":"v","k":["acciones"],"f":2,"d":1,"v3":"aplaude"},
+{"p":"saludar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"saluda"},
+{"p":"llamar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"llama"},
+{"p":"contar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"cuenta"},
+{"p":"sumar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"suma"},
+{"p":"restar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"resta"},
+{"p":"medir","c":"v","k":["acciones"],"f":2,"d":1,"v3":"mide"},
+{"p":"pesar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"pesa"},
+{"p":"copiar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"copia"},
+{"p":"borrar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"borra"},
+{"p":"colorear","c":"v","k":["acciones"],"f":2,"d":1,"v3":"colorea"},
+{"p":"recortar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"recorta"},
+{"p":"doblar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"dobla"},
+{"p":"mezclar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"mezcla"},
+{"p":"amasar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"amasa"},
+{"p":"hornear","c":"v","k":["acciones"],"f":2,"d":1,"v3":"hornea"},
+{"p":"freír","c":"v","k":["acciones"],"f":2,"d":1,"v3":"fríe"},
+{"p":"hervir","c":"v","k":["acciones"],"f":2,"d":1,"v3":"hierve"},
+{"p":"cenar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"cena"},
+{"p":"desayunar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"desayuna"},
+{"p":"merendar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"merienda"},
+{"p":"despertar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"despierta"},
+{"p":"acostar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"acuesta"},
+{"p":"duchar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"ducha"},
+{"p":"bañar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"baña"},
+{"p":"secar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"seca"},
+{"p":"mojar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"moja"},
+{"p":"llover","c":"v","k":["acciones"],"f":2,"d":1,"v3":"llueve"},
+{"p":"nevar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"nieva"},
+{"p":"brillar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"brilla"},
+{"p":"florecer","c":"v","k":["acciones"],"f":2,"d":1,"v3":"florece"},
+{"p":"crecer","c":"v","k":["acciones"],"f":2,"d":1,"v3":"crece"},
+{"p":"nacer","c":"v","k":["acciones"],"f":2,"d":1,"v3":"nace"},
+{"p":"mover","c":"v","k":["acciones"],"f":2,"d":1,"v3":"mueve"},
+{"p":"parar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"para"},
+{"p":"salir","c":"v","k":["acciones"],"f":2,"d":1,"v3":"sale"},
+{"p":"entrar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"entra"},
+{"p":"llegar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"llega"},
+{"p":"venir","c":"v","k":["acciones"],"f":2,"d":1,"v3":"viene"},
+{"p":"caer","c":"v","k":["acciones"],"f":2,"d":1,"v3":"cae"},
+{"p":"tropezar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"tropieza"},
+{"p":"chocar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"choca"},
+{"p":"sentir","c":"v","k":["acciones"],"f":2,"d":1,"v3":"siente"},
+{"p":"descansar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"descansa"},
+{"p":"estirar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"estira"},
+{"p":"brincar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"brinca"},
+{"p":"gatear","c":"v","k":["acciones"],"f":2,"d":1,"v3":"gatea"},
+{"p":"pisar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"pisa"},
+{"p":"patinar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"patina"},
+{"p":"esquiar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"esquia"},
+{"p":"pescar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"pesca"},
+{"p":"ladrar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"ladra"},
+{"p":"maullar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"maulla"},
+{"p":"rugir","c":"v","k":["acciones"],"f":2,"d":1,"v3":"ruge"},
+{"p":"zumbar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"zumba"},
+{"p":"bucear","c":"v","k":["acciones"],"f":2,"d":1,"v3":"bucea"},
+{"p":"flotar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"flota"},
+{"p":"navegar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"navega"},
+{"p":"remar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"rema"},
+{"p":"aterrizar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"aterriza"},
+{"p":"despegar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"despega"},
+{"p":"arrancar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"arranca"},
+{"p":"frenar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"frena"},
+{"p":"aparcar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"aparca"},
+{"p":"cruzar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"cruza"},
+{"p":"enviar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"envía"},
+{"p":"recibir","c":"v","k":["acciones"],"f":2,"d":1,"v3":"recibe"},
+{"p":"regalar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"regala"},
+{"p":"envolver","c":"v","k":["acciones"],"f":2,"d":1,"v3":"envuelve"},
+{"p":"abrochar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"abrocha"},
+{"p":"atar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"ata"},
+{"p":"cepillar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"cepilla"},
+{"p":"bostezar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"bosteza"},
+{"p":"estornudar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"estornuda"},
+{"p":"toser","c":"v","k":["acciones"],"f":2,"d":1,"v3":"tose"},
+{"p":"respirar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"respira"},
+{"p":"temblar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"tiembla"},
+{"p":"tiritar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"tirita"},
+{"p":"invitar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"invita"},
+{"p":"felicitar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"felicita"},
+{"p":"almorzar","c":"v","k":["acciones"],"f":3,"d":1,"v3":"almuerza"},
+{"p":"afeitar","c":"v","k":["acciones"],"f":3,"d":1,"v3":"afeita"},
+{"p":"enseñar","c":"v","k":["acciones"],"f":3,"d":1,"v3":"enseña"},
+{"p":"estudiar","c":"v","k":["acciones"],"f":3,"d":1,"v3":"estudia"},
+{"p":"mandar","c":"v","k":["acciones"],"f":3,"d":1,"v3":"manda"},
+{"p":"meter","c":"v","k":["acciones"],"f":3,"d":1,"v3":"mete"},
+{"p":"sacar","c":"v","k":["acciones"],"f":3,"d":1,"v3":"saca"},
+{"p":"echar","c":"v","k":["acciones"],"f":3,"d":1,"v3":"echa"},
+{"p":"usar","c":"v","k":["acciones"],"f":3,"d":1,"v3":"usa"},
+{"p":"tomar","c":"v","k":["acciones"],"f":3,"d":1,"v3":"toma"},
+{"p":"cuidar","c":"v","k":["acciones"],"f":3,"d":1,"v3":"cuida"},
+{"p":"compartir","c":"v","k":["acciones"],"f":3,"d":1,"v3":"comparte"},
+{"p":"ayudar","c":"v","k":["acciones"],"f":3,"d":1,"v3":"ayuda"},
+{"p":"esperar","c":"v","k":["acciones"],"f":3,"d":1,"v3":"espera"},
+{"p":"pensar","c":"v","k":["acciones"],"f":1,"v3":"piensa"},
+{"p":"querer","c":"v","k":["acciones"],"f":1,"v3":"quiere"},
+{"p":"poder","c":"v","k":["acciones"],"f":1,"v3":"puede"},
+{"p":"saber","c":"v","k":["acciones"],"f":1,"v3":"sabe"},
+{"p":"ser","c":"v","k":["acciones"],"f":1,"v3":"es"},
+{"p":"estar","c":"v","k":["acciones"],"f":1,"v3":"está"},
+{"p":"tener","c":"v","k":["acciones"],"f":1,"v3":"tiene"},
+{"p":"hacer","c":"v","k":["acciones"],"f":1,"v3":"hace"},
+{"p":"decir","c":"v","k":["acciones"],"f":1,"v3":"dice"},
+{"p":"ir","c":"v","k":["acciones"],"f":1,"v3":"va"},
+{"p":"imaginar","c":"v","k":["acciones"],"f":1,"v3":"imagina"},
+{"p":"recordar","c":"v","k":["acciones"],"f":1,"v3":"recuerda"},
+{"p":"olvidar","c":"v","k":["acciones"],"f":1,"v3":"olvida"},
+{"p":"aprender","c":"v","k":["acciones"],"f":1,"v3":"aprende"},
+{"p":"necesitar","c":"v","k":["acciones"],"f":1,"v3":"necesita"},
+{"p":"gustar","c":"v","k":["acciones"],"f":1,"v3":"gusta"},
+{"p":"amar","c":"v","k":["acciones"],"f":1,"v3":"ama"},
+{"p":"preguntar","c":"v","k":["acciones"],"f":1,"v3":"pregunta"},
+{"p":"contestar","c":"v","k":["acciones"],"f":1,"v3":"contesta"},
+{"p":"pedir","c":"v","k":["acciones"],"f":1,"v3":"pide"},
+{"p":"dejar","c":"v","k":["acciones"],"f":1,"v3":"deja"},
+{"p":"prestar","c":"v","k":["acciones"],"f":1,"v3":"presta"},
+{"p":"soñar","c":"v","k":["acciones"],"f":1,"v3":"sueña"},
+{"p":"cumplir","c":"v","k":["acciones"],"f":1,"v3":"cumple"},
+{"p":"celebrar","c":"v","k":["acciones"],"f":1,"v3":"celebra"},
+{"p":"vivir","c":"v","k":["acciones"],"f":1,"v3":"vive"},
+{"p":"grande","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"pequeño","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"alto","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"bajo","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"largo","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"corto","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"gordo","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"delgado","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"ancho","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"estrecho","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"pesado","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"ligero","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"lleno","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"vacío","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"abierto","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"cerrado","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"limpio","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"sucio","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"mojado","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"seco","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"caliente","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"nuevo","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"viejo","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"bonito","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"feo","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"fuerte","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"débil","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"rápido","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"lento","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"duro","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"blando","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"redondo","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"alegre","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"contento","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"feliz","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"enfadado","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"cansado","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"dormido","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"despierto","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"sorprendido","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"asustado","c":"a","k":["cualidades"],"f":1,"d":1},
+{"p":"grueso","c":"a","k":["cualidades"],"f":2,"d":1},
+{"p":"fino","c":"a","k":["cualidades"],"f":2,"d":1},
+{"p":"suave","c":"a","k":["cualidades"],"f":2,"d":1},
+{"p":"áspero","c":"a","k":["cualidades"],"f":2,"d":1},
+{"p":"liso","c":"a","k":["cualidades"],"f":2,"d":1},
+{"p":"puntiagudo","c":"a","k":["cualidades"],"f":2,"d":1},
+{"p":"peludo","c":"a","k":["cualidades"],"f":2,"d":1},
+{"p":"rizado","c":"a","k":["cualidades"],"f":2,"d":1},
+{"p":"rubio","c":"a","k":["cualidades"],"f":2,"d":1},
+{"p":"moreno","c":"a","k":["cualidades"],"f":2,"d":1},
+{"p":"pelirrojo","c":"a","k":["cualidades"],"f":2,"d":1},
+{"p":"pecoso","c":"a","k":["cualidades"],"f":2,"d":1},
+{"p":"profundo","c":"a","k":["cualidades"],"f":2,"d":1},
+{"p":"plano","c":"a","k":["cualidades"],"f":2,"d":1},
+{"p":"empinado","c":"a","k":["cualidades"],"f":2,"d":1},
+{"p":"torcido","c":"a","k":["cualidades"],"f":2,"d":1},
+{"p":"recto","c":"a","k":["cualidades"],"f":2,"d":1},
+{"p":"curvo","c":"a","k":["cualidades"],"f":2,"d":1},
+{"p":"gigante","c":"a","k":["cualidades"],"f":2,"d":1},
+{"p":"diminuto","c":"a","k":["cualidades"],"f":2,"d":1},
+{"p":"enorme","c":"a","k":["cualidades"],"f":2,"d":1},
+{"p":"maduro","c":"a","k":["cualidades"],"f":2,"d":1},
+{"p":"vivo","c":"a","k":["cualidades"],"f":2,"d":1},
+{"p":"claro","c":"a","k":["cualidades"],"f":2,"d":1},
+{"p":"oscuro","c":"a","k":["cualidades"],"f":2,"d":1},
+{"p":"brillante","c":"a","k":["cualidades"],"f":2,"d":1},
+{"p":"templado","c":"a","k":["cualidades"],"f":3,"d":1},
+{"p":"ruidoso","c":"a","k":["cualidades"],"f":3,"d":1},
+{"p":"silencioso","c":"a","k":["cualidades"],"f":3,"d":1},
+{"p":"lejano","c":"a","k":["cualidades"],"f":3,"d":1},
+{"p":"cercano","c":"a","k":["cualidades"],"f":3,"d":1},
+{"p":"inclinado","c":"a","k":["cualidades"],"f":3,"d":1},
+{"p":"bueno","c":"a","k":["cualidades"],"f":1},
+{"p":"malo","c":"a","k":["cualidades"],"f":1},
+{"p":"guapo","c":"a","k":["cualidades"],"f":1},
+{"p":"listo","c":"a","k":["cualidades"],"f":1},
+{"p":"tímido","c":"a","k":["cualidades"],"f":1},
+{"p":"valiente","c":"a","k":["cualidades"],"f":1},
+{"p":"simpático","c":"a","k":["cualidades"],"f":1},
+{"p":"amable","c":"a","k":["cualidades"],"f":1},
+{"p":"divertido","c":"a","k":["cualidades"],"f":1},
+{"p":"aburrido","c":"a","k":["cualidades"],"f":1},
+{"p":"curioso","c":"a","k":["cualidades"],"f":1},
+{"p":"travieso","c":"a","k":["cualidades"],"f":1},
+{"p":"obediente","c":"a","k":["cualidades"],"f":1},
+{"p":"tranquilo","c":"a","k":["cualidades"],"f":1},
+{"p":"nervioso","c":"a","k":["cualidades"],"f":1},
+{"p":"sano","c":"a","k":["cualidades"],"f":1},
+{"p":"dulce","c":"a","k":["cualidades"],"f":1},
+{"p":"salado","c":"a","k":["cualidades"],"f":1},
+{"p":"ácido","c":"a","k":["cualidades"],"f":1},
+{"p":"amargo","c":"a","k":["cualidades"],"f":1},
+{"p":"rico","c":"a","k":["cualidades"],"f":1},
+{"p":"sabroso","c":"a","k":["cualidades"],"f":1},
+{"p":"jugoso","c":"a","k":["cualidades"],"f":1},
+{"p":"fresco","c":"a","k":["cualidades"],"f":1},
+{"p":"crudo","c":"a","k":["cualidades"],"f":1},
+{"p":"primero","c":"a","k":["cualidades"],"f":1},
+{"p":"último","c":"a","k":["cualidades"],"f":1},
+{"p":"mismo","c":"a","k":["cualidades"],"f":1},
+{"p":"otro","c":"a","k":["cualidades"],"f":1},
+{"p":"igual","c":"a","k":["cualidades"],"f":1},
+{"p":"diferente","c":"a","k":["cualidades"],"f":1},
+{"p":"mucho","c":"a","k":["cualidades"],"f":1},
+{"p":"poco","c":"a","k":["cualidades"],"f":1},
+{"p":"todo","c":"a","k":["cualidades"],"f":1},
+{"p":"entero","c":"a","k":["cualidades"],"f":2},
+{"p":"medio","c":"a","k":["cualidades"],"f":2},
+{"p":"doble","c":"a","k":["cualidades"],"f":2},
+{"p":"libre","c":"a","k":["cualidades"],"f":2},
+{"p":"solo","c":"a","k":["cualidades"],"f":2},
+{"p":"precioso","c":"a","k":["cualidades"],"f":2},
+{"p":"elegante","c":"a","k":["cualidades"],"f":2},
+{"p":"cómodo","c":"a","k":["cualidades"],"f":2},
+{"p":"peligroso","c":"a","k":["cualidades"],"f":2},
+{"p":"seguro","c":"a","k":["cualidades"],"f":2},
+{"p":"difícil","c":"a","k":["cualidades"],"f":2},
+{"p":"fácil","c":"a","k":["cualidades"],"f":2},
+{"p":"posible","c":"a","k":["cualidades"],"f":2},
+{"p":"importante","c":"a","k":["cualidades"],"f":2},
+{"p":"especial","c":"a","k":["cualidades"],"f":2},
+{"p":"mágico","c":"a","k":["cualidades"],"f":2},
+{"p":"rojo","c":"a","k":["colores","cualidades"],"f":1,"d":1},
+{"p":"azul","c":"a","k":["colores","cualidades"],"f":1,"d":1},
+{"p":"verde","c":"a","k":["colores","cualidades"],"f":1,"d":1},
+{"p":"amarillo","c":"a","k":["colores","cualidades"],"f":1,"d":1},
+{"p":"marrón","c":"a","k":["colores","cualidades"],"f":1,"d":1},
+{"p":"negro","c":"a","k":["colores","cualidades"],"f":1,"d":1},
+{"p":"blanco","c":"a","k":["colores","cualidades"],"f":1,"d":1},
+{"p":"gris","c":"a","k":["colores","cualidades"],"f":1,"d":1},
+{"p":"morado","c":"a","k":["colores","cualidades"],"f":1,"d":1},
+{"p":"violeta","c":"a","k":["colores","cualidades"],"f":2,"d":1},
+{"p":"dorado","c":"a","k":["colores","cualidades"],"f":2,"d":1},
+{"p":"plateado","c":"a","k":["colores","cualidades"],"f":2,"d":1},
+{"p":"celeste","c":"a","k":["colores","cualidades"],"f":2,"d":1},
+{"p":"ayer","c":"o","k":["otros"],"f":1},
+{"p":"hoy","c":"o","k":["otros"],"f":1},
+{"p":"después","c":"o","k":["otros"],"f":1},
+{"p":"antes","c":"o","k":["otros"],"f":1},
+{"p":"pronto","c":"o","k":["otros"],"f":1},
+{"p":"siempre","c":"o","k":["otros"],"f":1},
+{"p":"nunca","c":"o","k":["otros"],"f":1},
+{"p":"todavía","c":"o","k":["otros"],"f":1},
+{"p":"ya","c":"o","k":["otros"],"f":1},
+{"p":"allí","c":"o","k":["otros"],"f":1},
+{"p":"cerca","c":"o","k":["otros"],"f":1},
+{"p":"lejos","c":"o","k":["otros"],"f":1},
+{"p":"arriba","c":"o","k":["otros"],"f":1},
+{"p":"abajo","c":"o","k":["otros"],"f":1},
+{"p":"dentro","c":"o","k":["otros"],"f":1},
+{"p":"fuera","c":"o","k":["otros"],"f":1},
+{"p":"delante","c":"o","k":["otros"],"f":1},
+{"p":"detrás","c":"o","k":["otros"],"f":1},
+{"p":"encima","c":"o","k":["otros"],"f":1},
+{"p":"debajo","c":"o","k":["otros"],"f":1},
+{"p":"entre","c":"o","k":["otros"],"f":1},
+{"p":"con","c":"o","k":["otros"],"f":1},
+{"p":"sin","c":"o","k":["otros"],"f":1},
+{"p":"en","c":"o","k":["otros"],"f":1},
+{"p":"de","c":"o","k":["otros"],"f":1},
+{"p":"a","c":"o","k":["otros"],"f":1},
+{"p":"para","c":"o","k":["otros"],"f":1},
+{"p":"por","c":"o","k":["otros"],"f":1},
+{"p":"hasta","c":"o","k":["otros"],"f":1},
+{"p":"desde","c":"o","k":["otros"],"f":1},
+{"p":"hacia","c":"o","k":["otros"],"f":1},
+{"p":"y","c":"o","k":["otros"],"f":1},
+{"p":"o","c":"o","k":["otros"],"f":1},
+{"p":"pero","c":"o","k":["otros"],"f":1},
+{"p":"porque","c":"o","k":["otros"],"f":1},
+{"p":"que","c":"o","k":["otros"],"f":1},
+{"p":"si","c":"o","k":["otros"],"f":1},
+{"p":"muy","c":"o","k":["otros"],"f":1},
+{"p":"más","c":"o","k":["otros"],"f":1},
+{"p":"menos","c":"o","k":["otros"],"f":1},
+{"p":"bien","c":"o","k":["otros"],"f":1},
+{"p":"mal","c":"o","k":["otros"],"f":1},
+{"p":"también","c":"o","k":["otros"],"f":1},
+{"p":"tampoco","c":"o","k":["otros"],"f":1},
+{"p":"quizá","c":"o","k":["otros"],"f":1},
+{"p":"cuando","c":"o","k":["otros"],"f":1},
+{"p":"donde","c":"o","k":["otros"],"f":1},
+{"p":"adiós","c":"o","k":["otros"],"f":1},
+{"p":"vale","c":"o","k":["otros"],"f":1},
+{"p":"perdón","c":"o","k":["otros"],"f":1},
+{"p":"uno","c":"o","k":["otros"],"f":1},
+{"p":"dos","c":"o","k":["otros"],"f":1},
+{"p":"tres","c":"o","k":["otros"],"f":1},
+{"p":"cuatro","c":"o","k":["otros"],"f":1},
+{"p":"cinco","c":"o","k":["otros"],"f":1},
+{"p":"siete","c":"o","k":["otros"],"f":1},
+{"p":"ocho","c":"o","k":["otros"],"f":1},
+{"p":"nueve","c":"o","k":["otros"],"f":1},
+{"p":"diez","c":"o","k":["otros"],"f":1},
+{"p":"cero","c":"o","k":["otros"],"f":1}
+];
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get LEXICO() { return LEXICO; } }));
+},
+"lengua/palabras.js": (__exp) => {
+// Charta · Lengua · buscar palabras en el léxico de 1.º con los filtros de las opciones comunes (LENGUA_1.md, §2).
+// Las sílabas se calculan una vez por palabra (caché). Sin DOM.
+const { LEXICO } = __req("lengua/lexico.js");
+const { silabas, tipoSilaba, TIPOS_SILABA, soloLetras, llevaLetra } = __req("lengua/reglas.js");
+const info = new Map();
+/** Datos calculados de una palabra del léxico: sílabas y tipos de sílaba. */
+function datosPalabra(e) {
+  if (!info.has(e.p)) { const s = silabas(e.p); info.set(e.p, { s, tipos: s.map(tipoSilaba) }); }
+  return info.get(e.p);
+}
+
+/** Palabras que cumplen los filtros (todos opcionales):
+ *  cat ("n" | "v" | "a" | "o" o lista), campos (lista: alguno), nSilabas (número o lista), tipo ("directas"… "mixtas"),
+ *  letras (letras vistas: cadena o lista), conLetra (todas la llevan), dibujo (true: solo dibujables), frec (máxima), sin (palabras a excluir),
+ *  minLetras / maxLetras. */
+function buscar({ cat, campos, nSilabas, tipo, letras, conLetra, dibujo, frec, sin, minLetras, maxLetras } = {}) {
+  const cats = cat ? [].concat(cat) : null, ns = nSilabas ? [].concat(nSilabas) : null, fuera = sin ? new Set(sin) : null;
+  return LEXICO.filter((e) => {
+    if (cats && !cats.includes(e.c)) return false;
+    if (campos && !campos.some((k) => e.k.includes(k))) return false;
+    if (dibujo && !e.d) return false;
+    if (frec && e.f > frec) return false;
+    if (fuera && fuera.has(e.p)) return false;
+    const n = [...e.p].length;
+    if ((minLetras && n < minLetras) || (maxLetras && n > maxLetras)) return false;
+    if (letras && !soloLetras(e.p, letras)) return false;
+    if (conLetra && !llevaLetra(e.p, conLetra)) return false;
+    const d = datosPalabra(e);
+    if (ns && !ns.includes(d.s.length)) return false;
+    if (tipo && !d.tipos.every((t) => TIPOS_SILABA[tipo].includes(t))) return false;
+    return true;
+  });
+}
+
+/** k palabras distintas al azar con esos filtros; error claro si no hay bastantes (la invariante lo comprobará en cada opción). */
+function elegirPalabras(azar, k, filtros = {}) {
+  const ps = buscar(filtros);
+  if (ps.length < k) throw new Error(`Solo hay ${ps.length} palabras con esas opciones (hacen falta ${k}).`);
+  return azar.muestra(ps, k);
+}
+
+const CAMPOS_LEXICOS = ["animales", "comida", "ropa", "casa", "escuela", "cuerpo", "juguetes", "transportes", "familia", "naturaleza", "colores", "oficios"];
+const palabra = (p) => LEXICO.find((e) => e.p === p) || null;
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get datosPalabra() { return datosPalabra; }, get buscar() { return buscar; }, get elegirPalabras() { return elegirPalabras; }, get CAMPOS_LEXICOS() { return CAMPOS_LEXICOS; }, get palabra() { return palabra; } }));
+},
+"lengua/reglas.js": (__exp) => {
+// Charta · Lengua · reglas del español para 1.º (lote 0 de LENGUA_1.md). Sin dependencias ni DOM.
+// Silabeo, tipo de sílaba, sílaba tónica, rima, plural, artículo, letras vistas y huecos de ortografía.
+// Las palabras van en minúscula. «ch», «ll», «rr», «qu» y «gu» (ante e, i) cuentan como una consonante al silabear.
+
+const FUERTES = "aeoáéíóú";            // í y ú con tilde rompen el diptongo (hiato), como las fuertes
+const DEBILES = "iuü";
+const VOCALES = FUERTES + DEBILES;
+const TILDES = { á: "a", é: "e", í: "i", ó: "o", ú: "u", ü: "u" };
+const PONER_TILDE = { a: "á", e: "é", i: "í", o: "ó", u: "ú" };
+// Grupos que no se separan (van juntos a la sílaba siguiente): pla, bra, cri, dra, tre…
+const TRABADOS = new Set(["pl", "pr", "bl", "br", "fl", "fr", "cl", "cr", "gl", "gr", "dr", "tr", "kl", "kr"]);
+
+const sinTildes = (s) => String(s).replace(/[áéíóúü]/g, (c) => TILDES[c]);
+
+/** Unidades de la palabra: { t: texto, v: es vocal }. Dígrafos juntos; la «u» muda de que/qui/gue/gui va con su consonante;
+ *  la «y» es vocal al final o entre consonantes (rey, muy, y) y consonante ante vocal (yo, mayo). */
+function unidades(p) {
+  const u = [];
+  for (let i = 0; i < p.length; i++) {
+    const c = p[i], d = p[i + 1];
+    if ((c === "c" && d === "h") || (c === "l" && d === "l") || (c === "r" && d === "r")) { u.push({ t: c + d, v: false }); i++; continue; }
+    if ((c === "q" || c === "g") && d === "u" && "eiéí".includes(p[i + 2] ?? "-")) { u.push({ t: c + d, v: false }); i++; continue; }
+    if (c === "y") { u.push({ t: c, v: !VOCALES.includes(d ?? "-") }); continue; }
+    u.push({ t: c, v: VOCALES.includes(c) });
+  }
+  return u;
+}
+
+const fuerte = (t) => FUERTES.includes(t);
+const debil = (t) => DEBILES.includes(t) || t === "y";
+
+/** Separa en sílabas: «pelota» → ["pe", "lo", "ta"]. */
+function silabas(palabra) {
+  const p = String(palabra).toLowerCase();
+  const u = unidades(p);
+  // Núcleos: rachas de vocales partidas en los hiatos (dos fuertes seguidas, o débil con tilde).
+  const nucleos = [];                      // [inicio, fin) en u
+  for (let i = 0; i < u.length;) {
+    if (!u[i].v) { i++; continue; }
+    let j = i + 1;
+    while (j < u.length && u[j].v && !(fuerte(u[j - 1].t) && fuerte(u[j].t))) j++;
+    nucleos.push([i, j]); i = j;
+  }
+  if (nucleos.length <= 1) return [p];
+  const cortes = [];                       // índice en u donde empieza cada sílaba (salvo la primera)
+  for (let k = 0; k + 1 < nucleos.length; k++) {
+    const a = nucleos[k][1], b = nucleos[k + 1][0], n = b - a;   // consonantes entre núcleos: u[a..b)
+    const par = (i) => TRABADOS.has(u[i].t + u[i + 1].t);
+    let corte;
+    if (n === 0) corte = a;                                        // hiatos: le-ón, ma-íz
+    else if (n === 1) corte = a;                                   // pe-lo-ta
+    else if (n === 2) corte = par(a) ? a : a + 1;                  // pla-to · ár-bol
+    else if (n === 3) corte = par(b - 2) ? a + 1 : a + 2;          // hom-bre · ins-tan-te
+    else corte = a + 2;                                            // ins-truc-ción
+    cortes.push(corte);
+  }
+  const s = []; let ini = 0;
+  for (const c of [...cortes, u.length]) { s.push(u.slice(ini, c).map((x) => x.t).join("")); ini = c; }
+  return s;
+}
+
+/** Tipo de una sílaba: "vocal" (a), "directa" (ma), "inversa" (al), "trabada" (pla, tren) o "mixta" (sol, con). */
+function tipoSilaba(s) {
+  const u = unidades(String(s).toLowerCase());
+  const i = u.findIndex((x) => x.v);
+  if (i < 0) return "mixta";
+  let j = i; while (j < u.length && u[j].v) j++;
+  const ataque = i, coda = u.length - j;
+  if (ataque >= 2) return "trabada";
+  if (ataque === 1) return coda ? "mixta" : "directa";
+  return coda ? "inversa" : "vocal";
+}
+
+/** Tipos de sílaba que admite cada opción («Tipo de sílabas» en LENGUA_1.md); cada opción incluye las anteriores. */
+const TIPOS_SILABA = {
+  directas: ["vocal", "directa"],
+  inversas: ["vocal", "directa", "inversa"],
+  trabadas: ["vocal", "directa", "inversa", "trabada"],
+  mixtas: ["vocal", "directa", "inversa", "trabada", "mixta"],
+};
+/** ¿Todas las sílabas de la palabra son del nivel pedido? */
+const cabeTipo = (palabra, nivel = "mixtas") => silabas(palabra).every((s) => TIPOS_SILABA[nivel].includes(tipoSilaba(s)));
+
+/** Índice de la sílaba tónica: la que lleva tilde; si no, aguda si acaba en consonante distinta de n, s; llana si no. */
+function tonica(palabra) {
+  const s = silabas(palabra);
+  const t = s.findIndex((x) => /[áéíóú]/.test(x));
+  if (t >= 0) return t;
+  if (s.length === 1) return 0;
+  return /[aeiouns]$/.test(String(palabra).toLowerCase()) ? s.length - 2 : s.length - 1;
+}
+/** Aguda, llana o esdrújula (para el plural y la tilde). */
+function acentuacion(palabra) {
+  const d = silabas(palabra).length - 1 - tonica(palabra);
+  return d === 0 ? "aguda" : d === 1 ? "llana" : "esdrujula";
+}
+
+/** Posición (en la palabra) de la vocal tónica: la de la tilde o, en la sílaba tónica, la fuerte (o la 2.ª débil: «cuidado»). */
+function vocalTonica(palabra) {
+  const p = String(palabra).toLowerCase(), s = silabas(p), t = tonica(p);
+  const ini = s.slice(0, t).join("").length, sil = s[t];
+  let k = [...sil].findIndex((c) => "áéíóú".includes(c));
+  if (k < 0) k = [...sil].findIndex((c, i) => fuerte(c) && !(c === "u" && i > 0 && "qg".includes(sil[i - 1])));
+  if (k < 0) { const vs = [...sil].map((c, i) => [c, i]).filter(([c, i]) => (VOCALES.includes(c) || (c === "y" && i === sil.length - 1)) && !(c === "u" && i > 0 && "qg".includes(sil[i - 1]) && "eiéí".includes(sil[i + 1] ?? "-"))); k = vs.length ? vs[vs.length - 1][1] : 0; }
+  return ini + k;
+}
+
+/** Rima: "silaba" = misma última sílaba (gato – pato); "vocal" = igual desde la vocal tónica (ratón – camión). Sin tildes. */
+function rima(palabra, modo = "vocal") {
+  const p = String(palabra).toLowerCase();
+  if (modo === "silaba") return sinTildes(silabas(p).at(-1));
+  return sinTildes(p.slice(vocalTonica(p)));
+}
+const riman = (a, b, modo = "vocal") => a !== b && rima(a, modo) === rima(b, modo);
+
+/** Plural de un nombre o adjetivo: gato → gatos, flor → flores, pez → peces, camión → camiones, joven → jóvenes. */
+const PLURAL_IRREGULAR = { jersey: "jerséis", espray: "espráis" };
+function plural(palabra) {
+  const p = String(palabra).toLowerCase();
+  if (PLURAL_IRREGULAR[p]) return PLURAL_IRREGULAR[p];
+  if (/[tkcpbg]$/.test(p)) return p + "s";                         // robot → robots, cómic → cómics
+  if (/[aeiouáéó]$/.test(p)) return p + "s";
+  if (/[íú]$/.test(p)) return p + "s";                            // menú → menús, rubí → rubís (también admitido)
+  if (p.endsWith("z")) return p.slice(0, -1) + "ces";
+  if (/[sx]$/.test(p) && acentuacion(p) !== "aguda") return p;  // lunes, tórax
+  if (p.endsWith("y")) return p + "es";                            // rey → reyes
+  const ac = acentuacion(p);
+  if (ac === "aguda" && /[áéíóú]/.test(p)) return sinTildeAguda(p) + "es";   // camión → camiones
+  if (ac === "llana" && /n$/.test(p) && !/[áéíóú]/.test(p) && silabas(p).length > 1) {   // joven → jóvenes
+    const k = vocalTonica(p); return p.slice(0, k) + PONER_TILDE[p[k]] + p.slice(k + 1) + "es";
+  }
+  return p + "es";
+}
+// La tilde de la aguda se va al ser llana (camión → camiones), salvo la de hiato (país → países).
+const sinTildeAguda = (p) => p.replace(/([aeiou]?)([áéíóú])([aeiou]?)(?=[^áéíóú]*$)/, (m, a, c, b) => ("íú".includes(c) && (a || b)) ? m : a + TILDES[c] + b);
+
+/** Artículo: definido (el, la, los, las) o indefinido (un, una, unos, unas) según género (m/f) y número. */
+function articulo(genero, { plural: pl = false, indefinido = false } = {}) {
+  const f = genero === "f";
+  if (indefinido) return pl ? (f ? "unas" : "unos") : (f ? "una" : "un");
+  return pl ? (f ? "las" : "los") : (f ? "la" : "el");
+}
+
+/** Letras de la palabra (la «ñ» es una; «ch» y «ll» son dos, como en el abecedario actual). */
+const letras = (palabra) => [...String(palabra).toLowerCase()];
+const ABECEDARIO = [..."abcdefghijklmnñopqrstuvwxyz"];
+/** ¿La palabra usa solo letras vistas? (las vocales con tilde o diéresis cuentan como su vocal). */
+function soloLetras(palabra, vistas) {
+  if (!vistas) return true;
+  const v = new Set([...vistas].map(sinTildes));
+  return letras(sinTildes(palabra)).every((c) => v.has(c));
+}
+/** ¿La palabra lleva la letra? */
+const llevaLetra = (palabra, letra) => letras(sinTildes(palabra)).includes(sinTildes(letra));
+
+/** Huecos de ortografía (orto.elige): dónde se aplica la regla y qué va. Cada hueco: { pos, largo, correcta, opciones }.
+ *  Reglas: "mpb" (m antes de p y b), "r" (r / rr entre vocales y al principio), "cqu" (c / qu), "ggu" (g / gu), "cz" (c / z). */
+function huecosOrto(palabra, regla) {
+  const p = String(palabra).toLowerCase(), h = [];
+  for (let i = 0; i < p.length; i++) {
+    const sig = p[i + 1] ?? "", ant = p[i - 1] ?? "";
+    const delante = sinTildes(p[i + 2] ?? "");
+    if (regla === "mpb" && (p[i] === "m" || p[i] === "n") && "pbv".includes(sig) && sig) h.push({ pos: i, largo: 1, correcta: p[i], opciones: ["m", "n"] });   // campo, enviar
+    if (regla === "r") {
+      if (p.startsWith("rr", i)) { h.push({ pos: i, largo: 2, correcta: "rr", opciones: ["r", "rr"] }); i++; }
+      else if (p[i] === "r" && VOCALES.includes(ant) && VOCALES.includes(sig)) h.push({ pos: i, largo: 1, correcta: "r", opciones: ["r", "rr"] });
+      else if (p[i] === "r" && i === 0) h.push({ pos: 0, largo: 1, correcta: "r", opciones: ["r", "rr"] });
+    }
+    if (regla === "cqu") {
+      if (p.startsWith("qu", i)) { h.push({ pos: i, largo: 2, correcta: "qu", opciones: ["c", "qu"] }); i++; }
+      else if (p[i] === "c" && "aouáóú".includes(sig) && sig) h.push({ pos: i, largo: 1, correcta: "c", opciones: ["c", "qu"] });
+    }
+    if (regla === "ggu") {
+      if (p.startsWith("gu", i) && "ei".includes(delante) && delante) { h.push({ pos: i, largo: 2, correcta: "gu", opciones: ["g", "gu"] }); i++; }
+      else if (p[i] === "g" && "aouáóú".includes(sig) && sig) h.push({ pos: i, largo: 1, correcta: "g", opciones: ["g", "gu"] });
+    }
+    if (regla === "cz") {
+      const s = sinTildes(sig);
+      if (p[i] === "z" && "aouáóú".includes(sig) && sig) h.push({ pos: i, largo: 1, correcta: "z", opciones: ["c", "z"] });
+      else if (p[i] === "c" && "ei".includes(s) && s) h.push({ pos: i, largo: 1, correcta: "c", opciones: ["c", "z"] });
+    }
+  }
+  return h;
+}
+const REGLAS_ORTO = ["mpb", "r", "cqu", "ggu", "cz"];
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get sinTildes() { return sinTildes; }, get silabas() { return silabas; }, get tipoSilaba() { return tipoSilaba; }, get TIPOS_SILABA() { return TIPOS_SILABA; }, get cabeTipo() { return cabeTipo; }, get tonica() { return tonica; }, get acentuacion() { return acentuacion; }, get rima() { return rima; }, get riman() { return riman; }, get plural() { return plural; }, get articulo() { return articulo; }, get letras() { return letras; }, get ABECEDARIO() { return ABECEDARIO; }, get soloLetras() { return soloLetras; }, get llevaLetra() { return llevaLetra; }, get huecosOrto() { return huecosOrto; }, get REGLAS_ORTO() { return REGLAS_ORTO; } }));
+},
 "nube/config.js": (__exp) => {
 // Charta · configuración de Firebase (paso 5.1)
 // Proyecto compartido con Tabula, Barri, Lectori y Calculi ("mis-apps-educativas"). Estos valores identifican
@@ -6038,6 +7568,1382 @@ const CATALOGO = {
      "decenas"
     ]
    }
+  },
+  {
+   "id": "letra.busca",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 2,
+   "familia": "letra",
+   "clave": "busca",
+   "nombre": "Rodea la letra",
+   "descripcion": "Filas de letras sueltas: rodear todas las que son iguales a la pedida.",
+   "opciones": [
+    {
+     "id": "letra",
+     "etiqueta": "Letra que se busca",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Al azar"
+      },
+      {
+       "valor": "a",
+       "etiqueta": "a"
+      },
+      {
+       "valor": "b",
+       "etiqueta": "b"
+      },
+      {
+       "valor": "c",
+       "etiqueta": "c"
+      },
+      {
+       "valor": "d",
+       "etiqueta": "d"
+      },
+      {
+       "valor": "e",
+       "etiqueta": "e"
+      },
+      {
+       "valor": "f",
+       "etiqueta": "f"
+      },
+      {
+       "valor": "g",
+       "etiqueta": "g"
+      },
+      {
+       "valor": "h",
+       "etiqueta": "h"
+      },
+      {
+       "valor": "i",
+       "etiqueta": "i"
+      },
+      {
+       "valor": "j",
+       "etiqueta": "j"
+      },
+      {
+       "valor": "k",
+       "etiqueta": "k"
+      },
+      {
+       "valor": "l",
+       "etiqueta": "l"
+      },
+      {
+       "valor": "m",
+       "etiqueta": "m"
+      },
+      {
+       "valor": "n",
+       "etiqueta": "n"
+      },
+      {
+       "valor": "ñ",
+       "etiqueta": "ñ"
+      },
+      {
+       "valor": "o",
+       "etiqueta": "o"
+      },
+      {
+       "valor": "p",
+       "etiqueta": "p"
+      },
+      {
+       "valor": "q",
+       "etiqueta": "q"
+      },
+      {
+       "valor": "r",
+       "etiqueta": "r"
+      },
+      {
+       "valor": "s",
+       "etiqueta": "s"
+      },
+      {
+       "valor": "t",
+       "etiqueta": "t"
+      },
+      {
+       "valor": "u",
+       "etiqueta": "u"
+      },
+      {
+       "valor": "v",
+       "etiqueta": "v"
+      },
+      {
+       "valor": "w",
+       "etiqueta": "w"
+      },
+      {
+       "valor": "x",
+       "etiqueta": "x"
+      },
+      {
+       "valor": "y",
+       "etiqueta": "y"
+      },
+      {
+       "valor": "z",
+       "etiqueta": "z"
+      }
+     ]
+    },
+    {
+     "id": "distractoras",
+     "etiqueta": "Las otras letras",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Al azar"
+      },
+      {
+       "valor": "confusas",
+       "etiqueta": "Las que se confunden (b-d-p-q, m-n, u-n…)"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULA"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "RODEA LA LETRA",
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 8,
+    "etiquetas": [
+     "lengua",
+     "letras",
+     "reconocer",
+     "rodear",
+     "atención"
+    ]
+   }
+  },
+  {
+   "id": "letra.enpalabras",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 2,
+   "familia": "letra",
+   "clave": "enpalabras",
+   "nombre": "Rodea la letra en las palabras",
+   "descripcion": "Una lista de palabras: rodear la letra pedida en cada una y contar cuántas veces sale.",
+   "opciones": [
+    {
+     "id": "letra",
+     "etiqueta": "Letra que se busca",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Al azar"
+      },
+      {
+       "valor": "a",
+       "etiqueta": "a"
+      },
+      {
+       "valor": "b",
+       "etiqueta": "b"
+      },
+      {
+       "valor": "c",
+       "etiqueta": "c"
+      },
+      {
+       "valor": "d",
+       "etiqueta": "d"
+      },
+      {
+       "valor": "e",
+       "etiqueta": "e"
+      },
+      {
+       "valor": "f",
+       "etiqueta": "f"
+      },
+      {
+       "valor": "g",
+       "etiqueta": "g"
+      },
+      {
+       "valor": "h",
+       "etiqueta": "h"
+      },
+      {
+       "valor": "i",
+       "etiqueta": "i"
+      },
+      {
+       "valor": "j",
+       "etiqueta": "j"
+      },
+      {
+       "valor": "l",
+       "etiqueta": "l"
+      },
+      {
+       "valor": "m",
+       "etiqueta": "m"
+      },
+      {
+       "valor": "n",
+       "etiqueta": "n"
+      },
+      {
+       "valor": "ñ",
+       "etiqueta": "ñ"
+      },
+      {
+       "valor": "o",
+       "etiqueta": "o"
+      },
+      {
+       "valor": "p",
+       "etiqueta": "p"
+      },
+      {
+       "valor": "r",
+       "etiqueta": "r"
+      },
+      {
+       "valor": "s",
+       "etiqueta": "s"
+      },
+      {
+       "valor": "t",
+       "etiqueta": "t"
+      },
+      {
+       "valor": "u",
+       "etiqueta": "u"
+      },
+      {
+       "valor": "v",
+       "etiqueta": "v"
+      },
+      {
+       "valor": "z",
+       "etiqueta": "z"
+      }
+     ]
+    },
+    {
+     "id": "tarea",
+     "etiqueta": "Tarea",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Rodear y contar cuántas veces"
+      },
+      {
+       "valor": "rodea",
+       "etiqueta": "Solo rodear"
+      }
+     ]
+    },
+    {
+     "id": "tipo",
+     "etiqueta": "Tipo de sílabas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Directas (ma, pe)"
+      },
+      {
+       "valor": "inversas",
+       "etiqueta": "Con inversas (al, en)"
+      },
+      {
+       "valor": "trabadas",
+       "etiqueta": "Con trabadas (pla, bra)"
+      },
+      {
+       "valor": "mixtas",
+       "etiqueta": "Con mixtas (con, sol)"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "inicial",
+       "etiqueta": "Mayúscula inicial"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULAS"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "RODEA LA LETRA EN LAS PALABRAS",
+   "color": "rosa",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "lengua",
+     "letras",
+     "rodear",
+     "contar",
+     "palabras"
+    ]
+   }
+  },
+  {
+   "id": "letra.falta",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 2,
+   "familia": "letra",
+   "clave": "falta",
+   "nombre": "Pon la letra que falta",
+   "descripcion": "Palabras con una letra en hueco (m_sa), con tres letras para elegir o sin ayuda.",
+   "opciones": [
+    {
+     "id": "ayuda",
+     "etiqueta": "Ayuda",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Con tres letras para elegir"
+      },
+      {
+       "valor": "sin",
+       "etiqueta": "Sin ayuda"
+      }
+     ]
+    },
+    {
+     "id": "hueco",
+     "etiqueta": "Letra que falta",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Cualquier letra"
+      },
+      {
+       "valor": "primera",
+       "etiqueta": "La primera"
+      }
+     ]
+    },
+    {
+     "id": "tipo",
+     "etiqueta": "Tipo de sílabas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Directas (ma, pe)"
+      },
+      {
+       "valor": "inversas",
+       "etiqueta": "Con inversas (al, en)"
+      },
+      {
+       "valor": "trabadas",
+       "etiqueta": "Con trabadas (pla, bra)"
+      },
+      {
+       "valor": "mixtas",
+       "etiqueta": "Con mixtas (con, sol)"
+      }
+     ]
+    },
+    {
+     "id": "largo",
+     "etiqueta": "Sílabas de cada palabra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Variadas"
+      },
+      {
+       "valor": 1,
+       "etiqueta": "1 sílaba"
+      },
+      {
+       "valor": 2,
+       "etiqueta": "2 sílabas"
+      },
+      {
+       "valor": 3,
+       "etiqueta": "3 sílabas"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 sílabas"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "inicial",
+       "etiqueta": "Mayúscula inicial"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULAS"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "PON LA LETRA QUE FALTA",
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "lengua",
+     "letras",
+     "palabras",
+     "completar"
+    ]
+   }
+  },
+  {
+   "id": "letra.vocales",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 2,
+   "familia": "letra",
+   "clave": "vocales",
+   "nombre": "Completa las vocales",
+   "descripcion": "Palabras con las vocales en hueco (p_l_t_): escribirlas.",
+   "opciones": [
+    {
+     "id": "faltan",
+     "etiqueta": "Vocales que faltan",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Todas"
+      },
+      {
+       "valor": "una",
+       "etiqueta": "Una"
+      },
+      {
+       "valor": "azar",
+       "etiqueta": "Algunas (al azar)"
+      }
+     ]
+    },
+    {
+     "id": "tipo",
+     "etiqueta": "Tipo de sílabas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Directas (ma, pe)"
+      },
+      {
+       "valor": "inversas",
+       "etiqueta": "Con inversas (al, en)"
+      },
+      {
+       "valor": "trabadas",
+       "etiqueta": "Con trabadas (pla, bra)"
+      },
+      {
+       "valor": "mixtas",
+       "etiqueta": "Con mixtas (con, sol)"
+      }
+     ]
+    },
+    {
+     "id": "largo",
+     "etiqueta": "Sílabas de cada palabra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Variadas"
+      },
+      {
+       "valor": 1,
+       "etiqueta": "1 sílaba"
+      },
+      {
+       "valor": 2,
+       "etiqueta": "2 sílabas"
+      },
+      {
+       "valor": 3,
+       "etiqueta": "3 sílabas"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 sílabas"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "inicial",
+       "etiqueta": "Mayúscula inicial"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULAS"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "COMPLETA LAS VOCALES",
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 12,
+    "etiquetas": [
+     "lengua",
+     "letras",
+     "vocales",
+     "palabras",
+     "completar"
+    ]
+   }
+  },
+  {
+   "id": "letra.parejas",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 2,
+   "familia": "letra",
+   "clave": "parejas",
+   "nombre": "Mayúscula y minúscula",
+   "descripcion": "Unir cada mayúscula con su minúscula, o escribir la que falta.",
+   "opciones": [
+    {
+     "id": "tarea",
+     "etiqueta": "Tarea",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Unir"
+      },
+      {
+       "valor": "escribe",
+       "etiqueta": "Escribir la que falta"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa"
+   ],
+   "titulo": "MAYÚSCULA Y MINÚSCULA",
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "lengua",
+     "letras",
+     "mayúsculas",
+     "minúsculas",
+     "unir"
+    ]
+   }
+  },
+  {
+   "id": "letra.abecedario",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 2,
+   "familia": "letra",
+   "clave": "abecedario",
+   "nombre": "Antes y después",
+   "descripcion": "La letra de antes, la de después o las dos, con el abecedario (con ñ).",
+   "opciones": [
+    {
+     "id": "modo",
+     "etiqueta": "Letras",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "La de antes y la de después"
+      },
+      {
+       "valor": "anterior",
+       "etiqueta": "Solo la de antes"
+      },
+      {
+       "valor": "posterior",
+       "etiqueta": "Solo la de después"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULA"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "ANTES Y DESPUÉS",
+   "color": "rosa",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "lengua",
+     "letras",
+     "abecedario",
+     "orden",
+     "anterior",
+     "posterior"
+    ]
+   }
+  },
+  {
+   "id": "silaba.tabla",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 3,
+   "familia": "silaba",
+   "clave": "tabla",
+   "nombre": "Lee las sílabas",
+   "descripcion": "Tabla de lectura de sílabas (ma me mi mo mu…) para leer en voz alta.",
+   "opciones": [
+    {
+     "id": "letra",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Todas"
+      },
+      {
+       "valor": "m",
+       "etiqueta": "m"
+      },
+      {
+       "valor": "p",
+       "etiqueta": "p"
+      },
+      {
+       "valor": "s",
+       "etiqueta": "s"
+      },
+      {
+       "valor": "l",
+       "etiqueta": "l"
+      },
+      {
+       "valor": "t",
+       "etiqueta": "t"
+      },
+      {
+       "valor": "d",
+       "etiqueta": "d"
+      },
+      {
+       "valor": "n",
+       "etiqueta": "n"
+      },
+      {
+       "valor": "f",
+       "etiqueta": "f"
+      },
+      {
+       "valor": "b",
+       "etiqueta": "b"
+      },
+      {
+       "valor": "v",
+       "etiqueta": "v"
+      },
+      {
+       "valor": "r",
+       "etiqueta": "r"
+      },
+      {
+       "valor": "j",
+       "etiqueta": "j"
+      },
+      {
+       "valor": "c",
+       "etiqueta": "c"
+      },
+      {
+       "valor": "z",
+       "etiqueta": "z"
+      },
+      {
+       "valor": "g",
+       "etiqueta": "g"
+      },
+      {
+       "valor": "h",
+       "etiqueta": "h"
+      },
+      {
+       "valor": "ñ",
+       "etiqueta": "ñ"
+      },
+      {
+       "valor": "ch",
+       "etiqueta": "ch"
+      },
+      {
+       "valor": "ll",
+       "etiqueta": "ll"
+      }
+     ]
+    },
+    {
+     "id": "tipo",
+     "etiqueta": "Tipo de sílabas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Directas (ma, pe)"
+      },
+      {
+       "valor": "inversas",
+       "etiqueta": "Con inversas (al, en)"
+      },
+      {
+       "valor": "trabadas",
+       "etiqueta": "Con trabadas (pla, bra)"
+      },
+      {
+       "valor": "mixtas",
+       "etiqueta": "Con mixtas (con, sol)"
+      }
+     ]
+    },
+    {
+     "id": "orden",
+     "etiqueta": "Orden",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Ordenadas"
+      },
+      {
+       "valor": "mezcladas",
+       "etiqueta": "Mezcladas"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULA"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa"
+   ],
+   "titulo": "LEE LAS SÍLABAS",
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 8,
+    "etiquetas": [
+     "lengua",
+     "sílabas",
+     "lectura",
+     "voz alta",
+     "fluidez"
+    ]
+   }
+  },
+  {
+   "id": "silaba.junta",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 3,
+   "familia": "silaba",
+   "clave": "junta",
+   "nombre": "Junta las sílabas",
+   "descripcion": "Juntar sílabas para formar la palabra (ca + sa), escribiéndola o uniendo columnas.",
+   "opciones": [
+    {
+     "id": "tarea",
+     "etiqueta": "Tarea",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Escribir la palabra"
+      },
+      {
+       "valor": "une",
+       "etiqueta": "Unir las sílabas"
+      }
+     ]
+    },
+    {
+     "id": "largo",
+     "etiqueta": "Sílabas de cada palabra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "2 sílabas"
+      },
+      {
+       "valor": 3,
+       "etiqueta": "3 sílabas"
+      },
+      {
+       "valor": "variadas",
+       "etiqueta": "2 y 3 sílabas"
+      }
+     ]
+    },
+    {
+     "id": "tipo",
+     "etiqueta": "Tipo de sílabas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Directas (ma, pe)"
+      },
+      {
+       "valor": "inversas",
+       "etiqueta": "Con inversas (al, en)"
+      },
+      {
+       "valor": "trabadas",
+       "etiqueta": "Con trabadas (pla, bra)"
+      },
+      {
+       "valor": "mixtas",
+       "etiqueta": "Con mixtas (con, sol)"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "inicial",
+       "etiqueta": "Mayúscula inicial"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULAS"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "JUNTA LAS SÍLABAS",
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "lengua",
+     "sílabas",
+     "formar palabras",
+     "unir",
+     "escribir"
+    ]
+   }
+  },
+  {
+   "id": "silaba.separa",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 3,
+   "familia": "silaba",
+   "clave": "separa",
+   "nombre": "Separa en sílabas",
+   "descripcion": "Separar cada palabra en sílabas: en casillas o con rayas.",
+   "opciones": [
+    {
+     "id": "modo",
+     "etiqueta": "Cómo se separa",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "En casillas"
+      },
+      {
+       "valor": "rayas",
+       "etiqueta": "Con rayas"
+      }
+     ]
+    },
+    {
+     "id": "largo",
+     "etiqueta": "Sílabas de cada palabra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Variadas"
+      },
+      {
+       "valor": 2,
+       "etiqueta": "2 sílabas"
+      },
+      {
+       "valor": 3,
+       "etiqueta": "3 sílabas"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 sílabas"
+      }
+     ]
+    },
+    {
+     "id": "tipo",
+     "etiqueta": "Tipo de sílabas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Directas (ma, pe)"
+      },
+      {
+       "valor": "inversas",
+       "etiqueta": "Con inversas (al, en)"
+      },
+      {
+       "valor": "trabadas",
+       "etiqueta": "Con trabadas (pla, bra)"
+      },
+      {
+       "valor": "mixtas",
+       "etiqueta": "Con mixtas (con, sol)"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "inicial",
+       "etiqueta": "Mayúscula inicial"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULAS"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "SEPARA EN SÍLABAS",
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 12,
+    "etiquetas": [
+     "lengua",
+     "sílabas",
+     "separar",
+     "palabras"
+    ]
+   }
+  },
+  {
+   "id": "silaba.ordena",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 3,
+   "familia": "silaba",
+   "clave": "ordena",
+   "nombre": "Ordena las sílabas",
+   "descripcion": "Sílabas desordenadas: escribir la palabra (ta · pe · lo = pelota).",
+   "opciones": [
+    {
+     "id": "largo",
+     "etiqueta": "Sílabas de cada palabra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Variadas"
+      },
+      {
+       "valor": 2,
+       "etiqueta": "2 sílabas"
+      },
+      {
+       "valor": 3,
+       "etiqueta": "3 sílabas"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 sílabas"
+      }
+     ]
+    },
+    {
+     "id": "tipo",
+     "etiqueta": "Tipo de sílabas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Directas (ma, pe)"
+      },
+      {
+       "valor": "inversas",
+       "etiqueta": "Con inversas (al, en)"
+      },
+      {
+       "valor": "trabadas",
+       "etiqueta": "Con trabadas (pla, bra)"
+      },
+      {
+       "valor": "mixtas",
+       "etiqueta": "Con mixtas (con, sol)"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "inicial",
+       "etiqueta": "Mayúscula inicial"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULAS"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "ORDENA LAS SÍLABAS",
+   "color": "rosa",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "lengua",
+     "sílabas",
+     "ordenar",
+     "palabras"
+    ]
+   }
+  },
+  {
+   "id": "silaba.falta",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 3,
+   "familia": "silaba",
+   "clave": "falta",
+   "nombre": "Pon la sílaba que falta",
+   "descripcion": "Palabras con una sílaba en hueco (pe__ta), con tres sílabas para elegir o sin ayuda.",
+   "opciones": [
+    {
+     "id": "ayuda",
+     "etiqueta": "Ayuda",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Con tres sílabas para elegir"
+      },
+      {
+       "valor": "sin",
+       "etiqueta": "Sin ayuda"
+      }
+     ]
+    },
+    {
+     "id": "hueco",
+     "etiqueta": "Sílaba que falta",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Cualquiera"
+      },
+      {
+       "valor": "primera",
+       "etiqueta": "La primera"
+      },
+      {
+       "valor": "ultima",
+       "etiqueta": "La última"
+      }
+     ]
+    },
+    {
+     "id": "largo",
+     "etiqueta": "Sílabas de cada palabra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Variadas"
+      },
+      {
+       "valor": 2,
+       "etiqueta": "2 sílabas"
+      },
+      {
+       "valor": 3,
+       "etiqueta": "3 sílabas"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 sílabas"
+      }
+     ]
+    },
+    {
+     "id": "tipo",
+     "etiqueta": "Tipo de sílabas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Directas (ma, pe)"
+      },
+      {
+       "valor": "inversas",
+       "etiqueta": "Con inversas (al, en)"
+      },
+      {
+       "valor": "trabadas",
+       "etiqueta": "Con trabadas (pla, bra)"
+      },
+      {
+       "valor": "mixtas",
+       "etiqueta": "Con mixtas (con, sol)"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "inicial",
+       "etiqueta": "Mayúscula inicial"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULAS"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "PON LA SÍLABA QUE FALTA",
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "lengua",
+     "sílabas",
+     "palabras",
+     "completar"
+    ]
+   }
   }
  ]
 };
@@ -7142,6 +10048,121 @@ function svgCompleto({ w, h, svg }, margen = 2) {
 }
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get REPS() { return REPS; }, get RANGOS() { return RANGOS; }, get VACIAS() { return VACIAS; }, get PLANTILLAS() { return PLANTILLAS; }, get ancho() { return ancho; }, get esc() { return esc; }, get nombreNumero() { return nombreNumero; }, get rep() { return rep; }, get plantilla() { return plantilla; }, get svgCompleto() { return svgCompleto; } }));
+},
+"tipos/_lengua.js": (__exp) => {
+// Charta · ayudantes comunes de los tipos de Lengua (lote 1: letra.* y silaba.*; LENGUA_1.md).
+// Sin DOM. Elegir palabras del léxico con las opciones comunes (tipo de sílabas, largo, letra), aplicar mayúsculas,
+// comprobar que un hueco tiene una sola solución en el léxico y dibujar palabras letra a letra (rodear, rayas).
+const { LEXICO } = __req("lengua/lexico.js");
+const { buscar } = __req("lengua/palabras.js");
+const { sinTildes } = __req("lengua/reglas.js");
+const { COLOR_SOLUCION } = __req("render/papel.js");
+/** Categorías que se leen en 1.º en estos modelos: nombres, adjetivos y verbos (no las palabras gramaticales). */
+const CATS = ["n", "a", "v"];
+const VOCALES = [..."aeiou"];
+const cap = (t) => (t ? t[0].toUpperCase() + t.slice(1) : t);
+
+/** Aplica «Letra»: minúscula (null) · "inicial" (primera mayúscula) · "mayus" (TODO MAYÚSCULAS). */
+const alCaso = (t, caso) => (caso === "mayus" ? t.toUpperCase() : caso === "inicial" ? cap(t) : t);
+/** Lo mismo con una lista de trozos (sílabas): «inicial» solo mayúscula en el primero. */
+const trozosCaso = (ts, caso) => ts.map((s, i) => (caso === "mayus" ? s.toUpperCase() : caso === "inicial" && i === 0 ? cap(s) : s));
+
+/** Palabras del léxico para las opciones: tipo de sílabas (por defecto directas) y filtros extra. Con «Mayúscula inicial» no entran
+ *  las que empiezan por «i» (la «I» mayúscula de Fredoka se confunde con la «l»). */
+const memoCandidatas = new Map();
+function candidatas(params, extra = {}) {
+  const clave = JSON.stringify([params.tipo || "directas", params.caso === "inicial", extra]);
+  if (!memoCandidatas.has(clave)) {
+    const ps = buscar({ cat: CATS, tipo: params.tipo || "directas", ...extra });
+    memoCandidatas.set(clave, params.caso === "inicial" ? ps.filter((e) => !/^[iíì]/.test(e.p)) : ps);
+  }
+  return memoCandidatas.get(clave);   // no modificar: se comparte entre llamadas
+}
+
+/**
+ * Elige n palabras distintas siguiendo la secuencia de largos (p. ej. [2, 3] = una de 2 sílabas, otra de 3…, o [1, 2, 3, 4] a partes iguales).
+ * ok(entrada, azar) → algo verdadero si la palabra sirve (puede devolver sus datos, p. ej. el hueco elegido) o falso para descartarla.
+ * Devuelve [{ e, r, p }] barajadas; si no hay bastantes, error con «necesita».
+ */
+function elegirPalabras(azar, n, params, largos, { extra = {}, ok = null, id = "este modelo" } = {}) {
+  const bolsas = {};
+  for (const l of new Set(largos)) bolsas[l] = azar.barajar(candidatas(params, { ...extra, nSilabas: l }));
+  const out = []; let i = 0;
+  while (out.length < n) {
+    let tomada = false;
+    for (let k = 0; k < largos.length && !tomada; k++) {
+      const b = bolsas[largos[(i + k) % largos.length]];
+      while (b.length) {
+        const e = b.pop(), r = ok ? ok(e, azar) : true;
+        if (r) { out.push({ e, r, p: e.p }); tomada = true; i += k + 1; break; }
+      }
+    }
+    if (!tomada) throw new Error(`«${id}» necesita más palabras: con esas opciones solo hay ${out.length} y hacen falta ${n}. Prueba con otro tipo de sílabas o con palabras de otro largo.`);
+  }
+  return azar.barajar(out);
+}
+
+/** Largos para «Sílabas de cada palabra» con la opción `largo`: un número, o variadas (la secuencia que se dé). */
+const largosDe = (params, variadas) => (Number.isInteger(params.largo) ? [params.largo] : variadas);
+
+/** Cantidad de ejercicios: la de la página completa o su mitad en media página. */
+const cuantas = (tamano, completa) => (tamano === "media" ? completa / 2 : completa);
+
+// ---------------------------------------------------------------- huecos con solución única
+const porLargo = new Map();
+function delLargo(n) {
+  if (!porLargo.has(n)) porLargo.set(n, LEXICO.filter((e) => e.p.length === n).map((e) => ({ p: e.p, s: sinTildes(e.p) })));
+  return porLargo.get(n);
+}
+/** ¿Es la palabra la única del léxico que encaja con esas letras ocultas (posiciones `ocultas` libres, el resto igual)? */
+function patronUnico(palabra, ocultas) {
+  const s = sinTildes(palabra), libres = new Set(ocultas);
+  return !delLargo(palabra.length).some((o) => o.p !== palabra && [...o.s].every((c, i) => libres.has(i) || c === s[i]));
+}
+
+/** Unidades de la palabra para dibujarla y ocultar letras: «ch», «ll», «rr», «qu» y «gu» (ante e, i) van juntas. */
+const unidades = (p) => p.match(/ch|ll|rr|qu|gu(?=[eéií])|./gi) || [];
+
+// ---------------------------------------------------------------- dibujo
+/** Tamaño de letra que hace caber el ancho total (suma de anchos + huecos) en w: baja desde fs hasta min. */
+function ajusta(p, anchoCon, w, fs, min = 14) {
+  let f = fs;
+  while (f > min && anchoCon(f) > w) f -= 1;
+  return f;
+}
+
+/** Palabra dibujada por unidades (letras) con un hueco entre ellas; las de `rodear` se rodean en rojo en la solución;
+ *  `rayas` = posiciones (nº de letras) tras las que va una raya roja en la solución. Centrada en la caja (x, y, w, h). */
+function palabraLetras(p, x, y, w, h, texto, { fs = 28, gap = 0.12, rodear = null, rayas = null } = {}) {
+  const us = unidades(texto);
+  const f = ajusta(p, (q) => us.reduce((t, u) => t + p.ancho(u, "PB", q), 0) + q * gap * (us.length - 1), w, fs);
+  const gg = f * gap, ws = us.map((u) => p.ancho(u, "PB", f));
+  let cx = x + (w - ws.reduce((a, b) => a + b, 0) - gg * (us.length - 1)) / 2, pos = 0;
+  const ok = new Set(rodear ?? []), cortes = new Set(rayas ?? []);
+  us.forEach((u, k) => {
+    p.text(cx, y + h / 2 - f * 0.35, u, f, { f: "PB" });
+    if (p.solucion && ok.has(k)) p.rrect(cx - f * 0.12, y + h / 2 - f * 0.62, ws[k] + f * 0.24, f * 1.24, Math.min(ws[k] / 2 + f * 0.12, f * 0.62), { lw: 2.2, stroke: COLOR_SOLUCION });
+    pos += u.length;
+    if (p.solucion && cortes.has(pos) && k < us.length - 1) p.line(cx + ws[k] + gg / 2, y + h / 2 - f * 0.75, cx + ws[k] + gg / 2, y + h / 2 + f * 0.75, { lw: 2.4, gris: COLOR_SOLUCION });
+    cx += ws[k] + gg;
+  });
+  return f;
+}
+
+/** Fila de «píldoras» (sílabas sueltas) desde x; devuelve el x donde acaban. */
+function pildoras(p, x, y, h, textos, fs = 22, gap = 10) {
+  const bh = fs * 1.7, by = y + (h - bh) / 2; let cx = x;
+  textos.forEach((t) => {
+    const w = p.ancho(t, "PB", fs) + fs * 0.9;
+    p.rrect(cx, by, w, bh, bh / 2, { lw: 0.8, fill: 1, stroke: 0.55 });
+    p.text(cx + w / 2, y + h / 2 - fs * 0.35, t, fs, { f: "PB", anchor: "middle" });
+    cx += w + gap;
+  });
+  return cx - gap;
+}
+const anchoPildoras = (p, textos, fs = 22, gap = 10) => textos.reduce((t, s) => t + p.ancho(s, "PB", fs) + fs * 0.9, 0) + gap * (textos.length - 1);
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get CATS() { return CATS; }, get VOCALES() { return VOCALES; }, get cap() { return cap; }, get alCaso() { return alCaso; }, get trozosCaso() { return trozosCaso; }, get candidatas() { return candidatas; }, get elegirPalabras() { return elegirPalabras; }, get largosDe() { return largosDe; }, get cuantas() { return cuantas; }, get patronUnico() { return patronUnico; }, get unidades() { return unidades; }, get ajusta() { return ajusta; }, get palabraLetras() { return palabraLetras; }, get pildoras() { return pildoras; }, get anchoPildoras() { return anchoPildoras; } }));
 },
 "tipos/_problemas.js": (__exp) => {
 // Charta · núcleo común de los problemas de 1.º (bloque 8): plantillas con nombres y objetos, y dibujo.
@@ -8280,6 +11301,16 @@ __req("tipos/juegos.oculto.js");
 __req("tipos/juegos.colorea.js");
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({  }));
 },
+"tipos/familia.letra.js": (__exp) => {
+// Charta · tipos de la familia «letra» (Lengua 1.º, bloque 2). Añadir aquí cada módulo nuevo de la familia.
+__req("tipos/letra.busca.js");
+__req("tipos/letra.enpalabras.js");
+__req("tipos/letra.falta.js");
+__req("tipos/letra.vocales.js");
+__req("tipos/letra.parejas.js");
+__req("tipos/letra.abecedario.js");
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({  }));
+},
 "tipos/familia.medida.js": (__exp) => {
 // Charta · tipos de la familia «medida». Añadir aquí cada módulo nuevo de la familia.
 __req("tipos/medida.reloj.js");
@@ -8346,6 +11377,15 @@ __req("tipos/restar.hueco.js");
 __req("tipos/restar.decenas.js");
 __req("tipos/restar.encadenadas.js");
 __req("tipos/restar.familia.js");
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({  }));
+},
+"tipos/familia.silaba.js": (__exp) => {
+// Charta · tipos de la familia «silaba» (Lengua 1.º, bloque 3). Añadir aquí cada módulo nuevo de la familia.
+__req("tipos/silaba.tabla.js");
+__req("tipos/silaba.junta.js");
+__req("tipos/silaba.separa.js");
+__req("tipos/silaba.ordena.js");
+__req("tipos/silaba.falta.js");
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({  }));
 },
 "tipos/familia.sumar.js": (__exp) => {
@@ -8855,6 +11895,8 @@ __req("tipos/familia.trucos.js");
 __req("tipos/familia.geometria.js");
 __req("tipos/familia.medida.js");
 __req("tipos/familia.estadistica.js");
+__req("tipos/familia.letra.js");
+__req("tipos/familia.silaba.js");
 const __r1 = __req("nucleo/tipos.js");
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get tipo() { return __r1.tipo; }, get hayTipo() { return __r1.hayTipo; }, get listaTipos() { return __r1.listaTipos; } }));
 },
@@ -9265,6 +12307,352 @@ const __default = registrar({
 });
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get paresSuma() { return paresSuma; }, get paresResta() { return paresResta; }, get default() { return __default; } }));
+},
+"tipos/letra.abecedario.js": (__exp) => {
+// letra.abecedario · Antes y después (Lengua 1.º, lote 1; LENGUA_1.md §3, bloque 2). Como conteo.anterior, con el abecedario (27 letras, con ñ).
+// datos:    { letra, patron }   patron = "hnh" (antes y después), "hn" (solo antes) o "nh" (solo después): «n» = la letra, «h» = hueco.
+// solucion: { huecos: [letra de antes y/o de después, de izquierda a derecha] }
+// Opciones: modo (ambas / anterior / posterior) · caso (minúscula / MAYÚSCULA). Letras sin repetir: la de antes no existe para la «a» y la de después no existe para la «z».
+// Completa: 18 letras (3 × 6); media: 9.
+const { registrar } = __req("nucleo/tipos.js");
+const { TOP } = __req("render/papel.js");
+const { ABECEDARIO } = __req("lengua/reglas.js");
+const { cuantas } = __req("tipos/_lengua.js");
+const TEXTO = {
+  ambos: "Escribe la letra de antes y la de después\nde cada letra del abecedario.",
+  anterior: "Escribe la letra de antes\nde cada letra del abecedario.",
+  posterior: "Escribe la letra de después\nde cada letra del abecedario.",
+};
+
+const __default = registrar({
+  id: "letra.abecedario",
+  version: 1,
+  generar(params, azar, { tamano }) {
+    const modo = params.modo || "ambos", n = cuantas(tamano, 18), L = ABECEDARIO.length;
+    const [lo, hi] = { ambos: [1, L - 2], anterior: [1, L - 1], posterior: [0, L - 2] }[modo];
+    const patron = { ambos: "hnh", anterior: "hn", posterior: "nh" }[modo];
+    const fmt = (c) => (params.caso === "mayus" ? c.toUpperCase() : c);
+    const idx = azar.muestra(Array.from({ length: hi - lo + 1 }, (_, k) => lo + k), n);
+    return {
+      enunciado: TEXTO[modo],
+      ejercicios: idx.map((i) => ({
+        datos: { letra: fmt(ABECEDARIO[i]), patron },
+        solucion: { huecos: [...patron].flatMap((t, j) => (t === "h" ? [fmt(ABECEDARIO[j < patron.indexOf("n") ? i - 1 : i + 1])] : [])) },
+      })),
+    };
+  },
+  dibujar(p, act) {
+    const { cel, cw, ch } = p.celdas(TOP, 3, 6, 10, 10), bw = 44, bh = 48, g = 7;
+    act.ejercicios.forEach((e, idx) => p.ejercicio(e.id, () => {
+      const [x, y] = cel[idx], { letra, patron } = e.datos;
+      p.marco(x, y, cw, ch, idx);
+      const bx = x + (cw - (patron.length * bw + (patron.length - 1) * g)) / 2;
+      let k = 0;
+      [...patron].forEach((t, j) => p.caja(bx + j * (bw + g), y + (ch - 14 - bh) / 2, bw, bh, t === "n" ? letra : null, 26, t === "n" ? null : e.solucion.huecos[k++]));
+    }));
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/letra.busca.js": (__exp) => {
+// letra.busca · Rodea la letra (Lengua 1.º, lote 1; LENGUA_1.md §3, bloque 2).
+// datos:    { letra: "m", fila: [10 letras, en minúscula o MAYÚSCULA] }
+// solucion: { huecos: [], rodea: [posiciones de la letra pedida en la fila] }   (el alumno rodea; en la solución, rodeadas en rojo)
+// Opciones: letra (al azar o una concreta) · distractoras (al azar / las que se confunden) · caso (minúscula / MAYÚSCULA).
+// Completa: 10 filas de 10 letras (3 o 4 veces la pedida cada una); media: 5. Filas distintas.
+const { registrar } = __req("nucleo/tipos.js");
+const { TOP } = __req("render/papel.js");
+const { ABECEDARIO } = __req("lengua/reglas.js");
+const { rodear } = __req("lengua/dibujo.js");
+const { ajusta } = __req("tipos/_lengua.js");
+/** Letras que se parecen a cada una (para las distractoras «que se confunden»): b-d-p-q, m-n, u-n y otras parejas de letra escolar. */
+const CONFUSAS = {
+  a: "oecd", b: "dpqh", c: "eoas", d: "bpqg", e: "caos", f: "tlrk", g: "qpyj", h: "nbmk", i: "ljtu", j: "igyt", k: "hxvf", l: "itfh", m: "nwuh",
+  n: "mhurñ", ñ: "nmhr", o: "aecu", p: "bdqg", q: "gpbd", r: "nvfñ", s: "zcxe", t: "flik", u: "nvmo", v: "uywr", w: "vumn", x: "kzvs", y: "vgjq", z: "sxct",
+};
+const NFILA = 10;
+
+const __default = registrar({
+  id: "letra.busca",
+  version: 1,
+  generar(params, azar, { tamano }) {
+    const n = tamano === "media" ? 5 : 10, mayus = params.caso === "mayus", fmt = (c) => (mayus ? c.toUpperCase() : c);
+    const letra = params.letra || azar.elegir(ABECEDARIO);
+    const otras = params.distractoras === "confusas" ? [...CONFUSAS[letra]] : ABECEDARIO.filter((l) => l !== letra);
+    const filas = new Set();
+    while (filas.size < n) {
+      const veces = azar.entero(3, 4), cola = Array.from({ length: NFILA - veces }, () => azar.elegir(otras));
+      const pos = azar.muestra([...Array(NFILA).keys()], veces).sort((a, b) => a - b);
+      filas.add(JSON.stringify({ pos, fila: Array.from({ length: NFILA }, (_, i) => (pos.includes(i) ? letra : cola.pop())) }));
+    }
+    return {
+      enunciado: `Rodea todas las letras «${fmt(letra)}».`,
+      ejercicios: [...filas].map((j) => {
+        const { pos, fila } = JSON.parse(j);
+        return { datos: { letra: fmt(letra), fila: fila.map(fmt) }, solucion: { huecos: [], rodea: pos } };
+      }),
+    };
+  },
+  dibujar(p, act) {
+    const { cel, cw, ch } = p.celdas(TOP, 1, 10, 10, 8);
+    act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
+      const [x, y] = cel[i], w = cw - 56;
+      p.marco(x, y, cw, ch, i);
+      const fila = e.datos.fila, gap = 4;
+      const fs = ajusta(p, (q) => fila.reduce((t, l) => t + p.ancho(l, "PB", q) + q * 0.9, 0) + gap * (fila.length - 1), w, 26);
+      rodear(p, x + 44, y, w, ch, fila, e.solucion.rodea, { fs, gap });
+    }));
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get CONFUSAS() { return CONFUSAS; }, get NFILA() { return NFILA; }, get default() { return __default; } }));
+},
+"tipos/letra.enpalabras.js": (__exp) => {
+// letra.enpalabras · Rodea la letra en las palabras (Lengua 1.º, lote 1; LENGUA_1.md §3, bloque 2).
+// datos:    { palabra: "pelota" (en el caso elegido), letra: "o", cuenta: true|false (lleva cuadro para el número de veces) }
+// solucion: { huecos: [veces] (solo si lleva cuadro), rodea: [posiciones de las letras a rodear, por unidad: «ch», «ll», «rr» cuentan como una] }
+//           «a» y «á» son la misma letra. No salen palabras donde la letra pedida forma parte de «ch», «ll», «rr», «qu» o «gu».
+// Opciones: letra (al azar o una concreta) · tarea (rodear y contar / solo rodear) · tipo de sílabas · caso. Palabras de hasta 9 letras, sin repetir.
+// Completa: 12 palabras (2 × 6); media: 6.
+const { registrar } = __req("nucleo/tipos.js");
+const { TOP } = __req("render/papel.js");
+const { ABECEDARIO, sinTildes } = __req("lengua/reglas.js");
+const { alCaso, candidatas, unidades, palabraLetras, cuantas } = __req("tipos/_lengua.js");
+/** Posiciones (por unidad) de la letra en la palabra; null si forma parte de un dígrafo (ch, ll, rr, qu, gu): ahí no se puede rodear sola. */
+function posiciones(palabra, letra) {
+  const us = unidades(palabra), pos = [];
+  for (let k = 0; k < us.length; k++) {
+    const u = sinTildes(us[k].toLowerCase());
+    if (u === letra) pos.push(k);
+    else if (u.length > 1 && u.includes(letra)) return null;
+  }
+  return pos;
+}
+
+const memo = new Map();   // palabras buenas por tipo, caso inicial y letra
+
+const __default = registrar({
+  id: "letra.enpalabras",
+  version: 1,
+  generar(params, azar, { tamano }) {
+    const n = cuantas(tamano, 12), cuenta = params.tarea !== "rodea";
+    const buenas = (l) => {
+      const clave = `${params.tipo}|${params.caso === "inicial"}|${l}`;
+      if (!memo.has(clave)) memo.set(clave, candidatas(params, { conLetra: l, maxLetras: 9 }).filter((e) => { const p = posiciones(e.p, l); return p && p.length >= 1 && p.length <= 4; }));
+      return memo.get(clave);
+    };
+    let letra = params.letra;
+    if (!letra) {
+      const posibles = ABECEDARIO.filter((l) => !"kqwxy".includes(l) && buenas(l).length >= n);
+      if (!posibles.length) throw new Error("«letra.enpalabras» necesita más palabras: con ese tipo de sílabas no hay letra con palabras de sobra.");
+      letra = azar.elegir(posibles);
+    }
+    const ps = buenas(letra);
+    if (ps.length < n) throw new Error(`«letra.enpalabras» necesita más palabras con la «${letra}»: con esas opciones solo hay ${ps.length} y hacen falta ${n}.`);
+    const fmt = (t) => (params.caso === "mayus" ? t.toUpperCase() : t);
+    return {
+      enunciado: cuenta ? `Rodea la letra «${fmt(letra)}» en cada palabra\ny escribe cuántas veces sale.` : `Rodea la letra «${fmt(letra)}» en cada palabra.`,
+      ejercicios: azar.muestra(ps, n).map((e) => {
+        const rodea = posiciones(e.p, letra);
+        return { datos: { palabra: alCaso(e.p, params.caso), letra: fmt(letra), cuenta }, solucion: { huecos: cuenta ? [rodea.length] : [], rodea } };
+      }),
+    };
+  },
+  dibujar(p, act) {
+    const { cel, cw, ch } = p.celdas(TOP, 2, 6, 10, 8);
+    act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
+      const [x, y] = cel[i], cuenta = e.datos.cuenta, bw = 40, bh = 38;
+      p.marco(x, y, cw, ch, i);
+      const ancho = cuenta ? cw - 30 - bw - 22 : cw - 56;
+      palabraLetras(p, x + 32, y, ancho, ch, e.datos.palabra, { fs: 28, gap: 0.27, rodear: e.solucion.rodea });
+      if (cuenta) {
+        p.text(x + cw - 14 - bw / 2, y + ch / 2 + bh / 2 + 4, "veces", 9, { f: "PM", anchor: "middle", gris: 0.3 });
+        p.caja(x + cw - 14 - bw, y + (ch - bh) / 2 - 5, bw, bh, null, 22, e.solucion.huecos[0]);
+      }
+    }));
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get posiciones() { return posiciones; }, get default() { return __default; } }));
+},
+"tipos/letra.falta.js": (__exp) => {
+// letra.falta · Pon la letra que falta (Lengua 1.º, lote 1; LENGUA_1.md §3, bloque 2).
+// datos:    { palabra: "mesa" (en el caso elegido), pos: posición de la letra que falta, opciones: [3 letras] | null (sin ayuda) }
+// solucion: { huecos: ["e"] }   la letra, en el mismo caso que la palabra.
+// Reglas: la palabra está en el léxico y es la ÚNICA del léxico que encaja con el hueco (m_sa solo vale si no hay «masa», «misa»…);
+//         las 2 letras de ayuda no forman otra palabra del léxico; el hueco nunca es una letra con tilde ni parte de ch, ll, rr, qu, gu.
+// Opciones: ayuda (con tres letras / sin) · letra que falta (cualquiera / la primera) · tipo de sílabas · largo · caso. Palabras de hasta 8 letras, sin repetir.
+// Completa: 16 palabras (2 × 8); media: 8.
+const { registrar } = __req("nucleo/tipos.js");
+const { TOP } = __req("render/papel.js");
+const { rodear, palabraHuecos } = __req("lengua/dibujo.js");
+const { LEXICO } = __req("lengua/lexico.js");
+const { alCaso, cuantas, elegirPalabras, largosDe, patronUnico, unidades } = __req("tipos/_lengua.js");
+const PALABRAS = new Set(LEXICO.map((e) => e.p));
+const VOCALES = [..."aeiou"], CONSONANTES = [..."bcdfgjlmnprstvz"];
+/** Posiciones (índice de letra) que pueden quedar en hueco: letras sueltas sin tilde (no dígrafos, ü ni «y»). */
+function posiblesHuecos(p) {
+  let i = 0; const out = [];
+  for (const u of unidades(p)) { if (u.length === 1 && /[a-zñ]/.test(u) && u !== "y") out.push(i); i += u.length; }
+  return out;
+}
+const cambia = (p, i, c) => p.slice(0, i) + c + p.slice(i + 1);
+
+const __default = registrar({
+  id: "letra.falta",
+  version: 1,
+  generar(params, azar, { tamano }) {
+    const n = cuantas(tamano, 16), ayuda = params.ayuda !== "sin";
+    const ok = (e, az) => {
+      let ps = posiblesHuecos(e.p);
+      if (params.hueco === "primera") ps = ps.filter((i) => i === 0);
+      ps = ps.filter((i) => patronUnico(e.p, [i]));
+      if (!ps.length) return null;
+      const pos = az.elegir(ps), real = e.p[pos];
+      if (!ayuda) return { pos, opciones: null };
+      const fam = VOCALES.includes(real) ? VOCALES : CONSONANTES;
+      const malas = az.barajar(fam.filter((c) => c !== real && !PALABRAS.has(cambia(e.p, pos, c)) && !(pos === 0 && params.caso === "inicial" && c === "i")));
+      if (malas.length < 2) return null;
+      return { pos, opciones: az.barajar([real, malas[0], malas[1]]) };
+    };
+    const ps = elegirPalabras(azar, n, params, largosDe(params, [2, 3, 2, 3, 1, 4]), { extra: { maxLetras: 8 }, ok, id: "letra.falta" });
+    return {
+      enunciado: ayuda ? "Elige la letra que falta y escríbela\nen el cuadro gris." : "Escribe la letra que falta\nen el cuadro gris.",
+      ejercicios: ps.map(({ p: w, r }) => {
+        const palabra = alCaso(w, params.caso), mayus = params.caso === "mayus" || (params.caso === "inicial" && r.pos === 0);
+        return { datos: { palabra, pos: r.pos, opciones: r.opciones && r.opciones.map((c) => (mayus ? c.toUpperCase() : c)) }, solucion: { huecos: [palabra[r.pos]] } };
+      }),
+    };
+  },
+  dibujar(p, act) {
+    const { cel, cw, ch } = p.celdas(TOP, 2, 8, 10, 8);
+    act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
+      const [x, y] = cel[i], { palabra, pos, opciones } = e.datos;
+      p.marco(x, y, cw, ch, i);
+      const conAyuda = !!opciones, h1 = conAyuda ? ch - 36 : ch, y1 = conAyuda ? y + 32 : y;
+      palabraHuecos(p, x + 30, y1, cw - 40, h1 - (conAyuda ? 6 : 0), palabra, [{ pos, largo: 1, sol: e.solucion.huecos[0] }], { fs: 28 });
+      if (conAyuda) rodear(p, x + 30, y + 4, cw - 40, 30, opciones, [], { fs: 19, gap: 14, tarjeta: true });
+    }));
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get posiblesHuecos() { return posiblesHuecos; }, get default() { return __default; } }));
+},
+"tipos/letra.parejas.js": (__exp) => {
+// letra.parejas · Mayúscula y minúscula (Lengua 1.º, lote 1; LENGUA_1.md §3, bloque 2). Solo página completa.
+// Tarea «unir» (8 filas): datos { izq: mayúscula, derecha: minúscula de la caja de la derecha en esta fila }
+//                          solucion { huecos: [], une: índice de la fila cuya caja de la derecha lleva la minúscula de izq }
+// Tarea «escribir» (24 pares, 3 × 8): datos { mayus, minus, falta: "mayus" | "minus" }  solucion { huecos: [la letra que falta] }
+// Reglas: letras distintas; nunca salen juntas «i» y «l» (la «I» mayúscula de Fredoka se confunde con la «l»).
+// Opciones: tarea (unir / escribir la que falta). Letras: todas.
+const { registrar } = __req("nucleo/tipos.js");
+const { TOP, M, W, T, B } = __req("render/papel.js");
+const { ABECEDARIO } = __req("lengua/reglas.js");
+const { unir } = __req("lengua/dibujo.js");
+/** n letras distintas al azar del abecedario (con ñ) sin que salgan a la vez «i» y «l». */
+function letrasSueltas(azar, n) {
+  const out = [];
+  for (const l of azar.barajar(ABECEDARIO)) {
+    if ((l === "i" && out.includes("l")) || (l === "l" && out.includes("i"))) continue;
+    out.push(l); if (out.length === n) break;
+  }
+  return out;
+}
+
+const __default = registrar({
+  id: "letra.parejas",
+  version: 1,
+  generar(params, azar) {
+    if (params.tarea === "escribe") {
+      return {
+        enunciado: "Escribe la letra que falta en cada pareja:\nla mayúscula o la minúscula.",
+        ejercicios: letrasSueltas(azar, 24).map((l, i) => {
+          const falta = azar.real() < 0.5 ? "mayus" : "minus";
+          return { datos: { mayus: l.toUpperCase(), minus: l, falta }, solucion: { huecos: [falta === "mayus" ? l.toUpperCase() : l] } };
+        }),
+      };
+    }
+    const ls = letrasSueltas(azar, 8);
+    let der = azar.barajar(ls);
+    while (der.every((l, i) => l === ls[i])) der = azar.barajar(ls);
+    return {
+      enunciado: "Une cada letra mayúscula con su minúscula.",
+      ejercicios: ls.map((l, i) => ({ datos: { izq: l.toUpperCase(), derecha: der[i] }, solucion: { huecos: [], une: der.indexOf(l) } })),
+    };
+  },
+  dibujar(p, act) {
+    const es = act.ejercicios;
+    if (es[0].datos.izq === undefined) {
+      const { cel, cw, ch } = p.celdas(TOP, 3, 8, 10, 8);
+      es.forEach((e, i) => p.ejercicio(e.id, () => {
+        const [x, y] = cel[i], { mayus, minus, falta } = e.datos, bw = 46, bh = 44, sol = e.solucion.huecos[0];
+        p.marco(x, y, cw, ch, i);
+        p.linea(x + 18, y, cw - 22, ch, falta === "mayus" ? [B(bw, bh, sol), T(minus, 32)] : [T(mayus, 32), B(bw, bh, sol)], 18);
+      }));
+      return;
+    }
+    const h = TOP - M;
+    unir(p, M, TOP - h, W - 2 * M, h, es.map((e) => e.datos.izq), es.map((e) => e.datos.derecha), es.map((e) => e.solucion.une), { fs: 32, ids: es.map((e) => e.id) });
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get letrasSueltas() { return letrasSueltas; }, get default() { return __default; } }));
+},
+"tipos/letra.vocales.js": (__exp) => {
+// letra.vocales · Completa las vocales (Lengua 1.º, lote 1; LENGUA_1.md §3, bloque 2).
+// datos:    { palabra: "pelota" (en el caso elegido), huecos: [posiciones (índice de letra) de las vocales ocultas, de izquierda a derecha] }
+// solucion: { huecos: ["e", "o", "a"] }   las vocales ocultas, tal como van en la palabra (con su tilde).
+// Reglas: la palabra está en el léxico y es la ÚNICA del léxico que encaja con esos huecos (p_l_t_ solo vale si ninguna otra palabra encaja);
+//         la «u» muda de que, qui, gue, gui no se oculta; la «y» no cuenta como vocal; no salen palabras con «ü». Palabras de hasta 8 letras, sin repetir.
+// Opciones: vocales que faltan (todas / una / algunas al azar) · tipo de sílabas · largo · caso. Completa: 16 palabras (2 × 8); media: 8.
+const { registrar } = __req("nucleo/tipos.js");
+const { TOP } = __req("render/papel.js");
+const { palabraHuecos } = __req("lengua/dibujo.js");
+const { alCaso, cuantas, elegirPalabras, largosDe, patronUnico, unidades } = __req("tipos/_lengua.js");
+/** Posiciones de las vocales que se pueden ocultar (no la «u» de qu/gu, no la «y»). */
+function vocalesOcultables(p) {
+  let i = 0; const out = [];
+  for (const u of unidades(p)) { if (u.length === 1 && /[aeiouáéíóú]/.test(u)) out.push(i); i += u.length; }
+  return out;
+}
+
+const __default = registrar({
+  id: "letra.vocales",
+  version: 1,
+  generar(params, azar, { tamano }) {
+    const n = cuantas(tamano, 16), modo = params.faltan || "todas";
+    const ok = (e, az) => {
+      if (e.p.includes("ü")) return null;
+      const vs = vocalesOcultables(e.p);
+      if (!vs.length || (modo === "azar" && vs.length < 2)) return null;
+      if (modo === "todas") return patronUnico(e.p, vs) ? vs : null;
+      for (let k = 0; k < 12; k++) {
+        const hs = modo === "una" ? [az.elegir(vs)] : az.muestra(vs, az.entero(1, vs.length - 1)).sort((a, b) => a - b);
+        if (patronUnico(e.p, hs)) return hs;
+      }
+      return null;
+    };
+    const ps = elegirPalabras(azar, n, params, largosDe(params, [2, 3, 2, 3, 1, 4]), { extra: { maxLetras: 8 }, ok, id: "letra.vocales" });
+    return {
+      enunciado: modo === "una" ? "Escribe la vocal que falta en cada palabra." : "Escribe las vocales que faltan\nen cada palabra.",
+      ejercicios: ps.map(({ p: w, r }) => {
+        const palabra = alCaso(w, params.caso);
+        return { datos: { palabra, huecos: r }, solucion: { huecos: r.map((i) => palabra[i]) } };
+      }),
+    };
+  },
+  dibujar(p, act) {
+    const { cel, cw, ch } = p.celdas(TOP, 2, 8, 10, 8);
+    act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
+      const [x, y] = cel[i];
+      p.marco(x, y, cw, ch, i);
+      palabraHuecos(p, x + 30, y, cw - 40, ch, e.datos.palabra, e.datos.huecos.map((pos, k) => ({ pos, largo: 1, sol: e.solucion.huecos[k] })), { fs: 26 });
+    }));
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get vocalesOcultables() { return vocalesOcultables; }, get default() { return __default; } }));
 },
 "tipos/medida.calendario.js": (__exp) => {
 // medida.calendario · El calendario (port de _m_calendario() del motor).
@@ -10819,6 +14207,324 @@ const __default = registrar({
 });
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/silaba.falta.js": (__exp) => {
+// silaba.falta · Pon la sílaba que falta (Lengua 1.º, lote 1; LENGUA_1.md §3, bloque 3).
+// datos:    { palabra (en el caso elegido), pos: posición de la letra donde empieza la sílaba que falta, largo: letras que tiene, opciones: [3 sílabas] | null (sin ayuda) }
+// solucion: { huecos: [sílaba] }   en el mismo caso que la palabra.
+// Reglas: palabra del léxico con el silabeo de reglas.js y 2–4 sílabas; es la ÚNICA del léxico con esas otras sílabas (pe__ta no vale si hay otra palabra «pe…ta»);
+//         las 2 sílabas de ayuda son del mismo tipo que la correcta, distintas (sin tildes), sin pistas (llevan tilde solo si la lleva la correcta; sin k, w, x, y, ü salvo la correcta) y no forman otra palabra del léxico. Palabras de hasta 9 letras, sin repetir.
+// Opciones: ayuda (con tres sílabas / sin) · sílaba que falta (cualquiera / primera / última) · sílabas (variadas, 2, 3 o 4) · tipo de sílabas · caso.
+// Completa: 10 palabras; media: 5.
+const { registrar } = __req("nucleo/tipos.js");
+const { TOP } = __req("render/papel.js");
+const { silabas, tipoSilaba, sinTildes } = __req("lengua/reglas.js");
+const { rodear, palabraHuecos } = __req("lengua/dibujo.js");
+const { LEXICO } = __req("lengua/lexico.js");
+const { datosPalabra } = __req("lengua/palabras.js");
+const { alCaso, cuantas, elegirPalabras, largosDe, candidatas } = __req("tipos/_lengua.js");
+const PALABRAS = new Set(LEXICO.map((e) => e.p));
+const ENTRADAS = LEXICO.map((e) => ({ p: e.p, s: datosPalabra(e).s.map(sinTildes) }));
+/** ¿Es la única palabra del léxico con esas otras sílabas (todas menos la k)? */
+function unicaSilaba(palabra, k) {
+  const ss = silabas(palabra).map(sinTildes);
+  return !ENTRADAS.some((o) => o.p !== palabra && o.s.length === ss.length && o.s.every((s, i) => i === k || s === ss[i]));
+}
+
+const __default = registrar({
+  id: "silaba.falta",
+  version: 1,
+  generar(params, azar, { tamano }) {
+    const n = cuantas(tamano, 10), ayuda = params.ayuda !== "sin", tipo = params.tipo || "directas";
+    // Sílabas que pueden servir de ayuda, por tipo (de las palabras del léxico que caben en el tipo pedido).
+    const reserva = {};
+    for (const e of candidatas(params)) for (const s of datosPalabra(e).s) (reserva[tipoSilaba(s)] ??= new Set()).add(s);
+    const ok = (e, az) => {
+      const ss = silabas(e.p);
+      let ks = ss.map((_, k) => k);
+      if (params.hueco === "primera") ks = [0]; else if (params.hueco === "ultima") ks = [ss.length - 1];
+      ks = ks.filter((k) => unicaSilaba(e.p, k));
+      if (!ks.length) return null;
+      const k = az.elegir(ks);
+      if (!ayuda) return { k, opciones: null };
+      const real = ss[k], pre = ss.slice(0, k).join(""), post = ss.slice(k + 1).join("");
+      const raras = /[kwxyü]/, tilde = (s) => /[áéíóú]/.test(s);
+      const valen = (s) => sinTildes(s) !== sinTildes(real) && !PALABRAS.has(pre + s + post) && tilde(s) === tilde(real) && (!raras.test(s) || raras.test(real)) && s.length > 1 === real.length > 1;   // sin pistas: la tilde y las letras raras no delatan la buena
+      const malas = [...new Map(az.barajar([...reserva[tipoSilaba(real)]].filter(valen)).map((s) => [sinTildes(s), s])).values()];
+      if (malas.length < 2) return null;
+      return { k, opciones: az.barajar([real, malas[0], malas[1]]) };
+    };
+    const ps = elegirPalabras(azar, n, params, largosDe(params, [2, 3, 2, 3, 4]), { extra: { maxLetras: 9 }, ok, id: "silaba.falta" });
+    return {
+      enunciado: ayuda ? "Elige la sílaba que falta y escríbela\nen el cuadro gris." : "Escribe la sílaba que falta\nen el cuadro gris.",
+      ejercicios: ps.map(({ p: w, r }) => {
+        const ss = silabas(w), palabra = alCaso(w, params.caso), pos = ss.slice(0, r.k).join("").length, largo = ss[r.k].length;
+        const mayus = params.caso === "mayus" || (params.caso === "inicial" && r.k === 0);
+        return { datos: { palabra, pos, largo, opciones: r.opciones && r.opciones.map((s) => (mayus ? alCaso(s, params.caso === "mayus" ? "mayus" : "inicial") : s)) }, solucion: { huecos: [palabra.slice(pos, pos + largo)] } };
+      }),
+    };
+  },
+  dibujar(p, act) {
+    const { cel, cw, ch } = p.celdas(TOP, 1, 10, 10, 8);
+    act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
+      const [x, y] = cel[i], { palabra, pos, largo, opciones } = e.datos, hu = [{ pos, largo, sol: e.solucion.huecos[0] }];
+      p.marco(x, y, cw, ch, i);
+      if (opciones) {
+        palabraHuecos(p, x + 34, y, cw * 0.5 - 20, ch, palabra, hu, { fs: 26 });
+        rodear(p, x + cw * 0.53, y, cw * 0.45, ch, opciones, [], { fs: 20, gap: 12, tarjeta: true });
+      } else palabraHuecos(p, x + 34, y, cw - 48, ch, palabra, hu, { fs: 28 });
+    }));
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get unicaSilaba() { return unicaSilaba; }, get default() { return __default; } }));
+},
+"tipos/silaba.junta.js": (__exp) => {
+// silaba.junta · Junta las sílabas (Lengua 1.º, lote 1; LENGUA_1.md §3, bloque 3).
+// Tarea «escribir» (10 filas; media 5): datos { silabas: [2–3 sílabas, en el caso elegido], palabra }  solucion { huecos: [palabra] }
+// Tarea «une» (8 filas; media 4; solo palabras de 2 sílabas): datos { izq: primera sílaba, derecha: segunda sílaba de la caja de la derecha de esta fila }
+//                                                        solucion { huecos: [], une: índice de la fila cuya caja de la derecha lleva la segunda sílaba }
+// Reglas: palabra del léxico con el silabeo de reglas.js. Al unir, ninguna primera sílaba forma otra palabra del léxico con la segunda de otra fila
+//         y no se repiten primeras ni segundas sílabas (una sola unión posible por fila).
+// Opciones: tarea · sílabas (2 / 3 / 2 y 3) · tipo de sílabas · caso. Sin palabras repetidas.
+const { registrar } = __req("nucleo/tipos.js");
+const { TOP, M, W, T, B } = __req("render/papel.js");
+const { unir } = __req("lengua/dibujo.js");
+const { LEXICO } = __req("lengua/lexico.js");
+const { silabas } = __req("lengua/reglas.js");
+const { alCaso, trozosCaso, cuantas, elegirPalabras, candidatas } = __req("tipos/_lengua.js");
+const PALABRAS = new Set(LEXICO.map((e) => e.p));
+
+const __default = registrar({
+  id: "silaba.junta",
+  version: 1,
+  generar(params, azar, { tamano }) {
+    const une = params.tarea === "une", largo = params.largo ?? 2;
+    if (une && largo !== 2) throw new Error("«silaba.junta» necesita palabras de 2 sílabas para unir (con 3 sílabas, escribe la palabra).");
+    const largos = largo === "variadas" ? [2, 3] : [largo];
+    if (!une) {
+      const n = cuantas(tamano, 10);
+      return {
+        enunciado: "Junta las sílabas y escribe la palabra.",
+        ejercicios: elegirPalabras(azar, n, params, largos, { extra: { maxLetras: 9 }, id: "silaba.junta" }).map(({ p }) => {
+          const ss = trozosCaso(silabas(p), params.caso);
+          return { datos: { silabas: ss, palabra: alCaso(p, params.caso) }, solucion: { huecos: [alCaso(p, params.caso)] } };
+        }),
+      };
+    }
+    const n = cuantas(tamano, 8), usadas = { a: new Set(), b: new Set() }, elegidas = [];
+    for (const e of azar.barajar(candidatas(params, { nSilabas: 2, maxLetras: 9 }))) {
+      const [a, b] = silabas(e.p);
+      if (a.length < 2 || b.length < 2) continue;      // sin sílabas de una sola letra («o», «a»): se leen mal sueltas
+      if (usadas.a.has(a) || usadas.b.has(b) || a === b) continue;
+      if (elegidas.some(([c, d]) => PALABRAS.has(a + d) || PALABRAS.has(c + b))) continue;
+      elegidas.push([a, b]); usadas.a.add(a); usadas.b.add(b);
+      if (elegidas.length === n) break;
+    }
+    if (elegidas.length < n) throw new Error(`«silaba.junta» necesita más palabras para unir: con esas opciones solo hay ${elegidas.length} y hacen falta ${n}.`);
+    let der = azar.barajar(elegidas.map(([, b]) => b));
+    while (der.every((b, i) => b === elegidas[i][1])) der = azar.barajar(der);
+    const izq = (s) => alCaso(s, params.caso), der2 = (s) => (params.caso === "mayus" ? s.toUpperCase() : s);
+    return {
+      enunciado: "Une las sílabas de las dos columnas\npara formar palabras.",
+      ejercicios: elegidas.map(([a, b], i) => ({
+        datos: { izq: izq(a), derecha: der2(der[i]) },
+        solucion: { huecos: [], une: der.indexOf(b) },
+      })),
+    };
+  },
+  dibujar(p, act) {
+    const es = act.ejercicios;
+    if (es[0].datos.izq !== undefined) {
+      const h = (TOP - M) * p.parte;
+      unir(p, M, TOP - h, W - 2 * M, h, es.map((e) => e.datos.izq), es.map((e) => e.datos.derecha), es.map((e) => e.solucion.une), { fs: 28, ids: es.map((e) => e.id) });
+      return;
+    }
+    const { cel, cw, ch } = p.celdas(TOP, 1, 10, 10, 8);
+    es.forEach((e, i) => p.ejercicio(e.id, () => {
+      const [x, y] = cel[i], ss = e.datos.silabas, fs = 26;
+      p.marco(x, y, cw, ch, i);
+      const items = [];
+      ss.forEach((s, k) => { if (k) items.push(T("+", 22)); items.push(T(s, fs)); });
+      items.push(T("=", 24), B(210, 40, e.solucion.huecos[0]));
+      p.linea(x + 30, y, cw - 40, ch, items, 12);
+    }));
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/silaba.ordena.js": (__exp) => {
+// silaba.ordena · Ordena las sílabas (Lengua 1.º, lote 1; LENGUA_1.md §3, bloque 3).
+// datos:    { silabas: [sílabas desordenadas, en el caso elegido], palabra }     (el orden mostrado nunca es el de la palabra)
+// solucion: { huecos: [palabra] }     con «Mayúscula inicial», la sílaba que va primera se ve ya con mayúscula.
+// Reglas: palabra del léxico con el silabeo de reglas.js; ninguna otra ordenación de esas sílabas forma otra palabra del léxico
+//         (solución única); la palabra tiene al menos 2 sílabas distintas. Palabras de hasta 10 letras, sin repetir.
+// Opciones: sílabas (variadas, 2, 3 o 4) · tipo de sílabas · caso. Completa: 10 palabras; media: 5.
+const { registrar } = __req("nucleo/tipos.js");
+const { TOP } = __req("render/papel.js");
+const { silabas } = __req("lengua/reglas.js");
+const { LEXICO } = __req("lengua/lexico.js");
+const { alCaso, trozosCaso, cuantas, elegirPalabras, largosDe, pildoras, anchoPildoras, ajusta } = __req("tipos/_lengua.js");
+const PALABRAS = new Set(LEXICO.map((e) => e.p));
+/** Todas las ordenaciones de la lista. */
+const permutaciones = (l) => (l.length <= 1 ? [l] : l.flatMap((x, i) => permutaciones([...l.slice(0, i), ...l.slice(i + 1)]).map((r) => [x, ...r])));
+
+/** ¿Sirve la palabra? Sí si ninguna otra ordenación de sus sílabas es una palabra del léxico y hay al menos dos sílabas distintas. */
+function ordenable(p) {
+  const ss = silabas(p);
+  if (new Set(ss).size < 2) return false;
+  return !permutaciones(ss).some((q) => q.join("") !== p && PALABRAS.has(q.join("")));
+}
+
+const __default = registrar({
+  id: "silaba.ordena",
+  version: 1,
+  generar(params, azar, { tamano }) {
+    const n = cuantas(tamano, 10);
+    const ps = elegirPalabras(azar, n, params, largosDe(params, [2, 3, 2, 3, 4]), { extra: { maxLetras: 10 }, ok: (e) => ordenable(e.p), id: "silaba.ordena" });
+    return {
+      enunciado: "Ordena las sílabas y escribe la palabra.",
+      ejercicios: ps.map(({ p }) => {
+        const ss = silabas(p); let mez = azar.barajar(ss);
+        while (mez.join("") === p) mez = azar.barajar(ss);
+        const vista = trozosCaso(mez, params.caso === "inicial" ? null : params.caso);
+        if (params.caso === "inicial") { const k = mez.indexOf(ss[0]); vista[k] = alCaso(vista[k], "inicial"); }   // la sílaba con mayúscula es la primera
+        return { datos: { silabas: vista, palabra: alCaso(p, params.caso) }, solucion: { huecos: [alCaso(p, params.caso)] } };
+      }),
+    };
+  },
+  dibujar(p, act) {
+    const { cel, cw, ch } = p.celdas(TOP, 1, 10, 10, 8);
+    act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
+      const [x, y] = cel[i], ss = e.datos.silabas, bw = 190, wp = cw - 36 - bw - 40;
+      p.marco(x, y, cw, ch, i);
+      const fs = ajusta(p, (q) => anchoPildoras(p, ss, q, 8), wp, 24, 14);
+      pildoras(p, x + 36, y, ch, ss, fs, 8);
+      p.text(x + cw - 14 - bw - 20, y + ch / 2 - 8, "→", 20, { f: "PB", anchor: "middle", gris: 0.4 });
+      p.caja(x + cw - 14 - bw, y + (ch - 40) / 2, bw, 40, null, 20, e.solucion.huecos[0]);
+    }));
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get ordenable() { return ordenable; }, get default() { return __default; } }));
+},
+"tipos/silaba.separa.js": (__exp) => {
+// silaba.separa · Separa en sílabas (Lengua 1.º, lote 1; LENGUA_1.md §3, bloque 3).
+// datos:    { palabra (en el caso elegido), modo: "casillas" | "rayas", n: nº de sílabas }
+// solucion: casillas → { huecos: [las sílabas, una por casilla] }
+//           rayas    → { huecos: [], rayas: [nº de letras tras las que va cada raya, de izquierda a derecha] }  (el alumno traza las rayas; en la solución, en rojo)
+// Reglas: palabra del léxico; las sílabas son las de reglas.js (silabas); sin repetir palabras. Palabras de hasta 10 letras.
+// Opciones: cómo se separa (en casillas / con rayas) · sílabas (variadas, 2, 3 o 4) · tipo de sílabas · caso. Completa: 10 palabras; media: 5.
+const { registrar } = __req("nucleo/tipos.js");
+const { TOP } = __req("render/papel.js");
+const { silabas } = __req("lengua/reglas.js");
+const { casillas } = __req("lengua/dibujo.js");
+const { alCaso, trozosCaso, cuantas, elegirPalabras, largosDe, palabraLetras, ajusta } = __req("tipos/_lengua.js");
+const __default = registrar({
+  id: "silaba.separa",
+  version: 1,
+  generar(params, azar, { tamano }) {
+    const n = cuantas(tamano, 10), modo = params.modo === "rayas" ? "rayas" : "casillas";
+    const ps = elegirPalabras(azar, n, params, largosDe(params, [2, 3, 2, 3, 4]), { extra: { maxLetras: 10 }, id: "silaba.separa" });
+    return {
+      enunciado: modo === "rayas" ? "Separa cada palabra en sílabas:\ntraza una raya entre ellas." : "Separa cada palabra en sílabas:\nescribe una en cada casilla.",
+      ejercicios: ps.map(({ p }) => {
+        const ss = silabas(p), palabra = alCaso(p, params.caso);
+        if (modo === "casillas") return { datos: { palabra, modo, n: ss.length }, solucion: { huecos: trozosCaso(ss, params.caso) } };
+        const rayas = ss.slice(0, -1).map((_, k) => ss.slice(0, k + 1).join("").length);
+        return { datos: { palabra, modo, n: ss.length }, solucion: { huecos: [], rayas } };
+      }),
+    };
+  },
+  dibujar(p, act) {
+    const { cel, cw, ch } = p.celdas(TOP, 1, 10, 10, 8);
+    act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
+      const [x, y] = cel[i], { palabra, modo, n } = e.datos;
+      p.marco(x, y, cw, ch, i);
+      if (modo === "rayas") {
+        palabraLetras(p, x + 40, y, cw - 56, ch, palabra, { fs: 32, gap: 0.4, rayas: e.solucion.rayas });
+        return;
+      }
+      const w1 = cw * 0.42, fs = ajusta(p, (q) => p.ancho(palabra, "PB", q), w1 - 10, 28);
+      p.text(x + 36, y + ch / 2 - fs * 0.35, palabra, fs, { f: "PB" });
+      casillas(p, x + cw * 0.46, y, cw * 0.52, ch, n, { sol: e.solucion.huecos, ancho: 56, alto: 38, gap: 8, fs: 18 });
+    }));
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/silaba.tabla.js": (__exp) => {
+// silaba.tabla · Lee las sílabas (Lengua 1.º, lote 1; LENGUA_1.md §3, bloque 3). Solo página completa. Lectura en voz alta: sin respuesta escrita.
+// datos:    { silabas: [5 sílabas de la fila], cons: consonante de la fila ("" si la fila mezcla varias) }
+// solucion: { huecos: [] }
+// Tipos: directas (ma me mi mo mu) · inversas (am em im om um) · trabadas (pla ple pli plo plu) · mixtas (man men min mon mun).
+//   Cada sílaba es del tipo pedido según reglas.js (tipoSilaba).
+// Opciones: letra (todas las filas de 12 consonantes al azar, o una sola letra) · tipo · orden · caso (minúscula / MAYÚSCULA).
+//   Ordenadas: cada fila en orden a e i o u (con una letra concreta, las siguientes filas empiezan por otra vocal).
+//   Mezcladas: las sílabas barajadas por toda la tabla (con una letra concreta, cada fila en un orden distinto).
+// 12 filas de 5 sílabas.
+const { registrar } = __req("nucleo/tipos.js");
+const { TOP } = __req("render/papel.js");
+const { alCaso } = __req("tipos/_lengua.js");
+const V = [..."aeiou"];
+const CONSONANTES = ["m", "p", "s", "l", "t", "d", "n", "f", "b", "v", "r", "j", "c", "z", "g", "h", "ñ", "ch", "ll"];
+const DIRECTA = { c: ["ca", "ce", "ci", "co", "cu"], g: ["ga", "gue", "gui", "go", "gu"] };
+const CODAS_INV = ["l", "n", "r", "s", "m", "d", "z", "c", "p", "t", "b", "x"];
+const GRUPOS = ["pl", "pr", "bl", "br", "fl", "fr", "cl", "cr", "gl", "gr", "dr", "tr"];
+const INICIAL_MIXTA = ["m", "p", "s", "l", "t", "d", "n", "f", "b", "r"], CODAS_MIXTA = ["n", "s", "l", "r"];
+
+/** Todas las filas posibles de un tipo: { cons, sil: [5 sílabas en orden a e i o u] }. «cons» = la letra que se elige en la opción. */
+function filasDe(tipo) {
+  if (tipo === "inversas") return CODAS_INV.map((c) => ({ cons: c, sil: V.map((v) => v + c) }));
+  if (tipo === "trabadas") return GRUPOS.map((g) => ({ cons: g[0], sil: V.map((v) => g + v) }));
+  if (tipo === "mixtas") return INICIAL_MIXTA.flatMap((c) => CODAS_MIXTA.map((k) => ({ cons: c, sil: V.map((v) => c + v + k) })));
+  return CONSONANTES.map((c) => ({ cons: c, sil: DIRECTA[c] || V.map((v) => c + v) }));
+}
+const FILAS = 12;
+
+const __default = registrar({
+  id: "silaba.tabla",
+  version: 1,
+  generar(params, azar) {
+    const tipo = params.tipo || "directas", mezcla = params.orden === "mezcladas";
+    let pool = filasDe(tipo);
+    if (params.letra) {
+      pool = pool.filter((f) => f.cons === params.letra);
+      if (!pool.length) throw new Error(`«silaba.tabla» necesita una letra que tenga sílabas de ese tipo (con «${params.letra}» no hay sílabas ${tipo}).`);
+    }
+    let filas;
+    if (params.letra) {
+      const base = pool.length === 1 ? pool : azar.muestra(pool, Math.min(pool.length, 3));   // mixtas/trabadas: varias codas o grupos de la misma letra
+      filas = Array.from({ length: FILAS }, (_, r) => {
+        const b = base[r % base.length], sil = b.sil;
+        return mezcla ? azar.barajar(sil) : [...sil.slice(Math.floor(r / base.length) % 5), ...sil.slice(0, Math.floor(r / base.length) % 5)];
+      });
+    } else {
+      const elegidas = azar.muestra(pool, FILAS).sort((a, b) => pool.indexOf(a) - pool.indexOf(b));
+      if (mezcla) {
+        const todas = azar.barajar(elegidas.flatMap((f) => f.sil));
+        filas = Array.from({ length: FILAS }, (_, r) => todas.slice(r * 5, r * 5 + 5));
+      } else filas = elegidas.map((f) => f.sil);
+    }
+    const mayus = params.caso === "mayus";
+    return {
+      enunciado: "Lee en voz alta las sílabas de cada fila.",
+      ejercicios: filas.map((sil) => ({ datos: { silabas: sil.map((s) => alCaso(s, mayus ? "mayus" : null)) }, solucion: { huecos: [] } })),
+    };
+  },
+  dibujar(p, act) {
+    const { cel, cw, ch } = p.celdas(TOP, 1, FILAS, 10, 6);
+    act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
+      const [x, y] = cel[i], n = e.datos.silabas.length, x0 = x + 50, w = cw - 64, fs = 30;
+      p.marco(x, y, cw, ch, i);
+      e.datos.silabas.forEach((s, k) => p.text(x0 + (k + 0.5) * (w / n), y + ch / 2 - fs * 0.35, s, fs, { f: "PB", anchor: "middle" }));
+    }));
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get CONSONANTES() { return CONSONANTES; }, get filasDe() { return filasDe; }, get default() { return __default; } }));
 },
 "tipos/suma.suma.js": (__exp) => {
 // suma.suma · Suma y dibuja (port de filas_suma() y ficha_suma() del motor).

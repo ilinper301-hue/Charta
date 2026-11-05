@@ -123,6 +123,18 @@ META = {
     "estadistica.recuento": (1, 10, "estadística recuento datos contar"),
     "estadistica.barras": (2, 12, "estadística gráfico_de_barras datos"),
     "estadistica.patrones": (2, 10, "patrones series razonamiento"),
+    # Lengua · lote 1 · bloque 2 (letras) y bloque 3 (sílabas)
+    "letra.busca": (1, 8, "lengua letras reconocer rodear atención"),
+    "letra.enpalabras": (2, 10, "lengua letras rodear contar palabras"),
+    "letra.falta": (2, 10, "lengua letras palabras completar"),
+    "letra.vocales": (2, 12, "lengua letras vocales palabras completar"),
+    "letra.parejas": (2, 10, "lengua letras mayúsculas minúsculas unir"),
+    "letra.abecedario": (2, 10, "lengua letras abecedario orden anterior posterior"),
+    "silaba.tabla": (1, 8, "lengua sílabas lectura voz_alta fluidez"),
+    "silaba.junta": (2, 10, "lengua sílabas formar_palabras unir escribir"),
+    "silaba.separa": (2, 12, "lengua sílabas separar palabras"),
+    "silaba.ordena": (2, 10, "lengua sílabas ordenar palabras"),
+    "silaba.falta": (2, 10, "lengua sílabas palabras completar"),
 }
 
 def metadatos(id):

@@ -5049,6 +5049,1382 @@ export const CATALOGO = {
      "decenas"
     ]
    }
+  },
+  {
+   "id": "letra.busca",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 2,
+   "familia": "letra",
+   "clave": "busca",
+   "nombre": "Rodea la letra",
+   "descripcion": "Filas de letras sueltas: rodear todas las que son iguales a la pedida.",
+   "opciones": [
+    {
+     "id": "letra",
+     "etiqueta": "Letra que se busca",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Al azar"
+      },
+      {
+       "valor": "a",
+       "etiqueta": "a"
+      },
+      {
+       "valor": "b",
+       "etiqueta": "b"
+      },
+      {
+       "valor": "c",
+       "etiqueta": "c"
+      },
+      {
+       "valor": "d",
+       "etiqueta": "d"
+      },
+      {
+       "valor": "e",
+       "etiqueta": "e"
+      },
+      {
+       "valor": "f",
+       "etiqueta": "f"
+      },
+      {
+       "valor": "g",
+       "etiqueta": "g"
+      },
+      {
+       "valor": "h",
+       "etiqueta": "h"
+      },
+      {
+       "valor": "i",
+       "etiqueta": "i"
+      },
+      {
+       "valor": "j",
+       "etiqueta": "j"
+      },
+      {
+       "valor": "k",
+       "etiqueta": "k"
+      },
+      {
+       "valor": "l",
+       "etiqueta": "l"
+      },
+      {
+       "valor": "m",
+       "etiqueta": "m"
+      },
+      {
+       "valor": "n",
+       "etiqueta": "n"
+      },
+      {
+       "valor": "ñ",
+       "etiqueta": "ñ"
+      },
+      {
+       "valor": "o",
+       "etiqueta": "o"
+      },
+      {
+       "valor": "p",
+       "etiqueta": "p"
+      },
+      {
+       "valor": "q",
+       "etiqueta": "q"
+      },
+      {
+       "valor": "r",
+       "etiqueta": "r"
+      },
+      {
+       "valor": "s",
+       "etiqueta": "s"
+      },
+      {
+       "valor": "t",
+       "etiqueta": "t"
+      },
+      {
+       "valor": "u",
+       "etiqueta": "u"
+      },
+      {
+       "valor": "v",
+       "etiqueta": "v"
+      },
+      {
+       "valor": "w",
+       "etiqueta": "w"
+      },
+      {
+       "valor": "x",
+       "etiqueta": "x"
+      },
+      {
+       "valor": "y",
+       "etiqueta": "y"
+      },
+      {
+       "valor": "z",
+       "etiqueta": "z"
+      }
+     ]
+    },
+    {
+     "id": "distractoras",
+     "etiqueta": "Las otras letras",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Al azar"
+      },
+      {
+       "valor": "confusas",
+       "etiqueta": "Las que se confunden (b-d-p-q, m-n, u-n…)"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULA"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "RODEA LA LETRA",
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 8,
+    "etiquetas": [
+     "lengua",
+     "letras",
+     "reconocer",
+     "rodear",
+     "atención"
+    ]
+   }
+  },
+  {
+   "id": "letra.enpalabras",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 2,
+   "familia": "letra",
+   "clave": "enpalabras",
+   "nombre": "Rodea la letra en las palabras",
+   "descripcion": "Una lista de palabras: rodear la letra pedida en cada una y contar cuántas veces sale.",
+   "opciones": [
+    {
+     "id": "letra",
+     "etiqueta": "Letra que se busca",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Al azar"
+      },
+      {
+       "valor": "a",
+       "etiqueta": "a"
+      },
+      {
+       "valor": "b",
+       "etiqueta": "b"
+      },
+      {
+       "valor": "c",
+       "etiqueta": "c"
+      },
+      {
+       "valor": "d",
+       "etiqueta": "d"
+      },
+      {
+       "valor": "e",
+       "etiqueta": "e"
+      },
+      {
+       "valor": "f",
+       "etiqueta": "f"
+      },
+      {
+       "valor": "g",
+       "etiqueta": "g"
+      },
+      {
+       "valor": "h",
+       "etiqueta": "h"
+      },
+      {
+       "valor": "i",
+       "etiqueta": "i"
+      },
+      {
+       "valor": "j",
+       "etiqueta": "j"
+      },
+      {
+       "valor": "l",
+       "etiqueta": "l"
+      },
+      {
+       "valor": "m",
+       "etiqueta": "m"
+      },
+      {
+       "valor": "n",
+       "etiqueta": "n"
+      },
+      {
+       "valor": "ñ",
+       "etiqueta": "ñ"
+      },
+      {
+       "valor": "o",
+       "etiqueta": "o"
+      },
+      {
+       "valor": "p",
+       "etiqueta": "p"
+      },
+      {
+       "valor": "r",
+       "etiqueta": "r"
+      },
+      {
+       "valor": "s",
+       "etiqueta": "s"
+      },
+      {
+       "valor": "t",
+       "etiqueta": "t"
+      },
+      {
+       "valor": "u",
+       "etiqueta": "u"
+      },
+      {
+       "valor": "v",
+       "etiqueta": "v"
+      },
+      {
+       "valor": "z",
+       "etiqueta": "z"
+      }
+     ]
+    },
+    {
+     "id": "tarea",
+     "etiqueta": "Tarea",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Rodear y contar cuántas veces"
+      },
+      {
+       "valor": "rodea",
+       "etiqueta": "Solo rodear"
+      }
+     ]
+    },
+    {
+     "id": "tipo",
+     "etiqueta": "Tipo de sílabas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Directas (ma, pe)"
+      },
+      {
+       "valor": "inversas",
+       "etiqueta": "Con inversas (al, en)"
+      },
+      {
+       "valor": "trabadas",
+       "etiqueta": "Con trabadas (pla, bra)"
+      },
+      {
+       "valor": "mixtas",
+       "etiqueta": "Con mixtas (con, sol)"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "inicial",
+       "etiqueta": "Mayúscula inicial"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULAS"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "RODEA LA LETRA EN LAS PALABRAS",
+   "color": "rosa",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "lengua",
+     "letras",
+     "rodear",
+     "contar",
+     "palabras"
+    ]
+   }
+  },
+  {
+   "id": "letra.falta",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 2,
+   "familia": "letra",
+   "clave": "falta",
+   "nombre": "Pon la letra que falta",
+   "descripcion": "Palabras con una letra en hueco (m_sa), con tres letras para elegir o sin ayuda.",
+   "opciones": [
+    {
+     "id": "ayuda",
+     "etiqueta": "Ayuda",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Con tres letras para elegir"
+      },
+      {
+       "valor": "sin",
+       "etiqueta": "Sin ayuda"
+      }
+     ]
+    },
+    {
+     "id": "hueco",
+     "etiqueta": "Letra que falta",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Cualquier letra"
+      },
+      {
+       "valor": "primera",
+       "etiqueta": "La primera"
+      }
+     ]
+    },
+    {
+     "id": "tipo",
+     "etiqueta": "Tipo de sílabas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Directas (ma, pe)"
+      },
+      {
+       "valor": "inversas",
+       "etiqueta": "Con inversas (al, en)"
+      },
+      {
+       "valor": "trabadas",
+       "etiqueta": "Con trabadas (pla, bra)"
+      },
+      {
+       "valor": "mixtas",
+       "etiqueta": "Con mixtas (con, sol)"
+      }
+     ]
+    },
+    {
+     "id": "largo",
+     "etiqueta": "Sílabas de cada palabra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Variadas"
+      },
+      {
+       "valor": 1,
+       "etiqueta": "1 sílaba"
+      },
+      {
+       "valor": 2,
+       "etiqueta": "2 sílabas"
+      },
+      {
+       "valor": 3,
+       "etiqueta": "3 sílabas"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 sílabas"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "inicial",
+       "etiqueta": "Mayúscula inicial"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULAS"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "PON LA LETRA QUE FALTA",
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "lengua",
+     "letras",
+     "palabras",
+     "completar"
+    ]
+   }
+  },
+  {
+   "id": "letra.vocales",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 2,
+   "familia": "letra",
+   "clave": "vocales",
+   "nombre": "Completa las vocales",
+   "descripcion": "Palabras con las vocales en hueco (p_l_t_): escribirlas.",
+   "opciones": [
+    {
+     "id": "faltan",
+     "etiqueta": "Vocales que faltan",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Todas"
+      },
+      {
+       "valor": "una",
+       "etiqueta": "Una"
+      },
+      {
+       "valor": "azar",
+       "etiqueta": "Algunas (al azar)"
+      }
+     ]
+    },
+    {
+     "id": "tipo",
+     "etiqueta": "Tipo de sílabas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Directas (ma, pe)"
+      },
+      {
+       "valor": "inversas",
+       "etiqueta": "Con inversas (al, en)"
+      },
+      {
+       "valor": "trabadas",
+       "etiqueta": "Con trabadas (pla, bra)"
+      },
+      {
+       "valor": "mixtas",
+       "etiqueta": "Con mixtas (con, sol)"
+      }
+     ]
+    },
+    {
+     "id": "largo",
+     "etiqueta": "Sílabas de cada palabra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Variadas"
+      },
+      {
+       "valor": 1,
+       "etiqueta": "1 sílaba"
+      },
+      {
+       "valor": 2,
+       "etiqueta": "2 sílabas"
+      },
+      {
+       "valor": 3,
+       "etiqueta": "3 sílabas"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 sílabas"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "inicial",
+       "etiqueta": "Mayúscula inicial"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULAS"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "COMPLETA LAS VOCALES",
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 12,
+    "etiquetas": [
+     "lengua",
+     "letras",
+     "vocales",
+     "palabras",
+     "completar"
+    ]
+   }
+  },
+  {
+   "id": "letra.parejas",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 2,
+   "familia": "letra",
+   "clave": "parejas",
+   "nombre": "Mayúscula y minúscula",
+   "descripcion": "Unir cada mayúscula con su minúscula, o escribir la que falta.",
+   "opciones": [
+    {
+     "id": "tarea",
+     "etiqueta": "Tarea",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Unir"
+      },
+      {
+       "valor": "escribe",
+       "etiqueta": "Escribir la que falta"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa"
+   ],
+   "titulo": "MAYÚSCULA Y MINÚSCULA",
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "lengua",
+     "letras",
+     "mayúsculas",
+     "minúsculas",
+     "unir"
+    ]
+   }
+  },
+  {
+   "id": "letra.abecedario",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 2,
+   "familia": "letra",
+   "clave": "abecedario",
+   "nombre": "Antes y después",
+   "descripcion": "La letra de antes, la de después o las dos, con el abecedario (con ñ).",
+   "opciones": [
+    {
+     "id": "modo",
+     "etiqueta": "Letras",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "La de antes y la de después"
+      },
+      {
+       "valor": "anterior",
+       "etiqueta": "Solo la de antes"
+      },
+      {
+       "valor": "posterior",
+       "etiqueta": "Solo la de después"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULA"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "ANTES Y DESPUÉS",
+   "color": "rosa",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "lengua",
+     "letras",
+     "abecedario",
+     "orden",
+     "anterior",
+     "posterior"
+    ]
+   }
+  },
+  {
+   "id": "silaba.tabla",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 3,
+   "familia": "silaba",
+   "clave": "tabla",
+   "nombre": "Lee las sílabas",
+   "descripcion": "Tabla de lectura de sílabas (ma me mi mo mu…) para leer en voz alta.",
+   "opciones": [
+    {
+     "id": "letra",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Todas"
+      },
+      {
+       "valor": "m",
+       "etiqueta": "m"
+      },
+      {
+       "valor": "p",
+       "etiqueta": "p"
+      },
+      {
+       "valor": "s",
+       "etiqueta": "s"
+      },
+      {
+       "valor": "l",
+       "etiqueta": "l"
+      },
+      {
+       "valor": "t",
+       "etiqueta": "t"
+      },
+      {
+       "valor": "d",
+       "etiqueta": "d"
+      },
+      {
+       "valor": "n",
+       "etiqueta": "n"
+      },
+      {
+       "valor": "f",
+       "etiqueta": "f"
+      },
+      {
+       "valor": "b",
+       "etiqueta": "b"
+      },
+      {
+       "valor": "v",
+       "etiqueta": "v"
+      },
+      {
+       "valor": "r",
+       "etiqueta": "r"
+      },
+      {
+       "valor": "j",
+       "etiqueta": "j"
+      },
+      {
+       "valor": "c",
+       "etiqueta": "c"
+      },
+      {
+       "valor": "z",
+       "etiqueta": "z"
+      },
+      {
+       "valor": "g",
+       "etiqueta": "g"
+      },
+      {
+       "valor": "h",
+       "etiqueta": "h"
+      },
+      {
+       "valor": "ñ",
+       "etiqueta": "ñ"
+      },
+      {
+       "valor": "ch",
+       "etiqueta": "ch"
+      },
+      {
+       "valor": "ll",
+       "etiqueta": "ll"
+      }
+     ]
+    },
+    {
+     "id": "tipo",
+     "etiqueta": "Tipo de sílabas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Directas (ma, pe)"
+      },
+      {
+       "valor": "inversas",
+       "etiqueta": "Con inversas (al, en)"
+      },
+      {
+       "valor": "trabadas",
+       "etiqueta": "Con trabadas (pla, bra)"
+      },
+      {
+       "valor": "mixtas",
+       "etiqueta": "Con mixtas (con, sol)"
+      }
+     ]
+    },
+    {
+     "id": "orden",
+     "etiqueta": "Orden",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Ordenadas"
+      },
+      {
+       "valor": "mezcladas",
+       "etiqueta": "Mezcladas"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULA"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa"
+   ],
+   "titulo": "LEE LAS SÍLABAS",
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 8,
+    "etiquetas": [
+     "lengua",
+     "sílabas",
+     "lectura",
+     "voz alta",
+     "fluidez"
+    ]
+   }
+  },
+  {
+   "id": "silaba.junta",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 3,
+   "familia": "silaba",
+   "clave": "junta",
+   "nombre": "Junta las sílabas",
+   "descripcion": "Juntar sílabas para formar la palabra (ca + sa), escribiéndola o uniendo columnas.",
+   "opciones": [
+    {
+     "id": "tarea",
+     "etiqueta": "Tarea",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Escribir la palabra"
+      },
+      {
+       "valor": "une",
+       "etiqueta": "Unir las sílabas"
+      }
+     ]
+    },
+    {
+     "id": "largo",
+     "etiqueta": "Sílabas de cada palabra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "2 sílabas"
+      },
+      {
+       "valor": 3,
+       "etiqueta": "3 sílabas"
+      },
+      {
+       "valor": "variadas",
+       "etiqueta": "2 y 3 sílabas"
+      }
+     ]
+    },
+    {
+     "id": "tipo",
+     "etiqueta": "Tipo de sílabas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Directas (ma, pe)"
+      },
+      {
+       "valor": "inversas",
+       "etiqueta": "Con inversas (al, en)"
+      },
+      {
+       "valor": "trabadas",
+       "etiqueta": "Con trabadas (pla, bra)"
+      },
+      {
+       "valor": "mixtas",
+       "etiqueta": "Con mixtas (con, sol)"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "inicial",
+       "etiqueta": "Mayúscula inicial"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULAS"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "JUNTA LAS SÍLABAS",
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "lengua",
+     "sílabas",
+     "formar palabras",
+     "unir",
+     "escribir"
+    ]
+   }
+  },
+  {
+   "id": "silaba.separa",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 3,
+   "familia": "silaba",
+   "clave": "separa",
+   "nombre": "Separa en sílabas",
+   "descripcion": "Separar cada palabra en sílabas: en casillas o con rayas.",
+   "opciones": [
+    {
+     "id": "modo",
+     "etiqueta": "Cómo se separa",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "En casillas"
+      },
+      {
+       "valor": "rayas",
+       "etiqueta": "Con rayas"
+      }
+     ]
+    },
+    {
+     "id": "largo",
+     "etiqueta": "Sílabas de cada palabra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Variadas"
+      },
+      {
+       "valor": 2,
+       "etiqueta": "2 sílabas"
+      },
+      {
+       "valor": 3,
+       "etiqueta": "3 sílabas"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 sílabas"
+      }
+     ]
+    },
+    {
+     "id": "tipo",
+     "etiqueta": "Tipo de sílabas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Directas (ma, pe)"
+      },
+      {
+       "valor": "inversas",
+       "etiqueta": "Con inversas (al, en)"
+      },
+      {
+       "valor": "trabadas",
+       "etiqueta": "Con trabadas (pla, bra)"
+      },
+      {
+       "valor": "mixtas",
+       "etiqueta": "Con mixtas (con, sol)"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "inicial",
+       "etiqueta": "Mayúscula inicial"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULAS"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "SEPARA EN SÍLABAS",
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 12,
+    "etiquetas": [
+     "lengua",
+     "sílabas",
+     "separar",
+     "palabras"
+    ]
+   }
+  },
+  {
+   "id": "silaba.ordena",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 3,
+   "familia": "silaba",
+   "clave": "ordena",
+   "nombre": "Ordena las sílabas",
+   "descripcion": "Sílabas desordenadas: escribir la palabra (ta · pe · lo = pelota).",
+   "opciones": [
+    {
+     "id": "largo",
+     "etiqueta": "Sílabas de cada palabra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Variadas"
+      },
+      {
+       "valor": 2,
+       "etiqueta": "2 sílabas"
+      },
+      {
+       "valor": 3,
+       "etiqueta": "3 sílabas"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 sílabas"
+      }
+     ]
+    },
+    {
+     "id": "tipo",
+     "etiqueta": "Tipo de sílabas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Directas (ma, pe)"
+      },
+      {
+       "valor": "inversas",
+       "etiqueta": "Con inversas (al, en)"
+      },
+      {
+       "valor": "trabadas",
+       "etiqueta": "Con trabadas (pla, bra)"
+      },
+      {
+       "valor": "mixtas",
+       "etiqueta": "Con mixtas (con, sol)"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "inicial",
+       "etiqueta": "Mayúscula inicial"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULAS"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "ORDENA LAS SÍLABAS",
+   "color": "rosa",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "lengua",
+     "sílabas",
+     "ordenar",
+     "palabras"
+    ]
+   }
+  },
+  {
+   "id": "silaba.falta",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 3,
+   "familia": "silaba",
+   "clave": "falta",
+   "nombre": "Pon la sílaba que falta",
+   "descripcion": "Palabras con una sílaba en hueco (pe__ta), con tres sílabas para elegir o sin ayuda.",
+   "opciones": [
+    {
+     "id": "ayuda",
+     "etiqueta": "Ayuda",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Con tres sílabas para elegir"
+      },
+      {
+       "valor": "sin",
+       "etiqueta": "Sin ayuda"
+      }
+     ]
+    },
+    {
+     "id": "hueco",
+     "etiqueta": "Sílaba que falta",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Cualquiera"
+      },
+      {
+       "valor": "primera",
+       "etiqueta": "La primera"
+      },
+      {
+       "valor": "ultima",
+       "etiqueta": "La última"
+      }
+     ]
+    },
+    {
+     "id": "largo",
+     "etiqueta": "Sílabas de cada palabra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Variadas"
+      },
+      {
+       "valor": 2,
+       "etiqueta": "2 sílabas"
+      },
+      {
+       "valor": 3,
+       "etiqueta": "3 sílabas"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 sílabas"
+      }
+     ]
+    },
+    {
+     "id": "tipo",
+     "etiqueta": "Tipo de sílabas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Directas (ma, pe)"
+      },
+      {
+       "valor": "inversas",
+       "etiqueta": "Con inversas (al, en)"
+      },
+      {
+       "valor": "trabadas",
+       "etiqueta": "Con trabadas (pla, bra)"
+      },
+      {
+       "valor": "mixtas",
+       "etiqueta": "Con mixtas (con, sol)"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "inicial",
+       "etiqueta": "Mayúscula inicial"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULAS"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "PON LA SÍLABA QUE FALTA",
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "lengua",
+     "sílabas",
+     "palabras",
+     "completar"
+    ]
+   }
   }
  ]
 };
