@@ -4574,16 +4574,90 @@ const __default = registrar({
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get elegirHuecos() { return elegirHuecos; }, get default() { return __default; } }));
 },
-"tipos/index.js": (__exp) => {
-// Charta · todos los tipos disponibles en la app. Añadir aquí cada módulo nuevo.
-__req("tipos/sumar.h20.js");
+"tipos/familia.combinada.js": (__exp) => {
+// Charta · tipos de la familia «combinada». Añadir aquí cada módulo nuevo de la familia.
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({  }));
+},
+"tipos/familia.conteo.js": (__exp) => {
+// Charta · tipos de la familia «conteo». Añadir aquí cada módulo nuevo de la familia.
+__req("tipos/conteo.serie1.js");
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({  }));
+},
+"tipos/familia.estadistica.js": (__exp) => {
+// Charta · tipos de la familia «estadistica». Añadir aquí cada módulo nuevo de la familia.
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({  }));
+},
+"tipos/familia.geometria.js": (__exp) => {
+// Charta · tipos de la familia «geometria». Añadir aquí cada módulo nuevo de la familia.
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({  }));
+},
+"tipos/familia.juegos.js": (__exp) => {
+// Charta · tipos de la familia «juegos». Añadir aquí cada módulo nuevo de la familia.
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({  }));
+},
+"tipos/familia.medida.js": (__exp) => {
+// Charta · tipos de la familia «medida». Añadir aquí cada módulo nuevo de la familia.
+__req("tipos/medida.reloj.js");
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({  }));
+},
+"tipos/familia.orden.js": (__exp) => {
+// Charta · tipos de la familia «orden». Añadir aquí cada módulo nuevo de la familia.
+__req("tipos/orden.signos.js");
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({  }));
+},
+"tipos/familia.rep.js": (__exp) => {
+// Charta · tipos de la familia «rep». Añadir aquí cada módulo nuevo de la familia.
 __req("tipos/rep.dado.js");
 __req("tipos/rep.marco.js");
-__req("tipos/conteo.serie1.js");
-__req("tipos/orden.signos.js");
-__req("tipos/sumar.vertical.js");
+__req("tipos/rep.dedos.js");
+__req("tipos/rep.domino.js");
+__req("tipos/rep.palotes.js");
+__req("tipos/rep.objetos.js");
+__req("tipos/rep.regletas.js");
+__req("tipos/rep.descomp.js");
+__req("tipos/rep.letras.js");
+__req("tipos/rep.recta.js");
+__req("tipos/rep.bloques.js");
+__req("tipos/rep.cuadricula.js");
+__req("tipos/rep.monedas.js");
+__req("tipos/rep.abaco.js");
+__req("tipos/rep.du.js");
+__req("tipos/rep.atados.js");
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({  }));
+},
+"tipos/familia.restar.js": (__exp) => {
+// Charta · tipos de la familia «restar». Añadir aquí cada módulo nuevo de la familia.
 __req("tipos/restar.recta.js");
-__req("tipos/medida.reloj.js");
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({  }));
+},
+"tipos/familia.sumar.js": (__exp) => {
+// Charta · tipos de la familia «sumar». Añadir aquí cada módulo nuevo de la familia.
+__req("tipos/sumar.h20.js");
+__req("tipos/sumar.vertical.js");
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({  }));
+},
+"tipos/familia.valor.js": (__exp) => {
+// Charta · tipos de la familia «valor». Añadir aquí cada módulo nuevo de la familia.
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({  }));
+},
+"tipos/index.js": (__exp) => {
+// Charta · todos los tipos disponibles en la app, por familias (src/tipos/familia.<f>.js).
+__req("tipos/familia.rep.js");
+__req("tipos/familia.combinada.js");
+__req("tipos/familia.conteo.js");
+__req("tipos/familia.orden.js");
+__req("tipos/familia.valor.js");
+__req("tipos/familia.sumar.js");
+__req("tipos/familia.restar.js");
+__req("tipos/familia.juegos.js");
+__req("tipos/familia.geometria.js");
+__req("tipos/familia.medida.js");
+__req("tipos/familia.estadistica.js");
 const __r1 = __req("nucleo/tipos.js");
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get tipo() { return __r1.tipo; }, get hayTipo() { return __r1.hayTipo; }, get listaTipos() { return __r1.listaTipos; } }));
 },
@@ -4705,6 +4779,34 @@ const __default = registrar({
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
 },
+"tipos/rep.abaco.js": (__exp) => {
+// rep.abaco · Leer y dibujar números con abaco. Ver _rep.js.
+const { tipoRep } = __req("tipos/_rep.js");
+const __default = tipoRep("abaco");
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/rep.atados.js": (__exp) => {
+// rep.atados · Leer y dibujar números con atados. Ver _rep.js.
+const { tipoRep } = __req("tipos/_rep.js");
+const __default = tipoRep("atados");
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/rep.bloques.js": (__exp) => {
+// rep.bloques · Leer y dibujar números con bloques. Ver _rep.js.
+const { tipoRep } = __req("tipos/_rep.js");
+const __default = tipoRep("bloques");
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/rep.cuadricula.js": (__exp) => {
+// rep.cuadricula · Leer y dibujar números con cuadricula. Ver _rep.js.
+const { tipoRep } = __req("tipos/_rep.js");
+const __default = tipoRep("cuadricula");
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
 "tipos/rep.dado.js": (__exp) => {
 // rep.dado · El dado: leer y dibujar números con puntos (1–6 un dado, 7–12 dos). Ver _rep.js.
 const { tipoRep } = __req("tipos/_rep.js");
@@ -4712,10 +4814,80 @@ const __default = tipoRep("dado");
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
 },
+"tipos/rep.dedos.js": (__exp) => {
+// rep.dedos · Leer y dibujar números con dedos. Ver _rep.js.
+const { tipoRep } = __req("tipos/_rep.js");
+const __default = tipoRep("dedos");
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/rep.descomp.js": (__exp) => {
+// rep.descomp · Leer y dibujar números con descomp. Ver _rep.js.
+const { tipoRep } = __req("tipos/_rep.js");
+const __default = tipoRep("descomp");
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/rep.domino.js": (__exp) => {
+// rep.domino · Leer y dibujar números con domino. Ver _rep.js.
+const { tipoRep } = __req("tipos/_rep.js");
+const __default = tipoRep("domino");
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/rep.du.js": (__exp) => {
+// rep.du · Leer y dibujar números con du. Ver _rep.js.
+const { tipoRep } = __req("tipos/_rep.js");
+const __default = tipoRep("du");
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/rep.letras.js": (__exp) => {
+// rep.letras · Leer y dibujar números con letras. Ver _rep.js.
+const { tipoRep } = __req("tipos/_rep.js");
+const __default = tipoRep("letras");
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
 "tipos/rep.marco.js": (__exp) => {
 // rep.marco · El marco de diez: leer y rellenar marcos (hasta 40). Ver _rep.js.
 const { tipoRep } = __req("tipos/_rep.js");
 const __default = tipoRep("marco");
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/rep.monedas.js": (__exp) => {
+// rep.monedas · Leer y dibujar números con monedas. Ver _rep.js.
+const { tipoRep } = __req("tipos/_rep.js");
+const __default = tipoRep("monedas");
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/rep.objetos.js": (__exp) => {
+// rep.objetos · Leer y dibujar números con objetos. Ver _rep.js.
+const { tipoRep } = __req("tipos/_rep.js");
+const __default = tipoRep("objetos");
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/rep.palotes.js": (__exp) => {
+// rep.palotes · Leer y dibujar números con palotes. Ver _rep.js.
+const { tipoRep } = __req("tipos/_rep.js");
+const __default = tipoRep("palotes");
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/rep.recta.js": (__exp) => {
+// rep.recta · Leer y dibujar números con recta. Ver _rep.js.
+const { tipoRep } = __req("tipos/_rep.js");
+const __default = tipoRep("recta");
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/rep.regletas.js": (__exp) => {
+// rep.regletas · Leer y dibujar números con regletas. Ver _rep.js.
+const { tipoRep } = __req("tipos/_rep.js");
+const __default = tipoRep("regletas");
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
 },

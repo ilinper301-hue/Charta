@@ -1,0 +1,1 @@
+// Charta · tipos de la familia «combinada». Añadir aquí cada módulo nuevo de la familia.

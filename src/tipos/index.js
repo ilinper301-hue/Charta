@@ -1,11 +1,14 @@
-// Charta · todos los tipos disponibles en la app. Añadir aquí cada módulo nuevo.
-import "./sumar.h20.js";
-import "./rep.dado.js";
-import "./rep.marco.js";
-import "./conteo.serie1.js";
-import "./orden.signos.js";
-import "./sumar.vertical.js";
-import "./restar.recta.js";
-import "./medida.reloj.js";
+// Charta · todos los tipos disponibles en la app, por familias (src/tipos/familia.<f>.js).
+import "./familia.rep.js";
+import "./familia.combinada.js";
+import "./familia.conteo.js";
+import "./familia.orden.js";
+import "./familia.valor.js";
+import "./familia.sumar.js";
+import "./familia.restar.js";
+import "./familia.juegos.js";
+import "./familia.geometria.js";
+import "./familia.medida.js";
+import "./familia.estadistica.js";
 
 export { tipo, hayTipo, listaTipos } from "../nucleo/tipos.js";

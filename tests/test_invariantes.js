@@ -1,4 +1,4 @@
-// Charta · invariantes aritméticas de todos los tipos (paso 2.5).  Uso: node tests/test_invariantes.js [--full]
+// Charta · invariantes aritméticas de todos los tipos (paso 2.5).  Uso: node tests/test_invariantes.js [--full] [--solo <prefijo>]
 // Cada tipo, cada combinación de opciones, completa y media, varias semillas y variantes:
 // las soluciones salen de los datos, nada supera el rango ni es negativo y se respetan los niveles.
 import { generar, modelo } from "../src/nucleo/ficha.js";
@@ -7,6 +7,7 @@ import { INVARIANTES, comunes } from "./invariantes.js";
 import { combinaciones, contador } from "./comun.js";
 
 const FULL = process.argv.includes("--full");
+const SOLO = (() => { const i = process.argv.indexOf("--solo"); return i > 0 ? process.argv[i + 1] : ""; })();   // --solo conteo. (prefijo)
 const SEMILLAS = FULL ? 60 : 8;
 const t = contador(), { prueba } = t;
 let actividades = 0, ejercicios = 0;
@@ -16,7 +17,7 @@ prueba("todos los tipos tienen invariante", () => {
   if (faltan.length) throw new Error("Falta invariante en tests/invariantes.js: " + faltan.join(", "));
 });
 
-for (const id of listaTipos()) {
+for (const id of listaTipos().filter((x) => x.startsWith(SOLO))) {
   if (!INVARIANTES[id]) continue;
   prueba(id, () => {
     for (const params of combinaciones(id)) for (const tam of modelo(id).tamanos) for (let s = 1; s <= SEMILLAS; s++) {

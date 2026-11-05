@@ -1,32 +1,23 @@
 // Charta · invariantes aritméticas de cada tipo (paso 2.5; reglas de tests/test_motor.py y CONTEXT.md).
 // INVARIANTES[id](actividad, tamano) lanza un error si algún ejercicio no cumple las reglas.
-// Todo tipo registrado DEBE tener aquí su invariante (test_invariantes.js lo exige): al portar uno nuevo, añadirla.
+// Tipos nuevos: su regla va en tests/inv/<familia>.js (export default { "<id>"(act, tam) {…} }), con los ayudantes
+// de tests/inv/_ayuda.js (ent, unicos, cuantos, mitad, rep). Todo tipo registrado DEBE tener aquí su invariante (test_invariantes.js lo exige): al portar uno nuevo, añadirla.
 import assert from "node:assert/strict";
-import { RANGOS } from "../src/rep/index.js";
-
-const ent = (v, lo, hi, q) => assert.ok(Number.isInteger(v) && v >= lo && v <= hi, `${q} = ${v} fuera de ${lo}..${hi}`);
-const unicos = (es, f, q = "repetidos") => assert.equal(new Set(es.map(f)).size, es.length, q);
-const cuantos = (es, n) => assert.equal(es.length, n, `ejercicios: ${es.length} ≠ ${n}`);
-/** Nivel «mezcla»: exactamente la mitad con llevada. */
-const mitad = (es, lleva) => assert.equal(es.filter(lleva).length, es.length / 2, "mezcla: no hay mitad y mitad");
-
-function rep(nombre) {
-  const [lo, max] = RANGOS[nombre];
-  return (act, tam) => {
-    const R = act.params.rango ?? 10, hi = Math.min(R, max), lect = !!act.params.lectura, comp = tam === "completa";
-    const leer = act.ejercicios.filter((e) => e.datos.accion === "leer"), dib = act.ejercicios.filter((e) => e.datos.accion === "dibujar");
-    assert.equal(leer.length, comp ? (lect ? 12 : 9) : (lect ? 6 : 3), "nº de leer");
-    assert.equal(dib.length, lect ? 0 : 3, "nº de dibujar");
-    assert.deepEqual(act.ejercicios, [...leer, ...dib], "primero leer, después dibujar");
-    for (const e of act.ejercicios) {
-      assert.equal(e.datos.rep, nombre);
-      ent(e.datos.n, lo, hi, "n");
-      assert.deepEqual(e.solucion.huecos, e.datos.accion === "leer" ? [e.datos.n] : []);
-    }
-  };
-}
+import { ent, unicos, cuantos, mitad, rep } from "./inv/_ayuda.js";
+import inv_rep from "./inv/rep.js";
+import inv_combinada from "./inv/combinada.js";
+import inv_conteo from "./inv/conteo.js";
+import inv_orden from "./inv/orden.js";
+import inv_valor from "./inv/valor.js";
+import inv_sumar from "./inv/sumar.js";
+import inv_restar from "./inv/restar.js";
+import inv_juegos from "./inv/juegos.js";
+import inv_geometria from "./inv/geometria.js";
+import inv_medida from "./inv/medida.js";
+import inv_estadistica from "./inv/estadistica.js";
 
 export const INVARIANTES = {
+  ...inv_rep, ...inv_combinada, ...inv_conteo, ...inv_orden, ...inv_valor, ...inv_sumar, ...inv_restar, ...inv_juegos, ...inv_geometria, ...inv_medida, ...inv_estadistica,
   "rep.dado": rep("dado"),
   "rep.marco": rep("marco"),
 

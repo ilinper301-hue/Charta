@@ -1,4 +1,4 @@
-// Charta · pruebas comunes de todos los tipos (paso 2.3).  Uso: node tests/test_tipos.js [--full]
+// Charta · pruebas comunes de todos los tipos (paso 2.3).  Uso: node tests/test_tipos.js [--full] [--solo <prefijo>]
 // Para cada tipo registrado, cada combinación de opciones, completa y media y varias semillas:
 // generar() cumple el esquema, render() da SVG limpio, un grupo "ej" por ejercicio y,
 // en modo solución, una respuesta en rojo por cada hueco de solucion.huecos.
@@ -10,6 +10,7 @@ import { render, svgZona } from "../src/render/actividad.js";
 import { COLOR_SOLUCION } from "../src/render/papel.js";
 
 const FULL = process.argv.includes("--full");
+const SOLO = (() => { const i = process.argv.indexOf("--solo"); return i > 0 ? process.argv[i + 1] : ""; })();   // --solo conteo. (prefijo)
 const SEMILLAS = FULL ? 40 : 6;
 let n = 0, fichas = 0;
 const prueba = (nombre, f) => { try { f(); n++; } catch (e) { console.error("FALLA:", nombre, "\n", e.stack || e.message); process.exitCode = 1; } };
@@ -56,7 +57,7 @@ function comprobar(id, params, tam, s) {
   }
 }
 
-for (const id of listaTipos()) {
+for (const id of listaTipos().filter((x) => x.startsWith(SOLO))) {
   prueba(id, () => {
     const m = modelo(id);
     for (const params of combinaciones(id)) for (const tam of m.tamanos) for (let s = 1; s <= SEMILLAS; s++) {
@@ -66,4 +67,4 @@ for (const id of listaTipos()) {
   });
 }
 
-console.log(`test_tipos: ${n} tipos OK (${listaTipos().join(", ")}) · ${fichas} fichas`);
+console.log(`test_tipos: ${n} tipos OK (${listaTipos().filter((x) => x.startsWith(SOLO)).join(", ")}) · ${fichas} fichas`);
