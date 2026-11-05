@@ -164,7 +164,7 @@ MODELOS += [
     M(5, "sumar", "hueco", "Sumas con hueco", "Sumas con un sumando desconocido.", [NIVEL]),
     M(5, "sumar", "decenas", "Sumas de decenas", "Sumar decenas completas (20 + 30).", [BLOQ], rmin=30),
     M(5, "sumar", "encadenadas", "Sumas encadenadas", "Sumar tres números seguidos.", rmax=20),
-    M(5, "sumar", "piramide", "Pirámides de sumas", "Cada casilla es la suma de las dos de abajo.", [HUECOS(1, 4, 3)]),
+    M(5, "sumar", "piramide", "Pirámides de sumas", "Cada casilla es la suma de las dos de abajo.", [HUECOS(1, 3, 3)]),
     M(5, "sumar", "tabla", "Tabla de sumar", "Completar una tabla de doble entrada.", [HUECOS(1, 36)], tam=COMPLETA),
 ]
 

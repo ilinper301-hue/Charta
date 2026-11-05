@@ -1826,7 +1826,7 @@ export const CATALOGO = {
      "etiqueta": "Cuadros vacíos",
      "tipo": "numero",
      "min": 1,
-     "max": 4,
+     "max": 3,
      "defecto": 3
     }
    ],
