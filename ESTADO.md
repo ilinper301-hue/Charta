@@ -74,7 +74,9 @@
 ## Fase 6 · Accesibilidad y metadatos propios
 - [x] Dificultad, tiempo estimado y etiquetas por modelo (sin LOMLOE: decisión de Iván, 5-11-2026).
   - Hecho: `motor/metadatos.py` (`META`: dificultad 1–3, minutos y etiquetas de los 94 modelos; `tools/catalogo.py` los vuelca a `catalogo.js` como `metadatos`). `metadatosDe(ids)` en `ficha.js` (dificultad = la mayor, minutos = suma, media página ≈ la mitad, etiquetas sin repetir); la app los pone en `ficha.metadatos` (no en `generar()` por defecto: las doradas no cambian). Selector: «●○○ · 8 min» en cada tarjeta. `npm test` y `test_motor.py` OK. Los valores son una primera estimación: Iván puede ajustarlos en `META`.
-- [ ] Lectura fácil y pictogramas; tamaños grandes para 1.º.
+- [x] Tamaños grandes y lectura fácil (los pictogramas siguen pendientes, a decidir con Iván).
+  - Hecho: casillas «Letra grande» y «Lectura fácil» (ficha.presentacion.letraGrande / lecturaFacil, solo si se marcan: las doradas no cambian). `hoja()` con `grande` (cabecera y enunciado mayores, enunciado partido por palabras) y `facil` (además una frase por línea); el dibujo de la actividad no cambia. Se guardan en favoritos/recientes. `estiloLectura(ficha)`. Probado en los 94 modelos (`test_ui.js`) y con una muestra en PNG. `npm test` OK.
+- [ ] Pictogramas (decidir con Iván: de dónde salen y dónde se ponen).
 
 ## Fase 7 · Ampliación de contenidos
 - [ ] Bloque 8: problemas (con plantillas de nombres y objetos).

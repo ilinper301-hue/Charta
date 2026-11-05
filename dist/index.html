@@ -190,6 +190,8 @@ body.con-selector { overflow: hidden; }
       <option value="3">Tres variantes (A, B y C), alternas</option>
       <option value="distintas">Una distinta para cada ficha</option></select></label>
     <label class="check"><input type="checkbox" id="bn"> Blanco y negro (ahorro de tinta)</label>
+    <label class="check"><input type="checkbox" id="grande"> Letra grande (cabecera y enunciado)</label>
+    <label class="check"><input type="checkbox" id="facil"> Lectura fácil (letra grande y una frase por línea)</label>
     <label>Título (opcional) <input id="titulo" placeholder="Automático"></label>
     <div class="botones">
       <button id="imprimir" class="primario">Imprimir / Guardar PDF</button>
@@ -227,7 +229,7 @@ const { CATALOGO } = __req("nucleo/catalogo.js");
 const { generar, porDefecto, modelo, metadatosDe } = __req("nucleo/ficha.js");
 const { erroresFicha, letraVariante, paginasVariante } = __req("nucleo/lector.js");
 const { listaTipos } = __req("tipos/index.js");
-const { hoja, hojas, PALETA } = __req("render/hoja.js");
+const { hoja, hojas, estiloLectura, PALETA } = __req("render/hoja.js");
 const { hayTipo } = __req("nucleo/tipos.js");
 const { miniatura } = __req("ui/navegacion.js");
 const { abrirSelector } = __req("ui/selector.js");
@@ -367,7 +369,7 @@ function iniciar() {
         metadatos: metadatosDe(acts.map((a) => a.tipo)),
         titulo: $("titulo").value.trim() || undefined,
         variantes: numVariantes($("variaciones").value, total),
-        presentacion: { color: !$("bn").checked },
+        presentacion: { color: !$("bn").checked, ...($("grande").checked && { letraGrande: true }), ...($("facil").checked && { lecturaFacil: true }) },
       }, semilla);
       const bn = $("bn").checked;
       paginas = hojas(ficha, { nombres: ns, copias: total, bn });
@@ -375,7 +377,7 @@ function iniciar() {
       $("hojas").replaceChildren(...paginas.map((p) => el("div", {}, el("p", { className: "hoja-etq", textContent: etiqueta(p) }),
         Object.assign(el("div", { className: "hoja" }), { innerHTML: p.svg }))));
       // Solucionario: una hoja resuelta por variante (sin nombres).
-      const sol = Array.from({ length: ficha.variantes }, (_, v) => ({ svg: hoja(paginasVariante(ficha, v)[0], { titulo: ficha.titulo, bn, modo: "solucion", uid: `s${v}` }) }));
+      const sol = Array.from({ length: ficha.variantes }, (_, v) => ({ svg: hoja(paginasVariante(ficha, v)[0], { titulo: ficha.titulo, bn, modo: "solucion", uid: `s${v}`, ...estiloLectura(ficha) }) }));
       $("hojasSol").replaceChildren(...sol.map((p, v) => el("div", {}, el("p", { className: "hoja-etq", textContent: ficha.variantes > 1 ? `Variante ${letraVariante(v)}` : "Soluciones" }),
         Object.assign(el("div", { className: "hoja" }), { innerHTML: p.svg }))));
       $("info").textContent = `${paginas.length} página${paginas.length > 1 ? "s" : ""}` +
@@ -386,7 +388,7 @@ function iniciar() {
   $("anadir").onclick = () => abrirSelector({ tamano: "media", actual: editores[0].id,
     alElegir: (id) => { nuevoEditor(id); pintar(); } });
   $("acts").addEventListener("change", pintar);
-  for (const id of ["alumnos", "copias", "variaciones", "bn", "titulo"]) $(id).addEventListener("change", pintar);
+  for (const id of ["alumnos", "copias", "variaciones", "bn", "grande", "facil", "titulo"]) $(id).addEventListener("change", pintar);
   $("alumnos").addEventListener("input", contar);
   $("irPrevia").onclick = () => $("previa").scrollIntoView({ behavior: "smooth" });
   $("variante").onclick = () => { semilla++; pintar(); };
@@ -400,7 +402,7 @@ function iniciar() {
   const guardadas = crearGuardadas(almacen);
   let pestana = "favoritos";
   const composicion = () => ({ actividades: editores.map((e) => e.leer()), semilla, titulo: $("titulo").value.trim(),
-    variaciones: $("variaciones").value, bn: $("bn").checked });
+    variaciones: $("variaciones").value, bn: $("bn").checked, grande: $("grande").checked, facil: $("facil").checked });
   function marcarFavorito() {
     try { const f = guardadas.esFavorito(composicion()); $("favorito").textContent = f ? "★ Favorita" : "☆ Favorita"; $("favorito").classList.toggle("on", f); } catch {}
   }
@@ -409,7 +411,7 @@ function iniciar() {
     for (const a of c.actividades) { const e = editorActividad(a.tipo, { tamano, alCambiar: cambiado }); editores.push(e); }
     recolocar();
     c.actividades.forEach((a, i) => editores[i].poner(a.tipo, a.params));
-    semilla = c.semilla || 1; $("titulo").value = c.titulo || ""; $("variaciones").value = c.variaciones || "iguales"; $("bn").checked = !!c.bn;
+    semilla = c.semilla || 1; $("titulo").value = c.titulo || ""; $("variaciones").value = c.variaciones || "iguales"; $("bn").checked = !!c.bn; $("grande").checked = !!c.grande; $("facil").checked = !!c.facil;
     pintar(); $("acts").scrollIntoView({ behavior: "smooth" });
   }
   function pintarGuardadas() {
@@ -5567,7 +5569,8 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get render() {
 "render/hoja.js": (__exp) => {
 // Charta · paso 2.4 · página A4 completa en SVG: Nombre (impreso o línea en blanco), Fecha, título
 // y 1 o 2 paneles con su actividad. Port de encabezado(), panel() y pagina() del motor.
-// opciones: { titulo, nombre = "", bn = false (blanco y negro / ahorro de tinta), modo = "papel" | "solucion", uid }
+// opciones: { titulo, nombre = "", bn = false (blanco y negro / ahorro de tinta), modo = "papel" | "solucion", uid,
+//   grande = false (letra grande en cabecera y enunciado), facil = false (lectura fácil: letra grande + una frase por línea) }
 const { Papel, W, H, M, INK, ZONA } = __req("render/papel.js");
 const { render } = __req("render/actividad.js");
 const AZUL = "#1F4E79";
@@ -5588,33 +5591,54 @@ function tituloMotor(t) {
   return k < 0 ? s : s.slice(0, k) + s[k].toUpperCase() + s.slice(k + 1);
 }
 
-function encabezado(p, titulo, nombre, bn) {
-  p.text(34, H - 46, "Nombre:", 10.5, { f: "PR" }); p.text(360, H - 46, "Fecha:", 10.5, { f: "PR" });
-  const x0 = 34 + p.ancho("Nombre: ", "PR", 10.5);
+function encabezado(p, titulo, nombre, bn, grande) {
+  const fe = grande ? 13 : 10.5;
+  p.text(34, H - 46, "Nombre:", fe, { f: "PR" }); p.text(360, H - 46, "Fecha:", fe, { f: "PR" });
+  const x0 = 34 + p.ancho("Nombre: ", "PR", fe);
   p.line(x0, H - 48, 332, H - 48, { lw: 0.8, gris: 0 });
-  p.line(360 + p.ancho("Fecha: ", "PR", 10.5), H - 48, 533, H - 48, { lw: 0.8, gris: 0 });
+  p.line(360 + p.ancho("Fecha: ", "PR", fe), H - 48, 533, H - 48, { lw: 0.8, gris: 0 });
   if (nombre) {
-    let fs = 12;
+    let fs = grande ? 14 : 12;
     while (p.ancho(nombre, "PM", fs) > 332 - x0 - 8 && fs > 7) fs -= 0.5;
     p.text(x0 + 4, H - 45, nombre, fs, { f: "PM" });
   }
   const tt = tituloMotor(titulo);
-  let fs = 16;
+  let fs = grande ? 20 : 16;
   while (p.ancho(tt, "PB", fs) > W - 80 && fs > 10) fs -= 0.5;
   p.text(W / 2, H - 86, tt, fs, { f: "PB", anchor: "middle", gris: bn ? INK : AZUL });
 }
 
-function panel(p, act, rect, { bn, modo, clip }) {
+/** Líneas del enunciado. Normal: las del motor. Grande: letra mayor, partiendo las líneas largas por palabras.
+ *  Fácil: además, una frase por línea. Devuelve { lineas, fs, lh } (lh = interlineado). */
+function enunciadoLineas(p, texto, ancho, grande, facil) {
+  let lineas = texto.split("\n");
+  if (!grande) return { lineas, fs: 0, lh: 16 };
+  const fs = facil ? 15 : 14;
+  if (facil) lineas = lineas.flatMap((l) => l.split(/(?<=[.:;?!])\s+/));
+  const partidas = [];
+  for (const l of lineas) {
+    let actual = "";
+    for (const pal of l.split(" ")) {
+      const prueba = actual ? actual + " " + pal : pal;
+      if (actual && p.ancho(prueba, "PR", fs) > ancho) { partidas.push(actual); actual = pal; } else actual = prueba;
+    }
+    partidas.push(actual);
+  }
+  return { lineas: partidas, fs, lh: fs * 1.4 };
+}
+
+function panel(p, act, rect, { bn, modo, clip, grande, facil }) {
   const [x, yB, w, h] = rect, yT = yB + h;
-  const lineas = act.enunciado.split("\n"), extra = 16 * (lineas.length - 1);
+  const en = enunciadoLineas(p, act.enunciado, w - 72, grande, facil);
+  const lineas = en.lineas, extra = en.lh * (lineas.length - 1);
   const [fill, borde] = bn ? ["#ffffff", "#8c8c8c"] : PALETA[act.color];
   p.rrect(x, yB, w, h, 14, { lw: 1, fill, stroke: borde });
   if (bn) p.circle(x + 24, yT - 22, 11, { lw: 1.4, fill: 1, stroke: INK });
   else p.circle(x + 24, yT - 22, 11, { fill: AZUL, stroke: null });
   p.text(x + 24, yT - 26, String(act.n), 11, { f: "PB", anchor: "middle", gris: bn ? INK : 1 });
-  let fs = 11.5;
+  let fs = en.fs || 11.5;
   while (lineas.some((t) => p.ancho(t, "PR", fs) > w - 59) && fs > 8) fs -= 0.5;
-  lineas.forEach((t, j) => p.text(x + 45, yT - 26 - j * 16, t, fs, { f: "PR" }));
+  lineas.forEach((t, j) => p.text(x + 45, yT - 26 - j * en.lh, t, fs, { f: "PR" }));
   // Encaje de la zona de página (como panel()): punto (X, Y) → (sc·X + e, sc·Y + fy), y hacia arriba.
   const z = render(act, modo), parte = act.tamano === "media" ? 0.5 : 1;
   const hi = (yT - 43 - extra) - (yB + 14), alto = ZONA.alto * parte, base = ZONA.yArriba - alto;
@@ -5625,15 +5649,22 @@ function panel(p, act, rect, { bn, modo, clip }) {
 }
 
 /** SVG de una página (pagina = { actividades: [...] } de la ficha). */
-function hoja(pagina, { titulo, nombre = "", bn = false, modo = "papel", uid = "h" } = {}) {
+function hoja(pagina, { titulo, nombre = "", bn = false, modo = "papel", uid = "h", grande = false, facil = false } = {}) {
+  grande = grande || facil;
   const acts = pagina.actividades;
   if (acts.length < 1 || acts.length > 2) throw new Error("Una página lleva 1 o 2 actividades.");
   const p = new Papel({ modo });
-  encabezado(p, titulo, nombre, bn);
+  encabezado(p, titulo, nombre, bn, grande);
   const rects = rectsPanel(acts.length);
-  acts.forEach((a, i) => panel(p, a, rects[i], { bn, modo, clip: `${uid}c${i}` }));
+  acts.forEach((a, i) => panel(p, a, rects[i], { bn, modo, clip: `${uid}c${i}`, grande, facil }));
   return `<svg xmlns="http://www.w3.org/2000/svg" class="hoja-svg" viewBox="0 0 ${f2(W)} ${f2(H)}" width="210mm" height="297mm">` +
     `<rect width="${f2(W)}" height="${f2(H)}" fill="#fff"/><g stroke-linecap="round" stroke-linejoin="round">${p.o.join("")}</g></svg>`;
+}
+
+/** Opciones de lectura de la ficha (`presentacion.letraGrande` / `lecturaFacil`). */
+function estiloLectura(ficha) {
+  const p = ficha.presentacion || {};
+  return { grande: !!p.letraGrande, facil: !!p.lecturaFacil };
 }
 
 /**
@@ -5647,11 +5678,11 @@ function hojas(ficha, { nombres = [], copias = 1, bn = false, modo = "papel" } =
   return quienes.map((nombre, i) => {
     const v = i % ficha.variantes;
     const pag = (v === 0 ? ficha.paginas : ficha.variantesDatos[v - 1].paginas)[0];
-    return { nombre, variante: v, svg: hoja(pag, { titulo: ficha.titulo, nombre, bn, modo, uid: `h${i}${modo[0]}` }) };
+    return { nombre, variante: v, svg: hoja(pag, { titulo: ficha.titulo, nombre, bn, modo, uid: `h${i}${modo[0]}`, ...estiloLectura(ficha) }) };
   });
 }
 
-Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get AZUL() { return AZUL; }, get PALETA() { return PALETA; }, get rectsPanel() { return rectsPanel; }, get hoja() { return hoja; }, get hojas() { return hojas; } }));
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get AZUL() { return AZUL; }, get PALETA() { return PALETA; }, get rectsPanel() { return rectsPanel; }, get hoja() { return hoja; }, get estiloLectura() { return estiloLectura; }, get hojas() { return hojas; } }));
 },
 "render/papel.js": (__exp) => {
 // Charta · lienzo de página para dibujar actividades (paso 2.3).
@@ -10662,7 +10693,7 @@ const CLAVES = { recientes: "charta:recientes", favoritos: "charta:favoritos" };
 function limpiar(c) {
   return {
     actividades: c.actividades.map((a) => ({ tipo: a.tipo, params: { ...a.params } })),
-    semilla: c.semilla | 0, titulo: c.titulo || "", variaciones: c.variaciones || "iguales", bn: !!c.bn,
+    semilla: c.semilla | 0, titulo: c.titulo || "", variaciones: c.variaciones || "iguales", bn: !!c.bn, grande: !!c.grande, facil: !!c.facil,
   };
 }
 const igualSinSemilla = (a, b) => JSON.stringify({ ...a, semilla: 0, nombre: 0, fecha: 0 }) === JSON.stringify({ ...b, semilla: 0, nombre: 0, fecha: 0 });

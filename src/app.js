@@ -3,7 +3,7 @@ import { CATALOGO } from "./nucleo/catalogo.js";
 import { generar, porDefecto, modelo, metadatosDe } from "./nucleo/ficha.js";
 import { erroresFicha, letraVariante, paginasVariante } from "./nucleo/lector.js";
 import { listaTipos } from "./tipos/index.js";
-import { hoja, hojas, PALETA } from "./render/hoja.js";
+import { hoja, hojas, estiloLectura, PALETA } from "./render/hoja.js";
 import { hayTipo } from "./nucleo/tipos.js";
 import { miniatura } from "./ui/navegacion.js";
 import { abrirSelector } from "./ui/selector.js";
@@ -144,7 +144,7 @@ function iniciar() {
         metadatos: metadatosDe(acts.map((a) => a.tipo)),
         titulo: $("titulo").value.trim() || undefined,
         variantes: numVariantes($("variaciones").value, total),
-        presentacion: { color: !$("bn").checked },
+        presentacion: { color: !$("bn").checked, ...($("grande").checked && { letraGrande: true }), ...($("facil").checked && { lecturaFacil: true }) },
       }, semilla);
       const bn = $("bn").checked;
       paginas = hojas(ficha, { nombres: ns, copias: total, bn });
@@ -152,7 +152,7 @@ function iniciar() {
       $("hojas").replaceChildren(...paginas.map((p) => el("div", {}, el("p", { className: "hoja-etq", textContent: etiqueta(p) }),
         Object.assign(el("div", { className: "hoja" }), { innerHTML: p.svg }))));
       // Solucionario: una hoja resuelta por variante (sin nombres).
-      const sol = Array.from({ length: ficha.variantes }, (_, v) => ({ svg: hoja(paginasVariante(ficha, v)[0], { titulo: ficha.titulo, bn, modo: "solucion", uid: `s${v}` }) }));
+      const sol = Array.from({ length: ficha.variantes }, (_, v) => ({ svg: hoja(paginasVariante(ficha, v)[0], { titulo: ficha.titulo, bn, modo: "solucion", uid: `s${v}`, ...estiloLectura(ficha) }) }));
       $("hojasSol").replaceChildren(...sol.map((p, v) => el("div", {}, el("p", { className: "hoja-etq", textContent: ficha.variantes > 1 ? `Variante ${letraVariante(v)}` : "Soluciones" }),
         Object.assign(el("div", { className: "hoja" }), { innerHTML: p.svg }))));
       $("info").textContent = `${paginas.length} página${paginas.length > 1 ? "s" : ""}` +
@@ -163,7 +163,7 @@ function iniciar() {
   $("anadir").onclick = () => abrirSelector({ tamano: "media", actual: editores[0].id,
     alElegir: (id) => { nuevoEditor(id); pintar(); } });
   $("acts").addEventListener("change", pintar);
-  for (const id of ["alumnos", "copias", "variaciones", "bn", "titulo"]) $(id).addEventListener("change", pintar);
+  for (const id of ["alumnos", "copias", "variaciones", "bn", "grande", "facil", "titulo"]) $(id).addEventListener("change", pintar);
   $("alumnos").addEventListener("input", contar);
   $("irPrevia").onclick = () => $("previa").scrollIntoView({ behavior: "smooth" });
   $("variante").onclick = () => { semilla++; pintar(); };
@@ -177,7 +177,7 @@ function iniciar() {
   const guardadas = crearGuardadas(almacen);
   let pestana = "favoritos";
   const composicion = () => ({ actividades: editores.map((e) => e.leer()), semilla, titulo: $("titulo").value.trim(),
-    variaciones: $("variaciones").value, bn: $("bn").checked });
+    variaciones: $("variaciones").value, bn: $("bn").checked, grande: $("grande").checked, facil: $("facil").checked });
   function marcarFavorito() {
     try { const f = guardadas.esFavorito(composicion()); $("favorito").textContent = f ? "★ Favorita" : "☆ Favorita"; $("favorito").classList.toggle("on", f); } catch {}
   }
@@ -186,7 +186,7 @@ function iniciar() {
     for (const a of c.actividades) { const e = editorActividad(a.tipo, { tamano, alCambiar: cambiado }); editores.push(e); }
     recolocar();
     c.actividades.forEach((a, i) => editores[i].poner(a.tipo, a.params));
-    semilla = c.semilla || 1; $("titulo").value = c.titulo || ""; $("variaciones").value = c.variaciones || "iguales"; $("bn").checked = !!c.bn;
+    semilla = c.semilla || 1; $("titulo").value = c.titulo || ""; $("variaciones").value = c.variaciones || "iguales"; $("bn").checked = !!c.bn; $("grande").checked = !!c.grande; $("facil").checked = !!c.facil;
     pintar(); $("acts").scrollIntoView({ behavior: "smooth" });
   }
   function pintarGuardadas() {

@@ -8,7 +8,7 @@ const CLAVES = { recientes: "charta:recientes", favoritos: "charta:favoritos" };
 export function limpiar(c) {
   return {
     actividades: c.actividades.map((a) => ({ tipo: a.tipo, params: { ...a.params } })),
-    semilla: c.semilla | 0, titulo: c.titulo || "", variaciones: c.variaciones || "iguales", bn: !!c.bn,
+    semilla: c.semilla | 0, titulo: c.titulo || "", variaciones: c.variaciones || "iguales", bn: !!c.bn, grande: !!c.grande, facil: !!c.facil,
   };
 }
 const igualSinSemilla = (a, b) => JSON.stringify({ ...a, semilla: 0, nombre: 0, fecha: 0 }) === JSON.stringify({ ...b, semilla: 0, nombre: 0, fecha: 0 });

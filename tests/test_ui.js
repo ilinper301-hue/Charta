@@ -122,3 +122,23 @@ import { metadatosDe } from "../src/nucleo/ficha.js";
   assert.deepEqual(f.metadatos, uno);
   console.log("test_ui: metadatos OK");
 }
+
+// Fase 6 · letra grande y lectura fácil: se dibujan todos los modelos, la cabecera crece y los enunciados caben.
+import { hoja, estiloLectura } from "../src/render/hoja.js";
+{
+  let n = 0;
+  for (const m of CATALOGO.modelos) {
+    const f = generar({ actividades: [{ tipo: m.id }], presentacion: { lecturaFacil: true } }, 5);
+    assert.deepEqual(estiloLectura(f), { grande: false, facil: true });
+    const normal = hoja(f.paginas[0], { titulo: f.titulo });
+    for (const est of [{ grande: true }, { facil: true }]) {
+      const g = hoja(f.paginas[0], { titulo: f.titulo, ...est });
+      assert.ok(g.startsWith("<svg") && !/NaN|undefined/.test(g), `${m.id}: hoja grande`);
+      assert.notEqual(g, normal, `${m.id}: la letra grande cambia la hoja`);
+    }
+    n++;
+  }
+  const f = generar({ actividades: [{ tipo: "sumar.h20" }, { tipo: "restar.r20" }], presentacion: { letraGrande: true } }, 2);
+  assert.ok(hoja(f.paginas[0], { titulo: f.titulo, ...estiloLectura(f) }).includes("font-size"));
+  console.log(`test_ui: letra grande y lectura fácil OK (${n} modelos)`);
+}

@@ -1,6 +1,7 @@
 // Charta · paso 2.4 · página A4 completa en SVG: Nombre (impreso o línea en blanco), Fecha, título
 // y 1 o 2 paneles con su actividad. Port de encabezado(), panel() y pagina() del motor.
-// opciones: { titulo, nombre = "", bn = false (blanco y negro / ahorro de tinta), modo = "papel" | "solucion", uid }
+// opciones: { titulo, nombre = "", bn = false (blanco y negro / ahorro de tinta), modo = "papel" | "solucion", uid,
+//   grande = false (letra grande en cabecera y enunciado), facil = false (lectura fácil: letra grande + una frase por línea) }
 import { Papel, W, H, M, INK, ZONA } from "./papel.js";
 import { render } from "./actividad.js";
 
@@ -22,33 +23,54 @@ function tituloMotor(t) {
   return k < 0 ? s : s.slice(0, k) + s[k].toUpperCase() + s.slice(k + 1);
 }
 
-function encabezado(p, titulo, nombre, bn) {
-  p.text(34, H - 46, "Nombre:", 10.5, { f: "PR" }); p.text(360, H - 46, "Fecha:", 10.5, { f: "PR" });
-  const x0 = 34 + p.ancho("Nombre: ", "PR", 10.5);
+function encabezado(p, titulo, nombre, bn, grande) {
+  const fe = grande ? 13 : 10.5;
+  p.text(34, H - 46, "Nombre:", fe, { f: "PR" }); p.text(360, H - 46, "Fecha:", fe, { f: "PR" });
+  const x0 = 34 + p.ancho("Nombre: ", "PR", fe);
   p.line(x0, H - 48, 332, H - 48, { lw: 0.8, gris: 0 });
-  p.line(360 + p.ancho("Fecha: ", "PR", 10.5), H - 48, 533, H - 48, { lw: 0.8, gris: 0 });
+  p.line(360 + p.ancho("Fecha: ", "PR", fe), H - 48, 533, H - 48, { lw: 0.8, gris: 0 });
   if (nombre) {
-    let fs = 12;
+    let fs = grande ? 14 : 12;
     while (p.ancho(nombre, "PM", fs) > 332 - x0 - 8 && fs > 7) fs -= 0.5;
     p.text(x0 + 4, H - 45, nombre, fs, { f: "PM" });
   }
   const tt = tituloMotor(titulo);
-  let fs = 16;
+  let fs = grande ? 20 : 16;
   while (p.ancho(tt, "PB", fs) > W - 80 && fs > 10) fs -= 0.5;
   p.text(W / 2, H - 86, tt, fs, { f: "PB", anchor: "middle", gris: bn ? INK : AZUL });
 }
 
-function panel(p, act, rect, { bn, modo, clip }) {
+/** Líneas del enunciado. Normal: las del motor. Grande: letra mayor, partiendo las líneas largas por palabras.
+ *  Fácil: además, una frase por línea. Devuelve { lineas, fs, lh } (lh = interlineado). */
+function enunciadoLineas(p, texto, ancho, grande, facil) {
+  let lineas = texto.split("\n");
+  if (!grande) return { lineas, fs: 0, lh: 16 };
+  const fs = facil ? 15 : 14;
+  if (facil) lineas = lineas.flatMap((l) => l.split(/(?<=[.:;?!])\s+/));
+  const partidas = [];
+  for (const l of lineas) {
+    let actual = "";
+    for (const pal of l.split(" ")) {
+      const prueba = actual ? actual + " " + pal : pal;
+      if (actual && p.ancho(prueba, "PR", fs) > ancho) { partidas.push(actual); actual = pal; } else actual = prueba;
+    }
+    partidas.push(actual);
+  }
+  return { lineas: partidas, fs, lh: fs * 1.4 };
+}
+
+function panel(p, act, rect, { bn, modo, clip, grande, facil }) {
   const [x, yB, w, h] = rect, yT = yB + h;
-  const lineas = act.enunciado.split("\n"), extra = 16 * (lineas.length - 1);
+  const en = enunciadoLineas(p, act.enunciado, w - 72, grande, facil);
+  const lineas = en.lineas, extra = en.lh * (lineas.length - 1);
   const [fill, borde] = bn ? ["#ffffff", "#8c8c8c"] : PALETA[act.color];
   p.rrect(x, yB, w, h, 14, { lw: 1, fill, stroke: borde });
   if (bn) p.circle(x + 24, yT - 22, 11, { lw: 1.4, fill: 1, stroke: INK });
   else p.circle(x + 24, yT - 22, 11, { fill: AZUL, stroke: null });
   p.text(x + 24, yT - 26, String(act.n), 11, { f: "PB", anchor: "middle", gris: bn ? INK : 1 });
-  let fs = 11.5;
+  let fs = en.fs || 11.5;
   while (lineas.some((t) => p.ancho(t, "PR", fs) > w - 59) && fs > 8) fs -= 0.5;
-  lineas.forEach((t, j) => p.text(x + 45, yT - 26 - j * 16, t, fs, { f: "PR" }));
+  lineas.forEach((t, j) => p.text(x + 45, yT - 26 - j * en.lh, t, fs, { f: "PR" }));
   // Encaje de la zona de página (como panel()): punto (X, Y) → (sc·X + e, sc·Y + fy), y hacia arriba.
   const z = render(act, modo), parte = act.tamano === "media" ? 0.5 : 1;
   const hi = (yT - 43 - extra) - (yB + 14), alto = ZONA.alto * parte, base = ZONA.yArriba - alto;
@@ -59,15 +81,22 @@ function panel(p, act, rect, { bn, modo, clip }) {
 }
 
 /** SVG de una página (pagina = { actividades: [...] } de la ficha). */
-export function hoja(pagina, { titulo, nombre = "", bn = false, modo = "papel", uid = "h" } = {}) {
+export function hoja(pagina, { titulo, nombre = "", bn = false, modo = "papel", uid = "h", grande = false, facil = false } = {}) {
+  grande = grande || facil;
   const acts = pagina.actividades;
   if (acts.length < 1 || acts.length > 2) throw new Error("Una página lleva 1 o 2 actividades.");
   const p = new Papel({ modo });
-  encabezado(p, titulo, nombre, bn);
+  encabezado(p, titulo, nombre, bn, grande);
   const rects = rectsPanel(acts.length);
-  acts.forEach((a, i) => panel(p, a, rects[i], { bn, modo, clip: `${uid}c${i}` }));
+  acts.forEach((a, i) => panel(p, a, rects[i], { bn, modo, clip: `${uid}c${i}`, grande, facil }));
   return `<svg xmlns="http://www.w3.org/2000/svg" class="hoja-svg" viewBox="0 0 ${f2(W)} ${f2(H)}" width="210mm" height="297mm">` +
     `<rect width="${f2(W)}" height="${f2(H)}" fill="#fff"/><g stroke-linecap="round" stroke-linejoin="round">${p.o.join("")}</g></svg>`;
+}
+
+/** Opciones de lectura de la ficha (`presentacion.letraGrande` / `lecturaFacil`). */
+export function estiloLectura(ficha) {
+  const p = ficha.presentacion || {};
+  return { grande: !!p.letraGrande, facil: !!p.lecturaFacil };
 }
 
 /**
@@ -81,6 +110,6 @@ export function hojas(ficha, { nombres = [], copias = 1, bn = false, modo = "pap
   return quienes.map((nombre, i) => {
     const v = i % ficha.variantes;
     const pag = (v === 0 ? ficha.paginas : ficha.variantesDatos[v - 1].paginas)[0];
-    return { nombre, variante: v, svg: hoja(pag, { titulo: ficha.titulo, nombre, bn, modo, uid: `h${i}${modo[0]}` }) };
+    return { nombre, variante: v, svg: hoja(pag, { titulo: ficha.titulo, nombre, bn, modo, uid: `h${i}${modo[0]}`, ...estiloLectura(ficha) }) };
   });
 }
