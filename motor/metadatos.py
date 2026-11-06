@@ -156,6 +156,12 @@ META = {
     "frase.completa": (2, 10, "lengua frases completar palabras"),
     "frase.verdad": (1, 8, "lengua frases comprensión verdadero falso rodear"),
     "frase.puntua": (2, 10, "lengua frases mayúsculas punto ortografía"),
+    "escritura.trazos": (1, 8, "lengua escritura caligrafía grafomotricidad trazos pauta"),
+    "escritura.letra": (1, 10, "lengua escritura caligrafía letras repasar pauta"),
+    "escritura.palabras": (2, 12, "lengua escritura caligrafía palabras copiar pauta"),
+    "escritura.frase": (2, 12, "lengua escritura caligrafía frases copiar mayúscula punto pauta"),
+    "escritura.dictado": (2, 15, "lengua escritura dictado palabras frases pauta"),
+    "escritura.libre": (3, 15, "lengua escritura expresión_escrita frases libre pauta"),
 }
 
 def metadatos(id):

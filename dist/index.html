@@ -2284,6 +2284,54 @@ const palabra = (p) => LEXICO.find((e) => e.p === p) || null;
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get datosPalabra() { return datosPalabra; }, get buscar() { return buscar; }, get elegirPalabras() { return elegirPalabras; }, get CAMPOS_LEXICOS() { return CAMPOS_LEXICOS; }, get palabra() { return palabra; } }));
 },
+"lengua/pauta.js": (__exp) => {
+// Charta · Lengua · pauta Lamela (doble pauta) en SVG (lote 4 de LENGUA_1.md).
+// Cada renglón: dos líneas que marcan el cuerpo de la letra (la de abajo, la base, más marcada).
+// Las astas y los rabos (0,8 del cuerpo) ocupan el espacio entre renglones; línea fina opcional en medio.
+// Medidas REALES en el papel impreso: p.mm() compensa la escala del panel (ver Papel.mm).
+//   Renglón = 3 cuerpos de alto: 1 por encima (asta 0,8 + aire), el cuerpo y 1 por debajo (rabo 0,8 + aire).
+//   Con 5 mm: 15 mm de base a base. En unidades de la pauta (cuerpo = 1): base y = 0, línea de arriba y = 1.
+
+/** Tamaños de cuerpo admitidos, en mm (decidido el 5-11-2026: 5 por defecto). */
+const TAMANOS_PAUTA = [5, 4, 3.5];
+const PAUTA_POR_DEFECTO = 5;
+/** Proporciones en cuerpos: asta, rabo y alto del renglón (de base a base). */
+const ASTA = 0.8;
+const RABO = 0.8;
+const PASO = 3;
+
+/** Cuerpo (c) y paso de la pauta de `mm` milímetros en unidades del papel. */
+function medidasPauta(p, mm = PAUTA_POR_DEFECTO) {
+  if (!TAMANOS_PAUTA.includes(mm)) throw new Error(`Pauta de ${mm} mm no admitida (${TAMANOS_PAUTA.join(", ")}).`);
+  const c = p.mm(mm);
+  return { c, paso: PASO * c };
+}
+
+/** Renglones que caben en un alto (unidades del papel). */
+function cabenRenglones(p, alto, mm = PAUTA_POR_DEFECTO) {
+  return Math.max(0, Math.floor(alto / medidasPauta(p, mm).paso + 1e-9));
+}
+
+/**
+ * Dibuja n renglones de x0 a x1 empezando en yArriba (borde superior del primer renglón, astas incluidas).
+ * Devuelve las bases (y de cada renglón) y el cuerpo c, para escribir encima con trazos.js.
+ * guia: línea fina discontinua entre renglones (marca hasta dónde llegan astas y rabos).
+ */
+function renglones(p, x0, x1, yArriba, n, { mm = PAUTA_POR_DEFECTO, guia = false } = {}) {
+  const { c, paso } = medidasPauta(p, mm), bases = [];
+  const lwBase = p.mm(0.3), lwArriba = p.mm(0.18);
+  for (let k = 0; k < n; k++) {
+    const base = yArriba - k * paso - 2 * c;
+    bases.push(base);
+    p.line(x0, base + c, x1, base + c, { lw: lwArriba, gris: 0.62 });
+    p.line(x0, base, x1, base, { lw: lwBase, gris: 0.35 });
+    if (guia && k < n - 1) p.line(x0, base - c, x1, base - c, { lw: p.mm(0.12), gris: 0.75, dash: [p.mm(1.2), p.mm(1.2)] });
+  }
+  return { bases, c, paso };
+}
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get TAMANOS_PAUTA() { return TAMANOS_PAUTA; }, get PAUTA_POR_DEFECTO() { return PAUTA_POR_DEFECTO; }, get ASTA() { return ASTA; }, get RABO() { return RABO; }, get PASO() { return PASO; }, get medidasPauta() { return medidasPauta; }, get cabenRenglones() { return cabenRenglones; }, get renglones() { return renglones; } }));
+},
 "lengua/reglas.js": (__exp) => {
 // Charta · Lengua · reglas del español para 1.º (lote 0 de LENGUA_1.md). Sin dependencias ni DOM.
 // Silabeo, tipo de sílaba, sílaba tónica, rima, plural, artículo, letras vistas y huecos de ortografía.
@@ -2472,6 +2520,215 @@ function huecosOrto(palabra, regla) {
 const REGLAS_ORTO = ["mpb", "r", "cqu", "ggu", "cz"];
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get sinTildes() { return sinTildes; }, get silabas() { return silabas; }, get tipoSilaba() { return tipoSilaba; }, get TIPOS_SILABA() { return TIPOS_SILABA; }, get cabeTipo() { return cabeTipo; }, get tonica() { return tonica; }, get acentuacion() { return acentuacion; }, get rima() { return rima; }, get riman() { return riman; }, get plural() { return plural; }, get articulo() { return articulo; }, get letras() { return letras; }, get ABECEDARIO() { return ABECEDARIO; }, get soloLetras() { return soloLetras; }, get llevaLetra() { return llevaLetra; }, get huecosOrto() { return huecosOrto; }, get REGLAS_ORTO() { return REGLAS_ORTO; } }));
+},
+"lengua/trazos.js": (__exp) => {
+// Charta · Lengua · letras de trazo (una sola línea) para la pauta Lamela (lote 4 de LENGUA_1.md).
+// Formas de Fredoka (a y g de un piso), en unidades de la pauta: base y = 0, cuerpo y = 1, asta hasta 1,8, rabo hasta −0,8.
+// Cada letra: { w (ancho del dibujo), t: [trazo…] } en el ORDEN en que se escribe; cada trazo: { d: [segmento…], lado }.
+//   Segmentos: ["M", x, y] · ["L", x, y] · ["A", cx, cy, rx, ry, a0, a1] (arco de elipse en grados, y hacia arriba;
+//   a1 > a0 = sentido contrario a las agujas del reloj). El trazo empieza en su primer punto.
+//   lado: +1 / −1, a qué lado del trazo va la flecha numerada (por defecto +1 = a la derecha del sentido de la marcha).
+//   en: dónde va la flecha, en fracción del PRIMER segmento (0 = al empezar; por defecto 0).
+// Pinta en un Papel como «modelo» (negro + punto verde de inicio + flechas numeradas), «repaso» (gris claro) o «punteado».
+
+/** Separación entre letras, en cuerpos. */
+const ESPACIO_LETRA = 0.32;
+const VERDE_INICIO = "#2E7D32";
+const COLOR_FLECHA = "#1F4E79";
+
+const BOLA = (desde = 40) => ["A", 0.45, 0.5, 0.45, 0.5, desde, desde + 360];   // panza de a, g, d, q: empieza arriba a la derecha y gira a la izquierda
+
+// Ayudantes de dibujo (todo en unidades de la pauta).
+const pl = (...pts) => pts.map(([x, y], i) => [i ? "L" : "M", x, y]);                      // polilínea
+const ar = (cx, cy, rx, ry, a0, a1) => ["A", cx, cy, rx, ry, a0, a1];                       // arco de elipse
+const T = (d, extra = {}) => ({ d, ...extra });
+const tallo = (x, y0, y1, extra) => T(pl([x, y0], [x, y1]), extra);                         // trazo vertical
+const barra = (x0, x1, y, extra) => T(pl([x0, y], [x1, y]), extra);                         // trazo horizontal
+const punto = (x, y) => T([ar(x, y, 0.035, 0.035, 0, 360)]);                                // punto (círculo diminuto; con el trazo grueso sale relleno)
+const ARCO_N = (x0, rx, y = 0.55, ry = 0.45) => ar(x0 + rx, y, rx, ry, 180, 0);             // arco de n, h, m: de la izquierda por arriba a la derecha
+const BOLA_B = (x0 = 0.1) => ar(x0 + 0.45, 0.5, 0.45, 0.5, 180, -180);                      // panza de b y p: empieza en el asta y gira a la derecha
+const CAP = 1.8;                                                                             // altura de mayúsculas y dígitos
+
+const LETRAS_TRAZO = {
+  a: { w: 0.9, t: [{ d: [BOLA()], en: 50 / 360 }, { d: [["M", 0.9, 1], ["L", 0.9, 0]], lado: -1, en: 0.45 }] },
+  l: { w: 0.2, t: [{ d: [["M", 0.1, 1.8], ["L", 0.1, 0]], en: 0.25 }] },
+  g: { w: 0.9, t: [{ d: [BOLA()], en: 50 / 360 }, { d: [["M", 0.9, 1], ["L", 0.9, -0.4], ["A", 0.5, -0.4, 0.4, 0.4, 0, -165]], lado: -1, en: 0.3 }] },
+  // ---- minúsculas
+  b: { w: 1, t: [tallo(0.1, 1.8, 0, { en: 0.25 }), T([BOLA_B()], { en: 0.1 })] },
+  c: { w: 0.85, t: [T([ar(0.45, 0.5, 0.45, 0.5, 45, 315)], { en: 0.1 })] },
+  d: { w: 0.9, t: [{ d: [BOLA()], en: 50 / 360 }, tallo(0.9, 1.8, 0, { lado: -1, en: 0.25 })] },
+  e: { w: 0.9, t: [T([...pl([0, 0.5], [0.9, 0.5]), ar(0.45, 0.5, 0.45, 0.5, 0, 320)], { lado: -1 })] },
+  f: { w: 0.85, t: [T([ar(0.55, 1.5, 0.25, 0.3, 20, 180), ["L", 0.3, 0]], { lado: -1, en: 0.2 }), barra(0, 0.6, 1)] },
+  h: { w: 1, t: [tallo(0.1, 1.8, 0, { en: 0.25 }), T([ARCO_N(0.1, 0.4), ["L", 0.9, 0]], { en: 0.35 })] },
+  i: { w: 0.3, t: [tallo(0.15, 1, 0, { en: 0.25 }), punto(0.15, 1.4)] },
+  j: { w: 0.6, t: [T([...pl([0.5, 1], [0.5, -0.4]), ar(0.2, -0.4, 0.3, 0.4, 0, -140)], { lado: -1, en: 0.3 }), punto(0.5, 1.4)] },
+  k: { w: 0.9, t: [tallo(0.1, 1.8, 0, { en: 0.25 }), T(pl([0.8, 1], [0.1, 0.35], [0.85, 0]), { lado: -1 })] },
+  m: { w: 1.2, t: [tallo(0.1, 1, 0, { en: 0.25 }), T([ARCO_N(0.1, 0.25), ["L", 0.6, 0]], { en: 0.3 }),
+    T([ARCO_N(0.6, 0.25), ["L", 1.1, 0]], { en: 0.3 })] },
+  n: { w: 1, t: [tallo(0.1, 1, 0, { en: 0.25 }), T([ARCO_N(0.1, 0.4), ["L", 0.9, 0]], { en: 0.35 })] },
+  o: { w: 0.9, t: [T([ar(0.45, 0.5, 0.45, 0.5, 90, 450)], { en: 0.1 })] },
+  p: { w: 1, t: [tallo(0.1, 1, -0.8, { en: 0.25 }), T([BOLA_B()], { en: 0.1 })] },
+  q: { w: 0.9, t: [{ d: [BOLA()], en: 50 / 360 }, tallo(0.9, 1, -0.8, { lado: -1, en: 0.25 })] },
+  r: { w: 0.7, t: [tallo(0.1, 1, 0, { en: 0.25 }), T([ar(0.45, 0.55, 0.35, 0.45, 180, 70)], { en: 0.35 })] },
+  s: { w: 0.8, t: [T([ar(0.42, 0.75, 0.35, 0.25, 30, 270), ar(0.42, 0.25, 0.35, 0.25, 90, -150)], { en: 0.1 })] },
+  t: { w: 0.65, t: [T([...pl([0.3, 1.45], [0.3, 0.25]), ar(0.55, 0.25, 0.25, 0.25, 180, 290)], { en: 0.15 }), barra(0, 0.6, 1)] },
+  u: { w: 1, t: [T([...pl([0.1, 1], [0.1, 0.4]), ar(0.5, 0.4, 0.4, 0.4, 180, 360)], { lado: -1, en: 0.3 }), tallo(0.9, 1, 0, { lado: -1, en: 0.25 })] },
+  v: { w: 0.9, t: [T(pl([0.05, 1], [0.45, 0], [0.85, 1]))] },
+  w: { w: 1.1, t: [T(pl([0.05, 1], [0.3, 0], [0.55, 1], [0.8, 0], [1.05, 1]))] },
+  x: { w: 0.8, t: [T(pl([0.05, 1], [0.75, 0])), T(pl([0.75, 1], [0.05, 0]), { lado: -1 })] },
+  y: { w: 0.9, t: [T(pl([0.05, 1], [0.49, 0])), T(pl([0.85, 1], [0.2, -0.8]), { lado: -1 })] },
+  z: { w: 0.85, t: [T(pl([0.05, 1], [0.8, 1], [0.05, 0], [0.8, 0]), { lado: -1 })] },
+  // ---- mayúsculas
+  A: { w: 1.1, t: [T(pl([0.05, 0], [0.55, CAP], [1.05, 0]), { lado: -1 }), barra(0.25, 0.85, 0.6)] },
+  B: { w: 1.1, t: [tallo(0.1, CAP, 0, { en: 0.25 }), T([...pl([0.1, CAP], [0.5, CAP]), ar(0.5, 1.35, 0.4, 0.45, 90, -90), ["L", 0.1, 0.9]], { lado: -1 }),
+    T([...pl([0.1, 0.9], [0.55, 0.9]), ar(0.55, 0.45, 0.45, 0.45, 90, -90), ["L", 0.1, 0]], { lado: -1 })] },
+  C: { w: 1.1, t: [T([ar(0.55, 0.9, 0.5, 0.9, 45, 315)], { en: 0.1 })] },
+  D: { w: 1.1, t: [tallo(0.1, CAP, 0, { en: 0.25 }), T([...pl([0.1, CAP], [0.4, CAP]), ar(0.4, 0.9, 0.6, 0.9, 90, -90), ["L", 0.1, 0]], { lado: -1 })] },
+  E: { w: 0.95, t: [T(pl([0.85, CAP], [0.1, CAP], [0.1, 0], [0.85, 0]), { lado: -1 }), barra(0.1, 0.75, 0.9)] },
+  F: { w: 0.95, t: [T(pl([0.85, CAP], [0.1, CAP], [0.1, 0]), { lado: -1 }), barra(0.1, 0.7, 0.95)] },
+  G: { w: 1.1, t: [T([ar(0.55, 0.9, 0.5, 0.9, 45, 360), ["L", 0.6, 0.9]], { en: 0.1 })] },
+  H: { w: 1, t: [tallo(0.1, CAP, 0, { en: 0.25 }), tallo(0.9, CAP, 0, { lado: -1, en: 0.25 }), barra(0.1, 0.9, 0.9)] },
+  I: { w: 0.8, t: [tallo(0.4, CAP, 0, { en: 0.25 }), barra(0.15, 0.65, CAP), barra(0.15, 0.65, 0)] },
+  J: { w: 0.85, t: [T([...pl([0.8, CAP], [0.8, 0.4]), ar(0.45, 0.4, 0.35, 0.4, 0, -150)], { lado: -1, en: 0.2 })] },
+  K: { w: 1.05, t: [tallo(0.1, CAP, 0, { en: 0.25 }), T(pl([0.9, CAP], [0.1, 0.75]), { lado: -1 }), T(pl([0.35, 1.07], [0.95, 0]))] },
+  L: { w: 0.9, t: [T(pl([0.1, CAP], [0.1, 0], [0.8, 0]), { en: 0.25 })] },
+  M: { w: 1.2, t: [T(pl([0.1, 0], [0.1, CAP], [0.6, 0.5], [1.1, CAP], [1.1, 0]), { lado: -1, en: 0.25 })] },
+  N: { w: 1, t: [T(pl([0.1, 0], [0.1, CAP], [0.9, 0], [0.9, CAP]), { lado: -1, en: 0.25 })] },
+  O: { w: 1.1, t: [T([ar(0.55, 0.9, 0.5, 0.9, 90, 450)], { en: 0.1 })] },
+  P: { w: 1, t: [tallo(0.1, CAP, 0, { en: 0.25 }), T([...pl([0.1, CAP], [0.45, CAP]), ar(0.45, 1.3, 0.45, 0.5, 90, -90), ["L", 0.1, 0.8]], { lado: -1 })] },
+  Q: { w: 1.1, t: [T([ar(0.55, 0.9, 0.5, 0.9, 90, 450)], { en: 0.1 }), T(pl([0.65, 0.45], [1.05, -0.25]))] },
+  R: { w: 1, t: [tallo(0.1, CAP, 0, { en: 0.25 }), T([...pl([0.1, CAP], [0.45, CAP]), ar(0.45, 1.3, 0.45, 0.5, 90, -90), ["L", 0.1, 0.8]], { lado: -1 }), T(pl([0.4, 0.8], [0.95, 0]))] },
+  S: { w: 1, t: [T([ar(0.5, 1.35, 0.4, 0.45, 30, 270), ar(0.5, 0.45, 0.4, 0.45, 90, -150)], { en: 0.1 })] },
+  T: { w: 1, t: [barra(0.05, 0.95, CAP), tallo(0.5, CAP, 0, { en: 0.25 })] },
+  U: { w: 1, t: [T([...pl([0.1, CAP], [0.1, 0.6]), ar(0.5, 0.6, 0.4, 0.6, 180, 360), ["L", 0.9, CAP]], { lado: -1, en: 0.2 })] },
+  V: { w: 1.1, t: [T(pl([0.05, CAP], [0.55, 0], [1.05, CAP]))] },
+  W: { w: 1.3, t: [T(pl([0.05, CAP], [0.35, 0], [0.65, CAP], [0.95, 0], [1.25, CAP]))] },
+  X: { w: 1, t: [T(pl([0.05, CAP], [0.95, 0])), T(pl([0.95, CAP], [0.05, 0]), { lado: -1 })] },
+  Y: { w: 1, t: [T(pl([0.05, CAP], [0.5, 0.9])), T(pl([0.95, CAP], [0.5, 0.9], [0.5, 0]), { lado: -1 })] },
+  Z: { w: 1, t: [T(pl([0.1, CAP], [0.9, CAP], [0.1, 0], [0.9, 0]), { lado: -1 })] },
+  // ---- dígitos
+  0: { w: 0.9, t: [T([ar(0.45, 0.9, 0.4, 0.9, 90, 450)], { en: 0.1 })] },
+  1: { w: 0.7, t: [T(pl([0.15, 1.4], [0.5, CAP], [0.5, 0]), { lado: -1 })] },
+  2: { w: 1, t: [T([ar(0.5, 1.35, 0.4, 0.45, 180, -35), ["L", 0.1, 0], ["L", 0.95, 0]], { en: 0.1 })] },
+  3: { w: 1, t: [T([ar(0.5, 1.35, 0.38, 0.45, 150, -90), ar(0.5, 0.45, 0.42, 0.45, 90, -150)], { en: 0.1 })] },
+  4: { w: 1, t: [T(pl([0.7, CAP], [0.05, 0.55], [0.95, 0.55]), { lado: -1 }), tallo(0.7, CAP, 0)] },
+  5: { w: 1, t: [T([...pl([0.85, CAP], [0.2, CAP], [0.15, 0.9]), ar(0.5, 0.5, 0.4, 0.5, 150, -150)], { lado: -1 })] },
+  6: { w: 1, t: [T([ar(0.9, 0.9, 0.8, 0.9, 100, 180), ["L", 0.1, 0.5], ar(0.5, 0.5, 0.4, 0.5, 180, 540)], { lado: -1 })] },
+  7: { w: 1, t: [T(pl([0.1, CAP], [0.9, CAP], [0.35, 0]), { lado: -1 })] },
+  8: { w: 1, t: [T([ar(0.5, 1.35, 0.35, 0.45, 90, 270), ar(0.5, 0.45, 0.42, 0.45, 90, -270), ar(0.5, 1.35, 0.35, 0.45, 270, 450)], { en: 0.1 })] },
+  9: { w: 1, t: [T([ar(0.5, 1.3, 0.4, 0.5, 0, 360), ["L", 0.9, 0.9], ar(0.1, 0.9, 0.8, 0.9, 0, -80)], { lado: -1, en: 0.1 })] },
+  // ---- puntuación (sobre la base)
+  ".": { w: 0.25, t: [punto(0.12, 0.08)] },
+  ",": { w: 0.25, t: [T(pl([0.15, 0.12], [0.05, -0.25]))] },
+};
+
+/** Adornos (tilde, virgulilla, diéresis) como trazos propios, centrados en cx a la altura y. */
+const ADORNOS = {
+  tilde: (cx, y) => [T(pl([cx - 0.1, y - 0.15], [cx + 0.12, y + 0.15]))],
+  tilde_n: (cx, y) => [T([ar(cx - 0.15, y, 0.15, 0.14, 180, 0), ar(cx + 0.15, y, 0.15, 0.14, 180, 360)])],
+  dieresis: (cx, y) => [punto(cx - 0.17, y), punto(cx + 0.17, y)],
+};
+/** Letra con adorno: reutiliza los trazos de la letra base (sin copiar datos) y añade el adorno al final. quitarPunto: la «i» sin punto. */
+function conAdorno(base, tipo, may, { quitarPunto = false } = {}) {
+  const B = LETRAS_TRAZO[base], y = { tilde: may ? 2.13 : 1.5, tilde_n: may ? 2.15 : 1.45, dieresis: may ? 2.1 : 1.4 }[tipo];
+  return { w: B.w, ador: true, t: [...(quitarPunto ? B.t.slice(0, 1) : B.t), ...ADORNOS[tipo](B.w / 2, y)] };
+}
+Object.assign(LETRAS_TRAZO, {
+  "á": conAdorno("a", "tilde"), "é": conAdorno("e", "tilde"), "í": conAdorno("i", "tilde", false, { quitarPunto: true }),
+  "ó": conAdorno("o", "tilde"), "ú": conAdorno("u", "tilde"), "ü": conAdorno("u", "dieresis"), "ñ": conAdorno("n", "tilde_n"),
+  "Á": conAdorno("A", "tilde", true), "É": conAdorno("E", "tilde", true), "Í": conAdorno("I", "tilde", true),
+  "Ó": conAdorno("O", "tilde", true), "Ú": conAdorno("U", "tilde", true), "Ü": conAdorno("U", "dieresis", true), "Ñ": conAdorno("N", "tilde_n", true),
+});
+
+const rad = (g) => (g * Math.PI) / 180;
+const enArco = (cx, cy, rx, ry, a) => [cx + rx * Math.cos(rad(a)), cy + ry * Math.sin(rad(a))];
+
+/** Trazo → { ini: [x, y], dir: [dx, dy] (unitario), flecha: { p, d } (dónde y hacia dónde va la flecha), cmds } en unidades de la pauta (cmds para Papel.path, ya en y hacia arriba). */
+function trazoACurvas(trazo) {
+  const cmds = []; let ini = null, dir = null, pos = null, flecha = null;
+  const f = trazo.en ?? 0;
+  const empezar = (x, y) => { if (!pos) { ini = [x, y]; cmds.push(["M", x, y]); } else if (Math.hypot(x - pos[0], y - pos[1]) > 1e-6) cmds.push(["L", x, y]); };
+  for (const s of trazo.d) {
+    if (s[0] === "M") { if (pos) throw new Error("Un trazo solo tiene un «M» (al principio)."); empezar(s[1], s[2]); pos = [s[1], s[2]]; }
+    else if (s[0] === "L") {
+      if (!pos) throw new Error("El trazo empieza con «M» o «A».");
+      if (!dir) { dir = [s[1] - pos[0], s[2] - pos[1]]; flecha = { p: [pos[0] + f * dir[0], pos[1] + f * dir[1]], d: dir }; }
+      cmds.push(["L", s[1], s[2]]); pos = [s[1], s[2]];
+    } else if (s[0] === "A") {
+      const [, cx, cy, rx, ry, a0, a1] = s, sg = Math.sign(a1 - a0);
+      empezar(...enArco(cx, cy, rx, ry, a0));
+      if (!dir) {
+        dir = [-rx * Math.sin(rad(a0)) * sg, ry * Math.cos(rad(a0)) * sg];
+        const af = a0 + f * (a1 - a0);
+        flecha = { p: enArco(cx, cy, rx, ry, af), d: [-rx * Math.sin(rad(af)) * sg, ry * Math.cos(rad(af)) * sg] };
+      }
+      const n = Math.max(1, Math.ceil(Math.abs(a1 - a0) / 90)), da = (a1 - a0) / n, k = (4 / 3) * Math.tan(rad(da) / 4);
+      for (let i = 0; i < n; i++) {
+        const t0 = rad(a0 + i * da), t1 = rad(a0 + (i + 1) * da);
+        const [x0, y0] = [cx + rx * Math.cos(t0), cy + ry * Math.sin(t0)], [x3, y3] = [cx + rx * Math.cos(t1), cy + ry * Math.sin(t1)];
+        cmds.push(["C", x0 - k * rx * Math.sin(t0), y0 + k * ry * Math.cos(t0), x3 + k * rx * Math.sin(t1), y3 - k * ry * Math.cos(t1), x3, y3]);
+      }
+      pos = enArco(cx, cy, rx, ry, a1);
+    } else throw new Error(`Segmento desconocido: ${s[0]}`);
+  }
+  const u = ([x, y]) => { const m = Math.hypot(x, y); return [x / m, y / m]; };
+  return { ini, dir: u(dir), flecha: { p: flecha.p, d: u(flecha.d) }, cmds };
+}
+
+/** ¿Hay letra de trazo para este carácter? */
+const hayTrazo = (ch) => ch === " " || Object.hasOwn(LETRAS_TRAZO, ch);
+
+/** Ancho de un texto en cuerpos (sin el espacio tras la última letra). Espacio = 0,7 cuerpos. */
+function anchoTrazos(texto) {
+  let w = 0;
+  [...texto].forEach((ch, i) => {
+    if (ch === " ") w += 0.7;
+    else { const L = LETRAS_TRAZO[ch]; if (!L) throw new Error(`Falta la letra de trazo «${ch}».`); w += L.w; }
+    if (i < [...texto].length - 1) w += ESPACIO_LETRA;
+  });
+  return w;
+}
+
+/**
+ * Escribe `texto` con letras de trazo en (x, base), cuerpo c (unidades del papel). Devuelve la x final.
+ * estilo: "modelo" (negro, punto verde y flechas numeradas) · "repaso" (gris claro) · "punteado".
+ * punto: punto verde de inicio en cada trazo (en el modelo siempre). flechas: flechas numeradas del modelo
+ * (por defecto solo si el cuerpo mide 12 mm o más: a 5 mm no se leen).
+ */
+function escribirTrazos(p, texto, x, base, c, { estilo = "modelo", punto = estilo === "modelo", flechas = c >= p.mm(12) } = {}) {
+  const chars = [...texto];
+  chars.forEach((ch, i) => {
+    if (ch === " ") { x += 0.7 * c + (i < chars.length - 1 ? ESPACIO_LETRA * c : 0); return; }
+    const L = LETRAS_TRAZO[ch];
+    if (!L) throw new Error(`Falta la letra de trazo «${ch}».`);
+    const aPapel = (u, v) => [x + u * c, base + v * c];
+    L.t.forEach((tr, j) => {
+      const { ini, flecha: fl, cmds } = trazoACurvas(tr);
+      const cm = cmds.map(([k, ...v]) => [k, ...v.map((n, q) => (q % 2 ? base + n * c : x + n * c))]);
+      if (estilo === "modelo") p.path(cm, { lw: 0.11 * c, stroke: 0.1 });
+      else if (estilo === "repaso") p.path(cm, { lw: 0.12 * c, stroke: "#c4c4c4" });
+      else if (estilo === "punteado") p.path(cm, { lw: 0.09 * c, stroke: 0.45, dash: [0.001 * c, 0.17 * c] });
+      else throw new Error(`Estilo de trazo desconocido: ${estilo}`);
+      const [sx, sy] = aPapel(...ini);
+      if (punto) p.circle(sx, sy, (estilo === "modelo" ? 0.1 : 0.075) * c, { fill: VERDE_INICIO, stroke: null });
+      if (estilo === "modelo" && flechas) flecha(p, ...aPapel(...fl.p), fl.d, (tr.lado ?? 1), j + 1, c);
+    });
+    x += L.w * c + (i < chars.length - 1 ? ESPACIO_LETRA * c : 0);
+  });
+  return x;
+}
+
+/** Flecha corta paralela al comienzo del trazo, a un lado, con el número de orden detrás. */
+function flecha(p, sx, sy, [dx, dy], lado, num, c) {
+  const nx = dy * lado, ny = -dx * lado, off = 0.3 * c, L = 0.38 * c, lw = 0.055 * c;
+  const ax = sx + nx * off, ay = sy + ny * off, bx = ax + dx * L, by = ay + dy * L, h = 0.12 * c;
+  p.line(ax, ay, bx, by, { lw, gris: COLOR_FLECHA });
+  for (const s of [1, -1]) p.line(bx, by, bx - dx * h + s * -dy * h * 0.7, by - dy * h + s * dx * h * 0.7, { lw, gris: COLOR_FLECHA });
+  const fs = 0.34 * c;
+  p.text(ax - dx * 0.2 * c, ay - dy * 0.2 * c - fs * 0.35, String(num), fs, { f: "PB", anchor: "middle", gris: COLOR_FLECHA });
+}
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get ESPACIO_LETRA() { return ESPACIO_LETRA; }, get VERDE_INICIO() { return VERDE_INICIO; }, get COLOR_FLECHA() { return COLOR_FLECHA; }, get LETRAS_TRAZO() { return LETRAS_TRAZO; }, get trazoACurvas() { return trazoACurvas; }, get hayTrazo() { return hayTrazo; }, get anchoTrazos() { return anchoTrazos; }, get escribirTrazos() { return escribirTrazos; } }));
 },
 "nube/config.js": (__exp) => {
 // Charta · configuración de Firebase (paso 5.1)
@@ -11140,6 +11397,864 @@ const CATALOGO = {
      "ortografía"
     ]
    }
+  },
+  {
+   "id": "escritura.trazos",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 8,
+   "familia": "escritura",
+   "clave": "trazos",
+   "nombre": "Trazos",
+   "descripcion": "Grafomotricidad en la pauta: líneas, ondas, bucles, puentes, arcos, zigzag y círculos con punto de inicio, repaso y filas libres.",
+   "opciones": [
+    {
+     "id": "trazo",
+     "etiqueta": "Tipo de trazo",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Variados (uno distinto en cada bloque)"
+      },
+      {
+       "valor": "lineas",
+       "etiqueta": "Líneas (horizontales, verticales, inclinadas)"
+      },
+      {
+       "valor": "ondas",
+       "etiqueta": "Ondas"
+      },
+      {
+       "valor": "bucles",
+       "etiqueta": "Bucles"
+      },
+      {
+       "valor": "puentes",
+       "etiqueta": "Puentes"
+      },
+      {
+       "valor": "arcos",
+       "etiqueta": "Arcos"
+      },
+      {
+       "valor": "zigzag",
+       "etiqueta": "Zigzag"
+      },
+      {
+       "valor": "circulos",
+       "etiqueta": "Círculos y óvalos"
+      }
+     ]
+    },
+    {
+     "id": "pauta",
+     "etiqueta": "Tamaño de pauta",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "5 mm"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 mm"
+      },
+      {
+       "valor": 3.5,
+       "etiqueta": "3,5 mm"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "TRAZOS",
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 8,
+    "etiquetas": [
+     "lengua",
+     "escritura",
+     "caligrafía",
+     "grafomotricidad",
+     "trazos",
+     "pauta"
+    ]
+   }
+  },
+  {
+   "id": "escritura.letra",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 8,
+   "familia": "escritura",
+   "clave": "letra",
+   "nombre": "Repasa y escribe la letra",
+   "descripcion": "Una letra de modelo (con flechas numeradas si la pauta es grande), filas de repaso y filas libres.",
+   "opciones": [
+    {
+     "id": "letra",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Al azar"
+      },
+      {
+       "valor": "a",
+       "etiqueta": "a"
+      },
+      {
+       "valor": "b",
+       "etiqueta": "b"
+      },
+      {
+       "valor": "c",
+       "etiqueta": "c"
+      },
+      {
+       "valor": "d",
+       "etiqueta": "d"
+      },
+      {
+       "valor": "e",
+       "etiqueta": "e"
+      },
+      {
+       "valor": "f",
+       "etiqueta": "f"
+      },
+      {
+       "valor": "g",
+       "etiqueta": "g"
+      },
+      {
+       "valor": "h",
+       "etiqueta": "h"
+      },
+      {
+       "valor": "i",
+       "etiqueta": "i"
+      },
+      {
+       "valor": "j",
+       "etiqueta": "j"
+      },
+      {
+       "valor": "k",
+       "etiqueta": "k"
+      },
+      {
+       "valor": "l",
+       "etiqueta": "l"
+      },
+      {
+       "valor": "m",
+       "etiqueta": "m"
+      },
+      {
+       "valor": "n",
+       "etiqueta": "n"
+      },
+      {
+       "valor": "ñ",
+       "etiqueta": "ñ"
+      },
+      {
+       "valor": "o",
+       "etiqueta": "o"
+      },
+      {
+       "valor": "p",
+       "etiqueta": "p"
+      },
+      {
+       "valor": "q",
+       "etiqueta": "q"
+      },
+      {
+       "valor": "r",
+       "etiqueta": "r"
+      },
+      {
+       "valor": "s",
+       "etiqueta": "s"
+      },
+      {
+       "valor": "t",
+       "etiqueta": "t"
+      },
+      {
+       "valor": "u",
+       "etiqueta": "u"
+      },
+      {
+       "valor": "v",
+       "etiqueta": "v"
+      },
+      {
+       "valor": "w",
+       "etiqueta": "w"
+      },
+      {
+       "valor": "x",
+       "etiqueta": "x"
+      },
+      {
+       "valor": "y",
+       "etiqueta": "y"
+      },
+      {
+       "valor": "z",
+       "etiqueta": "z"
+      },
+      {
+       "valor": "palabra",
+       "etiqueta": "Las letras de una palabra"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Mayúscula o minúscula",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULA"
+      },
+      {
+       "valor": "ambas",
+       "etiqueta": "Las dos (Aa)"
+      }
+     ]
+    },
+    {
+     "id": "repaso",
+     "etiqueta": "Repaso",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Gris claro"
+      },
+      {
+       "valor": "punteado",
+       "etiqueta": "Punteado"
+      }
+     ]
+    },
+    {
+     "id": "filas",
+     "etiqueta": "Filas de repaso",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "2 filas"
+      },
+      {
+       "valor": 1,
+       "etiqueta": "1 fila"
+      },
+      {
+       "valor": 3,
+       "etiqueta": "3 filas"
+      }
+     ]
+    },
+    {
+     "id": "pauta",
+     "etiqueta": "Tamaño de pauta",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "5 mm"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 mm"
+      },
+      {
+       "valor": 3.5,
+       "etiqueta": "3,5 mm"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "REPASA Y ESCRIBE LA LETRA",
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 10,
+    "etiquetas": [
+     "lengua",
+     "escritura",
+     "caligrafía",
+     "letras",
+     "repasar",
+     "pauta"
+    ]
+   }
+  },
+  {
+   "id": "escritura.palabras",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 8,
+   "familia": "escritura",
+   "clave": "palabras",
+   "nombre": "Copia palabras",
+   "descripcion": "Palabras con la letra trabajada: modelo, repaso y copia libre.",
+   "opciones": [
+    {
+     "id": "letra",
+     "etiqueta": "Con la letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Todas"
+      },
+      {
+       "valor": "a",
+       "etiqueta": "a"
+      },
+      {
+       "valor": "b",
+       "etiqueta": "b"
+      },
+      {
+       "valor": "c",
+       "etiqueta": "c"
+      },
+      {
+       "valor": "d",
+       "etiqueta": "d"
+      },
+      {
+       "valor": "e",
+       "etiqueta": "e"
+      },
+      {
+       "valor": "f",
+       "etiqueta": "f"
+      },
+      {
+       "valor": "g",
+       "etiqueta": "g"
+      },
+      {
+       "valor": "h",
+       "etiqueta": "h"
+      },
+      {
+       "valor": "i",
+       "etiqueta": "i"
+      },
+      {
+       "valor": "j",
+       "etiqueta": "j"
+      },
+      {
+       "valor": "l",
+       "etiqueta": "l"
+      },
+      {
+       "valor": "m",
+       "etiqueta": "m"
+      },
+      {
+       "valor": "n",
+       "etiqueta": "n"
+      },
+      {
+       "valor": "ñ",
+       "etiqueta": "ñ"
+      },
+      {
+       "valor": "o",
+       "etiqueta": "o"
+      },
+      {
+       "valor": "p",
+       "etiqueta": "p"
+      },
+      {
+       "valor": "r",
+       "etiqueta": "r"
+      },
+      {
+       "valor": "s",
+       "etiqueta": "s"
+      },
+      {
+       "valor": "t",
+       "etiqueta": "t"
+      },
+      {
+       "valor": "u",
+       "etiqueta": "u"
+      },
+      {
+       "valor": "v",
+       "etiqueta": "v"
+      },
+      {
+       "valor": "z",
+       "etiqueta": "z"
+      }
+     ]
+    },
+    {
+     "id": "tipo",
+     "etiqueta": "Tipo de sílabas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Directas (ma, pe)"
+      },
+      {
+       "valor": "inversas",
+       "etiqueta": "Con inversas (al, en)"
+      },
+      {
+       "valor": "trabadas",
+       "etiqueta": "Con trabadas (pla, bra)"
+      },
+      {
+       "valor": "mixtas",
+       "etiqueta": "Con mixtas (con, sol)"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "inicial",
+       "etiqueta": "Mayúscula inicial"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULAS"
+      }
+     ]
+    },
+    {
+     "id": "pauta",
+     "etiqueta": "Tamaño de pauta",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "5 mm"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 mm"
+      },
+      {
+       "valor": 3.5,
+       "etiqueta": "3,5 mm"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "COPIA PALABRAS",
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 12,
+    "etiquetas": [
+     "lengua",
+     "escritura",
+     "caligrafía",
+     "palabras",
+     "copiar",
+     "pauta"
+    ]
+   }
+  },
+  {
+   "id": "escritura.frase",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 8,
+   "familia": "escritura",
+   "clave": "frase",
+   "nombre": "Copia la frase",
+   "descripcion": "Frases con mayúscula y punto: modelo, repaso y copia libre.",
+   "opciones": [
+    {
+     "id": "palabras",
+     "etiqueta": "Palabras de cada frase",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Variadas (3 a 5)"
+      },
+      {
+       "valor": 3,
+       "etiqueta": "3 palabras"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 palabras"
+      },
+      {
+       "valor": 5,
+       "etiqueta": "5 palabras"
+      }
+     ]
+    },
+    {
+     "id": "repaso",
+     "etiqueta": "Repaso",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Gris claro"
+      },
+      {
+       "valor": "punteado",
+       "etiqueta": "Punteado"
+      }
+     ]
+    },
+    {
+     "id": "pauta",
+     "etiqueta": "Tamaño de pauta",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "5 mm"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 mm"
+      },
+      {
+       "valor": 3.5,
+       "etiqueta": "3,5 mm"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "COPIA LA FRASE",
+   "color": "rosa",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 12,
+    "etiquetas": [
+     "lengua",
+     "escritura",
+     "caligrafía",
+     "frases",
+     "copiar",
+     "mayúscula",
+     "punto",
+     "pauta"
+    ]
+   }
+  },
+  {
+   "id": "escritura.dictado",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 8,
+   "familia": "escritura",
+   "clave": "dictado",
+   "nombre": "Hoja de dictado",
+   "descripcion": "Renglones numerados en blanco; la maestra dicta. La lista dictada solo sale en pantalla (solucionario y Fori).",
+   "opciones": [
+    {
+     "id": "modo",
+     "etiqueta": "Qué se dicta",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Palabras"
+      },
+      {
+       "valor": "frases",
+       "etiqueta": "Frases"
+      }
+     ]
+    },
+    {
+     "id": "numero",
+     "etiqueta": "Renglones",
+     "tipo": "numero",
+     "min": 5,
+     "max": 10,
+     "defecto": 10
+    },
+    {
+     "id": "letra",
+     "etiqueta": "Con la letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Todas"
+      },
+      {
+       "valor": "a",
+       "etiqueta": "a"
+      },
+      {
+       "valor": "b",
+       "etiqueta": "b"
+      },
+      {
+       "valor": "c",
+       "etiqueta": "c"
+      },
+      {
+       "valor": "d",
+       "etiqueta": "d"
+      },
+      {
+       "valor": "e",
+       "etiqueta": "e"
+      },
+      {
+       "valor": "f",
+       "etiqueta": "f"
+      },
+      {
+       "valor": "g",
+       "etiqueta": "g"
+      },
+      {
+       "valor": "h",
+       "etiqueta": "h"
+      },
+      {
+       "valor": "i",
+       "etiqueta": "i"
+      },
+      {
+       "valor": "j",
+       "etiqueta": "j"
+      },
+      {
+       "valor": "l",
+       "etiqueta": "l"
+      },
+      {
+       "valor": "m",
+       "etiqueta": "m"
+      },
+      {
+       "valor": "n",
+       "etiqueta": "n"
+      },
+      {
+       "valor": "ñ",
+       "etiqueta": "ñ"
+      },
+      {
+       "valor": "o",
+       "etiqueta": "o"
+      },
+      {
+       "valor": "p",
+       "etiqueta": "p"
+      },
+      {
+       "valor": "r",
+       "etiqueta": "r"
+      },
+      {
+       "valor": "s",
+       "etiqueta": "s"
+      },
+      {
+       "valor": "t",
+       "etiqueta": "t"
+      },
+      {
+       "valor": "u",
+       "etiqueta": "u"
+      },
+      {
+       "valor": "v",
+       "etiqueta": "v"
+      },
+      {
+       "valor": "z",
+       "etiqueta": "z"
+      }
+     ]
+    },
+    {
+     "id": "pauta",
+     "etiqueta": "Tamaño de pauta",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "5 mm"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 mm"
+      },
+      {
+       "valor": 3.5,
+       "etiqueta": "3,5 mm"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "HOJA DE DICTADO",
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 15,
+    "etiquetas": [
+     "lengua",
+     "escritura",
+     "dictado",
+     "palabras",
+     "frases",
+     "pauta"
+    ]
+   }
+  },
+  {
+   "id": "escritura.libre",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 8,
+   "familia": "escritura",
+   "clave": "libre",
+   "nombre": "Escribe una frase",
+   "descripcion": "Renglones libres con la frase empezada (El gato…) o con un tema para escribir. Corrección abierta.",
+   "opciones": [
+    {
+     "id": "inicio",
+     "etiqueta": "Cómo empieza",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Con la frase empezada (El gato…)"
+      },
+      {
+       "valor": "tema",
+       "etiqueta": "Con un tema para escribir"
+      }
+     ]
+    },
+    {
+     "id": "pauta",
+     "etiqueta": "Tamaño de pauta",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "5 mm"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 mm"
+      },
+      {
+       "valor": 3.5,
+       "etiqueta": "3,5 mm"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "ESCRIBE UNA FRASE",
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 3,
+    "minutos": 15,
+    "etiquetas": [
+     "lengua",
+     "escritura",
+     "expresión escrita",
+     "frases",
+     "libre",
+     "pauta"
+    ]
+   }
   }
  ]
 };
@@ -12258,6 +13373,163 @@ function svgCompleto({ w, h, svg }, margen = 2) {
 }
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get REPS() { return REPS; }, get RANGOS() { return RANGOS; }, get VACIAS() { return VACIAS; }, get PLANTILLAS() { return PLANTILLAS; }, get ancho() { return ancho; }, get esc() { return esc; }, get nombreNumero() { return nombreNumero; }, get rep() { return rep; }, get plantilla() { return plantilla; }, get svgCompleto() { return svgCompleto; } }));
+},
+"tipos/_escritura.js": (__exp) => {
+// Charta · ayudantes de los tipos escritura.* (Lengua 1.º, lote 4; LENGUA_1.md §3, bloque 8). Sin DOM.
+// Todo se escribe en pauta Lamela (src/lengua/pauta.js) con letras de trazo (src/lengua/trazos.js).
+// Medidas: la pauta se mide en milímetros REALES (Papel.mm). El nº de renglones de cada bloque se decide en `generar` con una tabla conservadora
+// (filasDe) para que los datos no dependan de la escala del panel; `dibujar` solo recorta renglones LIBRES si, con letra grande y un enunciado largo,
+// el panel quedase más pequeño de lo previsto (los renglones guiados siempre se dibujan).
+const { ZONA } = __req("render/papel.js");
+const { cabenRenglones, PAUTA_POR_DEFECTO } = __req("lengua/pauta.js");
+const { escribirTrazos, anchoTrazos, trazoACurvas, VERDE_INICIO } = __req("lengua/trazos.js");
+/** Alto (mm) de pauta que se usa para planificar, con margen: completa ≈ 229 mm reales y media ≈ 98 mm con un enunciado de una línea. */
+const CAP_MM = { completa: 210, media: 92 };
+/** Ancho útil (mm) de un renglón al planificar (antes de los márgenes). */
+const ANCHO_MM = { completa: 158, media: 138 };
+/** Alto (mm) de la etiqueta de un bloque de «escribe una frase». */
+const ETIQUETA_MM = 9;
+
+/** Tamaño de pauta (mm) de la actividad: 5 por defecto. */
+const mmDe = (params) => params?.pauta ?? PAUTA_POR_DEFECTO;
+/** Renglones que caben (con margen) en una actividad. 5 mm: 14 (completa) y 6 (media). */
+const filasDe = (tamano, mm) => Math.floor(CAP_MM[tamano] / (3 * mm) + 1e-9);
+/** Ancho útil de un renglón en cuerpos (unidades de la pauta). */
+const anchoDe = (tamano, mm) => (ANCHO_MM[tamano] - 3) / mm;
+/** Un texto cabe en una sola línea (con margen a los lados). */
+const cabeEnLinea = (texto, tamano, mm) => anchoTrazos(texto) <= anchoDe(tamano, mm) - 1.2;
+
+/** Reparte los renglones libres que sobran entre los bloques (los que sobran del reparto, a los primeros). */
+function repartirLibres(total, guiadas) {
+  const B = guiadas.length, libre = total - guiadas.reduce((a, b) => a + b, 0);
+  if (libre < B) throw new Error(`escritura: ${total} renglones no bastan para ${B} bloques.`);
+  return guiadas.map((g, i) => Math.floor(libre / B) + (i < libre % B ? 1 : 0));
+}
+
+// ---------------------------------------------------------------- dibujo
+/** Medidas del dibujo de una actividad: pauta (mm), cuerpo c, márgenes laterales y renglones que caben de verdad en el panel. */
+function contexto(p, act) {
+  const mm = mmDe(act.params), c = p.mm(mm), alto = ZONA.alto * p.parte;
+  return { mm, c, paso: 3 * c, alto, x0: ZONA.x + p.mm(1.5), x1: ZONA.x + ZONA.w - p.mm(1.5), yTop: ZONA.yArriba, caben: cabenRenglones(p, alto, mm) };
+}
+
+/** Recorta renglones libres (de los últimos bloques hacia atrás) si el total no cabe en `caben`. */
+function recortar(libres, guiadas, caben) {
+  const l = libres.slice();
+  let exceso = l.reduce((a, b) => a + b, 0) + guiadas.reduce((a, b) => a + b, 0) - caben;
+  for (let i = l.length - 1; i >= 0 && exceso > 0; i--) { const q = Math.min(l[i], exceso); l[i] -= q; exceso -= q; }
+  return l;
+}
+
+/** Texto con letras de trazo: el modelo lleva punto verde de inicio (y flechas si el cuerpo es grande); el repaso (gris / punteado) también lleva el punto. */
+function escribir(p, texto, x, base, c, estilo = "modelo") {
+  return escribirTrazos(p, texto, x, base, c, estilo === "modelo" ? { estilo } : { estilo, punto: true });
+}
+
+/** Copias del texto repetidas a lo ancho de x a x1 (separadas `sep` cuerpos). Devuelve cuántas caben. */
+function repetir(p, texto, x, x1, base, c, estilo, { sep = 1.2, max = 99 } = {}) {
+  const w = anchoTrazos(texto), paso = w + sep;
+  const n = Math.max(1, Math.min(max, Math.floor(((x1 - x) / c + sep) / paso + 1e-9)));
+  for (let k = 0; k < n; k++) escribir(p, texto, x + k * paso * c, base, c, estilo);
+  return n;
+}
+
+// ---------------------------------------------------------------- trazos de grafomotricidad (escritura.trazos)
+// Un patrón = { paso, hacer(i0, i1) → [{ d: [segmento…], sinPunto? }] }: las celdas i0…i1−1, en unidades de la pauta (base 0, cuerpo 1, asta 1,8, rabo −0,8).
+// «sueltas»: cada unidad es un trazo (con su punto de inicio). «continuo»: una sola línea que sigue (el punto solo al empezar).
+const M_ = (x, y) => ["M", x, y], L_ = (x, y) => ["L", x, y], ar = (cx, cy, rx, ry, a0, a1) => ["A", cx, cy, rx, ry, a0, a1];
+const sueltas = (paso, unidad) => ({ paso, hacer: (i0, i1) => Array.from({ length: Math.max(0, i1 - i0) }, (_, k) => ({ d: unidad((i0 + k) * paso) })) });
+const continuo = (paso, ini, celda) => ({
+  paso, hacer: (i0, i1) => {
+    if (i1 <= i0) return [];
+    const d = ini ? [ini(i0 * paso)] : [];
+    for (let i = i0; i < i1; i++) d.push(...celda(i * paso));
+    return [{ d, sinPunto: i0 > 0 }];
+  },
+});
+/** Bucles (trocoide): b = avance, a = ancho del lazo, yc/ry = centro y alto, sg = +1 lazos arriba / −1 lazos abajo. Empieza en el extremo opuesto al lazo. */
+function bucles(b, a, yc, ry, sg) {
+  const paso = 2 * Math.PI * b, K = 28;
+  return {
+    paso, hacer: (i0, i1) => {
+      if (i1 <= i0) return [];
+      const d = [];
+      for (let k = 0; k <= (i1 - i0) * K; k++) {
+        const th = Math.PI + 2 * Math.PI * i0 + (2 * Math.PI * k) / K;
+        d.push([k ? "L" : "M", i0 * paso + b * (th - Math.PI - 2 * Math.PI * i0) - a * Math.sin(th), yc + sg * ry * Math.cos(th)]);
+      }
+      return [{ d, sinPunto: i0 > 0 }];
+    },
+  };
+}
+const onda = (rx, ry, cy) => continuo(4 * rx, null, (x) => [ar(x + rx, cy, rx, ry, 180, 0), ar(x + 3 * rx, cy, rx, ry, 180, 360)]);
+const puentes = (rx, ry) => continuo(2 * rx, null, (x) => [ar(x + rx, 0, rx, ry, 180, 0)]);
+const picos = (dx, alto) => continuo(2 * dx, (x) => M_(x, 0), (x) => [L_(x + dx, alto), L_(x + 2 * dx, 0)]);
+
+/** Familias de trazos: id → { nombre, variantes: [[id, nombre, patrón]…] } (todas tienen al menos 4 variantes). */
+const FAMILIAS_TRAZO = {
+  lineas: { nombre: "Líneas", variantes: [
+    ["horizontales", "Líneas horizontales", sueltas(1.5, (x) => [M_(x, 0.5), L_(x + 1, 0.5)])],
+    ["verticales", "Líneas verticales", sueltas(0.8, (x) => [M_(x + 0.1, 1), L_(x + 0.1, 0)])],
+    ["altas", "Líneas verticales altas", sueltas(0.8, (x) => [M_(x + 0.1, 1.8), L_(x + 0.1, 0)])],
+    ["derecha", "Líneas inclinadas /", sueltas(0.9, (x) => [M_(x + 0.6, 1), L_(x, 0)])],
+    ["izquierda", "Líneas inclinadas \\", sueltas(0.9, (x) => [M_(x, 1), L_(x + 0.6, 0)])],
+  ] },
+  ondas: { nombre: "Ondas", variantes: [
+    ["suave", "Onda suave", onda(0.4, 0.4, 0.5)],
+    ["normal", "Onda", onda(0.45, 0.5, 0.5)],
+    ["alta", "Onda alta", onda(0.45, 0.9, 0.9)],
+    ["larga", "Onda larga", onda(0.8, 0.5, 0.5)],
+  ] },
+  bucles: { nombre: "Bucles", variantes: [
+    ["arriba", "Bucles hacia arriba", bucles(0.2, 0.34, 0.5, 0.5, 1)],
+    ["altos", "Bucles altos", bucles(0.22, 0.36, 0.9, 0.9, 1)],
+    ["abajo", "Bucles hacia abajo", bucles(0.2, 0.34, 0.5, 0.5, -1)],
+    ["largos", "Bucles largos hacia abajo", bucles(0.22, 0.36, 0.1, 0.9, -1)],
+  ] },
+  puentes: { nombre: "Puentes", variantes: [
+    ["bajos", "Puentes bajos", puentes(0.45, 0.5)],
+    ["pequenos", "Puentes pequeños", puentes(0.4, 0.8)],
+    ["anchos", "Puentes anchos", puentes(0.7, 0.8)],
+    ["altos", "Puentes altos", puentes(0.5, 1.8)],
+  ] },
+  arcos: { nombre: "Arcos", variantes: [
+    ["cuenco", "Arcos hacia arriba", sueltas(1.2, (x) => [ar(x + 0.4, 1, 0.4, 1, 180, 360)])],
+    ["cuencoLargo", "Arcos largos hacia arriba", sueltas(1.2, (x) => [ar(x + 0.4, 1, 0.4, 1.8, 180, 360)])],
+    ["tejado", "Arcos hacia abajo", sueltas(1.2, (x) => [ar(x + 0.4, 0, 0.4, 1, 180, 0)])],
+    ["tejadoAlto", "Arcos altos hacia abajo", sueltas(1.2, (x) => [ar(x + 0.4, 0, 0.4, 1.8, 180, 0)])],
+  ] },
+  zigzag: { nombre: "Zigzag", variantes: [
+    ["picos", "Picos", picos(0.5, 1)],
+    ["altos", "Picos altos", picos(0.5, 1.8)],
+    ["anchos", "Picos anchos", picos(0.7, 1)],
+    ["sierra", "Dientes de sierra", continuo(0.8, (x) => M_(x, 0), (x) => [L_(x + 0.8, 1), L_(x + 0.8, 0)])],
+  ] },
+  circulos: { nombre: "Círculos y óvalos", variantes: [
+    ["circulos", "Círculos", sueltas(1.3, (x) => [ar(x + 0.45, 0.5, 0.45, 0.5, 90, 450)])],
+    ["pequenos", "Círculos pequeños", sueltas(0.9, (x) => [ar(x + 0.3, 0.5, 0.3, 0.3, 90, 450)])],
+    ["altos", "Óvalos altos", sueltas(1.2, (x) => [ar(x + 0.4, 0.9, 0.4, 0.9, 90, 450)])],
+    ["anchos", "Óvalos anchos", sueltas(1.9, (x) => [ar(x + 0.7, 0.5, 0.7, 0.5, 90, 450)])],
+  ] },
+};
+const patronTrazo = (familia, variante) => FAMILIAS_TRAZO[familia].variantes.find((v) => v[0] === variante)[2];
+
+/** Dibuja trazos de un patrón con el estilo del modelo («modelo» negro, «repaso» gris, «punteado»); punto verde al inicio de cada trazo. */
+function pintarTrazos(p, trazos, x, base, c, estilo) {
+  for (const tr of trazos) {
+    const { ini, cmds } = trazoACurvas(tr);
+    const cm = cmds.map(([k, ...v]) => [k, ...v.map((n, q) => (q % 2 ? base + n * c : x + n * c))]);
+    if (estilo === "modelo") p.path(cm, { lw: 0.11 * c, stroke: 0.1 });
+    else if (estilo === "repaso") p.path(cm, { lw: 0.12 * c, stroke: "#c4c4c4" });
+    else p.path(cm, { lw: 0.09 * c, stroke: 0.45, dash: [0.001 * c, 0.17 * c] });
+    if (!tr.sinPunto) p.circle(x + ini[0] * c, base + ini[1] * c, (estilo === "modelo" ? 0.1 : 0.075) * c, { fill: VERDE_INICIO, stroke: null });
+  }
+}
+/** Cuántas celdas del patrón caben en una línea de `ancho` cuerpos. */
+const celdasQueCaben = (patron, ancho) => Math.max(1, Math.floor((ancho - 1) / patron.paso));
+
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get CAP_MM() { return CAP_MM; }, get ANCHO_MM() { return ANCHO_MM; }, get ETIQUETA_MM() { return ETIQUETA_MM; }, get mmDe() { return mmDe; }, get filasDe() { return filasDe; }, get anchoDe() { return anchoDe; }, get cabeEnLinea() { return cabeEnLinea; }, get repartirLibres() { return repartirLibres; }, get contexto() { return contexto; }, get recortar() { return recortar; }, get escribir() { return escribir; }, get repetir() { return repetir; }, get FAMILIAS_TRAZO() { return FAMILIAS_TRAZO; }, get patronTrazo() { return patronTrazo; }, get pintarTrazos() { return pintarTrazos; }, get celdasQueCaben() { return celdasQueCaben; } }));
 },
 "tipos/_fono.js": (__exp) => {
 // Charta · ayudantes de la familia «fono» (Lengua 1.º, lote 2). Sin DOM.
@@ -13635,6 +14907,331 @@ const __default = registrar({
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
 },
+"tipos/escritura.dictado.js": (__exp) => {
+// escritura.dictado · Hoja de dictado (Lengua 1.º, lote 4; LENGUA_1.md §3, bloque 8).
+// datos:    { numero: 1, modo: "palabras" | "frases" }   (cada ejercicio es un renglón numerado en blanco; NO lleva el texto dictado)
+// solucion: { huecos: ["mesa"] }   lo que dicta la maestra, en el orden de los renglones. Solo sale en pantalla (solucionario y Fori, modo «solucion»):
+//           en el papel no se imprime nada de la lista.
+// Reglas: n renglones (5–10, por defecto 10) en completa y la mitad (redondeada hacia arriba: 10 → 5, 5 → 3) en media. Palabras: del léxico, sílabas directas, sin
+//         repetir; frases: de _frase.js (3–5 palabras), de sujetos distintos mientras se pueda. Con una letra, todo lo dictado la lleva. Solo caracteres con trazo.
+//         Los renglones se separan para llenar la página (hasta 6 mm entre ellos); caben siempre (n ≤ 10 renglones de pauta: filasDe).
+// Opciones: qué se dicta (palabras / frases) · renglones (5–10) · con la letra (todas / a–z; «letras vistas»: de momento no hay orden del método) · pauta (5, 4, 3,5 mm).
+const { registrar } = __req("nucleo/tipos.js");
+const { elegirPalabras, ajusta } = __req("tipos/_lengua.js");
+const { elegirFrases, largosFrase, textoFrase } = __req("tipos/_frase.js");
+const { llevaLetra } = __req("lengua/reglas.js");
+const { hayTrazo } = __req("lengua/trazos.js");
+const { COLOR_SOLUCION } = __req("render/papel.js");
+const { contexto, mmDe } = __req("tipos/_escritura.js");
+const { renglones } = __req("lengua/pauta.js");
+const renglonesDictado = (params, tamano) => { const n = params.numero ?? 10; return tamano === "media" ? Math.ceil(n / 2) : n; };
+
+const __default = registrar({
+  id: "escritura.dictado",
+  version: 1,
+  generar(params, azar, { tamano }) {
+    const n = renglonesDictado(params, tamano), frases = params.modo === "frases";
+    let lista;
+    if (frases) {
+      const fs = elegirFrases(azar, largosFrase(azar, n), {
+        id: "escritura.dictado", filtro: (f) => (!params.letra || llevaLetra(f.palabras.join(""), params.letra)) && [...textoFrase(f.palabras)].every(hayTrazo),
+      });
+      lista = fs.map((f) => textoFrase(f.palabras));
+    } else {
+      const extra = params.letra ? { conLetra: params.letra } : {};
+      lista = elegirPalabras(azar, n, params, [2, 3, 1, 2], { extra, ok: (e) => [...e.p].every(hayTrazo), id: "escritura.dictado" }).map((x) => x.p);
+    }
+    return {
+      enunciado: frases ? "Escucha y escribe las frases que dicta tu maestra.\nEmpieza con mayúscula y acaba con punto." : "Escucha y escribe las palabras que dicta tu maestra.",
+      ejercicios: lista.map((t, i) => ({ datos: { numero: i + 1, modo: frases ? "frases" : "palabras" }, solucion: { huecos: [t] } })),
+    };
+  },
+  dibujar(p, act) {
+    const ctx = contexto(p, act), { c, paso, x0, x1 } = ctx, es = act.ejercicios, n = es.length;
+    const hueco = Math.max(0, Math.min((ctx.alto - n * paso - 2 * c) / n, p.mm(6)));
+    const xr = x0 + p.mm(9);
+    let y = ctx.yTop;
+    es.forEach((e) => p.ejercicio(e.id, () => {
+      const { bases } = renglones(p, xr, x1, y, 1, { mm: ctx.mm });
+      p.text(x0, bases[0], String(e.datos.numero), 1.3 * c, { f: "PB", gris: 0.3 });
+      if (p.solucion) {
+        const t = e.solucion.huecos[0], fs = ajusta(p, (q) => p.ancho(t, "PB", q), x1 - xr - c, 1.3 * c, 8);
+        p.text(xr + 0.6 * c, bases[0] + 0.2 * c, t, fs, { f: "PB", gris: COLOR_SOLUCION });
+      }
+      y -= paso + hueco;
+    }));
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get renglonesDictado() { return renglonesDictado; }, get default() { return __default; } }));
+},
+"tipos/escritura.frase.js": (__exp) => {
+// escritura.frase · Copia la frase (Lengua 1.º, lote 4; LENGUA_1.md §3, bloque 8).
+// datos:    { frase: "El gato come pan.", libres: 1 }   (frase del banco de _frase.js con mayúscula y punto; cada ejercicio es un bloque: 1 renglón de modelo
+//           (negro, punto verde de inicio), 1 de repaso (gris o punteado) y `libres` renglones en blanco para copiarla)
+// solucion: { huecos: [] }   no hay corrección
+// Reglas: frases de _frase.js (3 a 5 palabras), distintas y de sujetos distintos mientras se pueda, que caben en UNA línea de la pauta (cabeEnLinea: en media página
+//         con 5 mm las más largas de 5 palabras no entran) y con todos sus caracteres en trazos. Completa 4, media 2.
+// Opciones: palabras de cada frase (variadas 3–5 / 3 / 4 / 5) · repaso (gris / punteado) · pauta (5, 4, 3,5 mm).
+const { registrar } = __req("nucleo/tipos.js");
+const { cuantas } = __req("tipos/_lengua.js");
+const { elegirFrases, largosFrase, textoFrase } = __req("tipos/_frase.js");
+const { hayTrazo } = __req("lengua/trazos.js");
+const { contexto, recortar, repartirLibres, filasDe, mmDe, escribir, cabeEnLinea } = __req("tipos/_escritura.js");
+const { renglones } = __req("lengua/pauta.js");
+const __default = registrar({
+  id: "escritura.frase",
+  version: 1,
+  generar(params, azar, { tamano }) {
+    const n = cuantas(tamano, 4), mm = mmDe(params);
+    const fs = elegirFrases(azar, largosFrase(azar, n, params.palabras), {
+      id: "escritura.frase", filtro: (f) => { const t = textoFrase(f.palabras); return [...t].every(hayTrazo) && cabeEnLinea(t, tamano, mm); },
+    });
+    const libres = repartirLibres(filasDe(tamano, mm), Array(n).fill(2));
+    return {
+      enunciado: "Copia cada frase.\nEmpieza con mayúscula y acaba con punto.",
+      ejercicios: fs.map((f, i) => ({ datos: { frase: textoFrase(f.palabras), libres: libres[i] }, solucion: { huecos: [] } })),
+    };
+  },
+  dibujar(p, act) {
+    const ctx = contexto(p, act), { c, paso, x0, x1 } = ctx, es = act.ejercicios, estilo = act.params.repaso === "punteado" ? "punteado" : "repaso";
+    const libres = recortar(es.map((e) => e.datos.libres), es.map(() => 2), ctx.caben);
+    let y = ctx.yTop;
+    es.forEach((e, i) => p.ejercicio(e.id, () => {
+      const n = 2 + libres[i], { bases } = renglones(p, x0, x1, y, n, { mm: ctx.mm });
+      escribir(p, e.datos.frase, x0 + 0.6 * c, bases[0], c, "modelo");
+      escribir(p, e.datos.frase, x0 + 0.6 * c, bases[1], c, estilo);
+      y -= n * paso;
+    }));
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/escritura.letra.js": (__exp) => {
+// escritura.letra · Repasa y escribe la letra (Lengua 1.º, lote 4; LENGUA_1.md §3, bloque 8).
+// datos:    { letra: "a", texto: "Aa", forma: "sueltas" | "juntas", repaso: 2, libres: 3 }
+//           (cada ejercicio es un bloque: 1 renglón de modelo en negro con punto verde de inicio (y flechas numeradas solo si el cuerpo mide ≥ 12 mm:
+//            escribirTrazos lo decide; a 5 mm no hay flechas), `repaso` renglones de repaso (gris o punteado) y `libres` renglones en blanco)
+// solucion: { huecos: [] }   no hay corrección (el modelo está en la hoja)
+// Reglas: una letra por ficha (a elegir o al azar): completa 2 bloques (letras «sueltas» y «juntas»), media 1 (sueltas). «Las letras de una palabra»: una palabra del
+//         léxico de 3 a 6 letras con 4 letras distintas (completa) o 2 (media); un bloque por cada una de las primeras letras distintas.
+//         «Las dos» escribe la pareja «Aa». Filas de repaso: las pedidas (1–3, por defecto 2); si no caben (4 bloques de la palabra en 5 mm) se reducen
+//         hasta floor(renglones / bloques) − 2 (1 modelo y al menos 1 libre). Los renglones libres llenan el resto de la página (filasDe).
+// Opciones: letra (al azar / a–z, ñ / las de una palabra) · mayúscula o minúscula (minúscula / MAYÚSCULA / las dos) · repaso (gris / punteado) · filas de repaso (2 / 1 / 3) · pauta.
+const { registrar } = __req("nucleo/tipos.js");
+const { cuantas, elegirPalabras } = __req("tipos/_lengua.js");
+const { sinTildes } = __req("lengua/reglas.js");
+const { contexto, recortar, repartirLibres, filasDe, mmDe, repetir } = __req("tipos/_escritura.js");
+const { renglones } = __req("lengua/pauta.js");
+const LETRAS_ESCRITURA = [..."abcdefghijklmnñopqrstuvwxyz"];
+/** Texto del modelo de una letra según «mayúscula o minúscula». */
+const textoLetra = (l, caso) => (caso === "mayus" ? l.toUpperCase() : caso === "ambas" ? l.toUpperCase() + l : l);
+
+const __default = registrar({
+  id: "escritura.letra",
+  version: 1,
+  generar(params, azar, { tamano }) {
+    const mm = mmDe(params), N = filasDe(tamano, mm), pedidas = params.filas ?? 2, caso = params.caso || null;
+    let letras, formas, enunciado;
+    if (params.letra === "palabra") {
+      const B = cuantas(tamano, 4);
+      const distintas = (w) => [...new Set([...sinTildes(w)])];
+      const [{ p: pal }] = elegirPalabras(azar, 1, {}, [2, 3], { extra: { minLetras: 3, maxLetras: 6 }, ok: (e) => distintas(e.p).length >= B, id: "escritura.letra" });
+      letras = distintas(pal).slice(0, B); formas = Array(B).fill("sueltas");
+      enunciado = `Repasa las letras de «${pal}»\ny escríbelas en los renglones.`;
+    } else {
+      const l = params.letra || azar.elegir(LETRAS_ESCRITURA);
+      letras = tamano === "media" ? [l] : [l, l]; formas = tamano === "media" ? ["sueltas"] : ["sueltas", "juntas"];
+      enunciado = caso === "ambas" ? `Repasa la letra «${l.toUpperCase()}${l}»\ny escríbela en los renglones.` : `Repasa la letra «${textoLetra(l, caso)}»\ny escríbela en los renglones.`;
+    }
+    const B = letras.length, repaso = Math.max(0, Math.min(pedidas, Math.floor(N / B) - 2));
+    const libres = repartirLibres(N, Array(B).fill(1 + repaso));
+    return {
+      enunciado,
+      ejercicios: letras.map((l, i) => ({ datos: { letra: l, texto: textoLetra(l, caso), forma: formas[i], repaso, libres: libres[i] }, solucion: { huecos: [] } })),
+    };
+  },
+  dibujar(p, act) {
+    const ctx = contexto(p, act), { c, paso, x0, x1 } = ctx, es = act.ejercicios, estilo = act.params.repaso === "punteado" ? "punteado" : "repaso";
+    const libres = recortar(es.map((e) => e.datos.libres), es.map((e) => 1 + e.datos.repaso), ctx.caben);
+    let y = ctx.yTop;
+    es.forEach((e, i) => p.ejercicio(e.id, () => {
+      const { texto, forma, repaso } = e.datos, n = 1 + repaso + libres[i], { bases } = renglones(p, x0, x1, y, n, { mm: ctx.mm }), sep = forma === "juntas" ? 0.45 : 1.6;
+      repetir(p, texto, x0 + 0.6 * c, x1, bases[0], c, "modelo", { sep });
+      for (let r = 1; r <= repaso; r++) repetir(p, texto, x0 + 0.6 * c, x1, bases[r], c, estilo, { sep });
+      y -= n * paso;
+    }));
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get LETRAS_ESCRITURA() { return LETRAS_ESCRITURA; }, get textoLetra() { return textoLetra; }, get default() { return __default; } }));
+},
+"tipos/escritura.libre.js": (__exp) => {
+// escritura.libre · Escribe una frase (Lengua 1.º, lote 4; LENGUA_1.md §3, bloque 8).
+// datos:    { inicio: "El gato" | null, pregunta: "¿Qué hace el gato?", filas: 3, ejemplo: "El gato duerme mucho." }   (cada ejercicio es un bloque: una etiqueta con la pregunta o el tema y `filas` renglones
+//           libres; con «frase empezada» el primer renglón lleva el comienzo («El gato») en negro con punto verde de inicio, para seguir escribiendo)
+// solucion: { huecos: [] }   corrección abierta: no hay nada rojo en la hoja. `datos.ejemplo` es una posible respuesta (no se dibuja; para la pantalla). Va en `datos` y no en `solucion`
+//           porque Fori exigiría pasos rojos a cualquier `solucion` con contenido.
+// Reglas: completa 4 bloques, media 2. Frase empezada: frases de acción de _frase.js (verbos de hacer, no «es» ni «está»), sujetos distintos, con el sujeto
+//         («El gato», «Los niños») como comienzo. Tema: 12 temas con su pregunta (banco TEMAS), sin repetir. Renglones por bloque: los que quepan tras la etiqueta
+//         (ETIQUETA_MM = 9 mm), repartidos entre los bloques (≥ 2 siempre; el primero del bloque lleva el comienzo).
+// Opciones: cómo empieza (frase empezada / tema para escribir) · pauta (5, 4, 3,5 mm).
+const { registrar } = __req("nucleo/tipos.js");
+const { cuantas, ajusta } = __req("tipos/_lengua.js");
+const { elegirFrases, largosFrase, textoFrase } = __req("tipos/_frase.js");
+const { contexto, mmDe, escribir, CAP_MM, ETIQUETA_MM } = __req("tipos/_escritura.js");
+const { renglones } = __req("lengua/pauta.js");
+const ACCION = new Set(["i", "im", "ob", "od", "lug"]);
+/** Temas para escribir: [tema, pregunta, ejemplo de respuesta]. */
+const TEMAS = [
+  ["Mi familia", "¿Quién vive en tu casa?", "En mi casa vivimos cuatro."],
+  ["Mi mascota", "¿Qué animal te gusta?", "Me gusta el perro."],
+  ["Mi cole", "¿Qué haces en clase?", "En clase leo y pinto."],
+  ["Mi comida favorita", "¿Qué te gusta comer?", "Me gusta la pasta."],
+  ["El parque", "¿A qué juegas en el parque?", "Juego a la pelota."],
+  ["Mi juguete", "¿Con qué juguete juegas?", "Juego con mi coche."],
+  ["Mi amigo", "¿Cómo es tu amigo o tu amiga?", "Mi amiga es muy simpática."],
+  ["El fin de semana", "¿Qué haces el sábado?", "El sábado voy al parque."],
+  ["Mi dibujo", "¿Qué te gusta dibujar?", "Me gusta dibujar flores."],
+  ["El verano", "¿Qué te gusta del verano?", "Me gusta nadar en el mar."],
+  ["Mi cuarto", "¿Qué hay en tu cuarto?", "En mi cuarto hay una cama."],
+  ["El tiempo", "¿Qué tiempo hace hoy?", "Hoy hace sol."],
+];
+
+const art = (w) => w[0].toUpperCase() + w.slice(1);
+
+const __default = registrar({
+  id: "escritura.libre",
+  version: 1,
+  generar(params, azar, { tamano }) {
+    const n = cuantas(tamano, 4), mm = mmDe(params), empezada = params.inicio !== "tema";
+    const total = Math.floor((CAP_MM[tamano] - n * ETIQUETA_MM) / (3 * mm) + 1e-9);
+    const filas = Array.from({ length: n }, (_, i) => Math.floor(total / n) + (i < total % n ? 1 : 0));
+    let items;
+    if (empezada) {
+      items = elegirFrases(azar, largosFrase(azar, n), { id: "escritura.libre", filtro: (f) => ACCION.has(f.tipo) })
+        .map((f) => {
+          const [a, s] = f.palabras, plural = f.numero === "p";
+          return { inicio: `${art(a)} ${s}`, pregunta: `¿Qué ${plural ? "hacen" : "hace"} ${a} ${s}?`, ejemplo: textoFrase(f.palabras) };
+        });
+    } else items = azar.muestra(TEMAS, n).map(([tema, pregunta, ejemplo]) => ({ inicio: null, pregunta: `${tema}: ${pregunta}`, ejemplo }));
+    return {
+      enunciado: empezada ? "Escribe qué hace cada uno.\nContinúa la frase en los renglones." : "Escribe una frase sobre cada tema.",
+      ejercicios: items.map((it, i) => ({ datos: { inicio: it.inicio, pregunta: it.pregunta, filas: filas[i], ejemplo: it.ejemplo }, solucion: { huecos: [] } })),
+    };
+  },
+  dibujar(p, act) {
+    const ctx = contexto(p, act), { c, paso, x0, x1 } = ctx, es = act.ejercicios, H = p.mm(ETIQUETA_MM);
+    // si el panel es menor de lo previsto, se quitan renglones del final de los últimos bloques (siempre quedan 2)
+    const filas = es.map((e) => e.datos.filas);
+    let exceso = filas.reduce((a, b) => a + b, 0) * paso + es.length * H - ctx.alto;
+    for (let i = filas.length - 1; i >= 0 && exceso > 0; i--) while (filas[i] > 2 && exceso > 0) { filas[i]--; exceso -= paso; }
+    let y = ctx.yTop;
+    es.forEach((e, i) => p.ejercicio(e.id, () => {
+      const { pregunta, inicio } = e.datos, h = H * 0.78, by = y - H * 0.12 - h;
+      p.rrect(x0, by, x1 - x0, h, h / 2.6, { lw: 0.8, fill: 0.965, stroke: 0.78 });
+      const fs = ajusta(p, (q) => p.ancho(pregunta, "PB", q), x1 - x0 - 2 * c, 0.5 * H, 9);
+      p.text(x0 + c, by + h / 2 - fs * 0.35, pregunta, fs, { f: "PB", gris: 0.2 });
+      const { bases } = renglones(p, x0, x1, y - H, filas[i], { mm: ctx.mm });
+      if (inicio) escribir(p, inicio, x0 + 0.6 * c, bases[0], c, "modelo");
+      y -= H + filas[i] * paso;
+    }));
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get TEMAS() { return TEMAS; }, get default() { return __default; } }));
+},
+"tipos/escritura.palabras.js": (__exp) => {
+// escritura.palabras · Copia palabras (Lengua 1.º, lote 4; LENGUA_1.md §3, bloque 8).
+// datos:    { palabra: "mesa", libres: 1 }   (palabra ya en el caso pedido; cada ejercicio es un bloque: 1 renglón de modelo (negro, punto verde de inicio),
+//           1 de repaso (gris, la palabra repetida a lo ancho) y `libres` renglones en blanco para copiarla)
+// solucion: { huecos: [] }   no hay corrección
+// Reglas: palabras del léxico (nombres, adjetivos y verbos) con las opciones comunes (tipo de sílabas, letra, caso), distintas, de 1 a 3 sílabas, solo con
+//         letras que existen en trazos (hayTrazo) y que caben en una línea de la pauta (cabeEnLinea). Completa 4, media 2. Con «Mayúscula inicial» no entran las que
+//         empiezan por «i». La opción «letra» = todas las palabras llevan esa letra (la «letra trabajada»; la «sílaba trabajada» llegará con el orden del método).
+// Opciones: con la letra (todas / a–z) · tipo de sílabas · letra (minúscula / mayúscula inicial / MAYÚSCULAS) · pauta (5, 4, 3,5 mm).
+const { registrar } = __req("nucleo/tipos.js");
+const { cuantas, elegirPalabras, alCaso } = __req("tipos/_lengua.js");
+const { hayTrazo } = __req("lengua/trazos.js");
+const { contexto, recortar, repartirLibres, filasDe, mmDe, escribir, repetir, cabeEnLinea } = __req("tipos/_escritura.js");
+const { renglones } = __req("lengua/pauta.js");
+const __default = registrar({
+  id: "escritura.palabras",
+  version: 1,
+  generar(params, azar, { tamano }) {
+    const n = cuantas(tamano, 4), mm = mmDe(params);
+    const extra = params.letra ? { conLetra: params.letra } : {};
+    const ok = (e) => { const t = alCaso(e.p, params.caso); return [...t].every(hayTrazo) && cabeEnLinea(t, tamano, mm); };
+    const ps = elegirPalabras(azar, n, params, [2, 3, 1, 2, 3], { extra, ok, id: "escritura.palabras" });
+    const libres = repartirLibres(filasDe(tamano, mm), Array(n).fill(2));
+    return {
+      enunciado: params.letra ? `Copia las palabras con la letra «${params.letra}».\nMira el modelo y repasa antes de escribir.` : "Copia las palabras.\nMira el modelo y repasa antes de escribir.",
+      ejercicios: ps.map((x, i) => ({ datos: { palabra: alCaso(x.p, params.caso), libres: libres[i] }, solucion: { huecos: [] } })),
+    };
+  },
+  dibujar(p, act) {
+    const ctx = contexto(p, act), { c, paso, x0, x1 } = ctx, es = act.ejercicios;
+    const libres = recortar(es.map((e) => e.datos.libres), es.map(() => 2), ctx.caben);
+    let y = ctx.yTop;
+    es.forEach((e, i) => p.ejercicio(e.id, () => {
+      const n = 2 + libres[i], { bases } = renglones(p, x0, x1, y, n, { mm: ctx.mm });
+      escribir(p, e.datos.palabra, x0 + 0.6 * c, bases[0], c, "modelo");
+      repetir(p, e.datos.palabra, x0 + 0.6 * c, x1, bases[1], c, "repaso", { sep: 1.6 });
+      y -= n * paso;
+    }));
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/escritura.trazos.js": (__exp) => {
+// escritura.trazos · Trazos (Lengua 1.º, lote 4; LENGUA_1.md §3, bloque 8): grafomotricidad en la pauta Lamela.
+// datos:    { familia: "lineas" | "ondas" | "bucles" | "puentes" | "arcos" | "zigzag" | "circulos", variante: "horizontales"…, nombre: "Líneas horizontales", libres: 1 }
+//           (cada ejercicio es un bloque de renglones: 1.º el trazo en negro con punto verde de inicio las dos primeras veces y en gris el resto para repasar,
+//            2.º el mismo trazo punteado, y `libres` renglones en blanco para seguir)
+// solucion: { huecos: [] }   no hay corrección
+// Reglas: completa 4 bloques, media 2; sin repetir (familia, variante). Con «Variados», cada bloque es de una familia distinta; con una familia,
+//         cada bloque es una variante distinta de ella. Renglones: 2 guiados + libres por bloque, repartidos para llenar la página (filasDe).
+// Opciones: tipo de trazo (variados / líneas / ondas / bucles / puentes / arcos / zigzag / círculos) · tamaño de pauta (5, 4, 3,5 mm).
+const { registrar } = __req("nucleo/tipos.js");
+const { cuantas } = __req("tipos/_lengua.js");
+const { FAMILIAS_TRAZO, patronTrazo, pintarTrazos, celdasQueCaben, contexto, recortar, repartirLibres, filasDe, mmDe } = __req("tipos/_escritura.js");
+const { renglones } = __req("lengua/pauta.js");
+const IDS = Object.keys(FAMILIAS_TRAZO);
+
+const __default = registrar({
+  id: "escritura.trazos",
+  version: 1,
+  generar(params, azar, { tamano }) {
+    const n = cuantas(tamano, 4), mm = mmDe(params);
+    const elegidos = params.trazo
+      ? azar.muestra(FAMILIAS_TRAZO[params.trazo].variantes, n).map((v) => [params.trazo, v])
+      : azar.muestra(IDS, n).map((f) => [f, azar.elegir(FAMILIAS_TRAZO[f].variantes)]);
+    const libres = repartirLibres(filasDe(tamano, mm), Array(n).fill(2));
+    return {
+      enunciado: "Repasa los trazos con el lápiz\ny sigue tú en los renglones libres.",
+      ejercicios: elegidos.map(([f, v], i) => ({ datos: { familia: f, variante: v[0], nombre: v[1], libres: libres[i] }, solucion: { huecos: [] } })),
+    };
+  },
+  dibujar(p, act) {
+    const ctx = contexto(p, act), { c, paso, x0, x1 } = ctx, es = act.ejercicios;
+    const libres = recortar(es.map((e) => e.datos.libres), es.map(() => 2), ctx.caben);
+    let y = ctx.yTop;
+    es.forEach((e, i) => p.ejercicio(e.id, () => {
+      const n = 2 + libres[i], { bases } = renglones(p, x0, x1, y, n, { mm: ctx.mm });
+      const patron = patronTrazo(e.datos.familia, e.datos.variante), q = celdasQueCaben(patron, (x1 - x0 - 1.2 * c) / c), xi = x0 + 0.6 * c;
+      const k = Math.min(2, q - 1);
+      pintarTrazos(p, patron.hacer(0, k), xi, bases[0], c, "modelo");
+      pintarTrazos(p, patron.hacer(k, q), xi, bases[0], c, "repaso");
+      pintarTrazos(p, patron.hacer(0, q), xi, bases[1], c, "punteado");
+      y -= n * paso;
+    }));
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
 "tipos/estadistica.barras.js": (__exp) => {
 // estadistica.barras · El gráfico de barras (port de _e_barras() del motor). Solo página completa.
 // datos:    { lee, kinds: ["c"|"s"|"q"|"t" × 4, orden de las columnas], v: [valor de cada columna, 1..10], par: [i, o] }
@@ -13941,6 +15538,16 @@ __req("tipos/conteo.serie10.js");
 __req("tipos/conteo.series.js");
 __req("tipos/conteo.tabla.js");
 __req("tipos/conteo.camino.js");
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({  }));
+},
+"tipos/familia.escritura.js": (__exp) => {
+// Charta · tipos de la familia «escritura» (Lengua 1.º, lote 4). Añadir aquí cada módulo nuevo de la familia.
+__req("tipos/escritura.trazos.js");
+__req("tipos/escritura.letra.js");
+__req("tipos/escritura.palabras.js");
+__req("tipos/escritura.frase.js");
+__req("tipos/escritura.dictado.js");
+__req("tipos/escritura.libre.js");
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({  }));
 },
 "tipos/familia.estadistica.js": (__exp) => {
@@ -15188,6 +16795,7 @@ __req("tipos/familia.fono.js");
 __req("tipos/familia.palabra.js");
 __req("tipos/familia.orto.js");
 __req("tipos/familia.frase.js");
+__req("tipos/familia.escritura.js");
 const __r1 = __req("nucleo/tipos.js");
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get tipo() { return __r1.tipo; }, get hayTipo() { return __r1.hayTipo; }, get listaTipos() { return __r1.listaTipos; } }));
 },

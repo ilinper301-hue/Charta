@@ -8422,6 +8422,864 @@ export const CATALOGO = {
      "ortografía"
     ]
    }
+  },
+  {
+   "id": "escritura.trazos",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 8,
+   "familia": "escritura",
+   "clave": "trazos",
+   "nombre": "Trazos",
+   "descripcion": "Grafomotricidad en la pauta: líneas, ondas, bucles, puentes, arcos, zigzag y círculos con punto de inicio, repaso y filas libres.",
+   "opciones": [
+    {
+     "id": "trazo",
+     "etiqueta": "Tipo de trazo",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Variados (uno distinto en cada bloque)"
+      },
+      {
+       "valor": "lineas",
+       "etiqueta": "Líneas (horizontales, verticales, inclinadas)"
+      },
+      {
+       "valor": "ondas",
+       "etiqueta": "Ondas"
+      },
+      {
+       "valor": "bucles",
+       "etiqueta": "Bucles"
+      },
+      {
+       "valor": "puentes",
+       "etiqueta": "Puentes"
+      },
+      {
+       "valor": "arcos",
+       "etiqueta": "Arcos"
+      },
+      {
+       "valor": "zigzag",
+       "etiqueta": "Zigzag"
+      },
+      {
+       "valor": "circulos",
+       "etiqueta": "Círculos y óvalos"
+      }
+     ]
+    },
+    {
+     "id": "pauta",
+     "etiqueta": "Tamaño de pauta",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "5 mm"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 mm"
+      },
+      {
+       "valor": 3.5,
+       "etiqueta": "3,5 mm"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "TRAZOS",
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 8,
+    "etiquetas": [
+     "lengua",
+     "escritura",
+     "caligrafía",
+     "grafomotricidad",
+     "trazos",
+     "pauta"
+    ]
+   }
+  },
+  {
+   "id": "escritura.letra",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 8,
+   "familia": "escritura",
+   "clave": "letra",
+   "nombre": "Repasa y escribe la letra",
+   "descripcion": "Una letra de modelo (con flechas numeradas si la pauta es grande), filas de repaso y filas libres.",
+   "opciones": [
+    {
+     "id": "letra",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Al azar"
+      },
+      {
+       "valor": "a",
+       "etiqueta": "a"
+      },
+      {
+       "valor": "b",
+       "etiqueta": "b"
+      },
+      {
+       "valor": "c",
+       "etiqueta": "c"
+      },
+      {
+       "valor": "d",
+       "etiqueta": "d"
+      },
+      {
+       "valor": "e",
+       "etiqueta": "e"
+      },
+      {
+       "valor": "f",
+       "etiqueta": "f"
+      },
+      {
+       "valor": "g",
+       "etiqueta": "g"
+      },
+      {
+       "valor": "h",
+       "etiqueta": "h"
+      },
+      {
+       "valor": "i",
+       "etiqueta": "i"
+      },
+      {
+       "valor": "j",
+       "etiqueta": "j"
+      },
+      {
+       "valor": "k",
+       "etiqueta": "k"
+      },
+      {
+       "valor": "l",
+       "etiqueta": "l"
+      },
+      {
+       "valor": "m",
+       "etiqueta": "m"
+      },
+      {
+       "valor": "n",
+       "etiqueta": "n"
+      },
+      {
+       "valor": "ñ",
+       "etiqueta": "ñ"
+      },
+      {
+       "valor": "o",
+       "etiqueta": "o"
+      },
+      {
+       "valor": "p",
+       "etiqueta": "p"
+      },
+      {
+       "valor": "q",
+       "etiqueta": "q"
+      },
+      {
+       "valor": "r",
+       "etiqueta": "r"
+      },
+      {
+       "valor": "s",
+       "etiqueta": "s"
+      },
+      {
+       "valor": "t",
+       "etiqueta": "t"
+      },
+      {
+       "valor": "u",
+       "etiqueta": "u"
+      },
+      {
+       "valor": "v",
+       "etiqueta": "v"
+      },
+      {
+       "valor": "w",
+       "etiqueta": "w"
+      },
+      {
+       "valor": "x",
+       "etiqueta": "x"
+      },
+      {
+       "valor": "y",
+       "etiqueta": "y"
+      },
+      {
+       "valor": "z",
+       "etiqueta": "z"
+      },
+      {
+       "valor": "palabra",
+       "etiqueta": "Las letras de una palabra"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Mayúscula o minúscula",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULA"
+      },
+      {
+       "valor": "ambas",
+       "etiqueta": "Las dos (Aa)"
+      }
+     ]
+    },
+    {
+     "id": "repaso",
+     "etiqueta": "Repaso",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Gris claro"
+      },
+      {
+       "valor": "punteado",
+       "etiqueta": "Punteado"
+      }
+     ]
+    },
+    {
+     "id": "filas",
+     "etiqueta": "Filas de repaso",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "2 filas"
+      },
+      {
+       "valor": 1,
+       "etiqueta": "1 fila"
+      },
+      {
+       "valor": 3,
+       "etiqueta": "3 filas"
+      }
+     ]
+    },
+    {
+     "id": "pauta",
+     "etiqueta": "Tamaño de pauta",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "5 mm"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 mm"
+      },
+      {
+       "valor": 3.5,
+       "etiqueta": "3,5 mm"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "REPASA Y ESCRIBE LA LETRA",
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 10,
+    "etiquetas": [
+     "lengua",
+     "escritura",
+     "caligrafía",
+     "letras",
+     "repasar",
+     "pauta"
+    ]
+   }
+  },
+  {
+   "id": "escritura.palabras",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 8,
+   "familia": "escritura",
+   "clave": "palabras",
+   "nombre": "Copia palabras",
+   "descripcion": "Palabras con la letra trabajada: modelo, repaso y copia libre.",
+   "opciones": [
+    {
+     "id": "letra",
+     "etiqueta": "Con la letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Todas"
+      },
+      {
+       "valor": "a",
+       "etiqueta": "a"
+      },
+      {
+       "valor": "b",
+       "etiqueta": "b"
+      },
+      {
+       "valor": "c",
+       "etiqueta": "c"
+      },
+      {
+       "valor": "d",
+       "etiqueta": "d"
+      },
+      {
+       "valor": "e",
+       "etiqueta": "e"
+      },
+      {
+       "valor": "f",
+       "etiqueta": "f"
+      },
+      {
+       "valor": "g",
+       "etiqueta": "g"
+      },
+      {
+       "valor": "h",
+       "etiqueta": "h"
+      },
+      {
+       "valor": "i",
+       "etiqueta": "i"
+      },
+      {
+       "valor": "j",
+       "etiqueta": "j"
+      },
+      {
+       "valor": "l",
+       "etiqueta": "l"
+      },
+      {
+       "valor": "m",
+       "etiqueta": "m"
+      },
+      {
+       "valor": "n",
+       "etiqueta": "n"
+      },
+      {
+       "valor": "ñ",
+       "etiqueta": "ñ"
+      },
+      {
+       "valor": "o",
+       "etiqueta": "o"
+      },
+      {
+       "valor": "p",
+       "etiqueta": "p"
+      },
+      {
+       "valor": "r",
+       "etiqueta": "r"
+      },
+      {
+       "valor": "s",
+       "etiqueta": "s"
+      },
+      {
+       "valor": "t",
+       "etiqueta": "t"
+      },
+      {
+       "valor": "u",
+       "etiqueta": "u"
+      },
+      {
+       "valor": "v",
+       "etiqueta": "v"
+      },
+      {
+       "valor": "z",
+       "etiqueta": "z"
+      }
+     ]
+    },
+    {
+     "id": "tipo",
+     "etiqueta": "Tipo de sílabas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Directas (ma, pe)"
+      },
+      {
+       "valor": "inversas",
+       "etiqueta": "Con inversas (al, en)"
+      },
+      {
+       "valor": "trabadas",
+       "etiqueta": "Con trabadas (pla, bra)"
+      },
+      {
+       "valor": "mixtas",
+       "etiqueta": "Con mixtas (con, sol)"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "inicial",
+       "etiqueta": "Mayúscula inicial"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULAS"
+      }
+     ]
+    },
+    {
+     "id": "pauta",
+     "etiqueta": "Tamaño de pauta",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "5 mm"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 mm"
+      },
+      {
+       "valor": 3.5,
+       "etiqueta": "3,5 mm"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "COPIA PALABRAS",
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 12,
+    "etiquetas": [
+     "lengua",
+     "escritura",
+     "caligrafía",
+     "palabras",
+     "copiar",
+     "pauta"
+    ]
+   }
+  },
+  {
+   "id": "escritura.frase",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 8,
+   "familia": "escritura",
+   "clave": "frase",
+   "nombre": "Copia la frase",
+   "descripcion": "Frases con mayúscula y punto: modelo, repaso y copia libre.",
+   "opciones": [
+    {
+     "id": "palabras",
+     "etiqueta": "Palabras de cada frase",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Variadas (3 a 5)"
+      },
+      {
+       "valor": 3,
+       "etiqueta": "3 palabras"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 palabras"
+      },
+      {
+       "valor": 5,
+       "etiqueta": "5 palabras"
+      }
+     ]
+    },
+    {
+     "id": "repaso",
+     "etiqueta": "Repaso",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Gris claro"
+      },
+      {
+       "valor": "punteado",
+       "etiqueta": "Punteado"
+      }
+     ]
+    },
+    {
+     "id": "pauta",
+     "etiqueta": "Tamaño de pauta",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "5 mm"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 mm"
+      },
+      {
+       "valor": 3.5,
+       "etiqueta": "3,5 mm"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "COPIA LA FRASE",
+   "color": "rosa",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 12,
+    "etiquetas": [
+     "lengua",
+     "escritura",
+     "caligrafía",
+     "frases",
+     "copiar",
+     "mayúscula",
+     "punto",
+     "pauta"
+    ]
+   }
+  },
+  {
+   "id": "escritura.dictado",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 8,
+   "familia": "escritura",
+   "clave": "dictado",
+   "nombre": "Hoja de dictado",
+   "descripcion": "Renglones numerados en blanco; la maestra dicta. La lista dictada solo sale en pantalla (solucionario y Fori).",
+   "opciones": [
+    {
+     "id": "modo",
+     "etiqueta": "Qué se dicta",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Palabras"
+      },
+      {
+       "valor": "frases",
+       "etiqueta": "Frases"
+      }
+     ]
+    },
+    {
+     "id": "numero",
+     "etiqueta": "Renglones",
+     "tipo": "numero",
+     "min": 5,
+     "max": 10,
+     "defecto": 10
+    },
+    {
+     "id": "letra",
+     "etiqueta": "Con la letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Todas"
+      },
+      {
+       "valor": "a",
+       "etiqueta": "a"
+      },
+      {
+       "valor": "b",
+       "etiqueta": "b"
+      },
+      {
+       "valor": "c",
+       "etiqueta": "c"
+      },
+      {
+       "valor": "d",
+       "etiqueta": "d"
+      },
+      {
+       "valor": "e",
+       "etiqueta": "e"
+      },
+      {
+       "valor": "f",
+       "etiqueta": "f"
+      },
+      {
+       "valor": "g",
+       "etiqueta": "g"
+      },
+      {
+       "valor": "h",
+       "etiqueta": "h"
+      },
+      {
+       "valor": "i",
+       "etiqueta": "i"
+      },
+      {
+       "valor": "j",
+       "etiqueta": "j"
+      },
+      {
+       "valor": "l",
+       "etiqueta": "l"
+      },
+      {
+       "valor": "m",
+       "etiqueta": "m"
+      },
+      {
+       "valor": "n",
+       "etiqueta": "n"
+      },
+      {
+       "valor": "ñ",
+       "etiqueta": "ñ"
+      },
+      {
+       "valor": "o",
+       "etiqueta": "o"
+      },
+      {
+       "valor": "p",
+       "etiqueta": "p"
+      },
+      {
+       "valor": "r",
+       "etiqueta": "r"
+      },
+      {
+       "valor": "s",
+       "etiqueta": "s"
+      },
+      {
+       "valor": "t",
+       "etiqueta": "t"
+      },
+      {
+       "valor": "u",
+       "etiqueta": "u"
+      },
+      {
+       "valor": "v",
+       "etiqueta": "v"
+      },
+      {
+       "valor": "z",
+       "etiqueta": "z"
+      }
+     ]
+    },
+    {
+     "id": "pauta",
+     "etiqueta": "Tamaño de pauta",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "5 mm"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 mm"
+      },
+      {
+       "valor": 3.5,
+       "etiqueta": "3,5 mm"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "HOJA DE DICTADO",
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 15,
+    "etiquetas": [
+     "lengua",
+     "escritura",
+     "dictado",
+     "palabras",
+     "frases",
+     "pauta"
+    ]
+   }
+  },
+  {
+   "id": "escritura.libre",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 8,
+   "familia": "escritura",
+   "clave": "libre",
+   "nombre": "Escribe una frase",
+   "descripcion": "Renglones libres con la frase empezada (El gato…) o con un tema para escribir. Corrección abierta.",
+   "opciones": [
+    {
+     "id": "inicio",
+     "etiqueta": "Cómo empieza",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Con la frase empezada (El gato…)"
+      },
+      {
+       "valor": "tema",
+       "etiqueta": "Con un tema para escribir"
+      }
+     ]
+    },
+    {
+     "id": "pauta",
+     "etiqueta": "Tamaño de pauta",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "5 mm"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 mm"
+      },
+      {
+       "valor": 3.5,
+       "etiqueta": "3,5 mm"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "ESCRIBE UNA FRASE",
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 3,
+    "minutos": 15,
+    "etiquetas": [
+     "lengua",
+     "escritura",
+     "expresión escrita",
+     "frases",
+     "libre",
+     "pauta"
+    ]
+   }
   }
  ]
 };

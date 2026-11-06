@@ -19,7 +19,7 @@ BLOQUES = {
 
 # ------------------------------------------------------------------ opciones comunes (LENGUA_1.md, §2)
 # «Letras: todas» (aún no hay orden de letras del método): por eso no hay opción de letras vistas, salvo elegir una letra concreta donde el modelo la pide.
-from modelos import M, op, COMPLETA, AMBOS
+from modelos import M, op, num, COMPLETA, AMBOS
 
 TIPO = op("tipo", "Tipo de sílabas", [(None, "Directas (ma, pe)"), ("inversas", "Con inversas (al, en)"), ("trabadas", "Con trabadas (pla, bra)"), ("mixtas", "Con mixtas (con, sol)")])
 CASO = op("caso", "Letra", [(None, "minúscula"), ("inicial", "Mayúscula inicial"), ("mayus", "MAYÚSCULAS")])
@@ -177,4 +177,34 @@ MODELOS_LENGUA += [
         op("falta", "Qué falta", [(None, "Las dos (mayúscula y punto)"), ("mayus", "Solo la mayúscula"), ("punto", "Solo el punto")]), FRASE_LARGO],
        "MAYÚSCULA Y PUNTO", "azul"),
     # <<< FRASE
+]
+
+# ------------------------------------------------------------------ lote 4 · escritura.* (bloque 8; todo con pauta Lamela)
+PAUTA = op("pauta", "Tamaño de pauta", [(None, "5 mm"), (4, "4 mm"), (3.5, "3,5 mm")])
+REPASO = op("repaso", "Repaso", [(None, "Gris claro"), ("punteado", "Punteado")])
+MODELOS_LENGUA += [
+    # >>> ESCRITURA (agente escritura)
+    _l(8, "escritura", "trazos", "Trazos", "Grafomotricidad en la pauta: líneas, ondas, bucles, puentes, arcos, zigzag y círculos con punto de inicio, repaso y filas libres.",
+       [op("trazo", "Tipo de trazo", [(None, "Variados (uno distinto en cada bloque)"), ("lineas", "Líneas (horizontales, verticales, inclinadas)"), ("ondas", "Ondas"), ("bucles", "Bucles"),
+                                      ("puentes", "Puentes"), ("arcos", "Arcos"), ("zigzag", "Zigzag"), ("circulos", "Círculos y óvalos")]), PAUTA],
+       "TRAZOS", "verde"),
+    _l(8, "escritura", "letra", "Repasa y escribe la letra", "Una letra de modelo (con flechas numeradas si la pauta es grande), filas de repaso y filas libres.",
+       [op("letra", "Letra", [(None, "Al azar")] + [(l, l) for l in LETRAS] + [("palabra", "Las letras de una palabra")]),
+        op("caso", "Mayúscula o minúscula", [(None, "minúscula"), ("mayus", "MAYÚSCULA"), ("ambas", "Las dos (Aa)")]),
+        REPASO, op("filas", "Filas de repaso", [(None, "2 filas"), (1, "1 fila"), (3, "3 filas")]), PAUTA],
+       "REPASA Y ESCRIBE LA LETRA", "amarillo"),
+    _l(8, "escritura", "palabras", "Copia palabras", "Palabras con la letra trabajada: modelo, repaso y copia libre.",
+       [op("letra", "Con la letra", [(None, "Todas")] + [(l, l) for l in SIN_RARAS]), TIPO, CASO, PAUTA],
+       "COPIA PALABRAS", "azul"),
+    _l(8, "escritura", "frase", "Copia la frase", "Frases con mayúscula y punto: modelo, repaso y copia libre.",
+       [FRASE_LARGO, REPASO, PAUTA],
+       "COPIA LA FRASE", "rosa"),
+    _l(8, "escritura", "dictado", "Hoja de dictado", "Renglones numerados en blanco; la maestra dicta. La lista dictada solo sale en pantalla (solucionario y Fori).",
+       [op("modo", "Qué se dicta", [(None, "Palabras"), ("frases", "Frases")]), num("numero", "Renglones", 5, 10, 10),
+        op("letra", "Con la letra", [(None, "Todas")] + [(l, l) for l in SIN_RARAS]), PAUTA],
+       "HOJA DE DICTADO", "verde"),
+    _l(8, "escritura", "libre", "Escribe una frase", "Renglones libres con la frase empezada (El gato…) o con un tema para escribir. Corrección abierta.",
+       [op("inicio", "Cómo empieza", [(None, "Con la frase empezada (El gato…)"), ("tema", "Con un tema para escribir")]), PAUTA],
+       "ESCRIBE UNA FRASE", "amarillo"),
+    # <<< ESCRITURA
 ]

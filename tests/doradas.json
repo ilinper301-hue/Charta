@@ -2618,6 +2618,606 @@
    "b5ef977a892416cb"
   ]
  },
+ "escritura.dictado": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Hoja de dictado",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "escritura.dictado",
+       "tipoVersion": 1,
+       "params": {
+        "modo": null,
+        "numero": 10,
+        "letra": null,
+        "pauta": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Escucha y escribe las palabras que dicta tu maestra.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "numero": 1,
+          "modo": "palabras"
+         },
+         "solucion": {
+          "huecos": [
+           "aro"
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "numero": 2,
+          "modo": "palabras"
+         },
+         "solucion": {
+          "huecos": [
+           "karate"
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "numero": 3,
+          "modo": "palabras"
+         },
+         "solucion": {
+          "huecos": [
+           "rey"
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "numero": 4,
+          "modo": "palabras"
+         },
+         "solucion": {
+          "huecos": [
+           "pecera"
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "numero": 5,
+          "modo": "palabras"
+         },
+         "solucion": {
+          "huecos": [
+           "suelo"
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "numero": 6,
+          "modo": "palabras"
+         },
+         "solucion": {
+          "huecos": [
+           "goma"
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "numero": 7,
+          "modo": "palabras"
+         },
+         "solucion": {
+          "huecos": [
+           "cuchara"
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "numero": 8,
+          "modo": "palabras"
+         },
+         "solucion": {
+          "huecos": [
+           "hija"
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "numero": 9,
+          "modo": "palabras"
+         },
+         "solucion": {
+          "huecos": [
+           "ducha"
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "numero": 10,
+          "modo": "palabras"
+         },
+         "solucion": {
+          "huecos": [
+           "pie"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "33f242811d0a09dd"
+  ],
+  "svgSolucion": [
+   "357d0eefa3d9e7e3"
+  ]
+ },
+ "escritura.frase": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Copia la frase",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "escritura.frase",
+       "tipoVersion": 1,
+       "params": {
+        "palabras": null,
+        "repaso": null,
+        "pauta": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Copia cada frase.\nEmpieza con mayúscula y acaba con punto.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "frase": "Las hermanas leen.",
+          "libres": 2
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "frase": "El niño camina.",
+          "libres": 2
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "frase": "El amigo lee cuentos.",
+          "libres": 1
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "frase": "El tigre es muy fuerte.",
+          "libres": 1
+         },
+         "solucion": {
+          "huecos": []
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "fabc48e71984a586"
+  ],
+  "svgSolucion": [
+   "66d3e8a8351f61cc"
+  ]
+ },
+ "escritura.letra": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Repasa y escribe la letra",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "escritura.letra",
+       "tipoVersion": 1,
+       "params": {
+        "letra": null,
+        "caso": null,
+        "repaso": null,
+        "filas": null,
+        "pauta": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Repasa la letra «o»\ny escríbela en los renglones.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "letra": "o",
+          "texto": "o",
+          "forma": "sueltas",
+          "repaso": 2,
+          "libres": 4
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "letra": "o",
+          "texto": "o",
+          "forma": "juntas",
+          "repaso": 2,
+          "libres": 4
+         },
+         "solucion": {
+          "huecos": []
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "dada7b31e7c4cf97"
+  ],
+  "svgSolucion": [
+   "cff8e2bee7633d24"
+  ]
+ },
+ "escritura.libre": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Escribe una frase",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "escritura.libre",
+       "tipoVersion": 1,
+       "params": {
+        "inicio": null,
+        "pauta": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Escribe qué hace cada uno.\nContinúa la frase en los renglones.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "inicio": "Las hermanas",
+          "pregunta": "¿Qué hacen las hermanas?",
+          "filas": 3,
+          "ejemplo": "Las hermanas leen."
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "inicio": "El niño",
+          "pregunta": "¿Qué hace el niño?",
+          "filas": 3,
+          "ejemplo": "El niño camina."
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "inicio": "El amigo",
+          "pregunta": "¿Qué hace el amigo?",
+          "filas": 3,
+          "ejemplo": "El amigo come arroz."
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "inicio": "El perro",
+          "pregunta": "¿Qué hace el perro?",
+          "filas": 2,
+          "ejemplo": "El perro duerme en casa."
+         },
+         "solucion": {
+          "huecos": []
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "4393e5f3dbe4b3fe"
+  ],
+  "svgSolucion": [
+   "a8163d4e4a97659c"
+  ]
+ },
+ "escritura.palabras": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Copia palabras",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "escritura.palabras",
+       "tipoVersion": 1,
+       "params": {
+        "letra": null,
+        "tipo": null,
+        "caso": null,
+        "pauta": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Copia las palabras.\nMira el modelo y repasa antes de escribir.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "palabra": "aro",
+          "libres": 2
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "palabra": "hija",
+          "libres": 2
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "palabra": "karate",
+          "libres": 1
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "palabra": "rey",
+          "libres": 1
+         },
+         "solucion": {
+          "huecos": []
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "fe9b3a098b863e55"
+  ],
+  "svgSolucion": [
+   "1df9869de6db9f36"
+  ]
+ },
+ "escritura.trazos": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Trazos",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "escritura.trazos",
+       "tipoVersion": 1,
+       "params": {
+        "trazo": null,
+        "pauta": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Repasa los trazos con el lápiz\ny sigue tú en los renglones libres.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "familia": "zigzag",
+          "variante": "picos",
+          "nombre": "Picos",
+          "libres": 2
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "familia": "circulos",
+          "variante": "altos",
+          "nombre": "Óvalos altos",
+          "libres": 2
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "familia": "lineas",
+          "variante": "verticales",
+          "nombre": "Líneas verticales",
+          "libres": 1
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "familia": "arcos",
+          "variante": "cuencoLargo",
+          "nombre": "Arcos largos hacia arriba",
+          "libres": 1
+         },
+         "solucion": {
+          "huecos": []
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "629278522d5a587f"
+  ],
+  "svgSolucion": [
+   "67ee6580bb834097"
+  ]
+ },
  "estadistica.barras": {
   "ficha": {
    "schemaVersion": 1,

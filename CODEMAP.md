@@ -58,6 +58,8 @@ src/tipos/_fono.js, _palabra.js, _orto.js  ayudantes de fono.*, palabra.* y orto
 src/tipos/_frase.js, familia.frase.js  banco de frases con concordancia y ayudantes de frase.* (lote 3 de Lengua) · tests/inv/frase.js
 src/lengua/pauta.js   pauta Lamela (lote 4): renglones(p, x0, x1, yArriba, n, {mm, guia}) → {bases, c, paso}; medidasPauta, cabenRenglones, TAMANOS_PAUTA (5, 4, 3,5 mm). Medidas reales con Papel.mm()
 src/lengua/trazos.js  letras de una sola línea en unidades de la pauta (base 0, cuerpo 1, asta 1,8, rabo −0,8): LETRAS_TRAZO, trazoACurvas, anchoTrazos, escribirTrazos(p, texto, x, base, c, {estilo: modelo|repaso|punteado, punto, flechas})
+src/tipos/_escritura.js, familia.escritura.js  ayudantes de escritura.* (lote 4 de Lengua): filasDe/anchoDe (tabla conservadora de renglones y ancho por tamaño y pauta), contexto/recortar/repartirLibres, escribir/repetir (texto con letras de trazo), FAMILIAS_TRAZO (7 familias × 4–5 variantes de grafomotricidad) y pintarTrazos
+src/tipos/escritura.{trazos,letra,palabras,frase,dictado,libre}.js  los 6 tipos del bloque 8: bloques de renglones (modelo + repaso + libres); el dictado lleva la lista solo en `solucion` (nada en el papel) · tests/inv/escritura.js
 tests/test_pauta.js   escala real del panel, pauta y letras de trazo · tools/prueba_pauta.js → hoja de prueba para imprimir y medir
 tests/test_lengua.js  reglas (lista de control), léxico y ayudantes
 tools/build.py        src/ → dist/index.html (un solo archivo) + sw.js y manifest.webmanifest en la raíz; --js = solo el paquete
