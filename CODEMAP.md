@@ -56,6 +56,13 @@ src/lengua/dibujo.js  ayudantes en Papel: palabraHuecos, casillas (sol / rellena
 src/tipos/_lengua.js  ayudantes comunes de letra.* y silaba.* (lote 1 de Lengua) · tests/inv/_lengua.js
 src/tipos/_fono.js, _palabra.js, _orto.js  ayudantes de fono.*, palabra.* y orto.* (lote 2 de Lengua; _orto.js trae el banco de nombres propios) · tests/inv/{fono,palabra,orto}.js
 src/tipos/_frase.js, familia.frase.js  banco de frases con concordancia y ayudantes de frase.* (lote 3 de Lengua) · tests/inv/frase.js
+src/tipos/_lectura.js  ayudantes de lectura.* (lote 5): crearTexto(azar, nivel)/elegirHuecos/pregunta (textos por plantillas con preguntas de solución única), SECUENCIAS (banco de 36 para ordenar), ADIVINANZAS (banco de 47, originales), figura()/FORMAS/PINTURAS/textoInstruccion (instrucciones), envolver/ajustaLineas/parrafo (texto en líneas) · tests/inv/lectura.js (reconoce palabras del léxico y concordancia)
+src/tipos/familia.lectura.js  importa los 5 tipos del bloque 7 (Comprensión lectora), sin pictogramas; importada desde src/tipos/index.js
+src/tipos/lectura.texto.js  Lee y responde: texto de 2/4/6 frases (nivel 1/2/3; media solo nivel 1) + preguntas de elegir entre 3, sí/no y completar; el texto se repite en `datos.texto` de cada ejercicio y se dibuja fuera de los grupos `ej`
+src/tipos/lectura.ordena.js  Ordena la historia: secuencias de 3–4 frases del banco (rutina/receta/cuento), casilla con el número de cada frase (solución en rojo)
+src/tipos/lectura.instrucciones.js  Lee y colorea: «Colorea de rojo la estrella grande.» con círculo/estrella/cuadrado/triángulo grandes o pequeños; una sola figura cumple cada orden; en la solución se rellena de su color (borde rojo)
+src/tipos/lectura.adivinanza.js  Adivinanzas del banco: respuesta escrita en un cuadro o letra a letra (una casilla por letra)
+src/tipos/lectura.fluidez.js  Lectura rápida (solo completa): 40 palabras (4 columnas) o 12 frases numeradas y casilla «Palabras leídas» (en la solución, el total de palabras)
 src/lengua/pauta.js   pauta Lamela (lote 4): renglones(p, x0, x1, yArriba, n, {mm, guia}) → {bases, c, paso}; medidasPauta, cabenRenglones, TAMANOS_PAUTA (5, 4, 3,5 mm). Medidas reales con Papel.mm()
 src/lengua/trazos.js  letras de una sola línea en unidades de la pauta (base 0, cuerpo 1, asta 1,8, rabo −0,8): LETRAS_TRAZO, trazoACurvas, anchoTrazos, escribirTrazos(p, texto, x, base, c, {estilo: modelo|repaso|punteado, punto, flechas})
 src/tipos/_escritura.js, familia.escritura.js  ayudantes de escritura.* (lote 4 de Lengua): filasDe/anchoDe (tabla conservadora de renglones y ancho por tamaño y pauta), contexto/recortar/repartirLibres, escribir/repetir (texto con letras de trazo), FAMILIAS_TRAZO (7 familias × 4–5 variantes de grafomotricidad) y pintarTrazos

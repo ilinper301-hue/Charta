@@ -179,6 +179,30 @@ MODELOS_LENGUA += [
     # <<< FRASE
 ]
 
+# ------------------------------------------------------------------ lote 5 · lectura.* (bloque 7; sin pictogramas)
+MODELOS_LENGUA += [
+    # >>> LECTURA (agente lectura)
+    _l(7, "lectura", "texto", "Lee y responde", "Texto breve (personaje, mascota, color, lugar, comida…) y preguntas: elegir entre tres, sí o no y completar. En media página, solo el nivel 1.",
+       [op("nivel", "Nivel del texto", [(None, "Nivel 1 · dos frases"), (2, "Nivel 2 · cuatro frases", COMPLETA), (3, "Nivel 3 · cuento corto", COMPLETA)]),
+        op("preguntas", "Preguntas", [(None, "Variadas (elegir, sí o no, completar)"), ("elegir", "Elegir entre tres respuestas"), ("sino", "Sí o no"), ("completar", "Completar la frase")]), CASO_LETRA],
+       "LEE Y RESPONDE", "azul"),
+    _l(7, "lectura", "ordena", "Ordena la historia", "Tres o cuatro frases de una historia corta (rutinas, recetas, cuentos) para numerar en orden.",
+       [op("tema", "Tema", [(None, "Todos (rutinas, recetas y cuentos)"), ("rutina", "Rutinas"), ("receta", "Recetas"), ("cuento", "Cuentos")]),
+        op("frases", "Frases de cada historia", [(None, "3 o 4"), (3, "3 frases"), (4, "4 frases")]), CASO_LETRA],
+       "ORDENA LA HISTORIA", "rosa"),
+    _l(7, "lectura", "instrucciones", "Lee y colorea", "Una orden escrita («Colorea de rojo la estrella grande.») y varias figuras: colorear solo la que cumple la orden.",
+       [op("ordenes", "Órdenes", [(None, "Figura y tamaño (la estrella grande)"), ("figura", "Solo la figura (el círculo)"), ("dos", "Dos órdenes seguidas")]),
+        op("colores", "Colores", [(None, "Cuatro (rojo, azul, verde y amarillo)"), ("todos", "Ocho (con naranja, rosa, morado y marrón)")]), CASO_LETRA],
+       "LEE Y COLOREA", "amarillo"),
+    _l(7, "lectura", "adivinanza", "Adivinanzas", "Adivinanzas cortas con respuesta de una palabra, escrita en un cuadro o letra a letra.",
+       [op("ayuda", "Ayuda", [(None, "Sin ayuda (escribe la palabra)"), ("letras", "Una casilla por cada letra")]), CASO_LETRA],
+       "ADIVINANZAS", "verde"),
+    _l(7, "lectura", "fluidez", "Lectura rápida", "Lista numerada de palabras o frases para leer en un minuto, con la casilla de palabras leídas.",
+       [op("contenido", "Qué se lee", [(None, "Palabras"), ("frases", "Frases")]), TIPO, _largo("Sílabas de cada palabra", [(None, "Variadas"), (2, "2 sílabas"), (3, "3 sílabas")]), CASO],
+       "LECTURA RÁPIDA", "azul", COMPLETA),
+    # <<< LECTURA
+]
+
 # ------------------------------------------------------------------ lote 4 · escritura.* (bloque 8; todo con pauta Lamela)
 PAUTA = op("pauta", "Tamaño de pauta", [(None, "5 mm"), (4, "4 mm"), (3.5, "3,5 mm")])
 REPASO = op("repaso", "Repaso", [(None, "Gris claro"), ("punteado", "Punteado")])

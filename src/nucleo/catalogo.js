@@ -8424,6 +8424,450 @@ export const CATALOGO = {
    }
   },
   {
+   "id": "lectura.texto",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 7,
+   "familia": "lectura",
+   "clave": "texto",
+   "nombre": "Lee y responde",
+   "descripcion": "Texto breve (personaje, mascota, color, lugar, comida…) y preguntas: elegir entre tres, sí o no y completar. En media página, solo el nivel 1.",
+   "opciones": [
+    {
+     "id": "nivel",
+     "etiqueta": "Nivel del texto",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Nivel 1 · dos frases"
+      },
+      {
+       "valor": 2,
+       "etiqueta": "Nivel 2 · cuatro frases",
+       "tamanos": [
+        "completa"
+       ]
+      },
+      {
+       "valor": 3,
+       "etiqueta": "Nivel 3 · cuento corto",
+       "tamanos": [
+        "completa"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "preguntas",
+     "etiqueta": "Preguntas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Variadas (elegir, sí o no, completar)"
+      },
+      {
+       "valor": "elegir",
+       "etiqueta": "Elegir entre tres respuestas"
+      },
+      {
+       "valor": "sino",
+       "etiqueta": "Sí o no"
+      },
+      {
+       "valor": "completar",
+       "etiqueta": "Completar la frase"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULA"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "LEE Y RESPONDE",
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "lengua",
+     "comprensión lectora",
+     "texto",
+     "preguntas",
+     "leer"
+    ]
+   }
+  },
+  {
+   "id": "lectura.ordena",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 7,
+   "familia": "lectura",
+   "clave": "ordena",
+   "nombre": "Ordena la historia",
+   "descripcion": "Tres o cuatro frases de una historia corta (rutinas, recetas, cuentos) para numerar en orden.",
+   "opciones": [
+    {
+     "id": "tema",
+     "etiqueta": "Tema",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Todos (rutinas, recetas y cuentos)"
+      },
+      {
+       "valor": "rutina",
+       "etiqueta": "Rutinas"
+      },
+      {
+       "valor": "receta",
+       "etiqueta": "Recetas"
+      },
+      {
+       "valor": "cuento",
+       "etiqueta": "Cuentos"
+      }
+     ]
+    },
+    {
+     "id": "frases",
+     "etiqueta": "Frases de cada historia",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "3 o 4"
+      },
+      {
+       "valor": 3,
+       "etiqueta": "3 frases"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 frases"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULA"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "ORDENA LA HISTORIA",
+   "color": "rosa",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "lengua",
+     "comprensión lectora",
+     "ordenar",
+     "historia",
+     "secuencia",
+     "numerar"
+    ]
+   }
+  },
+  {
+   "id": "lectura.instrucciones",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 7,
+   "familia": "lectura",
+   "clave": "instrucciones",
+   "nombre": "Lee y colorea",
+   "descripcion": "Una orden escrita («Colorea de rojo la estrella grande.») y varias figuras: colorear solo la que cumple la orden.",
+   "opciones": [
+    {
+     "id": "ordenes",
+     "etiqueta": "Órdenes",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Figura y tamaño (la estrella grande)"
+      },
+      {
+       "valor": "figura",
+       "etiqueta": "Solo la figura (el círculo)"
+      },
+      {
+       "valor": "dos",
+       "etiqueta": "Dos órdenes seguidas"
+      }
+     ]
+    },
+    {
+     "id": "colores",
+     "etiqueta": "Colores",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Cuatro (rojo, azul, verde y amarillo)"
+      },
+      {
+       "valor": "todos",
+       "etiqueta": "Ocho (con naranja, rosa, morado y marrón)"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULA"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "LEE Y COLOREA",
+   "color": "amarillo",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 8,
+    "etiquetas": [
+     "lengua",
+     "comprensión lectora",
+     "órdenes",
+     "figuras",
+     "colorear"
+    ]
+   }
+  },
+  {
+   "id": "lectura.adivinanza",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 7,
+   "familia": "lectura",
+   "clave": "adivinanza",
+   "nombre": "Adivinanzas",
+   "descripcion": "Adivinanzas cortas con respuesta de una palabra, escrita en un cuadro o letra a letra.",
+   "opciones": [
+    {
+     "id": "ayuda",
+     "etiqueta": "Ayuda",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Sin ayuda (escribe la palabra)"
+      },
+      {
+       "valor": "letras",
+       "etiqueta": "Una casilla por cada letra"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULA"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "ADIVINANZAS",
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 10,
+    "etiquetas": [
+     "lengua",
+     "comprensión lectora",
+     "adivinanzas",
+     "escribir"
+    ]
+   }
+  },
+  {
+   "id": "lectura.fluidez",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 7,
+   "familia": "lectura",
+   "clave": "fluidez",
+   "nombre": "Lectura rápida",
+   "descripcion": "Lista numerada de palabras o frases para leer en un minuto, con la casilla de palabras leídas.",
+   "opciones": [
+    {
+     "id": "contenido",
+     "etiqueta": "Qué se lee",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Palabras"
+      },
+      {
+       "valor": "frases",
+       "etiqueta": "Frases"
+      }
+     ]
+    },
+    {
+     "id": "tipo",
+     "etiqueta": "Tipo de sílabas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Directas (ma, pe)"
+      },
+      {
+       "valor": "inversas",
+       "etiqueta": "Con inversas (al, en)"
+      },
+      {
+       "valor": "trabadas",
+       "etiqueta": "Con trabadas (pla, bra)"
+      },
+      {
+       "valor": "mixtas",
+       "etiqueta": "Con mixtas (con, sol)"
+      }
+     ]
+    },
+    {
+     "id": "largo",
+     "etiqueta": "Sílabas de cada palabra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Variadas"
+      },
+      {
+       "valor": 2,
+       "etiqueta": "2 sílabas"
+      },
+      {
+       "valor": 3,
+       "etiqueta": "3 sílabas"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "inicial",
+       "etiqueta": "Mayúscula inicial"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULAS"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa"
+   ],
+   "titulo": "LECTURA RÁPIDA",
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 5,
+    "etiquetas": [
+     "lengua",
+     "comprensión lectora",
+     "fluidez",
+     "lectura rápida",
+     "palabras"
+    ]
+   }
+  },
+  {
    "id": "escritura.trazos",
    "curso": 1,
    "materia": "lengua",

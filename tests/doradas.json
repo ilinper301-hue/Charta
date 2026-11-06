@@ -9024,6 +9024,767 @@
    "e19ea20bbf43903c"
   ]
  },
+ "lectura.adivinanza": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Adivinanzas",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "lectura.adivinanza",
+       "tipoVersion": 1,
+       "params": {
+        "ayuda": null,
+        "caso": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Lee la adivinanza y escribe la respuesta.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "texto": "Tiene dos hojas, corta el papel y se usa con la mano.",
+          "n": 6,
+          "ayuda": "sin",
+          "id": 29
+         },
+         "solucion": {
+          "huecos": [
+           "tijera"
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "texto": "Es enorme y tiene la nariz muy larga. Sus orejas son grandes.",
+          "n": 8,
+          "ayuda": "sin",
+          "id": 9
+         },
+         "solucion": {
+          "huecos": [
+           "elefante"
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "texto": "Brilla en el cielo por la noche. Es redonda o delgada, pero no es una estrella.",
+          "n": 4,
+          "ayuda": "sin",
+          "id": 16
+         },
+         "solucion": {
+          "huecos": [
+           "luna"
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "texto": "Se lleva en el pie. Tiene suela y cordones.",
+          "n": 6,
+          "ayuda": "sin",
+          "id": 32
+         },
+         "solucion": {
+          "huecos": [
+           "zapato"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "ac892429368e150d"
+  ],
+  "svgSolucion": [
+   "32c408f18383704f"
+  ]
+ },
+ "lectura.fluidez": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Lectura rápida",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "lectura.fluidez",
+       "tipoVersion": 1,
+       "params": {
+        "contenido": null,
+        "tipo": null,
+        "largo": null,
+        "caso": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Lee en voz alta durante un minuto.\nEscribe cuántas palabras has leído.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "items": [
+           "varita",
+           "mecánico",
+           "vaso",
+           "otoño",
+           "suelo",
+           "copa",
+           "suma",
+           "maraca",
+           "regalo",
+           "rubio",
+           "camarero",
+           "tapa",
+           "pie",
+           "cuchillo",
+           "mariposa",
+           "día",
+           "cocinero",
+           "señora",
+           "boca",
+           "sano",
+           "tierra",
+           "cuello",
+           "chico",
+           "toro",
+           "mágico",
+           "violeta",
+           "cosa",
+           "caramelo",
+           "sueño",
+           "medio",
+           "té",
+           "rey",
+           "zoo",
+           "correa",
+           "piano",
+           "cómodo",
+           "goma",
+           "pera",
+           "ficha",
+           "tesoro"
+          ],
+          "contenido": "palabras",
+          "total": 40
+         },
+         "solucion": {
+          "huecos": [
+           40
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "248255b21de50ed4"
+  ],
+  "svgSolucion": [
+   "7dde1854710cab05"
+  ]
+ },
+ "lectura.instrucciones": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Lee y colorea",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "lectura.instrucciones",
+       "tipoVersion": 1,
+       "params": {
+        "ordenes": null,
+        "colores": null,
+        "caso": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Lee la orden y colorea la figura.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "texto": "Colorea de azul el triángulo grande.",
+          "ordenes": [
+           {
+            "color": "azul",
+            "forma": "t",
+            "tam": "g"
+           }
+          ],
+          "figuras": [
+           {
+            "forma": "s",
+            "tam": "p"
+           },
+           {
+            "forma": "q",
+            "tam": "g"
+           },
+           {
+            "forma": "t",
+            "tam": "g"
+           },
+           {
+            "forma": "c",
+            "tam": "g"
+           },
+           {
+            "forma": "c",
+            "tam": "p"
+           },
+           {
+            "forma": "q",
+            "tam": "p"
+           }
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": [
+           2
+          ],
+          "colores": [
+           "azul"
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "texto": "Colorea de amarillo el triángulo pequeño.",
+          "ordenes": [
+           {
+            "color": "amarillo",
+            "forma": "t",
+            "tam": "p"
+           }
+          ],
+          "figuras": [
+           {
+            "forma": "t",
+            "tam": "g"
+           },
+           {
+            "forma": "s",
+            "tam": "g"
+           },
+           {
+            "forma": "q",
+            "tam": "p"
+           },
+           {
+            "forma": "t",
+            "tam": "p"
+           },
+           {
+            "forma": "s",
+            "tam": "p"
+           },
+           {
+            "forma": "c",
+            "tam": "p"
+           }
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": [
+           3
+          ],
+          "colores": [
+           "amarillo"
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "texto": "Colorea de rojo la estrella pequeña.",
+          "ordenes": [
+           {
+            "color": "rojo",
+            "forma": "s",
+            "tam": "p"
+           }
+          ],
+          "figuras": [
+           {
+            "forma": "s",
+            "tam": "p"
+           },
+           {
+            "forma": "c",
+            "tam": "p"
+           },
+           {
+            "forma": "t",
+            "tam": "p"
+           },
+           {
+            "forma": "t",
+            "tam": "g"
+           },
+           {
+            "forma": "s",
+            "tam": "g"
+           },
+           {
+            "forma": "q",
+            "tam": "p"
+           }
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": [
+           0
+          ],
+          "colores": [
+           "rojo"
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "texto": "Colorea de verde la estrella pequeña.",
+          "ordenes": [
+           {
+            "color": "verde",
+            "forma": "s",
+            "tam": "p"
+           }
+          ],
+          "figuras": [
+           {
+            "forma": "q",
+            "tam": "p"
+           },
+           {
+            "forma": "c",
+            "tam": "p"
+           },
+           {
+            "forma": "c",
+            "tam": "g"
+           },
+           {
+            "forma": "s",
+            "tam": "p"
+           },
+           {
+            "forma": "s",
+            "tam": "g"
+           },
+           {
+            "forma": "t",
+            "tam": "g"
+           }
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": [
+           3
+          ],
+          "colores": [
+           "verde"
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "texto": "Colorea de verde la estrella grande.",
+          "ordenes": [
+           {
+            "color": "verde",
+            "forma": "s",
+            "tam": "g"
+           }
+          ],
+          "figuras": [
+           {
+            "forma": "s",
+            "tam": "g"
+           },
+           {
+            "forma": "t",
+            "tam": "g"
+           },
+           {
+            "forma": "c",
+            "tam": "p"
+           },
+           {
+            "forma": "c",
+            "tam": "g"
+           },
+           {
+            "forma": "s",
+            "tam": "p"
+           },
+           {
+            "forma": "t",
+            "tam": "p"
+           }
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": [
+           0
+          ],
+          "colores": [
+           "verde"
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "texto": "Colorea de amarillo el triángulo grande.",
+          "ordenes": [
+           {
+            "color": "amarillo",
+            "forma": "t",
+            "tam": "g"
+           }
+          ],
+          "figuras": [
+           {
+            "forma": "q",
+            "tam": "p"
+           },
+           {
+            "forma": "s",
+            "tam": "p"
+           },
+           {
+            "forma": "s",
+            "tam": "g"
+           },
+           {
+            "forma": "c",
+            "tam": "p"
+           },
+           {
+            "forma": "t",
+            "tam": "g"
+           },
+           {
+            "forma": "q",
+            "tam": "g"
+           }
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": [
+           4
+          ],
+          "colores": [
+           "amarillo"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "a84a3f793f9cc59b"
+  ],
+  "svgSolucion": [
+   "71f9eb5c52963795"
+  ]
+ },
+ "lectura.ordena": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Ordena la historia",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "lectura.ordena",
+       "tipoVersion": 1,
+       "params": {
+        "tema": null,
+        "frases": null,
+        "caso": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Lee las frases.\nEscribe 1, 2, 3… para ponerlas en orden.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "frases": [
+           "El padre lava el tomate.",
+           "El padre pone el tomate en el plato.",
+           "El padre corta el tomate."
+          ],
+          "tema": "receta",
+          "id": 16
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           3,
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "frases": [
+           "El pato come el pan.",
+           "El pato ve el pan.",
+           "El pato nada hacia el pan."
+          ],
+          "tema": "cuento",
+          "id": 35
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           1,
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "frases": [
+           "La niña ata los cordones.",
+           "La niña se pone los calcetines.",
+           "La niña se pone los zapatos."
+          ],
+          "tema": "rutina",
+          "id": 4
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           1,
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "frases": [
+           "El perro corre.",
+           "El perro lleva la pelota al niño.",
+           "El perro coge la pelota.",
+           "El niño lanza la pelota."
+          ],
+          "tema": "cuento",
+          "id": 28
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           4,
+           3,
+           1
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "1cc7f1b732cbc7f0"
+  ],
+  "svgSolucion": [
+   "6bcaeb7652e90307"
+  ]
+ },
+ "lectura.texto": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Lee y responde",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "lectura.texto",
+       "tipoVersion": 1,
+       "params": {
+        "nivel": null,
+        "preguntas": null,
+        "caso": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Lee el texto y contesta.\nRodea la respuesta o escribe la palabra que falta.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "texto": [
+           "La hermana tiene un conejo gris.",
+           "El conejo está contento."
+          ],
+          "tipo": "elegir",
+          "fuente": 0,
+          "pregunta": "¿Qué tiene la hermana?",
+          "opciones": [
+           "un gato",
+           "un pájaro",
+           "un conejo"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 2
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "texto": [
+           "La hermana tiene un conejo gris.",
+           "El conejo está contento."
+          ],
+          "tipo": "sino",
+          "fuente": 0,
+          "frase": "La hermana tiene un conejo blanco."
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 1
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "texto": [
+           "La hermana tiene un conejo gris.",
+           "El conejo está contento."
+          ],
+          "tipo": "completar",
+          "fuente": 1,
+          "antes": "El conejo está",
+          "despues": "."
+         },
+         "solucion": {
+          "huecos": [
+           "contento"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "0eebbe5944a64253"
+  ],
+  "svgSolucion": [
+   "31c4de9b0f701ce9"
+  ]
+ },
  "letra.abecedario": {
   "ficha": {
    "schemaVersion": 1,
