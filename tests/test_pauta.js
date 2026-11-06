@@ -54,8 +54,9 @@ function muestras(cmds) {
   return pts;
 }
 
-// 3. Letras de trazo: cada trazo empieza con M o A, dentro de la pauta (asta ≤ 1,8, rabo ≥ −0,8) y del ancho declarado.
-for (const [ch, L] of Object.entries(LETRAS_TRAZO)) {
+// 3. Letras de trazo de muestra a, l, g (el alfabeto completo se prueba en test_trazos.js): cada trazo empieza con M o A, dentro de la pauta (asta ≤ 1,8, rabo ≥ −0,8) y del ancho declarado.
+for (const ch of ["a", "l", "g"]) {
+  const L = LETRAS_TRAZO[ch];
   assert.ok(L.w > 0 && L.t.length >= 1, ch);
   for (const tr of L.t) {
     const { cmds, ini, dir, flecha } = trazoACurvas(tr);

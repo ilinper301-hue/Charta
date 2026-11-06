@@ -4,7 +4,7 @@
   "type": "module",
   "description": "Charta: fichas educativas personalizadas. Sin dependencias; package.json solo para que Node trate src/ como módulos ES.",
   "scripts": {
-    "test": "node tests/test_lengua.js && node tests/test_pauta.js && node tests/test_nucleo.js && node tests/test_rep.js && node tests/test_tipos.js && node tests/test_invariantes.js && node tests/test_doradas.js && node tests/test_ui.js && node tests/test_nube.js && node tests/test_fori.js",
+    "test": "node tests/test_lengua.js && node tests/test_pauta.js && node tests/test_trazos.js && node tests/test_nucleo.js && node tests/test_rep.js && node tests/test_tipos.js && node tests/test_invariantes.js && node tests/test_doradas.js && node tests/test_ui.js && node tests/test_nube.js && node tests/test_fori.js",
     "build": "python3 tools/build.py"
   }
 }

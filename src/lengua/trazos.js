@@ -14,11 +14,107 @@ export const COLOR_FLECHA = "#1F4E79";
 
 const BOLA = (desde = 40) => ["A", 0.45, 0.5, 0.45, 0.5, desde, desde + 360];   // panza de a, g, d, q: empieza arriba a la derecha y gira a la izquierda
 
+// Ayudantes de dibujo (todo en unidades de la pauta).
+const pl = (...pts) => pts.map(([x, y], i) => [i ? "L" : "M", x, y]);                      // polilínea
+const ar = (cx, cy, rx, ry, a0, a1) => ["A", cx, cy, rx, ry, a0, a1];                       // arco de elipse
+const T = (d, extra = {}) => ({ d, ...extra });
+const tallo = (x, y0, y1, extra) => T(pl([x, y0], [x, y1]), extra);                         // trazo vertical
+const barra = (x0, x1, y, extra) => T(pl([x0, y], [x1, y]), extra);                         // trazo horizontal
+const punto = (x, y) => T([ar(x, y, 0.035, 0.035, 0, 360)]);                                // punto (círculo diminuto; con el trazo grueso sale relleno)
+const ARCO_N = (x0, rx, y = 0.55, ry = 0.45) => ar(x0 + rx, y, rx, ry, 180, 0);             // arco de n, h, m: de la izquierda por arriba a la derecha
+const BOLA_B = (x0 = 0.1) => ar(x0 + 0.45, 0.5, 0.45, 0.5, 180, -180);                      // panza de b y p: empieza en el asta y gira a la derecha
+const CAP = 1.8;                                                                             // altura de mayúsculas y dígitos
+
 export const LETRAS_TRAZO = {
   a: { w: 0.9, t: [{ d: [BOLA()], en: 50 / 360 }, { d: [["M", 0.9, 1], ["L", 0.9, 0]], lado: -1, en: 0.45 }] },
   l: { w: 0.2, t: [{ d: [["M", 0.1, 1.8], ["L", 0.1, 0]], en: 0.25 }] },
   g: { w: 0.9, t: [{ d: [BOLA()], en: 50 / 360 }, { d: [["M", 0.9, 1], ["L", 0.9, -0.4], ["A", 0.5, -0.4, 0.4, 0.4, 0, -165]], lado: -1, en: 0.3 }] },
+  // ---- minúsculas
+  b: { w: 1, t: [tallo(0.1, 1.8, 0, { en: 0.25 }), T([BOLA_B()], { en: 0.1 })] },
+  c: { w: 0.85, t: [T([ar(0.45, 0.5, 0.45, 0.5, 45, 315)], { en: 0.1 })] },
+  d: { w: 0.9, t: [{ d: [BOLA()], en: 50 / 360 }, tallo(0.9, 1.8, 0, { lado: -1, en: 0.25 })] },
+  e: { w: 0.9, t: [T([...pl([0, 0.5], [0.9, 0.5]), ar(0.45, 0.5, 0.45, 0.5, 0, 320)], { lado: -1 })] },
+  f: { w: 0.85, t: [T([ar(0.55, 1.5, 0.25, 0.3, 20, 180), ["L", 0.3, 0]], { lado: -1, en: 0.2 }), barra(0, 0.6, 1)] },
+  h: { w: 1, t: [tallo(0.1, 1.8, 0, { en: 0.25 }), T([ARCO_N(0.1, 0.4), ["L", 0.9, 0]], { en: 0.35 })] },
+  i: { w: 0.3, t: [tallo(0.15, 1, 0, { en: 0.25 }), punto(0.15, 1.4)] },
+  j: { w: 0.6, t: [T([...pl([0.5, 1], [0.5, -0.4]), ar(0.2, -0.4, 0.3, 0.4, 0, -140)], { lado: -1, en: 0.3 }), punto(0.5, 1.4)] },
+  k: { w: 0.9, t: [tallo(0.1, 1.8, 0, { en: 0.25 }), T(pl([0.8, 1], [0.1, 0.35], [0.85, 0]), { lado: -1 })] },
+  m: { w: 1.2, t: [tallo(0.1, 1, 0, { en: 0.25 }), T([ARCO_N(0.1, 0.25), ["L", 0.6, 0]], { en: 0.3 }),
+    T([ARCO_N(0.6, 0.25), ["L", 1.1, 0]], { en: 0.3 })] },
+  n: { w: 1, t: [tallo(0.1, 1, 0, { en: 0.25 }), T([ARCO_N(0.1, 0.4), ["L", 0.9, 0]], { en: 0.35 })] },
+  o: { w: 0.9, t: [T([ar(0.45, 0.5, 0.45, 0.5, 90, 450)], { en: 0.1 })] },
+  p: { w: 1, t: [tallo(0.1, 1, -0.8, { en: 0.25 }), T([BOLA_B()], { en: 0.1 })] },
+  q: { w: 0.9, t: [{ d: [BOLA()], en: 50 / 360 }, tallo(0.9, 1, -0.8, { lado: -1, en: 0.25 })] },
+  r: { w: 0.7, t: [tallo(0.1, 1, 0, { en: 0.25 }), T([ar(0.45, 0.55, 0.35, 0.45, 180, 70)], { en: 0.35 })] },
+  s: { w: 0.8, t: [T([ar(0.42, 0.75, 0.35, 0.25, 30, 270), ar(0.42, 0.25, 0.35, 0.25, 90, -150)], { en: 0.1 })] },
+  t: { w: 0.65, t: [T([...pl([0.3, 1.45], [0.3, 0.25]), ar(0.55, 0.25, 0.25, 0.25, 180, 290)], { en: 0.15 }), barra(0, 0.6, 1)] },
+  u: { w: 1, t: [T([...pl([0.1, 1], [0.1, 0.4]), ar(0.5, 0.4, 0.4, 0.4, 180, 360)], { lado: -1, en: 0.3 }), tallo(0.9, 1, 0, { lado: -1, en: 0.25 })] },
+  v: { w: 0.9, t: [T(pl([0.05, 1], [0.45, 0], [0.85, 1]))] },
+  w: { w: 1.1, t: [T(pl([0.05, 1], [0.3, 0], [0.55, 1], [0.8, 0], [1.05, 1]))] },
+  x: { w: 0.8, t: [T(pl([0.05, 1], [0.75, 0])), T(pl([0.75, 1], [0.05, 0]), { lado: -1 })] },
+  y: { w: 0.9, t: [T(pl([0.05, 1], [0.49, 0])), T(pl([0.85, 1], [0.2, -0.8]), { lado: -1 })] },
+  z: { w: 0.85, t: [T(pl([0.05, 1], [0.8, 1], [0.05, 0], [0.8, 0]), { lado: -1 })] },
+  // ---- mayúsculas
+  A: { w: 1.1, t: [T(pl([0.05, 0], [0.55, CAP], [1.05, 0]), { lado: -1 }), barra(0.25, 0.85, 0.6)] },
+  B: { w: 1.1, t: [tallo(0.1, CAP, 0, { en: 0.25 }), T([...pl([0.1, CAP], [0.5, CAP]), ar(0.5, 1.35, 0.4, 0.45, 90, -90), ["L", 0.1, 0.9]], { lado: -1 }),
+    T([...pl([0.1, 0.9], [0.55, 0.9]), ar(0.55, 0.45, 0.45, 0.45, 90, -90), ["L", 0.1, 0]], { lado: -1 })] },
+  C: { w: 1.1, t: [T([ar(0.55, 0.9, 0.5, 0.9, 45, 315)], { en: 0.1 })] },
+  D: { w: 1.1, t: [tallo(0.1, CAP, 0, { en: 0.25 }), T([...pl([0.1, CAP], [0.4, CAP]), ar(0.4, 0.9, 0.6, 0.9, 90, -90), ["L", 0.1, 0]], { lado: -1 })] },
+  E: { w: 0.95, t: [T(pl([0.85, CAP], [0.1, CAP], [0.1, 0], [0.85, 0]), { lado: -1 }), barra(0.1, 0.75, 0.9)] },
+  F: { w: 0.95, t: [T(pl([0.85, CAP], [0.1, CAP], [0.1, 0]), { lado: -1 }), barra(0.1, 0.7, 0.95)] },
+  G: { w: 1.1, t: [T([ar(0.55, 0.9, 0.5, 0.9, 45, 360), ["L", 0.6, 0.9]], { en: 0.1 })] },
+  H: { w: 1, t: [tallo(0.1, CAP, 0, { en: 0.25 }), tallo(0.9, CAP, 0, { lado: -1, en: 0.25 }), barra(0.1, 0.9, 0.9)] },
+  I: { w: 0.8, t: [tallo(0.4, CAP, 0, { en: 0.25 }), barra(0.15, 0.65, CAP), barra(0.15, 0.65, 0)] },
+  J: { w: 0.85, t: [T([...pl([0.8, CAP], [0.8, 0.4]), ar(0.45, 0.4, 0.35, 0.4, 0, -150)], { lado: -1, en: 0.2 })] },
+  K: { w: 1.05, t: [tallo(0.1, CAP, 0, { en: 0.25 }), T(pl([0.9, CAP], [0.1, 0.75]), { lado: -1 }), T(pl([0.35, 1.07], [0.95, 0]))] },
+  L: { w: 0.9, t: [T(pl([0.1, CAP], [0.1, 0], [0.8, 0]), { en: 0.25 })] },
+  M: { w: 1.2, t: [T(pl([0.1, 0], [0.1, CAP], [0.6, 0.5], [1.1, CAP], [1.1, 0]), { lado: -1, en: 0.25 })] },
+  N: { w: 1, t: [T(pl([0.1, 0], [0.1, CAP], [0.9, 0], [0.9, CAP]), { lado: -1, en: 0.25 })] },
+  O: { w: 1.1, t: [T([ar(0.55, 0.9, 0.5, 0.9, 90, 450)], { en: 0.1 })] },
+  P: { w: 1, t: [tallo(0.1, CAP, 0, { en: 0.25 }), T([...pl([0.1, CAP], [0.45, CAP]), ar(0.45, 1.3, 0.45, 0.5, 90, -90), ["L", 0.1, 0.8]], { lado: -1 })] },
+  Q: { w: 1.1, t: [T([ar(0.55, 0.9, 0.5, 0.9, 90, 450)], { en: 0.1 }), T(pl([0.65, 0.45], [1.05, -0.25]))] },
+  R: { w: 1, t: [tallo(0.1, CAP, 0, { en: 0.25 }), T([...pl([0.1, CAP], [0.45, CAP]), ar(0.45, 1.3, 0.45, 0.5, 90, -90), ["L", 0.1, 0.8]], { lado: -1 }), T(pl([0.4, 0.8], [0.95, 0]))] },
+  S: { w: 1, t: [T([ar(0.5, 1.35, 0.4, 0.45, 30, 270), ar(0.5, 0.45, 0.4, 0.45, 90, -150)], { en: 0.1 })] },
+  T: { w: 1, t: [barra(0.05, 0.95, CAP), tallo(0.5, CAP, 0, { en: 0.25 })] },
+  U: { w: 1, t: [T([...pl([0.1, CAP], [0.1, 0.6]), ar(0.5, 0.6, 0.4, 0.6, 180, 360), ["L", 0.9, CAP]], { lado: -1, en: 0.2 })] },
+  V: { w: 1.1, t: [T(pl([0.05, CAP], [0.55, 0], [1.05, CAP]))] },
+  W: { w: 1.3, t: [T(pl([0.05, CAP], [0.35, 0], [0.65, CAP], [0.95, 0], [1.25, CAP]))] },
+  X: { w: 1, t: [T(pl([0.05, CAP], [0.95, 0])), T(pl([0.95, CAP], [0.05, 0]), { lado: -1 })] },
+  Y: { w: 1, t: [T(pl([0.05, CAP], [0.5, 0.9])), T(pl([0.95, CAP], [0.5, 0.9], [0.5, 0]), { lado: -1 })] },
+  Z: { w: 1, t: [T(pl([0.1, CAP], [0.9, CAP], [0.1, 0], [0.9, 0]), { lado: -1 })] },
+  // ---- dígitos
+  0: { w: 0.9, t: [T([ar(0.45, 0.9, 0.4, 0.9, 90, 450)], { en: 0.1 })] },
+  1: { w: 0.7, t: [T(pl([0.15, 1.4], [0.5, CAP], [0.5, 0]), { lado: -1 })] },
+  2: { w: 1, t: [T([ar(0.5, 1.35, 0.4, 0.45, 180, -35), ["L", 0.1, 0], ["L", 0.95, 0]], { en: 0.1 })] },
+  3: { w: 1, t: [T([ar(0.5, 1.35, 0.38, 0.45, 150, -90), ar(0.5, 0.45, 0.42, 0.45, 90, -150)], { en: 0.1 })] },
+  4: { w: 1, t: [T(pl([0.7, CAP], [0.05, 0.55], [0.95, 0.55]), { lado: -1 }), tallo(0.7, CAP, 0)] },
+  5: { w: 1, t: [T([...pl([0.85, CAP], [0.2, CAP], [0.15, 0.9]), ar(0.5, 0.5, 0.4, 0.5, 150, -150)], { lado: -1 })] },
+  6: { w: 1, t: [T([ar(0.9, 0.9, 0.8, 0.9, 100, 180), ["L", 0.1, 0.5], ar(0.5, 0.5, 0.4, 0.5, 180, 540)], { lado: -1 })] },
+  7: { w: 1, t: [T(pl([0.1, CAP], [0.9, CAP], [0.35, 0]), { lado: -1 })] },
+  8: { w: 1, t: [T([ar(0.5, 1.35, 0.35, 0.45, 90, 270), ar(0.5, 0.45, 0.42, 0.45, 90, -270), ar(0.5, 1.35, 0.35, 0.45, 270, 450)], { en: 0.1 })] },
+  9: { w: 1, t: [T([ar(0.5, 1.3, 0.4, 0.5, 0, 360), ["L", 0.9, 0.9], ar(0.1, 0.9, 0.8, 0.9, 0, -80)], { lado: -1, en: 0.1 })] },
+  // ---- puntuación (sobre la base)
+  ".": { w: 0.25, t: [punto(0.12, 0.08)] },
+  ",": { w: 0.25, t: [T(pl([0.15, 0.12], [0.05, -0.25]))] },
 };
+
+/** Adornos (tilde, virgulilla, diéresis) como trazos propios, centrados en cx a la altura y. */
+const ADORNOS = {
+  tilde: (cx, y) => [T(pl([cx - 0.1, y - 0.15], [cx + 0.12, y + 0.15]))],
+  tilde_n: (cx, y) => [T([ar(cx - 0.15, y, 0.15, 0.14, 180, 0), ar(cx + 0.15, y, 0.15, 0.14, 180, 360)])],
+  dieresis: (cx, y) => [punto(cx - 0.17, y), punto(cx + 0.17, y)],
+};
+/** Letra con adorno: reutiliza los trazos de la letra base (sin copiar datos) y añade el adorno al final. quitarPunto: la «i» sin punto. */
+function conAdorno(base, tipo, may, { quitarPunto = false } = {}) {
+  const B = LETRAS_TRAZO[base], y = { tilde: may ? 2.13 : 1.5, tilde_n: may ? 2.15 : 1.45, dieresis: may ? 2.1 : 1.4 }[tipo];
+  return { w: B.w, ador: true, t: [...(quitarPunto ? B.t.slice(0, 1) : B.t), ...ADORNOS[tipo](B.w / 2, y)] };
+}
+Object.assign(LETRAS_TRAZO, {
+  "á": conAdorno("a", "tilde"), "é": conAdorno("e", "tilde"), "í": conAdorno("i", "tilde", false, { quitarPunto: true }),
+  "ó": conAdorno("o", "tilde"), "ú": conAdorno("u", "tilde"), "ü": conAdorno("u", "dieresis"), "ñ": conAdorno("n", "tilde_n"),
+  "Á": conAdorno("A", "tilde", true), "É": conAdorno("E", "tilde", true), "Í": conAdorno("I", "tilde", true),
+  "Ó": conAdorno("O", "tilde", true), "Ú": conAdorno("U", "tilde", true), "Ü": conAdorno("U", "dieresis", true), "Ñ": conAdorno("N", "tilde_n", true),
+});
 
 const rad = (g) => (g * Math.PI) / 180;
 const enArco = (cx, cy, rx, ry, a) => [cx + rx * Math.cos(rad(a)), cy + ry * Math.sin(rad(a))];
