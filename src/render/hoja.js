@@ -102,16 +102,17 @@ export function estiloLectura(ficha) {
 }
 
 /**
- * Páginas para imprimir: una por alumno (o `copias` con la línea en blanco si no hay alumnos).
- * Con variantes > 1, el alumno i recibe la variante i % variantes. Devuelve [{ nombre, variante, svg }].
+ * Páginas para imprimir: todas las de la ficha para cada alumno (o `copias` con la línea en blanco si no hay alumnos), seguidas.
+ * Con variantes > 1, el alumno i recibe la variante i % variantes. Devuelve [{ nombre, variante, pagina (0…), total, svg }].
  * Los nombres solo se usan aquí, en el dispositivo: nunca entran en la ficha.
  */
 export function hojas(ficha, { nombres = [], copias = 1, bn = false, modo = "papel" } = {}) {
   const lista = nombres.map((s) => String(s).trim()).filter(Boolean);
   const quienes = lista.length ? lista : Array(Math.max(1, copias | 0)).fill("");   // sin alumnos: copias con la línea en blanco
-  return quienes.map((nombre, i) => {
+  return quienes.flatMap((nombre, i) => {
     const v = i % ficha.variantes;
-    const pag = (v === 0 ? ficha.paginas : ficha.variantesDatos[v - 1].paginas)[0];
-    return { nombre, variante: v, svg: hoja(pag, { titulo: ficha.titulo, nombre, bn, modo, uid: `h${i}${modo[0]}`, ...estiloLectura(ficha) }) };
+    const pags = v === 0 ? ficha.paginas : ficha.variantesDatos[v - 1].paginas;
+    return pags.map((pag, k) => ({ nombre, variante: v, pagina: k, total: pags.length,
+      svg: hoja(pag, { titulo: ficha.titulo, nombre, bn, modo, uid: k ? `h${i}p${k}${modo[0]}` : `h${i}${modo[0]}`, ...estiloLectura(ficha) }) }));
   });
 }

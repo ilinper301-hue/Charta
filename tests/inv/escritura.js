@@ -113,7 +113,7 @@ export default {
     cuantos(es, tam === "media" ? 2 : 4);
     unicos(es, (e) => e.datos.frase, "frases repetidas");
     for (const { datos: d } of es) {
-      assert.match(d.frase, /^[A-ZÁÉÍÓÚÑ][a-záéíóúüñ ]+\.$/, "no es «Mayúscula… punto.»"); trazable(d.frase, "frase");
+      assert.match(d.frase, /^[A-ZÁÉÍÓÚÑ][A-Za-záéíóúüñÁÉÍÓÚÑ ]+\.$/, "no es «Mayúscula… punto.»"); trazable(d.frase, "frase");
       const ws = palabrasDe(d.frase); analiza(ws); assert.ok(frasePorId(ws.join(" ")), `«${d.frase}» no es una frase del banco`);
       if (Number.isInteger(p.palabras)) assert.equal(ws.length, p.palabras, "palabras de la frase"); else assert.ok(ws.length >= 3 && ws.length <= 5);
       assert.ok(cabeEnLinea(d.frase, tam, mmDe(act)), `«${d.frase}» no cabe en una línea`);
@@ -132,7 +132,7 @@ export default {
     });
     unicos(lista, (t) => t, "dictado repetido"); trazable(lista.join(" "), "dictado");
     for (const t of lista) {
-      if (frases) { assert.match(t, /^[A-ZÁÉÍÓÚÑ][a-záéíóúüñ ]+\.$/); const ws = palabrasDe(t); analiza(ws); assert.ok(frasePorId(ws.join(" ")), `«${t}» no es del banco`); if (p.letra) assert.ok(llevaLetra(ws.join(""), p.letra), `«${t}» no lleva la «${p.letra}»`); }
+      if (frases) { assert.match(t, /^[A-ZÁÉÍÓÚÑ][A-Za-záéíóúüñÁÉÍÓÚÑ ]+\.$/); const ws = palabrasDe(t); analiza(ws); assert.ok(frasePorId(ws.join(" ")), `«${t}» no es del banco`); if (p.letra) assert.ok(llevaLetra(ws.join(""), p.letra), `«${t}» no lleva la «${p.letra}»`); }
       else { palabraValida(t, { ...p, largo: null, caso: null }, { largos: [1, 2, 3, 4] }); if (p.letra) assert.ok(llevaLetra(t, p.letra), `«${t}» no lleva la «${p.letra}»`); }
     }
     // la lista no se imprime: ni en los datos, ni en el SVG del papel; sí en el de la solución (una vez cada una, en rojo)

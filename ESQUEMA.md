@@ -20,7 +20,7 @@
   },
   "presentacion": { "color": true, "lecturaFacil": false, "pictogramas": false },
   "paginas": [                       // variante A; las demás en "variantesDatos" si variantes > 1
-    { "actividades": [ /* Actividad */ ] }
+    { "actividades": [ /* Actividad */ ] }   // 1 a 10 páginas de 1 o 2 actividades (1 = página completa, 2 = media cada una)
   ],
   "variantesDatos": []               // [{ "semilla": …, "paginas": [...] }, …]
 }
@@ -30,10 +30,11 @@
 ## Actividad
 ```json
 {
-  "n": 1,
+  "n": 1,                                   // número seguido en toda la ficha: 1, 2 | 3 | 4 (no vuelve a 1 en cada página)
   "tipo": "sumar.h20", "tipoVersion": 1,   // id del registro de tipos (= id de MODELOS)
   "params": { "rango": 20, "nivel": "con" },
   // Lengua de 1.º: "vistas": "aeioumpslt" = letras que pueden salir (mapa de letras); sin el campo = todas
+  // Lengua de 1.º, tipos con frases: "misFrases": ["Mi mamá me mima.", …] = frases de la maestra que se mezclan con las del banco
   "tamano": "media",                        // "completa" | "media"
   "color": "azul",                          // amarillo | rosa | azul | verde
   "enunciado": "Calcula y escribe el resultado en el cuadro gris.",
@@ -66,7 +67,7 @@ descomposición, letras, recta, bloques, cuadrícula, monedas, ábaco, D/U, atad
 { "schemaVersion": 1, "app": "charta", "autor": "uid", "titulo": "…", "creada": "2026-11-05T10:00:00Z",
   "tipos": ["sumar.h20"], "variantes": 2,
   "ficha": "{…JSON de la ficha…}",      // texto: Firestore no admite listas dentro de listas
-  "composicion": "{…}" }                // actividades ({tipo, curso?, params}) + opciones, semilla, título, variaciones, B/N (para reabrirla en Charta)
+  "composicion": "{…}" }                // actividades ({tipo, curso?, params}) + paginas? ([2, 1, 1] = actividades de cada página; sin él, una) + opciones, semilla, título, variaciones, B/N (para reabrirla en Charta)
 ```
 - Leer (Tabula, Fori): `fichaDeDocumento(datos, id)` de `src/nucleo/lector.js` → ficha comprobada con `erroresFicha()`.
 - Reglas: bloque «Charta» de `firestore.rules` (copia de `tabula/firestore.rules`): solo el autor (Google) lee, cambia y borra; campos y tamaños fijos (ficha ≤ 900.000 caracteres; 30 variantes ≈ 110 KB).

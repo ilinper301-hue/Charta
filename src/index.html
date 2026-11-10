@@ -42,13 +42,18 @@
   <section class="tarjeta">
     <div class="sec-cab"><h2>Actividades</h2></div>
     <div id="acts" class="acts"></div>
-    <button id="anadir" class="anadir">+ Segunda actividad</button>
+    <button id="anadirPagina" class="anadir" title="Otra página con su actividad: las actividades se numeran seguidas">+ Otra página</button>
   </section>
   <section class="tarjeta" id="secLetras" hidden>
     <div class="sec-cab"><h2>Letras</h2><small id="letrasCuenta">Todas</small></div>
     <p class="info">Toca una letra para quitarla o ponerla: las palabras, sílabas y frases solo llevarán las letras marcadas.</p>
     <div id="mapaLetras" class="mapa-letras" role="group" aria-label="Letras que pueden salir"></div>
     <div class="letras-atajos"><button id="letrasTodas">Todas</button><button id="letrasVocales">Solo vocales</button><button id="letrasNinguna">Ninguna</button></div>
+    <details id="cajaMisFrases" class="mis-frases" hidden><summary>Mis frases <small id="misFrasesCuenta"></small></summary>
+      <label class="campo"><span>Una frase por línea, de 3 a 5 palabras <em>Se mezclan con las de Charta en las actividades de frases (ordenar, separar, mayúscula y punto, copiar, dictado y lectura rápida) si usan solo las letras marcadas.</em></span>
+        <textarea id="misFrases" rows="4" placeholder="Mi mamá me mima.&#10;Lola sale sola."></textarea></label>
+      <p id="misFrasesInfo" class="info"></p>
+    </details>
   </section>
   <section class="tarjeta">
     <div class="sec-cab"><h2>Alumnos</h2></div>

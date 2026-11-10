@@ -90,6 +90,14 @@ h2 { margin: 0; font-weight: 600; font-size: .95rem; letter-spacing: -.01em; col
 .ops label.check { grid-column: 1 / -1; }
 .anadir { width: 100%; border-style: dashed; color: var(--acento-texto); background: transparent; }
 .anadir:hover:not(:disabled) { background: var(--acento-suave); border-color: var(--acento-linea); }
+/* Varias páginas: cada página es un grupo con su cabecera; con una sola, no se nota. */
+.pagina-comp { display: grid; }
+.pagina-comp > .anadir { margin: 4px 0 8px; }
+.pagina-comp.varias { border: 1px solid var(--borde); border-radius: var(--r-md); padding: 8px 10px 4px; margin-bottom: 10px; }
+.pagina-cab { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.pagina-cab h3 { margin: 0; font-size: .9rem; font-weight: 600; color: var(--texto-2); }
+.pagina-cab button { height: var(--alto-sm); padding: 0 10px; font-size: .8rem; }
+#anadirPagina { margin-top: 2px; }
 
 /* ---------- Campos ---------- */
 label, .campo { display: grid; gap: 6px; font-size: .8rem; font-weight: 500; color: var(--texto-2); min-width: 0; }
@@ -270,6 +278,10 @@ body.con-selector { overflow: hidden; }
   color: var(--apagado); font: 600 1.1rem var(--sans); cursor: pointer; padding: 0; text-decoration: line-through; text-decoration-color: var(--borde-fuerte); }
 .mapa-letras button.vocal { border-style: dashed; }
 .mapa-letras button[aria-pressed="true"] { background: var(--primario); border-color: var(--primario); color: var(--sobre-acento); text-decoration: none; border-style: solid; }
+.mis-frases { margin-top: 12px; border-top: 1px solid var(--borde); padding-top: 10px; }
+.mis-frases summary { cursor: pointer; font-weight: 600; }
+.mis-frases summary small { font-weight: 400; color: var(--texto-2); margin-left: 6px; }
+.mis-frases .campo { margin-top: 8px; }
 .letras-atajos { display: flex; gap: 8px; flex-wrap: wrap; }
 .letras-atajos button { height: var(--alto-sm); padding: 0 12px; border-radius: var(--r-sm); border: 1px solid var(--borde); background: var(--superficie-2); color: var(--texto-2); font: inherit; font-size: .85rem; cursor: pointer; }
 </style>
@@ -305,13 +317,18 @@ body.con-selector { overflow: hidden; }
   <section class="tarjeta">
     <div class="sec-cab"><h2>Actividades</h2></div>
     <div id="acts" class="acts"></div>
-    <button id="anadir" class="anadir">+ Segunda actividad</button>
+    <button id="anadirPagina" class="anadir" title="Otra página con su actividad: las actividades se numeran seguidas">+ Otra página</button>
   </section>
   <section class="tarjeta" id="secLetras" hidden>
     <div class="sec-cab"><h2>Letras</h2><small id="letrasCuenta">Todas</small></div>
     <p class="info">Toca una letra para quitarla o ponerla: las palabras, sílabas y frases solo llevarán las letras marcadas.</p>
     <div id="mapaLetras" class="mapa-letras" role="group" aria-label="Letras que pueden salir"></div>
     <div class="letras-atajos"><button id="letrasTodas">Todas</button><button id="letrasVocales">Solo vocales</button><button id="letrasNinguna">Ninguna</button></div>
+    <details id="cajaMisFrases" class="mis-frases" hidden><summary>Mis frases <small id="misFrasesCuenta"></small></summary>
+      <label class="campo"><span>Una frase por línea, de 3 a 5 palabras <em>Se mezclan con las de Charta en las actividades de frases (ordenar, separar, mayúscula y punto, copiar, dictado y lectura rápida) si usan solo las letras marcadas.</em></span>
+        <textarea id="misFrases" rows="4" placeholder="Mi mamá me mima.&#10;Lola sale sola."></textarea></label>
+      <p id="misFrasesInfo" class="info"></p>
+    </details>
   </section>
   <section class="tarjeta">
     <div class="sec-cab"><h2>Alumnos</h2></div>
@@ -383,7 +400,7 @@ const __mods = {
 "app.js": (__exp) => {
 // Charta · app. 4.8: pantalla de inicio · 4.1: selector y opciones · 4.2: compositor · 4.3: alumnos y variantes · 4.4: favoritas y recientes · 4.5: PWA y tableta · 5.1: nube · 5.2: Tabula · 5.3: Fori.
 const { CATALOGO } = __req("nucleo/catalogo.js");
-const { generar, porDefecto, modelo, metadatosDe, rangosDe, cursoDe, visible } = __req("nucleo/ficha.js");
+const { generar, porDefecto, modelo, metadatosDe, rangosDe, cursoDe, visible, MAX_PAGINAS } = __req("nucleo/ficha.js");
 const { erroresFicha, letraVariante, paginasVariante } = __req("nucleo/lector.js");
 const { listaTipos } = __req("tipos/index.js");
 const { hoja, hojas, estiloLectura, PALETA } = __req("render/hoja.js");
@@ -399,7 +416,8 @@ const { iniciarTema } = __req("ui/tema.js");
 const { crearNube } = __req("nube/nube.js");
 const { leerEntrada, leerTabula, gruposDeTabula, urlVolver } = __req("ui/tabula.js");
 const { miniaturaDeSvg, dejarParaTabula } = __req("ui/miniatura_ficha.js");
-const { VOCALES, CLAVE_LETRAS, hayLengua1, conLetras, letrasDe, vistasDe, resumenLetras } = __req("ui/letras.js");
+const { VOCALES, CLAVE_LETRAS, hayLengua1, conLetras, letrasDe, vistasDe, resumenLetras, CLAVE_FRASES, hayFrases, conFrases, frasesDe, resumenFrases } = __req("ui/letras.js");
+const { cuentasDe, agrupar, paginaDe, inicioDe } = __req("ui/paginas.js");
 const { ABECEDARIO } = __req("lengua/reglas.js");
 const { paqueteFori, URL_FORI, CLAVE_FORI } = __req("fori/diapositivas.js");
 const { fuentePorId, registrarFuenteUsuario, quitarFuenteUsuario, todasLasFuentes } = __req("render/fuentes.js");
@@ -518,20 +536,48 @@ function iniciar() {
       : `${n} alumno${n > 1 ? "s" : ""}: una ficha con su nombre para cada uno.` + (todos.length > MAX_ALUMNOS ? ` (máximo ${MAX_ALUMNOS}; sobran ${todos.length - MAX_ALUMNOS})` : "");
   }
 
-  const tamano = () => (editores.length > 1 ? "media" : "completa");
-  // Compositor (paso 4.2): añadir, ordenar y quitar actividades (1 o 2 por hoja).
-  const boton = (texto, titulo, f) => { const b = el("button", { textContent: texto, title: titulo }); b.onclick = f; return b; };
+  // Compositor (paso 4.2): añadir, ordenar y quitar actividades (1 o 2 por hoja) y páginas (las actividades se numeran seguidas).
+  // editores = todas las actividades seguidas; cuentas = cuántas lleva cada página ([2, 1, 1]).
+  let cuentas = [1];
+  const tamanoDe = (ed) => (cuentas[paginaDe(cuentas, editores.indexOf(ed))] > 1 ? "media" : "completa");
+  const boton = (texto, titulo, f, clase = "") => { const b = el("button", { textContent: texto, title: titulo, className: clase }); b.onclick = f; return b; };
   function recolocar() {
-    $("acts").replaceChildren(...editores.map((e) => e.caja));
+    const varias = cuentas.length > 1;
+    $("acts").replaceChildren(...cuentas.map((k, p) => {
+      const i0 = inicioDe(cuentas, p), eds = editores.slice(i0, i0 + k);
+      const caja = el("div", { className: "pagina-comp" + (varias ? " varias" : "") });
+      if (varias) caja.append(el("div", { className: "pagina-cab" }, el("h3", { textContent: `Página ${p + 1}` }),
+        boton("Quitar página", "Quitar esta página y sus actividades", () => quitarPagina(p))));
+      caja.append(...eds.map((e) => e.caja));
+      if (k < 2) caja.append(boton("+ Segunda actividad", "Otra actividad en esta página (cada una ocupa media página)", () => anadirSegunda(p), "anadir"));
+      return caja;
+    }));
+    const n = editores.length;
     editores.forEach((e, i) => e.cabecera(i + 1, [
-      ...(editores.length > 1 ? [i ? boton("↑ Subir", "Pasarla a actividad 1", () => mover(i, -1)) : boton("↓ Bajar", "Pasarla a actividad 2", () => mover(i, 1))] : []),
-      ...(editores.length > 1 ? [boton("Quitar", "Quitar esta actividad", () => quitar(i))] : []),
+      ...(i > 0 ? [boton("↑ Subir", `Pasarla a actividad ${i}`, () => mover(i, -1))] : []),
+      ...(i < n - 1 ? [boton("↓ Bajar", `Pasarla a actividad ${i + 2}`, () => mover(i, 1))] : []),
+      ...(n > 1 ? [boton("Quitar", "Quitar esta actividad", () => quitar(i))] : []),
     ]));
-    $("anadir").hidden = editores.length >= 2;
+    $("anadirPagina").hidden = cuentas.length >= MAX_PAGINAS;
     for (const e of editores) e.refrescar();
   }
   function mover(i, d) { [editores[i], editores[i + d]] = [editores[i + d], editores[i]]; recolocar(); letraMateria(); pintar(); }
-  function quitar(i) { editores.splice(i, 1); recolocar(); letraMateria(); pintar(); }
+  function quitar(i) {
+    const p = paginaDe(cuentas, i);
+    editores.splice(i, 1); cuentas[p]--; if (!cuentas[p]) cuentas.splice(p, 1);
+    recolocar(); letraMateria(); pintar();
+  }
+  function quitarPagina(p) {
+    if (cuentas.length < 2) return;
+    editores.splice(inicioDe(cuentas, p), cuentas[p]); cuentas.splice(p, 1);
+    recolocar(); letraMateria(); pintar();
+  }
+  function anadirSegunda(p) {
+    const e0 = editores[inicioDe(cuentas, p)];
+    abrirSelector({ tamano: "media", actual: e0.id, curso: e0.curso, alElegir: (id, c) => {
+      editores.splice(inicioDe(cuentas, p) + 1, 0, crearEditor(id, c)); cuentas[p] = 2; recolocar(); pintar();
+    } });
+  }
   // Letra por materia: si la actividad 1 pasa a otra materia, se pone la letra de esa materia (Lengua → Fredoka).
   let materia1 = null;
   function letraMateria() {
@@ -540,7 +586,8 @@ function iniciar() {
     materia1 = m;
   }
   function cambiado(e) { if (editores[0] === e) { guardarUltimo(e.id); usos.anotar(e.id); letraMateria(); } pintar(); }
-  function nuevoEditor(id, curso) { editores.push(editorActividad(id, { tamano, alCambiar: cambiado, curso })); recolocar(); }
+  function crearEditor(id, curso) { let ed = null; ed = editorActividad(id, { tamano: () => (ed ? tamanoDe(ed) : "completa"), alCambiar: cambiado, curso }); return ed; }
+  function nuevoEditor(id, curso) { editores.push(crearEditor(id, curso)); cuentas = [editores.length]; recolocar(); }
 
   // Mapa de letras (Lengua de 1.º): marcadas = pueden salir. Se recuerdan las últimas (las que lleva la clase).
   const marcadas = new Set(ABECEDARIO);
@@ -562,7 +609,16 @@ function iniciar() {
   const atajo = (id, ls) => { $(id).onclick = () => { marcadas.clear(); for (const l of ls) marcadas.add(l); cambiarLetras(); }; };
   atajo("letrasTodas", ABECEDARIO); atajo("letrasVocales", VOCALES); atajo("letrasNinguna", "");
   pintarLetras();
-  const actividades = () => conLetras(editores.map((e) => e.leer()), vistasDe(marcadas));
+  // «Mis frases»: las de la clase se recuerdan en el dispositivo; viajan en la composición (params.misFrases).
+  try { $("misFrases").value = localStorage.getItem(CLAVE_FRASES) || ""; } catch {}
+  const misFrases = () => resumenFrases($("misFrases").value, null).frases;
+  function pintarMisFrases() {
+    const r = resumenFrases($("misFrases").value, vistasDe(marcadas));
+    $("misFrasesCuenta").textContent = r.cuenta ? `(${r.cuenta})` : ""; $("misFrasesInfo").textContent = r.info; $("misFrasesInfo").hidden = !r.info;
+  }
+  $("misFrases").addEventListener("change", () => { try { localStorage.setItem(CLAVE_FRASES, $("misFrases").value); } catch {} pintar(); });
+  $("misFrases").addEventListener("input", pintarMisFrases);
+  const actividades = () => conFrases(conLetras(editores.map((e) => e.leer()), vistasDe(marcadas)), misFrases());
 
   function pintar() {
     $("error").hidden = true;
@@ -570,31 +626,35 @@ function iniciar() {
     try {
       contar();
       const ns = nombres(), total = ns.length || copias();
-      $("secLetras").hidden = !hayLengua1(editores.map((e) => e.leer()));
-      const acts = actividades();
+      const leidas = editores.map((e) => e.leer());
+      $("secLetras").hidden = !hayLengua1(leidas); $("cajaMisFrases").hidden = !hayFrases(leidas);
+      pintarMisFrases();
+      const acts = actividades(), pags = agrupar(acts, cuentas);
       ficha = generar({
-        actividades: acts,
-        metadatos: metadatosDe(acts.map((a) => a.tipo)),
+        paginas: pags,
+        metadatos: metadatosDe(pags.map((p) => p.actividades.map((a) => a.tipo))),
         titulo: $("titulo").value.trim() || undefined,
         variantes: numVariantes($("variaciones").value, total),
         presentacion: { color: !$("bn").checked, ...($("fuente").value !== "andika" && { fuente: $("fuente").value }), ...($("grande").checked && { letraGrande: true }), ...($("facil").checked && { lecturaFacil: true }) },
       }, semilla);
       const bn = $("bn").checked;
       paginas = hojas(ficha, { nombres: ns, copias: total, bn });
-      const etiqueta = (p) => (p.nombre || "Sin nombre") + (ficha.variantes > 1 ? ` · variante ${letraVariante(p.variante)}` : "");
+      const etiqueta = (p) => (p.nombre || "Sin nombre") + (ficha.variantes > 1 ? ` · variante ${letraVariante(p.variante)}` : "") + (p.total > 1 ? ` · página ${p.pagina + 1} de ${p.total}` : "");
       $("hojas").replaceChildren(...paginas.map((p) => el("div", {}, el("p", { className: "hoja-etq", textContent: etiqueta(p) }),
         Object.assign(el("div", { className: "hoja" }), { innerHTML: p.svg }))));
       // Solucionario: una hoja resuelta por variante (sin nombres).
-      const sol = Array.from({ length: ficha.variantes }, (_, v) => ({ svg: hoja(paginasVariante(ficha, v)[0], { titulo: ficha.titulo, bn, modo: "solucion", uid: `s${v}`, ...estiloLectura(ficha) }) }));
-      $("hojasSol").replaceChildren(...sol.map((p, v) => el("div", {}, el("p", { className: "hoja-etq", textContent: ficha.variantes > 1 ? `Variante ${letraVariante(v)}` : "Soluciones" }),
+      const sol = Array.from({ length: ficha.variantes }, (_, v) => paginasVariante(ficha, v).map((pag, k, ps) => ({ v, k, total: ps.length,
+        svg: hoja(pag, { titulo: ficha.titulo, bn, modo: "solucion", uid: k ? `s${v}p${k}` : `s${v}`, ...estiloLectura(ficha) }) }))).flat();
+      $("hojasSol").replaceChildren(...sol.map((p) => el("div", {}, el("p", { className: "hoja-etq",
+        textContent: (ficha.variantes > 1 ? `Variante ${letraVariante(p.v)}` : "Soluciones") + (p.total > 1 ? ` · página ${p.k + 1} de ${p.total}` : "") }),
         Object.assign(el("div", { className: "hoja" }), { innerHTML: p.svg }))));
       $("info").textContent = `${paginas.length} página${paginas.length > 1 ? "s" : ""}` +
         (ficha.variantes > 1 ? ` · variantes ${letraVariante(0)}–${letraVariante(ficha.variantes - 1)}` : "") + ` · ${ficha.titulo}`;
     } catch (e) { $("error").textContent = e.message; $("error").hidden = false; }
   }
 
-  $("anadir").onclick = () => abrirSelector({ tamano: "media", actual: editores[0].id, curso: editores[0].curso,
-    alElegir: (id, c) => { nuevoEditor(id, c); pintar(); } });
+  $("anadirPagina").onclick = () => { const u = editores[editores.length - 1]; abrirSelector({ tamano: "completa", actual: u.id, curso: u.curso,
+    alElegir: (id, c) => { editores.push(crearEditor(id, c)); cuentas.push(1); recolocar(); pintar(); $("acts").lastElementChild?.scrollIntoView({ behavior: "smooth" }); } }); };
   $("acts").addEventListener("change", pintar);
   for (const id of ["alumnos", "copias", "variaciones", "bn", "grande", "facil", "titulo"]) $(id).addEventListener("change", pintar);
 
@@ -644,15 +704,15 @@ function iniciar() {
   const almacen = (() => { try { return localStorage; } catch { return { getItem: () => null, setItem() {} }; } })();
   const guardadas = crearGuardadas(almacen);
   let pestana = "favoritos";
-  const composicion = () => ({ actividades: (() => { try { return actividades(); } catch { return editores.map((e) => e.leer()); } })(), semilla, titulo: $("titulo").value.trim(),
+  const composicion = () => ({ actividades: (() => { try { return actividades(); } catch { return editores.map((e) => e.leer()); } })(), ...(cuentas.length > 1 && { paginas: [...cuentas] }), semilla, titulo: $("titulo").value.trim(),
     variaciones: $("variaciones").value, bn: $("bn").checked, grande: $("grande").checked, facil: $("facil").checked, fuente: $("fuente").value });
   function marcarFavorito() {
     try { const f = guardadas.esFavorito(composicion()); $("favorito").textContent = f ? "★ Favorita" : "☆ Favorita"; $("favorito").classList.toggle("on", f); } catch {}
   }
   function abrirGuardada(c) {
     aDiseno();
-    editores.length = 0;
-    for (const a of c.actividades) { const e = editorActividad(a.tipo, { tamano, alCambiar: cambiado }); editores.push(e); }
+    editores.length = 0; cuentas = cuentasDe(c);
+    for (const a of c.actividades) editores.push(crearEditor(a.tipo));
     recolocar();
     c.actividades.forEach((a, i) => editores[i].poner(a.tipo, a.params, a.curso));
     semilla = c.semilla || 1; $("titulo").value = c.titulo || ""; $("variaciones").value = c.variaciones || "iguales"; $("bn").checked = !!c.bn; $("grande").checked = !!c.grande; $("facil").checked = !!c.facil;
@@ -660,6 +720,7 @@ function iniciar() {
     else { elegirFuente("andika"); $("infoFuente").textContent = `Esta ficha usaba la letra «${c.fuente.replace("usuario:", "")}», que no está en este dispositivo: se usa Andika. Puedes subirla otra vez.`; }
     materia1 = materiaDe(editores[0].id);
     if (hayLengua1(c.actividades)) { const v = letrasDe(c); marcadas.clear(); for (const l of v ?? ABECEDARIO) marcadas.add(l); pintarLetras(); }   // sin guardarlas como las de la clase
+    if (hayFrases(c.actividades)) $("misFrases").value = frasesDe(c).join("\n");   // ídem con «Mis frases»
     pintar(); $("acts").scrollIntoView({ behavior: "smooth" });
   }
   function pintarGuardadas() {
@@ -838,7 +899,7 @@ function iniciar() {
   /** «Crear ficha»: una ficha nueva con el modelo elegido (la composición anterior no se toca: sigue en Recientes). */
   function nuevaFicha(id, curso) {
     if (!id || !hayTipo(id)) return;
-    editores.splice(1); recolocar();
+    editores.splice(1); cuentas = [1]; recolocar();
     editores[0].poner(id, undefined, curso);
     semilla = 1; $("titulo").value = ""; $("bn").checked = bnDefecto();
     usos.anotar(id); guardarUltimo(id); letraMateria();
@@ -1086,6 +1147,457 @@ function rotulo(p, x, y, h, texto, { fs = FS, anchor = "start", gris = INK } = {
 }
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get palabraHuecos() { return palabraHuecos; }, get casillas() { return casillas; }, get rodear() { return rodear; }, get unir() { return unir; }, get rotulo() { return rotulo; } }));
+},
+"lengua/frases.js": (__exp) => {
+// Charta · Lengua de 1.º · frases que no salen de las plantillas de _frase.js:
+//   · FRASES_1 (datos/frases_1.tsv): frases para las primeras letras, por etapas. Solo entran con letras elegidas (mapa de letras):
+//     con todas las letras, las fichas son las de siempre.
+//   · «Mis frases»: las que escribe la maestra. Viajan en `params.misFrases` de las actividades que usan frases (como `params.vistas`)
+//     y generar() las activa mientras genera esa actividad (conPropias). Siempre entran.
+// Sin DOM.
+const { ABECEDARIO, sinTildes } = __req("lengua/reglas.js");
+/** Tipos que sacan frases del banco y admiten frases libres (sin estructura: no sirven para «completa», «verdad» ni «libre»). */
+const USA_FRASES = new Set(["frase.ordena", "frase.separa", "frase.puntua", "escritura.frase", "escritura.dictado", "lectura.fluidez"]);
+const MAX_PROPIAS = 60;
+const MAX_LARGO = 60;
+
+const LETRA = new RegExp(`^[${ABECEDARIO.join("")}áéíóúü]+$`, "i");
+/**
+ * Texto de la caja «Mis frases» (una por línea) → { frases: ["Mi mamá me mima.", …], errores: ["línea 3: …"] }.
+ * Cada frase: de 3 a 5 palabras, solo letras; se le pone mayúscula y punto si faltan. Sin repetir; como mucho MAX_PROPIAS.
+ */
+function leerPropias(texto) {
+  const frases = [], errores = [], vistas = new Set();
+  String(texto || "").split(/\r?\n/).forEach((l, i) => {
+    let t = l.trim().replace(/\s+/g, " ").replace(/[.]+$/, "").trim();
+    if (!t) return;
+    const ws = t.split(" ");
+    const mal = (m) => errores.push(`Línea ${i + 1} («${l.trim()}»): ${m}`);
+    if (t.length > MAX_LARGO) return mal("es demasiado larga.");
+    if (ws.length < 3 || ws.length > 5) return mal(`tiene ${ws.length} palabra${ws.length > 1 ? "s" : ""}; han de ser de 3 a 5.`);
+    if (!ws.every((w) => LETRA.test(w))) return mal("solo puede llevar letras (sin comas ni otros signos).");
+    t = t[0].toUpperCase() + t.slice(1) + ".";
+    if (vistas.has(t.toLowerCase())) return;
+    if (frases.length >= MAX_PROPIAS) return mal(`caben ${MAX_PROPIAS} frases como mucho.`);
+    vistas.add(t.toLowerCase()); frases.push(t);
+  });
+  return { frases, errores };
+}
+
+/** Lista de frases para `params.misFrases` (normalizada) o null si no hay. */
+function normalizarPropias(lista) {
+  if (!Array.isArray(lista)) return null;
+  const { frases } = leerPropias(lista.filter((x) => typeof x === "string").join("\n"));
+  return frases.length ? frases : null;
+}
+
+/** Palabras de una frase (sin el punto). La primera va en minúscula salvo que sea un nombre propio (sale con mayúscula en otra frase o en `nombres`). */
+function palabrasLibres(t, nombres) {
+  const ws = t.replace(/\.$/, "").split(" ");
+  if (!nombres.has(ws[0])) ws[0] = ws[0][0].toLowerCase() + ws[0].slice(1);
+  return ws;
+}
+/** Nombres propios de una lista de frases: palabras con mayúscula que no van al principio. */
+const nombresDe = (frases) => new Set(frases.flatMap((t) => t.replace(/\.$/, "").split(" ").slice(1).filter((w) => w[0] !== w[0].toLowerCase())));
+
+let activas = null;   // lista de textos o null
+/** Ejecuta f con esas frases propias activas (y las quita después). */
+function conPropias(lista, f) {
+  const antes = activas;
+  activas = lista && lista.length ? lista : null;
+  try { return f(); } finally { activas = antes; }
+}
+const propiasActivas = () => activas;
+
+/** Letras de una frase (sin tildes, en minúscula, sin repetir), para enseñar qué hace falta marcar. */
+const letrasFrase = (t) => [...new Set([...sinTildes(t.toLowerCase())].filter((c) => ABECEDARIO.includes(c)))];
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get USA_FRASES() { return USA_FRASES; }, get MAX_PROPIAS() { return MAX_PROPIAS; }, get MAX_LARGO() { return MAX_LARGO; }, get leerPropias() { return leerPropias; }, get normalizarPropias() { return normalizarPropias; }, get palabrasLibres() { return palabrasLibres; }, get nombresDe() { return nombresDe; }, get conPropias() { return conPropias; }, get propiasActivas() { return propiasActivas; }, get letrasFrase() { return letrasFrase; } }));
+},
+"lengua/frases_1.js": (__exp) => {
+// GENERADO por tools/frases.py desde datos/frases_1.tsv. No editar a mano.
+// Frases para las primeras letras de 1.º: e = etapa (letra nueva), w = palabras (minúscula salvo nombres propios).
+const FRASES_1 = [
+{"e":"l","w":["Lola","lee","a","Lalo"]},
+{"e":"l","w":["Leo","lee","a","Lola"]},
+{"e":"l","w":["elia","lee","a","Leo"]},
+{"e":"l","w":["lilia","lee","a","Lalo"]},
+{"e":"l","w":["Lalo","oía","la","ola"]},
+{"e":"l","w":["Lía","olía","la","lila"]},
+{"e":"l","w":["Eulalia","lee","a","Lilo"]},
+{"e":"l","w":["Lola","olía","a","lila"]},
+{"e":"l","w":["Lalo","lee","a","Lía"]},
+{"e":"l","w":["Leo","olía","el","alelí"]},
+{"e":"l","w":["él","lo","lee"]},
+{"e":"l","w":["él","lo","leía"]},
+{"e":"l","w":["él","oía","la","ola"]},
+{"e":"l","w":["el","alelí","olía","a","lila"]},
+{"e":"l","w":["la","lila","olía","a","alelí"]},
+{"e":"l","w":["el","aula","olía","a","lila"]},
+{"e":"l","w":["Lola","lo","lee"]},
+{"e":"l","w":["él","olía","el","alelí"]},
+{"e":"l","w":["olía","a","lila"]},
+{"e":"l","w":["Lía","lee","a","Lola"]},
+{"e":"l","w":["él","lo","olía"]},
+{"e":"l","w":["él","olía","la","lila"]},
+{"e":"l","w":["él","olía","a","lila"]},
+{"e":"l","w":["Lola","oía","la","ola"]},
+{"e":"l","w":["Lía","lee","a","Eulalia"]},
+{"e":"m","w":["mi","mamá","me","mima"]},
+{"e":"m","w":["mamá","me","lee"]},
+{"e":"m","w":["mi","mamá","me","ama"]},
+{"e":"m","w":["Mimí","ama","a","mamá"]},
+{"e":"m","w":["mamá","ama","a","Lola"]},
+{"e":"m","w":["mi","mamá","lee","a","Mimí"]},
+{"e":"m","w":["mila","ama","a","la","mula"]},
+{"e":"m","w":["la","mula","olía","la","miel"]},
+{"e":"m","w":["mi","mamá","ama","a","Mimí"]},
+{"e":"m","w":["mi","mula","ama","la","miel"]},
+{"e":"m","w":["mi","mula","me","mima"]},
+{"e":"m","w":["la","mula","lo","mima"]},
+{"e":"m","w":["mila","lee","a","mamá"]},
+{"e":"m","w":["emilio","mima","a","la","mula"]},
+{"e":"m","w":["Amelia","ama","a","mamá"]},
+{"e":"m","w":["emilio","ama","a","Amelia"]},
+{"e":"m","w":["mi","mamá","ama","la","miel"]},
+{"e":"m","w":["mi","mamá","lee","a","Lola"]},
+{"e":"m","w":["la","miel","olía","a","lila"]},
+{"e":"m","w":["Lalo","ama","a","mamá"]},
+{"e":"m","w":["Mimí","mima","a","mi","mula"]},
+{"e":"m","w":["Mimí","ama","la","miel"]},
+{"e":"m","w":["mamá","ama","a","Mimí"]},
+{"e":"m","w":["la","mula","olía","la","lima"]},
+{"e":"m","w":["Lola","mima","a","mamá"]},
+{"e":"s","w":["Susi","sale","sola"]},
+{"e":"s","w":["la","osa","sale","al","sol"]},
+{"e":"s","w":["esa","mesa","es","mía"]},
+{"e":"s","w":["mi","oso","es","mío"]},
+{"e":"s","w":["el","oso","ama","la","miel"]},
+{"e":"s","w":["la","mula","lame","la","sal"]},
+{"e":"s","w":["mamá","sale","a","la","sala"]},
+{"e":"s","w":["sami","lee","a","Susi"]},
+{"e":"s","w":["elisa","se","asea"]},
+{"e":"s","w":["la","osa","lame","la","miel"]},
+{"e":"s","w":["sale","el","sol"]},
+{"e":"s","w":["mi","mamá","usa","la","sal"]},
+{"e":"s","w":["Susi","usa","mi","mesa"]},
+{"e":"s","w":["luis","ama","a","su","mamá"]},
+{"e":"s","w":["su","oso","sale","solo"]},
+{"e":"s","w":["mi","mula","sale","sola"]},
+{"e":"s","w":["Lalo","suma","solo"]},
+{"e":"s","w":["mila","lee","a","Luisa"]},
+{"e":"s","w":["eso","es","mío"]},
+{"e":"s","w":["mi","mamá","me","asea"]},
+{"e":"s","w":["esa","sala","es","mía"]},
+{"e":"s","w":["Mimí","asea","la","sala"]},
+{"e":"s","w":["la","mesa","es","lisa"]},
+{"e":"s","w":["esa","mula","es","mía"]},
+{"e":"s","w":["mi","mamá","asea","esa","mesa"]},
+{"e":"n","w":["una","nena","lee","sola"]},
+{"e":"n","w":["el","mono","se","asoma"]},
+{"e":"n","w":["mi","mono","no","sale"]},
+{"e":"n","w":["Ana","no","sale","sola"]},
+{"e":"n","w":["nina","mima","a","su","nene"]},
+{"e":"n","w":["la","luna","sale","sola"]},
+{"e":"n","w":["una","nena","ama","a","mamá"]},
+{"e":"n","w":["mi","nene","no","se","asea"]},
+{"e":"n","w":["mi","nene","lee","solo"]},
+{"e":"n","w":["los","nenes","leen"]},
+{"e":"n","w":["las","nenas","salen","solas"]},
+{"e":"n","w":["mi","mamá","no","sale","sola"]},
+{"e":"n","w":["nono","se","asoma"]},
+{"e":"n","w":["ese","mono","es","mío"]},
+{"e":"n","w":["un","mono","mima","al","nene"]},
+{"e":"n","w":["Ana","lee","en","una","mesa"]},
+{"e":"n","w":["nina","asea","la","sala"]},
+{"e":"n","w":["mamá","lee","una","nana"]},
+{"e":"n","w":["una","luna","asoma","sola"]},
+{"e":"n","w":["nela","mima","a","la","mula"]},
+{"e":"n","w":["mi","mamá","asea","una","mesa"]},
+{"e":"n","w":["Ana","mima","a","su","mono"]},
+{"e":"n","w":["el","mono","ama","la","miel"]},
+{"e":"n","w":["una","mula","sale","sola"]},
+{"e":"n","w":["elena","lee","una","nana"]},
+{"e":"h","w":["mi","hilo","es","lila"]},
+{"e":"h","w":["el","humo","sale"]},
+{"e":"h","w":["Helena","ama","el","hielo"]},
+{"e":"h","w":["el","hielo","es","liso"]},
+{"e":"h","w":["ese","hilo","es","mío"]},
+{"e":"h","w":["mamá","hila","la","lana"]},
+{"e":"h","w":["Lola","hila","sola"]},
+{"e":"h","w":["hasan","ama","a","Helena"]},
+{"e":"h","w":["la","sala","huele","a","humo"]},
+{"e":"h","w":["mamá","huele","a","lila"]},
+{"e":"h","w":["Helena","huele","la","lima"]},
+{"e":"h","w":["mi","oso","huele","la","miel"]},
+{"e":"h","w":["nina","huele","una","lila"]},
+{"e":"h","w":["Helena","no","sale","sola"]},
+{"e":"h","w":["hasan","se","asoma"]},
+{"e":"d","w":["Dani","lee","en","la","sala"]},
+{"e":"d","w":["mamá","me","da","limonada"]},
+{"e":"d","w":["dime","una","nana"]},
+{"e":"d","w":["dale","miel","a","Dani"]},
+{"e":"d","w":["dos","osos","salen","al","sol"]},
+{"e":"d","w":["dina","ha","leído","una","nana"]},
+{"e":"d","w":["adela","anda","sola"]},
+{"e":"d","w":["dame","una","limonada"]},
+{"e":"d","w":["el","nene","ha","salido","solo"]},
+{"e":"d","w":["mi","nena","anda","sola"]},
+{"e":"d","w":["la","mula","anda","sola"]},
+{"e":"d","w":["el","nido","es","de","Diana"]},
+{"e":"d","w":["mamá","sale","de","la","sala"]},
+{"e":"d","w":["dina","dio","limonada","a","Dani"]},
+{"e":"d","w":["nilda","ama","la","limonada"]},
+{"e":"d","w":["un","día","sale","el","sol"]},
+{"e":"d","w":["la","dama","anda","sola"]},
+{"e":"d","w":["el","mono","ama","el","nido"]},
+{"e":"d","w":["la","seda","es","lisa"]},
+{"e":"d","w":["un","mono","ha","salido","solo"]},
+{"e":"d","w":["dana","lee","una","nana"]},
+{"e":"d","w":["mi","mamá","me","da","miel"]},
+{"e":"d","w":["daniel","sale","a","la","sala"]},
+{"e":"d","w":["la","duna","es","lisa"]},
+{"e":"d","w":["dos","nenes","salen","solos"]},
+{"e":"f","w":["mi","mamá","me","da","flan"]},
+{"e":"f","w":["fani","ama","el","flan"]},
+{"e":"f","w":["Sofía","asea","el","sofá"]},
+{"e":"f","w":["mamá","lee","en","el","sofá"]},
+{"e":"f","w":["mi","nene","anda","en","fila"]},
+{"e":"f","w":["el","sofá","es","fino"]},
+{"e":"f","w":["ese","flan","es","de","Sofía"]},
+{"e":"f","w":["fidel","anda","en","la","fila"]},
+{"e":"f","w":["Fina","lee","en","el","sofá"]},
+{"e":"f","w":["Dani","sale","de","la","fila"]},
+{"e":"f","w":["la","mula","huele","el","flan"]},
+{"e":"f","w":["Dani","da","flan","a","Fina"]},
+{"e":"f","w":["Fina","sale","sin","Alfonso"]},
+{"e":"f","w":["fidel","mima","a","Fina"]},
+{"e":"f","w":["felisa","ama","el","flan"]},
+{"e":"f","w":["la","seda","es","fina"]},
+{"e":"f","w":["el","sofá","es","de","mamá"]},
+{"e":"f","w":["ese","sofá","es","mío"]},
+{"e":"f","w":["mamá","salió","de","la","fila"]},
+{"e":"f","w":["Sofía","fue","sola"]},
+{"e":"f","w":["fui","al","sofá"]},
+{"e":"f","w":["fani","lee","en","la","sala"]},
+{"e":"f","w":["mi","mono","ama","el","flan"]},
+{"e":"f","w":["Alfonso","sale","a","la","sala"]},
+{"e":"f","w":["Fina","anda","sola"]},
+{"e":"p","w":["papá","pone","la","sopa"]},
+{"e":"p","w":["Pepa","pasea","sola"]},
+{"e":"p","w":["mi","papá","lee","un","papel"]},
+{"e":"p","w":["mamá","pone","el","pan"]},
+{"e":"p","w":["el","pan","es","de","Pepa"]},
+{"e":"p","w":["papá","usa","una","lupa"]},
+{"e":"p","w":["Pepe","lee","un","mapa"]},
+{"e":"p","w":["un","puma","pasea","solo"]},
+{"e":"p","w":["el","pulpo","nada","solo"]},
+{"e":"p","w":["mi","papá","ama","la","sopa"]},
+{"e":"p","w":["papá","apila","los","papeles"]},
+{"e":"p","w":["me","duele","el","pie"]},
+{"e":"p","w":["ese","piso","es","de","Pepe"]},
+{"e":"p","w":["papá","pasa","el","pan"]},
+{"e":"p","w":["dina","pasa","el","pan"]},
+{"e":"p","w":["la","lupa","es","de","Pepa"]},
+{"e":"p","w":["Pepe","no","pide","pan"]},
+{"e":"p","w":["mi","papá","me","da","pan"]},
+{"e":"p","w":["Pepa","pone","la","sopa"]},
+{"e":"p","w":["papá","sale","solo"]},
+{"e":"p","w":["mi","papá","pasea","sin","mí"]},
+{"e":"p","w":["Pepe","lee","los","papeles"]},
+{"e":"p","w":["la","sopa","es","de","papá"]},
+{"e":"p","w":["Pepa","usa","la","lupa"]},
+{"e":"p","w":["le","duele","el","pie"]},
+{"e":"t","w":["mi","tía","me","da","té"]},
+{"e":"t","w":["Tito","toma","sopa"]},
+{"e":"t","w":["mi","tío","tiene","un","pato"]},
+{"e":"t","w":["Tina","pone","el","plato"]},
+{"e":"t","w":["papá","toma","té"]},
+{"e":"t","w":["la","pelota","es","de","Tito"]},
+{"e":"t","w":["mi","tía","tiene","tomates"]},
+{"e":"t","w":["Teo","pasea","a","su","pato"]},
+{"e":"t","w":["el","pato","nada","solo"]},
+{"e":"t","w":["tu","mamá","te","mima"]},
+{"e":"t","w":["mi","tío","toma","atún"]},
+{"e":"t","w":["Tina","toma","una","patata"]},
+{"e":"t","w":["la","tapa","es","de","Tito"]},
+{"e":"t","w":["tomás","toma","limonada"]},
+{"e":"t","w":["la","tienda","es","de","Tina"]},
+{"e":"t","w":["en","la","tienda","tienen","pan"]},
+{"e":"t","w":["mi","tía","patina"]},
+{"e":"t","w":["esta","mesa","es","de","Teo"]},
+{"e":"t","w":["esta","sopa","tiene","tomate"]},
+{"e":"t","w":["mamá","sale","a","la","tienda"]},
+{"e":"t","w":["tu","tío","te","da","pan"]},
+{"e":"t","w":["Tito","sale","en","la","fila"]},
+{"e":"t","w":["mi","tía","tiene","un","sofá"]},
+{"e":"t","w":["Tina","lee","una","nota"]},
+{"e":"t","w":["Teo","tiene","una","pelota"]},
+{"e":"r","w":["rita","mira","el","mar"]},
+{"e":"r","w":["el","perro","mira","la","puerta"]},
+{"e":"r","w":["rosa","tiene","una","rana"]},
+{"e":"r","w":["la","rana","sale","del","río"]},
+{"e":"r","w":["el","tren","anda","rápido"]},
+{"e":"r","w":["mamá","me","pone","la","ropa"]},
+{"e":"r","w":["la","reina","toma","té"]},
+{"e":"r","w":["el","perro","duerme"]},
+{"e":"r","w":["rita","pasea","a","su","perro"]},
+{"e":"r","w":["la","mariposa","mira","la","rosa"]},
+{"e":"r","w":["mi","tía","tiene","una","rosa"]},
+{"e":"r","w":["papá","pasa","por","la","puerta"]},
+{"e":"r","w":["un","pulpo","mira","el","mar"]},
+{"e":"r","w":["rosa","me","da","una","pera"]},
+{"e":"r","w":["la","arena","es","lisa"]},
+{"e":"r","w":["tu","perro","es","rápido"]},
+{"e":"r","w":["rita","ama","a","su","perro"]},
+{"e":"r","w":["el","ratón","mira","la","pared"]},
+{"e":"r","w":["ese","toro","es","de","Tito"]},
+{"e":"r","w":["mi","perro","mira","la","luna"]},
+{"e":"r","w":["rosa","pasea","por","el","río"]},
+{"e":"r","w":["mamá","mira","el","mar"]},
+{"e":"r","w":["rita","tiene","una","pera"]},
+{"e":"r","w":["mi","perro","es","rápido"]},
+{"e":"r","w":["rosa","toma","sopa"]},
+{"e":"b","w":["mi","abuela","me","besa"]},
+{"e":"b","w":["el","bebé","bebe","limonada"]},
+{"e":"b","w":["mi","abuelo","toma","té"]},
+{"e":"b","w":["la","nube","es","bonita"]},
+{"e":"b","w":["Bea","baila","sola"]},
+{"e":"b","w":["el","bebé","mira","la","bola"]},
+{"e":"b","w":["mi","libro","es","bueno"]},
+{"e":"b","w":["el","lobo","mira","la","luna"]},
+{"e":"b","w":["bruno","tiene","una","bata"]},
+{"e":"b","w":["el","burro","tiene","sed"]},
+{"e":"b","w":["rubén","tiene","una","bola"]},
+{"e":"b","w":["blas","tiene","una","bota"]},
+{"e":"b","w":["mi","abuela","baila","bien"]},
+{"e":"b","w":["la","bolsa","es","de","Bea"]},
+{"e":"b","w":["Bea","abre","la","bolsa"]},
+{"e":"b","w":["mi","tío","toma","una","bebida"]},
+{"e":"b","w":["un","burro","baila"]},
+{"e":"b","w":["berta","lee","un","libro"]},
+{"e":"b","w":["mi","perro","bebe","solo"]},
+{"e":"b","w":["rita","me","da","el","balón"]},
+{"e":"b","w":["el","botón","es","de","Bea"]},
+{"e":"b","w":["mi","abuelo","lee","un","libro"]},
+{"e":"b","w":["el","bebé","tiene","sed"]},
+{"e":"b","w":["la","abuela","mira","el","mar"]},
+{"e":"b","w":["mi","abuelo","bebe","limonada"]},
+{"e":"v","w":["eva","vive","en","el","sur"]},
+{"e":"v","w":["mi","abuela","viene","en","tren"]},
+{"e":"v","w":["papá","lava","el","vaso"]},
+{"e":"v","w":["el","avión","vuela","rápido"]},
+{"e":"v","w":["un","ave","vuela"]},
+{"e":"v","w":["mi","vestido","es","verde"]},
+{"e":"v","w":["vera","mira","la","nieve"]},
+{"e":"v","w":["mi","tío","ve","un","avión"]},
+{"e":"v","w":["la","uva","es","verde"]},
+{"e":"v","w":["ven","a","la","mesa"]},
+{"e":"v","w":["mamá","pone","una","vela"]},
+{"e":"v","w":["valeria","toma","uvas"]},
+{"e":"v","w":["la","nieve","es","bonita"]},
+{"e":"v","w":["rubén","abre","la","ventana"]},
+{"e":"v","w":["eva","tiene","nueve","uvas"]},
+{"e":"ñ","w":["la","niña","tiene","un","moño"]},
+{"e":"ñ","w":["el","niño","mira","una","araña"]},
+{"e":"ñ","w":["mañana","viene","mi","abuela"]},
+{"e":"ñ","w":["mi","abuela","tiene","un","pañuelo"]},
+{"e":"ñ","w":["el","niño","va","al","baño"]},
+{"e":"ñ","w":["mamá","me","enseña","un","libro"]},
+{"e":"ñ","w":["papá","toma","piña"]},
+{"e":"ñ","w":["una","araña","sale","del","baño"]},
+{"e":"ñ","w":["mañana","vamos","al","mar"]},
+{"e":"ñ","w":["el","niño","sueña"]},
+{"e":"ñ","w":["el","señor","mira","el","mar"]},
+{"e":"ñ","w":["la","niña","ve","una","piña"]},
+{"e":"ñ","w":["mañana","veo","a","mi","abuelo"]},
+{"e":"ñ","w":["ese","pañuelo","es","de","Ana"]},
+{"e":"ñ","w":["el","niño","se","baña"]},
+{"e":"y","w":["yo","veo","una","playa"]},
+{"e":"y","w":["mi","mamá","me","ayuda"]},
+{"e":"y","w":["hoy","voy","a","la","playa"]},
+{"e":"y","w":["hoy","hay","sol"]},
+{"e":"y","w":["yo","soy","muy","alto"]},
+{"e":"y","w":["ya","viene","el","payaso"]},
+{"e":"y","w":["el","payaso","baila","muy","bien"]},
+{"e":"y","w":["ayer","vi","un","yate"]},
+{"e":"y","w":["ya","lo","leo","yo"]},
+{"e":"y","w":["mi","yoyó","es","verde"]},
+{"e":"y","w":["el","rey","tiene","un","yate"]},
+{"e":"y","w":["papá","me","ayuda","hoy"]},
+{"e":"y","w":["la","yema","es","del","huevo"]},
+{"e":"y","w":["mamá","mira","la","playa"]},
+{"e":"y","w":["mamá","me","leyó","un","libro"]},
+{"e":"k","w":["kiko","ama","a","Kika"]},
+{"e":"k","w":["Kika","pesa","un","kilo"]},
+{"e":"k","w":["mi","kimono","es","verde"]},
+{"e":"k","w":["el","koala","duerme"]},
+{"e":"k","w":["Kika","mira","al","koala"]},
+{"e":"k","w":["kike","lee","un","libro"]},
+{"e":"k","w":["yo","veo","un","koala"]},
+{"e":"c","w":["mi","casa","es","muy","bonita"]},
+{"e":"c","w":["mamá","cocina","una","sopa"]},
+{"e":"c","w":["el","cerdo","come","pan"]},
+{"e":"c","w":["mi","abuela","cuenta","un","cuento"]},
+{"e":"c","w":["el","cielo","es","bonito"]},
+{"e":"c","w":["carla","corre","por","la","playa"]},
+{"e":"c","w":["cinco","niños","van","al","cine"]},
+{"e":"c","w":["la","cabra","come","hierba"]},
+{"e":"c","w":["mi","cama","es","muy","cómoda"]},
+{"e":"c","w":["papá","cocina","con","mamá"]},
+{"e":"c","w":["carlos","come","uvas"]},
+{"e":"c","w":["el","perro","mueve","la","cola"]},
+{"e":"c","w":["mi","casa","tiene","una","cocina"]},
+{"e":"c","w":["el","caracol","camina","despacio"]},
+{"e":"c","w":["una","cabra","come","uvas"]},
+{"e":"z","w":["mi","zapato","es","azul"]},
+{"e":"z","w":["el","zorro","come","cerezas"]},
+{"e":"z","w":["papá","bebe","zumo"]},
+{"e":"z","w":["mi","taza","es","azul"]},
+{"e":"z","w":["la","niña","tiene","un","lazo"]},
+{"e":"z","w":["un","pez","nada"]},
+{"e":"z","w":["la","plaza","es","muy","bonita"]},
+{"e":"z","w":["mi","abuela","corta","zanahorias"]},
+{"e":"z","w":["veo","un","pez","azul"]},
+{"e":"z","w":["hay","luz","en","la","cocina"]},
+{"e":"z","w":["el","cielo","es","azul"]},
+{"e":"z","w":["los","zapatos","son","azules"]},
+{"e":"z","w":["Ana","toma","zumo","de","piña"]},
+{"e":"z","w":["zara","baila","en","la","plaza"]},
+{"e":"z","w":["Dani","come","cerezas"]},
+{"e":"q","w":["yo","quiero","queso"]},
+{"e":"q","w":["raquel","come","queso"]},
+{"e":"q","w":["mi","abuela","quiere","té"]},
+{"e":"q","w":["aquí","vive","mi","tío"]},
+{"e":"q","w":["quique","corre","en","el","parque"]},
+{"e":"q","w":["el","mosquito","vuela","aquí"]},
+{"e":"q","w":["mamá","dice","que","sí"]},
+{"e":"q","w":["quien","lee","aprende"]},
+{"e":"q","w":["mi","tía","quiere","un","zumo"]},
+{"e":"q","w":["el","parque","está","cerca"]},
+{"e":"q","w":["raquel","quiere","una","taza"]},
+{"e":"q","w":["quique","quiere","una","pelota"]},
+{"e":"q","w":["en","la","esquina","hay","luz"]},
+{"e":"q","w":["quiero","ver","el","mar"]},
+{"e":"q","w":["papá","me","dice","que","viene"]},
+{"e":"g","w":["mi","gato","come","pescado"]},
+{"e":"g","w":["el","gato","bebe","agua"]},
+{"e":"g","w":["diego","tiene","un","gorro"]},
+{"e":"g","w":["mi","amiga","Gema","baila"]},
+{"e":"g","w":["gabi","me","da","un","regalo"]},
+{"e":"g","w":["hugo","tiene","gafas","nuevas"]},
+{"e":"g","w":["el","tigre","es","grande"]},
+{"e":"g","w":["luego","como","pan","con","queso"]},
+{"e":"g","w":["mi","amigo","vive","cerca"]},
+{"e":"g","w":["un","gusano","come","hierba"]},
+{"e":"g","w":["una","gota","de","agua","cae"]},
+{"e":"g","w":["el","mago","tiene","un","gorro"]},
+{"e":"g","w":["gracias","por","el","regalo"]},
+{"e":"g","w":["el","lago","es","muy","grande"]},
+{"e":"g","w":["mi","gato","duerme","en","casa"]}
+];
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get FRASES_1() { return FRASES_1; } }));
 },
 "lengua/lexico.js": (__exp) => {
 // GENERADO por tools/lexico.py desde datos/lexico_1.tsv. No editar a mano.
@@ -2787,7 +3299,7 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get ESPACIO_LE
 // Charta · Lengua de 1.º · letras elegidas por la maestra (el «mapa de letras» del diseño).
 // generar() activa las letras mientras genera cada actividad de Lengua (conVistas); buscar() y los bancos
 // (frases, textos, adivinanzas…) solo dejan pasar lo que se escribe con esas letras. Sin letras: todo vale
-// (las fichas de siempre no cambian). Las vocales con tilde o diéresis cuentan como su vocal. Sin DOM.
+// (las fichas de siempre no cambian). Las vocales con tilde o diéresis cuentan como su vocal; la «y» suelta vale siempre. Sin DOM.
 const { ABECEDARIO, sinTildes } = __req("lengua/reglas.js");
 let activas = null;   // Set de letras o null (todas)
 
@@ -2807,9 +3319,11 @@ function conVistas(vistas, f) {
 /** Letras activas (cadena) o null. Sirve de clave de caché. */
 const vistasActivas = () => (activas ? [...activas].join("") : null);
 /** ¿El texto se escribe solo con las letras activas? (ignora espacios, signos y números). */
+// La «y» suelta (conjunción) vale siempre: Iván la usa desde el principio («mamá y papá»).
+const Y_SUELTA = /(^|[^\p{L}])y(?![\p{L}])/gu;
 function permitida(texto) {
   if (!activas) return true;
-  for (const c of sinTildes(String(texto).toLowerCase())) if (/\p{L}/u.test(c) && !activas.has(c)) return false;
+  for (const c of sinTildes(String(texto).toLowerCase()).replace(Y_SUELTA, "$1")) if (/\p{L}/u.test(c) && !activas.has(c)) return false;
   return true;
 }
 /** Elementos de la lista cuyo texto (f) usa solo las letras activas. */
@@ -13980,6 +14494,7 @@ const { POR_ID } = __req("nucleo/catalogo.js");
 const { crearAzar, mezclar } = __req("nucleo/azar.js");
 const { tipo } = __req("nucleo/tipos.js");
 const { normalizarVistas, conVistas } = __req("lengua/vistas.js");
+const { normalizarPropias, conPropias, USA_FRASES } = __req("lengua/frases.js");
 const SCHEMA_VERSION = 1;
 const COLORES = ["amarillo", "rosa", "azul", "verde"];
 
@@ -14038,8 +14553,10 @@ function validar(id, params = {}, tamano = "completa", curso) {
   const ops = Object.fromEntries(m.opciones.map((o) => [o.id, o]));
   // Letras elegidas (mapa de letras): solo Lengua de 1.º; todas = sin el campo (las fichas de siempre no cambian).
   if ("vistas" in p) { const v = esLengua1(m, c) ? normalizarVistas(p.vistas) : null; if (v) p.vistas = v; else delete p.vistas; }
+  // «Mis frases» (Lengua de 1.º, tipos que usan frases): como las letras, viajan en los parámetros.
+  if ("misFrases" in p) { const f = esLengua1(m, c) && USA_FRASES.has(id) ? normalizarPropias(p.misFrases) : null; if (f) p.misFrases = f; else delete p.misFrases; }
   for (const [k, v] of Object.entries(p)) {
-    if (k === "vistas") continue;
+    if (k === "vistas" || k === "misFrases") continue;
     if (k === "rango") {
       if (rgs.length && !rgs.includes(v)) throw new Error(`${id}: rango ${v} no admitido [${rgs}]`);
       continue;
@@ -14114,14 +14631,15 @@ function coloresPagina(acts) {
   });
 }
 
-function pagina(acts, tamano, colores, semilla) {
+/** Una página: sus actividades se numeran desde `n0 + 1` (la numeración sigue de una página a otra) y su semilla es la de su número. */
+function pagina(acts, tamano, colores, semilla, n0 = 0) {
   return {
-    actividades: acts.map((a, i) => {
-      const T = tipo(a.tipo);
-      const res = conVistas(a.params.vistas || null, () => T.generar(a.params, crearAzar(mezclar(semilla, i + 1)), { tamano }));
+    actividades: acts.map((a, j) => {
+      const T = tipo(a.tipo), i = n0 + j;
+      const res = conPropias(a.params.misFrases || null, () => conVistas(a.params.vistas || null, () => T.generar(a.params, crearAzar(mezclar(semilla, i + 1)), { tamano })));
       const n = i + 1;
       return {
-        n, tipo: a.tipo, tipoVersion: T.version, params: a.params, tamano, color: colores[i],
+        n, tipo: a.tipo, tipoVersion: T.version, params: a.params, tamano, color: colores[j],
         enunciado: res.enunciado, ejemplo: res.ejemplo ?? null,
         ejercicios: res.ejercicios.map((e, k) => ({ id: `a${n}e${k + 1}`, datos: e.datos, solucion: e.solucion, ...(e.pasos ? { pasos: e.pasos } : {}) })),
       };
@@ -14131,59 +14649,70 @@ function pagina(acts, tamano, colores, semilla) {
 
 /** Metadatos propios de una ficha (sin LOMLOE): dificultad = la mayor, minutos = suma (media página ≈ la mitad), etiquetas sin repetir. */
 function metadatosDe(ids) {
-  const ms = ids.map((id) => modelo(id).metadatos);
-  const mitad = ids.length > 1;
+  // ids: los de una página (["sumar.h20", …]) o los de varias ([["a", "b"], ["c"]]): media página = la mitad de minutos.
+  const pags = Array.isArray(ids[0]) ? ids : [ids];
+  const ms = pags.flatMap((p) => p.map((id) => ({ ...modelo(id).metadatos, mitad: p.length > 1 })));
   return {
     dificultad: Math.max(...ms.map((m) => m.dificultad)),
-    minutos: ms.reduce((t, m) => t + (mitad ? Math.round(m.minutos / 2) : m.minutos), 0),
+    minutos: ms.reduce((t, m) => t + (m.mitad ? Math.round(m.minutos / 2) : m.minutos), 0),
     etiquetas: [...new Set(ms.flatMap((m) => m.etiquetas))],
   };
 }
 
+/** Páginas como máximo en una ficha. */
+const MAX_PAGINAS = 10;
+
 /**
  * opciones = {
- *   actividades: [{ tipo: "sumar.h20", params?: {…}, color?: "azul" }, …]   (1 o 2),
+ *   actividades: [{ tipo: "sumar.h20", params?: {…}, color?: "azul" }, …]   (1 o 2: una página)
+ *   o paginas: [{ actividades: [1 o 2] }, …]   (varias páginas: hasta MAX_PAGINAS; las actividades se numeran seguidas: 1, 2, 3…),
  *   titulo?, variantes?: 1 (N = variantes A, B, C…), presentacion?: { color, lecturaFacil, pictogramas },
  *   metadatos?: { dificultad, minutos, etiquetas }
  * }
  * Determinista: no pone id, creada ni autor (se añaden al guardar en Firestore).
+ * La semilla de cada actividad depende de su número: la página 1 de una ficha larga es igual que la ficha de una página.
  */
 function generar(opciones, semilla = 1) {
-  const brutas = opciones?.actividades || [];
-  if (brutas.length < 1 || brutas.length > 2) throw new Error("Una ficha lleva 1 o 2 actividades.");
+  const brutasPags = opciones?.paginas ? opciones.paginas.map((p) => p?.actividades || []) : [opciones?.actividades || []];
+  if (!brutasPags.length || brutasPags.length > MAX_PAGINAS) throw new Error(`Una ficha lleva de 1 a ${MAX_PAGINAS} páginas.`);
+  brutasPags.forEach((b, k) => { if (b.length < 1 || b.length > 2) throw new Error(brutasPags.length > 1 ? `La página ${k + 1} lleva 1 o 2 actividades.` : "Una ficha lleva 1 o 2 actividades."); });
   if (!Number.isInteger(semilla)) throw new Error("La semilla debe ser un entero.");
-  const tamano = brutas.length === 1 ? "completa" : "media";
-  const acts = brutas.map((a) => {
-    const m = modelo(a.tipo);
-    if (!m.tamanos.includes(tamano)) throw new Error(`«${m.nombre}» solo cabe en una página completa.`);
-    if (!tipo(a.tipo)) throw new Error(`«${m.nombre}» aún no está disponible en la app.`);
-    const curso = cursosDe(m).includes(a.curso) ? a.curso : cursoDe(a.tipo, { params: a.params });   // curso elegido en el selector (o el que pide un valor con `curso`)
-    return { tipo: a.tipo, curso, params: validar(a.tipo, a.params, tamano, curso), color: a.color || null };
+  const pags = brutasPags.map((brutas) => {
+    const tamano = brutas.length === 1 ? "completa" : "media";
+    const acts = brutas.map((a) => {
+      const m = modelo(a.tipo);
+      if (!m.tamanos.includes(tamano)) throw new Error(`«${m.nombre}» solo cabe en una página completa.`);
+      if (!tipo(a.tipo)) throw new Error(`«${m.nombre}» aún no está disponible en la app.`);
+      const curso = cursosDe(m).includes(a.curso) ? a.curso : cursoDe(a.tipo, { params: a.params });   // curso elegido en el selector (o el que pide un valor con `curso`)
+      return { tipo: a.tipo, curso, params: validar(a.tipo, a.params, tamano, curso), color: a.color || null };
+    });
+    return { acts, tamano, colores: coloresPagina(acts) };
   });
-  const colores = coloresPagina(acts);
+  const todas = pags.flatMap((p) => p.acts);
   const variantes = opciones.variantes ?? 1;
   if (!Number.isInteger(variantes) || variantes < 1 || variantes > 30) throw new Error("variantes: de 1 a 30.");
   const semillaVariante = (v) => (v === 0 ? semilla >>> 0 : mezclar(semilla, v));
-  const m0 = modelo(acts[0].tipo);
+  const paginasDe = (s) => { let n0 = 0; return pags.map((p) => { const r = pagina(p.acts, p.tamano, p.colores, s, n0); n0 += p.acts.length; return r; }); };
+  const m0 = modelo(todas[0].tipo);
   const ficha = {
     schemaVersion: SCHEMA_VERSION, app: "charta",
-    titulo: opciones.titulo || tituloPagina(acts),
-    curso: acts[0].curso, area: m0.materia,
+    titulo: opciones.titulo || tituloPagina(todas),
+    curso: todas[0].curso, area: m0.materia,
     semilla, variantes,
     presentacion: { color: true, lecturaFacil: false, pictogramas: false, ...(opciones.presentacion || {}) },
-    paginas: [pagina(acts, tamano, colores, semillaVariante(0))],
+    paginas: paginasDe(semillaVariante(0)),
     variantesDatos: [],
   };
   if (opciones.metadatos) ficha.metadatos = { ...opciones.metadatos };
   for (let v = 1; v < variantes; v++) {
     const s = semillaVariante(v);
-    ficha.variantesDatos.push({ semilla: s, paginas: [pagina(acts, tamano, colores, s)] });
+    ficha.variantesDatos.push({ semilla: s, paginas: paginasDe(s) });
   }
   // Normalizada a JSON (−0 → 0…): la ficha en memoria es idéntica a la guardada en Firestore o leída por Tabula/Fori.
   return JSON.parse(JSON.stringify(ficha));
 }
 
-Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get SCHEMA_VERSION() { return SCHEMA_VERSION; }, get COLORES() { return COLORES; }, get modelo() { return modelo; }, get cursosDe() { return cursosDe; }, get rangosDe() { return rangosDe; }, get rangosTodos() { return rangosTodos; }, get cursoDe() { return cursoDe; }, get porDefecto() { return porDefecto; }, get visible() { return visible; }, get esLengua1() { return esLengua1; }, get validar() { return validar; }, get capitalizar() { return capitalizar; }, get tituloModelo() { return tituloModelo; }, get nombreEnCurso() { return nombreEnCurso; }, get tituloPagina() { return tituloPagina; }, get coloresPagina() { return coloresPagina; }, get metadatosDe() { return metadatosDe; }, get generar() { return generar; } }));
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get SCHEMA_VERSION() { return SCHEMA_VERSION; }, get COLORES() { return COLORES; }, get modelo() { return modelo; }, get cursosDe() { return cursosDe; }, get rangosDe() { return rangosDe; }, get rangosTodos() { return rangosTodos; }, get cursoDe() { return cursoDe; }, get porDefecto() { return porDefecto; }, get visible() { return visible; }, get esLengua1() { return esLengua1; }, get validar() { return validar; }, get capitalizar() { return capitalizar; }, get tituloModelo() { return tituloModelo; }, get nombreEnCurso() { return nombreEnCurso; }, get tituloPagina() { return tituloPagina; }, get coloresPagina() { return coloresPagina; }, get metadatosDe() { return metadatosDe; }, get MAX_PAGINAS() { return MAX_PAGINAS; }, get generar() { return generar; } }));
 },
 "nucleo/lector.js": (__exp) => {
 // Charta · lectura de fichas JSON sin motor (lo pueden importar Tabula y Fori).
@@ -14205,12 +14734,13 @@ function erroresFicha(f) {
   es(Array.isArray(f.variantesDatos) && f.variantesDatos.length === (f.variantes || 1) - 1, "variantesDatos no cuadra con variantes");
   if ("alumnos" in f || "nombres" in f) e.push("la ficha no debe llevar datos de alumnos");
   const grupos = [f.paginas || [], ...(f.variantesDatos || []).map((v) => v.paginas || [])];
-  grupos.forEach((ps, v) => ps.forEach((p, i) => {
+  // Varias páginas: las actividades se numeran seguidas (1, 2 | 3 | 4…) en cada variante.
+  grupos.forEach((ps, v) => { let n = 0; ps.forEach((p, i) => {
     const donde = `variante ${v + 1}, página ${i + 1}`;
     if (!Array.isArray(p.actividades) || p.actividades.length < 1 || p.actividades.length > 2) { e.push(`${donde}: 1 o 2 actividades`); return; }
     p.actividades.forEach((a, k) => {
       const d = `${donde}, actividad ${k + 1}`;
-      es(a.n === k + 1, `${d}: n debe ser ${k + 1}`);
+      n++; es(a.n === n, `${d}: n debe ser ${n}`);
       es(typeof a.tipo === "string" && Number.isInteger(a.tipoVersion), `${d}: tipo y tipoVersion`);
       es(["completa", "media"].includes(a.tamano), `${d}: tamano no válido`);
       es(COLORES.includes(a.color), `${d}: color no válido`);
@@ -14218,7 +14748,7 @@ function erroresFicha(f) {
       es(Array.isArray(a.ejercicios) && a.ejercicios.length, `${d}: sin ejercicios`);
       (a.ejercicios || []).forEach((x, j) => es(x.id && x.datos && x.solucion, `${d}, ejercicio ${j + 1}: id, datos y solucion`));
     });
-  }));
+  }); });
   return e;
 }
 
@@ -14473,17 +15003,18 @@ function estiloLectura(ficha) {
 }
 
 /**
- * Páginas para imprimir: una por alumno (o `copias` con la línea en blanco si no hay alumnos).
- * Con variantes > 1, el alumno i recibe la variante i % variantes. Devuelve [{ nombre, variante, svg }].
+ * Páginas para imprimir: todas las de la ficha para cada alumno (o `copias` con la línea en blanco si no hay alumnos), seguidas.
+ * Con variantes > 1, el alumno i recibe la variante i % variantes. Devuelve [{ nombre, variante, pagina (0…), total, svg }].
  * Los nombres solo se usan aquí, en el dispositivo: nunca entran en la ficha.
  */
 function hojas(ficha, { nombres = [], copias = 1, bn = false, modo = "papel" } = {}) {
   const lista = nombres.map((s) => String(s).trim()).filter(Boolean);
   const quienes = lista.length ? lista : Array(Math.max(1, copias | 0)).fill("");   // sin alumnos: copias con la línea en blanco
-  return quienes.map((nombre, i) => {
+  return quienes.flatMap((nombre, i) => {
     const v = i % ficha.variantes;
-    const pag = (v === 0 ? ficha.paginas : ficha.variantesDatos[v - 1].paginas)[0];
-    return { nombre, variante: v, svg: hoja(pag, { titulo: ficha.titulo, nombre, bn, modo, uid: `h${i}${modo[0]}`, ...estiloLectura(ficha) }) };
+    const pags = v === 0 ? ficha.paginas : ficha.variantesDatos[v - 1].paginas;
+    return pags.map((pag, k) => ({ nombre, variante: v, pagina: k, total: pags.length,
+      svg: hoja(pag, { titulo: ficha.titulo, nombre, bn, modo, uid: k ? `h${i}p${k}${modo[0]}` : `h${i}${modo[0]}`, ...estiloLectura(ficha) }) }));
   });
 }
 
@@ -15476,7 +16007,9 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get repartir()
 // (el agua) no entran. Las frases empiezan siempre por el artículo (El, La, Los, Las), nunca por «I».
 const { LEXICO } = __req("lengua/lexico.js");
 const { articulo, plural, tonica } = __req("lengua/reglas.js");
-const { permitida, filtrarVistas, avisoVistas } = __req("lengua/vistas.js");
+const { permitida, filtrarVistas, avisoVistas, vistasActivas } = __req("lengua/vistas.js");
+const { FRASES_1 } = __req("lengua/frases_1.js");
+const { propiasActivas, palabrasLibres, nombresDe } = __req("lengua/frases.js");
 const ENT = new Map(LEXICO.map((e) => [e.p, e]));
 const gen = (lema) => {
   const e = ENT.get(lema);
@@ -15635,15 +16168,47 @@ function construir() {
   const vistas = new Set();
   return out.filter((f) => !vistas.has(f.id) && vistas.add(f.id)).filter((f) => f.n >= 3 && f.n <= 5);
 }
-let memo = null;
-/** Todas las frases posibles (singular y plural), sin repetir. No modificar: se comparte. */
-function todasFrases() { return (memo ??= construir()); }
-const memoPorId = new Map();
-function frasePorId(id) {
-  if (!memoPorId.size) for (const f of todasFrases()) memoPorId.set(f.id, f);
-  return memoPorId.get(id) || null;
+// ---------------------------------------------------------------- frases libres (sin plantilla): tipo "lib"
+// Las de las primeras letras (FRASES_1, solo con letras elegidas) y «Mis frases» (propias, siempre). No tienen estructura:
+// sin suj/obj reales (suj.lema = la frase, para no repetir), así que solo las usan ordena (con la primera marcada), separa, puntúa,
+// copia, dictado y lectura rápida (lo decide cada tipo con su filtro). `nombres` = lleva un nombre propio detrás de la primera palabra.
+function mkLibre(palabras, fuente) {
+  const id = palabras.join(" ").toLowerCase();
+  return { id, tipo: "lib", fuente, n: palabras.length, numero: "s", palabras, suj: { i: 0, lema: id, g: null, num: "s" }, obj: null, verbo: null, universal: false,
+    nombres: palabras.slice(1).some((w) => w[0] !== w[0].toLowerCase()) };
+}
+const NOMBRES_1 = nombresDe(FRASES_1.map((f) => f.w.join(" ")));
+let LIBRES_1 = null;
+const libres1 = () => (LIBRES_1 ??= FRASES_1.map((f) => mkLibre(f.w, "inicial")));
+function libresPropias(lista) {
+  const nombres = new Set([...NOMBRES_1, ...nombresDe(lista)]);
+  return lista.map((t) => mkLibre(palabrasLibres(t, nombres), "propia"));
 }
 
+let memo = null;
+const memos = new Map();   // clave (con letras · frases propias) → lista
+/** Todas las frases posibles (singular y plural), sin repetir: las de plantilla y, según el caso, las libres. No modificar: se comparte. */
+function todasFrases() {
+  const base = (memo ??= construir()), propias = propiasActivas(), conIniciales = vistasActivas() !== null;
+  if (!propias && !conIniciales) return base;
+  const clave = (conIniciales ? "1" : "0") + "|" + (propias || []).join("|");
+  if (!memos.has(clave)) {
+    if (memos.size > 20) memos.clear();
+    const ids = new Set(base.map((f) => f.id)), extra = [...(propias ? libresPropias(propias) : []), ...(conIniciales ? libres1() : [])];
+    memos.set(clave, [...base, ...extra.filter((f) => !ids.has(f.id) && ids.add(f.id))]);
+  }
+  return memos.get(clave);
+}
+const memoPorId = new Map();
+/** La frase con ese texto (palabras en minúscula separadas por espacios), también las libres activas. */
+function frasePorId(id) {
+  const todas = todasFrases();
+  if (!memoPorId.has(todas)) { if (memoPorId.size > 20) memoPorId.clear(); memoPorId.set(todas, new Map(todas.map((f) => [f.id, f]))); }
+  return memoPorId.get(todas).get(String(id).toLowerCase()) || null;
+}
+
+/** ¿Ninguna palabra lleva mayúscula? (las libres con nombres propios no sirven para puntúa ni separa). */
+const sinMayusculas = (f) => f.palabras.every((w) => w === w.toLowerCase());
 /** Texto de la frase tal como se escribe: «El gato come pan.» */
 const textoFrase = (palabras) => { const t = palabras.join(" "); return t[0].toUpperCase() + t.slice(1) + "."; };
 /** Aplica «Letra»: null = como se escribe (Mayúscula inicial) · "mayus" = TODO EN MAYÚSCULAS. */
@@ -15678,9 +16243,9 @@ function elegirFrases(azar, largos, { filtro = null, id = "frase", ya = new Set(
 }
 
 // ---------------------------------------------------------------- orden único (ordena)
-let VALIDAS = null;
+const VALIDAS = new Map();
 /** Textos de todas las frases del banco (en orden normal). */
-const validas = () => (VALIDAS ??= new Set(todasFrases().map((f) => f.id)));
+const validas = () => { const t = todasFrases(); if (!VALIDAS.has(t)) { if (VALIDAS.size > 20) VALIDAS.clear(); VALIDAS.set(t, new Set(t.map((f) => f.id))); } return VALIDAS.get(t); };
 const permutaciones = (l) => (l.length <= 1 ? [l] : l.flatMap((x, i) => permutaciones([...l.slice(0, i), ...l.slice(i + 1)]).map((r) => [x, ...r])));
 const memoUnico = new Map();
 /**
@@ -15689,10 +16254,11 @@ const memoUnico = new Map();
  * Con la primera palabra marcada (mayúscula) solo cuentan los órdenes que empiezan por ella.
  */
 function ordenUnico(f, marcada = true) {
-  const clave = f.id + (marcada ? "|m" : "");
+  if (f.tipo === "lib" && (!marcada || f.nombres)) return false;   // libres: solo con la primera marcada y sin nombres propios (la mayúscula delataría el orden)
+  const clave = f.id + (marcada ? "|m" : "") + (f.tipo === "lib" ? "|" + todasFrases().length : "");
   if (!memoUnico.has(clave)) {
-    const V = validas();
-    memoUnico.set(clave, !permutaciones(f.palabras).some((p) => { const t = p.join(" "); return t !== f.id && (!marcada || p[0] === f.palabras[0]) && V.has(t); }));
+    const V = validas(), ws = f.palabras.map((w) => w.toLowerCase());
+    memoUnico.set(clave, !permutaciones(ws).some((p) => { const t = p.join(" "); return t !== f.id && (!marcada || p[0] === ws[0]) && V.has(t); }));
   }
   return memoUnico.get(clave);
 }
@@ -15785,7 +16351,7 @@ function elegirVerdades(azar, n, { id = "frase.verdad" } = {}) {
   return mezcla;
 }
 
-Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get VERBOS() { return VERBOS; }, get ADJETIVOS() { return ADJETIVOS; }, get formaAdj() { return formaAdj; }, get BANCO() { return BANCO; }, get INERTES() { return INERTES; }, get todasFrases() { return todasFrases; }, get frasePorId() { return frasePorId; }, get textoFrase() { return textoFrase; }, get frAlCaso() { return frAlCaso; }, get largosFrase() { return largosFrase; }, get elegirFrases() { return elegirFrases; }, get ordenUnico() { return ordenUnico; }, get desordenar() { return desordenar; }, get cortesLimpios() { return cortesLimpios; }, get distractoras() { return distractoras; }, get NO_COMIBLE() { return NO_COMIBLE; }, get hechosVerdad() { return hechosVerdad; }, get elegirVerdades() { return elegirVerdades; } }));
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get VERBOS() { return VERBOS; }, get ADJETIVOS() { return ADJETIVOS; }, get formaAdj() { return formaAdj; }, get BANCO() { return BANCO; }, get INERTES() { return INERTES; }, get todasFrases() { return todasFrases; }, get frasePorId() { return frasePorId; }, get sinMayusculas() { return sinMayusculas; }, get textoFrase() { return textoFrase; }, get frAlCaso() { return frAlCaso; }, get largosFrase() { return largosFrase; }, get elegirFrases() { return elegirFrases; }, get ordenUnico() { return ordenUnico; }, get desordenar() { return desordenar; }, get cortesLimpios() { return cortesLimpios; }, get distractoras() { return distractoras; }, get NO_COMIBLE() { return NO_COMIBLE; }, get hechosVerdad() { return hechosVerdad; }, get elegirVerdades() { return elegirVerdades; } }));
 },
 "tipos/_lectura.js": (__exp) => {
 // Charta · ayudantes de los tipos lectura.* (Lengua 1.º, lote 5; LENGUA_1.md §3, bloque 7). Sin DOM.
@@ -18706,13 +19272,13 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() 
 const { registrar } = __req("nucleo/tipos.js");
 const { TOP, COLOR_SOLUCION } = __req("render/papel.js");
 const { cuantas, ajusta } = __req("tipos/_lengua.js");
-const { elegirFrases, largosFrase, textoFrase } = __req("tipos/_frase.js");
+const { elegirFrases, largosFrase, textoFrase, sinMayusculas } = __req("tipos/_frase.js");
 const __default = registrar({
   id: "frase.puntua",
   version: 1,
   generar(params, azar, { tamano }) {
     const n = cuantas(tamano, 8), falta = params.falta || "ambos", modo = params.tarea === "escribe" ? "escribe" : "rodea";
-    const frases = elegirFrases(azar, largosFrase(azar, n, params.palabras), { id: "frase.puntua" });
+    const frases = elegirFrases(azar, largosFrase(azar, n, params.palabras), { id: "frase.puntua", filtro: sinMayusculas });
     const enunciado = modo === "escribe" ? "Escribe bien cada frase: mayúscula al empezar\ny punto al final."
       : falta === "mayus" ? "Rodea la letra que debe ser mayúscula."
       : falta === "punto" ? "Pon el punto en el cuadro gris."
@@ -18766,13 +19332,13 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() 
 const { registrar } = __req("nucleo/tipos.js");
 const { TOP } = __req("render/papel.js");
 const { cuantas, palabraLetras, ajusta } = __req("tipos/_lengua.js");
-const { elegirFrases, largosFrase, cortesLimpios, frAlCaso } = __req("tipos/_frase.js");
+const { elegirFrases, largosFrase, cortesLimpios, frAlCaso, sinMayusculas } = __req("tipos/_frase.js");
 const __default = registrar({
   id: "frase.separa",
   version: 1,
   generar(params, azar, { tamano }) {
     const rayas = params.tarea !== "escribe", n = cuantas(tamano, rayas ? 10 : 8);
-    const frases = elegirFrases(azar, largosFrase(azar, n, params.palabras), { filtro: rayas ? (f) => cortesLimpios(f.palabras) : null, id: "frase.separa" });
+    const frases = elegirFrases(azar, largosFrase(azar, n, params.palabras), { filtro: (f) => sinMayusculas(f) && (!rayas || cortesLimpios(f.palabras)), id: "frase.separa" });
     return {
       enunciado: rayas ? "Traza una raya entre las palabras\nde cada frase." : "Escribe cada frase separando bien\nlas palabras.",
       ejercicios: frases.map((f) => {
@@ -24498,7 +25064,8 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get MAX_BYTES(
 },
 "ui/guardadas.js": (__exp) => {
 // Charta · recientes y favoritos (paso 4.4). Sin DOM: el almacén se inyecta (localStorage en la app).
-// Se guarda la composición (actividades + opciones, semilla, título, variantes, B/N); NUNCA los nombres de los alumnos.
+// Se guarda la composición (actividades + páginas + opciones, semilla, título, variantes, B/N); NUNCA los nombres de los alumnos.
+const { cuentasDe } = __req("ui/paginas.js");
 const MAX_RECIENTES = 8;
 const MAX_FAVORITOS = 30;
 const CLAVES = { recientes: "charta:recientes", favoritos: "charta:favoritos" };
@@ -24507,6 +25074,7 @@ const CLAVES = { recientes: "charta:recientes", favoritos: "charta:favoritos" };
 function limpiar(c) {
   return {
     actividades: c.actividades.map((a) => ({ tipo: a.tipo, ...(Number.isInteger(a.curso) && { curso: a.curso }), params: { ...a.params } })),
+    ...(cuentasDe(c).length > 1 && { paginas: cuentasDe(c) }),                  // varias páginas: actividades de cada una
     semilla: c.semilla | 0, titulo: c.titulo || "", variaciones: c.variaciones || "iguales", bn: !!c.bn, grande: !!c.grande, facil: !!c.facil,
     ...(c.fuente && c.fuente !== "andika" && { fuente: String(c.fuente) }),     // solo el nombre; la letra no viaja
   };
@@ -24723,7 +25291,8 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get crearInici
 // Todas marcadas = sin el campo: la ficha es la de siempre.
 const { modelo, esLengua1 } = __req("nucleo/ficha.js");
 const { ABECEDARIO } = __req("lengua/reglas.js");
-const { normalizarVistas } = __req("lengua/vistas.js");
+const { normalizarVistas, conVistas, permitida } = __req("lengua/vistas.js");
+const { USA_FRASES, leerPropias } = __req("lengua/frases.js");
 const VOCALES = "aeiou";
 const CLAVE_LETRAS = "charta:letras";   // las últimas marcadas (las que lleva la clase): se proponen en fichas nuevas
 
@@ -24754,7 +25323,30 @@ function resumenLetras(marcadas) {
   return `${n} de ${ABECEDARIO.length}`;
 }
 
-Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get VOCALES() { return VOCALES; }, get CLAVE_LETRAS() { return CLAVE_LETRAS; }, get hayLengua1() { return hayLengua1; }, get conLetras() { return conLetras; }, get letrasDe() { return letrasDe; }, get vistasDe() { return vistasDe; }, get resumenLetras() { return resumenLetras; } }));
+// «Mis frases» (Lengua de 1.º): viajan en `params.misFrases` de las actividades que usan frases (USA_FRASES), como las letras.
+const CLAVE_FRASES = "charta:misFrases";   // las últimas escritas (las de la clase)
+const usaFrases = (a) => admite(a) && USA_FRASES.has(a.tipo);
+/** ¿Alguna actividad usa frases? (para enseñar la caja «Mis frases»). */
+const hayFrases = (acts) => acts.some(usaFrases);
+/** Las actividades con las frases propias puestas (lista de textos ya leída con leerPropias; vacía = sin el campo). */
+function conFrases(acts, frases) {
+  return acts.map((a) => {
+    const { misFrases: _, ...params } = a.params || {};
+    return usaFrases(a) && frases?.length ? { ...a, params: { ...params, misFrases: frases } } : { ...a, params };
+  });
+}
+/** Frases propias de una composición guardada (las de su primera actividad que las lleve) o []. */
+const frasesDe = (c) => (c?.actividades || []).find((a) => usaFrases(a) && Array.isArray(a.params?.misFrases))?.params.misFrases || [];
+/** Resumen de la caja: { frases, cuenta: "3", info: "…" } con los errores y las que no salen con las letras marcadas (vistas = cadena o null). */
+function resumenFrases(texto, vistas) {
+  const { frases, errores } = leerPropias(texto);
+  const fuera = vistas ? frases.filter((t) => !conVistas(vistas, () => permitida(t))) : [];
+  const partes = [...errores];
+  if (fuera.length) partes.push(`Con las letras marcadas no ${fuera.length > 1 ? "salen" : "sale"}: ${fuera.map((t) => `«${t}»`).join(", ")}.`);
+  return { frases, cuenta: frases.length ? String(frases.length) : "", info: partes.join(" ") };
+}
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get VOCALES() { return VOCALES; }, get CLAVE_LETRAS() { return CLAVE_LETRAS; }, get hayLengua1() { return hayLengua1; }, get conLetras() { return conLetras; }, get letrasDe() { return letrasDe; }, get vistasDe() { return vistasDe; }, get resumenLetras() { return resumenLetras; }, get CLAVE_FRASES() { return CLAVE_FRASES; }, get hayFrases() { return hayFrases; }, get conFrases() { return conFrases; }, get frasesDe() { return frasesDe; }, get resumenFrases() { return resumenFrases; } }));
 },
 "ui/miniatura_ficha.js": (__exp) => {
 // Charta · miniatura de la hoja 1 para Documentos de Tabula (paso 5.4). SVG → imagen JPEG pequeña (data URL).
@@ -24846,6 +25438,39 @@ function miniatura(id) {
 }
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get cursos() { return cursos; }, get materias() { return materias; }, get bloques() { return bloques; }, get modelos() { return modelos; }, get fuenteMateria() { return fuenteMateria; }, get materiaDe() { return materiaDe; }, get miniatura() { return miniatura; } }));
+},
+"ui/paginas.js": (__exp) => {
+// Charta · fichas de varias páginas en la composición, sin DOM.
+// La composición guarda las actividades seguidas (`actividades`, como siempre) y, si hay más de una página,
+// cuántas lleva cada una (`paginas: [2, 1, 1]`). Sin `paginas` = una sola página (las guardadas de antes no cambian).
+const { MAX_PAGINAS } = __req("nucleo/ficha.js");
+/** Actividades por página de una composición: [2, 1, 1]; si `paginas` no cuadra o no está, una sola página. */
+function cuentasDe(c) {
+  const n = c?.actividades?.length || 0, p = c?.paginas;
+  if (Array.isArray(p) && p.length >= 1 && p.length <= MAX_PAGINAS && p.every((x) => x === 1 || x === 2) && p.reduce((a, b) => a + b, 0) === n) return [...p];
+  return [Math.max(1, Math.min(2, n))];
+}
+/** ¿La composición es válida en páginas? (de 1 a MAX_PAGINAS páginas de 1 o 2 actividades). */
+function paginasValidas(c) {
+  const n = c?.actividades?.length || 0;
+  if (c?.paginas == null) return n >= 1 && n <= 2;
+  return JSON.stringify(cuentasDe(c)) === JSON.stringify(c.paginas);
+}
+/** Reparte la lista según las cuentas: ([a, b, c], [2, 1]) → [{ actividades: [a, b] }, { actividades: [c] }]. */
+function agrupar(lista, cuentas) {
+  let i = 0;
+  return cuentas.map((k) => ({ actividades: lista.slice(i, (i += k)) }));
+}
+/** Página (0…) de la actividad i. */
+function paginaDe(cuentas, i) {
+  let fin = 0;
+  for (let k = 0; k < cuentas.length; k++) { fin += cuentas[k]; if (i < fin) return k; }
+  return -1;
+}
+/** Primera actividad (índice) de la página k. */
+const inicioDe = (cuentas, k) => cuentas.slice(0, k).reduce((a, b) => a + b, 0);
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get cuentasDe() { return cuentasDe; }, get paginasValidas() { return paginasValidas; }, get agrupar() { return agrupar; }, get paginaDe() { return paginaDe; }, get inicioDe() { return inicioDe; } }));
 },
 "ui/selector.js": (__exp) => {
 // Charta · selector de actividad a pantalla completa (paso 4.1).
@@ -24974,6 +25599,7 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get abrirSelec
 //   Charta → Tabula  /tabula/?charta=B64( {v:1, id?, titulo, tipos, comp, grupo?, sesion?, tarea?, variantes?, minutos?, dificultad?, etiquetas?} )
 //                    + la miniatura de la hoja 1 (sin nombres) en localStorage["charta:aTabula"] = {v:1, titulo, miniatura} (5.4)
 
+const { paginasValidas } = __req("ui/paginas.js");
 const URL_TABULA = "/tabula/"; // raíz del sitio (ilinper301-hue.github.io); la app está en /Charta/dist/
 
 /** Texto UTF-8 → base64url sin «=». */
@@ -24991,7 +25617,7 @@ function deB64url(s) {
 /** Composición válida (la de Charta: actividades + opciones, semilla, título…) o null. */
 function composicionValida(c, hayTipo = () => true) {
   if (!c || typeof c !== "object" || !Array.isArray(c.actividades)) return null;
-  if (c.actividades.length < 1 || c.actividades.length > 2) return null;
+  if (!paginasValidas(c)) return null;                 // 1 o 2 actividades; o varias páginas (`paginas: [2, 1…]`)
   if (!c.actividades.every((a) => a && typeof a.tipo === "string" && hayTipo(a.tipo) && (a.params == null || typeof a.params === "object"))) return null;
   return c;
 }

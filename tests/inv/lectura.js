@@ -2,6 +2,7 @@
 // Todo lo que se lee sale del léxico de 1.º (nombres y adjetivos con género y número, verbos en infinitivo o 3.ª persona) más palabras gramaticales (artículos, «en», «por», «qué»…).
 // Una frase es válida si todas sus palabras se reconocen, el artículo concuerda con el nombre, el adjetivo con el nombre anterior y el verbo con el sujeto, y no empieza por «I».
 import assert from "node:assert/strict";
+import { frasePorId } from "../../src/tipos/_frase.js";
 import { unicos, cuantos } from "./_ayuda.js";
 import { enCaso, PALABRAS } from "./_lengua.js";
 import { analiza as analizaFrase } from "./frase.js";
@@ -276,7 +277,11 @@ export default {
     unicos(items, (x) => x.toLowerCase(), "elementos repetidos");
     if (frases) {
       assert.equal(items.length, FRASES_FLUIDEZ);
-      let t = 0; items.forEach((f) => { ck(f, mayus, "frase"); const ws = palabrasDe(f); analizaFrase(ws); t += ws.length; assert.match(f, mayus ? /^[A-ZÁÉÍÓÚÜÑ ]+\.$/ : /^[A-ZÁÉÍÓÚÑ][a-záéíóúüñ ]+\.$/); });
+      let t = 0; items.forEach((f) => {
+        const ws = palabrasDe(f); t += ws.length;
+        if (frasePorId(ws.join(" "))?.tipo === "lib") { assert.match(f, mayus ? /^[A-ZÁÉÍÓÚÜÑ ]+\.$/ : /^[A-ZÁÉÍÓÚÑ][A-Za-záéíóúüñÁÉÍÓÚÑ ]+\.$/); return; }   // frase libre (primeras letras, «Mis frases»)
+        ck(f, mayus, "frase"); analizaFrase(ws); assert.match(f, mayus ? /^[A-ZÁÉÍÓÚÜÑ ]+\.$/ : /^[A-ZÁÉÍÓÚÑ][a-záéíóúüñ ]+\.$/);
+      });
       assert.equal(t, total, "el total no cuenta las palabras de las frases");
     } else {
       assert.equal(items.length, PALABRAS_FLUIDEZ); assert.equal(total, items.length);

@@ -9,14 +9,14 @@
 import { registrar } from "../nucleo/tipos.js";
 import { TOP, COLOR_SOLUCION } from "../render/papel.js";
 import { cuantas, ajusta } from "./_lengua.js";
-import { elegirFrases, largosFrase, textoFrase } from "./_frase.js";
+import { elegirFrases, largosFrase, textoFrase, sinMayusculas } from "./_frase.js";
 
 export default registrar({
   id: "frase.puntua",
   version: 1,
   generar(params, azar, { tamano }) {
     const n = cuantas(tamano, 8), falta = params.falta || "ambos", modo = params.tarea === "escribe" ? "escribe" : "rodea";
-    const frases = elegirFrases(azar, largosFrase(azar, n, params.palabras), { id: "frase.puntua" });
+    const frases = elegirFrases(azar, largosFrase(azar, n, params.palabras), { id: "frase.puntua", filtro: sinMayusculas });
     const enunciado = modo === "escribe" ? "Escribe bien cada frase: mayúscula al empezar\ny punto al final."
       : falta === "mayus" ? "Rodea la letra que debe ser mayúscula."
       : falta === "punto" ? "Pon el punto en el cuadro gris."

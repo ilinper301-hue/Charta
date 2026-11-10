@@ -17,12 +17,13 @@ export function erroresFicha(f) {
   es(Array.isArray(f.variantesDatos) && f.variantesDatos.length === (f.variantes || 1) - 1, "variantesDatos no cuadra con variantes");
   if ("alumnos" in f || "nombres" in f) e.push("la ficha no debe llevar datos de alumnos");
   const grupos = [f.paginas || [], ...(f.variantesDatos || []).map((v) => v.paginas || [])];
-  grupos.forEach((ps, v) => ps.forEach((p, i) => {
+  // Varias páginas: las actividades se numeran seguidas (1, 2 | 3 | 4…) en cada variante.
+  grupos.forEach((ps, v) => { let n = 0; ps.forEach((p, i) => {
     const donde = `variante ${v + 1}, página ${i + 1}`;
     if (!Array.isArray(p.actividades) || p.actividades.length < 1 || p.actividades.length > 2) { e.push(`${donde}: 1 o 2 actividades`); return; }
     p.actividades.forEach((a, k) => {
       const d = `${donde}, actividad ${k + 1}`;
-      es(a.n === k + 1, `${d}: n debe ser ${k + 1}`);
+      n++; es(a.n === n, `${d}: n debe ser ${n}`);
       es(typeof a.tipo === "string" && Number.isInteger(a.tipoVersion), `${d}: tipo y tipoVersion`);
       es(["completa", "media"].includes(a.tamano), `${d}: tamano no válido`);
       es(COLORES.includes(a.color), `${d}: color no válido`);
@@ -30,7 +31,7 @@ export function erroresFicha(f) {
       es(Array.isArray(a.ejercicios) && a.ejercicios.length, `${d}: sin ejercicios`);
       (a.ejercicios || []).forEach((x, j) => es(x.id && x.datos && x.solucion, `${d}, ejercicio ${j + 1}: id, datos y solucion`));
     });
-  }));
+  }); });
   return e;
 }
 

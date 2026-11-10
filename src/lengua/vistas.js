@@ -1,7 +1,7 @@
 // Charta · Lengua de 1.º · letras elegidas por la maestra (el «mapa de letras» del diseño).
 // generar() activa las letras mientras genera cada actividad de Lengua (conVistas); buscar() y los bancos
 // (frases, textos, adivinanzas…) solo dejan pasar lo que se escribe con esas letras. Sin letras: todo vale
-// (las fichas de siempre no cambian). Las vocales con tilde o diéresis cuentan como su vocal. Sin DOM.
+// (las fichas de siempre no cambian). Las vocales con tilde o diéresis cuentan como su vocal; la «y» suelta vale siempre. Sin DOM.
 import { ABECEDARIO, sinTildes } from "./reglas.js";
 
 let activas = null;   // Set de letras o null (todas)
@@ -22,9 +22,11 @@ export function conVistas(vistas, f) {
 /** Letras activas (cadena) o null. Sirve de clave de caché. */
 export const vistasActivas = () => (activas ? [...activas].join("") : null);
 /** ¿El texto se escribe solo con las letras activas? (ignora espacios, signos y números). */
+// La «y» suelta (conjunción) vale siempre: Iván la usa desde el principio («mamá y papá»).
+const Y_SUELTA = /(^|[^\p{L}])y(?![\p{L}])/gu;
 export function permitida(texto) {
   if (!activas) return true;
-  for (const c of sinTildes(String(texto).toLowerCase())) if (/\p{L}/u.test(c) && !activas.has(c)) return false;
+  for (const c of sinTildes(String(texto).toLowerCase()).replace(Y_SUELTA, "$1")) if (/\p{L}/u.test(c) && !activas.has(c)) return false;
   return true;
 }
 /** Elementos de la lista cuyo texto (f) usa solo las letras activas. */

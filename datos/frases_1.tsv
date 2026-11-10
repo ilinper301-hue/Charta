@@ -1,0 +1,397 @@
+etapa	frase
+# etapa l
+l	Lola lee a Lalo.
+l	Leo lee a Lola.
+l	Elia lee a Leo.
+l	Lilia lee a Lalo.
+l	Lalo oía la ola.
+l	Lía olía la lila.
+l	Eulalia lee a Lilo.
+l	Lola olía a lila.
+l	Lalo lee a Lía.
+l	Leo olía el alelí.
+l	Él lo lee.
+l	Él lo leía.
+l	Él oía la ola.
+l	El alelí olía a lila.
+l	La lila olía a alelí.
+l	El aula olía a lila.
+l	Lola lo lee.
+l	Él olía el alelí.
+l	Olía a lila.
+l	Lía lee a Lola.
+l	Él lo olía.
+l	Él olía la lila.
+l	Él olía a lila.
+l	Lola oía la ola.
+l	Lía lee a Eulalia.
+# etapa m
+m	Mi mamá me mima.
+m	Mamá me lee.
+m	Mi mamá me ama.
+m	Mimí ama a mamá.
+m	Mamá ama a Lola.
+m	Mi mamá lee a Mimí.
+m	Mila ama a la mula.
+m	La mula olía la miel.
+m	Mi mamá ama a Mimí.
+m	Mi mula ama la miel.
+m	Mi mula me mima.
+m	La mula lo mima.
+m	Mila lee a mamá.
+m	Emilio mima a la mula.
+m	Amelia ama a mamá.
+m	Emilio ama a Amelia.
+m	Mi mamá ama la miel.
+m	Mi mamá lee a Lola.
+m	La miel olía a lila.
+m	Lalo ama a mamá.
+m	Mimí mima a mi mula.
+m	Mimí ama la miel.
+m	Mamá ama a Mimí.
+m	La mula olía la lima.
+m	Lola mima a mamá.
+# etapa s
+s	Susi sale sola.
+s	La osa sale al sol.
+s	Esa mesa es mía.
+s	Mi oso es mío.
+s	El oso ama la miel.
+s	La mula lame la sal.
+s	Mamá sale a la sala.
+s	Sami lee a Susi.
+s	Elisa se asea.
+s	La osa lame la miel.
+s	Sale el sol.
+s	Mi mamá usa la sal.
+s	Susi usa mi mesa.
+s	Luis ama a su mamá.
+s	Su oso sale solo.
+s	Mi mula sale sola.
+s	Lalo suma solo.
+s	Mila lee a Luisa.
+s	Eso es mío.
+s	Mi mamá me asea.
+s	Esa sala es mía.
+s	Mimí asea la sala.
+s	La mesa es lisa.
+s	Esa mula es mía.
+s	Mi mamá asea esa mesa.
+# etapa n
+n	Una nena lee sola.
+n	El mono se asoma.
+n	Mi mono no sale.
+n	Ana no sale sola.
+n	Nina mima a su nene.
+n	La luna sale sola.
+n	Una nena ama a mamá.
+n	Mi nene no se asea.
+n	Mi nene lee solo.
+n	Los nenes leen.
+n	Las nenas salen solas.
+n	Mi mamá no sale sola.
+n	Nono se asoma.
+n	Ese mono es mío.
+n	Un mono mima al nene.
+n	Ana lee en una mesa.
+n	Nina asea la sala.
+n	Mamá lee una nana.
+n	Una luna asoma sola.
+n	Nela mima a la mula.
+n	Mi mamá asea una mesa.
+n	Ana mima a su mono.
+n	El mono ama la miel.
+n	Una mula sale sola.
+n	Elena lee una nana.
+# etapa h
+h	Mi hilo es lila.
+h	El humo sale.
+h	Helena ama el hielo.
+h	El hielo es liso.
+h	Ese hilo es mío.
+h	Mamá hila la lana.
+h	Lola hila sola.
+h	Hasan ama a Helena.
+h	La sala huele a humo.
+h	Mamá huele a lila.
+h	Helena huele la lima.
+h	Mi oso huele la miel.
+h	Nina huele una lila.
+h	Helena no sale sola.
+h	Hasan se asoma.
+# etapa d
+d	Dani lee en la sala.
+d	Mamá me da limonada.
+d	Dime una nana.
+d	Dale miel a Dani.
+d	Dos osos salen al sol.
+d	Dina ha leído una nana.
+d	Adela anda sola.
+d	Dame una limonada.
+d	El nene ha salido solo.
+d	Mi nena anda sola.
+d	La mula anda sola.
+d	El nido es de Diana.
+d	Mamá sale de la sala.
+d	Dina dio limonada a Dani.
+d	Nilda ama la limonada.
+d	Un día sale el sol.
+d	La dama anda sola.
+d	El mono ama el nido.
+d	La seda es lisa.
+d	Un mono ha salido solo.
+d	Dana lee una nana.
+d	Mi mamá me da miel.
+d	Daniel sale a la sala.
+d	La duna es lisa.
+d	Dos nenes salen solos.
+# etapa f
+f	Mi mamá me da flan.
+f	Fani ama el flan.
+f	Sofía asea el sofá.
+f	Mamá lee en el sofá.
+f	Mi nene anda en fila.
+f	El sofá es fino.
+f	Ese flan es de Sofía.
+f	Fidel anda en la fila.
+f	Fina lee en el sofá.
+f	Dani sale de la fila.
+f	La mula huele el flan.
+f	Dani da flan a Fina.
+f	Fina sale sin Alfonso.
+f	Fidel mima a Fina.
+f	Felisa ama el flan.
+f	La seda es fina.
+f	El sofá es de mamá.
+f	Ese sofá es mío.
+f	Mamá salió de la fila.
+f	Sofía fue sola.
+f	Fui al sofá.
+f	Fani lee en la sala.
+f	Mi mono ama el flan.
+f	Alfonso sale a la sala.
+f	Fina anda sola.
+# etapa p
+p	Papá pone la sopa.
+p	Pepa pasea sola.
+p	Mi papá lee un papel.
+p	Mamá pone el pan.
+p	El pan es de Pepa.
+p	Papá usa una lupa.
+p	Pepe lee un mapa.
+p	Un puma pasea solo.
+p	El pulpo nada solo.
+p	Mi papá ama la sopa.
+p	Papá apila los papeles.
+p	Me duele el pie.
+p	Ese piso es de Pepe.
+p	Papá pasa el pan.
+p	Dina pasa el pan.
+p	La lupa es de Pepa.
+p	Pepe no pide pan.
+p	Mi papá me da pan.
+p	Pepa pone la sopa.
+p	Papá sale solo.
+p	Mi papá pasea sin mí.
+p	Pepe lee los papeles.
+p	La sopa es de papá.
+p	Pepa usa la lupa.
+p	Le duele el pie.
+# etapa t
+t	Mi tía me da té.
+t	Tito toma sopa.
+t	Mi tío tiene un pato.
+t	Tina pone el plato.
+t	Papá toma té.
+t	La pelota es de Tito.
+t	Mi tía tiene tomates.
+t	Teo pasea a su pato.
+t	El pato nada solo.
+t	Tu mamá te mima.
+t	Mi tío toma atún.
+t	Tina toma una patata.
+t	La tapa es de Tito.
+t	Tomás toma limonada.
+t	La tienda es de Tina.
+t	En la tienda tienen pan.
+t	Mi tía patina.
+t	Esta mesa es de Teo.
+t	Esta sopa tiene tomate.
+t	Mamá sale a la tienda.
+t	Tu tío te da pan.
+t	Tito sale en la fila.
+t	Mi tía tiene un sofá.
+t	Tina lee una nota.
+t	Teo tiene una pelota.
+# etapa r
+r	Rita mira el mar.
+r	El perro mira la puerta.
+r	Rosa tiene una rana.
+r	La rana sale del río.
+r	El tren anda rápido.
+r	Mamá me pone la ropa.
+r	La reina toma té.
+r	El perro duerme.
+r	Rita pasea a su perro.
+r	La mariposa mira la rosa.
+r	Mi tía tiene una rosa.
+r	Papá pasa por la puerta.
+r	Un pulpo mira el mar.
+r	Rosa me da una pera.
+r	La arena es lisa.
+r	Tu perro es rápido.
+r	Rita ama a su perro.
+r	El ratón mira la pared.
+r	Ese toro es de Tito.
+r	Mi perro mira la luna.
+r	Rosa pasea por el río.
+r	Mamá mira el mar.
+r	Rita tiene una pera.
+r	Mi perro es rápido.
+r	Rosa toma sopa.
+# etapa b
+b	Mi abuela me besa.
+b	El bebé bebe limonada.
+b	Mi abuelo toma té.
+b	La nube es bonita.
+b	Bea baila sola.
+b	El bebé mira la bola.
+b	Mi libro es bueno.
+b	El lobo mira la luna.
+b	Bruno tiene una bata.
+b	El burro tiene sed.
+b	Rubén tiene una bola.
+b	Blas tiene una bota.
+b	Mi abuela baila bien.
+b	La bolsa es de Bea.
+b	Bea abre la bolsa.
+b	Mi tío toma una bebida.
+b	Un burro baila.
+b	Berta lee un libro.
+b	Mi perro bebe solo.
+b	Rita me da el balón.
+b	El botón es de Bea.
+b	Mi abuelo lee un libro.
+b	El bebé tiene sed.
+b	La abuela mira el mar.
+b	Mi abuelo bebe limonada.
+# etapa v
+v	Eva vive en el sur.
+v	Mi abuela viene en tren.
+v	Papá lava el vaso.
+v	El avión vuela rápido.
+v	Un ave vuela.
+v	Mi vestido es verde.
+v	Vera mira la nieve.
+v	Mi tío ve un avión.
+v	La uva es verde.
+v	Ven a la mesa.
+v	Mamá pone una vela.
+v	Valeria toma uvas.
+v	La nieve es bonita.
+v	Rubén abre la ventana.
+v	Eva tiene nueve uvas.
+# etapa ñ
+ñ	La niña tiene un moño.
+ñ	El niño mira una araña.
+ñ	Mañana viene mi abuela.
+ñ	Mi abuela tiene un pañuelo.
+ñ	El niño va al baño.
+ñ	Mamá me enseña un libro.
+ñ	Papá toma piña.
+ñ	Una araña sale del baño.
+ñ	Mañana vamos al mar.
+ñ	El niño sueña.
+ñ	El señor mira el mar.
+ñ	La niña ve una piña.
+ñ	Mañana veo a mi abuelo.
+ñ	Ese pañuelo es de Ana.
+ñ	El niño se baña.
+# etapa y
+y	Yo veo una playa.
+y	Mi mamá me ayuda.
+y	Hoy voy a la playa.
+y	Hoy hay sol.
+y	Yo soy muy alto.
+y	Ya viene el payaso.
+y	El payaso baila muy bien.
+y	Ayer vi un yate.
+y	Ya lo leo yo.
+y	Mi yoyó es verde.
+y	El rey tiene un yate.
+y	Papá me ayuda hoy.
+y	La yema es del huevo.
+y	Mamá mira la playa.
+y	Mamá me leyó un libro.
+# etapa k
+k	Kiko ama a Kika.
+k	Kika pesa un kilo.
+k	Mi kimono es verde.
+k	El koala duerme.
+k	Kika mira al koala.
+k	Kike lee un libro.
+k	Yo veo un koala.
+# etapa c
+c	Mi casa es muy bonita.
+c	Mamá cocina una sopa.
+c	El cerdo come pan.
+c	Mi abuela cuenta un cuento.
+c	El cielo es bonito.
+c	Carla corre por la playa.
+c	Cinco niños van al cine.
+c	La cabra come hierba.
+c	Mi cama es muy cómoda.
+c	Papá cocina con mamá.
+c	Carlos come uvas.
+c	El perro mueve la cola.
+c	Mi casa tiene una cocina.
+c	El caracol camina despacio.
+c	Una cabra come uvas.
+# etapa z
+z	Mi zapato es azul.
+z	El zorro come cerezas.
+z	Papá bebe zumo.
+z	Mi taza es azul.
+z	La niña tiene un lazo.
+z	Un pez nada.
+z	La plaza es muy bonita.
+z	Mi abuela corta zanahorias.
+z	Veo un pez azul.
+z	Hay luz en la cocina.
+z	El cielo es azul.
+z	Los zapatos son azules.
+z	Ana toma zumo de piña.
+z	Zara baila en la plaza.
+z	Dani come cerezas.
+# etapa q
+q	Yo quiero queso.
+q	Raquel come queso.
+q	Mi abuela quiere té.
+q	Aquí vive mi tío.
+q	Quique corre en el parque.
+q	El mosquito vuela aquí.
+q	Mamá dice que sí.
+q	Quien lee aprende.
+q	Mi tía quiere un zumo.
+q	El parque está cerca.
+q	Raquel quiere una taza.
+q	Quique quiere una pelota.
+q	En la esquina hay luz.
+q	Quiero ver el mar.
+q	Papá me dice que viene.
+# etapa g
+g	Mi gato come pescado.
+g	El gato bebe agua.
+g	Diego tiene un gorro.
+g	Mi amiga Gema baila.
+g	Gabi me da un regalo.
+g	Hugo tiene gafas nuevas.
+g	El tigre es grande.
+g	Luego como pan con queso.
+g	Mi amigo vive cerca.
+g	Un gusano come hierba.
+g	Una gota de agua cae.
+g	El mago tiene un gorro.
+g	Gracias por el regalo.
+g	El lago es muy grande.
+g	Mi gato duerme en casa.

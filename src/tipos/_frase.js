@@ -9,7 +9,9 @@
 // (el agua) no entran. Las frases empiezan siempre por el artículo (El, La, Los, Las), nunca por «I».
 import { LEXICO } from "../lengua/lexico.js";
 import { articulo, plural, tonica } from "../lengua/reglas.js";
-import { permitida, filtrarVistas, avisoVistas } from "../lengua/vistas.js";
+import { permitida, filtrarVistas, avisoVistas, vistasActivas } from "../lengua/vistas.js";
+import { FRASES_1 } from "../lengua/frases_1.js";
+import { propiasActivas, palabrasLibres, nombresDe } from "../lengua/frases.js";
 
 const ENT = new Map(LEXICO.map((e) => [e.p, e]));
 const gen = (lema) => {
@@ -169,15 +171,47 @@ function construir() {
   const vistas = new Set();
   return out.filter((f) => !vistas.has(f.id) && vistas.add(f.id)).filter((f) => f.n >= 3 && f.n <= 5);
 }
-let memo = null;
-/** Todas las frases posibles (singular y plural), sin repetir. No modificar: se comparte. */
-export function todasFrases() { return (memo ??= construir()); }
-const memoPorId = new Map();
-export function frasePorId(id) {
-  if (!memoPorId.size) for (const f of todasFrases()) memoPorId.set(f.id, f);
-  return memoPorId.get(id) || null;
+// ---------------------------------------------------------------- frases libres (sin plantilla): tipo "lib"
+// Las de las primeras letras (FRASES_1, solo con letras elegidas) y «Mis frases» (propias, siempre). No tienen estructura:
+// sin suj/obj reales (suj.lema = la frase, para no repetir), así que solo las usan ordena (con la primera marcada), separa, puntúa,
+// copia, dictado y lectura rápida (lo decide cada tipo con su filtro). `nombres` = lleva un nombre propio detrás de la primera palabra.
+function mkLibre(palabras, fuente) {
+  const id = palabras.join(" ").toLowerCase();
+  return { id, tipo: "lib", fuente, n: palabras.length, numero: "s", palabras, suj: { i: 0, lema: id, g: null, num: "s" }, obj: null, verbo: null, universal: false,
+    nombres: palabras.slice(1).some((w) => w[0] !== w[0].toLowerCase()) };
+}
+const NOMBRES_1 = nombresDe(FRASES_1.map((f) => f.w.join(" ")));
+let LIBRES_1 = null;
+const libres1 = () => (LIBRES_1 ??= FRASES_1.map((f) => mkLibre(f.w, "inicial")));
+function libresPropias(lista) {
+  const nombres = new Set([...NOMBRES_1, ...nombresDe(lista)]);
+  return lista.map((t) => mkLibre(palabrasLibres(t, nombres), "propia"));
 }
 
+let memo = null;
+const memos = new Map();   // clave (con letras · frases propias) → lista
+/** Todas las frases posibles (singular y plural), sin repetir: las de plantilla y, según el caso, las libres. No modificar: se comparte. */
+export function todasFrases() {
+  const base = (memo ??= construir()), propias = propiasActivas(), conIniciales = vistasActivas() !== null;
+  if (!propias && !conIniciales) return base;
+  const clave = (conIniciales ? "1" : "0") + "|" + (propias || []).join("|");
+  if (!memos.has(clave)) {
+    if (memos.size > 20) memos.clear();
+    const ids = new Set(base.map((f) => f.id)), extra = [...(propias ? libresPropias(propias) : []), ...(conIniciales ? libres1() : [])];
+    memos.set(clave, [...base, ...extra.filter((f) => !ids.has(f.id) && ids.add(f.id))]);
+  }
+  return memos.get(clave);
+}
+const memoPorId = new Map();
+/** La frase con ese texto (palabras en minúscula separadas por espacios), también las libres activas. */
+export function frasePorId(id) {
+  const todas = todasFrases();
+  if (!memoPorId.has(todas)) { if (memoPorId.size > 20) memoPorId.clear(); memoPorId.set(todas, new Map(todas.map((f) => [f.id, f]))); }
+  return memoPorId.get(todas).get(String(id).toLowerCase()) || null;
+}
+
+/** ¿Ninguna palabra lleva mayúscula? (las libres con nombres propios no sirven para puntúa ni separa). */
+export const sinMayusculas = (f) => f.palabras.every((w) => w === w.toLowerCase());
 /** Texto de la frase tal como se escribe: «El gato come pan.» */
 export const textoFrase = (palabras) => { const t = palabras.join(" "); return t[0].toUpperCase() + t.slice(1) + "."; };
 /** Aplica «Letra»: null = como se escribe (Mayúscula inicial) · "mayus" = TODO EN MAYÚSCULAS. */
@@ -212,9 +246,9 @@ export function elegirFrases(azar, largos, { filtro = null, id = "frase", ya = n
 }
 
 // ---------------------------------------------------------------- orden único (ordena)
-let VALIDAS = null;
+const VALIDAS = new Map();
 /** Textos de todas las frases del banco (en orden normal). */
-const validas = () => (VALIDAS ??= new Set(todasFrases().map((f) => f.id)));
+const validas = () => { const t = todasFrases(); if (!VALIDAS.has(t)) { if (VALIDAS.size > 20) VALIDAS.clear(); VALIDAS.set(t, new Set(t.map((f) => f.id))); } return VALIDAS.get(t); };
 const permutaciones = (l) => (l.length <= 1 ? [l] : l.flatMap((x, i) => permutaciones([...l.slice(0, i), ...l.slice(i + 1)]).map((r) => [x, ...r])));
 const memoUnico = new Map();
 /**
@@ -223,10 +257,11 @@ const memoUnico = new Map();
  * Con la primera palabra marcada (mayúscula) solo cuentan los órdenes que empiezan por ella.
  */
 export function ordenUnico(f, marcada = true) {
-  const clave = f.id + (marcada ? "|m" : "");
+  if (f.tipo === "lib" && (!marcada || f.nombres)) return false;   // libres: solo con la primera marcada y sin nombres propios (la mayúscula delataría el orden)
+  const clave = f.id + (marcada ? "|m" : "") + (f.tipo === "lib" ? "|" + todasFrases().length : "");
   if (!memoUnico.has(clave)) {
-    const V = validas();
-    memoUnico.set(clave, !permutaciones(f.palabras).some((p) => { const t = p.join(" "); return t !== f.id && (!marcada || p[0] === f.palabras[0]) && V.has(t); }));
+    const V = validas(), ws = f.palabras.map((w) => w.toLowerCase());
+    memoUnico.set(clave, !permutaciones(ws).some((p) => { const t = p.join(" "); return t !== f.id && (!marcada || p[0] === ws[0]) && V.has(t); }));
   }
   return memoUnico.get(clave);
 }

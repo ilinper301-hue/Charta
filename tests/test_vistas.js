@@ -6,6 +6,8 @@ import { listaTipos } from "../src/nucleo/tipos.js";
 import { normalizarVistas, conVistas, permitida } from "../src/lengua/vistas.js";
 import { sinTildes } from "../src/lengua/reglas.js";
 import { combinaciones, contador } from "./comun.js";
+import { INVARIANTES, comunes } from "./invariantes.js";
+import { conPropias, USA_FRASES } from "../src/lengua/frases.js";
 import { conLetras, letrasDe, vistasDe, resumenLetras, hayLengua1 } from "../src/ui/letras.js";
 
 const args = process.argv.slice(2), FULL = args.includes("--full"), SOLO = args.find((a) => !a.startsWith("--"));
@@ -48,9 +50,42 @@ t.prueba("ui/letras.js", () => {
   if (vistasDe(new Set("aeiou")) !== "aeiou" || resumenLetras(new Set("aeiou")) !== "Solo vocales") throw new Error("resumen");
 });
 
-const JUEGOS = ["aeioumpslt", "aeioumpslntdcrbgf", "aeiouyñmpslntdcrbgfvjhz"];
+const JUEGOS = ["aeioulms", "aeioumpslt", "aeioumpslntdcrbgf", "aeiouyñmpslntdcrbgfvjhz"];
 const ids = listaTipos().filter((id) => modelo(id).materia === "lengua" && !EXENTOS.has(id) && (!SOLO || id.startsWith(SOLO)));
 let fichas = 0, errores = 0;
+
+// Primeras letras (orden de Iván: vocales, l, m, s, n…): las actividades de frases ya salen con el banco de frases iniciales.
+t.prueba("frases iniciales", () => {
+  for (const v of ["aeioulm", "aeioulms", "aeioulmsn"]) for (const id of ["escritura.frase", "escritura.dictado", "frase.ordena", "lectura.fluidez"]) {
+    const params = id === "escritura.dictado" ? { modo: "frases", vistas: v } : id === "lectura.fluidez" ? { contenido: "frases", vistas: v } : { vistas: v };
+    const f = generar({ actividades: [{ tipo: id, params }] }, 1);
+    if (!f.paginas[0].actividades[0].ejercicios.length) throw new Error(`${id} ${v}`);
+  }
+  if (!conVistas("aeioulm", () => permitida("Mamá y Lola"))) throw new Error("la «y» suelta vale siempre");
+  if (conVistas("aeioulm", () => permitida("yo"))) throw new Error("la «y» de «yo» no");
+});
+// Invariantes de los tipos con frases, con frases libres en juego (primeras letras y «Mis frases»).
+t.prueba("invariantes con frases libres", () => {
+  const MIAS = ["Pepa pinta con Pablo.", "Mi mamá me mima.", "Lola sale sola.", "Lalo y Lola leen."];
+  let n = 0;
+  for (const id of USA_FRASES) for (const combo of combinaciones(id)) for (const tam of modelo(id).tamanos)
+    for (const [v, mias] of [["aeioulms", null], ["aeioulmsnhdfp", MIAS], [null, MIAS]]) {
+      const params = { ...combo, ...(v && { vistas: v }), ...(mias && { misFrases: mias }) };
+      let f; try { f = generar({ actividades: tam === "media" ? [{ tipo: id, params }, { tipo: id, params }] : [{ tipo: id, params }] }, 7); }
+      catch (e) { if (!/necesita|solo en|no hay/i.test(e.message)) throw e; continue; }
+      for (const a of f.paginas[0].actividades) conPropias(a.params.misFrases, () => conVistas(a.params.vistas || null, () => { comunes(a); INVARIANTES[id](a, tam); n++; }));
+    }
+  if (n < 50) throw new Error("pocas actividades comprobadas: " + n);
+});
+// «Mis frases»: viajan en params.misFrases y salen en la ficha aunque no haya letras elegidas.
+t.prueba("mis frases", () => {
+  const misFrases = ["Pepa pinta con Pablo", "el loro de Rocío habla."];
+  const f = generar({ actividades: [{ tipo: "escritura.dictado", params: { modo: "frases", numero: 10, misFrases, vistas: "abcdefghijklmnopqrstu" } }] }, 3);
+  const a = f.paginas[0].actividades[0];
+  if (JSON.stringify(a.params.misFrases) !== JSON.stringify(["Pepa pinta con Pablo.", "El loro de Rocío habla."])) throw new Error("normalizar: " + JSON.stringify(a.params.misFrases));
+  const g = generar({ actividades: [{ tipo: "frase.verdad", params: { misFrases } }] }, 3);
+  if ("misFrases" in g.paginas[0].actividades[0].params) throw new Error("frase.verdad no usa frases libres");
+});
 for (const id of ids) t.prueba(id, () => {
   const m = modelo(id), combos = combinaciones(id), paso = FULL ? 1 : Math.max(1, Math.floor(combos.length / 40));
   const fallos = [];
@@ -67,7 +102,7 @@ for (const id of ids) t.prueba(id, () => {
       const out = []; textos(e.datos, "", out);
       const ok = new Set(v);
       for (const [k, x] of out) {
-        const malas = [...sinTildes(x.toLowerCase())].filter((c) => /\p{L}/u.test(c) && !ok.has(c));
+        const malas = [...sinTildes(x.toLowerCase()).replace(/(^|[^\p{L}])y(?![\p{L}])/gu, "$1")].filter((c) => /\p{L}/u.test(c) && !ok.has(c));
         if (malas.length && fallos.length < 3) fallos.push(`${v} ${JSON.stringify(combos[i])} ${tam}: ${k}=«${x.slice(0, 40)}» (${[...new Set(malas)].join("")})`);
       }
     }

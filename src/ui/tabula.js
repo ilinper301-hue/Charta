@@ -8,6 +8,7 @@
 //   Charta → Tabula  /tabula/?charta=B64( {v:1, id?, titulo, tipos, comp, grupo?, sesion?, tarea?, variantes?, minutos?, dificultad?, etiquetas?} )
 //                    + la miniatura de la hoja 1 (sin nombres) en localStorage["charta:aTabula"] = {v:1, titulo, miniatura} (5.4)
 
+import { paginasValidas } from "./paginas.js";
 export const URL_TABULA = "/tabula/"; // raíz del sitio (ilinper301-hue.github.io); la app está en /Charta/dist/
 
 /** Texto UTF-8 → base64url sin «=». */
@@ -25,7 +26,7 @@ export function deB64url(s) {
 /** Composición válida (la de Charta: actividades + opciones, semilla, título…) o null. */
 export function composicionValida(c, hayTipo = () => true) {
   if (!c || typeof c !== "object" || !Array.isArray(c.actividades)) return null;
-  if (c.actividades.length < 1 || c.actividades.length > 2) return null;
+  if (!paginasValidas(c)) return null;                 // 1 o 2 actividades; o varias páginas (`paginas: [2, 1…]`)
   if (!c.actividades.every((a) => a && typeof a.tipo === "string" && hayTipo(a.tipo) && (a.params == null || typeof a.params === "object"))) return null;
   return c;
 }

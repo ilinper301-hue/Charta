@@ -21,6 +21,24 @@ prueba("mulberry32 determinista y en [0,1)", () => {
   assert.equal(mulberry32(1)(), 0.6270739405881613);   // valor fijo: si cambia, cambian todas las fichas
 });
 
+prueba("varias páginas: numeración seguida, tamaños por página y la página 1 como una ficha suelta", () => {
+  const una = generar({ actividades: [{ tipo: "sumar.h20" }, { tipo: "restar.r20" }] }, 5);
+  const f = generar({ paginas: [{ actividades: [{ tipo: "sumar.h20" }, { tipo: "restar.r20" }] }, { actividades: [{ tipo: "sumar.h20" }] }, { actividades: [{ tipo: "restar.r20" }] }], variantes: 2 }, 5);
+  assert.deepEqual(erroresFicha(f), []);
+  assert.equal(f.paginas.length, 3);
+  assert.deepEqual(f.paginas.map((p) => p.actividades.map((a) => a.n)), [[1, 2], [3], [4]]);
+  assert.deepEqual(f.paginas.map((p) => p.actividades.map((a) => a.tamano)), [["media", "media"], ["completa"], ["completa"]]);
+  assert.deepEqual(f.paginas[0], una.paginas[0]);
+  assert.equal(f.variantesDatos[0].paginas.length, 3);
+  assert.deepEqual(paginasVariante(f, 1).map((p) => p.actividades.map((a) => a.n)), [[1, 2], [3], [4]]);
+  const ids = f.paginas.flatMap((p) => p.actividades.flatMap((a) => a.ejercicios.map((e) => e.id)));
+  assert.equal(new Set(ids).size, ids.length, "ids de ejercicio repetidos");
+  const mala = JSON.parse(JSON.stringify(f)); mala.paginas[1].actividades[0].n = 1;
+  assert.ok(erroresFicha(mala).some((e) => /n debe ser 3/.test(e)));
+  assert.throws(() => generar({ paginas: [{ actividades: [] }] }), /1 o 2 actividades/);
+  assert.throws(() => generar({ paginas: Array(11).fill({ actividades: [{ tipo: "sumar.h20" }] }) }), /de 1 a 10 páginas/);
+});
+
 prueba("mezclar y azar", () => {
   assert.equal(mezclar(1, 2), mezclar(1, 2));
   assert.notEqual(mezclar(1, 2), mezclar(2, 1));
@@ -112,7 +130,7 @@ prueba("lector detecta fichas mal formadas", () => {
 });
 
 prueba("build.py: dist/index.html autocontenido y el paquete funciona", () => {
-  const js = execFileSync("python3", [raiz + "tools/build.py", "--js"], { encoding: "utf-8" });
+  const js = execFileSync("python3", [raiz + "tools/build.py", "--js"], { encoding: "utf-8", maxBuffer: 64 << 20 });
   const ctx = {}; vm.createContext(ctx); vm.runInContext(js, ctx);
   const f = ctx.Charta.generar({ actividades: [{ tipo: "sumar.h20", params: { nivel: "mezcla" } }] }, 3);
   assert.deepEqual(JSON.parse(JSON.stringify(f)), generar({ actividades: [{ tipo: "sumar.h20", params: { nivel: "mezcla" } }] }, 3));

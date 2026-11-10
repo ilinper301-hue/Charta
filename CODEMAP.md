@@ -58,11 +58,14 @@ src/lengua/reglas.js  silabas, tipoSilaba, TIPOS_SILABA, cabeTipo, tonica, acent
 src/lengua/vistas.js  mapa de letras (Lengua 1.º): normalizarVistas, conVistas(v, f) (lo activa generar() en cada actividad), permitida(texto), filtrarVistas(lista, f), letrasActivas(), vistasActivas() (clave de caché), avisoVistas() (final de los errores «necesita»). buscar() ya filtra
 src/ui/letras.js      mapa de letras sin DOM: hayLengua1, conLetras(acts, vistas), letrasDe(comp), vistasDe(set), resumenLetras; CLAVE_LETRAS (charta:letras). El mapa (#secLetras) está en index.html y app.js
 tests/test_vistas.js  con `params.vistas`, el texto de `datos` solo usa esas letras (INTERNOS = campos que no lee el alumno) · `--full`
+datos/frases_1.tsv    frases de las primeras letras por etapas (etapa, frase) → tools/frases.py (comprueba; --revisar) → src/lengua/frases_1.js (GENERADO)
+src/lengua/frases.js  frases sin plantilla: USA_FRASES (tipos que las usan), leerPropias/normalizarPropias («Mis frases»: 3–5 palabras, ≤60), conPropias/propiasActivas (las activa generar() con params.misFrases), palabrasLibres, nombresDe
+src/ui/paginas.js     varias páginas en la composición, sin DOM: cuentasDe(c) ([2, 1, 1]), paginasValidas, agrupar(lista, cuentas), paginaDe, inicioDe
 src/lengua/palabras.js  buscar({cat, campos, nSilabas, tipo, letras, conLetra, dibujo, frec, sin, min/maxLetras}), elegirPalabras(azar, k, filtros), datosPalabra, CAMPOS_LEXICOS
 src/lengua/dibujo.js  ayudantes en Papel: palabraHuecos, casillas (sol / rellenar), rodear (rojo en solución), unir (líneas rojas), rotulo
 src/tipos/_lengua.js  ayudantes comunes de letra.* y silaba.* (lote 1 de Lengua) · tests/inv/_lengua.js
 src/tipos/_fono.js, _palabra.js, _orto.js  ayudantes de fono.*, palabra.* y orto.* (lote 2 de Lengua; _orto.js trae el banco de nombres propios) · tests/inv/{fono,palabra,orto}.js
-src/tipos/_frase.js, familia.frase.js  banco de frases con concordancia y ayudantes de frase.* (lote 3 de Lengua) · tests/inv/frase.js
+src/tipos/_frase.js, familia.frase.js  banco de frases con concordancia y ayudantes de frase.* (lote 3 de Lengua) · tests/inv/frase.js. todasFrases() añade las libres (tipo "lib": FRASES_1 con letras elegidas, «Mis frases» siempre); sinMayusculas(f)
 src/tipos/_lectura.js  ayudantes de lectura.* (lote 5): crearTexto(azar, nivel)/elegirHuecos/pregunta (textos por plantillas con preguntas de solución única), SECUENCIAS (banco de 36 para ordenar), ADIVINANZAS (banco de 47, originales), figura()/FORMAS/PINTURAS/textoInstruccion (instrucciones), envolver/ajustaLineas/parrafo (texto en líneas) · tests/inv/lectura.js (reconoce palabras del léxico y concordancia)
 src/tipos/familia.lectura.js  importa los 5 tipos del bloque 7 (Comprensión lectora), sin pictogramas; importada desde src/tipos/index.js
 src/tipos/lectura.texto.js  Lee y responde: texto de 2/4/6 frases (nivel 1/2/3; media solo nivel 1) + preguntas de elegir entre 3, sí/no y completar; el texto se repite en `datos.texto` de cada ejercicio y se dibuja fuera de los grupos `ej`

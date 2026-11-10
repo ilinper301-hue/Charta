@@ -3,7 +3,8 @@
 // Todas marcadas = sin el campo: la ficha es la de siempre.
 import { modelo, esLengua1 } from "../nucleo/ficha.js";
 import { ABECEDARIO } from "../lengua/reglas.js";
-import { normalizarVistas } from "../lengua/vistas.js";
+import { normalizarVistas, conVistas, permitida } from "../lengua/vistas.js";
+import { USA_FRASES, leerPropias } from "../lengua/frases.js";
 
 
 export const VOCALES = "aeiou";
@@ -34,4 +35,27 @@ export function resumenLetras(marcadas) {
   if (!n) return "Ninguna";
   if (n === 5 && [...VOCALES].every((v) => marcadas.has(v))) return "Solo vocales";
   return `${n} de ${ABECEDARIO.length}`;
+}
+
+// «Mis frases» (Lengua de 1.º): viajan en `params.misFrases` de las actividades que usan frases (USA_FRASES), como las letras.
+export const CLAVE_FRASES = "charta:misFrases";   // las últimas escritas (las de la clase)
+const usaFrases = (a) => admite(a) && USA_FRASES.has(a.tipo);
+/** ¿Alguna actividad usa frases? (para enseñar la caja «Mis frases»). */
+export const hayFrases = (acts) => acts.some(usaFrases);
+/** Las actividades con las frases propias puestas (lista de textos ya leída con leerPropias; vacía = sin el campo). */
+export function conFrases(acts, frases) {
+  return acts.map((a) => {
+    const { misFrases: _, ...params } = a.params || {};
+    return usaFrases(a) && frases?.length ? { ...a, params: { ...params, misFrases: frases } } : { ...a, params };
+  });
+}
+/** Frases propias de una composición guardada (las de su primera actividad que las lleve) o []. */
+export const frasesDe = (c) => (c?.actividades || []).find((a) => usaFrases(a) && Array.isArray(a.params?.misFrases))?.params.misFrases || [];
+/** Resumen de la caja: { frases, cuenta: "3", info: "…" } con los errores y las que no salen con las letras marcadas (vistas = cadena o null). */
+export function resumenFrases(texto, vistas) {
+  const { frases, errores } = leerPropias(texto);
+  const fuera = vistas ? frases.filter((t) => !conVistas(vistas, () => permitida(t))) : [];
+  const partes = [...errores];
+  if (fuera.length) partes.push(`Con las letras marcadas no ${fuera.length > 1 ? "salen" : "sale"}: ${fuera.map((t) => `«${t}»`).join(", ")}.`);
+  return { frases, cuenta: frases.length ? String(frases.length) : "", info: partes.join(" ") };
 }

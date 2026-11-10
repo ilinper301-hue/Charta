@@ -23,8 +23,16 @@ for (const g of ["m", "f"]) for (const num of ["s", "p"]) for (const indef of [f
 const SUELTAS = new Set(["mucho", "muy", "en", "a"]);
 for (const w of SUELTAS) assert.ok(ENT.has(w) || w === "mucho", `«${w}» no está en el léxico`);
 
+/** Frase libre (primeras letras o «Mis frases»): 3 a 5 palabras de letras; el sujeto es la frase entera (para no repetir). */
+function analizaLibre(palabras) {
+  const q = palabras.join(" ");
+  assert.ok(palabras.length >= 3 && palabras.length <= 5, `«${q}»: ${palabras.length} palabras (3 a 5)`);
+  palabras.forEach((w) => assert.match(w, /^[a-záéíóúüñ]+$/i, `«${q}»: «${w}» no es una palabra`));
+  return { suj: { lema: q.toLowerCase(), g: null, num: "s" }, verbo: null, forma: null };
+}
 /** Comprueba una frase (palabras en minúscula) y devuelve { suj: { lema, g, num }, verbo }. */
 export function analiza(palabras) {
+  if (frasePorId(palabras.join(" "))?.tipo === "lib") return analizaLibre(palabras);
   const q = palabras.join(" ");
   assert.ok(palabras.length >= 3 && palabras.length <= 5, `«${q}»: ${palabras.length} palabras (3 a 5)`);
   assert.ok(!/^[iíì]/.test(palabras[0]), `«${q}» empieza por i`);
@@ -82,7 +90,7 @@ const sinRepetirSujeto = (frases) => {
 let bancoComprobado = false;
 function comprobarBanco() {
   if (bancoComprobado) return; bancoComprobado = true;
-  for (const f of todasFrases()) { analiza(f.palabras); assert.ok(!f.palabras.some((w) => INERTES.some((i) => w === i || w === plural(i))), `«${f.id}»: lleva un objeto inerte`); }
+  for (const f of todasFrases().filter((x) => x.tipo !== "lib")) { analiza(f.palabras); assert.ok(!f.palabras.some((w) => INERTES.some((i) => w === i || w === plural(i))), `«${f.id}»: lleva un objeto inerte`); }
   for (const s of BANCO) assert.ok(NOMBRE.has(s.s), `«${s.s}» no está en el léxico`);
 }
 

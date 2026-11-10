@@ -250,3 +250,32 @@ import { crearGuardadas as crearG, limpiar as limp } from "../src/ui/guardadas.j
   assert.equal(new Set(ms.map((m) => m.id)).size, ms.length);
   console.log("test_ui: inicio (saludo, usos, accesos rápidos, seguir) OK");
 }
+
+// Varias páginas en la composición (cuentas por página) y «Mis frases».
+import { cuentasDe, paginasValidas, agrupar, paginaDe, inicioDe } from "../src/ui/paginas.js";
+import { conFrases, frasesDe, resumenFrases, hayFrases } from "../src/ui/letras.js";
+import { leerPropias } from "../src/lengua/frases.js";
+{
+  const A = (tipo) => ({ tipo, params: {} });
+  const c = { actividades: [A("sumar.h20"), A("restar.r20"), A("sumar.h10"), A("restar.r10")], paginas: [2, 1, 1] };
+  assert.deepEqual(cuentasDe(c), [2, 1, 1]); assert.ok(paginasValidas(c));
+  assert.deepEqual(cuentasDe({ actividades: [A("sumar.h20")] }), [1]);
+  assert.ok(!paginasValidas({ ...c, paginas: [2, 1] })); assert.ok(!paginasValidas({ ...c, paginas: [1, 3] })); assert.ok(!paginasValidas({ actividades: c.actividades }));
+  assert.deepEqual(agrupar([1, 2, 3, 4], [2, 1, 1]), [{ actividades: [1, 2] }, { actividades: [3] }, { actividades: [4] }]);
+  assert.deepEqual([0, 1, 2, 3].map((i) => paginaDe([2, 1, 1], i)), [0, 0, 1, 2]); assert.equal(inicioDe([2, 1, 1], 2), 3);
+  assert.ok(composicionValida(c)); assert.equal(composicionValida({ ...c, paginas: [1, 1] }), null);
+  const g = crearGuardadas({ m: {}, getItem(k) { return this.m[k] ?? null; }, setItem(k, v) { this.m[k] = v; } });
+  g.alternarFavorito({ ...c, semilla: 3 }, "x"); assert.deepEqual(g.favoritos()[0].paginas, [2, 1, 1]); assert.ok(g.esFavorito({ ...c, semilla: 3 }));
+  const f = generar({ paginas: agrupar(c.actividades, cuentasDe(c)) }, 2);
+  const hs = hojas(f, { nombres: ["Ana", "Luis"] });
+  assert.deepEqual(hs.map((h) => `${h.nombre}${h.pagina + 1}/${h.total}`), ["Ana1/3", "Ana2/3", "Ana3/3", "Luis1/3", "Luis2/3", "Luis3/3"]);
+  assert.equal(new Set(hs.map((h) => h.svg.match(/clipPath id="([^"]+)"/)[1])).size, hs.length, "ids de recorte repetidos entre páginas");
+  // Mis frases
+  const { frases, errores } = leerPropias("mi mamá me mima\n\nPepe, Pepa.\nLola sale sola.\nmi mamá me mima.");
+  assert.deepEqual(frases, ["Mi mamá me mima.", "Lola sale sola."]); assert.equal(errores.length, 1);
+  const acts = conFrases([A("escritura.frase"), A("frase.verdad"), A("sumar.h20")], frases);
+  assert.deepEqual(acts.map((a) => !!a.params.misFrases), [true, false, false]);
+  assert.deepEqual(frasesDe({ actividades: acts }), frases); assert.ok(hayFrases(acts)); assert.ok(!hayFrases([A("frase.verdad")]));
+  assert.match(resumenFrases("Pepe pinta un pato.", "aeioulms").info, /no sale/);
+  console.log("test_ui: varias páginas y «Mis frases» OK");
+}

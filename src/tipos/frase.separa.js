@@ -9,14 +9,14 @@
 import { registrar } from "../nucleo/tipos.js";
 import { TOP } from "../render/papel.js";
 import { cuantas, palabraLetras, ajusta } from "./_lengua.js";
-import { elegirFrases, largosFrase, cortesLimpios, frAlCaso } from "./_frase.js";
+import { elegirFrases, largosFrase, cortesLimpios, frAlCaso, sinMayusculas } from "./_frase.js";
 
 export default registrar({
   id: "frase.separa",
   version: 1,
   generar(params, azar, { tamano }) {
     const rayas = params.tarea !== "escribe", n = cuantas(tamano, rayas ? 10 : 8);
-    const frases = elegirFrases(azar, largosFrase(azar, n, params.palabras), { filtro: rayas ? (f) => cortesLimpios(f.palabras) : null, id: "frase.separa" });
+    const frases = elegirFrases(azar, largosFrase(azar, n, params.palabras), { filtro: (f) => sinMayusculas(f) && (!rayas || cortesLimpios(f.palabras)), id: "frase.separa" });
     return {
       enunciado: rayas ? "Traza una raya entre las palabras\nde cada frase." : "Escribe cada frase separando bien\nlas palabras.",
       ejercicios: frases.map((f) => {

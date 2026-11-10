@@ -154,5 +154,14 @@
   - Hecho: `src/render/fuentes.js` (registro; anchuras de Andika y de Fredoka —`tools/anchos_fuente.py`—; las subidas se miden con canvas) y `src/ui/fuentes.js` (validación .ttf/.otf/.woff/.woff2, máx. 600 KB y 8 letras; IndexedDB `charta-fuentes`, solo en el dispositivo). `ficha.presentacion.fuente` = `"fredoka"` o `"usuario:<Nombre>"` (solo si no es Andika: las fichas anteriores no cambian; en otro dispositivo sin esa letra sale Andika con aviso). Se guarda en favoritos/recientes y en Fori (se incrustan solo Andika y la elegida). Las representaciones (`rep.*`) también usan la letra elegida. Probado en Chrome (elegir, subir, recargar, quitar; sin errores). 
   - **Pendiente**: que Lengua use Fredoka por defecto (cuando existan sus modelos: letra por materia). Fredoka no es letra de escritura: la pauta de caligrafía de Lengua puede necesitar otra letra.
 
+## Frases para las primeras letras, «Mis frases» y fichas de varias páginas (pedido por Iván, 10-11-2026)
+- [x] Banco de frases por etapas con el orden de letras de Iván (vocales, l, m, s, n, h, d, f, p, t, r, b, v, ñ, y, k, c, z, q, g, j, w, x, ll, ch).
+  - Hecho (Sonnet redacta, Opus integra y revisa): `datos/frases_1.tsv` (377 frases de 3 a 5 palabras, etapas l→g; cada una solo con letras ya vistas y con la nueva) → `tools/frases.py` (comprueba letras, largo, signos; `--revisar` lista palabras fuera del léxico) → `src/lengua/frases_1.js`. Entran como frases «libres» (tipo `lib`) **solo con letras elegidas** (sin ellas, las fichas no cambian: doradas iguales). La «y» suelta vale siempre (`permitida`).
+  - Las libres no tienen estructura: las usan ordena (solo con la primera marcada y sin nombres propios), separa y mayúscula y punto (sin nombres propios), copia, dictado y lectura rápida; no completa, ¿sí o no? ni escribe una frase.
+  - **Revisar (Iván, cuando quiera)**: `datos/frases_1.tsv`; la etapa l tiene frases flojas (pocas palabras posibles: «Él lo leía.»). Tras editarlo: `python3 tools/frases.py`.
+- [x] «Mis frases»: caja en «Letras» (si hay una actividad que usa frases), una por línea, 3–5 palabras, hasta 60. Se recuerdan en el dispositivo (`charta:misFrases`) y viajan en `params.misFrases` (como `vistas`): la composición, la nube, Tabula y Fori las llevan. Avisa de las que no salen con las letras marcadas.
+- [x] Fichas de varias páginas (1–10 páginas de 1 o 2 actividades): numeración seguida (1, 2 | 3 | 4); `generar({ paginas: [{ actividades }…] })`; la página 1 sale igual que una ficha suelta. Composición: `actividades` seguidas + `paginas: [2, 1, 1]`. Compositor con «Página N», «+ Segunda actividad» por página, «+ Otra página» y «Quitar página»; vista previa, solucionario e impresión con todas las páginas de cada alumno.
+  - **Pendiente**: comprobar en Tabula que guarda y abre fichas de varias páginas (allí no se ha tocado nada).
+
 ## Fase 8 · Opcional
 - [ ] Publicar en Google Play (TWA).

@@ -4,6 +4,7 @@ import { POR_ID } from "./catalogo.js";
 import { crearAzar, mezclar } from "./azar.js";
 import { tipo } from "./tipos.js";
 import { normalizarVistas, conVistas } from "../lengua/vistas.js";
+import { normalizarPropias, conPropias, USA_FRASES } from "../lengua/frases.js";
 
 export const SCHEMA_VERSION = 1;
 export const COLORES = ["amarillo", "rosa", "azul", "verde"];
@@ -63,8 +64,10 @@ export function validar(id, params = {}, tamano = "completa", curso) {
   const ops = Object.fromEntries(m.opciones.map((o) => [o.id, o]));
   // Letras elegidas (mapa de letras): solo Lengua de 1.º; todas = sin el campo (las fichas de siempre no cambian).
   if ("vistas" in p) { const v = esLengua1(m, c) ? normalizarVistas(p.vistas) : null; if (v) p.vistas = v; else delete p.vistas; }
+  // «Mis frases» (Lengua de 1.º, tipos que usan frases): como las letras, viajan en los parámetros.
+  if ("misFrases" in p) { const f = esLengua1(m, c) && USA_FRASES.has(id) ? normalizarPropias(p.misFrases) : null; if (f) p.misFrases = f; else delete p.misFrases; }
   for (const [k, v] of Object.entries(p)) {
-    if (k === "vistas") continue;
+    if (k === "vistas" || k === "misFrases") continue;
     if (k === "rango") {
       if (rgs.length && !rgs.includes(v)) throw new Error(`${id}: rango ${v} no admitido [${rgs}]`);
       continue;
@@ -139,14 +142,15 @@ export function coloresPagina(acts) {
   });
 }
 
-function pagina(acts, tamano, colores, semilla) {
+/** Una página: sus actividades se numeran desde `n0 + 1` (la numeración sigue de una página a otra) y su semilla es la de su número. */
+function pagina(acts, tamano, colores, semilla, n0 = 0) {
   return {
-    actividades: acts.map((a, i) => {
-      const T = tipo(a.tipo);
-      const res = conVistas(a.params.vistas || null, () => T.generar(a.params, crearAzar(mezclar(semilla, i + 1)), { tamano }));
+    actividades: acts.map((a, j) => {
+      const T = tipo(a.tipo), i = n0 + j;
+      const res = conPropias(a.params.misFrases || null, () => conVistas(a.params.vistas || null, () => T.generar(a.params, crearAzar(mezclar(semilla, i + 1)), { tamano })));
       const n = i + 1;
       return {
-        n, tipo: a.tipo, tipoVersion: T.version, params: a.params, tamano, color: colores[i],
+        n, tipo: a.tipo, tipoVersion: T.version, params: a.params, tamano, color: colores[j],
         enunciado: res.enunciado, ejemplo: res.ejemplo ?? null,
         ejercicios: res.ejercicios.map((e, k) => ({ id: `a${n}e${k + 1}`, datos: e.datos, solucion: e.solucion, ...(e.pasos ? { pasos: e.pasos } : {}) })),
       };
@@ -156,53 +160,64 @@ function pagina(acts, tamano, colores, semilla) {
 
 /** Metadatos propios de una ficha (sin LOMLOE): dificultad = la mayor, minutos = suma (media página ≈ la mitad), etiquetas sin repetir. */
 export function metadatosDe(ids) {
-  const ms = ids.map((id) => modelo(id).metadatos);
-  const mitad = ids.length > 1;
+  // ids: los de una página (["sumar.h20", …]) o los de varias ([["a", "b"], ["c"]]): media página = la mitad de minutos.
+  const pags = Array.isArray(ids[0]) ? ids : [ids];
+  const ms = pags.flatMap((p) => p.map((id) => ({ ...modelo(id).metadatos, mitad: p.length > 1 })));
   return {
     dificultad: Math.max(...ms.map((m) => m.dificultad)),
-    minutos: ms.reduce((t, m) => t + (mitad ? Math.round(m.minutos / 2) : m.minutos), 0),
+    minutos: ms.reduce((t, m) => t + (m.mitad ? Math.round(m.minutos / 2) : m.minutos), 0),
     etiquetas: [...new Set(ms.flatMap((m) => m.etiquetas))],
   };
 }
 
+/** Páginas como máximo en una ficha. */
+export const MAX_PAGINAS = 10;
+
 /**
  * opciones = {
- *   actividades: [{ tipo: "sumar.h20", params?: {…}, color?: "azul" }, …]   (1 o 2),
+ *   actividades: [{ tipo: "sumar.h20", params?: {…}, color?: "azul" }, …]   (1 o 2: una página)
+ *   o paginas: [{ actividades: [1 o 2] }, …]   (varias páginas: hasta MAX_PAGINAS; las actividades se numeran seguidas: 1, 2, 3…),
  *   titulo?, variantes?: 1 (N = variantes A, B, C…), presentacion?: { color, lecturaFacil, pictogramas },
  *   metadatos?: { dificultad, minutos, etiquetas }
  * }
  * Determinista: no pone id, creada ni autor (se añaden al guardar en Firestore).
+ * La semilla de cada actividad depende de su número: la página 1 de una ficha larga es igual que la ficha de una página.
  */
 export function generar(opciones, semilla = 1) {
-  const brutas = opciones?.actividades || [];
-  if (brutas.length < 1 || brutas.length > 2) throw new Error("Una ficha lleva 1 o 2 actividades.");
+  const brutasPags = opciones?.paginas ? opciones.paginas.map((p) => p?.actividades || []) : [opciones?.actividades || []];
+  if (!brutasPags.length || brutasPags.length > MAX_PAGINAS) throw new Error(`Una ficha lleva de 1 a ${MAX_PAGINAS} páginas.`);
+  brutasPags.forEach((b, k) => { if (b.length < 1 || b.length > 2) throw new Error(brutasPags.length > 1 ? `La página ${k + 1} lleva 1 o 2 actividades.` : "Una ficha lleva 1 o 2 actividades."); });
   if (!Number.isInteger(semilla)) throw new Error("La semilla debe ser un entero.");
-  const tamano = brutas.length === 1 ? "completa" : "media";
-  const acts = brutas.map((a) => {
-    const m = modelo(a.tipo);
-    if (!m.tamanos.includes(tamano)) throw new Error(`«${m.nombre}» solo cabe en una página completa.`);
-    if (!tipo(a.tipo)) throw new Error(`«${m.nombre}» aún no está disponible en la app.`);
-    const curso = cursosDe(m).includes(a.curso) ? a.curso : cursoDe(a.tipo, { params: a.params });   // curso elegido en el selector (o el que pide un valor con `curso`)
-    return { tipo: a.tipo, curso, params: validar(a.tipo, a.params, tamano, curso), color: a.color || null };
+  const pags = brutasPags.map((brutas) => {
+    const tamano = brutas.length === 1 ? "completa" : "media";
+    const acts = brutas.map((a) => {
+      const m = modelo(a.tipo);
+      if (!m.tamanos.includes(tamano)) throw new Error(`«${m.nombre}» solo cabe en una página completa.`);
+      if (!tipo(a.tipo)) throw new Error(`«${m.nombre}» aún no está disponible en la app.`);
+      const curso = cursosDe(m).includes(a.curso) ? a.curso : cursoDe(a.tipo, { params: a.params });   // curso elegido en el selector (o el que pide un valor con `curso`)
+      return { tipo: a.tipo, curso, params: validar(a.tipo, a.params, tamano, curso), color: a.color || null };
+    });
+    return { acts, tamano, colores: coloresPagina(acts) };
   });
-  const colores = coloresPagina(acts);
+  const todas = pags.flatMap((p) => p.acts);
   const variantes = opciones.variantes ?? 1;
   if (!Number.isInteger(variantes) || variantes < 1 || variantes > 30) throw new Error("variantes: de 1 a 30.");
   const semillaVariante = (v) => (v === 0 ? semilla >>> 0 : mezclar(semilla, v));
-  const m0 = modelo(acts[0].tipo);
+  const paginasDe = (s) => { let n0 = 0; return pags.map((p) => { const r = pagina(p.acts, p.tamano, p.colores, s, n0); n0 += p.acts.length; return r; }); };
+  const m0 = modelo(todas[0].tipo);
   const ficha = {
     schemaVersion: SCHEMA_VERSION, app: "charta",
-    titulo: opciones.titulo || tituloPagina(acts),
-    curso: acts[0].curso, area: m0.materia,
+    titulo: opciones.titulo || tituloPagina(todas),
+    curso: todas[0].curso, area: m0.materia,
     semilla, variantes,
     presentacion: { color: true, lecturaFacil: false, pictogramas: false, ...(opciones.presentacion || {}) },
-    paginas: [pagina(acts, tamano, colores, semillaVariante(0))],
+    paginas: paginasDe(semillaVariante(0)),
     variantesDatos: [],
   };
   if (opciones.metadatos) ficha.metadatos = { ...opciones.metadatos };
   for (let v = 1; v < variantes; v++) {
     const s = semillaVariante(v);
-    ficha.variantesDatos.push({ semilla: s, paginas: [pagina(acts, tamano, colores, s)] });
+    ficha.variantesDatos.push({ semilla: s, paginas: paginasDe(s) });
   }
   // Normalizada a JSON (−0 → 0…): la ficha en memoria es idéntica a la guardada en Firestore o leída por Tabula/Fori.
   return JSON.parse(JSON.stringify(ficha));

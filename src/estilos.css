@@ -78,6 +78,14 @@ h2 { margin: 0; font-weight: 600; font-size: .95rem; letter-spacing: -.01em; col
 .ops label.check { grid-column: 1 / -1; }
 .anadir { width: 100%; border-style: dashed; color: var(--acento-texto); background: transparent; }
 .anadir:hover:not(:disabled) { background: var(--acento-suave); border-color: var(--acento-linea); }
+/* Varias páginas: cada página es un grupo con su cabecera; con una sola, no se nota. */
+.pagina-comp { display: grid; }
+.pagina-comp > .anadir { margin: 4px 0 8px; }
+.pagina-comp.varias { border: 1px solid var(--borde); border-radius: var(--r-md); padding: 8px 10px 4px; margin-bottom: 10px; }
+.pagina-cab { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.pagina-cab h3 { margin: 0; font-size: .9rem; font-weight: 600; color: var(--texto-2); }
+.pagina-cab button { height: var(--alto-sm); padding: 0 10px; font-size: .8rem; }
+#anadirPagina { margin-top: 2px; }
 
 /* ---------- Campos ---------- */
 label, .campo { display: grid; gap: 6px; font-size: .8rem; font-weight: 500; color: var(--texto-2); min-width: 0; }
@@ -258,5 +266,9 @@ body.con-selector { overflow: hidden; }
   color: var(--apagado); font: 600 1.1rem var(--sans); cursor: pointer; padding: 0; text-decoration: line-through; text-decoration-color: var(--borde-fuerte); }
 .mapa-letras button.vocal { border-style: dashed; }
 .mapa-letras button[aria-pressed="true"] { background: var(--primario); border-color: var(--primario); color: var(--sobre-acento); text-decoration: none; border-style: solid; }
+.mis-frases { margin-top: 12px; border-top: 1px solid var(--borde); padding-top: 10px; }
+.mis-frases summary { cursor: pointer; font-weight: 600; }
+.mis-frases summary small { font-weight: 400; color: var(--texto-2); margin-left: 6px; }
+.mis-frases .campo { margin-top: 8px; }
 .letras-atajos { display: flex; gap: 8px; flex-wrap: wrap; }
 .letras-atajos button { height: var(--alto-sm); padding: 0 12px; border-radius: var(--r-sm); border: 1px solid var(--borde); background: var(--superficie-2); color: var(--texto-2); font: inherit; font-size: .85rem; cursor: pointer; }
