@@ -9,6 +9,7 @@ import { registrar } from "../nucleo/tipos.js";
 import { TOP, INK } from "../render/papel.js";
 import { rodear } from "../lengua/dibujo.js";
 import { LEXICO } from "../lengua/lexico.js";
+import { permitida } from "../lengua/vistas.js";
 import { alCaso, cuantas, elegirPalabras, largosDe, patronUnico, unidades } from "./_lengua.js";
 
 const PALABRAS = new Set(LEXICO.map((e) => e.p));
@@ -27,7 +28,7 @@ export default registrar({
       if ((tipoL === "vocales" && !esV) || (tipoL === "consonantes" && esV)) return null;
       if (!patronUnico(p, [pos])) return null;
       const fam = tipoL === "vocales" ? VOC : tipoL === "consonantes" ? CON : [...VOC, ...CON];
-      const malas = az.barajar(fam.filter((c) => c !== u && !PALABRAS.has(cambia(p, pos, c)) && !(pos === 0 && params.caso === "inicial" && c === "i")));
+      const malas = az.barajar(fam.filter((c) => c !== u && permitida(c) && !PALABRAS.has(cambia(p, pos, c)) && !(pos === 0 && params.caso === "inicial" && c === "i")));
       if (malas.length < 2) return null;
       return { pos, opciones: az.barajar([u, malas[0], malas[1]]) };
     };

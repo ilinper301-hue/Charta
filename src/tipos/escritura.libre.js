@@ -12,6 +12,7 @@ import { cuantas, ajusta } from "./_lengua.js";
 import { elegirFrases, largosFrase, textoFrase } from "./_frase.js";
 import { contexto, mmDe, escribir, CAP_MM, ETIQUETA_MM } from "./_escritura.js";
 import { renglones } from "../lengua/pauta.js";
+import { vistasActivas, permitida, filtrarVistas, avisoVistas } from "../lengua/vistas.js";
 
 const ACCION = new Set(["i", "im", "ob", "od", "lug"]);
 /** Temas para escribir: [tema, pregunta, ejemplo de respuesta]. */
@@ -30,6 +31,8 @@ export const TEMAS = [
   ["El tiempo", "¿Qué tiempo hace hoy?", "Hoy hace sol."],
 ];
 
+/** «¿Qué hace el gato?» */
+const pregunta = (f) => `¿Qué ${f.numero === "p" ? "hacen" : "hace"} ${f.palabras[0]} ${f.palabras[1]}?`;
 const art = (w) => w[0].toUpperCase() + w.slice(1);
 
 export default registrar({
@@ -41,12 +44,16 @@ export default registrar({
     const filas = Array.from({ length: n }, (_, i) => Math.floor(total / n) + (i < total % n ? 1 : 0));
     let items;
     if (empezada) {
-      items = elegirFrases(azar, largosFrase(azar, n), { id: "escritura.libre", filtro: (f) => ACCION.has(f.tipo) })
+      items = elegirFrases(azar, largosFrase(azar, n), { id: "escritura.libre", filtro: (f) => ACCION.has(f.tipo) && permitida(pregunta(f)) })
         .map((f) => {
-          const [a, s] = f.palabras, plural = f.numero === "p";
-          return { inicio: `${art(a)} ${s}`, pregunta: `¿Qué ${plural ? "hacen" : "hace"} ${a} ${s}?`, ejemplo: textoFrase(f.palabras) };
+          const [a, s] = f.palabras;
+          return { inicio: `${art(a)} ${s}`, pregunta: pregunta(f), ejemplo: textoFrase(f.palabras) };
         });
-    } else items = azar.muestra(TEMAS, n).map(([tema, pregunta, ejemplo]) => ({ inicio: null, pregunta: `${tema}: ${pregunta}`, ejemplo }));
+    } else {
+      const temas = filtrarVistas(TEMAS, (t) => t.join(" "));
+      if (vistasActivas() && temas.length < n) throw new Error(`«escritura.libre» necesita más temas: con esas letras solo hay ${temas.length} y hacen falta ${n}.${avisoVistas()}`);
+      items = azar.muestra(temas, n).map(([tema, pregunta, ejemplo]) => ({ inicio: null, pregunta: `${tema}: ${pregunta}`, ejemplo }));
+    }
     return {
       enunciado: empezada ? "Escribe qué hace cada uno.\nContinúa la frase en los renglones." : "Escribe una frase sobre cada tema.",
       ejercicios: items.map((it, i) => ({ datos: { inicio: it.inicio, pregunta: it.pregunta, filas: filas[i], ejemplo: it.ejemplo }, solucion: { huecos: [] } })),

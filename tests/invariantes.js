@@ -3,13 +3,13 @@
 // Tipos nuevos: su regla va en tests/inv/<familia>.js (export default { "<id>"(act, tam) {…} }), con los ayudantes
 // de tests/inv/_ayuda.js (ent, unicos, cuantos, mitad, rep). Todo tipo registrado DEBE tener aquí su invariante (test_invariantes.js lo exige): al portar uno nuevo, añadirla.
 import assert from "node:assert/strict";
-import { ent, unicos, cuantos, mitad, rep } from "./inv/_ayuda.js";
+import { ent, unicos, cuantos, mitad, rep, colsSuma, nivelesV, cdu } from "./inv/_ayuda.js";
 import inv_rep from "./inv/rep.js";
 import inv_combinada from "./inv/combinada.js";
 import inv_conteo from "./inv/conteo.js";
 import inv_orden from "./inv/orden.js";
 import inv_valor from "./inv/valor.js";
-import inv_sumar from "./inv/sumar.js";
+import inv_sumar, { recta2 } from "./inv/sumar.js";
 import inv_restar from "./inv/restar.js";
 import inv_juegos from "./inv/juegos.js";
 import inv_problemas from "./inv/problemas.js";
@@ -48,6 +48,21 @@ export const INVARIANTES = {
     const es = act.ejercicios, nivel = act.params.nivel || "sin", cap = Math.min(act.params.rango ?? 30, 99);
     const lleva = ({ datos: { a, b } }) => (a % 10) + (b % 10) >= 10;
     cuantos(es, tam === "media" ? 6 : 12);
+    if ((act.params.rango ?? 30) > 100) {      // 2.º: columnas C, D, U (R ≥ 200 para u/d/ud y 3 sumandos)
+      const R = act.params.rango, k = act.params.sumandos === 3 ? 3 : 2;
+      unicos(es, (e) => Object.values(e.datos).sort().join("+"));
+      for (const { datos, solucion } of es) {
+        const xs = Object.values(datos);
+        assert.deepEqual(Object.keys(datos), ["a", "b", "c"].slice(0, k), "claves de datos");
+        xs.forEach((v, j) => ent(v, j === 0 ? 100 : 1, R, "sumando"));
+        assert.deepEqual([...xs].sort((p, q) => q - p), xs, "de mayor a menor");
+        const t = xs.reduce((s, v) => s + v, 0);
+        ent(t, 101, R, "suma"); assert.ok(t <= 999, "suma de más de 3 cifras");
+        assert.deepEqual(solucion.huecos, cdu(t), "huecos C, D, U");
+      }
+      nivelesV(es.map((e) => colsSuma(Object.values(e.datos)).map((c) => c > 0)), nivel, `(R ${R})`);
+      return;
+    }
     unicos(es, (e) => e.datos.a + "+" + e.datos.b);
     for (const { datos: { a, b }, solucion } of es) {
       ent(a, 11, 98, "a"); ent(b, 1, 98, "b"); ent(a + b, 12, cap, "a + b");
@@ -59,6 +74,7 @@ export const INVARIANTES = {
   },
 
   "restar.recta"(act, tam) {
+    if ((act.params.rango ?? 10) >= 100) return recta2(act, tam, true);
     const R = act.params.rango ?? 10, N = R <= 10 ? 10 : R <= 20 ? 20 : 30;
     cuantos(act.ejercicios, tam === "media" ? 3 : 6);
     for (const { datos: { a, b, N: n }, solucion } of act.ejercicios) {
@@ -95,17 +111,7 @@ export const INVARIANTES = {
     });
   },
 
-  "medida.reloj"(act, tam) {
-    const es = act.ejercicios, modo = act.params.modo || "mezcla";
-    cuantos(es, tam === "media" ? 6 : 12);
-    for (const { datos: { h, m }, solucion } of es) {
-      ent(h, 1, 12, "hora"); assert.ok(m === 0 || m === 30, "minutos");
-      assert.deepEqual(solucion.huecos, [h, m ? "30" : "00"]);
-    }
-    for (const m of [0, 30]) unicos(es.filter((e) => e.datos.m === m), (e) => e.datos.h, "horas repetidas en un grupo");
-    const media = es.filter((e) => e.datos.m === 30).length;
-    assert.equal(media, modo === "punto" ? 0 : modo === "media" ? es.length : es.length / 2, "en punto / y media");
-  },
+
 };
 
 /** Reglas comunes a todos los tipos: ids únicos, huecos numéricos enteros y no negativos. */

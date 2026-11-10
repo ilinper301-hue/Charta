@@ -4,10 +4,13 @@
 //           h = de izquierda a derecha · v = de arriba abajo · d = en diagonal, hacia abajo y a la derecha (solo con la opción «diagonal»)
 // Reglas: palabras del léxico, del campo elegido (nombres de 3 a 8 letras sin tilde; en «colores», adjetivos), sin que una esté dentro de otra; todas caben y están
 //         donde dice `sopa`; cada una aparece una sola vez en la cuadrícula (en h, v o d) y las direcciones se reparten; el resto son letras al azar.
+// Con letras elegidas (vistas.js): las palabras y las letras de relleno usan solo ellas (el relleno, las de RELLENO que estén elegidas; si son menos de 3, todas las elegidas).
 // Opciones: campo (al azar o uno) · palabras (8, 7 o 6) · direcciones (h y v / también diagonal) · letra (MAYÚSCULAS / minúscula). Solo completa.
 import { registrar } from "../nucleo/tipos.js";
 import { TOP, M, W, COLOR_SOLUCION } from "../render/papel.js";
 import { CAMPOS_P, deCampo } from "./_palabra.js";
+import { vistasActivas, letrasActivas, avisoVistas } from "../lengua/vistas.js";
+
 
 export const N = 10;
 export const DIRS = { h: [0, 1], v: [1, 0], d: [1, 1] };
@@ -23,6 +26,12 @@ export function apariciones(filas, w) {
   return c;
 }
 
+/** Letras de relleno: RELLENO (más vocales, como en español) o, con letras elegidas, las de RELLENO que lo estén (o todas las elegidas si son pocas). */
+function rellenoDe() {
+  if (!vistasActivas()) return RELLENO;
+  const ok = new Set(letrasActivas()), r = [...RELLENO].filter((c) => ok.has(c)).join("");
+  return new Set(r).size >= 3 ? r : letrasActivas().join("");
+}
 function colocar(azar, palabras, dirs) {
   const celdas = Array.from({ length: N }, () => Array(N).fill(null)), puestas = [];
   const orden = palabras.map((w, i) => ({ w, dir: dirs[i % dirs.length] })).sort((a, b) => b.w.length - a.w.length);
@@ -48,8 +57,9 @@ export default registrar({
   generar(params, azar) {
     const n = params.palabras ?? 8, dirs = params.direcciones === "diagonal" ? ["h", "v", "d"] : ["h", "v"], mayus = !params.minus;
     const posibles = CAMPOS_P.filter((c) => deCampo(c, { maxLetras: 8, sinTilde: true }).length >= n);
-    const campo = params.campo || azar.elegir(posibles);
-    if (!posibles.includes(campo)) throw new Error(`«palabra.sopa» necesita más palabras del campo «${campo}».`);
+    const relleno = rellenoDe();
+    const campo = params.campo || (posibles.length ? azar.elegir(posibles) : "elegido");
+    if (!posibles.includes(campo)) throw new Error(`«palabra.sopa» necesita más palabras del campo «${campo}».` + avisoVistas());
     for (let intento = 0; intento < 200; intento++) {
       const elegidas = [];
       for (const e of azar.barajar(deCampo(campo, { maxLetras: 8, sinTilde: true }))) {
@@ -61,7 +71,7 @@ export default registrar({
       const puesto = colocar(azar, azar.barajar(elegidas), dirs);
       if (!puesto) continue;
       for (let r = 0; r < 20; r++) {
-        const filas = puesto.celdas.map((fila) => fila.map((l) => l ?? RELLENO[azar.entero(0, RELLENO.length - 1)]).join(""));
+        const filas = puesto.celdas.map((fila) => fila.map((l) => l ?? relleno[azar.entero(0, relleno.length - 1)]).join(""));
         if (elegidas.some((w) => apariciones(filas, w) !== 1)) continue;
         const f = (t) => (mayus ? t.toUpperCase() : t);
         return {
@@ -73,7 +83,7 @@ export default registrar({
         };
       }
     }
-    throw new Error(`«palabra.sopa» necesita más palabras: no se pudo componer la sopa con ${n} palabras de «${campo}».`);
+    throw new Error(`«palabra.sopa» necesita más palabras: no se pudo componer la sopa con ${n} palabras de «${campo}».` + avisoVistas());
   },
   dibujar(p, act) {
     const e = act.ejercicios[0], { filas, palabras } = e.datos, cw = W - 2 * M, ch = TOP - M;

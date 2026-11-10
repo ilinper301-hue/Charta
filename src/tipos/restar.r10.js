@@ -6,6 +6,7 @@
 import { registrar } from "../nucleo/tipos.js";
 import { TOP, T, B, MENOS } from "../render/papel.js";
 import { pares } from "./sumar.h20.js";
+import { paresResta3 } from "./_tres.js";
 
 /** Grupos de pares (a, b) de _pares_resta(R, nivel) del motor. */
 export function gruposResta(R, nivel) {
@@ -27,7 +28,7 @@ export function gruposResta(R, nivel) {
   con.lleva = true;   // pares(): no rellenar con otro tipo de grupo
   return { sin: [dd, du, dudu], con: [con], mezcla: [dd, du, dudu, con] }[nivel];
 }
-export const paresResta = (R, nivel, cnt, azar) => pares(gruposResta(R, nivel), cnt, azar);
+export const paresResta = (R, nivel, cnt, azar) => (R > 100 ? paresResta3(R, nivel, cnt, azar) : pares(gruposResta(R, nivel), cnt, azar));   // 2.º: tres cifras
 
 /** Tipo de restas horizontales hasta R fijo (R = null: usa params.rango). */
 export function restasHoriz(id, Rfijo, minimo, titulo) {

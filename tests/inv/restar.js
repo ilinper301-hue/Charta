@@ -1,7 +1,8 @@
 // Charta · invariantes de la familia «restar» (ver tests/invariantes.js). restar.recta está en tests/invariantes.js.
 import assert from "node:assert/strict";
-import { ent, unicos, cuantos, mitad } from "./_ayuda.js";
+import { colsResta, nivelesV, cdu, ent, unicos, cuantos, mitad, tope, llevaS3, llevaR3, niveles3 } from "./_ayuda.js";
 
+import { encadenadas2 } from "./sumar.js";
 /** ¿La resta a − b lleva (necesita "pedir")? Misma definición que _pares_resta() del motor. */
 const lleva = (R) => (R <= 20 ? (a, b) => a > 10 && a - b < 10 : (a, b) => b % 10 > a % 10);
 /** ¿La suma a + b lleva? (_pares_suma del motor.) */
@@ -10,6 +11,7 @@ const llevaSuma = (R) => (R <= 20 ? (a, b) => a < 10 && b < 10 && a + b > 10 : (
 /** Niveles sin/con/mezcla de las restas a − b (hasta 10 no hay opción). f(e) → [a, b]. */
 function niveles(es, R, nivel, f, cnt, mezclaExacta = false) {
   if (R <= 10) return;
+  if (R > 100) return niveles3(es.map(f), nivel, llevaR3);   // 2.º: tres cifras
   const l = lleva(R), n = es.filter((e) => l(...f(e))).length;
   if (nivel === "sin") assert.equal(n, 0, "sin: hay restas con llevada");
   if (nivel === "con") assert.equal(n, es.length, "con: hay restas sin llevada");
@@ -21,7 +23,7 @@ function niveles(es, R, nivel, f, cnt, mezclaExacta = false) {
 
 function horiz(Rfijo) {
   return (act, tam) => {
-    const es = act.ejercicios, R = Rfijo ?? act.params.rango, cap = Math.min(R, 99), nivel = act.params.nivel || "sin";
+    const es = act.ejercicios, R = Rfijo ?? act.params.rango, cap = tope(R), nivel = act.params.nivel || "sin";
     cuantos(es, tam === "media" ? 12 : 24);
     for (const { datos: { a, b }, solucion } of es) {
       ent(a, 2, cap, "a"); ent(b, 1, a - 1, "b");
@@ -52,6 +54,19 @@ export default {
   "restar.vertical"(act, tam) {
     const es = act.ejercicios, cap = Math.min(act.params.rango ?? 30, 99), nivel = act.params.nivel || "sin";
     cuantos(es, tam === "media" ? 6 : 12);
+    if ((act.params.rango ?? 30) > 100) {      // 2.º: columnas C, D, U (+ prueba: [C, D, U, resultado])
+      const R = act.params.rango, prueba = !!act.params.prueba;
+      unicos(es, (e) => e.datos.a + "-" + e.datos.b);
+      for (const { datos, solucion } of es) {
+        assert.deepEqual(Object.keys(datos), ["a", "b"], "claves de datos");
+        const { a, b } = datos, t = a - b;
+        ent(a, 101, R, "a"); ent(b, 1, a - 1, "b"); ent(t, 1, 998, "resultado");
+        assert.deepEqual(solucion.huecos, prueba ? [...cdu(t), t] : cdu(t), "huecos");
+        if (prueba) assert.equal(solucion.huecos[3] + b, a, "prueba: resultado + sustraendo = minuendo");
+      }
+      nivelesV(es.map((e) => colsResta(e.datos.a, e.datos.b)), nivel, `(R ${R})`);
+      return;
+    }
     unicos(es, (e) => e.datos.a + "-" + e.datos.b);
     for (const { datos: { a, b }, solucion } of es) {
       ent(a, 21, cap, "a"); ent(b, 1, a - 1, "b");
@@ -87,7 +102,7 @@ export default {
   },
 
   "restar.hueco"(act, tam) {
-    const es = act.ejercicios, R = Math.min(act.params.rango ?? 10, 99), nivel = act.params.nivel || "sin";
+    const es = act.ejercicios, R = tope(act.params.rango ?? 10), nivel = act.params.nivel || "sin";
     cuantos(es, tam === "media" ? 12 : 24);
     for (const { datos: { a, b, c, hueco }, solucion } of es) {
       ent(a, 2, R, "a"); ent(b, 1, a - 1, "b"); assert.equal(c, a - b); ent(c, 1, R, "c");
@@ -98,6 +113,18 @@ export default {
 
   "restar.decenas"(act, tam) {
     const es = act.ejercicios, cap = Math.min(act.params.rango ?? 30, 100), bloques = act.params.modo === "bloques";
+    if ((act.params.rango ?? 30) > 100 && !bloques) {      // 2.º: decenas (70 − 30), centenas (700 − 300), centenas con decenas (450 − 20)
+      const R = act.params.rango, clase = (a, b) => (a <= 100 ? "A" : a % 100 === 0 && b % 100 === 0 ? "B" : b <= 90 ? "C" : "?");
+      cuantos(es, tam === "media" ? 12 : 24);
+      unicos(es, (e) => [e.datos.a, e.datos.b, e.datos.forma].join());
+      for (const { datos: { a, b, forma }, solucion } of es) {
+        assert.equal(a % 10, 0); assert.equal(b % 10, 0); ent(a, 20, R, "a"); ent(b, 10, a - 10, "b"); ent(forma, 0, 2, "forma");
+        assert.notEqual(clase(a, b), "?", `clase de ${a} − ${b}`);
+        assert.deepEqual(solucion.huecos, [[a - b], [b], [a]][forma]);
+      }
+      if (tam === "completa" && R >= 300) for (const c of "ABC") assert.ok(es.filter((e) => clase(e.datos.a, e.datos.b) === c).length >= 6, `pocas de la clase ${c}`);
+      return;
+    }
     let np = 0; for (let a = 20; a <= cap; a += 10) for (let b = 10; b < a; b += 10) np++;
     if (bloques) {
       const m = Math.min(10, np), n = Math.max(2, m - (m % 2));
@@ -117,6 +144,7 @@ export default {
   },
 
   "restar.encadenadas"(act, tam) {
+    if ((act.params.rango ?? 10) >= 100) return encadenadas2(act, tam, true);
     const es = act.ejercicios, cap = (act.params.rango ?? 10) <= 10 ? 10 : 20;
     cuantos(es, tam === "media" ? 8 : 16);
     unicos(es, (e) => [e.datos.a, e.datos.b, e.datos.c].join());
@@ -127,7 +155,7 @@ export default {
   },
 
   "restar.familia"(act, tam) {
-    const es = act.ejercicios, R = Math.min(act.params.rango ?? 10, 99), nivel = act.params.nivel || "sin";
+    const es = act.ejercicios, R = tope(act.params.rango ?? 10), nivel = act.params.nivel || "sin";
     cuantos(es, tam === "media" ? 4 : 8);
     unicos(es, (e) => e.datos.a + "+" + e.datos.b);
     for (const { datos: { a, b, t }, solucion } of es) {
@@ -135,7 +163,7 @@ export default {
       assert.deepEqual(solucion.huecos, [t - a, t - b]);
     }
     if (R > 10) {
-      const l = llevaSuma(R), n = es.filter((e) => l(e.datos.a, e.datos.b)).length;
+      const l = R > 100 ? llevaS3 : llevaSuma(R), n = es.filter((e) => l(e.datos.a, e.datos.b)).length;
       if (nivel === "sin") assert.equal(n, 0, "sin: hay sumas con llevada");
       if (nivel === "con") assert.equal(n, es.length, "con: hay sumas sin llevada");
     }

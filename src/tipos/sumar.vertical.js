@@ -3,13 +3,30 @@
 // solucion: { huecos: [decenas, unidades] del resultado }   (hueco de D, después el de U)
 // Opción nivel: null/"sin" (sin llevadas), "con" (con llevada en las unidades), "mezcla" (alternadas).
 // Completa: 12 sumas (4 filas × 3); media: 6.
+// 2.º (rango > 100, columnas C, D, U; ver _tres.js):
+//   datos:    { a, b } o, con sumandos: 3, { a, b, c }   (a ≥ b ≥ c, a de tres cifras, suma ≤ rango ≤ 999)
+//   solucion: { huecos: [centenas, decenas, unidades] del resultado }   (las llevadas no son huecos: se calculan al dibujar)
+//   Opción nivel: además de sin/con/mezcla, "u" (llevada solo en las unidades), "d" (solo en las decenas), "ud" (en las dos);
+//   con tres sumandos la llevada de las unidades puede ser 2. Opción sumandos: null (dos) | 3 (tres filas).
+//   Dibujo: sobre D y C, casilla pequeña de llevada (vacía en papel; en la solución, la llevada si la hay, en rojo).
 import { registrar } from "../nucleo/tipos.js";
 import { TOP } from "../render/papel.js";
+import { sumasVert, vertical3 } from "./_tres.js";
 
 export default registrar({
   id: "sumar.vertical",
   version: 1,
   generar(params, azar, { tamano }) {
+    if ((params.rango ?? 30) > 100) {
+      const k = params.sumandos === 3 ? 3 : 2, ps = sumasVert(params.rango, params.nivel, k, tamano === "media" ? 6 : 12, azar);
+      return {
+        enunciado: "Suma primero las unidades, después las decenas y las centenas.",
+        ejercicios: ps.map(([a, b, c]) => {
+          const t = a + b + (c ?? 0);
+          return { datos: c === undefined ? { a, b } : { a, b, c }, solucion: { huecos: [Math.floor(t / 100), Math.floor(t / 10) % 10, t % 10] } };
+        }),
+      };
+    }
     const cap = Math.min(params.rango ?? 30, 99), nivel = params.nivel || "sin", cnt = tamano === "media" ? 6 : 12;
     const cand = { true: [], false: [] };       // por «lleva»
     for (let a = 11; a <= cap - 1; a++) for (let b = 1; b <= cap - a; b++) cand[(a % 10) + (b % 10) >= 10].push([a, b]);
@@ -26,6 +43,7 @@ export default registrar({
     };
   },
   dibujar(p, act) {
+    if ((act.params.rango ?? 30) > 100) return vertical3(p, act, false);
     const { cel, cw, ch } = p.celdas(TOP, 3, 4);
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], { a, b } = e.datos, xt = x + cw / 2 - 17, xu = x + cw / 2 + 17;

@@ -8,6 +8,9 @@
 import { LEXICO } from "../lengua/lexico.js";
 import { articulo } from "../lengua/reglas.js";
 import { formaAdj } from "./_frase.js";
+import { permitida, filtrarVistas, avisoVistas } from "../lengua/vistas.js";
+
+const fv = (l) => filtrarVistas(l);   // sin letras elegidas devuelve la misma lista
 
 const ENT = new Map(LEXICO.map((e) => [e.p, e]));
 export const gen = (n) => {
@@ -103,13 +106,17 @@ export const palabrasToken = (tokens) => tokens.join(" ").replace(/,/g, "").spli
  * cada pregunta tiene una sola respuesta.
  */
 export function crearTexto(azar, nivel) {
-  const persona = azar.elegir(PERSONAJES), mascota = azar.elegir(Object.keys(MASCOTAS)), M = MASCOTAS[mascota];
-  const color = azar.elegir(M.colores), verbo = azar.elegir(M.verbos), lugar = azar.elegir(VERBO_LUGAR[verbo]);
+  const lugaresDe = (v) => filtrarVistas(VERBO_LUGAR[v], (l) => LUGARES[l]);
+  const verbosOk = (vs) => filtrarVistas(vs).filter((v) => lugaresDe(v).length);
+  const mascotas = Object.keys(MASCOTAS).filter((k) => permitida(k) && fv(MASCOTAS[k].colores).length && fv(MASCOTAS[k].come).length && verbosOk(MASCOTAS[k].verbos).length);
+  if (!mascotas.length || !fv(PERSONAJES).length) throw new Error("«lectura.texto» necesita más letras para montar el texto." + avisoVistas());
+  const persona = azar.elegir(fv(PERSONAJES)), mascota = azar.elegir(mascotas), M = MASCOTAS[mascota];
+  const color = azar.elegir(fv(M.colores)), verbo = azar.elegir(verbosOk(M.verbos)), lugar = azar.elegir(lugaresDe(verbo));
   const tieneMascota = { kind: "poseer", vals: { suj: persona, verbo: "tiene", item: mascota, color, tipo: "mascota" } };
   const lugarMascota = (momento) => ({ kind: "lugar", vals: { suj: mascota, verbo, lugar, ...(momento && { momento }) } });
-  const comida = { kind: "comida", vals: { suj: mascota, comida: azar.elegir(M.come) } };
-  const estado = { kind: "estado", vals: { suj: mascota, estado: azar.elegir(ESTADOS) } };
-  const ropa = (colorPrenda) => ({ kind: "poseer", vals: { suj: persona, verbo: "lleva", item: azar.elegir(PRENDAS), color: colorPrenda, tipo: "ropa" } });
+  const comida = { kind: "comida", vals: { suj: mascota, comida: azar.elegir(fv(M.come)) } };
+  const estado = { kind: "estado", vals: { suj: mascota, estado: azar.elegir(fv(ESTADOS)) } };
+  const ropa = (colorPrenda) => ({ kind: "poseer", vals: { suj: persona, verbo: "lleva", item: azar.elegir(fv(PRENDAS)), color: colorPrenda, tipo: "ropa" } });
   let hechos;
   if (nivel === 1) {
     const v = azar.entero(1, 4);
@@ -117,14 +124,14 @@ export function crearTexto(azar, nivel) {
     else if (v === 2) hechos = [tieneMascota, lugarMascota()];
     else if (v === 3) hechos = [tieneMascota, estado];
     else {
-      const verboP = azar.elegir(VERBOS_LUGAR_PERSONA), lugarP = azar.elegir(VERBO_LUGAR[verboP]);
-      hechos = [ropa(azar.elegir(COLORES)), { kind: "lugar", vals: { suj: persona, verbo: verboP, lugar: lugarP } }];
+      const verboP = azar.elegir(verbosOk(VERBOS_LUGAR_PERSONA)), lugarP = azar.elegir(lugaresDe(verboP));
+      hechos = [ropa(azar.elegir(fv(COLORES))), { kind: "lugar", vals: { suj: persona, verbo: verboP, lugar: lugarP } }];
     }
   } else if (nivel === 2) hechos = [tieneMascota, lugarMascota(), comida, estado];
   else {
-    const otros = COLORES.filter((c) => c !== color);
-    const verboP = azar.elegir(VERBOS_PERSONA.filter((x) => x !== verbo));
-    hechos = [tieneMascota, ropa(azar.elegir(otros)), lugarMascota(azar.elegir(MOMENTOS)), { kind: "accion", vals: { suj: persona, verbo: verboP } }, comida, estado];
+    const otros = fv(COLORES).filter((c) => c !== color);
+    const verboP = azar.elegir(fv(VERBOS_PERSONA).filter((x) => x !== verbo));
+    hechos = [tieneMascota, ropa(azar.elegir(otros)), lugarMascota(azar.elegir(fv(MOMENTOS))), { kind: "accion", vals: { suj: persona, verbo: verboP } }, comida, estado];
   }
   return { hechos: hechos.map((h) => ({ ...h, ...CONSTRUCTORES[h.kind](h.vals) })) };
 }
@@ -156,7 +163,7 @@ const clave = (s) => s.split(" ").pop();             // la palabra que distingue
 /** Valores de un hueco que cambian el hecho (no son el verdadero ni aparecen en el texto). */
 function alternativas(h, hueco, enTexto, cuales) {
   const { correcta, pool, plaus } = valoresDe(h, hueco);
-  let ok = pool.filter((o) => o !== correcta && !enTexto.has(clave(o)));
+  let ok = pool.filter((o) => o !== correcta && !enTexto.has(clave(o)) && permitida(o));
   if (cuales === "plausibles" && plaus) { const p = ok.filter((o) => plaus.includes(o)); if (p.length) ok = p; }
   return ok;
 }
@@ -193,14 +200,14 @@ export function pregunta(azar, tipo, c, hechos, textoPal, verdad = true) {
   const h = c.h, { correcta, q } = valoresDe(h, c.hueco);
   if (tipo === "elegir") {
     const malas = azar.muestra(alternativas(h, c.hueco, textoPal), 2);
-    if (malas.length < 2) throw new Error("«lectura.texto» necesita más opciones para las preguntas de elegir.");
+    if (malas.length < 2) throw new Error("«lectura.texto» necesita más opciones para las preguntas de elegir." + avisoVistas());
     const ops = azar.barajar([correcta, ...malas]);
     return { datos: { tipo, fuente: c.i, pregunta: q, opciones: ops }, solucion: { huecos: [], rodea: ops.indexOf(correcta) } };
   }
   if (tipo === "sino") {
     if (verdad) return { datos: { tipo, fuente: c.i, frase: textoDe(h.t) }, solucion: { huecos: [], rodea: 0 } };
     const clavVals = HUECO_VALS[`${h.kind}.${c.hueco}`], alts = alternativas(h, c.hueco, textoPal, "plausibles");
-    if (!alts.length) throw new Error("«lectura.texto» necesita más opciones para las preguntas de sí o no.");
+    if (!alts.length) throw new Error("«lectura.texto» necesita más opciones para las preguntas de sí o no." + avisoVistas());
     let candidatas = alts.map((a) => interno(h, c.hueco, a));
     if (h.kind === "poseer" && clavVals === "item") {   // el mismo género (un gato → un perro, una falda → una bufanda): solo cambia una palabra; y, si se puede, un animal que tenga ese color
       const mismo = candidatas.filter((a) => gen(a) === gen(h.vals.item));
@@ -266,13 +273,13 @@ export const TEMAS_SEC = ["rutina", "receta", "cuento"];
  * n secuencias distintas (de `tema` o de todos los temas, de `frases` frases o de 3 y 4). Con todos los temas se reparten por turnos. Error con «necesita» si no hay bastantes.
  */
 export function elegirSecuencias(azar, n, { tema = null, frases = null } = {}) {
-  const ok = SECUENCIAS.filter((s) => (!tema || s.tema === tema) && (!frases || s.frases.length === frases));
+  const ok = filtrarVistas(SECUENCIAS, (s) => s.frases.join(" ")).filter((s) => (!tema || s.tema === tema) && (!frases || s.frases.length === frases));
   const temas = tema ? [tema] : azar.barajar(TEMAS_SEC), out = [], usadas = new Set();
   for (let k = 0; out.length < n; k++) {
     const t = temas[k % temas.length], libres = ok.filter((s) => s.tema === t && !usadas.has(s.id));
     if (!libres.length) {
       const otras = ok.filter((s) => !usadas.has(s.id));
-      if (!otras.length) throw new Error(`«lectura.ordena» necesita más secuencias: con esas opciones solo hay ${out.length} y hacen falta ${n}.`);
+      if (!otras.length) throw new Error(`«lectura.ordena» necesita más secuencias: con esas opciones solo hay ${out.length} y hacen falta ${n}.${avisoVistas()}`);
       const s = azar.elegir(otras); usadas.add(s.id); out.push(s); continue;
     }
     const s = azar.elegir(libres); usadas.add(s.id); out.push(s);
@@ -342,7 +349,7 @@ const PALABRAS_DE = (t) => t.toLowerCase().match(/[a-záéíóúüñ]+/g) || [];
 
 /** n adivinanzas con respuestas distintas; ninguna menciona la respuesta de otra de la misma ficha (se evita si se puede). */
 export function elegirAdivinanzas(azar, n, { maxLetras = 9 } = {}) {
-  const sinI = ADIVINANZAS.filter((a) => a.respuesta.length <= maxLetras);
+  const sinI = filtrarVistas(ADIVINANZAS, (a) => a.texto + " " + a.respuesta).filter((a) => a.respuesta.length <= maxLetras);
   for (let intento = 0; intento < 40; intento++) {
     const out = [];
     for (const a of azar.barajar(sinI)) {
@@ -353,7 +360,7 @@ export function elegirAdivinanzas(azar, n, { maxLetras = 9 } = {}) {
     }
     if (out.length === n) return out;
   }
-  throw new Error(`«lectura.adivinanza» necesita más adivinanzas: hacen falta ${n}.`);
+  throw new Error(`«lectura.adivinanza» necesita más adivinanzas: hacen falta ${n}.${avisoVistas()}`);
 }
 
 // ================================================================ INSTRUCCIONES: figuras, tamaños y colores

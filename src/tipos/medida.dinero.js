@@ -1,13 +1,13 @@
 // medida.dinero · Cuenta el dinero (port de _m_dinero() e _item_dinero() del motor; dibuja sus propias monedas y billetes).
 // datos:    { u: "€" | "c", items: [["m" | "b", valor], …] (de mayor a menor valor) }
 // solucion: { huecos: [total] }
-// Opciones: modo null (euros: monedas de 1 y 2 € y billetes de 5, 10 y 20 € hasta el rango) | "centimos" (monedas de 1 a 50 c).
+// Opciones: modo null (euros: monedas de 1 y 2 € y billetes de 5, 10 y 20 € hasta el rango; 2.º, rango 200–500: también 50 y 100 €) | "centimos" (monedas de 1 a 50 c).
 // rango (10, 20, 30, 100): tope del total (euros ≤ 50, céntimos ≤ 99); totales entre 3 y el tope, sin repetir.
 // Completa: 8 cuentas (2 × 4); media: 4.
 import { registrar } from "../nucleo/tipos.js";
 import { TOP, T, B } from "../render/papel.js";
 
-export const BILLETES = { 5: [52, 28], 10: [56, 28], 20: [60, 28], 50: [64, 28] };
+export const BILLETES = { 5: [52, 28], 10: [56, 28], 20: [60, 28], 50: [64, 28], 100: [70, 28] };
 export const RADIO = { "€": { 1: 15, 2: 17 }, c: { 1: 10, 2: 11.5, 5: 13, 10: 12, 20: 14, 50: 15 } };
 
 /** _item_dinero(): una moneda ("m") o un billete ("b") centrado en (x, y). */
@@ -24,14 +24,18 @@ export function itemDinero(p, kind, v, x, y, u) {
   }
 }
 
+/** 2.º (lote 3, rango 200–500): totales hasta el rango, con billetes de 50 y 100 €. En 1.º, hasta 50 € (céntimos: 99). */
+export const topeDinero = (R, cent) => cent ? Math.min(R, 99) : R > 100 ? R : Math.min(R, 50);
+export const billetes = (R) => R > 100 ? [5, 10, 20, 50, 100] : [5, 10, 20];
+
 export default registrar({
   id: "medida.dinero",
   version: 1,
   generar(params, azar, { tamano }) {
     const R = params.rango ?? 20;
     if (R < 10) throw new Error("Este modelo necesita un rango máximo de al menos 10.");
-    const cent = params.modo === "centimos", u = cent ? "c" : "€", cap = cent ? Math.min(R, 99) : Math.min(R, 50);
-    const vals = cent ? [1, 2, 5, 10, 20, 50].map((v) => ["m", v]) : [["m", 1], ["m", 2], ...[5, 10, 20].filter((v) => v <= cap).map((v) => ["b", v])];
+    const cent = params.modo === "centimos", u = cent ? "c" : "€", cap = topeDinero(R, cent);
+    const vals = cent ? [1, 2, 5, 10, 20, 50].map((v) => ["m", v]) : [["m", 1], ["m", 2], ...billetes(R).filter((v) => v <= cap).map((v) => ["b", v])];
     const cnt = tamano === "media" ? 4 : 8, vistos = new Set(), ejercicios = [];
     for (let i = 0; i < cnt; i++) {
       let its, tot, ok = false;

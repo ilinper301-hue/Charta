@@ -21,7 +21,7 @@ export default registrar({
       const d = Array.from({ length: 10 }, (_, i) => i + 1);
       filas = ordenado(azar.muestra(d, 6)); columnas = ordenado(azar.muestra(d, 6));
     } else {
-      const decenas = []; for (let v = 10; v < Math.min(R, 99) - 8; v += 10) decenas.push(v);
+      const decenas = []; for (let v = 10; R > 100 ? v <= R - 9 : v < Math.min(R, 99) - 8; v += 10) decenas.push(v);   // 2.º: decenas hasta R − 9
       filas = ordenado(azar.muestra(decenas, Math.min(6, decenas.length)));
       columnas = ordenado(azar.muestra([1, 2, 3, 4, 5, 6, 7, 8, 9], 6));
     }

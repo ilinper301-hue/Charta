@@ -4,10 +4,13 @@
 // Reglas: palabras del léxico (nombres frecuentes de 3 a 9 letras; en «colores», adjetivos); tres del campo y una que no lo es;
 //         solución única: ninguna otra terna de las cuatro comparte un campo léxico con su cuarta (solo las tres del campo lo hacen).
 //         Sin palabras repetidas en la ficha. Con campo «Varios», cada fila es de un campo distinto.
+// Con letras elegidas (vistas.js) solo entran palabras que se escriben con ellas; con «Varios» solo cuentan los campos con palabras de sobra
+// (si hay menos de n, la ficha lleva menos filas, mínimo 3); con un campo fijo hacen falta n filas distintas de ese campo.
 // Opciones: campo (varios o uno de los 10 con palabras de sobra) · letra (minúscula / mayúscula inicial / MAYÚSCULAS). Completa: 8 filas; media: 4.
 import { registrar } from "../nucleo/tipos.js";
 import { TOP } from "../render/papel.js";
 import { rodear } from "../lengua/dibujo.js";
+import { vistasActivas, avisoVistas } from "../lengua/vistas.js";
 import { alCaso, cuantas, ajusta } from "./_lengua.js";
 import { CAMPOS_P, deCampo, deTodosCampos, camposComunes } from "./_palabra.js";
 
@@ -19,7 +22,9 @@ export default registrar({
   version: 1,
   generar(params, azar, { tamano }) {
     const n = cuantas(tamano, 8), caso = params.caso;
-    const campos = params.campo ? Array(n).fill(params.campo) : azar.barajar(CAMPOS_P).slice(0, n);
+    const viables = vistasActivas() ? CAMPOS_P.filter((c) => deCampo(c, { caso }).length >= 4) : CAMPOS_P;   // 3 del campo + 1 ajena
+    const campos = params.campo ? Array(n).fill(params.campo) : azar.barajar(viables).slice(0, n);
+    if (campos.length < 3) throw new Error(`«palabra.intrusa» necesita palabras de al menos 3 campos distintos: con esas opciones solo hay ${campos.length}.` + avisoVistas());
     const todas = deTodosCampos({ caso }), usadas = new Set(), filas = [];
     for (const campo of campos) {
       const propias = azar.barajar(deCampo(campo, { caso }).filter((e) => !usadas.has(e.p)));
@@ -30,7 +35,7 @@ export default registrar({
         const intrusa = ajenas.find((e) => tres.every((_, j) => camposComunes([e, ...tres.filter((__, m) => m !== j)]).length === 0));
         if (intrusa) hecho = { tres, intrusa };
       }
-      if (!hecho) throw new Error(`«palabra.intrusa» necesita más palabras del campo «${campo}»: no hay para ${n} filas distintas. Prueba con «Varios» o con otro campo.`);
+      if (!hecho) throw new Error(`«palabra.intrusa» necesita más palabras del campo «${campo}»: no hay para ${n} filas distintas. Prueba con «Varios» o con otro campo.` + avisoVistas());
       for (const e of [...hecho.tres, hecho.intrusa]) usadas.add(e.p);
       const pos = azar.entero(0, 3), ws = hecho.tres.map((e) => e.p);
       ws.splice(pos, 0, hecho.intrusa.p);

@@ -5,8 +5,13 @@
 // Opción modo: null (rejillas de 3 columnas, 3 formas) | "bloques" (varillas de decena; 2 columnas × 5 filas).
 // Sin bloques — completa: min(24, 3·pares) (filas de 3; la rejilla es la de 8 filas); media: la mitad de filas.
 // Con bloques — completa: n pares (par, ≤ 10); media: hasta 4.
+// 2.º (rango > 100, sin bloques; ver _tres.js): mismos datos y solucion, con a y b múltiplos de 10, a + b ≤ rango ≤ 999.
+//   Tres clases a partes iguales (8 de 24; en media, 12 mezclados): decenas (40 + 30, sumas de 100 o más incluidas),
+//   centenas (300 + 400) y centenas con decenas (250 + 30, b < 100). Tres formas de hueco, como en 1.º; letra de 15 y hueco de 52 para que quepan 3 cifras.
+//   Con «bloques» y rango > 100 se limita a decenas hasta 100 (varillas de decena; no se dibujan placas de cien): sale igual que con rango 100.
 import { registrar } from "../nucleo/tipos.js";
 import { TOP, M, W, T, B } from "../render/papel.js";
+import { decenasSuma3 } from "./_tres.js";
 
 function varilla(p, x, y) {
   p.rrect(x, y, 9, 34, 0, { lw: 1.3 });
@@ -17,6 +22,13 @@ export default registrar({
   id: "sumar.decenas",
   version: 1,
   generar(params, azar, { tamano }) {
+    if ((params.rango ?? 30) > 100 && params.modo !== "bloques") {
+      const es = decenasSuma3(params.rango, azar).slice(0, tamano === "media" ? 12 : 24);
+      return {
+        enunciado: "Suma las decenas y las centenas y escribe el resultado.",
+        ejercicios: es.map(([a, b, forma]) => ({ datos: { a, b, forma }, solucion: { huecos: [forma === 0 ? a + b : forma === 1 ? b : a] } })),
+      };
+    }
     const cap = Math.min(params.rango ?? 30, 100), media = tamano === "media", pool = [];
     for (let a = 10; a < cap; a += 10) for (let b = 10; b < cap; b += 10) if (a + b <= cap) pool.push([a, b]);
     if (params.modo === "bloques") {
@@ -57,7 +69,8 @@ export default registrar({
       const r = Math.floor(i / 3), k = i % 3, x = M + k * (cw + GX), y = TOP - (r + 1) * ch - r * GY;
       const { a, b, forma } = e.datos, t = a + b, s = e.solucion.huecos[0];
       p.marco(x, y, cw, ch);
-      p.linea(x, y, cw, ch, forma === 0 ? [T(`${a} + ${b} =`), B(44, 38, s)] : forma === 1 ? [T(`${a} +`), B(44, 38, s), T(`= ${t}`)] : [B(44, 38, s), T(`+ ${b} = ${t}`)], 8);
+      const tres = (act.params.rango ?? 30) > 100, f = tres ? 15 : 19, w = tres ? 52 : 44;   // 2.º: tres cifras
+      p.linea(x, y, cw, ch, forma === 0 ? [T(`${a} + ${b} =`, f), B(w, 38, s)] : forma === 1 ? [T(`${a} +`, f), B(w, 38, s), T(`= ${t}`, f)] : [B(w, 38, s), T(`+ ${b} = ${t}`, f)], tres ? 6 : 8);
     }));
   },
 });

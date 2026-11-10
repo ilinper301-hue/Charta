@@ -1,7 +1,8 @@
 // GENERADO por tools/catalogo.py desde motor/modelos.py. No editar a mano.
 export const CATALOGO = {
  "cursos": {
-  "1": "1.º de Primaria"
+  "1": "1.º de Primaria",
+  "2": "2.º de Primaria"
  },
  "materias": {
   "matematicas": "Matemáticas",
@@ -357,6 +358,23 @@ export const CATALOGO = {
      "descomposición",
      "decenas unidades"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 999
+    }
    }
   },
   {
@@ -404,6 +422,23 @@ export const CATALOGO = {
      "escritura",
      "letras"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 999
+    }
    }
   },
   {
@@ -450,6 +485,23 @@ export const CATALOGO = {
      "representación",
      "recta numérica"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 999
+    }
    }
   },
   {
@@ -497,6 +549,23 @@ export const CATALOGO = {
      "bloques",
      "decenas unidades"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 999
+    }
    }
   },
   {
@@ -634,6 +703,23 @@ export const CATALOGO = {
      "ábaco",
      "decenas unidades"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 999
+    }
    }
   },
   {
@@ -680,6 +766,23 @@ export const CATALOGO = {
      "representación",
      "decenas unidades"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 999
+    }
    }
   },
   {
@@ -893,6 +996,23 @@ export const CATALOGO = {
      "posterior",
      "orden"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 100
+    }
    }
   },
   {
@@ -941,6 +1061,23 @@ export const CATALOGO = {
      "series",
      "número que falta"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 100
+    }
    }
   },
   {
@@ -1038,6 +1175,23 @@ export const CATALOGO = {
      "de 2 en 2",
      "pares"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 100
+    }
    }
   },
   {
@@ -1086,6 +1240,23 @@ export const CATALOGO = {
      "series",
      "de 5 en 5"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 100
+    }
    }
   },
   {
@@ -1134,6 +1305,23 @@ export const CATALOGO = {
      "de 10 en 10",
      "decenas"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 100
+    }
    }
   },
   {
@@ -1182,6 +1370,23 @@ export const CATALOGO = {
      "series",
      "mezcla"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 100
+    }
    }
   },
   {
@@ -1276,6 +1481,23 @@ export const CATALOGO = {
      "series",
      "camino"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 100
+    }
    }
   },
   {
@@ -1343,6 +1565,23 @@ export const CATALOGO = {
      "mayor",
      "menor"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 100
+    }
    }
   },
   {
@@ -1460,6 +1699,23 @@ export const CATALOGO = {
      "mayor",
      "menor"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 100
+    }
    }
   },
   {
@@ -1514,6 +1770,23 @@ export const CATALOGO = {
      "ordenar",
      "menor a mayor"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 100
+    }
    }
   },
   {
@@ -1568,6 +1841,23 @@ export const CATALOGO = {
      "ordenar",
      "mayor a menor"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 100
+    }
    }
   },
   {
@@ -1606,6 +1896,23 @@ export const CATALOGO = {
      "orden",
      "número entre dos"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 100
+    }
    }
   },
   {
@@ -1753,6 +2060,15 @@ export const CATALOGO = {
      "decenas",
      "agrupar"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      200,
+      300
+     ],
+     "rango": 300
+    }
    }
   },
   {
@@ -1808,6 +2124,23 @@ export const CATALOGO = {
      "canje",
      "decenas unidades"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 999
+    }
    }
   },
   {
@@ -1878,6 +2211,23 @@ export const CATALOGO = {
      "descomposición",
      "decenas unidades"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 999
+    }
    }
   },
   {
@@ -1931,6 +2281,23 @@ export const CATALOGO = {
      "valor posicional",
      "decenas unidades"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 999
+    }
    }
   },
   {
@@ -1982,6 +2349,23 @@ export const CATALOGO = {
      "pares",
      "impares"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 100
+    }
    }
   },
   {
@@ -2018,6 +2402,23 @@ export const CATALOGO = {
      "valor posicional",
      "cifra"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 999
+    }
    }
   },
   {
@@ -2059,7 +2460,26 @@ export const CATALOGO = {
    "clave": "recta",
    "nombre": "Suma en la recta numérica",
    "descripcion": "Sumar dando saltos en la recta.",
-   "opciones": [],
+   "opciones": [
+    {
+     "id": "salto",
+     "etiqueta": "Saltos",
+     "tipo": "opcion",
+     "defecto": null,
+     "rmin": 100,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "De 10 en 10"
+      },
+      {
+       "valor": 100,
+       "etiqueta": "De 100 en 100",
+       "rmin": 500
+      }
+     ]
+    }
+   ],
    "rangos": [
     10,
     20,
@@ -2079,6 +2499,23 @@ export const CATALOGO = {
      "sumar",
      "recta numérica"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 100
+    }
    }
   },
   {
@@ -2220,6 +2657,23 @@ export const CATALOGO = {
      "cálculo",
      "llevadas"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 100
+    }
    }
   },
   {
@@ -2249,6 +2703,38 @@ export const CATALOGO = {
       {
        "valor": "mezcla",
        "etiqueta": "Mezcladas"
+      },
+      {
+       "valor": "u",
+       "etiqueta": "Llevada solo en las unidades",
+       "rmin": 200
+      },
+      {
+       "valor": "d",
+       "etiqueta": "Llevada solo en las decenas",
+       "rmin": 300
+      },
+      {
+       "valor": "ud",
+       "etiqueta": "Llevada en las unidades y en las decenas",
+       "rmin": 200
+      }
+     ]
+    },
+    {
+     "id": "sumandos",
+     "etiqueta": "Sumandos",
+     "tipo": "opcion",
+     "defecto": null,
+     "rmin": 200,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Dos"
+      },
+      {
+       "valor": 3,
+       "etiqueta": "Tres"
       }
      ]
     }
@@ -2279,6 +2765,23 @@ export const CATALOGO = {
      "algoritmo",
      "llevadas"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 999
+    }
    }
   },
   {
@@ -2303,7 +2806,29 @@ export const CATALOGO = {
       },
       {
        "valor": "dibujo",
-       "etiqueta": "Con dibujos"
+       "etiqueta": "Con dibujos",
+       "rmax": 20
+      }
+     ]
+    },
+    {
+     "id": "operacion",
+     "etiqueta": "Calcula",
+     "tipo": "opcion",
+     "defecto": null,
+     "rmin": 100,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Dobles"
+      },
+      {
+       "valor": "mitades",
+       "etiqueta": "Mitades"
+      },
+      {
+       "valor": "mezcla",
+       "etiqueta": "Dobles y mitades"
       }
      ]
     }
@@ -2327,6 +2852,14 @@ export const CATALOGO = {
      "dobles",
      "cálculo mental"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100
+     ],
+     "rango": 100
+    }
    }
   },
   {
@@ -2454,6 +2987,23 @@ export const CATALOGO = {
      "sumar",
      "hueco cálculo"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 100
+    }
    }
   },
   {
@@ -2501,6 +3051,23 @@ export const CATALOGO = {
      "decenas",
      "cálculo mental"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 999
+    }
    }
   },
   {
@@ -2512,7 +3079,43 @@ export const CATALOGO = {
    "clave": "encadenadas",
    "nombre": "Sumas encadenadas",
    "descripcion": "Sumar tres números seguidos.",
-   "opciones": [],
+   "opciones": [
+    {
+     "id": "salto",
+     "etiqueta": "Saltos",
+     "tipo": "opcion",
+     "defecto": null,
+     "rmin": 100,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "De 10 en 10 (350 + 20 + 40)"
+      },
+      {
+       "valor": 100,
+       "etiqueta": "De 100 en 100 (300 + 200 + 100)",
+       "rmin": 700
+      }
+     ]
+    },
+    {
+     "id": "sumandos",
+     "etiqueta": "Sumandos",
+     "tipo": "opcion",
+     "defecto": null,
+     "rmin": 100,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Tres"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "Cuatro"
+      }
+     ]
+    }
+   ],
    "rangos": [
     10,
     20
@@ -2532,6 +3135,23 @@ export const CATALOGO = {
      "encadenadas",
      "cálculo"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 100
+    }
    }
   },
   {
@@ -2580,6 +3200,23 @@ export const CATALOGO = {
      "pirámide",
      "cálculo"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 100
+    }
    }
   },
   {
@@ -2627,6 +3264,23 @@ export const CATALOGO = {
      "tabla",
      "cálculo"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 100
+    }
    }
   },
   {
@@ -2668,7 +3322,26 @@ export const CATALOGO = {
    "clave": "recta",
    "nombre": "Resta en la recta numérica",
    "descripcion": "Restar dando saltos hacia atrás.",
-   "opciones": [],
+   "opciones": [
+    {
+     "id": "salto",
+     "etiqueta": "Saltos",
+     "tipo": "opcion",
+     "defecto": null,
+     "rmin": 100,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "De 10 en 10"
+      },
+      {
+       "valor": 100,
+       "etiqueta": "De 100 en 100",
+       "rmin": 500
+      }
+     ]
+    }
+   ],
    "rangos": [
     10,
     20,
@@ -2688,6 +3361,23 @@ export const CATALOGO = {
      "restar",
      "recta numérica"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 100
+    }
    }
   },
   {
@@ -2829,6 +3519,23 @@ export const CATALOGO = {
      "cálculo",
      "llevadas"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 100
+    }
    }
   },
   {
@@ -2858,8 +3565,30 @@ export const CATALOGO = {
       {
        "valor": "mezcla",
        "etiqueta": "Mezcladas"
+      },
+      {
+       "valor": "u",
+       "etiqueta": "Llevada solo en las unidades",
+       "rmin": 200
+      },
+      {
+       "valor": "d",
+       "etiqueta": "Llevada solo en las decenas",
+       "rmin": 300
+      },
+      {
+       "valor": "ud",
+       "etiqueta": "Llevada en las unidades y en las decenas",
+       "rmin": 200
       }
      ]
+    },
+    {
+     "id": "prueba",
+     "etiqueta": "Con la prueba de la resta",
+     "tipo": "si_no",
+     "defecto": false,
+     "rmin": 200
     }
    ],
    "rangos": [
@@ -2888,6 +3617,23 @@ export const CATALOGO = {
      "algoritmo",
      "llevadas"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 999
+    }
    }
   },
   {
@@ -3034,6 +3780,23 @@ export const CATALOGO = {
      "restar",
      "hueco cálculo"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 100
+    }
    }
   },
   {
@@ -3081,6 +3844,23 @@ export const CATALOGO = {
      "decenas",
      "cálculo mental"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 999
+    }
    }
   },
   {
@@ -3092,7 +3872,26 @@ export const CATALOGO = {
    "clave": "encadenadas",
    "nombre": "Restas encadenadas",
    "descripcion": "Restar dos números seguidos.",
-   "opciones": [],
+   "opciones": [
+    {
+     "id": "salto",
+     "etiqueta": "Saltos",
+     "tipo": "opcion",
+     "defecto": null,
+     "rmin": 100,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "De 10 en 10 (350 − 20 − 40)"
+      },
+      {
+       "valor": 100,
+       "etiqueta": "De 100 en 100 (900 − 300 − 200)",
+       "rmin": 700
+      }
+     ]
+    }
+   ],
    "rangos": [
     10,
     20
@@ -3112,6 +3911,23 @@ export const CATALOGO = {
      "encadenadas",
      "cálculo"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 100
+    }
    }
   },
   {
@@ -3172,6 +3988,23 @@ export const CATALOGO = {
      "restar",
      "familia de operaciones"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 100
+    }
    }
   },
   {
@@ -3220,6 +4053,23 @@ export const CATALOGO = {
      "cuadrado mágico",
      "sumar"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      10,
+      20,
+      30,
+      40,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100
+     ],
+     "rango": 10
+    }
    }
   },
   {
@@ -3283,6 +4133,23 @@ export const CATALOGO = {
      "laberinto",
      "cálculo"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 100
+    }
    }
   },
   {
@@ -3361,6 +4228,23 @@ export const CATALOGO = {
      "juego",
      "unir operaciones resultados"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 100
+    }
    }
   },
   {
@@ -3400,6 +4284,23 @@ export const CATALOGO = {
      "cadena",
      "cálculo"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 100
+    }
    }
   },
   {
@@ -3439,6 +4340,23 @@ export const CATALOGO = {
      "número oculto",
      "razonamiento"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 100
+    }
    }
   },
   {
@@ -3542,6 +4460,23 @@ export const CATALOGO = {
      "colorear",
      "cálculo"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      10,
+      20,
+      30,
+      40,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100
+     ],
+     "rango": 10
+    }
    }
   },
   {
@@ -3569,6 +4504,12 @@ export const CATALOGO = {
      "geometría",
      "figuras planas"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [],
+     "rango": null
+    }
    }
   },
   {
@@ -3623,6 +4564,12 @@ export const CATALOGO = {
      "geometría",
      "cuerpos geométricos"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [],
+     "rango": null
+    }
    }
   },
   {
@@ -3696,6 +4643,12 @@ export const CATALOGO = {
      "líneas",
      "rectas curvas"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [],
+     "rango": null
+    }
    }
   },
   {
@@ -3725,6 +4678,12 @@ export const CATALOGO = {
      "espacio",
      "lateralidad"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [],
+     "rango": null
+    }
    }
   },
   {
@@ -3761,6 +4720,12 @@ export const CATALOGO = {
      "geometría",
      "simetría"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [],
+     "rango": null
+    }
    }
   },
   {
@@ -3789,6 +4754,12 @@ export const CATALOGO = {
      "dibujo",
      "cuadrícula"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [],
+     "rango": null
+    }
    }
   },
   {
@@ -3846,6 +4817,17 @@ export const CATALOGO = {
      "monedas",
      "euros"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      200,
+      300,
+      400,
+      500
+     ],
+     "rango": 200
+    }
    }
   },
   {
@@ -3895,6 +4877,14 @@ export const CATALOGO = {
      "compras",
      "precios"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100
+     ],
+     "rango": 100
+    }
    }
   },
   {
@@ -3924,6 +4914,16 @@ export const CATALOGO = {
       {
        "valor": "media",
        "etiqueta": "Solo y media"
+      },
+      {
+       "valor": "cuarto",
+       "etiqueta": "Solo y cuarto y menos cuarto",
+       "curso": 2
+      },
+      {
+       "valor": "todas",
+       "etiqueta": "En punto, y media, y cuarto y menos cuarto",
+       "curso": 2
       }
      ]
     }
@@ -3944,6 +4944,12 @@ export const CATALOGO = {
      "reloj",
      "hora"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [],
+     "rango": null
+    }
    }
   },
   {
@@ -3973,6 +4979,16 @@ export const CATALOGO = {
       {
        "valor": "media",
        "etiqueta": "Solo y media"
+      },
+      {
+       "valor": "cuarto",
+       "etiqueta": "Solo y cuarto y menos cuarto",
+       "curso": 2
+      },
+      {
+       "valor": "todas",
+       "etiqueta": "En punto, y media, y cuarto y menos cuarto",
+       "curso": 2
       }
      ]
     }
@@ -3994,6 +5010,12 @@ export const CATALOGO = {
      "hora",
      "agujas"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [],
+     "rango": null
+    }
    }
   },
   {
@@ -4082,6 +5104,12 @@ export const CATALOGO = {
      "calendario",
      "tiempo"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [],
+     "rango": null
+    }
    }
   },
   {
@@ -4107,6 +5135,16 @@ export const CATALOGO = {
       {
        "valor": "meses",
        "etiqueta": "Meses del año"
+      },
+      {
+       "valor": "equivalencias",
+       "etiqueta": "Horas, minutos, días, semanas y meses",
+       "curso": 2
+      },
+      {
+       "valor": "horas",
+       "etiqueta": "Antes y después de una hora",
+       "curso": 2
       }
      ]
     }
@@ -4131,6 +5169,12 @@ export const CATALOGO = {
      "días",
      "meses"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [],
+     "rango": null
+    }
    }
   },
   {
@@ -4204,6 +5248,12 @@ export const CATALOGO = {
      "capacidad",
      "líquido"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [],
+     "rango": null
+    }
    }
   },
   {
@@ -4250,6 +5300,14 @@ export const CATALOGO = {
      "pictograma",
      "datos"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      10
+     ],
+     "rango": 10
+    }
    }
   },
   {
@@ -4282,6 +5340,16 @@ export const CATALOGO = {
      "datos",
      "contar"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      10,
+      20,
+      30
+     ],
+     "rango": 10
+    }
    }
   },
   {
@@ -4373,6 +5441,12 @@ export const CATALOGO = {
      "series",
      "razonamiento"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [],
+     "rango": null
+    }
    }
   },
   {
@@ -4454,6 +5528,23 @@ export const CATALOGO = {
      "texto",
      "razonamiento"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 100
+    }
    }
   },
   {
@@ -4539,6 +5630,23 @@ export const CATALOGO = {
      "texto",
      "razonamiento"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 100
+    }
    }
   },
   {
@@ -4601,6 +5709,23 @@ export const CATALOGO = {
      "texto",
      "razonamiento"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 100
+    }
    }
   },
   {
@@ -4701,6 +5826,23 @@ export const CATALOGO = {
      "restar",
      "razonamiento"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 100
+    }
    }
   },
   {
@@ -4957,6 +6099,23 @@ export const CATALOGO = {
      "sumar",
      "sumar 9"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 100
+    }
    }
   },
   {
@@ -5048,6 +6207,23 @@ export const CATALOGO = {
      "restar",
      "decenas"
     ]
+   },
+   "cursos": {
+    "2": {
+     "rangos": [
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900,
+      999
+     ],
+     "rango": 100
+    }
    }
   },
   {

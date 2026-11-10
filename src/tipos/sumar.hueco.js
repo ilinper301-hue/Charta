@@ -11,7 +11,7 @@ export default registrar({
   id: "sumar.hueco",
   version: 1,
   generar(params, azar, { tamano }) {
-    const ps = paresSuma(Math.min(params.rango ?? 10, 99), params.nivel, tamano === "media" ? 12 : 24, azar);
+    const ps = paresSuma(((R) => (R > 100 ? R : Math.min(R, 99)))(params.rango ?? 10), params.nivel, tamano === "media" ? 12 : 24, azar);
     return {
       enunciado: "Escribe el número que falta.",
       ejercicios: ps.map(([a, b]) => {

@@ -2,11 +2,14 @@
 // datos:    total → { a: [nombre, precio], b: [nombre, precio] } · cambio → { nom, precio, pago }
 // solucion: { huecos: [a + b] } o { huecos: [pago − precio] }
 // Opciones: modo null (total de la compra) | "cambio" (la vuelta de un billete de 5, 10 o 20 €); rango 10 | 20 (tope de la suma / billete).
+// 2.º (rango 100): productos más caros (hasta 60 €), total hasta 100 € y billetes de 20, 50 y 100 €.
 // Completa: 10 tarjetas (2 × 5); media: 4 (2 filas).
 import { registrar } from "../nucleo/tipos.js";
 import { TOP, T, B } from "../render/papel.js";
 import { itemDinero } from "./medida.dinero.js";
 
+/** 2.º (lote 3, rango 100): precios en euros enteros hasta 100 €; la vuelta de billetes de 20, 50 y 100 €. */
+const PRODUCTOS_2 = { estuche: [5, 12], camiseta: [8, 16], muñeca: [10, 20], libro: [9, 18], balón: [12, 25], "juego de mesa": [15, 30], mochila: [18, 35], zapatillas: [25, 45], patinete: [35, 60], cometa: [6, 14] };
 const PRODUCTOS = { "lápiz": [1, 3], goma: [1, 2], sacapuntas: [1, 2], regla: [2, 3], pegamento: [2, 4], cuaderno: [3, 5], pelota: [4, 8], libro: [5, 9], mochila: [8, 12] };
 
 /** _etiqueta(): rótulo con el nombre y el precio. */
@@ -22,17 +25,18 @@ export default registrar({
   generar(params, azar, { tamano }) {
     const R = params.rango ?? 20;
     if (R < 10) throw new Error("Este modelo necesita un rango máximo de al menos 10.");
-    const cap = Math.min(R, 20), cambio = params.modo === "cambio", cnt = tamano === "media" ? 4 : 10, nombres = Object.keys(PRODUCTOS), ejercicios = [];
+    const dos = R > 20, P = dos ? PRODUCTOS_2 : PRODUCTOS, pagos = dos ? [20, 50, 100] : [5, 10, 20];
+    const cap = dos ? R : Math.min(R, 20), cambio = params.modo === "cambio", cnt = tamano === "media" ? 4 : 10, nombres = Object.keys(P), ejercicios = [];
     for (let i = 0; i < cnt; i++) {
       if (cambio) {
-        const pago = azar.elegir([5, 10, 20].filter((v) => v <= cap));
-        const nom = azar.elegir(nombres.filter((k) => PRODUCTOS[k][0] < pago)), [lo, hi] = PRODUCTOS[nom];
+        const pago = azar.elegir(pagos.filter((v) => v <= cap));
+        const nom = azar.elegir(nombres.filter((k) => P[k][0] < pago)), [lo, hi] = P[nom];
         const precio = azar.entero(lo, Math.min(hi, pago - 1));
         ejercicios.push({ datos: { nom, precio, pago }, solucion: { huecos: [pago - precio] } });
       } else {
         let a, b, pa, pb, ok = false;
         for (let k = 0; k < 2000 && !ok; k++) {
-          [a, b] = azar.muestra(nombres, 2); pa = azar.entero(...PRODUCTOS[a]); pb = azar.entero(...PRODUCTOS[b]);
+          [a, b] = azar.muestra(nombres, 2); pa = azar.entero(...P[a]); pb = azar.entero(...P[b]);
           ok = pa + pb <= cap;
         }
         if (!ok) throw new Error("Este modelo necesita un rango máximo mayor.");

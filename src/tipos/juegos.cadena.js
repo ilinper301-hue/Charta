@@ -9,8 +9,9 @@ export default registrar({
   id: "juegos.cadena",
   version: 1,
   generar(params, azar, { tamano }) {
-    const R = params.rango ?? 10, cap = Math.min(R, 99);
+    const R = params.rango ?? 10, cap = R > 100 ? R : Math.min(R, 99);
     const mags = Array.from({ length: R <= 10 ? 5 : 9 }, (_, i) => i + 1); if (R > 20) mags.push(10);
+    if (R > 100) mags.push(20, 30, 40, 50, 100);   // 2.º: saltos de decenas y de 100
     const ejercicios = [];
     for (let i = 0; i < (tamano === "media" ? 3 : 7); i++) {
       let v = azar.entero(Math.max(1, Math.floor(cap / 5)), cap - Math.floor(cap / 5)); const vals = [v], ops = [];

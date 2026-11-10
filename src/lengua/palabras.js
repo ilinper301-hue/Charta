@@ -2,6 +2,7 @@
 // Las sílabas se calculan una vez por palabra (caché). Sin DOM.
 import { LEXICO } from "./lexico.js";
 import { silabas, tipoSilaba, TIPOS_SILABA, soloLetras, llevaLetra } from "./reglas.js";
+import { permitida, avisoVistas } from "./vistas.js";
 
 const info = new Map();
 /** Datos calculados de una palabra del léxico: sílabas y tipos de sílaba. */
@@ -25,6 +26,7 @@ export function buscar({ cat, campos, nSilabas, tipo, letras, conLetra, dibujo, 
     const n = [...e.p].length;
     if ((minLetras && n < minLetras) || (maxLetras && n > maxLetras)) return false;
     if (letras && !soloLetras(e.p, letras)) return false;
+    if (!permitida(e.p)) return false;   // letras elegidas en el diseño (vistas.js)
     if (conLetra && !llevaLetra(e.p, conLetra)) return false;
     const d = datosPalabra(e);
     if (ns && !ns.includes(d.s.length)) return false;
@@ -36,7 +38,7 @@ export function buscar({ cat, campos, nSilabas, tipo, letras, conLetra, dibujo, 
 /** k palabras distintas al azar con esos filtros; error claro si no hay bastantes (la invariante lo comprobará en cada opción). */
 export function elegirPalabras(azar, k, filtros = {}) {
   const ps = buscar(filtros);
-  if (ps.length < k) throw new Error(`Solo hay ${ps.length} palabras con esas opciones (hacen falta ${k}).`);
+  if (ps.length < k) throw new Error(`Solo hay ${ps.length} palabras con esas opciones (hacen falta ${k}).` + avisoVistas());
   return azar.muestra(ps, k);
 }
 

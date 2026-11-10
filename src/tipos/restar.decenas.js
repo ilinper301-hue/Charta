@@ -5,8 +5,13 @@
 // Opción modo: null (solo números) o "bloques" (varillas de 10; se tachan las b/10 últimas).
 // Solo números: con 3 formas por pareja, min(24, 3·parejas) ejercicios en filas de 3 (media: la mitad de filas, como el motor).
 // Bloques: parejas distintas, máx. 10 pares (2×5 tarjetas); media: 4 tarjetas como máximo. Con rango 30 solo hay 3 parejas.
+// 2.º (rango > 100, sin bloques; ver _tres.js): mismos datos y solucion, con a y b múltiplos de 10, 10 ≤ b < a ≤ rango ≤ 999.
+//   Tres clases a partes iguales (8 de 24; en media, 12 mezclados): decenas (70 − 30), centenas (700 − 300) y
+//   centenas con decenas (450 − 20, b < 100). Tres formas de hueco como en 1.º; letra de 15 y hueco de 52 para que quepan 3 cifras.
+//   Con «bloques» y rango > 100 se limita a decenas hasta 100 (no se dibujan placas de cien): sale igual que con rango 100.
 import { registrar } from "../nucleo/tipos.js";
 import { TOP, M, W, MENOS, T, B } from "../render/papel.js";
+import { decenasResta3 } from "./_tres.js";
 
 const filasMedia = (filas, tamano) => (tamano === "media" ? Math.max(1, Math.floor(filas * 0.5)) : filas);
 
@@ -16,6 +21,12 @@ export default registrar({
   generar(params, azar, { tamano }) {
     const R = params.rango ?? 30;
     if (R < 30) throw new Error("Restas de decenas necesita un rango máximo de al menos 30.");
+    if (R > 100 && params.modo !== "bloques") {
+      return {
+        enunciado: "Resta las decenas y las centenas y escribe el resultado.",
+        ejercicios: decenasResta3(R, azar).slice(0, tamano === "media" ? 12 : 24).map(([a, b, forma]) => ({ datos: { a, b, forma }, solucion: { huecos: [[a - b], [b], [a]][forma] } })),
+      };
+    }
     const cap = Math.min(R, 100), pool = [];
     for (let a = 20; a <= cap; a += 10) for (let b = 10; b < a; b += 10) pool.push([a, b]);
     if (params.modo === "bloques") {
@@ -57,8 +68,9 @@ export default registrar({
       const { a, b, forma } = e.datos, s = e.solucion.huecos[0], r = Math.floor(i / cols), k = i % cols;
       const x = M + k * (cw + GX), y = TOP - (r + 1) * ch - r * GY, t = a - b;
       p.marco(x, y, cw, ch);
-      p.linea(x, y, cw, ch, forma === 0 ? [T(`${a} ${MENOS} ${b} =`), B(44, 38, s)]
-        : forma === 1 ? [T(`${a} ${MENOS}`), B(44, 38, s), T(`= ${t}`)] : [B(44, 38, s), T(`${MENOS} ${b} = ${t}`)], 8);
+      const tres = (act.params.rango ?? 30) > 100, f = tres ? 15 : 19, w = tres ? 52 : 44;   // 2.º: tres cifras
+      p.linea(x, y, cw, ch, forma === 0 ? [T(`${a} ${MENOS} ${b} =`, f), B(w, 38, s)]
+        : forma === 1 ? [T(`${a} ${MENOS}`, f), B(w, 38, s), T(`= ${t}`, f)] : [B(w, 38, s), T(`${MENOS} ${b} = ${t}`, f)], tres ? 6 : 8);
     }));
   },
 });

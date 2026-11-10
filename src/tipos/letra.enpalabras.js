@@ -6,7 +6,8 @@
 // Completa: 12 palabras (2 × 6); media: 6.
 import { registrar } from "../nucleo/tipos.js";
 import { TOP } from "../render/papel.js";
-import { ABECEDARIO, sinTildes } from "../lengua/reglas.js";
+import { sinTildes } from "../lengua/reglas.js";
+import { letrasActivas, vistasActivas, avisoVistas } from "../lengua/vistas.js";
 import { alCaso, candidatas, unidades, palabraLetras, cuantas } from "./_lengua.js";
 
 /** Posiciones (por unidad) de la letra en la palabra; null si forma parte de un dígrafo (ch, ll, rr, qu, gu): ahí no se puede rodear sola. */
@@ -20,7 +21,7 @@ export function posiciones(palabra, letra) {
   return pos;
 }
 
-const memo = new Map();   // palabras buenas por tipo, caso inicial y letra
+const memo = new Map();   // palabras buenas por tipo, caso inicial, letra y letras elegidas
 
 export default registrar({
   id: "letra.enpalabras",
@@ -28,18 +29,18 @@ export default registrar({
   generar(params, azar, { tamano }) {
     const n = cuantas(tamano, 12), cuenta = params.tarea !== "rodea";
     const buenas = (l) => {
-      const clave = `${params.tipo}|${params.caso === "inicial"}|${l}`;
+      const clave = `${params.tipo}|${params.caso === "inicial"}|${l}|${vistasActivas()}`;
       if (!memo.has(clave)) memo.set(clave, candidatas(params, { conLetra: l, maxLetras: 9 }).filter((e) => { const p = posiciones(e.p, l); return p && p.length >= 1 && p.length <= 4; }));
       return memo.get(clave);
     };
     let letra = params.letra;
     if (!letra) {
-      const posibles = ABECEDARIO.filter((l) => !"kqwxy".includes(l) && buenas(l).length >= n);
-      if (!posibles.length) throw new Error("«letra.enpalabras» necesita más palabras: con ese tipo de sílabas no hay letra con palabras de sobra.");
+      const posibles = letrasActivas().filter((l) => !"kqwxy".includes(l) && buenas(l).length >= n);
+      if (!posibles.length) throw new Error("«letra.enpalabras» necesita más palabras: con ese tipo de sílabas no hay letra con palabras de sobra." + avisoVistas());
       letra = azar.elegir(posibles);
     }
     const ps = buenas(letra);
-    if (ps.length < n) throw new Error(`«letra.enpalabras» necesita más palabras con la «${letra}»: con esas opciones solo hay ${ps.length} y hacen falta ${n}.`);
+    if (ps.length < n) throw new Error(`«letra.enpalabras» necesita más palabras con la «${letra}»: con esas opciones solo hay ${ps.length} y hacen falta ${n}.` + avisoVistas());
     const fmt = (t) => (params.caso === "mayus" ? t.toUpperCase() : t);
     return {
       enunciado: cuenta ? `Rodea la letra «${fmt(letra)}» en cada palabra\ny escribe cuántas veces sale.` : `Rodea la letra «${fmt(letra)}» en cada palabra.`,

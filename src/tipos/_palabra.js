@@ -3,6 +3,7 @@
 import { LEXICO } from "../lengua/lexico.js";
 import { plural } from "../lengua/reglas.js";
 import { cap } from "./_lengua.js";
+import { filtrarVistas, avisoVistas } from "../lengua/vistas.js";
 import { INK } from "../render/papel.js";
 
 /** Campos léxicos que usan intrusa, clasifica y sopa (en este orden; «colores» solo lleva adjetivos). */
@@ -14,7 +15,8 @@ export const PALABRAS_P = new Set(LEXICO.map((e) => e.p));
 export const rotuloCampo = (campo, caso) => (caso === "mayus" ? campo.toUpperCase() : cap(campo));
 
 const memo = new Map();
-/** Palabras de un campo: nombres (en «colores», adjetivos) frecuentes, de 3 a maxLetras letras; con «Mayúscula inicial» sin la «i» inicial. */
+/** Palabras de un campo: nombres (en «colores», adjetivos) frecuentes, de 3 a maxLetras letras; con «Mayúscula inicial» sin la «i» inicial.
+ *  Con letras elegidas (vistas.js) solo las que se escriben con ellas (la caché guarda la lista entera; se filtra al devolverla). */
 export function deCampo(campo, { caso = null, maxLetras = 9, sinTilde = false } = {}) {
   const clave = `${campo}|${caso === "inicial"}|${maxLetras}|${sinTilde}`;
   if (!memo.has(clave)) {
@@ -22,7 +24,7 @@ export function deCampo(campo, { caso = null, maxLetras = 9, sinTilde = false } 
     memo.set(clave, LEXICO.filter((e) => e.k.includes(campo) && cats.includes(e.c) && e.f <= 2 && e.p.length >= 3 && e.p.length <= maxLetras
       && !/[\s-]/.test(e.p) && (caso !== "inicial" || !/^[iíì]/.test(e.p)) && (!sinTilde || !/[áéíóúü]/.test(e.p))));
   }
-  return memo.get(clave);   // no modificar: se comparte
+  return filtrarVistas(memo.get(clave), (e) => e.p);   // no modificar: se comparte
 }
 
 /** Todas las palabras de todos los campos (sin repetir). */
@@ -49,7 +51,7 @@ export function elegirPorLetras(azar, n, lista, largos, ok, id) {
       const b = bolsas[largos[(i + k) % largos.length]];
       if (b.length) { out.push(b.pop()); tomada = true; i += k + 1; }
     }
-    if (!tomada) throw new Error(`«${id}» necesita más palabras: con esas opciones solo hay ${out.length} y hacen falta ${n}. Prueba con otro tipo de sílabas o con otro largo.`);
+    if (!tomada) throw new Error(`«${id}» necesita más palabras: con esas opciones solo hay ${out.length} y hacen falta ${n}. Prueba con otro tipo de sílabas o con otro largo.` + avisoVistas());
   }
   return out;
 }

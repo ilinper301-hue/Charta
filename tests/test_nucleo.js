@@ -5,7 +5,7 @@ import { readFileSync } from "node:fs";
 import vm from "node:vm";
 import { mulberry32, mezclar, crearAzar } from "../src/nucleo/azar.js";
 import { CATALOGO, POR_ID } from "../src/nucleo/catalogo.js";
-import { generar, validar, porDefecto, capitalizar, tituloPagina, coloresPagina } from "../src/nucleo/ficha.js";
+import { generar, validar, porDefecto, capitalizar, tituloPagina, coloresPagina, cursosDe, rangosDe, rangosTodos, cursoDe, visible, tituloModelo } from "../src/nucleo/ficha.js";
 import { erroresFicha, paginasVariante, letraVariante } from "../src/nucleo/lector.js";
 import { listaTipos, tipo } from "../src/tipos/index.js";
 
@@ -128,6 +128,66 @@ prueba("build.py: dist/index.html autocontenido y el paquete funciona", () => {
   const html = readFileSync(raiz + "dist/index.html", "utf-8");
   assert.ok(!/src="app\.js"|href="estilos\.css"|^\s*import\s/m.test(html), "quedan referencias externas o import");
   assert.match(html, /<style>/); assert.match(html, /__req\("app\.js"\)/);
+});
+
+prueba("un modelo en varios cursos (MATES_2.md): rangos y curso de la ficha", () => {
+  const m = POR_ID["rep.letras"];
+  assert.deepEqual(cursosDe(m), [1, 2]);
+  assert.deepEqual(cursosDe(POR_ID["rep.dedos"]), [1]);
+  assert.deepEqual(rangosDe("rep.letras", 1), m.rangos);
+  assert.deepEqual(rangosDe("rep.letras", 2), [100, 200, 300, 400, 500, 600, 700, 800, 900, 999]);
+  assert.deepEqual(rangosDe("rep.dedos", 2), POR_ID["rep.dedos"].rangos);       // no está en 2.º: los suyos
+  assert.ok(rangosTodos("rep.letras").includes(10) && rangosTodos("rep.letras").includes(999));
+  assert.equal(porDefecto("rep.letras").rango, m.rango);
+  assert.equal(porDefecto("rep.letras", 2).rango, 999);
+  assert.equal(cursoDe("rep.letras", { curso: 2 }), 2);
+  assert.equal(cursoDe("rep.letras", { rango: 500 }), 2);                        // guardada sin curso: por el rango
+  assert.equal(cursoDe("rep.letras", { rango: 50 }), 1);
+  assert.equal(cursoDe("rep.dedos", { curso: 2 }), 1);                           // no está en 2.º
+  assert.throws(() => validar("rep.letras", { rango: 150 }), /rango/);
+  // Sin curso, la ficha es de 1.º e idéntica a la de antes; con curso 2, solo cambia ficha.curso.
+  const a = generar({ actividades: [{ tipo: "rep.letras", params: { rango: 100 } }] }, 5);
+  const b = generar({ actividades: [{ tipo: "rep.letras", curso: 2, params: { rango: 100 } }] }, 5);
+  assert.equal(a.curso, 1); assert.equal(b.curso, 2);
+  assert.deepEqual({ ...b, curso: 1 }, a);
+  assert.equal(generar({ actividades: [{ tipo: "rep.dedos", curso: 2 }] }, 5).curso, 1);
+});
+
+prueba("opciones solo con tres cifras (rmin, 2.º)", () => {
+  const ops = POR_ID["sumar.vertical"].opciones, nivel = ops.find((o) => o.id === "nivel");
+  assert.ok(nivel.valores.some((v) => v.valor === "ud" && v.rmin === 200) && ops.some((o) => o.id === "sumandos" && o.rmin === 200));
+  assert.ok(!visible(nivel.valores.find((v) => v.valor === "u"), 100) && visible(nivel.valores.find((v) => v.valor === "u"), 999));
+  assert.throws(() => validar("sumar.vertical", { rango: 100, nivel: "u" }), /solo con números/);
+  assert.throws(() => validar("sumar.vertical", { rango: 30, sumandos: 3 }), /solo con números/);
+  assert.throws(() => validar("restar.vertical", { rango: 100, prueba: true }), /solo con números/);
+  assert.deepEqual(validar("sumar.vertical", { rango: 30 }), { nivel: null, rango: 30 });
+  assert.equal(validar("restar.vertical", { rango: 999, nivel: "d", prueba: true }).prueba, true);
+});
+
+prueba("lote 2b: saltos, sumandos, mitades y dibujos solo hasta 20 (rmax)", () => {
+  assert.throws(() => validar("sumar.dobles", { rango: 100, modo: "dibujo" }), /hasta 20 o menos/);
+  assert.equal(validar("sumar.dobles", { rango: 20, modo: "dibujo" }).modo, "dibujo");
+  assert.throws(() => validar("sumar.recta", { rango: 400, salto: 100 }), /solo con números/);
+  assert.throws(() => validar("sumar.recta", { rango: 30, salto: 100 }), /solo con números/);
+  assert.throws(() => validar("restar.encadenadas", { rango: 600, salto: 100 }), /solo con números/);
+  assert.equal(validar("sumar.encadenadas", { rango: 100, sumandos: 4 }).sumandos, 4);
+  assert.deepEqual(validar("sumar.recta", { rango: 20 }), { rango: 20 });
+  assert.equal(tituloModelo(POR_ID["valor.agrupa"], { rango: 300 }), "AGRUPA EN CENTENAS");
+  assert.equal(tituloModelo(POR_ID["sumar.dobles"], { rango: 100, operacion: "mitades" }), "LAS MITADES");
+  assert.equal(tituloModelo(POR_ID["sumar.dobles"], { rango: 20 }), "LOS DOBLES");
+});
+
+prueba("lote 3: valores solo de 2.º en modelos sin rango (curso)", () => {
+  const modo = POR_ID["medida.reloj"].opciones.find((o) => o.id === "modo"), todas = modo.valores.find((v) => v.valor === "todas");
+  assert.equal(todas.curso, 2);
+  assert.ok(!visible(todas, null, 1) && visible(todas, null, 2) && visible(todas, null));
+  assert.throws(() => validar("medida.reloj", { modo: "todas" }, "completa", 1), /solo desde 2/);
+  assert.equal(validar("medida.reloj", { modo: "todas" }, "completa", 2).modo, "todas");
+  assert.equal(cursoDe("medida.tiempo", { params: { modo: "horas" } }), 2);
+  assert.equal(cursoDe("medida.tiempo", { params: { modo: "meses" } }), 1);
+  assert.equal(generar({ actividades: [{ tipo: "medida.reloj", params: { modo: "cuarto" } }] }).curso, 2);
+  assert.equal(generar({ actividades: [{ tipo: "medida.reloj" }] }).curso, 1);
+  assert.equal(tituloModelo(POR_ID["medida.tiempo"], { modo: "horas" }), "ANTES Y DESPUÉS");
 });
 
 console.log(process.exitCode ? "Pruebas con errores." : `OK: ${n} pruebas.`);

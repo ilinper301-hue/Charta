@@ -3,6 +3,7 @@
 import { POR_ID } from "./catalogo.js";
 import { crearAzar, mezclar } from "./azar.js";
 import { tipo } from "./tipos.js";
+import { normalizarVistas, conVistas } from "../lengua/vistas.js";
 
 export const SCHEMA_VERSION = 1;
 export const COLORES = ["amarillo", "rosa", "azul", "verde"];
@@ -13,29 +14,71 @@ export function modelo(id) {
   return m;
 }
 
-/** Parámetros por defecto: { rango, opción: valor, … }. */
-export function porDefecto(id) {
+/** Cursos en los que está un modelo: el suyo y los de `cursos` (MATES_2.md: un modelo en varios cursos). */
+export const cursosDe = (m) => [m.curso, ...Object.keys(m.cursos || {}).map(Number).filter((c) => c !== m.curso)];
+/** Rangos de un modelo en un curso (sin curso, o si no está en él: los de su curso). */
+export function rangosDe(id, curso) { const m = modelo(id); return m.cursos?.[curso]?.rangos ?? m.rangos; }
+/** Todos los rangos admitidos (unión de cursos), en orden. */
+export function rangosTodos(id) {
+  const m = modelo(id);
+  return [...new Set([...m.rangos, ...Object.values(m.cursos || {}).flatMap((c) => c.rangos)])].sort((a, b) => a - b);
+}
+
+/** Curso de una actividad: el pedido si el modelo está en él; si no, el que admite su rango; si no, el del modelo. */
+export function cursoDe(id, { curso, rango, params } = {}) {
+  const m = modelo(id), cs = cursosDe(m);
+  if (cs.includes(curso)) return curso;
+  // 2.º sin rango (lote 3): un valor con `curso` (p. ej. reloj «y cuarto») dice el curso.
+  for (const o of params ? m.opciones : []) {
+    const x = o.tipo === "opcion" ? o.valores.find((v) => v.valor === params[o.id]) : null, k = x?.curso ?? (params[o.id] != null && o.curso);
+    if (k && cs.includes(k)) return k;
+  }
+  if (rango != null && !m.rangos.includes(rango)) { const c = cs.find((k) => rangosDe(id, k).includes(rango)); if (c) return c; }
+  return m.curso;
+}
+
+/** Parámetros por defecto: { rango, opción: valor, … } (el rango, el del curso si se da). */
+export function porDefecto(id, curso) {
   const m = modelo(id), p = {};
   for (const o of m.opciones) p[o.id] = o.defecto ?? null;
-  p.rango = m.rango;
+  p.rango = m.cursos?.[curso]?.rango ?? m.rango;
   return p;
 }
 
+/** Opción o valor visible con este rango (2.º: `rmin` = solo con números de tres cifras; MATES_2.md, lote 2;
+ *  `rmax` = solo hasta ese rango, p. ej. dobles con dibujos). */
+export const visible = (x, rango, curso) => (!x.rmin || (rango ?? 0) >= x.rmin) && (!x.rmax || (rango ?? 0) <= x.rmax)
+  && (!x.curso || curso == null || Number(curso) >= x.curso);   // `curso`: solo desde ese curso (2.º, lote 3: modelos sin rango)
+const soloCon = (x) => x.curso && !x.rmin && !x.rmax ? `solo desde ${x.curso}.º`
+  : x.rmax ? `solo con números hasta ${x.rmax} o menos` : `solo con números hasta ${x.rmin} o más`;
+
 /** Comprueba y completa los parámetros. Devuelve un objeto nuevo o lanza Error. */
-export function validar(id, params = {}, tamano = "completa") {
-  const m = modelo(id), p = { ...porDefecto(id), ...params };
+/** ¿Admite el mapa de letras? (Lengua de 1.º) */
+export const esLengua1 = (m, curso) => m.materia === "lengua" && String(curso ?? m.curso) === "1";
+
+export function validar(id, params = {}, tamano = "completa", curso) {
+  const m = modelo(id), p = { ...porDefecto(id, curso), ...params }, rgs = rangosTodos(id);
+  const c = cursoDe(id, { curso, rango: p.rango, params });
   if (!m.tamanos.includes(tamano)) throw new Error(`${id}: no admite el tamaño '${tamano}'`);
   const ops = Object.fromEntries(m.opciones.map((o) => [o.id, o]));
+  // Letras elegidas (mapa de letras): solo Lengua de 1.º; todas = sin el campo (las fichas de siempre no cambian).
+  if ("vistas" in p) { const v = esLengua1(m, c) ? normalizarVistas(p.vistas) : null; if (v) p.vistas = v; else delete p.vistas; }
   for (const [k, v] of Object.entries(p)) {
+    if (k === "vistas") continue;
     if (k === "rango") {
-      if (m.rangos.length && !m.rangos.includes(v)) throw new Error(`${id}: rango ${v} no admitido [${m.rangos}]`);
+      if (rgs.length && !rgs.includes(v)) throw new Error(`${id}: rango ${v} no admitido [${rgs}]`);
       continue;
     }
     const o = ops[k];
     if (!o) throw new Error(`${id}: opción desconocida '${k}'`);
+    if (!visible(o, p.rango, c)) {   // 2.º: sin tres cifras no se guarda (las fichas de 1.º no cambian)
+      if (v !== (o.defecto ?? (o.tipo === "si_no" ? false : null))) throw new Error(`${id}: '${o.etiqueta}' ${soloCon(o)}`);
+      delete p[k]; continue;
+    }
     if (o.tipo === "opcion") {
       const x = o.valores.find((x) => x.valor === v);
       if (!x) throw new Error(`${id}: valor '${v}' no válido para ${k}`);
+      if (!visible(x, p.rango, c)) throw new Error(`${id}: '${x.etiqueta}' ${soloCon(x)}`);
       if (x.tamanos && !x.tamanos.includes(tamano)) throw new Error(`${id}: '${x.etiqueta}' solo en ${x.tamanos}`);
     }
     if (o.tipo === "numero" && v !== null && !(Number.isInteger(v) && o.min <= v && v <= o.max))
@@ -47,14 +90,31 @@ export function validar(id, params = {}, tamano = "completa") {
 
 /** "SUMAS HASTA 20" → "Sumas hasta 20" (como _titulo() del motor). */
 export function capitalizar(t) {
-  const s = t.toLowerCase().replace(" d y u", " D y U");
+  const s = t.toLowerCase().replace(" c, d y u", " C, D y U").replace(" d y u", " D y U");
   const k = s.search(/\p{L}/u);
   return k < 0 ? s : s.slice(0, k) + s[k].toUpperCase() + s.slice(k + 1);
 }
 
+/** 2.º (lote 2b): modelos que cambian de título con números desde 100 (en 1.º nunca llegan a 100). */
+const TITULO_2 = { "valor.agrupa": { _: "AGRUPA EN CENTENAS" }, "sumar.dobles": { mitades: "LAS MITADES", mezcla: "DOBLES Y MITADES" } };
+/** 2.º (lote 3): títulos de los modos que solo salen en 2.º (modelos sin rango). */
+const TITULO_MODO_2 = { "medida.tiempo": { equivalencias: "LAS MEDIDAS DEL TIEMPO", horas: "ANTES Y DESPUÉS" } };
+const NOMBRE_2 = { "valor.agrupa": "Agrupa en decenas y centenas", "sumar.dobles": "Los dobles y las mitades" };
+
 export function tituloModelo(m, p = {}) {
-  const t = m.titulo;
-  return typeof t === "string" ? t : t[p.modo ?? "_"] ?? t._;
+  const t2 = p.rango >= 100 && TITULO_2[m.id], t2v = t2 && (t2[p.operacion] ?? t2._);
+  if (t2v) return t2v;
+  const tm = TITULO_MODO_2[m.id]?.[p.modo];
+  if (tm) return tm;
+  const t0 = m.titulo, t = typeof t0 === "string" ? t0 : t0[p.modo ?? "_"] ?? t0._;
+  return p.rango > 100 ? t.replace(/(HASTA|hasta) 100\b/, `$1 ${p.rango}`).replace(/\bD (Y|y) U\b/, "C, D $1 U") : t;   // 2.º: «Sumas hasta 999»
+}
+
+/** Nombre del modelo en el selector de un curso: en 2.º, «hasta 100» → «hasta» el rango mayor del curso. */
+export function nombreEnCurso(m, curso) {
+  if (String(curso) === "2" && NOMBRE_2[m.id]) return NOMBRE_2[m.id];
+  const rg = m.cursos?.[curso]?.rangos, mx = rg?.length ? Math.max(...rg) : 0;
+  return mx > 100 ? m.nombre.replace(/hasta 100\b/, `hasta ${mx}`).replace(/\bD y U\b/, "C, D y U") : m.nombre;
 }
 
 /** Título por defecto: el del modelo; con dos, «X y y». */
@@ -83,7 +143,7 @@ function pagina(acts, tamano, colores, semilla) {
   return {
     actividades: acts.map((a, i) => {
       const T = tipo(a.tipo);
-      const res = T.generar(a.params, crearAzar(mezclar(semilla, i + 1)), { tamano });
+      const res = conVistas(a.params.vistas || null, () => T.generar(a.params, crearAzar(mezclar(semilla, i + 1)), { tamano }));
       const n = i + 1;
       return {
         n, tipo: a.tipo, tipoVersion: T.version, params: a.params, tamano, color: colores[i],
@@ -122,7 +182,8 @@ export function generar(opciones, semilla = 1) {
     const m = modelo(a.tipo);
     if (!m.tamanos.includes(tamano)) throw new Error(`«${m.nombre}» solo cabe en una página completa.`);
     if (!tipo(a.tipo)) throw new Error(`«${m.nombre}» aún no está disponible en la app.`);
-    return { tipo: a.tipo, params: validar(a.tipo, a.params, tamano), color: a.color || null };
+    const curso = cursosDe(m).includes(a.curso) ? a.curso : cursoDe(a.tipo, { params: a.params });   // curso elegido en el selector (o el que pide un valor con `curso`)
+    return { tipo: a.tipo, curso, params: validar(a.tipo, a.params, tamano, curso), color: a.color || null };
   });
   const colores = coloresPagina(acts);
   const variantes = opciones.variantes ?? 1;
@@ -132,7 +193,7 @@ export function generar(opciones, semilla = 1) {
   const ficha = {
     schemaVersion: SCHEMA_VERSION, app: "charta",
     titulo: opciones.titulo || tituloPagina(acts),
-    curso: m0.curso, area: m0.materia,
+    curso: acts[0].curso, area: m0.materia,
     semilla, variantes,
     presentacion: { color: true, lecturaFacil: false, pictogramas: false, ...(opciones.presentacion || {}) },
     paginas: [pagina(acts, tamano, colores, semillaVariante(0))],

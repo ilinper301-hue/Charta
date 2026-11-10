@@ -8,9 +8,11 @@ ESTADO.md             hoja de ruta con pasos marcables
 ESQUEMA.md            esquema JSON v1 de ficha, actividad y ejercicio
 INICIO_CHAT.md        mensaje para empezar un chat nuevo
 LENGUA_1.md           guion de tipología de Lengua de 1.º (bloques, modelos, pauta Lamela, lotes)
+MATES_2.md            guion de tipología de Matemáticas de 2.º (♻/🔧/✨, catálogo por curso, lotes)
 motor/generador_fichas.py   motor de REFERENCIA (Python + ReportLab), ~2.700 líneas: diseño aprobado y reglas
 motor/modelos_app.py  modelos SOLO de la app (bloque 8 problemas…): MODELOS_APP con titulo y color; tools/catalogo.py los añade tras los del motor
 motor/metadatos.py    META: dificultad, minutos y etiquetas de cada modelo (también los de la app)
+motor/modelos_2.py    Matemáticas de 2.º: CURSO, RANGOS_2 (100…999), EN_2 {id de 1.º: (rmin, rmax, defecto) | None = rangos de 1.º} → `cursos: {"2": {rangos, rango}}` en el catálogo (un modelo en varios cursos); OPCIONES_2 (opciones y valores con `rmin`: solo con tres cifras; `rmax`: solo hasta ese rango, p. ej. dobles con dibujos; un valor de OPCIONES_2 con el mismo `valor` que uno de 1.º solo le añade campos; `visible(x, rango)` en ficha.js, la app las oculta, validar() no las guarda si no se ven; `curso`: solo desde ese curso, para modelos sin rango como el reloj, `visible(x, rango, curso)`); MODELOS_2 (nuevos de 2.º)
 motor/modelos.py      catálogo MODELOS para la app (solo datos): menu(), por_defecto(), validar(), a_json()
 tests/test_motor.py   regresión: genera todo y comprueba la aritmética
 referencia/ficha_muestra.pdf  ficha de muestra de Iván (marco a imitar)
@@ -21,18 +23,19 @@ src/index.html, estilos.css, app.js   app: columna .col (Actividades, Alumnos, I
 src/ui/navegacion.js  cursos(), materias(c), bloques(c, m) (CATALOGO.bloques[materia]), modelos(c, m, b, tamano) (solo tipos registrados; `cabe`), miniatura(id), fuenteMateria(id), materiaDe(id) — sin DOM
 src/ui/alumnos.js     leerAlumnos(texto) (pegar listas, Séneca), numVariantes(opción, páginas), MAX_ALUMNOS — sin DOM
 src/ui/guardadas.js   crearGuardadas(almacén): recientes(), favoritos(), anotarReciente, alternarFavorito, esFavorito, quitar — sin nombres
-src/ui/selector.js    abrirSelector({ actual, tamano, ruta, alElegir, alCerrar }): pantalla curso → materia → bloque → modelo (`ruta` parcial, p. ej. { materia }, desde el inicio)
+src/ui/selector.js    abrirSelector({ actual, curso, tamano, ruta, alElegir(id, curso), alCerrar }): pantalla curso → materia → bloque → modelo (`ruta` parcial, p. ej. { materia }, desde el inicio)
 src/ui/inicio.js      paso 4.8, sin DOM: saludo(hora, nombre), fechaCorta, crearUsos(almacén) (charta:usos), accesosRapidos, ultimaComposicion, materiasDisponibles, DEFECTO
 src/ui/inicio_vista.js  paso 4.8, DOM: crearInicio(cb) → { pintar(estado), cerrarMaterias() }; el marcado (#inicio…) está en src/index.html y la navegación (mostrar / aDiseno / aInicio, historial) en app.js
 tests/test_ui.js      navegación: todos los tipos alcanzables, miniaturas limpias
 src/nucleo/azar.js    mulberry32, mezclar(...ns) (semillas derivadas), crearAzar(s): entero, elegir, barajar, muestra, hijo
 src/nucleo/tipos.js   registro: registrar(t), tipo(id), hayTipo, listaTipos
-src/nucleo/ficha.js   modelo, porDefecto, validar, capitalizar, tituloModelo, tituloPagina, coloresPagina, generar(opciones, semilla)
+src/nucleo/ficha.js   modelo, cursosDe(m), rangosDe(id, curso), rangosTodos(id), cursoDe(id, {curso, rango, params}), porDefecto(id, curso), validar (acepta los rangos de todos los cursos), capitalizar, tituloModelo, tituloPagina, coloresPagina, generar(opciones, semilla)
 src/nucleo/lector.js  erroresFicha(f), paginasVariante(f, v), letraVariante — sin dependencias (Tabula/Fori)
 src/nucleo/catalogo.js  GENERADO por tools/catalogo.py (MODELOS + titulo + color); no editar
 src/rep/index.js      16 representaciones en SVG: rep(nombre, n, {i, vacio, rango}) y plantilla() → {w, h, svg} (caja en puntos PDF, y hacia abajo, centrada como el motor); svgCompleto(), nombreNumero(). Anchuras de Andika incrustadas
 tests/test_rep.js     pruebas de las representaciones · tools/comparar_rep.py: hoja motor vs JS en PNG
 src/tipos/_problemas.js  problemas del bloque 8: NOMBRES, OBJETOS, SITUACIONES, generarProblemas(), dibujarProblemas() (tipos problemas.suma/resta/mixtos)
+src/tipos/_tres.js     2.º (rango > 100): sumasVert/restasVert/vertical3 (verticales C/D/U, niveles u·d·ud, 3 sumandos, llevada, prueba), decenasSuma3/decenasResta3; paresSuma3/paresResta3(R, nivel, cnt, azar), llevaSuma3/llevaResta3 (llevada en cualquier columna); lo usan sumar.h100/hueco, restar.r100/hueco/familia, juegos.une y problemas
 src/tipos/_trucos.js  fábrica trucoTipo({id, enunciado, filas, pool}) de los trucos de Calculi (bloque 12): filas con huecos, igualdades ciertas, sin repetir; tipos trucos.<clave>.js
 src/render/fuentes.js  registro de letras: fuentePorId, fuenteDe(ficha), registrarFuenteUsuario, nombreFuente; anchuras en anchos_fredoka.js (GENERADO por tools/anchos_fuente.py)
 src/ui/fuentes.js     letras subidas: validarArchivo, cssFuente, crearAlmacenFuentes (IndexedDB charta-fuentes), instalarCss
@@ -46,11 +49,15 @@ tests/comun.js        combinaciones(id), contador() (compartido por las pruebas)
 tests/invariantes.js  INVARIANTES[id] (reúne tests/inv/<f>.js; ayudantes en tests/inv/_ayuda.js)(actividad, tamaño): reglas aritméticas de cada tipo (obligatoria al añadir un tipo) + comunes()
 tests/test_invariantes.js  todas las combinaciones × semillas × variantes · `--full`
 tests/test_doradas.js + doradas.json  fichas doradas (JSON + huella SVG); `--actualizar` solo si el cambio es intencionado (y subir `version` del tipo)
+tools/ver_tipo.js     un tipo en PNG sin motor (2.º): `node tools/ver_tipo.js <id> '{params}' [--media] [--solucion]` → /tmp/ver_<id>….png
 tools/comparar_tipo.py  motor vs JS de un tipo en A4 → /tmp/cmp_<id>_<tamaño>.png (`--media`, `--solucion`)
 tools/ENCARGO_PORTAR.md  instrucciones para que un agente porte modelos del motor (fase 3; reutilizable para Lengua u otros cursos)
 motor/modelos_lengua.py  Lengua: MATERIA, FUENTE (fredoka), BLOQUES (1–8 propios), MODELOS_LENGUA (por lotes; ver LENGUA_1.md)
 datos/lexico_1.tsv    léxico de Lengua de 1.º (palabra, cat, genero, campos, dibujo, frec, extra=3.ª persona de los verbos) → tools/lexico.py → src/lengua/lexico.js (GENERADO)
 src/lengua/reglas.js  silabas, tipoSilaba, TIPOS_SILABA, cabeTipo, tonica, acentuacion, rima, riman, plural, articulo, letras, soloLetras, llevaLetra, huecosOrto, REGLAS_ORTO, sinTildes
+src/lengua/vistas.js  mapa de letras (Lengua 1.º): normalizarVistas, conVistas(v, f) (lo activa generar() en cada actividad), permitida(texto), filtrarVistas(lista, f), letrasActivas(), vistasActivas() (clave de caché), avisoVistas() (final de los errores «necesita»). buscar() ya filtra
+src/ui/letras.js      mapa de letras sin DOM: hayLengua1, conLetras(acts, vistas), letrasDe(comp), vistasDe(set), resumenLetras; CLAVE_LETRAS (charta:letras). El mapa (#secLetras) está en index.html y app.js
+tests/test_vistas.js  con `params.vistas`, el texto de `datos` solo usa esas letras (INTERNOS = campos que no lee el alumno) · `--full`
 src/lengua/palabras.js  buscar({cat, campos, nSilabas, tipo, letras, conLetra, dibujo, frec, sin, min/maxLetras}), elegirPalabras(azar, k, filtros), datosPalabra, CAMPOS_LEXICOS
 src/lengua/dibujo.js  ayudantes en Papel: palabraHuecos, casillas (sol / rellenar), rodear (rojo en solución), unir (líneas rojas), rotulo
 src/tipos/_lengua.js  ayudantes comunes de letra.* y silaba.* (lote 1 de Lengua) · tests/inv/_lengua.js

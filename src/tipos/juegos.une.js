@@ -5,6 +5,7 @@
 // Opciones: modo (sumas y restas / suma / resta) y nivel (llevadas), como sumar.* y restar.* (rangos 10, 20, 30, 100).
 import { registrar } from "../nucleo/tipos.js";
 import { TOP, M, W, MENOS, INK, COLOR_SOLUCION } from "../render/papel.js";
+import { paresSuma3, paresResta3 } from "./_tres.js";
 
 const rango = (a, b, paso = 1) => { const o = []; for (let i = a; i < b; i += paso) o.push(i); return o; };
 
@@ -17,6 +18,7 @@ function unico(pool, vistos, azar) {
 
 /** _pares_suma(R, nivel, cnt). */
 export function paresSuma(R, nivel, cnt, azar) {
+  if (R > 100) return paresSuma3(R, nivel, cnt, azar);   // 2.º: tres cifras
   nivel = nivel || "sin"; let grupos;
   if (R <= 10) grupos = [rango(1, 10).flatMap((a) => rango(1, 10).filter((b) => a + b <= 10).map((b) => [a, b]))];
   else if (R <= 20) {
@@ -40,6 +42,7 @@ export function paresSuma(R, nivel, cnt, azar) {
 
 /** _pares_resta(R, nivel, cnt). */
 export function paresResta(R, nivel, cnt, azar) {
+  if (R > 100) return paresResta3(R, nivel, cnt, azar);   // 2.º: tres cifras
   nivel = nivel || "sin"; let grupos;
   if (R <= 10) grupos = [rango(2, 11).flatMap((a) => rango(1, a).map((b) => [a, b]))];
   else if (R <= 20) {

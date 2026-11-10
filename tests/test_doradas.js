@@ -21,6 +21,19 @@ const CASOS = [
   { nombre: "dos actividades", semilla: 7, opciones: { actividades: [{ tipo: "sumar.h20", params: { nivel: "con" } }, { tipo: "restar.recta", params: { rango: 20 } }] } },
   { nombre: "mismo color corregido", semilla: 3, opciones: { actividades: [{ tipo: "orden.signos", color: "rosa" }, { tipo: "conteo.serie1", color: "rosa" }] } },
   { nombre: "variantes y título", semilla: 42, opciones: { titulo: "Repaso del lunes", variantes: 3, actividades: [{ tipo: "sumar.vertical", params: { nivel: "mezcla", rango: 100 } }, { tipo: "medida.reloj", params: { modo: "media" } }] } },
+  // Matemáticas 2.º · lote 2 (tres cifras)
+  { nombre: "2.º sumas en vertical", semilla: 8, opciones: { actividades: [{ tipo: "sumar.vertical", params: { rango: 999, nivel: "ud", sumandos: 3 } }] } },
+  { nombre: "2.º restas con prueba", semilla: 8, opciones: { actividades: [{ tipo: "restar.vertical", params: { rango: 999, nivel: "con", prueba: true } }] } },
+  { nombre: "2.º descomposición y canjes", semilla: 8, opciones: { actividades: [{ tipo: "valor.descdu", params: { rango: 999, modo: "suma" } }, { tipo: "valor.canje", params: { rango: 500 } }] } },
+  { nombre: "2.º recta de 10 en 10 y de 100 en 100", semilla: 8, opciones: { actividades: [{ tipo: "sumar.recta", params: { rango: 999 } }, { tipo: "restar.recta", params: { rango: 999, salto: 100 } }] } },
+  { nombre: "2.º encadenadas", semilla: 8, opciones: { actividades: [{ tipo: "sumar.encadenadas", params: { rango: 999, sumandos: 4 } }, { tipo: "restar.encadenadas", params: { rango: 999, salto: 100 } }] } },
+  { nombre: "2.º dobles y mitades", semilla: 8, opciones: { actividades: [{ tipo: "sumar.dobles", params: { rango: 100, operacion: "mezcla" } }] } },
+  { nombre: "2.º agrupa en centenas", semilla: 8, opciones: { actividades: [{ tipo: "valor.agrupa", params: { rango: 300 } }] } },
+  { nombre: "2.º decenas y cifra", semilla: 8, opciones: { actividades: [{ tipo: "sumar.decenas", params: { rango: 999 } }, { tipo: "valor.cifra", params: { rango: 999 } }] } },
+  // Matemáticas 2.º · lote 3 (medida)
+  { nombre: "2.º reloj con cuartos", semilla: 8, opciones: { actividades: [{ tipo: "medida.reloj", curso: 2, params: { modo: "todas" } }, { tipo: "medida.reloj2", curso: 2, params: { modo: "cuarto" } }] } },
+  { nombre: "2.º medidas del tiempo", semilla: 8, opciones: { actividades: [{ tipo: "medida.tiempo", curso: 2, params: { modo: "equivalencias" } }, { tipo: "medida.tiempo", curso: 2, params: { modo: "horas" } }] } },
+  { nombre: "2.º dinero y compras", semilla: 8, opciones: { actividades: [{ tipo: "medida.dinero", params: { rango: 300 } }, { tipo: "medida.precios", params: { rango: 100, modo: "cambio" } }] } },
   { nombre: "nombres y B/N", semilla: 5, nombres: ["Ana", "Luis", "Marta"], bn: true, opciones: { variantes: 2, actividades: [{ tipo: "rep.dado", params: { lectura: true } }, { tipo: "rep.marco", params: { rango: 20 } }] } },
 ];
 

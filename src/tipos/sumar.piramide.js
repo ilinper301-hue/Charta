@@ -24,7 +24,7 @@ export default registrar({
   id: "sumar.piramide",
   version: 1,
   generar(params, azar, { tamano }) {
-    const R = params.rango ?? 10, cap = R <= 20 ? R : Math.min(R, 99), mx = Math.max(2, R > 20 ? Math.floor(cap / 4) : Math.floor(cap / 3));
+    const R = params.rango ?? 10, cap = R <= 20 || R > 100 ? R : Math.min(R, 99), mx = Math.max(2, R > 20 ? Math.floor(cap / 4) : Math.floor(cap / 3));
     const h = Math.max(1, Math.min(4, params.huecos ?? 3)), ejercicios = [];
     for (let i = 0; i < (tamano === "media" ? 2 : 6); i++) {
       let b = [1, 1, 1];

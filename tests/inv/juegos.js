@@ -1,9 +1,9 @@
 // Charta · invariantes de la familia «juegos» (ver tests/invariantes.js).
 import assert from "node:assert/strict";
-import { ent, unicos, cuantos } from "./_ayuda.js";
+import { ent, unicos, cuantos, tope, llevaS3, llevaR3 } from "./_ayuda.js";
 
 const suma = (a) => a.reduce((s, x) => s + x, 0);
-const lleva = (op, a, b, R) => op === "+"
+const lleva = (op, a, b, R) => R > 100 ? (op === "+" ? llevaS3(a, b) : llevaR3(a, b)) : op === "+"
   ? (R <= 20 ? a < 10 && b < 10 && a + b > 10 : (a % 10) + (b % 10) >= 10)
   : (R <= 20 ? a > 10 && a - b < 10 : (a % 10) < (b % 10));
 
@@ -58,7 +58,7 @@ export default {
     assert.deepEqual(es.map((e) => e.datos.derecha).sort((x, y) => x - y), es.map((e) => e.datos.r).sort((x, y) => x - y), "resultados de la derecha");
     es.forEach(({ datos: { a, b, op, r, derecha }, solucion }, i) => {
       assert.ok(op === "+" || op === "-");
-      assert.equal(r, op === "+" ? a + b : a - b); ent(a, 1, Math.min(R, 99), "a"); ent(b, 1, Math.min(R, 99), "b"); ent(r, 1, Math.min(R, 99), "resultado");
+      assert.equal(r, op === "+" ? a + b : a - b); ent(a, 1, tope(R), "a"); ent(b, 1, tope(R), "b"); ent(r, 1, tope(R), "resultado");
       assert.equal(es[solucion.une].datos.derecha, r, "línea que une");
       if (modo === "suma") assert.equal(op, "+"); if (modo === "resta") assert.equal(op, "-");
       if (R > 10 && nivel === "sin") assert.ok(!lleva(op, a, b, R), `sin: ${a} ${op} ${b} lleva`);
@@ -70,7 +70,7 @@ export default {
   },
 
   "juegos.cadena"(act, tam) {
-    const R = act.params.rango ?? 10, cap = Math.min(R, 99), maxm = R <= 10 ? 5 : R <= 20 ? 9 : 10;
+    const R = act.params.rango ?? 10, cap = tope(R), maxm = R <= 10 ? 5 : R <= 20 ? 9 : R <= 100 ? 10 : 100;
     cuantos(act.ejercicios, tam === "media" ? 3 : 7);
     for (const { datos: { vals, ops }, solucion } of act.ejercicios) {
       assert.equal(vals.length, 5); assert.equal(ops.length, 4);

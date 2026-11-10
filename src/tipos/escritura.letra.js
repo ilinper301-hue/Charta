@@ -13,6 +13,7 @@ import { cuantas, elegirPalabras } from "./_lengua.js";
 import { sinTildes } from "../lengua/reglas.js";
 import { contexto, recortar, repartirLibres, filasDe, mmDe, repetir } from "./_escritura.js";
 import { renglones } from "../lengua/pauta.js";
+import { vistasActivas, letrasActivas } from "../lengua/vistas.js";
 
 export const LETRAS_ESCRITURA = [..."abcdefghijklmnñopqrstuvwxyz"];
 /** Texto del modelo de una letra según «mayúscula o minúscula». */
@@ -31,7 +32,7 @@ export default registrar({
       letras = distintas(pal).slice(0, B); formas = Array(B).fill("sueltas");
       enunciado = `Repasa las letras de «${pal}»\ny escríbelas en los renglones.`;
     } else {
-      const l = params.letra || azar.elegir(LETRAS_ESCRITURA);
+      const l = params.letra || azar.elegir(vistasActivas() ? letrasActivas() : LETRAS_ESCRITURA);
       letras = tamano === "media" ? [l] : [l, l]; formas = tamano === "media" ? ["sueltas"] : ["sueltas", "juntas"];
       enunciado = caso === "ambas" ? `Repasa la letra «${l.toUpperCase()}${l}»\ny escríbela en los renglones.` : `Repasa la letra «${textoLetra(l, caso)}»\ny escríbela en los renglones.`;
     }

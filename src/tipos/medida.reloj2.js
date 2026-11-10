@@ -1,22 +1,18 @@
 // medida.reloj2 · Dibuja las agujas (port de _m_reloj2() del motor; reutiliza dibujarReloj de medida.reloj).
-// datos:    { h (1–12), m (0 o 30) }
+// datos:    { h (1–12), m (0, 15, 30 o 45) }
 // solucion: { huecos: [] }  (el alumno dibuja las agujas; en la hoja de soluciones se pintan en rojo)
 // Opción modo: null (en punto y y media, mitad y mitad) | "punto" | "media". Completa: 12 relojes (3 × 4); media: 6.
 import { registrar } from "../nucleo/tipos.js";
 import { TOP, COLOR_SOLUCION } from "../render/papel.js";
-import { dibujarReloj } from "./medida.reloj.js";
+import { dibujarReloj, horasModo } from "./medida.reloj.js";
 
-const horas = (k, azar) => azar.muestra(Array.from({ length: 12 }, (_, i) => i + 1), k);
 
 export default registrar({
   id: "medida.reloj2",
   version: 1,
   generar(params, azar, { tamano }) {
     const cnt = tamano === "media" ? 6 : 12, modo = params.modo || "mezcla";
-    let hs;
-    if (modo === "punto") hs = horas(cnt, azar).map((h) => [h, 0]);
-    else if (modo === "media") hs = horas(cnt, azar).map((h) => [h, 30]);
-    else hs = azar.barajar([...horas(cnt / 2, azar).map((h) => [h, 0]), ...horas(cnt / 2, azar).map((h) => [h, 30])]);
+    const hs = horasModo(modo, cnt, azar);
     return {
       enunciado: "Dibuja las agujas para marcar la hora.",
       ejercicios: hs.map(([h, m]) => ({ datos: { h, m }, solucion: { huecos: [] } })),

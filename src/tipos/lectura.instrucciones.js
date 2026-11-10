@@ -8,9 +8,11 @@ import { registrar } from "../nucleo/tipos.js";
 import { TOP } from "../render/papel.js";
 import { COLOR_SOLUCION } from "../render/papel.js";
 import { cuantas } from "./_lengua.js";
-import { FORMAS, TAMANOS, PINTURAS, COLORES_INSTR, textoInstruccion, figura, alCaso, ajustaLineas, parrafo } from "./_lectura.js";
+import { permitida, filtrarVistas, avisoVistas } from "../lengua/vistas.js";
+import { FORMAS, TAMANOS, PINTURAS, COLORES_INSTR, sintagma, textoInstruccion, figura, alCaso, ajustaLineas, parrafo } from "./_lectura.js";
 
-const combos = () => Object.keys(FORMAS).flatMap((forma) => Object.keys(TAMANOS).map((tam) => ({ forma, tam })));
+const combos = () => // todas las figuras posibles (las que se ven)
+   Object.keys(FORMAS).flatMap((forma) => Object.keys(TAMANOS).map((tam) => ({ forma, tam })));
 const igual = (a, b) => a.forma === b.forma && a.tam === b.tam;
 
 export default registrar({
@@ -19,13 +21,19 @@ export default registrar({
   generar(params, azar, { tamano }) {
     const modo = params.ordenes === "figura" ? "figura" : params.ordenes === "dos" ? "dos" : "tamano";
     const filas = modo === "dos" ? 5 : 6, n = tamano === "media" ? Math.floor(filas / 2) : filas, colores = COLORES_INSTR(params.colores === "todos"), mayus = params.caso === "mayus";
+    // con letras elegidas, solo órdenes cuya frase se escribe con ellas («Colorea de rojo la estrella grande.»)
+    if (!permitida(modo === "dos" ? "Colorea de y" : "Colorea de")) throw new Error("«lectura.instrucciones» necesita las letras de «Colorea de» para escribir las órdenes." + avisoVistas());
+    const formasOk = filtrarVistas(Object.keys(FORMAS), (f) => sintagma({ forma: f, tam: null })), combosOk = filtrarVistas(combos(), sintagma);
+    const coloresOk = filtrarVistas(colores);
+    const quedan = modo === "figura" ? formasOk.length : combosOk.length, hacen = modo === "dos" ? 2 : 1;
+    if (quedan < hacen || coloresOk.length < hacen) throw new Error("«lectura.instrucciones» necesita más figuras o colores que se escriban con esas letras." + avisoVistas());
     const vistas = new Set(), usos = {}, out = [];
     for (let i = 0; i < n; i++) {
       let ordenes, figuras;
       for (let intento = 0; ; intento++) {
-        if (intento > 200) throw new Error("«lectura.instrucciones» necesita más combinaciones de figura y color.");
-        const objetivos = modo === "figura" ? [{ forma: azar.elegir(Object.keys(FORMAS)), tam: null }] : azar.muestra(combos(), modo === "dos" ? 2 : 1).map((c) => ({ ...c }));
-        const cols = azar.barajar(colores).sort((a, b) => (usos[a] || 0) - (usos[b] || 0)).slice(0, objetivos.length);   // los colores menos usados primero
+        if (intento > 200) throw new Error("«lectura.instrucciones» necesita más combinaciones de figura y color." + avisoVistas());
+        const objetivos = modo === "figura" ? [{ forma: azar.elegir(formasOk), tam: null }] : azar.muestra(combosOk, modo === "dos" ? 2 : 1).map((c) => ({ ...c }));
+        const cols = azar.barajar(coloresOk).sort((a, b) => (usos[a] || 0) - (usos[b] || 0)).slice(0, objetivos.length);   // los colores menos usados primero
         ordenes = objetivos.map((o, k) => ({ color: cols[k], forma: o.forma, tam: o.tam }));
         const claves = ordenes.map((o) => `${o.forma}|${o.tam}|${o.color}`);
         if (claves.some((c) => vistas.has(c))) continue;

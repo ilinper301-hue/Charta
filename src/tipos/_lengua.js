@@ -3,6 +3,7 @@
 // comprobar que un hueco tiene una sola solución en el léxico y dibujar palabras letra a letra (rodear, rayas).
 import { LEXICO } from "../lengua/lexico.js";
 import { buscar } from "../lengua/palabras.js";
+import { vistasActivas, avisoVistas } from "../lengua/vistas.js";
 import { sinTildes } from "../lengua/reglas.js";
 import { COLOR_SOLUCION } from "../render/papel.js";
 
@@ -20,7 +21,7 @@ export const trozosCaso = (ts, caso) => ts.map((s, i) => (caso === "mayus" ? s.t
  *  las que empiezan por «i» (la «I» mayúscula de Fredoka se confunde con la «l»). */
 const memoCandidatas = new Map();
 export function candidatas(params, extra = {}) {
-  const clave = JSON.stringify([params.tipo || "directas", params.caso === "inicial", extra]);
+  const clave = JSON.stringify([params.tipo || "directas", params.caso === "inicial", extra, vistasActivas()]);
   if (!memoCandidatas.has(clave)) {
     const ps = buscar({ cat: CATS, tipo: params.tipo || "directas", ...extra });
     memoCandidatas.set(clave, params.caso === "inicial" ? ps.filter((e) => !/^[iíì]/.test(e.p)) : ps);
@@ -46,7 +47,7 @@ export function elegirPalabras(azar, n, params, largos, { extra = {}, ok = null,
         if (r) { out.push({ e, r, p: e.p }); tomada = true; i += k + 1; break; }
       }
     }
-    if (!tomada) throw new Error(`«${id}» necesita más palabras: con esas opciones solo hay ${out.length} y hacen falta ${n}. Prueba con otro tipo de sílabas o con palabras de otro largo.`);
+    if (!tomada) throw new Error(`«${id}» necesita más palabras: con esas opciones solo hay ${out.length} y hacen falta ${n}. Prueba con otro tipo de sílabas o con palabras de otro largo.` + avisoVistas());
   }
   return azar.barajar(out);
 }

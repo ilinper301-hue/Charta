@@ -1,5 +1,5 @@
 // Charta · selector de actividad a pantalla completa (paso 4.1).
-// abrirSelector({ actual, tamano, alElegir }) — los niveles con una sola opción se saltan solos,
+// abrirSelector({ actual, curso, tamano, alElegir(id, curso) }) — los niveles con una sola opción se saltan solos,
 // pero quedan en la ruta (migas) para poder volver.
 import { modelo } from "../nucleo/ficha.js";
 import { PALETA } from "../render/hoja.js";
@@ -10,10 +10,10 @@ function el(tag, props = {}, ...hijos) { const e = Object.assign(document.create
 const NIVELES = ["curso", "materia", "bloque", "modelo"];
 const TITULOS = { curso: "Elige el curso", materia: "Elige la materia", bloque: "Elige el contenido", modelo: "Elige el modelo" };
 
-export function abrirSelector({ actual = null, tamano = "completa", ruta: inicial = null, alElegir, alCerrar } = {}) {
+export function abrirSelector({ actual = null, curso = null, tamano = "completa", ruta: inicial = null, alElegir, alCerrar } = {}) {
   // Ruta inicial: la del modelo actual (se abre en su bloque), una parcial (p. ej. { materia } desde el inicio) o vacía.
   const ruta = {};
-  if (actual) { const m = modelo(actual); Object.assign(ruta, { curso: m.curso, materia: m.materia, bloque: m.bloque }); }
+  if (actual) { const m = modelo(actual); Object.assign(ruta, { curso: curso ?? m.curso, materia: m.materia, bloque: m.bloque }); }
   else if (inicial) Object.assign(ruta, inicial);
   // Si la materia pedida no existe en el curso elegido, se vuelve a preguntar.
   const cuadra = () => { if (ruta.curso !== undefined && ruta.materia !== undefined && !materias(ruta.curso).some((m) => m.id === ruta.materia)) { delete ruta.materia; delete ruta.bloque; } };
@@ -29,7 +29,8 @@ export function abrirSelector({ actual = null, tamano = "completa", ruta: inicia
   document.body.append(capa);
   document.body.classList.add("con-selector");
 
-  const opciones = (nivel) => nivel === "curso" ? cursos()
+  // Si ya hay materia (Crear ficha → Lengua), solo los cursos que la tienen.
+  const opciones = (nivel) => nivel === "curso" ? cursos().filter((c) => ruta.materia === undefined || materias(c.id).some((m) => m.id === ruta.materia))
     : nivel === "materia" ? materias(ruta.curso)
     : nivel === "bloque" ? bloques(ruta.curso, ruta.materia)
     : modelos(ruta.curso, ruta.materia, ruta.bloque, tamano);
@@ -49,7 +50,7 @@ export function abrirSelector({ actual = null, tamano = "completa", ruta: inicia
 
   function fin(id) {
     capa.remove(); document.body.classList.remove("con-selector");
-    if (id) alElegir?.(id); else alCerrar?.();
+    if (id) alElegir?.(id, ruta.curso); else alCerrar?.();   // con el curso elegido (2.º: sus rangos)
   }
 
   function pintar() {

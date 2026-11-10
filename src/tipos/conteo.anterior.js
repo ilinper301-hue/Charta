@@ -38,13 +38,13 @@ export default registrar({
     };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 3, 5, 10, 10), bw = 40, bh = 46, g = 7;
+    const tres = act.params?.rango > 100, { cel, cw, ch } = p.celdas(TOP, 3, 5, 10, 10), bw = tres ? 50 : 40, bh = 46, g = tres ? 5 : 7, fs = tres ? 20 : 22;   // 2.º: 3 cifras
     act.ejercicios.forEach((e, idx) => p.ejercicio(e.id, () => {
       const [x, y] = cel[idx], { n, patron } = e.datos;
       p.marco(x, y, cw, ch, idx);
       const bx = x + (cw - (patron.length * bw + (patron.length - 1) * g)) / 2;
       let k = 0;
-      [...patron].forEach((t, j) => p.caja(bx + j * (bw + g), y + (ch - 14 - bh) / 2, bw, bh, t === "n" ? n : null, 22, t === "n" ? null : e.solucion.huecos[k++]));
+      [...patron].forEach((t, j) => p.caja(bx + j * (bw + g), y + (ch - 14 - bh) / 2, bw, bh, t === "n" ? n : null, fs, t === "n" ? null : e.solucion.huecos[k++]));
     }));
   },
 });

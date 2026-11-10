@@ -8,6 +8,7 @@
 import { registrar } from "../nucleo/tipos.js";
 import { TOP, M, W } from "../render/papel.js";
 import { unir } from "../lengua/dibujo.js";
+import { avisoVistas } from "../lengua/vistas.js";
 import { rima, silabas } from "../lengua/reglas.js";
 import { alCaso, candidatas } from "./_lengua.js";
 
@@ -33,7 +34,7 @@ export default registrar({
       elegidas.push(par);
       if (elegidas.length === np) break;
     }
-    if (elegidas.length < np) throw new Error(`«fono.rimas» necesita más palabras que rimen: con esas opciones solo hay ${elegidas.length} parejas y hacen falta ${np}. Prueba con otro tipo de sílabas.`);
+    if (elegidas.length < np) throw new Error(`«fono.rimas» necesita más palabras que rimen: con esas opciones solo hay ${elegidas.length} parejas y hacen falta ${np}. Prueba con otro tipo de sílabas.` + avisoVistas());
     let der = azar.barajar(elegidas.map(([, b]) => b));
     while (der.every((b, i) => b === elegidas[i][1])) der = azar.barajar(der);
     return {

@@ -6,9 +6,13 @@
 // Opciones: letra (todas las filas de 12 consonantes al azar, o una sola letra) · tipo · orden · caso (minúscula / MAYÚSCULA).
 //   Ordenadas: cada fila en orden a e i o u (con una letra concreta, las siguientes filas empiezan por otra vocal).
 //   Mezcladas: las sílabas barajadas por toda la tabla (con una letra concreta, cada fila en un orden distinto).
+// Con letras elegidas (vistas.js) solo entran filas cuyas sílabas se escriben con ellas (todas las letras de la fila); una «letra» concreta de las opciones se
+//   respeta aunque no esté elegida (las demás letras de sus sílabas, p. ej. la coda de «man», sí deben estarlo). Sin «letra», si hay menos de 12 filas
+//   utilizables la tabla lleva menos filas (mínimo 3).
 // 12 filas de 5 sílabas.
 import { registrar } from "../nucleo/tipos.js";
 import { TOP } from "../render/papel.js";
+import { filtrarVistas, permitida, avisoVistas } from "../lengua/vistas.js";
 import { alCaso } from "./_lengua.js";
 
 const V = [..."aeiou"];
@@ -36,7 +40,11 @@ export default registrar({
     if (params.letra) {
       pool = pool.filter((f) => f.cons === params.letra);
       if (!pool.length) throw new Error(`«silaba.tabla» necesita una letra que tenga sílabas de ese tipo (con «${params.letra}» no hay sílabas ${tipo}).`);
-    }
+      pool = pool.filter((f) => permitida(f.sil.join("").split(params.letra).join("")));
+      if (!pool.length) throw new Error(`«silaba.tabla» necesita sílabas ${tipo} con «${params.letra}» escritas con letras elegidas.` + avisoVistas());
+    } else pool = filtrarVistas(pool, (f) => f.sil.join(""));
+    const nf = Math.min(FILAS, pool.length);
+    if (!params.letra && nf < 3) throw new Error(`«silaba.tabla» necesita al menos 3 filas de sílabas ${tipo}: con esas opciones solo hay ${nf}.` + avisoVistas());
     let filas;
     if (params.letra) {
       const base = pool.length === 1 ? pool : azar.muestra(pool, Math.min(pool.length, 3));   // mixtas/trabadas: varias codas o grupos de la misma letra
@@ -45,10 +53,10 @@ export default registrar({
         return mezcla ? azar.barajar(sil) : [...sil.slice(Math.floor(r / base.length) % 5), ...sil.slice(0, Math.floor(r / base.length) % 5)];
       });
     } else {
-      const elegidas = azar.muestra(pool, FILAS).sort((a, b) => pool.indexOf(a) - pool.indexOf(b));
+      const elegidas = azar.muestra(pool, nf).sort((a, b) => pool.indexOf(a) - pool.indexOf(b));
       if (mezcla) {
         const todas = azar.barajar(elegidas.flatMap((f) => f.sil));
-        filas = Array.from({ length: FILAS }, (_, r) => todas.slice(r * 5, r * 5 + 5));
+        filas = Array.from({ length: nf }, (_, r) => todas.slice(r * 5, r * 5 + 5));
       } else filas = elegidas.map((f) => f.sil);
     }
     const mayus = params.caso === "mayus";

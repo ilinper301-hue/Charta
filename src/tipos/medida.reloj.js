@@ -1,7 +1,7 @@
 // medida.reloj · Los relojes de agujas (port de _reloj(), _horas() y _m_reloj() del motor).
-// datos:    { h (1–12), m (0 o 30) }
-// solucion: { huecos: [h, "00" | "30"] }
-// Opción modo: null (en punto y y media, mitad y mitad) | "punto" | "media".
+// datos:    { h (1–12), m (0, 15, 30 o 45; «menos cuarto» = h:45) }
+// solucion: { huecos: [h, "00" | "15" | "30" | "45"] }
+// Opción modo: null (en punto y y media, mitad y mitad) | "punto" | "media" · 2.º: "cuarto" | "todas".
 // Completa: 12 relojes (4 filas × 3, horas distintas por grupo); media: 6.
 import { registrar } from "../nucleo/tipos.js";
 import { TOP, T, B, INK } from "../render/papel.js";
@@ -28,19 +28,25 @@ export function dibujarReloj(p, cx, cy, r, h, m, manos = true) {
 }
 
 const horas = (k, azar) => azar.muestra(Array.from({ length: 12 }, (_, i) => i + 1), k);
+/** Minutos de cada modo: en 2.º (lote 3) «cuarto» = y cuarto y menos cuarto; «todas» = las cuatro (repartidas). */
+export const MINUTOS = { punto: [0], media: [30], mezcla: [0, 30], cuarto: [15, 45], todas: [0, 15, 30, 45] };
+/** [h, m] de cada reloj: los grupos de minutos a partes iguales (el resto, a los primeros), horas distintas en cada grupo. */
+export function horasModo(modo, cnt, azar) {
+  const ms = MINUTOS[modo || "mezcla"];
+  if (ms.length === 1) return horas(cnt, azar).map((h) => [h, ms[0]]);
+  const hs = ms.flatMap((m, k) => horas(Math.floor(cnt / ms.length) + (k < cnt % ms.length ? 1 : 0), azar).map((h) => [h, m]));
+  return azar.barajar(hs);
+}
 
 export default registrar({
   id: "medida.reloj",
   version: 1,
   generar(params, azar, { tamano }) {
     const cnt = tamano === "media" ? 6 : 12, modo = params.modo || "mezcla";
-    let hs;
-    if (modo === "punto") hs = horas(cnt, azar).map((h) => [h, 0]);
-    else if (modo === "media") hs = horas(cnt, azar).map((h) => [h, 30]);
-    else hs = azar.barajar([...horas(cnt / 2, azar).map((h) => [h, 0]), ...horas(cnt / 2, azar).map((h) => [h, 30])]);
+    const hs = horasModo(modo, cnt, azar);
     return {
       enunciado: "Escribe la hora que marca cada reloj.",
-      ejercicios: hs.map(([h, m]) => ({ datos: { h, m }, solucion: { huecos: [h, m ? "30" : "00"] } })),
+      ejercicios: hs.map(([h, m]) => ({ datos: { h, m }, solucion: { huecos: [h, String(m).padStart(2, "0")] } })),
     };
   },
   dibujar(p, act) {

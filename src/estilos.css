@@ -250,3 +250,13 @@ body.con-selector { overflow: hidden; }
   .inicio { max-width: 760px; padding-top: 32px; }
   .ini-rapidos { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
+
+/* Mapa de letras (Lengua de 1.º): una tecla por letra; marcada = puede salir en la ficha. */
+.mapa-letras { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin: 10px 0; }
+@media (min-width: 520px) { .mapa-letras { grid-template-columns: repeat(9, 1fr); } }
+.mapa-letras button { height: var(--alto); border-radius: var(--r-sm); border: 1px solid var(--borde-fuerte); background: var(--superficie);
+  color: var(--apagado); font: 600 1.1rem var(--sans); cursor: pointer; padding: 0; text-decoration: line-through; text-decoration-color: var(--borde-fuerte); }
+.mapa-letras button.vocal { border-style: dashed; }
+.mapa-letras button[aria-pressed="true"] { background: var(--primario); border-color: var(--primario); color: var(--sobre-acento); text-decoration: none; border-style: solid; }
+.letras-atajos { display: flex; gap: 8px; flex-wrap: wrap; }
+.letras-atajos button { height: var(--alto-sm); padding: 0 12px; border-radius: var(--r-sm); border: 1px solid var(--borde); background: var(--superficie-2); color: var(--texto-2); font: inherit; font-size: .85rem; cursor: pointer; }

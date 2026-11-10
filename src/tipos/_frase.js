@@ -9,6 +9,7 @@
 // (el agua) no entran. Las frases empiezan siempre por el artículo (El, La, Los, Las), nunca por «I».
 import { LEXICO } from "../lengua/lexico.js";
 import { articulo, plural, tonica } from "../lengua/reglas.js";
+import { permitida, filtrarVistas, avisoVistas } from "../lengua/vistas.js";
 
 const ENT = new Map(LEXICO.map((e) => [e.p, e]));
 const gen = (lema) => {
@@ -197,10 +198,10 @@ export function largosFrase(azar, n, palabras) {
 export function elegirFrases(azar, largos, { filtro = null, id = "frase", ya = new Set(), sujetos = new Set() } = {}) {
   const out = [];
   const porLargo = new Map();
-  for (const l of new Set(largos)) porLargo.set(l, todasFrases().filter((f) => f.n === l && (!filtro || filtro(f))));
+  for (const l of new Set(largos)) porLargo.set(l, filtrarVistas(todasFrases(), (f) => f.id).filter((f) => f.n === l && (!filtro || filtro(f))));
   for (const l of largos) {
     const libres = porLargo.get(l).filter((f) => !ya.has(f.id));
-    if (!libres.length) throw new Error(`«${id}» necesita más frases: con esas opciones solo hay ${out.length} y hacen falta ${largos.length}. Prueba con frases de otro largo.`);
+    if (!libres.length) throw new Error(`«${id}» necesita más frases: con esas opciones solo hay ${out.length} y hacen falta ${largos.length}. Prueba con frases de otro largo.${avisoVistas()}`);
     const num = azar.entero(1, 3) === 1 ? "p" : "s";
     let pool = libres.filter((f) => f.numero === num); if (!pool.length) pool = libres;
     const nuevos = pool.filter((f) => !sujetos.has(f.suj.lema)); if (nuevos.length) pool = nuevos;
@@ -255,8 +256,8 @@ export function cortesLimpios(palabras) {
 // ---------------------------------------------------------------- «completa»: distractoras
 /** Dos nombres inertes que no encajan, del mismo género y número que `g`/`num` (o de cualquiera si g es null). Sin repetir `excluir`. */
 export function distractoras(azar, g, num, excluir = []) {
-  const ok = INERTES.filter((n) => (g === null || gen(n) === g) && !excluir.includes(n));
-  if (ok.length < 2) throw new Error("_frase.js necesita más nombres inertes para las distractoras.");
+  const ok = INERTES.filter((n) => (g === null || gen(n) === g) && !excluir.includes(n) && permitida(sust(n, num)));
+  if (ok.length < 2) throw new Error("_frase.js necesita más nombres inertes para las distractoras." + avisoVistas());
   return azar.muestra(ok, 2).map((n) => sust(n, num));
 }
 
@@ -305,8 +306,8 @@ export function elegirVerdades(azar, n, { id = "frase.verdad" } = {}) {
   const largos = (k) => { const l = []; for (let i = 0; i < k; i++) l.push(3 + (i % 3)); return azar.barajar(l); };
   for (const verdad of [true, false]) {
     for (const l of largos(n / 2)) {
-      const libres = todos.filter((h) => h.verdad === verdad && h.n === l && !usados.has(h.id));
-      if (!libres.length) throw new Error(`«${id}» necesita más frases de ${l} palabras (${verdad ? "verdaderas" : "falsas"}).`);
+      const libres = todos.filter((h) => h.verdad === verdad && h.n === l && !usados.has(h.id) && permitida(h.id));
+      if (!libres.length) throw new Error(`«${id}» necesita más frases de ${l} palabras (${verdad ? "verdaderas" : "falsas"}).${avisoVistas()}`);
       const num = azar.entero(1, 3) === 1 ? "p" : "s";
       let pool = libres.filter((h) => h.numero === num); if (!pool.length) pool = libres;
       const nuevos = pool.filter((h) => !(sujetos.get(h.suj) >= 1)); if (nuevos.length) pool = nuevos;

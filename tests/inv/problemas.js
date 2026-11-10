@@ -1,9 +1,9 @@
 // Charta · invariantes de la familia «problemas» (ver tests/invariantes.js).
 import assert from "node:assert/strict";
-import { ent, unicos, cuantos } from "./_ayuda.js";
+import { ent, unicos, cuantos, llevaS3, llevaR3 } from "./_ayuda.js";
 
 const MENOS = "−";
-const lleva = (op, a, b) => (op === "+" ? (a % 10) + (b % 10) >= 10 : a % 10 < b % 10);
+const lleva = (op, a, b, R = 0) => (R > 100 ? (op === "+" ? llevaS3(a, b) : llevaR3(a, b)) : op === "+" ? (a % 10) + (b % 10) >= 10 : a % 10 < b % 10);
 const palabra = (t, n) => new RegExp(`(^|[^\\d])${n}([^\\d]|$)`).test(t);
 
 function problemas(clase) {
@@ -24,10 +24,10 @@ function problemas(clase) {
       assert.ok(!/undefined|NaN|\s{2}/.test(d.texto), "texto: " + d.texto);
       const sits = { suma: ["juntar", "anadir"], resta: ["quitar", "comparar", "faltar"] }[esSuma ? "suma" : "resta"];
       assert.ok(sit ? d.sit === sit : sits.includes(d.sit), `situación ${d.sit}`);
-      if (nivel === "sin") assert.ok(!lleva(d.op, d.a, d.b), `sin: ${d.a} ${d.op} ${d.b} lleva`);
-      if (nivel === "con") assert.ok(lleva(d.op, d.a, d.b), `con: ${d.a} ${d.op} ${d.b} no lleva`);
+      if (nivel === "sin") assert.ok(!lleva(d.op, d.a, d.b, R), `sin: ${d.a} ${d.op} ${d.b} lleva`);
+      if (nivel === "con") assert.ok(lleva(d.op, d.a, d.b, R), `con: ${d.a} ${d.op} ${d.b} no lleva`);
     });
-    if (nivel === "mezcla") assert.equal(es.filter((e) => lleva(e.datos.op, e.datos.a, e.datos.b)).length, es.length / 2, "mezcla: mitad y mitad");
+    if (nivel === "mezcla") assert.equal(es.filter((e) => lleva(e.datos.op, e.datos.a, e.datos.b, R)).length, es.length / 2, "mezcla: mitad y mitad");
   };
 }
 

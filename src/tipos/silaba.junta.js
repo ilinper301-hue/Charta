@@ -10,6 +10,7 @@ import { TOP, M, W, T, B } from "../render/papel.js";
 import { unir } from "../lengua/dibujo.js";
 import { LEXICO } from "../lengua/lexico.js";
 import { silabas } from "../lengua/reglas.js";
+import { avisoVistas } from "../lengua/vistas.js";
 import { alCaso, trozosCaso, cuantas, elegirPalabras, candidatas } from "./_lengua.js";
 
 const PALABRAS = new Set(LEXICO.map((e) => e.p));
@@ -40,7 +41,7 @@ export default registrar({
       elegidas.push([a, b]); usadas.a.add(a); usadas.b.add(b);
       if (elegidas.length === n) break;
     }
-    if (elegidas.length < n) throw new Error(`«silaba.junta» necesita más palabras para unir: con esas opciones solo hay ${elegidas.length} y hacen falta ${n}.`);
+    if (elegidas.length < n) throw new Error(`«silaba.junta» necesita más palabras para unir: con esas opciones solo hay ${elegidas.length} y hacen falta ${n}.` + avisoVistas());
     let der = azar.barajar(elegidas.map(([, b]) => b));
     while (der.every((b, i) => b === elegidas[i][1])) der = azar.barajar(der);
     const izq = (s) => alCaso(s, params.caso), der2 = (s) => (params.caso === "mayus" ? s.toUpperCase() : s);

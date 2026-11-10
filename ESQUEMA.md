@@ -10,7 +10,7 @@
   "app": "charta",
   "id": "f_8Kq2…",                 // lo pone Firestore al guardar (/apps/charta/fichas/{id})
   "titulo": "Sumas hasta 20 y restas en la recta",
-  "curso": 1, "area": "matematicas",
+  "curso": 1, "area": "matematicas",   // curso elegido en el selector para la actividad 1 (un modelo puede estar en varios cursos)
   "creada": "2026-11-05T10:00:00Z", "autor": "uid de Firebase",
   "semilla": 1234,
   "variantes": 1,                  // 1 = todas iguales; N = N variantes (A, B, C…)
@@ -33,6 +33,7 @@
   "n": 1,
   "tipo": "sumar.h20", "tipoVersion": 1,   // id del registro de tipos (= id de MODELOS)
   "params": { "rango": 20, "nivel": "con" },
+  // Lengua de 1.º: "vistas": "aeioumpslt" = letras que pueden salir (mapa de letras); sin el campo = todas
   "tamano": "media",                        // "completa" | "media"
   "color": "azul",                          // amarillo | rosa | azul | verde
   "enunciado": "Calcula y escribe el resultado en el cuadro gris.",
@@ -65,7 +66,7 @@ descomposición, letras, recta, bloques, cuadrícula, monedas, ábaco, D/U, atad
 { "schemaVersion": 1, "app": "charta", "autor": "uid", "titulo": "…", "creada": "2026-11-05T10:00:00Z",
   "tipos": ["sumar.h20"], "variantes": 2,
   "ficha": "{…JSON de la ficha…}",      // texto: Firestore no admite listas dentro de listas
-  "composicion": "{…}" }                // actividades + opciones, semilla, título, variaciones, B/N (para reabrirla en Charta)
+  "composicion": "{…}" }                // actividades ({tipo, curso?, params}) + opciones, semilla, título, variaciones, B/N (para reabrirla en Charta)
 ```
 - Leer (Tabula, Fori): `fichaDeDocumento(datos, id)` de `src/nucleo/lector.js` → ficha comprobada con `erroresFicha()`.
 - Reglas: bloque «Charta» de `firestore.rules` (copia de `tabula/firestore.rules`): solo el autor (Google) lee, cambia y borra; campos y tamaños fijos (ficha ≤ 900.000 caracteres; 30 variantes ≈ 110 KB).

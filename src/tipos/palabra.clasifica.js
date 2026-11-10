@@ -4,9 +4,11 @@
 //           (los huecos son los espacios para escribir, uno por palabra, caja a caja de izquierda a derecha y de arriba abajo)
 // Reglas: palabras del léxico; cada palabra es de su campo y de ninguno de los otros campos de la misma tarjeta (campos todos distintos entre
 //         tarjetas); 4 palabras por caja con 2 cajas, 3 con 3 cajas. Sin repetidos.
+// Con letras elegidas (vistas.js) solo entran palabras que se escriben con ellas y campos con palabras de sobra; si no llegan para 3 tarjetas, lleva menos.
 // Opciones: cajas (2 o 3) · letra. Solo completa: 3 tarjetas.
 import { registrar } from "../nucleo/tipos.js";
 import { TOP, M, W } from "../render/papel.js";
+import { vistasActivas, avisoVistas } from "../lengua/vistas.js";
 import { alCaso } from "./_lengua.js";
 import { CAMPOS_P, deCampo, rotuloCampo } from "./_palabra.js";
 
@@ -17,12 +19,15 @@ export default registrar({
   version: 1,
   generar(params, azar) {
     const nc = params.cajas === 3 ? 3 : 2, por = nc === 2 ? 4 : 3, caso = params.caso;
-    const orden = azar.barajar(CAMPOS_P), usadas = new Set(), ejercicios = [];
-    for (let t = 0; t < 3; t++) {
+    const viables = vistasActivas() ? CAMPOS_P.filter((c) => deCampo(c, { caso }).length >= por) : CAMPOS_P;
+    const orden = azar.barajar(viables), usadas = new Set(), ejercicios = [];
+    const nt = Math.min(3, Math.floor(orden.length / nc));
+    if (nt < 1) throw new Error(`«palabra.clasifica» necesita palabras de al menos ${nc} campos con ${por} palabras cada uno.` + avisoVistas());
+    for (let t = 0; t < nt; t++) {
       const campos = orden.slice(t * nc, t * nc + nc);
       const cajas = campos.map((c) => {
         const buenas = deCampo(c, { caso }).filter((e) => !usadas.has(e.p) && campos.every((o) => o === c || !e.k.includes(o)));
-        if (buenas.length < por) throw new Error(`«palabra.clasifica» necesita más palabras del campo «${c}».`);
+        if (buenas.length < por) throw new Error(`«palabra.clasifica» necesita más palabras del campo «${c}».` + avisoVistas());
         const ws = azar.muestra(buenas, por).map((e) => e.p);
         ws.forEach((w) => usadas.add(w));
         return ws;

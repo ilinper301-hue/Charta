@@ -9,6 +9,7 @@ import { registrar } from "../nucleo/tipos.js";
 import { TOP } from "../render/papel.js";
 import { silabas } from "../lengua/reglas.js";
 import { rodear } from "../lengua/dibujo.js";
+import { avisoVistas } from "../lengua/vistas.js";
 import { alCaso, candidatas, cuantas, ajusta } from "./_lengua.js";
 import { repartir } from "./_fono.js";
 
@@ -24,7 +25,7 @@ export default registrar({
     const ejercicios = [];
     for (let i = 0; i < n; i++) {
       const posibles = TRIPLES.filter((t) => t.every((l) => bolsas[l].length));
-      if (!posibles.length) throw new Error(`«fono.larga» necesita más palabras: con esas opciones solo hay ${i} grupos y hacen falta ${n}. Prueba con otro tipo de sílabas.`);
+      if (!posibles.length) throw new Error(`«fono.larga» necesita más palabras: con esas opciones solo hay ${i} grupos y hacen falta ${n}. Prueba con otro tipo de sílabas.` + avisoVistas());
       const ws = azar.barajar(azar.elegir(posibles).map((l) => bolsas[l].pop().p)), cuenta = ws.map((w) => silabas(w).length);
       const objetivo = cuales[i] === "mas" ? Math.max(...cuenta) : Math.min(...cuenta);
       ejercicios.push({ datos: { palabras: ws.map((w) => alCaso(w, params.caso)), cual: cuales[i] }, solucion: { huecos: [], rodea: cuenta.indexOf(objetivo) } });

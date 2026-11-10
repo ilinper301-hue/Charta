@@ -2,23 +2,23 @@
 import assert from "node:assert/strict";
 import { ent, unicos, cuantos } from "./_ayuda.js";
 
-const horas = (act, tam, solo) => {
-  const es = act.ejercicios, modo = act.params.modo;
+const MIN = { punto: [0], media: [30], cuarto: [15, 45], todas: [0, 15, 30, 45] };
+const horas = (act, tam) => {
+  const es = act.ejercicios, ms = MIN[act.params.modo] || [0, 30];
   cuantos(es, tam === "media" ? 6 : 12);
   unicos(es, (e) => e.datos.h + ":" + e.datos.m, "horas repetidas");
-  for (const { datos: { h, m } } of es) { ent(h, 1, 12, "h"); assert.ok(m === 0 || m === 30, "minutos"); }
-  if (modo === "punto") assert.ok(es.every((e) => e.datos.m === 0), "punto: hay medias");
-  if (modo === "media") assert.ok(es.every((e) => e.datos.m === 30), "media: hay en punto");
-  if (!modo) assert.equal(es.filter((e) => e.datos.m === 0).length, es.length / 2, "mitad en punto y mitad y media");
+  for (const { datos: { h, m } } of es) { ent(h, 1, 12, "h"); assert.ok(ms.includes(m), "minutos del modo"); }
+  const n = ms.map((mm) => es.filter((e) => e.datos.m === mm).length);
+  assert.ok(Math.max(...n) - Math.min(...n) <= 1, "grupos de minutos a partes iguales");
   const por = (mm) => es.filter((e) => e.datos.m === mm).map((e) => e.datos.h);
-  for (const hs of [por(0), por(30)]) assert.equal(new Set(hs).size, hs.length, "horas repetidas en un grupo");
+  for (const mm of ms) { const hs = por(mm); assert.equal(new Set(hs).size, hs.length, "horas repetidas en un grupo"); }
 };
 const permutacion = (v, n) => assert.deepEqual([...v].sort((a, b) => a - b), Array.from({ length: n }, (_, i) => i), "no es una permutación");
 
 export default {
   "medida.reloj"(act, tam) {
     horas(act, tam);
-    for (const { datos: { h, m }, solucion } of act.ejercicios) assert.deepEqual(solucion.huecos, [h, m ? "30" : "00"]);
+    for (const { datos: { h, m }, solucion } of act.ejercicios) assert.deepEqual(solucion.huecos, [h, String(m).padStart(2, "0")]);
   },
 
   "medida.reloj2"(act, tam) {
@@ -27,10 +27,10 @@ export default {
   },
 
   "medida.dinero"(act, tam) {
-    const R = act.params.rango ?? 20, cent = act.params.modo === "centimos", cap = cent ? Math.min(R, 99) : Math.min(R, 50);
+    const R = act.params.rango ?? 20, cent = act.params.modo === "centimos", cap = cent ? Math.min(R, 99) : R > 100 ? R : Math.min(R, 50);
     cuantos(act.ejercicios, tam === "media" ? 4 : 8);
     unicos(act.ejercicios, (e) => e.solucion.huecos[0], "totales repetidos");
-    const permitidos = cent ? ["m1", "m2", "m5", "m10", "m20", "m50"] : ["m1", "m2", ...[5, 10, 20].filter((v) => v <= cap).map((v) => "b" + v)];
+    const permitidos = cent ? ["m1", "m2", "m5", "m10", "m20", "m50"] : ["m1", "m2", ...(R > 100 ? [5, 10, 20, 50, 100] : [5, 10, 20]).filter((v) => v <= cap).map((v) => "b" + v)];
     for (const { datos: { u, items }, solucion } of act.ejercicios) {
       assert.equal(u, cent ? "c" : "€");
       ent(items.length, 2, 6, "nº de piezas");
@@ -42,16 +42,16 @@ export default {
   },
 
   "medida.precios"(act, tam) {
-    const R = act.params.rango ?? 20, cap = Math.min(R, 20), cambio = act.params.modo === "cambio";
+    const R = act.params.rango ?? 20, dos = R > 20, cap = dos ? R : Math.min(R, 20), cambio = act.params.modo === "cambio", tope = dos ? 60 : 12;
     cuantos(act.ejercicios, tam === "media" ? 4 : 10);
     for (const { datos: d, solucion } of act.ejercicios) {
       if (cambio) {
-        assert.ok([5, 10, 20].includes(d.pago) && d.pago <= cap, "billete");
+        assert.ok((dos ? [20, 50, 100] : [5, 10, 20]).includes(d.pago) && d.pago <= cap, "billete");
         ent(d.precio, 1, d.pago - 1, "precio");
         assert.deepEqual(solucion.huecos, [d.pago - d.precio]); ent(d.pago - d.precio, 1, cap - 1, "vuelta");
       } else {
         assert.notEqual(d.a[0], d.b[0], "productos distintos");
-        ent(d.a[1], 1, 12, "pa"); ent(d.b[1], 1, 12, "pb");
+        ent(d.a[1], 1, tope, "pa"); ent(d.b[1], 1, tope, "pb");
         assert.deepEqual(solucion.huecos, [d.a[1] + d.b[1]]); ent(d.a[1] + d.b[1], 2, cap, "total");
       }
     }
@@ -83,8 +83,33 @@ export default {
   },
 
   "medida.tiempo"(act, tam) {
-    const es = act.ejercicios;
-    if (act.params.modo === "meses") {
+    const es = act.ejercicios, modo = act.params.modo;
+    if (modo === "equivalencias") {
+      cuantos(es, tam === "media" ? 6 : 12);
+      unicos(es, (e) => e.datos.a.join(" ") + e.datos.b, "equivalencias repetidas");
+      const MIN = { minuto: 1, hora: 60, día: 1440, semana: 10080, mes: 1, año: 12 }, uno = (u) => u.replace(/(es|s)$/, "").replace("dia", "día");
+      for (const { datos: { tipo, a, b }, solucion: { huecos: [n] } } of es) {
+        assert.equal(tipo, "equiv");
+        const ua = uno(a[1]) === "mese" ? "mes" : uno(a[1]), ub = uno(b) === "mese" ? "mes" : uno(b), na = a[0] === "media" ? 0.5 : a[0];
+        assert.ok(ua in MIN && ub in MIN, `unidades ${ua} ${ub}`);
+        assert.equal(na * MIN[ua], n * MIN[ub], `${a.join(" ")} = ${n} ${b}`);
+        assert.equal(b.endsWith("s") , n !== 1, "plural de la unidad");
+      }
+      if (tam !== "media") for (const u of ["hora", "día", "semana", "año"]) assert.ok(es.some((e) => e.datos.a.join(" ") === "1 " + u), `falta 1 ${u}`);
+      return;
+    }
+    if (modo === "horas") {
+      cuantos(es, tam === "media" ? 4 : 8);
+      unicos(es, (e) => e.datos.h * 100 + e.datos.m, "horas de partida repetidas");
+      assert.equal(es.filter((e) => e.datos.dentro).length, es.length / 2, "mitad «dentro de»");
+      for (const { datos: { h, m, k, dentro }, solucion } of es) {
+        ent(h, 1, 12, "h"); assert.ok(m === 0 || m === 30); ent(k, 1, 3, "k");
+        const h2 = dentro ? h + k : h - k; ent(h2, 1, 12, "sin pasar de las 12");
+        assert.deepEqual(solucion.huecos, [h2, m ? "30" : "00"]);
+      }
+      return;
+    }
+    if (modo === "meses") {
       cuantos(es, tam === "media" ? 1 : 7);
       const o = es[0].datos;
       assert.equal(o.tipo, "orden"); permutacion(o.orden, 12);

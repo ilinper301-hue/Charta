@@ -5,6 +5,7 @@
 // Todas las cantidades que aparecen y el resultado valen ≥ 2: así el plural del objeto es siempre correcto.
 // Completa: 4 problemas; media: 2 (la mitad de filas, como el resto de tipos).
 import { TOP, T, B, MENOS, INK, COLOR_SOLUCION } from "../render/papel.js";
+import { llevaSuma3, llevaResta3 } from "./_tres.js";
 
 export const NOMBRES = ["Ana", "Luis", "Marta", "Pablo", "Lucía", "Hugo", "Sara", "Daniel", "Carla", "Mario", "Paula", "Diego",
   "Elena", "Leo", "Irene", "Nico", "Julia", "Pedro", "Alba", "Sofía", "Martín", "Laura", "Hugo", "Noa"].filter((n, i, l) => l.indexOf(n) === i);
@@ -48,12 +49,13 @@ const OPERACION = { suma: "+", resta: MENOS };
 
 /** Cantidades según rango y nivel de llevadas (sumar: a + b ≤ R; restar: a ≤ R, a − b ≥ 2). Todas ≥ 2. */
 function cantidades(op, R, nivel, az) {
-  const lleva = op === "suma" ? (a, b) => (a % 10) + (b % 10) >= 10 : (a, b) => a % 10 < b % 10;
-  const par = [];
-  for (let a = 2; a <= R; a++) for (let b = 2; b <= R; b++) {
-    if (op === "suma" ? a + b > R || a + b < 4 : a - b < 2) continue;
-    par.push([a, b]);
-  }
+  const lleva = R > 100 ? (op === "suma" ? llevaSuma3 : llevaResta3)   // 2.º: llevada en cualquier columna
+    : op === "suma" ? (a, b) => (a % 10) + (b % 10) >= 10 : (a, b) => a % 10 < b % 10;
+  const par = [], ok = (a, b) => !(op === "suma" ? a + b > R || a + b < 4 : a - b < 2);
+  if (R > 100) {   // 2.º: muestra de 4.000 parejas (recorrerlas todas, hasta 999 × 999, es lento)
+    const vistos = new Set();
+    for (let k = 0; k < 4000; k++) { const a = az.entero(2, R), b = az.entero(2, R); if (ok(a, b) && !vistos.has(a * 1000 + b)) { vistos.add(a * 1000 + b); par.push([a, b]); } }
+  } else for (let a = 2; a <= R; a++) for (let b = 2; b <= R; b++) if (ok(a, b)) par.push([a, b]);
   const con = par.filter(([a, b]) => lleva(a, b)), sin = par.filter(([a, b]) => !lleva(a, b));
   const lista = { sin, con, mezcla: par }[nivel || "sin"];
   if (!lista.length || (nivel === "mezcla" && (!con.length || !sin.length)) || (nivel === "con" && !con.length))

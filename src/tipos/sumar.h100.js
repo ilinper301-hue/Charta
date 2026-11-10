@@ -6,9 +6,11 @@
 import { registrar } from "../nucleo/tipos.js";
 import { TOP, T, B } from "../render/papel.js";
 import { pares } from "./sumar.h20.js";
+import { paresSuma3 } from "./_tres.js";
 
 /** _pares_suma(R, nivel, cnt): cnt pares [a, b] sin repetir, alternando los grupos del nivel. */
 export function paresSuma(R, nivel, cnt, azar) {
+  if (R > 100) return paresSuma3(R, nivel, cnt, azar);   // 2.º: tres cifras (_tres.js)
   nivel = nivel || "sin";
   let grupos;
   if (R <= 10) {

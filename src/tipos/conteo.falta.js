@@ -25,14 +25,14 @@ export default registrar({
     };
   },
   dibujar(p, act) {
-    const cols = 2, rows = 8, { cel, cw, ch } = p.celdas(TOP, cols, rows, 10, 8), bw = 40, bh = 44, g = 7;
+    const tres = act.params?.rango > 100, cols = 2, rows = 8, { cel, cw, ch } = p.celdas(TOP, cols, rows, 10, 8), bw = tres ? 48 : 40, bh = 44, g = tres ? 4 : 7, fs = tres ? 20 : 22;   // 2.º: 3 cifras
     act.ejercicios.forEach((e, idx) => p.ejercicio(e.id, () => {
       const [x, y] = cel[idx], { a, huecos } = e.datos;
       p.marco(x, y, cw, ch);
       const bx = x + (cw - (L * bw + (L - 1) * g)) / 2;
       for (let j = 0; j < L; j++) {
         const k = huecos.indexOf(j);
-        p.caja(bx + j * (bw + g), y + (ch - bh) / 2, bw, bh, k >= 0 ? null : a + j, 22, k >= 0 ? e.solucion.huecos[k] : null);
+        p.caja(bx + j * (bw + g), y + (ch - bh) / 2, bw, bh, k >= 0 ? null : a + j, fs, k >= 0 ? e.solucion.huecos[k] : null);
       }
     }));
   },

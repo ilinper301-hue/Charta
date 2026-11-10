@@ -12,9 +12,15 @@ export const REPS = ["dedos", "dado", "domino", "marco", "palotes", "objetos", "
 /** Rango [mín, máx] de cada representación (columnas MIN, MAX de CAT). */
 export const RANGOS = {
   dedos: [1, 10], dado: [1, 12], domino: [1, 12], marco: [1, 40], palotes: [1, 30], objetos: [1, 30],
-  regletas: [1, 30], descomp: [2, 100], letras: [1, 100], recta: [1, 100], bloques: [1, 99],
+  regletas: [1, 30], descomp: [2, 999], letras: [1, 999], recta: [1, 999], bloques: [1, 99],
   cuadricula: [1, 100], monedas: [1, 69], abaco: [1, 99], du: [1, 99], atados: [1, 69],
 };
+/** Rangos de las fichas de 2.º (centenas): las seis representaciones que admiten hasta 999.
+ *  RANGOS conserva el 99 de bloques, ábaco y du porque suma.suma y combinada lo leen con Math.min(R, máx) y, con R = 100,
+ *  pasar a 100 cambiaría las fichas de 1.º. Las fichas de rango > 100 usan RANGOS_C (vía maximo()). */
+export const RANGOS_C = { ...RANGOS, bloques: [1, 999], abaco: [1, 999], du: [1, 999] };
+/** Máximo efectivo de la representación en una ficha de rango R. */
+export const maximo = (nombre, R) => Math.min(R, (R > 100 ? RANGOS_C : RANGOS)[nombre][1]);
 /** Representaciones con versión vacía "V(f)" y/o plantilla propia (columna TPL de CAT). */
 export const VACIAS = ["dado", "domino", "marco", "recta", "cuadricula"];
 export const PLANTILLAS = ["dado", "domino", "marco", "descomp", "letras", "recta", "cuadricula", "abaco", "du"];
@@ -262,18 +268,29 @@ function r_regletas(c, n) {
 }
 
 // ---------------------------------------------------------------- DESCOMPOSICIÓN
-function descompTxt(n, i) {
+function descompTxt(n, i, cen) {
+  if (cen && n >= 100 && n !== 100) {
+    // tres cifras: «300 + 40 + 5», sin sumandos 0 (305 → «300 + 5»); los cientos redondos: «200 → 100 + 100»
+    const [cc, r] = div(n, 100), [dd, uu] = div(r, 10);
+    if (!r) return `${n - 100} + 100`;
+    return [cc * 100, dd * 10, uu].filter((v) => v).join(" + ");
+  }
   if (n <= 10) { const a = (i * 3 + n) % (n - 1) + 1; return `${a} + ${n - a}`; }
   if (n % 10 === 0) return n === 20 ? "10 + 10" : `${n - 10} + 10`;
   return `${Math.floor(n / 10) * 10} + ${n % 10}`;
 }
-function r_descomp(c, n, i) {
-  const t = descompTxt(n, i);
+function r_descomp(c, n, i, vacio, rango, cen) {
+  const t = descompTxt(n, i, cen);
   let fs = 40;
   while (ancho(t, true, fs) > 140) fs -= 1;
   c.text(0, -fs * 0.33, t, fs, { negrita: true, cls: "descomp" });
 }
-function t_descomp(c) {
+function t_descomp(c, n, i, cen) {
+  if (cen && n >= 100) {   // tres huecos y dos «+»
+    for (const x of [-26, 26]) c.text(x, -8, "+", 26, { negrita: true });
+    for (const x of [-52, 0, 52]) c.line(x - 17, -12, x + 17, -12, 1.4);
+    return;
+  }
   c.text(0, -8, "+", 26, { negrita: true });
   c.line(-66, -12, -22, -12, 1.4);
   c.line(22, -12, 66, -12, 1.4);
@@ -284,25 +301,44 @@ const U = ["", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho",
   "once", "doce", "trece", "catorce", "quince", "dieciséis", "diecisiete", "dieciocho",
   "diecinueve", "veinte", "veintiuno", "veintidós", "veintitrés", "veinticuatro",
   "veinticinco", "veintiséis", "veintisiete", "veintiocho", "veintinueve"];
+const C = ["", "ciento", "doscientos", "trescientos", "cuatrocientos", "quinientos", "seiscientos", "setecientos", "ochocientos", "novecientos"];
 const D = { 3: "treinta", 4: "cuarenta", 5: "cincuenta", 6: "sesenta", 7: "setenta", 8: "ochenta", 9: "noventa" };
 export function nombreNumero(n) {
   if (n < 30) return U[n];
   if (n === 100) return "cien";
+  if (n > 100 && n < 1000) { const [cc, r] = div(n, 100); return C[cc] + (r ? " " + nombreNumero(r) : ""); }
   const [d, u] = div(n, 10);
   return (D[d] ?? String(n)) + (u ? " y " + U[u] : "");
 }
 function r_letras(c, n) {
   const t = nombreNumero(n);
-  let lineas = [t];
-  if (t.length > 11 && t.includes(" y ")) { const p = t.split(" y "); lineas = [p[0], "y " + p[1]]; }
-  let fs = 40;
-  while (Math.max(...lineas.map((x) => ancho(x, true, fs))) > 138) fs -= 1;
+  let lineas = [t], fs = 40;
+  if (n > 100) {   // centenas: «ciento» / «cuarenta» / «y cinco» (hasta 3 líneas)
+    const [cc, r] = div(n, 100), resto = r ? nombreNumero(r) : "";
+    lineas = [C[cc]];
+    if (resto.includes(" y ")) { const p = resto.split(" y "); lineas.push(p[0], "y " + p[1]); }
+    else if (resto) lineas.push(resto);
+    fs = lineas.length === 3 ? 25 : lineas.length === 2 ? 32 : 36;
+  } else if (t.length > 11 && t.includes(" y ")) { const p = t.split(" y "); lineas = [p[0], "y " + p[1]]; }
+  const lim = n > 100 ? 118 : 138;   // con centenas, más margen en la celda
+  while (Math.max(...lineas.map((x) => ancho(x, true, fs))) > lim) fs -= 1;
   lineas.forEach((x, k) => c.text(0, -fs * 0.33 + (lineas.length - 1) * fs * 0.55 - k * fs * 1.1, x, fs, { negrita: true, cls: "letras" }));
 }
-function t_letras(c) { c.line(-66, -8, 66, -8, 1.4); }
+function t_letras(c, n, i, cen) {
+  if (cen && n >= 100) { c.line(-66, 6, 66, 6, 1.4); c.line(-66, -22, 66, -22, 1.4); }   // dos renglones
+  else c.line(-66, -8, 66, -8, 1.4);
+}
 
 // ---------------------------------------------------------------- RECTA
-function r_recta(c, n, i, vacio, rango) {
+/** Inicio (múltiplo de 10) del tramo de 30 números que contiene n: solo depende de (n, i). */
+export function inicioTramo(n, i) {
+  const s0 = Math.floor(n / 10) * 10, cand = [];
+  for (let s = s0 - 20; s <= s0; s += 10) if (s >= 0 && s <= 970 && n - s >= 3 && n - s <= 27) cand.push(s);   // n no pegado a los extremos; el tramo no pasa de 1000
+  if (!cand.length) for (let s = s0 - 20; s <= s0; s += 10) if (s >= 0 && s <= 970 && n - s <= 30) cand.push(s);
+  return cand[(i + Math.floor(n / 10)) % cand.length];
+}
+function r_recta(c, n, i, vacio, rango, cen) {
+  if (cen) return r_recta_tramo(c, n, i, vacio);
   const lw = 1.6, maxn = rango > 30 ? 100 : 30, w = 144, step = w / maxn, x0 = -w / 2, y = -8;
   c.line(x0 - 6, y, x0 + w + 6, y, lw);
   for (const [sgn, xe] of [[-1, x0 - 6], [1, x0 + w + 6]])
@@ -316,6 +352,24 @@ function r_recta(c, n, i, vacio, rango) {
   }
   if (!vacio) {
     const mx = x0 + n * step;
+    c.line(mx, y + 34, mx, y + 14, 2, "flecha");
+    c.poly([[mx, y + 8], [mx - 6, y + 18], [mx + 6, y + 18]], { fill: INK, stroke: false, cls: "flecha" });
+  }
+}
+
+/** Recta de tres cifras: tramo de 30 números (marcas de 1 en 1, rotuladas cada 5) que empieza en una decena. */
+function r_recta_tramo(c, n, i, vacio) {
+  const lw = 1.6, w = 144, step = w / 30, x0 = -w / 2, y = -8, s = inicioTramo(n, i);
+  c.line(x0 - 6, y, x0 + w + 6, y, lw);
+  for (const [sgn, xe] of [[-1, x0 - 6], [1, x0 + w + 6]])
+    c.poly([[xe + sgn * 5, y], [xe, y + 3.5], [xe, y - 3.5]], { fill: INK, stroke: false });
+  for (let k = 0; k <= 30; k++) {
+    const big = k % 5 === 0, a = big ? 5.5 : 3;
+    c.line(x0 + k * step, y - a, x0 + k * step, y + a, big ? 1.3 : 0.9, "marca");
+    if (big) c.text(x0 + k * step, y - 18, String(s + k), 7.5);
+  }
+  if (!vacio) {
+    const mx = x0 + (n - s) * step;
     c.line(mx, y + 34, mx, y + 14, 2, "flecha");
     c.poly([[mx, y + 8], [mx - 6, y + 18], [mx + 6, y + 18]], { fill: INK, stroke: false, cls: "flecha" });
   }
@@ -341,7 +395,43 @@ function _bloques(c, n) {
     c.rect(x + col * (cubo + cg), y0 + (cubo + cg) * r_, cubo, cubo, { lw: 1.6, cls: "unidad" });
   }
 }
-function r_bloques(c, n, i) {
+/** Bloques con placas de cien: placas (1–2 filas de hasta 5), debajo barras de diez y cubos. */
+function _bloquesC(c, n) {
+  const [cc, r] = div(n, 100), [d, u] = div(r, 10);
+  const pl = 26, pg = 4, pcell = pl / 10, bw = 7, ub = 3.4, bh = 10 * ub, gap = 3, cubo = 8, cg = 2, ucols = 3, sep = 16;
+  const filas = cc > 5 ? 2 : cc ? 1 : 0, hP = filas ? filas * pl + (filas - 1) * pg : 0;
+  const hB = d ? bh : u ? Math.ceil(u / ucols) * (cubo + cg) - cg : 0, sepV = filas && hB ? 10 : 0;
+  const alto = hP + sepV + hB;
+  let yTop = alto / 2;
+  if (cc) {
+    const f1 = Math.min(cc, 5);
+    for (let q = 0; q < cc; q++) {
+      const fila = q < 5 ? 0 : 1, nf = fila ? cc - 5 : f1, col = fila ? q - 5 : q;
+      const x = -(nf * pl + (nf - 1) * pg) / 2 + col * (pl + pg), y = yTop - pl - fila * (pl + pg);
+      c.abrir("placa");
+      c.rect(x, y, pl, pl, { lw: 1.6 });
+      for (let j = 1; j < 10; j++) { c.lineGris(x + j * pcell, y, x + j * pcell, y + pl); c.lineGris(x, y + j * pcell, x + pl, y + j * pcell); }
+      c.cerrar();
+    }
+  }
+  const y0 = -alto / 2, nu = Math.min(u, ucols);   // barras y cubos apoyados en la base
+  const total = (d ? d * bw + (d - 1) * gap : 0) + (d && u ? sep : 0) + (u ? nu * cubo + (nu - 1) * cg : 0);
+  let x = -total / 2;
+  for (let q = 0; q < d; q++) {
+    c.abrir("decena");
+    c.rect(x, y0, bw, bh, { lw: 1.4 });
+    for (let j = 1; j < 10; j++) c.line(x, y0 + j * ub, x + bw, y0 + j * ub, 0.5);
+    c.cerrar();
+    x += bw + gap;
+  }
+  if (d) x += sep - gap;
+  for (let k = 0; k < u; k++) {
+    const [r_, col] = div(k, ucols);
+    c.rect(x + col * (cubo + cg), y0 + (cubo + cg) * r_, cubo, cubo, { lw: 1.4, cls: "unidad" });
+  }
+}
+function r_bloques(c, n, i, vacio, rango, cen) {
+  if (cen) return _bloquesC(c, n);
   const [d, u] = div(n, 10);
   const total = (d ? d * 11 + (d - 1) * 5 : 0) + (d && u ? 24 : 0) + (u ? Math.min(u, 3) * 10 + (Math.min(u, 3) - 1) * 3 : 0);
   c.grupo(0, 0, Math.min(1.3, 150 / Math.max(total, 1)), 0, () => _bloques(c, n, i));
@@ -411,11 +501,37 @@ function abaco(c, d, u, cuentas = true) {
   }
   c.cerrar();
 }
-function r_abaco(c, n) { const [d, u] = div(n, 10); c.grupo(0, 0, 0.7, 0, () => abaco(c, d, u)); }
-function t_abaco(c) { c.grupo(0, 0, 0.7, 0, () => abaco(c, 0, 0, false)); }
+/** Ábaco de tres varillas C, D, U (marco más ancho). */
+function abaco3(c, cc, d, u, cuentas = true) {
+  const fw = 156, fh = 100, x = -fw / 2, y = -fh / 2;
+  c.abrir("abaco");
+  c.rrect(x, y, fw, fh, 8, { lw: 1.8, cls: "marco-abaco" });
+  for (const [xr, k, lab] of [[-48, cc, "C"], [0, d, "D"], [48, u, "U"]]) {
+    c.abrir("varilla");
+    c.line(xr, y + 14, xr, y + fh - 5, 1.6);
+    if (cuentas) for (let j = 0; j < k; j++) c.circle(xr, y + 14 + 4.4 + j * 8.8, 4.4, { lw: 1.6, fill: INK, cls: "cuenta" });
+    c.text(xr, y + 4, lab, 8.5);
+    c.cerrar();
+  }
+  c.cerrar();
+}
+function r_abaco(c, n, i, vacio, rango, cen) {
+  if (cen) { const [cc, r] = div(n, 100), [d, u] = div(r, 10); c.grupo(0, 0, 0.7, 0, () => abaco3(c, cc, d, u)); return; }
+  const [d, u] = div(n, 10); c.grupo(0, 0, 0.7, 0, () => abaco(c, d, u));
+}
+function t_abaco(c, n, i, cen) { c.grupo(0, 0, 0.7, 0, () => cen ? abaco3(c, 0, 0, 0, false) : abaco(c, 0, 0, false)); }
 
 // ---------------------------------------------------------------- DECENAS Y UNIDADES
-function r_du(c, n) {
+function r_du(c, n, i, vacio, rango, cen) {
+  if (cen) {   // «3 centenas 4 decenas 5 unidades» (singular/plural)
+    const [cc, r] = div(n, 100), [d, u] = div(r, 10);
+    [[cc, cc !== 1 ? "centenas" : "centena"], [d, d !== 1 ? "decenas" : "decena"], [u, u !== 1 ? "unidades" : "unidad"]].forEach(([num, txt], k) => {
+      const yy = 30 - k * 30, wn = ancho(String(num), true, 26), wt = ancho(txt, false, 17), x = -(wn + 8 + wt) / 2;
+      c.text(x, yy - 9, String(num), 26, { negrita: true, anchor: "start", cls: "du-numero" });
+      c.text(x + wn + 8, yy - 7, txt, 17, { anchor: "start", cls: "du-texto" });
+    });
+    return;
+  }
   const [d, u] = div(n, 10);
   [[d, d !== 1 ? "decenas" : "decena"], [u, u !== 1 ? "unidades" : "unidad"]].forEach(([num, txt], k) => {
     const yy = 14 - k * 32, wn = ancho(String(num), true, 28), wt = ancho(txt, false, 18);
@@ -424,7 +540,15 @@ function r_du(c, n) {
     c.text(x + wn + 8, yy - 7, txt, 18, { anchor: "start", cls: "du-texto" });
   });
 }
-function t_du(c) {
+function t_du(c, n, i, cen) {
+  if (cen) {
+    ["centenas", "decenas", "unidades"].forEach((txt, k) => {
+      const yy = 30 - k * 30, wt = ancho(txt, false, 16), lw = 34, x = -(lw + 8 + wt) / 2;
+      c.line(x, yy - 6, x + lw, yy - 6, 1.4);
+      c.text(x + lw + 8, yy - 6, txt, 16, { anchor: "start" });
+    });
+    return;
+  }
   ["decenas", "unidades"].forEach((txt, k) => {
     const yy = 14 - k * 32, wt = ancho(txt, false, 16), lw = 34, x = -(lw + 8 + wt) / 2;
     c.line(x, yy - 6, x + lw, yy - 6, 1.4);
@@ -459,8 +583,8 @@ function r_atados(c, n, i) {
 const DIBUJO = {
   dedos: (c, n) => r_dedos(c, n), dado: r_dado, domino: r_domino, marco: r_marco, palotes: (c, n) => r_palotes(c, n),
   objetos: r_objetos, regletas: (c, n) => r_regletas(c, n), descomp: r_descomp, letras: (c, n) => r_letras(c, n),
-  recta: r_recta, bloques: r_bloques, cuadricula: r_cuadricula, monedas: r_monedas, abaco: (c, n) => r_abaco(c, n),
-  du: (c, n) => r_du(c, n), atados: r_atados,
+  recta: r_recta, bloques: r_bloques, cuadricula: r_cuadricula, monedas: r_monedas, abaco: r_abaco,
+  du: r_du, atados: r_atados,
 };
 const TPL = { descomp: t_descomp, letras: t_letras, abaco: t_abaco, du: t_du };
 
@@ -469,22 +593,23 @@ function comprobar(nombre) { if (!DIBUJO[nombre]) throw new Error(`Representaci�
 /**
  * Representación del número n. `i` desambigua variantes (descomposición, dominó, objetos…).
  * `vacio` solo afecta a dado, domino, marco, recta y cuadricula.
+ * `centenas` (modo centenas: ficha de rango > 100; implícito si n > 100): ábaco C/D/U, du con centenas, bloques con placas, recta de tramo, descomp de 3 cifras.
  * `rango` (solo recta): 30 o 100 (en el motor es RANGO = R de la ficha); por defecto 30 si n ≤ 30, si no 100.
  */
-export function rep(nombre, n, { i = 0, vacio = false, rango } = {}) {
+export function rep(nombre, n, { i = 0, vacio = false, rango, centenas = false } = {}) {
   comprobar(nombre);
   const c = new Lienzo();
-  DIBUJO[nombre](c, n, i, vacio, rango ?? (n <= 30 ? 30 : 100));
+  DIBUJO[nombre](c, n, i, vacio, rango ?? (n <= 30 ? 30 : 100), centenas || n > 100);
   return c.resultado();
 }
 
 /** Columna TPL de CAT: plantilla vacía para que el alumno dibuje; null si no hay. */
-export function plantilla(nombre, n, { i = 0, rango } = {}) {
+export function plantilla(nombre, n, { i = 0, rango, centenas = false } = {}) {
   comprobar(nombre);
-  if (VACIAS.includes(nombre)) return rep(nombre, n, { i, vacio: true, rango });
+  if (VACIAS.includes(nombre)) return rep(nombre, n, { i, vacio: true, rango, centenas });
   if (!TPL[nombre]) return null;
   const c = new Lienzo();
-  TPL[nombre](c, n, i);
+  TPL[nombre](c, n, i, centenas || n > 100);
   return c.resultado();
 }
 

@@ -6,10 +6,12 @@
 //                solucion: { huecos: ["Marta"] }
 // Nombres: banco de src/tipos/_orto.js (niños, niñas, mascotas, pueblos y ciudades; ninguno empieza por «I» ni es una palabra común).
 // Opciones: tarea (rodear / escribir) · nombres (personas / mascotas / pueblos y ciudades / mezclados). Sin repetir ni nombres ni palabras.
+// Con letras elegidas (vistas.js): solo entran los nombres (y las palabras comunes) que se escriben con ellas; si no hay nombres para n tarjetas, error «necesita».
 // Completa: 12 tarjetas (2 × 6); media: 6. Si el banco de la categoría no llega, se usan menos nombres por tarjeta (mínimo uno).
 import { registrar } from "../nucleo/tipos.js";
 import { TOP } from "../render/papel.js";
 import { rodear } from "../lengua/dibujo.js";
+import { filtrarVistas, avisoVistas } from "../lengua/vistas.js";
 import { candidatas, cuantas } from "./_lengua.js";
 import { NOMBRES, nombresDe } from "./_orto.js";
 
@@ -20,8 +22,8 @@ export default registrar({
   version: 1,
   generar(params, azar, { tamano }) {
     const n = cuantas(tamano, 12), escribe = params.tarea === "escribe";
-    const banco = azar.barajar(nombresDe(params.nombres || null));
-    if (banco.length < n) throw new Error(`«orto.mayuscula» necesita más nombres: de ese tipo solo hay ${banco.length} y hacen falta ${n}.`);
+    const banco = azar.barajar(filtrarVistas(nombresDe(params.nombres || null), (x) => x.n));
+    if (banco.length < n) throw new Error(`«orto.mayuscula» necesita más nombres: de ese tipo solo hay ${banco.length} y hacen falta ${n}.` + avisoVistas());
     if (escribe) {
       return {
         enunciado: "Escribe cada nombre con mayúscula\nen el cuadro gris.",
@@ -32,7 +34,7 @@ export default registrar({
     const dos = Math.min(Math.floor(n / 2), banco.length - n);
     const ks = azar.barajar(Array.from({ length: n }, (_, i) => (i < dos ? 2 : 1)));
     const comunes = azar.barajar(candidatas({ tipo: params.tipo }, { maxLetras: 7 }).filter((e) => !COMUNES.has(e.p)));
-    if (comunes.length < n * 2) throw new Error("«orto.mayuscula» necesita más palabras comunes.");
+    if (comunes.length < n * 2) throw new Error("«orto.mayuscula» necesita más palabras comunes." + avisoVistas());
     let b = 0;
     return {
       enunciado: "Rodea las palabras que llevan mayúscula.",

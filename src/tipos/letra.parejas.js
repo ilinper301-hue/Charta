@@ -4,15 +4,18 @@
 // Tarea «escribir» (24 pares, 3 × 8): datos { mayus, minus, falta: "mayus" | "minus" }  solucion { huecos: [la letra que falta] }
 // Reglas: letras distintas; nunca salen juntas «i» y «l» (la «I» mayúscula de Fredoka se confunde con la «l»).
 // Opciones: tarea (unir / escribir la que falta). Letras: todas.
+// Con letras elegidas (vistas.js) solo salen ellas; si hay menos de las que caben (8 / 24), la ficha lleva menos filas o parejas (mínimo 4 letras).
 import { registrar } from "../nucleo/tipos.js";
 import { TOP, M, W, T, B } from "../render/papel.js";
-import { ABECEDARIO } from "../lengua/reglas.js";
+import { letrasActivas, avisoVistas } from "../lengua/vistas.js";
 import { unir } from "../lengua/dibujo.js";
 
-/** n letras distintas al azar del abecedario (con ñ) sin que salgan a la vez «i» y «l». */
+const MIN_LETRAS = 4;
+/** n letras distintas al azar del abecedario (con ñ; solo las elegidas si las hay) sin que salgan a la vez «i» y «l».
+ *  Si no hay n utilizables, devuelve las que haya. */
 export function letrasSueltas(azar, n) {
   const out = [];
-  for (const l of azar.barajar(ABECEDARIO)) {
+  for (const l of azar.barajar(letrasActivas())) {
     if ((l === "i" && out.includes("l")) || (l === "l" && out.includes("i"))) continue;
     out.push(l); if (out.length === n) break;
   }
@@ -23,16 +26,17 @@ export default registrar({
   id: "letra.parejas",
   version: 1,
   generar(params, azar) {
+    const pocas = (ls) => { if (ls.length < MIN_LETRAS) throw new Error(`«letra.parejas» necesita al menos ${MIN_LETRAS} letras (sin «i» y «l» a la vez): con esas opciones solo hay ${ls.length}.` + avisoVistas()); return ls; };
     if (params.tarea === "escribe") {
       return {
         enunciado: "Escribe la letra que falta en cada pareja:\nla mayúscula o la minúscula.",
-        ejercicios: letrasSueltas(azar, 24).map((l, i) => {
+        ejercicios: pocas(letrasSueltas(azar, 24)).map((l, i) => {
           const falta = azar.real() < 0.5 ? "mayus" : "minus";
           return { datos: { mayus: l.toUpperCase(), minus: l, falta }, solucion: { huecos: [falta === "mayus" ? l.toUpperCase() : l] } };
         }),
       };
     }
-    const ls = letrasSueltas(azar, 8);
+    const ls = pocas(letrasSueltas(azar, 8));
     let der = azar.barajar(ls);
     while (der.every((l, i) => l === ls[i])) der = azar.barajar(ls);
     return {

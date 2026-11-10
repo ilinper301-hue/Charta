@@ -1,6 +1,10 @@
 // Charta · pruebas de las 16 representaciones SVG (paso 2.2).  Uso: node tests/test_rep.js
 import assert from "node:assert/strict";
-import { REPS, RANGOS, rep, plantilla, svgCompleto, nombreNumero } from "../src/rep/index.js";
+import { REPS, RANGOS, RANGOS_C, rep, plantilla, svgCompleto, nombreNumero, inicioTramo } from "../src/rep/index.js";
+import "../src/tipos/index.js";
+import { tipo } from "../src/nucleo/tipos.js";
+import { crearAzar } from "../src/nucleo/azar.js";
+import { rep as invRep } from "./inv/_ayuda.js";
 
 let n = 0;
 const prueba = (nombre, f) => { try { f(); n++; } catch (e) { console.error("FALLA:", nombre, "\n", e.message); process.exitCode = 1; } };
@@ -154,6 +158,63 @@ prueba("plantilla: null donde TPL es None; svgCompleto", () => {
   for (const nom of ["dado", "domino", "marco", "descomp", "letras", "recta", "cuadricula", "abaco", "du"]) assert.ok(plantilla(nom, 7), nom);
   const s = svgCompleto(rep("dado", 3), 2);
   assert.ok(s.startsWith('<svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 ') && s.endsWith("</svg>"));
+});
+
+// ---------------------------------------------------------------- centenas (2.º)
+const CONTROL = [[100, "cien"], [101, "ciento uno"], [110, "ciento diez"], [115, "ciento quince"], [116, "ciento dieciséis"],
+  [120, "ciento veinte"], [121, "ciento veintiuno"], [122, "ciento veintidós"], [123, "ciento veintitrés"], [126, "ciento veintiséis"],
+  [130, "ciento treinta"], [145, "ciento cuarenta y cinco"], [200, "doscientos"], [201, "doscientos uno"], [300, "trescientos"],
+  [340, "trescientos cuarenta"], [400, "cuatrocientos"], [500, "quinientos"], [512, "quinientos doce"], [600, "seiscientos"],
+  [700, "setecientos"], [716, "setecientos dieciséis"], [800, "ochocientos"], [900, "novecientos"], [990, "novecientos noventa"],
+  [999, "novecientos noventa y nueve"]];
+prueba("letras: lista de control 100–999", () => {
+  for (const [k, t] of CONTROL) assert.equal(nombreNumero(k), t, `nombreNumero(${k})`);
+  for (let k = 1; k <= 999; k++) { const t = nombreNumero(k); assert.ok(t && !/\d|undefined/.test(t), `letras ${k}`); }
+});
+
+const SEIS = ["bloques", "abaco", "du", "letras", "recta", "descomp"];
+const hojas = (nombre, R, s) => tipo(`rep.${nombre}`).generar({ rango: R, lectura: false }, crearAzar(s), { tamano: "completa" });
+prueba("centenas: rangos y fichas de rango 200 / 999", () => {
+  for (const nom of SEIS) assert.equal(RANGOS_C[nom][1], 999, nom);
+  for (const nom of SEIS) for (const R of [200, 999]) for (let s = 1; s <= 8; s++) {
+    const a = hojas(nom, R, s);
+    invRep(nom)({ params: { rango: R, lectura: false }, ejercicios: a.ejercicios }, "completa");
+    assert.ok(a.ejercicios.some((e) => e.datos.n >= 100), `${nom} ${R}: algún n ≥ 100`);
+    for (const e of a.ejercicios) assert.equal(e.datos.centenas, true);
+  }
+  // 1.º: sin campo «centenas»
+  for (const nom of SEIS) for (const e of hojas(nom, 100, 3).ejercicios) assert.ok(!("centenas" in e.datos), nom);
+});
+
+prueba("centenas: bloques (placas + barras + cubos), ábaco (≤ 9 por varilla), du, descomp, recta", () => {
+  for (let k = 1; k <= 999; k++) {
+    const b = rep("bloques", k, { centenas: true });
+    assert.equal(cuenta(b, "placa") * 100 + cuenta(b, "decena") * 10 + cuenta(b, "unidad"), k, `bloques ${k}`);
+    const v = rep("abaco", k, { centenas: true }).svg.split('<g class="varilla">').slice(1);
+    assert.deepEqual(v.map((x) => (x.match(/class="cuenta"/g) || []).length), [Math.floor(k / 100), Math.floor(k / 10) % 10, k % 10], `ábaco ${k}`);
+    const du = [...rep("du", k, { centenas: true }).svg.matchAll(/class="du-numero"[^>]*>(\d+)</g)].map((m) => +m[1]);
+    assert.deepEqual(du, [Math.floor(k / 100), Math.floor(k / 10) % 10, k % 10], `du ${k}`);
+    for (let i = 0; i < 3 && k >= 2; i++) {
+      const t = [...rep("descomp", k, { i, centenas: k >= 100 }).svg.matchAll(/>([\d +]+)<\/text>/g)][0][1];
+      const sum = t.split(" + ").map(Number).reduce((a, b) => a + b, 0);
+      assert.equal(sum, k, `descomp ${k}`); assert.ok(!/\b0\b/.test(t), `descomp ${k} lleva un 0: ${t}`);
+      if (k > 100) {
+        const s = inicioTramo(k, i);
+        assert.ok(s % 10 === 0 && s >= 0 && s <= k && k <= s + 30, `tramo ${k}/${i}: ${s}`);
+        assert.equal(inicioTramo(k, i), s);
+      }
+    }
+  }
+  const dsc = (k) => rep("descomp", k).svg.match(/>([\d +]+)<\/text>/)[1];
+  assert.equal(dsc(345), "300 + 40 + 5"); assert.equal(dsc(305), "300 + 5"); assert.equal(dsc(340), "300 + 40"); assert.equal(dsc(200), "100 + 100");
+  const txt = (k, o) => rep("du", k, o).svg;
+  assert.ok(txt(111, {}).includes(">centena<") && txt(111, {}).includes(">decena<") && txt(111, {}).includes(">unidad<"));
+  assert.ok(txt(345, {}).includes(">centenas<") && txt(57, { centenas: true }).includes(">0<"));
+  assert.equal(cuenta(rep("recta", 345), "marca"), 31);
+  assert.equal(cuenta(plantilla("abaco", 345), "varilla"), 3); assert.equal(cuenta(plantilla("abaco", 345), "cuenta"), 0);
+  assert.equal((plantilla("descomp", 345).svg.match(/<line /g) || []).length, 3);
+  assert.equal((plantilla("descomp", 345).svg.match(/>\+</g) || []).length, 2);
+  assert.equal((plantilla("du", 345).svg.match(/<line /g) || []).length, 3);
 });
 
 console.log(`test_rep: ${n} pruebas OK`);

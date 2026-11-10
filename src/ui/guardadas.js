@@ -7,7 +7,7 @@ const CLAVES = { recientes: "charta:recientes", favoritos: "charta:favoritos" };
 /** Solo los campos permitidos (así ningún nombre de alumno puede colarse). */
 export function limpiar(c) {
   return {
-    actividades: c.actividades.map((a) => ({ tipo: a.tipo, params: { ...a.params } })),
+    actividades: c.actividades.map((a) => ({ tipo: a.tipo, ...(Number.isInteger(a.curso) && { curso: a.curso }), params: { ...a.params } })),
     semilla: c.semilla | 0, titulo: c.titulo || "", variaciones: c.variaciones || "iguales", bn: !!c.bn, grande: !!c.grande, facil: !!c.facil,
     ...(c.fuente && c.fuente !== "andika" && { fuente: String(c.fuente) }),     // solo el nombre; la letra no viaja
   };

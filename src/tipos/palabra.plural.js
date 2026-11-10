@@ -4,10 +4,12 @@
 // Reglas: nombre del léxico de 3 a 8 letras; el plural es el de reglas.js (plural()) y no cambia de tilde ni es igual al singular (camión → camiones queda fuera).
 //         «Solo -s»: nombres acabados en vocal sin tilde. «-s y -es»: un tercio acaba en consonante (flor → flores, pez → peces, rey → reyes) y el resto en vocal.
 //         Sin repetidos. Completa: 12; media: 6.
+// Con letras elegidas (vistas.js): el singular y el plural (los dos se leen o se escriben) usan solo ellas.
 // Opciones: plurales (solo -s / -s y -es) · sentido (de uno a muchos / de muchos a uno) · letra (minúscula / MAYÚSCULA).
 import { registrar } from "../nucleo/tipos.js";
 import { TOP, B, T } from "../render/papel.js";
 import { plural } from "../lengua/reglas.js";
+import { filtrarVistas, avisoVistas } from "../lengua/vistas.js";
 import { cuantas, ajusta } from "./_lengua.js";
 import { NOMBRES } from "./_palabra.js";
 
@@ -21,8 +23,9 @@ export default registrar({
   generar(params, azar, { tamano }) {
     const n = cuantas(tamano, 12), conEs = params.plural === "es", reves = params.sentido === "alreves";
     const nEs = conEs ? Math.round(n / 3) : 0;
-    const conso = azar.barajar(SIMPLES.filter(enConsonante)), vocal = azar.barajar(SIMPLES.filter(enVocal));
-    if (conso.length < nEs || vocal.length < n - nEs) throw new Error("«palabra.plural» necesita más nombres en el léxico para esas opciones.");
+    const ambos = filtrarVistas(SIMPLES, (e) => e.p + " " + plural(e.p));
+    const conso = azar.barajar(ambos.filter(enConsonante)), vocal = azar.barajar(ambos.filter(enVocal));
+    if (conso.length < nEs || vocal.length < n - nEs) throw new Error("«palabra.plural» necesita más nombres en el léxico para esas opciones." + avisoVistas());
     const elegidos = [...conso.slice(0, nEs), ...vocal.slice(0, n - nEs)];
     const mayus = params.caso === "mayus", f = (t) => (mayus ? t.toUpperCase() : t);
     return {

@@ -34550,6 +34550,2326 @@
    "78c5df4dabfb7a70"
   ]
  },
+ "2.º sumas en vertical": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Sumas en vertical",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 8,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "sumar.vertical",
+       "tipoVersion": 1,
+       "params": {
+        "nivel": "ud",
+        "sumandos": 3,
+        "rango": 999
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Suma primero las unidades, después las decenas y las centenas.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "a": 442,
+          "b": 79,
+          "c": 3
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           2,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "a": 757,
+          "b": 83,
+          "c": 12
+         },
+         "solucion": {
+          "huecos": [
+           8,
+           5,
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "a": 466,
+          "b": 34,
+          "c": 8
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           0,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": 183,
+          "b": 17,
+          "c": 10
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           1,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "a": 899,
+          "b": 11,
+          "c": 8
+         },
+         "solucion": {
+          "huecos": [
+           9,
+           1,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": 556,
+          "b": 194,
+          "c": 28
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           7,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "a": 798,
+          "b": 127,
+          "c": 44
+         },
+         "solucion": {
+          "huecos": [
+           9,
+           6,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "a": 535,
+          "b": 63,
+          "c": 58
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           5,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "a": 895,
+          "b": 16,
+          "c": 7
+         },
+         "solucion": {
+          "huecos": [
+           9,
+           1,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "a": 385,
+          "b": 311,
+          "c": 9
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           0,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "a": 417,
+          "b": 289,
+          "c": 33
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           3,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "a": 389,
+          "b": 79,
+          "c": 75
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           4,
+           3
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "c91875b3520acdbd"
+  ],
+  "svgSolucion": [
+   "0d341ef7eb05a770"
+  ]
+ },
+ "2.º restas con prueba": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Restas en vertical",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 8,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "restar.vertical",
+       "tipoVersion": 1,
+       "params": {
+        "nivel": "con",
+        "prueba": true,
+        "rango": 999
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Resta y comprueba con la suma de abajo.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "a": 353,
+          "b": 9
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           4,
+           4,
+           344
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "a": 221,
+          "b": 149
+         },
+         "solucion": {
+          "huecos": [
+           0,
+           7,
+           2,
+           72
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "a": 171,
+          "b": 7
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           6,
+           4,
+           164
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": 832,
+          "b": 47
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           8,
+           5,
+           785
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "a": 818,
+          "b": 30
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           8,
+           8,
+           788
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": 341,
+          "b": 8
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           3,
+           3,
+           333
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "a": 210,
+          "b": 139
+         },
+         "solucion": {
+          "huecos": [
+           0,
+           7,
+           1,
+           71
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "a": 815,
+          "b": 271
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           4,
+           4,
+           544
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "a": 605,
+          "b": 80
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           2,
+           5,
+           525
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "a": 752,
+          "b": 7
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           4,
+           5,
+           745
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "a": 796,
+          "b": 547
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           4,
+           9,
+           249
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "a": 905,
+          "b": 16
+         },
+         "solucion": {
+          "huecos": [
+           8,
+           8,
+           9,
+           889
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "b4861e0345a356ea"
+  ],
+  "svgSolucion": [
+   "63569e21b5db2f42"
+  ]
+ },
+ "2.º descomposición y canjes": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Descomposición en C, D y U y los canjes",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 8,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "valor.descdu",
+       "tipoVersion": 1,
+       "params": {
+        "modo": "suma",
+        "nivel": null,
+        "rango": 999
+       },
+       "tamano": "media",
+       "color": "rosa",
+       "enunciado": "Descompón cada número en una suma de centenas, decenas y unidades.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "n": 136,
+          "suma": true,
+          "centenas": true
+         },
+         "solucion": {
+          "huecos": [
+           100,
+           30,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "n": 229,
+          "suma": true,
+          "centenas": true
+         },
+         "solucion": {
+          "huecos": [
+           200,
+           20,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "n": 151,
+          "suma": true,
+          "centenas": true
+         },
+         "solucion": {
+          "huecos": [
+           100,
+           50,
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "n": 235,
+          "suma": true,
+          "centenas": true
+         },
+         "solucion": {
+          "huecos": [
+           200,
+           30,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "n": 148,
+          "suma": true,
+          "centenas": true
+         },
+         "solucion": {
+          "huecos": [
+           100,
+           40,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "n": 534,
+          "suma": true,
+          "centenas": true
+         },
+         "solucion": {
+          "huecos": [
+           500,
+           30,
+           4
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "valor.canje",
+       "tipoVersion": 1,
+       "params": {
+        "nivel": null,
+        "rango": 500
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Cambia decenas y centenas: escribe cuántas centenas, decenas o unidades son.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "forma": "cu",
+          "n": 6,
+          "centenas": true
+         },
+         "solucion": {
+          "huecos": [
+           600
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "forma": "dc",
+          "n": 91,
+          "centenas": true
+         },
+         "solucion": {
+          "huecos": [
+           9,
+           1
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "forma": "dc",
+          "n": 79,
+          "centenas": true
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "forma": "cd",
+          "n": 1,
+          "centenas": true
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "0d712359d23f330e"
+  ],
+  "svgSolucion": [
+   "698a517048ba7c8d"
+  ]
+ },
+ "2.º recta de 10 en 10 y de 100 en 100": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Suma en la recta numérica y resta en la recta numérica",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 8,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "sumar.recta",
+       "tipoVersion": 1,
+       "params": {
+        "salto": null,
+        "rango": 999
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Sigue el salto en la recta y escribe el resultado.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "a": 10,
+          "b": 20,
+          "N": 10,
+          "desde": 0,
+          "paso": 10
+         },
+         "solucion": {
+          "huecos": [
+           30
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "a": 620,
+          "b": 70,
+          "N": 10,
+          "desde": 600,
+          "paso": 10
+         },
+         "solucion": {
+          "huecos": [
+           690
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "a": 160,
+          "b": 40,
+          "N": 10,
+          "desde": 100,
+          "paso": 10
+         },
+         "solucion": {
+          "huecos": [
+           200
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "restar.recta",
+       "tipoVersion": 1,
+       "params": {
+        "salto": 100,
+        "rango": 999
+       },
+       "tamano": "media",
+       "color": "verde",
+       "enunciado": "Salta hacia atrás en la recta y escribe el resultado.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "a": 500,
+          "b": 200,
+          "N": 9,
+          "desde": 0,
+          "paso": 100
+         },
+         "solucion": {
+          "huecos": [
+           300
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "a": 600,
+          "b": 300,
+          "N": 9,
+          "desde": 0,
+          "paso": 100
+         },
+         "solucion": {
+          "huecos": [
+           300
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "a": 900,
+          "b": 600,
+          "N": 9,
+          "desde": 0,
+          "paso": 100
+         },
+         "solucion": {
+          "huecos": [
+           300
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "62a490a39c97374f"
+  ],
+  "svgSolucion": [
+   "a6bc47dfad49df54"
+  ]
+ },
+ "2.º encadenadas": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Sumas encadenadas y restas encadenadas",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 8,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "sumar.encadenadas",
+       "tipoVersion": 1,
+       "params": {
+        "salto": null,
+        "sumandos": 4,
+        "rango": 999
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Suma los números y escribe el resultado.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "x": 710,
+          "y": 10,
+          "z": 10,
+          "w": 10
+         },
+         "solucion": {
+          "huecos": [
+           740
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "x": 280,
+          "y": 80,
+          "z": 40,
+          "w": 20
+         },
+         "solucion": {
+          "huecos": [
+           420
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "x": 190,
+          "y": 90,
+          "z": 40,
+          "w": 70
+         },
+         "solucion": {
+          "huecos": [
+           390
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "x": 850,
+          "y": 20,
+          "z": 60,
+          "w": 30
+         },
+         "solucion": {
+          "huecos": [
+           960
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "x": 640,
+          "y": 60,
+          "z": 80,
+          "w": 70
+         },
+         "solucion": {
+          "huecos": [
+           850
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "x": 720,
+          "y": 10,
+          "z": 40,
+          "w": 30
+         },
+         "solucion": {
+          "huecos": [
+           800
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "x": 320,
+          "y": 80,
+          "z": 30,
+          "w": 10
+         },
+         "solucion": {
+          "huecos": [
+           440
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "x": 160,
+          "y": 40,
+          "z": 10,
+          "w": 90
+         },
+         "solucion": {
+          "huecos": [
+           300
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "restar.encadenadas",
+       "tipoVersion": 1,
+       "params": {
+        "salto": 100,
+        "rango": 999
+       },
+       "tamano": "media",
+       "color": "verde",
+       "enunciado": "Resta de izquierda a derecha y escribe el resultado.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "a": 700,
+          "b": 200,
+          "c": 400
+         },
+         "solucion": {
+          "huecos": [
+           100
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "a": 700,
+          "b": 300,
+          "c": 300
+         },
+         "solucion": {
+          "huecos": [
+           100
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "a": 700,
+          "b": 200,
+          "c": 100
+         },
+         "solucion": {
+          "huecos": [
+           400
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "a": 800,
+          "b": 200,
+          "c": 500
+         },
+         "solucion": {
+          "huecos": [
+           100
+          ]
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "a": 900,
+          "b": 600,
+          "c": 200
+         },
+         "solucion": {
+          "huecos": [
+           100
+          ]
+         }
+        },
+        {
+         "id": "a2e6",
+         "datos": {
+          "a": 900,
+          "b": 300,
+          "c": 400
+         },
+         "solucion": {
+          "huecos": [
+           200
+          ]
+         }
+        },
+        {
+         "id": "a2e7",
+         "datos": {
+          "a": 500,
+          "b": 200,
+          "c": 100
+         },
+         "solucion": {
+          "huecos": [
+           200
+          ]
+         }
+        },
+        {
+         "id": "a2e8",
+         "datos": {
+          "a": 900,
+          "b": 500,
+          "c": 300
+         },
+         "solucion": {
+          "huecos": [
+           100
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "fd2afee0567d2b47"
+  ],
+  "svgSolucion": [
+   "eeabb39946612123"
+  ]
+ },
+ "2.º dobles y mitades": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Dobles y mitades",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 8,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "sumar.dobles",
+       "tipoVersion": 1,
+       "params": {
+        "modo": null,
+        "operacion": "mezcla",
+        "rango": 100
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Calcula el doble o la mitad.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "n": 12,
+          "forma": 2
+         },
+         "solucion": {
+          "huecos": [
+           12
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "n": 13,
+          "forma": 2
+         },
+         "solucion": {
+          "huecos": [
+           13
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "n": 14,
+          "forma": 0
+         },
+         "solucion": {
+          "huecos": [
+           28
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "n": 33,
+          "forma": 0
+         },
+         "solucion": {
+          "huecos": [
+           66
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "n": 24,
+          "forma": 2
+         },
+         "solucion": {
+          "huecos": [
+           24
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "n": 20,
+          "forma": 0
+         },
+         "solucion": {
+          "huecos": [
+           40
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "n": 30,
+          "forma": 2
+         },
+         "solucion": {
+          "huecos": [
+           30
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "n": 31,
+          "forma": 2
+         },
+         "solucion": {
+          "huecos": [
+           31
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "n": 23,
+          "forma": 2
+         },
+         "solucion": {
+          "huecos": [
+           23
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "n": 32,
+          "forma": 1
+         },
+         "solucion": {
+          "huecos": [
+           64
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "n": 11,
+          "forma": 0
+         },
+         "solucion": {
+          "huecos": [
+           22
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "n": 40,
+          "forma": 0
+         },
+         "solucion": {
+          "huecos": [
+           80
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "b20d50ec50808dab"
+  ],
+  "svgSolucion": [
+   "51356f3d41badb12"
+  ]
+ },
+ "2.º agrupa en centenas": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Agrupa en centenas",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 8,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "valor.agrupa",
+       "tipoVersion": 1,
+       "params": {
+        "rango": 300
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Rodea grupos de 10 decenas y escribe cuántas centenas, decenas y unidades hay.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "n": 188,
+          "centenas": true
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           8,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "n": 231,
+          "centenas": true
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           3,
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "n": 100,
+          "centenas": true
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           0,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "n": 194,
+          "centenas": true
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           9,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "n": 240,
+          "centenas": true
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           4,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "n": 263,
+          "centenas": true
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           6,
+           3
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "9b7fe59cf60cb9b6"
+  ],
+  "svgSolucion": [
+   "6bc1356de4cbaac5"
+  ]
+ },
+ "2.º decenas y cifra": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Sumas de decenas y el valor de la cifra",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 8,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "sumar.decenas",
+       "tipoVersion": 1,
+       "params": {
+        "modo": null,
+        "rango": 999
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Suma las decenas y las centenas y escribe el resultado.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "a": 100,
+          "b": 300,
+          "forma": 2
+         },
+         "solucion": {
+          "huecos": [
+           100
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "a": 560,
+          "b": 70,
+          "forma": 1
+         },
+         "solucion": {
+          "huecos": [
+           70
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "a": 10,
+          "b": 50,
+          "forma": 0
+         },
+         "solucion": {
+          "huecos": [
+           60
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": 500,
+          "b": 200,
+          "forma": 1
+         },
+         "solucion": {
+          "huecos": [
+           200
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "a": 510,
+          "b": 20,
+          "forma": 2
+         },
+         "solucion": {
+          "huecos": [
+           510
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": 400,
+          "b": 500,
+          "forma": 2
+         },
+         "solucion": {
+          "huecos": [
+           400
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "a": 650,
+          "b": 30,
+          "forma": 0
+         },
+         "solucion": {
+          "huecos": [
+           680
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "a": 200,
+          "b": 100,
+          "forma": 0
+         },
+         "solucion": {
+          "huecos": [
+           300
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "a": 400,
+          "b": 100,
+          "forma": 2
+         },
+         "solucion": {
+          "huecos": [
+           400
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "a": 60,
+          "b": 80,
+          "forma": 1
+         },
+         "solucion": {
+          "huecos": [
+           80
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "a": 80,
+          "b": 60,
+          "forma": 1
+         },
+         "solucion": {
+          "huecos": [
+           60
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "a": 180,
+          "b": 80,
+          "forma": 2
+         },
+         "solucion": {
+          "huecos": [
+           180
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "valor.cifra",
+       "tipoVersion": 1,
+       "params": {
+        "rango": 999
+       },
+       "tamano": "media",
+       "color": "rosa",
+       "enunciado": "Escribe cuánto vale cada cifra.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "n": 951,
+          "centenas": true
+         },
+         "solucion": {
+          "huecos": [
+           900,
+           50,
+           1
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "n": 826,
+          "centenas": true
+         },
+         "solucion": {
+          "huecos": [
+           800,
+           20,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "n": 934,
+          "centenas": true
+         },
+         "solucion": {
+          "huecos": [
+           900,
+           30,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "n": 471,
+          "centenas": true
+         },
+         "solucion": {
+          "huecos": [
+           400,
+           70,
+           1
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "0465db3043b618f2"
+  ],
+  "svgSolucion": [
+   "7b58931ce1421b83"
+  ]
+ },
+ "2.º reloj con cuartos": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Los relojes y dibuja las agujas",
+   "curso": 2,
+   "area": "matematicas",
+   "semilla": 8,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "medida.reloj",
+       "tipoVersion": 1,
+       "params": {
+        "modo": "todas",
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Escribe la hora que marca cada reloj.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "h": 11,
+          "m": 15
+         },
+         "solucion": {
+          "huecos": [
+           11,
+           "15"
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "h": 6,
+          "m": 0
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           "00"
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "h": 2,
+          "m": 45
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           "45"
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "h": 6,
+          "m": 30
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           "30"
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "h": 9,
+          "m": 15
+         },
+         "solucion": {
+          "huecos": [
+           9,
+           "15"
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "h": 8,
+          "m": 0
+         },
+         "solucion": {
+          "huecos": [
+           8,
+           "00"
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "medida.reloj2",
+       "tipoVersion": 1,
+       "params": {
+        "modo": "cuarto",
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "verde",
+       "enunciado": "Dibuja las agujas para marcar la hora.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "h": 9,
+          "m": 45
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "h": 5,
+          "m": 45
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "h": 1,
+          "m": 45
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "h": 3,
+          "m": 15
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "h": 11,
+          "m": 15
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a2e6",
+         "datos": {
+          "h": 1,
+          "m": 15
+         },
+         "solucion": {
+          "huecos": []
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "b94133e9db56aa93"
+  ],
+  "svgSolucion": [
+   "43822f88c4f5ebf2"
+  ]
+ },
+ "2.º medidas del tiempo": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Las medidas del tiempo y antes y después",
+   "curso": 2,
+   "area": "matematicas",
+   "semilla": 8,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "medida.tiempo",
+       "tipoVersion": 1,
+       "params": {
+        "modo": "equivalencias",
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Escribe el número que falta.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           24,
+           "meses"
+          ],
+          "b": "años"
+         },
+         "solucion": {
+          "huecos": [
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           1,
+           "día"
+          ],
+          "b": "horas"
+         },
+         "solucion": {
+          "huecos": [
+           24
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           2,
+           "años"
+          ],
+          "b": "meses"
+         },
+         "solucion": {
+          "huecos": [
+           24
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           60,
+           "minutos"
+          ],
+          "b": "hora"
+         },
+         "solucion": {
+          "huecos": [
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           1,
+           "semana"
+          ],
+          "b": "días"
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           3,
+           "semanas"
+          ],
+          "b": "días"
+         },
+         "solucion": {
+          "huecos": [
+           21
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "medida.tiempo",
+       "tipoVersion": 1,
+       "params": {
+        "modo": "horas",
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "verde",
+       "enunciado": "Mira el reloj y escribe qué hora será o qué hora era.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "tipo": "hora",
+          "h": 9,
+          "m": 30,
+          "k": 2,
+          "dentro": false
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           "30"
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "tipo": "hora",
+          "h": 2,
+          "m": 30,
+          "k": 2,
+          "dentro": true
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           "30"
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "tipo": "hora",
+          "h": 7,
+          "m": 0,
+          "k": 1,
+          "dentro": true
+         },
+         "solucion": {
+          "huecos": [
+           8,
+           "00"
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "tipo": "hora",
+          "h": 10,
+          "m": 30,
+          "k": 3,
+          "dentro": false
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           "30"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "47f99001d215f65c"
+  ],
+  "svgSolucion": [
+   "525ac5ded17012ca"
+  ]
+ },
+ "2.º dinero y compras": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Cuenta el dinero y las compras",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 8,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "medida.dinero",
+       "tipoVersion": 1,
+       "params": {
+        "modo": null,
+        "rango": 300
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Cuenta las monedas y los billetes y escribe el total.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "u": "€",
+          "items": [
+           [
+            "b",
+            100
+           ],
+           [
+            "b",
+            50
+           ],
+           [
+            "b",
+            5
+           ],
+           [
+            "b",
+            5
+           ],
+           [
+            "m",
+            1
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           161
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "u": "€",
+          "items": [
+           [
+            "b",
+            50
+           ],
+           [
+            "m",
+            2
+           ],
+           [
+            "m",
+            1
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           53
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "u": "€",
+          "items": [
+           [
+            "b",
+            100
+           ],
+           [
+            "b",
+            50
+           ],
+           [
+            "b",
+            50
+           ],
+           [
+            "b",
+            10
+           ],
+           [
+            "m",
+            2
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           212
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "u": "€",
+          "items": [
+           [
+            "b",
+            50
+           ],
+           [
+            "b",
+            50
+           ],
+           [
+            "b",
+            5
+           ],
+           [
+            "m",
+            2
+           ],
+           [
+            "m",
+            2
+           ],
+           [
+            "m",
+            1
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           110
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "medida.precios",
+       "tipoVersion": 1,
+       "params": {
+        "modo": "cambio",
+        "rango": 100
+       },
+       "tamano": "media",
+       "color": "verde",
+       "enunciado": "Calcula cuánto dinero te devuelven y escríbelo.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "nom": "libro",
+          "precio": 10,
+          "pago": 20
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "nom": "zapatillas",
+          "precio": 40,
+          "pago": 50
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "nom": "zapatillas",
+          "precio": 35,
+          "pago": 50
+         },
+         "solucion": {
+          "huecos": [
+           15
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "nom": "balón",
+          "precio": 15,
+          "pago": 100
+         },
+         "solucion": {
+          "huecos": [
+           85
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "fbf2c5108df39f8e"
+  ],
+  "svgSolucion": [
+   "49b984a2fce5e4d0"
+  ]
+ },
  "nombres y B/N": {
   "ficha": {
    "schemaVersion": 1,

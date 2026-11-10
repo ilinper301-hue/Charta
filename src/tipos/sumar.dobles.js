@@ -2,14 +2,31 @@
 // datos:    { n, forma: 0 | 1 }   (forma 0: «n + n =»; forma 1: «Doble de n =»; 1 ≤ n ≤ max(2, min(10, rango/2)))
 // solucion: { huecos: [2n] }
 // Opción modo: null (solo números) | "dibujo" (dos filas de n círculos sobre el cuadro).
+// 2.º (rango 100): n = decenas hasta 50 o números de dos cifras con unidades 0–4 (sin llevada); opción operacion:
+//   null (dobles, formas 0 y 1) | "mitades" (forma 2: «Mitad de 2n =», hueco n) | "mezcla". Sin dibujos (rmax 20).
 // Completa: 12 (4 filas × 3); media: 6. Con rango 10 el motor completa con repetidos (solo hay 10 combinaciones).
 import { registrar } from "../nucleo/tipos.js";
 import { TOP, T, B, INK } from "../render/papel.js";
+
+function dobles2(params, azar, k) {
+  const op = params.operacion, formas = op === "mitades" ? [2] : op === "mezcla" ? [0, 1, 2] : [0, 1], pool = [];
+  for (let n = 10; n <= 50; n++) if (n % 10 <= 4) for (const forma of formas) pool.push({ n, forma });
+  let cs = azar.muestra(pool, k);
+  if (op === "mezcla") {   // la mitad de dobles y la mitad de mitades
+    const d = azar.muestra(pool.filter((c) => c.forma < 2), k / 2), m = azar.muestra(pool.filter((c) => c.forma === 2 && !d.some((x) => x.n === c.n)), k / 2);
+    cs = azar.barajar([...d, ...m]);
+  }
+  return {
+    enunciado: op === "mitades" ? "Calcula la mitad de cada número." : op === "mezcla" ? "Calcula el doble o la mitad." : "Calcula el doble de cada número.",
+    ejercicios: cs.map(({ n, forma }) => ({ datos: { n, forma }, solucion: { huecos: [forma === 2 ? n : 2 * n] } })),
+  };
+}
 
 export default registrar({
   id: "sumar.dobles",
   version: 1,
   generar(params, azar, { tamano }) {
+    if ((params.rango ?? 10) >= 100) return dobles2(params, azar, tamano === "media" ? 6 : 12);
     const R = params.rango ?? 10, cap = Math.max(2, Math.min(10, Math.floor(R / 2))), k = tamano === "media" ? 6 : 12, pool = [];
     for (let n = 1; n <= cap; n++) for (const forma of [0, 1]) pool.push({ n, forma });
     const cs = azar.muestra(pool, k);
@@ -24,7 +41,8 @@ export default registrar({
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], { n, forma } = e.datos, s = e.solucion.huecos[0];
       p.marco(x, y, cw, ch, i);
-      const it = forma === 0 ? [T(`${n} + ${n} =`, 17), B(44, 38, s)] : [T(`Doble de ${n} =`, 14), B(44, 38, s)];
+      const it = forma === 0 ? [T(`${n} + ${n} =`, 17), B(44, 38, s)] : forma === 1 ? [T(`Doble de ${n} =`, 14), B(44, 38, s)]
+        : [T(`Mitad de ${2 * n} =`, 14), B(44, 38, s)];
       if (dibujo) {
         const pitch = Math.min(20, (cw - 36) / n), r = Math.min(6, pitch * 0.3), x0 = x + cw / 2 - (n - 1) * pitch / 2;
         for (let j = 0; j < n; j++) {

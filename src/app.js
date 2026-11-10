@@ -1,6 +1,6 @@
 // Charta · app. 4.8: pantalla de inicio · 4.1: selector y opciones · 4.2: compositor · 4.3: alumnos y variantes · 4.4: favoritas y recientes · 4.5: PWA y tableta · 5.1: nube · 5.2: Tabula · 5.3: Fori.
 import { CATALOGO } from "./nucleo/catalogo.js";
-import { generar, porDefecto, modelo, metadatosDe } from "./nucleo/ficha.js";
+import { generar, porDefecto, modelo, metadatosDe, rangosDe, cursoDe, visible } from "./nucleo/ficha.js";
 import { erroresFicha, letraVariante, paginasVariante } from "./nucleo/lector.js";
 import { listaTipos } from "./tipos/index.js";
 import { hoja, hojas, estiloLectura, PALETA } from "./render/hoja.js";
@@ -16,6 +16,8 @@ import { iniciarTema } from "./ui/tema.js";
 import { crearNube } from "./nube/nube.js";
 import { leerEntrada, leerTabula, gruposDeTabula, urlVolver } from "./ui/tabula.js";
 import { miniaturaDeSvg, dejarParaTabula } from "./ui/miniatura_ficha.js";
+import { VOCALES, CLAVE_LETRAS, hayLengua1, conLetras, letrasDe, vistasDe, resumenLetras } from "./ui/letras.js";
+import { ABECEDARIO } from "./lengua/reglas.js";
 import { paqueteFori, URL_FORI, CLAVE_FORI } from "./fori/diapositivas.js";
 import { fuentePorId, registrarFuenteUsuario, quitarFuenteUsuario, todasLasFuentes } from "./render/fuentes.js";
 import { validarArchivo, crearAlmacenFuentes, instalarCss, aBase64 } from "./ui/fuentes.js";
@@ -40,7 +42,7 @@ const cssFuentes = (usadas = ["Andika"]) => [...document.styleSheets].flatMap((h
   .filter((r) => r instanceof CSSFontFaceRule && /data:/.test(r.cssText) && usadas.includes(r.style.getPropertyValue("font-family").replace(/["']/g, "").trim())).map((r) => r.cssText).join("");
 
 /** Editor de una actividad: modelo elegido (con el selector) + sus opciones (desde MODELOS). */
-function editorActividad(id, { tamano, alCambiar }) {
+function editorActividad(id, { tamano, alCambiar, curso = null }) {
   const caja = el("div", { className: "act" });
   const ops = el("div", { className: "ops" });
   const mini = el("div", { className: "mini" }), nombre = el("strong"), desc = el("small");
@@ -49,35 +51,44 @@ function editorActividad(id, { tamano, alCambiar }) {
   const etq = el("span"), herr = el("div", { className: "act-herr" });
   const cab = el("div", { className: "act-cab" }, etq, herr);
   caja.append(cab, elegido, ops);
+  // Al cambiar «Números», se vuelven a pintar las opciones si alguna depende del rango (`rmin`, 2.º).
+  ops.addEventListener("change", (ev) => {
+    const m = modelo(ed.id);
+    if (ev.target.dataset.op === "rango" && m.opciones.some((o) => o.rmin || o.rmax || o.valores?.some((v) => v.rmin || v.rmax))) ed.refrescar();
+  });
   const ed = { caja, id, leer, poner, refrescar: () => pintarOpciones(leer().params),
     /** El compositor pone el número y los botones (subir, bajar, quitar). */
     cabecera(num, botones) { etq.textContent = `Actividad ${num}`; herr.replaceChildren(...botones); } };
 
-  function poner(nuevo, params) {
-    ed.id = nuevo;
+  // curso: el elegido en el selector (MATES_2.md: un modelo en varios cursos, cada uno con sus rangos).
+  function poner(nuevo, params, curso) {
+    ed.id = nuevo; ed.curso = cursoDe(nuevo, { curso, rango: params?.rango, params });
     const m = modelo(nuevo), [fondo, borde] = PALETA[m.color] ?? PALETA.verde;
     nombre.textContent = m.nombre; desc.textContent = m.descripcion;
     mini.style.background = fondo; mini.style.borderColor = borde;
     try { mini.innerHTML = miniatura(nuevo); } catch { mini.textContent = ""; }
     pintarOpciones(params);
   }
-  cambiar.onclick = () => abrirSelector({ actual: ed.id, tamano: tamano(), alElegir: (n) => { poner(n); alCambiar(ed); } });
+  cambiar.onclick = () => abrirSelector({ actual: ed.id, curso: ed.curso, tamano: tamano(), alElegir: (n, c) => { poner(n, undefined, c); alCambiar(ed); } });
 
   // prev: valores que ya había (se conservan al pasar de página completa a media y al revés).
   function pintarOpciones(prev = {}) {
-    const m = modelo(ed.id), def = { ...porDefecto(m.id), ...prev }, t = tamano();
+    const m = modelo(ed.id), rgs = rangosDe(m.id, ed.curso), def = { ...porDefecto(m.id, ed.curso), ...prev }, t = tamano();
+    if (!rgs.includes(def.rango)) def.rango = porDefecto(m.id, ed.curso).rango;
     ops.replaceChildren();
     const campo = (etq, control) => ops.append(el("label", {}, etq, control));
-    if (m.rangos.length > 1) {
+    if (rgs.length > 1) {
       const s = el("select"); s.dataset.op = "rango";
-      for (const r of m.rangos) s.add(new Option(`Hasta el ${r}`, r, false, r === def.rango));
+      for (const r of rgs) s.add(new Option(`Hasta el ${r}`, r, false, r === def.rango));
       campo("Números", s);
     }
     for (const o of m.opciones) {
+      if (!visible(o, def.rango, ed.curso)) continue;   // 2.º: opciones solo con tres cifras
       let c;
       if (o.tipo === "opcion") {
         c = el("select");
         o.valores.forEach((v, i) => {
+          if (!visible(v, def.rango, ed.curso)) return;
           const op = new Option(v.etiqueta, i, false, v.valor === def[o.id]);
           if (v.tamanos && !v.tamanos.includes(t)) { op.disabled = true; op.text += " (solo página completa)"; op.selected = false; }
           c.add(op);
@@ -99,9 +110,9 @@ function editorActividad(id, { tamano, alCambiar }) {
       else if (o.tipo === "si_no") p[k] = c.checked;
       else p[k] = c.value === "" ? null : +c.value;
     }
-    return { tipo: ed.id, params: p };
+    return { tipo: ed.id, params: p, ...(ed.curso !== m.curso && { curso: ed.curso }) };
   }
-  poner(id);
+  poner(id, undefined, curso);
   return ed;
 }
 
@@ -147,7 +158,29 @@ function iniciar() {
     materia1 = m;
   }
   function cambiado(e) { if (editores[0] === e) { guardarUltimo(e.id); usos.anotar(e.id); letraMateria(); } pintar(); }
-  function nuevoEditor(id) { editores.push(editorActividad(id, { tamano, alCambiar: cambiado })); recolocar(); }
+  function nuevoEditor(id, curso) { editores.push(editorActividad(id, { tamano, alCambiar: cambiado, curso })); recolocar(); }
+
+  // Mapa de letras (Lengua de 1.º): marcadas = pueden salir. Se recuerdan las últimas (las que lleva la clase).
+  const marcadas = new Set(ABECEDARIO);
+  try { const g = localStorage.getItem(CLAVE_LETRAS); if (g !== null) { marcadas.clear(); for (const l of g) if (ABECEDARIO.includes(l)) marcadas.add(l); } } catch {}
+  const teclas = ABECEDARIO.map((l) => {
+    const b = el("button", { type: "button", textContent: l, className: VOCALES.includes(l) ? "vocal" : "" });
+    b.onclick = () => { marcadas.has(l) ? marcadas.delete(l) : marcadas.add(l); cambiarLetras(); };
+    return b;
+  });
+  $("mapaLetras").replaceChildren(...teclas);
+  function pintarLetras() {
+    teclas.forEach((b, i) => { const on = marcadas.has(ABECEDARIO[i]); b.setAttribute("aria-pressed", on); b.title = on ? "Puede salir (toca para quitarla)" : "No sale (toca para ponerla)"; });
+    $("letrasCuenta").textContent = resumenLetras(marcadas);
+  }
+  function cambiarLetras(guardar = true) {
+    if (guardar) try { localStorage.setItem(CLAVE_LETRAS, ABECEDARIO.filter((l) => marcadas.has(l)).join("")); } catch {}
+    pintarLetras(); pintar();
+  }
+  const atajo = (id, ls) => { $(id).onclick = () => { marcadas.clear(); for (const l of ls) marcadas.add(l); cambiarLetras(); }; };
+  atajo("letrasTodas", ABECEDARIO); atajo("letrasVocales", VOCALES); atajo("letrasNinguna", "");
+  pintarLetras();
+  const actividades = () => conLetras(editores.map((e) => e.leer()), vistasDe(marcadas));
 
   function pintar() {
     $("error").hidden = true;
@@ -155,7 +188,8 @@ function iniciar() {
     try {
       contar();
       const ns = nombres(), total = ns.length || copias();
-      const acts = editores.map((e) => e.leer());
+      $("secLetras").hidden = !hayLengua1(editores.map((e) => e.leer()));
+      const acts = actividades();
       ficha = generar({
         actividades: acts,
         metadatos: metadatosDe(acts.map((a) => a.tipo)),
@@ -177,8 +211,8 @@ function iniciar() {
     } catch (e) { $("error").textContent = e.message; $("error").hidden = false; }
   }
 
-  $("anadir").onclick = () => abrirSelector({ tamano: "media", actual: editores[0].id,
-    alElegir: (id) => { nuevoEditor(id); pintar(); } });
+  $("anadir").onclick = () => abrirSelector({ tamano: "media", actual: editores[0].id, curso: editores[0].curso,
+    alElegir: (id, c) => { nuevoEditor(id, c); pintar(); } });
   $("acts").addEventListener("change", pintar);
   for (const id of ["alumnos", "copias", "variaciones", "bn", "grande", "facil", "titulo"]) $(id).addEventListener("change", pintar);
 
@@ -228,7 +262,7 @@ function iniciar() {
   const almacen = (() => { try { return localStorage; } catch { return { getItem: () => null, setItem() {} }; } })();
   const guardadas = crearGuardadas(almacen);
   let pestana = "favoritos";
-  const composicion = () => ({ actividades: editores.map((e) => e.leer()), semilla, titulo: $("titulo").value.trim(),
+  const composicion = () => ({ actividades: (() => { try { return actividades(); } catch { return editores.map((e) => e.leer()); } })(), semilla, titulo: $("titulo").value.trim(),
     variaciones: $("variaciones").value, bn: $("bn").checked, grande: $("grande").checked, facil: $("facil").checked, fuente: $("fuente").value });
   function marcarFavorito() {
     try { const f = guardadas.esFavorito(composicion()); $("favorito").textContent = f ? "★ Favorita" : "☆ Favorita"; $("favorito").classList.toggle("on", f); } catch {}
@@ -238,11 +272,12 @@ function iniciar() {
     editores.length = 0;
     for (const a of c.actividades) { const e = editorActividad(a.tipo, { tamano, alCambiar: cambiado }); editores.push(e); }
     recolocar();
-    c.actividades.forEach((a, i) => editores[i].poner(a.tipo, a.params));
+    c.actividades.forEach((a, i) => editores[i].poner(a.tipo, a.params, a.curso));
     semilla = c.semilla || 1; $("titulo").value = c.titulo || ""; $("variaciones").value = c.variaciones || "iguales"; $("bn").checked = !!c.bn; $("grande").checked = !!c.grande; $("facil").checked = !!c.facil;
     if (!c.fuente || fuentePorId(c.fuente).id === c.fuente) elegirFuente(c.fuente || "andika");
     else { elegirFuente("andika"); $("infoFuente").textContent = `Esta ficha usaba la letra «${c.fuente.replace("usuario:", "")}», que no está en este dispositivo: se usa Andika. Puedes subirla otra vez.`; }
     materia1 = materiaDe(editores[0].id);
+    if (hayLengua1(c.actividades)) { const v = letrasDe(c); marcadas.clear(); for (const l of v ?? ABECEDARIO) marcadas.add(l); pintarLetras(); }   // sin guardarlas como las de la clase
     pintar(); $("acts").scrollIntoView({ behavior: "smooth" });
   }
   function pintarGuardadas() {
@@ -419,10 +454,10 @@ function iniciar() {
   addEventListener("popstate", () => { pusheado = !!history.state?.diseno; mostrar(pusheado ? "diseno" : "inicio"); });
   $("aInicio").onclick = aInicio;
   /** «Crear ficha»: una ficha nueva con el modelo elegido (la composición anterior no se toca: sigue en Recientes). */
-  function nuevaFicha(id) {
+  function nuevaFicha(id, curso) {
     if (!id || !hayTipo(id)) return;
     editores.splice(1); recolocar();
-    editores[0].poner(id);
+    editores[0].poner(id, undefined, curso);
     semilla = 1; $("titulo").value = ""; $("bn").checked = bnDefecto();
     usos.anotar(id); guardarUltimo(id); letraMateria();
     aDiseno(); pintar();

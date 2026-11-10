@@ -5,10 +5,12 @@
 // Banco fijo BANCO de 46 pares [a, b, grupo]; todas las palabras están en el léxico (lo comprueba la prueba). A cada par se le da la vuelta al azar
 // (se ve a o b). Reglas: ninguna palabra sale dos veces en la ficha y de los pares de un mismo `grupo` (palabras casi sinónimas: gordo/grueso, alto/largo…)
 // sale como mucho uno, así cada palabra tiene un solo contrario posible. Con «Mayúscula inicial» no entra ninguna palabra que empiece por «i».
+// Con letras elegidas (vistas.js) solo entran los pares cuyas dos palabras se escriben con ellas (con pocas letras casi no hay: error «necesita»).
 // Opciones: tarea (unir / escribir) · letra.
 import { registrar } from "../nucleo/tipos.js";
 import { TOP, M, W } from "../render/papel.js";
 import { unir } from "../lengua/dibujo.js";
+import { filtrarVistas, avisoVistas } from "../lengua/vistas.js";
 import { alCaso, cuantas, ajusta } from "./_lengua.js";
 
 export const BANCO = [
@@ -28,14 +30,14 @@ export default registrar({
   generar(params, azar, { tamano }) {
     const une = params.tarea !== "escribe", n = cuantas(tamano, une ? 8 : 12), caso = params.caso;
     const usadas = new Set(), grupos = new Set(), elegidos = [];
-    for (const [a, b, g] of azar.barajar(BANCO)) {
+    for (const [a, b, g] of azar.barajar(filtrarVistas(BANCO, ([x, y]) => x + " " + y))) {
       if (caso === "inicial" && /^[iíì]/.test(a + b)) continue;
       if (usadas.has(a) || usadas.has(b) || (g && grupos.has(g))) continue;
       usadas.add(a); usadas.add(b); if (g) grupos.add(g);
       elegidos.push(azar.real() < 0.5 ? [a, b] : [b, a]);
       if (elegidos.length === n) break;
     }
-    if (elegidos.length < n) throw new Error(`«palabra.contrarios» necesita más pares: solo hay ${elegidos.length} y hacen falta ${n}.`);
+    if (elegidos.length < n) throw new Error(`«palabra.contrarios» necesita más pares: solo hay ${elegidos.length} y hacen falta ${n}.` + avisoVistas());
     if (!une) {
       return {
         enunciado: "Escribe el contrario de cada palabra.",

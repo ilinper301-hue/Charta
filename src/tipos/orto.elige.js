@@ -7,12 +7,14 @@
 // Palabras del léxico (nombres, adjetivos y verbos) de hasta 8 letras, sin repetir. Un solo hueco por palabra, y la otra opción nunca
 // forma otra palabra del léxico (pero/perro, rizo/rico…). El hueco mide lo mismo con cualquier opción para no dar pistas.
 // Opciones: regla (una o mezcladas) · ayuda (dos opciones / sin ayuda) · caso. Mezcladas reparte las reglas a partes iguales.
+// Con letras elegidas (vistas.js): la palabra y, con ayuda, las dos opciones (la mala también se lee) usan solo ellas.
 // Completa: 16 palabras (2 × 8); media: 8.
 import { registrar } from "../nucleo/tipos.js";
 import { TOP } from "../render/papel.js";
 import { rodear, palabraHuecos } from "../lengua/dibujo.js";
 import { LEXICO } from "../lengua/lexico.js";
 import { huecosOrto, REGLAS_ORTO } from "../lengua/reglas.js";
+import { vistasActivas, permitida, avisoVistas } from "../lengua/vistas.js";
 import { alCaso, candidatas, cuantas } from "./_lengua.js";
 
 const PALABRAS = new Set(LEXICO.map((e) => e.p));
@@ -30,11 +32,11 @@ export function huecosBuenos(p, regla) {
 }
 
 const memo = new Map();
-const buenas = (params, regla) => {
-  const clave = `${params.caso === "inicial"}|${regla}`;
+const buenas = (params, regla, ayuda) => {
+  const clave = `${params.caso === "inicial"}|${regla}|${ayuda}|${vistasActivas()}`;
   if (!memo.has(clave)) {
     memo.set(clave, candidatas({ ...params, tipo: "mixtas" }, { maxLetras: 8 })
-      .map((e) => ({ p: e.p, hs: huecosBuenos(e.p, regla) })).filter((x) => x.hs.length));
+      .map((e) => ({ p: e.p, hs: huecosBuenos(e.p, regla).filter((h) => !ayuda || h.opciones.every(permitida)) })).filter((x) => x.hs.length));
   }
   return memo.get(clave);
 };
@@ -45,7 +47,7 @@ export default registrar({
   generar(params, azar, { tamano }) {
     const n = cuantas(tamano, 16), ayuda = params.ayuda !== "sin";
     const reglas = params.regla ? [params.regla] : REGLAS_ORTO;
-    const bolsas = Object.fromEntries(reglas.map((r) => [r, azar.barajar(buenas(params, r))]));
+    const bolsas = Object.fromEntries(reglas.map((r) => [r, azar.barajar(buenas(params, r, ayuda))]));
     const usadas = new Set(), out = [];
     let vacias = 0;
     for (let k = 0; out.length < n; k++) {
@@ -53,7 +55,7 @@ export default registrar({
       let e;
       while (b.length && (e = b.pop()) && usadas.has(e.p)) e = null;
       if (e) { usadas.add(e.p); out.push({ regla: r, p: e.p, h: azar.elegir(e.hs) }); vacias = 0; }
-      else if (++vacias >= reglas.length) throw new Error(`«orto.elige» necesita más palabras: con esa regla solo hay ${out.length} y hacen falta ${n}. Prueba con «Mezcladas».`);
+      else if (++vacias >= reglas.length) throw new Error(`«orto.elige» necesita más palabras: con esa regla solo hay ${out.length} y hacen falta ${n}. Prueba con «Mezcladas».` + avisoVistas());
     }
     const mayus = (t, pos) => (params.caso === "mayus" ? t.toUpperCase() : params.caso === "inicial" && pos === 0 ? t[0].toUpperCase() + t.slice(1) : t);
     return {

@@ -6,6 +6,7 @@
 import { registrar } from "../nucleo/tipos.js";
 import { TOP, T, B, MENOS } from "../render/papel.js";
 import { pares } from "./sumar.h20.js";
+import { paresSuma3 } from "./_tres.js";
 
 /** Grupos de pares (a, b) de _pares_suma(R, nivel) del motor (copia propia). */
 function gruposSuma(R, nivel) {
@@ -33,7 +34,7 @@ export default registrar({
   version: 1,
   generar(params, azar, { tamano }) {
     // Como el motor (20 sumas, sin a = b, las primeras 8), pero sin repetir: con rango 30 el grupo de decenas solo tiene 2 parejas.
-    const vistos = new Set(), ps = pares(gruposSuma(params.rango ?? 10, params.nivel), 20, azar)
+    const R = params.rango ?? 10, vistos = new Set(), ps = (R > 100 ? paresSuma3(R, params.nivel, 20, azar) : pares(gruposSuma(R, params.nivel), 20, azar))
       .filter(([a, b]) => a !== b && !vistos.has(a + "," + b) && vistos.add(a + "," + b)).slice(0, tamano === "media" ? 4 : 8);
     return {
       enunciado: "Usa la suma para completar las dos restas.",

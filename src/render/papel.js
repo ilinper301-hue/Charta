@@ -82,9 +82,9 @@ export class Papel {
   }
   ancho(t, f, fs) { return this.fuente.ancho(String(t), negrita(f), fs); }
   /** Representación del número centrada en (cx, cy), como CAT[k][READ](cx, cy, n, i) del motor. */
-  rep(nombre, n, cx, cy, { i = 0, vacio = false, rango, escala = 1 } = {}) { this._svg(repSVG(nombre, n, { i, vacio, rango }), cx, cy, escala); }
-  plantilla(nombre, n, cx, cy, { i = 0, rango, escala = 1 } = {}) {
-    const r = tplSVG(nombre, n, { i, rango }); if (r) this._svg(r, cx, cy, escala);
+  rep(nombre, n, cx, cy, { i = 0, vacio = false, rango, escala = 1, centenas = false } = {}) { this._svg(repSVG(nombre, n, { i, vacio, rango, centenas }), cx, cy, escala); }
+  plantilla(nombre, n, cx, cy, { i = 0, rango, escala = 1, centenas = false } = {}) {
+    const r = tplSVG(nombre, n, { i, rango, centenas }); if (r) this._svg(r, cx, cy, escala);
   }
   _svg({ w, h, svg }, cx, cy, k) {
     if (this.fuente.css !== FUENTE) svg = svg.replaceAll(`font-family="${FUENTE}"`, `font-family="${this.fuente.css.replaceAll('"', "&quot;")}"`);   // las representaciones también usan la letra elegida

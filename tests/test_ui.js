@@ -7,6 +7,7 @@ import { cursos, materias, bloques, modelos, miniatura } from "../src/ui/navegac
 const cs = cursos();
 assert.ok(cs.length >= 1 && cs[0].nombre);
 let total = 0;
+const vistos = new Set();
 for (const c of cs) for (const m of materias(c.id)) for (const b of bloques(c.id, m.id)) {
   const ms = modelos(c.id, m.id, b.id);
   assert.equal(ms.length, b.n, `nº de modelos del bloque ${b.id}`);
@@ -19,9 +20,14 @@ for (const c of cs) for (const m of materias(c.id)) for (const b of bloques(c.id
     const svg = miniatura(x.id);
     assert.ok(svg.startsWith("<svg") && svg.length > 200 && !/NaN|undefined/.test(svg), `${x.id}: miniatura`);
   }
-  total += ms.length;
+  total += ms.length; for (const x of ms) vistos.add(x.id);
 }
-assert.equal(total, listaTipos().length, "todos los tipos aparecen en el selector");
+assert.equal(vistos.size, listaTipos().length, "todos los tipos aparecen en el selector");
+// MATES_2.md: un modelo en varios cursos. 2.º sale en el selector solo con Matemáticas; rep.letras está en 1.º y en 2.º.
+assert.deepEqual(cs.map((c) => c.id), [1, 2]);
+assert.deepEqual(materias(2).map((m) => m.id), ["matematicas"]);
+for (const c of [1, 2]) assert.ok(modelos(c, "matematicas", 1).some((x) => x.id === "rep.letras"), `rep.letras en ${c}.º`);
+assert.ok(!modelos(2, "matematicas", 1).some((x) => x.id === "rep.dedos"), "rep.dedos solo en 1.º");
 // En media página, los de solo página completa salen marcados.
 const solo = CATALOGO.modelos.filter((m) => !m.tamanos.includes("media"));
 for (const m of solo) assert.equal(modelos(m.curso, m.materia, m.bloque, "media").find((x) => x.id === m.id).cabe, false);
@@ -148,6 +154,9 @@ import { fuentePorId, fuenteDe, registrarFuenteUsuario, quitarFuenteUsuario, nom
 import { validarArchivo, cssFuente, MAX_BYTES, MAX_FUENTES } from "../src/ui/fuentes.js";
 import { crearGuardadas as crearG, limpiar as limp } from "../src/ui/guardadas.js";
 {
+  // MATES_2.md: el curso de la actividad se guarda (solo si es un entero)
+  assert.equal(limp({ actividades: [{ tipo: "rep.letras", curso: 2, params: { rango: 500 } }] }).actividades[0].curso, 2);
+  assert.ok(!("curso" in limp({ actividades: [{ tipo: "rep.letras", curso: "x", params: {} }] }).actividades[0]));
   // nombres y validación de archivos
   assert.equal(nombreFuente("Mi_Letra-Bonita (1).ttf"), "Mi Letra-Bonita 1");
   assert.equal(nombreFuente("###.ttf"), "Mi letra");

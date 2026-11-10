@@ -11,16 +11,19 @@ import { registrar } from "../nucleo/tipos.js";
 import { TOP, ZONA, M, W, T, B } from "../render/papel.js";
 import { rodear } from "../lengua/dibujo.js";
 import { ajusta } from "./_lengua.js";
+import { vistasActivas, permitida, avisoVistas } from "../lengua/vistas.js";
 import { crearTexto, elegirHuecos, pregunta, textoDe, palabrasToken, alCaso, ajustaLineas, parrafo } from "./_lectura.js";
 
 const TIPOS = ["elegir", "sino", "completar"];
 const CUANTAS = { 1: 3, 2: 4, 3: 5 };
 
-export default registrar({
-  id: "lectura.texto",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    const nivel = params.nivel ?? 1, mayus = params.caso === "mayus";
+const leibles = (e) => {
+  const d = e.datos;
+  return [d.texto, d.pregunta, d.opciones, d.frase, d.antes, d.despues, e.solucion.huecos].flat(2).every((x) => typeof x !== "string" || permitida(x));
+};
+
+function montar(params, azar, { tamano }) {
+  const nivel = params.nivel ?? 1, mayus = params.caso === "mayus";
     if (tamano === "media" && nivel !== 1) throw new Error("Lee y responde solo en página completa con el nivel 2 o 3 (en media página, el nivel 1).");
     const n = tamano === "media" ? 2 : CUANTAS[nivel];
     const { hechos } = crearTexto(azar, nivel);
@@ -51,6 +54,20 @@ export default registrar({
         solucion: { ...solucion, huecos: solucion.huecos.map(aCaso) },
       })),
     };
+}
+
+export default registrar({
+  id: "lectura.texto",
+  version: 1,
+  generar(params, azar, ctx) {
+    if (!vistasActivas()) return montar(params, azar, ctx);
+    // con letras elegidas: personajes y cosas del texto solo entre los permitidos; se descarta el intento si algo (frases fijas, preguntas, opciones) usa otra letra
+    for (let k = 0; k < 120; k++) {
+      let r;
+      try { r = montar(params, azar, ctx); } catch (e) { if (/necesita/.test(e.message)) continue; throw e; }
+      if (r.ejercicios.every(leibles)) return r;
+    }
+    throw new Error("«lectura.texto» necesita más letras para montar el texto y las preguntas." + avisoVistas());
   },
   dibujar(p, act) {
     const es = act.ejercicios, texto = es[0].datos.texto, mayus = act.params.caso === "mayus", ops = mayus ? ["SÍ", "NO"] : ["Sí", "No"];
