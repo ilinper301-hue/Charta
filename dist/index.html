@@ -19669,7 +19669,8 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() 
 },
 "tipos/geometria.lineas.js": (__exp) => {
 // geometria.lineas · Las líneas (port de _g_lineas() y _trazo() del motor).
-// datos:    { tipo: "recta"|"curva"|"quebrada"|"abierta"|"cerrada", tipos: [opciones en orden fijo], ang?, v?, ys? }
+// datos:    { tipo: "recta"|"curva"|"quebrada"|"abierta"|"cerrada", tipos: [las opciones de la casilla], ang?, v?, ys? }
+//           tipos: en cada casilla va en un orden distinto (se baraja), para que el alumnado tenga que leer; «abierta/cerrada» va en orden fijo.
 //           recta: ang (grados) · curva: v (0|1) · quebrada: ys (5 alturas) · abierta/cerrada: v (0–3)
 // solucion: { huecos: [], correcta: tipo }
 // Opción modo: null (recta, curva o quebrada) | "cierre" (abierta o cerrada). Completa: 12 líneas (6 filas × 2); media: 6.
@@ -19687,8 +19688,9 @@ function nuevo(tipo, azar) {
 function trazo(p, d, cx, cy) {
   const lw = 2.0, t = d.tipo;
   if (t === "recta") {
-    const a = d.ang * Math.PI / 180, dx = 52 * Math.cos(a), dy = 52 * Math.sin(a);
-    p.line(cx - dx, cy - dy, cx + dx, cy + dy, { lw });
+    // La recta no debe salirse de la casilla ni tocar las opciones: se acorta si es muy inclinada y se sube un poco (la y del papel crece hacia arriba en los trazos).
+    const a = d.ang * Math.PI / 180, L = Math.min(52, 30 / Math.max(Math.abs(Math.sin(a)), 1e-6)), dx = L * Math.cos(a), dy = L * Math.sin(a), y0 = cy + 6;
+    p.line(cx - dx, y0 - dy, cx + dx, y0 + dy, { lw });
   } else if (t === "curva") {
     if (d.v === 0) p.path([["M", cx - 55, cy], ["C", cx - 20, cy + 45, cx + 20, cy - 45, cx + 55, cy]], { lw });
     else p.path([["M", cx - 50, cy - 20], ["C", cx - 30, cy + 32, cx + 30, cy + 32, cx + 50, cy - 20]], { lw });
@@ -19708,13 +19710,13 @@ function trazo(p, d, cx, cy) {
 
 const __default = registrar({
   id: "geometria.lineas",
-  version: 1,
+  version: 2,   // 2: las tres opciones salen desordenadas en cada casilla y las rectas caben en la casilla
   generar(params, azar, { tamano }) {
     const cierre = params.modo === "cierre", tipos = cierre ? ["abierta", "cerrada"] : ["recta", "curva", "quebrada"];
     const cnt = tamano === "media" ? 6 : 12;
     return {
       enunciado: cierre ? "Rodea si cada línea es abierta o cerrada." : "Rodea el nombre de cada línea.",
-      ejercicios: ciclo(tipos, cnt, azar).map((k) => ({ datos: { tipo: k, tipos, ...nuevo(k, azar) }, solucion: { huecos: [], correcta: k } })),
+      ejercicios: ciclo(tipos, cnt, azar).map((k) => ({ datos: { tipo: k, tipos: cierre ? tipos : azar.barajar(tipos), ...nuevo(k, azar) }, solucion: { huecos: [], correcta: k } })),
     };
   },
   dibujar(p, act) {

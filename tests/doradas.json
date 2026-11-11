@@ -6872,7 +6872,7 @@
       {
        "n": 1,
        "tipo": "geometria.lineas",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "modo": null,
         "rango": null
@@ -6887,9 +6887,9 @@
          "datos": {
           "tipo": "curva",
           "tipos": [
-           "recta",
+           "quebrada",
            "curva",
-           "quebrada"
+           "recta"
           ],
           "v": 0
          },
@@ -6903,16 +6903,16 @@
          "datos": {
           "tipo": "quebrada",
           "tipos": [
-           "recta",
            "curva",
+           "recta",
            "quebrada"
           ],
           "ys": [
-           -8,
+           -18,
            12,
-           -8,
+           -18,
            12,
-           -18
+           0
           ]
          },
          "solucion": {
@@ -6925,11 +6925,11 @@
          "datos": {
           "tipo": "recta",
           "tipos": [
-           "recta",
+           "quebrada",
            "curva",
-           "quebrada"
+           "recta"
           ],
-          "ang": 30
+          "ang": 90
          },
          "solucion": {
           "huecos": [],
@@ -6941,11 +6941,11 @@
          "datos": {
           "tipo": "curva",
           "tipos": [
-           "recta",
+           "quebrada",
            "curva",
-           "quebrada"
+           "recta"
           ],
-          "v": 0
+          "v": 1
          },
          "solucion": {
           "huecos": [],
@@ -6957,15 +6957,15 @@
          "datos": {
           "tipo": "quebrada",
           "tipos": [
-           "recta",
+           "quebrada",
            "curva",
-           "quebrada"
+           "recta"
           ],
           "ys": [
            -18,
-           20,
+           12,
            -18,
-           20,
+           12,
            0
           ]
          },
@@ -6979,8 +6979,8 @@
          "datos": {
           "tipo": "quebrada",
           "tipos": [
-           "recta",
            "curva",
+           "recta",
            "quebrada"
           ],
           "ys": [
@@ -6988,7 +6988,7 @@
            20,
            -8,
            12,
-           0
+           -18
           ]
          },
          "solucion": {
@@ -7002,10 +7002,10 @@
           "tipo": "recta",
           "tipos": [
            "recta",
-           "curva",
-           "quebrada"
+           "quebrada",
+           "curva"
           ],
-          "ang": 60
+          "ang": 150
          },
          "solucion": {
           "huecos": [],
@@ -7017,11 +7017,11 @@
          "datos": {
           "tipo": "recta",
           "tipos": [
-           "recta",
+           "quebrada",
            "curva",
-           "quebrada"
+           "recta"
           ],
-          "ang": 30
+          "ang": 150
          },
          "solucion": {
           "huecos": [],
@@ -7049,16 +7049,16 @@
          "datos": {
           "tipo": "quebrada",
           "tipos": [
-           "recta",
            "curva",
+           "recta",
            "quebrada"
           ],
           "ys": [
            -18,
            20,
            -8,
-           12,
-           -18
+           20,
+           0
           ]
          },
          "solucion": {
@@ -7071,11 +7071,11 @@
          "datos": {
           "tipo": "recta",
           "tipos": [
-           "recta",
            "curva",
+           "recta",
            "quebrada"
           ],
-          "ang": 120
+          "ang": 45
          },
          "solucion": {
           "huecos": [],
@@ -7087,8 +7087,8 @@
          "datos": {
           "tipo": "curva",
           "tipos": [
-           "recta",
            "curva",
+           "recta",
            "quebrada"
           ],
           "v": 1
@@ -7106,10 +7106,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "40e29234020ce9a3"
+   "7acdb09c5aaf420a"
   ],
   "svgSolucion": [
-   "bf4e5d8c8f4bd198"
+   "b5c92138ea702563"
   ]
  },
  "geometria.posiciones": {

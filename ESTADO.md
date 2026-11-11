@@ -163,5 +163,7 @@
 - [x] Fichas de varias páginas (1–10 páginas de 1 o 2 actividades): numeración seguida (1, 2 | 3 | 4); `generar({ paginas: [{ actividades }…] })`; la página 1 sale igual que una ficha suelta. Composición: `actividades` seguidas + `paginas: [2, 1, 1]`. Compositor con «Página N», «+ Segunda actividad» por página, «+ Otra página» y «Quitar página»; vista previa, solucionario e impresión con todas las páginas de cada alumno.
   - **Pendiente**: comprobar en Tabula que guarda y abre fichas de varias páginas (allí no se ha tocado nada).
 
+- [x] `geometria.lineas` v2 (11-11-2026): las opciones recta/curva/quebrada salen en otro orden en cada casilla (hay que leerlas); «abierta/cerrada» sigue en orden fijo. De paso, las rectas inclinadas ya no se salen de la casilla ni tocan las opciones.
+
 ## Fase 8 · Opcional
 - [ ] Publicar en Google Play (TWA).

@@ -51,7 +51,7 @@ export default {
     cuantos(es, tam === "media" ? 6 : 12);
     for (const e of es) {
       const d = e.datos; sinHuecos(e);
-      assert.deepEqual(d.tipos, tipos); assert.equal(e.solucion.correcta, d.tipo); assert.ok(tipos.includes(d.tipo));
+      assert.deepEqual(cierre ? d.tipos : [...d.tipos].sort(), cierre ? tipos : [...tipos].sort()); assert.equal(e.solucion.correcta, d.tipo); assert.ok(tipos.includes(d.tipo));
       if (d.tipo === "recta") assert.ok([0, 30, 45, 60, 90, 120, 150].includes(d.ang));
       if (d.tipo === "curva") assert.ok([0, 1].includes(d.v));
       if (d.tipo === "quebrada") assert.equal(d.ys.length, 5);
