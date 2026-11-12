@@ -243,7 +243,15 @@ Rutas de Tabula y Fori en un único `src/rutas.js` (R6).
 - En cada actividad: «Cambiar» y «⋯» (Subir, Bajar, Quitar).
 - Objetivo medible: Diseño con 25 alumnos en **menos de 4 pantallas** y menos de 2.500 nodos.
 
-### Fase 5 · Tablet — *Sonnet, esfuerzo medio*
+### Fase 5 · Tablet — *Sonnet, esfuerzo medio* · ✅ hecha (12-11-2026)
+
+> Resultado: desde 700 px, `main` mide el alto de la pantalla (`100dvh − 56 px`) y no se desplaza: columna de opciones de 360–420 px
+> con scroll propio (`.col-cuerpo`, nuevo en `index.html`; en móvil es `display: contents`) y barra Imprimir/«⋯» al pie de la
+> columna; la vista previa ocupa el resto con la hoja entera (`container-type: size`, ancho `min(100cqw, 100cqh × 210/297)`) y
+> el paginador debajo. 768 × 1024: 1 pantalla (antes 22,8); sin «Ver ficha». Inicio (920 px, accesos en 4 columnas, lista
+> de fichas en rejilla) y selector (rejilla y migas hasta 1200 px, tarjetas de modelo desde 168 px). `tests/navegador.py`:
+> bloque «Fase 5» (700, 768, 820 × 1180, 1024 × 768, 1180 y 699/390 como móvil). Límites: a 768 vertical la hoja mide ≈ 366 px de
+> ancho (se ve entera, pero pequeña; «Ver ficha» no existe allí); el solucionario sigue una hoja por vez.
 
 Dos columnas desde 700 px (opciones de ancho fijo, 360–400 px; la hoja ocupa el resto y se ve entera), barra de
 imprimir que no tape nada, selector y rejilla de Inicio aprovechando el ancho, y campos con ancho máximo.

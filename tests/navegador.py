@@ -10,6 +10,8 @@
 # Fase 4: vista previa de una hoja (paginador, flechas, «Ficha | Soluciones»), «Ver ficha» a pantalla completa (la hoja
 # cabe entera; Atrás la cierra), barra Ver ficha + Imprimir + «⋯», «⋯» de cada actividad (Subir, Quitar), título en la
 # cabecera, secciones plegadas con resumen y, con 25 alumnos y 2 actividades, menos de 4 pantallas y de 2.500 nodos.
+# Fase 5: tablet (700–1180 px): opciones a la izquierda (360–420 px, con su propio desplazamiento), vista previa a la derecha
+# con la hoja entera y el paginador, barra de Imprimir al pie de la columna sin tapar nada, la página no se desplaza.
 # Falla (código 1) si hay errores de consola, desbordamiento horizontal a 360/390/768/1180 px, se pierde el borrador,
 # Atrás de Android no cierra el selector o algún nombre de alumno sale de `charta:borrador` (otra clave, la URL de
 # Tabula o el paquete de Fori). Con carpeta, guarda capturas (inicio, selector, diseño) a 390 y 768 px.
@@ -245,6 +247,36 @@ async def main():
         ls = await almacen()
         comprobar('charta:borrador' in ls and MARCA in ls['charta:borrador'], 'borrador guardado con los alumnos')
         b = json.loads(ls['charta:borrador']); comprobar(MARCA not in json.dumps(b['composicion']), 'la composición del borrador no lleva nombres')
+
+        print('Fase 5: tablet (dos columnas desde 700 px)')
+        MEDIDAS = """(() => {
+          const r = (s) => { const e = document.querySelector(s); if (!e) return null; const b = e.getBoundingClientRect(); return { x: b.x, y: b.y, w: b.width, h: b.height, r: b.right, b: b.bottom }; };
+          return { col: r('.col'), cuerpo: r('.col-cuerpo'), barra: r('.accion-principal'), previa: r('#previa'), hojas: r('#hojas'), hoja: r('#hojas .hoja'), pag: r('#paginador'),
+            sobra: document.documentElement.scrollHeight - innerHeight, ancho: document.documentElement.scrollWidth - innerWidth,
+            ver: getComputedStyle(document.getElementById('verFicha')).display };
+        })()"""
+        for w, h in ((700, 900), (768, 1024), (820, 1180), (1024, 768), (1180, 820)):
+            await pg.set_viewport_size({'width': w, 'height': h}); await pg.wait_for_timeout(350)
+            m = await pg.evaluate(MEDIDAS); d = f'a {w}×{h}'
+            comprobar(m['previa']['x'] >= m['col']['r'] - 1, f'tablet {d}: opciones a la izquierda y vista previa a la derecha')
+            comprobar(358 <= m['col']['w'] <= 424, f'tablet {d}: columna de opciones de 360–420 px ({round(m["col"]["w"])})')
+            comprobar(m['sobra'] <= 1 and m['ancho'] <= 1, f'tablet {d}: la página no se desplaza ({m["sobra"]}, {m["ancho"]})')
+            comprobar(m['hoja'] and m['hoja']['x'] >= m['hojas']['x'] - 1 and m['hoja']['r'] <= m['hojas']['r'] + 1 and m['hoja']['y'] >= m['hojas']['y'] - 1 and m['hoja']['b'] <= m['hojas']['b'] + 1, f'tablet {d}: la hoja se ve entera')
+            comprobar(m['hoja']['b'] <= m['pag']['y'] and m['pag']['b'] <= h, f'tablet {d}: el paginador queda bajo la hoja y dentro de la pantalla')
+            comprobar(m['barra']['y'] >= m['cuerpo']['b'] - 1 and m['barra']['b'] <= h, f'tablet {d}: la barra de Imprimir no tapa las opciones')
+            comprobar(m['ver'] == 'none', f'tablet {d}: sin «Ver ficha» (la hoja ya se ve)')
+            # Todo lo de la columna se alcanza desplazando solo la columna
+            await pg.locator('#secImpresion > summary').scroll_into_view_if_needed(); await pg.wait_for_timeout(100)
+            s = await pg.evaluate("(() => { const b = document.querySelector('#secImpresion > summary').getBoundingClientRect(), c = document.querySelector('.col-cuerpo').getBoundingClientRect(); return b.y >= c.y - 1 && b.bottom <= c.bottom + 1; })()")
+            comprobar(s, f'tablet {d}: «Impresión» se alcanza desplazando la columna')
+        for w, h in ((699, 900), (390, 844)):
+            await pg.set_viewport_size({'width': w, 'height': h}); await pg.wait_for_timeout(300)
+            m = await pg.evaluate(MEDIDAS)
+            comprobar(m['barra'] and m['barra']['b'] >= h - 2 and m['previa']['y'] >= m['col']['b'] - 1, f'móvil a {w} px: una columna y la barra fija abajo')
+        await pg.set_viewport_size({'width': 1180, 'height': 820}); await pg.wait_for_timeout(300)
+        r = await pg.evaluate(AUDITORIA)
+        comprobar(not r['controles'] and not r['textos'], 'diseño a 1180 px: controles de 44 px y texto de 12,5 px ' + ', '.join((r['controles'] + r['textos'])[:6]))
+        await pg.set_viewport_size({'width': 390, 'height': 844})
 
         print('Recargar: el borrador vuelve')
         await pg.reload(); await pg.wait_for_timeout(1200)
