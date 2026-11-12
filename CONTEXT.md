@@ -33,7 +33,7 @@
 - **Sin pictogramas** (5-11-2026, abandonados; quizá más adelante). Si una ficha necesita un dibujo que Charta no hace, sale un recuadro con un mensaje pequeño («Pega aquí el dibujo») y Iván pega la imagen encima a mano.
 - **Sin metadatos LOMLOE** (saberes, criterios): la normativa cambia a menudo; quizá en el futuro. Solo metadatos propios opcionales (dificultad, minutos, etiquetas).
 - **Impresión**: a color (paneles pastel, aprobados) con opción de **blanco y negro / ahorro de tinta**.
-- **Privacidad**: la ficha se genera e imprime en el dispositivo. Los nombres de los alumnos solo se usan al imprimir: nunca se guardan en el JSON ni en Firestore.
+- **Privacidad**: la ficha se genera e imprime en el dispositivo. Los nombres de los alumnos solo se usan al imprimir: nunca se guardan en el JSON ni en Firestore. Excepción (12-11-2026): el **borrador** de la ficha en curso guarda los nombres en el `localStorage` del dispositivo (nunca en JSON, nube, favoritas, URL, Tabula ni Fori).
 - **Alojamiento**: GitHub Pages, repositorio `ilinper301-hue/Charta`, como sus otras apps (Barri: ilinper301-hue.github.io/Barri/, Lectori: ilinper301-hue.github.io/Educacion/). Publicación en Google Play opcional en el futuro (TWA, sin reescribir).
 
 ## Diseño

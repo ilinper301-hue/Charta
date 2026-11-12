@@ -141,7 +141,7 @@ Sin desplazamiento horizontal a 360, 390, 768 ni 1180 px. Sin errores de consola
 6. **Texto menor de 12,5 px** en 8–72 elementos por pantalla (etiquetas de hoja y de actividad, ayudas).
 7. **Accesibilidad**: el selector es un diálogo sin nombre y el foco se escapa de él con el tabulador; las pestañas
    no son pestañas para un lector de pantalla; solo hay una regla de foco visible.
-8. Al crear una ficha nueva se conservan alumnos, variantes y soluciones abiertas de la anterior (decidir si se quiere).
+8. Al crear una ficha nueva se conservan alumnos y variantes de la anterior. **Decidido (12-11-2026): se mantiene así.** Queda por decidir solo el solucionario abierto (propuesta: se cierra).
 
 ### B3. Reglas de diseño (valen para todas las fases)
 
@@ -163,9 +163,12 @@ Sin desplazamiento horizontal a 360, 390, 768 ni 1180 px. Sin errores de consola
 
 Primero lo que puede hacer perder trabajo; después, la prueba que protege las fases siguientes.
 
-- **Borrador automático** (R1): guardar la composición en curso (`charta:borrador`, sin nombres, con `limpiar()`)
-  en cada cambio y recuperarla al abrir («Seguir con la última» la usa). Decidir con Iván si los nombres se
-  conservan mientras la app siga abierta (`sessionStorage`) o nunca.
+- **Borrador automático** (R1): guardar la composición en curso (`charta:borrador`) en cada cambio y recuperarla
+  al abrir («Seguir con la última» la usa). **Decidido (12-11-2026): el borrador conserva los nombres** de los
+  alumnos. Límites: solo en `localStorage` de este dispositivo; los nombres **nunca** van al JSON de la ficha, a
+  la nube, a favoritas/recientes, a la URL ni a Tabula/Fori (el borrador guarda aparte `{ composicion, alumnos }`
+  y la composición sigue pasando por `limpiar()`). Se borra al imprimir o con «Descartar borrador», y se avisa
+  en Ajustes de que guarda los nombres en el dispositivo. Prueba: ninguna otra clave ni salida contiene nombres.
 - **Atrás de Android por capas** (R2): el selector (y después hojas y menús) apunta una entrada de historial y se
   cierra con Atrás.
 - **Nube** (R3): `tipos` se recorta a 10 al guardar (sin tocar las reglas) y el aviso de error distingue el motivo.
@@ -215,7 +218,7 @@ imprimir que no tape nada, selector y rejilla de Inicio aprovechando el ancho, y
 - Inicio: accesos rápidos en una fila compacta; «Mis fichas» visible sin desplazar, con «⋯» por fila
   (Abrir, Duplicar, Quitar); Ajustes como pantalla propia (letra, blanco y negro, tema, cuenta, copia).
 - Selector: **buscador de modelos** por nombre y etiquetas, recordar el último curso y materia, migas de 44 px.
-- Decidir (B2.8) qué se conserva al crear una ficha nueva.
+- Crear ficha nueva mantiene alumnos y variantes (decidido); no cambiar ese comportamiento.
 
 ### Fase 7 · Datos y contratos — *Sonnet, esfuerzo medio*
 

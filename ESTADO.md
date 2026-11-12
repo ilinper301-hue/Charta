@@ -8,6 +8,7 @@ Sin cambios de código. El plan y el estado de sus fases están en **`PLAN-DISEN
 - **Errores comprobados**: se pierde la ficha a medias al recargar o si Android cierra la app; Atrás de Android deja el selector encima del inicio; la nube rechaza fichas con más de 10 modelos distintos (regla `tipos ≤ 10`); «Mis frases» se copia en cada actividad (enlace a Tabula de hasta 48 KB); favoritas sin copia de seguridad.
 - **Enlaces**: los contratos con Tabula y Fori coinciden hoy; el iframe de Tabula usa `globalThis.Charta` sin contrato escrito ni prueba; todo depende del mismo origen y de rutas fijas.
 - **Interfaz** (capturas a 390 × 844, 768 × 1024 y 1180 × 820): Inicio y selector, bien (falta buscador de modelos). Diseño: la vista previa apila todas las hojas → 17 pantallas con 25 alumnos (36 con 2 páginas; 47 en tablet vertical, que usa el diseño de móvil), 12.800 nodos y 0,25 s por cada cambio; 6 acciones con el mismo peso; secciones siempre desplegadas; zonas táctiles de 26–32 px. Sin desbordamiento ni errores de consola.
+- **Decisiones de Iván (12-11-2026)**: el borrador conserva los nombres (solo en el dispositivo); al crear ficha nueva se mantienen alumnos y variantes.
 - **Fases**: 1 red de seguridad (borrador, Atrás, nube, prueba de navegador, adelgazar documentos) · 2 partir `app.js` · 3 piezas comunes · 4 diseño en móvil (vista previa de una hoja) · 5 tablet · 6 inicio y selector · 7 datos y contratos · 8 repaso.
 
 ## Hecho (antes de Charta)
