@@ -67,11 +67,11 @@ const icoCerrar = () => Object.assign(el("span", { className: "ico" }),
  * Hoja inferior (en tablet, ventana centrada). `contenido`: un nodo; si ya estaba en la página, vuelve a su sitio
  * (oculto) al cerrar. → { caja, cuerpo, cerrar(despues?) }
  */
-export function abrirHoja({ titulo, contenido, alCerrar }) {
+export function abrirHoja({ titulo, contenido, alCerrar, clase = "" }) {
   const sitio = contenido?.parentNode ? { padre: contenido.parentNode, sig: contenido.nextSibling, oculto: contenido.hidden } : null;
   let cuerpo = null;
   const r = capaModal({
-    clase: "hoja-inf",
+    clase: "hoja-inf" + (clase ? " " + clase : ""),   // clase "pantalla": a pantalla completa (vista previa, fase 4)
     cuerpo(caja, cerrar) {
       const h = el("h2", { id: nuevoId("hoja"), textContent: titulo });
       const x = el("button", { className: "fantasma icono", title: "Cerrar", onclick: () => cerrar() }, icoCerrar());
@@ -123,6 +123,27 @@ export function abrirMenu(ancla, items) {
   const a = ancla.getBoundingClientRect(), m = caja.getBoundingClientRect(), w = innerWidth, h = innerHeight;
   caja.style.left = Math.max(8, Math.min(a.right - m.width, w - m.width - 8)) + "px";
   caja.style.top = (a.bottom + 4 + m.height > h - 8 && a.top - 4 - m.height > 8 ? a.top - 4 - m.height : Math.min(a.bottom + 4, h - m.height - 8)) + "px";
+}
+
+/**
+ * Aviso breve abajo, encima de la barra (fase 4: sustituye a los textos de estado de «Más acciones»). Con error dura más y
+ * se anuncia como alerta. avisar("") lo quita.
+ */
+let tostada = null, relojTostada = null;
+export function avisar(texto, { error = false, duracion } = {}) {
+  clearTimeout(relojTostada);
+  if (!tostada) {
+    tostada = el("div", { className: "tostada", hidden: true });
+    document.body.append(tostada);
+  }
+  if (!texto) { tostada.hidden = true; return; }
+  const x = el("button", { className: "fantasma icono", title: "Cerrar aviso", onclick: () => avisar("") }, icoCerrar());
+  x.setAttribute("aria-label", "Cerrar aviso");
+  tostada.setAttribute("role", error ? "alert" : "status");
+  tostada.classList.toggle("error", error);
+  tostada.replaceChildren(el("span", { textContent: texto }), x);
+  tostada.hidden = false; tostada.inert = false;
+  relojTostada = setTimeout(() => { tostada.hidden = true; }, duracion ?? (error ? 9000 : 3500));
 }
 
 /** Pregunta con dos botones (sustituye a confirm()). → Promise<boolean>; Escape, Atrás o tocar fuera = no. */
@@ -177,5 +198,19 @@ export const ICONOS = {
   ajustes: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>',
   nueva: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M12 12v6M9 15h6"/></svg>',
   grupos: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg>',
+  subir: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>',
+  bajar: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>',
+  quitar: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></svg>',
+  variante: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8M4 4v4h4M4 13a8 8 0 0 0 14.3 4.9L20 16M20 20v-4h-4"/></svg>',
+  estrella: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/></svg>',
+  estrellaLlena: '<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/></svg>',
+  nube: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18a5 5 0 0 1-.6-10A6 6 0 0 1 18 9a4.5 4.5 0 0 1-.5 9z"/><path d="M12 11v5M9.5 13.5 12 11l2.5 2.5"/></svg>',
+  imprimir: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="7"/></svg>',
+  ver: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>',
+  ant: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>',
+  sig: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>',
+  /* Iconos de las apps (los mismos que tenían los botones de «Más acciones»). */
+  tabula: '<svg viewBox="0 0 512 512" width="20" height="20" aria-hidden="true"><rect width="512" height="512" rx="110" fill="#2B4257"/><rect x="96" y="118" width="320" height="98" rx="49" fill="#FAF9F5"/><path d="M200 214H311V338A55.5 55.5 0 0 1 200 338Z" fill="#9CC0DE"/><path d="M200 216C232 201 262 189 290 191C311 193 328 203 343 216H322Q311 216 311 227V270C299 246 262 226 200 221Z" fill="#5F86A8"/></svg>',
+  fori: '<svg viewBox="80 110 360 300" width="22" height="18" aria-hidden="true"><rect x="92" y="132" width="284" height="50" rx="25" fill="#27C1B0"/><rect x="376" y="132" width="50" height="196" rx="25" fill="#FFC845"/><rect x="140" y="324" width="286" height="50" rx="25" fill="#F4664A"/><rect x="92" y="182" width="50" height="192" rx="25" fill="#7444E0"/><path d="M172 274C196 226 214 214 226 214C238 214 226 254 244 254C258 254 276 238 292 228" fill="none" stroke="#FFFFFF" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/><g transform="rotate(39 360 306)"><rect x="296" y="284" width="136" height="44" rx="22" fill="#FFFFFF" stroke="#13214A" stroke-width="14" paint-order="stroke"/></g></svg>',
   pizarra: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>',
 };

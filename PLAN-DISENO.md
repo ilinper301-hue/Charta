@@ -218,7 +218,20 @@ Rutas de Tabula y Fori en un único `src/rutas.js` (R6).
 - Escala táctil (44 px), tamaño mínimo de texto, foco visible, pestañas con su rol.
 - Variantes de botón claras: principal, fantasma (sin borde) y con borde solo donde haga falta.
 
-### Fase 4 · Pantalla de diseño en móvil — *Opus, esfuerzo alto (la más importante)*
+### Fase 4 · Pantalla de diseño en móvil — *Opus, esfuerzo alto (la más importante)* · ✅ hecha (12-11-2026)
+
+> Resultado: con 2 actividades y 25 alumnos, **1,8 pantallas y 1.272 nodos** (antes 17,4 y 9.500). `src/ui/previa.js` dibuja solo la
+> hoja visible (paginador «‹ Ana · A · 1 de 25 ›» con desplegable para saltar, flechas del teclado y deslizar el dedo) y
+> «Ficha | Soluciones» dentro de la vista previa (el solucionario solo se dibuja si se mira); repinta con 120 ms de retardo y
+> **solo genera si cambian actividades, nº de variantes o semilla** (`claveGeneracion`; título, color, letra, lectura, nombres
+> y copias solo redibujan; `conPresentacion` = generar con ellos, probado). `render/hoja.js`: `listaHojas` + `dibujarHoja`
+> (`hojas()` igual: doradas sin cambios). Barra: Ver ficha (vista previa a pantalla completa, la hoja entera, con Imprimir) +
+> Imprimir + «⋯» (Otra variante, Favorita, Guardar en la nube, Enviar a Tabula, Proyectar en Fori); los estados van en un
+> aviso breve (`avisar()` en `piezas.js`). Fuera del diseño Favoritas/Recientes y «Más acciones». Título editable en la
+> cabecera (vacío = automático, como sugerencia). Letras, Alumnos e Impresión plegadas (`details`) con resumen; ayuda de
+> Letras tras «¿Cómo funciona?». Cada actividad: «Cambiar» + «⋯» (Subir, Bajar, Quitar). Pruebas: `tests/navegador.py`
+> (paginador, soluciones, Ver ficha, «⋯», medidas) y `test_ui.js` (`previa_datos.js`). Límites: el error de generación sale
+> en la vista previa y en un aviso; «Quitar página» sigue como botón en la cabecera de cada página.
 
 - **Vista previa de una hoja con paginador**, dibujando solo la visible (al imprimir se generan todas, como hoy).
   Conmutador «Ficha | Soluciones» dentro de la vista previa en vez de una tarjeta aparte. Repintado con un

@@ -77,8 +77,8 @@ function iniciar(tema) {
   function mostrar(v) {
     ctx.vista = v; document.body.dataset.vista = v;
     $("inicio").hidden = v !== "inicio"; document.querySelector("main").hidden = v === "inicio";
-    // Cabecera única (fase 3): en el inicio, la marca; en el diseño, atrás + título de la ficha. «⋯» en las dos.
-    $("aInicio").hidden = $("barraTitulo").hidden = v === "inicio"; $("marca").hidden = v !== "inicio";
+    // Cabecera única (fase 3): en el inicio, la marca; en el diseño, atrás + título de la ficha (editable, fase 4). «⋯» en las dos.
+    $("aInicio").hidden = $("titulo").hidden = v === "inicio"; $("marca").hidden = v !== "inicio";
     if (v === "inicio") { inicioVista.cerrarMaterias(); refrescarInicio(); }
     window.scrollTo(0, 0);
   }
@@ -96,6 +96,15 @@ function iniciar(tema) {
     { texto: "Nueva ficha", icono: ICONOS.nueva, accion: () => abrirSelector({ tamano: "completa", alElegir: nuevaFicha }) },
     { texto: "Ajustes", icono: ICONOS.ajustes, accion: ajustes.abrir },
   ]);
+  // Fase 4 · barra inferior: Ver ficha + Imprimir + «⋯» con el resto de acciones (antes, la tarjeta «Más acciones»).
+  $("masFicha").innerHTML = ICONOS.mas;
+  $("masFicha").onclick = () => { const fav = ctx.lista.esFavorita(); abrirMenu($("masFicha"), [
+    { texto: "Otra variante", icono: ICONOS.variante, accion: ctx.previa.otraVariante },
+    { texto: fav ? "Quitar de favoritas" : "Añadir a favoritas", icono: fav ? ICONOS.estrellaLlena : ICONOS.estrella, accion: ctx.lista.alternarFavorita },
+    { texto: "Guardar en la nube", icono: ICONOS.nube, accion: nubeV.guardarEnNube }, "-",
+    { texto: "Enviar a Tabula", icono: ICONOS.tabula, accion: enlaces.enviarTabula },
+    { texto: "Proyectar en Fori", icono: ICONOS.fori, accion: enlaces.proyectar },
+  ]); };
   /** «Crear ficha»: una ficha nueva con el modelo elegido (la composición anterior no se toca: sigue en Recientes). */
   function nuevaFicha(id, curso) {
     if (!id || !hayTipo(id)) return;

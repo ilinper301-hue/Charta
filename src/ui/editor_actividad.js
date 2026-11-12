@@ -3,6 +3,7 @@ import { modelo, porDefecto, rangosDe, cursoDe, visible } from "../nucleo/ficha.
 import { PALETA } from "../render/hoja.js";
 import { miniatura } from "./navegacion.js";
 import { abrirSelector } from "./selector.js";
+import { abrirMenu, ICONOS } from "./piezas.js";
 import { el } from "./dom.js";
 
 /** Editor de una actividad: modelo elegido (con el selector) + sus opciones (desde MODELOS). */
@@ -21,8 +22,15 @@ export function editorActividad(id, { tamano, alCambiar, curso = null }) {
     if (ev.target.dataset.op === "rango" && m.opciones.some((o) => o.rmin || o.rmax || o.valores?.some((v) => v.rmin || v.rmax))) ed.refrescar();
   });
   const ed = { caja, id, leer, poner, refrescar: () => pintarOpciones(leer().params),
-    /** El compositor pone el número y los botones (subir, bajar, quitar). */
-    cabecera(num, botones) { etq.textContent = `Actividad ${num}`; herr.replaceChildren(...botones); } };
+    /** El compositor pone el número y las acciones del «⋯» (fase 4: Subir, Bajar, Quitar). */
+    cabecera(num, items) {
+      etq.textContent = `Actividad ${num}`;
+      if (!items.length) { herr.replaceChildren(); return; }
+      const b = el("button", { className: "fantasma icono", title: `Más opciones de la actividad ${num}`, innerHTML: ICONOS.mas });
+      b.setAttribute("aria-label", `Más opciones de la actividad ${num}`); b.setAttribute("aria-haspopup", "menu"); b.setAttribute("aria-expanded", "false");
+      b.onclick = () => abrirMenu(b, items);
+      herr.replaceChildren(b);
+    } };
 
   // curso: el elegido en el selector (MATES_2.md: un modelo en varios cursos, cada uno con sus rangos).
   function poner(nuevo, params, curso) {

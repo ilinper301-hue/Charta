@@ -11,6 +11,7 @@ import { ABECEDARIO } from "../lengua/reglas.js";
 import { fuentePorId } from "../render/fuentes.js";
 import { editorActividad } from "./editor_actividad.js";
 import { guardarUltimo } from "./preferencias.js";
+import { ICONOS } from "./piezas.js";
 import { $, el } from "./dom.js";
 
 export function crearCompositor(ctx) {
@@ -26,17 +27,17 @@ export function crearCompositor(ctx) {
       const i0 = inicioDe(cuentas, p), eds = editores.slice(i0, i0 + k);
       const caja = el("div", { className: "pagina-comp" + (varias ? " varias" : "") });
       if (varias) caja.append(el("div", { className: "pagina-cab" }, el("h3", { textContent: `Página ${p + 1}` }),
-        boton("Quitar página", "Quitar esta página y sus actividades", () => quitarPagina(p))));
+        boton("Quitar página", "Quitar esta página y sus actividades", () => quitarPagina(p), "sutil")));
       caja.append(...eds.map((e) => e.caja));
       if (k < 2) caja.append(boton("+ Segunda actividad", "Otra actividad en esta página (cada una ocupa media página)", () => anadirSegunda(p), "anadir"));
       return caja;
     }));
     const n = editores.length;
-    editores.forEach((e, i) => e.cabecera(i + 1, [
-      ...(i > 0 ? [boton("↑ Subir", `Pasarla a actividad ${i}`, () => mover(i, -1))] : []),
-      ...(i < n - 1 ? [boton("↓ Bajar", `Pasarla a actividad ${i + 2}`, () => mover(i, 1))] : []),
-      ...(n > 1 ? [boton("Quitar", "Quitar esta actividad", () => quitar(i))] : []),
-    ]));
+    editores.forEach((e, i) => e.cabecera(i + 1, [   // fase 4: en el «⋯» de la actividad
+      ...(i > 0 ? [{ texto: `Subir (pasa a ser la ${i})`, icono: ICONOS.subir, accion: () => mover(i, -1) }] : []),
+      ...(i < n - 1 ? [{ texto: `Bajar (pasa a ser la ${i + 2})`, icono: ICONOS.bajar, accion: () => mover(i, 1) }] : []),
+      ...(n > 1 ? ["-", { texto: "Quitar actividad", icono: ICONOS.quitar, peligro: true, accion: () => quitar(i) }] : []),
+    ].filter((x, j, xs) => x !== "-" || j > 0)));
     $("anadirPagina").hidden = cuentas.length >= MAX_PAGINAS;
     for (const e of editores) e.refrescar();
   }
@@ -98,7 +99,7 @@ export function crearCompositor(ctx) {
       $("alumnos").value = extra.alumnos || ""; $("copias").value = extra.copias || 1;
       if (extra.grupo && [...$("grupoTabula").options].some((o) => o.value === extra.grupo)) $("grupoTabula").value = extra.grupo; else ctx.grupoBorrador = extra.grupo || null;
     }
-    pintar(); $("acts").scrollIntoView({ behavior: "smooth" });
+    pintar(); window.scrollTo(0, 0);
   }
 
   // Fase 1 (R1) · borrador: la ficha en curso se guarda en cada cambio (con los nombres, solo en este dispositivo: ver borrador.js).

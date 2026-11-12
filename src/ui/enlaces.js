@@ -1,7 +1,7 @@
 // Charta · enlaces con Tabula (paso 5.2) y Fori (paso 5.3) en la interfaz (fase 2 de PLAN-DISENO, antes en app.js).
 // Tabula: grupos leídos de su almacén (mismo origen, solo lectura) y vuelta con la ficha por URL. Fori: diapositivas (variante A)
 // por localStorage del mismo origen; Fori las convierte en páginas. Las rutas fijas están en src/rutas.js.
-// crearEnlaces(ctx) → { entrada, proyectar() }
+// crearEnlaces(ctx) → { entrada, enviarTabula(), proyectar() }
 import { hoja, estiloLectura } from "../render/hoja.js";
 import { paginasVariante } from "../nucleo/lector.js";
 import { hayTipo } from "../nucleo/tipos.js";
@@ -40,7 +40,7 @@ export function crearEnlaces(ctx) {
     if (entrada.grupo && grupos.some((g) => g.id === entrada.grupo)) { $("grupoTabula").value = entrada.grupo; $("grupoTabula").onchange(); }
     else if (ctx.grupoBorrador && grupos.some((g) => g.id === ctx.grupoBorrador)) $("grupoTabula").value = ctx.grupoBorrador;   // sin tocar los nombres del borrador
   }).catch(() => {});
-  $("aTabula").onclick = async () => {
+  async function enviarTabula() {
     const ficha = ctx.previa.ficha, N = ctx.nubeV;
     if (!ficha) return;
     N.avisoNube("");
@@ -60,7 +60,7 @@ export function crearEnlaces(ctx) {
     if (url.length > MAX_ENLACE && dejarParaTabula(ficha.titulo, m, localStorage, comp)) url = urlVolver({ ...datos, comp: null, compLocal: true });
     else dejarParaTabula(ficha.titulo, m);
     location.href = url;
-  };
+  }
   async function proyectar() {
     const ficha = ctx.previa.ficha;
     if (!ficha) return;
@@ -72,6 +72,5 @@ export function crearEnlaces(ctx) {
       location.href = URL_FORI + "?charta=1";
     } catch (e) { ctx.nubeV.avisoNube("No se ha podido preparar la ficha para Fori: " + e.message, true); }
   }
-  $("aFori").onclick = proyectar;
-  return { entrada, proyectar };
+  return { entrada, enviarTabula, proyectar };
 }

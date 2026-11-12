@@ -1,10 +1,9 @@
 // Charta · listas de fichas guardadas: favoritas, recientes y nube (fase 2 de PLAN-DISENO, antes en app.js).
-// Ayudantes comunes (los usa también inicio_vista.js) y la tarjeta de la pantalla de diseño.
-// crearListaFichas(ctx) → { pintar(), marcarFavorito(), mostrarNube() }
+// Ayudantes comunes (los usa inicio_vista.js) y la favorita de la ficha abierta.
+// crearListaFichas(ctx) → { pintar(), esFavorita(), alternarFavorita() }
 import { modelo } from "../nucleo/ficha.js";
 import { hayTipo } from "../nucleo/tipos.js";
-import { confirmar, prepararPestanas, marcarPestana } from "./piezas.js";
-import { $, el } from "./dom.js";
+import { avisar } from "./piezas.js";
 
 /** ¿Se puede abrir? Todos sus modelos existen en esta versión. */
 export const disponible = (comp, hay = hayTipo) => { const a = comp?.actividades || []; return a.length > 0 && a.every((x) => hay(x.tipo)); };
@@ -18,61 +17,16 @@ export const etiquetasPestanas = ({ fav, rec, nube }) => ({
 /** 2026-11-12 → 12-11-2026 (como se ve en las listas). */
 export const fechaDMA = (iso) => iso.split("-").reverse().map(Number).join("-");
 
+/**
+ * Fase 4: la tarjeta Favoritas/Recientes sale del diseño (las listas están solo en Inicio). Queda la favorita de la
+ * ficha abierta (en «⋯» de la barra) y pintar(), que refresca el inicio.
+ */
 export function crearListaFichas(ctx) {
-  let pestana = "favoritos";
-  const comp = () => ctx.comp, nubeV = () => ctx.nubeV;
-  function marcarFavorito() {
-    try { const f = ctx.guardadas.esFavorito(comp().composicion()); $("favorito").textContent = f ? "★ Favorita" : "☆ Favorita"; $("favorito").classList.toggle("on", f); } catch {}
+  const esFavorita = () => { try { return ctx.guardadas.esFavorito(ctx.comp.composicion()); } catch { return false; } };
+  function alternarFavorita() {
+    const ficha = ctx.previa.ficha; if (!ficha) return;
+    ctx.guardadas.alternarFavorito(ctx.comp.composicion(), ficha.titulo);
+    avisar(esFavorita() ? "Añadida a favoritas (en Inicio → Mis fichas)." : "Quitada de favoritas.");
   }
-  function pintar() {
-    const g = ctx.guardadas, fav = g.favoritos(), rec = g.recientes(), dentro = nubeV().nube.estado().estado === "dentro";
-    const nubeLista = dentro ? ctx.enNube || [] : [];
-    $("guardadas").hidden = !fav.length && !rec.length && !dentro;
-    if (pestana === "nube" && !dentro) pestana = "favoritos";
-    if (!fav.length && pestana === "favoritos") pestana = dentro ? "nube" : "recientes";
-    if (!rec.length && pestana === "recientes") pestana = fav.length || !dentro ? "favoritos" : "nube";
-    $("pNube").hidden = !dentro;
-    marcarPestana(document.querySelector("#guardadas .pestanas"), $({ favoritos: "pFav", recientes: "pRec", nube: "pNube" }[pestana]));
-    const t = etiquetasPestanas({ fav, rec, nube: ctx.enNube });
-    $("pFav").textContent = t.fav; $("pRec").textContent = t.rec; $("pNube").textContent = t.nube;
-    if (pestana === "nube") return pintarNube(nubeLista);
-    const lista = pestana === "favoritos" ? fav : rec;
-    $("listaGuardadas").replaceChildren(...lista.map((c, i) => {
-      const abrir = el("button", { className: "g-abrir", disabled: !disponible(c) },
-        el("strong", { textContent: c.nombre || "Ficha" }),
-        el("small", { textContent: nombresModelos(c) + (c.fecha ? " · " + fechaDMA(c.fecha) : "") }));
-      abrir.onclick = () => comp().abrirGuardada(c);
-      const x = el("button", { className: "g-quitar fantasma icono", textContent: "✕", title: "Quitar de la lista" });
-      x.setAttribute("aria-label", `Quitar «${c.nombre || "Ficha"}» de la lista`);
-      x.onclick = () => { g.quitar(pestana, i); pintar(); marcarFavorito(); };
-      return el("li", {}, abrir, x);
-    }));
-  }
-  function pintarNube(lista) {
-    if (!ctx.enNube) { $("listaGuardadas").replaceChildren(el("li", { className: "info", textContent: "Cargando…" })); return; }
-    if (!lista.length) { $("listaGuardadas").replaceChildren(el("li", { className: "info", textContent: "Aún no hay fichas en la nube: usa «☁ Guardar en la nube»." })); return; }
-    $("listaGuardadas").replaceChildren(...lista.map((x) => {
-      const abrir = el("button", { className: "g-abrir", disabled: !disponible(x.composicion) },
-        el("strong", { textContent: x.titulo }),
-        el("small", { textContent: nombresModelos(x.composicion) + (x.creada ? " · " + fechaDMA(x.creada.slice(0, 10)) : "") }));
-      abrir.onclick = () => comp().abrirGuardada(x.composicion);
-      const b = el("button", { className: "g-quitar fantasma icono", textContent: "✕", title: "Borrar de la nube" });
-      b.setAttribute("aria-label", `Borrar «${x.titulo}» de la nube`);
-      b.onclick = async () => {
-        if (!await confirmar({ titulo: `¿Borrar «${x.titulo}» de la nube?`, texto: "Tabula y Fori dejarán de verla.", si: "Borrar", peligro: true })) return;
-        try { await nubeV().nube.borrar(x.id); ctx.enNube = ctx.enNube.filter((y) => y.id !== x.id); pintar(); } catch (e) { nubeV().avisoNube(e.message, true); }
-      };
-      return el("li", {}, abrir, b);
-    }));
-  }
-  function mostrarNube() { pestana = "nube"; pintar(); }
-  prepararPestanas(document.querySelector("#guardadas .pestanas"), $("listaGuardadas"));
-  $("pFav").onclick = () => { pestana = "favoritos"; pintar(); };
-  $("pRec").onclick = () => { pestana = "recientes"; pintar(); };
-  $("pNube").onclick = () => { mostrarNube(); if (!ctx.enNube) nubeV().leerNube(); };
-  $("favorito").onclick = () => {
-    if (!ctx.previa.ficha) return;
-    pestana = "favoritos"; ctx.guardadas.alternarFavorito(comp().composicion(), ctx.previa.ficha.titulo); marcarFavorito(); pintar();
-  };
-  return { pintar, marcarFavorito, mostrarNube };
+  return { pintar: () => ctx.refrescarInicio(), esFavorita, alternarFavorita };
 }

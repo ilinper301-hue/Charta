@@ -102,17 +102,30 @@ export function estiloLectura(ficha) {
 }
 
 /**
- * Páginas para imprimir: todas las de la ficha para cada alumno (o `copias` con la línea en blanco si no hay alumnos), seguidas.
- * Con variantes > 1, el alumno i recibe la variante i % variantes. Devuelve [{ nombre, variante, pagina (0…), total, svg }].
- * Los nombres solo se usan aquí, en el dispositivo: nunca entran en la ficha.
+ * Lista de hojas sin dibujar (fase 4: la vista previa dibuja solo la visible): todas las páginas de la ficha para cada alumno
+ * (o `copias` con la línea en blanco si no hay alumnos), seguidas. Con variantes > 1, el alumno i recibe la variante
+ * i % variantes. → [{ nombre, variante, pagina (0…), total, i (alumno o copia) }]
  */
-export function hojas(ficha, { nombres = [], copias = 1, bn = false, modo = "papel" } = {}) {
+export function listaHojas(ficha, { nombres = [], copias = 1 } = {}) {
   const lista = nombres.map((s) => String(s).trim()).filter(Boolean);
   const quienes = lista.length ? lista : Array(Math.max(1, copias | 0)).fill("");   // sin alumnos: copias con la línea en blanco
   return quienes.flatMap((nombre, i) => {
-    const v = i % ficha.variantes;
-    const pags = v === 0 ? ficha.paginas : ficha.variantesDatos[v - 1].paginas;
-    return pags.map((pag, k) => ({ nombre, variante: v, pagina: k, total: pags.length,
-      svg: hoja(pag, { titulo: ficha.titulo, nombre, bn, modo, uid: k ? `h${i}p${k}${modo[0]}` : `h${i}${modo[0]}`, ...estiloLectura(ficha) }) }));
+    const v = i % ficha.variantes, total = (v === 0 ? ficha.paginas : ficha.variantesDatos[v - 1].paginas).length;
+    return Array.from({ length: total }, (_, k) => ({ nombre, variante: v, pagina: k, total, i }));
   });
+}
+
+/** SVG de una hoja de listaHojas(). */
+export function dibujarHoja(ficha, { nombre, variante: v, pagina: k, i }, { bn = false, modo = "papel" } = {}) {
+  const pags = v === 0 ? ficha.paginas : ficha.variantesDatos[v - 1].paginas;
+  return hoja(pags[k], { titulo: ficha.titulo, nombre, bn, modo, uid: k ? `h${i}p${k}${modo[0]}` : `h${i}${modo[0]}`, ...estiloLectura(ficha) });
+}
+
+/**
+ * Páginas para imprimir: listaHojas() dibujadas. Devuelve [{ nombre, variante, pagina (0…), total, svg }].
+ * Los nombres solo se usan aquí, en el dispositivo: nunca entran en la ficha. (API pública: la usa Tabula.)
+ */
+export function hojas(ficha, { nombres = [], copias = 1, bn = false, modo = "papel" } = {}) {
+  return listaHojas(ficha, { nombres, copias }).map((h) => ({ nombre: h.nombre, variante: h.variante, pagina: h.pagina, total: h.total,
+    svg: dibujarHoja(ficha, h, { bn, modo }) }));
 }

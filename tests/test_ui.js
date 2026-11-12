@@ -323,3 +323,40 @@ import { hayTipo as existeTipo } from "../src/nucleo/tipos.js";
   b.guardar(comp, {}); b.descartar(); assert.equal(alm.getItem(CLAVE_BORRADOR), null);
   console.log("test_ui: borrador, «Mis frases» una vez y enlace largo a Tabula OK");
 }
+
+// Fase 4 de PLAN-DISENO · vista previa de una hoja: lista sin dibujar, resúmenes, etiquetas y «no regenerar».
+import { listaHojas, dibujarHoja } from "../src/render/hoja.js";
+import { resumenAlumnos, resumenImpresion, etiquetaHoja, listaSoluciones, etiquetaSolucion, claveGeneracion, conPresentacion, solucionDe } from "../src/ui/previa_datos.js";
+{
+  const pags = [{ actividades: [{ tipo: "sumar.h20" }] }, { actividades: [{ tipo: "restar.r20" }, { tipo: "sumar.h10" }] }];
+  const md = metadatosDe(pags.map((p) => p.actividades.map((a) => a.tipo)));
+  const pres = { color: false, fuente: "fredoka", letraGrande: true };
+  // Generar sin título ni presentación y ponérselos después da la misma ficha que generarla con ellos.
+  const base = generar({ paginas: pags, metadatos: md, variantes: 3 }, 7);
+  assert.deepEqual(conPresentacion(base, { titulo: "Repaso", presentacion: pres }), generar({ paginas: pags, metadatos: md, variantes: 3, titulo: "Repaso", presentacion: pres }, 7));
+  assert.deepEqual(conPresentacion(base, { titulo: undefined, presentacion: {} }), base);
+  assert.equal(JSON.stringify(conPresentacion(base, { titulo: "X", presentacion: pres })), JSON.stringify(generar({ paginas: pags, metadatos: md, variantes: 3, titulo: "X", presentacion: pres }, 7)), "mismo orden de claves");
+  assert.equal(claveGeneracion({ paginas: pags, variantes: 3, semilla: 7 }), claveGeneracion({ paginas: structuredClone(pags), variantes: 3, semilla: 7 }));
+  assert.notEqual(claveGeneracion({ paginas: pags, variantes: 3, semilla: 7 }), claveGeneracion({ paginas: pags, variantes: 2, semilla: 7 }));
+  assert.notEqual(claveGeneracion({ paginas: pags, variantes: 3, semilla: 7 }), claveGeneracion({ paginas: pags, variantes: 3, semilla: 8 }));
+  // listaHojas + dibujarHoja = hojas() (la vista previa dibuja solo una; al imprimir, todas, iguales).
+  const f = conPresentacion(base, { titulo: "Repaso", presentacion: pres }), nombres = ["Ana", "Luis", "Eva", "Leo"];
+  const l = listaHojas(f, { nombres }), hs = hojas(f, { nombres, bn: true });
+  assert.equal(l.length, 8); assert.equal(hs.length, 8);
+  l.forEach((h, j) => { assert.equal(dibujarHoja(f, h, { bn: true }), hs[j].svg); assert.deepEqual({ ...hs[j], svg: 0 }, { nombre: h.nombre, variante: h.variante, pagina: h.pagina, total: h.total, svg: 0 }); });
+  assert.deepEqual(l.map((h) => h.variante), [0, 0, 1, 1, 2, 2, 0, 0]);
+  assert.equal(listaHojas(f, { copias: 3 }).length, 6);
+  assert.equal(etiquetaHoja(l[3], { variantes: 3 }), "Luis · B · pág. 2 de 2");
+  assert.equal(etiquetaHoja(listaHojas(f, { copias: 3 })[2], { variantes: 1, copias: 3 }), "Copia 2 · pág. 1 de 2");
+  assert.equal(etiquetaHoja({ nombre: "", i: 0, variante: 0, pagina: 0, total: 1 }), "Sin nombre");
+  const s = listaSoluciones(f);
+  assert.equal(s.length, 6); assert.equal(etiquetaSolucion(s[3], 3), "Variante B · pág. 2 de 2");
+  assert.equal(solucionDe(s, l[5]), 5); assert.equal(etiquetaSolucion({ variante: 0, pagina: 0, total: 1 }), "Soluciones");
+  assert.equal(resumenAlumnos({ alumnos: 25, variaciones: "2" }), "25 alumnos · variantes A y B");
+  assert.equal(resumenAlumnos({ alumnos: 1 }), "1 alumno · todas iguales");
+  assert.equal(resumenAlumnos({ copias: 1 }), "Sin nombres · 1 copia");
+  assert.equal(resumenAlumnos({ copias: 4, variaciones: "distintas" }), "Sin nombres · 4 copias · una distinta para cada copia");
+  assert.equal(resumenImpresion({ fuente: "Andika" }), "Color · Andika");
+  assert.equal(resumenImpresion({ bn: true, fuente: "Fredoka", grande: true, facil: true }), "Blanco y negro · Fredoka · lectura fácil");
+  console.log("test_ui: vista previa de una hoja (fase 4) OK");
+}

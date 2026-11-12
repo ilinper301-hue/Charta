@@ -42,7 +42,14 @@ em { font-style: normal; }
   -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--borde); }
 .marca { display: flex; align-items: center; gap: 9px; min-width: 0; flex: 1; }
 .barra:has(#aInicio:not([hidden])) { padding-left: 6px; }
-.barra-titulo { flex: 1; min-width: 0; margin: 0 0 0 2px; font-size: 1rem; font-weight: 600; letter-spacing: -.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* Fase 4: el título de la ficha se edita en la cabecera (vacío = automático, que se ve como sugerencia). */
+.barra input.barra-titulo { flex: 1; min-width: 0; margin: 0 0 0 2px; height: var(--alto); padding: 0 34px 0 10px; font-size: 1rem; font-weight: 600; letter-spacing: -.01em;
+  text-overflow: ellipsis; background: transparent no-repeat right 10px center / 16px; border: 1px solid transparent; border-radius: var(--r-md); box-shadow: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z'/%3E%3C/svg%3E"); }
+.barra input.barra-titulo::placeholder { color: var(--texto); opacity: 1; }
+.barra input.barra-titulo:hover { border-color: var(--borde); }
+.barra input.barra-titulo:focus { background-color: var(--superficie); background-image: none; padding-right: 10px; border-color: var(--primario); box-shadow: 0 0 0 3px color-mix(in srgb, var(--primario) 16%, transparent); }
+.barra input.barra-titulo:focus::placeholder { color: var(--apagado); opacity: .65; }
 .logo { width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0; }
 .barra h1 { margin: 0; font-weight: 650; font-size: 1.05rem; letter-spacing: -.02em; color: var(--texto); line-height: 1; }
 .sub { color: var(--apagado); font-size: .82rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-left: 9px;
@@ -140,16 +147,26 @@ button .ico { display: inline-grid; place-items: center; }
 button:disabled { cursor: default; opacity: .5; }
 .botones, .fila-fuente { display: flex; gap: 8px; flex-wrap: wrap; }
 .fila-fuente { margin: -8px 0 -4px -10px; gap: 2px; }
-.acciones-sec { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 160px), 1fr)); gap: 8px; }
-.acciones-sec button { justify-content: flex-start; text-align: left; white-space: normal; height: auto; min-height: var(--alto); padding: 8px 12px; line-height: 1.2; }
-.acciones-sec button .ico-app { flex: none; margin-right: 8px; }
-#favorito.on { background: var(--acento-suave); color: var(--acento-texto); border-color: var(--acento-linea); }
 
-/* Acciones principales: barra fija abajo en móvil */
-.accion-principal { position: fixed; z-index: 6; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: auto 1fr; gap: 8px;
+/* ---------- Secciones plegadas (fase 4): lo que casi no se cambia, con su resumen en una línea ---------- */
+details.plegable { display: block; padding: 0; }
+.plegable > summary { display: flex; align-items: center; gap: 10px; min-height: 56px; padding: 6px 16px; cursor: pointer; list-style: none; border-radius: var(--r-lg); }
+.plegable > summary::-webkit-details-marker { display: none; }
+.plegable > summary h2 { flex-shrink: 0; }
+.plegable > summary small { flex: 1; min-width: 0; text-align: right; color: var(--apagado); font-size: var(--txt-min); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.plegable > summary::after { content: ""; flex-shrink: 0; width: 8px; height: 8px; margin: 0 4px 4px; border: solid var(--apagado); border-width: 0 2px 2px 0; rotate: 45deg; transition: rotate .15s; }
+.plegable[open] > summary::after { rotate: 225deg; margin-bottom: -4px; }
+.plegable > summary:hover { background: var(--hover); }
+.plegable-cuerpo { display: grid; gap: 14px; padding: 4px 16px 16px; }
+details.ayuda > summary { display: inline-flex; align-items: center; min-height: var(--alto); cursor: pointer; color: var(--acento-texto); font-size: .86rem; font-weight: 500; }
+details.ayuda > p { margin: 0 0 4px; }
+
+/* Barra fija abajo (fase 4): Ver ficha + Imprimir (la acción principal) + «⋯» con el resto */
+.accion-principal { position: fixed; z-index: 6; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: auto 1fr auto; gap: 6px;
   padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); background: color-mix(in srgb, var(--fondo) 88%, transparent);
   backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-top: 1px solid var(--borde); }
 .accion-principal button { height: 46px; font-size: .95rem; }
+.accion-principal .icono { width: 46px; min-width: 46px; }
 .accion-principal .primario { box-shadow: 0 1px 2px rgba(0, 0, 0, .12); }
 
 .error { color: var(--error); margin: 0; font-size: .85rem; }
@@ -159,18 +176,34 @@ button:disabled { cursor: default; opacity: .5; }
 #cuenta { margin-top: -6px; }
 
 /* ---------- Vista previa ---------- */
-.hojas { display: grid; gap: 14px; }
+.hojas { display: grid; gap: 14px; touch-action: pan-y; }
 /* El papel es siempre blanco (también en modo oscuro): es como saldrá impreso. */
 .hoja { background: #fff; border-radius: 4px; overflow: hidden; box-shadow: var(--sombra-papel); }
 .hoja svg { display: block; width: 100%; height: auto; }
 .hoja-etq { font-size: var(--txt-min); font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--apagado); margin: 0 0 6px; }
-.previa, .solucionario { background: var(--superficie-2); }
+.previa { background: var(--superficie-2); }
+/* Fase 4: una hoja cada vez, con «Ficha | Soluciones» arriba y el paginador «‹ Ana · A · 1 de 25 ›» abajo. */
+.previa-cab { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.previa-cab .info { font-size: var(--txt-min); }
+.nota-sol { margin-top: -6px; }
+.paginador { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 6px; align-items: center; }
+.paginador select { text-align: center; text-align-last: center; font-weight: 500; }
+.paginador button { background: var(--superficie); }
+/* «Ver ficha»: la vista previa a pantalla completa; la hoja cabe entera (unidades del contenedor). */
+.hoja-inf.pantalla { inset: 0; max-height: none; border-radius: 0; animation: aparecer .15s ease-out; }
+.hoja-inf.pantalla::before { display: none; }
+.hoja-inf.pantalla .hoja-inf-cuerpo { flex: 1; min-height: 0; padding: 10px 12px; display: flex; flex-direction: column; overflow: hidden; }
+.pantalla .previa { flex: 1; min-height: 0; border: 0; padding: 0; background: transparent; display: flex; flex-direction: column; gap: 10px; }
+.pantalla .hojas { flex: 1; min-height: 0; container-type: size; display: grid; place-items: center; }
+.pantalla .hoja { width: min(100cqw, 100cqh * 210 / 297); }
+.visor-pie { display: grid; padding: 8px 12px calc(8px + env(safe-area-inset-bottom)); border-top: 1px solid var(--borde); }
+.visor-pie button { height: 46px; font-size: .95rem; }
 .impresion { display: none; }
 
 @page { size: A4 portrait; margin: 0; }
 @media print {
   body { background: #fff; }
-  .barra, main, .inicio, .aviso, .velo, .selector { display: none !important; }
+  .barra, main, .inicio, .aviso, .velo, .selector, .tostada { display: none !important; }
   .impresion { display: block; }
   .impresion .pag { width: 210mm; height: 297mm; overflow: hidden; break-after: page; page-break-after: always; }
   .impresion .pag:last-child { break-after: auto; page-break-after: auto; }
@@ -222,6 +255,13 @@ body.con-selector, body.con-capa { overflow: hidden; }
 .aviso { position: fixed; left: 50%; bottom: calc(80px + env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 20; background: var(--texto); color: var(--fondo);
   padding: 8px 8px 8px 14px; border-radius: var(--r-md); display: flex; gap: 12px; align-items: center; box-shadow: var(--sombra-md); font-size: .85rem; width: max-content; max-width: calc(100vw - 24px); }
 .aviso button { padding: 0 14px; }
+/* Avisos breves (fase 4, avisar() de piezas.js): estado de la nube, favoritas, errores. */
+.tostada { position: fixed; left: 50%; bottom: calc(76px + env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 25; display: flex; align-items: center; gap: 4px;
+  width: max-content; max-width: calc(100vw - 24px); padding: 4px 4px 4px 14px; border-radius: var(--r-md); background: var(--texto); color: var(--fondo);
+  box-shadow: var(--sombra-md); font-size: .88rem; line-height: 1.35; animation: aparecer .15s ease-out; }
+.tostada.error { background: var(--error); color: #fff; }
+.tostada button { color: inherit; flex-shrink: 0; }
+.tostada button:hover:not(:disabled) { background: rgba(255, 255, 255, .15); color: inherit; }
 
 /* ---------- Tableta y escritorio: opciones a la izquierda, vista previa fija a la derecha ---------- */
 @media (min-width: 900px) {
@@ -229,16 +269,17 @@ body.con-selector, body.con-capa { overflow: hidden; }
   main { max-width: 1280px; padding: 18px; padding-bottom: 18px; grid-template-columns: minmax(380px, 460px) minmax(0, 1fr); gap: 18px; align-items: start; }
   .lado { position: sticky; top: 70px; max-height: calc(100vh - 88px); overflow-y: auto; border-radius: var(--r-lg); }
   .accion-principal { position: sticky; bottom: 12px; padding: 8px; grid-template-columns: 1fr; border: 1px solid var(--borde); border-radius: var(--r-lg);
-    background: var(--superficie); box-shadow: var(--sombra-md); }
-  #irPrevia { display: none; }
+    background: var(--superficie); box-shadow: var(--sombra-md); grid-template-columns: 1fr auto; }
+  #verFicha { display: none; }
+  .tostada { bottom: 16px; }
   .aviso { bottom: 16px; }
 }
-@media (min-width: 1200px) { .lado .hojas { grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); } }
+
 @media (max-width: 360px) { .sub { display: none; } }
 @media (max-width: 380px) {
   .elegido { grid-template-columns: 72px minmax(0, 1fr); }
   .elegido > button { grid-column: 1 / -1; width: 100%; }
-  .accion-principal button { font-size: .88rem; padding: 0 12px; }
+  .accion-principal button { font-size: .88rem; padding: 0 10px; }
 }
 
 /* ---------- Pantalla de inicio (paso 4.8) ---------- */
