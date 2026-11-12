@@ -11,7 +11,7 @@
 //                    payload lleva `compLocal: true` en lugar de `comp` (Tabula la recoge comprobando el título).
 
 import { paginasValidas } from "./paginas.js";
-export const URL_TABULA = "/tabula/"; // raíz del sitio (ilinper301-hue.github.io); la app está en /Charta/dist/
+import { URL_TABULA } from "../rutas.js";
 export const MAX_ENLACE = 6144;       // más largo, la composición viaja por localStorage (los servidores cortan hacia los 8 KB)
 
 /** Texto UTF-8 → base64url sin «=». */

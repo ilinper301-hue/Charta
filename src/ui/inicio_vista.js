@@ -3,9 +3,8 @@
 import { PALETA } from "../render/hoja.js";
 import { miniatura } from "./navegacion.js";
 import { fechaCorta } from "./inicio.js";
-
-const $ = (id) => document.getElementById(id);
-function el(tag, props = {}, ...hijos) { const e = Object.assign(document.createElement(tag), props); e.append(...hijos); return e; }
+import { disponible, nombresModelos, etiquetasPestanas } from "./lista_fichas.js";
+import { $, el } from "./dom.js";
 
 /** Miniaturas de una en una (no bloquean la pantalla); se cancelan si el inicio se repinta. */
 let tanda = 0;
@@ -67,8 +66,8 @@ export function crearInicio(cb) {
     if (pestana === "favoritos" && !fav.length) pestana = rec.length || !dentro ? "recientes" : "nube";
     $("iFav").classList.toggle("activa", pestana === "favoritos"); $("iRec").classList.toggle("activa", pestana === "recientes");
     $("iNube").classList.toggle("activa", pestana === "nube"); $("iNube").hidden = !dentro;
-    $("iFav").textContent = `★ Favoritas (${fav.length})`; $("iRec").textContent = `Recientes (${rec.length})`;
-    $("iNube").textContent = nube ? `☁ En la nube (${nube.length})` : "☁ En la nube";
+    const t = etiquetasPestanas({ fav, rec, nube });
+    $("iFav").textContent = t.fav; $("iRec").textContent = t.rec; $("iNube").textContent = t.nube;
     const vacio = (t) => [el("li", { className: "info", textContent: t })];
     let filas;
     if (pestana === "nube") {
@@ -85,11 +84,11 @@ export function crearInicio(cb) {
 
   function fila({ comp, nombre, fecha }) {
     const acts = comp?.actividades || [];
-    const disp = acts.length > 0 && acts.every((a) => cb.hayTipo(a.tipo));
+    const disp = disponible(comp, cb.hayTipo);
     const mini = disp ? miniCaja(acts[0].tipo, cb.colorDe(acts[0].tipo)) : el("div", { className: "mini" });
     const b = el("button", { className: "g-abrir ini-fila", disabled: !disp }, mini,
       el("span", { className: "ini-fila-txt" }, el("strong", { textContent: nombre }),
-        el("small", { textContent: acts.map((a) => cb.nombreModelo(a.tipo)).join(" + ") + (fecha ? " · " + fechaCorta(fecha) : "") })));
+        el("small", { textContent: nombresModelos(comp, cb.nombreModelo) + (fecha ? " · " + fechaCorta(fecha) : "") })));
     b.onclick = () => cb.abrir(comp);
     return el("li", {}, b);
   }

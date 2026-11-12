@@ -21,7 +21,19 @@ referencia/ficha_muestra.pdf  ficha de muestra de Iván (marco a imitar)
 tests/test_nucleo.js  pruebas del núcleo JS (Node): `node tests/test_nucleo.js`
 index.html            redirige a dist/ (GitHub Pages sirve la raíz)
 package.json          solo "type": "module" para Node (sin dependencias)
-src/index.html, estilos.css, app.js   app: columna .col (Actividades, Alumnos, Impresión, Más acciones, barra .accion-principal) + .lado (vista previa); el CSS solo depende de los ids y clases que crea app.js
+src/index.html, estilos.css   app: columna .col (Actividades, Alumnos, Impresión, Más acciones, barra .accion-principal) + .lado (vista previa); el CSS solo depende de los ids y clases que crea la interfaz
+src/app.js            fase 2: director (~130 líneas): crea `ctx` (semilla, vista, enNube, almacén, guardadas, borrador, usos) y las vistas de src/ui/ (cada una recibe `ctx` y se asigna a `ctx.<vista>`; se llaman entre sí por `ctx` al responder a eventos, nunca al crearse), inicio (estadoInicio, mostrar, aDiseno/aInicio, nuevaFicha) y arranque; `globalThis.Charta` (API que usa Tabula)
+src/rutas.js          R6: URL_FORI y URL_TABULA (rutas fijas de las otras apps, un solo sitio)
+src/ui/dom.js         $ y el(tag, props, …hijos)
+src/ui/preferencias.js  guardarUltimo, leerUltimo, bnDefecto, ponerBnDefecto
+src/ui/editor_actividad.js  editorActividad(id, {tamano, alCambiar, curso}) → { caja, id, curso, leer, poner, refrescar, cabecera }: modelo elegido + opciones
+src/ui/compositor.js  crearCompositor(ctx) → { editores, cuentas (get/set), recolocar, nuevoEditor, crearEditor, letraMateria, ponerMateria1, composicion(), abrirGuardada(c, extra), guardarBorrador() }: actividades y páginas, composición, abrir una guardada y borrador (R1)
+src/ui/letras_vista.js  crearLetrasVista(ctx) → { marcadas, obligatorias, misFrases(), pintarLetras, pintarMisFrases, actividadesBase(), actividades() }: mapa de letras y «Mis frases»
+src/ui/fuentes_vista.js  crearFuentesVista(ctx) → { elegirFuente(id) }: selector de letra y letras subidas
+src/ui/previa.js      crearPrevia(ctx) → { pintar(), nombres(), copias(), ficha, paginas }: alumnos, generar y pintar las hojas y el solucionario, Imprimir, Otra variante, Ver soluciones
+src/ui/lista_fichas.js  disponible, nombresModelos, etiquetasPestanas, fechaDMA (comunes con inicio_vista.js) y crearListaFichas(ctx) → { pintar(), marcarFavorito(), mostrarNube() }: tarjeta Favoritas/Recientes/Nube de Diseño
+src/ui/nube_vista.js  crearNubeVista(ctx) → { nube, avisoNube, leerNube, idUrl, aFori }: cuenta, Guardar en la nube, `?ficha=`; la lista leída está en `ctx.enNube`
+src/ui/enlaces.js     crearEnlaces(ctx) → { entrada, proyectar() }: grupos de Tabula, Enviar a Tabula y Proyectar en Fori
 src/ui/navegacion.js  cursos(), materias(c), bloques(c, m) (CATALOGO.bloques[materia]), modelos(c, m, b, tamano) (solo tipos registrados; `cabe`), miniatura(id), fuenteMateria(id), materiaDe(id) — sin DOM
 src/ui/alumnos.js     leerAlumnos(texto) (pegar listas, Séneca), numVariantes(opción, páginas), MAX_ALUMNOS — sin DOM
 src/ui/guardadas.js   crearGuardadas(almacén): recientes(), favoritos(), anotarReciente, alternarFavorito, esFavorito, quitar — sin nombres; limpiar(c) (lista blanca de campos; «Mis frases» en `misFrases` una vez), frasesComp(c)

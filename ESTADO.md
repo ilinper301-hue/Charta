@@ -10,7 +10,8 @@ Sin cambios de código. El plan y el estado de sus fases están en **`PLAN-DISEN
 - **Interfaz** (capturas a 390 × 844, 768 × 1024 y 1180 × 820): Inicio y selector, bien (falta buscador de modelos). Diseño: la vista previa apila todas las hojas → 17 pantallas con 25 alumnos (36 con 2 páginas; 47 en tablet vertical, que usa el diseño de móvil), 12.800 nodos y 0,25 s por cada cambio; 6 acciones con el mismo peso; secciones siempre desplegadas; zonas táctiles de 26–32 px. Sin desbordamiento ni errores de consola.
 - **Decisiones de Iván (12-11-2026)**: el borrador conserva los nombres (solo en el dispositivo); al crear ficha nueva se mantienen alumnos y variantes.
 - **Fases**: 1 red de seguridad (borrador, Atrás, nube, prueba de navegador, adelgazar documentos) · 2 partir `app.js` · 3 piezas comunes · 4 diseño en móvil (vista previa de una hoja) · 5 tablet · 6 inicio y selector · 7 datos y contratos · 8 repaso.
-- [x] **Fase 1 hecha (12-11-2026)**: borrador automático con los alumnos (`charta:borrador`, solo en el dispositivo; vuelve al recargar y con «Seguir con la última»; se borra al imprimir o con «Descartar borrador»), Atrás de Android cierra el selector (`src/ui/capas.js`), nube con `tipos` recortado a 10 y avisos claros, «Mis frases» una sola vez en la composición (enlace a Tabula de 36 KB → 4 KB; más de 6 KB va por `charta:aTabula`, Tabula ya lo lee), `tests/navegador.py` (33 comprobaciones) y `npm run test:rapido` (32 s). Historia cerrada → `HISTORIAL.md`. Siguiente: **fase 2** (Sonnet, esfuerzo medio).
+- [x] **Fase 1 hecha (12-11-2026)**: borrador automático con los alumnos (`charta:borrador`, solo en el dispositivo; vuelve al recargar y con «Seguir con la última»; se borra al imprimir o con «Descartar borrador»), Atrás de Android cierra el selector (`src/ui/capas.js`), nube con `tipos` recortado a 10 y avisos claros, «Mis frases» una sola vez en la composición (enlace a Tabula de 36 KB → 4 KB; más de 6 KB va por `charta:aTabula`, Tabula ya lo lee), `tests/navegador.py` (33 comprobaciones) y `npm run test:rapido` (32 s). Historia cerrada → `HISTORIAL.md`.
+- [x] **Fase 2 hecha (12-11-2026)**: `app.js` partido (608 → 131 líneas) en vistas de `src/ui/` (compositor, letras, fuentes, previa, lista de fichas, nube, enlaces) y rutas de Tabula y Fori en `src/rutas.js`; sin cambios visibles (mismo DOM y `localStorage` en un recorrido de 27 pasos; `npm test` y `tests/navegador.py` en verde). Siguiente: **fase 3** (Opus, esfuerzo alto).
 
 ## Resumen de lo hecho
 - Motor de referencia en Python (Fase 1) con compositor de página y API `generar(spec)`; `tests/test_motor.py` en verde.
@@ -44,6 +45,7 @@ Detalle de cada paso: `HISTORIAL.md`.
 - Revisar secuencias (orden único), adivinanzas (una respuesta clara) y lista de fluidez («té», «azada») de lectura.
 - Revisar `datos/frases_1.tsv` (etapa l con frases flojas) y después ejecutar `python3 tools/frases.py`.
 - Orden de las letras (más adelante); pictogramas aparcados.
+- Probar en el Android (fase 2, sin cambios visibles): iniciar sesión, «Guardar en la nube», «Enviar a Tabula», «Proyectar en Fori» y abrir una ficha de la nube; si algo falla, avisar.
 - Probar en el Android (fase 1): componer una ficha con alumnos, cerrar la app desde multitarea y volver → «Seguir con la última» la recupera; Atrás con el selector abierto lo cierra.
 
 ## Fase 7 · Ampliación de contenidos (en curso)

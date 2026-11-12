@@ -165,3 +165,9 @@ Pasos ya cerrados, movidos desde ESTADO.md el 12-11-2026. No hace falta leerlo a
   - **Pendiente**: comprobar en Tabula que guarda y abre fichas de varias páginas (allí no se ha tocado nada).
 
 - [x] `geometria.lineas` v2 (11-11-2026): las opciones recta/curva/quebrada salen en otro orden en cada casilla (hay que leerlas); «abierta/cerrada» sigue en orden fijo. De paso, las rectas inclinadas ya no se salen de la casilla ni tocan las opciones.
+
+## PLAN-DISENO · Fase 2 · Partir `app.js` (12-11-2026)
+- [x] `src/app.js` de 608 a 131 líneas: `iniciar()` solo crea el estado compartido (`ctx`), las vistas y el inicio. Vistas nuevas en `src/ui/`: `compositor.js`, `editor_actividad.js`, `letras_vista.js`, `fuentes_vista.js`, `previa.js`, `lista_fichas.js`, `nube_vista.js`, `enlaces.js`, `preferencias.js`, `dom.js`. `src/rutas.js` reúne `URL_FORI` y `URL_TABULA` (R6). `inicio_vista.js` usa los ayudantes comunes de `lista_fichas.js` (disponible, nombres, etiquetas de pestañas).
+- Comprobado: `tests/navegador.py` (33 comprobaciones), `npm test` y un recorrido de 27 pasos con el `dist` anterior y el nuevo (mismo DOM sin scripts y mismo `localStorage` en cada paso).
+- Límites: la elección de pestaña de «Mis fichas» sigue con dos reglas distintas (Diseño e Inicio); la nube con sesión real solo se prueba con `test_nube.js`.
+

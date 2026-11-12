@@ -188,7 +188,9 @@ Primero lo que puede hacer perder trabajo; después, la prueba que protege las f
 - **Adelgazar la documentación**: pasar lo ya cerrado de `ESTADO.md` a `HISTORIAL.md` (que no se lee al empezar)
   y poner al día los documentos del proyecto de Claude.
 
-### Fase 2 · Partir `app.js` — *Sonnet, esfuerzo medio (mecánico; lo protege la prueba de la fase 1)*
+### Fase 2 · Partir `app.js` — *Sonnet, esfuerzo medio (mecánico; lo protege la prueba de la fase 1)* · ✅ hecha (12-11-2026)
+
+> Resultado: `app.js` 608 → 131 líneas (director: `iniciar()` crea las vistas y las conecta con un `ctx` compartido). Nuevos en `src/ui/`: `compositor.js` (actividades, páginas, composición, abrir guardada, borrador), `editor_actividad.js`, `letras_vista.js` (mapa de letras y «Mis frases»), `fuentes_vista.js`, `previa.js` (alumnos, vista previa, imprimir), `lista_fichas.js` (ayudantes comunes con Inicio y tarjeta de Diseño), `nube_vista.js`, `enlaces.js` (Tabula y Fori), `preferencias.js`, `dom.js`; y `src/rutas.js` (R6: `URL_FORI`, `URL_TABULA`). Comprobado: `tests/navegador.py` y `npm test` en verde, y mismo DOM y mismo `localStorage` que antes en un recorrido de 27 pasos (Inicio, Lengua con letras y «Mis frases», letra, alumnos, variantes, soluciones, favoritas, recientes, ajustes). Límites: la lógica de elegir pestaña de «Mis fichas» sigue siendo distinta en Inicio y en Diseño (se unificará con la fase 3 o 6); la nube con sesión real no se prueba en navegador (solo `test_nube.js`).
 
 Sin cambiar nada visible ni ningún id. `iniciar()` queda como director y el resto pasa a `src/ui/`:
 `compositor.js`, `letras_vista.js`, `fuentes_vista.js`, `nube_vista.js`, `enlaces.js` (Tabula y Fori) y

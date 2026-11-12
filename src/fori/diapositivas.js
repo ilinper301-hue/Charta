@@ -12,7 +12,6 @@ import { fuenteDe } from "../render/fuentes.js";
 import { AZUL } from "../render/hoja.js";
 import { paginasVariante } from "../nucleo/lector.js";
 
-export const URL_FORI = "/Fori/";            // raíz del sitio (ilinper301-hue.github.io); Fori en /Fori/ (nombre del repo)
 export const CLAVE_FORI = "charta:aFori";
 export const ANCHO = 1600;
 export const ALTO = 900;
