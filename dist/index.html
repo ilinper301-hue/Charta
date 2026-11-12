@@ -21,7 +21,7 @@
   --borde: #E8E6DD; --borde-fuerte: #D9D7CC;
   --texto: #141413; --texto-2: #3D3C38; --apagado: #66655F;
   --primario: #1E524E; --primario-osc: #153E3C; --acento-texto: #22655E; --acento-suave: #E5F4EF; --acento-linea: #BFE6DA;
-  --sobre-acento: #FFFFFF; --error: #A63A2A;
+  --sobre-acento: #FFFFFF; --error: #A63A2A; --sobre-error: #FFFFFF;
   --sans: Inter, "SF Pro Text", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   /* Fase 3: zonas táctiles de 44 px como mínimo (--alto-sm queda como alias) y texto de 12,5 px como mínimo. */
   --alto: 44px; --alto-sm: 44px; --txt-min: 12.5px;
@@ -33,8 +33,8 @@
   --fondo: #171C1C; --superficie: #212827; --superficie-2: #1D2322; --hover: #2A3332;
   --borde: #313A39; --borde-fuerte: #3F4A48;
   --texto: #EDF2F0; --texto-2: #D1D9D6; --apagado: #9AA7A3;
-  --primario: #2D8070; --primario-osc: #389483; --acento-texto: #8EDCC6; --acento-suave: #1E3936; --acento-linea: #2C5650;
-  --error: #E58A78;
+  --primario: #2D8070; --primario-osc: #25695C; --acento-texto: #8EDCC6; --acento-suave: #1E3936; --acento-linea: #2C5650;
+  --error: #E58A78; --sobre-error: #171C1C;
   --sombra-sm: 0 1px 2px rgba(0, 0, 0, .3); --sombra-md: 0 6px 24px rgba(0, 0, 0, .35); --sombra-papel: 0 2px 14px rgba(0, 0, 0, .5);
   color-scheme: dark;
 }
@@ -61,7 +61,7 @@ em { font-style: normal; }
 .barra input.barra-titulo::placeholder { color: var(--texto); opacity: 1; }
 .barra input.barra-titulo:hover { border-color: var(--borde); }
 .barra input.barra-titulo:focus { background-color: var(--superficie); background-image: none; padding-right: 10px; border-color: var(--primario); box-shadow: 0 0 0 3px color-mix(in srgb, var(--primario) 16%, transparent); }
-.barra input.barra-titulo:focus::placeholder { color: var(--apagado); opacity: .65; }
+.barra input.barra-titulo:focus::placeholder { color: var(--apagado); opacity: 1; }
 .logo { width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0; }
 .barra h1 { margin: 0; font-weight: 650; font-size: 1.05rem; letter-spacing: -.02em; color: var(--texto); line-height: 1; }
 .sub { color: var(--apagado); font-size: .82rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-left: 9px;
@@ -121,7 +121,7 @@ select { appearance: none; -webkit-appearance: none; padding-right: 34px; text-o
 select:hover, input:not([type="checkbox"]):hover, textarea:hover { border-color: color-mix(in srgb, var(--borde-fuerte) 60%, var(--apagado)); }
 textarea { padding: 10px 12px; resize: vertical; min-height: 96px; line-height: 1.5; }
 select:focus, input:focus, textarea:focus { outline: none; border-color: var(--primario); box-shadow: 0 0 0 3px color-mix(in srgb, var(--primario) 16%, transparent); background-color: var(--superficie); }
-::placeholder { color: var(--apagado); opacity: .65; }
+::placeholder { color: var(--apagado); opacity: 1; }   /* fase 8: 5,8:1 en claro y 6,0:1 en oscuro (antes .65 → 2,8 y 3,4) */
 input[type="number"] { -moz-appearance: textfield; }
 
 /* Casillas como interruptores (siguen siendo checkbox: mismo comportamiento) */
@@ -152,8 +152,8 @@ button.fantasma, button.sutil { background: transparent; border-color: transpare
 button.fantasma:hover:not(:disabled) { background: var(--hover); color: var(--texto); }
 button.sutil { font-size: .84rem; color: var(--acento-texto); padding: 0 10px; }
 button.sutil:hover:not(:disabled) { background: var(--acento-suave); }
-button.peligro { background: var(--error); border-color: var(--error); color: #fff; font-weight: 600; }
-button.peligro:hover:not(:disabled), button.peligro:active:not(:disabled) { background: color-mix(in srgb, var(--error) 85%, #000); border-color: transparent; color: #fff; }
+button.peligro { background: var(--error); border-color: var(--error); color: var(--sobre-error); font-weight: 600; }
+button.peligro:hover:not(:disabled), button.peligro:active:not(:disabled) { background: color-mix(in srgb, var(--error) 85%, #000); border-color: transparent; color: var(--sobre-error); }
 button.icono { width: var(--alto); min-width: var(--alto); padding: 0; flex-shrink: 0; font-size: 1.1rem; }
 button .ico { display: inline-grid; place-items: center; }
 button:disabled { cursor: default; opacity: .5; }
@@ -192,7 +192,6 @@ details.ayuda > p { margin: 0 0 4px; }
 /* El papel es siempre blanco (también en modo oscuro): es como saldrá impreso. */
 .hoja { background: #fff; border-radius: 4px; overflow: hidden; box-shadow: var(--sombra-papel); }
 .hoja svg { display: block; width: 100%; height: auto; }
-.hoja-etq { font-size: var(--txt-min); font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--apagado); margin: 0 0 6px; }
 .previa { background: var(--superficie-2); }
 /* Fase 4: una hoja cada vez, con «Ficha | Soluciones» arriba y el paginador «‹ Ana · A · 1 de 25 ›» abajo. */
 .previa-cab { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
@@ -267,7 +266,6 @@ body.con-selector, body.con-capa { overflow: hidden; }
   white-space: normal; color: var(--texto); background: var(--superficie-2); border-color: var(--borde); }
 .g-abrir strong { font-weight: 600; font-size: .88rem; }
 .g-abrir small { color: var(--apagado); font-size: var(--txt-min); }
-.g-quitar { color: var(--apagado); }
 
 /* ---------- Aviso de versión nueva ---------- */
 .aviso { position: fixed; left: 50%; bottom: calc(80px + env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 20; background: var(--texto); color: var(--fondo);
@@ -277,7 +275,7 @@ body.con-selector, body.con-capa { overflow: hidden; }
 .tostada { position: fixed; left: 50%; bottom: calc(76px + env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 25; display: flex; align-items: center; gap: 4px;
   width: max-content; max-width: calc(100vw - 24px); padding: 4px 4px 4px 14px; border-radius: var(--r-md); background: var(--texto); color: var(--fondo);
   box-shadow: var(--sombra-md); font-size: .88rem; line-height: 1.35; animation: aparecer .15s ease-out; }
-.tostada.error { background: var(--error); color: #fff; }
+.tostada.error { background: var(--error); color: var(--sobre-error); }
 .tostada button { color: inherit; flex-shrink: 0; }
 .tostada button:hover:not(:disabled) { background: rgba(255, 255, 255, .15); color: inherit; }
 

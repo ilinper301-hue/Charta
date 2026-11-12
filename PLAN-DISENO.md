@@ -288,7 +288,9 @@ imprimir que no tape nada, selector y rejilla de Inicio aprovechando el ancho, y
   `tabula/js/charta.js` y `fori/src/js/05f-charta.js` clonando esos repositorios.
 - Medir y limitar el paquete de Fori (R9). Catálogo sin espacios (192 KB → menos de la mitad).
 
-### Fase 8 · Repaso final — *Sonnet, esfuerzo bajo*
+### Fase 8 · Repaso final — *Sonnet, esfuerzo bajo* · ✅ hecha (13-11-2026)
+
+> Resultado: contraste AA en claro y oscuro medido y corregido (error y «Imprimir» con ratón en oscuro, placeholders), CSS sin uso borrado (2 reglas), `README.md` y `CODEMAP.md` al día; el resto (nombres accesibles, teclado, hojas y menús) ya cumplía. `tests/navegador.py` («Fase 8») lo vigila.
 
 Modo oscuro, lector de pantalla y teclado en hojas y menús nuevos, borrar CSS sin uso, `README.md` y `CODEMAP.md`
 al día, capturas de antes y después.

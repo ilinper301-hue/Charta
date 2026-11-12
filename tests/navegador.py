@@ -45,6 +45,53 @@ AUDITORIA = """(() => {
   return { controles: [...new Set(controles)], textos: [...new Set(textos)] };
 })()"""
 
+# Fase 8: contraste del texto (WCAG AA: 4,5:1; 3:1 si es grande), placeholders incluidos, y controles sin nombre. Fuera de las fichas.
+CONTRASTE = """(() => {
+  const num = (c) => { const m = c.match(/rgba?\\(([^)]+)\\)/); if (!m) return null; const p = m[1].split(/[ ,\\/]+/).filter(Boolean).map(Number); return { r: p[0], g: p[1], b: p[2], a: p.length > 3 ? p[3] : 1 }; };
+  const lum = ({ r, g, b }) => { const f = (v) => { v /= 255; return v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4); }; return .2126 * f(r) + .7152 * f(g) + .0722 * f(b); };
+  const mezcla = (t, f) => ({ r: t.r * t.a + f.r * (1 - t.a), g: t.g * t.a + f.g * (1 - t.a), b: t.b * t.a + f.b * (1 - t.a), a: 1 });
+  const fondo = (e) => { const capas = []; for (let x = e; x; x = x.parentElement) { const c = num(getComputedStyle(x).backgroundColor); if (c && c.a > 0) { capas.push(c); if (c.a >= 1) break; } }
+    let b = { r: 255, g: 255, b: 255, a: 1 }; for (const c of capas.reverse()) b = mezcla(c, b); return b; };
+  // Lo plegado (details cerrado) no se dibuja y Chrome no recalcula su estilo al cambiar de tema: se salta.
+  const plegado = (e) => { for (let x = e.parentElement; x; x = x.parentElement) if (x.tagName === 'DETAILS' && !x.open && !e.closest('summary')) return true; return false; };
+  const vis = (e) => { const r = e.getBoundingClientRect(); return r.width > 0 && r.height > 0 && getComputedStyle(e).visibility !== 'hidden' && !plegado(e); };
+  const opac = (e) => { let o = 1; for (let x = e; x; x = x.parentElement) o *= parseFloat(getComputedStyle(x).opacity); return o; };
+  const desc = (e) => (e.id ? '#' + e.id : e.tagName.toLowerCase() + '.' + String(e.className || '').split(' ')[0]);
+  const fallos = [];
+  const medir = (e, estilo, texto, op) => {
+    const bg = fondo(e); let fg = num(estilo.color); if (!fg) return;
+    fg = mezcla({ ...fg, a: fg.a * op }, bg);
+    const a = lum(fg), b = lum(bg), cr = (Math.max(a, b) + .05) / (Math.min(a, b) + .05);
+    const fs = parseFloat(estilo.fontSize), grande = fs >= 24 || (fs >= 18.66 && parseInt(estilo.fontWeight) >= 700);
+    if (cr < (grande ? 3 : 4.5)) fallos.push(desc(e) + '«' + texto.trim().slice(0, 16) + '» ' + cr.toFixed(2) + ':1');
+  };
+  const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  while (w.nextNode()) {
+    const n = w.currentNode, p = n.parentElement;
+    if (!n.textContent.trim() || p.closest('svg, [inert], [hidden], .mini, .hoja, option, script, style') || !vis(p)) continue;
+    if (p.closest('button:disabled')) continue;
+    medir(p, getComputedStyle(p), n.textContent, opac(p));
+  }
+  for (const e of document.querySelectorAll('input[placeholder], textarea[placeholder]')) {
+    if (!vis(e) || e.closest('[inert], [hidden]') || e.value) continue;
+    const ph = getComputedStyle(e, '::placeholder');
+    medir(e, { color: ph.color, fontSize: ph.fontSize, fontWeight: ph.fontWeight }, 'placeholder ' + e.placeholder, opac(e) * parseFloat(ph.opacity));
+  }
+  return [...new Set(fallos)];
+})()"""
+SIN_NOMBRE = """(() => {
+  const vis = (e) => { const r = e.getBoundingClientRect(); return r.width > 0 && r.height > 0 && getComputedStyle(e).visibility !== 'hidden'; };
+  const nombre = (e) => e.getAttribute('aria-label') || (e.getAttribute('aria-labelledby') || '').split(' ').map((i) => document.getElementById(i)?.textContent || '').join(' ').trim()
+    || [...(e.labels || [])].map((l) => l.textContent).join(' ').trim() || e.title || (e.textContent || '').trim();
+  const mal = [];
+  for (const e of document.querySelectorAll('button, a[href], select, input:not([type=file]), textarea, summary, [role=dialog], [role=alertdialog], [role=menu]')) {
+    if (!vis(e) || e.closest('[inert], [hidden]')) continue;
+    const n = nombre(e), conAria = e.getAttribute('aria-label') || e.getAttribute('aria-labelledby');
+    if (!n || (!conAria && /^[^\\p{L}\\p{N}]{1,2}$/u.test(n))) mal.push((e.id ? '#' + e.id : e.tagName.toLowerCase() + '.' + String(e.className || '').split(' ')[0]) + '«' + n + '»');
+  }
+  return [...new Set(mal)];
+})()"""
+
 
 def comprobar(cond, texto):
     print(('  ok  ' if cond else '  MAL ') + texto)
@@ -433,6 +480,36 @@ async def main():
         comprobar(await visible('#secLetras') and await pg.locator('#acts .act').count() == 1, 'nueva ficha de Lengua con el mapa de letras')
         await auditar('diseño de Lengua')
         await captura('lengua')
+
+        print('Fase 8: contraste en claro y oscuro, controles con nombre y teclado')
+        async def revisar(donde):
+            for tema in ('claro', 'oscuro'):
+                await pg.evaluate(f"document.documentElement.dataset.tema = '{tema}'"); await pg.wait_for_timeout(350)   # las transiciones de color duran 150 ms
+                mal = await pg.evaluate(CONTRASTE)
+                comprobar(not mal, f'{donde} ({tema}): contraste AA ' + ', '.join(mal[:5]))
+            nom = await pg.evaluate(SIN_NOMBRE)
+            comprobar(not nom, f'{donde}: controles con nombre accesible ' + ', '.join(nom[:5]))
+        await pg.evaluate("document.documentElement.dataset.tema = ''")
+        await revisar('diseño de Lengua')
+        await pg.hover('.accion-principal .primario'); await revisar('Imprimir con el ratón encima')
+        await pg.mouse.move(0, 0)
+        await pg.evaluate("import('/Charta/src/ui/piezas.js').then((m) => { window.__p = m; })"); await pg.wait_for_timeout(300)
+        await pg.evaluate("window.__p.avisar('Prueba de aviso', { error: true }); 0"); await pg.wait_for_selector('.tostada:not([hidden])')
+        await revisar('aviso de error')
+        await pg.evaluate("window.__p.avisar(''); 0")
+        await pg.evaluate("window.__p.confirmar({ titulo: '¿Borrar?', texto: 'Prueba', si: 'Borrar', peligro: true }); 0"); await pg.wait_for_selector('[role=alertdialog]')
+        await revisar('confirmar con botón de peligro')
+        await pg.keyboard.press('Escape'); await pg.wait_for_selector('[role=alertdialog]', state='detached'); await pg.wait_for_timeout(300)
+        await pg.click('#masBarra'); await pg.locator('[role=menuitem]', has_text='Ajustes').click(); await pg.wait_for_selector('.hoja-inf'); await pg.wait_for_timeout(250)
+        await revisar('Ajustes')
+        await pg.go_back(); await pg.wait_for_timeout(300)
+        await pg.click('#aInicio'); await pg.wait_for_selector('#inicio:not([hidden])'); await pg.wait_for_timeout(200)
+        await revisar('inicio')
+        await pg.click('#iniCrear'); await pg.wait_for_timeout(250)
+        if await visible('#iniMaterias'): await pg.locator('#iniMateriasBtn button', has_text='Matem').click()
+        await pg.wait_for_selector('.selector'); await pg.wait_for_timeout(200)
+        await revisar('selector')
+        await pg.go_back(); await pg.wait_for_timeout(300)
 
         comprobar(not errores, 'sin errores de consola' + ('' if not errores else ': ' + ' | '.join(errores[:5])))
         await nav.close()
