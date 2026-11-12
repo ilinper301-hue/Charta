@@ -256,7 +256,14 @@ Rutas de Tabula y Fori en un único `src/rutas.js` (R6).
 Dos columnas desde 700 px (opciones de ancho fijo, 360–400 px; la hoja ocupa el resto y se ve entera), barra de
 imprimir que no tape nada, selector y rejilla de Inicio aprovechando el ancho, y campos con ancho máximo.
 
-### Fase 6 · Inicio y selector — *Sonnet, esfuerzo medio*
+### Fase 6 · Inicio y selector — *Sonnet, esfuerzo medio* · ✅ hecha (12-11-2026)
+
+> Resultado: Inicio con «Mis fichas» sobre los accesos rápidos (una fila deslizable); «⋯» por fila (`menuFila` en `inicio_vista.js`;
+> `guardadas.duplicar`; en la nube, borrar con `confirmar`, que sustituye al borrado perdido al quitar la tarjeta de Diseño en la
+> fase 4). Ajustes con `clase: "pantalla"`. Selector: `navegacion.buscar` + `.sel-buscar` (aparece con el curso elegido) y
+> `charta:ultimaRuta` (se abre en el último curso y materia; las migas los cambian). Migas ya eran de 44 px (fase 3).
+> Límites: Duplicar no existe para la nube; la copia de seguridad de Ajustes queda para la fase 7; la ruta recordada no se aplica
+> al abrir desde un modelo concreto ni al «Crear ficha» con materia distinta (esa manda).
 
 - Inicio: accesos rápidos en una fila compacta; «Mis fichas» visible sin desplazar, con «⋯» por fila
   (Abrir, Duplicar, Quitar); Ajustes como pantalla propia (letra, blanco y negro, tema, cuenta, copia).

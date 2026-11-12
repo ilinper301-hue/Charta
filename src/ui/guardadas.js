@@ -47,6 +47,15 @@ export function crearGuardadas(almacen) {
       escribir("favoritos", [{ ...x, nombre, fecha: new Date().toISOString().slice(0, 10) }, ...fs].slice(0, MAX_FAVORITOS));
       return true;
     },
+    /** Fase 6: copia de una guardada como otra favorita, con otra semilla (si no, sería la misma y no se añadiría). Devuelve el nombre. */
+    duplicar(c, nombre) {
+      const x = limpiar(c), fs = leer("favoritos");
+      let semilla = (x.semilla | 0) + 1;
+      while (fs.some((f) => igual(f, { ...x, semilla }))) semilla++;
+      const copia = `${nombre || "Ficha"} (copia)`;
+      escribir("favoritos", [{ ...x, semilla, nombre: copia, fecha: new Date().toISOString().slice(0, 10) }, ...fs].slice(0, MAX_FAVORITOS));
+      return copia;
+    },
     quitar(k, i) { const v = leer(k); v.splice(i, 1); escribir(k, v); },
   };
 }

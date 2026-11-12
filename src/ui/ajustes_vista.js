@@ -1,4 +1,4 @@
-// Charta · Ajustes en una hoja inferior (fase 3 de PLAN-DISENO): cuenta, tema, letra y blanco y negro por defecto y
+// Charta · Ajustes a pantalla completa (fase 3 de PLAN-DISENO; pantalla propia desde la fase 6): cuenta, tema, letra y blanco y negro por defecto y
 // borrador. Es el único sitio de la cuenta y del tema (antes también en la cabecera). La cuenta la pinta nube_vista.js
 // en #iaCuenta / #iaCuentaTxt. crearAjustes(cb) → { abrir(), pintar() }
 import { abrirHoja } from "./piezas.js";
@@ -24,7 +24,7 @@ export function crearAjustes(cb) {
   }
   function abrir() {
     abierta = true; pintar();
-    abrirHoja({ titulo: "Ajustes", contenido: $("ajustes"), alCerrar: () => { abierta = false; } });
+    abrirHoja({ titulo: "Ajustes", contenido: $("ajustes"), clase: "pantalla", alCerrar: () => { abierta = false; } });
   }
   return { abrir, pintar };
 }

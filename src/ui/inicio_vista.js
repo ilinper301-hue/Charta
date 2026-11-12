@@ -4,7 +4,7 @@ import { PALETA } from "../render/hoja.js";
 import { miniatura } from "./navegacion.js";
 import { fechaCorta } from "./inicio.js";
 import { disponible, nombresModelos, etiquetasPestanas } from "./lista_fichas.js";
-import { prepararPestanas, marcarPestana } from "./piezas.js";
+import { prepararPestanas, marcarPestana, abrirMenu, ICONOS } from "./piezas.js";
 import { $, el } from "./dom.js";
 
 /** Miniaturas de una en una (no bloquean la pantalla); se cancelan si el inicio se repinta. */
@@ -54,17 +54,25 @@ export function crearInicio(cb) {
     let filas;
     if (pestana === "nube") {
       filas = !nube ? vacio("Cargando…") : !nube.length ? vacio("Aún no hay fichas en la nube: usa «☁ Guardar en la nube» al preparar una.")
-        : nube.slice(0, 12).map((x) => fila({ comp: x.composicion, nombre: x.titulo, fecha: x.creada }));
+        : nube.slice(0, 12).map((x) => fila({ comp: x.composicion, nombre: x.titulo, fecha: x.creada, id: x.id }));
     } else {
       const lista = pestana === "favoritos" ? fav : rec;
       filas = !lista.length ? vacio(pestana === "favoritos" ? "Marca una ficha con ☆ Favorita y la tendrás aquí." : "Las fichas que imprimas aparecerán aquí.")
-        : lista.slice(0, 12).map((c) => fila({ comp: c, nombre: c.nombre || "Ficha", fecha: c.fecha }));
+        : lista.slice(0, 12).map((c, i) => fila({ comp: c, nombre: c.nombre || "Ficha", fecha: c.fecha, i }));
     }
     $("iniLista").replaceChildren(...filas);
     cargarMiniaturas($("inicio"));
   }
 
-  function fila({ comp, nombre, fecha }) {
+  /** Fase 6: «⋯» de cada fila → Abrir, Duplicar (solo favoritas y recientes) y Quitar (de la lista; en la nube, borra la ficha). */
+  function menuFila(ancla, { comp, nombre, id, i }, disp) {
+    abrirMenu(ancla, [
+      { texto: "Abrir", icono: ICONOS.ver, accion: () => cb.abrir(comp), desactivado: !disp },
+      ...(pestana === "nube" ? [] : [{ texto: "Duplicar", icono: ICONOS.nueva, accion: () => cb.duplicar(comp, nombre), desactivado: !disp }]), "-",
+      { texto: pestana === "nube" ? "Borrar de la nube" : "Quitar de la lista", icono: ICONOS.quitar, peligro: true, accion: () => cb.quitar(pestana, { i, id, nombre }) },
+    ]);
+  }
+  function fila({ comp, nombre, fecha, id, i }) {
     const acts = comp?.actividades || [];
     const disp = disponible(comp, cb.hayTipo);
     const mini = disp ? miniCaja(acts[0].tipo, cb.colorDe(acts[0].tipo)) : el("div", { className: "mini" });
@@ -72,7 +80,10 @@ export function crearInicio(cb) {
       el("span", { className: "ini-fila-txt" }, el("strong", { textContent: nombre }),
         el("small", { textContent: nombresModelos(comp, cb.nombreModelo) + (fecha ? " · " + fechaCorta(fecha) : "") })));
     b.onclick = () => cb.abrir(comp);
-    return el("li", {}, b);
+    const mas = el("button", { className: "fantasma icono ini-fila-mas", title: `Más acciones de «${nombre}»`, innerHTML: ICONOS.mas });
+    mas.setAttribute("aria-label", `Más acciones de «${nombre}»`); mas.setAttribute("aria-haspopup", "menu");
+    mas.onclick = () => menuFila(mas, { comp, nombre, id, i }, disp);
+    return el("li", { className: "ini-fila-li" }, b, mas);
   }
 
   return {

@@ -25,7 +25,7 @@ import { crearListaFichas } from "./ui/lista_fichas.js";
 import { crearNubeVista } from "./ui/nube_vista.js";
 import { crearEnlaces } from "./ui/enlaces.js";
 import { crearAjustes } from "./ui/ajustes_vista.js";
-import { abrirMenu, ICONOS } from "./ui/piezas.js";
+import { abrirMenu, ICONOS, avisar, confirmar } from "./ui/piezas.js";
 import { URL_FORI, URL_TABULA } from "./rutas.js";
 import { $ } from "./ui/dom.js";
 
@@ -123,6 +123,13 @@ function iniciar(tema) {
     hayBorrador: () => ctx.borrador.hay(hayTipo),
     descartarBorrador: () => { ctx.borrador.descartar(); refrescarInicio(); },
     abrir: comp.abrirGuardada,
+    duplicar: (c, nombre) => { const n = ctx.guardadas.duplicar(c, nombre); refrescarInicio(); avisar(`Copia «${n}» añadida a favoritas.`); },
+    quitar: async (pestana, { i, id, nombre }) => {
+      if (pestana !== "nube") { ctx.guardadas.quitar(pestana, i); refrescarInicio(); return avisar("Quitada de la lista."); }
+      if (!await confirmar({ titulo: "¿Borrar de la nube?", texto: `«${nombre}» se borrará de tu nube; las copias de otros dispositivos no cambian.`, si: "Borrar", peligro: true })) return;
+      try { await nubeV.nube.borrar(id); ctx.enNube = await nubeV.nube.listar().catch(() => ctx.enNube); refrescarInicio(); avisar("Borrada de la nube."); }
+      catch (e) { avisar(e.message, { error: true }); }
+    },
     leerNube: () => { if (!ctx.enNube) nubeV.leerNube(); },
   });
   // Fase 3: Ajustes en una hoja inferior (único sitio de la cuenta y del tema), desde «⋯» en la cabecera.

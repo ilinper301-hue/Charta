@@ -219,6 +219,11 @@ body.con-selector, body.con-capa { overflow: hidden; }
 .migas { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; padding: 12px 14px 0; color: var(--apagado); font-size: .82rem; }
 .migas:empty { display: none; }
 .migas { padding-top: 8px; gap: 2px 4px; }
+.sel-buscador { padding: 8px 14px 0; }
+.sel-buscador[hidden] { display: none; }
+.sel-buscar { width: 100%; height: var(--alto); padding: 0 14px; border: 1px solid var(--borde); border-radius: var(--r-md); background: var(--superficie); color: var(--texto); font-size: 1rem; }
+.sel-vacio { grid-column: 1 / -1; margin: 12px 4px; color: var(--apagado); }
+.sel-tarjeta .donde { color: var(--acento-texto); font-weight: 600; }
 /* La píldora se ve de 32 px; la zona táctil es de 44 (el botón, transparente, la envuelve). */
 .migas button { height: var(--alto); padding: 0 2px; border: 0; background: transparent; color: var(--acento-texto); font-size: .84rem; }
 .migas button > span { display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--acento-linea); background: var(--acento-suave); }
@@ -227,7 +232,7 @@ body.con-selector, body.con-capa { overflow: hidden; }
 .rejilla { flex: 1; overflow-y: auto; padding: 14px; display: grid; gap: 10px; align-content: start;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); max-width: 1000px; width: 100%; margin: 0 auto; }
 .rejilla.modelos { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
-@media (min-width: 700px) { .migas { max-width: 1200px; width: 100%; margin: 0 auto; padding-left: 18px; padding-right: 18px; } .rejilla { max-width: 1200px; padding: 14px 18px 22px; } .rejilla.modelos { grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); } }
+@media (min-width: 700px) { .sel-buscador { max-width: 1200px; width: 100%; margin: 0 auto; padding: 8px 18px 0; } .sel-buscar { max-width: 420px; } .migas { max-width: 1200px; width: 100%; margin: 0 auto; padding-left: 18px; padding-right: 18px; } .rejilla { max-width: 1200px; padding: 14px 18px 22px; } .rejilla.modelos { grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); } }
 .sel-tarjeta { height: auto; white-space: normal; display: grid; gap: 4px; text-align: left; align-content: start; justify-content: stretch;
   background: var(--superficie); color: var(--texto); border: 1px solid var(--borde); border-radius: var(--r-lg); padding: 14px 16px; }
 .sel-tarjeta strong { font-weight: 600; font-size: .98rem; color: var(--texto); }
@@ -309,18 +314,23 @@ body.con-selector, body.con-capa { overflow: hidden; }
 .ini-seguir-txt strong { font-weight: 600; font-size: .98rem; }
 .ini-seguir-txt small { color: var(--apagado); font-size: .8rem; line-height: 1.3; }
 .ini-descartar { height: 44px; border: 0; background: none; color: var(--apagado); font-size: .85rem; justify-self: end; margin-top: -6px; text-decoration: underline; text-underline-offset: 3px; }
-.ini-rapidos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
-.ini-rapido { height: auto; padding: 8px; display: grid; gap: 6px; justify-content: stretch; text-align: left; white-space: normal; align-content: start; border-color: var(--borde); }
+/* Fase 6: accesos rápidos en una sola fila que se desliza (miniatura + nombre), para que «Mis fichas» quede a la vista. */
+.ini-rapidos { display: flex; gap: 8px; overflow-x: auto; scroll-snap-type: x proximity; margin: 0 -4px; padding: 2px 4px 4px; scrollbar-width: none; }
+.ini-rapidos::-webkit-scrollbar { display: none; }
+.ini-rapido { flex: 0 0 auto; width: 188px; min-height: 56px; height: auto; padding: 6px 10px 6px 6px; display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 10px; align-items: center; text-align: left; white-space: normal; border-color: var(--borde); scroll-snap-align: start; }
+.ini-rapido .mini { padding: 3px; border-radius: var(--r-sm); }
 .ini-rapido strong { font-weight: 600; font-size: .86rem; line-height: 1.25; }
+#iniRapidos .sec-cab h2 { font-size: .9rem; }
 .ini-lista { max-height: none; }
+.lista-g li.ini-fila-li { display: grid; grid-template-columns: minmax(0, 1fr) var(--alto); align-items: center; gap: 2px; }
+.ini-fila-mas { color: var(--apagado); }
 .ini-fila { display: grid; grid-template-columns: 60px minmax(0, 1fr); gap: 10px; align-items: center; }
 .ini-fila-txt { display: grid; gap: 1px; min-width: 0; }
 .ini-fila .mini { padding: 3px; border-radius: var(--r-sm); }
 .ini-lista li.info { padding: 6px 2px; }
 @media (min-width: 700px) {
   .inicio { max-width: 920px; padding: 28px 24px 40px; }
-  .ini-rapidos { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .ini-lista { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); max-height: none; }
+    .ini-lista { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); max-height: none; }
   .ini-lista li.info { grid-column: 1 / -1; }
   .ini-crear { justify-self: start; width: min(100%, 420px); }
 }

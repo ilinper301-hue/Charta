@@ -231,6 +231,11 @@ body.con-selector, body.con-capa { overflow: hidden; }
 .migas { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; padding: 12px 14px 0; color: var(--apagado); font-size: .82rem; }
 .migas:empty { display: none; }
 .migas { padding-top: 8px; gap: 2px 4px; }
+.sel-buscador { padding: 8px 14px 0; }
+.sel-buscador[hidden] { display: none; }
+.sel-buscar { width: 100%; height: var(--alto); padding: 0 14px; border: 1px solid var(--borde); border-radius: var(--r-md); background: var(--superficie); color: var(--texto); font-size: 1rem; }
+.sel-vacio { grid-column: 1 / -1; margin: 12px 4px; color: var(--apagado); }
+.sel-tarjeta .donde { color: var(--acento-texto); font-weight: 600; }
 /* La píldora se ve de 32 px; la zona táctil es de 44 (el botón, transparente, la envuelve). */
 .migas button { height: var(--alto); padding: 0 2px; border: 0; background: transparent; color: var(--acento-texto); font-size: .84rem; }
 .migas button > span { display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--acento-linea); background: var(--acento-suave); }
@@ -239,7 +244,7 @@ body.con-selector, body.con-capa { overflow: hidden; }
 .rejilla { flex: 1; overflow-y: auto; padding: 14px; display: grid; gap: 10px; align-content: start;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); max-width: 1000px; width: 100%; margin: 0 auto; }
 .rejilla.modelos { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
-@media (min-width: 700px) { .migas { max-width: 1200px; width: 100%; margin: 0 auto; padding-left: 18px; padding-right: 18px; } .rejilla { max-width: 1200px; padding: 14px 18px 22px; } .rejilla.modelos { grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); } }
+@media (min-width: 700px) { .sel-buscador { max-width: 1200px; width: 100%; margin: 0 auto; padding: 8px 18px 0; } .sel-buscar { max-width: 420px; } .migas { max-width: 1200px; width: 100%; margin: 0 auto; padding-left: 18px; padding-right: 18px; } .rejilla { max-width: 1200px; padding: 14px 18px 22px; } .rejilla.modelos { grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); } }
 .sel-tarjeta { height: auto; white-space: normal; display: grid; gap: 4px; text-align: left; align-content: start; justify-content: stretch;
   background: var(--superficie); color: var(--texto); border: 1px solid var(--borde); border-radius: var(--r-lg); padding: 14px 16px; }
 .sel-tarjeta strong { font-weight: 600; font-size: .98rem; color: var(--texto); }
@@ -321,18 +326,23 @@ body.con-selector, body.con-capa { overflow: hidden; }
 .ini-seguir-txt strong { font-weight: 600; font-size: .98rem; }
 .ini-seguir-txt small { color: var(--apagado); font-size: .8rem; line-height: 1.3; }
 .ini-descartar { height: 44px; border: 0; background: none; color: var(--apagado); font-size: .85rem; justify-self: end; margin-top: -6px; text-decoration: underline; text-underline-offset: 3px; }
-.ini-rapidos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
-.ini-rapido { height: auto; padding: 8px; display: grid; gap: 6px; justify-content: stretch; text-align: left; white-space: normal; align-content: start; border-color: var(--borde); }
+/* Fase 6: accesos rápidos en una sola fila que se desliza (miniatura + nombre), para que «Mis fichas» quede a la vista. */
+.ini-rapidos { display: flex; gap: 8px; overflow-x: auto; scroll-snap-type: x proximity; margin: 0 -4px; padding: 2px 4px 4px; scrollbar-width: none; }
+.ini-rapidos::-webkit-scrollbar { display: none; }
+.ini-rapido { flex: 0 0 auto; width: 188px; min-height: 56px; height: auto; padding: 6px 10px 6px 6px; display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 10px; align-items: center; text-align: left; white-space: normal; border-color: var(--borde); scroll-snap-align: start; }
+.ini-rapido .mini { padding: 3px; border-radius: var(--r-sm); }
 .ini-rapido strong { font-weight: 600; font-size: .86rem; line-height: 1.25; }
+#iniRapidos .sec-cab h2 { font-size: .9rem; }
 .ini-lista { max-height: none; }
+.lista-g li.ini-fila-li { display: grid; grid-template-columns: minmax(0, 1fr) var(--alto); align-items: center; gap: 2px; }
+.ini-fila-mas { color: var(--apagado); }
 .ini-fila { display: grid; grid-template-columns: 60px minmax(0, 1fr); gap: 10px; align-items: center; }
 .ini-fila-txt { display: grid; gap: 1px; min-width: 0; }
 .ini-fila .mini { padding: 3px; border-radius: var(--r-sm); }
 .ini-lista li.info { padding: 6px 2px; }
 @media (min-width: 700px) {
   .inicio { max-width: 920px; padding: 28px 24px 40px; }
-  .ini-rapidos { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .ini-lista { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); max-height: none; }
+    .ini-lista { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); max-height: none; }
   .ini-lista li.info { grid-column: 1 / -1; }
   .ini-crear { justify-self: start; width: min(100%, 420px); }
 }
@@ -400,10 +410,10 @@ body.con-selector, body.con-capa { overflow: hidden; }
   <div id="iniMaterias" class="ini-materias" hidden><span>¿De qué materia?</span><div id="iniMateriasBtn"></div></div>
   <button id="iniSeguir" class="ini-seguir" hidden><div class="mini" id="iniSeguirMini"></div><span class="ini-seguir-txt"><small>Seguir con la última</small><strong id="iniSeguirNombre"></strong><small id="iniSeguirDetalle"></small></span></button>
   <button id="iniDescartar" class="ini-descartar" hidden>Descartar borrador</button>
-  <section class="tarjeta" id="iniRapidos" hidden><div class="sec-cab"><h2>Accesos rápidos</h2></div><div id="iniRapidosLista" class="ini-rapidos"></div></section>
   <section class="tarjeta" id="iniFichas"><div class="sec-cab"><h2>Mis fichas</h2></div>
     <div class="pestanas" aria-label="Mis fichas"><button id="iFav" class="activa">★ Favoritas</button><button id="iRec">Recientes</button><button id="iNube" hidden>☁ En la nube</button></div>
     <ul id="iniLista" class="lista-g ini-lista"></ul></section>
+  <section class="tarjeta" id="iniRapidos" hidden><div class="sec-cab"><h2>Accesos rápidos</h2></div><div id="iniRapidosLista" class="ini-rapidos"></div></section>
 </section>
 <main hidden>
   <div class="col">
@@ -531,7 +541,7 @@ const { crearListaFichas } = __req("ui/lista_fichas.js");
 const { crearNubeVista } = __req("ui/nube_vista.js");
 const { crearEnlaces } = __req("ui/enlaces.js");
 const { crearAjustes } = __req("ui/ajustes_vista.js");
-const { abrirMenu, ICONOS } = __req("ui/piezas.js");
+const { abrirMenu, ICONOS, avisar, confirmar } = __req("ui/piezas.js");
 const { URL_FORI, URL_TABULA } = __req("rutas.js");
 const { $ } = __req("ui/dom.js");
 // API pública: la usa el iframe de Tabula (contrato por escribir en ESQUEMA.md, fase 7).
@@ -628,6 +638,13 @@ function iniciar(tema) {
     hayBorrador: () => ctx.borrador.hay(hayTipo),
     descartarBorrador: () => { ctx.borrador.descartar(); refrescarInicio(); },
     abrir: comp.abrirGuardada,
+    duplicar: (c, nombre) => { const n = ctx.guardadas.duplicar(c, nombre); refrescarInicio(); avisar(`Copia «${n}» añadida a favoritas.`); },
+    quitar: async (pestana, { i, id, nombre }) => {
+      if (pestana !== "nube") { ctx.guardadas.quitar(pestana, i); refrescarInicio(); return avisar("Quitada de la lista."); }
+      if (!await confirmar({ titulo: "¿Borrar de la nube?", texto: `«${nombre}» se borrará de tu nube; las copias de otros dispositivos no cambian.`, si: "Borrar", peligro: true })) return;
+      try { await nubeV.nube.borrar(id); ctx.enNube = await nubeV.nube.listar().catch(() => ctx.enNube); refrescarInicio(); avisar("Borrada de la nube."); }
+      catch (e) { avisar(e.message, { error: true }); }
+    },
     leerNube: () => { if (!ctx.enNube) nubeV.leerNube(); },
   });
   // Fase 3: Ajustes en una hoja inferior (único sitio de la cuenta y del tema), desde «⋯» en la cabecera.
@@ -25139,7 +25156,7 @@ function clasifica(p, act) {
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
 },
 "ui/ajustes_vista.js": (__exp) => {
-// Charta · Ajustes en una hoja inferior (fase 3 de PLAN-DISENO): cuenta, tema, letra y blanco y negro por defecto y
+// Charta · Ajustes a pantalla completa (fase 3 de PLAN-DISENO; pantalla propia desde la fase 6): cuenta, tema, letra y blanco y negro por defecto y
 // borrador. Es el único sitio de la cuenta y del tema (antes también en la cabecera). La cuenta la pinta nube_vista.js
 // en #iaCuenta / #iaCuentaTxt. crearAjustes(cb) → { abrir(), pintar() }
 const { abrirHoja } = __req("ui/piezas.js");
@@ -25164,7 +25181,7 @@ function crearAjustes(cb) {
   }
   function abrir() {
     abierta = true; pintar();
-    abrirHoja({ titulo: "Ajustes", contenido: $("ajustes"), alCerrar: () => { abierta = false; } });
+    abrirHoja({ titulo: "Ajustes", contenido: $("ajustes"), clase: "pantalla", alCerrar: () => { abierta = false; } });
   }
   return { abrir, pintar };
 }
@@ -25744,6 +25761,15 @@ function crearGuardadas(almacen) {
       escribir("favoritos", [{ ...x, nombre, fecha: new Date().toISOString().slice(0, 10) }, ...fs].slice(0, MAX_FAVORITOS));
       return true;
     },
+    /** Fase 6: copia de una guardada como otra favorita, con otra semilla (si no, sería la misma y no se añadiría). Devuelve el nombre. */
+    duplicar(c, nombre) {
+      const x = limpiar(c), fs = leer("favoritos");
+      let semilla = (x.semilla | 0) + 1;
+      while (fs.some((f) => igual(f, { ...x, semilla }))) semilla++;
+      const copia = `${nombre || "Ficha"} (copia)`;
+      escribir("favoritos", [{ ...x, semilla, nombre: copia, fecha: new Date().toISOString().slice(0, 10) }, ...fs].slice(0, MAX_FAVORITOS));
+      return copia;
+    },
     quitar(k, i) { const v = leer(k); v.splice(i, 1); escribir(k, v); },
   };
 }
@@ -25816,7 +25842,7 @@ const { PALETA } = __req("render/hoja.js");
 const { miniatura } = __req("ui/navegacion.js");
 const { fechaCorta } = __req("ui/inicio.js");
 const { disponible, nombresModelos, etiquetasPestanas } = __req("ui/lista_fichas.js");
-const { prepararPestanas, marcarPestana } = __req("ui/piezas.js");
+const { prepararPestanas, marcarPestana, abrirMenu, ICONOS } = __req("ui/piezas.js");
 const { $, el } = __req("ui/dom.js");
 /** Miniaturas de una en una (no bloquean la pantalla); se cancelan si el inicio se repinta. */
 let tanda = 0;
@@ -25865,17 +25891,25 @@ function crearInicio(cb) {
     let filas;
     if (pestana === "nube") {
       filas = !nube ? vacio("Cargando…") : !nube.length ? vacio("Aún no hay fichas en la nube: usa «☁ Guardar en la nube» al preparar una.")
-        : nube.slice(0, 12).map((x) => fila({ comp: x.composicion, nombre: x.titulo, fecha: x.creada }));
+        : nube.slice(0, 12).map((x) => fila({ comp: x.composicion, nombre: x.titulo, fecha: x.creada, id: x.id }));
     } else {
       const lista = pestana === "favoritos" ? fav : rec;
       filas = !lista.length ? vacio(pestana === "favoritos" ? "Marca una ficha con ☆ Favorita y la tendrás aquí." : "Las fichas que imprimas aparecerán aquí.")
-        : lista.slice(0, 12).map((c) => fila({ comp: c, nombre: c.nombre || "Ficha", fecha: c.fecha }));
+        : lista.slice(0, 12).map((c, i) => fila({ comp: c, nombre: c.nombre || "Ficha", fecha: c.fecha, i }));
     }
     $("iniLista").replaceChildren(...filas);
     cargarMiniaturas($("inicio"));
   }
 
-  function fila({ comp, nombre, fecha }) {
+  /** Fase 6: «⋯» de cada fila → Abrir, Duplicar (solo favoritas y recientes) y Quitar (de la lista; en la nube, borra la ficha). */
+  function menuFila(ancla, { comp, nombre, id, i }, disp) {
+    abrirMenu(ancla, [
+      { texto: "Abrir", icono: ICONOS.ver, accion: () => cb.abrir(comp), desactivado: !disp },
+      ...(pestana === "nube" ? [] : [{ texto: "Duplicar", icono: ICONOS.nueva, accion: () => cb.duplicar(comp, nombre), desactivado: !disp }]), "-",
+      { texto: pestana === "nube" ? "Borrar de la nube" : "Quitar de la lista", icono: ICONOS.quitar, peligro: true, accion: () => cb.quitar(pestana, { i, id, nombre }) },
+    ]);
+  }
+  function fila({ comp, nombre, fecha, id, i }) {
     const acts = comp?.actividades || [];
     const disp = disponible(comp, cb.hayTipo);
     const mini = disp ? miniCaja(acts[0].tipo, cb.colorDe(acts[0].tipo)) : el("div", { className: "mini" });
@@ -25883,7 +25917,10 @@ function crearInicio(cb) {
       el("span", { className: "ini-fila-txt" }, el("strong", { textContent: nombre }),
         el("small", { textContent: nombresModelos(comp, cb.nombreModelo) + (fecha ? " · " + fechaCorta(fecha) : "") })));
     b.onclick = () => cb.abrir(comp);
-    return el("li", {}, b);
+    const mas = el("button", { className: "fantasma icono ini-fila-mas", title: `Más acciones de «${nombre}»`, innerHTML: ICONOS.mas });
+    mas.setAttribute("aria-label", `Más acciones de «${nombre}»`); mas.setAttribute("aria-haspopup", "menu");
+    mas.onclick = () => menuFila(mas, { comp, nombre, id, i }, disp);
+    return el("li", { className: "ini-fila-li" }, b, mas);
   }
 
   return {
@@ -26172,6 +26209,26 @@ function modelos(curso, materia, bloque, tamano = "completa") {
     .map((m) => ({ id: m.id, nombre: nombreEnCurso(m, curso), descripcion: m.descripcion, color: m.color, ...m.metadatos, cabe: m.tamanos.includes(tamano) }));
 }
 
+/** Sin tildes ni mayúsculas, para comparar. */
+const plano = (s) => String(s ?? "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+/**
+ * Fase 6 · buscador: modelos del curso (y de la materia, si ya está elegida) cuyo nombre, descripción o etiquetas contienen
+ * todas las palabras de `texto` (sin tildes ni mayúsculas). Cada uno lleva `donde` («Matemáticas · Bloque») para saber de dónde es.
+ */
+function buscar(curso, materia, texto, tamano = "completa") {
+  const palabras = plano(texto).split(/\s+/).filter(Boolean);
+  if (!palabras.length) return [];
+  return disponibles().filter((m) => enCurso(m, curso) && (materia === undefined || m.materia === materia)).flatMap((m) => {
+    const nombre = nombreEnCurso(m, curso), paja = plano([nombre, m.descripcion, ...(m.metadatos?.etiquetas || [])].join(" "));
+    if (!palabras.every((p) => paja.includes(p))) return [];
+    const bloque = CATALOGO.bloques[m.materia]?.[m.bloque] ?? `Bloque ${m.bloque}`;
+    // Primero los que llevan la palabra en el nombre.
+    const enNombre = palabras.every((p) => plano(nombre).includes(p));
+    return [{ id: m.id, nombre, descripcion: m.descripcion, color: m.color, ...m.metadatos, cabe: m.tamanos.includes(tamano), donde: (materia === undefined ? `${CATALOGO.materias[m.materia] ?? m.materia} · ` : "") + bloque, _o: enNombre ? 0 : 1 }];
+  }).sort((a, b) => a._o - b._o).map(({ _o, ...o }) => o);
+}
+
 /** Letra por defecto de la materia de un modelo ("andika" si la materia no dice otra). */
 const fuenteMateria = (id) => CATALOGO.fuentes?.[POR_ID[id]?.materia] || "andika";
 const materiaDe = (id) => POR_ID[id]?.materia;
@@ -26186,7 +26243,7 @@ function miniatura(id) {
   return cache.get(id);
 }
 
-Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get cursos() { return cursos; }, get materias() { return materias; }, get bloques() { return bloques; }, get modelos() { return modelos; }, get fuenteMateria() { return fuenteMateria; }, get materiaDe() { return materiaDe; }, get miniatura() { return miniatura; } }));
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get cursos() { return cursos; }, get materias() { return materias; }, get bloques() { return bloques; }, get modelos() { return modelos; }, get plano() { return plano; }, get buscar() { return buscar; }, get fuenteMateria() { return fuenteMateria; }, get materiaDe() { return materiaDe; }, get miniatura() { return miniatura; } }));
 },
 "ui/nube_vista.js": (__exp) => {
 // Charta · nube en la interfaz (paso 5.1; fase 2 de PLAN-DISENO, antes en app.js): inicio de sesión con Google y fichas en
@@ -26735,13 +26792,18 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get resumenAlu
 "ui/selector.js": (__exp) => {
 // Charta · selector de actividad a pantalla completa (paso 4.1).
 // abrirSelector({ actual, curso, tamano, alElegir(id, curso) }) — los niveles con una sola opción se saltan solos,
-// pero quedan en la ruta (migas) para poder volver.
+// pero quedan en la ruta (migas) para poder volver. Fase 6: buscador de modelos y último curso/materia recordados.
 const { modelo } = __req("nucleo/ficha.js");
 const { PALETA } = __req("render/hoja.js");
-const { cursos, materias, bloques, modelos, miniatura } = __req("ui/navegacion.js");
+const { cursos, materias, bloques, modelos, miniatura, buscar, materiaDe } = __req("ui/navegacion.js");
 const { abrirCapa } = __req("ui/capas.js");
 const { modal, ICONOS } = __req("ui/piezas.js");
 function el(tag, props = {}, ...hijos) { const e = Object.assign(document.createElement(tag), props); e.append(...hijos); return e; }
+
+// Fase 6: el selector recuerda el último curso y materia elegidos (solo ids, en este dispositivo).
+const ULTIMA_RUTA = "charta:ultimaRuta";
+const leerUltimaRuta = () => { try { const r = JSON.parse(localStorage.getItem(ULTIMA_RUTA) || "null"); return r && typeof r === "object" ? r : null; } catch { return null; } };
+const guardarUltimaRuta = (curso, materia) => { try { localStorage.setItem(ULTIMA_RUTA, JSON.stringify({ curso, materia })); } catch {} };
 
 const NIVELES = ["curso", "materia", "bloque", "modelo"];
 const TITULOS = { curso: "Elige el curso", materia: "Elige la materia", bloque: "Elige el contenido", modelo: "Elige el modelo" };
@@ -26754,17 +26816,29 @@ function abrirSelector({ actual = null, curso = null, tamano = "completa", ruta:
   // Si la materia pedida no existe en el curso elegido, se vuelve a preguntar.
   const cuadra = () => { if (ruta.curso !== undefined && ruta.materia !== undefined && !materias(ruta.curso).some((m) => m.id === ruta.materia)) { delete ruta.materia; delete ruta.bloque; } };
   cuadra();
+  // Recordar: si no se pide nada concreto, se abre en el último curso y materia (las migas permiten cambiarlos).
+  if (!actual && ruta.curso === undefined) {
+    const ul = leerUltimaRuta();
+    if (ul && cursos().some((c) => c.id === ul.curso) && (ruta.materia === undefined || materias(ul.curso).some((m) => m.id === ruta.materia))) {
+      ruta.curso = ul.curso;
+      if (ruta.materia === undefined && materias(ul.curso).some((m) => m.id === ul.materia)) ruta.materia = ul.materia;
+    }
+  }
 
   const migas = el("nav", { className: "migas" });
   migas.setAttribute("aria-label", "Ruta elegida");
   const titulo = el("h2", { id: "selTitulo" });
   const rejilla = el("div", { className: "rejilla" });
+  // Buscador de modelos (fase 6): en todo el curso (o la materia) elegido; aparece cuando ya hay curso.
+  const buscador = el("input", { type: "search", className: "sel-buscar", placeholder: "Buscar modelo: dado, reloj, sumas…", autocomplete: "off", enterKeyHint: "search" });
+  buscador.setAttribute("aria-label", "Buscar modelo");
+  const caja = el("div", { className: "sel-buscador", hidden: true }, buscador);
   // Cabecera única (fase 3): atrás + título + cerrar, botones de 44 px con nombre.
   const atras = el("button", { className: "sel-atras fantasma icono", title: "Atrás" });
   const cerrar = el("button", { className: "sel-cerrar fantasma icono", title: "Cerrar", textContent: "✕" });
   atras.innerHTML = ICONOS.atras; atras.setAttribute("aria-label", "Atrás"); cerrar.setAttribute("aria-label", "Cerrar");
   const capa = el("div", { className: "selector", role: "dialog" },
-    el("div", { className: "sel-cab" }, atras, titulo, cerrar), migas, rejilla);
+    el("div", { className: "sel-cab" }, atras, titulo, cerrar), migas, caja, rejilla);
   capa.setAttribute("aria-modal", "true"); capa.setAttribute("aria-labelledby", titulo.id);
   document.body.append(capa);
   document.body.classList.add("con-selector");
@@ -26795,6 +26869,7 @@ function abrirSelector({ actual = null, curso = null, tamano = "completa", ruta:
   // Atrás de Android cierra sin elegir (alCerrar no se llama: no hay nada que deshacer).
   function fin(id) {
     const c = ruta.curso;   // con el curso elegido (2.º: sus rangos)
+    if (id && c !== undefined) guardarUltimaRuta(c, ruta.materia ?? materiaDe(id));
     enHistorial.cerrar(() => { if (id) alElegir?.(id, c); else alCerrar?.(); });
   }
 
@@ -26813,12 +26888,26 @@ function abrirSelector({ actual = null, curso = null, tamano = "completa", ruta:
       for (const x of NIVELES.slice(NIVELES.indexOf(previos.at(-1)))) delete ruta[x];
       pintar();
     };
+    caja.hidden = ruta.curso === undefined; buscador.value = "";
+    pintarOpciones(nivel);
+  }
+  function pintarOpciones(nivel) {
+    const q = buscador.value.trim();
+    if (q && ruta.curso !== undefined) {
+      const rs = buscar(ruta.curso, ruta.materia, q, tamano);
+      rejilla.className = "rejilla modelos";
+      rejilla.replaceChildren(...(rs.length ? rs.map(tarjetaModelo) : [el("p", { className: "sel-vacio", textContent: `No hay modelos con «${q}». Prueba con otra palabra (por ejemplo: dado, reloj, sumas).` })]));
+      rejilla.setAttribute("aria-live", "polite");
+      cargarMiniaturas();
+      return;
+    }
     rejilla.className = "rejilla" + (nivel === "modelo" ? " modelos" : "");
-    const os = opciones(nivel);
-    rejilla.replaceChildren(...os.map((o) => nivel === "modelo" ? tarjetaModelo(o) : tarjetaNivel(nivel, o)));
+    rejilla.removeAttribute("aria-live");
+    rejilla.replaceChildren(...opciones(nivel).map((o) => nivel === "modelo" ? tarjetaModelo(o) : tarjetaNivel(nivel, o)));
     rejilla.scrollTop = 0;
     if (nivel === "modelo") cargarMiniaturas();
   }
+  buscador.addEventListener("input", () => pintarOpciones(nivelActual()));
 
   function tarjetaNivel(nivel, o) {
     const b = el("button", { className: "sel-tarjeta" }, el("strong", { textContent: o.nombre }));
@@ -26833,7 +26922,7 @@ function abrirSelector({ actual = null, curso = null, tamano = "completa", ruta:
     mini.style.background = fondo; mini.style.borderColor = borde;
     mini.dataset.id = o.id;
     const b = el("button", { className: "sel-tarjeta modelo" + (o.id === actual ? " actual" : ""), disabled: !o.cabe },
-      mini, el("strong", { textContent: o.nombre }), el("small", { textContent: o.cabe ? o.descripcion : "Solo en página completa (una actividad)." }),
+      mini, el("strong", { textContent: o.nombre }), ...(o.donde ? [el("small", { className: "donde", textContent: o.donde })] : []), el("small", { textContent: o.cabe ? o.descripcion : "Solo en página completa (una actividad)." }),
       el("small", { className: "meta", textContent: `${"●".repeat(o.dificultad)}${"○".repeat(3 - o.dificultad)} · ${o.minutos} min`, title: `Dificultad ${o.dificultad} de 3 (${["refuerzo", "estándar", "ampliación"][o.dificultad - 1]}) · unos ${o.minutos} minutos` }));
     b.onclick = () => fin(o.id);
     return b;
@@ -26857,7 +26946,7 @@ function abrirSelector({ actual = null, curso = null, tamano = "completa", ruta:
   atras.focus();
 }
 
-Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get abrirSelector() { return abrirSelector; } }));
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get leerUltimaRuta() { return leerUltimaRuta; }, get abrirSelector() { return abrirSelector; } }));
 },
 "ui/tabula.js": (__exp) => {
 // Charta · enlace con Tabula (paso 5.2). Mismo origen (ilinper301-hue.github.io/…), así que Charta LEE

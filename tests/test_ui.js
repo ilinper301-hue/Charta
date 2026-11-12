@@ -360,3 +360,28 @@ import { resumenAlumnos, resumenImpresion, etiquetaHoja, listaSoluciones, etique
   assert.equal(resumenImpresion({ bn: true, fuente: "Fredoka", grande: true, facil: true }), "Blanco y negro · Fredoka · lectura fácil");
   console.log("test_ui: vista previa de una hoja (fase 4) OK");
 }
+
+// Fase 6: buscador de modelos y «Duplicar» una guardada.
+{
+  const { buscar, plano } = await import("../src/ui/navegacion.js");
+  const { crearGuardadas } = await import("../src/ui/guardadas.js");
+  assert.equal(plano("Dominó ÁBACO"), "domino abaco");
+  assert.deepEqual(buscar(1, undefined, "   "), []);
+  const r = buscar(1, undefined, "DOMINO");
+  assert.ok(r.some((m) => m.id === "rep.domino") && r.every((m) => m.donde.includes("·")), "busca sin tildes ni mayúsculas y dice de dónde es");
+  assert.ok(buscar(1, "matematicas", "dado")[0].nombre.toLowerCase().includes("dado"), "los que llevan la palabra en el nombre, primero");
+  assert.ok(buscar(1, "matematicas", "dado").every((m) => !m.donde.includes("Matem")), "con la materia elegida, solo el bloque");
+  assert.deepEqual(buscar(1, undefined, "dado zzzqq"), [], "todas las palabras deben aparecer");
+  assert.ok(buscar(1, undefined, "decenas unidades").length >= 1, "también por etiquetas");
+  const mem = new Map(), alm = { getItem: (k) => mem.get(k) ?? null, setItem: (k, v) => mem.set(k, v) };
+  const g = crearGuardadas(alm);
+  const c = { actividades: [{ tipo: "rep.dedos", params: {} }], semilla: 5, titulo: "Dedos", variaciones: "iguales" };
+  g.alternarFavorito(c, "Dedos");
+  const n1 = g.duplicar(c, "Dedos"), n2 = g.duplicar(c, "Dedos");
+  const fs = g.favoritos();
+  assert.equal(n1, "Dedos (copia)"); assert.equal(fs.length, 3);
+  assert.deepEqual(fs.map((f) => f.semilla).sort(), [5, 6, 7], "cada copia, con otra semilla");
+  assert.ok(g.esFavorito(c), "la original sigue como favorita");
+  assert.ok(!JSON.stringify(fs).includes("alumnos"), "sin nombres");
+  console.log("test_ui: buscador y duplicar (fase 6) OK");
+}
