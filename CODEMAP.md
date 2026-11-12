@@ -7,6 +7,7 @@ CODEMAP.md            este mapa
 ESTADO.md             hoja de ruta con pasos marcables
 ESQUEMA.md            esquema JSON v1 de ficha, actividad y ejercicio
 INICIO_CHAT.md        mensaje para empezar un chat nuevo
+PLAN-DISENO.md        análisis del sistema y de la interfaz (12-11-2026) y plan de mejora por fases (una por chat)
 LENGUA_1.md           guion de tipología de Lengua de 1.º (bloques, modelos, pauta Lamela, lotes)
 MATES_2.md            guion de tipología de Matemáticas de 2.º (♻/🔧/✨, catálogo por curso, lotes)
 motor/generador_fichas.py   motor de REFERENCIA (Python + ReportLab), ~2.700 líneas: diseño aprobado y reglas

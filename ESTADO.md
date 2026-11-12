@@ -2,6 +2,14 @@
 
 > Si Iván escribe "Continúa": seguir desde el primer paso sin marcar. Marcar `[x]` al terminar cada paso y anotar lo relevante en una línea.
 
+## Análisis del sistema y de la interfaz (12-11-2026) → `PLAN-DISENO.md`
+Sin cambios de código. El plan y el estado de sus fases están en **`PLAN-DISENO.md`** (se piden con «Ejecuta la fase N de `PLAN-DISENO.md`»; «Continúa» sigue con los pasos de contenidos de más abajo).
+- **Sistema**: motor sólido (`npm test`: 151 tipos, 166 doradas, 0 errores, 5 min; `dist/` al día). Débil: `app.js` (565 líneas, sin pruebas de navegador) y documentación de 83 KB por chat.
+- **Errores comprobados**: se pierde la ficha a medias al recargar o si Android cierra la app; Atrás de Android deja el selector encima del inicio; la nube rechaza fichas con más de 10 modelos distintos (regla `tipos ≤ 10`); «Mis frases» se copia en cada actividad (enlace a Tabula de hasta 48 KB); favoritas sin copia de seguridad.
+- **Enlaces**: los contratos con Tabula y Fori coinciden hoy; el iframe de Tabula usa `globalThis.Charta` sin contrato escrito ni prueba; todo depende del mismo origen y de rutas fijas.
+- **Interfaz** (capturas a 390 × 844, 768 × 1024 y 1180 × 820): Inicio y selector, bien (falta buscador de modelos). Diseño: la vista previa apila todas las hojas → 17 pantallas con 25 alumnos (36 con 2 páginas; 47 en tablet vertical, que usa el diseño de móvil), 12.800 nodos y 0,25 s por cada cambio; 6 acciones con el mismo peso; secciones siempre desplegadas; zonas táctiles de 26–32 px. Sin desbordamiento ni errores de consola.
+- **Fases**: 1 red de seguridad (borrador, Atrás, nube, prueba de navegador, adelgazar documentos) · 2 partir `app.js` · 3 piezas comunes · 4 diseño en móvil (vista previa de una hoja) · 5 tablet · 6 inicio y selector · 7 datos y contratos · 8 repaso.
+
 ## Hecho (antes de Charta)
 - [x] Motor con unos 75 modelos de Matemáticas de 1.º (bloques 1–7 y 9–11) y marco de la ficha de muestra.
 - [x] Prueba de regresión `tests/test_motor.py` (0 errores; la versión completa comprueba unas 24.000 operaciones).
