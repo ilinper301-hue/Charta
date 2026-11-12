@@ -7,9 +7,12 @@
 //                    ../Charta/?ficha=ID | ?comp=B64 [&grupo=G]&desde=tabula     abrir una guardada
 //   Charta → Tabula  /tabula/?charta=B64( {v:1, id?, titulo, tipos, comp, grupo?, sesion?, tarea?, variantes?, minutos?, dificultad?, etiquetas?} )
 //                    + la miniatura de la hoja 1 (sin nombres) en localStorage["charta:aTabula"] = {v:1, titulo, miniatura} (5.4)
+//                    Si el enlace pasaría de MAX_ENLACE (fase 1, R4), la composición va también allí ({…, comp}) y el
+//                    payload lleva `compLocal: true` en lugar de `comp` (Tabula la recoge comprobando el título).
 
 import { paginasValidas } from "./paginas.js";
 export const URL_TABULA = "/tabula/"; // raíz del sitio (ilinper301-hue.github.io); la app está en /Charta/dist/
+export const MAX_ENLACE = 6144;       // más largo, la composición viaja por localStorage (los servidores cortan hacia los 8 KB)
 
 /** Texto UTF-8 → base64url sin «=». */
 export function b64url(texto) {
@@ -40,8 +43,8 @@ export function leerEntrada(search = "", hayTipo) {
 }
 
 /** URL para volver a Tabula con la ficha (sin nombres de alumnos). */
-export function urlVolver({ id, titulo, tipos, comp, grupo, sesion, tarea, variantes, minutos, dificultad, etiquetas }, base = URL_TABULA) {
-  const datos = { v: 1, ...(id ? { id } : {}), titulo: String(titulo || "Ficha").slice(0, 200), tipos: tipos || [], comp,
+export function urlVolver({ id, titulo, tipos, comp, compLocal, grupo, sesion, tarea, variantes, minutos, dificultad, etiquetas }, base = URL_TABULA) {
+  const datos = { v: 1, ...(id ? { id } : {}), titulo: String(titulo || "Ficha").slice(0, 200), tipos: tipos || [], ...(compLocal ? { compLocal: true } : { comp }),
     ...(variantes > 1 ? { variantes } : {}), ...(minutos ? { minutos } : {}), ...(dificultad ? { dificultad } : {}),
     ...(etiquetas?.length ? { etiquetas: etiquetas.slice(0, 6).map((t) => String(t).slice(0, 30)) } : {}),
     ...(grupo ? { grupo } : {}), ...(sesion ? { sesion } : {}), ...(tarea ? { tarea } : {}) };

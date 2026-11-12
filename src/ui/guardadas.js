@@ -1,17 +1,27 @@
 // Charta · recientes y favoritos (paso 4.4). Sin DOM: el almacén se inyecta (localStorage en la app).
 // Se guarda la composición (actividades + páginas + opciones, semilla, título, variantes, B/N); NUNCA los nombres de los alumnos.
 import { cuentasDe } from "./paginas.js";
+import { normalizarPropias } from "../lengua/frases.js";
 export const MAX_RECIENTES = 8;
 export const MAX_FAVORITOS = 30;
 const CLAVES = { recientes: "charta:recientes", favoritos: "charta:favoritos" };
 
+/** «Mis frases» de una composición: una sola vez, en `misFrases` (fase 1, R4); las guardadas antes las llevaban en cada actividad. */
+export const frasesComp = (c) => normalizarPropias(Array.isArray(c?.misFrases) ? c.misFrases
+  : (c?.actividades || []).find((a) => Array.isArray(a?.params?.misFrases))?.params.misFrases);
+
 /** Solo los campos permitidos (así ningún nombre de alumno puede colarse). */
 export function limpiar(c) {
+  const frases = frasesComp(c);
   return {
-    actividades: c.actividades.map((a) => ({ tipo: a.tipo, ...(Number.isInteger(a.curso) && { curso: a.curso }), params: { ...a.params } })),
+    actividades: c.actividades.map((a) => {
+      const { misFrases: _, ...params } = a.params || {};
+      return { tipo: a.tipo, ...(Number.isInteger(a.curso) && { curso: a.curso }), params };
+    }),
     ...(cuentasDe(c).length > 1 && { paginas: cuentasDe(c) }),                  // varias páginas: actividades de cada una
     semilla: c.semilla | 0, titulo: c.titulo || "", variaciones: c.variaciones || "iguales", bn: !!c.bn, grande: !!c.grande, facil: !!c.facil,
     ...(c.fuente && c.fuente !== "andika" && { fuente: String(c.fuente) }),     // solo el nombre; la letra no viaja
+    ...(frases && { misFrases: frases }),                                        // «Mis frases» (Lengua 1.º), una vez para toda la ficha
   };
 }
 // Se comparan normalizadas con limpiar(): las favoritas guardadas antes (sin los campos nuevos) siguen reconociéndose.

@@ -68,13 +68,16 @@ descomposición, letras, recta, bloques, cuadrícula, monedas, ábaco, D/U, atad
 { "schemaVersion": 1, "app": "charta", "autor": "uid", "titulo": "…", "creada": "2026-11-05T10:00:00Z",
   "tipos": ["sumar.h20"], "variantes": 2,
   "ficha": "{…JSON de la ficha…}",      // texto: Firestore no admite listas dentro de listas
-  "composicion": "{…}" }                // actividades ({tipo, curso?, params}) + paginas? ([2, 1, 1] = actividades de cada página; sin él, una) + opciones, semilla, título, variaciones, B/N (para reabrirla en Charta)
+  "composicion": "{…}" }                // actividades ({tipo, curso?, params}) + paginas? ([2, 1, 1] = actividades de cada página; sin él, una) + opciones, semilla, título, variaciones, B/N, misFrases? (para reabrirla en Charta)
 ```
+- **Composición** (favoritas, recientes, nube, `?comp=`, Tabula): «Mis frases» van **una vez** en `misFrases: [...]` (fase 1); al generar se ponen en `params.misFrases` de cada actividad que las usa. Las composiciones antiguas las llevan en cada actividad y se leen igual.
+- `tipos` es un índice: se recorta a 10 (regla). Antes de enviar, `aDocumento()` comprueba los límites de las reglas (título ≤ 200, variantes ≤ 30, composición ≤ 20.000, ficha ≤ 900.000) para dar un aviso claro.
+- **Borrador** (solo en el dispositivo): `localStorage["charta:borrador"] = { v: 1, composicion, alumnos, copias, grupo?, fecha }`. Es lo único que guarda nombres (texto de la caja de alumnos); nunca sale del dispositivo.
 - Leer (Tabula, Fori): `fichaDeDocumento(datos, id)` de `src/nucleo/lector.js` → ficha comprobada con `erroresFicha()`.
 - Reglas: bloque «Charta» de `firestore.rules` (copia de `tabula/firestore.rules`): solo el autor (Google) lee, cambia y borra; campos y tamaños fijos (ficha ≤ 900.000 caracteres; 30 variantes ≈ 110 KB).
 
 ## Enlace con Tabula por URL (paso 5.2)
 - Tabula → Charta: `../Charta/?desde=tabula[&grupo=G][&sesion=S][&tarea=T]` (crear) · `?ficha=ID` o `?comp=B64[&grupo=G]` (abrir). Charta lee la lista del grupo en el almacén de Tabula: los nombres nunca van en la URL.
 - Fori (paso 5.3): Charta → `/Fori/?charta=1` con `localStorage["charta:aFori"]` = `{ "v": 1, "app": "charta", "titulo", "diapositivas": [{ "etq", "svg", "n" }] }` (SVG 1600×900 con la solución; paso K = `class="cs pK"`; `/*PASOS*/` en su `<style>` ← `cssPasos(k, n)`). Fori → Charta: `../Charta/?ficha=ID|comp=B64&a=fori`. `pasos` de cada ejercicio sigue siendo opcional: Fori corrige con las marcas de la solución.
-- Charta → Tabula: `/tabula/?charta=B64` con `{ "v": 1, "id"?, "titulo", "tipos", "comp", "grupo"?, "sesion"?, "tarea"?, "variantes"?, "minutos"?, "dificultad"?, "etiquetas"? }`; la miniatura de la hoja 1 (sin nombres) va aparte en `localStorage["charta:aTabula"] = { v:1, titulo, miniatura }` (data URL JPEG) (B64 = base64url de JSON UTF-8, sin «=»).
+- Charta → Tabula: `/tabula/?charta=B64` con `{ "v": 1, "id"?, "titulo", "tipos", "comp", "grupo"?, "sesion"?, "tarea"?, "variantes"?, "minutos"?, "dificultad"?, "etiquetas"? }`; la miniatura de la hoja 1 (sin nombres) va aparte en `localStorage["charta:aTabula"] = { v:1, titulo, miniatura }` (data URL JPEG) (B64 = base64url de JSON UTF-8, sin «=»). Si el enlace pasara de 6 KB (fase 1): `compLocal: true` en lugar de `comp`, y la composición va en `charta:aTabula` (`{ v:1, titulo, miniatura?, comp }`); Tabula la recoge con `compDeCharta()` comprobando el título.
 - En Tabula, documento `{ tipo: "charta", charta: { id?, tipos, comp }, groupId, … }`; sesiones y tareas lo enlazan en `documentoIds`.

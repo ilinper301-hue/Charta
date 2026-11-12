@@ -15,7 +15,10 @@ export async function cargarSdk() {
 
 export function mensajeError(e) {
   const c = (e && e.code) || "";
-  if (c.includes("permission-denied")) return "La nube ha rechazado el acceso. Revisa que las reglas de Firestore incluyan el bloque de Charta.";
+  // La ficha ya se ha comprobado antes de enviarla (documento.js), así que un rechazo es de sesión o de reglas.
+  if (c.includes("permission-denied")) return "La nube no ha dejado guardar ni leer: cierra la sesión y vuelve a entrar con Google. Si sigue igual, las reglas de Firestore no tienen el bloque de Charta (pégalo desde firestore.rules).";
+  if (c.includes("unauthenticated")) return "La sesión ha caducado: vuelve a entrar con Google.";
+  if (c.includes("resource-exhausted")) return "La nube ha llegado a su límite de hoy. Inténtalo mañana.";
   if (c.includes("unauthorized-domain")) return "Este dominio no está autorizado en Firebase → Authentication → Dominios autorizados.";
   if (c.includes("popup-closed") || c.includes("cancelled-popup")) return "Se cerró la ventana de inicio de sesión.";
   if (c.includes("network") || c.includes("unavailable")) return "No hay conexión. Inténtalo cuando vuelva la red.";

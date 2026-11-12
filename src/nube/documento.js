@@ -7,8 +7,11 @@
 import { erroresFicha, fichaDeDocumento } from "../nucleo/lector.js";
 import { limpiar } from "../ui/guardadas.js";
 
-/** Tamaño máximo del texto de la ficha (Firestore: 1 MiB por documento). */
-export const TAM_MAX = 900000;
+/** Límites de las reglas de Firestore (bloque Charta de firestore.rules): se comprueban aquí para dar un aviso claro. */
+export const TAM_MAX = 900000;      // texto de la ficha (Firestore: 1 MiB por documento)
+export const MAX_TIPOS = 10;        // `tipos` es solo un índice: se recorta (una ficha admite 10 páginas × 2 modelos)
+export const MAX_COMPOSICION = 20000;
+export const MAX_TITULO = 200;
 export const CAMPOS = ["schemaVersion", "app", "autor", "titulo", "creada", "tipos", "variantes", "ficha", "composicion"];
 
 export function aDocumento(ficha, comp, uid, ahora = new Date()) {
@@ -19,10 +22,13 @@ export function aDocumento(ficha, comp, uid, ahora = new Date()) {
   const f = { ...ficha, autor: uid, creada };
   delete f.id; // el id lo da Firestore (es el del documento)
   const texto = JSON.stringify(f);
-  if (texto.length > TAM_MAX) throw new Error("La ficha es demasiado grande para guardarla en la nube (prueba con menos variantes).");
-  const tipos = [...new Set(f.paginas.flatMap((p) => p.actividades.map((a) => a.tipo)))];
-  return { schemaVersion: f.schemaVersion, app: "charta", autor: uid, titulo: f.titulo, creada, tipos,
-    variantes: f.variantes, ficha: texto, composicion: JSON.stringify(limpiar(comp)) };
+  if (texto.length > TAM_MAX) throw new Error("La ficha es demasiado grande para guardarla en la nube (prueba con menos variantes o menos páginas).");
+  if (!(f.variantes >= 1 && f.variantes <= 30)) throw new Error("La nube admite como mucho 30 variantes.");
+  const composicion = JSON.stringify(limpiar(comp));
+  if (composicion.length > MAX_COMPOSICION) throw new Error("La ficha tiene demasiadas opciones para la nube (prueba con menos «Mis frases»).");
+  const tipos = [...new Set(f.paginas.flatMap((p) => p.actividades.map((a) => a.tipo)))].slice(0, MAX_TIPOS);
+  return { schemaVersion: f.schemaVersion, app: "charta", autor: uid, titulo: String(f.titulo || "Ficha").slice(0, MAX_TITULO), creada, tipos,
+    variantes: f.variantes, ficha: texto, composicion };
 }
 
 /** Documento → { id, titulo, creada, tipos, composicion, ficha() } (la ficha se lee solo si hace falta). */

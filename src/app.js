@@ -14,7 +14,8 @@ import { leerAlumnos, numVariantes, MAX_ALUMNOS } from "./ui/alumnos.js";
 import { registrarSW } from "./pwa/registro.js";
 import { iniciarTema } from "./ui/tema.js";
 import { crearNube } from "./nube/nube.js";
-import { leerEntrada, leerTabula, gruposDeTabula, urlVolver } from "./ui/tabula.js";
+import { leerEntrada, leerTabula, gruposDeTabula, urlVolver, MAX_ENLACE } from "./ui/tabula.js";
+import { crearBorrador } from "./ui/borrador.js";
 import { miniaturaDeSvg, dejarParaTabula } from "./ui/miniatura_ficha.js";
 import { VOCALES, CLAVE_LETRAS, CLAVE_OBLIGATORIAS, hayLengua1, conLetras, letrasDe, obligatoriasDe, vistasDe, resumenLetras, CLAVE_FRASES, hayFrases, conFrases, frasesDe, resumenFrases } from "./ui/letras.js";
 import { cuentasDe, agrupar, paginaDe, inicioDe } from "./ui/paginas.js";
@@ -245,7 +246,9 @@ function iniciar() {
   }
   $("misFrases").addEventListener("change", () => { try { localStorage.setItem(CLAVE_FRASES, $("misFrases").value); } catch {} pintar(); });
   $("misFrases").addEventListener("input", pintarMisFrases);
-  const actividades = () => conFrases(conLetras(editores.map((e) => e.leer()), vistasDe(marcadas), ABECEDARIO.filter((l) => obligatorias.has(l)).join("")), misFrases());
+  // Composición: las letras en cada actividad; «Mis frases» una sola vez (fase 1, R4). Al generar, en cada actividad que las usa.
+  const actividadesBase = () => conLetras(editores.map((e) => e.leer()), vistasDe(marcadas), ABECEDARIO.filter((l) => obligatorias.has(l)).join(""));
+  const actividades = () => conFrases(actividadesBase(), misFrases());
 
   function pintar() {
     $("error").hidden = true;
@@ -278,6 +281,7 @@ function iniciar() {
       $("info").textContent = `${paginas.length} página${paginas.length > 1 ? "s" : ""}` +
         (ficha.variantes > 1 ? ` · variantes ${letraVariante(0)}–${letraVariante(ficha.variantes - 1)}` : "") + ` · ${ficha.titulo}`;
     } catch (e) { $("error").textContent = e.message; $("error").hidden = false; }
+    guardarBorrador();
   }
 
   $("anadirPagina").onclick = () => { const u = editores[editores.length - 1]; abrirSelector({ tamano: "completa", actual: u.id, curso: u.curso,
@@ -331,12 +335,30 @@ function iniciar() {
   const almacen = (() => { try { return localStorage; } catch { return { getItem: () => null, setItem() {} }; } })();
   const guardadas = crearGuardadas(almacen);
   let pestana = "favoritos";
-  const composicion = () => ({ actividades: (() => { try { return actividades(); } catch { return editores.map((e) => e.leer()); } })(), ...(cuentas.length > 1 && { paginas: [...cuentas] }), semilla, titulo: $("titulo").value.trim(),
-    variaciones: $("variaciones").value, bn: $("bn").checked, grande: $("grande").checked, facil: $("facil").checked, fuente: $("fuente").value });
+  const composicion = () => {
+    let acts; try { acts = actividadesBase(); } catch { acts = editores.map((e) => e.leer()); }
+    const fr = hayFrases(acts) ? misFrases() : [];
+    return { actividades: acts, ...(cuentas.length > 1 && { paginas: [...cuentas] }), semilla, titulo: $("titulo").value.trim(),
+      variaciones: $("variaciones").value, bn: $("bn").checked, grande: $("grande").checked, facil: $("facil").checked, fuente: $("fuente").value,
+      ...(fr.length && { misFrases: fr }) };
+  };
+  // Fase 1 (R1) · borrador: la ficha en curso se guarda en cada cambio (con los nombres, solo en este dispositivo: ver borrador.js).
+  const borrador = crearBorrador(almacen);
+  let listo = false;   // hasta terminar de arrancar no se guarda (el arranque no es un cambio de la maestra)
+  function guardarBorrador() {
+    if (!listo || vista !== "diseno" || !editores.length) return;
+    borrador.guardar(composicion(), { alumnos: $("alumnos").value, copias: copias(), grupo: $("grupoTabula").value });
+  }
+  let relojBorrador = null;
+  const guardarLuego = () => { clearTimeout(relojBorrador); relojBorrador = setTimeout(guardarBorrador, 400); };
+  for (const id of ["alumnos", "titulo", "copias", "misFrases"]) $(id).addEventListener("input", guardarLuego);
+  addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden") guardarBorrador(); });
+  addEventListener("pagehide", guardarBorrador);
   function marcarFavorito() {
     try { const f = guardadas.esFavorito(composicion()); $("favorito").textContent = f ? "★ Favorita" : "☆ Favorita"; $("favorito").classList.toggle("on", f); } catch {}
   }
-  function abrirGuardada(c) {
+  /** Abre una composición; `extra` (solo el borrador): { alumnos, copias, grupo } de este dispositivo. */
+  function abrirGuardada(c, extra = null) {
     aDiseno();
     editores.length = 0; cuentas = cuentasDe(c);
     for (const a of c.actividades) editores.push(crearEditor(a.tipo));
@@ -348,6 +370,10 @@ function iniciar() {
     materia1 = materiaDe(editores[0].id);
     if (hayLengua1(c.actividades)) { const v = letrasDe(c); marcadas.clear(); for (const l of v ?? ABECEDARIO) marcadas.add(l); obligatorias.clear(); for (const l of obligatoriasDe(c) ?? "") obligatorias.add(l); pintarLetras(); }   // sin guardarlas como las de la clase
     if (hayFrases(c.actividades)) $("misFrases").value = frasesDe(c).join("\n");   // ídem con «Mis frases»
+    if (extra) {
+      $("alumnos").value = extra.alumnos || ""; $("copias").value = extra.copias || 1;
+      if (extra.grupo && [...$("grupoTabula").options].some((o) => o.value === extra.grupo)) $("grupoTabula").value = extra.grupo; else grupoBorrador = extra.grupo || null;
+    }
     pintar(); $("acts").scrollIntoView({ behavior: "smooth" });
   }
   function pintarGuardadas() {
@@ -449,12 +475,13 @@ function iniciar() {
     // Solo las fichas del alumnado: el solucionario nunca va al papel.
     $("impresion").replaceChildren(...paginas.map((p) => Object.assign(el("div", { className: "pag" }), { innerHTML: p.svg })));
     guardadas.anotarReciente(composicion(), ficha.titulo); pintarGuardadas();
+    borrador.descartar();   // ya está en Recientes (sin nombres)
     const t = document.title; document.title = ficha.titulo;
     document.fonts.ready.then(() => { window.print(); document.title = t; });
   };
   // Paso 5.2 · Tabula: grupos leídos de su almacén (mismo origen, solo lectura) y vuelta con la ficha por URL.
   const entrada = leerEntrada(location.search, hayTipo);
-  let grupos = [];
+  let grupos = [], grupoBorrador = null;
   $("grupoTabula").onchange = () => {
     const g = grupos.find((x) => x.id === $("grupoTabula").value);
     if (g) { $("alumnos").value = g.alumnos.join("\n"); pintar(); }
@@ -464,6 +491,7 @@ function iniciar() {
     $("filaTabula").hidden = !grupos.length;
     for (const g of grupos) $("grupoTabula").add(new Option(`${g.nombre} (${g.alumnos.length})`, g.id));
     if (entrada.grupo && grupos.some((g) => g.id === entrada.grupo)) { $("grupoTabula").value = entrada.grupo; $("grupoTabula").onchange(); }
+    else if (grupoBorrador && grupos.some((g) => g.id === grupoBorrador)) $("grupoTabula").value = grupoBorrador;   // sin tocar los nombres del borrador
   }).catch(() => {});
   $("aTabula").onclick = async () => {
     if (!ficha) return;
@@ -473,14 +501,17 @@ function iniciar() {
     // Si la nube falla, se envía igual (con la composición): Tabula no depende de la nube.
     if (nube.estado().estado === "dentro") try { if (!enNube) await leerNube(); id = (await nube.guardar(ficha, composicion())).id || null; } catch (e) { console.warn("Nube:", e.message); id = null; }
     // Miniatura de la hoja 1 SIN nombre (Tabula la recoge de localStorage; si falla, el documento sale sin imagen).
-    try {
-      const m = await miniaturaDeSvg(hoja(paginasVariante(ficha, 0)[0], { titulo: ficha.titulo, bn: $("bn").checked, uid: "mt", ...estiloLectura(ficha) }));
-      dejarParaTabula(ficha.titulo, m);
-    } catch {}
-    const md = ficha.metadatos || {};
-    location.href = urlVolver({ id, titulo: ficha.titulo, tipos: editores.map((e) => e.id), comp: composicion(),
+    let m = null;
+    try { m = await miniaturaDeSvg(hoja(paginasVariante(ficha, 0)[0], { titulo: ficha.titulo, bn: $("bn").checked, uid: "mt", ...estiloLectura(ficha) })); } catch {}
+    const md = ficha.metadatos || {}, comp = composicion();
+    const datos = { id, titulo: ficha.titulo, tipos: editores.map((e) => e.id), comp,
       variantes: ficha.variantes, minutos: md.minutos, dificultad: md.dificultad, etiquetas: md.etiquetas,
-      grupo: $("grupoTabula").value || entrada.grupo, sesion: entrada.sesion, tarea: entrada.tarea });
+      grupo: $("grupoTabula").value || entrada.grupo, sesion: entrada.sesion, tarea: entrada.tarea };
+    let url = urlVolver(datos);
+    // Fase 1 (R4): un enlace muy largo puede fallar; entonces la composición va por localStorage, como la miniatura.
+    if (url.length > MAX_ENLACE && dejarParaTabula(ficha.titulo, m, localStorage, comp)) url = urlVolver({ ...datos, comp: null, compLocal: true });
+    else dejarParaTabula(ficha.titulo, m);
+    location.href = url;
   };
   // Paso 5.3 · Fori: diapositivas (variante A) por localStorage del mismo origen; Fori las convierte en páginas.
   async function proyectar() {
@@ -498,11 +529,16 @@ function iniciar() {
   const usos = crearUsos(almacen);
   const nombreModelo = (id) => { try { return modelo(id).nombre; } catch { return id; } };
   const colorDe = (id) => { try { return modelo(id).color; } catch { return "verde"; } };
-  const ultimaDeInicio = () => ultimaComposicion({ recientes: guardadas.recientes(), ultimo: leerUltimo(), hayTipo });
+  // «Seguir con la última»: el borrador (la ficha a medias, con sus alumnos) y, si no hay, la última impresa o el último modelo.
+  const ultimaDeInicio = () => { const b = borrador.leer(hayTipo); return b ? { borrador: b } : ultimaComposicion({ recientes: guardadas.recientes(), ultimo: leerUltimo(), hayTipo }); };
   function estadoInicio() {
     const rec = guardadas.recientes(), fav = guardadas.favoritos(), e = nube.estado(), dentro = e.estado === "dentro", u = ultimaDeInicio();
     let seguir = null;
-    if (u?.composicion) {
+    if (u?.borrador) {
+      const c = u.borrador.composicion, t = c.actividades[0].tipo, n = leerAlumnos(u.borrador.alumnos).length;
+      seguir = { nombre: c.titulo || "Ficha sin terminar", tipo: t, color: colorDe(t), borrador: true,
+        detalle: c.actividades.map((a) => nombreModelo(a.tipo)).join(" + ") + (n ? ` · ${Math.min(n, MAX_ALUMNOS)} alumnos` : "") + " · sin imprimir" };
+    } else if (u?.composicion) {
       const c = u.composicion, t = c.actividades[0].tipo;
       seguir = { nombre: c.nombre || "Ficha", tipo: t, color: colorDe(t),
         detalle: c.actividades.map((a) => nombreModelo(a.tipo)).join(" + ") + (c.fecha ? " · " + fechaCorta(c.fecha) : "") };
@@ -537,7 +573,9 @@ function iniciar() {
     materias: () => materiasDisponibles(cursos, materias),
     crear: (materia) => abrirSelector({ tamano: "completa", ruta: materia ? { materia } : null, alElegir: nuevaFicha }),
     crearModelo: nuevaFicha,
-    seguir: () => { const u = ultimaDeInicio(); if (u?.composicion) abrirGuardada(u.composicion); else if (u?.modelo) nuevaFicha(u.modelo); },
+    seguir: () => { const u = ultimaDeInicio(); if (u?.borrador) abrirGuardada(u.borrador.composicion, u.borrador); else if (u?.composicion) abrirGuardada(u.composicion); else if (u?.modelo) nuevaFicha(u.modelo); },
+    hayBorrador: () => borrador.hay(hayTipo),
+    descartarBorrador: () => { borrador.descartar(); refrescarInicio(); },
     abrir: abrirGuardada,
     leerNube: () => { if (!enNube) leerNube(); },
     fuentes: () => ({ fuentes: todasLasFuentes(), fuente: $("fuente").value }),
@@ -553,8 +591,13 @@ function iniciar() {
   if (entrada.comp) { abrirGuardada(entrada.comp); if (aFori) proyectar(); }
   // Los enlaces directos (?ficha=, ?comp=, ?grupo=, ?desde=tabula…) van al diseño; si no, la app abre en el inicio.
   const directo = !!(idUrl || entrada.comp || entrada.grupo || entrada.desdeTabula || entrada.sesion || entrada.tarea);
-  mostrar(directo ? "diseno" : "inicio");
+  // Recarga (o vuelta tras cerrarla Android) estando en el diseño: se recupera el borrador allí mismo.
+  const b = !directo && history.state?.diseno ? borrador.leer(hayTipo) : null;
+  if (b) { abrirGuardada(b.composicion, b); pusheado = true; }
+  else if (!directo && history.state?.diseno) history.replaceState(null, "");
+  mostrar(directo || b ? "diseno" : "inicio");
   materia1 ??= materiaDe(editores[0].id);   // al arrancar mandan la letra guardada o la de la composición abierta
+  listo = true;
 }
 
 if (typeof document !== "undefined") {

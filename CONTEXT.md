@@ -58,8 +58,8 @@
 ## Forma de trabajar (ahorro de tokens)
 - Iván se queda sin cuota pronto: **respuestas breves y por partes**, en español de España, tuteando.
 - No pedir confirmación para cosas pequeñas: implementarlas y probarlas.
-- Leer CONTEXT.md, CODEMAP.md y ESTADO.md antes de nada. **No abrir el motor entero** (unas 2.500 líneas): ir a la sección concreta con el número de línea de CODEMAP.md.
-- Tras cada cambio: las pruebas de lo tocado (`node tests/…` para la app; `python3 tests/test_motor.py` si se toca el motor de referencia) y, al cerrar una fase, la completa.
+- Leer CONTEXT.md, CODEMAP.md y ESTADO.md antes de nada (`HISTORIAL.md` no: solo para buscar el detalle de un paso cerrado). **No abrir el motor entero** (unas 2.500 líneas): ir a la sección concreta con el número de línea de CODEMAP.md.
+- Tras cada cambio: las pruebas de lo tocado (`node tests/…` para la app; `npm run test:rapido` para cambios de interfaz, 30 s; `python3 tests/navegador.py` si se toca `app.js` o la interfaz; `python3 tests/test_motor.py` si se toca el motor de referencia) y, al cerrar una fase, la completa (`npm test`).
 - Entregar **solo los archivos que cambien**. No renderizar muestras salvo cambios de diseño o petición expresa (y entonces una imagen a baja resolución).
 - Si Iván escribe **"Continúa"**: leer ESTADO.md y retomar desde el primer paso sin marcar.
 - Actualizar ESTADO.md al terminar cada paso.

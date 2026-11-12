@@ -4,6 +4,7 @@
 import { modelo } from "../nucleo/ficha.js";
 import { PALETA } from "../render/hoja.js";
 import { cursos, materias, bloques, modelos, miniatura } from "./navegacion.js";
+import { abrirCapa } from "./capas.js";
 
 function el(tag, props = {}, ...hijos) { const e = Object.assign(document.createElement(tag), props); e.append(...hijos); return e; }
 
@@ -28,6 +29,8 @@ export function abrirSelector({ actual = null, curso = null, tamano = "completa"
     el("div", { className: "sel-cab" }, atras, titulo, cerrar), migas, rejilla);
   document.body.append(capa);
   document.body.classList.add("con-selector");
+  // Fase 1 (R2): el selector es una capa con su entrada de historial; Atrás de Android lo cierra.
+  const enHistorial = abrirCapa(() => { capa.remove(); document.body.classList.remove("con-selector"); });
 
   // Si ya hay materia (Crear ficha → Lengua), solo los cursos que la tienen.
   const opciones = (nivel) => nivel === "curso" ? cursos().filter((c) => ruta.materia === undefined || materias(c.id).some((m) => m.id === ruta.materia))
@@ -48,9 +51,11 @@ export function abrirSelector({ actual = null, curso = null, tamano = "completa"
   }
   const automatico = (n) => opciones(n).length === 1;
 
+  // Lo elegido se aplica cuando el historial ya ha vuelto (así el diseño puede apuntar su propia entrada).
+  // Atrás de Android cierra sin elegir (alCerrar no se llama: no hay nada que deshacer).
   function fin(id) {
-    capa.remove(); document.body.classList.remove("con-selector");
-    if (id) alElegir?.(id, ruta.curso); else alCerrar?.();   // con el curso elegido (2.º: sus rangos)
+    const c = ruta.curso;   // con el curso elegido (2.º: sus rangos)
+    enHistorial.cerrar(() => { if (id) alElegir?.(id, c); else alCerrar?.(); });
   }
 
   function pintar() {

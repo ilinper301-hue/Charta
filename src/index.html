@@ -18,6 +18,7 @@
   <button id="iniCrear" class="primario ini-crear">+ Crear ficha</button>
   <div id="iniMaterias" class="ini-materias" hidden><span>¿De qué materia?</span><div id="iniMateriasBtn"></div></div>
   <button id="iniSeguir" class="ini-seguir" hidden><div class="mini" id="iniSeguirMini"></div><span class="ini-seguir-txt"><small>Seguir con la última</small><strong id="iniSeguirNombre"></strong><small id="iniSeguirDetalle"></small></span></button>
+  <button id="iniDescartar" class="ini-descartar" hidden>Descartar borrador</button>
   <section class="tarjeta" id="iniRapidos" hidden><div class="sec-cab"><h2>Accesos rápidos</h2></div><div id="iniRapidosLista" class="ini-rapidos"></div></section>
   <section class="tarjeta" id="iniFichas"><div class="sec-cab"><h2>Mis fichas</h2></div>
     <div class="pestanas"><button id="iFav" class="activa">★ Favoritas</button><button id="iRec">Recientes</button><button id="iNube" hidden>☁ En la nube</button></div>
@@ -31,6 +32,8 @@
     <label class="campo"><span>Letra por defecto</span><select id="iaFuente"></select></label>
     <div class="interruptores"><label class="check"><input type="checkbox" id="iaBn"> <span>Blanco y negro por defecto <em>Ahorro de tinta en las fichas nuevas</em></span></label></div>
     <div class="acciones-sec"><button id="iaTema">Cambiar tema</button><button id="iaCuenta">☁ Entrar</button></div>
+    <p class="info ia-borrador">La ficha que estás preparando se guarda sola en este dispositivo, <strong>con los nombres de los alumnos</strong>, para no perderla si se cierra la app. Se borra al imprimir o al descartarla; nunca va a la nube, a Tabula ni a Fori.</p>
+    <div class="acciones-sec"><button id="iaBorrador">Descartar borrador</button></div>
   </section>
 </section>
 <main hidden>

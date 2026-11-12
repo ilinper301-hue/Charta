@@ -159,7 +159,14 @@ Sin desplazamiento horizontal a 360, 390, 768 ni 1180 px. Sin errores de consola
 
 ## Parte C · Fases
 
-### Fase 1 · Red de seguridad — *Opus, esfuerzo alto*
+### Fase 1 · Red de seguridad — *Opus, esfuerzo alto* · ✅ hecha (12-11-2026)
+
+> Resultado: `src/ui/borrador.js` (R1), `src/ui/capas.js` + selector (R2), `src/nube/documento.js` (R3: `tipos` ≤ 10 y
+> comprobación previa de los límites de las reglas → avisos claros), «Mis frases» en `composicion.misFrases` (R4; las
+> antiguas se leen igual; enlace a Tabula > 6 KB → `compLocal` + `charta:aTabula`; Tabula actualizada:
+> `js/charta.js` `compDeCharta`, `combine-model.js` reparte las frases), `tests/navegador.py`, `npm run test:rapido`,
+> `HISTORIAL.md`. Límites: Tabula → Charta sigue abriendo con `?comp=` en la URL (sin límite de tamaño propio);
+> el borrador es uno solo (Crear ficha lo sustituye).
 
 Primero lo que puede hacer perder trabajo; después, la prueba que protege las fases siguientes.
 

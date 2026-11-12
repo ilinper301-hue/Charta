@@ -242,6 +242,8 @@ body.con-selector { overflow: hidden; }
 .ini-seguir-txt small:first-child { color: var(--acento-texto); font-weight: 600; font-size: .72rem; letter-spacing: .07em; text-transform: uppercase; }
 .ini-seguir-txt strong { font-weight: 600; font-size: .98rem; }
 .ini-seguir-txt small { color: var(--apagado); font-size: .8rem; line-height: 1.3; }
+.ini-descartar { height: 44px; border: 0; background: none; color: var(--apagado); font-size: .85rem; justify-self: end; margin-top: -6px; text-decoration: underline; text-underline-offset: 3px; }
+.ia-borrador { margin-top: 12px; line-height: 1.45; }
 .ini-rapidos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
 .ini-rapido { height: auto; padding: 8px; display: grid; gap: 6px; justify-content: stretch; text-align: left; white-space: normal; align-content: start; border-color: var(--borde); }
 .ini-rapido strong { font-weight: 600; font-size: .86rem; line-height: 1.25; }

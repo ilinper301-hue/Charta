@@ -36,6 +36,8 @@ export function crearInicio(cb) {
     if (!abierto) $("iniMateriasBtn").replaceChildren(...ms.map((m) => el("button", { textContent: m.nombre, onclick: () => cb.crear(m.id) })));
   };
   $("iniSeguir").onclick = () => cb.seguir();
+  const descartar = () => { cb.descartarBorrador(); if (!$("iniAjustes").hidden) pintarAjustes(); };
+  $("iniDescartar").onclick = descartar;
   $("iFav").onclick = () => { pestana = "favoritos"; pintarFichas(); };
   $("iRec").onclick = () => { pestana = "recientes"; pintarFichas(); };
   $("iNube").onclick = () => { pestana = "nube"; cb.leerNube(); pintarFichas(); };
@@ -50,11 +52,13 @@ export function crearInicio(cb) {
   $("iaBn").onchange = () => cb.ponerBn($("iaBn").checked);
   $("iaTema").onclick = () => $("tema").click();
   $("iaCuenta").onclick = () => $("cuentaNube").click();
+  $("iaBorrador").onclick = descartar;
   function pintarAjustes() {
     const { fuentes, fuente } = cb.fuentes();
     $("iaFuente").replaceChildren(...fuentes.map((f) => el("option", { value: f.id, textContent: f.nombre, selected: f.id === fuente })));
     $("iaBn").checked = cb.bnDefecto();
     $("iaCuenta").textContent = $("cuentaNube").textContent; $("iaCuenta").disabled = $("cuentaNube").disabled;
+    $("iaBorrador").disabled = !cb.hayBorrador(); $("iaBorrador").textContent = cb.hayBorrador() ? "Descartar borrador" : "No hay borrador";
   }
 
   function pintarFichas() {
@@ -91,11 +95,11 @@ export function crearInicio(cb) {
   }
 
   return {
-    /** estado: { saludo, seguir: { nombre, detalle, tipo, color } | null, rapidos: [{ id, nombre, color }], fav, rec, nube, dentro } */
+    /** estado: { saludo, seguir: { nombre, detalle, tipo, color, borrador? } | null, rapidos: [{ id, nombre, color }], fav, rec, nube, dentro } */
     pintar(e) {
       estado = e;
       $("iniSaludo").textContent = e.saludo;
-      $("iniSeguir").hidden = !e.seguir;
+      $("iniSeguir").hidden = !e.seguir; $("iniDescartar").hidden = !e.seguir?.borrador;
       if (e.seguir) {
         $("iniSeguirNombre").textContent = e.seguir.nombre; $("iniSeguirDetalle").textContent = e.seguir.detalle;
         const m = $("iniSeguirMini"), [fondo, borde] = PALETA[e.seguir.color] ?? PALETA.verde;

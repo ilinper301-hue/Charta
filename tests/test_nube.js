@@ -90,3 +90,16 @@ const roto = crearNube({ cargar: async () => { throw new Error("red"); } });
 await assert.rejects(roto.iniciar(), /No se pudo cargar/); assert.equal(roto.estado().estado, "error");
 
 console.log("test_nube: documento, sesión, guardar, listar, abrir, borrar y sin conexión OK");
+
+// PLAN-DISENO fase 1 (R3): más de 10 modelos distintos → `tipos` recortado a 10 (la regla lo exige); avisos claros.
+{
+  const ids = ["sumar.h20", "restar.r20", "sumar.h10", "restar.r10", "rep.dado", "rep.marco", "conteo.serie1", "orden.signos", "sumar.vertical", "restar.recta", "medida.reloj", "sumar.dobles"];
+  const f = generar({ paginas: Array.from({ length: 6 }, (_, i) => ({ actividades: ids.slice(2 * i, 2 * i + 2).map((tipo) => ({ tipo })) })) }, 1);
+  const n = new Set(f.paginas.flatMap((p) => p.actividades.map((a) => a.tipo))).size;
+  assert.ok(n > 10, `la ficha de prueba tiene ${n} modelos`);
+  const d2 = aDocumento(f, { actividades: [] }, "u1");
+  assert.equal(d2.tipos.length, 10);
+  assert.throws(() => aDocumento(f, { actividades: [{ tipo: "sumar.h20", params: { x: "y".repeat(25000) } }] }, "u1"), /demasiadas opciones/);
+  assert.equal(aDocumento({ ...f, titulo: "t".repeat(300) }, { actividades: [] }, "u1").titulo.length, 200);
+  console.log("test_nube: más de 10 modelos y avisos OK");
+}

@@ -279,3 +279,47 @@ import { leerPropias } from "../src/lengua/frases.js";
   assert.match(resumenFrases("Pepe pinta un pato.", "aeioulms").info, /no sale/);
   console.log("test_ui: varias páginas y «Mis frases» OK");
 }
+
+// PLAN-DISENO fase 1: borrador (R1), «Mis frases» una sola vez (R4) y enlace largo a Tabula.
+import { crearBorrador, CLAVE_BORRADOR } from "../src/ui/borrador.js";
+import { dejarParaTabula, CLAVE_A_TABULA } from "../src/ui/miniatura_ficha.js";
+import { MAX_ENLACE } from "../src/ui/tabula.js";
+import { hayTipo as existeTipo } from "../src/nucleo/tipos.js";
+{
+  const mem = () => ({ m: {}, getItem(k) { return this.m[k] ?? null; }, setItem(k, v) { this.m[k] = String(v); }, removeItem(k) { delete this.m[k]; } });
+  const A = (tipo, params = {}) => ({ tipo, params });
+  const frases = ["Mi mamá me mima.", "Lola sale sola."];
+  // R4: la composición lleva las frases una vez; las antiguas (en cada actividad) se leen igual.
+  const vieja = { actividades: [A("escritura.frase", { misFrases: frases }), A("frase.ordena", { misFrases: frases })], paginas: [1, 1], semilla: 2 };
+  const l = limp(vieja);
+  assert.deepEqual(l.misFrases, frases); assert.ok(l.actividades.every((a) => !("misFrases" in a.params)), "frases fuera de las actividades");
+  assert.deepEqual(frasesDe(l), frases); assert.deepEqual(frasesDe(vieja), frases);
+  assert.deepEqual(limp({ ...l, misFrases: [...frases, 3, "no vale"] }).misFrases, frases);
+  assert.ok(!("misFrases" in limp({ actividades: [A("sumar.h20")] })));
+  // 20 actividades con 60 frases: antes 60 × 20 en el enlace a Tabula; ahora una vez.
+  const N = ["Ana", "Lola", "Pepe", "Susi", "Toni", "Nuria"], V = ["pinta", "lava", "mira", "toca", "pisa"], O = ["la mesa", "la sopa", "el pato", "la lata"];
+  const muchas = Array.from({ length: 60 }, (_, i) => `${N[i % 6]} ${V[Math.floor(i / 6) % 5]} ${O[Math.floor(i / 30) + (i % 2)]}.`);
+  assert.equal(new Set(leerPropias(muchas.join("\n")).frases).size, 60);
+  const grande = { actividades: Array.from({ length: 20 }, () => A("escritura.frase")), paginas: Array(10).fill(2), misFrases: muchas, semilla: 1 };
+  const u = urlVolver({ titulo: "x", tipos: [], comp: limp(grande) });
+  assert.ok(u.length < MAX_ENLACE, `enlace de ${u.length}`);   // antes, unos 36 KB
+  const ul = JSON.parse(deB64url(urlVolver({ titulo: "x", tipos: [], comp: limp(grande), compLocal: true }).split("=")[1]));
+  assert.equal(ul.compLocal, true); assert.ok(!("comp" in ul));
+  const al = mem(); assert.ok(dejarParaTabula("T", null, al, { a: 1 })); assert.deepEqual(JSON.parse(al.getItem(CLAVE_A_TABULA)), { v: 1, titulo: "T", comp: { a: 1 } });
+  assert.equal(dejarParaTabula("T", null, al), false); assert.equal(al.getItem(CLAVE_A_TABULA), null);
+
+  // R1: borrador con los nombres SOLO en charta:borrador; la composición pasa por limpiar().
+  const alm = mem(), b = crearBorrador(alm);
+  assert.equal(b.leer(), null); assert.ok(!b.hay());
+  const comp = { actividades: [A("sumar.h20", { rango: 20 })], semilla: 5, titulo: "Sumas", variaciones: "distintas", nombres: ["Colada"], alumnos: "Colada" };
+  assert.ok(b.guardar(comp, { alumnos: "Ana Pérez\nLuis Gil", copias: 4, grupo: "g1" }));
+  const r = b.leer(existeTipo);
+  assert.equal(r.alumnos, "Ana Pérez\nLuis Gil"); assert.equal(r.copias, 4); assert.equal(r.grupo, "g1");
+  assert.deepEqual(r.composicion, limp(comp)); assert.ok(!JSON.stringify(r.composicion).includes("Colada"), "nada fuera de limpiar()");
+  assert.deepEqual(Object.keys(alm.m), [CLAVE_BORRADOR], "una sola clave");
+  assert.ok(!JSON.stringify(JSON.parse(alm.m[CLAVE_BORRADOR]).composicion).includes("Ana"), "los nombres van aparte de la composición");
+  assert.equal(b.leer((id) => id !== "sumar.h20"), null, "modelo que ya no existe");
+  alm.m[CLAVE_BORRADOR] = "{roto"; assert.equal(b.leer(), null);
+  b.guardar(comp, {}); b.descartar(); assert.equal(alm.getItem(CLAVE_BORRADOR), null);
+  console.log("test_ui: borrador, «Mis frases» una vez y enlace largo a Tabula OK");
+}

@@ -1,6 +1,6 @@
 // Charta · miniatura de la hoja 1 para Documentos de Tabula (paso 5.4). SVG → imagen JPEG pequeña (data URL).
 // La hoja se dibuja SIN nombre de alumno: la miniatura nunca lleva nombres.
-export const CLAVE_A_TABULA = "charta:aTabula";   // localStorage (mismo origen): { v:1, titulo, miniatura }
+export const CLAVE_A_TABULA = "charta:aTabula";   // localStorage (mismo origen): { v:1, titulo, miniatura?, comp? }
 export const ANCHO_MINIATURA = 220;
 
 /** SVG (texto) → data URL JPEG de `ancho` px de ancho; null si el navegador no puede (sin DOM, error…). */
@@ -27,11 +27,16 @@ export function miniaturaDeSvg(svg, ancho = ANCHO_MINIATURA, calidad = 0.72) {
   });
 }
 
-/** Deja la miniatura para que Tabula la recoja (mismo origen). Si no cabe en el almacén, se omite sin error. */
-export function dejarParaTabula(titulo, miniatura, almacen = globalThis.localStorage) {
+/** Deja la miniatura (y, si el enlace sería largo, la composición: fase 1, R4) para que Tabula la recoja (mismo origen).
+ *  Sin composición, si no cabe en el almacén, se omite sin error; con composición devuelve false si no se ha podido dejar. */
+export function dejarParaTabula(titulo, miniatura, almacen = globalThis.localStorage, comp = null) {
+  const t = String(titulo || "").slice(0, 200);
   try {
-    if (!miniatura) { almacen?.removeItem(CLAVE_A_TABULA); return false; }
-    almacen.setItem(CLAVE_A_TABULA, JSON.stringify({ v: 1, titulo: String(titulo || ""), miniatura }));
+    if (!miniatura && !comp) { almacen?.removeItem(CLAVE_A_TABULA); return false; }
+    almacen.setItem(CLAVE_A_TABULA, JSON.stringify({ v: 1, titulo: t, ...(miniatura && { miniatura }), ...(comp && { comp }) }));
     return true;
-  } catch { return false; }
+  } catch {
+    if (!comp || !miniatura) return false;
+    try { almacen.setItem(CLAVE_A_TABULA, JSON.stringify({ v: 1, titulo: t, comp })); return true; } catch { return false; }   // sin miniatura sí cabe
+  }
 }

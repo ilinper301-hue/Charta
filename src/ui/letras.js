@@ -48,7 +48,8 @@ function resumenSolo(marcadas) {
   return `${n} de ${ABECEDARIO.length}`;
 }
 
-// «Mis frases» (Lengua de 1.º): viajan en `params.misFrases` de las actividades que usan frases (USA_FRASES), como las letras.
+// «Mis frases» (Lengua de 1.º): en la composición van UNA vez (`misFrases`, fase 1 R4); al generar, conFrases() las pone
+// en `params.misFrases` de las actividades que usan frases (USA_FRASES), que es lo que lee generar().
 export const CLAVE_FRASES = "charta:misFrases";   // las últimas escritas (las de la clase)
 const usaFrases = (a) => admite(a) && USA_FRASES.has(a.tipo);
 /** ¿Alguna actividad usa frases? (para enseñar la caja «Mis frases»). */
@@ -60,8 +61,8 @@ export function conFrases(acts, frases) {
     return usaFrases(a) && frases?.length ? { ...a, params: { ...params, misFrases: frases } } : { ...a, params };
   });
 }
-/** Frases propias de una composición guardada (las de su primera actividad que las lleve) o []. */
-export const frasesDe = (c) => (c?.actividades || []).find((a) => usaFrases(a) && Array.isArray(a.params?.misFrases))?.params.misFrases || [];
+/** Frases propias de una composición guardada (`misFrases`; en las antiguas, las de su primera actividad que las lleve) o []. */
+export const frasesDe = (c) => (Array.isArray(c?.misFrases) ? c.misFrases : (c?.actividades || []).find((a) => usaFrases(a) && Array.isArray(a.params?.misFrases))?.params.misFrases) || [];
 /** Resumen de la caja: { frases, cuenta: "3", info: "…" } con los errores y las que no salen con las letras marcadas (vistas = cadena o null). */
 export function resumenFrases(texto, vistas) {
   const { frases, errores } = leerPropias(texto);
