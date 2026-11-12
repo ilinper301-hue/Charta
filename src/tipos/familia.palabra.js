@@ -7,3 +7,4 @@ import "./palabra.articulo.js";
 import "./palabra.plural.js";
 import "./palabra.contrarios.js";
 import "./palabra.sopa.js";
+import "./palabra.dibuja.js";

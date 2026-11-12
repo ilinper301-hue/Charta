@@ -140,6 +140,9 @@ MODELOS_LENGUA += [
         op("direcciones", "Direcciones", [(None, "Horizontal y vertical"), ("diagonal", "También en diagonal")]),
         op("minus", "Letra", [(None, "MAYÚSCULAS"), ("minus", "minúscula")])],
        "SOPA DE LETRAS", "amarillo", COMPLETA),
+    _l(4, "palabra", "dibuja", "Leo y dibujo", "Una palabra y un recuadro vacío: leer la palabra y dibujar lo que dice (solo nombres que se pueden dibujar). Sin corrección.",
+       [_largo("Sílabas de cada palabra", [(None, "Variadas"), (1, "1 sílaba"), (2, "2 sílabas"), (3, "3 sílabas")]), TIPO, CASO],
+       "LEO Y DIBUJO", "verde"),
     # <<< PALABRA
 ]
 # ------------------------------------------------------------------ lote 2 · orto.* (bloque 6)
@@ -230,5 +233,9 @@ MODELOS_LENGUA += [
     _l(8, "escritura", "libre", "Escribe una frase", "Renglones libres con la frase empezada (El gato…) o con un tema para escribir. Corrección abierta.",
        [op("inicio", "Cómo empieza", [(None, "Con la frase empezada (El gato…)"), ("tema", "Con un tema para escribir")]), PAUTA],
        "ESCRIBE UNA FRASE", "amarillo"),
+    _l(8, "escritura", "ordena", "Miro y escribo", "Una tarjeta con espacio en blanco para pegar el dibujo, las letras desordenadas del nombre y la pauta: ordenar las letras y escribir la palabra.",
+       [op("letras", "Letras de cada palabra", [(None, "3 a 6 (variadas)"), (3, "3 letras"), (4, "4 letras"), (5, "5 letras"), (6, "6 letras")]), TIPO,
+        op("caso", "Letra", [(None, "minúscula"), ("mayus", "MAYÚSCULA")]), PAUTA],
+       "MIRO Y ESCRIBO", "azul"),
     # <<< ESCRITURA
 ]

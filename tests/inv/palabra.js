@@ -14,6 +14,18 @@ const comunes = (es) => es[0].k.filter((c) => es.every((e) => e.k.includes(c)));
 const tildes = (s) => (s.match(/[áéíóú]/g) || []).length;
 
 export default {
+  // Leo y dibujo (petición de Iván, 12-11-2026): palabras dibujables, sin corrección, sin repetir; el dibujo es libre.
+  "palabra.dibuja"(act, tam) {
+    const es = act.ejercicios, p = act.params;
+    cuantos(es, tam === "media" ? 6 : 12);
+    unicos(es, (e) => e.datos.palabra.toLowerCase(), "palabras repetidas");
+    for (const e of es) {
+      assert.deepEqual(Object.keys(e.datos), ["palabra"]); assert.deepEqual(e.solucion, { huecos: [] }, "el dibujo es libre: no hay corrección");
+      const m = enCaso(e.datos.palabra, p.caso, "palabra"); palabraValida(m, p, { largos: [1, 2, 3, 4] }); sinI(m, p);
+      assert.ok(ENT.get(m).d, `«${m}» no se puede dibujar`); assert.equal(ENT.get(m).c, "n", `«${m}» no es un nombre`);
+    }
+  },
+
   "palabra.intrusa"(act, tam) {
     const es = act.ejercicios, p = act.params;
     cuantos(es, tam === "media" ? 4 : 8);

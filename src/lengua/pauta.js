@@ -26,6 +26,18 @@ export function cabenRenglones(p, alto, mm = PAUTA_POR_DEFECTO) {
 }
 
 /**
+ * Pauta Lamela de cuatro líneas equidistantes (un cuerpo c entre ellas), como la de la ficha «Miro y escribo» de Iván:
+ * las dos del cuerpo (base y base + c) negras y las de las astas y los rabos (base + 2c y base − c) grises. Un solo renglón.
+ */
+export function pautaLamela(p, x0, x1, base, c) {
+  const lw = p.mm(0.3);
+  p.line(x0, base + 2 * c, x1, base + 2 * c, { lw: p.mm(0.2), gris: 0.62 });
+  p.line(x0, base + c, x1, base + c, { lw, gris: 0.1 });
+  p.line(x0, base, x1, base, { lw, gris: 0.1 });
+  p.line(x0, base - c, x1, base - c, { lw: p.mm(0.2), gris: 0.62 });
+}
+
+/**
  * Dibuja n renglones de x0 a x1 empezando en yArriba (borde superior del primer renglón, astas incluidas).
  * Devuelve las bases (y de cada renglón) y el cuerpo c, para escribir encima con trazos.js.
  * guia: línea fina discontinua entre renglones (marca hasta dónde llegan astas y rabos).

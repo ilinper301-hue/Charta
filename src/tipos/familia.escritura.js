@@ -5,3 +5,4 @@ import "./escritura.palabras.js";
 import "./escritura.frase.js";
 import "./escritura.dictado.js";
 import "./escritura.libre.js";
+import "./escritura.ordena.js";

@@ -132,6 +132,7 @@ Fredoka es letra de imprenta, pero es un **contorno** (al repasarla saldría un 
 - **`palabra.sopa` · Sopa de letras** (C) ⚙
   6–8 palabras de un campo léxico; horizontal y vertical (opción diagonal).
   Corrección: palabras rodeadas.
+- **`palabra.dibuja` · Leo y dibujo** (C/M) ⚙ — añadido el 12-11-2026 a petición de Iván. Palabra y recuadro vacío para dibujar lo que dice (no necesita pictogramas). Opciones: sílabas 1–3 · tipo de sílabas · letra. Corrección: ninguna (dibujo libre).
 - **`palabra.dibujo` · Une la palabra con su dibujo** (C/M) 🖼 (Fase 6)
 - **`palabra.crucigrama` · Crucigrama con dibujos** (C) 🖼 (Fase 6)
 
@@ -199,6 +200,7 @@ Fredoka es letra de imprenta, pero es un **contorno** (al repasarla saldría un 
   Corrección: la lista.
 - **`escritura.libre` · Escribe una frase** (C/M) ✍
   «Escribe qué hace…» con la frase empezada. Corrección: abierta (ejemplo en pantalla).
+- **`escritura.ordena` · Miro y escribo** (C/M) ✍ ⚙ — añadido el 12-11-2026 a petición de Iván. Tarjeta con **espacio en blanco** para el dibujo (Iván lo pega), letras desordenadas en casillas y un renglón de pauta Lamela de cuatro líneas. Opciones: letras 3–6 · tipo de sílabas · minúscula/MAYÚSCULA · pauta. Corrección: la palabra, solo en pantalla.
 - **`escritura.nombre` · Escribe el nombre del dibujo** (C/M) ✍ 🖼 (Fase 6)
 
 **Total**: 47 modelos; 43 se pueden hacer ya y 4 esperan a los pictogramas (otros 4 tendrán además versión con dibujo).

@@ -49,7 +49,7 @@ prueba("mezclar y azar", () => {
 });
 
 prueba("catálogo generado desde modelos.py y modelos_app.py", () => {
-  assert.equal(CATALOGO.modelos.length, 149);   // 94 del motor + 12 solo de la app (4 de problemas y 8 trucos de Calculi) + 32 de Lengua (lote 1: 6 letra.* y 5 silaba.*; lote 2: 6 fono.*, 8 palabra.* y 2 orto.*; lote 3: 5 frase.*; lote 4: 6 escritura.*; lote 5: 5 lectura.*)
+  assert.equal(CATALOGO.modelos.length, 151);   // 94 del motor + 12 solo de la app (4 de problemas y 8 trucos de Calculi) + 34 de Lengua (lote 1: 6 letra.* y 5 silaba.*; lote 2: 6 fono.*, 8 palabra.* y 2 orto.*; lote 3: 5 frase.*; lote 4: 6 escritura.*; lote 5: 5 lectura.*; petición de Iván 12-11-2026: palabra.dibuja y escritura.ordena)
   for (const m of CATALOGO.modelos) {
     assert.ok(["amarillo", "rosa", "azul", "verde"].includes(m.color), m.id);
     assert.ok(m.titulo, m.id);

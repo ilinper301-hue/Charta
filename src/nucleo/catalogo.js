@@ -9012,6 +9012,104 @@ export const CATALOGO = {
    }
   },
   {
+   "id": "palabra.dibuja",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 4,
+   "familia": "palabra",
+   "clave": "dibuja",
+   "nombre": "Leo y dibujo",
+   "descripcion": "Una palabra y un recuadro vacío: leer la palabra y dibujar lo que dice (solo nombres que se pueden dibujar). Sin corrección.",
+   "opciones": [
+    {
+     "id": "largo",
+     "etiqueta": "Sílabas de cada palabra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Variadas"
+      },
+      {
+       "valor": 1,
+       "etiqueta": "1 sílaba"
+      },
+      {
+       "valor": 2,
+       "etiqueta": "2 sílabas"
+      },
+      {
+       "valor": 3,
+       "etiqueta": "3 sílabas"
+      }
+     ]
+    },
+    {
+     "id": "tipo",
+     "etiqueta": "Tipo de sílabas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Directas (ma, pe)"
+      },
+      {
+       "valor": "inversas",
+       "etiqueta": "Con inversas (al, en)"
+      },
+      {
+       "valor": "trabadas",
+       "etiqueta": "Con trabadas (pla, bra)"
+      },
+      {
+       "valor": "mixtas",
+       "etiqueta": "Con mixtas (con, sol)"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "inicial",
+       "etiqueta": "Mayúscula inicial"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULAS"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "LEO Y DIBUJO",
+   "color": "verde",
+   "metadatos": {
+    "dificultad": 1,
+    "minutos": 8,
+    "etiquetas": [
+     "lengua",
+     "palabras",
+     "leer",
+     "dibujar"
+    ]
+   }
+  },
+  {
    "id": "orto.elige",
    "curso": 1,
    "materia": "lengua",
@@ -10898,6 +10996,127 @@ export const CATALOGO = {
      "frases",
      "libre",
      "pauta"
+    ]
+   }
+  },
+  {
+   "id": "escritura.ordena",
+   "curso": 1,
+   "materia": "lengua",
+   "bloque": 8,
+   "familia": "escritura",
+   "clave": "ordena",
+   "nombre": "Miro y escribo",
+   "descripcion": "Una tarjeta con espacio en blanco para pegar el dibujo, las letras desordenadas del nombre y la pauta: ordenar las letras y escribir la palabra.",
+   "opciones": [
+    {
+     "id": "letras",
+     "etiqueta": "Letras de cada palabra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "3 a 6 (variadas)"
+      },
+      {
+       "valor": 3,
+       "etiqueta": "3 letras"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 letras"
+      },
+      {
+       "valor": 5,
+       "etiqueta": "5 letras"
+      },
+      {
+       "valor": 6,
+       "etiqueta": "6 letras"
+      }
+     ]
+    },
+    {
+     "id": "tipo",
+     "etiqueta": "Tipo de sílabas",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "Directas (ma, pe)"
+      },
+      {
+       "valor": "inversas",
+       "etiqueta": "Con inversas (al, en)"
+      },
+      {
+       "valor": "trabadas",
+       "etiqueta": "Con trabadas (pla, bra)"
+      },
+      {
+       "valor": "mixtas",
+       "etiqueta": "Con mixtas (con, sol)"
+      }
+     ]
+    },
+    {
+     "id": "caso",
+     "etiqueta": "Letra",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "minúscula"
+      },
+      {
+       "valor": "mayus",
+       "etiqueta": "MAYÚSCULA"
+      }
+     ]
+    },
+    {
+     "id": "pauta",
+     "etiqueta": "Tamaño de pauta",
+     "tipo": "opcion",
+     "defecto": null,
+     "valores": [
+      {
+       "valor": null,
+       "etiqueta": "5 mm"
+      },
+      {
+       "valor": 4,
+       "etiqueta": "4 mm"
+      },
+      {
+       "valor": 3.5,
+       "etiqueta": "3,5 mm"
+      }
+     ]
+    }
+   ],
+   "rangos": [],
+   "rango": null,
+   "tamanos": [
+    "completa",
+    "media"
+   ],
+   "titulo": "MIRO Y ESCRIBO",
+   "color": "azul",
+   "metadatos": {
+    "dificultad": 2,
+    "minutos": 12,
+    "etiquetas": [
+     "lengua",
+     "escritura",
+     "palabras",
+     "letras",
+     "ordenar",
+     "pauta",
+     "dibujo"
     ]
    }
   }

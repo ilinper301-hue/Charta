@@ -138,6 +138,7 @@ META = {
     "palabra.intrusa": (2, 8, "lengua palabras campos_léxicos rodear clasificar"),
     "palabra.clasifica": (2, 12, "lengua palabras campos_léxicos clasificar escribir"),
     "palabra.letras": (2, 10, "lengua palabras letras ordenar escribir"),
+    "palabra.dibuja": (1, 8, "lengua palabras leer dibujar"),
     "palabra.cuenta": (1, 8, "lengua palabras letras contar"),
     "palabra.articulo": (2, 10, "lengua palabras artículos género número"),
     "palabra.plural": (2, 10, "lengua palabras plural singular escribir"),
@@ -165,6 +166,7 @@ META = {
     "escritura.letra": (1, 10, "lengua escritura caligrafía letras repasar pauta"),
     "escritura.palabras": (2, 12, "lengua escritura caligrafía palabras copiar pauta"),
     "escritura.frase": (2, 12, "lengua escritura caligrafía frases copiar mayúscula punto pauta"),
+    "escritura.ordena": (2, 12, "lengua escritura palabras letras ordenar pauta dibujo"),
     "escritura.dictado": (2, 15, "lengua escritura dictado palabras frases pauta"),
     "escritura.libre": (3, 15, "lengua escritura expresión_escrita frases libre pauta"),
 }

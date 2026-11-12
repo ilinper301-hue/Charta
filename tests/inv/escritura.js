@@ -8,6 +8,7 @@ import { enCaso, palabraValida, PALABRAS } from "./_lengua.js";
 import { analiza } from "./frase.js";
 import { llevaLetra, sinTildes } from "../../src/lengua/reglas.js";
 import { hayTrazo, trazoACurvas } from "../../src/lengua/trazos.js";
+import { LEXICO } from "../../src/lengua/lexico.js";
 import { frasePorId } from "../../src/tipos/_frase.js";
 import { FAMILIAS_TRAZO, filasDe, cabeEnLinea, CAP_MM, ETIQUETA_MM } from "../../src/tipos/_escritura.js";
 import { renglonesDictado } from "../../src/tipos/escritura.dictado.js";
@@ -119,6 +120,31 @@ export default {
       assert.ok(cabeEnLinea(d.frase, tam, mmDe(act)), `«${d.frase}» no cabe en una línea`);
     }
     sinCorreccion(es); renglonesOk(act, tam, () => 2);
+  },
+
+  // Miro y escribo (petición de Iván, 12-11-2026): palabras dibujables de 3 a 6 letras, letras desordenadas, palabra solo en `solucion` (no se imprime).
+  "escritura.ordena"(act, tam) {
+    const es = act.ejercicios, p = act.params, ent = new Map(LEXICO.map((x) => [x.p, x]));
+    cuantos(es, tam === "media" ? 4 : 8);
+    unicos(es, (e) => e.datos.palabra.toLowerCase(), "palabras repetidas");
+    for (const e of es) {
+      const { letras, palabra } = e.datos, m = palabra.toLowerCase();
+      assert.deepEqual(Object.keys(e.datos), ["letras", "palabra"]); assert.deepEqual(e.solucion, { huecos: [palabra] }, "la solución es la palabra");
+      assert.equal(palabra, p.caso === "mayus" ? m.toUpperCase() : m, "caso de la palabra");
+      palabraValida(m, { ...p, largo: null, caso: null }, { maxLetras: 6 });
+      assert.ok(ent.get(m).d && ent.get(m).c === "n", `«${m}» no es un nombre dibujable`);
+      assert.ok(m.length >= 3 && m.length <= 6, "3 a 6 letras"); if (Number.isInteger(p.letras)) assert.equal(m.length, p.letras);
+      assert.ok(!/[áéíóúü]|ch|ll|rr|qu|gu[ei]/.test(m), `«${m}»: dígrafo o tilde`);
+      assert.deepEqual([...letras.join("").toLowerCase()].sort(), [...m].sort(), "las letras no son las de la palabra");
+      assert.notEqual(letras.join("").toLowerCase(), m, "letras ya ordenadas");
+      if (p.caso === "mayus") letras.forEach((l) => assert.equal(l, l.toUpperCase()));
+    }
+    // la palabra solo sale en el SVG de la solución (una vez cada una, en rojo); en el papel no se imprime
+    const papel = render(act, "papel").svg, sol = render(act, "solucion").svg;
+    for (const e of es) {
+      assert.ok(!papel.includes(`>${e.datos.palabra}</text>`), `«${e.datos.palabra}» se imprime en el papel`);
+      assert.ok(sol.includes(`>${e.datos.palabra}</text>`), `«${e.datos.palabra}» no sale en la solución`);
+    }
   },
 
   "escritura.dictado"(act, tam) {

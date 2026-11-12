@@ -3038,6 +3038,191 @@
    "a8163d4e4a97659c"
   ]
  },
+ "escritura.ordena": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Miro y escribo",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "escritura.ordena",
+       "tipoVersion": 1,
+       "params": {
+        "letras": null,
+        "tipo": null,
+        "caso": null,
+        "pauta": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Ordena las letras y escribe el nombre del dibujo en la pauta.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "letras": [
+           "a",
+           "a",
+           "p",
+           "t"
+          ],
+          "palabra": "tapa"
+         },
+         "solucion": {
+          "huecos": [
+           "tapa"
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "letras": [
+           "m",
+           "a",
+           "i",
+           "a",
+           "g"
+          ],
+          "palabra": "amiga"
+         },
+         "solucion": {
+          "huecos": [
+           "amiga"
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "letras": [
+           "p",
+           "d",
+           "r",
+           "a",
+           "a",
+           "a"
+          ],
+          "palabra": "parada"
+         },
+         "solucion": {
+          "huecos": [
+           "parada"
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "letras": [
+           "e",
+           "p",
+           "i"
+          ],
+          "palabra": "pie"
+         },
+         "solucion": {
+          "huecos": [
+           "pie"
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "letras": [
+           "o",
+           "s",
+           "r",
+           "a"
+          ],
+          "palabra": "rosa"
+         },
+         "solucion": {
+          "huecos": [
+           "rosa"
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "letras": [
+           "j",
+           "a",
+           "l",
+           "u",
+           "a"
+          ],
+          "palabra": "jaula"
+         },
+         "solucion": {
+          "huecos": [
+           "jaula"
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "letras": [
+           "g",
+           "m",
+           "o",
+           "a"
+          ],
+          "palabra": "goma"
+         },
+         "solucion": {
+          "huecos": [
+           "goma"
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "letras": [
+           "ñ",
+           "u",
+           "a"
+          ],
+          "palabra": "uña"
+         },
+         "solucion": {
+          "huecos": [
+           "uña"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "aaafc58f8d8aa21c"
+  ],
+  "svgSolucion": [
+   "03b5d4650303e152"
+  ]
+ },
  "escritura.palabras": {
   "ficha": {
    "schemaVersion": 1,
@@ -16388,6 +16573,160 @@
   ],
   "svgSolucion": [
    "271c0627e0d313b0"
+  ]
+ },
+ "palabra.dibuja": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Leo y dibujo",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "palabra.dibuja",
+       "tipoVersion": 1,
+       "params": {
+        "largo": null,
+        "tipo": null,
+        "caso": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Lee cada palabra y dibuja lo que dice.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "palabra": "mesa"
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "palabra": "boca"
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "palabra": "dado"
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "palabra": "zoo"
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "palabra": "baño"
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "palabra": "cueva"
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "palabra": "yoyó"
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "palabra": "maleta"
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "palabra": "rana"
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "palabra": "camisa"
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "palabra": "patata"
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "palabra": "lana"
+         },
+         "solucion": {
+          "huecos": []
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "890273564f8060b9"
+  ],
+  "svgSolucion": [
+   "d8b90a7e092564cc"
   ]
  },
  "palabra.intrusa": {
