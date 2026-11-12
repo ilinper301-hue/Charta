@@ -71,7 +71,7 @@ motor/modelos_lengua.py  Lengua: MATERIA, FUENTE (fredoka), BLOQUES (1–8 propi
 datos/lexico_1.tsv    léxico de Lengua de 1.º (palabra, cat, genero, campos, dibujo, frec, extra=3.ª persona de los verbos) → tools/lexico.py → src/lengua/lexico.js (GENERADO)
 src/lengua/reglas.js  silabas, tipoSilaba, TIPOS_SILABA, cabeTipo, tonica, acentuacion, rima, riman, plural, articulo, letras, soloLetras, llevaLetra, huecosOrto, REGLAS_ORTO, sinTildes
 src/lengua/vistas.js  mapa de letras (Lengua 1.º): normalizarVistas, conVistas(v, f) (lo activa generar() en cada actividad); obligatorias (pulsación larga): normalizarObligatorias, conObligatorias, obligada(texto) (buscar() y elegirFrases() la aplican), obligatoriasActivas, claveLetras() (clave de caché); permitida(texto), filtrarVistas(lista, f), letrasActivas(), vistasActivas() (clave de caché), avisoVistas() (final de los errores «necesita»). buscar() ya filtra
-src/ui/letras.js      mapa de letras sin DOM: hayLengua1, conLetras(acts, vistas, obligatorias), obligatoriasDe(comp), letrasDe(comp), vistasDe(set), resumenLetras; CLAVE_LETRAS (charta:letras). El mapa (#secLetras) está en index.html y app.js
+src/ui/letras.js      mapa de letras sin DOM: hayLengua1, conLetras(acts, vistas, obligatorias), obligatoriasDe(comp), letrasDe(comp), vistasDe(set), resumenLetras; CLAVE_LETRAS (charta:letras). El mapa (#secLetras) está en index.html y letras_vista.js
 tests/test_vistas.js  con `params.vistas`, el texto de `datos` solo usa esas letras (INTERNOS = campos que no lee el alumno) · `--full`
 datos/frases_1.tsv    frases de las primeras letras por etapas (etapa, frase) → tools/frases.py (comprueba; --revisar) → src/lengua/frases_1.js (GENERADO)
 src/lengua/frases.js  frases sin plantilla: USA_FRASES (tipos que las usan), leerPropias/normalizarPropias («Mis frases»: 3–5 palabras, ≤60), conPropias/propiasActivas (las activa generar() con params.misFrases), palabrasLibres, nombresDe
@@ -102,14 +102,14 @@ src/nube/config.js    firebaseConfig (proyecto compartido "mis-apps-educativas")
 src/nube/documento.js aDocumento(ficha, comp, uid), deDocumento(id, datos), mismaComposicion — ficha ⇄ documento, sin SDK
 src/nube/nube.js      crearNube({cargar, almacen}): iniciar, entrar (Google), salir, listar, guardar, abrir, borrar; SDK del CDN solo si se usa (charta:nube = hubo sesión)
 tests/test_nube.js    con un Firebase falso que aplica las reglas
-src/ui/tabula.js      paso 5.2: leerTabula() (IndexedDB «tabula-data», solo lectura), gruposDeTabula(), leerEntrada(?desde, grupo, sesion, tarea, comp), urlVolver() → /tabula/?charta=…; contrato igual que tabula/js/charta.js
+src/ui/tabula.js      paso 5.2: leerTabula() (IndexedDB «tabula-data», solo lectura), gruposDeTabula(), leerEntrada(?desde, grupo, sesion, tarea, comp), urlVolver() → URL_TABULA (src/rutas.js) + ?charta=…; contrato igual que tabula/js/charta.js
 firestore.rules       reglas COMPLETAS del proyecto (copia de tabula/firestore.rules: mantener iguales)
 sw.js, manifest.webmanifest   GENERADOS por build.py en la raíz (scope /Charta/); no editar
 src/ui/miniatura_ficha.js  paso 5.4: miniaturaDeSvg(svg) → JPEG data URL, dejarParaTabula(titulo, miniatura, almacén, comp?) (charta:aTabula; con comp si el enlace pasa de MAX_ENLACE)
-src/ui/borrador.js    fase 1 (R1), sin DOM: crearBorrador(almacén) → guardar(comp, {alumnos, copias, grupo}), leer(hayTipo), hay, descartar; `charta:borrador` = { v, composicion (limpiar), alumnos, copias, grupo?, fecha }. app.js lo guarda en cada pintar() (solo en el diseño), al escribir y al ocultar la app
+src/ui/borrador.js    fase 1 (R1), sin DOM: crearBorrador(almacén) → guardar(comp, {alumnos, copias, grupo}), leer(hayTipo), hay, descartar; `charta:borrador` = { v, composicion (limpiar), alumnos, copias, grupo?, fecha }. compositor.js lo guarda en cada pintar() (solo en el diseño), al escribir y al ocultar la app
 src/ui/capas.js       fase 1 (R2): abrirCapa(alCerrar) → { cerrar(despues) }: entrada de historial por capa; Atrás cierra la de arriba (escucha popstate antes que app.js). La usa el selector; la usarán hojas y menús
 tests/navegador.py    fase 1: Playwright (Chrome) a 390 px: Inicio → selector (Atrás) → Diseño → 2 actividades → 25 alumnos → recargar → Seguir → favorita, Tabula, Fori → imprimir; desbordamiento a 360/390/768/1180, consola y nombres fuera del borrador. `python3 tests/navegador.py [capturas]`
-src/fori/diapositivas.js  paso 5.3: marcarPasos(svg, ej), diapositivas(ficha, {cajas, fuentes}), paqueteFori(), cssPasos(k, n); URL_FORI, CLAVE_FORI (contrato con fori/src/js/05f-charta.js)
+src/fori/diapositivas.js  paso 5.3: marcarPasos(svg, ej), diapositivas(ficha, {cajas, fuentes}), paqueteFori(), cssPasos(k, n); CLAVE_FORI (la ruta URL_FORI está en src/rutas.js; contrato con fori/src/js/05f-charta.js)
 tests/test_fori.js    pasos de la solución y diapositivas de todos los tipos · `--full`
 tools/iconos.py       iconos/ desde src/pwa/logo.svg con rsvg-convert (normal, maskable al 80 %, favicon, apple-touch)
 dist/index.html       la app construida (se sube al repositorio: la sirve Pages)
