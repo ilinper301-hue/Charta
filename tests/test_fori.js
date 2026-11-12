@@ -74,4 +74,25 @@ prueba("paquete: sin nombres, tamaño razonable", () => {
   assert.ok(t.length < 400000, `paquete de ${t.length} caracteres`);
 });
 
+// Fase 7 (R9): con letras reales de cada diapositiva (≈ 33 KB) el paquete se pasa pronto; hay modo compacto y aviso.
+const LETRAS = `@font-face{font-family:"x";src:url(data:font/woff;base64,${"A".repeat(34000)})}`;
+const cajasF = (z) => cajaFalsa(z)(z);
+prueba("paquete grande: compacto (una diapositiva por actividad) y aviso claro", () => {
+  const f = generar({ actividades: [{ tipo: "sumar.hueco" }, { tipo: "restar.hueco" }] }, 3);
+  const entero = paqueteFori(f, { cajas: cajasF, fuentes: LETRAS, max: 1e9 });
+  assert.ok(!entero.compacto && entero.diapositivas.length > 2);
+  const tam = JSON.stringify(entero).length;
+  const c = paqueteFori(f, { cajas: cajasF, fuentes: LETRAS, max: tam - 1 });
+  assert.equal(c.compacto, true);
+  assert.equal(c.diapositivas.length, 2, "una por actividad");
+  assert.ok(JSON.stringify(c).length < tam / 3);
+  assert.equal(c.v, 1); assert.equal(c.app, "charta");
+  assert.throws(() => paqueteFori(f, { cajas: cajasF, fuentes: LETRAS, max: 1000 }), /demasiado grande.*menos páginas/);
+});
+prueba("paquete: la ficha mayor posible cabe compacta (10 páginas × 2 actividades)", () => {
+  const f = generar({ paginas: Array.from({ length: 10 }, () => ({ actividades: [{ tipo: "rep.recta" }, { tipo: "rep.recta" }] })) }, 3);
+  const p = paqueteFori(f, { cajas: cajasF, fuentes: LETRAS });
+  assert.ok(JSON.stringify(p).length <= 2500000, "cabe en MAX_PAQUETE");
+});
+
 console.log(`test_fori: ${c.n} pruebas, ${diapos} diapositivas ${process.exitCode ? "CON ERRORES" : "OK"}`);

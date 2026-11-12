@@ -13,6 +13,10 @@ import { AZUL } from "../render/hoja.js";
 import { paginasVariante } from "../nucleo/lector.js";
 
 export const CLAVE_FORI = "charta:aFori";
+// Fase 7 (R9): cada diapositiva lleva sus letras (≈ 33 KB con Andika, ≈ 78 KB con Fredoka) y la clave es de localStorage (≈ 5 MB
+// de caracteres compartidos con las demás apps). Hasta este tamaño (caracteres del JSON) va la ficha entera; si se pasa, una sola
+// diapositiva por actividad (sin las de cada ejercicio); si aun así se pasa, se avisa. Fori acepta hasta 2 millones por diapositiva.
+export const MAX_PAQUETE = 2500000;
 export const ANCHO = 1600;
 export const ALTO = 900;
 // Colores que solo aparecen en modo solución: rojo de las respuestas y rosas de colorear (colorea, simetría, barras).
@@ -89,16 +93,17 @@ function diapositiva(act, zona, c, ej, etiqueta, fuentes, fuente) {
 
 /**
  * Diapositivas de una variante: por cada actividad, una con la actividad entera y, si tiene varios
- * ejercicios, una por ejercicio (recortada a su caja). cajas(zona) → { idEjercicio: {x, y, w, h} } (coordenadas de la zona).
+ * ejercicios, una por ejercicio (recortada a su caja; `porEjercicio: false` las omite). cajas(zona) → { idEjercicio: {x, y, w, h} }
+ * (coordenadas de la zona).
  */
-export function diapositivas(ficha, { cajas, fuentes = "", variante = 0 } = {}) {
+export function diapositivas(ficha, { cajas, fuentes = "", variante = 0, porEjercicio = true } = {}) {
   if (typeof cajas !== "function") throw new Error("Faltan las cajas de los ejercicios.");
   const out = [], fuente = fuenteDe(ficha);
   for (const pag of paginasVariante(ficha, variante)) for (const act of pag.actividades) {
     const zona = render(act, "solucion", fuente), cs = cajas(zona);
     const ids = act.ejercicios.map((e) => e.id).filter((id) => cs[id] && cs[id].w > 0 && cs[id].h > 0);
     out.push({ etq: `Actividad ${act.n}`, ...diapositiva(act, zona, { x: zona.x, y: zona.y, w: zona.w, h: zona.h }, null, "", fuentes, fuente) });
-    if (ids.length > 1) ids.forEach((id, i) => {
+    if (porEjercicio && ids.length > 1) ids.forEach((id, i) => {
       const etq = `Ejercicio ${i + 1} de ${ids.length}`;
       out.push({ etq: `Actividad ${act.n} · ${etq}`, ...diapositiva(act, zona, cs[id], id, etq, fuentes, fuente) });
     });
@@ -106,7 +111,18 @@ export function diapositivas(ficha, { cajas, fuentes = "", variante = 0 } = {}) 
   return out;
 }
 
-/** Paquete para Fori (sin nombres de alumnos: la ficha no los lleva). */
-export function paqueteFori(ficha, opciones) {
-  return { v: 1, app: "charta", titulo: ficha.titulo, diapositivas: diapositivas(ficha, opciones) };
+/**
+ * Paquete para Fori (sin nombres de alumnos: la ficha no los lleva). Si pasa de `max` caracteres, `compacto: true` (una diapositiva
+ * por actividad); si sigue pasando, lanza un Error legible. Fori ignora los campos que no conoce.
+ */
+export function paqueteFori(ficha, opciones = {}) {
+  const { max = MAX_PAQUETE, ...o } = opciones;
+  let p = { v: 1, app: "charta", titulo: ficha.titulo, diapositivas: diapositivas(ficha, o) };
+  let tam = JSON.stringify(p).length;
+  if (tam > max) {
+    p = { ...p, compacto: true, diapositivas: diapositivas(ficha, { ...o, porEjercicio: false }) };
+    tam = JSON.stringify(p).length;
+    if (tam > max) throw new Error(`La ficha es demasiado grande para proyectarla (${(tam / 1e6).toFixed(1)} MB; el máximo es ${(max / 1e6).toFixed(1)} MB). Proyecta menos páginas cada vez.`);
+  }
+  return p;
 }

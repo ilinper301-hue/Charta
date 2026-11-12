@@ -270,7 +270,17 @@ imprimir que no tape nada, selector y rejilla de Inicio aprovechando el ancho, y
 - Selector: **buscador de modelos** por nombre y etiquetas, recordar el último curso y materia, migas de 44 px.
 - Crear ficha nueva mantiene alumnos y variantes (decidido); no cambiar ese comportamiento.
 
-### Fase 7 · Datos y contratos — *Sonnet, esfuerzo medio*
+### Fase 7 · Datos y contratos — *Sonnet, esfuerzo medio* · ✅ hecha (13-11-2026)
+
+> Resultado: R5 `src/ui/copia.js` + `copia_vista.js` (+ `guardadas.exportar/importar`): archivo `charta-copia-AAAA-MM-DD.json` con favoritas, recientes y 6 ajustes
+> (lista blanca con validación), sin nombres ni borrador; cargar = sumar sin repetir (máx. 30 y 8); «Subir mis favoritas a la nube» con sesión
+> (`opcionesDeComp` = lectura de Tabula). R7 `src/api.js` (`contrato: 1`), `ESQUEMA.md` («API pública») y `tests/test_contratos.js` (17 pruebas; con Tabula y Fori
+> clonados al lado: `chartaOpciones`, `leerEntradaCharta`, `compDeCharta`, `urlCrearFicha/urlAbrirFicha`, `CH_KEY`, `chCss`, `chValid`, `firestore.rules`; sin ellos se omiten,
+> con `--exigir` fallan). R9 `tools/medir_fori.js`: el paquete llegaba a 1,3 MB por página (33 KB de letras en cada diapositiva; Fredoka 78 KB) y 4 páginas pesadas pasaban
+> de 5 MB; `paqueteFori` limita a `MAX_PAQUETE` = 2,5 MB: si se pasa, una diapositiva por actividad (`compacto: true`, Fori lo ignora) y si aun así, error claro; la ficha mayor
+> posible (10 × 2) cabe compacta. Catálogo 192 → 123 KB (−36 %; no llega a la mitad sin tocar el formato: `valor: null` y `defecto: null` significan algo).
+> Límites: la copia no incluye letras subidas ni «Usos»; cargar nunca borra (no hay «reemplazar» en la interfaz, sí en `aplicarCopia`); la subida a la nube no se prueba con sesión
+> real en navegador (solo la lógica); Fori sigue necesitando las letras en cada diapositiva (cambiar eso exige cambiar su contrato).
 
 - **Copia de seguridad** (R5): exportar e importar favoritas, recientes y ajustes en un archivo; con sesión
   iniciada, ofrecer subir las favoritas a la nube.

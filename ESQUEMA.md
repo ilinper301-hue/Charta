@@ -76,6 +76,24 @@ descomposición, letras, recta, bloques, cuadrícula, monedas, ábaco, D/U, atad
 - Leer (Tabula, Fori): `fichaDeDocumento(datos, id)` de `src/nucleo/lector.js` → ficha comprobada con `erroresFicha()`.
 - Reglas: bloque «Charta» de `firestore.rules` (copia de `tabula/firestore.rules`): solo el autor (Google) lee, cambia y borra; campos y tamaños fijos (ficha ≤ 900.000 caracteres; 30 variantes ≈ 110 KB).
 
+## API pública `globalThis.Charta` (fase 7, R7)
+Definida en `src/api.js`; la usa Tabula desde un iframe oculto (`../Charta/dist/index.html`, `tabula/js/charta-hojas.js`). Fijada por `tests/test_contratos.js`.
+```js
+Charta = { contrato: 1, generar, hojas, modelo, erroresFicha, listaTipos, CATALOGO }
+```
+- `generar(opciones, semilla) → ficha` (esquema de arriba). `opciones` = `{ actividades: [{tipo, params}] }` o `{ paginas: [{ actividades }, …], variantes?, titulo?, presentacion?, metadatos? }`. Mismas opciones + semilla = misma ficha. Lanza `Error` con mensaje legible.
+- `hojas(ficha, { nombres = [], copias = 1, bn = false, modo = "papel" | "solucion" }) → [{ nombre, variante, pagina, total, svg }]` (SVG A4, una por alumno o copia y página). Los nombres solo se usan aquí.
+- `modelo(id)`, `listaTipos()`, `erroresFicha(ficha) → [mensajes]` (vacío = válida), `CATALOGO` (solo lectura).
+- Cambios compatibles: añadir campos o funciones. Quitar o cambiar la forma de algo → subir `contrato` y avisar a Tabula (su prueba cruzada falla).
+- Tabula convierte una composición guardada en estas opciones con `chartaOpciones()` (`tabula/js/combine-model.js`); Charta usa lo mismo en `opcionesDeComp()` (`src/ui/copia.js`) y la prueba comprueba que coinciden.
+
+## Copia de seguridad (fase 7, R5)
+`charta-copia-AAAA-MM-DD.json`: `{ "v": 1, "app": "charta", "tipo": "copia", "fecha", "favoritos": [composición + nombre + fecha], "recientes": […], "ajustes": { "charta:tema": "oscuro", … } }`.
+Ajustes admitidos (cada valor se valida): `charta:tema`, `charta:fuente`, `charta:bnDefecto`, `charta:letras`, `charta:letrasObligatorias`, `charta:misFrases`. Nunca lleva nombres de alumnos (las listas pasan por `limpiar()`), el borrador, claves de otras partes (`aFori`, `aTabula`, `nube`) ni las letras subidas. Cargar suma sin repetir y respeta los máximos (30 favoritas, 8 recientes).
+
+## Paquete para Fori: tamaño (fase 7, R9)
+Cada diapositiva lleva sus letras (Andika ≈ 33 KB; con Fredoka ≈ 78 KB). Si el paquete pasa de `MAX_PAQUETE` (2,5 millones de caracteres) se envía una diapositiva por actividad y `compacto: true` (Fori ignora los campos que no conoce); si aun así se pasa, Charta avisa y no proyecta. Fori acepta hasta 2 millones por diapositiva (`chValid`).
+
 ## Enlace con Tabula por URL (paso 5.2)
 - Tabula → Charta: `../Charta/?desde=tabula[&grupo=G][&sesion=S][&tarea=T]` (crear) · `?ficha=ID` o `?comp=B64[&grupo=G]` (abrir). Charta lee la lista del grupo en el almacén de Tabula: los nombres nunca van en la URL.
 - Fori (paso 5.3): Charta → `/Fori/?charta=1` con `localStorage["charta:aFori"]` = `{ "v": 1, "app": "charta", "titulo", "diapositivas": [{ "etq", "svg", "n" }] }` (SVG 1600×900 con la solución; paso K = `class="cs pK"`; `/*PASOS*/` en su `<style>` ← `cssPasos(k, n)`). Fori → Charta: `../Charta/?ficha=ID|comp=B64&a=fori`. `pasos` de cada ejercicio sigue siendo opcional: Fori corrige con las marcas de la solución.

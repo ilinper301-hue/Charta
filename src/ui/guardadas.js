@@ -2,6 +2,7 @@
 // Se guarda la composición (actividades + páginas + opciones, semilla, título, variantes, B/N); NUNCA los nombres de los alumnos.
 import { cuentasDe } from "./paginas.js";
 import { normalizarPropias } from "../lengua/frases.js";
+import { composicionValida } from "./tabula.js";
 export const MAX_RECIENTES = 8;
 export const MAX_FAVORITOS = 30;
 const CLAVES = { recientes: "charta:recientes", favoritos: "charta:favoritos" };
@@ -27,6 +28,10 @@ export function limpiar(c) {
 // Se comparan normalizadas con limpiar(): las favoritas guardadas antes (sin los campos nuevos) siguen reconociéndose.
 const igualSinSemilla = (a, b) => JSON.stringify({ ...limpiar(a), semilla: 0 }) === JSON.stringify({ ...limpiar(b), semilla: 0 });
 const igual = (a, b) => igualSinSemilla(a, b) && a.semilla === b.semilla;
+
+/** limpiar() + nombre y fecha de la lista (texto corto y fecha AAAA-MM-DD; si no valen, «Ficha» y hoy). */
+const conMeta = (x) => ({ ...limpiar(x), nombre: typeof x.nombre === "string" && x.nombre.trim() ? x.nombre.trim().slice(0, 100) : "Ficha",
+  fecha: /^\d{4}-\d{2}-\d{2}$/.test(x.fecha) ? x.fecha : new Date().toISOString().slice(0, 10) });
 
 export function crearGuardadas(almacen) {
   const leer = (k) => { try { const v = JSON.parse(almacen.getItem(CLAVES[k]) || "[]"); return Array.isArray(v) ? v : []; } catch { return []; } };
@@ -57,5 +62,23 @@ export function crearGuardadas(almacen) {
       return copia;
     },
     quitar(k, i) { const v = leer(k); v.splice(i, 1); escribir(k, v); },
+    /** Fase 7 (R5): las dos listas tal como están (ya sin nombres de alumnos: solo lo que deja pasar limpiar()). */
+    exportar: () => ({ favoritos: leer("favoritos").map(conMeta), recientes: leer("recientes").map(conMeta) }),
+    /**
+     * Fase 7 (R5): mete las listas de una copia. Cada ficha se comprueba (composicionValida) y pasa por limpiar(); las que ya
+     * están (misma composición y semilla) no se repiten. `reemplazar`: se parte de listas vacías; si no, las de la copia van
+     * detrás de las actuales. Respeta los máximos. → { favoritos, recientes, descartadas } (cuántas entran de cada lista).
+     */
+    importar({ favoritos = [], recientes = [] } = {}, { reemplazar = false, hayTipo = () => true } = {}) {
+      let descartadas = 0;
+      const valida = (x) => { try { if (!composicionValida(x, hayTipo)) throw 0; return conMeta(x); } catch { descartadas++; return null; } };
+      const meter = (k, lista, max, igualQue) => {
+        const actual = reemplazar ? [] : leer(k), antes = actual.length;
+        for (const x of lista.map(valida).filter(Boolean)) if (!actual.some((a) => igualQue(a, x))) actual.push(x);
+        escribir(k, actual.slice(0, max));
+        return Math.min(actual.length, max) - Math.min(antes, max);
+      };
+      return { favoritos: meter("favoritos", favoritos, MAX_FAVORITOS, igual), recientes: meter("recientes", recientes, MAX_RECIENTES, igualSinSemilla), descartadas };
+    },
   };
 }

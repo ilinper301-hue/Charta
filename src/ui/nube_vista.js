@@ -26,7 +26,7 @@ export function crearNubeVista(ctx) {
   nube.alCambiar((e) => {
     pintarCuenta(e);
     if (e.estado === "dentro" && !ctx.enNube) leerNube(); else if (e.estado !== "dentro") ctx.enNube = null;
-    ctx.lista.pintar(); ctx.refrescarInicio();
+    ctx.lista.pintar(); ctx.refrescarInicio(); ctx.ajustes?.pintar();   // fase 7: «Subir favoritas» aparece al entrar
   });
   $("iaCuenta").onclick = async () => {
     const e = nube.estado();

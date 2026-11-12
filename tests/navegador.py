@@ -15,7 +15,7 @@
 # Falla (código 1) si hay errores de consola, desbordamiento horizontal a 360/390/768/1180 px, se pierde el borrador,
 # Atrás de Android no cierra el selector o algún nombre de alumno sale de `charta:borrador` (otra clave, la URL de
 # Tabula o el paquete de Fori). Con carpeta, guarda capturas (inicio, selector, diseño) a 390 y 768 px.
-import asyncio, base64, functools, http.server, json, os, sys, tempfile, threading
+import asyncio, base64, re, functools, http.server, json, os, sys, tempfile, threading
 from playwright.async_api import async_playwright
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -363,6 +363,34 @@ async def main():
         await pg.click('#masBarra'); await pg.locator('[role=menuitem]', has_text='Ajustes').click(); await pg.wait_for_timeout(300)
         r = await pg.evaluate("(() => { const b = document.querySelector('.hoja-inf.pantalla'); if (!b) return null; const c = b.getBoundingClientRect(); return [Math.round(c.width), Math.round(c.height), innerWidth, innerHeight]; })()")
         comprobar(bool(r) and r[0] >= r[2] - 2 and r[1] >= r[3] - 2, f'Ajustes a pantalla completa {r}')
+        # Fase 7 (R5): copia de seguridad. Con el borrador lleno de nombres: la copia no los lleva; importarla suma sin repetir.
+        print('Fase 7: copia de seguridad en Ajustes')
+        comprobar(NOMBRES[0] in (await almacen()).get('charta:borrador', ''), 'Fase 7: hay un borrador con nombres (la copia no debe llevarlos)')
+        comprobar(await visible('#iaExportar') and await visible('#iaImportar') and not await visible('#iaSubir'), 'copia: Guardar y Cargar a la vista; «Subir a la nube» solo con sesión')
+        await auditar('Ajustes con la copia de seguridad')
+        antes = json.loads((await almacen()).get('charta:favoritos', '[]'))
+        async with pg.expect_download() as d:
+            await pg.click('#iaExportar')
+        dl = await d.value
+        ruta = os.path.join(tempfile.mkdtemp(), dl.suggested_filename); await dl.save_as(ruta)
+        texto = open(ruta, encoding='utf-8').read(); copia = json.loads(texto)
+        comprobar(re.fullmatch(r'charta-copia-\d{4}-\d{2}-\d{2}\.json', dl.suggested_filename) is not None, 'copia: nombre del archivo ' + dl.suggested_filename)
+        comprobar(copia['app'] == 'charta' and copia['tipo'] == 'copia' and len(copia['favoritos']) == len(antes) and len(copia['favoritos']) >= 1, f"copia: lleva las {len(antes)} favoritas")
+        comprobar(MARCA not in texto and 'alumnos' not in texto and 'borrador' not in texto, 'copia: sin nombres de alumnos ni borrador')
+        comprobar('guardada' in (await pg.inner_text('#iaCopiaTxt')).lower() or 'copia guardada' in (await pg.inner_text('#iaCopiaTxt')).lower(), 'copia: aviso al guardar')
+        # Se quita una favorita y se carga la copia: vuelve, y cargarla otra vez no duplica.
+        await pg.evaluate("localStorage.setItem('charta:favoritos', JSON.stringify(JSON.parse(localStorage.getItem('charta:favoritos')).slice(1)))")
+        for repeticion in (1, 2):
+            await pg.set_input_files('#iaArchivo', ruta); await pg.wait_for_selector('.confirmar'); await pg.wait_for_timeout(150)
+            comprobar('favorita' in await pg.inner_text('.confirmar'), 'copia: pregunta antes de cargar')
+            await pg.locator('.confirmar button', has_text='Cargar').click(); await pg.wait_for_timeout(300)
+            ahora = len(json.loads((await almacen()).get('charta:favoritos', '[]')))
+            comprobar(ahora == len(antes), f'copia: cargarla ({repeticion}.ª vez) deja {len(antes)} favoritas, hay {ahora}')
+        comprobar('copia cargada' in (await pg.inner_text('#iaCopiaTxt')).lower(), 'copia: resultado de cargar')
+        # Un archivo que no es una copia da un aviso claro y no toca nada.
+        mala = os.path.join(os.path.dirname(ruta), 'otra.json'); open(mala, 'w').write('{"hola": 1}')
+        await pg.set_input_files('#iaArchivo', mala); await pg.wait_for_timeout(300)
+        comprobar('no es una copia' in await pg.inner_text('#iaCopiaTxt') and await pg.locator('.confirmar').count() == 0, 'copia: un archivo ajeno se rechaza')
         await pg.keyboard.press('Escape'); await pg.wait_for_timeout(250)
         # Selector: recuerda curso y materia y busca
         await pg.click('#iniCrear'); await pg.wait_for_timeout(250)

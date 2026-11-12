@@ -68,9 +68,10 @@ export function crearEnlaces(ctx) {
     try {
       await document.fonts.ready;
       const p = paqueteFori(ficha, { cajas: cajasEjercicios, fuentes: cssFuentes(["Andika", fuentePorId(ficha.presentacion?.fuente).nombre]) });
-      localStorage.setItem(CLAVE_FORI, JSON.stringify(p));
+      try { localStorage.setItem(CLAVE_FORI, JSON.stringify(p)); }
+      catch { try { localStorage.removeItem(CLAVE_FORI); } catch {} throw new Error("no cabe en la memoria del navegador (la comparten todas tus apps). Proyecta menos páginas cada vez."); }
       location.href = URL_FORI + "?charta=1";
-    } catch (e) { ctx.nubeV.avisoNube("No se ha podido preparar la ficha para Fori: " + e.message, true); }
+    } catch (e) { ctx.nubeV.avisoNube(e.message.startsWith("La ficha es") ? e.message : "No se ha podido preparar la ficha para Fori: " + e.message, true); }
   }
   return { entrada, enviarTabula, proyectar };
 }

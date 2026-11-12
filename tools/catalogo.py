@@ -31,8 +31,11 @@ for m in modelos:
 datos = {"cursos": {**MOD.CURSOS, M2.CURSO: M2.NOMBRE}, "materias": {**MOD.MATERIAS, LEN.MATERIA: LEN.NOMBRE},
          "bloques": {"matematicas": dict(sorted({**MOD.BLOQUES, **APP.BLOQUES}.items())), LEN.MATERIA: LEN.BLOQUES},
          "fuentes": {LEN.MATERIA: LEN.FUENTE}, "modelos": modelos}
+# Fase 7 (R9): JSON compacto (sin espacios ni sangrías, −36 %); un modelo por línea para que los cambios se lean en git.
+compacto = lambda x: json.dumps(x, ensure_ascii=False, separators=(",", ":"))
+resto = {k: v for k, v in datos.items() if k != "modelos"}
 js = ("// GENERADO por tools/catalogo.py desde motor/modelos.py. No editar a mano.\n"
-      "export const CATALOGO = " + json.dumps(datos, ensure_ascii=False, indent=1) + ";\n"
+      "export const CATALOGO = " + compacto(resto)[:-1] + ',"modelos":[\n' + ",\n".join(compacto(m) for m in modelos) + "\n]};\n"
       "export const POR_ID = Object.fromEntries(CATALOGO.modelos.map((m) => [m.id, m]));\n")
 with open(os.path.join(RAIZ, "src", "nucleo", "catalogo.js"), "w", encoding="utf-8") as f: f.write(js)
 print(f"catalogo.js: {len(modelos)} modelos")

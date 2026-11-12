@@ -1,5 +1,5 @@
 // Charta · Ajustes a pantalla completa (fase 3 de PLAN-DISENO; pantalla propia desde la fase 6): cuenta, tema, letra y blanco y negro por defecto y
-// borrador. Es el único sitio de la cuenta y del tema (antes también en la cabecera). La cuenta la pinta nube_vista.js
+// borrador y copia de seguridad (copia_vista.js). Es el único sitio de la cuenta y del tema (antes también en la cabecera). La cuenta la pinta nube_vista.js
 // en #iaCuenta / #iaCuentaTxt. crearAjustes(cb) → { abrir(), pintar() }
 import { abrirHoja } from "./piezas.js";
 import { TEMAS, NOMBRES_TEMA } from "./tema.js";
@@ -21,6 +21,7 @@ export function crearAjustes(cb) {
     $("iaBn").checked = cb.bnDefecto();
     const hay = cb.hayBorrador();
     $("iaBorrador").disabled = !hay; $("iaBorrador").textContent = hay ? "Descartar borrador" : "No hay borrador";
+    cb.pintarCopia?.();   // fase 7: «Subir favoritas» solo con sesión
   }
   function abrir() {
     abierta = true; pintar();

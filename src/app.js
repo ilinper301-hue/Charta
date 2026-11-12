@@ -1,10 +1,8 @@
 // Charta · app. Director (fase 2 de PLAN-DISENO): crea las vistas de src/ui/ y las conecta con un `ctx` compartido.
 // 4.8: pantalla de inicio · 4.1: selector y opciones · 4.2: compositor · 4.3: alumnos y variantes · 4.4: favoritas y recientes · 4.5: PWA y tableta · 5.1: nube · 5.2: Tabula · 5.3: Fori.
-import { CATALOGO } from "./nucleo/catalogo.js";
+import { API } from "./api.js";
 import { generar, modelo } from "./nucleo/ficha.js";
-import { erroresFicha } from "./nucleo/lector.js";
 import { listaTipos } from "./tipos/index.js";
-import { hojas } from "./render/hoja.js";
 import { hayTipo } from "./nucleo/tipos.js";
 import { cursos, materias } from "./ui/navegacion.js";
 import { abrirSelector } from "./ui/selector.js";
@@ -25,12 +23,13 @@ import { crearListaFichas } from "./ui/lista_fichas.js";
 import { crearNubeVista } from "./ui/nube_vista.js";
 import { crearEnlaces } from "./ui/enlaces.js";
 import { crearAjustes } from "./ui/ajustes_vista.js";
+import { crearCopiaVista } from "./ui/copia_vista.js";
 import { abrirMenu, ICONOS, avisar, confirmar } from "./ui/piezas.js";
 import { URL_FORI, URL_TABULA } from "./rutas.js";
 import { $ } from "./ui/dom.js";
 
-// API pública: la usa el iframe de Tabula (contrato por escribir en ESQUEMA.md, fase 7).
-globalThis.Charta = { generar, modelo, erroresFicha, listaTipos, hojas, CATALOGO };
+// API pública: la usa el iframe de Tabula (contrato en ESQUEMA.md y src/api.js; lo fija tests/test_contratos.js).
+globalThis.Charta = API;
 
 function iniciar(tema) {
   // `ctx` reúne el estado compartido y las vistas (cada una se asigna al crearla; se usan al responder a eventos, no al crearlas).
@@ -133,8 +132,9 @@ function iniciar(tema) {
     leerNube: () => { if (!ctx.enNube) nubeV.leerNube(); },
   });
   // Fase 3: Ajustes en una hoja inferior (único sitio de la cuenta y del tema), desde «⋯» en la cabecera.
+  ctx.copiaV = crearCopiaVista(ctx);
   const ajustes = crearAjustes({
-    tema,
+    tema, pintarCopia: () => ctx.copiaV.pintar(),
     fuentes: () => ({ fuentes: todasLasFuentes(), fuente: $("fuente").value }),
     ponerFuente: (id) => { ctx.fuentes.elegirFuente(id); pintar(); },
     bnDefecto,
@@ -142,6 +142,7 @@ function iniciar(tema) {
     hayBorrador: () => ctx.borrador.hay(hayTipo),
     descartarBorrador: () => { ctx.borrador.descartar(); refrescarInicio(); },
   });
+  ctx.ajustes = ajustes;
 
   ctx.lista.pintar();
   const ultimo = leerUltimo();

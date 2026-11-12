@@ -112,6 +112,12 @@
     <label class="campo"><span>Tema</span><select id="iaTema"></select></label>
     <label class="campo"><span>Letra por defecto</span><select id="iaFuente"></select></label>
     <div class="interruptores"><label class="check"><input type="checkbox" id="iaBn"> <span>Blanco y negro por defecto <em>Ahorro de tinta en las fichas nuevas</em></span></label></div></div>
+  <div class="ajustes-grupo"><h3>Copia de seguridad</h3>
+    <p class="info">Guarda en un archivo tus fichas favoritas, las recientes y estos ajustes (<strong>sin nombres de alumnos</strong>) para recuperarlos si cambias de móvil o borras los datos del navegador. Las letras subidas no se incluyen.</p>
+    <div class="botones"><button id="iaExportar">Guardar copia</button><button id="iaImportar">Cargar copia…</button></div>
+    <input type="file" id="iaArchivo" accept=".json,application/json" hidden>
+    <p id="iaCopiaTxt" class="info" role="status"></p>
+    <button id="iaSubir" hidden>Subir mis favoritas a la nube</button></div>
   <div class="ajustes-grupo"><h3>Borrador</h3>
     <p class="info">La ficha que estás preparando se guarda sola en este dispositivo, <strong>con los nombres de los alumnos</strong>, para no perderla si se cierra la app. Se borra al imprimir o al descartarla; nunca va a la nube, a Tabula ni a Fori.</p>
     <button id="iaBorrador">Descartar borrador</button></div>
