@@ -49,6 +49,7 @@ Detalle de cada paso: `HISTORIAL.md`.
 - Revisar secuencias (orden único), adivinanzas (una respuesta clara) y lista de fluidez («té», «azada») de lectura.
 - Revisar `datos/frases_1.tsv` (etapa l con frases flojas) y después ejecutar `python3 tools/frases.py`.
 - Orden de las letras (más adelante); pictogramas aparcados.
+- Probar en el Android (fase 6): en Inicio, «⋯» de una ficha (Abrir, Duplicar, Quitar), accesos rápidos en fila, «⋯» → Ajustes a pantalla completa, y en Crear ficha el buscador de modelos y que se abra en el último curso y materia; decir si algo molesta. (Fase 5, en la tablet: dos columnas con la hoja entera.)
 - Probar en el Android (fase 4): «Ver ficha», pasar hojas con el dedo, «Soluciones», «⋯» de la barra (favorita, nube, Tabula, Fori), editar el título en la cabecera y «⋯» de una actividad; decir si algo molesta.
 - Probar en el Android (fase 3): «⋯» de la cabecera → Ajustes (entrar con Google, tema), Atrás cierra el menú y la hoja; en Diseño, «⋯» → Nueva ficha; borrar una ficha de la nube pregunta con la ventana nueva.
 - Probar en el Android (fase 2, sin cambios visibles): iniciar sesión, «Guardar en la nube», «Enviar a Tabula», «Proyectar en Fori» y abrir una ficha de la nube; si algo falla, avisar.
