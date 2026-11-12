@@ -197,7 +197,20 @@ Sin cambiar nada visible ni ningún id. `iniciar()` queda como director y el res
 `lista_fichas.js` (una sola forma de pintar favoritas, recientes y nube, compartida con Inicio).
 Rutas de Tabula y Fori en un único `src/rutas.js` (R6).
 
-### Fase 3 · Piezas comunes — *Opus, esfuerzo alto*
+### Fase 3 · Piezas comunes — *Opus, esfuerzo alto* · ✅ hecha (12-11-2026)
+
+> Resultado: `src/ui/piezas.js` (`abrirHoja`, `abrirMenu`, `confirmar`, `modal`, pestañas con rol; todas son capas: Escape,
+> Atrás y tocar fuera cierran; resto inerte, Tab dentro y foco devuelto) y `src/ui/ajustes_vista.js` (Ajustes en hoja:
+> cuenta, tema, letra y B/N por defecto, borrador). Cabecera única: Inicio = marca + «⋯» (Ajustes, Grupos de Tabula,
+> Pizarra Fori; desaparece el pie de Inicio); Diseño = ← + título de la ficha + «⋯» (Nueva ficha, Ajustes); selector =
+> ← + título + ✕, diálogo modal con nombre. Cuenta y tema solo en Ajustes; `confirm()` sustituido (R8). Escala de 44 px
+> (`--alto`), texto mínimo 12,5 px (`--txt-min`), foco visible en todos los fondos, migas con zona de 44 px, mapa de letras
+> `auto-fill` de 44 px. Botones: `.primario`, `.fantasma`, `.sutil`, `.peligro`, `.icono`. Arreglado en `capas.js`: una capa
+> abierta al cerrar otra (menú → Ajustes) se cerraba en la misma vuelta. `tests/navegador.py` amplía la prueba (menú,
+> Ajustes, confirmar, pestañas, selector y auditoría de 44 px / 12,5 px a 390 y 768 en Inicio, Ajustes, selector, Diseño y
+> Lengua: 0 fallos). Límites: «Más acciones» sigue igual (fase 4); el título de la cabecera aún no se edita (fase 4);
+> la nube con sesión real (cerrar sesión, borrar) no se prueba en navegador.
+
 
 - `src/ui/piezas.js`: `abrirHoja()` (hoja inferior), `abrirMenu()` («⋯») y `confirmar()` (sustituye a `confirm()`,
   R8), accesibles: nombre, foco atrapado, Escape y Atrás.

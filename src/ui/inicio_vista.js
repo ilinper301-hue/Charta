@@ -1,9 +1,10 @@
 // Charta · vista de la pantalla de inicio (paso 4.8). Solo DOM: la lógica está en inicio.js.
-// crearInicio(cb) → { pintar(estado), cerrarMaterias() }. Todo lo que cambia la ficha lo hace app.js a través de cb.
+// crearInicio(cb) → { pintar(estado), cerrarMaterias() }. Ajustes: ajustes_vista.js (fase 3). Todo lo que cambia la ficha lo hace app.js a través de cb.
 import { PALETA } from "../render/hoja.js";
 import { miniatura } from "./navegacion.js";
 import { fechaCorta } from "./inicio.js";
 import { disponible, nombresModelos, etiquetasPestanas } from "./lista_fichas.js";
+import { prepararPestanas, marcarPestana } from "./piezas.js";
 import { $, el } from "./dom.js";
 
 /** Miniaturas de una en una (no bloquean la pantalla); se cancelan si el inicio se repinta. */
@@ -35,37 +36,18 @@ export function crearInicio(cb) {
     if (!abierto) $("iniMateriasBtn").replaceChildren(...ms.map((m) => el("button", { textContent: m.nombre, onclick: () => cb.crear(m.id) })));
   };
   $("iniSeguir").onclick = () => cb.seguir();
-  const descartar = () => { cb.descartarBorrador(); if (!$("iniAjustes").hidden) pintarAjustes(); };
-  $("iniDescartar").onclick = descartar;
+  $("iniDescartar").onclick = () => cb.descartarBorrador();
+  prepararPestanas(document.querySelector("#iniFichas .pestanas"), $("iniLista"));
   $("iFav").onclick = () => { pestana = "favoritos"; pintarFichas(); };
   $("iRec").onclick = () => { pestana = "recientes"; pintarFichas(); };
   $("iNube").onclick = () => { pestana = "nube"; cb.leerNube(); pintarFichas(); };
-
-  // Ajustes discretos
-  $("iniAjustesBtn").onclick = () => {
-    const abrir = $("iniAjustes").hidden;
-    $("iniAjustes").hidden = !abrir; $("iniAjustesBtn").setAttribute("aria-expanded", String(abrir));
-    if (abrir) { pintarAjustes(); $("iniAjustes").scrollIntoView({ behavior: "smooth", block: "nearest" }); }
-  };
-  $("iaFuente").onchange = () => cb.ponerFuente($("iaFuente").value);
-  $("iaBn").onchange = () => cb.ponerBn($("iaBn").checked);
-  $("iaTema").onclick = () => $("tema").click();
-  $("iaCuenta").onclick = () => $("cuentaNube").click();
-  $("iaBorrador").onclick = descartar;
-  function pintarAjustes() {
-    const { fuentes, fuente } = cb.fuentes();
-    $("iaFuente").replaceChildren(...fuentes.map((f) => el("option", { value: f.id, textContent: f.nombre, selected: f.id === fuente })));
-    $("iaBn").checked = cb.bnDefecto();
-    $("iaCuenta").textContent = $("cuentaNube").textContent; $("iaCuenta").disabled = $("cuentaNube").disabled;
-    $("iaBorrador").disabled = !cb.hayBorrador(); $("iaBorrador").textContent = cb.hayBorrador() ? "Descartar borrador" : "No hay borrador";
-  }
 
   function pintarFichas() {
     const { fav, rec, nube, dentro } = estado;
     if (pestana === "nube" && !dentro) pestana = "favoritos";
     if (pestana === "favoritos" && !fav.length) pestana = rec.length || !dentro ? "recientes" : "nube";
-    $("iFav").classList.toggle("activa", pestana === "favoritos"); $("iRec").classList.toggle("activa", pestana === "recientes");
-    $("iNube").classList.toggle("activa", pestana === "nube"); $("iNube").hidden = !dentro;
+    $("iNube").hidden = !dentro;
+    marcarPestana(document.querySelector("#iniFichas .pestanas"), $({ favoritos: "iFav", recientes: "iRec", nube: "iNube" }[pestana]));
     const t = etiquetasPestanas({ fav, rec, nube });
     $("iFav").textContent = t.fav; $("iRec").textContent = t.rec; $("iNube").textContent = t.nube;
     const vacio = (t) => [el("li", { className: "info", textContent: t })];
@@ -111,7 +93,6 @@ export function crearInicio(cb) {
         return b;
       }));
       pintarFichas();
-      if (!$("iniAjustes").hidden) pintarAjustes();
     },
     cerrarMaterias() { $("iniMaterias").hidden = true; },
   };

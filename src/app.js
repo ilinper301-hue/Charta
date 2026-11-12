@@ -24,12 +24,15 @@ import { crearPrevia } from "./ui/previa.js";
 import { crearListaFichas } from "./ui/lista_fichas.js";
 import { crearNubeVista } from "./ui/nube_vista.js";
 import { crearEnlaces } from "./ui/enlaces.js";
+import { crearAjustes } from "./ui/ajustes_vista.js";
+import { abrirMenu, ICONOS } from "./ui/piezas.js";
+import { URL_FORI, URL_TABULA } from "./rutas.js";
 import { $ } from "./ui/dom.js";
 
 // API pública: la usa el iframe de Tabula (contrato por escribir en ESQUEMA.md, fase 7).
 globalThis.Charta = { generar, modelo, erroresFicha, listaTipos, hojas, CATALOGO };
 
-function iniciar() {
+function iniciar(tema) {
   // `ctx` reúne el estado compartido y las vistas (cada una se asigna al crearla; se usan al responder a eventos, no al crearlas).
   const ctx = { semilla: 1, vista: "diseno", pusheado: false, listo: false, enNube: null, grupoBorrador: null };   // 4.8: vista = "inicio" | "diseno"
   let inicioVista = null;
@@ -73,7 +76,9 @@ function iniciar() {
   function refrescarInicio() { if (ctx.vista === "inicio") inicioVista?.pintar(estadoInicio()); }
   function mostrar(v) {
     ctx.vista = v; document.body.dataset.vista = v;
-    $("inicio").hidden = v !== "inicio"; document.querySelector("main").hidden = v === "inicio"; $("aInicio").hidden = v === "inicio";
+    $("inicio").hidden = v !== "inicio"; document.querySelector("main").hidden = v === "inicio";
+    // Cabecera única (fase 3): en el inicio, la marca; en el diseño, atrás + título de la ficha. «⋯» en las dos.
+    $("aInicio").hidden = $("barraTitulo").hidden = v === "inicio"; $("marca").hidden = v !== "inicio";
     if (v === "inicio") { inicioVista.cerrarMaterias(); refrescarInicio(); }
     window.scrollTo(0, 0);
   }
@@ -81,7 +86,16 @@ function iniciar() {
   function aDiseno() { if (ctx.vista === "diseno") return; history.pushState({ diseno: 1 }, ""); ctx.pusheado = true; mostrar("diseno"); }
   function aInicio() { if (ctx.vista === "inicio") return; if (ctx.pusheado) history.back(); else mostrar("inicio"); }
   addEventListener("popstate", () => { ctx.pusheado = !!history.state?.diseno; mostrar(ctx.pusheado ? "diseno" : "inicio"); });
-  $("aInicio").onclick = aInicio;
+  $("aInicio").onclick = aInicio; $("aInicio").innerHTML = ICONOS.atras;
+  $("masBarra").innerHTML = ICONOS.mas;
+  $("masBarra").onclick = () => abrirMenu($("masBarra"), ctx.vista === "inicio" ? [
+    { texto: "Ajustes", icono: ICONOS.ajustes, accion: ajustes.abrir }, "-",
+    { texto: "Grupos de Tabula", icono: ICONOS.grupos, accion: () => { location.href = URL_TABULA; } },
+    { texto: "Pizarra Fori", icono: ICONOS.pizarra, accion: () => { location.href = URL_FORI; } },
+  ] : [
+    { texto: "Nueva ficha", icono: ICONOS.nueva, accion: () => abrirSelector({ tamano: "completa", alElegir: nuevaFicha }) },
+    { texto: "Ajustes", icono: ICONOS.ajustes, accion: ajustes.abrir },
+  ]);
   /** «Crear ficha»: una ficha nueva con el modelo elegido (la composición anterior no se toca: sigue en Recientes). */
   function nuevaFicha(id, curso) {
     if (!id || !hayTipo(id)) return;
@@ -101,10 +115,16 @@ function iniciar() {
     descartarBorrador: () => { ctx.borrador.descartar(); refrescarInicio(); },
     abrir: comp.abrirGuardada,
     leerNube: () => { if (!ctx.enNube) nubeV.leerNube(); },
+  });
+  // Fase 3: Ajustes en una hoja inferior (único sitio de la cuenta y del tema), desde «⋯» en la cabecera.
+  const ajustes = crearAjustes({
+    tema,
     fuentes: () => ({ fuentes: todasLasFuentes(), fuente: $("fuente").value }),
     ponerFuente: (id) => { ctx.fuentes.elegirFuente(id); pintar(); },
     bnDefecto,
     ponerBn: (v) => { ponerBnDefecto(v); $("bn").checked = v; pintar(); },
+    hayBorrador: () => ctx.borrador.hay(hayTipo),
+    descartarBorrador: () => { ctx.borrador.descartar(); refrescarInicio(); },
   });
 
   ctx.lista.pintar();
@@ -124,8 +144,7 @@ function iniciar() {
 }
 
 if (typeof document !== "undefined") {
-  iniciarTema($("tema"));
-  iniciar();
+  iniciar(iniciarTema());
   // Paso 4.5 · sin conexión. Si llega una versión nueva, se avisa (no se recarga solo: se perdería lo escrito).
   registrarSW(() => { $("aviso").hidden = false; $("recargar").onclick = () => location.reload(); });
 }

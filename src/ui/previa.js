@@ -37,6 +37,7 @@ export function crearPrevia(ctx) {
         presentacion: { color: !$("bn").checked, ...($("fuente").value !== "andika" && { fuente: $("fuente").value }), ...($("grande").checked && { letraGrande: true }), ...($("facil").checked && { lecturaFacil: true }) },
       }, ctx.semilla);
       const bn = $("bn").checked;
+      $("barraTitulo").textContent = ficha.titulo;   // cabecera única (fase 3); editable en la fase 4
       paginas = hojas(ficha, { nombres: ns, copias: total, bn });
       const etiqueta = (p) => (p.nombre || "Sin nombre") + (ficha.variantes > 1 ? ` · variante ${letraVariante(p.variante)}` : "") + (p.total > 1 ? ` · página ${p.pagina + 1} de ${p.total}` : "");
       $("hojas").replaceChildren(...paginas.map((p) => el("div", {}, el("p", { className: "hoja-etq", textContent: etiqueta(p) }),

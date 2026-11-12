@@ -22,7 +22,7 @@ tests/test_nucleo.js  pruebas del núcleo JS (Node): `node tests/test_nucleo.js`
 index.html            redirige a dist/ (GitHub Pages sirve la raíz)
 package.json          solo "type": "module" para Node (sin dependencias)
 src/index.html, estilos.css   app: columna .col (Actividades, Alumnos, Impresión, Más acciones, barra .accion-principal) + .lado (vista previa); el CSS solo depende de los ids y clases que crea la interfaz
-src/app.js            fase 2: director (~130 líneas): crea `ctx` (semilla, vista, enNube, almacén, guardadas, borrador, usos) y las vistas de src/ui/ (cada una recibe `ctx` y se asigna a `ctx.<vista>`; se llaman entre sí por `ctx` al responder a eventos, nunca al crearse), inicio (estadoInicio, mostrar, aDiseno/aInicio, nuevaFicha) y arranque; `globalThis.Charta` (API que usa Tabula)
+src/app.js            fase 2: director (~150 líneas); fase 3: cabecera única (#aInicio, #marca/#barraTitulo, #masBarra con su menú: Inicio → Ajustes, Grupos de Tabula, Pizarra Fori; Diseño → Nueva ficha, Ajustes) y crearAjustes; crea `ctx` (semilla, vista, enNube, almacén, guardadas, borrador, usos) y las vistas de src/ui/ (cada una recibe `ctx` y se asigna a `ctx.<vista>`; se llaman entre sí por `ctx` al responder a eventos, nunca al crearse), inicio (estadoInicio, mostrar, aDiseno/aInicio, nuevaFicha) y arranque; `globalThis.Charta` (API que usa Tabula)
 src/rutas.js          R6: URL_FORI y URL_TABULA (rutas fijas de las otras apps, un solo sitio)
 src/ui/dom.js         $ y el(tag, props, …hijos)
 src/ui/preferencias.js  guardarUltimo, leerUltimo, bnDefecto, ponerBnDefecto
@@ -39,6 +39,8 @@ src/ui/alumnos.js     leerAlumnos(texto) (pegar listas, Séneca), numVariantes(o
 src/ui/guardadas.js   crearGuardadas(almacén): recientes(), favoritos(), anotarReciente, alternarFavorito, esFavorito, quitar — sin nombres; limpiar(c) (lista blanca de campos; «Mis frases» en `misFrases` una vez), frasesComp(c)
 src/ui/selector.js    abrirSelector({ actual, curso, tamano, ruta, alElegir(id, curso), alCerrar }): pantalla curso → materia → bloque → modelo (`ruta` parcial, p. ej. { materia }, desde el inicio)
 src/ui/inicio.js      paso 4.8, sin DOM: saludo(hora, nombre), fechaCorta, crearUsos(almacén) (charta:usos), accesosRapidos, ultimaComposicion, materiasDisponibles, DEFECTO
+src/ui/piezas.js      fase 3: abrirHoja({titulo, contenido, alCerrar}) (hoja inferior; ventana centrada desde 700 px; `contenido` vuelve a su sitio al cerrar), abrirMenu(ancla, items) («⋯»: [{texto, icono, accion, peligro}] | "-"), confirmar({titulo, texto, si, no, peligro}) → Promise<bool> (sustituye a confirm()), modal(raiz) → soltar() (resto inerte, Tab dentro, foco devuelto; la usa el selector), prepararPestanas/marcarPestana (tablist/tab/tabpanel con flechas), ICONOS. Todas son capas: Escape, Atrás y tocar fuera cierran
+src/ui/ajustes_vista.js  fase 3: crearAjustes(cb) → { abrir(), pintar() }: hoja «Ajustes» (#ajustes en index.html): cuenta (la pinta nube_vista.js en #iaCuenta/#iaCuentaTxt), tema, letra y B/N por defecto, borrador. Se abre desde «⋯» de la cabecera
 src/ui/inicio_vista.js  paso 4.8, DOM: crearInicio(cb) → { pintar(estado), cerrarMaterias() }; el marcado (#inicio…) está en src/index.html y la navegación (mostrar / aDiseno / aInicio, historial) en app.js
 tests/test_ui.js      navegación: todos los tipos alcanzables, miniaturas limpias; también alumnos, guardadas, Tabula, inicio, páginas, borrador
 package.json          `npm test` (todo, 5 min) · `npm run test:rapido` (test_tipos/test_invariantes con --rapido: una semilla y muestra de combinaciones; 30 s) para cambios de interfaz
@@ -97,7 +99,7 @@ tests/test_pauta.js   escala real del panel, pauta y letras de trazo · tools/pr
 tests/test_lengua.js  reglas (lista de control), léxico y ayudantes
 tools/build.py        src/ → dist/index.html (un solo archivo) + sw.js y manifest.webmanifest en la raíz; --js = solo el paquete
 src/pwa/              sw.js (plantilla, __VERSION__), manifest.webmanifest, registro.js (registrarSW(avisar)), logo.svg (fuente del logo y los iconos) · paso 4.5
-src/ui/tema.js        iniciarTema(botón): sistema/claro/oscuro en charta:tema → html[data-tema="oscuro"]; variables en estilos.css (como Tabula)
+src/ui/tema.js        iniciarTema() → { actual(), poner(t) } (fase 3: sin botón; lo usa Ajustes), TEMAS, NOMBRES_TEMA: sistema/claro/oscuro en charta:tema → html[data-tema="oscuro"]; variables en estilos.css (como Tabula)
 src/nube/config.js    firebaseConfig (proyecto compartido "mis-apps-educativas"), FIREBASE_SDK, RUTA_FICHAS · paso 5.1
 src/nube/documento.js aDocumento(ficha, comp, uid), deDocumento(id, datos), mismaComposicion — ficha ⇄ documento, sin SDK
 src/nube/nube.js      crearNube({cargar, almacen}): iniciar, entrar (Google), salir, listar, guardar, abrir, borrar; SDK del CDN solo si se usa (charta:nube = hubo sesión)
@@ -107,8 +109,8 @@ firestore.rules       reglas COMPLETAS del proyecto (copia de tabula/firestore.r
 sw.js, manifest.webmanifest   GENERADOS por build.py en la raíz (scope /Charta/); no editar
 src/ui/miniatura_ficha.js  paso 5.4: miniaturaDeSvg(svg) → JPEG data URL, dejarParaTabula(titulo, miniatura, almacén, comp?) (charta:aTabula; con comp si el enlace pasa de MAX_ENLACE)
 src/ui/borrador.js    fase 1 (R1), sin DOM: crearBorrador(almacén) → guardar(comp, {alumnos, copias, grupo}), leer(hayTipo), hay, descartar; `charta:borrador` = { v, composicion (limpiar), alumnos, copias, grupo?, fecha }. compositor.js lo guarda en cada pintar() (solo en el diseño), al escribir y al ocultar la app
-src/ui/capas.js       fase 1 (R2): abrirCapa(alCerrar) → { cerrar(despues) }: entrada de historial por capa; Atrás cierra la de arriba (escucha popstate antes que app.js). La usa el selector; la usarán hojas y menús
-tests/navegador.py    fase 1: Playwright (Chrome) a 390 px: Inicio → selector (Atrás) → Diseño → 2 actividades → 25 alumnos → recargar → Seguir → favorita, Tabula, Fori → imprimir; desbordamiento a 360/390/768/1180, consola y nombres fuera del borrador. `python3 tests/navegador.py [capturas]`
+src/ui/capas.js       fase 1 (R2): abrirCapa(alCerrar) → { cerrar(despues) }: entrada de historial por capa; Atrás cierra la de arriba (escucha popstate antes que app.js). La usan el selector y las piezas de piezas.js (una capa que se abre al cerrar otra no se cierra en la misma vuelta)
+tests/navegador.py    fase 1 y 3: Playwright (Chrome) a 390 px (fase 3: menú, Ajustes, confirmar, pestañas, selector modal y auditoría de controles < 44 px y texto < 12,5 px en Inicio, Ajustes, selector, Diseño y Lengua a 390 y 768): Inicio → selector (Atrás) → Diseño → 2 actividades → 25 alumnos → recargar → Seguir → favorita, Tabula, Fori → imprimir; desbordamiento a 360/390/768/1180, consola y nombres fuera del borrador. `python3 tests/navegador.py [capturas]`
 src/fori/diapositivas.js  paso 5.3: marcarPasos(svg, ej), diapositivas(ficha, {cajas, fuentes}), paqueteFori(), cssPasos(k, n); CLAVE_FORI (la ruta URL_FORI está en src/rutas.js; contrato con fori/src/js/05f-charta.js)
 tests/test_fori.js    pasos de la solución y diapositivas de todos los tipos · `--full`
 tools/iconos.py       iconos/ desde src/pwa/logo.svg con rsvg-convert (normal, maskable al 80 %, favicon, apple-touch)

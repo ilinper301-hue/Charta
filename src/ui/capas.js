@@ -36,8 +36,9 @@ if (enNavegador) {
   addEventListener("popstate", (ev) => {
     if (!pila.length) return;
     const n = history.state?.capa || 0;
-    let cerro = false;
-    while (pila.length && pila.at(-1).id > n) { quitar(pila.at(-1)); cerro = true; }
-    if (cerro) ev.stopImmediatePropagation();
+    // Primero se decide cuáles cierra esta vuelta: lo que se haga después (p. ej. menú → Ajustes) puede abrir otra capa.
+    const cerrar = pila.filter((c) => c.id > n).reverse();
+    for (const c of cerrar) quitar(c);
+    if (cerrar.length) ev.stopImmediatePropagation();
   });
 }

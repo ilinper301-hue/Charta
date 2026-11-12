@@ -5,6 +5,7 @@ import { modelo } from "../nucleo/ficha.js";
 import { PALETA } from "../render/hoja.js";
 import { cursos, materias, bloques, modelos, miniatura } from "./navegacion.js";
 import { abrirCapa } from "./capas.js";
+import { modal, ICONOS } from "./piezas.js";
 
 function el(tag, props = {}, ...hijos) { const e = Object.assign(document.createElement(tag), props); e.append(...hijos); return e; }
 
@@ -21,16 +22,21 @@ export function abrirSelector({ actual = null, curso = null, tamano = "completa"
   cuadra();
 
   const migas = el("nav", { className: "migas" });
-  const titulo = el("h2");
+  migas.setAttribute("aria-label", "Ruta elegida");
+  const titulo = el("h2", { id: "selTitulo" });
   const rejilla = el("div", { className: "rejilla" });
-  const atras = el("button", { className: "sel-atras", textContent: "←", title: "Atrás" });
-  const cerrar = el("button", { className: "sel-cerrar", textContent: "✕", title: "Cerrar" });
+  // Cabecera única (fase 3): atrás + título + cerrar, botones de 44 px con nombre.
+  const atras = el("button", { className: "sel-atras fantasma icono", title: "Atrás" });
+  const cerrar = el("button", { className: "sel-cerrar fantasma icono", title: "Cerrar", textContent: "✕" });
+  atras.innerHTML = ICONOS.atras; atras.setAttribute("aria-label", "Atrás"); cerrar.setAttribute("aria-label", "Cerrar");
   const capa = el("div", { className: "selector", role: "dialog" },
     el("div", { className: "sel-cab" }, atras, titulo, cerrar), migas, rejilla);
+  capa.setAttribute("aria-modal", "true"); capa.setAttribute("aria-labelledby", titulo.id);
   document.body.append(capa);
   document.body.classList.add("con-selector");
+  const soltar = modal(capa);   // fase 3: lo de detrás, inerte; el tabulador no se escapa
   // Fase 1 (R2): el selector es una capa con su entrada de historial; Atrás de Android lo cierra.
-  const enHistorial = abrirCapa(() => { capa.remove(); document.body.classList.remove("con-selector"); });
+  const enHistorial = abrirCapa(() => { capa.remove(); document.body.classList.remove("con-selector"); soltar(); });
 
   // Si ya hay materia (Crear ficha → Lengua), solo los cursos que la tienen.
   const opciones = (nivel) => nivel === "curso" ? cursos().filter((c) => ruta.materia === undefined || materias(c.id).some((m) => m.id === ruta.materia))
@@ -62,7 +68,7 @@ export function abrirSelector({ actual = null, curso = null, tamano = "completa"
     const nivel = nivelActual(), i = NIVELES.indexOf(nivel);
     titulo.textContent = TITULOS[nivel];
     migas.replaceChildren(...NIVELES.slice(0, i).flatMap((n, k) => {
-      const b = el("button", { textContent: nombreDe(n) });
+      const b = el("button", {}, el("span", { textContent: nombreDe(n) }));
       b.onclick = () => { for (const x of NIVELES.slice(k)) delete ruta[x]; pintar(); };
       return k ? [el("span", { textContent: "›" }), b] : [b];
     }));
@@ -112,7 +118,7 @@ export function abrirSelector({ actual = null, curso = null, tamano = "completa"
   }
 
   cerrar.onclick = () => fin(null);
-  capa.addEventListener("keydown", (e) => { if (e.key === "Escape") fin(null); });
+  capa.addEventListener("keydown", (e) => { if (e.key === "Escape" && e.target.closest(".selector") === capa) fin(null); });
   pintar();
   atras.focus();
 }

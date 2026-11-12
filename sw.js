@@ -1,7 +1,7 @@
 // Charta · service worker (paso 4.5). PLANTILLA: build.py la copia a la raíz (/Charta/sw.js, scope /Charta/)
-// poniendo 4f10cbf9170d = huella de la app; si la app cambia, cambia este archivo y el navegador lo actualiza.
+// poniendo 4b4345012398 = huella de la app; si la app cambia, cambia este archivo y el navegador lo actualiza.
 // Mismo origen que Lectori, Tabula, Fori…: solo se tocan las cachés que empiezan por "charta-".
-const VERSION = "4f10cbf9170d";
+const VERSION = "4b4345012398";
 const CACHE = "charta-" + VERSION;
 const SDK = "charta-sdk"; // SDK de Firebase (versionado en la URL: no cambia) → se conserva entre versiones
 const ARCHIVOS = ["./", "./index.html", "./dist/", "./dist/index.html", "./manifest.webmanifest",

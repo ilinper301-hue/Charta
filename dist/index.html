@@ -23,7 +23,8 @@
   --primario: #1E524E; --primario-osc: #153E3C; --acento-texto: #22655E; --acento-suave: #E5F4EF; --acento-linea: #BFE6DA;
   --sobre-acento: #FFFFFF; --error: #A63A2A;
   --sans: Inter, "SF Pro Text", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --alto: 40px; --alto-sm: 32px;
+  /* Fase 3: zonas táctiles de 44 px como mínimo (--alto-sm queda como alias) y texto de 12,5 px como mínimo. */
+  --alto: 44px; --alto-sm: 44px; --txt-min: 12.5px;
   --r-sm: 8px; --r-md: 10px; --r-lg: 14px;
   --sombra-sm: 0 1px 2px rgba(20, 20, 19, .05); --sombra-md: 0 6px 24px rgba(20, 20, 19, .08); --sombra-papel: 0 2px 10px rgba(20, 20, 19, .12);
   color-scheme: light;
@@ -41,23 +42,23 @@
 * { box-sizing: border-box; }
 body { margin: 0; font-family: var(--sans); font-size: 15px; line-height: 1.45; background: var(--fondo); color: var(--texto);
   -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
-:focus-visible { outline: 2px solid var(--primario); outline-offset: 2px; }
+/* Foco visible (fase 3): anillo del color del texto de acento, que contrasta en claro, en oscuro y junto a los botones principales. */
+:focus-visible { outline: 2px solid var(--acento-texto); outline-offset: 2px; }
+button.primario:focus-visible, .mapa-letras button[aria-pressed="true"]:focus-visible { outline-offset: 3px; }
+.lista-g :focus-visible, .rejilla :focus-visible, .menu :focus-visible, .pestanas :focus-visible { outline-offset: -2px; }
 em { font-style: normal; }
 
-/* ---------- Cabecera compacta ---------- */
-.barra { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; justify-content: space-between; gap: 10px;
-  height: 52px; padding: 0 14px; background: color-mix(in srgb, var(--fondo) 85%, transparent); backdrop-filter: blur(12px);
+/* ---------- Cabecera única (fase 3): [atrás] + marca o título de la ficha + «⋯». Cuenta y tema, solo en Ajustes. ---------- */
+.barra { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; justify-content: space-between; gap: 4px;
+  height: 56px; padding: 0 6px 0 14px; background: color-mix(in srgb, var(--fondo) 85%, transparent); backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--borde); }
-.marca { display: flex; align-items: center; gap: 9px; min-width: 0; }
+.marca { display: flex; align-items: center; gap: 9px; min-width: 0; flex: 1; }
+.barra:has(#aInicio:not([hidden])) { padding-left: 6px; }
+.barra-titulo { flex: 1; min-width: 0; margin: 0 0 0 2px; font-size: 1rem; font-weight: 600; letter-spacing: -.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .logo { width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0; }
 .barra h1 { margin: 0; font-weight: 650; font-size: 1.05rem; letter-spacing: -.02em; color: var(--texto); line-height: 1; }
 .sub { color: var(--apagado); font-size: .82rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-left: 9px;
   border-left: 1px solid var(--borde-fuerte); line-height: 1; }
-.acciones { display: flex; align-items: center; gap: 6px; }
-.tema { display: grid; place-items: center; width: var(--alto-sm); height: var(--alto-sm); padding: 0; border-radius: var(--r-sm);
-  border: 1px solid transparent; background: transparent; color: var(--texto-2); }
-.tema:hover:not(:disabled) { background: var(--hover); }
-.cuenta { height: var(--alto-sm); padding: 0 12px; font-size: .84rem; max-width: 46vw; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 /* ---------- Composición ---------- */
 main { max-width: 640px; margin: 0 auto; padding: 14px 14px 96px; display: grid; gap: 14px; }
@@ -65,18 +66,18 @@ main { max-width: 640px; margin: 0 auto; padding: 14px 14px 96px; display: grid;
 .tarjeta { background: var(--superficie); border: 1px solid var(--borde); border-radius: var(--r-lg); padding: 16px; display: grid; gap: 14px; }
 .sec-cab { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
 h2 { margin: 0; font-weight: 600; font-size: .95rem; letter-spacing: -.01em; color: var(--texto); }
-.sec-cab small { color: var(--apagado); font-size: .78rem; }
+.sec-cab small { color: var(--apagado); font-size: var(--txt-min); }
 
 /* ---------- Actividades: sin cajas anidadas; separador entre la 1 y la 2 ---------- */
 .acts { display: grid; }
 .act { display: grid; gap: 12px; padding: 14px 0; border-top: 1px solid var(--borde); }
 .act:first-child { padding-top: 0; border-top: 0; }
 .act:last-child { padding-bottom: 0; }
-.act-cab { display: flex; justify-content: space-between; align-items: center; min-height: 24px; font-size: .72rem; font-weight: 600;
+.act-cab { display: flex; justify-content: space-between; align-items: center; min-height: 24px; font-size: var(--txt-min); font-weight: 600;
   letter-spacing: .07em; text-transform: uppercase; color: var(--acento-texto); }
-.act-herr { display: flex; gap: 4px; }
+.act-herr { display: flex; gap: 2px; margin-right: -8px; }
 .act-herr:empty { display: none; }
-.act-herr button { height: 26px; padding: 0 9px; font-size: .78rem; letter-spacing: 0; text-transform: none; border-color: transparent; background: transparent; color: var(--apagado); }
+.act-herr button { height: var(--alto); padding: 0 10px; font-size: .84rem; letter-spacing: 0; text-transform: none; border-color: transparent; background: transparent; color: var(--apagado); }
 .act-herr button:hover:not(:disabled) { background: var(--hover); color: var(--texto); }
 .elegido { display: grid; grid-template-columns: 92px minmax(0, 1fr) auto; gap: 12px; align-items: center; }
 .elegido-txt { display: grid; gap: 3px; min-width: 0; }
@@ -101,7 +102,7 @@ h2 { margin: 0; font-weight: 600; font-size: .95rem; letter-spacing: -.01em; col
 
 /* ---------- Campos ---------- */
 label, .campo { display: grid; gap: 6px; font-size: .8rem; font-weight: 500; color: var(--texto-2); min-width: 0; }
-label > span em, .campo em { display: block; font-weight: 400; color: var(--apagado); font-size: .76rem; margin-top: 1px; }
+label > span em, .campo em { display: block; font-weight: 400; color: var(--apagado); font-size: var(--txt-min); margin-top: 1px; }
 .campos-2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 12px; }
 .campos-2 > [hidden] + .campo, .campos-2 > .campo:only-child { grid-column: 1 / -1; }
 select, input:not([type="checkbox"]), textarea { font: inherit; font-size: .92rem; font-weight: 400; width: 100%; min-width: 0; color: var(--texto);
@@ -117,7 +118,7 @@ select:focus, input:focus, textarea:focus { outline: none; border-color: var(--p
 input[type="number"] { -moz-appearance: textfield; }
 
 /* Casillas como interruptores (siguen siendo checkbox: mismo comportamiento) */
-label.check { display: flex; flex-direction: row-reverse; justify-content: space-between; align-items: center; gap: 12px;
+label.check { display: flex; flex-direction: row-reverse; justify-content: space-between; align-items: center; gap: 12px; min-height: var(--alto);
   font-size: .9rem; font-weight: 400; color: var(--texto); cursor: pointer; }
 label.check > span { display: grid; }
 input[type="checkbox"] { appearance: none; -webkit-appearance: none; flex-shrink: 0; position: relative; width: 36px; height: 22px; margin: 0;
@@ -127,7 +128,7 @@ input[type="checkbox"]::before { content: ""; position: absolute; top: 3px; left
 input[type="checkbox"]:checked { background: var(--primario); }
 input[type="checkbox"]:checked::before { transform: translateX(14px); }
 .interruptores { display: grid; border: 1px solid var(--borde); border-radius: var(--r-md); }
-.interruptores label.check { padding: 11px 12px; }
+.interruptores label.check { padding: 8px 12px; }
 .interruptores label.check + label.check { border-top: 1px solid var(--borde); }
 
 /* ---------- Botones ---------- */
@@ -138,11 +139,19 @@ button:hover:not(:disabled) { background: var(--hover); }
 button:active:not(:disabled) { background: var(--acento-suave); border-color: var(--acento-linea); color: var(--acento-texto); }
 button.primario { background: var(--primario); border-color: var(--primario); color: var(--sobre-acento); font-weight: 600; }
 button.primario:hover:not(:disabled), button.primario:active:not(:disabled) { background: var(--primario-osc); border-color: var(--primario-osc); color: var(--sobre-acento); }
-button.sutil { height: var(--alto-sm); font-size: .82rem; background: transparent; color: var(--acento-texto); border-color: transparent; padding: 0 8px; }
+/* Variantes (fase 3): principal (.primario, una por pantalla), con borde (la de siempre, solo donde haga falta), fantasma
+   (sin borde; .sutil = fantasma en color de acento), de peligro y de icono (cuadrado de 44 px). */
+button.fantasma, button.sutil { background: transparent; border-color: transparent; color: var(--texto-2); }
+button.fantasma:hover:not(:disabled) { background: var(--hover); color: var(--texto); }
+button.sutil { font-size: .84rem; color: var(--acento-texto); padding: 0 10px; }
 button.sutil:hover:not(:disabled) { background: var(--acento-suave); }
+button.peligro { background: var(--error); border-color: var(--error); color: #fff; font-weight: 600; }
+button.peligro:hover:not(:disabled), button.peligro:active:not(:disabled) { background: color-mix(in srgb, var(--error) 85%, #000); border-color: transparent; color: #fff; }
+button.icono { width: var(--alto); min-width: var(--alto); padding: 0; flex-shrink: 0; font-size: 1.1rem; }
+button .ico { display: inline-grid; place-items: center; }
 button:disabled { cursor: default; opacity: .5; }
 .botones, .fila-fuente { display: flex; gap: 8px; flex-wrap: wrap; }
-.fila-fuente { margin: -8px 0 -4px -8px; gap: 2px; }
+.fila-fuente { margin: -8px 0 -4px -10px; gap: 2px; }
 .acciones-sec { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 160px), 1fr)); gap: 8px; }
 .acciones-sec button { justify-content: flex-start; text-align: left; white-space: normal; height: auto; min-height: var(--alto); padding: 8px 12px; line-height: 1.2; }
 .acciones-sec button .ico-app { flex: none; margin-right: 8px; }
@@ -156,8 +165,9 @@ button:disabled { cursor: default; opacity: .5; }
 .accion-principal .primario { box-shadow: 0 1px 2px rgba(0, 0, 0, .12); }
 
 .error { color: var(--error); margin: 0; font-size: .85rem; }
+.info.error { color: var(--error); }
 .info { color: var(--apagado); margin: 0; font-size: .8rem; }
-.apagado { color: var(--apagado); line-height: 1.4; font-size: .76rem; }
+.apagado { color: var(--apagado); line-height: 1.4; font-size: var(--txt-min); }
 #cuenta { margin-top: -6px; }
 
 /* ---------- Vista previa ---------- */
@@ -165,14 +175,14 @@ button:disabled { cursor: default; opacity: .5; }
 /* El papel es siempre blanco (también en modo oscuro): es como saldrá impreso. */
 .hoja { background: #fff; border-radius: 4px; overflow: hidden; box-shadow: var(--sombra-papel); }
 .hoja svg { display: block; width: 100%; height: auto; }
-.hoja-etq { font-size: .74rem; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--apagado); margin: 0 0 6px; }
+.hoja-etq { font-size: var(--txt-min); font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--apagado); margin: 0 0 6px; }
 .previa, .solucionario { background: var(--superficie-2); }
 .impresion { display: none; }
 
 @page { size: A4 portrait; margin: 0; }
 @media print {
   body { background: #fff; }
-  .barra, main, .inicio, .aviso { display: none !important; }
+  .barra, main, .inicio, .aviso, .velo, .selector { display: none !important; }
   .impresion { display: block; }
   .impresion .pag { width: 210mm; height: 297mm; overflow: hidden; break-after: page; page-break-after: always; }
   .impresion .pag:last-child { break-after: auto; page-break-after: auto; }
@@ -181,14 +191,18 @@ button:disabled { cursor: default; opacity: .5; }
 }
 
 /* ---------- Selector curso → materia → bloque → modelo (paso 4.1) ---------- */
-body.con-selector { overflow: hidden; }
+body.con-selector, body.con-capa { overflow: hidden; }
 .selector { position: fixed; inset: 0; z-index: 10; background: var(--fondo); display: flex; flex-direction: column; }
-.sel-cab { display: flex; align-items: center; gap: 6px; height: 52px; padding: 0 8px; border-bottom: 1px solid var(--borde); background: var(--fondo); }
-.sel-cab h2 { flex: 1; font-size: 1rem; }
-.sel-cab button { background: transparent; border: 0; color: var(--texto-2); font-size: 1.15rem; width: 40px; padding: 0; }
+.sel-cab { display: flex; align-items: center; gap: 4px; height: 56px; padding: 0 6px; border-bottom: 1px solid var(--borde); background: var(--fondo); flex-shrink: 0; }
+.sel-cab h2 { flex: 1; min-width: 0; margin-left: 2px; font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .migas { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; padding: 12px 14px 0; color: var(--apagado); font-size: .82rem; }
 .migas:empty { display: none; }
-.migas button { height: 28px; border: 1px solid var(--acento-linea); background: var(--acento-suave); color: var(--acento-texto); padding: 0 12px; border-radius: 999px; font-size: .8rem; }
+.migas { padding-top: 8px; gap: 2px 4px; }
+/* La píldora se ve de 32 px; la zona táctil es de 44 (el botón, transparente, la envuelve). */
+.migas button { height: var(--alto); padding: 0 2px; border: 0; background: transparent; color: var(--acento-texto); font-size: .84rem; }
+.migas button > span { display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--acento-linea); background: var(--acento-suave); }
+.migas button:hover:not(:disabled), .migas button:active:not(:disabled) { background: transparent; color: var(--acento-texto); }
+.migas button:hover > span { border-color: var(--acento-texto); }
 .rejilla { flex: 1; overflow-y: auto; padding: 14px; display: grid; gap: 10px; align-content: start;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); max-width: 1000px; width: 100%; margin: 0 auto; }
 .rejilla.modelos { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
@@ -206,20 +220,20 @@ body.con-selector { overflow: hidden; }
 
 /* ---------- Favoritas y recientes (paso 4.4): control segmentado ---------- */
 .pestanas { display: flex; gap: 2px; padding: 3px; background: var(--superficie-2); border: 1px solid var(--borde); border-radius: var(--r-md); width: fit-content; max-width: 100%; overflow-x: auto; }
-.pestanas button { height: 30px; padding: 0 12px; border: 0; border-radius: 7px; font-size: .82rem; background: transparent; color: var(--apagado); }
+.pestanas button { height: var(--alto); padding: 0 14px; border: 0; border-radius: 7px; font-size: .86rem; background: transparent; color: var(--apagado); }
 .pestanas button.activa { background: var(--superficie); color: var(--texto); box-shadow: 0 1px 2px rgba(0, 0, 0, .08); }
 .lista-g { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; max-height: 260px; overflow-y: auto; }
 .lista-g li { display: flex; gap: 6px; }
 .g-abrir { flex: 1; min-width: 0; height: auto; min-height: var(--alto); padding: 8px 12px; display: grid; gap: 1px; justify-content: stretch; text-align: left;
   white-space: normal; color: var(--texto); background: var(--superficie-2); border-color: var(--borde); }
 .g-abrir strong { font-weight: 600; font-size: .88rem; }
-.g-abrir small { color: var(--apagado); font-size: .76rem; }
-.g-quitar { color: var(--apagado); width: var(--alto); padding: 0; border-color: transparent; background: transparent; }
+.g-abrir small { color: var(--apagado); font-size: var(--txt-min); }
+.g-quitar { color: var(--apagado); }
 
 /* ---------- Aviso de versión nueva ---------- */
 .aviso { position: fixed; left: 50%; bottom: calc(80px + env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 20; background: var(--texto); color: var(--fondo);
   padding: 8px 8px 8px 14px; border-radius: var(--r-md); display: flex; gap: 12px; align-items: center; box-shadow: var(--sombra-md); font-size: .85rem; width: max-content; max-width: calc(100vw - 24px); }
-.aviso button { height: var(--alto-sm); padding: 0 12px; }
+.aviso button { padding: 0 14px; }
 
 /* ---------- Tableta y escritorio: opciones a la izquierda, vista previa fija a la derecha ---------- */
 @media (min-width: 900px) {
@@ -232,7 +246,7 @@ body.con-selector { overflow: hidden; }
   .aviso { bottom: 16px; }
 }
 @media (min-width: 1200px) { .lado .hojas { grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); } }
-@media (max-width: 520px) { .sub { display: none; } body[data-vista="diseno"] .barra h1 { display: none; } body[data-vista="diseno"] .cuenta { max-width: 36vw; } }
+@media (max-width: 360px) { .sub { display: none; } }
 @media (max-width: 380px) {
   .elegido { grid-template-columns: 72px minmax(0, 1fr); }
   .elegido > button { grid-column: 1 / -1; width: 100%; }
@@ -251,11 +265,10 @@ body.con-selector { overflow: hidden; }
 .ini-seguir { height: auto; width: 100%; padding: 12px; display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 12px; align-items: center;
   justify-content: stretch; text-align: left; white-space: normal; border-radius: var(--r-lg); border-color: var(--borde); }
 .ini-seguir-txt { display: grid; gap: 2px; min-width: 0; }
-.ini-seguir-txt small:first-child { color: var(--acento-texto); font-weight: 600; font-size: .72rem; letter-spacing: .07em; text-transform: uppercase; }
+.ini-seguir-txt small:first-child { color: var(--acento-texto); font-weight: 600; font-size: var(--txt-min); letter-spacing: .07em; text-transform: uppercase; }
 .ini-seguir-txt strong { font-weight: 600; font-size: .98rem; }
 .ini-seguir-txt small { color: var(--apagado); font-size: .8rem; line-height: 1.3; }
 .ini-descartar { height: 44px; border: 0; background: none; color: var(--apagado); font-size: .85rem; justify-self: end; margin-top: -6px; text-decoration: underline; text-underline-offset: 3px; }
-.ia-borrador { margin-top: 12px; line-height: 1.45; }
 .ini-rapidos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
 .ini-rapido { height: auto; padding: 8px; display: grid; gap: 6px; justify-content: stretch; text-align: left; white-space: normal; align-content: start; border-color: var(--borde); }
 .ini-rapido strong { font-weight: 600; font-size: .86rem; line-height: 1.25; }
@@ -264,18 +277,13 @@ body.con-selector { overflow: hidden; }
 .ini-fila-txt { display: grid; gap: 1px; min-width: 0; }
 .ini-fila .mini { padding: 3px; border-radius: var(--r-sm); }
 .ini-lista li.info { padding: 6px 2px; }
-.ini-pie { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; }
-.ini-icono { height: var(--alto-sm); padding: 0 12px; border-radius: var(--r-sm); border: 1px solid transparent; background: transparent; color: var(--apagado);
-  font: inherit; font-size: .82rem; font-weight: 500; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; cursor: pointer; }
-.ini-icono:hover { background: var(--hover); color: var(--texto); }
 @media (min-width: 900px) {
   .inicio { max-width: 760px; padding-top: 32px; }
   .ini-rapidos { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 
 /* Mapa de letras (Lengua de 1.º): una tecla por letra; marcada = puede salir en la ficha. */
-.mapa-letras { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin: 10px 0; }
-@media (min-width: 520px) { .mapa-letras { grid-template-columns: repeat(9, 1fr); } }
+.mapa-letras { display: grid; grid-template-columns: repeat(auto-fill, minmax(44px, 1fr)); gap: 6px; margin: 10px 0; }   /* teclas de 44 px como mínimo */
 .mapa-letras button { height: var(--alto); border-radius: var(--r-sm); border: 1px solid var(--borde-fuerte); background: var(--superficie);
   color: var(--apagado); font: 600 1.1rem var(--sans); cursor: pointer; padding: 0; text-decoration: line-through; text-decoration-color: var(--borde-fuerte); }
 .mapa-letras button.vocal { border-style: dashed; }
@@ -289,11 +297,48 @@ body.con-selector { overflow: hidden; }
 .mis-frases summary small { font-weight: 400; color: var(--texto-2); margin-left: 6px; }
 .mis-frases .campo { margin-top: 8px; }
 .letras-atajos { display: flex; gap: 8px; flex-wrap: wrap; }
-.letras-atajos button { height: var(--alto-sm); padding: 0 12px; border-radius: var(--r-sm); border: 1px solid var(--borde); background: var(--superficie-2); color: var(--texto-2); font: inherit; font-size: .85rem; cursor: pointer; }
+.letras-atajos button { height: var(--alto); padding: 0 14px; border-radius: var(--r-sm); border: 1px solid var(--borde); background: var(--superficie-2); color: var(--texto-2); font: inherit; font-size: .85rem; cursor: pointer; }
+
+/* ---------- Piezas comunes (fase 3, src/ui/piezas.js): hoja inferior, menú «⋯» y confirmar ---------- */
+.velo { position: fixed; inset: 0; z-index: 30; background: rgba(20, 20, 19, .42); animation: aparecer .15s ease-out; }
+.velo.transparente { background: transparent; animation: none; }
+.velo > [role] { outline: none; }
+.hoja-inf { position: absolute; left: 0; right: 0; bottom: 0; max-height: min(88vh, 760px); display: flex; flex-direction: column;
+  background: var(--superficie); color: var(--texto); border-radius: 18px 18px 0 0; box-shadow: var(--sombra-md);
+  padding-bottom: env(safe-area-inset-bottom); animation: subir .2s ease-out; }
+.hoja-inf::before { content: ""; align-self: center; flex-shrink: 0; width: 36px; height: 4px; border-radius: 2px; background: var(--borde-fuerte); margin-top: 8px; }
+.hoja-inf-cab { display: flex; align-items: center; gap: 8px; padding: 2px 6px 2px 18px; border-bottom: 1px solid var(--borde); min-height: 52px; flex-shrink: 0; }
+.hoja-inf-cab h2 { flex: 1; font-size: 1.05rem; }
+.hoja-inf-cuerpo { overflow-y: auto; overscroll-behavior: contain; padding: 16px 18px 22px; display: grid; gap: 16px; }
+.menu { position: absolute; min-width: 220px; max-width: calc(100vw - 16px); display: grid; padding: 6px; background: var(--superficie); color: var(--texto);
+  border: 1px solid var(--borde); border-radius: var(--r-md); box-shadow: var(--sombra-md); animation: aparecer .12s ease-out; }
+.menu-item { justify-content: flex-start; gap: 12px; width: 100%; height: var(--alto); padding: 0 12px; border: 0; border-radius: var(--r-sm);
+  background: transparent; color: var(--texto); font-size: .92rem; font-weight: 500; }
+.menu-item .ico { color: var(--apagado); }
+.menu-item:focus { background: var(--hover); }
+.menu-item.peligro, .menu-item.peligro .ico { color: var(--error); }
+.menu-sep { height: 1px; margin: 5px 6px; background: var(--borde); }
+.confirmar { position: absolute; left: 50%; top: 50%; translate: -50% -50%; width: min(400px, calc(100vw - 32px)); display: grid; gap: 10px;
+  padding: 20px 20px 14px; background: var(--superficie); color: var(--texto); border-radius: var(--r-lg); box-shadow: var(--sombra-md); animation: aparecer .15s ease-out; }
+.confirmar h2 { font-size: 1.05rem; line-height: 1.3; }
+.confirmar p { margin: 0; color: var(--texto-2); font-size: .92rem; }
+.confirmar .botones { justify-content: flex-end; margin-top: 6px; }
+/* Ajustes (contenido de una hoja) */
+.ajustes { display: grid; gap: 20px; }
+.ajustes-grupo { display: grid; gap: 10px; }
+.ajustes-grupo h3 { margin: 0; font-size: var(--txt-min); font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--acento-texto); }
+.ajustes-grupo > button { justify-self: start; }
+@keyframes aparecer { from { opacity: 0; } }
+@keyframes subir { from { transform: translateY(24px); opacity: 0; } }
+@media (min-width: 700px) {
+  .hoja-inf { left: 50%; top: 50%; bottom: auto; width: min(560px, calc(100vw - 32px)); max-height: 85vh; translate: -50% -50%; border-radius: var(--r-lg); padding-bottom: 0; animation: aparecer .15s ease-out; }
+  .hoja-inf::before { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .velo, .hoja-inf, .menu, .confirmar { animation: none; } }
 </style>
 </head>
 <body>
-<header class="barra"><div class="marca"><svg class="logo" viewBox="0 0 512 512" aria-hidden="true"><rect width="512" height="512" rx="118" fill="#174543"/><path d="M251.2 88.5L237.4 89.7L221.8 92.5L203.1 98.0L191.1 102.9L175.8 110.9L164.7 118.3L151.9 128.7L138.4 142.5L130.4 152.6L121.5 166.4L114.4 180.2L107.7 197.7L104.0 210.9L100.6 229.3L99.1 246.5L99.1 265.2L100.9 283.6L104.0 299.3L107.7 312.8L114.1 329.6L120.9 343.1L131.6 359.7L140.8 371.0L151.9 382.1L174.6 399.3L191.7 408.5L201.5 412.5L217.2 417.4L231.9 420.4L250.3 422.6L267.2 422.6L292.4 419.8L317.2 413.1L340.5 402.3L361.1 388.5L380.1 370.4L393.9 352.3L397.3 345.0L399.4 335.8L399.4 325.6L397.9 318.6L392.7 307.2L388.7 302.0L381.9 295.9L369.4 289.4L362.3 287.9L353.1 287.6L344.8 289.1L334.4 293.7L322.7 303.5L302.5 323.8L289.3 331.5L280.7 334.5L266.6 337.3L253.1 337.3L238.7 334.5L226.1 329.3L213.5 320.4L203.1 309.1L194.5 294.3L189.0 277.8L186.8 263.1L187.1 244.3L191.1 224.7L198.2 208.5L203.4 200.5L212.9 190.0L220.6 183.9L228.2 179.3L239.9 174.7L247.9 172.9L268.1 171.9L281.9 174.4L292.7 178.4L300.3 182.7L310.8 190.7L327.0 206.9L336.8 213.4L348.8 217.0L358.0 217.3L366.0 216.1L373.0 213.7L380.1 209.7L390.5 199.6L393.9 194.3L397.3 186.1L398.8 178.7L398.8 168.3L397.6 162.1L393.9 152.6L382.8 138.5L364.4 121.6L341.7 106.9L322.1 98.3L300.6 92.2L276.4 88.8Z" fill="#459B89"/><path d="M395.7 313.1L390.5 304.5L384.1 297.7L371.5 290.4L360.8 287.9L351.6 287.9L339.3 291.3L332.2 295.3L325.5 301.1L243.3 383.9L234.7 391.0L223.3 397.4L210.8 401.7L202.8 402.9L193.3 402.9L183.8 401.4L182.8 403.2L195.7 410.0L215.7 416.7L235.0 420.7L253.1 422.6L274.6 422.0L291.4 419.8L308.3 415.8L324.6 410.0L342.4 401.1L360.5 388.8L373.3 377.5L389.6 358.5L395.7 348.3L399.1 336.7L399.4 326.9Z" fill="#83D7C0"/><path d="M384.4 298.0L377.3 293.1L367.5 289.1L360.5 287.9L351.9 287.9L338.1 291.9L330.7 296.5L326.7 300.5L322.1 307.2L316.3 320.1L303.1 371.0L294.2 392.2L284.4 405.7L275.8 413.7L265.0 420.4L265.4 422.0L277.3 421.7L294.5 419.2L311.1 414.9L323.0 410.6L333.2 406.0L348.8 397.1L362.3 387.3L375.5 375.0L382.2 367.7L393.3 352.9L396.3 346.8L399.1 336.4L399.1 325.0L396.7 315.5L392.7 307.5Z" fill="#B5F1DF"/></svg><h1>Charta</h1><span class="sub">Fichas educativas</span></div><div class="acciones"><button id="aInicio" class="sutil" hidden title="Volver al inicio">← Inicio</button><button id="cuentaNube" class="cuenta">☁ Entrar</button><button id="tema" class="tema"></button></div></header>
+<header class="barra"><button id="aInicio" class="fantasma icono" hidden title="Volver al inicio" aria-label="Volver al inicio"></button><div class="marca" id="marca"><svg class="logo" viewBox="0 0 512 512" aria-hidden="true"><rect width="512" height="512" rx="118" fill="#174543"/><path d="M251.2 88.5L237.4 89.7L221.8 92.5L203.1 98.0L191.1 102.9L175.8 110.9L164.7 118.3L151.9 128.7L138.4 142.5L130.4 152.6L121.5 166.4L114.4 180.2L107.7 197.7L104.0 210.9L100.6 229.3L99.1 246.5L99.1 265.2L100.9 283.6L104.0 299.3L107.7 312.8L114.1 329.6L120.9 343.1L131.6 359.7L140.8 371.0L151.9 382.1L174.6 399.3L191.7 408.5L201.5 412.5L217.2 417.4L231.9 420.4L250.3 422.6L267.2 422.6L292.4 419.8L317.2 413.1L340.5 402.3L361.1 388.5L380.1 370.4L393.9 352.3L397.3 345.0L399.4 335.8L399.4 325.6L397.9 318.6L392.7 307.2L388.7 302.0L381.9 295.9L369.4 289.4L362.3 287.9L353.1 287.6L344.8 289.1L334.4 293.7L322.7 303.5L302.5 323.8L289.3 331.5L280.7 334.5L266.6 337.3L253.1 337.3L238.7 334.5L226.1 329.3L213.5 320.4L203.1 309.1L194.5 294.3L189.0 277.8L186.8 263.1L187.1 244.3L191.1 224.7L198.2 208.5L203.4 200.5L212.9 190.0L220.6 183.9L228.2 179.3L239.9 174.7L247.9 172.9L268.1 171.9L281.9 174.4L292.7 178.4L300.3 182.7L310.8 190.7L327.0 206.9L336.8 213.4L348.8 217.0L358.0 217.3L366.0 216.1L373.0 213.7L380.1 209.7L390.5 199.6L393.9 194.3L397.3 186.1L398.8 178.7L398.8 168.3L397.6 162.1L393.9 152.6L382.8 138.5L364.4 121.6L341.7 106.9L322.1 98.3L300.6 92.2L276.4 88.8Z" fill="#459B89"/><path d="M395.7 313.1L390.5 304.5L384.1 297.7L371.5 290.4L360.8 287.9L351.6 287.9L339.3 291.3L332.2 295.3L325.5 301.1L243.3 383.9L234.7 391.0L223.3 397.4L210.8 401.7L202.8 402.9L193.3 402.9L183.8 401.4L182.8 403.2L195.7 410.0L215.7 416.7L235.0 420.7L253.1 422.6L274.6 422.0L291.4 419.8L308.3 415.8L324.6 410.0L342.4 401.1L360.5 388.8L373.3 377.5L389.6 358.5L395.7 348.3L399.1 336.7L399.4 326.9Z" fill="#83D7C0"/><path d="M384.4 298.0L377.3 293.1L367.5 289.1L360.5 287.9L351.9 287.9L338.1 291.9L330.7 296.5L326.7 300.5L322.1 307.2L316.3 320.1L303.1 371.0L294.2 392.2L284.4 405.7L275.8 413.7L265.0 420.4L265.4 422.0L277.3 421.7L294.5 419.2L311.1 414.9L323.0 410.6L333.2 406.0L348.8 397.1L362.3 387.3L375.5 375.0L382.2 367.7L393.3 352.9L396.3 346.8L399.1 336.4L399.1 325.0L396.7 315.5L392.7 307.5Z" fill="#B5F1DF"/></svg><h1>Charta</h1><span class="sub">Fichas educativas</span></div><h1 id="barraTitulo" class="barra-titulo" hidden>Ficha</h1><button id="masBarra" class="fantasma icono" title="Más opciones" aria-label="Más opciones" aria-haspopup="menu" aria-expanded="false"></button></header>
 <section id="inicio" class="inicio">
   <div class="ini-cab"><h2 id="iniSaludo">Hola</h2><p>¿Qué ficha preparamos hoy?</p></div>
   <button id="iniCrear" class="primario ini-crear">+ Crear ficha</button>
@@ -302,25 +347,13 @@ body.con-selector { overflow: hidden; }
   <button id="iniDescartar" class="ini-descartar" hidden>Descartar borrador</button>
   <section class="tarjeta" id="iniRapidos" hidden><div class="sec-cab"><h2>Accesos rápidos</h2></div><div id="iniRapidosLista" class="ini-rapidos"></div></section>
   <section class="tarjeta" id="iniFichas"><div class="sec-cab"><h2>Mis fichas</h2></div>
-    <div class="pestanas"><button id="iFav" class="activa">★ Favoritas</button><button id="iRec">Recientes</button><button id="iNube" hidden>☁ En la nube</button></div>
+    <div class="pestanas" aria-label="Mis fichas"><button id="iFav" class="activa">★ Favoritas</button><button id="iRec">Recientes</button><button id="iNube" hidden>☁ En la nube</button></div>
     <ul id="iniLista" class="lista-g ini-lista"></ul></section>
-  <nav class="ini-pie" aria-label="Más">
-    <a class="ini-icono" id="iniTabula" href="/tabula/" title="Abrir Tabula (grupos y planificación)"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg>Grupos</a>
-    <a class="ini-icono" id="iniFori" href="/Fori/" title="Abrir la pizarra Fori"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>Fori</a>
-    <button class="ini-icono" id="iniAjustesBtn" aria-expanded="false" title="Ajustes"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></svg>Ajustes</button>
-  </nav>
-  <section class="tarjeta" id="iniAjustes" hidden><div class="sec-cab"><h2>Ajustes</h2></div>
-    <label class="campo"><span>Letra por defecto</span><select id="iaFuente"></select></label>
-    <div class="interruptores"><label class="check"><input type="checkbox" id="iaBn"> <span>Blanco y negro por defecto <em>Ahorro de tinta en las fichas nuevas</em></span></label></div>
-    <div class="acciones-sec"><button id="iaTema">Cambiar tema</button><button id="iaCuenta">☁ Entrar</button></div>
-    <p class="info ia-borrador">La ficha que estás preparando se guarda sola en este dispositivo, <strong>con los nombres de los alumnos</strong>, para no perderla si se cierra la app. Se borra al imprimir o al descartarla; nunca va a la nube, a Tabula ni a Fori.</p>
-    <div class="acciones-sec"><button id="iaBorrador">Descartar borrador</button></div>
-  </section>
 </section>
 <main hidden>
   <div class="col">
   <section class="tarjeta" id="guardadas" hidden>
-    <div class="pestanas"><button id="pFav" class="activa">★ Favoritas</button><button id="pRec">Recientes</button><button id="pNube" hidden>☁ En la nube</button></div>
+    <div class="pestanas" aria-label="Fichas guardadas"><button id="pFav" class="activa">★ Favoritas</button><button id="pRec">Recientes</button><button id="pNube" hidden>☁ En la nube</button></div>
     <ul id="listaGuardadas" class="lista-g"></ul>
   </section>
   <section class="tarjeta">
@@ -400,6 +433,18 @@ body.con-selector { overflow: hidden; }
   </section>
   </div>
 </main>
+<section id="ajustes" class="ajustes" hidden>
+  <div class="ajustes-grupo"><h3>Cuenta</h3>
+    <p id="iaCuentaTxt" class="info">Entra con tu cuenta de Google para guardar fichas en la nube y abrirlas desde Tabula y Fori.</p>
+    <button id="iaCuenta">Entrar con Google</button></div>
+  <div class="ajustes-grupo"><h3>Aspecto y fichas nuevas</h3>
+    <label class="campo"><span>Tema</span><select id="iaTema"></select></label>
+    <label class="campo"><span>Letra por defecto</span><select id="iaFuente"></select></label>
+    <div class="interruptores"><label class="check"><input type="checkbox" id="iaBn"> <span>Blanco y negro por defecto <em>Ahorro de tinta en las fichas nuevas</em></span></label></div></div>
+  <div class="ajustes-grupo"><h3>Borrador</h3>
+    <p class="info">La ficha que estás preparando se guarda sola en este dispositivo, <strong>con los nombres de los alumnos</strong>, para no perderla si se cierra la app. Se borra al imprimir o al descartarla; nunca va a la nube, a Tabula ni a Fori.</p>
+    <button id="iaBorrador">Descartar borrador</button></div>
+</section>
 <div id="aviso" class="aviso" hidden>Hay una versión nueva de Charta. <button id="recargar">Actualizar</button></div>
 <div id="impresion" class="impresion"></div>
 <script>
@@ -433,11 +478,14 @@ const { crearPrevia } = __req("ui/previa.js");
 const { crearListaFichas } = __req("ui/lista_fichas.js");
 const { crearNubeVista } = __req("ui/nube_vista.js");
 const { crearEnlaces } = __req("ui/enlaces.js");
+const { crearAjustes } = __req("ui/ajustes_vista.js");
+const { abrirMenu, ICONOS } = __req("ui/piezas.js");
+const { URL_FORI, URL_TABULA } = __req("rutas.js");
 const { $ } = __req("ui/dom.js");
 // API pública: la usa el iframe de Tabula (contrato por escribir en ESQUEMA.md, fase 7).
 globalThis.Charta = { generar, modelo, erroresFicha, listaTipos, hojas, CATALOGO };
 
-function iniciar() {
+function iniciar(tema) {
   // `ctx` reúne el estado compartido y las vistas (cada una se asigna al crearla; se usan al responder a eventos, no al crearlas).
   const ctx = { semilla: 1, vista: "diseno", pusheado: false, listo: false, enNube: null, grupoBorrador: null };   // 4.8: vista = "inicio" | "diseno"
   let inicioVista = null;
@@ -481,7 +529,9 @@ function iniciar() {
   function refrescarInicio() { if (ctx.vista === "inicio") inicioVista?.pintar(estadoInicio()); }
   function mostrar(v) {
     ctx.vista = v; document.body.dataset.vista = v;
-    $("inicio").hidden = v !== "inicio"; document.querySelector("main").hidden = v === "inicio"; $("aInicio").hidden = v === "inicio";
+    $("inicio").hidden = v !== "inicio"; document.querySelector("main").hidden = v === "inicio";
+    // Cabecera única (fase 3): en el inicio, la marca; en el diseño, atrás + título de la ficha. «⋯» en las dos.
+    $("aInicio").hidden = $("barraTitulo").hidden = v === "inicio"; $("marca").hidden = v !== "inicio";
     if (v === "inicio") { inicioVista.cerrarMaterias(); refrescarInicio(); }
     window.scrollTo(0, 0);
   }
@@ -489,7 +539,16 @@ function iniciar() {
   function aDiseno() { if (ctx.vista === "diseno") return; history.pushState({ diseno: 1 }, ""); ctx.pusheado = true; mostrar("diseno"); }
   function aInicio() { if (ctx.vista === "inicio") return; if (ctx.pusheado) history.back(); else mostrar("inicio"); }
   addEventListener("popstate", () => { ctx.pusheado = !!history.state?.diseno; mostrar(ctx.pusheado ? "diseno" : "inicio"); });
-  $("aInicio").onclick = aInicio;
+  $("aInicio").onclick = aInicio; $("aInicio").innerHTML = ICONOS.atras;
+  $("masBarra").innerHTML = ICONOS.mas;
+  $("masBarra").onclick = () => abrirMenu($("masBarra"), ctx.vista === "inicio" ? [
+    { texto: "Ajustes", icono: ICONOS.ajustes, accion: ajustes.abrir }, "-",
+    { texto: "Grupos de Tabula", icono: ICONOS.grupos, accion: () => { location.href = URL_TABULA; } },
+    { texto: "Pizarra Fori", icono: ICONOS.pizarra, accion: () => { location.href = URL_FORI; } },
+  ] : [
+    { texto: "Nueva ficha", icono: ICONOS.nueva, accion: () => abrirSelector({ tamano: "completa", alElegir: nuevaFicha }) },
+    { texto: "Ajustes", icono: ICONOS.ajustes, accion: ajustes.abrir },
+  ]);
   /** «Crear ficha»: una ficha nueva con el modelo elegido (la composición anterior no se toca: sigue en Recientes). */
   function nuevaFicha(id, curso) {
     if (!id || !hayTipo(id)) return;
@@ -509,10 +568,16 @@ function iniciar() {
     descartarBorrador: () => { ctx.borrador.descartar(); refrescarInicio(); },
     abrir: comp.abrirGuardada,
     leerNube: () => { if (!ctx.enNube) nubeV.leerNube(); },
+  });
+  // Fase 3: Ajustes en una hoja inferior (único sitio de la cuenta y del tema), desde «⋯» en la cabecera.
+  const ajustes = crearAjustes({
+    tema,
     fuentes: () => ({ fuentes: todasLasFuentes(), fuente: $("fuente").value }),
     ponerFuente: (id) => { ctx.fuentes.elegirFuente(id); pintar(); },
     bnDefecto,
     ponerBn: (v) => { ponerBnDefecto(v); $("bn").checked = v; pintar(); },
+    hayBorrador: () => ctx.borrador.hay(hayTipo),
+    descartarBorrador: () => { ctx.borrador.descartar(); refrescarInicio(); },
   });
 
   ctx.lista.pintar();
@@ -532,8 +597,7 @@ function iniciar() {
 }
 
 if (typeof document !== "undefined") {
-  iniciarTema($("tema"));
-  iniciar();
+  iniciar(iniciarTema());
   // Paso 4.5 · sin conexión. Si llega una versión nueva, se avisa (no se recarga solo: se perdería lo escrito).
   registrarSW(() => { $("aviso").hidden = false; $("recargar").onclick = () => location.reload(); });
 }
@@ -25000,6 +25064,39 @@ function clasifica(p, act) {
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
 },
+"ui/ajustes_vista.js": (__exp) => {
+// Charta · Ajustes en una hoja inferior (fase 3 de PLAN-DISENO): cuenta, tema, letra y blanco y negro por defecto y
+// borrador. Es el único sitio de la cuenta y del tema (antes también en la cabecera). La cuenta la pinta nube_vista.js
+// en #iaCuenta / #iaCuentaTxt. crearAjustes(cb) → { abrir(), pintar() }
+const { abrirHoja } = __req("ui/piezas.js");
+const { TEMAS, NOMBRES_TEMA } = __req("ui/tema.js");
+const { $, el } = __req("ui/dom.js");
+function crearAjustes(cb) {
+  let abierta = false;
+  $("iaTema").replaceChildren(...TEMAS.map((t) => el("option", { value: t, textContent: NOMBRES_TEMA[t] })));
+  $("iaTema").onchange = () => cb.tema.poner($("iaTema").value);
+  $("iaFuente").onchange = () => cb.ponerFuente($("iaFuente").value);
+  $("iaBn").onchange = () => cb.ponerBn($("iaBn").checked);
+  $("iaBorrador").onclick = () => { cb.descartarBorrador(); pintar(); };
+
+  function pintar() {
+    if (!abierta) return;
+    const { fuentes, fuente } = cb.fuentes();
+    $("iaFuente").replaceChildren(...fuentes.map((f) => el("option", { value: f.id, textContent: f.nombre, selected: f.id === fuente })));
+    $("iaTema").value = cb.tema.actual();
+    $("iaBn").checked = cb.bnDefecto();
+    const hay = cb.hayBorrador();
+    $("iaBorrador").disabled = !hay; $("iaBorrador").textContent = hay ? "Descartar borrador" : "No hay borrador";
+  }
+  function abrir() {
+    abierta = true; pintar();
+    abrirHoja({ titulo: "Ajustes", contenido: $("ajustes"), alCerrar: () => { abierta = false; } });
+  }
+  return { abrir, pintar };
+}
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get crearAjustes() { return crearAjustes; } }));
+},
 "ui/alumnos.js": (__exp) => {
 // Charta · lista de alumnos escrita o pegada (paso 4.3). Sin DOM. Los nombres nunca se guardan.
 const MAX_ALUMNOS = 30;
@@ -25108,9 +25205,10 @@ if (enNavegador) {
   addEventListener("popstate", (ev) => {
     if (!pila.length) return;
     const n = history.state?.capa || 0;
-    let cerro = false;
-    while (pila.length && pila.at(-1).id > n) { quitar(pila.at(-1)); cerro = true; }
-    if (cerro) ev.stopImmediatePropagation();
+    // Primero se decide cuáles cierra esta vuelta: lo que se haga después (p. ej. menú → Ajustes) puede abrir otra capa.
+    const cerrar = pila.filter((c) => c.id > n).reverse();
+    for (const c of cerrar) quitar(c);
+    if (cerrar.length) ev.stopImmediatePropagation();
   });
 }
 
@@ -25631,11 +25729,12 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get DEFECTO() 
 },
 "ui/inicio_vista.js": (__exp) => {
 // Charta · vista de la pantalla de inicio (paso 4.8). Solo DOM: la lógica está en inicio.js.
-// crearInicio(cb) → { pintar(estado), cerrarMaterias() }. Todo lo que cambia la ficha lo hace app.js a través de cb.
+// crearInicio(cb) → { pintar(estado), cerrarMaterias() }. Ajustes: ajustes_vista.js (fase 3). Todo lo que cambia la ficha lo hace app.js a través de cb.
 const { PALETA } = __req("render/hoja.js");
 const { miniatura } = __req("ui/navegacion.js");
 const { fechaCorta } = __req("ui/inicio.js");
 const { disponible, nombresModelos, etiquetasPestanas } = __req("ui/lista_fichas.js");
+const { prepararPestanas, marcarPestana } = __req("ui/piezas.js");
 const { $, el } = __req("ui/dom.js");
 /** Miniaturas de una en una (no bloquean la pantalla); se cancelan si el inicio se repinta. */
 let tanda = 0;
@@ -25666,37 +25765,18 @@ function crearInicio(cb) {
     if (!abierto) $("iniMateriasBtn").replaceChildren(...ms.map((m) => el("button", { textContent: m.nombre, onclick: () => cb.crear(m.id) })));
   };
   $("iniSeguir").onclick = () => cb.seguir();
-  const descartar = () => { cb.descartarBorrador(); if (!$("iniAjustes").hidden) pintarAjustes(); };
-  $("iniDescartar").onclick = descartar;
+  $("iniDescartar").onclick = () => cb.descartarBorrador();
+  prepararPestanas(document.querySelector("#iniFichas .pestanas"), $("iniLista"));
   $("iFav").onclick = () => { pestana = "favoritos"; pintarFichas(); };
   $("iRec").onclick = () => { pestana = "recientes"; pintarFichas(); };
   $("iNube").onclick = () => { pestana = "nube"; cb.leerNube(); pintarFichas(); };
-
-  // Ajustes discretos
-  $("iniAjustesBtn").onclick = () => {
-    const abrir = $("iniAjustes").hidden;
-    $("iniAjustes").hidden = !abrir; $("iniAjustesBtn").setAttribute("aria-expanded", String(abrir));
-    if (abrir) { pintarAjustes(); $("iniAjustes").scrollIntoView({ behavior: "smooth", block: "nearest" }); }
-  };
-  $("iaFuente").onchange = () => cb.ponerFuente($("iaFuente").value);
-  $("iaBn").onchange = () => cb.ponerBn($("iaBn").checked);
-  $("iaTema").onclick = () => $("tema").click();
-  $("iaCuenta").onclick = () => $("cuentaNube").click();
-  $("iaBorrador").onclick = descartar;
-  function pintarAjustes() {
-    const { fuentes, fuente } = cb.fuentes();
-    $("iaFuente").replaceChildren(...fuentes.map((f) => el("option", { value: f.id, textContent: f.nombre, selected: f.id === fuente })));
-    $("iaBn").checked = cb.bnDefecto();
-    $("iaCuenta").textContent = $("cuentaNube").textContent; $("iaCuenta").disabled = $("cuentaNube").disabled;
-    $("iaBorrador").disabled = !cb.hayBorrador(); $("iaBorrador").textContent = cb.hayBorrador() ? "Descartar borrador" : "No hay borrador";
-  }
 
   function pintarFichas() {
     const { fav, rec, nube, dentro } = estado;
     if (pestana === "nube" && !dentro) pestana = "favoritos";
     if (pestana === "favoritos" && !fav.length) pestana = rec.length || !dentro ? "recientes" : "nube";
-    $("iFav").classList.toggle("activa", pestana === "favoritos"); $("iRec").classList.toggle("activa", pestana === "recientes");
-    $("iNube").classList.toggle("activa", pestana === "nube"); $("iNube").hidden = !dentro;
+    $("iNube").hidden = !dentro;
+    marcarPestana(document.querySelector("#iniFichas .pestanas"), $({ favoritos: "iFav", recientes: "iRec", nube: "iNube" }[pestana]));
     const t = etiquetasPestanas({ fav, rec, nube });
     $("iFav").textContent = t.fav; $("iRec").textContent = t.rec; $("iNube").textContent = t.nube;
     const vacio = (t) => [el("li", { className: "info", textContent: t })];
@@ -25742,7 +25822,6 @@ function crearInicio(cb) {
         return b;
       }));
       pintarFichas();
-      if (!$("iniAjustes").hidden) pintarAjustes();
     },
     cerrarMaterias() { $("iniMaterias").hidden = true; },
   };
@@ -25902,6 +25981,7 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get crearLetra
 // crearListaFichas(ctx) → { pintar(), marcarFavorito(), mostrarNube() }
 const { modelo } = __req("nucleo/ficha.js");
 const { hayTipo } = __req("nucleo/tipos.js");
+const { confirmar, prepararPestanas, marcarPestana } = __req("ui/piezas.js");
 const { $, el } = __req("ui/dom.js");
 /** ¿Se puede abrir? Todos sus modelos existen en esta versión. */
 const disponible = (comp, hay = hayTipo) => { const a = comp?.actividades || []; return a.length > 0 && a.every((x) => hay(x.tipo)); };
@@ -25928,8 +26008,8 @@ function crearListaFichas(ctx) {
     if (pestana === "nube" && !dentro) pestana = "favoritos";
     if (!fav.length && pestana === "favoritos") pestana = dentro ? "nube" : "recientes";
     if (!rec.length && pestana === "recientes") pestana = fav.length || !dentro ? "favoritos" : "nube";
-    $("pFav").classList.toggle("activa", pestana === "favoritos"); $("pRec").classList.toggle("activa", pestana === "recientes");
-    $("pNube").classList.toggle("activa", pestana === "nube"); $("pNube").hidden = !dentro;
+    $("pNube").hidden = !dentro;
+    marcarPestana(document.querySelector("#guardadas .pestanas"), $({ favoritos: "pFav", recientes: "pRec", nube: "pNube" }[pestana]));
     const t = etiquetasPestanas({ fav, rec, nube: ctx.enNube });
     $("pFav").textContent = t.fav; $("pRec").textContent = t.rec; $("pNube").textContent = t.nube;
     if (pestana === "nube") return pintarNube(nubeLista);
@@ -25939,7 +26019,8 @@ function crearListaFichas(ctx) {
         el("strong", { textContent: c.nombre || "Ficha" }),
         el("small", { textContent: nombresModelos(c) + (c.fecha ? " · " + fechaDMA(c.fecha) : "") }));
       abrir.onclick = () => comp().abrirGuardada(c);
-      const x = el("button", { className: "g-quitar", textContent: "✕", title: "Quitar de la lista" });
+      const x = el("button", { className: "g-quitar fantasma icono", textContent: "✕", title: "Quitar de la lista" });
+      x.setAttribute("aria-label", `Quitar «${c.nombre || "Ficha"}» de la lista`);
       x.onclick = () => { g.quitar(pestana, i); pintar(); marcarFavorito(); };
       return el("li", {}, abrir, x);
     }));
@@ -25952,15 +26033,17 @@ function crearListaFichas(ctx) {
         el("strong", { textContent: x.titulo }),
         el("small", { textContent: nombresModelos(x.composicion) + (x.creada ? " · " + fechaDMA(x.creada.slice(0, 10)) : "") }));
       abrir.onclick = () => comp().abrirGuardada(x.composicion);
-      const b = el("button", { className: "g-quitar", textContent: "✕", title: "Borrar de la nube" });
+      const b = el("button", { className: "g-quitar fantasma icono", textContent: "✕", title: "Borrar de la nube" });
+      b.setAttribute("aria-label", `Borrar «${x.titulo}» de la nube`);
       b.onclick = async () => {
-        if (!confirm(`¿Borrar «${x.titulo}» de la nube? Tabula y Fori dejarán de verla.`)) return;
+        if (!await confirmar({ titulo: `¿Borrar «${x.titulo}» de la nube?`, texto: "Tabula y Fori dejarán de verla.", si: "Borrar", peligro: true })) return;
         try { await nubeV().nube.borrar(x.id); ctx.enNube = ctx.enNube.filter((y) => y.id !== x.id); pintar(); } catch (e) { nubeV().avisoNube(e.message, true); }
       };
       return el("li", {}, abrir, b);
     }));
   }
   function mostrarNube() { pestana = "nube"; pintar(); }
+  prepararPestanas(document.querySelector("#guardadas .pestanas"), $("listaGuardadas"));
   $("pFav").onclick = () => { pestana = "favoritos"; pintar(); };
   $("pRec").onclick = () => { pestana = "recientes"; pintar(); };
   $("pNube").onclick = () => { mostrarNube(); if (!ctx.enNube) nubeV().leerNube(); };
@@ -26074,6 +26157,7 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get cursos() {
 // /apps/charta/fichas/{id} (sin nombres de alumnos). La lista leída vive en `ctx.enNube` (null = sin leer).
 // crearNubeVista(ctx) → { nube, avisoNube(texto, error), leerNube(), idUrl, aFori }
 const { crearNube } = __req("nube/nube.js");
+const { confirmar } = __req("ui/piezas.js");
 const { $ } = __req("ui/dom.js");
 function crearNubeVista(ctx) {
   const nube = crearNube({ almacen: ctx.almacen });
@@ -26083,11 +26167,14 @@ function crearNubeVista(ctx) {
     try { ctx.enNube = await nube.listar(); } catch (e) { ctx.enNube = ctx.enNube || []; avisoNube(e.message, true); }
     ctx.lista.pintar(); ctx.refrescarInicio();
   }
+  // La cuenta solo está en Ajustes (fase 3): #iaCuenta (Entrar / Cerrar sesión) y #iaCuentaTxt (estado).
   function pintarCuenta(e) {
-    const b = $("cuentaNube");
+    const b = $("iaCuenta"), dentro = e.estado === "dentro";
     b.disabled = e.estado === "cargando";
-    b.textContent = e.estado === "dentro" ? "☁ " + (e.usuario.nombre.split(" ")[0] || "Mi cuenta") : e.estado === "cargando" ? "☁ …" : "☁ Entrar";
-    b.title = e.estado === "dentro" ? `Sesión de ${e.usuario.correo}. Pulsa para cerrarla.` : "Iniciar sesión con Google para guardar fichas en la nube";
+    b.textContent = dentro ? "Cerrar sesión" : e.estado === "cargando" ? "Entrando…" : "Entrar con Google";
+    $("iaCuentaTxt").textContent = e.error || (dentro ? `Sesión de ${e.usuario.nombre || e.usuario.correo} (${e.usuario.correo}). Tus fichas de la nube están en Inicio → Mis fichas.`
+      : "Entra con tu cuenta de Google para guardar fichas en la nube y abrirlas desde Tabula y Fori.");
+    $("iaCuentaTxt").classList.toggle("error", !!e.error);
     if (e.error) avisoNube(e.error, true);
   }
   nube.alCambiar((e) => {
@@ -26095,9 +26182,12 @@ function crearNubeVista(ctx) {
     if (e.estado === "dentro" && !ctx.enNube) leerNube(); else if (e.estado !== "dentro") ctx.enNube = null;
     ctx.lista.pintar(); ctx.refrescarInicio();
   });
-  $("cuentaNube").onclick = async () => {
+  $("iaCuenta").onclick = async () => {
     const e = nube.estado();
-    if (e.estado === "dentro") { if (confirm(`¿Cerrar la sesión de ${e.usuario.correo}? Las fichas siguen en la nube.`)) await nube.salir(); return; }
+    if (e.estado === "dentro") {
+      if (await confirmar({ titulo: "¿Cerrar la sesión?", texto: `Sesión de ${e.usuario.correo}. Las fichas siguen en la nube.`, si: "Cerrar sesión" })) await nube.salir();
+      return;
+    }
     try { await nube.entrar(); } catch {}
   };
   $("guardarNube").onclick = async () => {
@@ -26118,7 +26208,7 @@ function crearNubeVista(ctx) {
   const aFori = new URLSearchParams(location.search).get("a") === "fori";   // la pide Fori: abrirla y devolvérsela
   if (nube.recordada() || idUrl) nube.iniciar().then(async () => {
     if (!idUrl) return;
-    if (nube.estado().estado !== "dentro") { avisoNube("Inicia sesión (☁ Entrar) para abrir la ficha enlazada."); return; }
+    if (nube.estado().estado !== "dentro") { avisoNube("Inicia sesión (⋯ → Ajustes → Entrar con Google) para abrir la ficha enlazada."); return; }
     try { const x = await nube.abrir(idUrl); if (x.composicion) { ctx.comp.abrirGuardada(x.composicion); if (aFori) ctx.enlaces.proyectar(); } } catch (e) { avisoNube(e.message, true); }
   }).catch(() => {});
   return { nube, avisoNube, leerNube, idUrl, aFori };
@@ -26158,6 +26248,190 @@ function paginaDe(cuentas, i) {
 const inicioDe = (cuentas, k) => cuentas.slice(0, k).reduce((a, b) => a + b, 0);
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get cuentasDe() { return cuentasDe; }, get paginasValidas() { return paginasValidas; }, get agrupar() { return agrupar; }, get paginaDe() { return paginaDe; }, get inicioDe() { return inicioDe; } }));
+},
+"ui/piezas.js": (__exp) => {
+// Charta · piezas comunes de interfaz (fase 3 de PLAN-DISENO): hoja inferior, menú «⋯», confirmar() (sustituye a
+// confirm(), R8) y pestañas accesibles. Hojas, menús y avisos son capas (capas.js): Atrás de Android, Escape y tocar
+// fuera las cierran; mientras están abiertas el resto de la página queda inerte (ni foco ni lector de pantalla), el
+// tabulador da la vuelta dentro y, al cerrarlas, el foco vuelve a donde estaba.
+const { abrirCapa } = __req("ui/capas.js");
+const { el } = __req("ui/dom.js");
+const ENFOCABLES = 'button:not([disabled]), [href], input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+/** Controles a los que llega el tabulador dentro de `raiz` (visibles). */
+const enfocables = (raiz) => [...raiz.querySelectorAll(ENFOCABLES)].filter((x) => x.getClientRects().length);
+
+let nId = 0;
+const nuevoId = (p) => `${p}-${++nId}`;
+const modales = [];
+
+/**
+ * Convierte `raiz` (ya en el body) en modal: lo demás, inerte; el tabulador, dentro; el scroll de la página, quieto.
+ * Devuelve soltar(), que lo deshace y devuelve el foco a quien lo tenía. La usan las piezas de aquí y el selector.
+ */
+function modal(raiz) {
+  const antes = document.activeElement, inertes = [];
+  for (const h of document.body.children) if (h !== raiz && !h.inert && h.tagName !== "SCRIPT") { h.inert = true; inertes.push(h); }
+  modales.push(raiz);
+  raiz.style.zIndex = String(30 + modales.length * 2);
+  document.body.classList.add("con-capa");
+  const tab = (e) => {
+    if (e.key !== "Tab") return;
+    const xs = enfocables(raiz), i = xs.indexOf(document.activeElement);
+    if (!xs.length) { e.preventDefault(); return; }
+    if (e.shiftKey && i <= 0) { e.preventDefault(); xs.at(-1).focus(); }
+    else if (!e.shiftKey && (i === -1 || i === xs.length - 1)) { e.preventDefault(); xs[0].focus(); }
+  };
+  raiz.addEventListener("keydown", tab);
+  return function soltar() {
+    raiz.removeEventListener("keydown", tab);
+    modales.splice(modales.indexOf(raiz), 1);
+    for (const h of inertes) h.inert = false;
+    if (!modales.length) document.body.classList.remove("con-capa");
+    if (antes?.isConnected && !antes.closest("[hidden]")) try { antes.focus({ preventScroll: true }); } catch {}
+  };
+}
+
+/**
+ * Capa modal genérica: velo + caja. `cuerpo(caja, cerrar)` la rellena. Escape, Atrás y tocar el velo cierran.
+ * → { caja, cerrar(despues?) }; `despues` se ejecuta cuando el historial ya ha vuelto (puede abrir otra capa).
+ */
+function capaModal({ clase, rol = "dialog", velo = "velo", cuerpo, alCerrar, enfocar }) {
+  const caja = el("div", { className: clase, tabIndex: -1 });
+  caja.setAttribute("role", rol); caja.setAttribute("aria-modal", "true");
+  const fondo = el("div", { className: velo }, caja);
+  let capa = null;
+  const cerrar = (despues) => capa?.cerrar(despues);
+  cuerpo(caja, cerrar);   // antes de modal(): lo que se mueva aquí desde la página no debe quedar inerte
+  document.body.append(fondo);
+  const soltar = modal(fondo);
+  capa = abrirCapa(() => { fondo.remove(); soltar(); alCerrar?.(); });
+  fondo.addEventListener("click", (e) => { if (e.target === fondo) cerrar(); });
+  caja.addEventListener("keydown", (e) => { if (e.key === "Escape") { e.stopPropagation(); cerrar(); } });
+  (enfocar?.(caja) || caja).focus({ preventScroll: true });
+  return { caja, cerrar };
+}
+
+const icoCerrar = () => Object.assign(el("span", { className: "ico" }),
+  { innerHTML: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>' });
+
+/**
+ * Hoja inferior (en tablet, ventana centrada). `contenido`: un nodo; si ya estaba en la página, vuelve a su sitio
+ * (oculto) al cerrar. → { caja, cuerpo, cerrar(despues?) }
+ */
+function abrirHoja({ titulo, contenido, alCerrar }) {
+  const sitio = contenido?.parentNode ? { padre: contenido.parentNode, sig: contenido.nextSibling, oculto: contenido.hidden } : null;
+  let cuerpo = null;
+  const r = capaModal({
+    clase: "hoja-inf",
+    cuerpo(caja, cerrar) {
+      const h = el("h2", { id: nuevoId("hoja"), textContent: titulo });
+      const x = el("button", { className: "fantasma icono", title: "Cerrar", onclick: () => cerrar() }, icoCerrar());
+      x.setAttribute("aria-label", "Cerrar");
+      caja.setAttribute("aria-labelledby", h.id);
+      cuerpo = el("div", { className: "hoja-inf-cuerpo" });
+      if (contenido) { contenido.hidden = false; cuerpo.append(contenido); }
+      caja.append(el("div", { className: "hoja-inf-cab" }, h, x), cuerpo);
+    },
+    alCerrar() {
+      if (sitio && contenido) { contenido.hidden = sitio.oculto; sitio.padre.insertBefore(contenido, sitio.sig); }
+      alCerrar?.();
+    },
+  });
+  return { ...r, cuerpo };
+}
+
+/**
+ * Menú «⋯» junto a `ancla`. items: [{ texto, icono? (svg), accion(), peligro?, desactivado? } | "-" (separador)].
+ * Flechas, Inicio y Fin mueven el foco; la acción se ejecuta cuando el menú ya está cerrado.
+ */
+function abrirMenu(ancla, items) {
+  ancla.setAttribute("aria-expanded", "true");
+  const botones = [];
+  const { caja } = capaModal({
+    clase: "menu", rol: "menu", velo: "velo transparente",
+    alCerrar: () => ancla.setAttribute("aria-expanded", "false"),
+    cuerpo(caja, cerrar) {
+      if (ancla.id) caja.setAttribute("aria-labelledby", ancla.id);
+      for (const it of items) {
+        if (it === "-") { caja.append(el("div", { className: "menu-sep", role: "separator" })); continue; }
+        const b = el("button", { className: "menu-item" + (it.peligro ? " peligro" : ""), tabIndex: -1, disabled: !!it.desactivado });
+        b.setAttribute("role", "menuitem");
+        if (it.icono) b.append(Object.assign(el("span", { className: "ico" }), { innerHTML: it.icono }));
+        b.append(el("span", { textContent: it.texto }));
+        b.onclick = () => cerrar(it.accion);
+        botones.push(b); caja.append(b);
+      }
+      caja.addEventListener("keydown", (e) => {
+        const xs = botones.filter((b) => !b.disabled), i = xs.indexOf(document.activeElement);
+        const ir = { ArrowDown: i + 1, ArrowUp: i - 1, Home: 0, End: xs.length - 1 }[e.key];
+        if (ir !== undefined) { e.preventDefault(); xs[(ir + xs.length) % xs.length]?.focus(); }
+        else if (e.key === "Tab") { e.preventDefault(); cerrar(); }
+      });
+    },
+    enfocar: () => botones.find((b) => !b.disabled),
+  });
+  // Debajo del ancla, alineado a su borde derecho; si no cabe, encima.
+  const a = ancla.getBoundingClientRect(), m = caja.getBoundingClientRect(), w = innerWidth, h = innerHeight;
+  caja.style.left = Math.max(8, Math.min(a.right - m.width, w - m.width - 8)) + "px";
+  caja.style.top = (a.bottom + 4 + m.height > h - 8 && a.top - 4 - m.height > 8 ? a.top - 4 - m.height : Math.min(a.bottom + 4, h - m.height - 8)) + "px";
+}
+
+/** Pregunta con dos botones (sustituye a confirm()). → Promise<boolean>; Escape, Atrás o tocar fuera = no. */
+function confirmar({ titulo, texto = "", si = "Aceptar", no = "Cancelar", peligro = false }) {
+  return new Promise((resolver) => {
+    let respuesta = false;
+    capaModal({
+      clase: "confirmar", rol: "alertdialog",
+      alCerrar: () => resolver(respuesta),
+      cuerpo(caja, cerrar) {
+        const h = el("h2", { id: nuevoId("conf"), textContent: titulo }), p = el("p", { id: nuevoId("conf"), textContent: texto });
+        caja.setAttribute("aria-labelledby", h.id);
+        if (texto) caja.setAttribute("aria-describedby", p.id);
+        const bNo = el("button", { className: "fantasma", textContent: no, onclick: () => cerrar() });
+        const bSi = el("button", { className: peligro ? "peligro" : "primario", textContent: si, onclick: () => { respuesta = true; cerrar(); } });
+        caja.append(h, ...(texto ? [p] : []), el("div", { className: "botones" }, bNo, bSi));
+      },
+      enfocar: (caja) => caja.querySelector(".fantasma"),   // lo seguro primero
+    });
+  });
+}
+
+/**
+ * Pestañas con su rol (tablist/tab/tabpanel) y flechas para moverse. `panel`: el elemento que cambian.
+ * Las pestañas siguen siendo botones con su onclick; marcarPestana() pone la activa.
+ */
+function prepararPestanas(lista, panel) {
+  lista.setAttribute("role", "tablist");
+  if (!panel.id) panel.id = nuevoId("panel");
+  panel.setAttribute("role", "tabpanel");
+  for (const b of lista.querySelectorAll("button")) { b.setAttribute("role", "tab"); b.setAttribute("aria-controls", panel.id); if (!b.id) b.id = nuevoId("pest"); }
+  lista.addEventListener("keydown", (e) => {
+    const xs = [...lista.querySelectorAll("button")].filter((b) => !b.hidden), i = xs.indexOf(document.activeElement);
+    const ir = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: xs.length - 1 }[e.key];
+    if (ir === undefined || i < 0) return;
+    e.preventDefault();
+    const b = xs[(ir + xs.length) % xs.length]; b.focus(); b.click();
+  });
+}
+function marcarPestana(lista, activa) {
+  for (const b of lista.querySelectorAll("button")) {
+    const si = b === activa;
+    b.classList.toggle("activa", si); b.setAttribute("aria-selected", String(si)); b.tabIndex = si ? 0 : -1;
+    if (si) document.getElementById(b.getAttribute("aria-controls"))?.setAttribute("aria-labelledby", b.id);
+  }
+}
+
+/** Iconos de 20 px para menús y cabecera. */
+const ICONOS = {
+  mas: '<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>',
+  atras: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>',
+  ajustes: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>',
+  nueva: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M12 12v6M9 15h6"/></svg>',
+  grupos: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg>',
+  pizarra: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>',
+};
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get enfocables() { return enfocables; }, get modal() { return modal; }, get abrirHoja() { return abrirHoja; }, get abrirMenu() { return abrirMenu; }, get confirmar() { return confirmar; }, get prepararPestanas() { return prepararPestanas; }, get marcarPestana() { return marcarPestana; }, get ICONOS() { return ICONOS; } }));
 },
 "ui/preferencias.js": (__exp) => {
 // Charta · pequeñas preferencias del dispositivo: último modelo elegido y blanco y negro por defecto.
@@ -26211,6 +26485,7 @@ function crearPrevia(ctx) {
         presentacion: { color: !$("bn").checked, ...($("fuente").value !== "andika" && { fuente: $("fuente").value }), ...($("grande").checked && { letraGrande: true }), ...($("facil").checked && { lecturaFacil: true }) },
       }, ctx.semilla);
       const bn = $("bn").checked;
+      $("barraTitulo").textContent = ficha.titulo;   // cabecera única (fase 3); editable en la fase 4
       paginas = hojas(ficha, { nombres: ns, copias: total, bn });
       const etiqueta = (p) => (p.nombre || "Sin nombre") + (ficha.variantes > 1 ? ` · variante ${letraVariante(p.variante)}` : "") + (p.total > 1 ? ` · página ${p.pagina + 1} de ${p.total}` : "");
       $("hojas").replaceChildren(...paginas.map((p) => el("div", {}, el("p", { className: "hoja-etq", textContent: etiqueta(p) }),
@@ -26258,6 +26533,7 @@ const { modelo } = __req("nucleo/ficha.js");
 const { PALETA } = __req("render/hoja.js");
 const { cursos, materias, bloques, modelos, miniatura } = __req("ui/navegacion.js");
 const { abrirCapa } = __req("ui/capas.js");
+const { modal, ICONOS } = __req("ui/piezas.js");
 function el(tag, props = {}, ...hijos) { const e = Object.assign(document.createElement(tag), props); e.append(...hijos); return e; }
 
 const NIVELES = ["curso", "materia", "bloque", "modelo"];
@@ -26273,16 +26549,21 @@ function abrirSelector({ actual = null, curso = null, tamano = "completa", ruta:
   cuadra();
 
   const migas = el("nav", { className: "migas" });
-  const titulo = el("h2");
+  migas.setAttribute("aria-label", "Ruta elegida");
+  const titulo = el("h2", { id: "selTitulo" });
   const rejilla = el("div", { className: "rejilla" });
-  const atras = el("button", { className: "sel-atras", textContent: "←", title: "Atrás" });
-  const cerrar = el("button", { className: "sel-cerrar", textContent: "✕", title: "Cerrar" });
+  // Cabecera única (fase 3): atrás + título + cerrar, botones de 44 px con nombre.
+  const atras = el("button", { className: "sel-atras fantasma icono", title: "Atrás" });
+  const cerrar = el("button", { className: "sel-cerrar fantasma icono", title: "Cerrar", textContent: "✕" });
+  atras.innerHTML = ICONOS.atras; atras.setAttribute("aria-label", "Atrás"); cerrar.setAttribute("aria-label", "Cerrar");
   const capa = el("div", { className: "selector", role: "dialog" },
     el("div", { className: "sel-cab" }, atras, titulo, cerrar), migas, rejilla);
+  capa.setAttribute("aria-modal", "true"); capa.setAttribute("aria-labelledby", titulo.id);
   document.body.append(capa);
   document.body.classList.add("con-selector");
+  const soltar = modal(capa);   // fase 3: lo de detrás, inerte; el tabulador no se escapa
   // Fase 1 (R2): el selector es una capa con su entrada de historial; Atrás de Android lo cierra.
-  const enHistorial = abrirCapa(() => { capa.remove(); document.body.classList.remove("con-selector"); });
+  const enHistorial = abrirCapa(() => { capa.remove(); document.body.classList.remove("con-selector"); soltar(); });
 
   // Si ya hay materia (Crear ficha → Lengua), solo los cursos que la tienen.
   const opciones = (nivel) => nivel === "curso" ? cursos().filter((c) => ruta.materia === undefined || materias(c.id).some((m) => m.id === ruta.materia))
@@ -26314,7 +26595,7 @@ function abrirSelector({ actual = null, curso = null, tamano = "completa", ruta:
     const nivel = nivelActual(), i = NIVELES.indexOf(nivel);
     titulo.textContent = TITULOS[nivel];
     migas.replaceChildren(...NIVELES.slice(0, i).flatMap((n, k) => {
-      const b = el("button", { textContent: nombreDe(n) });
+      const b = el("button", {}, el("span", { textContent: nombreDe(n) }));
       b.onclick = () => { for (const x of NIVELES.slice(k)) delete ruta[x]; pintar(); };
       return k ? [el("span", { textContent: "›" }), b] : [b];
     }));
@@ -26364,7 +26645,7 @@ function abrirSelector({ actual = null, curso = null, tamano = "completa", ruta:
   }
 
   cerrar.onclick = () => fin(null);
-  capa.addEventListener("keydown", (e) => { if (e.key === "Escape") fin(null); });
+  capa.addEventListener("keydown", (e) => { if (e.key === "Escape" && e.target.closest(".selector") === capa) fin(null); });
   pintar();
   atras.focus();
 }
@@ -26477,16 +26758,12 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get MAX_ENLACE
 // las fichas (papel) se ven siempre blancas, como saldrán impresas.
 const TEMAS = ["sistema", "claro", "oscuro"];
 const CLAVE = "charta:tema";
-const NOMBRES = { sistema: "Tema: automático", claro: "Tema: claro", oscuro: "Tema: oscuro" };
-const ICONOS = {
-  sistema: '<circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16Z" fill="currentColor"/>',
-  claro: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
-  oscuro: '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/>',
-};
+const NOMBRES_TEMA = { sistema: "Automático (el del sistema)", claro: "Claro", oscuro: "Oscuro" };
 const siguienteTema = (t) => TEMAS[(TEMAS.indexOf(t) + 1) % TEMAS.length];
 const esOscuro = (t, sistemaOscuro) => t === "oscuro" || (t === "sistema" && !!sistemaOscuro);
 
-function iniciarTema(boton) {
+/** Aplica el tema guardado y lo sigue si cambia el del sistema. → { actual(), poner(t) } (lo usa Ajustes; fase 3: ya no hay botón en la cabecera). */
+function iniciarTema() {
   const leer = () => { try { const t = localStorage.getItem(CLAVE); return TEMAS.includes(t) ? t : "sistema"; } catch { return "sistema"; } };
   const mq = matchMedia("(prefers-color-scheme: dark)");
   let tema = leer();
@@ -26494,16 +26771,14 @@ function iniciarTema(boton) {
     const oscuro = esOscuro(tema, mq.matches);
     if (oscuro) document.documentElement.dataset.tema = "oscuro"; else delete document.documentElement.dataset.tema;
     const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.content = oscuro ? "#1A1D1B" : "#FAF9F5";
-    boton.innerHTML = `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">${ICONOS[tema]}</svg>`;
-    boton.title = NOMBRES[tema]; boton.setAttribute("aria-label", NOMBRES[tema]);
+    if (meta) meta.content = oscuro ? "#171C1C" : "#FAF9F5";
   }
-  boton.onclick = () => { tema = siguienteTema(tema); try { localStorage.setItem(CLAVE, tema); } catch {} aplicar(); };
   mq.addEventListener("change", aplicar);
   aplicar();
+  return { actual: () => tema, poner(t) { if (!TEMAS.includes(t)) return; tema = t; try { localStorage.setItem(CLAVE, t); } catch {} aplicar(); } };
 }
 
-Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get TEMAS() { return TEMAS; }, get siguienteTema() { return siguienteTema; }, get esOscuro() { return esOscuro; }, get iniciarTema() { return iniciarTema; } }));
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get TEMAS() { return TEMAS; }, get NOMBRES_TEMA() { return NOMBRES_TEMA; }, get siguienteTema() { return siguienteTema; }, get esOscuro() { return esOscuro; }, get iniciarTema() { return iniciarTema; } }));
 }
 };
 const __cache = {};
