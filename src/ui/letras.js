@@ -3,24 +3,30 @@
 // Todas marcadas = sin el campo: la ficha es la de siempre.
 import { modelo, esLengua1 } from "../nucleo/ficha.js";
 import { ABECEDARIO } from "../lengua/reglas.js";
-import { normalizarVistas, conVistas, permitida } from "../lengua/vistas.js";
+import { normalizarVistas, normalizarObligatorias, conVistas, permitida } from "../lengua/vistas.js";
 import { USA_FRASES, leerPropias } from "../lengua/frases.js";
 
 
 export const VOCALES = "aeiou";
 export const CLAVE_LETRAS = "charta:letras";   // las últimas marcadas (las que lleva la clase): se proponen en fichas nuevas
+export const CLAVE_OBLIGATORIAS = "charta:letrasObligatorias";   // las obligatorias (pulsación larga): la letra que se está enseñando
 
 const admite = (a) => { try { return esLengua1(modelo(a.tipo), a.curso); } catch { return false; } };
 /** ¿Alguna actividad admite el mapa de letras? */
 export const hayLengua1 = (acts) => acts.some(admite);
-/** Las actividades con las letras puestas (vistas = cadena; null = todas; "" = ninguna → error claro). */
-export function conLetras(acts, vistas) {
+/** Las actividades con las letras puestas (vistas = cadena; null = todas; "" = ninguna → error claro)
+ *  y las obligatorias (cadena o null: cada palabra o frase lleva al menos una). */
+export function conLetras(acts, vistas, obligatorias = null) {
   if (vistas === "" && acts.some(admite)) throw new Error("Marca alguna letra en «Letras».");
+  const ob = normalizarObligatorias(obligatorias);
   return acts.map((a) => {
-    const { vistas: _, ...params } = a.params || {};
-    return admite(a) && vistas ? { ...a, params: { ...params, vistas } } : { ...a, params };
+    const { vistas: _, obligatorias: __, ...params } = a.params || {};
+    if (!admite(a)) return { ...a, params };
+    return { ...a, params: { ...params, ...(vistas && { vistas }), ...(ob && { obligatorias: ob }) } };
   });
 }
+/** Letras obligatorias de una composición guardada (las de su primera actividad de Lengua de 1.º que las lleve) o null. */
+export const obligatoriasDe = (c) => normalizarObligatorias((c?.actividades || []).find((a) => admite(a) && a.params?.obligatorias)?.params.obligatorias);
 /** Letras de una composición guardada (las de su primera actividad de Lengua de 1.º) o null (todas). */
 export const letrasDe = (c) => normalizarVistas((c?.actividades || []).find((a) => admite(a) && a.params?.vistas)?.params.vistas);
 /** Conjunto marcado → cadena para la ficha: null si están todas, "" si ninguna. */
@@ -29,7 +35,12 @@ export function vistasDe(marcadas) {
   return s.length === ABECEDARIO.length ? null : s;
 }
 /** Texto del contador: «Todas» · «Solo vocales» · «12 de 27». */
-export function resumenLetras(marcadas) {
+export function resumenLetras(marcadas, obligatorias = new Set()) {
+  const ob = ABECEDARIO.filter((l) => obligatorias.has(l));
+  const r = resumenSolo(marcadas);
+  return ob.length ? `${r} · obligatoria${ob.length > 1 ? "s" : ""}: ${ob.join(", ")}` : r;
+}
+function resumenSolo(marcadas) {
   const n = ABECEDARIO.filter((l) => marcadas.has(l)).length;
   if (n === ABECEDARIO.length) return "Todas";
   if (!n) return "Ninguna";

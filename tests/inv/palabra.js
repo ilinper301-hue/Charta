@@ -22,7 +22,8 @@ export default {
     for (const e of es) {
       assert.deepEqual(Object.keys(e.datos), ["palabra"]); assert.deepEqual(e.solucion, { huecos: [] }, "el dibujo es libre: no hay corrección");
       const m = enCaso(e.datos.palabra, p.caso, "palabra"); palabraValida(m, p, { largos: [1, 2, 3, 4] }); sinI(m, p);
-      assert.ok(ENT.get(m).d, `«${m}» no se puede dibujar`); assert.equal(ENT.get(m).c, "n", `«${m}» no es un nombre`);
+      assert.ok(ENT.get(m).d, `«${m}» no se puede dibujar`);
+      if (p.obligatorias) assert.ok([...p.obligatorias].some((o) => sinTildes(m).includes(o)), `«${m}» no lleva la obligatoria`); assert.equal(ENT.get(m).c, "n", `«${m}» no es un nombre`);
     }
   },
 

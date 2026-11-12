@@ -2659,7 +2659,7 @@
          },
          "solucion": {
           "huecos": [
-           "aro"
+           "té"
           ]
          }
         },
@@ -2671,7 +2671,7 @@
          },
          "solucion": {
           "huecos": [
-           "karate"
+           "nieto"
           ]
          }
         },
@@ -2683,7 +2683,7 @@
          },
          "solucion": {
           "huecos": [
-           "rey"
+           "goma"
           ]
          }
         },
@@ -2695,7 +2695,7 @@
          },
          "solucion": {
           "huecos": [
-           "pecera"
+           "carrera"
           ]
          }
         },
@@ -2707,7 +2707,7 @@
          },
          "solucion": {
           "huecos": [
-           "suelo"
+           "rey"
           ]
          }
         },
@@ -2719,7 +2719,7 @@
          },
          "solucion": {
           "huecos": [
-           "goma"
+           "taquilla"
           ]
          }
         },
@@ -2731,7 +2731,7 @@
          },
          "solucion": {
           "huecos": [
-           "cuchara"
+           "suelo"
           ]
          }
         },
@@ -2743,7 +2743,7 @@
          },
          "solucion": {
           "huecos": [
-           "hija"
+           "piano"
           ]
          }
         },
@@ -2755,7 +2755,7 @@
          },
          "solucion": {
           "huecos": [
-           "ducha"
+           "vaso"
           ]
          }
         },
@@ -2767,7 +2767,7 @@
          },
          "solucion": {
           "huecos": [
-           "pie"
+           "raqueta"
           ]
          }
         }
@@ -2782,7 +2782,7 @@
    "33f242811d0a09dd"
   ],
   "svgSolucion": [
-   "357d0eefa3d9e7e3"
+   "bacd17bf7cdc9f77"
   ]
  },
  "escritura.frase": {
@@ -3058,7 +3058,7 @@
       {
        "n": 1,
        "tipo": "escritura.ordena",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "letras": null,
         "tipo": null,
@@ -3077,14 +3077,16 @@
           "letras": [
            "a",
            "a",
-           "p",
-           "t"
+           "j",
+           "r",
+           "i",
+           "f"
           ],
-          "palabra": "tapa"
+          "palabra": "jirafa"
          },
          "solucion": {
           "huecos": [
-           "tapa"
+           "jirafa"
           ]
          }
         },
@@ -3092,17 +3094,15 @@
          "id": "a1e2",
          "datos": {
           "letras": [
-           "m",
-           "a",
-           "i",
-           "a",
-           "g"
+           "j",
+           "o",
+           "o"
           ],
-          "palabra": "amiga"
+          "palabra": "ojo"
          },
          "solucion": {
           "huecos": [
-           "amiga"
+           "ojo"
           ]
          }
         },
@@ -3110,18 +3110,17 @@
          "id": "a1e3",
          "datos": {
           "letras": [
-           "p",
-           "d",
-           "r",
-           "a",
-           "a",
-           "a"
+           "o",
+           "u",
+           "l",
+           "e",
+           "s"
           ],
-          "palabra": "parada"
+          "palabra": "suelo"
          },
          "solucion": {
           "huecos": [
-           "parada"
+           "suelo"
           ]
          }
         },
@@ -3129,26 +3128,10 @@
          "id": "a1e4",
          "datos": {
           "letras": [
-           "e",
-           "p",
-           "i"
-          ],
-          "palabra": "pie"
-         },
-         "solucion": {
-          "huecos": [
-           "pie"
-          ]
-         }
-        },
-        {
-         "id": "a1e5",
-         "datos": {
-          "letras": [
-           "o",
+           "a",
            "s",
-           "r",
-           "a"
+           "o",
+           "r"
           ],
           "palabra": "rosa"
          },
@@ -3159,20 +3142,36 @@
          }
         },
         {
-         "id": "a1e6",
+         "id": "a1e5",
          "datos": {
           "letras": [
-           "j",
-           "a",
-           "l",
+           "v",
+           "o",
            "u",
-           "a"
+           "h",
+           "e"
           ],
-          "palabra": "jaula"
+          "palabra": "huevo"
          },
          "solucion": {
           "huecos": [
-           "jaula"
+           "huevo"
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "letras": [
+           "e",
+           "i",
+           "p"
+          ],
+          "palabra": "pie"
+         },
+         "solucion": {
+          "huecos": [
+           "pie"
           ]
          }
         },
@@ -3180,16 +3179,16 @@
          "id": "a1e7",
          "datos": {
           "letras": [
-           "g",
-           "m",
+           "p",
            "o",
-           "a"
+           "l",
+           "e"
           ],
-          "palabra": "goma"
+          "palabra": "pelo"
          },
          "solucion": {
           "huecos": [
-           "goma"
+           "pelo"
           ]
          }
         },
@@ -3197,15 +3196,16 @@
          "id": "a1e8",
          "datos": {
           "letras": [
-           "ñ",
-           "u",
-           "a"
+           "e",
+           "a",
+           "v",
+           "ll"
           ],
-          "palabra": "uña"
+          "palabra": "llave"
          },
          "solucion": {
           "huecos": [
-           "uña"
+           "llave"
           ]
          }
         }
@@ -3217,10 +3217,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "aaafc58f8d8aa21c"
+   "5423bb8c6a8509b4"
   ],
   "svgSolucion": [
-   "03b5d4650303e152"
+   "557b225ae393523a"
   ]
  },
  "escritura.palabras": {
@@ -3259,7 +3259,7 @@
         {
          "id": "a1e1",
          "datos": {
-          "palabra": "aro",
+          "palabra": "rey",
           "libres": 2
          },
          "solucion": {
@@ -3269,7 +3269,7 @@
         {
          "id": "a1e2",
          "datos": {
-          "palabra": "hija",
+          "palabra": "nieto",
           "libres": 2
          },
          "solucion": {
@@ -3279,7 +3279,7 @@
         {
          "id": "a1e3",
          "datos": {
-          "palabra": "karate",
+          "palabra": "carrera",
           "libres": 1
          },
          "solucion": {
@@ -3289,7 +3289,7 @@
         {
          "id": "a1e4",
          "datos": {
-          "palabra": "rey",
+          "palabra": "piano",
           "libres": 1
          },
          "solucion": {
@@ -3304,10 +3304,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "fe9b3a098b863e55"
+   "98064a1d72097fc6"
   ],
   "svgSolucion": [
-   "1df9869de6db9f36"
+   "dfc48ba792ab6bfa"
   ]
  },
  "escritura.trazos": {
@@ -4086,43 +4086,9 @@
           "palabra": "goma",
           "pos": 0,
           "opciones": [
-           "l",
-           "m",
-           "g"
-          ],
-          "posicion": "principio"
-         },
-         "solucion": {
-          "huecos": [],
-          "rodea": 2
-         }
-        },
-        {
-         "id": "a1e2",
-         "datos": {
-          "palabra": "cómodo",
-          "pos": 0,
-          "opciones": [
-           "e",
-           "i",
-           "c"
-          ],
-          "posicion": "principio"
-         },
-         "solucion": {
-          "huecos": [],
-          "rodea": 2
-         }
-        },
-        {
-         "id": "a1e3",
-         "datos": {
-          "palabra": "suelo",
-          "pos": 0,
-          "opciones": [
-           "z",
-           "s",
-           "m"
+           "d",
+           "g",
+           "e"
           ],
           "posicion": "principio"
          },
@@ -4132,14 +4098,31 @@
          }
         },
         {
-         "id": "a1e4",
+         "id": "a1e2",
          "datos": {
-          "palabra": "cuchara",
+          "palabra": "rey",
           "pos": 0,
           "opciones": [
-           "d",
-           "m",
-           "c"
+           "r",
+           "a",
+           "n"
+          ],
+          "posicion": "principio"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 0
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "palabra": "piano",
+          "pos": 0,
+          "opciones": [
+           "u",
+           "l",
+           "p"
           ],
           "posicion": "principio"
          },
@@ -4149,14 +4132,14 @@
          }
         },
         {
-         "id": "a1e5",
+         "id": "a1e4",
          "datos": {
-          "palabra": "pecera",
+          "palabra": "carrera",
           "pos": 0,
           "opciones": [
-           "p",
-           "n",
-           "o"
+           "c",
+           "v",
+           "r"
           ],
           "posicion": "principio"
          },
@@ -4166,48 +4149,65 @@
          }
         },
         {
-         "id": "a1e6",
+         "id": "a1e5",
          "datos": {
-          "palabra": "rey",
+          "palabra": "nieto",
           "pos": 0,
           "opciones": [
+           "e",
            "r",
-           "n",
+           "n"
+          ],
+          "posicion": "principio"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 2
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "palabra": "cazuela",
+          "pos": 0,
+          "opciones": [
+           "d",
+           "c",
            "s"
           ],
           "posicion": "principio"
          },
          "solucion": {
           "huecos": [],
-          "rodea": 0
+          "rodea": 1
          }
         },
         {
          "id": "a1e7",
          "datos": {
-          "palabra": "ducha",
+          "palabra": "vaso",
           "pos": 0,
           "opciones": [
-           "d",
-           "b",
-           "t"
+           "e",
+           "m",
+           "v"
           ],
           "posicion": "principio"
          },
          "solucion": {
           "huecos": [],
-          "rodea": 0
+          "rodea": 2
          }
         },
         {
          "id": "a1e8",
          "datos": {
-          "palabra": "camarero",
+          "palabra": "raqueta",
           "pos": 0,
           "opciones": [
-           "d",
-           "c",
-           "r"
+           "z",
+           "r",
+           "l"
           ],
           "posicion": "principio"
          },
@@ -4219,12 +4219,12 @@
         {
          "id": "a1e9",
          "datos": {
-          "palabra": "mágico",
+          "palabra": "taquilla",
           "pos": 0,
           "opciones": [
-           "m",
-           "i",
-           "d"
+           "t",
+           "l",
+           "p"
           ],
           "posicion": "principio"
          },
@@ -4236,18 +4236,18 @@
         {
          "id": "a1e10",
          "datos": {
-          "palabra": "aro",
+          "palabra": "aburrido",
           "pos": 0,
           "opciones": [
-           "n",
-           "f",
-           "a"
+           "d",
+           "a",
+           "v"
           ],
           "posicion": "principio"
          },
          "solucion": {
           "huecos": [],
-          "rodea": 2
+          "rodea": 1
          }
         }
        ]
@@ -4258,10 +4258,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "9da53d4942d961f6"
+   "95ff2743f1744af5"
   ],
   "svgSolucion": [
-   "d317afbf76d25f4f"
+   "58a9ed33de9aeb85"
   ]
  },
  "fono.larga": {
@@ -4300,9 +4300,9 @@
          "id": "a1e1",
          "datos": {
           "palabras": [
+           "taquilla",
            "vaso",
-           "correa",
-           "panadera"
+           "aburrido"
           ],
           "cual": "mas"
          },
@@ -4315,39 +4315,39 @@
          "id": "a1e2",
          "datos": {
           "palabras": [
-           "gasolina",
-           "goma",
-           "violeta"
+           "pie",
+           "hoja",
+           "cazuela"
           ],
           "cual": "mas"
          },
          "solucion": {
           "huecos": [],
-          "rodea": 0
+          "rodea": 2
          }
         },
         {
          "id": "a1e3",
          "datos": {
           "palabras": [
-           "chocolate",
-           "suelo",
-           "pie"
+           "vacío",
+           "piso",
+           "gasolina"
           ],
           "cual": "mas"
          },
          "solucion": {
           "huecos": [],
-          "rodea": 0
+          "rodea": 2
          }
         },
         {
          "id": "a1e4",
          "datos": {
           "palabras": [
-           "mágico",
+           "lechero",
            "té",
-           "sueño"
+           "lado"
           ],
           "cual": "mas"
          },
@@ -4361,8 +4361,23 @@
          "datos": {
           "palabras": [
            "toro",
+           "etiqueta",
+           "títere"
+          ],
+          "cual": "mas"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 1
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "palabras": [
            "rey",
-           "cuchillo"
+           "chica",
+           "panadero"
           ],
           "cual": "mas"
          },
@@ -4372,42 +4387,27 @@
          }
         },
         {
-         "id": "a1e6",
-         "datos": {
-          "palabras": [
-           "mecánico",
-           "tesoro",
-           "chico"
-          ],
-          "cual": "mas"
-         },
-         "solucion": {
-          "huecos": [],
-          "rodea": 0
-         }
-        },
-        {
          "id": "a1e7",
          "datos": {
           "palabras": [
-           "mariposa",
-           "señora",
-           "medio"
+           "hoguera",
+           "limonero",
+           "rojo"
           ],
           "cual": "mas"
          },
          "solucion": {
           "huecos": [],
-          "rodea": 0
+          "rodea": 1
          }
         },
         {
          "id": "a1e8",
          "datos": {
           "palabras": [
-           "limonero",
+           "semáforo",
            "suma",
-           "maraca"
+           "palacio"
           ],
           "cual": "mas"
          },
@@ -4420,30 +4420,30 @@
          "id": "a1e9",
          "datos": {
           "palabras": [
-           "desayuno",
-           "rubio",
-           "otoño"
+           "bueno",
+           "músico",
+           "pegatina"
           ],
           "cual": "mas"
          },
          "solucion": {
           "huecos": [],
-          "rodea": 0
+          "rodea": 2
          }
         },
         {
          "id": "a1e10",
          "datos": {
           "palabras": [
-           "regalo",
-           "monedero",
-           "sano"
+           "juguete",
+           "ficha",
+           "cerradura"
           ],
           "cual": "mas"
          },
          "solucion": {
           "huecos": [],
-          "rodea": 1
+          "rodea": 2
          }
         }
        ]
@@ -4454,10 +4454,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "b174ab4a24b342dd"
+   "63b078675e8d26ad"
   ],
   "svgSolucion": [
-   "62aacffc36f53767"
+   "f4c196cb790c3e78"
   ]
  },
  "fono.posicion": {
@@ -4495,8 +4495,8 @@
         {
          "id": "a1e1",
          "datos": {
-          "palabra": "nota",
-          "letra": "n"
+          "palabra": "boli",
+          "letra": "b"
          },
          "solucion": {
           "huecos": [],
@@ -4506,8 +4506,8 @@
         {
          "id": "a1e2",
          "datos": {
-          "palabra": "palacio",
-          "letra": "p"
+          "palabra": "orilla",
+          "letra": "o"
          },
          "solucion": {
           "huecos": [],
@@ -4517,8 +4517,8 @@
         {
          "id": "a1e3",
          "datos": {
-          "palabra": "mucho",
-          "letra": "m"
+          "palabra": "todo",
+          "letra": "t"
          },
          "solucion": {
           "huecos": [],
@@ -4528,8 +4528,8 @@
         {
          "id": "a1e4",
          "datos": {
-          "palabra": "músico",
-          "letra": "m"
+          "palabra": "camino",
+          "letra": "c"
          },
          "solucion": {
           "huecos": [],
@@ -4539,7 +4539,7 @@
         {
          "id": "a1e5",
          "datos": {
-          "palabra": "diminuto",
+          "palabra": "aburrido",
           "letra": "o"
          },
          "solucion": {
@@ -4550,8 +4550,8 @@
         {
          "id": "a1e6",
          "datos": {
-          "palabra": "boli",
-          "letra": "l"
+          "palabra": "caqui",
+          "letra": "a"
          },
          "solucion": {
           "huecos": [],
@@ -4561,8 +4561,8 @@
         {
          "id": "a1e7",
          "datos": {
-          "palabra": "hoguera",
-          "letra": "r"
+          "palabra": "semana",
+          "letra": "m"
          },
          "solucion": {
           "huecos": [],
@@ -4572,8 +4572,8 @@
         {
          "id": "a1e8",
          "datos": {
-          "palabra": "juego",
-          "letra": "o"
+          "palabra": "coche",
+          "letra": "e"
          },
          "solucion": {
           "huecos": [],
@@ -4583,8 +4583,8 @@
         {
          "id": "a1e9",
          "datos": {
-          "palabra": "juguete",
-          "letra": "t"
+          "palabra": "tarea",
+          "letra": "r"
          },
          "solucion": {
           "huecos": [],
@@ -4594,8 +4594,8 @@
         {
          "id": "a1e10",
          "datos": {
-          "palabra": "etiqueta",
-          "letra": "a"
+          "palabra": "panadero",
+          "letra": "o"
          },
          "solucion": {
           "huecos": [],
@@ -4610,10 +4610,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "ad00296d47bc616a"
+   "81c14f3473051c7c"
   ],
   "svgSolucion": [
-   "329437a5144e8d1b"
+   "45cf778f22aba553"
   ]
  },
  "fono.quita": {
@@ -4653,14 +4653,14 @@
          "id": "a1e1",
          "datos": {
           "silabas": [
-           "hi",
-           "ja"
+           "nie",
+           "to"
           ],
           "k": 0
          },
          "solucion": {
           "huecos": [
-           "ja"
+           "to"
           ]
          }
         },
@@ -4668,15 +4668,15 @@
          "id": "a1e2",
          "datos": {
           "silabas": [
-           "ka",
-           "ra",
-           "te"
+           "ca",
+           "rre",
+           "ra"
           ],
           "k": 0
          },
          "solucion": {
           "huecos": [
-           "rate"
+           "rrera"
           ]
          }
         },
@@ -4684,14 +4684,14 @@
          "id": "a1e3",
          "datos": {
           "silabas": [
-           "du",
-           "cha"
+           "pia",
+           "no"
           ],
           "k": 0
          },
          "solucion": {
           "huecos": [
-           "cha"
+           "no"
           ]
          }
         },
@@ -4699,15 +4699,15 @@
          "id": "a1e4",
          "datos": {
           "silabas": [
-           "cu",
-           "cha",
-           "ra"
+           "ta",
+           "qui",
+           "lla"
           ],
           "k": 0
          },
          "solucion": {
           "huecos": [
-           "chara"
+           "quilla"
           ]
          }
         },
@@ -4715,21 +4715,52 @@
          "id": "a1e5",
          "datos": {
           "silabas": [
-           "re",
-           "ga",
-           "de",
-           "ra"
+           "pe",
+           "li",
+           "rro",
+           "jo"
           ],
           "k": 0
          },
          "solucion": {
           "huecos": [
-           "gadera"
+           "lirrojo"
           ]
          }
         },
         {
          "id": "a1e6",
+         "datos": {
+          "silabas": [
+           "va",
+           "so"
+          ],
+          "k": 0
+         },
+         "solucion": {
+          "huecos": [
+           "so"
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "silabas": [
+           "ra",
+           "que",
+           "ta"
+          ],
+          "k": 0
+         },
+         "solucion": {
+          "huecos": [
+           "queta"
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
          "datos": {
           "silabas": [
            "go",
@@ -4742,37 +4773,6 @@
            "ma"
           ]
          }
-        },
-        {
-         "id": "a1e7",
-         "datos": {
-          "silabas": [
-           "pe",
-           "ce",
-           "ra"
-          ],
-          "k": 0
-         },
-         "solucion": {
-          "huecos": [
-           "cera"
-          ]
-         }
-        },
-        {
-         "id": "a1e8",
-         "datos": {
-          "silabas": [
-           "sue",
-           "lo"
-          ],
-          "k": 0
-         },
-         "solucion": {
-          "huecos": [
-           "lo"
-          ]
-         }
         }
        ]
       }
@@ -4782,10 +4782,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "8686bb249c3c3a79"
+   "abe9324e3da3def2"
   ],
   "svgSolucion": [
-   "3cf3f6f1897ac8c6"
+   "73e4ff183236dcdc"
   ]
  },
  "fono.rimas": {
@@ -4926,19 +4926,7 @@
         {
          "id": "a1e1",
          "datos": {
-          "palabra": "ducha",
-          "n": 2,
-          "respuesta": "colorea"
-         },
-         "solucion": {
-          "huecos": [],
-          "colorea": 2
-         }
-        },
-        {
-         "id": "a1e2",
-         "datos": {
-          "palabra": "zapatero",
+          "palabra": "pelirrojo",
           "n": 4,
           "respuesta": "colorea"
          },
@@ -4948,21 +4936,33 @@
          }
         },
         {
-         "id": "a1e3",
+         "id": "a1e2",
          "datos": {
-          "palabra": "cuchara",
-          "n": 3,
+          "palabra": "rey",
+          "n": 1,
           "respuesta": "colorea"
          },
          "solucion": {
           "huecos": [],
-          "colorea": 3
+          "colorea": 1
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "palabra": "piano",
+          "n": 2,
+          "respuesta": "colorea"
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": 2
          }
         },
         {
          "id": "a1e4",
          "datos": {
-          "palabra": "hija",
+          "palabra": "nieto",
           "n": 2,
           "respuesta": "colorea"
          },
@@ -4974,31 +4974,7 @@
         {
          "id": "a1e5",
          "datos": {
-          "palabra": "pie",
-          "n": 1,
-          "respuesta": "colorea"
-         },
-         "solucion": {
-          "huecos": [],
-          "colorea": 1
-         }
-        },
-        {
-         "id": "a1e6",
-         "datos": {
-          "palabra": "aro",
-          "n": 2,
-          "respuesta": "colorea"
-         },
-         "solucion": {
-          "huecos": [],
-          "colorea": 2
-         }
-        },
-        {
-         "id": "a1e7",
-         "datos": {
-          "palabra": "regadera",
+          "palabra": "gominola",
           "n": 4,
           "respuesta": "colorea"
          },
@@ -5008,19 +4984,7 @@
          }
         },
         {
-         "id": "a1e8",
-         "datos": {
-          "palabra": "karate",
-          "n": 3,
-          "respuesta": "colorea"
-         },
-         "solucion": {
-          "huecos": [],
-          "colorea": 3
-         }
-        },
-        {
-         "id": "a1e9",
+         "id": "a1e6",
          "datos": {
           "palabra": "goma",
           "n": 2,
@@ -5032,9 +4996,45 @@
          }
         },
         {
+         "id": "a1e7",
+         "datos": {
+          "palabra": "raqueta",
+          "n": 3,
+          "respuesta": "colorea"
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": 3
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "palabra": "vaso",
+          "n": 2,
+          "respuesta": "colorea"
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": 2
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "palabra": "carrera",
+          "n": 3,
+          "respuesta": "colorea"
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": 3
+         }
+        },
+        {
          "id": "a1e10",
          "datos": {
-          "palabra": "pecera",
+          "palabra": "taquilla",
           "n": 3,
           "respuesta": "colorea"
          },
@@ -5051,10 +5051,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "8d654198f489d5fe"
+   "d666f1360aba0832"
   ],
   "svgSolucion": [
-   "f1b96ef6013cfe99"
+   "2167cf668a074b6e"
   ]
  },
  "frase.completa": {
@@ -9347,46 +9347,46 @@
          "id": "a1e1",
          "datos": {
           "items": [
-           "varita",
-           "mecánico",
-           "vaso",
-           "otoño",
-           "suelo",
-           "copa",
-           "suma",
-           "maraca",
-           "regalo",
-           "rubio",
-           "camarero",
-           "tapa",
-           "pie",
-           "cuchillo",
-           "mariposa",
-           "día",
-           "cocinero",
-           "señora",
-           "boca",
-           "sano",
-           "tierra",
-           "cuello",
-           "chico",
-           "toro",
-           "mágico",
-           "violeta",
-           "cosa",
-           "caramelo",
-           "sueño",
-           "medio",
-           "té",
-           "rey",
+           "marinero",
+           "lechero",
+           "bueno",
            "zoo",
-           "correa",
-           "piano",
-           "cómodo",
-           "goma",
-           "pera",
+           "vela",
+           "juguete",
+           "taquilla",
+           "té",
+           "vaso",
+           "títere",
+           "palacio",
+           "panadero",
+           "cazuela",
+           "lado",
+           "violeta",
+           "chica",
+           "patinete",
+           "vacío",
+           "rey",
+           "pie",
+           "río",
+           "piso",
+           "baile",
+           "reina",
+           "músico",
+           "labio",
+           "rosa",
+           "hoguera",
+           "hoja",
+           "sano",
+           "rojo",
+           "cocinero",
+           "aburrido",
+           "página",
+           "torre",
+           "cuello",
+           "suma",
+           "toro",
            "ficha",
-           "tesoro"
+           "pera"
           ],
           "contenido": "palabras",
           "total": 40
@@ -9405,10 +9405,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "248255b21de50ed4"
+   "9dc546ba30de6439"
   ],
   "svgSolucion": [
-   "7dde1854710cab05"
+   "580bd1d7c1fdf57a"
   ]
  },
  "lectura.instrucciones": {
@@ -10593,7 +10593,7 @@
         {
          "id": "a1e1",
          "datos": {
-          "palabra": "gallina",
+          "palabra": "vecino",
           "letra": "n",
           "cuenta": true
          },
@@ -10609,23 +10609,7 @@
         {
          "id": "a1e2",
          "datos": {
-          "palabra": "marioneta",
-          "letra": "n",
-          "cuenta": true
-         },
-         "solucion": {
-          "huecos": [
-           1
-          ],
-          "rodea": [
-           5
-          ]
-         }
-        },
-        {
-         "id": "a1e3",
-         "datos": {
-          "palabra": "corona",
+          "palabra": "gallina",
           "letra": "n",
           "cuenta": true
          },
@@ -10639,9 +10623,25 @@
          }
         },
         {
+         "id": "a1e3",
+         "datos": {
+          "palabra": "niño",
+          "letra": "n",
+          "cuenta": true
+         },
+         "solucion": {
+          "huecos": [
+           1
+          ],
+          "rodea": [
+           0
+          ]
+         }
+        },
+        {
          "id": "a1e4",
          "datos": {
-          "palabra": "conejo",
+          "palabra": "luna",
           "letra": "n",
           "cuenta": true
          },
@@ -10657,7 +10657,7 @@
         {
          "id": "a1e5",
          "datos": {
-          "palabra": "ceniza",
+          "palabra": "conejo",
           "letra": "n",
           "cuenta": true
          },
@@ -10673,7 +10673,7 @@
         {
          "id": "a1e6",
          "datos": {
-          "palabra": "nieta",
+          "palabra": "monedero",
           "letra": "n",
           "cuenta": true
          },
@@ -10682,12 +10682,44 @@
            1
           ],
           "rodea": [
-           0
+           2
           ]
          }
         },
         {
          "id": "a1e7",
+         "datos": {
+          "palabra": "línea",
+          "letra": "n",
+          "cuenta": true
+         },
+         "solucion": {
+          "huecos": [
+           1
+          ],
+          "rodea": [
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "palabra": "patinaje",
+          "letra": "n",
+          "cuenta": true
+         },
+         "solucion": {
+          "huecos": [
+           1
+          ],
+          "rodea": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
          "datos": {
           "palabra": "reina",
           "letra": "n",
@@ -10703,57 +10735,9 @@
          }
         },
         {
-         "id": "a1e8",
-         "datos": {
-          "palabra": "mano",
-          "letra": "n",
-          "cuenta": true
-         },
-         "solucion": {
-          "huecos": [
-           1
-          ],
-          "rodea": [
-           2
-          ]
-         }
-        },
-        {
-         "id": "a1e9",
-         "datos": {
-          "palabra": "limonero",
-          "letra": "n",
-          "cuenta": true
-         },
-         "solucion": {
-          "huecos": [
-           1
-          ],
-          "rodea": [
-           4
-          ]
-         }
-        },
-        {
          "id": "a1e10",
          "datos": {
-          "palabra": "cadena",
-          "letra": "n",
-          "cuenta": true
-         },
-         "solucion": {
-          "huecos": [
-           1
-          ],
-          "rodea": [
-           4
-          ]
-         }
-        },
-        {
-         "id": "a1e11",
-         "datos": {
-          "palabra": "nube",
+          "palabra": "noche",
           "letra": "n",
           "cuenta": true
          },
@@ -10767,7 +10751,7 @@
          }
         },
         {
-         "id": "a1e12",
+         "id": "a1e11",
          "datos": {
           "palabra": "peine",
           "letra": "n",
@@ -10781,6 +10765,22 @@
            3
           ]
          }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "palabra": "nieto",
+          "letra": "n",
+          "cuenta": true
+         },
+         "solucion": {
+          "huecos": [
+           1
+          ],
+          "rodea": [
+           0
+          ]
+         }
         }
        ]
       }
@@ -10790,10 +10790,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "072c19510516b83f"
+   "9148514cb9314e05"
   ],
   "svgSolucion": [
-   "467f45c50648bd0a"
+   "5f0a28410ad18456"
   ]
  },
  "letra.falta": {
@@ -10833,80 +10833,80 @@
         {
          "id": "a1e1",
          "datos": {
-          "palabra": "cocinero",
-          "pos": 5,
+          "palabra": "piano",
+          "pos": 3,
           "opciones": [
-           "o",
-           "a",
-           "e"
+           "n",
+           "d",
+           "v"
           ]
          },
          "solucion": {
           "huecos": [
-           "e"
+           "n"
           ]
          }
         },
         {
          "id": "a1e2",
          "datos": {
-          "palabra": "cuchara",
-          "pos": 0,
+          "palabra": "aburrido",
+          "pos": 2,
           "opciones": [
-           "c",
-           "g",
-           "v"
+           "e",
+           "a",
+           "u"
           ]
          },
          "solucion": {
           "huecos": [
-           "c"
+           "u"
           ]
          }
         },
         {
          "id": "a1e3",
          "datos": {
-          "palabra": "baile",
-          "pos": 2,
+          "palabra": "nieto",
+          "pos": 3,
           "opciones": [
-           "i",
-           "u",
-           "e"
+           "p",
+           "t",
+           "l"
           ]
          },
          "solucion": {
           "huecos": [
-           "i"
+           "t"
           ]
          }
         },
         {
          "id": "a1e4",
          "datos": {
-          "palabra": "karate",
-          "pos": 2,
+          "palabra": "taquilla",
+          "pos": 7,
           "opciones": [
-           "r",
-           "d",
-           "g"
+           "i",
+           "e",
+           "a"
           ]
          },
          "solucion": {
           "huecos": [
-           "r"
+           "a"
           ]
          }
         },
         {
          "id": "a1e5",
          "datos": {
-          "palabra": "rey",
+          "palabra": "pesado",
           "pos": 1,
           "opciones": [
            "e",
-           "a",
-           "u"
+           "i",
+           "a"
           ]
          },
          "solucion": {
@@ -10918,97 +10918,131 @@
         {
          "id": "a1e6",
          "datos": {
-          "palabra": "cómodo",
-          "pos": 3,
+          "palabra": "carrera",
+          "pos": 6,
           "opciones": [
-           "o",
-           "e",
-           "i"
-          ]
-         },
-         "solucion": {
-          "huecos": [
-           "o"
-          ]
-         }
-        },
-        {
-         "id": "a1e7",
-         "datos": {
-          "palabra": "hija",
-          "pos": 0,
-          "opciones": [
-           "p",
-           "h",
-           "n"
-          ]
-         },
-         "solucion": {
-          "huecos": [
-           "h"
-          ]
-         }
-        },
-        {
-         "id": "a1e8",
-         "datos": {
-          "palabra": "pecera",
-          "pos": 4,
-          "opciones": [
-           "b",
-           "l",
-           "r"
-          ]
-         },
-         "solucion": {
-          "huecos": [
-           "r"
-          ]
-         }
-        },
-        {
-         "id": "a1e9",
-         "datos": {
-          "palabra": "goma",
-          "pos": 0,
-          "opciones": [
-           "d",
-           "g",
-           "v"
-          ]
-         },
-         "solucion": {
-          "huecos": [
-           "g"
-          ]
-         }
-        },
-        {
-         "id": "a1e10",
-         "datos": {
-          "palabra": "aro",
-          "pos": 2,
-          "opciones": [
-           "u",
+           "i",
            "o",
            "a"
           ]
          },
          "solucion": {
           "huecos": [
-           "o"
+           "a"
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "palabra": "vaso",
+          "pos": 0,
+          "opciones": [
+           "d",
+           "z",
+           "v"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "v"
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "palabra": "cazuela",
+          "pos": 5,
+          "opciones": [
+           "l",
+           "b",
+           "z"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "l"
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "palabra": "pie",
+          "pos": 0,
+          "opciones": [
+           "m",
+           "z",
+           "p"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "p"
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "palabra": "sueño",
+          "pos": 0,
+          "opciones": [
+           "c",
+           "s",
+           "t"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "s"
           ]
          }
         },
         {
          "id": "a1e11",
          "datos": {
-          "palabra": "suelo",
-          "pos": 2,
+          "palabra": "raqueta",
+          "pos": 6,
+          "opciones": [
+           "u",
+           "a",
+           "o"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "a"
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "palabra": "cocinero",
+          "pos": 4,
+          "opciones": [
+           "z",
+           "n",
+           "s"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "n"
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "palabra": "rey",
+          "pos": 1,
           "opciones": [
            "e",
            "a",
-           "i"
+           "o"
           ]
          },
          "solucion": {
@@ -11018,87 +11052,53 @@
          }
         },
         {
-         "id": "a1e12",
-         "datos": {
-          "palabra": "ducha",
-          "pos": 0,
-          "opciones": [
-           "d",
-           "s",
-           "p"
-          ]
-         },
-         "solucion": {
-          "huecos": [
-           "d"
-          ]
-         }
-        },
-        {
-         "id": "a1e13",
-         "datos": {
-          "palabra": "pie",
-          "pos": 0,
-          "opciones": [
-           "c",
-           "v",
-           "p"
-          ]
-         },
-         "solucion": {
-          "huecos": [
-           "p"
-          ]
-         }
-        },
-        {
          "id": "a1e14",
          "datos": {
-          "palabra": "camarero",
-          "pos": 2,
+          "palabra": "goma",
+          "pos": 3,
           "opciones": [
-           "s",
-           "m",
-           "z"
+           "o",
+           "i",
+           "a"
           ]
          },
          "solucion": {
           "huecos": [
-           "m"
+           "a"
           ]
          }
         },
         {
          "id": "a1e15",
          "datos": {
-          "palabra": "mágico",
-          "pos": 5,
+          "palabra": "suelo",
+          "pos": 1,
           "opciones": [
-           "i",
-           "o",
-           "u"
+           "u",
+           "a",
+           "o"
           ]
          },
          "solucion": {
           "huecos": [
-           "o"
+           "u"
           ]
          }
         },
         {
          "id": "a1e16",
          "datos": {
-          "palabra": "cuchillo",
-          "pos": 1,
+          "palabra": "músico",
+          "pos": 3,
           "opciones": [
+           "i",
            "e",
-           "u",
            "a"
           ]
          },
          "solucion": {
           "huecos": [
-           "u"
+           "i"
           ]
          }
         }
@@ -11110,10 +11110,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "c5e387998f09bc70"
+   "af3694c0df26dcf8"
   ],
   "svgSolucion": [
-   "0928ab6df719fb15"
+   "a6edcf7fb991ad5b"
   ]
  },
  "letra.parejas": {
@@ -11284,78 +11284,6 @@
         {
          "id": "a1e1",
          "datos": {
-          "palabra": "poco",
-          "huecos": [
-           1,
-           3
-          ]
-         },
-         "solucion": {
-          "huecos": [
-           "o",
-           "o"
-          ]
-         }
-        },
-        {
-         "id": "a1e2",
-         "datos": {
-          "palabra": "mágico",
-          "huecos": [
-           1,
-           3,
-           5
-          ]
-         },
-         "solucion": {
-          "huecos": [
-           "á",
-           "i",
-           "o"
-          ]
-         }
-        },
-        {
-         "id": "a1e3",
-         "datos": {
-          "palabra": "camarero",
-          "huecos": [
-           1,
-           3,
-           5,
-           7
-          ]
-         },
-         "solucion": {
-          "huecos": [
-           "a",
-           "a",
-           "e",
-           "o"
-          ]
-         }
-        },
-        {
-         "id": "a1e4",
-         "datos": {
-          "palabra": "cuchara",
-          "huecos": [
-           1,
-           4,
-           6
-          ]
-         },
-         "solucion": {
-          "huecos": [
-           "u",
-           "a",
-           "a"
-          ]
-         }
-        },
-        {
-         "id": "a1e5",
-         "datos": {
           "palabra": "té",
           "huecos": [
            1
@@ -11368,41 +11296,7 @@
          }
         },
         {
-         "id": "a1e6",
-         "datos": {
-          "palabra": "ducha",
-          "huecos": [
-           1,
-           4
-          ]
-         },
-         "solucion": {
-          "huecos": [
-           "u",
-           "a"
-          ]
-         }
-        },
-        {
-         "id": "a1e7",
-         "datos": {
-          "palabra": "cómodo",
-          "huecos": [
-           1,
-           3,
-           5
-          ]
-         },
-         "solucion": {
-          "huecos": [
-           "ó",
-           "o",
-           "o"
-          ]
-         }
-        },
-        {
-         "id": "a1e8",
+         "id": "a1e2",
          "datos": {
           "palabra": "rey",
           "huecos": [
@@ -11416,30 +11310,28 @@
          }
         },
         {
-         "id": "a1e9",
+         "id": "a1e3",
          "datos": {
-          "palabra": "cuchillo",
+          "palabra": "suma",
           "huecos": [
            1,
-           4,
-           7
+           3
           ]
          },
          "solucion": {
           "huecos": [
            "u",
-           "i",
-           "o"
+           "a"
           ]
          }
         },
         {
-         "id": "a1e10",
+         "id": "a1e4",
          "datos": {
-          "palabra": "aro",
+          "palabra": "sano",
           "huecos": [
-           0,
-           2
+           1,
+           3
           ]
          },
          "solucion": {
@@ -11450,7 +11342,41 @@
          }
         },
         {
-         "id": "a1e11",
+         "id": "a1e5",
+         "datos": {
+          "palabra": "vaso",
+          "huecos": [
+           1,
+           3
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "a",
+           "o"
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "palabra": "sueño",
+          "huecos": [
+           1,
+           2,
+           4
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "u",
+           "e",
+           "o"
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
          "datos": {
           "palabra": "goma",
           "huecos": [
@@ -11466,9 +11392,9 @@
          }
         },
         {
-         "id": "a1e12",
+         "id": "a1e8",
          "datos": {
-          "palabra": "caramelo",
+          "palabra": "patinete",
           "huecos": [
            1,
            3,
@@ -11479,16 +11405,70 @@
          "solucion": {
           "huecos": [
            "a",
+           "i",
+           "e",
+           "e"
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "palabra": "carrera",
+          "huecos": [
+           1,
+           4,
+           6
+          ]
+         },
+         "solucion": {
+          "huecos": [
            "a",
            "e",
+           "a"
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "palabra": "cazuela",
+          "huecos": [
+           1,
+           3,
+           4,
+           6
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "a",
+           "u",
+           "e",
+           "a"
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "palabra": "toro",
+          "huecos": [
+           1,
+           3
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "o",
            "o"
           ]
          }
         },
         {
-         "id": "a1e13",
+         "id": "a1e12",
          "datos": {
-          "palabra": "karate",
+          "palabra": "ceniza",
           "huecos": [
            1,
            3,
@@ -11497,40 +11477,64 @@
          },
          "solucion": {
           "huecos": [
+           "e",
+           "i",
+           "a"
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "palabra": "aburrido",
+          "huecos": [
+           0,
+           2,
+           5,
+           7
+          ]
+         },
+         "solucion": {
+          "huecos": [
            "a",
-           "a",
-           "e"
+           "u",
+           "i",
+           "o"
           ]
          }
         },
         {
          "id": "a1e14",
          "datos": {
-          "palabra": "malo",
+          "palabra": "taquilla",
           "huecos": [
            1,
-           3
+           4,
+           7
           ]
          },
          "solucion": {
           "huecos": [
            "a",
-           "o"
+           "i",
+           "a"
           ]
          }
         },
         {
          "id": "a1e15",
          "datos": {
-          "palabra": "mapa",
+          "palabra": "raqueta",
           "huecos": [
            1,
-           3
+           4,
+           6
           ]
          },
          "solucion": {
           "huecos": [
            "a",
+           "e",
            "a"
           ]
          }
@@ -11538,7 +11542,7 @@
         {
          "id": "a1e16",
          "datos": {
-          "palabra": "pecera",
+          "palabra": "pesado",
           "huecos": [
            1,
            3,
@@ -11548,8 +11552,8 @@
          "solucion": {
           "huecos": [
            "e",
-           "e",
-           "a"
+           "a",
+           "o"
           ]
          }
         }
@@ -11561,10 +11565,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "dc4cd818e7820e02"
+   "e82ab4b7fa86f22e"
   ],
   "svgSolucion": [
-   "e31b4ea25ad669eb"
+   "335bee95c7d34a14"
   ]
  },
  "medida.calendario": {
@@ -15339,43 +15343,61 @@
         {
          "id": "a1e1",
          "datos": {
-          "palabra": "jugoso",
-          "pos": 2,
+          "palabra": "natación",
+          "pos": 4,
           "largo": 1,
-          "regla": "ggu",
+          "regla": "cz",
           "opciones": [
-           "g",
-           "gu"
+           "c",
+           "z"
           ]
          },
          "solucion": {
           "huecos": [
-           "g"
+           "c"
           ]
          }
         },
         {
          "id": "a1e2",
          "datos": {
-          "palabra": "zapatero",
-          "pos": 0,
+          "palabra": "hombre",
+          "pos": 2,
           "largo": 1,
-          "regla": "cz",
+          "regla": "mpb",
           "opciones": [
-           "z",
-           "c"
+           "n",
+           "m"
           ]
          },
          "solucion": {
           "huecos": [
-           "z"
+           "m"
           ]
          }
         },
         {
          "id": "a1e3",
          "datos": {
-          "palabra": "esquí",
+          "palabra": "sombra",
+          "pos": 2,
+          "largo": 1,
+          "regla": "mpb",
+          "opciones": [
+           "m",
+           "n"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "m"
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "palabra": "paquete",
           "pos": 2,
           "largo": 2,
           "regla": "cqu",
@@ -15391,27 +15413,9 @@
          }
         },
         {
-         "id": "a1e4",
-         "datos": {
-          "palabra": "cavar",
-          "pos": 0,
-          "largo": 1,
-          "regla": "cqu",
-          "opciones": [
-           "c",
-           "qu"
-          ]
-         },
-         "solucion": {
-          "huecos": [
-           "c"
-          ]
-         }
-        },
-        {
          "id": "a1e5",
          "datos": {
-          "palabra": "castillo",
+          "palabra": "columpio",
           "pos": 0,
           "largo": 1,
           "regla": "cqu",
@@ -15429,98 +15433,8 @@
         {
          "id": "a1e6",
          "datos": {
-          "palabra": "ganar",
+          "palabra": "río",
           "pos": 0,
-          "largo": 1,
-          "regla": "ggu",
-          "opciones": [
-           "g",
-           "gu"
-          ]
-         },
-         "solucion": {
-          "huecos": [
-           "g"
-          ]
-         }
-        },
-        {
-         "id": "a1e7",
-         "datos": {
-          "palabra": "sombra",
-          "pos": 2,
-          "largo": 1,
-          "regla": "mpb",
-          "opciones": [
-           "n",
-           "m"
-          ]
-         },
-         "solucion": {
-          "huecos": [
-           "m"
-          ]
-         }
-        },
-        {
-         "id": "a1e8",
-         "datos": {
-          "palabra": "ombligo",
-          "pos": 1,
-          "largo": 1,
-          "regla": "mpb",
-          "opciones": [
-           "m",
-           "n"
-          ]
-         },
-         "solucion": {
-          "huecos": [
-           "m"
-          ]
-         }
-        },
-        {
-         "id": "a1e9",
-         "datos": {
-          "palabra": "hombre",
-          "pos": 2,
-          "largo": 1,
-          "regla": "mpb",
-          "opciones": [
-           "m",
-           "n"
-          ]
-         },
-         "solucion": {
-          "huecos": [
-           "m"
-          ]
-         }
-        },
-        {
-         "id": "a1e10",
-         "datos": {
-          "palabra": "tierra",
-          "pos": 3,
-          "largo": 2,
-          "regla": "r",
-          "opciones": [
-           "r",
-           "rr"
-          ]
-         },
-         "solucion": {
-          "huecos": [
-           "rr"
-          ]
-         }
-        },
-        {
-         "id": "a1e11",
-         "datos": {
-          "palabra": "esperar",
-          "pos": 4,
           "largo": 1,
           "regla": "r",
           "opciones": [
@@ -15535,28 +15449,118 @@
          }
         },
         {
-         "id": "a1e12",
+         "id": "a1e7",
          "datos": {
-          "palabra": "zumo",
+          "palabra": "lago",
+          "pos": 2,
+          "largo": 1,
+          "regla": "ggu",
+          "opciones": [
+           "g",
+           "gu"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "g"
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "palabra": "gatear",
           "pos": 0,
           "largo": 1,
-          "regla": "cz",
+          "regla": "ggu",
           "opciones": [
-           "z",
+           "gu",
+           "g"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "g"
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "palabra": "recoger",
+          "pos": 2,
+          "largo": 1,
+          "regla": "cqu",
+          "opciones": [
+           "qu",
            "c"
           ]
          },
          "solucion": {
           "huecos": [
-           "z"
+           "c"
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "palabra": "recordar",
+          "pos": 0,
+          "largo": 1,
+          "regla": "r",
+          "opciones": [
+           "r",
+           "rr"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "r"
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "palabra": "cera",
+          "pos": 2,
+          "largo": 1,
+          "regla": "r",
+          "opciones": [
+           "r",
+           "rr"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "r"
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "palabra": "gato",
+          "pos": 0,
+          "largo": 1,
+          "regla": "ggu",
+          "opciones": [
+           "gu",
+           "g"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "g"
           ]
          }
         },
         {
          "id": "a1e13",
          "datos": {
-          "palabra": "ceja",
-          "pos": 0,
+          "palabra": "bucear",
+          "pos": 2,
           "largo": 1,
           "regla": "cz",
           "opciones": [
@@ -15573,44 +15577,44 @@
         {
          "id": "a1e14",
          "datos": {
-          "palabra": "cera",
+          "palabra": "limpio",
           "pos": 2,
           "largo": 1,
-          "regla": "r",
+          "regla": "mpb",
           "opciones": [
-           "rr",
-           "r"
+           "n",
+           "m"
           ]
          },
          "solucion": {
           "huecos": [
-           "r"
+           "m"
           ]
          }
         },
         {
          "id": "a1e15",
          "datos": {
-          "palabra": "gominola",
-          "pos": 0,
+          "palabra": "silencio",
+          "pos": 5,
           "largo": 1,
-          "regla": "ggu",
+          "regla": "cz",
           "opciones": [
-           "g",
-           "gu"
+           "z",
+           "c"
           ]
          },
          "solucion": {
           "huecos": [
-           "g"
+           "c"
           ]
          }
         },
         {
          "id": "a1e16",
          "datos": {
-          "palabra": "limpio",
-          "pos": 2,
+          "palabra": "ombligo",
+          "pos": 1,
           "largo": 1,
           "regla": "mpb",
           "opciones": [
@@ -15632,10 +15636,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "e922a5f408008b46"
+   "2d7045befa4f18e9"
   ],
   "svgSolucion": [
-   "c467c87ecfcf6828"
+   "ef99e5d1c09eebc5"
   ]
  },
  "orto.mayuscula": {
@@ -15673,16 +15677,16 @@
          "id": "a1e1",
          "datos": {
           "palabras": [
-           "Pablo",
            "Pepa",
-           "pelota"
+           "dado",
+           "Pablo"
           ]
          },
          "solucion": {
           "huecos": [],
           "rodea": [
            0,
-           1
+           2
           ]
          }
         },
@@ -15692,7 +15696,7 @@
           "palabras": [
            "Sara",
            "Eva",
-           "bikini"
+           "cuello"
           ]
          },
          "solucion": {
@@ -15707,15 +15711,15 @@
          "id": "a1e3",
          "datos": {
           "palabras": [
-           "tarea",
            "Toledo",
-           "lleno"
+           "seco",
+           "nota"
           ]
          },
          "solucion": {
           "huecos": [],
           "rodea": [
-           1
+           0
           ]
          }
         },
@@ -15723,25 +15727,8 @@
          "id": "a1e4",
          "datos": {
           "palabras": [
+           "Bruno",
            "Peta",
-           "pato",
-           "Bruno"
-          ]
-         },
-         "solucion": {
-          "huecos": [],
-          "rodea": [
-           0,
-           2
-          ]
-         }
-        },
-        {
-         "id": "a1e5",
-         "datos": {
-          "palabras": [
-           "Mimi",
-           "Noa",
            "vaca"
           ]
          },
@@ -15754,12 +15741,12 @@
          }
         },
         {
-         "id": "a1e6",
+         "id": "a1e5",
          "datos": {
           "palabras": [
-           "Paula",
-           "música",
-           "Toni"
+           "Mimi",
+           "raqueta",
+           "Noa"
           ]
          },
          "solucion": {
@@ -15771,18 +15758,35 @@
          }
         },
         {
-         "id": "a1e7",
+         "id": "a1e6",
          "datos": {
           "palabras": [
-           "Laura",
-           "jaula",
-           "mejilla"
+           "Paula",
+           "Toni",
+           "moneda"
           ]
          },
          "solucion": {
           "huecos": [],
           "rodea": [
-           0
+           0,
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "palabras": [
+           "bigote",
+           "cadena",
+           "Laura"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           2
           ]
          }
         },
@@ -15790,15 +15794,15 @@
          "id": "a1e8",
          "datos": {
           "palabras": [
-           "Sevilla",
-           "roca",
-           "botella"
+           "peine",
+           "ola",
+           "Sevilla"
           ]
          },
          "solucion": {
           "huecos": [],
           "rodea": [
-           0
+           2
           ]
          }
         },
@@ -15806,9 +15810,25 @@
          "id": "a1e9",
          "datos": {
           "palabras": [
-           "Málaga",
-           "bueno",
-           "chico"
+           "salado",
+           "médica",
+           "Málaga"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "palabras": [
+           "Mónica",
+           "piso",
+           "lata"
           ]
          },
          "solucion": {
@@ -15819,34 +15839,18 @@
          }
         },
         {
-         "id": "a1e10",
-         "datos": {
-          "palabras": [
-           "pozo",
-           "garaje",
-           "Mónica"
-          ]
-         },
-         "solucion": {
-          "huecos": [],
-          "rodea": [
-           2
-          ]
-         }
-        },
-        {
          "id": "a1e11",
          "datos": {
           "palabras": [
-           "camino",
-           "nata",
-           "Antequera"
+           "piña",
+           "Antequera",
+           "maleta"
           ]
          },
          "solucion": {
           "huecos": [],
           "rodea": [
-           2
+           1
           ]
          }
         },
@@ -15854,9 +15858,9 @@
          "id": "a1e12",
          "datos": {
           "palabras": [
-           "Cádiz",
-           "café",
-           "Nuria"
+           "Nuria",
+           "té",
+           "Cádiz"
           ]
          },
          "solucion": {
@@ -15875,10 +15879,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "e627054d070b1b57"
+   "bed9c93418d574dc"
   ],
   "svgSolucion": [
-   "57defc749c9f8f45"
+   "87a984407ad94a04"
   ]
  },
  "palabra.articulo": {
@@ -15915,20 +15919,20 @@
         {
          "id": "a1e1",
          "datos": {
-          "palabra": "puerto",
+          "palabra": "zapatilla",
           "numero": "s",
-          "genero": "m"
+          "genero": "f"
          },
          "solucion": {
           "huecos": [
-           "el"
+           "la"
           ]
          }
         },
         {
          "id": "a1e2",
          "datos": {
-          "palabra": "pregunta",
+          "palabra": "regla",
           "numero": "s",
           "genero": "f"
          },
@@ -15941,33 +15945,20 @@
         {
          "id": "a1e3",
          "datos": {
-          "palabra": "fresa",
+          "palabra": "motor",
           "numero": "s",
-          "genero": "f"
+          "genero": "m"
          },
          "solucion": {
           "huecos": [
-           "la"
+           "el"
           ]
          }
         },
         {
          "id": "a1e4",
          "datos": {
-          "palabra": "dado",
-          "numero": "s",
-          "genero": "m"
-         },
-         "solucion": {
-          "huecos": [
-           "el"
-          ]
-         }
-        },
-        {
-         "id": "a1e5",
-         "datos": {
-          "palabra": "cadena",
+          "palabra": "hija",
           "numero": "s",
           "genero": "f"
          },
@@ -15978,35 +15969,48 @@
          }
         },
         {
-         "id": "a1e6",
+         "id": "a1e5",
          "datos": {
-          "palabra": "vaso",
+          "palabra": "columpio",
           "numero": "s",
           "genero": "m"
          },
          "solucion": {
           "huecos": [
            "el"
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "palabra": "mesa",
+          "numero": "s",
+          "genero": "f"
+         },
+         "solucion": {
+          "huecos": [
+           "la"
           ]
          }
         },
         {
          "id": "a1e7",
          "datos": {
-          "palabra": "cuarto",
+          "palabra": "esquina",
           "numero": "s",
-          "genero": "m"
+          "genero": "f"
          },
          "solucion": {
           "huecos": [
-           "el"
+           "la"
           ]
          }
         },
         {
          "id": "a1e8",
          "datos": {
-          "palabra": "espejo",
+          "palabra": "cuchillo",
           "numero": "s",
           "genero": "m"
          },
@@ -16019,52 +16023,52 @@
         {
          "id": "a1e9",
          "datos": {
-          "palabra": "cazuela",
-          "numero": "s",
-          "genero": "f"
-         },
-         "solucion": {
-          "huecos": [
-           "la"
-          ]
-         }
-        },
-        {
-         "id": "a1e10",
-         "datos": {
-          "palabra": "frente",
-          "numero": "s",
-          "genero": "f"
-         },
-         "solucion": {
-          "huecos": [
-           "la"
-          ]
-         }
-        },
-        {
-         "id": "a1e11",
-         "datos": {
-          "palabra": "gasolina",
-          "numero": "s",
-          "genero": "f"
-         },
-         "solucion": {
-          "huecos": [
-           "la"
-          ]
-         }
-        },
-        {
-         "id": "a1e12",
-         "datos": {
-          "palabra": "sello",
+          "palabra": "rotulador",
           "numero": "s",
           "genero": "m"
          },
          "solucion": {
           "huecos": [
            "el"
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "palabra": "grifo",
+          "numero": "s",
+          "genero": "m"
+         },
+         "solucion": {
+          "huecos": [
+           "el"
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "palabra": "palo",
+          "numero": "s",
+          "genero": "m"
+         },
+         "solucion": {
+          "huecos": [
+           "el"
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "palabra": "grúa",
+          "numero": "s",
+          "genero": "f"
+         },
+         "solucion": {
+          "huecos": [
+           "la"
           ]
          }
         }
@@ -16076,10 +16080,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "80dc9880531eece1"
+   "a71b9e709526d547"
   ],
   "svgSolucion": [
-   "ef860eb43ed76bc6"
+   "2e0929719eb850dd"
   ]
  },
  "palabra.clasifica": {
@@ -16117,14 +16121,14 @@
          "id": "a1e1",
          "datos": {
           "banco": [
-           "sofá",
-           "rosa",
-           "cuchara",
-           "alfombra",
            "blanco",
+           "ventana",
+           "rosa",
+           "taza",
+           "amarillo",
+           "jardín",
            "dorado",
-           "pasillo",
-           "amarillo"
+           "fregadero"
           ],
           "cajas": [
            "Colores",
@@ -16134,27 +16138,27 @@
          },
          "solucion": {
           "huecos": [
-           "rosa",
            "blanco",
-           "dorado",
+           "rosa",
            "amarillo",
-           "sofá",
-           "cuchara",
-           "alfombra",
-           "pasillo"
+           "dorado",
+           "ventana",
+           "taza",
+           "jardín",
+           "fregadero"
           ],
           "clasifica": [
            [
-            "rosa",
             "blanco",
-            "dorado",
-            "amarillo"
+            "rosa",
+            "amarillo",
+            "dorado"
            ],
            [
-            "sofá",
-            "cuchara",
-            "alfombra",
-            "pasillo"
+            "ventana",
+            "taza",
+            "jardín",
+            "fregadero"
            ]
           ]
          }
@@ -16163,14 +16167,14 @@
          "id": "a1e2",
          "datos": {
           "banco": [
-           "gasolina",
-           "atardecer",
-           "arcoíris",
-           "barro",
-           "selva",
-           "túnel",
-           "freno",
-           "yate"
+           "desierto",
+           "trueno",
+           "verano",
+           "motor",
+           "camión",
+           "moto",
+           "montaña",
+           "rueda"
           ],
           "cajas": [
            "Naturaleza",
@@ -16180,27 +16184,27 @@
          },
          "solucion": {
           "huecos": [
-           "atardecer",
-           "arcoíris",
-           "barro",
-           "selva",
-           "gasolina",
-           "túnel",
-           "freno",
-           "yate"
+           "desierto",
+           "trueno",
+           "verano",
+           "montaña",
+           "motor",
+           "camión",
+           "moto",
+           "rueda"
           ],
           "clasifica": [
            [
-            "atardecer",
-            "arcoíris",
-            "barro",
-            "selva"
+            "desierto",
+            "trueno",
+            "verano",
+            "montaña"
            ],
            [
-            "gasolina",
-            "túnel",
-            "freno",
-            "yate"
+            "motor",
+            "camión",
+            "moto",
+            "rueda"
            ]
           ]
          }
@@ -16209,14 +16213,14 @@
          "id": "a1e3",
          "datos": {
           "banco": [
-           "oso",
-           "pestaña",
-           "voz",
-           "tigre",
-           "rizo",
-           "gallina",
-           "koala",
-           "risa"
+           "hámster",
+           "delfín",
+           "espalda",
+           "avispa",
+           "zorro",
+           "cintura",
+           "hombro",
+           "trenza"
           ],
           "cajas": [
            "Animales",
@@ -16226,27 +16230,27 @@
          },
          "solucion": {
           "huecos": [
-           "oso",
-           "tigre",
-           "gallina",
-           "koala",
-           "pestaña",
-           "voz",
-           "rizo",
-           "risa"
+           "hámster",
+           "delfín",
+           "avispa",
+           "zorro",
+           "espalda",
+           "cintura",
+           "hombro",
+           "trenza"
           ],
           "clasifica": [
            [
-            "oso",
-            "tigre",
-            "gallina",
-            "koala"
+            "hámster",
+            "delfín",
+            "avispa",
+            "zorro"
            ],
            [
-            "pestaña",
-            "voz",
-            "rizo",
-            "risa"
+            "espalda",
+            "cintura",
+            "hombro",
+            "trenza"
            ]
           ]
          }
@@ -16259,10 +16263,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "36a30d5a84a74a50"
+   "3b19ab468ec04213"
   ],
   "svgSolucion": [
-   "bba27fd7eaf0f197"
+   "3602965792ed2368"
   ]
  },
  "palabra.contrarios": {
@@ -16434,6 +16438,84 @@
         {
          "id": "a1e1",
          "datos": {
+          "palabra": "rayo",
+          "n": 4,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "palabra": "lleno",
+          "n": 5,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "palabra": "varita",
+          "n": 6,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "palabra": "pesado",
+          "n": 6,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "palabra": "piano",
+          "n": 5,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "palabra": "lechuga",
+          "n": 7,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
           "palabra": "tío",
           "n": 3,
           "respuesta": "numero"
@@ -16445,22 +16527,9 @@
          }
         },
         {
-         "id": "a1e2",
+         "id": "a1e8",
          "datos": {
-          "palabra": "seguro",
-          "n": 6,
-          "respuesta": "numero"
-         },
-         "solucion": {
-          "huecos": [
-           6
-          ]
-         }
-        },
-        {
-         "id": "a1e3",
-         "datos": {
-          "palabra": "llavero",
+          "palabra": "mejilla",
           "n": 7,
           "respuesta": "numero"
          },
@@ -16471,7 +16540,7 @@
          }
         },
         {
-         "id": "a1e4",
+         "id": "a1e9",
          "datos": {
           "palabra": "rey",
           "n": 3,
@@ -16484,80 +16553,15 @@
          }
         },
         {
-         "id": "a1e5",
-         "datos": {
-          "palabra": "cazuela",
-          "n": 7,
-          "respuesta": "numero"
-         },
-         "solucion": {
-          "huecos": [
-           7
-          ]
-         }
-        },
-        {
-         "id": "a1e6",
-         "datos": {
-          "palabra": "tierra",
-          "n": 6,
-          "respuesta": "numero"
-         },
-         "solucion": {
-          "huecos": [
-           6
-          ]
-         }
-        },
-        {
-         "id": "a1e7",
-         "datos": {
-          "palabra": "muela",
-          "n": 5,
-          "respuesta": "numero"
-         },
-         "solucion": {
-          "huecos": [
-           5
-          ]
-         }
-        },
-        {
-         "id": "a1e8",
-         "datos": {
-          "palabra": "tiza",
-          "n": 4,
-          "respuesta": "numero"
-         },
-         "solucion": {
-          "huecos": [
-           4
-          ]
-         }
-        },
-        {
-         "id": "a1e9",
-         "datos": {
-          "palabra": "nota",
-          "n": 4,
-          "respuesta": "numero"
-         },
-         "solucion": {
-          "huecos": [
-           4
-          ]
-         }
-        },
-        {
          "id": "a1e10",
          "datos": {
-          "palabra": "viaje",
-          "n": 5,
+          "palabra": "vela",
+          "n": 4,
           "respuesta": "numero"
          },
          "solucion": {
           "huecos": [
-           5
+           4
           ]
          }
         }
@@ -16569,10 +16573,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "13f3a91a568655f6"
+   "63be9c9586b1d95a"
   ],
   "svgSolucion": [
-   "271c0627e0d313b0"
+   "511abdee5d212ed0"
   ]
  },
  "palabra.dibuja": {
@@ -16610,7 +16614,7 @@
         {
          "id": "a1e1",
          "datos": {
-          "palabra": "mesa"
+          "palabra": "techo"
          },
          "solucion": {
           "huecos": []
@@ -16619,7 +16623,7 @@
         {
          "id": "a1e2",
          "datos": {
-          "palabra": "boca"
+          "palabra": "yoyó"
          },
          "solucion": {
           "huecos": []
@@ -16628,7 +16632,7 @@
         {
          "id": "a1e3",
          "datos": {
-          "palabra": "dado"
+          "palabra": "aro"
          },
          "solucion": {
           "huecos": []
@@ -16637,7 +16641,7 @@
         {
          "id": "a1e4",
          "datos": {
-          "palabra": "zoo"
+          "palabra": "amiga"
          },
          "solucion": {
           "huecos": []
@@ -16646,7 +16650,7 @@
         {
          "id": "a1e5",
          "datos": {
-          "palabra": "baño"
+          "palabra": "garaje"
          },
          "solucion": {
           "huecos": []
@@ -16655,7 +16659,7 @@
         {
          "id": "a1e6",
          "datos": {
-          "palabra": "cueva"
+          "palabra": "silla"
          },
          "solucion": {
           "huecos": []
@@ -16664,7 +16668,7 @@
         {
          "id": "a1e7",
          "datos": {
-          "palabra": "yoyó"
+          "palabra": "verano"
          },
          "solucion": {
           "huecos": []
@@ -16673,7 +16677,7 @@
         {
          "id": "a1e8",
          "datos": {
-          "palabra": "maleta"
+          "palabra": "lobo"
          },
          "solucion": {
           "huecos": []
@@ -16682,7 +16686,7 @@
         {
          "id": "a1e9",
          "datos": {
-          "palabra": "rana"
+          "palabra": "rama"
          },
          "solucion": {
           "huecos": []
@@ -16691,7 +16695,7 @@
         {
          "id": "a1e10",
          "datos": {
-          "palabra": "camisa"
+          "palabra": "boca"
          },
          "solucion": {
           "huecos": []
@@ -16700,7 +16704,7 @@
         {
          "id": "a1e11",
          "datos": {
-          "palabra": "patata"
+          "palabra": "suela"
          },
          "solucion": {
           "huecos": []
@@ -16709,7 +16713,7 @@
         {
          "id": "a1e12",
          "datos": {
-          "palabra": "lana"
+          "palabra": "torre"
          },
          "solucion": {
           "huecos": []
@@ -16723,10 +16727,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "890273564f8060b9"
+   "08c747d0ea08ef28"
   ],
   "svgSolucion": [
-   "d8b90a7e092564cc"
+   "6c400979a3932834"
   ]
  },
  "palabra.intrusa": {
@@ -16764,28 +16768,12 @@
          "id": "a1e1",
          "datos": {
           "palabras": [
+           "bosque",
            "negro",
            "rojo",
-           "guante",
            "verde"
           ],
           "campo": "colores"
-         },
-         "solucion": {
-          "huecos": [],
-          "rodea": 2
-         }
-        },
-        {
-         "id": "a1e2",
-         "datos": {
-          "palabras": [
-           "sol",
-           "pared",
-           "ducha",
-           "tendedero"
-          ],
-          "campo": "casa"
          },
          "solucion": {
           "huecos": [],
@@ -16793,13 +16781,29 @@
          }
         },
         {
+         "id": "a1e2",
+         "datos": {
+          "palabras": [
+           "papelera",
+           "bollo",
+           "olla",
+           "teléfono"
+          ],
+          "campo": "casa"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 1
+         }
+        },
+        {
          "id": "a1e3",
          "datos": {
           "palabras": [
+           "verano",
+           "tierra",
            "cueva",
-           "isla",
-           "primavera",
-           "pájaro"
+           "cerdo"
           ],
           "campo": "naturaleza"
          },
@@ -16812,44 +16816,12 @@
          "id": "a1e4",
          "datos": {
           "palabras": [
-           "motor",
-           "submarino",
-           "grúa",
-           "baraja"
+           "metro",
+           "tomate",
+           "billete",
+           "furgoneta"
           ],
           "campo": "transportes"
-         },
-         "solucion": {
-          "huecos": [],
-          "rodea": 3
-         }
-        },
-        {
-         "id": "a1e5",
-         "datos": {
-          "palabras": [
-           "peine",
-           "pingüino",
-           "tigre",
-           "gorila"
-          ],
-          "campo": "animales"
-         },
-         "solucion": {
-          "huecos": [],
-          "rodea": 0
-         }
-        },
-        {
-         "id": "a1e6",
-         "datos": {
-          "palabras": [
-           "pelo",
-           "sopa",
-           "hombro",
-           "pestaña"
-          ],
-          "campo": "cuerpo"
          },
          "solucion": {
           "huecos": [],
@@ -16857,35 +16829,67 @@
          }
         },
         {
+         "id": "a1e5",
+         "datos": {
+          "palabras": [
+           "boquerón",
+           "perrito",
+           "hormiga",
+           "balancín"
+          ],
+          "campo": "animales"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 3
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "palabras": [
+           "sonrisa",
+           "codo",
+           "mejilla",
+           "fresa"
+          ],
+          "campo": "cuerpo"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 3
+         }
+        },
+        {
          "id": "a1e7",
          "datos": {
           "palabras": [
-           "abeja",
-           "melocotón",
-           "lechuga",
-           "churro"
+           "salchicha",
+           "cacahuete",
+           "plátano",
+           "payaso"
           ],
           "campo": "comida"
          },
          "solucion": {
           "huecos": [],
-          "rodea": 0
+          "rodea": 3
          }
         },
         {
          "id": "a1e8",
          "datos": {
           "palabras": [
-           "chico",
-           "tía",
-           "pecho",
-           "hijo"
+           "esqueleto",
+           "abuelo",
+           "hijo",
+           "chico"
           ],
           "campo": "familia"
          },
          "solucion": {
           "huecos": [],
-          "rodea": 2
+          "rodea": 0
          }
         }
        ]
@@ -16896,10 +16900,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "976c3af004b94192"
+   "a9cace2b35902bb4"
   ],
   "svgSolucion": [
-   "28f6132099f9d634"
+   "0a43356ad63371f3"
   ]
  },
  "palabra.letras": {
@@ -17162,144 +17166,144 @@
         {
          "id": "a1e1",
          "datos": {
-          "palabra": "pera",
+          "palabra": "pelo",
           "sentido": "plural"
          },
          "solucion": {
           "huecos": [
-           "peras"
+           "pelos"
           ]
          }
         },
         {
          "id": "a1e2",
          "datos": {
-          "palabra": "medalla",
+          "palabra": "cachorro",
           "sentido": "plural"
          },
          "solucion": {
           "huecos": [
-           "medallas"
+           "cachorros"
           ]
          }
         },
         {
          "id": "a1e3",
          "datos": {
-          "palabra": "panadero",
+          "palabra": "pestaña",
           "sentido": "plural"
          },
          "solucion": {
           "huecos": [
-           "panaderos"
+           "pestañas"
           ]
          }
         },
         {
          "id": "a1e4",
          "datos": {
-          "palabra": "capa",
+          "palabra": "témpera",
           "sentido": "plural"
          },
          "solucion": {
           "huecos": [
-           "capas"
+           "témperas"
           ]
          }
         },
         {
          "id": "a1e5",
          "datos": {
-          "palabra": "tejado",
+          "palabra": "balanza",
           "sentido": "plural"
          },
          "solucion": {
           "huecos": [
-           "tejados"
+           "balanzas"
           ]
          }
         },
         {
          "id": "a1e6",
          "datos": {
-          "palabra": "zoo",
+          "palabra": "títere",
           "sentido": "plural"
          },
          "solucion": {
           "huecos": [
-           "zoos"
+           "títeres"
           ]
          }
         },
         {
          "id": "a1e7",
          "datos": {
-          "palabra": "xilófono",
+          "palabra": "guitarra",
           "sentido": "plural"
          },
          "solucion": {
           "huecos": [
-           "xilófonos"
+           "guitarras"
           ]
          }
         },
         {
          "id": "a1e8",
          "datos": {
-          "palabra": "teléfono",
+          "palabra": "gorra",
           "sentido": "plural"
          },
          "solucion": {
           "huecos": [
-           "teléfonos"
+           "gorras"
           ]
          }
         },
         {
          "id": "a1e9",
          "datos": {
-          "palabra": "pizarra",
+          "palabra": "tesoro",
           "sentido": "plural"
          },
          "solucion": {
           "huecos": [
-           "pizarras"
+           "tesoros"
           ]
          }
         },
         {
          "id": "a1e10",
          "datos": {
-          "palabra": "hoja",
+          "palabra": "mesa",
           "sentido": "plural"
          },
          "solucion": {
           "huecos": [
-           "hojas"
+           "mesas"
           ]
          }
         },
         {
          "id": "a1e11",
          "datos": {
-          "palabra": "tigre",
+          "palabra": "cuchara",
           "sentido": "plural"
          },
          "solucion": {
           "huecos": [
-           "tigres"
+           "cucharas"
           ]
          }
         },
         {
          "id": "a1e12",
          "datos": {
-          "palabra": "filete",
+          "palabra": "tomate",
           "sentido": "plural"
          },
          "solucion": {
           "huecos": [
-           "filetes"
+           "tomates"
           ]
          }
         }
@@ -17311,10 +17315,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "e9a6669726f085bb"
+   "15b1071443340ad4"
   ],
   "svgSolucion": [
-   "e195bd83ae43e04e"
+   "b3946a7101a64580"
   ]
  },
  "palabra.sopa": {
@@ -17355,78 +17359,78 @@
          "datos": {
           "n": 10,
           "filas": [
-           "SNDSIDADOC",
-           "SSJLNDOROP",
-           "TSZFLDISPI",
-           "DOUEOTAAAR",
-           "CVARITASLA",
-           "ORUINZLIAT",
-           "HPFEEDDSOA",
-           "EPEONZAORM",
-           "TRCUERDAEA",
-           "EEPENTFIYP"
+           "NDSICSSJLN",
+           "JCDOROTSZF",
+           "UOLDISDOUE",
+           "ELCASTILLO",
+           "GUOTAROBOT",
+           "OMRASRUINC",
+           "ZPELIPFEEO",
+           "DIIDPALASM",
+           "OONPEONZAB",
+           "OMARAEPENA"
           ],
           "palabras": [
-           "CUERDA",
-           "REY",
-           "PIRATA",
-           "DADO",
-           "VARITA",
+           "REINA",
+           "ROBOT",
+           "CASTILLO",
+           "COLUMPIO",
            "PEONZA",
-           "PALA",
-           "COHETE"
+           "COMBA",
+           "JUEGO",
+           "PALA"
           ]
          },
          "solucion": {
           "huecos": [],
           "sopa": [
            {
-            "p": "VARITA",
-            "f": 4,
-            "c": 1,
-            "dir": "h"
-           },
-           {
-            "p": "PIRATA",
-            "f": 1,
-            "c": 9,
-            "dir": "v"
-           },
-           {
-            "p": "PEONZA",
-            "f": 7,
-            "c": 1,
-            "dir": "h"
-           },
-           {
-            "p": "CUERDA",
-            "f": 8,
+            "p": "CASTILLO",
+            "f": 3,
             "c": 2,
             "dir": "h"
            },
            {
-            "p": "COHETE",
-            "f": 4,
+            "p": "COLUMPIO",
+            "f": 1,
+            "c": 1,
+            "dir": "v"
+           },
+           {
+            "p": "PEONZA",
+            "f": 8,
+            "c": 3,
+            "dir": "h"
+           },
+           {
+            "p": "REINA",
+            "f": 5,
+            "c": 2,
+            "dir": "v"
+           },
+           {
+            "p": "JUEGO",
+            "f": 1,
             "c": 0,
             "dir": "v"
            },
            {
-            "p": "DADO",
-            "f": 0,
+            "p": "ROBOT",
+            "f": 4,
             "c": 5,
             "dir": "h"
            },
            {
-            "p": "PALA",
-            "f": 2,
-            "c": 8,
+            "p": "COMBA",
+            "f": 5,
+            "c": 9,
             "dir": "v"
            },
            {
-            "p": "REY",
+            "p": "PALA",
             "f": 7,
-            "c": 8,
-            "dir": "v"
+            "c": 4,
+            "dir": "h"
            }
           ]
          }
@@ -17439,10 +17443,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "7e23ec72de102f7e"
+   "fe5d9d378f5b170a"
   ],
   "svgSolucion": [
-   "a9d3f24f70bcb2d6"
+   "f66e350b092c4b77"
   ]
  },
  "problemas.barras": {
@@ -24660,180 +24664,180 @@
         {
          "id": "a1e1",
          "datos": {
-          "palabra": "viaje",
-          "pos": 0,
+          "palabra": "raqueta",
+          "pos": 2,
           "largo": 3,
           "opciones": [
-           "rui",
            "li",
-           "via"
+           "cue",
+           "que"
           ]
          },
          "solucion": {
           "huecos": [
-           "via"
+           "que"
           ]
          }
         },
         {
          "id": "a1e2",
          "datos": {
-          "palabra": "peluquero",
-          "pos": 0,
-          "largo": 2,
+          "palabra": "taquilla",
+          "pos": 5,
+          "largo": 3,
           "opciones": [
-           "da",
-           "pe",
-           "llo"
+           "lla",
+           "pu",
+           "ni"
           ]
          },
          "solucion": {
           "huecos": [
-           "pe"
+           "lla"
           ]
          }
         },
         {
          "id": "a1e3",
          "datos": {
-          "palabra": "mágico",
-          "pos": 0,
+          "palabra": "carrera",
+          "pos": 5,
           "largo": 2,
           "opciones": [
-           "má",
-           "fé",
-           "pá"
+           "vi",
+           "go",
+           "ra"
           ]
          },
          "solucion": {
           "huecos": [
-           "má"
+           "ra"
           ]
          }
         },
         {
          "id": "a1e4",
          "datos": {
-          "palabra": "cuchara",
-          "pos": 5,
+          "palabra": "medio",
+          "pos": 0,
           "largo": 2,
           "opciones": [
-           "ra",
-           "rre",
-           "sua"
+           "vio",
+           "nue",
+           "me"
           ]
          },
          "solucion": {
           "huecos": [
-           "ra"
+           "me"
           ]
          }
         },
         {
          "id": "a1e5",
          "datos": {
-          "palabra": "karate",
+          "palabra": "gominola",
           "pos": 2,
           "largo": 2,
           "opciones": [
-           "pa",
-           "ra",
-           "cho"
+           "mie",
+           "gu",
+           "mi"
           ]
          },
          "solucion": {
           "huecos": [
-           "ra"
+           "mi"
           ]
          }
         },
         {
          "id": "a1e6",
          "datos": {
-          "palabra": "periódico",
-          "pos": 0,
-          "largo": 2,
+          "palabra": "tierra",
+          "pos": 3,
+          "largo": 3,
           "opciones": [
-           "ju",
-           "lia",
-           "pe"
+           "rra",
+           "hi",
+           "su"
           ]
          },
          "solucion": {
           "huecos": [
-           "pe"
+           "rra"
           ]
          }
         },
         {
          "id": "a1e7",
          "datos": {
-          "palabra": "pecera",
-          "pos": 4,
-          "largo": 2,
+          "palabra": "cazuela",
+          "pos": 2,
+          "largo": 3,
           "opciones": [
-           "te",
-           "lio",
-           "ra"
+           "zue",
+           "nu",
+           "qui"
           ]
          },
          "solucion": {
           "huecos": [
-           "ra"
+           "zue"
           ]
          }
         },
         {
          "id": "a1e8",
          "datos": {
-          "palabra": "burro",
-          "pos": 2,
-          "largo": 3,
+          "palabra": "pelirrojo",
+          "pos": 7,
+          "largo": 2,
           "opciones": [
-           "rro",
-           "lla",
-           "llo"
+           "rre",
+           "que",
+           "jo"
           ]
          },
          "solucion": {
           "huecos": [
-           "rro"
+           "jo"
           ]
          }
         },
         {
          "id": "a1e9",
          "datos": {
-          "palabra": "suave",
-          "pos": 3,
-          "largo": 2,
+          "palabra": "día",
+          "pos": 2,
+          "largo": 1,
           "opciones": [
-           "fo",
-           "bue",
-           "ve"
+           "a",
+           "i",
+           "o"
           ]
          },
          "solucion": {
           "huecos": [
-           "ve"
+           "a"
           ]
          }
         },
         {
          "id": "a1e10",
          "datos": {
-          "palabra": "jaula",
+          "palabra": "piano",
           "pos": 3,
           "largo": 2,
           "opciones": [
-           "la",
-           "rue",
-           "bi"
+           "no",
+           "ho",
+           "su"
           ]
          },
          "solucion": {
           "huecos": [
-           "la"
+           "no"
           ]
          }
         }
@@ -24845,10 +24849,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "1cd85f71e05732ca"
+   "37d42499847aeef6"
   ],
   "svgSolucion": [
-   "5e8e7e28249ca0f4"
+   "ad19cc9e66b5cabc"
   ]
  },
  "silaba.junta": {
@@ -24888,34 +24892,19 @@
          "id": "a1e1",
          "datos": {
           "silabas": [
-           "po",
-           "co"
+           "nie",
+           "to"
           ],
-          "palabra": "poco"
+          "palabra": "nieto"
          },
          "solucion": {
           "huecos": [
-           "poco"
+           "nieto"
           ]
          }
         },
         {
          "id": "a1e2",
-         "datos": {
-          "silabas": [
-           "hi",
-           "ja"
-          ],
-          "palabra": "hija"
-         },
-         "solucion": {
-          "huecos": [
-           "hija"
-          ]
-         }
-        },
-        {
-         "id": "a1e3",
          "datos": {
           "silabas": [
            "sue",
@@ -24930,7 +24919,37 @@
          }
         },
         {
+         "id": "a1e3",
+         "datos": {
+          "silabas": [
+           "va",
+           "so"
+          ],
+          "palabra": "vaso"
+         },
+         "solucion": {
+          "huecos": [
+           "vaso"
+          ]
+         }
+        },
+        {
          "id": "a1e4",
+         "datos": {
+          "silabas": [
+           "to",
+           "ro"
+          ],
+          "palabra": "toro"
+         },
+         "solucion": {
+          "huecos": [
+           "toro"
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
          "datos": {
           "silabas": [
            "go",
@@ -24945,32 +24964,17 @@
          }
         },
         {
-         "id": "a1e5",
-         "datos": {
-          "silabas": [
-           "a",
-           "ro"
-          ],
-          "palabra": "aro"
-         },
-         "solucion": {
-          "huecos": [
-           "aro"
-          ]
-         }
-        },
-        {
          "id": "a1e6",
          "datos": {
           "silabas": [
-           "ma",
-           "pa"
+           "sue",
+           "ño"
           ],
-          "palabra": "mapa"
+          "palabra": "sueño"
          },
          "solucion": {
           "huecos": [
-           "mapa"
+           "sueño"
           ]
          }
         },
@@ -24978,14 +24982,14 @@
          "id": "a1e7",
          "datos": {
           "silabas": [
-           "bu",
-           "rro"
+           "pia",
+           "no"
           ],
-          "palabra": "burro"
+          "palabra": "piano"
          },
          "solucion": {
           "huecos": [
-           "burro"
+           "piano"
           ]
          }
         },
@@ -24993,14 +24997,14 @@
          "id": "a1e8",
          "datos": {
           "silabas": [
-           "bai",
-           "le"
+           "su",
+           "ma"
           ],
-          "palabra": "baile"
+          "palabra": "suma"
          },
          "solucion": {
           "huecos": [
-           "baile"
+           "suma"
           ]
          }
         },
@@ -25008,14 +25012,14 @@
          "id": "a1e9",
          "datos": {
           "silabas": [
-           "du",
-           "cha"
+           "me",
+           "dio"
           ],
-          "palabra": "ducha"
+          "palabra": "medio"
          },
          "solucion": {
           "huecos": [
-           "ducha"
+           "medio"
           ]
          }
         },
@@ -25023,14 +25027,14 @@
          "id": "a1e10",
          "datos": {
           "silabas": [
-           "nie",
-           "to"
+           "chi",
+           "co"
           ],
-          "palabra": "nieto"
+          "palabra": "chico"
          },
          "solucion": {
           "huecos": [
-           "nieto"
+           "chico"
           ]
          }
         }
@@ -25042,10 +25046,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "77e1b0c5f852e89d"
+   "be7c60935f257b1f"
   ],
   "svgSolucion": [
-   "4e6bae38a4b55981"
+   "70b00441884b8bcc"
   ]
  },
  "silaba.ordena": {
@@ -25084,16 +25088,15 @@
          "id": "a1e1",
          "datos": {
           "silabas": [
-           "pa",
-           "za",
-           "te",
-           "ro"
+           "ra",
+           "rre",
+           "ca"
           ],
-          "palabra": "zapatero"
+          "palabra": "carrera"
          },
          "solucion": {
           "huecos": [
-           "zapatero"
+           "carrera"
           ]
          }
         },
@@ -25101,14 +25104,16 @@
          "id": "a1e2",
          "datos": {
           "silabas": [
-           "ja",
-           "hi"
+           "la",
+           "go",
+           "mi",
+           "no"
           ],
-          "palabra": "hija"
+          "palabra": "gominola"
          },
          "solucion": {
           "huecos": [
-           "hija"
+           "gominola"
           ]
          }
         },
@@ -25116,15 +25121,14 @@
          "id": "a1e3",
          "datos": {
           "silabas": [
-           "ra",
-           "cha",
-           "cu"
+           "no",
+           "pia"
           ],
-          "palabra": "cuchara"
+          "palabra": "piano"
          },
          "solucion": {
           "huecos": [
-           "cuchara"
+           "piano"
           ]
          }
         },
@@ -25132,14 +25136,15 @@
          "id": "a1e4",
          "datos": {
           "silabas": [
-           "cha",
-           "du"
+           "que",
+           "ta",
+           "ra"
           ],
-          "palabra": "ducha"
+          "palabra": "raqueta"
          },
          "solucion": {
           "huecos": [
-           "ducha"
+           "raqueta"
           ]
          }
         },
@@ -25147,15 +25152,16 @@
          "id": "a1e5",
          "datos": {
           "silabas": [
-           "co",
-           "gi",
-           "má"
+           "rro",
+           "pe",
+           "jo",
+           "li"
           ],
-          "palabra": "mágico"
+          "palabra": "pelirrojo"
          },
          "solucion": {
           "huecos": [
-           "mágico"
+           "pelirrojo"
           ]
          }
         },
@@ -25163,20 +25169,66 @@
          "id": "a1e6",
          "datos": {
           "silabas": [
-           "ka",
-           "te",
-           "ra"
+           "so",
+           "va"
           ],
-          "palabra": "karate"
+          "palabra": "vaso"
          },
          "solucion": {
           "huecos": [
-           "karate"
+           "vaso"
           ]
          }
         },
         {
          "id": "a1e7",
+         "datos": {
+          "silabas": [
+           "to",
+           "nie"
+          ],
+          "palabra": "nieto"
+         },
+         "solucion": {
+          "huecos": [
+           "nieto"
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "silabas": [
+           "ta",
+           "lla",
+           "qui"
+          ],
+          "palabra": "taquilla"
+         },
+         "solucion": {
+          "huecos": [
+           "taquilla"
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "silabas": [
+           "zue",
+           "ca",
+           "la"
+          ],
+          "palabra": "cazuela"
+         },
+         "solucion": {
+          "huecos": [
+           "cazuela"
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
          "datos": {
           "silabas": [
            "lo",
@@ -25189,54 +25241,6 @@
            "suelo"
           ]
          }
-        },
-        {
-         "id": "a1e8",
-         "datos": {
-          "silabas": [
-           "ra",
-           "pe",
-           "ce"
-          ],
-          "palabra": "pecera"
-         },
-         "solucion": {
-          "huecos": [
-           "pecera"
-          ]
-         }
-        },
-        {
-         "id": "a1e9",
-         "datos": {
-          "silabas": [
-           "ro",
-           "a"
-          ],
-          "palabra": "aro"
-         },
-         "solucion": {
-          "huecos": [
-           "aro"
-          ]
-         }
-        },
-        {
-         "id": "a1e10",
-         "datos": {
-          "silabas": [
-           "de",
-           "re",
-           "ra",
-           "ga"
-          ],
-          "palabra": "regadera"
-         },
-         "solucion": {
-          "huecos": [
-           "regadera"
-          ]
-         }
         }
        ]
       }
@@ -25246,10 +25250,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "276dcd9a149f21a7"
+   "4515bd550a66b9ab"
   ],
   "svgSolucion": [
-   "e432930ea1afdf8b"
+   "ca88332cc258e528"
   ]
  },
  "silaba.separa": {
@@ -25288,94 +25292,139 @@
         {
          "id": "a1e1",
          "datos": {
-          "palabra": "zapatero",
+          "palabra": "carrera",
           "modo": "casillas",
-          "n": 4
+          "n": 3
          },
          "solucion": {
           "huecos": [
-           "za",
-           "pa",
-           "te",
-           "ro"
+           "ca",
+           "rre",
+           "ra"
           ]
          }
         },
         {
          "id": "a1e2",
          "datos": {
-          "palabra": "hija",
+          "palabra": "gominola",
           "modo": "casillas",
-          "n": 2
+          "n": 4
          },
          "solucion": {
           "huecos": [
-           "hi",
-           "ja"
+           "go",
+           "mi",
+           "no",
+           "la"
           ]
          }
         },
         {
          "id": "a1e3",
          "datos": {
-          "palabra": "cuchara",
+          "palabra": "piano",
           "modo": "casillas",
-          "n": 3
+          "n": 2
          },
          "solucion": {
           "huecos": [
-           "cu",
-           "cha",
-           "ra"
+           "pia",
+           "no"
           ]
          }
         },
         {
          "id": "a1e4",
          "datos": {
-          "palabra": "ducha",
+          "palabra": "raqueta",
           "modo": "casillas",
-          "n": 2
+          "n": 3
          },
          "solucion": {
           "huecos": [
-           "du",
-           "cha"
+           "ra",
+           "que",
+           "ta"
           ]
          }
         },
         {
          "id": "a1e5",
          "datos": {
-          "palabra": "mágico",
+          "palabra": "pelirrojo",
           "modo": "casillas",
-          "n": 3
+          "n": 4
          },
          "solucion": {
           "huecos": [
-           "má",
-           "gi",
-           "co"
+           "pe",
+           "li",
+           "rro",
+           "jo"
           ]
          }
         },
         {
          "id": "a1e6",
          "datos": {
-          "palabra": "karate",
+          "palabra": "vaso",
           "modo": "casillas",
-          "n": 3
+          "n": 2
          },
          "solucion": {
           "huecos": [
-           "ka",
-           "ra",
-           "te"
+           "va",
+           "so"
           ]
          }
         },
         {
          "id": "a1e7",
+         "datos": {
+          "palabra": "nieto",
+          "modo": "casillas",
+          "n": 2
+         },
+         "solucion": {
+          "huecos": [
+           "nie",
+           "to"
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "palabra": "taquilla",
+          "modo": "casillas",
+          "n": 3
+         },
+         "solucion": {
+          "huecos": [
+           "ta",
+           "qui",
+           "lla"
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "palabra": "cazuela",
+          "modo": "casillas",
+          "n": 3
+         },
+         "solucion": {
+          "huecos": [
+           "ca",
+           "zue",
+           "la"
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
          "datos": {
           "palabra": "goma",
           "modo": "casillas",
@@ -25387,51 +25436,6 @@
            "ma"
           ]
          }
-        },
-        {
-         "id": "a1e8",
-         "datos": {
-          "palabra": "pecera",
-          "modo": "casillas",
-          "n": 3
-         },
-         "solucion": {
-          "huecos": [
-           "pe",
-           "ce",
-           "ra"
-          ]
-         }
-        },
-        {
-         "id": "a1e9",
-         "datos": {
-          "palabra": "aro",
-          "modo": "casillas",
-          "n": 2
-         },
-         "solucion": {
-          "huecos": [
-           "a",
-           "ro"
-          ]
-         }
-        },
-        {
-         "id": "a1e10",
-         "datos": {
-          "palabra": "regadera",
-          "modo": "casillas",
-          "n": 4
-         },
-         "solucion": {
-          "huecos": [
-           "re",
-           "ga",
-           "de",
-           "ra"
-          ]
-         }
         }
        ]
       }
@@ -25441,10 +25445,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "499512de8dbb14c0"
+   "a0b9bccde04d2179"
   ],
   "svgSolucion": [
-   "09a8bf1702dd09a6"
+   "72b8596958a18588"
   ]
  },
  "silaba.tabla": {

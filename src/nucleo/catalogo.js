@@ -11007,11 +11007,11 @@ export const CATALOGO = {
    "familia": "escritura",
    "clave": "ordena",
    "nombre": "Miro y escribo",
-   "descripcion": "Una tarjeta con espacio en blanco para pegar el dibujo, las letras desordenadas del nombre y la pauta: ordenar las letras y escribir la palabra.",
+   "descripcion": "Una tarjeta con espacio en blanco para pegar el dibujo, las letras desordenadas del nombre (qu, ch, ll, rr y gu en una casilla) y la pauta: ordenar las letras y escribir la palabra.",
    "opciones": [
     {
      "id": "letras",
-     "etiqueta": "Letras de cada palabra",
+     "etiqueta": "Casillas de cada palabra",
      "tipo": "opcion",
      "defecto": null,
      "valores": [
@@ -11021,19 +11021,19 @@ export const CATALOGO = {
       },
       {
        "valor": 3,
-       "etiqueta": "3 letras"
+       "etiqueta": "3 casillas"
       },
       {
        "valor": 4,
-       "etiqueta": "4 letras"
+       "etiqueta": "4 casillas"
       },
       {
        "valor": 5,
-       "etiqueta": "5 letras"
+       "etiqueta": "5 casillas"
       },
       {
        "valor": 6,
-       "etiqueta": "6 letras"
+       "etiqueta": "6 casillas"
       }
      ]
     },

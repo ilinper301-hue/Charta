@@ -131,11 +131,13 @@ export default {
       const { letras, palabra } = e.datos, m = palabra.toLowerCase();
       assert.deepEqual(Object.keys(e.datos), ["letras", "palabra"]); assert.deepEqual(e.solucion, { huecos: [palabra] }, "la solución es la palabra");
       assert.equal(palabra, p.caso === "mayus" ? m.toUpperCase() : m, "caso de la palabra");
-      palabraValida(m, { ...p, largo: null, caso: null }, { maxLetras: 6 });
+      palabraValida(m, { ...p, largo: null, caso: null }, { maxLetras: 9 });
       assert.ok(ent.get(m).d && ent.get(m).c === "n", `«${m}» no es un nombre dibujable`);
-      assert.ok(m.length >= 3 && m.length <= 6, "3 a 6 letras"); if (Number.isInteger(p.letras)) assert.equal(m.length, p.letras);
-      assert.ok(!/[áéíóúü]|ch|ll|rr|qu|gu[ei]/.test(m), `«${m}»: dígrafo o tilde`);
-      assert.deepEqual([...letras.join("").toLowerCase()].sort(), [...m].sort(), "las letras no son las de la palabra");
+      const cas = m.match(/qu|ch|ll|rr|gu(?=[eiéí])|./g);
+      assert.ok(cas.length >= 3 && cas.length <= 6, "3 a 6 casillas"); if (Number.isInteger(p.letras)) assert.equal(cas.length, p.letras);
+      assert.ok(!/[áéíóúü]/.test(m), `«${m}»: tilde`);
+      assert.deepEqual(letras.map((l) => l.toLowerCase()).sort(), [...cas].sort(), "las casillas no son las de la palabra (qu, ch, ll, rr y gu juntas)");
+      if (p.obligatorias) assert.ok([...p.obligatorias].some((o) => m.includes(o)), `«${m}» no lleva la obligatoria`);
       assert.notEqual(letras.join("").toLowerCase(), m, "letras ya ordenadas");
       if (p.caso === "mayus") letras.forEach((l) => assert.equal(l, l.toUpperCase()));
     }

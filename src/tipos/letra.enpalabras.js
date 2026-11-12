@@ -7,7 +7,7 @@
 import { registrar } from "../nucleo/tipos.js";
 import { TOP } from "../render/papel.js";
 import { sinTildes } from "../lengua/reglas.js";
-import { letrasActivas, vistasActivas, avisoVistas } from "../lengua/vistas.js";
+import { letrasActivas, vistasActivas, avisoVistas, claveLetras } from "../lengua/vistas.js";
 import { alCaso, candidatas, unidades, palabraLetras, cuantas } from "./_lengua.js";
 
 /** Posiciones (por unidad) de la letra en la palabra; null si forma parte de un dígrafo (ch, ll, rr, qu, gu): ahí no se puede rodear sola. */
@@ -29,7 +29,7 @@ export default registrar({
   generar(params, azar, { tamano }) {
     const n = cuantas(tamano, 12), cuenta = params.tarea !== "rodea";
     const buenas = (l) => {
-      const clave = `${params.tipo}|${params.caso === "inicial"}|${l}|${vistasActivas()}`;
+      const clave = `${params.tipo}|${params.caso === "inicial"}|${l}|${claveLetras()}`;
       if (!memo.has(clave)) memo.set(clave, candidatas(params, { conLetra: l, maxLetras: 9 }).filter((e) => { const p = posiciones(e.p, l); return p && p.length >= 1 && p.length <= 4; }));
       return memo.get(clave);
     };

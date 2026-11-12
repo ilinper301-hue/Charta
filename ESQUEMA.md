@@ -34,6 +34,7 @@
   "tipo": "sumar.h20", "tipoVersion": 1,   // id del registro de tipos (= id de MODELOS)
   "params": { "rango": 20, "nivel": "con" },
   // Lengua de 1.º: "vistas": "aeioumpslt" = letras que pueden salir (mapa de letras); sin el campo = todas
+  //               "obligatorias": "q" = cada palabra o frase lleva al menos una de ellas (pulsación larga); sin el campo = ninguna
   // Lengua de 1.º, tipos con frases: "misFrases": ["Mi mamá me mima.", …] = frases de la maestra que se mezclan con las del banco
   "tamano": "media",                        // "completa" | "media"
   "color": "azul",                          // amarillo | rosa | azul | verde

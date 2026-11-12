@@ -3,7 +3,7 @@
 import { POR_ID } from "./catalogo.js";
 import { crearAzar, mezclar } from "./azar.js";
 import { tipo } from "./tipos.js";
-import { normalizarVistas, conVistas } from "../lengua/vistas.js";
+import { normalizarVistas, conVistas, normalizarObligatorias, conObligatorias } from "../lengua/vistas.js";
 import { normalizarPropias, conPropias, USA_FRASES } from "../lengua/frases.js";
 
 export const SCHEMA_VERSION = 1;
@@ -64,10 +64,12 @@ export function validar(id, params = {}, tamano = "completa", curso) {
   const ops = Object.fromEntries(m.opciones.map((o) => [o.id, o]));
   // Letras elegidas (mapa de letras): solo Lengua de 1.º; todas = sin el campo (las fichas de siempre no cambian).
   if ("vistas" in p) { const v = esLengua1(m, c) ? normalizarVistas(p.vistas) : null; if (v) p.vistas = v; else delete p.vistas; }
+  // Letras obligatorias (pulsación larga en el mapa): cada palabra o frase lleva al menos una. Solo Lengua de 1.º.
+  if ("obligatorias" in p) { const o = esLengua1(m, c) ? normalizarObligatorias(p.obligatorias) : null; if (o) p.obligatorias = o; else delete p.obligatorias; }
   // «Mis frases» (Lengua de 1.º, tipos que usan frases): como las letras, viajan en los parámetros.
   if ("misFrases" in p) { const f = esLengua1(m, c) && USA_FRASES.has(id) ? normalizarPropias(p.misFrases) : null; if (f) p.misFrases = f; else delete p.misFrases; }
   for (const [k, v] of Object.entries(p)) {
-    if (k === "vistas" || k === "misFrases") continue;
+    if (k === "vistas" || k === "obligatorias" || k === "misFrases") continue;
     if (k === "rango") {
       if (rgs.length && !rgs.includes(v)) throw new Error(`${id}: rango ${v} no admitido [${rgs}]`);
       continue;
@@ -147,7 +149,7 @@ function pagina(acts, tamano, colores, semilla, n0 = 0) {
   return {
     actividades: acts.map((a, j) => {
       const T = tipo(a.tipo), i = n0 + j;
-      const res = conPropias(a.params.misFrases || null, () => conVistas(a.params.vistas || null, () => T.generar(a.params, crearAzar(mezclar(semilla, i + 1)), { tamano })));
+      const res = conPropias(a.params.misFrases || null, () => conVistas(a.params.vistas || null, () => conObligatorias(a.params.obligatorias || null, () => T.generar(a.params, crearAzar(mezclar(semilla, i + 1)), { tamano }))));
       const n = i + 1;
       return {
         n, tipo: a.tipo, tipoVersion: T.version, params: a.params, tamano, color: colores[j],

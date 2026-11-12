@@ -265,6 +265,10 @@ body.con-selector { overflow: hidden; }
 .mapa-letras button { height: var(--alto); border-radius: var(--r-sm); border: 1px solid var(--borde-fuerte); background: var(--superficie);
   color: var(--apagado); font: 600 1.1rem var(--sans); cursor: pointer; padding: 0; text-decoration: line-through; text-decoration-color: var(--borde-fuerte); }
 .mapa-letras button.vocal { border-style: dashed; }
+.mapa-letras button { position: relative; -webkit-touch-callout: none; user-select: none; -webkit-user-select: none; touch-action: manipulation; }
+/* Obligatoria (pulsación larga): anillo y punto; todas las palabras la llevan. */
+.mapa-letras button.obligatoria { box-shadow: 0 0 0 2px var(--superficie), 0 0 0 4px var(--primario); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.mapa-letras button.obligatoria::after { content: ""; position: absolute; top: 4px; right: 5px; width: 7px; height: 7px; border-radius: 50%; background: var(--sobre-acento); }
 .mapa-letras button[aria-pressed="true"] { background: var(--primario); border-color: var(--primario); color: var(--sobre-acento); text-decoration: none; border-style: solid; }
 .mis-frases { margin-top: 12px; border-top: 1px solid var(--borde); padding-top: 10px; }
 .mis-frases summary { cursor: pointer; font-weight: 600; }

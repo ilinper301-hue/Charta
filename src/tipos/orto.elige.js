@@ -14,7 +14,7 @@ import { TOP } from "../render/papel.js";
 import { rodear, palabraHuecos } from "../lengua/dibujo.js";
 import { LEXICO } from "../lengua/lexico.js";
 import { huecosOrto, REGLAS_ORTO } from "../lengua/reglas.js";
-import { vistasActivas, permitida, avisoVistas } from "../lengua/vistas.js";
+import { vistasActivas, permitida, avisoVistas, claveLetras } from "../lengua/vistas.js";
 import { alCaso, candidatas, cuantas } from "./_lengua.js";
 
 const PALABRAS = new Set(LEXICO.map((e) => e.p));
@@ -33,7 +33,7 @@ export function huecosBuenos(p, regla) {
 
 const memo = new Map();
 const buenas = (params, regla, ayuda) => {
-  const clave = `${params.caso === "inicial"}|${regla}|${ayuda}|${vistasActivas()}`;
+  const clave = `${params.caso === "inicial"}|${regla}|${ayuda}|${claveLetras()}`;
   if (!memo.has(clave)) {
     memo.set(clave, candidatas({ ...params, tipo: "mixtas" }, { maxLetras: 8 })
       .map((e) => ({ p: e.p, hs: huecosBuenos(e.p, regla).filter((h) => !ayuda || h.opciones.every(permitida)) })).filter((x) => x.hs.length));

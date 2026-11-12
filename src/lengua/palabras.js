@@ -2,7 +2,7 @@
 // Las sílabas se calculan una vez por palabra (caché). Sin DOM.
 import { LEXICO } from "./lexico.js";
 import { silabas, tipoSilaba, TIPOS_SILABA, soloLetras, llevaLetra } from "./reglas.js";
-import { permitida, avisoVistas } from "./vistas.js";
+import { permitida, obligada, avisoVistas } from "./vistas.js";
 
 const info = new Map();
 /** Datos calculados de una palabra del léxico: sílabas y tipos de sílaba. */
@@ -27,6 +27,7 @@ export function buscar({ cat, campos, nSilabas, tipo, letras, conLetra, dibujo, 
     if ((minLetras && n < minLetras) || (maxLetras && n > maxLetras)) return false;
     if (letras && !soloLetras(e.p, letras)) return false;
     if (!permitida(e.p)) return false;   // letras elegidas en el diseño (vistas.js)
+    if (!obligada(e.p)) return false;    // letra obligatoria (pulsación larga en el mapa)
     if (conLetra && !llevaLetra(e.p, conLetra)) return false;
     const d = datosPalabra(e);
     if (ns && !ns.includes(d.s.length)) return false;

@@ -3,7 +3,7 @@
 // comprobar que un hueco tiene una sola solución en el léxico y dibujar palabras letra a letra (rodear, rayas).
 import { LEXICO } from "../lengua/lexico.js";
 import { buscar } from "../lengua/palabras.js";
-import { vistasActivas, avisoVistas } from "../lengua/vistas.js";
+import { claveLetras, avisoVistas } from "../lengua/vistas.js";
 import { sinTildes } from "../lengua/reglas.js";
 import { COLOR_SOLUCION } from "../render/papel.js";
 
@@ -21,7 +21,7 @@ export const trozosCaso = (ts, caso) => ts.map((s, i) => (caso === "mayus" ? s.t
  *  las que empiezan por «i» (la «I» mayúscula de Fredoka se confunde con la «l»). */
 const memoCandidatas = new Map();
 export function candidatas(params, extra = {}) {
-  const clave = JSON.stringify([params.tipo || "directas", params.caso === "inicial", extra, vistasActivas()]);
+  const clave = JSON.stringify([params.tipo || "directas", params.caso === "inicial", extra, claveLetras()]);
   if (!memoCandidatas.has(clave)) {
     const ps = buscar({ cat: CATS, tipo: params.tipo || "directas", ...extra });
     memoCandidatas.set(clave, params.caso === "inicial" ? ps.filter((e) => !/^[iíì]/.test(e.p)) : ps);

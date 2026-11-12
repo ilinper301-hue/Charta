@@ -109,4 +109,27 @@ for (const id of ids) t.prueba(id, () => {
   }
   if (fallos.length) throw new Error(fallos.join("\n"));
 });
+// Letras obligatorias (pulsación larga en el mapa): cada palabra o frase lleva al menos una.
+t.prueba("letras obligatorias", () => {
+  const v = validar("palabra.dibuja", { obligatorias: "Qq" }); if (v.obligatorias !== "q") throw new Error("normalizar");
+  if ("obligatorias" in validar("sumar.h20", { obligatorias: "q" })) throw new Error("mates");
+  const r = conLetras([{ tipo: "palabra.dibuja", params: {} }, { tipo: "sumar.h20", params: {} }], null, "q");
+  if (r[0].params.obligatorias !== "q" || "obligatorias" in r[1].params) throw new Error("conLetras");
+  if (resumenLetras(new Set("aeioumq"), new Set("q")) !== "7 de 27 · obligatoria: q") throw new Error("resumen");
+  for (const [id, ob, campo] of [["palabra.dibuja", "q", (e) => e.datos.palabra], ["escritura.ordena", "q", (e) => e.datos.palabra], ["palabra.letras", "m", (e) => e.datos.palabra],
+    ["escritura.dictado", "m", (e) => e.solucion.huecos[0]], ["silaba.separa", "m", (e) => e.solucion.huecos.join("")]]) {
+    for (const s of [1, 2, 3, 4, 5]) for (const tam of ["completa", "media"]) {
+      const acts = Array(tam === "media" ? 2 : 1).fill({ tipo: id, params: { obligatorias: ob } });
+      const f = generar({ actividades: acts }, s);
+      for (const a of f.paginas[0].actividades) { INVARIANTES[id]?.(a, tam); for (const e of a.ejercicios) if (!campo(e).toLowerCase().includes(ob)) throw new Error(`${id}: «${campo(e)}» sin la «${ob}»`); }
+    }
+  }
+  // dictado de frases con la «m» obligatoria
+  const f = generar({ actividades: [{ tipo: "escritura.dictado", params: { modo: "frases", obligatorias: "m" } }] }, 1);
+  for (const e of f.paginas[0].actividades[0].ejercicios) if (!/m/i.test(e.solucion.huecos[0])) throw new Error("frase sin m");
+  // con obligatoria y pocas letras: error claro
+  try { generar({ actividades: [{ tipo: "palabra.dibuja", params: { vistas: "aeiouq", obligatorias: "q" } }] }, 1); throw new Error("debía fallar"); }
+  catch (e) { if (!/obligatoria/.test(e.message)) throw e; }
+});
+
 console.log(`test_vistas: ${t.n} pruebas OK · ${fichas} fichas · ${errores} con «faltan letras» (esperado con pocas letras)`);

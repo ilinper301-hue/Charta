@@ -233,8 +233,8 @@ MODELOS_LENGUA += [
     _l(8, "escritura", "libre", "Escribe una frase", "Renglones libres con la frase empezada (El gato…) o con un tema para escribir. Corrección abierta.",
        [op("inicio", "Cómo empieza", [(None, "Con la frase empezada (El gato…)"), ("tema", "Con un tema para escribir")]), PAUTA],
        "ESCRIBE UNA FRASE", "amarillo"),
-    _l(8, "escritura", "ordena", "Miro y escribo", "Una tarjeta con espacio en blanco para pegar el dibujo, las letras desordenadas del nombre y la pauta: ordenar las letras y escribir la palabra.",
-       [op("letras", "Letras de cada palabra", [(None, "3 a 6 (variadas)"), (3, "3 letras"), (4, "4 letras"), (5, "5 letras"), (6, "6 letras")]), TIPO,
+    _l(8, "escritura", "ordena", "Miro y escribo", "Una tarjeta con espacio en blanco para pegar el dibujo, las letras desordenadas del nombre (qu, ch, ll, rr y gu en una casilla) y la pauta: ordenar las letras y escribir la palabra.",
+       [op("letras", "Casillas de cada palabra", [(None, "3 a 6 (variadas)"), (3, "3 casillas"), (4, "4 casillas"), (5, "5 casillas"), (6, "6 casillas")]), TIPO,
         op("caso", "Letra", [(None, "minúscula"), ("mayus", "MAYÚSCULA")]), PAUTA],
        "MIRO Y ESCRIBO", "azul"),
     # <<< ESCRITURA

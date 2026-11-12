@@ -16,7 +16,7 @@ import { iniciarTema } from "./ui/tema.js";
 import { crearNube } from "./nube/nube.js";
 import { leerEntrada, leerTabula, gruposDeTabula, urlVolver } from "./ui/tabula.js";
 import { miniaturaDeSvg, dejarParaTabula } from "./ui/miniatura_ficha.js";
-import { VOCALES, CLAVE_LETRAS, hayLengua1, conLetras, letrasDe, vistasDe, resumenLetras, CLAVE_FRASES, hayFrases, conFrases, frasesDe, resumenFrases } from "./ui/letras.js";
+import { VOCALES, CLAVE_LETRAS, CLAVE_OBLIGATORIAS, hayLengua1, conLetras, letrasDe, obligatoriasDe, vistasDe, resumenLetras, CLAVE_FRASES, hayFrases, conFrases, frasesDe, resumenFrases } from "./ui/letras.js";
 import { cuentasDe, agrupar, paginaDe, inicioDe } from "./ui/paginas.js";
 import { ABECEDARIO } from "./lengua/reglas.js";
 import { paqueteFori, URL_FORI, CLAVE_FORI } from "./fori/diapositivas.js";
@@ -193,18 +193,44 @@ function iniciar() {
   // Mapa de letras (Lengua de 1.º): marcadas = pueden salir. Se recuerdan las últimas (las que lleva la clase).
   const marcadas = new Set(ABECEDARIO);
   try { const g = localStorage.getItem(CLAVE_LETRAS); if (g !== null) { marcadas.clear(); for (const l of g) if (ABECEDARIO.includes(l)) marcadas.add(l); } } catch {}
+  // Obligatorias (pulsación larga): todas las palabras y frases llevan al menos una. Siempre están también marcadas.
+  const obligatorias = new Set();
+  try { for (const l of localStorage.getItem(CLAVE_OBLIGATORIAS) || "") if (ABECEDARIO.includes(l)) { obligatorias.add(l); marcadas.add(l); } } catch {}
   const teclas = ABECEDARIO.map((l) => {
     const b = el("button", { type: "button", textContent: l, className: VOCALES.includes(l) ? "vocal" : "" });
-    b.onclick = () => { marcadas.has(l) ? marcadas.delete(l) : marcadas.add(l); cambiarLetras(); };
+    let reloj = null, larga = false;
+    const parar = () => { clearTimeout(reloj); reloj = null; };
+    b.addEventListener("pointerdown", () => {
+      larga = false; parar();
+      reloj = setTimeout(() => {
+        reloj = null; larga = true;
+        if (obligatorias.has(l)) obligatorias.delete(l); else { obligatorias.add(l); marcadas.add(l); }
+        try { navigator.vibrate?.(30); } catch {}
+        cambiarLetras();
+      }, 500);
+    });
+    for (const ev of ["pointerup", "pointerleave", "pointercancel"]) b.addEventListener(ev, parar);
+    b.addEventListener("contextmenu", (e) => e.preventDefault());   // en Android, la pulsación larga abre el menú
+    b.onclick = () => {
+      if (larga) { larga = false; return; }   // la pulsación larga ya ha hecho su cambio
+      if (obligatorias.has(l)) obligatorias.delete(l);   // tocar una obligatoria la deja solo marcada
+      else if (marcadas.has(l)) marcadas.delete(l); else marcadas.add(l);
+      cambiarLetras();
+    };
     return b;
   });
   $("mapaLetras").replaceChildren(...teclas);
   function pintarLetras() {
-    teclas.forEach((b, i) => { const on = marcadas.has(ABECEDARIO[i]); b.setAttribute("aria-pressed", on); b.title = on ? "Puede salir (toca para quitarla)" : "No sale (toca para ponerla)"; });
-    $("letrasCuenta").textContent = resumenLetras(marcadas);
+    teclas.forEach((b, i) => {
+      const l = ABECEDARIO[i], on = marcadas.has(l), ob = obligatorias.has(l);
+      b.setAttribute("aria-pressed", on); b.classList.toggle("obligatoria", ob);
+      b.title = ob ? "Obligatoria: todas las palabras la llevan (toca para que solo pueda salir)" : on ? "Puede salir (toca para quitarla; mantén pulsada para hacerla obligatoria)" : "No sale (toca para ponerla)";
+    });
+    $("letrasCuenta").textContent = resumenLetras(marcadas, obligatorias);
   }
   function cambiarLetras(guardar = true) {
-    if (guardar) try { localStorage.setItem(CLAVE_LETRAS, ABECEDARIO.filter((l) => marcadas.has(l)).join("")); } catch {}
+    for (const l of [...obligatorias]) if (!marcadas.has(l)) obligatorias.delete(l);   // una letra que no sale no puede ser obligatoria
+    if (guardar) try { localStorage.setItem(CLAVE_LETRAS, ABECEDARIO.filter((l) => marcadas.has(l)).join("")); localStorage.setItem(CLAVE_OBLIGATORIAS, ABECEDARIO.filter((l) => obligatorias.has(l)).join("")); } catch {}
     pintarLetras(); pintar();
   }
   const atajo = (id, ls) => { $(id).onclick = () => { marcadas.clear(); for (const l of ls) marcadas.add(l); cambiarLetras(); }; };
@@ -219,7 +245,7 @@ function iniciar() {
   }
   $("misFrases").addEventListener("change", () => { try { localStorage.setItem(CLAVE_FRASES, $("misFrases").value); } catch {} pintar(); });
   $("misFrases").addEventListener("input", pintarMisFrases);
-  const actividades = () => conFrases(conLetras(editores.map((e) => e.leer()), vistasDe(marcadas)), misFrases());
+  const actividades = () => conFrases(conLetras(editores.map((e) => e.leer()), vistasDe(marcadas), ABECEDARIO.filter((l) => obligatorias.has(l)).join("")), misFrases());
 
   function pintar() {
     $("error").hidden = true;
@@ -320,7 +346,7 @@ function iniciar() {
     if (!c.fuente || fuentePorId(c.fuente).id === c.fuente) elegirFuente(c.fuente || "andika");
     else { elegirFuente("andika"); $("infoFuente").textContent = `Esta ficha usaba la letra «${c.fuente.replace("usuario:", "")}», que no está en este dispositivo: se usa Andika. Puedes subirla otra vez.`; }
     materia1 = materiaDe(editores[0].id);
-    if (hayLengua1(c.actividades)) { const v = letrasDe(c); marcadas.clear(); for (const l of v ?? ABECEDARIO) marcadas.add(l); pintarLetras(); }   // sin guardarlas como las de la clase
+    if (hayLengua1(c.actividades)) { const v = letrasDe(c); marcadas.clear(); for (const l of v ?? ABECEDARIO) marcadas.add(l); obligatorias.clear(); for (const l of obligatoriasDe(c) ?? "") obligatorias.add(l); pintarLetras(); }   // sin guardarlas como las de la clase
     if (hayFrases(c.actividades)) $("misFrases").value = frasesDe(c).join("\n");   // ídem con «Mis frases»
     pintar(); $("acts").scrollIntoView({ behavior: "smooth" });
   }

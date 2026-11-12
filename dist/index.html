@@ -277,6 +277,10 @@ body.con-selector { overflow: hidden; }
 .mapa-letras button { height: var(--alto); border-radius: var(--r-sm); border: 1px solid var(--borde-fuerte); background: var(--superficie);
   color: var(--apagado); font: 600 1.1rem var(--sans); cursor: pointer; padding: 0; text-decoration: line-through; text-decoration-color: var(--borde-fuerte); }
 .mapa-letras button.vocal { border-style: dashed; }
+.mapa-letras button { position: relative; -webkit-touch-callout: none; user-select: none; -webkit-user-select: none; touch-action: manipulation; }
+/* Obligatoria (pulsación larga): anillo y punto; todas las palabras la llevan. */
+.mapa-letras button.obligatoria { box-shadow: 0 0 0 2px var(--superficie), 0 0 0 4px var(--primario); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.mapa-letras button.obligatoria::after { content: ""; position: absolute; top: 4px; right: 5px; width: 7px; height: 7px; border-radius: 50%; background: var(--sobre-acento); }
 .mapa-letras button[aria-pressed="true"] { background: var(--primario); border-color: var(--primario); color: var(--sobre-acento); text-decoration: none; border-style: solid; }
 .mis-frases { margin-top: 12px; border-top: 1px solid var(--borde); padding-top: 10px; }
 .mis-frases summary { cursor: pointer; font-weight: 600; }
@@ -321,7 +325,7 @@ body.con-selector { overflow: hidden; }
   </section>
   <section class="tarjeta" id="secLetras" hidden>
     <div class="sec-cab"><h2>Letras</h2><small id="letrasCuenta">Todas</small></div>
-    <p class="info">Toca una letra para quitarla o ponerla: las palabras, sílabas y frases solo llevarán las letras marcadas.</p>
+    <p class="info">Toca una letra para quitarla o ponerla: las palabras, sílabas y frases solo llevarán las letras marcadas. <b>Mantén pulsada</b> una letra para hacerla <b>obligatoria</b>: todas las palabras la llevarán (para la «qu», la «q»).</p>
     <div id="mapaLetras" class="mapa-letras" role="group" aria-label="Letras que pueden salir"></div>
     <div class="letras-atajos"><button id="letrasTodas">Todas</button><button id="letrasVocales">Solo vocales</button><button id="letrasNinguna">Ninguna</button></div>
     <details id="cajaMisFrases" class="mis-frases" hidden><summary>Mis frases <small id="misFrasesCuenta"></small></summary>
@@ -416,7 +420,7 @@ const { iniciarTema } = __req("ui/tema.js");
 const { crearNube } = __req("nube/nube.js");
 const { leerEntrada, leerTabula, gruposDeTabula, urlVolver } = __req("ui/tabula.js");
 const { miniaturaDeSvg, dejarParaTabula } = __req("ui/miniatura_ficha.js");
-const { VOCALES, CLAVE_LETRAS, hayLengua1, conLetras, letrasDe, vistasDe, resumenLetras, CLAVE_FRASES, hayFrases, conFrases, frasesDe, resumenFrases } = __req("ui/letras.js");
+const { VOCALES, CLAVE_LETRAS, CLAVE_OBLIGATORIAS, hayLengua1, conLetras, letrasDe, obligatoriasDe, vistasDe, resumenLetras, CLAVE_FRASES, hayFrases, conFrases, frasesDe, resumenFrases } = __req("ui/letras.js");
 const { cuentasDe, agrupar, paginaDe, inicioDe } = __req("ui/paginas.js");
 const { ABECEDARIO } = __req("lengua/reglas.js");
 const { paqueteFori, URL_FORI, CLAVE_FORI } = __req("fori/diapositivas.js");
@@ -592,18 +596,44 @@ function iniciar() {
   // Mapa de letras (Lengua de 1.º): marcadas = pueden salir. Se recuerdan las últimas (las que lleva la clase).
   const marcadas = new Set(ABECEDARIO);
   try { const g = localStorage.getItem(CLAVE_LETRAS); if (g !== null) { marcadas.clear(); for (const l of g) if (ABECEDARIO.includes(l)) marcadas.add(l); } } catch {}
+  // Obligatorias (pulsación larga): todas las palabras y frases llevan al menos una. Siempre están también marcadas.
+  const obligatorias = new Set();
+  try { for (const l of localStorage.getItem(CLAVE_OBLIGATORIAS) || "") if (ABECEDARIO.includes(l)) { obligatorias.add(l); marcadas.add(l); } } catch {}
   const teclas = ABECEDARIO.map((l) => {
     const b = el("button", { type: "button", textContent: l, className: VOCALES.includes(l) ? "vocal" : "" });
-    b.onclick = () => { marcadas.has(l) ? marcadas.delete(l) : marcadas.add(l); cambiarLetras(); };
+    let reloj = null, larga = false;
+    const parar = () => { clearTimeout(reloj); reloj = null; };
+    b.addEventListener("pointerdown", () => {
+      larga = false; parar();
+      reloj = setTimeout(() => {
+        reloj = null; larga = true;
+        if (obligatorias.has(l)) obligatorias.delete(l); else { obligatorias.add(l); marcadas.add(l); }
+        try { navigator.vibrate?.(30); } catch {}
+        cambiarLetras();
+      }, 500);
+    });
+    for (const ev of ["pointerup", "pointerleave", "pointercancel"]) b.addEventListener(ev, parar);
+    b.addEventListener("contextmenu", (e) => e.preventDefault());   // en Android, la pulsación larga abre el menú
+    b.onclick = () => {
+      if (larga) { larga = false; return; }   // la pulsación larga ya ha hecho su cambio
+      if (obligatorias.has(l)) obligatorias.delete(l);   // tocar una obligatoria la deja solo marcada
+      else if (marcadas.has(l)) marcadas.delete(l); else marcadas.add(l);
+      cambiarLetras();
+    };
     return b;
   });
   $("mapaLetras").replaceChildren(...teclas);
   function pintarLetras() {
-    teclas.forEach((b, i) => { const on = marcadas.has(ABECEDARIO[i]); b.setAttribute("aria-pressed", on); b.title = on ? "Puede salir (toca para quitarla)" : "No sale (toca para ponerla)"; });
-    $("letrasCuenta").textContent = resumenLetras(marcadas);
+    teclas.forEach((b, i) => {
+      const l = ABECEDARIO[i], on = marcadas.has(l), ob = obligatorias.has(l);
+      b.setAttribute("aria-pressed", on); b.classList.toggle("obligatoria", ob);
+      b.title = ob ? "Obligatoria: todas las palabras la llevan (toca para que solo pueda salir)" : on ? "Puede salir (toca para quitarla; mantén pulsada para hacerla obligatoria)" : "No sale (toca para ponerla)";
+    });
+    $("letrasCuenta").textContent = resumenLetras(marcadas, obligatorias);
   }
   function cambiarLetras(guardar = true) {
-    if (guardar) try { localStorage.setItem(CLAVE_LETRAS, ABECEDARIO.filter((l) => marcadas.has(l)).join("")); } catch {}
+    for (const l of [...obligatorias]) if (!marcadas.has(l)) obligatorias.delete(l);   // una letra que no sale no puede ser obligatoria
+    if (guardar) try { localStorage.setItem(CLAVE_LETRAS, ABECEDARIO.filter((l) => marcadas.has(l)).join("")); localStorage.setItem(CLAVE_OBLIGATORIAS, ABECEDARIO.filter((l) => obligatorias.has(l)).join("")); } catch {}
     pintarLetras(); pintar();
   }
   const atajo = (id, ls) => { $(id).onclick = () => { marcadas.clear(); for (const l of ls) marcadas.add(l); cambiarLetras(); }; };
@@ -618,7 +648,7 @@ function iniciar() {
   }
   $("misFrases").addEventListener("change", () => { try { localStorage.setItem(CLAVE_FRASES, $("misFrases").value); } catch {} pintar(); });
   $("misFrases").addEventListener("input", pintarMisFrases);
-  const actividades = () => conFrases(conLetras(editores.map((e) => e.leer()), vistasDe(marcadas)), misFrases());
+  const actividades = () => conFrases(conLetras(editores.map((e) => e.leer()), vistasDe(marcadas), ABECEDARIO.filter((l) => obligatorias.has(l)).join("")), misFrases());
 
   function pintar() {
     $("error").hidden = true;
@@ -719,7 +749,7 @@ function iniciar() {
     if (!c.fuente || fuentePorId(c.fuente).id === c.fuente) elegirFuente(c.fuente || "andika");
     else { elegirFuente("andika"); $("infoFuente").textContent = `Esta ficha usaba la letra «${c.fuente.replace("usuario:", "")}», que no está en este dispositivo: se usa Andika. Puedes subirla otra vez.`; }
     materia1 = materiaDe(editores[0].id);
-    if (hayLengua1(c.actividades)) { const v = letrasDe(c); marcadas.clear(); for (const l of v ?? ABECEDARIO) marcadas.add(l); pintarLetras(); }   // sin guardarlas como las de la clase
+    if (hayLengua1(c.actividades)) { const v = letrasDe(c); marcadas.clear(); for (const l of v ?? ABECEDARIO) marcadas.add(l); obligatorias.clear(); for (const l of obligatoriasDe(c) ?? "") obligatorias.add(l); pintarLetras(); }   // sin guardarlas como las de la clase
     if (hayFrases(c.actividades)) $("misFrases").value = frasesDe(c).join("\n");   // ídem con «Mis frases»
     pintar(); $("acts").scrollIntoView({ behavior: "smooth" });
   }
@@ -2795,7 +2825,23 @@ const LEXICO = [
 {"p":"ocho","c":"o","k":["otros"],"f":1},
 {"p":"nueve","c":"o","k":["otros"],"f":1},
 {"p":"diez","c":"o","k":["otros"],"f":1},
-{"p":"cero","c":"o","k":["otros"],"f":1}
+{"p":"cero","c":"o","k":["otros"],"f":1},
+{"p":"máquina","c":"n","k":["otros"],"f":1,"g":"f","d":1},
+{"p":"raqueta","c":"n","k":["juguetes"],"f":1,"g":"f","d":1},
+{"p":"buque","c":"n","k":["transportes"],"f":2,"g":"m","d":1},
+{"p":"quesito","c":"n","k":["comida"],"f":2,"g":"m","d":1},
+{"p":"maquillaje","c":"n","k":["otros"],"f":2,"g":"m","d":1},
+{"p":"taquilla","c":"n","k":["otros"],"f":2,"g":"f","d":1},
+{"p":"caqui","c":"n","k":["comida"],"f":2,"g":"m","d":1},
+{"p":"periquito","c":"n","k":["animales"],"f":1,"g":"m","d":1},
+{"p":"duquesa","c":"n","k":["otros"],"f":2,"g":"f","d":1},
+{"p":"mosquito","c":"n","k":["animales"],"f":1,"g":"m","d":1},
+{"p":"tanque","c":"n","k":["transportes"],"f":2,"g":"m","d":1},
+{"p":"quiosco","c":"n","k":["otros"],"f":1,"g":"m","d":1},
+{"p":"esqueleto","c":"n","k":["cuerpo"],"f":1,"g":"m","d":1},
+{"p":"boquerón","c":"n","k":["animales"],"f":2,"g":"m","d":1},
+{"p":"barquito","c":"n","k":["transportes"],"f":1,"g":"m","d":1},
+{"p":"banqueta","c":"n","k":["casa"],"f":2,"g":"f","d":1}
 ];
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get LEXICO() { return LEXICO; } }));
@@ -2805,7 +2851,7 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get LEXICO() {
 // Las sílabas se calculan una vez por palabra (caché). Sin DOM.
 const { LEXICO } = __req("lengua/lexico.js");
 const { silabas, tipoSilaba, TIPOS_SILABA, soloLetras, llevaLetra } = __req("lengua/reglas.js");
-const { permitida, avisoVistas } = __req("lengua/vistas.js");
+const { permitida, obligada, avisoVistas } = __req("lengua/vistas.js");
 const info = new Map();
 /** Datos calculados de una palabra del léxico: sílabas y tipos de sílaba. */
 function datosPalabra(e) {
@@ -2829,6 +2875,7 @@ function buscar({ cat, campos, nSilabas, tipo, letras, conLetra, dibujo, frec, s
     if ((minLetras && n < minLetras) || (maxLetras && n > maxLetras)) return false;
     if (letras && !soloLetras(e.p, letras)) return false;
     if (!permitida(e.p)) return false;   // letras elegidas en el diseño (vistas.js)
+    if (!obligada(e.p)) return false;    // letra obligatoria (pulsación larga en el mapa)
     if (conLetra && !llevaLetra(e.p, conLetra)) return false;
     const d = datosPalabra(e);
     if (ns && !ns.includes(d.s.length)) return false;
@@ -3314,6 +3361,7 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get ESPACIO_LE
 // (las fichas de siempre no cambian). Las vocales con tilde o diéresis cuentan como su vocal; la «y» suelta vale siempre. Sin DOM.
 const { ABECEDARIO, sinTildes } = __req("lengua/reglas.js");
 let activas = null;   // Set de letras o null (todas)
+let obligadas = null; // Set de letras obligatorias o null: cada palabra (o frase) debe llevar al menos una (pulsación larga en el mapa)
 
 /** Cadena normalizada (orden del abecedario, sin repetir) o null si están todas o no es válida. */
 function normalizarVistas(v) {
@@ -3327,6 +3375,28 @@ function conVistas(vistas, f) {
   const antes = activas;
   activas = vistas ? new Set(vistas) : null;
   try { return f(); } finally { activas = antes; }
+}
+/** Letras obligatorias normalizadas (cadena en orden del abecedario) o null. */
+function normalizarObligatorias(v) {
+  if (v == null || v === "") return null;
+  const s = new Set([...sinTildes(String(v).toLowerCase())]);
+  return ABECEDARIO.filter((c) => s.has(c)).join("") || null;
+}
+/** Ejecuta f con esas letras obligatorias (y las quita después). */
+function conObligatorias(o, f) {
+  const antes = obligadas;
+  obligadas = o ? new Set(o) : null;
+  try { return f(); } finally { obligadas = antes; }
+}
+/** Letras obligatorias activas (cadena) o null. */
+const obligatoriasActivas = () => (obligadas ? [...obligadas].join("") : null);
+/** Clave de caché de las letras: permitidas y obligatorias. */
+const claveLetras = () => `${vistasActivas()}|${obligatoriasActivas()}`;
+/** ¿El texto lleva alguna de las letras obligatorias? (sin obligatorias, siempre). La «qu» se marca con la «q». */
+function obligada(texto) {
+  if (!obligadas) return true;
+  for (const c of sinTildes(String(texto).toLowerCase())) if (obligadas.has(c)) return true;
+  return false;
 }
 /** Letras activas (cadena) o null. Sirve de clave de caché. */
 const vistasActivas = () => (activas ? [...activas].join("") : null);
@@ -3343,9 +3413,10 @@ const filtrarVistas = (lista, f = (x) => x) => (activas ? lista.filter((x) => pe
 /** Letras activas como lista (o todo el abecedario). */
 const letrasActivas = () => (activas ? ABECEDARIO.filter((c) => activas.has(c)) : [...ABECEDARIO]);
 /** Aviso para los errores «no hay bastantes»: solo si hay letras elegidas. */
-const avisoVistas = () => (activas ? " Con las letras elegidas no hay bastantes: marca más letras en «Letras»." : "");
+const avisoVistas = () => (obligadas ? ` Con la letra obligatoria «${[...obligadas].join("», «")}» no hay bastantes: quítala (mantenla pulsada) o marca más letras en «Letras».`
+  : activas ? " Con las letras elegidas no hay bastantes: marca más letras en «Letras»." : "");
 
-Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get normalizarVistas() { return normalizarVistas; }, get conVistas() { return conVistas; }, get vistasActivas() { return vistasActivas; }, get permitida() { return permitida; }, get filtrarVistas() { return filtrarVistas; }, get letrasActivas() { return letrasActivas; }, get avisoVistas() { return avisoVistas; } }));
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get normalizarVistas() { return normalizarVistas; }, get conVistas() { return conVistas; }, get normalizarObligatorias() { return normalizarObligatorias; }, get conObligatorias() { return conObligatorias; }, get obligatoriasActivas() { return obligatoriasActivas; }, get claveLetras() { return claveLetras; }, get obligada() { return obligada; }, get vistasActivas() { return vistasActivas; }, get permitida() { return permitida; }, get filtrarVistas() { return filtrarVistas; }, get letrasActivas() { return letrasActivas; }, get avisoVistas() { return avisoVistas; } }));
 },
 "nube/config.js": (__exp) => {
 // Charta · configuración de Firebase (paso 5.1)
@@ -14599,11 +14670,11 @@ const CATALOGO = {
    "familia": "escritura",
    "clave": "ordena",
    "nombre": "Miro y escribo",
-   "descripcion": "Una tarjeta con espacio en blanco para pegar el dibujo, las letras desordenadas del nombre y la pauta: ordenar las letras y escribir la palabra.",
+   "descripcion": "Una tarjeta con espacio en blanco para pegar el dibujo, las letras desordenadas del nombre (qu, ch, ll, rr y gu en una casilla) y la pauta: ordenar las letras y escribir la palabra.",
    "opciones": [
     {
      "id": "letras",
-     "etiqueta": "Letras de cada palabra",
+     "etiqueta": "Casillas de cada palabra",
      "tipo": "opcion",
      "defecto": null,
      "valores": [
@@ -14613,19 +14684,19 @@ const CATALOGO = {
       },
       {
        "valor": 3,
-       "etiqueta": "3 letras"
+       "etiqueta": "3 casillas"
       },
       {
        "valor": 4,
-       "etiqueta": "4 letras"
+       "etiqueta": "4 casillas"
       },
       {
        "valor": 5,
-       "etiqueta": "5 letras"
+       "etiqueta": "5 casillas"
       },
       {
        "valor": 6,
-       "etiqueta": "6 letras"
+       "etiqueta": "6 casillas"
       }
      ]
     },
@@ -14724,7 +14795,7 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get CATALOGO()
 const { POR_ID } = __req("nucleo/catalogo.js");
 const { crearAzar, mezclar } = __req("nucleo/azar.js");
 const { tipo } = __req("nucleo/tipos.js");
-const { normalizarVistas, conVistas } = __req("lengua/vistas.js");
+const { normalizarVistas, conVistas, normalizarObligatorias, conObligatorias } = __req("lengua/vistas.js");
 const { normalizarPropias, conPropias, USA_FRASES } = __req("lengua/frases.js");
 const SCHEMA_VERSION = 1;
 const COLORES = ["amarillo", "rosa", "azul", "verde"];
@@ -14784,10 +14855,12 @@ function validar(id, params = {}, tamano = "completa", curso) {
   const ops = Object.fromEntries(m.opciones.map((o) => [o.id, o]));
   // Letras elegidas (mapa de letras): solo Lengua de 1.º; todas = sin el campo (las fichas de siempre no cambian).
   if ("vistas" in p) { const v = esLengua1(m, c) ? normalizarVistas(p.vistas) : null; if (v) p.vistas = v; else delete p.vistas; }
+  // Letras obligatorias (pulsación larga en el mapa): cada palabra o frase lleva al menos una. Solo Lengua de 1.º.
+  if ("obligatorias" in p) { const o = esLengua1(m, c) ? normalizarObligatorias(p.obligatorias) : null; if (o) p.obligatorias = o; else delete p.obligatorias; }
   // «Mis frases» (Lengua de 1.º, tipos que usan frases): como las letras, viajan en los parámetros.
   if ("misFrases" in p) { const f = esLengua1(m, c) && USA_FRASES.has(id) ? normalizarPropias(p.misFrases) : null; if (f) p.misFrases = f; else delete p.misFrases; }
   for (const [k, v] of Object.entries(p)) {
-    if (k === "vistas" || k === "misFrases") continue;
+    if (k === "vistas" || k === "obligatorias" || k === "misFrases") continue;
     if (k === "rango") {
       if (rgs.length && !rgs.includes(v)) throw new Error(`${id}: rango ${v} no admitido [${rgs}]`);
       continue;
@@ -14867,7 +14940,7 @@ function pagina(acts, tamano, colores, semilla, n0 = 0) {
   return {
     actividades: acts.map((a, j) => {
       const T = tipo(a.tipo), i = n0 + j;
-      const res = conPropias(a.params.misFrases || null, () => conVistas(a.params.vistas || null, () => T.generar(a.params, crearAzar(mezclar(semilla, i + 1)), { tamano })));
+      const res = conPropias(a.params.misFrases || null, () => conVistas(a.params.vistas || null, () => conObligatorias(a.params.obligatorias || null, () => T.generar(a.params, crearAzar(mezclar(semilla, i + 1)), { tamano }))));
       const n = i + 1;
       return {
         n, tipo: a.tipo, tipoVersion: T.version, params: a.params, tamano, color: colores[j],
@@ -16238,7 +16311,7 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get repartir()
 // (el agua) no entran. Las frases empiezan siempre por el artículo (El, La, Los, Las), nunca por «I».
 const { LEXICO } = __req("lengua/lexico.js");
 const { articulo, plural, tonica } = __req("lengua/reglas.js");
-const { permitida, filtrarVistas, avisoVistas, vistasActivas } = __req("lengua/vistas.js");
+const { permitida, obligada, filtrarVistas, avisoVistas, vistasActivas } = __req("lengua/vistas.js");
 const { FRASES_1 } = __req("lengua/frases_1.js");
 const { propiasActivas, palabrasLibres, nombresDe } = __req("lengua/frases.js");
 const ENT = new Map(LEXICO.map((e) => [e.p, e]));
@@ -16460,7 +16533,7 @@ function largosFrase(azar, n, palabras) {
 function elegirFrases(azar, largos, { filtro = null, id = "frase", ya = new Set(), sujetos = new Set() } = {}) {
   const out = [];
   const porLargo = new Map();
-  for (const l of new Set(largos)) porLargo.set(l, filtrarVistas(todasFrases(), (f) => f.id).filter((f) => f.n === l && (!filtro || filtro(f))));
+  for (const l of new Set(largos)) porLargo.set(l, filtrarVistas(todasFrases(), (f) => f.id).filter((f) => f.n === l && obligada(f.id) && (!filtro || filtro(f))));
   for (const l of largos) {
     const libres = porLargo.get(l).filter((f) => !ya.has(f.id));
     if (!libres.length) throw new Error(`«${id}» necesita más frases: con esas opciones solo hay ${out.length} y hacen falta ${largos.length}. Prueba con frases de otro largo.${avisoVistas()}`);
@@ -16988,7 +17061,7 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get gen() { re
 // comprobar que un hueco tiene una sola solución en el léxico y dibujar palabras letra a letra (rodear, rayas).
 const { LEXICO } = __req("lengua/lexico.js");
 const { buscar } = __req("lengua/palabras.js");
-const { vistasActivas, avisoVistas } = __req("lengua/vistas.js");
+const { claveLetras, avisoVistas } = __req("lengua/vistas.js");
 const { sinTildes } = __req("lengua/reglas.js");
 const { COLOR_SOLUCION } = __req("render/papel.js");
 /** Categorías que se leen en 1.º en estos modelos: nombres, adjetivos y verbos (no las palabras gramaticales). */
@@ -17005,7 +17078,7 @@ const trozosCaso = (ts, caso) => ts.map((s, i) => (caso === "mayus" ? s.toUpperC
  *  las que empiezan por «i» (la «I» mayúscula de Fredoka se confunde con la «l»). */
 const memoCandidatas = new Map();
 function candidatas(params, extra = {}) {
-  const clave = JSON.stringify([params.tipo || "directas", params.caso === "inicial", extra, vistasActivas()]);
+  const clave = JSON.stringify([params.tipo || "directas", params.caso === "inicial", extra, claveLetras()]);
   if (!memoCandidatas.has(clave)) {
     const ps = buscar({ cat: CATS, tipo: params.tipo || "directas", ...extra });
     memoCandidatas.set(clave, params.caso === "inicial" ? ps.filter((e) => !/^[iíì]/.test(e.p)) : ps);
@@ -18442,19 +18515,18 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get TEMAS() { 
 },
 "tipos/escritura.ordena.js": (__exp) => {
 // escritura.ordena · Miro y escribo (Lengua 1.º, petición de Iván 12-11-2026, a partir de su ficha «Miro y escribo · Repaso»; LENGUA_1.md §3, bloque 8).
-// datos:    { letras: [letras desordenadas, en el caso elegido], palabra }   (cada ejercicio es una tarjeta: ESPACIO EN BLANCO para el dibujo —Charta no hace
+// datos:    { letras: [casillas desordenadas, en el caso elegido], palabra }   (v2: «qu», «ch», «ll», «rr» y «gu» ante e/i van en UNA casilla, como se enseñan)   (cada ejercicio es una tarjeta: ESPACIO EN BLANCO para el dibujo —Charta no hace
 //           dibujos: Iván pega el suyo—, las letras desordenadas en casillas y un renglón de pauta para escribir la palabra)
 // solucion: { huecos: [palabra] }   la palabra solo sale en pantalla (solucionario y Fori), en rojo sobre la pauta; en el papel no se imprime
-// Reglas: nombres del léxico que se pueden dibujar (campo «dibujo») de 3 a 6 letras, sin tildes ni ch/ll/rr/qu/gu (cada letra es un sonido) y con al menos dos
-//         letras distintas; las letras mostradas nunca están ya en orden. Sin repetir. Completa 8 (2 × 4), media 4 (2 × 2). Respeta el mapa de letras.
+// Reglas: nombres del léxico que se pueden dibujar (campo «dibujo») de 3 a 6 casillas, sin tildes ni «ü», y con al menos dos casillas distintas; las letras mostradas nunca están ya en orden. Sin repetir. Completa 8 (2 × 4), media 4 (2 × 2). Respeta el mapa de letras.
 //         No exige solución única entre anagramas (sol/los): la palabra la fija el dibujo que pegue la maestra.
 // Aspecto (idéntico a la ficha de Iván): tarjeta de borde verde azulado, casillas de borde rojo con la letra y pauta Lamela de cuatro líneas
 //         (las dos del cuerpo negras y las de las astas y los rabos grises).
-// Opciones: letras de cada palabra (3 a 6 variadas / 3 / 4 / 5 / 6) · tipo de sílabas · letra (minúscula / MAYÚSCULA) · pauta (5, 4, 3,5 mm).
+// Opciones: casillas de cada palabra (3 a 6 variadas / 3 / 4 / 5 / 6) · tipo de sílabas · letra (minúscula / MAYÚSCULA) · pauta (5, 4, 3,5 mm).
 const { registrar } = __req("nucleo/tipos.js");
 const { TOP, COLOR_SOLUCION, INK } = __req("render/papel.js");
 const { cuantas, candidatas } = __req("tipos/_lengua.js");
-const { elegirPorLetras } = __req("tipos/_palabra.js");
+const { avisoVistas } = __req("lengua/vistas.js");
 const { mmDe } = __req("tipos/_escritura.js");
 const { pautaLamela } = __req("lengua/pauta.js");
 const { VERDE_RECUADRO } = __req("tipos/palabra.dibuja.js");
@@ -18462,20 +18534,41 @@ const { VERDE_RECUADRO } = __req("tipos/palabra.dibuja.js");
 const ROJO_CASILLA = "#E34C38";
 const TAM_CASILLA = 22, SEP_CASILLA = 7, PAD = 12;
 
+/** Casillas de una palabra: «qu», «ch», «ll», «rr» y «gu» ante e/i juntas; el resto, letra a letra. queso → [qu, e, s, o]. */
+function casillasDe(p) {
+  return p.match(/qu|ch|ll|rr|gu(?=[eiéí])|./g);
+}
+/** Elige n palabras siguiendo la secuencia de largos en casillas (como elegirPorLetras de _palabra.js). */
+function elegirPorCasillas(azar, n, lista, largos) {
+  const bolsas = {};
+  for (const l of new Set(largos)) bolsas[l] = azar.barajar(lista.filter((e) => e.cas.length === l && new Set(e.cas).size >= 2));
+  const out = []; let i = 0;
+  while (out.length < n) {
+    let tomada = false;
+    for (let k = 0; k < largos.length && !tomada; k++) {
+      const b = bolsas[largos[(i + k) % largos.length]];
+      if (b.length) { out.push(b.pop()); tomada = true; i += k + 1; }
+    }
+    if (!tomada) throw new Error(`«escritura.ordena» necesita más palabras: con esas opciones solo hay ${out.length} y hacen falta ${n}. Prueba con otro tipo de sílabas o con otro largo.` + avisoVistas());
+  }
+  return out;
+}
+
 const __default = registrar({
   id: "escritura.ordena",
-  version: 1,
+  version: 2,
   generar(params, azar, { tamano }) {
     const n = cuantas(tamano, 8), mayus = params.caso === "mayus";
     const largos = Number.isInteger(params.letras) ? [params.letras] : [3, 4, 5, 6, 4, 3, 5, 4];
-    const lista = candidatas(params, { cat: "n", dibujo: true, minLetras: 3, maxLetras: 6 }).filter((e) => !/[áéíóúü]|ch|ll|rr|qu|gu[ei]/.test(e.p));
-    const ps = elegirPorLetras(azar, n, lista, largos, (e) => new Set([...e.p]).size >= 2, "escritura.ordena");
+    const lista = candidatas(params, { cat: "n", dibujo: true, minLetras: 3, maxLetras: 9 }).filter((e) => !/[áéíóúü]/.test(e.p))
+      .map((e) => ({ ...e, p: e.p, cas: casillasDe(e.p) })).filter((e) => e.cas.length >= 3 && e.cas.length <= 6);
+    const ps = elegirPorCasillas(azar, n, lista, largos);
     return {
       enunciado: "Ordena las letras y escribe el nombre del dibujo en la pauta.",
-      ejercicios: azar.barajar(ps).map(({ p }) => {
-        const ls = [...p];
+      ejercicios: azar.barajar(ps).map(({ p, cas }) => {
+        const ls = cas;
         let mez = azar.barajar(ls);
-        while (mez.join("") === p) mez = azar.barajar(ls);
+        while (mez.join("") === p) mez = azar.barajar(ls);   // nunca ya ordenadas
         const t = (s) => (mayus ? s.toUpperCase() : s);
         return { datos: { letras: mez.map(t), palabra: t(p) }, solucion: { huecos: [t(p)] } };
       }),
@@ -18491,18 +18584,18 @@ const __default = registrar({
       pautaLamela(p, x + PAD, x + cw - PAD, base, c);
       if (p.solucion) p.text(x + PAD + 0.6 * c, base, e.solucion.huecos[0], 1.75 * c, { f: "PR", gris: COLOR_SOLUCION });
       // letras desordenadas justo encima de la pauta (y, sobre ellas, el espacio en blanco del dibujo)
-      const total = ls.length * TAM_CASILLA + (ls.length - 1) * SEP_CASILLA;
+      const ws = ls.map((l) => Math.max(TAM_CASILLA, p.ancho(l, "PR", 15) + 10)), total = ws.reduce((a, b) => a + b, 0) + (ls.length - 1) * SEP_CASILLA;
       let cx = x + (cw - total) / 2; const ty = base + 2 * c + 12;
-      for (const l of ls) {
-        p.rrect(cx, ty, TAM_CASILLA, TAM_CASILLA, 6, { lw: 1, fill: 1, stroke: ROJO_CASILLA });
-        p.text(cx + TAM_CASILLA / 2, ty + TAM_CASILLA / 2 - 15 * 0.35, l, 15, { f: "PR", anchor: "middle", gris: INK });
-        cx += TAM_CASILLA + SEP_CASILLA;
-      }
+      ls.forEach((l, k) => {
+        p.rrect(cx, ty, ws[k], TAM_CASILLA, 6, { lw: 1, fill: 1, stroke: ROJO_CASILLA });
+        p.text(cx + ws[k] / 2, ty + TAM_CASILLA / 2 - 15 * 0.35, l, 15, { f: "PR", anchor: "middle", gris: INK });
+        cx += ws[k] + SEP_CASILLA;
+      });
     }));
   },
 });
 
-Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get ROJO_CASILLA() { return ROJO_CASILLA; }, get default() { return __default; } }));
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get ROJO_CASILLA() { return ROJO_CASILLA; }, get casillasDe() { return casillasDe; }, get default() { return __default; } }));
 },
 "tipos/escritura.palabras.js": (__exp) => {
 // escritura.palabras · Copia palabras (Lengua 1.º, lote 4; LENGUA_1.md §3, bloque 8).
@@ -21031,7 +21124,7 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get CONFUSAS()
 const { registrar } = __req("nucleo/tipos.js");
 const { TOP } = __req("render/papel.js");
 const { sinTildes } = __req("lengua/reglas.js");
-const { letrasActivas, vistasActivas, avisoVistas } = __req("lengua/vistas.js");
+const { letrasActivas, vistasActivas, avisoVistas, claveLetras } = __req("lengua/vistas.js");
 const { alCaso, candidatas, unidades, palabraLetras, cuantas } = __req("tipos/_lengua.js");
 /** Posiciones (por unidad) de la letra en la palabra; null si forma parte de un dígrafo (ch, ll, rr, qu, gu): ahí no se puede rodear sola. */
 function posiciones(palabra, letra) {
@@ -21052,7 +21145,7 @@ const __default = registrar({
   generar(params, azar, { tamano }) {
     const n = cuantas(tamano, 12), cuenta = params.tarea !== "rodea";
     const buenas = (l) => {
-      const clave = `${params.tipo}|${params.caso === "inicial"}|${l}|${vistasActivas()}`;
+      const clave = `${params.tipo}|${params.caso === "inicial"}|${l}|${claveLetras()}`;
       if (!memo.has(clave)) memo.set(clave, candidatas(params, { conLetra: l, maxLetras: 9 }).filter((e) => { const p = posiciones(e.p, l); return p && p.length >= 1 && p.length <= 4; }));
       return memo.get(clave);
     };
@@ -22222,7 +22315,7 @@ const { TOP } = __req("render/papel.js");
 const { rodear, palabraHuecos } = __req("lengua/dibujo.js");
 const { LEXICO } = __req("lengua/lexico.js");
 const { huecosOrto, REGLAS_ORTO } = __req("lengua/reglas.js");
-const { vistasActivas, permitida, avisoVistas } = __req("lengua/vistas.js");
+const { vistasActivas, permitida, avisoVistas, claveLetras } = __req("lengua/vistas.js");
 const { alCaso, candidatas, cuantas } = __req("tipos/_lengua.js");
 const PALABRAS = new Set(LEXICO.map((e) => e.p));
 const OPCIONES_REGLA = { mpb: ["m", "n"], r: ["r", "rr"], cqu: ["c", "qu"], ggu: ["g", "gu"], cz: ["c", "z"] };
@@ -22240,7 +22333,7 @@ function huecosBuenos(p, regla) {
 
 const memo = new Map();
 const buenas = (params, regla, ayuda) => {
-  const clave = `${params.caso === "inicial"}|${regla}|${ayuda}|${vistasActivas()}`;
+  const clave = `${params.caso === "inicial"}|${regla}|${ayuda}|${claveLetras()}`;
   if (!memo.has(clave)) {
     memo.set(clave, candidatas({ ...params, tipo: "mixtas" }, { maxLetras: 8 })
       .map((e) => ({ p: e.p, hs: huecosBuenos(e.p, regla).filter((h) => !ayuda || h.opciones.every(permitida)) })).filter((x) => x.hs.length));
@@ -22624,12 +22717,13 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() 
 // datos:    { palabra }   (ya en el caso pedido; cada ejercicio es una palabra con un recuadro vacío debajo para dibujar lo que dice)
 // solucion: { huecos: [] }   el dibujo es libre: no hay corrección
 // Reglas: nombres del léxico que se pueden dibujar (campo «dibujo»), con las opciones comunes (tipo de sílabas, letra) y las letras elegidas del mapa de letras;
-//         sin repetir. Completa 12 (3 × 4), media 6 (3 × 2). Con «Mayúscula inicial» no entran las que empiezan por «i» (candidatas()).
+//         sin repetir; con letra obligatoria y pocas palabras de 2–3 sílabas, también de 1 y 4 (hay pocas con «q»…). Completa 12 (3 × 4), media 6 (3 × 2). Con «Mayúscula inicial» no entran las que empiezan por «i» (candidatas()).
 // Aspecto (idéntico a la ficha de Iván): palabra arriba a la izquierda en Fredoka normal y recuadro de esquinas redondeadas con borde verde azulado.
 // Opciones: sílabas de cada palabra (variadas / 1 / 2 / 3) · tipo de sílabas · letra (minúscula / mayúscula inicial / MAYÚSCULAS).
 const { registrar } = __req("nucleo/tipos.js");
 const { TOP } = __req("render/papel.js");
 const { cuantas, elegirPalabras, alCaso, largosDe, ajusta } = __req("tipos/_lengua.js");
+const { obligatoriasActivas } = __req("lengua/vistas.js");
 /** Verde azulado de los recuadros de la ficha de Iván. */
 const VERDE_RECUADRO = "#196B78";
 const FS = 24, ALTO_PALABRA = 38;
@@ -22639,7 +22733,10 @@ const __default = registrar({
   version: 1,
   generar(params, azar, { tamano }) {
     const n = cuantas(tamano, 12);
-    const ps = elegirPalabras(azar, n, params, largosDe(params, [2, 2, 3, 2]), { extra: { cat: "n", dibujo: true }, id: "palabra.dibuja" });
+    const elegir = (largos) => elegirPalabras(azar, n, params, largosDe(params, largos), { extra: { cat: "n", dibujo: true }, id: "palabra.dibuja" });
+    let ps;
+    try { ps = elegir([2, 2, 3, 2]); }
+    catch (e) { if (!obligatoriasActivas() || Number.isInteger(params.largo)) throw e; ps = elegir([2, 3, 2, 4, 1]); }   // con obligatoria y pocas palabras: cualquier largo
     return {
       enunciado: "Lee cada palabra y dibuja lo que dice.",
       ejercicios: ps.map(({ p }) => ({ datos: { palabra: alCaso(p, params.caso) }, solucion: { huecos: [] } })),
@@ -25629,22 +25726,28 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get crearInici
 // Todas marcadas = sin el campo: la ficha es la de siempre.
 const { modelo, esLengua1 } = __req("nucleo/ficha.js");
 const { ABECEDARIO } = __req("lengua/reglas.js");
-const { normalizarVistas, conVistas, permitida } = __req("lengua/vistas.js");
+const { normalizarVistas, normalizarObligatorias, conVistas, permitida } = __req("lengua/vistas.js");
 const { USA_FRASES, leerPropias } = __req("lengua/frases.js");
 const VOCALES = "aeiou";
 const CLAVE_LETRAS = "charta:letras";   // las últimas marcadas (las que lleva la clase): se proponen en fichas nuevas
+const CLAVE_OBLIGATORIAS = "charta:letrasObligatorias";   // las obligatorias (pulsación larga): la letra que se está enseñando
 
 const admite = (a) => { try { return esLengua1(modelo(a.tipo), a.curso); } catch { return false; } };
 /** ¿Alguna actividad admite el mapa de letras? */
 const hayLengua1 = (acts) => acts.some(admite);
-/** Las actividades con las letras puestas (vistas = cadena; null = todas; "" = ninguna → error claro). */
-function conLetras(acts, vistas) {
+/** Las actividades con las letras puestas (vistas = cadena; null = todas; "" = ninguna → error claro)
+ *  y las obligatorias (cadena o null: cada palabra o frase lleva al menos una). */
+function conLetras(acts, vistas, obligatorias = null) {
   if (vistas === "" && acts.some(admite)) throw new Error("Marca alguna letra en «Letras».");
+  const ob = normalizarObligatorias(obligatorias);
   return acts.map((a) => {
-    const { vistas: _, ...params } = a.params || {};
-    return admite(a) && vistas ? { ...a, params: { ...params, vistas } } : { ...a, params };
+    const { vistas: _, obligatorias: __, ...params } = a.params || {};
+    if (!admite(a)) return { ...a, params };
+    return { ...a, params: { ...params, ...(vistas && { vistas }), ...(ob && { obligatorias: ob }) } };
   });
 }
+/** Letras obligatorias de una composición guardada (las de su primera actividad de Lengua de 1.º que las lleve) o null. */
+const obligatoriasDe = (c) => normalizarObligatorias((c?.actividades || []).find((a) => admite(a) && a.params?.obligatorias)?.params.obligatorias);
 /** Letras de una composición guardada (las de su primera actividad de Lengua de 1.º) o null (todas). */
 const letrasDe = (c) => normalizarVistas((c?.actividades || []).find((a) => admite(a) && a.params?.vistas)?.params.vistas);
 /** Conjunto marcado → cadena para la ficha: null si están todas, "" si ninguna. */
@@ -25653,7 +25756,12 @@ function vistasDe(marcadas) {
   return s.length === ABECEDARIO.length ? null : s;
 }
 /** Texto del contador: «Todas» · «Solo vocales» · «12 de 27». */
-function resumenLetras(marcadas) {
+function resumenLetras(marcadas, obligatorias = new Set()) {
+  const ob = ABECEDARIO.filter((l) => obligatorias.has(l));
+  const r = resumenSolo(marcadas);
+  return ob.length ? `${r} · obligatoria${ob.length > 1 ? "s" : ""}: ${ob.join(", ")}` : r;
+}
+function resumenSolo(marcadas) {
   const n = ABECEDARIO.filter((l) => marcadas.has(l)).length;
   if (n === ABECEDARIO.length) return "Todas";
   if (!n) return "Ninguna";
@@ -25684,7 +25792,7 @@ function resumenFrases(texto, vistas) {
   return { frases, cuenta: frases.length ? String(frases.length) : "", info: partes.join(" ") };
 }
 
-Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get VOCALES() { return VOCALES; }, get CLAVE_LETRAS() { return CLAVE_LETRAS; }, get hayLengua1() { return hayLengua1; }, get conLetras() { return conLetras; }, get letrasDe() { return letrasDe; }, get vistasDe() { return vistasDe; }, get resumenLetras() { return resumenLetras; }, get CLAVE_FRASES() { return CLAVE_FRASES; }, get hayFrases() { return hayFrases; }, get conFrases() { return conFrases; }, get frasesDe() { return frasesDe; }, get resumenFrases() { return resumenFrases; } }));
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get VOCALES() { return VOCALES; }, get CLAVE_LETRAS() { return CLAVE_LETRAS; }, get CLAVE_OBLIGATORIAS() { return CLAVE_OBLIGATORIAS; }, get hayLengua1() { return hayLengua1; }, get conLetras() { return conLetras; }, get obligatoriasDe() { return obligatoriasDe; }, get letrasDe() { return letrasDe; }, get vistasDe() { return vistasDe; }, get resumenLetras() { return resumenLetras; }, get CLAVE_FRASES() { return CLAVE_FRASES; }, get hayFrases() { return hayFrases; }, get conFrases() { return conFrases; }, get frasesDe() { return frasesDe; }, get resumenFrases() { return resumenFrases; } }));
 },
 "ui/miniatura_ficha.js": (__exp) => {
 // Charta · miniatura de la hoja 1 para Documentos de Tabula (paso 5.4). SVG → imagen JPEG pequeña (data URL).

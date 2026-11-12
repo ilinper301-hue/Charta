@@ -9,7 +9,7 @@
 // (el agua) no entran. Las frases empiezan siempre por el artículo (El, La, Los, Las), nunca por «I».
 import { LEXICO } from "../lengua/lexico.js";
 import { articulo, plural, tonica } from "../lengua/reglas.js";
-import { permitida, filtrarVistas, avisoVistas, vistasActivas } from "../lengua/vistas.js";
+import { permitida, obligada, filtrarVistas, avisoVistas, vistasActivas } from "../lengua/vistas.js";
 import { FRASES_1 } from "../lengua/frases_1.js";
 import { propiasActivas, palabrasLibres, nombresDe } from "../lengua/frases.js";
 
@@ -232,7 +232,7 @@ export function largosFrase(azar, n, palabras) {
 export function elegirFrases(azar, largos, { filtro = null, id = "frase", ya = new Set(), sujetos = new Set() } = {}) {
   const out = [];
   const porLargo = new Map();
-  for (const l of new Set(largos)) porLargo.set(l, filtrarVistas(todasFrases(), (f) => f.id).filter((f) => f.n === l && (!filtro || filtro(f))));
+  for (const l of new Set(largos)) porLargo.set(l, filtrarVistas(todasFrases(), (f) => f.id).filter((f) => f.n === l && obligada(f.id) && (!filtro || filtro(f))));
   for (const l of largos) {
     const libres = porLargo.get(l).filter((f) => !ya.has(f.id));
     if (!libres.length) throw new Error(`«${id}» necesita más frases: con esas opciones solo hay ${out.length} y hacen falta ${largos.length}. Prueba con frases de otro largo.${avisoVistas()}`);
