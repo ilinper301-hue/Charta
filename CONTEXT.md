@@ -65,3 +65,6 @@
 - Actualizar ESTADO.md al terminar cada paso.
 - **Delegar** en Sonnet o Haiku (subagentes) las tareas largas y mecánicas para ahorrar tokens; lo que necesita el contexto del chat, hacerlo directamente.
 - **Avisar** a Iván cuando el chat se alargue demasiado y convenga abrir uno nuevo (con INICIO_CHAT.md), y decirle el **nivel de esfuerzo recomendado** para el siguiente paso.
+
+## Ecosistema
+Antes de tocar algo que una app lea o deje para otra (alumnado, resultados, enlaces entre apps), lee `ECOSISTEMA.md`: es el contrato común de las seis apps.
