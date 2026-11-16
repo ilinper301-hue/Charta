@@ -1,9 +1,9 @@
-// Charta · letras de las fichas: Andika (la de siempre), Fredoka y Fredoka Medium (incrustadas) y las que suba la maestra (guardadas en el dispositivo).
+// Charta · letras de las fichas: Andika (la de siempre), Fredoka, Fredoka Medium y Fredoka Light (incrustadas) y las que suba la maestra (guardadas en el dispositivo).
 // Una fuente = { id, nombre, css (font-family para SVG), ancho(texto, negrita, fs) en pt }. El id va en `ficha.presentacion.fuente`
-// (solo si no es Andika, así las fichas anteriores no cambian): "fredoka", "fredoka-medium" o "usuario:<Nombre>".
+// (solo si no es Andika, así las fichas anteriores no cambian): "fredoka", "fredoka-medium", "fredoka-light" o "usuario:<Nombre>".
 // Las fuentes subidas NO viajan con la ficha (solo su nombre): en otro dispositivo sin esa letra se usa Andika.
 import { ancho as anchoAndika } from "../rep/index.js";
-import { FREDOKA_R, FREDOKA_B, FREDOKA_M } from "./anchos_fredoka.js";
+import { FREDOKA_R, FREDOKA_B, FREDOKA_M, FREDOKA_L } from "./anchos_fredoka.js";
 
 export const ANDIKA_CSS = "Andika, Poppins, sans-serif";
 const midiendo = (T) => (t, negrita, fs) => { let s = 0; for (const ch of String(t)) s += (negrita ? T.B : T.R)[ch] ?? (negrita ? T.B : T.R)["n"] ?? 560; return s * fs / 1000; };
@@ -11,7 +11,8 @@ const midiendo = (T) => (t, negrita, fs) => { let s = 0; for (const ch of String
 const ANDIKA = { id: "andika", nombre: "Andika", css: ANDIKA_CSS, ancho: (t, n, fs) => anchoAndika(String(t), n, fs) };
 const FREDOKA = { id: "fredoka", nombre: "Fredoka", css: "Fredoka, Andika, sans-serif", ancho: midiendo({ R: FREDOKA_R, B: FREDOKA_B }) };
 const FREDOKA_MEDIUM = { id: "fredoka-medium", nombre: "Fredoka Medium", css: '"Fredoka Medium", Fredoka, Andika, sans-serif', ancho: midiendo({ R: FREDOKA_M, B: FREDOKA_M }) };   // estática: la negrita no cambia el ancho
-export const FUENTES_INCLUIDAS = [ANDIKA, FREDOKA, FREDOKA_MEDIUM];
+const FREDOKA_LIGHT = { id: "fredoka-light", nombre: "Fredoka Light", css: '"Fredoka Light", Fredoka, Andika, sans-serif', ancho: midiendo({ R: FREDOKA_L, B: FREDOKA_L }) };
+export const FUENTES_INCLUIDAS = [ANDIKA, FREDOKA, FREDOKA_MEDIUM, FREDOKA_LIGHT];
 export const FUENTE_POR_DEFECTO = ANDIKA;
 
 /** Nombre de familia seguro para CSS/SVG a partir del nombre de un archivo: letras, números, espacios y guiones. */
