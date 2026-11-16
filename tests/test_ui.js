@@ -172,6 +172,8 @@ import { crearGuardadas as crearG, limpiar as limp } from "../src/ui/guardadas.j
 
   // Fredoka y letra de usuario en las fichas: todos los modelos se dibujan y la ficha solo guarda el id
   assert.equal(fuentePorId("fredoka").nombre, "Fredoka");
+  assert.equal(fuentePorId("fredoka-medium").nombre, "Fredoka Medium");
+  assert.ok(fuentePorId("fredoka-medium").css.startsWith('"Fredoka Medium"') && fuentePorId("fredoka-medium").ancho("Hola", true, 20) === fuentePorId("fredoka-medium").ancho("Hola", false, 20) && fuentePorId("fredoka-medium").ancho("Hola", false, 20) > 0, "Fredoka Medium: ancho estático");
   assert.equal(fuentePorId("usuario:No existe").id, "andika", "letra desconocida → Andika");
   const f1 = fuentePorId("fredoka"), a1 = fuentePorId("andika");
   assert.ok(f1.ancho("Hola", false, 20) > 0 && Math.abs(f1.ancho("Hola", true, 20) / f1.ancho("Hola", false, 20) - 1) < 0.1);   // la negrita de Fredoka casi no cambia el ancho
