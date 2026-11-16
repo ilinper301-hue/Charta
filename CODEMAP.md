@@ -58,12 +58,12 @@ tests/test_rep.js     pruebas de las representaciones · tools/comparar_rep.py: 
 src/tipos/_problemas.js  problemas del bloque 8: NOMBRES, OBJETOS, SITUACIONES, generarProblemas(), dibujarProblemas() (tipos problemas.suma/resta/mixtos)
 src/tipos/_tres.js     2.º (rango > 100): sumasVert/restasVert/vertical3 (verticales C/D/U, niveles u·d·ud, 3 sumandos, llevada, prueba), decenasSuma3/decenasResta3; paresSuma3/paresResta3(R, nivel, cnt, azar), llevaSuma3/llevaResta3 (llevada en cualquier columna); lo usan sumar.h100/hueco, restar.r100/hueco/familia, juegos.une y problemas
 src/tipos/_trucos.js  fábrica trucoTipo({id, enunciado, filas, pool}) de los trucos de Calculi (bloque 12): filas con huecos, igualdades ciertas, sin repetir; tipos trucos.<clave>.js
-src/render/fuentes.js  registro de letras (Andika, Fredoka, Fredoka Medium `fredoka-medium` y subidas): fuentePorId, fuenteDe(ficha), registrarFuenteUsuario, nombreFuente; anchuras en anchos_fredoka.js (GENERADO por tools/anchos_fuente.py)
+src/render/fuentes.js  registro de letras (Andika, Fredoka, Fredoka Medium `fredoka-medium`, Fredoka Light `fredoka-light` y subidas): fuentePorId, fuenteDe(ficha), registrarFuenteUsuario, nombreFuente; anchuras en anchos_fredoka.js (GENERADO por tools/anchos_fuente.py)
 src/ui/fuentes.js     letras subidas: validarArchivo, cssFuente, crearAlmacenFuentes (IndexedDB charta-fuentes), instalarCss
 src/tipos/index.js    importa familia.<f>.js (cada uno, los tipos de su familia); src/tipos/<id>.js uno por tipo (p. ej. sumar.h20.js); _rep.js = fábrica común de rep.*
 src/render/papel.js   lienzo Papel en coordenadas del MOTOR (pt, y hacia arriba); p.escala (la del panel) y p.mm(v) = v mm reales; PANEL, escalaPanel(parte, extra), MM; primitivas (line/path con dash) + port de caja, cuadrito, _marco, _celdas, _linea, T/B, _pintar, _n. TOP = H−M−76 (TOP_REP = H−M−90). Modo "solucion": huecos con la respuesta en rojo
 src/render/hoja.js    hoja(pagina, {titulo, nombre, bn, modo}) → SVG A4 (encabezado + paneles, como el motor); hojas(ficha, {nombres, copias, bn, modo}) → una por alumno (API pública, Tabula); fase 4: listaHojas(ficha, {nombres, copias}) (sin dibujar) + dibujarHoja(ficha, h, {bn, modo})
-src/fuentes/          Andika, Fredoka y Fredoka Medium recortadas (WOFF); build.py las incrusta en base64
+src/fuentes/          Andika, Fredoka, Fredoka Medium y Fredoka Light recortadas (WOFF); build.py las incrusta en base64
 src/render/actividad.js  render(actividad, modo) → zona {x, y, w, h, svg} que encaja el panel (como panel() del motor); svgZona()
 tests/test_tipos.js   pruebas comunes de todos los tipos (todas las opciones, completa/media, SVG limpio, un grupo "ej" por ejercicio, una respuesta por hueco) · `--full`
 tests/comun.js        combinaciones(id), contador() (compartido por las pruebas)

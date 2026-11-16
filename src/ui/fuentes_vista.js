@@ -7,7 +7,7 @@ import { $, el } from "./dom.js";
 export function crearFuentesVista(ctx) {
   const CLAVE_FUENTE = "charta:fuente", INFO_FUENTE = $("infoFuente").textContent;
   const almacenFuentes = (() => { try { return crearAlmacenFuentes(); } catch { return null; } })();
-  const NOTAS = { andika: " (la de Matemáticas)", fredoka: " (redondeada)", "fredoka-medium": " (redondeada, más gruesa)" };
+  const NOTAS = { andika: " (la de Matemáticas)", fredoka: " (redondeada)", "fredoka-medium": " (redondeada, más gruesa)", "fredoka-light": " (redondeada, más fina)" };
   function elegirFuente(id) {
     const f = fuentePorId(id);
     $("fuente").replaceChildren(...todasLasFuentes().map((x) => el("option", { value: x.id, textContent: x.nombre + (x.usuario ? " (subida)" : NOTAS[x.id] || "") })));
