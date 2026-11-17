@@ -171,3 +171,10 @@ Pasos ya cerrados, movidos desde ESTADO.md el 12-11-2026. No hace falta leerlo a
 - Comprobado: `tests/navegador.py` (33 comprobaciones), `npm test` y un recorrido de 27 pasos con el `dist` anterior y el nuevo (mismo DOM sin scripts y mismo `localStorage` en cada paso).
 - Límites: la elección de pestaña de «Mis fichas» sigue con dos reglas distintas (Diseño e Inicio); la nube con sesión real solo se prueba con `test_nube.js`.
 
+
+## Matemáticas 2.º · Lote 3b · medida (17-11-2026)
+- [x] ✨ `medida.euros` · «Paga con billetes y monedas» (solo 2.º, rangos 100–500; por defecto 200): pagos de 11 € al tope (≤ 99 en el rango 100, con billetes hasta 50; desde 200 también billete de 100 €), una fila por pago con una casilla bajo cada billete y moneda (también las que valen 0). Solución = algoritmo voraz, comprobado en `tests/inv/medida.js` contra el mínimo real (programación dinámica). 6 pagos (media: 3), todos distintos, de 3 piezas o más y 2 valores distintos como mínimo.
+- [x] ✨ `medida.masa` · «¿Cuánto pesa?» (solo 2.º, sin rango): balanza nivelada (no revela la respuesta) con pesas de 1 kg y de ½ kg (1–4 por plato); se escribe <, > o =. 8 balanzas (media: 4), una de cada tres equilibrada con pesas distintas (1 kg = 2 × ½ kg). Sin dibujos de objetos (no hacen falta pictogramas).
+- Catálogo: `MODELOS_2` en `motor/modelos_2.py` estrena `_n2()` (modelo de 2.º con `curso: 2` y rangos propios); metadatos en `motor/metadatos.py`; `tools/catalogo.py` → 153 modelos. `tests/test_nucleo.js` pasa de 151 a 153; dorada «2.º euros y masa» (169 fichas; las 166 anteriores no cambian).
+- Comprobado: `npm test` y `tests/navegador.py` en verde; revisadas las imágenes (completa, media y solución).
+- Límites: `medida.euros` no ofrece contar dinero (ya lo hace `medida.dinero`); `medida.masa` no tiene objetos 📦 ni rótulos («una sandía»); la balanza no se inclina.

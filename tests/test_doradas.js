@@ -34,6 +34,7 @@ const CASOS = [
   { nombre: "2.º reloj con cuartos", semilla: 8, opciones: { actividades: [{ tipo: "medida.reloj", curso: 2, params: { modo: "todas" } }, { tipo: "medida.reloj2", curso: 2, params: { modo: "cuarto" } }] } },
   { nombre: "2.º medidas del tiempo", semilla: 8, opciones: { actividades: [{ tipo: "medida.tiempo", curso: 2, params: { modo: "equivalencias" } }, { tipo: "medida.tiempo", curso: 2, params: { modo: "horas" } }] } },
   { nombre: "2.º dinero y compras", semilla: 8, opciones: { actividades: [{ tipo: "medida.dinero", params: { rango: 300 } }, { tipo: "medida.precios", params: { rango: 100, modo: "cambio" } }] } },
+  { nombre: "2.º euros y masa", semilla: 8, opciones: { actividades: [{ tipo: "medida.euros", curso: 2, params: { rango: 200 } }, { tipo: "medida.masa", curso: 2, params: {} }] } },
   { nombre: "nombres y B/N", semilla: 5, nombres: ["Ana", "Luis", "Marta"], bn: true, opciones: { variantes: 2, actividades: [{ tipo: "rep.dado", params: { lectura: true } }, { tipo: "rep.marco", params: { rango: 20 } }] } },
 ];
 

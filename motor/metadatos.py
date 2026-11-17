@@ -118,6 +118,8 @@ META = {
     "medida.tiempo": (2, 10, "medida tiempo días meses"),
     "medida.longitud": (1, 8, "medida longitud comparar"),
     "medida.capacidad": (1, 8, "medida capacidad líquido"),
+    "medida.euros": (3, 12, "medida dinero euros billetes monedas pagar"),
+    "medida.masa": (2, 8, "medida masa kilo peso balanza"),
     # Bloque 11 · estadística y patrones
     "estadistica.pictograma": (2, 12, "estadística pictograma datos"),
     "estadistica.recuento": (1, 10, "estadística recuento datos contar"),

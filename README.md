@@ -19,7 +19,7 @@ Sin dependencias de ejecución. Hace falta Node (módulos ES), Python 3 y, para 
 ```
 python3 tools/build.py            # src/ → dist/index.html (+ sw.js y manifest.webmanifest)
 npm run test:rapido               # 30 s: cambios de interfaz
-npm test                          # todo (≈5 min): 151 tipos, 166 fichas doradas, copia, contratos
+npm test                          # todo (≈5 min): 153 tipos, 166 fichas doradas, copia, contratos
 python3 tests/navegador.py [dir]  # Chrome a 390–1180 px: navegación, Atrás, tamaños táctiles, contraste claro/oscuro, nombres accesibles
 python3 tests/test_motor.py       # motor de referencia en Python
 ```

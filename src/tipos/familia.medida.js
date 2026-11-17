@@ -7,3 +7,5 @@ import "./medida.calendario.js";
 import "./medida.tiempo.js";
 import "./medida.longitud.js";
 import "./medida.capacidad.js";
+import "./medida.euros.js";
+import "./medida.masa.js";

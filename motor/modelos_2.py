@@ -5,6 +5,8 @@ en 2.º no cambian de id; tools/catalogo.py les añade `cursos: {"2": {"rangos":
 Los modelos nuevos de 2.º (✨) irán en MODELOS_2 con curso 2 (mismo formato que modelos_app.MODELOS_APP).
 """
 
+from modelos import M, AMBOS
+
 CURSO = 2
 NOMBRE = "2.º de Primaria"
 RANGOS_2 = (100, 200, 300, 400, 500, 600, 700, 800, 900, 999)   # de 100 en 100 (decidido el 8-11-2026)
@@ -113,7 +115,18 @@ def opciones_2(m):
     ops = [junta(o) if o["tipo"] == "opcion" else o for o in m["opciones"]]
     return ops + extra.get("nuevas", [])
 
-MODELOS_2 = []   # ✨ nuevos de 2.º (lotes 3–6)
+def _n2(bloque, familia, clave, nombre, descripcion, opciones, titulo, color, rmin=None, rmax=None, rango=None):
+    """✨ Modelo que solo existe en 2.º: curso 2, título (mayúsculas) y color de panel."""
+    m = M(bloque, familia, clave, nombre, descripcion, opciones, tam=AMBOS)
+    rg = rangos(rmin, rmax) if rmin else []
+    return {**m, "curso": CURSO, "rangos": rg, "rango": (rango if rango in rg else rg[0]) if rg else None, "titulo": titulo, "color": color}
+
+MODELOS_2 = [   # ✨ nuevos de 2.º (lotes 3–6)
+    _n2(10, "medida", "euros", "Paga con billetes y monedas", "Pagar una cantidad con el menor número de billetes y monedas (hasta 500 €).", [],
+        "PAGA CON BILLETES Y MONEDAS", "verde", rmin=100, rmax=500, rango=200),
+    _n2(10, "medida", "masa", "¿Cuánto pesa?", "Balanza con pesas de 1 kg y de medio kilo: pesa más, menos o igual.", [],
+        "¿CUÁNTO PESA?", "azul"),
+]
 
 
 def cursos_extra(m):

@@ -4,7 +4,7 @@
 
 ## Análisis del sistema y de la interfaz (12-11-2026) → `PLAN-DISENO.md`
 Sin cambios de código. El plan y el estado de sus fases están en **`PLAN-DISENO.md`** (se piden con «Ejecuta la fase N de `PLAN-DISENO.md`»; «Continúa» sigue con los pasos de contenidos de más abajo).
-- **Sistema**: motor sólido (`npm test`: 151 tipos, 166 doradas, 0 errores, 5 min; `dist/` al día). Débil: `app.js` (565 líneas, sin pruebas de navegador) y documentación de 83 KB por chat.
+- **Sistema**: motor sólido (`npm test`: 153 tipos, 169 doradas, 0 errores, 5 min; `dist/` al día). Débil: `app.js` (565 líneas, sin pruebas de navegador) y documentación de 83 KB por chat.
 - **Errores comprobados**: se pierde la ficha a medias al recargar o si Android cierra la app; Atrás de Android deja el selector encima del inicio; la nube rechaza fichas con más de 10 modelos distintos (regla `tipos ≤ 10`); «Mis frases» se copia en cada actividad (enlace a Tabula de hasta 48 KB); favoritas sin copia de seguridad.
 - **Enlaces**: los contratos con Tabula y Fori coinciden hoy; el iframe de Tabula usa `globalThis.Charta` sin contrato escrito ni prueba; todo depende del mismo origen y de rutas fijas.
 - **Interfaz** (capturas a 390 × 844, 768 × 1024 y 1180 × 820): Inicio y selector, bien (falta buscador de modelos). Diseño: la vista previa apila todas las hojas → 17 pantallas con 25 alumnos (36 con 2 páginas; 47 en tablet vertical, que usa el diseño de móvil), 12.800 nodos y 0,25 s por cada cambio; 6 acciones con el mismo peso; secciones siempre desplegadas; zonas táctiles de 26–32 px. Sin desbordamiento ni errores de consola.
@@ -22,7 +22,7 @@ Sin cambios de código. El plan y el estado de sus fases están en **`PLAN-DISEN
 ## Resumen de lo hecho
 - Motor de referencia en Python (Fase 1) con compositor de página y API `generar(spec)`; `tests/test_motor.py` en verde.
 - Núcleo JSON + render HTML/SVG (`src/`, `tools/build.py` → `dist/index.html`) con plantilla A4 de impresión (Fase 2).
-- 151 modelos/tipos de actividad hoy; `npm test`: 166 fichas doradas e invariantes, 0 errores (Fases 2–3 y 7).
+- 153 modelos/tipos de actividad hoy; `npm test`: 166 fichas doradas e invariantes, 0 errores (Fases 2–3 y 7).
 - App PWA en verde oscuro: curso → materia → bloque → modelo, compositor, alumnos, variantes A/B, soluciones, favoritos y recientes (Fase 4).
 - Pantalla de inicio, modo oscuro y rediseño visual; service worker sin conexión, icono y modo tableta.
 - Selector de letra (Andika por defecto, Fredoka para Lengua) y accesibilidad: dificultad, tiempo y etiquetas por modelo; pictogramas abandonados.
@@ -30,13 +30,14 @@ Sin cambios de código. El plan y el estado de sus fases están en **`PLAN-DISEN
 - Nube: Firebase compartido con Google, fichas en `/apps/charta/fichas/{id}` sin nombres de alumnos.
 - Tabula: listas de alumnos, «Crear ficha» y envío de fichas a Documentos; Fori: `?ficha={id}`, proyección y solución paso a paso.
 - Bloque 8 de problemas, `problemas.barras` (Barri) y 8 trucos de cálculo mental de Calculi en 1.º.
-- Matemáticas 1.º completa; Matemáticas 2.º: lotes 0–3a (catálogo por curso, hasta 999, tres cifras, saltos de 10 y 100, reloj con cuartos, dinero y compras).
+- Matemáticas 1.º completa; Matemáticas 2.º: lotes 0–3b (catálogo por curso, hasta 999, tres cifras, saltos de 10 y 100, reloj con cuartos, dinero y compras, pagar con billetes y monedas, balanzas).
 - Lengua 1.º: lotes 0–5 (sílaba, letra, fono, palabra, orto, frase, escritura con pauta Lamela y letras de trazo, lectura) más «Leo y dibujo» y «Miro y escribo».
 - Mapa de letras de Lengua 1.º con letras obligatorias (pulsación larga), válido en favoritas, nube, Tabula y Fori.
 - `geometria.lineas` v2 con opciones en orden aleatorio.
 Detalle de cada paso: `HISTORIAL.md`.
 
 ## Pendiente de Iván
+- Probar en el Android (lote 3b, 2.º): «Paga con billetes y monedas» (¿se entiende escribir 0 en los que no se usan?) y «¿Cuánto pesa?» (balanza nivelada con <, > o =); decir si algo cambia.
 - Probar en el Android (fase 8): activar el tema oscuro en Ajustes y mirar que se lea bien (botón «Imprimir» pulsado, avisos de error, buscador del selector); decir si algo molesta.
 - Probar en el Android (fase 7): Ajustes → «Guardar copia» (¿dónde queda el archivo?), borrar una favorita y «Cargar copia…»; con sesión iniciada, «Subir mis favoritas a la nube» (necesita las reglas de Firestore publicadas); proyectar en Fori una ficha larga (si sale el aviso de «demasiado grande», decir cuál era).
 - Pirámide: máximo 3 huecos (con 4 no hay solución única); sumas y restas de decenas desde rango 100 (decidido 5-11-2026).
@@ -63,7 +64,7 @@ Detalle de cada paso: `HISTORIAL.md`.
 - [ ] Otros cursos de Matemáticas (2.º a 6.º) y Lengua.
   - [ ] Matemáticas 2.º · Lote 3: medida.
     - [x] 3a. Reloj con cuartos, tiempo, dinero hasta 500 € y compras (9-11-2026; detalle en HISTORIAL.md)
-    - [ ] 3b. ✨ `medida.euros` (pagar con el menor número de billetes y monedas) y ✨ `medida.masa` (balanzas, kg y ½ kg). (Sonnet)
+    - [x] 3b. ✨ `medida.euros` y ✨ `medida.masa` (17-11-2026; detalle en HISTORIAL.md)
     - [ ] 3c. 🔧 `medida.longitud`: mide con la regla en centímetros reales (`Papel.mm()`) y ¿m o cm? (Opus)
   - [ ] Matemáticas 2.º · Lotes 4–6 (ver `MATES_2.md`).
   - [ ] Lengua 1.º · Lote 6 (con pictogramas): aparcado hasta decidir la Fase 6. Lote 4 · decidido: pauta de 5 mm. **Pendiente de Iván**: orden de las letras (más adelante); pictogramas aparcados. **Decisión de Iván (5-11-2026): la letra de las fichas de Lengua será Fredoka** (como Barri y Calculi; OFL, ya está en `fonts/` de Barri). Comprobar al diseñar: la «a» y la «g» que ve el alumno en las palabras de lectura, y la pauta de caligrafía (Fredoka no es letra de escritura a mano).

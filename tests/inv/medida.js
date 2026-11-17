@@ -153,4 +153,34 @@ export default {
       permutacion(solucion.huecos.map((v) => v - 1), 3);
     });
   },
+
+  "medida.euros"(act, tam) {
+    const R = act.params.rango ?? 200, den = R > 100 ? [100, 50, 20, 10, 5, 2, 1] : [50, 20, 10, 5, 2, 1], tope = R > 100 ? R : 99;
+    cuantos(act.ejercicios, tam === "media" ? 3 : 6);
+    unicos(act.ejercicios, (e) => e.datos.total, "pagos repetidos");
+    for (const { datos: d, solucion } of act.ejercicios) {
+      assert.deepEqual(d.den, den); ent(d.total, 11, tope, "total");
+      assert.equal(solucion.huecos.length, den.length);
+      assert.equal(solucion.huecos.reduce((s, n, j) => s + n * den[j], 0), d.total, "las piezas suman el pago");
+      // mínimo de verdad: programación dinámica sobre las piezas disponibles
+      const minimo = Array(d.total + 1).fill(Infinity); minimo[0] = 0;
+      for (let t = 1; t <= d.total; t++) for (const v of den) if (v <= t) minimo[t] = Math.min(minimo[t], minimo[t - v] + 1);
+      const n = solucion.huecos;
+      assert.equal(n.reduce((s, v) => s + v, 0), minimo[d.total], "no es el menor número de piezas");
+      assert.ok(n.reduce((s, v) => s + v, 0) >= 3 && n.filter((v) => v).length >= 2);
+    }
+  },
+
+  "medida.masa"(act, tam) {
+    cuantos(act.ejercicios, tam === "media" ? 4 : 8);
+    unicos(act.ejercicios, (e) => [...e.datos.izq, ...e.datos.der].join(), "balanzas repetidas");
+    let iguales = 0;
+    for (const { datos: { izq, der }, solucion } of act.ejercicios) {
+      for (const [k, m] of [izq, der]) { ent(k, 0, 3, "pesas de 1 kg"); ent(m, 0, 3, "pesas de ½ kg"); ent(k + m, 1, 4, "pesas por plato"); }
+      const a = 2 * izq[0] + izq[1], b = 2 * der[0] + der[1];
+      assert.deepEqual(solucion.huecos, [a < b ? "<" : a > b ? ">" : "="]);
+      if (a === b) { iguales++; assert.notEqual(izq[0], der[0], "equilibrio con las mismas pesas"); }
+    }
+    assert.ok(iguales >= Math.floor(act.ejercicios.length / 3), "equilibradas");
+  },
 };

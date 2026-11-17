@@ -12166,6 +12166,205 @@
    "8392d3674cce73a3"
   ]
  },
+ "medida.euros": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Paga con billetes y monedas",
+   "curso": 2,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "medida.euros",
+       "tipoVersion": 1,
+       "params": {
+        "rango": 200
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Paga con el menor número de billetes y monedas.\nEscribe cuántos de cada uno necesitas.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "total": 117,
+          "den": [
+           100,
+           50,
+           20,
+           10,
+           5,
+           2,
+           1
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           0,
+           0,
+           1,
+           1,
+           1,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "total": 99,
+          "den": [
+           100,
+           50,
+           20,
+           10,
+           5,
+           2,
+           1
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           0,
+           1,
+           2,
+           0,
+           1,
+           2,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "total": 61,
+          "den": [
+           100,
+           50,
+           20,
+           10,
+           5,
+           2,
+           1
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           0,
+           1,
+           0,
+           1,
+           0,
+           0,
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "total": 68,
+          "den": [
+           100,
+           50,
+           20,
+           10,
+           5,
+           2,
+           1
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           0,
+           1,
+           0,
+           1,
+           1,
+           1,
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "total": 59,
+          "den": [
+           100,
+           50,
+           20,
+           10,
+           5,
+           2,
+           1
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           0,
+           1,
+           0,
+           0,
+           1,
+           2,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "total": 171,
+          "den": [
+           100,
+           50,
+           20,
+           10,
+           5,
+           2,
+           1
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           1,
+           1,
+           0,
+           0,
+           0,
+           1
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "ac8a2546d4e944c6"
+  ],
+  "svgSolucion": [
+   "0a6fe857675bbbbe"
+  ]
+ },
  "medida.longitud": {
   "ficha": {
    "schemaVersion": 1,
@@ -12292,6 +12491,193 @@
   ],
   "svgSolucion": [
    "7265997c11521efa"
+  ]
+ },
+ "medida.masa": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "¿Cuánto pesa?",
+   "curso": 2,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "medida.masa",
+       "tipoVersion": 1,
+       "params": {
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Compara lo que pesan los dos platos y escribe <, > o =.\n1 kg pesa lo mismo que dos pesas de ½ kg.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "izq": [
+           2,
+           1
+          ],
+          "der": [
+           1,
+           1
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           ">"
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "izq": [
+           1,
+           3
+          ],
+          "der": [
+           0,
+           2
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           ">"
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "izq": [
+           1,
+           3
+          ],
+          "der": [
+           2,
+           1
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "="
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "izq": [
+           1,
+           0
+          ],
+          "der": [
+           1,
+           3
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "<"
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "izq": [
+           1,
+           1
+          ],
+          "der": [
+           2,
+           0
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "<"
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "izq": [
+           1,
+           2
+          ],
+          "der": [
+           2,
+           0
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "="
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "izq": [
+           2,
+           2
+          ],
+          "der": [
+           1,
+           3
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           ">"
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "izq": [
+           2,
+           2
+          ],
+          "der": [
+           2,
+           1
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           ">"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "ecd9ccd82be81bcb"
+  ],
+  "svgSolucion": [
+   "3dbf9a7d6250ecaf"
   ]
  },
  "medida.precios": {
@@ -37211,6 +37597,213 @@
   ],
   "svgSolucion": [
    "49b984a2fce5e4d0"
+  ]
+ },
+ "2.º euros y masa": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Paga con billetes y monedas y ¿Cuánto pesa?",
+   "curso": 2,
+   "area": "matematicas",
+   "semilla": 8,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "medida.euros",
+       "tipoVersion": 1,
+       "params": {
+        "rango": 200
+       },
+       "tamano": "media",
+       "color": "verde",
+       "enunciado": "Paga con el menor número de billetes y monedas.\nEscribe cuántos de cada uno necesitas.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "total": 28,
+          "den": [
+           100,
+           50,
+           20,
+           10,
+           5,
+           2,
+           1
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           0,
+           0,
+           1,
+           0,
+           1,
+           1,
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "total": 165,
+          "den": [
+           100,
+           50,
+           20,
+           10,
+           5,
+           2,
+           1
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           1,
+           0,
+           1,
+           1,
+           0,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "total": 90,
+          "den": [
+           100,
+           50,
+           20,
+           10,
+           5,
+           2,
+           1
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           0,
+           1,
+           2,
+           0,
+           0,
+           0,
+           0
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "medida.masa",
+       "tipoVersion": 1,
+       "params": {
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Compara lo que pesan los dos platos y escribe <, > o =.\n1 kg pesa lo mismo que dos pesas de ½ kg.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "izq": [
+           1,
+           3
+          ],
+          "der": [
+           1,
+           1
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           ">"
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "izq": [
+           1,
+           0
+          ],
+          "der": [
+           3,
+           0
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "<"
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "izq": [
+           2,
+           1
+          ],
+          "der": [
+           1,
+           3
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "="
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "izq": [
+           1,
+           0
+          ],
+          "der": [
+           3,
+           1
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "<"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "c418b6d8fce0a009"
+  ],
+  "svgSolucion": [
+   "e25b2fb653c321a2"
   ]
  },
  "nombres y B/N": {
