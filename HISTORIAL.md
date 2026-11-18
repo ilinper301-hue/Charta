@@ -178,3 +178,10 @@ Pasos ya cerrados, movidos desde ESTADO.md el 12-11-2026. No hace falta leerlo a
 - Catálogo: `MODELOS_2` en `motor/modelos_2.py` estrena `_n2()` (modelo de 2.º con `curso: 2` y rangos propios); metadatos en `motor/metadatos.py`; `tools/catalogo.py` → 153 modelos. `tests/test_nucleo.js` pasa de 151 a 153; dorada «2.º euros y masa» (169 fichas; las 166 anteriores no cambian).
 - Comprobado: `npm test` y `tests/navegador.py` en verde; revisadas las imágenes (completa, media y solución).
 - Límites: `medida.euros` no ofrece contar dinero (ya lo hace `medida.dinero`); `medida.masa` no tiene objetos 📦 ni rótulos («una sandía»); la balanza no se inclina.
+
+## Matemáticas 2.º · Lote 3c · medida.longitud (18-11-2026)
+- 🔧 `medida.longitud` (mismo id y `version: 1`; 1.º sin cambios): en 2.º se llama «Mide longitudes» (`NOMBRE_2`) y gana dos valores de `modo` con `curso: 2` (`OPCIONES_2` en `motor/modelos_2.py`; está en `EN_2` con sus rangos de 1.º).
+  - `regla` («Mide con la regla», título MIDE CON LA REGLA): 6/3 tiras de 2 a 10 cm **reales** sin repetir longitud, dibujadas con `p.mm()`, y hueco «cm». Enunciado de dos líneas («Pon el 0 de la regla al principio de la tira»). `tests/test_pauta.js` mide cada tira en el A4 final (completa, media y letra grande; error < 0,05 mm) y que cabe antes del hueco.
+  - `mcm` («¿Metros o centímetros?»): 12/6 objetos (`UNIDADES`: 14 de cm y 12 de m, sin duda posible), entre 40 y 60 % de cada unidad; se rodea m o cm (solución `{ huecos: [], unidad }`, en rojo).
+- Límites: la tira más larga es de 10 cm (cabe en media página con enunciado de dos líneas y letra grande). Solo sirve impresa al 100 %.
+- Reglas en `tests/inv/medida.js`; dorada «2.º regla y ¿m o cm?» (las demás, iguales). `npm test` en verde.

@@ -1,6 +1,7 @@
 // Charta · invariantes de la familia «medida» (ver tests/invariantes.js).
 import assert from "node:assert/strict";
 import { ent, unicos, cuantos } from "./_ayuda.js";
+import { UNIDADES } from "../../src/tipos/medida.longitud.js";
 
 const MIN = { punto: [0], media: [30], cuarto: [15, 45], todas: [0, 15, 30, 45] };
 const horas = (act, tam) => {
@@ -131,6 +132,25 @@ export default {
   },
 
   "medida.longitud"(act, tam) {
+    if (act.params.modo === "regla") {
+      cuantos(act.ejercicios, tam === "media" ? 3 : 6);
+      unicos(act.ejercicios, (e) => e.datos.nombre, "objetos repetidos");
+      unicos(act.ejercicios, (e) => e.datos.cm, "longitudes repetidas");
+      for (const { datos: { cm }, solucion } of act.ejercicios) { ent(cm, 2, 10, "cm"); assert.deepEqual(solucion.huecos, [cm]); }
+      return;
+    }
+    if (act.params.modo === "mcm") {
+      const es = act.ejercicios, n = tam === "media" ? 6 : 12;
+      cuantos(es, n);
+      unicos(es, (e) => e.datos.objeto, "objetos repetidos");
+      for (const { datos: { objeto }, solucion } of es) {
+        assert.ok(UNIDADES[solucion.unidad]?.includes(objeto), `unidad de «${objeto}»`);
+        assert.deepEqual(solucion.huecos, []);
+      }
+      const nm = es.filter((e) => e.solucion.unidad === "m").length;
+      assert.ok(nm >= Math.floor(n * 0.4) && nm <= Math.ceil(n * 0.6), "m y cm equilibrados");
+      return;
+    }
     const compara = act.params.modo === "compara";
     cuantos(act.ejercicios, tam === "media" ? 3 : 6);
     unicos(act.ejercicios, (e) => e.datos.nombre, "objetos repetidos");

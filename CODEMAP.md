@@ -70,6 +70,7 @@ tests/comun.js        combinaciones(id), contador() (compartido por las pruebas)
 tests/invariantes.js  INVARIANTES[id] (reúne tests/inv/<f>.js; ayudantes en tests/inv/_ayuda.js)(actividad, tamaño): reglas aritméticas de cada tipo (obligatoria al añadir un tipo) + comunes()
 tests/test_invariantes.js  todas las combinaciones × semillas × variantes · `--full`
 src/tipos/medida.euros.js, medida.masa.js  lote 3b de 2.º (solo curso 2, declarados con `_n2()` en motor/modelos_2.py): pagar con el menor número de billetes y monedas (`valores(R)`, `voraz`) y balanza nivelada con pesas de 1 kg y ½ kg (<, > o =) · reglas en tests/inv/medida.js
+src/tipos/medida.longitud.js  1.º cubitos; 2.º (lote 3c, `modo` con `curso`): `regla` (tiras de 2–10 cm reales con `p.mm()`; medidas comprobadas en tests/test_pauta.js) y `mcm` (¿m o cm?, banco `UNIDADES`)
 tests/test_doradas.js + doradas.json  fichas doradas (JSON + huella SVG); `--actualizar` solo si el cambio es intencionado (y subir `version` del tipo)
 tools/ver_tipo.js     un tipo en PNG sin motor (2.º): `node tools/ver_tipo.js <id> '{params}' [--media] [--solucion]` → /tmp/ver_<id>….png
 tools/comparar_tipo.py  motor vs JS de un tipo en A4 → /tmp/cmp_<id>_<tamaño>.png (`--media`, `--solucion`)

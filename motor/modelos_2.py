@@ -50,7 +50,7 @@ EN_2 = {
     "sumar.dobles": (100, 100, 100),
     "valor.agrupa": (200, 300, 300),   # hasta 29 barras de diez en la casilla
     # Lote 3 · medida: reloj con cuartos y tiempo (opciones con `curso`), dinero hasta 500 € y compras hasta 100 €
-    **{i: None for i in ("medida.reloj", "medida.reloj2", "medida.tiempo")},
+    **{i: None for i in ("medida.reloj", "medida.reloj2", "medida.tiempo", "medida.longitud")},
     "medida.dinero": (200, 500, 200),
     "medida.precios": (100, 100, 100),
 }
@@ -98,6 +98,9 @@ OPCIONES_2.update({
     "medida.reloj2": {"valores": {"modo": CUARTOS}},
     "medida.tiempo": {"valores": {"modo": [{"valor": "equivalencias", "etiqueta": "Horas, minutos, días, semanas y meses", "curso": CURSO},
                                            {"valor": "horas", "etiqueta": "Antes y después de una hora", "curso": CURSO}]}},
+    # Lote 3c · regla en centímetros reales y ¿m o cm?
+    "medida.longitud": {"valores": {"modo": [{"valor": "regla", "etiqueta": "Mide con la regla (cm)", "curso": CURSO},
+                                             {"valor": "mcm", "etiqueta": "¿Metros o centímetros?", "curso": CURSO}]}},
 })
 
 

@@ -25,6 +25,26 @@ for (const [acts, grande] of [[[act("completa", 1, "Una línea.")], false], [[ac
     cerca(p.mm(5) * e, 5 * MM, 0.01, "5 mm en el papel");
   });
 }
+// 1b. medida.longitud «Mide con la regla» (2.º): cada tira mide en el A4 sus centímetros reales y cabe antes del hueco.
+{
+  const { generar } = await import("../src/nucleo/ficha.js");
+  await import("../src/tipos/index.js");
+  const { W, M } = await import("../src/render/papel.js");
+  const regla = { tipo: "medida.longitud", curso: 2, params: { modo: "regla" } };
+  for (const [acts, grande] of [[[regla], false], [[regla, regla], false], [[regla], true]]) for (const s of [1, 2, 3]) {
+    const pag = generar({ actividades: acts }, s).paginas[0], svg = hoja(pag, { titulo: "x", grande });
+    const escalas = [...svg.matchAll(/class="actividad"[^>]*><g transform="translate\([^)]*\) scale\(([\d.]+)\)/g)].map((m) => +m[1]);
+    const trozos = svg.split('class="actividad"').slice(1);
+    pag.actividades.forEach((a, i) => {
+      const tiras = [...trozos[i].matchAll(/<rect x="([\d.]+)" y="[\d.]+" width="([\d.]+)"[^>]*fill="#d1d1d1"/g)].map((m) => [+m[1], +m[2]]);
+      assert.equal(tiras.length, a.ejercicios.length, "una tira por ejercicio");
+      tiras.forEach(([x, w], k) => {
+        cerca(w * escalas[i], a.ejercicios[k].datos.cm * 10 * MM, 0.15, `${a.ejercicios[k].datos.cm} cm en el papel`);
+        assert.ok(x + w < W - M - 112, "la tira cabe antes del hueco"); n++;
+      });
+    });
+  }
+}
 cerca(new Papel().escala, escalaPanel(1), 1e-12, "escala nominal");
 cerca(new Papel({ parte: 0.5 }).escala, escalaPanel(0.5), 1e-12, "escala nominal (media)");
 

@@ -103,8 +103,9 @@ export function capitalizar(t) {
 /** 2.º (lote 2b): modelos que cambian de título con números desde 100 (en 1.º nunca llegan a 100). */
 const TITULO_2 = { "valor.agrupa": { _: "AGRUPA EN CENTENAS" }, "sumar.dobles": { mitades: "LAS MITADES", mezcla: "DOBLES Y MITADES" } };
 /** 2.º (lote 3): títulos de los modos que solo salen en 2.º (modelos sin rango). */
-const TITULO_MODO_2 = { "medida.tiempo": { equivalencias: "LAS MEDIDAS DEL TIEMPO", horas: "ANTES Y DESPUÉS" } };
-const NOMBRE_2 = { "valor.agrupa": "Agrupa en decenas y centenas", "sumar.dobles": "Los dobles y las mitades" };
+const TITULO_MODO_2 = { "medida.tiempo": { equivalencias: "LAS MEDIDAS DEL TIEMPO", horas: "ANTES Y DESPUÉS" },
+                        "medida.longitud": { regla: "MIDE CON LA REGLA", mcm: "¿METROS O CENTÍMETROS?" } };
+const NOMBRE_2 = { "valor.agrupa": "Agrupa en decenas y centenas", "sumar.dobles": "Los dobles y las mitades", "medida.longitud": "Mide longitudes" };
 
 export function tituloModelo(m, p = {}) {
   const t2 = p.rango >= 100 && TITULO_2[m.id], t2v = t2 && (t2[p.operacion] ?? t2._);

@@ -3509,7 +3509,7 @@ const CATALOGO = {"cursos":{"1":"1.º de Primaria","2":"2.º de Primaria"},"mate
 {"id":"medida.reloj2","curso":1,"materia":"matematicas","bloque":10,"familia":"medida","clave":"reloj2","nombre":"Dibuja las agujas","descripcion":"Dibujar las agujas para marcar una hora.","opciones":[{"id":"modo","etiqueta":"Horas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"En punto e y media"},{"valor":"punto","etiqueta":"Solo en punto"},{"valor":"media","etiqueta":"Solo y media"},{"valor":"cuarto","etiqueta":"Solo y cuarto y menos cuarto","curso":2},{"valor":"todas","etiqueta":"En punto, y media, y cuarto y menos cuarto","curso":2}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"DIBUJA LAS AGUJAS","color":"azul","metadatos":{"dificultad":3,"minutos":12,"etiquetas":["medida","reloj","hora","agujas"]},"cursos":{"2":{"rangos":[],"rango":null}}},
 {"id":"medida.calendario","curso":1,"materia":"matematicas","bloque":10,"familia":"medida","clave":"calendario","nombre":"El calendario","descripcion":"Leer un calendario mensual y contestar.","opciones":[{"id":"n","etiqueta":"Mes","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Al azar"},{"valor":1,"etiqueta":"Enero"},{"valor":2,"etiqueta":"Febrero"},{"valor":3,"etiqueta":"Marzo"},{"valor":4,"etiqueta":"Abril"},{"valor":5,"etiqueta":"Mayo"},{"valor":6,"etiqueta":"Junio"},{"valor":7,"etiqueta":"Julio"},{"valor":8,"etiqueta":"Agosto"},{"valor":9,"etiqueta":"Septiembre"},{"valor":10,"etiqueta":"Octubre"},{"valor":11,"etiqueta":"Noviembre"},{"valor":12,"etiqueta":"Diciembre"}]}],"rangos":[],"rango":null,"tamanos":["completa"],"titulo":"EL CALENDARIO","color":"azul","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["medida","calendario","tiempo"]},"cursos":{"2":{"rangos":[],"rango":null}}},
 {"id":"medida.tiempo","curso":1,"materia":"matematicas","bloque":10,"familia":"medida","clave":"tiempo","nombre":"Días y meses","descripcion":"Orden de los días de la semana o de los meses.","opciones":[{"id":"modo","etiqueta":"Tema","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Días de la semana"},{"valor":"meses","etiqueta":"Meses del año"},{"valor":"equivalencias","etiqueta":"Horas, minutos, días, semanas y meses","curso":2},{"valor":"horas","etiqueta":"Antes y después de una hora","curso":2}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":{"_":"LOS DÍAS DE LA SEMANA","meses":"LOS MESES DEL AÑO"},"color":"azul","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["medida","tiempo","días","meses"]},"cursos":{"2":{"rangos":[],"rango":null}}},
-{"id":"medida.longitud","curso":1,"materia":"matematicas","bloque":10,"familia":"medida","clave":"longitud","nombre":"Mide con cubitos","descripcion":"Medir longitudes con cubitos.","opciones":[{"id":"modo","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Medir y escribir"},{"valor":"compara","etiqueta":"Medir y rodear el más largo"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"MIDE CON CUBITOS","color":"azul","metadatos":{"dificultad":1,"minutos":8,"etiquetas":["medida","longitud","comparar"]}},
+{"id":"medida.longitud","curso":1,"materia":"matematicas","bloque":10,"familia":"medida","clave":"longitud","nombre":"Mide con cubitos","descripcion":"Medir longitudes con cubitos.","opciones":[{"id":"modo","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Medir y escribir"},{"valor":"compara","etiqueta":"Medir y rodear el más largo"},{"valor":"regla","etiqueta":"Mide con la regla (cm)","curso":2},{"valor":"mcm","etiqueta":"¿Metros o centímetros?","curso":2}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"MIDE CON CUBITOS","color":"azul","metadatos":{"dificultad":1,"minutos":8,"etiquetas":["medida","longitud","comparar"]},"cursos":{"2":{"rangos":[],"rango":null}}},
 {"id":"medida.capacidad","curso":1,"materia":"matematicas","bloque":10,"familia":"medida","clave":"capacidad","nombre":"¿Cuánto líquido hay?","descripcion":"Ordenar vasos según el líquido.","opciones":[],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"¿CUÁNTO LÍQUIDO HAY?","color":"azul","metadatos":{"dificultad":1,"minutos":8,"etiquetas":["medida","capacidad","líquido"]},"cursos":{"2":{"rangos":[],"rango":null}}},
 {"id":"estadistica.pictograma","curso":1,"materia":"matematicas","bloque":11,"familia":"estadistica","clave":"pictograma","nombre":"El pictograma","descripcion":"Leer un pictograma y contestar.","opciones":[{"id":"modo","etiqueta":"Valor del dibujo","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Cada dibujo vale 1"},{"valor":"dos","etiqueta":"Cada dibujo vale 2"}]}],"rangos":[10],"rango":10,"tamanos":["completa"],"titulo":"EL PICTOGRAMA","color":"verde","metadatos":{"dificultad":2,"minutos":12,"etiquetas":["estadística","pictograma","datos"]},"cursos":{"2":{"rangos":[10],"rango":10}}},
 {"id":"estadistica.recuento","curso":1,"materia":"matematicas","bloque":11,"familia":"estadistica","clave":"recuento","nombre":"Cuenta y anota","descripcion":"Contar con palotes y escribir el número.","opciones":[],"rangos":[10,20,30],"rango":10,"tamanos":["completa"],"titulo":"CUENTA Y ANOTA","color":"verde","metadatos":{"dificultad":1,"minutos":10,"etiquetas":["estadística","recuento","datos","contar"]},"cursos":{"2":{"rangos":[10,20,30],"rango":10}}},
@@ -3684,8 +3684,9 @@ function capitalizar(t) {
 /** 2.º (lote 2b): modelos que cambian de título con números desde 100 (en 1.º nunca llegan a 100). */
 const TITULO_2 = { "valor.agrupa": { _: "AGRUPA EN CENTENAS" }, "sumar.dobles": { mitades: "LAS MITADES", mezcla: "DOBLES Y MITADES" } };
 /** 2.º (lote 3): títulos de los modos que solo salen en 2.º (modelos sin rango). */
-const TITULO_MODO_2 = { "medida.tiempo": { equivalencias: "LAS MEDIDAS DEL TIEMPO", horas: "ANTES Y DESPUÉS" } };
-const NOMBRE_2 = { "valor.agrupa": "Agrupa en decenas y centenas", "sumar.dobles": "Los dobles y las mitades" };
+const TITULO_MODO_2 = { "medida.tiempo": { equivalencias: "LAS MEDIDAS DEL TIEMPO", horas: "ANTES Y DESPUÉS" },
+                        "medida.longitud": { regla: "MIDE CON LA REGLA", mcm: "¿METROS O CENTÍMETROS?" } };
+const NOMBRE_2 = { "valor.agrupa": "Agrupa en decenas y centenas", "sumar.dobles": "Los dobles y las mitades", "medida.longitud": "Mide longitudes" };
 
 function tituloModelo(m, p = {}) {
   const t2 = p.rango >= 100 && TITULO_2[m.id], t2v = t2 && (t2[p.operacion] ?? t2._);
@@ -10407,13 +10408,40 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get valores() 
 // datos:    { nombre, barras: [n] | [n1, n2] }  (longitud en cubitos, 2–12; con compara dos barras distintas A y B)
 // solucion: medir → { huecos: [n] } · compara → { huecos: [] } (se rodea la letra de la barra más larga; en la solución, en rojo)
 // Opción modo: null (medir y escribir) | "compara" (medir y rodear el más largo). Completa: 6 filas; media: 3.
+// 2.º (lote 3c, valores con `curso`):
+//   "regla" → datos { nombre, cm } (tira de 2–10 cm REALES, dibujada con Papel.mm(); sin repetir longitudes) · solucion { huecos: [cm] }
+//   "mcm"   → datos { objeto } · solucion { huecos: [], unidad: "m" | "cm" } (se rodea la unidad; en la solución, en rojo). Completa: 12 (2 × 6); media: 6.
 const { registrar } = __req("nucleo/tipos.js");
 const { TOP, W, M } = __req("render/papel.js");
 const { chips } = __req("tipos/medida.tiempo.js");
+/** ¿m o cm? Objetos sin duda posible para un niño de 2.º. */
+const UNIDADES = {
+  cm: ["Un lápiz", "Una goma", "Un libro", "Una cuchara", "Un clip", "Tu mano", "Un zapato", "Unas tijeras", "Un estuche",
+       "Una llave", "Un tenedor", "Un cepillo de dientes", "Una pajita", "Una hoja de papel"],
+  m: ["El pasillo del cole", "El patio", "Una piscina", "Un campo de fútbol", "Una calle", "Un autobús", "Un tren",
+      "Un edificio", "Una ballena", "Un camión", "La pista de atletismo", "La valla del cole"],
+};
+const ART = { cinta: "La", tira: "La", cuerda: "La", pajita: "La", regla: "La", hoja: "La" };
+const ROJO = "#C62828";
+
+function generar2(modo, azar, tamano) {
+  if (modo === "regla") {
+    const n = tamano === "media" ? 3 : 6, nombres = azar.barajar(["cinta", "tira", "cuerda", "pajita", "palo", "lazo", "cordón", "lápiz"]);
+    const cms = azar.muestra([2, 3, 4, 5, 6, 7, 8, 9, 10], n);
+    return { enunciado: "Mide cada tira con tu regla y escribe cuántos centímetros mide.\nPon el 0 de la regla al principio de la tira.",
+             ejercicios: cms.map((cm, i) => ({ datos: { nombre: nombres[i], cm }, solucion: { huecos: [cm] } })) };
+  }
+  const n = tamano === "media" ? 6 : 12, nm = azar.entero(Math.floor(n * 0.4), Math.ceil(n * 0.6));
+  const lista = azar.barajar([...azar.muestra(UNIDADES.m, nm).map((o) => [o, "m"]), ...azar.muestra(UNIDADES.cm, n - nm).map((o) => [o, "cm"])]);
+  return { enunciado: "¿Lo medirías en metros (m) o en centímetros (cm)? Rodea.",
+           ejercicios: lista.map(([objeto, unidad]) => ({ datos: { objeto }, solucion: { huecos: [], unidad } })) };
+}
+
 const __default = registrar({
   id: "medida.longitud",
   version: 1,
   generar(params, azar, { tamano }) {
+    if (params.modo === "regla" || params.modo === "mcm") return generar2(params.modo, azar, tamano);
     const compara = params.modo === "compara", nombres = azar.barajar(["lápiz", "cinta", "tira", "palo", "cuerda", "pajita", "regla", "hoja"]), ejercicios = [];
     for (let i = 0; i < (tamano === "media" ? 3 : 6); i++) {
       const n1 = azar.entero(2, 12), n2 = azar.elegir([2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].filter((v) => v !== n1));
@@ -10423,6 +10451,8 @@ const __default = registrar({
     return { enunciado: compara ? "Mide con los cubitos y rodea el más largo." : "Cuenta cuántos cubitos mide cada objeto y escribe el número.", ejercicios };
   },
   dibujar(p, act) {
+    if (act.params?.modo === "regla") return dibujarRegla(p, act);
+    if (act.params?.modo === "mcm") return dibujarMcm(p, act);
     const top = TOP, rows = 6, GY = 10, rh = (top - M - (rows - 1) * GY) / rows, u = 26, gx = M + 108;
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const y = top - (i + 1) * rh - i * GY, { barras, nombre } = e.datos, compara = barras.length === 2;
@@ -10444,7 +10474,35 @@ const __default = registrar({
   },
 });
 
-Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+/** Tiras de longitud real: 1 cm en el papel impreso al 100 % = 1 cm de la regla. */
+function dibujarRegla(p, act) {
+  const top = TOP, rows = 6, GY = 10, rh = (top - M - (rows - 1) * GY) / rows, gx = M + 22;
+  act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
+    const y = top - (i + 1) * rh - i * GY, { nombre, cm } = e.datos, alto = p.mm(6);
+    p.marco(M, y, W - 2 * M, rh);
+    p.text(gx, y + rh - 26, `${ART[nombre] ?? "El"} ${nombre}`, 12, { f: "PM" });
+    const by = y + rh / 2 - alto / 2 - 8;
+    p.rrect(gx, by, p.mm(cm * 10), alto, 0, { lw: 1.2, fill: 0.82 });
+    p.caja(W - M - 106, y + rh / 2 - 22, 50, 36, null, 22, e.solucion.huecos[0]);
+    p.text(W - M - 50, y + rh / 2 - 10, "cm", 14, { f: "PM" });
+  }));
+}
+
+/** ¿m o cm?: objeto a la izquierda y las dos unidades para rodear a la derecha. */
+function dibujarMcm(p, act) {
+  const { cel, cw, ch } = p.celdas(TOP, 2, 6);
+  act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
+    const [x, y] = cel[i];
+    p.marco(x, y, cw, ch, i);
+    const tot = p.ancho("m", "PM", 14) + p.ancho("cm", "PM", 14) + 32 + 8, x0 = x + 30, max = x + cw - 16 - tot - 14 - x0;
+    let fs = 13; while (p.ancho(e.datos.objeto, "PM", fs) > max && fs > 8) fs -= 0.5;
+    p.text(x0, y + ch / 2 - fs * 0.33, e.datos.objeto, fs, { f: "PM" });
+    const pos = chips(p, x + cw - 16 - tot / 2, y + ch / 2 - 12, ["m", "cm"], 14, 24, 8);
+    if (p.solucion) { const [cx, w] = pos[e.solucion.unidad === "m" ? 0 : 1]; p.rrect(cx - 3, y + ch / 2 - 15, w + 6, 30, 11, { lw: 1.6, stroke: ROJO }); }
+  }));
+}
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get UNIDADES() { return UNIDADES; }, get default() { return __default; } }));
 },
 "tipos/medida.masa.js": (__exp) => {
 // medida.masa · ¿Cuánto pesa? (2.º, lote 3b): balanza con pesas de 1 kg y de ½ kg; ¿pesa más, menos o igual?

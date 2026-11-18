@@ -37,6 +37,7 @@ Sin cambios de código. El plan y el estado de sus fases están en **`PLAN-DISEN
 Detalle de cada paso: `HISTORIAL.md`.
 
 ## Pendiente de Iván
+- Probar en el Android (lote 3c, 2.º): «Mide longitudes» → «Mide con la regla»: imprimir **al 100 %** (sin «Ajustar a la página») y medir una tira con la regla; «¿Metros o centímetros?»: ¿sobra o falta algún objeto?
 - Probar en el Android (lote 3b, 2.º): «Paga con billetes y monedas» (¿se entiende escribir 0 en los que no se usan?) y «¿Cuánto pesa?» (balanza nivelada con <, > o =); decir si algo cambia.
 - Probar en el Android (fase 8): activar el tema oscuro en Ajustes y mirar que se lea bien (botón «Imprimir» pulsado, avisos de error, buscador del selector); decir si algo molesta.
 - Probar en el Android (fase 7): Ajustes → «Guardar copia» (¿dónde queda el archivo?), borrar una favorita y «Cargar copia…»; con sesión iniciada, «Subir mis favoritas a la nube» (necesita las reglas de Firestore publicadas); proyectar en Fori una ficha larga (si sale el aviso de «demasiado grande», decir cuál era).
@@ -62,10 +63,10 @@ Detalle de cada paso: `HISTORIAL.md`.
 
 ## Fase 7 · Ampliación de contenidos (en curso)
 - [ ] Otros cursos de Matemáticas (2.º a 6.º) y Lengua.
-  - [ ] Matemáticas 2.º · Lote 3: medida.
+  - [x] Matemáticas 2.º · Lote 3: medida (18-11-2026).
     - [x] 3a. Reloj con cuartos, tiempo, dinero hasta 500 € y compras (9-11-2026; detalle en HISTORIAL.md)
     - [x] 3b. ✨ `medida.euros` y ✨ `medida.masa` (17-11-2026; detalle en HISTORIAL.md)
-    - [ ] 3c. 🔧 `medida.longitud`: mide con la regla en centímetros reales (`Papel.mm()`) y ¿m o cm? (Opus)
+    - [x] 3c. 🔧 `medida.longitud` en 2.º: «Mide con la regla» (tiras de 2–10 cm reales) y «¿Metros o centímetros?» (rodear) (18-11-2026; detalle en HISTORIAL.md)
   - [ ] Matemáticas 2.º · Lotes 4–6 (ver `MATES_2.md`).
   - [ ] Lengua 1.º · Lote 6 (con pictogramas): aparcado hasta decidir la Fase 6. Lote 4 · decidido: pauta de 5 mm. **Pendiente de Iván**: orden de las letras (más adelante); pictogramas aparcados. **Decisión de Iván (5-11-2026): la letra de las fichas de Lengua será Fredoka** (como Barri y Calculi; OFL, ya está en `fonts/` de Barri). Comprobar al diseñar: la «a» y la «g» que ve el alumno en las palabras de lectura, y la pauta de caligrafía (Fredoka no es letra de escritura a mano).
 

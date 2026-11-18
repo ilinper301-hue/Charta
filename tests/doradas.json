@@ -37599,6 +37599,161 @@
    "49b984a2fce5e4d0"
   ]
  },
+ "2.º regla y ¿m o cm?": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Mide con la regla y ¿Metros o centímetros?",
+   "curso": 2,
+   "area": "matematicas",
+   "semilla": 8,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "medida.longitud",
+       "tipoVersion": 1,
+       "params": {
+        "modo": "regla",
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Mide cada tira con tu regla y escribe cuántos centímetros mide.\nPon el 0 de la regla al principio de la tira.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "nombre": "cuerda",
+          "cm": 8
+         },
+         "solucion": {
+          "huecos": [
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "nombre": "lazo",
+          "cm": 5
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "nombre": "tira",
+          "cm": 7
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "medida.longitud",
+       "tipoVersion": 1,
+       "params": {
+        "modo": "mcm",
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "verde",
+       "enunciado": "¿Lo medirías en metros (m) o en centímetros (cm)? Rodea.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "objeto": "Un estuche"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "cm"
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "objeto": "Una goma"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "cm"
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "objeto": "El pasillo del cole"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "m"
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "objeto": "Un edificio"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "m"
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "objeto": "Unas tijeras"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "cm"
+         }
+        },
+        {
+         "id": "a2e6",
+         "datos": {
+          "objeto": "Un tenedor"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "cm"
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "2086832c38b0b9df"
+  ],
+  "svgSolucion": [
+   "70e2b04f7c9b487a"
+  ]
+ },
  "2.º euros y masa": {
   "ficha": {
    "schemaVersion": 1,
