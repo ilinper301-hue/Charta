@@ -1,6 +1,6 @@
 # Charta · Matemáticas de 2.º — Guion de tipología de fichas
 
-> Guion **aprobado** por Iván (8-11-2026). Hechos: lotes 0, 1, 2, 2b y 3a (ver ESTADO.md).
+> Guion **aprobado** por Iván (8-11-2026). Hechos: lotes 0–5 (ver ESTADO.md).
 > Decisiones de Iván (8-11-2026): **sí** multiplicar (bloque 13); reloj **con y cuarto y menos cuarto**; rangos **de 100 en 100** hasta el 999; **redondear a la decena** en 2.º.
 > Base: los 106 tipos de Matemáticas de 1.º. Currículo andaluz (Orden de 30-5-2023, primer ciclo): números hasta el **999**, suma y resta, ordinales, euros (monedas de 1 y 2 € y billetes de 5 a 100 €), metro, kilo y litro, reloj, figuras planas, simetría, croquis, patrones, signos =, ≠, <, >, pictogramas y barras. La multiplicación no está en el primer ciclo andaluz, pero Iván la incluye (bloque 13).
 

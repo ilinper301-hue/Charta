@@ -16,6 +16,7 @@ export const OBJETOS = [["manzanas", "f"], ["peras", "f"], ["galletas", "f"], ["
 
 const cuantos = (g) => (g === "f" ? "Cuántas" : "Cuántos");
 const cuantosMin = (g) => (g === "f" ? "cuántas" : "cuántos");
+const unos = (g) => (g === "f" ? "unas" : "unos");
 const VERBOS_ANADIR = ["compra", "encuentra", "recibe", "consigue"];
 const VERBOS_QUITAR = (b) => [`Regala ${b}.`, `Pierde ${b}.`, `Da ${b} a un amigo.`];
 
@@ -42,9 +43,23 @@ export const SITUACIONES = {
     ]),
     faltar: ({ N, a, b, o, g }) =>
       `${N} necesita ${a} ${o} para completar su colección. Ya tiene ${b}. ¿${cuantos(g)} ${o} le faltan?`,
+    // 2.º (lote 5): igualar y cambio con la incógnita al principio
+    igualar: ({ N, M, a, b, o, g }) =>
+      `${N} tiene ${b} ${o} y ${M} tiene ${a}. ¿${cuantos(g)} ${o} más necesita ${N} para tener los mismos que ${M}?`,
+    inicio: ({ N, a, b, o, g }, az) => az.elegir([
+      `${N} tenía ${unos(g)} ${o}. Le dieron ${b} y ahora tiene ${a}. ¿${cuantos(g)} ${o} tenía al principio?`,
+      `En la caja había ${unos(g)} ${o}. Se metieron ${b} y ahora hay ${a}. ¿${cuantos(g)} ${o} había al principio?`,
+    ]),
   },
 };
+// 2.º (lote 5): cambio con la incógnita al principio que se resuelve sumando (a = lo que queda, b = lo que se quitó)
+SITUACIONES.suma.inicio = ({ N, a, b, o, g }, az) => az.elegir([
+  `${N} tenía ${unos(g)} ${o}. Regaló ${b} y ahora le quedan ${a}. ¿${cuantos(g)} ${o} tenía al principio?`,
+  `En el cesto había ${unos(g)} ${o}. Se sacaron ${b} y ahora quedan ${a}. ¿${cuantos(g)} ${o} había al principio?`,
+]);
 const SITS = { suma: ["juntar", "anadir"], resta: ["quitar", "comparar", "faltar"] };
+/** Situaciones nuevas de 2.º: solo si se eligen o con «todas» (las fichas de 1.º no cambian). */
+export const SITS_NUEVAS = { suma: ["inicio"], resta: ["igualar", "inicio"] };
 const OPERACION = { suma: "+", resta: MENOS };
 
 /** Cantidades según rango y nivel de llevadas (sumar: a + b ≤ R; restar: a ≤ R, a − b ≥ 2). Todas ≥ 2. */
@@ -68,7 +83,7 @@ export function generarProblemas(clase, params, az, n) {
   const R = params.rango || 20, nivel = params.nivel || "sin";
   const clases = clase === "mixtos" ? ["suma", "resta"] : [clase];
   const pools = Object.fromEntries(clases.map((c) => [c, cantidades(c, R, nivel, az)]));
-  const sitsPermitidas = (c) => (params.situacion ? [params.situacion] : SITS[c]);
+  const sitsPermitidas = (c) => (params.situacion === "todas" ? [...SITS[c], ...SITS_NUEVAS[c]] : params.situacion ? [params.situacion] : SITS[c]);
   const nombres = az.barajar(NOMBRES), objetos = az.barajar(OBJETOS);
   const vistos = new Set(), out = [];
   for (let i = 0; i < n; i++) {

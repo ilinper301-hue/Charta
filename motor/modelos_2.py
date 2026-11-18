@@ -146,8 +146,50 @@ MODELOS_2 = [   # ✨ nuevos de 2.º (lotes 3–6)
     _n2(9, "geometria", "itinerario", "Sigue el camino", "Seguir flechas en una cuadrícula, o escribir las flechas de un camino.",
         [op("modo", "Tarea", [(None, "Dibuja el camino"), ("llega", "¿Dónde llegas?"), ("flechas", "Escribe las flechas")])],
         "SIGUE EL CAMINO", "rosa", tam=COMPLETA),
+    # Lote 5 · trucos de 2.º (Calculi c2)
+    _n2(12, "trucos", "amigos100", "Amigos del 100", "Truco: buscar el amigo del 100 (30 + 70, 45 + 55).",
+        [op("modo", "Números", [(None, "Decenas exactas y otros números"), ("decenas", "Solo decenas exactas (30 + 70)")])],
+        "AMIGOS DEL 100", "amarillo"),
+    _n2(12, "trucos", "sumadecenas", "Sumar decenas", "Truco: al sumar decenas, las unidades no cambian (47 + 30).", [],
+        "SUMAR DECENAS", "verde"),
+    _n2(12, "trucos", "restadecenas", "Restar decenas", "Truco: al restar decenas, las unidades no cambian (85 − 40).", [],
+        "RESTAR DECENAS", "azul"),
+    _n2(12, "trucos", "descomponer2", "Decenas y unidades", "Truco: sumar por separado las decenas y las unidades, sin llevada (34 + 25).", [],
+        "DECENAS Y UNIDADES", "rosa"),
+    _n2(12, "trucos", "pasardecena2", "Pasar la decena", "Truco: completar la decena y sumar lo que sobra (38 + 7 = 40 + 5).", [],
+        "PASAR LA DECENA", "amarillo"),
+    _n2(12, "trucos", "sumar919", "Sumar 9 y 19", "Truco: sumar 10 o 20 y quitar 1 (36 + 19).", [],
+        "SUMAR 9 Y 19", "verde"),
+    _n2(12, "trucos", "restar919", "Restar 9 y 19", "Truco: restar 10 o 20 y devolver 1 (52 − 19).", [],
+        "RESTAR 9 Y 19", "azul"),
+    _n2(12, "trucos", "compensar2", "Redondear y compensar", "Truco: redondear a la decena, sumar y quitar lo que sobra (48 + 25).", [],
+        "REDONDEAR Y COMPENSAR", "rosa"),
+    _n2(12, "trucos", "centenas", "Sumar y restar centenas", "Truco: solo cambian las centenas (340 + 200, 700 − 300).",
+        [op("modo", "Operaciones", [(None, "Sumar y restar"), ("suma", "Solo sumar"), ("resta", "Solo restar")])],
+        "SUMAR Y RESTAR CENTENAS", "amarillo"),
+    _n2(12, "trucos", "restaradelante", "Restar hacia delante", "Truco: contar cuánto falta del número pequeño al grande (62 − 58).", [],
+        "RESTAR HACIA DELANTE", "verde"),
 ]
 
+
+# Lote 5 · problemas: situaciones nuevas de 2.º en los de una operación (valores con `curso`) y dos modelos nuevos
+SIT_TODAS = {"valor": "todas", "etiqueta": "Variadas, también las nuevas", "curso": CURSO}
+INICIO = {"valor": "inicio", "etiqueta": "¿Cuántos había al principio?", "curso": CURSO}
+OPCIONES_2.update({
+    "problemas.suma": {"valores": {"situacion": [INICIO, SIT_TODAS]}},
+    "problemas.resta": {"valores": {"situacion": [{"valor": "igualar", "etiqueta": "Igualar (cuántos le faltan para tener los mismos)", "curso": CURSO},
+                                                  INICIO, SIT_TODAS]}},
+})
+NIVEL_2P = op("nivel", "Llevadas", [(None, "Sin llevadas"), ("con", "Con llevadas"), ("mezcla", "Mezcladas")])
+MODELOS_2 += [
+    _n2(8, "problemas", "dospasos", "Problemas de dos operaciones", "Tenía 45, me dan 20 y gasto 30: dos operaciones y la respuesta.",
+        [op("operaciones", "Operaciones", [(None, "Variadas"), ("mixtas", "Sumar y restar"), ("suma", "Sumar dos veces"), ("resta", "Restar dos veces")]), NIVEL_2P],
+        "PROBLEMAS DE DOS OPERACIONES", "azul", rmin=100, rmax=999, rango=100),
+    _n2(8, "problemas", "dinero", "Problemas de compras", "Precios en euros: cuánto pago, cuánto me devuelven, cuánto me queda o me falta.",
+        [op("situacion", "Situaciones", [(None, "Variadas"), ("pagar", "¿Cuánto paga? (sumar precios)"), ("vuelta", "¿Cuánto le devuelven?"),
+                                         ("queda", "¿Cuánto le queda?"), ("falta", "¿Cuánto le falta?")])],
+        "PROBLEMAS DE COMPRAS", "verde", rmin=100, rmax=500, rango=100),
+]
 
 def cursos_extra(m):
     """{"2": {"rangos", "rango"}} si el modelo (dict del catálogo) también está en 2.º; {} si no."""

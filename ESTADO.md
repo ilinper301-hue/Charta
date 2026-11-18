@@ -37,6 +37,7 @@ Sin cambios de código. El plan y el estado de sus fases están en **`PLAN-DISEN
 Detalle de cada paso: `HISTORIAL.md`.
 
 ## Pendiente de Iván
+- Probar en el Android (lote 5, 2.º): «Problemas de dos operaciones» (¿cabe bien la fila de las dos operaciones?), «Problemas de compras» y en «Problemas de sumar/restar» la situación «Variadas, también las nuevas»; trucos de 2.º (los encadenados van en 2 columnas). ¿Quieres la barra (Barri) también en los de dos operaciones?
 - Probar en el Android (lote 4, 2.º): «Lados y vértices»; «Sigue el camino» en sus 3 tareas (¿se entiende la S y la L? ¿cabe dibujar el camino con el dedo o el lápiz?); «El gráfico de barras» con escala de 2 en 2 o de 5 en 5 y «¿Cuántos más?».
 - Probar en el Android (lote 3c, 2.º): «Mide longitudes» → «Mide con la regla»: imprimir **al 100 %** (sin «Ajustar a la página») y medir una tira con la regla; «¿Metros o centímetros?»: ¿sobra o falta algún objeto?
 - Probar en el Android (lote 3b, 2.º): «Paga con billetes y monedas» (¿se entiende escribir 0 en los que no se usan?) y «¿Cuánto pesa?» (balanza nivelada con <, > o =); decir si algo cambia.
@@ -69,7 +70,8 @@ Detalle de cada paso: `HISTORIAL.md`.
     - [x] 3b. ✨ `medida.euros` y ✨ `medida.masa` (17-11-2026; detalle en HISTORIAL.md)
     - [x] 3c. 🔧 `medida.longitud` en 2.º: «Mide con la regla» (tiras de 2–10 cm reales) y «¿Metros o centímetros?» (rodear) (18-11-2026; detalle en HISTORIAL.md)
   - [x] Matemáticas 2.º · Lote 4: geometría y estadística (18-11-2026; ✨ `geometria.lados`, ✨ `geometria.itinerario`, 🔧 `estadistica.barras` con escala y «¿cuántos más?»; detalle en HISTORIAL.md).
-  - [ ] Matemáticas 2.º · Lotes 5–6 (ver `MATES_2.md`): 5 problemas de dos pasos, de compras y trucos de 2.º; 6 multiplicar y repartir.
+  - [x] Matemáticas 2.º · Lote 5: problemas y trucos (18-11-2026; ✨ `problemas.dospasos`, ✨ `problemas.dinero`, situaciones «igualar» y «¿cuántos había al principio?» en sumar/restar, 10 trucos de Calculi 2.º; detalle en HISTORIAL.md).
+  - [ ] Matemáticas 2.º · Lote 6 (ver `MATES_2.md`): multiplicar y repartir.
   - [ ] Lengua 1.º · Lote 6 (con pictogramas): aparcado hasta decidir la Fase 6. Lote 4 · decidido: pauta de 5 mm. **Pendiente de Iván**: orden de las letras (más adelante); pictogramas aparcados. **Decisión de Iván (5-11-2026): la letra de las fichas de Lengua será Fredoka** (como Barri y Calculi; OFL, ya está en `fonts/` de Barri). Comprobar al diseñar: la «a» y la «g» que ve el alumno en las palabras de lectura, y la pauta de caligrafía (Fredoka no es letra de escritura a mano).
 
 Límites conocidos de cada tipo: buscar «Límites» en `HISTORIAL.md`.

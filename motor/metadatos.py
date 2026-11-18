@@ -91,6 +91,8 @@ META = {
     "problemas.resta": (3, 15, "problemas restar texto razonamiento"),
     "problemas.barras": (3, 20, "problemas barras modelo_de_barras singapur sumar restar razonamiento"),
     "problemas.mixtos": (3, 18, "problemas sumar restar texto razonamiento"),
+    "problemas.dospasos": (3, 20, "problemas dos_operaciones sumar restar texto razonamiento"),
+    "problemas.dinero": (3, 18, "problemas dinero euros compras sumar restar razonamiento"),
     # Bloque 12 · trucos de cálculo mental (de Calculi)
     "trucos.masmenos1": (1, 8, "cálculo_mental truco sumar restar uno_más_uno_menos"),
     "trucos.descomponer": (1, 8, "cálculo_mental truco descomposición hasta_10"),
@@ -100,6 +102,17 @@ META = {
     "trucos.sumar9": (3, 10, "cálculo_mental truco sumar sumar_9"),
     "trucos.restarsumando": (3, 10, "cálculo_mental truco restar restar_sumando"),
     "trucos.masmenos10": (2, 10, "cálculo_mental truco sumar restar decenas"),
+    # Lote 5 · trucos de 2.º
+    "trucos.amigos100": (2, 8, "cálculo_mental truco amigos_del_100 sumar"),
+    "trucos.sumadecenas": (2, 8, "cálculo_mental truco sumar decenas"),
+    "trucos.restadecenas": (2, 8, "cálculo_mental truco restar decenas"),
+    "trucos.descomponer2": (3, 10, "cálculo_mental truco sumar descomposición decenas unidades"),
+    "trucos.pasardecena2": (3, 10, "cálculo_mental truco sumar llevada completar_decena"),
+    "trucos.sumar919": (3, 10, "cálculo_mental truco sumar sumar_9 sumar_19"),
+    "trucos.restar919": (3, 10, "cálculo_mental truco restar restar_9 restar_19"),
+    "trucos.compensar2": (3, 10, "cálculo_mental truco sumar redondear compensar"),
+    "trucos.centenas": (2, 8, "cálculo_mental truco sumar restar centenas"),
+    "trucos.restaradelante": (3, 10, "cálculo_mental truco restar restar_sumando contar_hacia_delante"),
     # Bloque 9 · geometría
     "geometria.figuras": (1, 8, "geometría figuras_planas"),
     "geometria.cuenta": (2, 10, "geometría figuras contar"),
