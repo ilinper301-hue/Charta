@@ -52,7 +52,7 @@ const lleva3 = (op, x, y) => (op === "+" ? llevaS3(x, y) : llevaR3(x, y));
 /** problemas.dospasos: dos operaciones encadenadas, todo en 2..R, el enunciado nombra las tres cantidades. */
 function dospasos(act, tam) {
   const es = act.ejercicios, R = act.params.rango ?? 100, nivel = act.params.nivel || "sin", ops = act.params.operaciones;
-  cuantos(es, tam === "media" ? 2 : 4);
+  cuantos(es, act.params.barra ? (tam === "media" ? 1 : 3) : tam === "media" ? 2 : 4);
   unicos(es, (e) => `${e.datos.a},${e.datos.b},${e.datos.c}`, "cantidades repetidas");
   unicos(es, (e) => e.datos.obj, "objeto repetido");
   const llevan = es.map(({ datos: d, solucion }) => {

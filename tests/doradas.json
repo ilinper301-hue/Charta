@@ -18566,6 +18566,7 @@
        "params": {
         "operaciones": null,
         "nivel": null,
+        "barra": null,
         "rango": 100
        },
        "tamano": "completa",

@@ -4,7 +4,7 @@
 // problemas.dinero    · datos:    { texto, sit, a, b, op, obj: "€" }         (mismo dibujo que los de 1.º)
 //                      solucion: { huecos: [a, op, b, resultado, resultado] }
 // Todas las cantidades valen ≥ 2 y ningún resultado (ni el intermedio) pasa del rango.
-import { TOP, T, B, MENOS } from "../render/papel.js";
+import { TOP, T, B, MENOS, INK, COLOR_SOLUCION } from "../render/papel.js";
 import { NOMBRES, OBJETOS, partir } from "./_problemas.js";
 import { llevaSuma3, llevaResta3 } from "./_tres.js";
 
@@ -51,6 +51,9 @@ function tresCantidades(op1, op2, R, quiere, az) {
   throw new Error("No hay problemas de dos operaciones con estas opciones: prueba con números más grandes.");
 }
 
+/** Cuántos problemas: 4/2 sin barra; con barra (dibujada o en blanco), 3/1. */
+export const cuantosDosPasos = (params, tamano) => (params.barra ? (tamano === "media" ? 1 : 3) : tamano === "media" ? 2 : 4);
+
 export function generarDosPasos(params, az, n) {
   const R = params.rango || 100, nivel = params.nivel || "sin", sits = SITS_2[params.operaciones || "todas"];
   const nombres = az.barajar(NOMBRES), objetos = az.barajar(OBJETOS), orden = az.barajar(sits), out = [], vistos = new Set();
@@ -70,9 +73,66 @@ export function generarDosPasos(params, az, n) {
   return out;
 }
 
-/** Tarjeta: enunciado (hasta 3 líneas), «Operaciones: [a][+][b] = [r1]   [r1][−][c] = [r2]» y «Respuesta: [r2] objetos». */
+// ---------------------------------------------------------------- barra de dos pasos (modelo de Singapur, como Barri)
+const BW = 300, BH = 22, MIN = 30;
+/** Anchos proporcionales a `vals` que suman `W`, ninguno menor que MIN (para que quepa la etiqueta). */
+function reparto(vals, W) {
+  const tot = vals.reduce((x, y) => x + y, 0);
+  let bajo = vals.map(() => false), w = vals.map((v) => (v / tot) * W);
+  for (let k = 0; k < 4; k++) {
+    bajo = w.map((x, i) => bajo[i] || x < MIN);
+    const libre = W - MIN * bajo.filter(Boolean).length, resto = vals.reduce((t, v, i) => t + (bajo[i] ? 0 : v), 0);
+    w = vals.map((v, i) => (bajo[i] ? MIN : (v / resto) * libre));
+  }
+  return w;
+}
+/** Segmento: `val` número, null = «?» (incógnita), "" = sin etiqueta; `quita` = la parte que se quita (borde discontinuo, «−n»). */
+function seg(p, x, y, w, val, tinta, fill, quita = false) {
+  if (quita) p.path([["M", x, y], ["L", x + w, y], ["L", x + w, y + BH], ["L", x, y + BH], ["Z"]], { lw: 1.4, fill: 1, stroke: tinta, dash: [4, 3] });
+  else p.rrect(x, y, w, BH, 3, { lw: 1.4, fill, stroke: tinta });
+  if (val !== "") p.text(x + w / 2, y + BH / 2 - 4.5, val === null ? "?" : (quita ? MENOS : "") + val, 13.5, { f: "PB", anchor: "middle", gris: INK });
+}
+/** Fila de segmentos desde x0: [[valor, ancho, tachado]…]. */
+function fila(p, x0, y, partes, tinta, GR) {
+  let x = x0;
+  partes.forEach(([v, w, t], k) => { seg(p, x, y, w, v, tinta, GR ? GR[k % 2] : null, t); x += w; });
+}
+/** Llave sobre (arriba = true) o bajo [x0, x1] con su etiqueta (número o «?»). */
+function llave(p, x0, x1, y, arriba, val, tinta) {
+  const d = arriba ? 6 : -6;
+  p.path([["M", x0, y], ["L", x0, y + d], ["L", x1, y + d], ["L", x1, y]], { lw: 1.2, stroke: tinta });
+  p.text((x0 + x1) / 2, arriba ? y + 10 : y - 17, val === null ? "?" : String(val), 13, { f: "PB", anchor: "middle", gris: INK });
+}
+/** Barra de dos pasos en la zona [y, y + 92] desde x0. Una fila (dar y dar, quitar y quitar) o dos (el segundo paso debajo). */
+export function dibujarBarraDosPasos(p, d, x0, y, tinta) {
+  const GR = tinta === COLOR_SOLUCION ? null : [0.93, 0.84], r1 = opera(d.op1, d.a, d.b), r2 = opera(d.op2, r1, d.c);
+  const arriba = y + 52, abajo = y + 22, sola = y + 34;
+  if (d.sit === "dar_dar") {
+    const [wa, wb, wc] = reparto([d.a, d.b, d.c], BW);
+    fila(p, x0, sola, [[d.a, wa], [d.b, wb], [d.c, wc]], tinta, GR);
+    llave(p, x0, x0 + BW, sola + BH + 4, true, null, tinta);
+  } else if (d.sit === "quitar_quitar") {
+    const [w2, wb, wc] = reparto([r2, d.b, d.c], BW);
+    fila(p, x0, sola, [[null, w2], [d.b, wb, true], [d.c, wc, true]], tinta, GR);
+    llave(p, x0, x0 + BW, sola + BH + 4, true, d.a, tinta);
+  } else if (d.sit === "quitar_dar") {               // arriba: a = (lo que queda) + b tachado; abajo: lo que queda + c = ?
+    const T = Math.max(d.a, r1 + d.c), La = (d.a / T) * BW, Lb = (BW * (r1 + d.c)) / T;
+    const [w1, wb] = reparto([r1, d.b], La), wc = Math.max(MIN, Lb - w1);
+    fila(p, x0, arriba, [["", w1], [d.b, wb, true]], tinta, GR);
+    llave(p, x0, x0 + w1 + wb, arriba + BH + 4, true, d.a, tinta);
+    fila(p, x0, abajo, [["", w1], [d.c, wc]], tinta, GR);
+    llave(p, x0, x0 + w1 + wc, abajo - 4, false, null, tinta);
+  } else {                                           // dar_quitar, juntar_quitar: arriba a + b; abajo el mismo total = ? + c tachado
+    const [wa, wb] = reparto([d.a, d.b], BW), [w2, wc] = reparto([r2, d.c], BW);
+    fila(p, x0, arriba, [[d.a, wa], [d.b, wb]], tinta, GR);
+    fila(p, x0, abajo, [[null, w2], [d.c, wc, true]], tinta, GR);
+  }
+}
+
+/** Tarjeta: enunciado (hasta 3 líneas), «Operaciones: [a][+][b] = [r1]   [r1][−][c] = [r2]» y «Respuesta: [r2] objetos».
+ *  Con barra (`params.barra`: "dibujada" o "blanco"): 3 por página, la barra entre el enunciado y las operaciones y la respuesta a su derecha. */
 export function dibujarDosPasos(p, act) {
-  const es = act.ejercicios, filas = 4;
+  const es = act.ejercicios, barra = act.params.barra, filas = barra ? 3 : 4;
   const { cel, cw, ch } = p.celdas(TOP, 1, filas);
   es.slice(0, p.n(filas)).forEach((e, i) => p.ejercicio(e.id, () => {
     const [x, y] = cel[i], d = e.datos, h = e.solucion.huecos;
@@ -80,11 +140,19 @@ export function dibujarDosPasos(p, act) {
     const fs = 13.5, lineas = partir(p, d.texto, cw - 70, fs);
     if (lineas.length > 3) throw new Error(`Enunciado de más de 3 líneas: ${d.texto}`);
     lineas.forEach((l, j) => p.text(x + 36, y + ch - 30 - j * 17, l, fs, { f: "PR" }));
-    const hb = 34, fl = 12.5;
-    p.linea(x + 10, y + 52, cw - 20, hb + 4, [T("Operaciones:", fl, "PR"),
+    const hb = 34, fl = 12.5, yo = barra ? y + 8 : y + 52;
+    p.linea(x + 10, yo, cw - 20, hb + 4, [T("Operaciones:", fl, "PR"),
       B(42, hb, h[0]), B(26, hb, h[1]), B(42, hb, h[2]), T("=", 16), B(44, hb, h[3]), T("", 4),
       B(44, hb, h[4]), B(26, hb, h[5]), B(42, hb, h[6]), T("=", 16), B(44, hb, h[7])], 8);
-    p.linea(x + 10, y + 8, cw - 20, hb + 4, [T("Respuesta:", fl, "PR"), B(52, hb, h[8]), T(d.obj, fl, "PR")], 8);
+    const resp = [T("Respuesta:", fl, "PR"), B(52, hb, h[8]), T(d.obj, fl, "PR")];
+    if (!barra) return p.linea(x + 10, y + 8, cw - 20, hb + 4, resp, 8);
+    const yb = y + 52, x0 = x + 24;                          // zona de la barra: yb … yb + 92
+    if (barra !== "blanco") dibujarBarraDosPasos(p, d, x0, yb, INK);
+    else if (!p.solucion) {
+      p.rrect(x0 - 6, yb, BW + 12, 92, 6, { lw: 0.8, fill: 1, stroke: 0.7 });
+      p.text(x0 + BW / 2, yb + 42, "Dibuja aquí la barra", 10.5, { f: "PR", anchor: "middle", gris: 0.65 });
+    } else dibujarBarraDosPasos(p, d, x0, yb, COLOR_SOLUCION);
+    p.linea(x0 + BW + 14, yb + 27, cw - BW - 48, hb + 4, resp, 8);
   }));
 }
 

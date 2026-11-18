@@ -183,7 +183,8 @@ OPCIONES_2.update({
 NIVEL_2P = op("nivel", "Llevadas", [(None, "Sin llevadas"), ("con", "Con llevadas"), ("mezcla", "Mezcladas")])
 MODELOS_2 += [
     _n2(8, "problemas", "dospasos", "Problemas de dos operaciones", "Tenía 45, me dan 20 y gasto 30: dos operaciones y la respuesta.",
-        [op("operaciones", "Operaciones", [(None, "Variadas"), ("mixtas", "Sumar y restar"), ("suma", "Sumar dos veces"), ("resta", "Restar dos veces")]), NIVEL_2P],
+        [op("operaciones", "Operaciones", [(None, "Variadas"), ("mixtas", "Sumar y restar"), ("suma", "Sumar dos veces"), ("resta", "Restar dos veces")]), NIVEL_2P,
+         op("barra", "Barra", [(None, "Sin barra"), ("dibujada", "Dibujada (con los números)"), ("blanco", "En blanco (la dibuja el alumno)")])],
         "PROBLEMAS DE DOS OPERACIONES", "azul", rmin=100, rmax=999, rango=100),
     _n2(8, "problemas", "dinero", "Problemas de compras", "Precios en euros: cuánto pago, cuánto me devuelven, cuánto me queda o me falta.",
         [op("situacion", "Situaciones", [(None, "Variadas"), ("pagar", "¿Cuánto paga? (sumar precios)"), ("vuelta", "¿Cuánto le devuelven?"),

@@ -3586,7 +3586,7 @@ const CATALOGO = {"cursos":{"1":"1.º de Primaria","2":"2.º de Primaria"},"mate
 {"id":"trucos.compensar2","curso":2,"materia":"matematicas","bloque":12,"familia":"trucos","clave":"compensar2","nombre":"Redondear y compensar","descripcion":"Truco: redondear a la decena, sumar y quitar lo que sobra (48 + 25).","opciones":[],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"REDONDEAR Y COMPENSAR","color":"rosa","metadatos":{"dificultad":3,"minutos":10,"etiquetas":["cálculo mental","truco","sumar","redondear","compensar"]}},
 {"id":"trucos.centenas","curso":2,"materia":"matematicas","bloque":12,"familia":"trucos","clave":"centenas","nombre":"Sumar y restar centenas","descripcion":"Truco: solo cambian las centenas (340 + 200, 700 − 300).","opciones":[{"id":"modo","etiqueta":"Operaciones","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Sumar y restar"},{"valor":"suma","etiqueta":"Solo sumar"},{"valor":"resta","etiqueta":"Solo restar"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"SUMAR Y RESTAR CENTENAS","color":"amarillo","metadatos":{"dificultad":2,"minutos":8,"etiquetas":["cálculo mental","truco","sumar","restar","centenas"]}},
 {"id":"trucos.restaradelante","curso":2,"materia":"matematicas","bloque":12,"familia":"trucos","clave":"restaradelante","nombre":"Restar hacia delante","descripcion":"Truco: contar cuánto falta del número pequeño al grande (62 − 58).","opciones":[],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"RESTAR HACIA DELANTE","color":"verde","metadatos":{"dificultad":3,"minutos":10,"etiquetas":["cálculo mental","truco","restar","restar sumando","contar hacia delante"]}},
-{"id":"problemas.dospasos","curso":2,"materia":"matematicas","bloque":8,"familia":"problemas","clave":"dospasos","nombre":"Problemas de dos operaciones","descripcion":"Tenía 45, me dan 20 y gasto 30: dos operaciones y la respuesta.","opciones":[{"id":"operaciones","etiqueta":"Operaciones","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas"},{"valor":"mixtas","etiqueta":"Sumar y restar"},{"valor":"suma","etiqueta":"Sumar dos veces"},{"valor":"resta","etiqueta":"Restar dos veces"}]},{"id":"nivel","etiqueta":"Llevadas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Sin llevadas"},{"valor":"con","etiqueta":"Con llevadas"},{"valor":"mezcla","etiqueta":"Mezcladas"}]}],"rangos":[100,200,300,400,500,600,700,800,900,999],"rango":100,"tamanos":["completa","media"],"titulo":"PROBLEMAS DE DOS OPERACIONES","color":"azul","metadatos":{"dificultad":3,"minutos":20,"etiquetas":["problemas","dos operaciones","sumar","restar","texto","razonamiento"]}},
+{"id":"problemas.dospasos","curso":2,"materia":"matematicas","bloque":8,"familia":"problemas","clave":"dospasos","nombre":"Problemas de dos operaciones","descripcion":"Tenía 45, me dan 20 y gasto 30: dos operaciones y la respuesta.","opciones":[{"id":"operaciones","etiqueta":"Operaciones","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas"},{"valor":"mixtas","etiqueta":"Sumar y restar"},{"valor":"suma","etiqueta":"Sumar dos veces"},{"valor":"resta","etiqueta":"Restar dos veces"}]},{"id":"nivel","etiqueta":"Llevadas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Sin llevadas"},{"valor":"con","etiqueta":"Con llevadas"},{"valor":"mezcla","etiqueta":"Mezcladas"}]},{"id":"barra","etiqueta":"Barra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Sin barra"},{"valor":"dibujada","etiqueta":"Dibujada (con los números)"},{"valor":"blanco","etiqueta":"En blanco (la dibuja el alumno)"}]}],"rangos":[100,200,300,400,500,600,700,800,900,999],"rango":100,"tamanos":["completa","media"],"titulo":"PROBLEMAS DE DOS OPERACIONES","color":"azul","metadatos":{"dificultad":3,"minutos":20,"etiquetas":["problemas","dos operaciones","sumar","restar","texto","razonamiento"]}},
 {"id":"problemas.dinero","curso":2,"materia":"matematicas","bloque":8,"familia":"problemas","clave":"dinero","nombre":"Problemas de compras","descripcion":"Precios en euros: cuánto pago, cuánto me devuelven, cuánto me queda o me falta.","opciones":[{"id":"situacion","etiqueta":"Situaciones","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas"},{"valor":"pagar","etiqueta":"¿Cuánto paga? (sumar precios)"},{"valor":"vuelta","etiqueta":"¿Cuánto le devuelven?"},{"valor":"queda","etiqueta":"¿Cuánto le queda?"},{"valor":"falta","etiqueta":"¿Cuánto le falta?"}]}],"rangos":[100,200,300,400,500],"rango":100,"tamanos":["completa","media"],"titulo":"PROBLEMAS DE COMPRAS","color":"verde","metadatos":{"dificultad":3,"minutos":18,"etiquetas":["problemas","dinero","euros","compras","sumar","restar","razonamiento"]}}
 ]};
 const POR_ID = Object.fromEntries(CATALOGO.modelos.map((m) => [m.id, m]));
@@ -6332,7 +6332,7 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get NOMBRES() 
 // problemas.dinero    · datos:    { texto, sit, a, b, op, obj: "€" }         (mismo dibujo que los de 1.º)
 //                      solucion: { huecos: [a, op, b, resultado, resultado] }
 // Todas las cantidades valen ≥ 2 y ningún resultado (ni el intermedio) pasa del rango.
-const { TOP, T, B, MENOS } = __req("render/papel.js");
+const { TOP, T, B, MENOS, INK, COLOR_SOLUCION } = __req("render/papel.js");
 const { NOMBRES, OBJETOS, partir } = __req("tipos/_problemas.js");
 const { llevaSuma3, llevaResta3 } = __req("tipos/_tres.js");
 const cuantos = (g) => (g === "f" ? "Cuántas" : "Cuántos");
@@ -6378,6 +6378,9 @@ function tresCantidades(op1, op2, R, quiere, az) {
   throw new Error("No hay problemas de dos operaciones con estas opciones: prueba con números más grandes.");
 }
 
+/** Cuántos problemas: 4/2 sin barra; con barra (dibujada o en blanco), 3/1. */
+const cuantosDosPasos = (params, tamano) => (params.barra ? (tamano === "media" ? 1 : 3) : tamano === "media" ? 2 : 4);
+
 function generarDosPasos(params, az, n) {
   const R = params.rango || 100, nivel = params.nivel || "sin", sits = SITS_2[params.operaciones || "todas"];
   const nombres = az.barajar(NOMBRES), objetos = az.barajar(OBJETOS), orden = az.barajar(sits), out = [], vistos = new Set();
@@ -6397,9 +6400,66 @@ function generarDosPasos(params, az, n) {
   return out;
 }
 
-/** Tarjeta: enunciado (hasta 3 líneas), «Operaciones: [a][+][b] = [r1]   [r1][−][c] = [r2]» y «Respuesta: [r2] objetos». */
+// ---------------------------------------------------------------- barra de dos pasos (modelo de Singapur, como Barri)
+const BW = 300, BH = 22, MIN = 30;
+/** Anchos proporcionales a `vals` que suman `W`, ninguno menor que MIN (para que quepa la etiqueta). */
+function reparto(vals, W) {
+  const tot = vals.reduce((x, y) => x + y, 0);
+  let bajo = vals.map(() => false), w = vals.map((v) => (v / tot) * W);
+  for (let k = 0; k < 4; k++) {
+    bajo = w.map((x, i) => bajo[i] || x < MIN);
+    const libre = W - MIN * bajo.filter(Boolean).length, resto = vals.reduce((t, v, i) => t + (bajo[i] ? 0 : v), 0);
+    w = vals.map((v, i) => (bajo[i] ? MIN : (v / resto) * libre));
+  }
+  return w;
+}
+/** Segmento: `val` número, null = «?» (incógnita), "" = sin etiqueta; `quita` = la parte que se quita (borde discontinuo, «−n»). */
+function seg(p, x, y, w, val, tinta, fill, quita = false) {
+  if (quita) p.path([["M", x, y], ["L", x + w, y], ["L", x + w, y + BH], ["L", x, y + BH], ["Z"]], { lw: 1.4, fill: 1, stroke: tinta, dash: [4, 3] });
+  else p.rrect(x, y, w, BH, 3, { lw: 1.4, fill, stroke: tinta });
+  if (val !== "") p.text(x + w / 2, y + BH / 2 - 4.5, val === null ? "?" : (quita ? MENOS : "") + val, 13.5, { f: "PB", anchor: "middle", gris: INK });
+}
+/** Fila de segmentos desde x0: [[valor, ancho, tachado]…]. */
+function fila(p, x0, y, partes, tinta, GR) {
+  let x = x0;
+  partes.forEach(([v, w, t], k) => { seg(p, x, y, w, v, tinta, GR ? GR[k % 2] : null, t); x += w; });
+}
+/** Llave sobre (arriba = true) o bajo [x0, x1] con su etiqueta (número o «?»). */
+function llave(p, x0, x1, y, arriba, val, tinta) {
+  const d = arriba ? 6 : -6;
+  p.path([["M", x0, y], ["L", x0, y + d], ["L", x1, y + d], ["L", x1, y]], { lw: 1.2, stroke: tinta });
+  p.text((x0 + x1) / 2, arriba ? y + 10 : y - 17, val === null ? "?" : String(val), 13, { f: "PB", anchor: "middle", gris: INK });
+}
+/** Barra de dos pasos en la zona [y, y + 92] desde x0. Una fila (dar y dar, quitar y quitar) o dos (el segundo paso debajo). */
+function dibujarBarraDosPasos(p, d, x0, y, tinta) {
+  const GR = tinta === COLOR_SOLUCION ? null : [0.93, 0.84], r1 = opera(d.op1, d.a, d.b), r2 = opera(d.op2, r1, d.c);
+  const arriba = y + 52, abajo = y + 22, sola = y + 34;
+  if (d.sit === "dar_dar") {
+    const [wa, wb, wc] = reparto([d.a, d.b, d.c], BW);
+    fila(p, x0, sola, [[d.a, wa], [d.b, wb], [d.c, wc]], tinta, GR);
+    llave(p, x0, x0 + BW, sola + BH + 4, true, null, tinta);
+  } else if (d.sit === "quitar_quitar") {
+    const [w2, wb, wc] = reparto([r2, d.b, d.c], BW);
+    fila(p, x0, sola, [[null, w2], [d.b, wb, true], [d.c, wc, true]], tinta, GR);
+    llave(p, x0, x0 + BW, sola + BH + 4, true, d.a, tinta);
+  } else if (d.sit === "quitar_dar") {               // arriba: a = (lo que queda) + b tachado; abajo: lo que queda + c = ?
+    const T = Math.max(d.a, r1 + d.c), La = (d.a / T) * BW, Lb = (BW * (r1 + d.c)) / T;
+    const [w1, wb] = reparto([r1, d.b], La), wc = Math.max(MIN, Lb - w1);
+    fila(p, x0, arriba, [["", w1], [d.b, wb, true]], tinta, GR);
+    llave(p, x0, x0 + w1 + wb, arriba + BH + 4, true, d.a, tinta);
+    fila(p, x0, abajo, [["", w1], [d.c, wc]], tinta, GR);
+    llave(p, x0, x0 + w1 + wc, abajo - 4, false, null, tinta);
+  } else {                                           // dar_quitar, juntar_quitar: arriba a + b; abajo el mismo total = ? + c tachado
+    const [wa, wb] = reparto([d.a, d.b], BW), [w2, wc] = reparto([r2, d.c], BW);
+    fila(p, x0, arriba, [[d.a, wa], [d.b, wb]], tinta, GR);
+    fila(p, x0, abajo, [[null, w2], [d.c, wc, true]], tinta, GR);
+  }
+}
+
+/** Tarjeta: enunciado (hasta 3 líneas), «Operaciones: [a][+][b] = [r1]   [r1][−][c] = [r2]» y «Respuesta: [r2] objetos».
+ *  Con barra (`params.barra`: "dibujada" o "blanco"): 3 por página, la barra entre el enunciado y las operaciones y la respuesta a su derecha. */
 function dibujarDosPasos(p, act) {
-  const es = act.ejercicios, filas = 4;
+  const es = act.ejercicios, barra = act.params.barra, filas = barra ? 3 : 4;
   const { cel, cw, ch } = p.celdas(TOP, 1, filas);
   es.slice(0, p.n(filas)).forEach((e, i) => p.ejercicio(e.id, () => {
     const [x, y] = cel[i], d = e.datos, h = e.solucion.huecos;
@@ -6407,11 +6467,19 @@ function dibujarDosPasos(p, act) {
     const fs = 13.5, lineas = partir(p, d.texto, cw - 70, fs);
     if (lineas.length > 3) throw new Error(`Enunciado de más de 3 líneas: ${d.texto}`);
     lineas.forEach((l, j) => p.text(x + 36, y + ch - 30 - j * 17, l, fs, { f: "PR" }));
-    const hb = 34, fl = 12.5;
-    p.linea(x + 10, y + 52, cw - 20, hb + 4, [T("Operaciones:", fl, "PR"),
+    const hb = 34, fl = 12.5, yo = barra ? y + 8 : y + 52;
+    p.linea(x + 10, yo, cw - 20, hb + 4, [T("Operaciones:", fl, "PR"),
       B(42, hb, h[0]), B(26, hb, h[1]), B(42, hb, h[2]), T("=", 16), B(44, hb, h[3]), T("", 4),
       B(44, hb, h[4]), B(26, hb, h[5]), B(42, hb, h[6]), T("=", 16), B(44, hb, h[7])], 8);
-    p.linea(x + 10, y + 8, cw - 20, hb + 4, [T("Respuesta:", fl, "PR"), B(52, hb, h[8]), T(d.obj, fl, "PR")], 8);
+    const resp = [T("Respuesta:", fl, "PR"), B(52, hb, h[8]), T(d.obj, fl, "PR")];
+    if (!barra) return p.linea(x + 10, y + 8, cw - 20, hb + 4, resp, 8);
+    const yb = y + 52, x0 = x + 24;                          // zona de la barra: yb … yb + 92
+    if (barra !== "blanco") dibujarBarraDosPasos(p, d, x0, yb, INK);
+    else if (!p.solucion) {
+      p.rrect(x0 - 6, yb, BW + 12, 92, 6, { lw: 0.8, fill: 1, stroke: 0.7 });
+      p.text(x0 + BW / 2, yb + 42, "Dibuja aquí la barra", 10.5, { f: "PR", anchor: "middle", gris: 0.65 });
+    } else dibujarBarraDosPasos(p, d, x0, yb, COLOR_SOLUCION);
+    p.linea(x0 + BW + 14, yb + 27, cw - BW - 48, hb + 4, resp, 8);
   }));
 }
 
@@ -6471,7 +6539,7 @@ function generarDinero(params, az, n) {
   return out;
 }
 
-Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get SITUACIONES_2() { return SITUACIONES_2; }, get SITS_2() { return SITS_2; }, get generarDosPasos() { return generarDosPasos; }, get dibujarDosPasos() { return dibujarDosPasos; }, get PRODUCTOS() { return PRODUCTOS; }, get BILLETES() { return BILLETES; }, get SITS_DINERO() { return SITS_DINERO; }, get generarDinero() { return generarDinero; } }));
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get SITUACIONES_2() { return SITUACIONES_2; }, get SITS_2() { return SITS_2; }, get cuantosDosPasos() { return cuantosDosPasos; }, get generarDosPasos() { return generarDosPasos; }, get dibujarBarraDosPasos() { return dibujarBarraDosPasos; }, get dibujarDosPasos() { return dibujarDosPasos; }, get PRODUCTOS() { return PRODUCTOS; }, get BILLETES() { return BILLETES; }, get SITS_DINERO() { return SITS_DINERO; }, get generarDinero() { return generarDinero; } }));
 },
 "tipos/_rep.js": (__exp) => {
 // Charta · fábrica de los tipos «rep.*» (una representación del número: leer y dibujar).
@@ -12436,12 +12504,14 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() 
 "tipos/problemas.dospasos.js": (__exp) => {
 // problemas.dospasos · Problemas de dos operaciones (2.º, lote 5; modelo propio de la app). Ver _problemas2.js.
 const { registrar } = __req("nucleo/tipos.js");
-const { generarDosPasos, dibujarDosPasos } = __req("tipos/_problemas2.js");
+const { generarDosPasos, dibujarDosPasos, cuantosDosPasos } = __req("tipos/_problemas2.js");
 const __default = registrar({
   id: "problemas.dospasos",
   version: 1,
   generar(params, azar, { tamano }) {
-    return { enunciado: "Lee, escribe las dos operaciones y contesta.", ejercicios: generarDosPasos(params, azar, tamano === "media" ? 2 : 4) };
+    const enunciado = params.barra === "blanco" ? "Lee, dibuja la barra, escribe las dos operaciones y contesta."
+      : params.barra ? "Mira la barra, escribe las dos operaciones y contesta." : "Lee, escribe las dos operaciones y contesta.";
+    return { enunciado, ejercicios: generarDosPasos(params, azar, cuantosDosPasos(params, tamano)) };
   },
   dibujar: dibujarDosPasos,
 });
