@@ -7,3 +7,5 @@ import "./geometria.lineas.js";
 import "./geometria.posiciones.js";
 import "./geometria.simetria.js";
 import "./geometria.copia.js";
+import "./geometria.lados.js";
+import "./geometria.itinerario.js";

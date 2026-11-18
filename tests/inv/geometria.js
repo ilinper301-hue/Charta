@@ -1,6 +1,8 @@
 // Charta · invariantes de la familia «geometria» (ver tests/invariantes.js).
 import assert from "node:assert/strict";
 import { cuantos, unicos } from "./_ayuda.js";
+import { FORMAS as FORMAS_L, LADOS } from "../../src/tipos/geometria.lados.js";
+import { N, DIR, FIGURAS, recorrer } from "../../src/tipos/geometria.itinerario.js";
 
 const FIGS = ["circulo", "cuadrado", "rectangulo", "triangulo"], NOMF = { circulo: "círculo", cuadrado: "cuadrado", rectangulo: "rectángulo", triangulo: "triángulo" };
 const CUERPOS = ["esfera", "cubo", "cilindro", "cono", "piramide"], NOMC = { esfera: "esfera", cubo: "cubo", cilindro: "cilindro", cono: "cono", piramide: "pirámide" };
@@ -15,6 +17,39 @@ const repartido = (ks, lista) => {
 };
 
 export default {
+  "geometria.lados"(act, tam) {
+    const es = act.ejercicios; cuantos(es, tam === "media" ? 4 : 8);
+    for (const { datos: { forma, pts }, solucion } of es) {
+      assert.ok(FORMAS_L.includes(forma)); assert.equal(pts.length, LADOS[forma], "vértices de la forma");
+      assert.deepEqual(solucion.huecos, [LADOS[forma], LADOS[forma]]);
+      assert.equal(new Set(pts.map((q) => q + "")).size, pts.length, "vértices repetidos");
+      pts.forEach(([a, b]) => assert.ok(Math.abs(a) <= 1 && Math.abs(b) <= 1, "fuera de la caja"));
+      const l = pts.map(([a, b], k) => Math.hypot(a - pts[(k + 1) % pts.length][0], b - pts[(k + 1) % pts.length][1]));
+      l.forEach((v) => assert.ok(v > 0.4, "lado demasiado corto"));
+    }
+    if (tam === "completa") repartido(es.map((e) => e.datos.forma), FORMAS_L);
+  },
+  "geometria.itinerario"(act) {
+    const modo = act.params.modo ?? null, es = act.ejercicios, n = modo === "flechas" ? 3 : 4;
+    cuantos(es, 3); unicos(es, (e) => JSON.stringify([e.datos.inicio, e.datos.pasos]), "caminos repetidos");
+    for (const { datos: d, solucion } of es) {
+      assert.equal(d.pasos.length, n);
+      d.pasos.forEach(([dir, m], k) => {
+        assert.ok(DIR[dir]); assert.ok(Number.isInteger(m) && m >= 1 && m <= 4, "casillas 1..4");
+        if (k) assert.notEqual(DIR[dir][0] !== 0, DIR[d.pasos[k - 1][0]][0] !== 0, "ejes alternados");
+      });
+      const ruta = recorrer(d.inicio, d.pasos); assert.ok(ruta, "el camino se sale o se cruza");
+      assert.deepEqual(ruta[ruta.length - 1], d.fin); ruta.forEach(([c, r]) => { assert.ok(c >= 0 && r >= 0 && c < N && r < N); });
+      if (modo === "flechas") assert.deepEqual(solucion.huecos, d.pasos.flatMap(([dir, m]) => [dir, m]));
+      else assert.deepEqual(solucion.huecos, []);
+      if (modo === "llega") {
+        assert.equal(new Set(d.figs.map((f) => f.c + "," + f.r)).size, d.figs.length, "dos figuras en una casilla");
+        assert.ok(!d.figs.some((f) => f.c === d.inicio[0] && f.r === d.inicio[1]), "figura en la salida");
+        const fin = d.figs.find((f) => f.c === d.fin[0] && f.r === d.fin[1]); assert.ok(fin, "sin figura en la llegada");
+        assert.equal(solucion.correcta, FIGURAS[fin.k]);
+      } else assert.equal(d.figs, undefined);
+    }
+  },
   "geometria.figuras"(act, tam) {
     const es = act.ejercicios; cuantos(es, tam === "media" ? 6 : 12);
     for (const e of es) {

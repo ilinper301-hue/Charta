@@ -35,6 +35,9 @@ const CASOS = [
   { nombre: "2.º medidas del tiempo", semilla: 8, opciones: { actividades: [{ tipo: "medida.tiempo", curso: 2, params: { modo: "equivalencias" } }, { tipo: "medida.tiempo", curso: 2, params: { modo: "horas" } }] } },
   { nombre: "2.º dinero y compras", semilla: 8, opciones: { actividades: [{ tipo: "medida.dinero", params: { rango: 300 } }, { tipo: "medida.precios", params: { rango: 100, modo: "cambio" } }] } },
   { nombre: "2.º regla y ¿m o cm?", semilla: 8, opciones: { actividades: [{ tipo: "medida.longitud", curso: 2, params: { modo: "regla" } }, { tipo: "medida.longitud", curso: 2, params: { modo: "mcm" } }] } },
+  { nombre: "2.º lados (dos actividades)", semilla: 8, opciones: { actividades: [{ tipo: "geometria.lados", curso: 2, params: {} }, { tipo: "geometria.lados", curso: 2, params: {} }] } },
+  { nombre: "2.º itinerario con flechas", semilla: 8, opciones: { actividades: [{ tipo: "geometria.itinerario", curso: 2, params: { modo: "flechas" } }] } },
+  { nombre: "2.º barras con escala", semilla: 8, opciones: { actividades: [{ tipo: "estadistica.barras", curso: 2, params: { modo: "lee", escala: 5, pregunta: "mas" } }] } },
   { nombre: "2.º euros y masa", semilla: 8, opciones: { actividades: [{ tipo: "medida.euros", curso: 2, params: { rango: 200 } }, { tipo: "medida.masa", curso: 2, params: {} }] } },
   { nombre: "nombres y B/N", semilla: 5, nombres: ["Ana", "Luis", "Marta"], bn: true, opciones: { variantes: 2, actividades: [{ tipo: "rep.dado", params: { lectura: true } }, { tipo: "rep.marco", params: { rango: 20 } }] } },
 ];

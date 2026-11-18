@@ -44,9 +44,12 @@ export default {
     const lee = act.params.modo === "lee";
     cuantos(act.ejercicios, 1);
     const [{ datos: { lee: l, kinds, v, par }, solucion }] = act.ejercicios;
-    assert.equal(l, lee); mismas(kinds); unicos(v, (x) => x, "valores repetidos"); v.forEach((x) => ent(x, 1, 10, "valor"));
+    const esc = act.params.escala ?? 1, mas = act.params.pregunta === "mas";
+    assert.equal(l, lee); mismas(kinds); unicos(v, (x) => x, "valores repetidos"); v.forEach((x) => { assert.equal(x % esc, 0, "múltiplo de la escala"); ent(x / esc, 1, 10, "valor"); });
+    assert.equal(act.ejercicios[0].datos.esc, esc > 1 ? esc : undefined); assert.equal(act.ejercicios[0].datos.mas, mas ? true : undefined);
     assert.equal(par.length, 2); unicos(par, (x) => x); par.forEach((i) => ent(i, 0, 3, "columna"));
-    const tot = v[par[0]] + v[par[1]];
+    if (mas) assert.ok(v[par[0]] > v[par[1]], "«más que»: primero el mayor");
+    const tot = mas ? v[par[0]] - v[par[1]] : v[par[0]] + v[par[1]];
     assert.deepEqual(solucion.huecos, lee ? [...v, tot] : [tot]); assert.deepEqual(solucion.elegir, [NOMS[kinds[v.indexOf(max(v))]]]);
   },
 

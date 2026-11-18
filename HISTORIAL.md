@@ -185,3 +185,10 @@ Pasos ya cerrados, movidos desde ESTADO.md el 12-11-2026. No hace falta leerlo a
   - `mcm` («¿Metros o centímetros?»): 12/6 objetos (`UNIDADES`: 14 de cm y 12 de m, sin duda posible), entre 40 y 60 % de cada unidad; se rodea m o cm (solución `{ huecos: [], unidad }`, en rojo).
 - Límites: la tira más larga es de 10 cm (cabe en media página con enunciado de dos líneas y letra grande). Solo sirve impresa al 100 %.
 - Reglas en `tests/inv/medida.js`; dorada «2.º regla y ¿m o cm?» (las demás, iguales). `npm test` en verde.
+
+## Matemáticas 2.º · Lote 4 · geometría y estadística (18-11-2026)
+- ✨ `geometria.lados` «Lados y vértices» (solo 2.º, 8/4 polígonos: triángulo, cuadrado, rectángulo, pentágono y hexágono repartidos; con punto en cada vértice; hay que escribir lados y vértices).
+- ✨ `geometria.itinerario` «Sigue el camino» (solo completa, 3 ejercicios, cuadrícula 6 × 6, S = salida; flechas dibujadas como trazo, no como texto: Andika no las trae). `modo`: null «Dibuja el camino» (4 tramos; camino en rojo en la solución) · `llega` «¿Dónde llegas?» (rodear la figura de la llegada) · `flechas` «Escribe las flechas» (3 tramos, L = llegada; huecos `[flecha, n, …]`, la flecha roja es un dibujo). Ejes alternados, tramos de 1–4 casillas, sin repetir casilla. Ayudantes exportados: `recorrer`, `flecha`.
+- 🔧 `estadistica.barras` en 2.º: opciones `escala` (de 2 en 2 o de 5 en 5; valores múltiplos, hasta 10 casillas) y `pregunta` («¿Cuántos más…?», el primero de `par` es el mayor). Solo añade `esc` y `mas` a `datos` cuando se piden: las fichas de 1.º no cambian.
+- Límite: en «¿Cuántos más…?» el texto y el hueco llevan más separación (el ancho medido es algo menor que el real).
+- Catálogo 155 modelos; `tests/inv/geometria.js` y `estadistica.js`; 3 doradas nuevas (las demás, iguales). `npm test` y `tests/navegador.py` en verde.

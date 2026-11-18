@@ -119,6 +119,8 @@ META = {
     "medida.longitud": (1, 8, "medida longitud comparar"),
     "medida.capacidad": (1, 8, "medida capacidad líquido"),
     "medida.euros": (3, 12, "medida dinero euros billetes monedas pagar"),
+    "geometria.lados": (1, 8, "geometría polígonos lados vértices"),
+    "geometria.itinerario": (2, 12, "geometría itinerario flechas cuadrícula orientación"),
     "medida.masa": (2, 8, "medida masa kilo peso balanza"),
     # Bloque 11 · estadística y patrones
     "estadistica.pictograma": (2, 12, "estadística pictograma datos"),

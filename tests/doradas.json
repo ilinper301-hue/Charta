@@ -7037,6 +7037,447 @@
    "e1cbed0527b0f1f6"
   ]
  },
+ "geometria.itinerario": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Sigue el camino",
+   "curso": 2,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "geometria.itinerario",
+       "tipoVersion": 1,
+       "params": {
+        "modo": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Sal de la S y dibuja el camino que dicen las flechas.\nCada número dice cuántas casillas avanzas.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "inicio": [
+           3,
+           2
+          ],
+          "pasos": [
+           [
+            "R",
+            2
+           ],
+           [
+            "U",
+            2
+           ],
+           [
+            "L",
+            4
+           ],
+           [
+            "U",
+            1
+           ]
+          ],
+          "fin": [
+           1,
+           5
+          ]
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "inicio": [
+           4,
+           5
+          ],
+          "pasos": [
+           [
+            "D",
+            2
+           ],
+           [
+            "L",
+            1
+           ],
+           [
+            "U",
+            1
+           ],
+           [
+            "L",
+            3
+           ]
+          ],
+          "fin": [
+           0,
+           4
+          ]
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "inicio": [
+           1,
+           4
+          ],
+          "pasos": [
+           [
+            "R",
+            1
+           ],
+           [
+            "D",
+            1
+           ],
+           [
+            "R",
+            1
+           ],
+           [
+            "U",
+            1
+           ]
+          ],
+          "fin": [
+           3,
+           4
+          ]
+         },
+         "solucion": {
+          "huecos": []
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "c022ebfed5889c81"
+  ],
+  "svgSolucion": [
+   "ca388ab0257352f1"
+  ]
+ },
+ "geometria.lados": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Lados y vértices",
+   "curso": 2,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "geometria.lados",
+       "tipoVersion": 1,
+       "params": {
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Cuenta los lados y los vértices (los puntos) de cada figura.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "forma": "pentagono",
+          "pts": [
+           [
+            0.751,
+            -0.399
+           ],
+           [
+            0.611,
+            0.59
+           ],
+           [
+            -0.373,
+            0.764
+           ],
+           [
+            -0.842,
+            -0.118
+           ],
+           [
+            -0.148,
+            -0.837
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "forma": "cuadrado",
+          "pts": [
+           [
+            -0.7,
+            -0.7
+           ],
+           [
+            0.7,
+            -0.7
+           ],
+           [
+            0.7,
+            0.7
+           ],
+           [
+            -0.7,
+            0.7
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "forma": "hexagono",
+          "pts": [
+           [
+            0.475,
+            -0.705
+           ],
+           [
+            0.848,
+            0.059
+           ],
+           [
+            0.373,
+            0.764
+           ],
+           [
+            -0.475,
+            0.705
+           ],
+           [
+            -0.848,
+            -0.059
+           ],
+           [
+            -0.373,
+            -0.764
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "forma": "rectangulo",
+          "pts": [
+           [
+            -0.9,
+            -0.55
+           ],
+           [
+            0.9,
+            -0.55
+           ],
+           [
+            0.9,
+            0.55
+           ],
+           [
+            -0.9,
+            0.55
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "forma": "hexagono",
+          "pts": [
+           [
+            -0.58,
+            0.622
+           ],
+           [
+            -0.828,
+            -0.191
+           ],
+           [
+            -0.249,
+            -0.813
+           ],
+           [
+            0.58,
+            -0.622
+           ],
+           [
+            0.828,
+            0.191
+           ],
+           [
+            0.249,
+            0.813
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "forma": "rectangulo",
+          "pts": [
+           [
+            -0.9,
+            -0.55
+           ],
+           [
+            0.9,
+            -0.55
+           ],
+           [
+            0.9,
+            0.55
+           ],
+           [
+            -0.9,
+            0.55
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "forma": "triangulo",
+          "pts": [
+           [
+            -0.7,
+            0.6
+           ],
+           [
+            0.8,
+            0.6
+           ],
+           [
+            0,
+            -0.8
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "forma": "triangulo",
+          "pts": [
+           [
+            -0.8,
+            -0.6
+           ],
+           [
+            0.8,
+            -0.6
+           ],
+           [
+            0,
+            0.8
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           3
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "76344e20faa26405"
+  ],
+  "svgSolucion": [
+   "fff66102aca7c858"
+  ]
+ },
  "geometria.lineas": {
   "ficha": {
    "schemaVersion": 1,
@@ -37752,6 +38193,564 @@
   ],
   "svgSolucion": [
    "70e2b04f7c9b487a"
+  ]
+ },
+ "2.º lados (dos actividades)": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Lados y vértices",
+   "curso": 2,
+   "area": "matematicas",
+   "semilla": 8,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "geometria.lados",
+       "tipoVersion": 1,
+       "params": {
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "amarillo",
+       "enunciado": "Cuenta los lados y los vértices (los puntos) de cada figura.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "forma": "pentagono",
+          "pts": [
+           [
+            -0.386,
+            0.757
+           ],
+           [
+            -0.84,
+            -0.133
+           ],
+           [
+            -0.133,
+            -0.84
+           ],
+           [
+            0.757,
+            -0.386
+           ],
+           [
+            0.601,
+            0.601
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "forma": "rectangulo",
+          "pts": [
+           [
+            -0.55,
+            -0.9
+           ],
+           [
+            0.55,
+            -0.9
+           ],
+           [
+            0.55,
+            0.9
+           ],
+           [
+            -0.55,
+            0.9
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "forma": "cuadrado",
+          "pts": [
+           [
+            -0.7,
+            -0.7
+           ],
+           [
+            0.7,
+            -0.7
+           ],
+           [
+            0.7,
+            0.7
+           ],
+           [
+            -0.7,
+            0.7
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "forma": "hexagono",
+          "pts": [
+           [
+            -0.632,
+            0.569
+           ],
+           [
+            -0.808,
+            -0.263
+           ],
+           [
+            -0.177,
+            -0.831
+           ],
+           [
+            0.632,
+            -0.569
+           ],
+           [
+            0.808,
+            0.263
+           ],
+           [
+            0.177,
+            0.831
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           6
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "geometria.lados",
+       "tipoVersion": 1,
+       "params": {
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "rosa",
+       "enunciado": "Cuenta los lados y los vértices (los puntos) de cada figura.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "forma": "pentagono",
+          "pts": [
+           [
+            -0.206,
+            -0.825
+           ],
+           [
+            0.721,
+            -0.45
+           ],
+           [
+            0.651,
+            0.546
+           ],
+           [
+            -0.318,
+            0.788
+           ],
+           [
+            -0.848,
+            -0.059
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "forma": "rectangulo",
+          "pts": [
+           [
+            -0.9,
+            -0.55
+           ],
+           [
+            0.9,
+            -0.55
+           ],
+           [
+            0.9,
+            0.55
+           ],
+           [
+            -0.9,
+            0.55
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "forma": "cuadrado",
+          "pts": [
+           [
+            -0.7,
+            -0.7
+           ],
+           [
+            0.7,
+            -0.7
+           ],
+           [
+            0.7,
+            0.7
+           ],
+           [
+            -0.7,
+            0.7
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "forma": "hexagono",
+          "pts": [
+           [
+            0.277,
+            -0.804
+           ],
+           [
+            0.834,
+            -0.162
+           ],
+           [
+            0.558,
+            0.642
+           ],
+           [
+            -0.277,
+            0.804
+           ],
+           [
+            -0.834,
+            0.162
+           ],
+           [
+            -0.558,
+            -0.642
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           6
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "965993788e19c892"
+  ],
+  "svgSolucion": [
+   "14812b227a854ea7"
+  ]
+ },
+ "2.º itinerario con flechas": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Sigue el camino",
+   "curso": 2,
+   "area": "matematicas",
+   "semilla": 8,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "geometria.itinerario",
+       "tipoVersion": 1,
+       "params": {
+        "modo": "flechas",
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Escribe una flecha y un número por cada tramo del camino que va de la S a la L.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "inicio": [
+           0,
+           0
+          ],
+          "pasos": [
+           [
+            "R",
+            3
+           ],
+           [
+            "U",
+            4
+           ],
+           [
+            "L",
+            1
+           ]
+          ],
+          "fin": [
+           2,
+           4
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "R",
+           3,
+           "U",
+           4,
+           "L",
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "inicio": [
+           0,
+           1
+          ],
+          "pasos": [
+           [
+            "U",
+            2
+           ],
+           [
+            "R",
+            4
+           ],
+           [
+            "U",
+            2
+           ]
+          ],
+          "fin": [
+           4,
+           5
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "U",
+           2,
+           "R",
+           4,
+           "U",
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "inicio": [
+           0,
+           3
+          ],
+          "pasos": [
+           [
+            "R",
+            4
+           ],
+           [
+            "D",
+            1
+           ],
+           [
+            "L",
+            3
+           ]
+          ],
+          "fin": [
+           1,
+           2
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "R",
+           4,
+           "D",
+           1,
+           "L",
+           3
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "aaa5d1297b021c95"
+  ],
+  "svgSolucion": [
+   "662015003ef6bf8c"
+  ]
+ },
+ "2.º barras con escala": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "El gráfico de barras",
+   "curso": 2,
+   "area": "matematicas",
+   "semilla": 8,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "estadistica.barras",
+       "tipoVersion": 1,
+       "params": {
+        "modo": "lee",
+        "escala": 5,
+        "pregunta": "mas",
+        "rango": 10
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Cada casilla del gráfico vale 5.\nMira el gráfico, escribe los datos y contesta.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "lee": true,
+          "kinds": [
+           "s",
+           "q",
+           "t",
+           "c"
+          ],
+          "v": [
+           40,
+           45,
+           25,
+           10
+          ],
+          "par": [
+           0,
+           3
+          ],
+          "esc": 5,
+          "mas": true
+         },
+         "solucion": {
+          "huecos": [
+           40,
+           45,
+           25,
+           10,
+           30
+          ],
+          "elegir": [
+           "cuadrados"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "e199de926a4bbf88"
+  ],
+  "svgSolucion": [
+   "64fffe096ed7b334"
   ]
  },
  "2.º euros y masa": {

@@ -5,7 +5,7 @@ en 2.º no cambian de id; tools/catalogo.py les añade `cursos: {"2": {"rangos":
 Los modelos nuevos de 2.º (✨) irán en MODELOS_2 con curso 2 (mismo formato que modelos_app.MODELOS_APP).
 """
 
-from modelos import M, AMBOS
+from modelos import M, op, AMBOS, COMPLETA
 
 CURSO = 2
 NOMBRE = "2.º de Primaria"
@@ -104,6 +104,17 @@ OPCIONES_2.update({
 })
 
 
+# Lote 4 · gráfico de barras con escala de 2 en 2 o de 5 en 5 y pregunta de comparar (opciones con `curso`)
+OPCIONES_2.update({
+    "estadistica.barras": {"nuevas": [
+        {"id": "escala", "etiqueta": "Escala del gráfico", "tipo": "opcion", "defecto": None, "curso": CURSO,
+         "valores": [{"valor": None, "etiqueta": "De 1 en 1"}, {"valor": 2, "etiqueta": "De 2 en 2"}, {"valor": 5, "etiqueta": "De 5 en 5"}]},
+        {"id": "pregunta", "etiqueta": "Pregunta final", "tipo": "opcion", "defecto": None, "curso": CURSO,
+         "valores": [{"valor": None, "etiqueta": "¿Cuántos hay en total?"}, {"valor": "mas", "etiqueta": "¿Cuántos más hay?"}]}]},
+})
+EN_2["estadistica.barras"] = None
+
+
 def opciones_2(m):
     """Opciones del modelo (dict del catálogo) con las de tres cifras añadidas (lista nueva; m no cambia)."""
     extra = OPCIONES_2.get(m["id"])
@@ -118,9 +129,9 @@ def opciones_2(m):
     ops = [junta(o) if o["tipo"] == "opcion" else o for o in m["opciones"]]
     return ops + extra.get("nuevas", [])
 
-def _n2(bloque, familia, clave, nombre, descripcion, opciones, titulo, color, rmin=None, rmax=None, rango=None):
+def _n2(bloque, familia, clave, nombre, descripcion, opciones, titulo, color, rmin=None, rmax=None, rango=None, tam=AMBOS):
     """✨ Modelo que solo existe en 2.º: curso 2, título (mayúsculas) y color de panel."""
-    m = M(bloque, familia, clave, nombre, descripcion, opciones, tam=AMBOS)
+    m = M(bloque, familia, clave, nombre, descripcion, opciones, tam=tam)
     rg = rangos(rmin, rmax) if rmin else []
     return {**m, "curso": CURSO, "rangos": rg, "rango": (rango if rango in rg else rg[0]) if rg else None, "titulo": titulo, "color": color}
 
@@ -129,6 +140,12 @@ MODELOS_2 = [   # ✨ nuevos de 2.º (lotes 3–6)
         "PAGA CON BILLETES Y MONEDAS", "verde", rmin=100, rmax=500, rango=200),
     _n2(10, "medida", "masa", "¿Cuánto pesa?", "Balanza con pesas de 1 kg y de medio kilo: pesa más, menos o igual.", [],
         "¿CUÁNTO PESA?", "azul"),
+    # Lote 4 · geometría y estadística
+    _n2(9, "geometria", "lados", "Lados y vértices", "Contar los lados y los vértices de polígonos dibujados.", [],
+        "LADOS Y VÉRTICES", "amarillo"),
+    _n2(9, "geometria", "itinerario", "Sigue el camino", "Seguir flechas en una cuadrícula, o escribir las flechas de un camino.",
+        [op("modo", "Tarea", [(None, "Dibuja el camino"), ("llega", "¿Dónde llegas?"), ("flechas", "Escribe las flechas")])],
+        "SIGUE EL CAMINO", "rosa", tam=COMPLETA),
 ]
 
 
