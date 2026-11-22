@@ -29,7 +29,7 @@ for m in modelos:
     m["opciones"] = M2.opciones_2(m)   # 2.º: opciones solo con tres cifras (rmin)
 # Bloques por materia (cada materia numera los suyos) y letra por defecto de cada materia (Andika si no se dice).
 datos = {"cursos": {**MOD.CURSOS, M2.CURSO: M2.NOMBRE}, "materias": {**MOD.MATERIAS, LEN.MATERIA: LEN.NOMBRE},
-         "bloques": {"matematicas": dict(sorted({**MOD.BLOQUES, **APP.BLOQUES}.items())), LEN.MATERIA: LEN.BLOQUES},
+         "bloques": {"matematicas": dict(sorted({**MOD.BLOQUES, **APP.BLOQUES, **M2.BLOQUES_2}.items())), LEN.MATERIA: LEN.BLOQUES},
          "fuentes": {LEN.MATERIA: LEN.FUENTE}, "modelos": modelos}
 # Fase 7 (R9): JSON compacto (sin espacios ni sangrías, −36 %); un modelo por línea para que los cambios se lean en git.
 compacto = lambda x: json.dumps(x, ensure_ascii=False, separators=(",", ":"))

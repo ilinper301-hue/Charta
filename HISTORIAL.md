@@ -200,3 +200,13 @@ Pasos ya cerrados, movidos desde ESTADO.md el 12-11-2026. No hace falta leerlo a
 - ✨ Trucos de 2.º (lista c2 de Calculi; sin multiplicar ni dobles, que ya están en `sumar.dobles` y en el lote 6): `amigos100` (modo decenas exactas), `sumadecenas`, `restadecenas`, `descomponer2` (34 + 25 = □ + □ = □), `pasardecena2` (38 + 7 = 40 + □ = □), `sumar919`, `restar919` (… = □ − 1 = □), `compensar2` (48 + 25 = 50 + 25 − □ = □), `centenas` (modo suma/resta), `restaradelante`. `_trucos.js` admite `columnas` (2 para los encadenados: 16/8 filas); la regla de `tests/inv/trucos.js` acepta cadenas x = y = z.
 - Límites: en `pasardecena2` y `compensar2` la fila ya da la decena redonda (40, 50); `restaradelante` con diferencia ≤ 13.
 - Catálogo 167 modelos; reglas en `tests/inv/problemas.js` y `trucos.js`; 12 doradas nuevas (las demás, iguales). `npm test` en verde.
+
+## Matemáticas 2.º · Lote 6: multiplicar y repartir (22-11-2026)
+- Bloque 13 «Multiplicar y repartir» (`BLOQUES_2`, solo 2.º; en 1.º no aparece). Cinco tipos nuevos, sin rango, completa/media:
+  - `multiplicar.grupos` (6/3, tarjetas anchas): k grupos (2–5) de n puntos (2–5); suma repetida + «k × n» (`modo` mult: solo la multiplicación).
+  - `multiplicar.filas` (6/3): matriz r × c; «r filas de c» y r × c (`modo` dos: también c × r).
+  - `multiplicar.tablas`: `tablas` (2, 5 y 10 por defecto; una sola; todas) y `modo` resultado · hueco (factor que falta) · orden (columna por tabla, máx. 3; con «todas» se sortean 3). 24/12 operaciones (18/9 con una sola tabla), sin 1 × 1.
+  - `multiplicar.problemas` (4/2): 8 plantillas, `dibujarProblemas` con «×»; otro factor 2–10.
+  - `multiplicar.reparto`: reparto exacto (k 2–5, cociente 2–6) con platos y puntos rojos en la solución (4/2); `modo` mitad: mitad y tercio alternos (6/3). Sin ÷.
+- Convención: «3 grupos de 4» = 3 × 4. Límites: texto de problemas y reparto justo en la tarjeta (mirar con Andika).
+- `npm test` en verde: 172 tipos, 192 doradas (10 nuevas, ninguna cambiada).

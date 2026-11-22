@@ -13903,6 +13903,879 @@
    "e8442359fe6864c6"
   ]
  },
+ "multiplicar.filas": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Filas y columnas",
+   "curso": 2,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "multiplicar.filas",
+       "tipoVersion": 1,
+       "params": {
+        "modo": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Cuenta las filas y los puntos de cada fila. Escribe la multiplicación.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "r": 2,
+          "c": 4
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           4,
+           2,
+           4,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "r": 4,
+          "c": 5
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           5,
+           4,
+           5,
+           20
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "r": 2,
+          "c": 3
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           3,
+           2,
+           3,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "r": 4,
+          "c": 6
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           6,
+           4,
+           6,
+           24
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "r": 3,
+          "c": 3
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           3,
+           3,
+           3,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "r": 5,
+          "c": 2
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           2,
+           5,
+           2,
+           10
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "0d82c484171e77b5"
+  ],
+  "svgSolucion": [
+   "7a026224bb062f4d"
+  ]
+ },
+ "multiplicar.grupos": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Grupos iguales",
+   "curso": 2,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "multiplicar.grupos",
+       "tipoVersion": 1,
+       "params": {
+        "modo": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Cuenta los grupos y los puntos de cada grupo. Escribe la suma y la multiplicación.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "k": 4,
+          "n": 4
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           4,
+           4,
+           4,
+           16,
+           4,
+           4,
+           16
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "k": 4,
+          "n": 5
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           5,
+           5,
+           5,
+           20,
+           4,
+           5,
+           20
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "k": 5,
+          "n": 4
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           4,
+           4,
+           4,
+           4,
+           20,
+           5,
+           4,
+           20
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "k": 3,
+          "n": 2
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           2,
+           2,
+           6,
+           3,
+           2,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "k": 2,
+          "n": 3
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           3,
+           6,
+           2,
+           3,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "k": 4,
+          "n": 2
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           2,
+           2,
+           2,
+           8,
+           4,
+           2,
+           8
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "cabc7f27ff4d441e"
+  ],
+  "svgSolucion": [
+   "70659f047c6716a9"
+  ]
+ },
+ "multiplicar.problemas": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Problemas de multiplicar",
+   "curso": 2,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "multiplicar.problemas",
+       "tipoVersion": 1,
+       "params": {
+        "tablas": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Lee, escribe la operación y contesta.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "texto": "Un paquete trae 3 libros. ¿Cuántos libros hay en 5 paquetes?",
+          "a": 5,
+          "b": 3,
+          "op": "×",
+          "obj": "libros"
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           "×",
+           3,
+           15,
+           15
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "texto": "En cada caja hay 5 caramelos. ¿Cuántos caramelos hay en 9 cajas?",
+          "a": 9,
+          "b": 5,
+          "op": "×",
+          "obj": "caramelos"
+         },
+         "solucion": {
+          "huecos": [
+           9,
+           "×",
+           5,
+           45,
+           45
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "texto": "Hay 10 platos y en cada plato hay 6 pelotas. ¿Cuántas pelotas hay en total?",
+          "a": 10,
+          "b": 6,
+          "op": "×",
+          "obj": "pelotas"
+         },
+         "solucion": {
+          "huecos": [
+           10,
+           "×",
+           6,
+           60,
+           60
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "texto": "En cada mesa se sientan 8 niños. Hay 10 mesas. ¿Cuántos niños hay en total?",
+          "a": 10,
+          "b": 8,
+          "op": "×",
+          "obj": "niños"
+         },
+         "solucion": {
+          "huecos": [
+           10,
+           "×",
+           8,
+           80,
+           80
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "fcd6a5e65bad38c1"
+  ],
+  "svgSolucion": [
+   "24dad48390927926"
+  ]
+ },
+ "multiplicar.reparto": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Reparte",
+   "curso": 2,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "multiplicar.reparto",
+       "tipoVersion": 1,
+       "params": {
+        "modo": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Dibuja el reparto en los platos y escribe cuántos le tocan a cada uno.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "texto": "Reparte 30 galletas entre 5 amigos. ¿Cuántas galletas le tocan a cada uno?",
+          "k": 5,
+          "q": 6,
+          "obj": "galletas"
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "texto": "Reparte 20 caramelos entre 4 hermanos. ¿Cuántos caramelos le tocan a cada uno?",
+          "k": 4,
+          "q": 5,
+          "obj": "caramelos"
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "texto": "Reparte 6 peras entre 3 primos. ¿Cuántas peras le tocan a cada uno?",
+          "k": 3,
+          "q": 2,
+          "obj": "peras"
+         },
+         "solucion": {
+          "huecos": [
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "texto": "Reparte 18 coches entre 3 niños. ¿Cuántos coches le tocan a cada uno?",
+          "k": 3,
+          "q": 6,
+          "obj": "coches"
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "3d4180deebf69fd5"
+  ],
+  "svgSolucion": [
+   "979b31d799dc9a5e"
+  ]
+ },
+ "multiplicar.tablas": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Las tablas",
+   "curso": 2,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "multiplicar.tablas",
+       "tipoVersion": 1,
+       "params": {
+        "tablas": null,
+        "modo": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Calcula y escribe el resultado en el cuadro gris.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "a": 10,
+          "b": 5,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           50
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "a": 5,
+          "b": 3,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           15
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "a": 4,
+          "b": 5,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           20
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": 2,
+          "b": 6,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           12
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "a": 7,
+          "b": 2,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           14
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": 3,
+          "b": 10,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           30
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "a": 2,
+          "b": 5,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "a": 10,
+          "b": 10,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           100
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "a": 9,
+          "b": 10,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           90
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "a": 8,
+          "b": 2,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           16
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "a": 8,
+          "b": 5,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           40
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "a": 1,
+          "b": 2,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "a": 10,
+          "b": 9,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           90
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "a": 2,
+          "b": 4,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "a": 2,
+          "b": 7,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           14
+          ]
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "a": 5,
+          "b": 7,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           35
+          ]
+         }
+        },
+        {
+         "id": "a1e17",
+         "datos": {
+          "a": 2,
+          "b": 8,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           16
+          ]
+         }
+        },
+        {
+         "id": "a1e18",
+         "datos": {
+          "a": 4,
+          "b": 2,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e19",
+         "datos": {
+          "a": 10,
+          "b": 3,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           30
+          ]
+         }
+        },
+        {
+         "id": "a1e20",
+         "datos": {
+          "a": 5,
+          "b": 4,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           20
+          ]
+         }
+        },
+        {
+         "id": "a1e21",
+         "datos": {
+          "a": 4,
+          "b": 10,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           40
+          ]
+         }
+        },
+        {
+         "id": "a1e22",
+         "datos": {
+          "a": 5,
+          "b": 6,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           30
+          ]
+         }
+        },
+        {
+         "id": "a1e23",
+         "datos": {
+          "a": 10,
+          "b": 2,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           20
+          ]
+         }
+        },
+        {
+         "id": "a1e24",
+         "datos": {
+          "a": 10,
+          "b": 4,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           40
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "be90f4fb5efa7a67"
+  ],
+  "svgSolucion": [
+   "2a07086615c04fe1"
+  ]
+ },
  "orden.cantidad": {
   "ficha": {
    "schemaVersion": 1,

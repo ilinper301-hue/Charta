@@ -135,6 +135,12 @@ META = {
     "geometria.lados": (1, 8, "geometría polígonos lados vértices"),
     "geometria.itinerario": (2, 12, "geometría itinerario flechas cuadrícula orientación"),
     "medida.masa": (2, 8, "medida masa kilo peso balanza"),
+    # Lote 6 · bloque 13 · multiplicar y repartir (solo 2.º)
+    "multiplicar.grupos": (1, 8, "multiplicar grupos_iguales suma_repetida"),
+    "multiplicar.filas": (2, 8, "multiplicar filas columnas puntos propiedad_conmutativa"),
+    "multiplicar.tablas": (2, 12, "multiplicar tablas cálculo_mental factor"),
+    "multiplicar.problemas": (3, 15, "multiplicar problemas texto razonamiento grupos_iguales"),
+    "multiplicar.reparto": (3, 10, "repartir mitad tercio partes_iguales división"),
     # Bloque 11 · estadística y patrones
     "estadistica.pictograma": (2, 12, "estadística pictograma datos"),
     "estadistica.recuento": (1, 10, "estadística recuento datos contar"),

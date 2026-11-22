@@ -3420,7 +3420,7 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get mulberry32
 },
 "nucleo/catalogo.js": (__exp) => {
 // GENERADO por tools/catalogo.py desde motor/modelos.py. No editar a mano.
-const CATALOGO = {"cursos":{"1":"1.º de Primaria","2":"2.º de Primaria"},"materias":{"matematicas":"Matemáticas","lengua":"Lengua"},"bloques":{"matematicas":{"1":"Los números y sus representaciones","2":"Contar y series","3":"Orden y comparación","4":"Valor posicional","5":"Sumar","6":"Restar","7":"Juegos numéricos","8":"Problemas","9":"Geometría","10":"Medida","11":"Estadística y patrones","12":"Trucos de cálculo mental"},"lengua":{"1":"Conciencia fonológica","2":"Letras y sonidos","3":"Sílabas","4":"Palabras","5":"Frases","6":"Ortografía básica","7":"Comprensión lectora","8":"Escritura y caligrafía"}},"fuentes":{"lengua":"fredoka"},"modelos":[
+const CATALOGO = {"cursos":{"1":"1.º de Primaria","2":"2.º de Primaria"},"materias":{"matematicas":"Matemáticas","lengua":"Lengua"},"bloques":{"matematicas":{"1":"Los números y sus representaciones","2":"Contar y series","3":"Orden y comparación","4":"Valor posicional","5":"Sumar","6":"Restar","7":"Juegos numéricos","8":"Problemas","9":"Geometría","10":"Medida","11":"Estadística y patrones","12":"Trucos de cálculo mental","13":"Multiplicar y repartir"},"lengua":{"1":"Conciencia fonológica","2":"Letras y sonidos","3":"Sílabas","4":"Palabras","5":"Frases","6":"Ortografía básica","7":"Comprensión lectora","8":"Escritura y caligrafía"}},"fuentes":{"lengua":"fredoka"},"modelos":[
 {"id":"rep.dedos","curso":1,"materia":"matematicas","bloque":1,"familia":"rep","clave":"dedos","nombre":"Los dedos","descripcion":"Leer y dibujar números con los dedos de las manos.","opciones":[{"id":"lectura","etiqueta":"Solo leer (sin la fila de dibujar)","tipo":"si_no","defecto":false}],"rangos":[10],"rango":10,"tamanos":["completa","media"],"titulo":"LOS DEDOS","color":"azul","metadatos":{"dificultad":1,"minutos":8,"etiquetas":["números","representación","dedos"]}},
 {"id":"rep.dado","curso":1,"materia":"matematicas","bloque":1,"familia":"rep","clave":"dado","nombre":"El dado","descripcion":"Leer y dibujar números con puntos de uno o dos dados.","opciones":[{"id":"lectura","etiqueta":"Solo leer (sin la fila de dibujar)","tipo":"si_no","defecto":false}],"rangos":[10,20],"rango":10,"tamanos":["completa","media"],"titulo":"EL DADO","color":"azul","metadatos":{"dificultad":1,"minutos":8,"etiquetas":["números","representación","dado","puntos"]}},
 {"id":"rep.domino","curso":1,"materia":"matematicas","bloque":1,"familia":"rep","clave":"domino","nombre":"El dominó","descripcion":"Leer y dibujar números como fichas de dominó.","opciones":[{"id":"lectura","etiqueta":"Solo leer (sin la fila de dibujar)","tipo":"si_no","defecto":false}],"rangos":[10,20],"rango":10,"tamanos":["completa","media"],"titulo":"EL DOMINÓ","color":"azul","metadatos":{"dificultad":1,"minutos":10,"etiquetas":["números","representación","dominó","puntos"]}},
@@ -3587,7 +3587,12 @@ const CATALOGO = {"cursos":{"1":"1.º de Primaria","2":"2.º de Primaria"},"mate
 {"id":"trucos.centenas","curso":2,"materia":"matematicas","bloque":12,"familia":"trucos","clave":"centenas","nombre":"Sumar y restar centenas","descripcion":"Truco: solo cambian las centenas (340 + 200, 700 − 300).","opciones":[{"id":"modo","etiqueta":"Operaciones","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Sumar y restar"},{"valor":"suma","etiqueta":"Solo sumar"},{"valor":"resta","etiqueta":"Solo restar"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"SUMAR Y RESTAR CENTENAS","color":"amarillo","metadatos":{"dificultad":2,"minutos":8,"etiquetas":["cálculo mental","truco","sumar","restar","centenas"]}},
 {"id":"trucos.restaradelante","curso":2,"materia":"matematicas","bloque":12,"familia":"trucos","clave":"restaradelante","nombre":"Restar hacia delante","descripcion":"Truco: contar cuánto falta del número pequeño al grande (62 − 58).","opciones":[],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"RESTAR HACIA DELANTE","color":"verde","metadatos":{"dificultad":3,"minutos":10,"etiquetas":["cálculo mental","truco","restar","restar sumando","contar hacia delante"]}},
 {"id":"problemas.dospasos","curso":2,"materia":"matematicas","bloque":8,"familia":"problemas","clave":"dospasos","nombre":"Problemas de dos operaciones","descripcion":"Tenía 45, me dan 20 y gasto 30: dos operaciones y la respuesta.","opciones":[{"id":"operaciones","etiqueta":"Operaciones","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas"},{"valor":"mixtas","etiqueta":"Sumar y restar"},{"valor":"suma","etiqueta":"Sumar dos veces"},{"valor":"resta","etiqueta":"Restar dos veces"}]},{"id":"nivel","etiqueta":"Llevadas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Sin llevadas"},{"valor":"con","etiqueta":"Con llevadas"},{"valor":"mezcla","etiqueta":"Mezcladas"}]},{"id":"barra","etiqueta":"Barra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Sin barra"},{"valor":"dibujada","etiqueta":"Dibujada (con los números)"},{"valor":"blanco","etiqueta":"En blanco (la dibuja el alumno)"}]}],"rangos":[100,200,300,400,500,600,700,800,900,999],"rango":100,"tamanos":["completa","media"],"titulo":"PROBLEMAS DE DOS OPERACIONES","color":"azul","metadatos":{"dificultad":3,"minutos":20,"etiquetas":["problemas","dos operaciones","sumar","restar","texto","razonamiento"]}},
-{"id":"problemas.dinero","curso":2,"materia":"matematicas","bloque":8,"familia":"problemas","clave":"dinero","nombre":"Problemas de compras","descripcion":"Precios en euros: cuánto pago, cuánto me devuelven, cuánto me queda o me falta.","opciones":[{"id":"situacion","etiqueta":"Situaciones","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas"},{"valor":"pagar","etiqueta":"¿Cuánto paga? (sumar precios)"},{"valor":"vuelta","etiqueta":"¿Cuánto le devuelven?"},{"valor":"queda","etiqueta":"¿Cuánto le queda?"},{"valor":"falta","etiqueta":"¿Cuánto le falta?"}]}],"rangos":[100,200,300,400,500],"rango":100,"tamanos":["completa","media"],"titulo":"PROBLEMAS DE COMPRAS","color":"verde","metadatos":{"dificultad":3,"minutos":18,"etiquetas":["problemas","dinero","euros","compras","sumar","restar","razonamiento"]}}
+{"id":"problemas.dinero","curso":2,"materia":"matematicas","bloque":8,"familia":"problemas","clave":"dinero","nombre":"Problemas de compras","descripcion":"Precios en euros: cuánto pago, cuánto me devuelven, cuánto me queda o me falta.","opciones":[{"id":"situacion","etiqueta":"Situaciones","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas"},{"valor":"pagar","etiqueta":"¿Cuánto paga? (sumar precios)"},{"valor":"vuelta","etiqueta":"¿Cuánto le devuelven?"},{"valor":"queda","etiqueta":"¿Cuánto le queda?"},{"valor":"falta","etiqueta":"¿Cuánto le falta?"}]}],"rangos":[100,200,300,400,500],"rango":100,"tamanos":["completa","media"],"titulo":"PROBLEMAS DE COMPRAS","color":"verde","metadatos":{"dificultad":3,"minutos":18,"etiquetas":["problemas","dinero","euros","compras","sumar","restar","razonamiento"]}},
+{"id":"multiplicar.grupos","curso":2,"materia":"matematicas","bloque":13,"familia":"multiplicar","clave":"grupos","nombre":"Grupos iguales","descripcion":"Contar grupos iguales de puntos y escribir la suma repetida y la multiplicación (3 grupos de 4 = 3 × 4).","opciones":[{"id":"modo","etiqueta":"Qué se escribe","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Suma y multiplicación"},{"valor":"mult","etiqueta":"Solo la multiplicación"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"GRUPOS IGUALES","color":"amarillo","metadatos":{"dificultad":1,"minutos":8,"etiquetas":["multiplicar","grupos iguales","suma repetida"]}},
+{"id":"multiplicar.filas","curso":2,"materia":"matematicas","bloque":13,"familia":"multiplicar","clave":"filas","nombre":"Filas y columnas","descripcion":"Matrices de puntos: cuántas filas de cuántos y la multiplicación.","opciones":[{"id":"modo","etiqueta":"Qué se escribe","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Una multiplicación"},{"valor":"dos","etiqueta":"Las dos multiplicaciones"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"FILAS Y COLUMNAS","color":"verde","metadatos":{"dificultad":2,"minutos":8,"etiquetas":["multiplicar","filas","columnas","puntos","propiedad conmutativa"]}},
+{"id":"multiplicar.tablas","curso":2,"materia":"matematicas","bloque":13,"familia":"multiplicar","clave":"tablas","nombre":"Las tablas","descripcion":"Multiplicaciones de las tablas del 2, 3, 4, 5 y 10: el resultado, el factor que falta o la tabla en orden.","opciones":[{"id":"tablas","etiqueta":"Tablas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Del 2, 5 y 10"},{"valor":"2","etiqueta":"Del 2"},{"valor":"3","etiqueta":"Del 3"},{"valor":"4","etiqueta":"Del 4"},{"valor":"5","etiqueta":"Del 5"},{"valor":"10","etiqueta":"Del 10"},{"valor":"todas","etiqueta":"Del 2, 3, 4, 5 y 10"}]},{"id":"modo","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Resultado"},{"valor":"hueco","etiqueta":"El factor que falta"},{"valor":"orden","etiqueta":"La tabla en orden"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"LAS TABLAS","color":"azul","metadatos":{"dificultad":2,"minutos":12,"etiquetas":["multiplicar","tablas","cálculo mental","factor"]}},
+{"id":"multiplicar.problemas","curso":2,"materia":"matematicas","bloque":13,"familia":"multiplicar","clave":"problemas","nombre":"Problemas de multiplicar","descripcion":"Problemas de grupos iguales (cajas, bolsas, filas de sillas…) con su operación y su respuesta.","opciones":[{"id":"tablas","etiqueta":"Tablas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Del 2, 5 y 10"},{"valor":"2","etiqueta":"Del 2"},{"valor":"3","etiqueta":"Del 3"},{"valor":"4","etiqueta":"Del 4"},{"valor":"5","etiqueta":"Del 5"},{"valor":"10","etiqueta":"Del 10"},{"valor":"todas","etiqueta":"Del 2, 3, 4, 5 y 10"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"PROBLEMAS DE MULTIPLICAR","color":"rosa","metadatos":{"dificultad":3,"minutos":15,"etiquetas":["multiplicar","problemas","texto","razonamiento","grupos iguales"]}},
+{"id":"multiplicar.reparto","curso":2,"materia":"matematicas","bloque":13,"familia":"multiplicar","clave":"reparto","nombre":"Reparte","descripcion":"Repartir en partes iguales con dibujo, y la mitad y el tercio de un número.","opciones":[{"id":"modo","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Repartir en partes iguales"},{"valor":"mitad","etiqueta":"La mitad y el tercio"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"REPARTE","color":"amarillo","metadatos":{"dificultad":3,"minutos":10,"etiquetas":["repartir","mitad","tercio","partes iguales","división"]}}
 ]};
 const POR_ID = Object.fromEntries(CATALOGO.modelos.map((m) => [m.id, m]));
 
@@ -6001,6 +6006,59 @@ const anchoPildoras = (p, textos, fs = 22, gap = 10) => textos.reduce((t, s) => 
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get CATS() { return CATS; }, get VOCALES() { return VOCALES; }, get cap() { return cap; }, get alCaso() { return alCaso; }, get trozosCaso() { return trozosCaso; }, get candidatas() { return candidatas; }, get elegirPalabras() { return elegirPalabras; }, get largosDe() { return largosDe; }, get cuantas() { return cuantas; }, get patronUnico() { return patronUnico; }, get unidades() { return unidades; }, get ajusta() { return ajusta; }, get palabraLetras() { return palabraLetras; }, get pildoras() { return pildoras; }, get anchoPildoras() { return anchoPildoras; } }));
 },
+"tipos/_multiplicar.js": (__exp) => {
+// Charta · núcleo común de «multiplicar.*» (2.º, bloque 13, lote 6): tablas permitidas y dibujo de puntos.
+// Convención: «3 grupos de 4» → 3 × 4 = 12 (primero cuántas veces, luego cuánto hay en cada una).
+const { INK, COLOR_SOLUCION } = __req("render/papel.js");
+const POR = "×";
+/** Tablas que se trabajan en 2.º. */
+const TABLAS = [2, 3, 4, 5, 10];
+
+/** Opción `tablas` → lista de tablas: None = 2, 5 y 10; "todas" = 2, 3, 4, 5 y 10; "3" = solo la del 3. */
+function tablasDe(params) {
+  const v = params?.tablas ?? null;
+  if (v === null || v === undefined) return [2, 5, 10];
+  if (v === "todas") return [...TABLAS];
+  const n = Number(v);
+  if (!TABLAS.includes(n)) throw new Error(`Tabla no permitida: ${v}`);
+  return [n];
+}
+
+/** n elementos (de la lista) sin repetir, mezclados; si no hay bastantes, se repite el ciclo (solo entonces). */
+function sinRepetir(lista, n, azar) {
+  let out = [];
+  while (out.length < n) out = out.concat(azar.barajar(lista));
+  return out.slice(0, n);
+}
+
+/** Posiciones (en −1…1) de n puntos (2–5) como en un dado. */
+const DADO = {
+  2: [[-.5, .5], [.5, -.5]],
+  3: [[-.6, .6], [0, 0], [.6, -.6]],
+  4: [[-.5, .5], [.5, .5], [-.5, -.5], [.5, -.5]],
+  5: [[-.5, .5], [.5, .5], [0, 0], [-.5, -.5], [.5, -.5]],
+};
+/** Punto de n (2–5) bien colocado en una caja de w × h centrada en (cx, cy). */
+function puntosDado(p, cx, cy, w, h, n, r = 4.5) {
+  const sx = w / 2 - r - 4, sy = h / 2 - r - 4;
+  for (const [a, b] of DADO[n]) p.circle(cx + a * sx, cy + b * sy, r, { lw: 1, fill: INK });
+}
+
+/** n puntos en filas de `porFila` (la última, centrada si queda corta; `dibujo(x, y)` = otra forma de pintarlos), dentro de la caja x…x+w, y…y+h. */
+function puntosFilas(p, x, y, w, h, n, porFila, r = 5, paso = 15, dibujo = null) {
+  const filas = Math.ceil(n / porFila);
+  for (let i = 0; i < n; i++) {
+    const f = Math.floor(i / porFila), enFila = Math.min(porFila, n - f * porFila), k = i % porFila;
+    const px = x + w / 2 + (k - (enFila - 1) / 2) * paso, py = y + h / 2 + ((filas - 1) / 2 - f) * paso;
+    if (dibujo) dibujo(px, py); else p.circle(px, py, r, { lw: 1, fill: INK });
+  }
+}
+
+/** Punto rojo (línea mínima con extremos redondos: sin relleno, así no cuenta como respuesta escrita en la solución). */
+function puntoRojo(p, x, y) { p.line(x, y, x + 0.01, y, { lw: 7, gris: COLOR_SOLUCION }); }
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get POR() { return POR; }, get TABLAS() { return TABLAS; }, get tablasDe() { return tablasDe; }, get sinRepetir() { return sinRepetir; }, get puntosDado() { return puntosDado; }, get puntosFilas() { return puntosFilas; }, get puntoRojo() { return puntoRojo; } }));
+},
 "tipos/_orto.js": (__exp) => {
 // Charta · banco de nombres propios de 1.º para orto.mayuscula (lote 2). Sin DOM.
 // Sin nombres que empiecen por «I» (la «I» mayúscula de Fredoka se confunde con la «l») ni que sean también una palabra común del léxico
@@ -8159,6 +8217,15 @@ __req("tipos/medida.euros.js");
 __req("tipos/medida.masa.js");
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({  }));
 },
+"tipos/familia.multiplicar.js": (__exp) => {
+// Charta · tipos de la familia «multiplicar» (2.º, bloque 13). Añadir aquí cada módulo nuevo de la familia.
+__req("tipos/multiplicar.grupos.js");
+__req("tipos/multiplicar.filas.js");
+__req("tipos/multiplicar.tablas.js");
+__req("tipos/multiplicar.problemas.js");
+__req("tipos/multiplicar.reparto.js");
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({  }));
+},
 "tipos/familia.orden.js": (__exp) => {
 // Charta · tipos de la familia «orden». Añadir aquí cada módulo nuevo de la familia.
 __req("tipos/orden.signos.js");
@@ -9505,6 +9572,7 @@ __req("tipos/familia.juegos.js");
 __req("tipos/familia.problemas.js");
 __req("tipos/familia.trucos.js");
 __req("tipos/familia.geometria.js");
+__req("tipos/familia.multiplicar.js");
 __req("tipos/familia.medida.js");
 __req("tipos/familia.estadistica.js");
 __req("tipos/familia.letra.js");
@@ -11312,6 +11380,330 @@ const __default = registrar({
 });
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get chips() { return chips; }, get chips2() { return chips2; }, get default() { return __default; } }));
+},
+"tipos/multiplicar.filas.js": (__exp) => {
+// multiplicar.filas · Filas y columnas (2.º, lote 6, bloque 13): matriz de puntos de r filas × c columnas.
+// datos:    { r, c }   (r 2–5 filas, c 2–6 columnas; como mucho una matriz cuadrada r = c por actividad; sin repetir (r, c))
+// solucion: modo None → huecos [r, c, r, c, r·c]            («[r] filas de [c]» y «[r] × [c] = [ ]»)
+//           modo "dos" → huecos [r, c, r, c, r·c, c, r, r·c] (además «[c] × [r] = [ ]»: propiedad conmutativa)
+// Opción modo: None = «Una multiplicación» · "dos" = «Las dos multiplicaciones». `tablas` no se usa.
+// Completa: 6 tarjetas (una por fila; la media página son 3).
+const { registrar } = __req("nucleo/tipos.js");
+const { TOP, T, B } = __req("render/papel.js");
+const { POR } = __req("tipos/_multiplicar.js");
+const PARES = [];
+for (let r = 2; r <= 5; r++) for (let c = 2; c <= 6; c++) PARES.push([r, c]);
+
+/** cnt pares distintos, con a lo sumo uno cuadrado (r = c). */
+function elegir(cnt, azar) {
+  const out = []; let cuadrado = false;
+  for (const [r, c] of azar.barajar(PARES)) {
+    if (out.length === cnt) break;
+    if (r === c) { if (cuadrado) continue; cuadrado = true; }
+    out.push([r, c]);
+  }
+  return out;
+}
+
+const __default = registrar({
+  id: "multiplicar.filas",
+  version: 1,
+  generar(params, azar, { tamano }) {
+    const dos = params.modo === "dos";
+    return {
+      enunciado: dos ? "Cuenta las filas y los puntos de cada fila. Escribe las dos multiplicaciones."
+        : "Cuenta las filas y los puntos de cada fila. Escribe la multiplicación.",
+      ejercicios: elegir(tamano === "media" ? 3 : 6, azar).map(([r, c]) => ({
+        datos: { r, c }, solucion: { huecos: [r, c, r, c, r * c, ...(dos ? [c, r, r * c] : [])] },
+      })),
+    };
+  },
+  dibujar(p, act) {
+    const { cel, cw, ch } = p.celdas(TOP, 1, 6), dos = act.params.modo === "dos";
+    act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
+      const [x, y] = cel[i], { r, c } = e.datos, h = e.solucion.huecos;
+      p.marco(x, y, cw, ch, i);
+      // matriz de puntos, centrada en el lado izquierdo
+      const paso = 18, mw = (c - 1) * paso, mh = (r - 1) * paso, mx = x + 40 + (5 * paso - mw) / 2 + 12, my = y + ch / 2 + mh / 2 - 2;
+      p.rrect(mx - 14, my - mh - 14, mw + 28, mh + 28, 10, { lw: 1.2, fill: 1, stroke: 0.55 });
+      for (let a = 0; a < r; a++) for (let b = 0; b < c; b++) p.circle(mx + b * paso, my - a * paso, 5.5, { lw: 1, fill: 0.12 });
+      // escritura a la derecha
+      const lx = x + 230, lw = cw - 230 - 8, hb = 28, fs = 17, alto = hb + 6;
+      const filas = [
+        [B(34, hb, h[0]), T("filas de", 15, "PR"), B(34, hb, h[1])],
+        [B(34, hb, h[2]), T(POR, fs), B(34, hb, h[3]), T("=", fs), B(44, hb, h[4])],
+        ...(dos ? [[B(34, hb, h[5]), T(POR, fs), B(34, hb, h[6]), T("=", fs), B(44, hb, h[7])]] : []),
+      ];
+      const y0 = y + (ch - filas.length * alto) / 2;
+      filas.forEach((it, j) => p.linea(lx, y0 + (filas.length - 1 - j) * alto, lw, alto, it, 8));
+    }));
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/multiplicar.grupos.js": (__exp) => {
+// multiplicar.grupos · Grupos iguales (2.º, lote 6, bloque 13): k grupos de n puntos; suma repetida y multiplicación.
+// datos:    { k, n }   (k grupos de n; k 2–5, n 2–5)
+// solucion: modo None → huecos [n × k sumandos (k veces n), k·n, k, n, k·n]  (n + n + … = [ ] y k × n = [ ])
+//           modo "mult" → huecos [k, n, k·n]
+// Opción modo: None = «Suma y multiplicación» · "mult" = «Solo la multiplicación». `tablas` no se usa (n ≤ 5).
+// Completa: 6 tarjetas (una por fila; así la media página son 3); sin repetir (k, n).
+const { registrar } = __req("nucleo/tipos.js");
+const { TOP, T, B } = __req("render/papel.js");
+const { POR, puntosDado } = __req("tipos/_multiplicar.js");
+const PARES = [];
+for (let k = 2; k <= 5; k++) for (let n = 2; n <= 5; n++) PARES.push([k, n]);
+
+const __default = registrar({
+  id: "multiplicar.grupos",
+  version: 1,
+  generar(params, azar, { tamano }) {
+    const cnt = tamano === "media" ? 3 : 6, mult = params.modo === "mult";
+    const ejercicios = azar.muestra(PARES, cnt).map(([k, n]) => ({
+      datos: { k, n },
+      solucion: { huecos: mult ? [k, n, k * n] : [...Array(k).fill(n), k * n, k, n, k * n] },
+    }));
+    return {
+      enunciado: mult ? "Cuenta los grupos y los puntos de cada grupo. Escribe la multiplicación."
+        : "Cuenta los grupos y los puntos de cada grupo. Escribe la suma y la multiplicación.",
+      ejercicios,
+    };
+  },
+  dibujar(p, act) {
+    const { cel, cw, ch } = p.celdas(TOP, 1, 6), mult = act.params.modo === "mult";
+    act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
+      const [x, y] = cel[i], { k, n } = e.datos, h = e.solucion.huecos;
+      p.marco(x, y, cw, ch, i);
+      // grupos: óvalos de 40 × 66 con sus puntos
+      const gw = 40, gh = 66, gap = 6, x0 = x + 44 + (5 - k) * (gw + gap) / 2, cy = y + ch / 2 - 2;
+      for (let j = 0; j < k; j++) {
+        const gx = x0 + j * (gw + gap);
+        p.rrect(gx, cy - gh / 2, gw, gh, 18, { lw: 1.6, fill: 1, stroke: 0.35 });
+        puntosDado(p, gx + gw / 2, cy, gw, gh, n);
+      }
+      // líneas de escritura a la derecha
+      const lx = x + 290, lw = cw - 290 - 8, hb = 28, fs = 17;
+      const multi = [B(34, hb, h[mult ? 0 : k + 1]), T(POR, fs), B(34, hb, h[mult ? 1 : k + 2]), T("=", fs), B(44, hb, h[mult ? 2 : k + 3])];
+      if (mult) p.linea(lx, y + (ch - hb - 8) / 2, lw, hb + 8, multi, 8);
+      else {
+        const suma = [];
+        for (let j = 0; j < k; j++) { if (j) suma.push(T("+", fs)); suma.push(B(21, hb, h[j])); }
+        suma.push(T("=", fs), B(34, hb, h[k]));
+        p.linea(lx, y + ch / 2 + 2, lw, hb + 8, suma, 3);
+        p.linea(lx, y + ch / 2 - hb - 10, lw, hb + 8, multi, 8);
+      }
+    }));
+  },
+});
+
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/multiplicar.problemas.js": (__exp) => {
+// multiplicar.problemas · Problemas de multiplicar (2.º, lote 6, bloque 13): grupos iguales con plantillas variadas.
+// datos:    { texto, a, b, op: "×", obj }   (a = número de grupos, b = cuántos hay en cada uno; a × b ≤ 100)
+// solucion: { huecos: [a, "×", b, a·b, a·b] }   (como los problemas de sumar y restar: ver _problemas.js)
+// Opción tablas: la tabla es uno de los dos factores; el otro va de 2 a 10 (con 1 el plural no tendría sentido).
+// Completa: 4 problemas; media: 2. Ni plantilla ni nombre ni objeto repetidos en la actividad.
+const { registrar } = __req("nucleo/tipos.js");
+const { NOMBRES, OBJETOS, dibujarProblemas, enunciadoProblemas } = __req("tipos/_problemas.js");
+const { POR, tablasDe } = __req("tipos/_multiplicar.js");
+const cuantos = (g) => (g === "f" ? "Cuántas" : "Cuántos");
+const entre = (g) => (g === "f" ? "todas" : "todos");
+
+/** Plantillas: cada una da el texto a partir de { N, M, a, b, o, g } (a grupos de b). `fijo` = objeto propio de la plantilla. */
+const PLANTILLAS = {
+  cajas: ({ a, b, o, g }) => `En cada caja hay ${b} ${o}. ¿${cuantos(g)} ${o} hay en ${a} cajas?`,
+  bolsas: ({ N, a, b, o, g }) => `${N} llena ${a} bolsas con ${b} ${o} cada una. ¿${cuantos(g)} ${o} tiene en total?`,
+  platos: ({ a, b, o, g }) => `Hay ${a} platos y en cada plato hay ${b} ${o}. ¿${cuantos(g)} ${o} hay en total?`,
+  sillas: ({ a, b }) => `En el salón hay ${a} filas de ${b} sillas. ¿Cuántas sillas hay en total?`,
+  ninos: ({ a, b, o, g }) => `Cada niño tiene ${b} ${o} y hay ${a} niños. ¿${cuantos(g)} ${o} tienen entre ${entre(g)}?`,
+  veces: ({ N, M, a, b, o, g }) => `${N} tiene ${b} ${o}. ${M} tiene ${a} veces esa cantidad. ¿${cuantos(g)} ${o} tiene ${M}?`,
+  paquetes: ({ a, b, o, g }) => `Un paquete trae ${b} ${o}. ¿${cuantos(g)} ${o} hay en ${a} paquetes?`,
+  mesas: ({ a, b }) => `En cada mesa se sientan ${b} niños. Hay ${a} mesas. ¿Cuántos niños hay en total?`,
+};
+const FIJOS = { sillas: ["sillas", "f"], mesas: ["niños", "m"] };
+const CLAVES = Object.keys(PLANTILLAS);
+
+const __default = registrar({
+  id: "multiplicar.problemas",
+  version: 1,
+  generar(params, azar, { tamano }) {
+    const cnt = tamano === "media" ? 2 : 4, tablas = tablasDe(params);
+    const pares = [];
+    for (const t of tablas) for (let m = 2; m <= 10; m++) { pares.push([t, m]); if (m !== t) pares.push([m, t]); }
+    const claves = azar.barajar(CLAVES), nombres = azar.barajar(NOMBRES);
+    const objs = azar.barajar(OBJETOS), vistos = new Set(), ejercicios = [];
+    const unicos = [...new Map(pares.map((q) => [q.join(), q])).values()];
+    for (let i = 0; i < cnt; i++) {
+      const [a, b] = azar.elegir(unicos.filter((q) => !vistos.has(q.join())));
+      vistos.add([a, b].join());
+      const clave = claves[i % claves.length], [o, g] = FIJOS[clave] ?? objs[i % objs.length];
+      const texto = PLANTILLAS[clave]({ N: nombres[2 * i], M: nombres[2 * i + 1], a, b, o, g });
+      ejercicios.push({ datos: { texto, a, b, op: POR, obj: o }, solucion: { huecos: [a, POR, b, a * b, a * b] } });
+    }
+    return { enunciado: enunciadoProblemas, ejercicios };
+  },
+  dibujar: dibujarProblemas,
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/multiplicar.reparto.js": (__exp) => {
+// multiplicar.reparto · Reparte (2.º, lote 6, bloque 13): repartir en partes iguales, y la mitad y el tercio. Sin el signo ÷.
+// modo None = «Repartir en partes iguales»:
+//   datos:    { texto, k, q, obj }   (reparte k·q objetos entre k niños: a cada uno le tocan q; k 2–5, q 2–6, reparto exacto)
+//   solucion: { huecos: [q] }  · en modo solución se dibujan además en rojo q puntos dentro de cada plato.
+//   Completa: 4 (una por fila); media: 2. Sin repetir (k, q) ni objeto.
+// modo "mitad" = «La mitad y el tercio»:
+//   datos:    { kind: "mitad" | "tercio", n }   (mitades de 2 a 20, pares; tercios de 3 a 18, múltiplos de 3)
+//   solucion: { huecos: [n/2 | n/3] }
+//   Completa: 6 (3 de cada); media: 3 (2 mitades y 1 tercio). Sin repetir (kind, n).
+const { registrar } = __req("nucleo/tipos.js");
+const { TOP, T, B, INK } = __req("render/papel.js");
+const { partir, OBJETOS } = __req("tipos/_problemas.js");
+const { puntosFilas, puntoRojo } = __req("tipos/_multiplicar.js");
+const REPARTIDOS = ["niños", "amigos", "primos", "hermanos"];
+const MITADES = Array.from({ length: 10 }, (_, i) => 2 * (i + 1));
+const TERCIOS = Array.from({ length: 6 }, (_, i) => 3 * (i + 1));
+
+const __default = registrar({
+  id: "multiplicar.reparto",
+  version: 1,
+  generar(params, azar, { tamano }) {
+    const media = tamano === "media";
+    if (params.modo === "mitad") {
+      const nm = media ? 2 : 3, nt = media ? 1 : 3;
+      const ms = azar.muestra(MITADES, nm).map((n) => ["mitad", n]), ts = azar.muestra(TERCIOS, nt).map((n) => ["tercio", n]);
+      const orden = [];
+      for (let i = 0; i < Math.max(ms.length, ts.length); i++) { if (ms[i]) orden.push(ms[i]); if (ts[i]) orden.push(ts[i]); }
+      return {
+        enunciado: "Mira los puntos y escribe la mitad o el tercio.",
+        ejercicios: orden.map(([kind, n]) => ({ datos: { kind, n }, solucion: { huecos: [kind === "mitad" ? n / 2 : n / 3] } })),
+      };
+    }
+    const pares = [];
+    for (let k = 2; k <= 5; k++) for (let q = 2; q <= 6; q++) pares.push([k, q]);
+    const objs = azar.barajar(OBJETOS), quien = azar.barajar(REPARTIDOS);
+    const ejercicios = azar.muestra(pares, media ? 2 : 4).map(([k, q], i) => {
+      const [obj, g] = objs[i], pl = quien[i % quien.length];
+      const texto = `Reparte ${k * q} ${obj} entre ${k} ${pl}. ¿${g === "f" ? "Cuántas" : "Cuántos"} ${obj} le tocan a cada uno?`;
+      return { datos: { texto, k, q, obj }, solucion: { huecos: [q] } };
+    });
+    return { enunciado: "Dibuja el reparto en los platos y escribe cuántos le tocan a cada uno.", ejercicios };
+  },
+  dibujar(p, act) {
+    if (act.params.modo === "mitad") return dibujarMitad(p, act);
+    const { cel, cw, ch } = p.celdas(TOP, 1, 4);
+    act.ejercicios.slice(0, p.n(4)).forEach((e, i) => p.ejercicio(e.id, () => {
+      const [x, y] = cel[i], { texto, k, q } = e.datos;
+      p.marco(x, y, cw, ch, i);
+      const fs = 14.5;
+      partir(p, texto, cw - 84, fs).forEach((l, j) => p.text(x + 44, y + ch - 32 - j * 20, l, fs, { f: "PR" }));
+      // objetos a repartir (a la izquierda) y platos vacíos (a la derecha)
+      const total = k * q, cy = y + 76;
+      puntosFilas(p, x + 24, cy - 28, 160, 56, total, Math.min(10, Math.ceil(total / (total > 20 ? 3 : 2))), 5.5, 15);
+      const pr = 25, paso = 60, px0 = x + 215 + (5 - k) * paso / 2 + pr + 6;
+      for (let j = 0; j < k; j++) {
+        const cx = px0 + j * paso;
+        p.circle(cx, cy, pr, { lw: 1.8, fill: 1, stroke: INK });
+        p.circle(cx, cy, pr - 5, { lw: 0.8, fill: null, stroke: 0.6 });
+        if (p.solucion) puntosFilas(p, cx - 18, cy - 18, 36, 36, q, q > 3 ? 3 : 2, 0, 11, (a, b) => puntoRojo(p, a, b));
+      }
+      p.linea(x + 20, y + 8, cw - 40, 40, [T("A cada uno le tocan", 14.5, "PR"), B(52, 34, e.solucion.huecos[0])], 18);
+    }));
+  },
+});
+
+function dibujarMitad(p, act) {
+  const { cel, cw, ch } = p.celdas(TOP, 1, 6);
+  act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
+    const [x, y] = cel[i], { kind, n } = e.datos;
+    p.marco(x, y, cw, ch, i);
+    // los puntos, en una caja redondeada
+    const porFila = n > 10 ? 10 : n, filas = Math.ceil(n / porFila), bw = 10 * 17 + 20, bh = 74;
+    p.rrect(x + 44, y + (ch - bh) / 2 - 2, bw, bh, 10, { lw: 1.2, fill: 1, stroke: 0.55 });
+    puntosFilas(p, x + 44, y + (ch - bh) / 2 - 2, bw, bh, n, porFila, 5.5, 17);
+    const texto = kind === "mitad" ? "La mitad de" : "Un tercio de";
+    p.linea(x + 44 + bw + 10, y + (ch - 40) / 2 - 2, cw - bw - 44 - 18, 40, [T(`${texto} ${n} es`, 18, "PB"), B(52, 36, e.solucion.huecos[0])], 10);
+  }));
+}
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/multiplicar.tablas.js": (__exp) => {
+// multiplicar.tablas · Las tablas (2.º, lote 6, bloque 13): operaciones de las tablas del 2, 3, 4, 5 y 10 en rejilla.
+// datos:    { a, b, falta: null | 0 | 1 }   (a × b; `falta` = factor que se esconde en modo "hueco")
+//           modo "orden": además { tabla, orden: true } (tabla × b, con b de 1 a 10 seguidos)
+// solucion: resultado → huecos [a·b] · "hueco" → [factor escondido] · "orden" → [tabla·b]
+// Opciones: tablas (None = 2, 5 y 10; "2", "3", "4", "5", "10"; "todas") · modo (None = Resultado, "hueco", "orden").
+// En una operación al menos un factor es de la tabla y el otro va de 1 a 10. Sin repetir operaciones (salvo en "orden").
+// Resultado y hueco: rejilla de 3 columnas × 8 filas (24; media 12). Con una sola tabla hay solo 19–20 operaciones distintas: 6 filas (18; media 9).
+// Orden: una columna por tabla (hasta 3; con «todas» se sortean 3 de las 5), de ×1 a ×10; la media página, de ×1 a ×5.
+const { registrar } = __req("nucleo/tipos.js");
+const { TOP, T, B, W, M } = __req("render/papel.js");
+const { POR, tablasDe } = __req("tipos/_multiplicar.js");
+/** Parejas ordenadas (a, b) con al menos un factor de las tablas elegidas y los dos entre 1 y 10. */
+function parejas(tablas) {
+  const out = [];
+  for (let a = 1; a <= 10; a++) for (let b = 1; b <= 10; b++) if (tablas.includes(a) || tablas.includes(b)) out.push([a, b]);
+  return out;
+}
+
+const __default = registrar({
+  id: "multiplicar.tablas",
+  version: 1,
+  generar(params, azar, { tamano }) {
+    const media = tamano === "media", tablas = tablasDe(params), modo = params.modo ?? null;
+    if (modo === "orden") {
+      const elegidas = tablas.length > 3 ? azar.muestra(tablas, 3).sort((u, v) => u - v) : tablas;
+      const hasta = media ? 5 : 10;
+      return {
+        enunciado: "Completa las tablas en orden.",
+        ejercicios: elegidas.flatMap((t) => Array.from({ length: hasta }, (_, i) => ({
+          datos: { a: t, b: i + 1, tabla: t, orden: true, falta: null }, solucion: { huecos: [t * (i + 1)] },
+        }))),
+      };
+    }
+    const pool = parejas(tablas), filas = pool.length >= 24 ? 8 : 6, cnt = (media ? Math.floor(filas / 2) : filas) * 3;
+    const ejercicios = azar.muestra(pool.filter(([a, b]) => a !== 1 || b !== 1), cnt).map(([a, b]) => {
+      const falta = modo === "hueco" ? azar.entero(0, 1) : null;
+      return { datos: { a, b, falta }, solucion: { huecos: [falta === null ? a * b : falta === 0 ? a : b] } };
+    });
+    return {
+      enunciado: modo === "hueco" ? "Escribe el número que falta en cada multiplicación." : "Calcula y escribe el resultado en el cuadro gris.",
+      ejercicios,
+    };
+  },
+  dibujar(p, act) {
+    const es = act.ejercicios, orden = act.params.modo === "orden";
+    const items = (e) => {
+      const { a, b, falta } = e.datos, h = e.solucion.huecos[0];
+      if (falta === 0) return [B(40, 38, h), T(`${POR} ${b} = ${a * b}`, 19)];
+      if (falta === 1) return [T(`${a} ${POR}`, 19), B(40, 38, h), T(`= ${a * b}`, 19)];
+      return [T(`${a} ${POR} ${b} =`, 19), B(48, 38, h)];
+    };
+    if (!orden) {
+      // filas totales: 24 operaciones → 8 filas; 18 → 6 (la media página dibuja la mitad)
+      const filas = (act.tamano === "media" ? es.length * 2 : es.length) / 3;
+      p.pintar(TOP, 3, filas, es.map(items), es.map((e) => e.id));
+      return;
+    }
+    // La tabla en orden: una columna por tabla, 10 filas (la media, 5), centradas
+    const tablas = [...new Set(es.map((e) => e.datos.tabla))], GX = 10, GY = 8, rows = 10;
+    const cw = (W - 2 * M - 2 * GX) / 3, ch = (TOP - M - (rows - 1) * GY) / rows;
+    const x0 = M + (3 - tablas.length) * (cw + GX) / 2;
+    es.forEach((e) => p.ejercicio(e.id, () => {
+      const col = tablas.indexOf(e.datos.tabla), r = e.datos.b - 1;
+      const x = x0 + col * (cw + GX), y = TOP - (r + 1) * ch - r * GY;
+      p.marco(x, y, cw, ch);
+      p.linea(x, y, cw, ch, [T(`${e.datos.tabla} ${POR} ${e.datos.b} =`, 19), B(48, 38, e.solucion.huecos[0])], 8);
+    }));
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get parejas() { return parejas; }, get default() { return __default; } }));
 },
 "tipos/orden.cantidad.js": (__exp) => {
 // orden.cantidad · Más, menos o igual: comparar dos grupos de dibujos (port de _o_cantidad() y _dispersa() del motor).

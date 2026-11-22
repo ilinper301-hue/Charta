@@ -9,6 +9,7 @@ from modelos import M, op, AMBOS, COMPLETA
 
 CURSO = 2
 NOMBRE = "2.º de Primaria"
+BLOQUES_2 = {13: "Multiplicar y repartir"}   # bloque solo de 2.º (en 1.º no sale: la app oculta los bloques sin modelos del curso)
 RANGOS_2 = (100, 200, 300, 400, 500, 600, 700, 800, 900, 999)   # de 100 en 100 (decidido el 8-11-2026)
 
 
@@ -190,6 +191,27 @@ MODELOS_2 += [
         [op("situacion", "Situaciones", [(None, "Variadas"), ("pagar", "¿Cuánto paga? (sumar precios)"), ("vuelta", "¿Cuánto le devuelven?"),
                                          ("queda", "¿Cuánto le queda?"), ("falta", "¿Cuánto le falta?")])],
         "PROBLEMAS DE COMPRAS", "verde", rmin=100, rmax=500, rango=100),
+]
+
+
+# Lote 6 · multiplicar y repartir (bloque 13): sin rango; tablas del 2, 3, 4, 5 y 10 (opción `tablas`)
+TABLAS = op("tablas", "Tablas", [(None, "Del 2, 5 y 10"), ("2", "Del 2"), ("3", "Del 3"), ("4", "Del 4"), ("5", "Del 5"), ("10", "Del 10"),
+                                 ("todas", "Del 2, 3, 4, 5 y 10")])
+MODELOS_2 += [
+    _n2(13, "multiplicar", "grupos", "Grupos iguales", "Contar grupos iguales de puntos y escribir la suma repetida y la multiplicación (3 grupos de 4 = 3 × 4).",
+        [op("modo", "Qué se escribe", [(None, "Suma y multiplicación"), ("mult", "Solo la multiplicación")])],
+        "GRUPOS IGUALES", "amarillo"),
+    _n2(13, "multiplicar", "filas", "Filas y columnas", "Matrices de puntos: cuántas filas de cuántos y la multiplicación.",
+        [op("modo", "Qué se escribe", [(None, "Una multiplicación"), ("dos", "Las dos multiplicaciones")])],
+        "FILAS Y COLUMNAS", "verde"),
+    _n2(13, "multiplicar", "tablas", "Las tablas", "Multiplicaciones de las tablas del 2, 3, 4, 5 y 10: el resultado, el factor que falta o la tabla en orden.",
+        [TABLAS, op("modo", "Tarea", [(None, "Resultado"), ("hueco", "El factor que falta"), ("orden", "La tabla en orden")])],
+        "LAS TABLAS", "azul"),
+    _n2(13, "multiplicar", "problemas", "Problemas de multiplicar", "Problemas de grupos iguales (cajas, bolsas, filas de sillas…) con su operación y su respuesta.",
+        [TABLAS], "PROBLEMAS DE MULTIPLICAR", "rosa"),
+    _n2(13, "multiplicar", "reparto", "Reparte", "Repartir en partes iguales con dibujo, y la mitad y el tercio de un número.",
+        [op("modo", "Tarea", [(None, "Repartir en partes iguales"), ("mitad", "La mitad y el tercio")])],
+        "REPARTE", "amarillo"),
 ]
 
 def cursos_extra(m):
