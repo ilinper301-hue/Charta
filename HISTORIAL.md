@@ -210,3 +210,9 @@ Pasos ya cerrados, movidos desde ESTADO.md el 12-11-2026. No hace falta leerlo a
   - `multiplicar.reparto`: reparto exacto (k 2–5, cociente 2–6) con platos y puntos rojos en la solución (4/2); `modo` mitad: mitad y tercio alternos (6/3). Sin ÷.
 - Convención: «3 grupos de 4» = 3 × 4. Límites: texto de problemas y reparto justo en la tarjeta (mirar con Andika).
 - `npm test` en verde: 172 tipos, 192 doradas (10 nuevas, ninguna cambiada).
+
+## Lengua 1.º · Letra Escolar (ligada) en caligrafía (22-11-2026)
+- Petición de Iván: usar su fuente Escolar_G (© Antonio Herrera Infantes & Anye1992; `referencia/fuentes/Escolar_G.ttf`) en las fichas de caligrafía.
+- `tools/escolar.py` → `src/lengua/escolar.js` (GENERADO, ~21 KB, 78 caracteres: los del léxico y las frases; falla si falta alguno). `src/lengua/escolar_dibujo.js`: `escribirEscolar` (un path relleno con cuádricas; modelo, repaso gris, punteado) y `anchoEscolar`. Cuerpo = altura x (335 u), asta 2 cuerpos, rabo −1.
+- Opción `grafia` (null = letra de trazo; "escolar") en escritura.letra, palabras, frase, libre y ordena; generar mide con el ancho de Escolar. Sin punto de inicio ni flechas. Doradas antiguas iguales; 3 casos nuevos.
+- Límites: asta 2 (trazo 1,8): la «L» roza la etiqueta en `escritura.libre`; rabos y astas de filas seguidas casi se tocan; casillas de ordena pequeñas (6,5 pt).

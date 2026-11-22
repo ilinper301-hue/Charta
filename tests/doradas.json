@@ -2809,6 +2809,7 @@
        "params": {
         "palabras": null,
         "repaso": null,
+        "grafia": null,
         "pauta": null,
         "rango": null
        },
@@ -2897,6 +2898,7 @@
         "caso": null,
         "repaso": null,
         "filas": null,
+        "grafia": null,
         "pauta": null,
         "rango": null
        },
@@ -2968,6 +2970,7 @@
        "tipoVersion": 1,
        "params": {
         "inicio": null,
+        "grafia": null,
         "pauta": null,
         "rango": null
        },
@@ -3063,6 +3066,7 @@
         "letras": null,
         "tipo": null,
         "caso": null,
+        "grafia": null,
         "pauta": null,
         "rango": null
        },
@@ -3248,6 +3252,7 @@
         "letra": null,
         "tipo": null,
         "caso": null,
+        "grafia": null,
         "pauta": null,
         "rango": null
        },
@@ -44048,6 +44053,357 @@
    "3ab97142ce22afa0",
    "1de4a59560268ef5",
    "e518a5cf0d16cfda"
+  ]
+ },
+ "1.º escolar palabras + frase": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Copia palabras y copia la frase",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 5,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "escritura.palabras",
+       "tipoVersion": 1,
+       "params": {
+        "letra": null,
+        "tipo": null,
+        "caso": null,
+        "grafia": "escolar",
+        "pauta": null,
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Copia las palabras.\nMira el modelo y repasa antes de escribir.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "palabra": "feo",
+          "libres": 1
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "palabra": "baraja",
+          "libres": 1
+         },
+         "solucion": {
+          "huecos": []
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "escritura.frase",
+       "tipoVersion": 1,
+       "params": {
+        "palabras": null,
+        "repaso": null,
+        "grafia": "escolar",
+        "pauta": null,
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "rosa",
+       "enunciado": "Copia cada frase.\nEmpieza con mayúscula y acaba con punto.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "frase": "La abuela canta.",
+          "libres": 1
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "frase": "Los niños comen pan.",
+          "libres": 1
+         },
+         "solucion": {
+          "huecos": []
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "0dbabffd460f1c09"
+  ],
+  "svgSolucion": [
+   "881cc93f972503ed"
+  ]
+ },
+ "1.º escolar letra + ordena": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Repasa y escribe la letra y miro y escribo",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 5,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "escritura.letra",
+       "tipoVersion": 1,
+       "params": {
+        "letra": null,
+        "caso": null,
+        "repaso": null,
+        "filas": null,
+        "grafia": "escolar",
+        "pauta": null,
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "amarillo",
+       "enunciado": "Repasa la letra «x»\ny escríbela en los renglones.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "letra": "x",
+          "texto": "x",
+          "forma": "sueltas",
+          "repaso": 2,
+          "libres": 3
+         },
+         "solucion": {
+          "huecos": []
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "escritura.ordena",
+       "tipoVersion": 2,
+       "params": {
+        "letras": null,
+        "tipo": null,
+        "caso": null,
+        "grafia": "escolar",
+        "pauta": null,
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Ordena las letras y escribe el nombre del dibujo en la pauta.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "letras": [
+           "x",
+           "b",
+           "o",
+           "e",
+           "o"
+          ],
+          "palabra": "boxeo"
+         },
+         "solucion": {
+          "huecos": [
+           "boxeo"
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "letras": [
+           "c",
+           "a",
+           "u",
+           "n"
+          ],
+          "palabra": "cuna"
+         },
+         "solucion": {
+          "huecos": [
+           "cuna"
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "letras": [
+           "n",
+           "a",
+           "g",
+           "i",
+           "ll",
+           "a"
+          ],
+          "palabra": "gallina"
+         },
+         "solucion": {
+          "huecos": [
+           "gallina"
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "letras": [
+           "i",
+           "e",
+           "p"
+          ],
+          "palabra": "pie"
+         },
+         "solucion": {
+          "huecos": [
+           "pie"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "4663b1d6166da147"
+  ],
+  "svgSolucion": [
+   "5d40e18209970480"
+  ]
+ },
+ "1.º escolar libre": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Escribe una frase",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 5,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "escritura.libre",
+       "tipoVersion": 1,
+       "params": {
+        "inicio": null,
+        "grafia": "escolar",
+        "pauta": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Escribe qué hace cada uno.\nContinúa la frase en los renglones.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "inicio": "El niño",
+          "pregunta": "¿Qué hace el niño?",
+          "filas": 3,
+          "ejemplo": "El niño lee libros."
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "inicio": "La niña",
+          "pregunta": "¿Qué hace la niña?",
+          "filas": 3,
+          "ejemplo": "La niña canta en clase."
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "inicio": "El padre",
+          "pregunta": "¿Qué hace el padre?",
+          "filas": 3,
+          "ejemplo": "El padre camina."
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "inicio": "Las maestras",
+          "pregunta": "¿Qué hacen las maestras?",
+          "filas": 2,
+          "ejemplo": "Las maestras escriben."
+         },
+         "solucion": {
+          "huecos": []
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "ddd58cc47d7e1054"
+  ],
+  "svgSolucion": [
+   "2be8f6f3a61e5a91"
   ]
  }
 }

@@ -208,6 +208,7 @@ MODELOS_LENGUA += [
 
 # ------------------------------------------------------------------ lote 4 · escritura.* (bloque 8; todo con pauta Lamela)
 PAUTA = op("pauta", "Tamaño de pauta", [(None, "5 mm"), (4, "4 mm"), (3.5, "3,5 mm")])
+GRAFIA = op("grafia", "Tipo de letra", [(None, "Letra de trazo (con flechas)"), ("escolar", "Escolar (ligada)")])
 REPASO = op("repaso", "Repaso", [(None, "Gris claro"), ("punteado", "Punteado")])
 MODELOS_LENGUA += [
     # >>> ESCRITURA (agente escritura)
@@ -218,24 +219,24 @@ MODELOS_LENGUA += [
     _l(8, "escritura", "letra", "Repasa y escribe la letra", "Una letra de modelo (con flechas numeradas si la pauta es grande), filas de repaso y filas libres.",
        [op("letra", "Letra", [(None, "Al azar")] + [(l, l) for l in LETRAS] + [("palabra", "Las letras de una palabra")]),
         op("caso", "Mayúscula o minúscula", [(None, "minúscula"), ("mayus", "MAYÚSCULA"), ("ambas", "Las dos (Aa)")]),
-        REPASO, op("filas", "Filas de repaso", [(None, "2 filas"), (1, "1 fila"), (3, "3 filas")]), PAUTA],
+        REPASO, op("filas", "Filas de repaso", [(None, "2 filas"), (1, "1 fila"), (3, "3 filas")]), GRAFIA, PAUTA],
        "REPASA Y ESCRIBE LA LETRA", "amarillo"),
     _l(8, "escritura", "palabras", "Copia palabras", "Palabras con la letra trabajada: modelo, repaso y copia libre.",
-       [op("letra", "Con la letra", [(None, "Todas")] + [(l, l) for l in SIN_RARAS]), TIPO, CASO, PAUTA],
+       [op("letra", "Con la letra", [(None, "Todas")] + [(l, l) for l in SIN_RARAS]), TIPO, CASO, GRAFIA, PAUTA],
        "COPIA PALABRAS", "azul"),
     _l(8, "escritura", "frase", "Copia la frase", "Frases con mayúscula y punto: modelo, repaso y copia libre.",
-       [FRASE_LARGO, REPASO, PAUTA],
+       [FRASE_LARGO, REPASO, GRAFIA, PAUTA],
        "COPIA LA FRASE", "rosa"),
     _l(8, "escritura", "dictado", "Hoja de dictado", "Renglones numerados en blanco; la maestra dicta. La lista dictada solo sale en pantalla (solucionario y Fori).",
        [op("modo", "Qué se dicta", [(None, "Palabras"), ("frases", "Frases")]), num("numero", "Renglones", 5, 10, 10),
         op("letra", "Con la letra", [(None, "Todas")] + [(l, l) for l in SIN_RARAS]), PAUTA],
        "HOJA DE DICTADO", "verde"),
     _l(8, "escritura", "libre", "Escribe una frase", "Renglones libres con la frase empezada (El gato…) o con un tema para escribir. Corrección abierta.",
-       [op("inicio", "Cómo empieza", [(None, "Con la frase empezada (El gato…)"), ("tema", "Con un tema para escribir")]), PAUTA],
+       [op("inicio", "Cómo empieza", [(None, "Con la frase empezada (El gato…)"), ("tema", "Con un tema para escribir")]), GRAFIA, PAUTA],
        "ESCRIBE UNA FRASE", "amarillo"),
     _l(8, "escritura", "ordena", "Miro y escribo", "Una tarjeta con espacio en blanco para pegar el dibujo, las letras desordenadas del nombre (qu, ch, ll, rr y gu en una casilla) y la pauta: ordenar las letras y escribir la palabra.",
        [op("letras", "Casillas de cada palabra", [(None, "3 a 6 (variadas)"), (3, "3 casillas"), (4, "4 casillas"), (5, "5 casillas"), (6, "6 casillas")]), TIPO,
-        op("caso", "Letra", [(None, "minúscula"), ("mayus", "MAYÚSCULA")]), PAUTA],
+        op("caso", "Letra", [(None, "minúscula"), ("mayus", "MAYÚSCULA")]), GRAFIA, PAUTA],
        "MIRO Y ESCRIBO", "azul"),
     # <<< ESCRITURA
 ]

@@ -7,7 +7,7 @@
 //         léxico de 3 a 6 letras con 4 letras distintas (completa) o 2 (media); un bloque por cada una de las primeras letras distintas.
 //         «Las dos» escribe la pareja «Aa». Filas de repaso: las pedidas (1–3, por defecto 2); si no caben (4 bloques de la palabra en 5 mm) se reducen
 //         hasta floor(renglones / bloques) − 2 (1 modelo y al menos 1 libre). Los renglones libres llenan el resto de la página (filasDe).
-// Opciones: letra (al azar / a–z, ñ / las de una palabra) · mayúscula o minúscula (minúscula / MAYÚSCULA / las dos) · repaso (gris / punteado) · filas de repaso (2 / 1 / 3) · pauta.
+// Opciones: letra (al azar / a–z, ñ / las de una palabra) · mayúscula o minúscula (minúscula / MAYÚSCULA / las dos) · repaso (gris / punteado) · filas de repaso (2 / 1 / 3) · grafía (trazo / escolar ligada: modelo relleno sin flechas) · pauta.
 import { registrar } from "../nucleo/tipos.js";
 import { cuantas, elegirPalabras } from "./_lengua.js";
 import { sinTildes } from "../lengua/reglas.js";
@@ -44,13 +44,13 @@ export default registrar({
     };
   },
   dibujar(p, act) {
-    const ctx = contexto(p, act), { c, paso, x0, x1 } = ctx, es = act.ejercicios, estilo = act.params.repaso === "punteado" ? "punteado" : "repaso";
+    const ctx = contexto(p, act), { c, paso, x0, x1 } = ctx, es = act.ejercicios, g = act.params.grafia, estilo = act.params.repaso === "punteado" ? "punteado" : "repaso";
     const libres = recortar(es.map((e) => e.datos.libres), es.map((e) => 1 + e.datos.repaso), ctx.caben);
     let y = ctx.yTop;
     es.forEach((e, i) => p.ejercicio(e.id, () => {
       const { texto, forma, repaso } = e.datos, n = 1 + repaso + libres[i], { bases } = renglones(p, x0, x1, y, n, { mm: ctx.mm }), sep = forma === "juntas" ? 0.45 : 1.6;
-      repetir(p, texto, x0 + 0.6 * c, x1, bases[0], c, "modelo", { sep });
-      for (let r = 1; r <= repaso; r++) repetir(p, texto, x0 + 0.6 * c, x1, bases[r], c, estilo, { sep });
+      repetir(p, texto, x0 + 0.6 * c, x1, bases[0], c, "modelo", { sep, grafia: g });
+      for (let r = 1; r <= repaso; r++) repetir(p, texto, x0 + 0.6 * c, x1, bases[r], c, estilo, { sep, grafia: g });
       y -= n * paso;
     }));
   },

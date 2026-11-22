@@ -4,6 +4,10 @@ import { Papel, MM, escalaPanel } from "../src/render/papel.js";
 import { registrar } from "../src/nucleo/tipos.js";
 import { hoja } from "../src/render/hoja.js";
 import { renglones, medidasPauta, cabenRenglones, TAMANOS_PAUTA, ASTA, RABO } from "../src/lengua/pauta.js";
+import { GLIFOS, UNIDADES } from "../src/lengua/escolar.js";
+import { escribirEscolar, anchoEscolar, hayEscolar } from "../src/lengua/escolar_dibujo.js";
+import { LEXICO } from "../src/lengua/lexico.js";
+import { FRASES_1 } from "../src/lengua/frases_1.js";
 import { LETRAS_TRAZO, trazoACurvas, anchoTrazos, escribirTrazos, hayTrazo } from "../src/lengua/trazos.js";
 
 let n = 0;
@@ -105,6 +109,28 @@ cerca(anchoTrazos("al"), LETRAS_TRAZO.a.w + LETRAS_TRAZO.l.w + 0.32, 1e-9, "anch
   const r = new Papel(); escribirTrazos(r, "a", 0, 0, 10, { estilo: "punteado" });
   assert.ok(r.o.some((s) => s.includes("stroke-dasharray")) && !r.o.some((s) => s.includes("#2E7D32"))); n++;
   assert.throws(() => escribirTrazos(new Papel(), "a", 0, 0, 10, { estilo: "otro" })); n++;
+}
+
+// 5. Letra escolar «Escolar_G»: x = 1 cuerpo, asta 2 cuerpos, rabo −1, sin punto verde ni flechas; todo el léxico y las frases tienen glifo.
+{
+  assert.equal(UNIDADES, 335); n++;
+  // contornos: se mide sobre los comandos de la tabla (y en unidades de la fuente)
+  const ext = (ch) => { const v = [...GLIFOS[ch][1].matchAll(/-?\d+/g)].map(Number); const ys = v.filter((_, i) => i % 2); return [Math.min(...ys), Math.max(...ys)]; };
+  const [, xa] = ext("x"); cerca(xa / UNIDADES, 1, 0.01, "x = 1 cuerpo");
+  cerca(ext("l")[1] / UNIDADES, 2, 0.01, "asta = 2 cuerpos"); cerca(ext("p")[0] / UNIDADES, -1, 0.01, "rabo = −1 cuerpo");
+  const p = new Papel(), c = medidasPauta(p, 5).c, xf = escribirEscolar(p, "mesa", 40, 300, c);
+  cerca(xf - 40, anchoEscolar("mesa") * c, 1e-9, "avance"); cerca(anchoEscolar("mesa"), ["m", "e", "s", "a"].reduce((t, l) => t + GLIFOS[l][0], 0) / 335, 1e-9, "ancho = suma de avances");
+  assert.ok(p.o.length === 1 && p.o[0].includes('fill="#1a1a1a"') && !p.o[0].includes("stroke-width")); n += 2;   // un solo relleno oscuro, sin contorno
+  const r = new Papel(); escribirEscolar(r, "a", 0, 0, 10, { estilo: "repaso" }); assert.ok(r.o[0].includes('fill="#c4c4c4"')); n++;
+  const q = new Papel(); escribirEscolar(q, "a", 0, 0, 10, { estilo: "punteado" }); assert.ok(q.o[0].includes('fill="none"') && q.o[0].includes("stroke-dasharray")); n++;
+  assert.ok(![p, r, q].some((x) => x.o.join("").includes("#2E7D32") || x.o.join("").includes("<text"))); n++;
+  assert.throws(() => anchoEscolar("a€")); n++; assert.throws(() => escribirEscolar(new Papel(), "a", 0, 0, 10, { estilo: "otro" })); n++;
+  assert.ok(hayEscolar("ñ") && hayEscolar(" ") && !hayEscolar("€")); n++;
+  const usados = new Set([..."abcdefghijklmnñopqrstuvwxyzáéíóúüABCDEFGHIJKLMNÑOPQRSTUVWXYZÁÉÍÓÚÜ¿?¡!.,;:-«» "]);
+  for (const e of LEXICO) { [...e.p, ...(e.v3 || "")].forEach((ch) => usados.add(ch)); }
+  for (const f of FRASES_1) [...f.w.join(" ")].forEach((ch) => usados.add(ch));
+  for (const ch of usados) assert.ok(hayEscolar(ch), `falta «${ch}» en la letra escolar`);
+  n++;
 }
 
 console.log(`test_pauta: ${n} comprobaciones OK`);

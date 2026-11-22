@@ -32,11 +32,13 @@ Sin cambios de código. El plan y el estado de sus fases están en **`PLAN-DISEN
 - Bloque 8 de problemas, `problemas.barras` (Barri) y 8 trucos de cálculo mental de Calculi en 1.º.
 - Matemáticas 1.º completa; Matemáticas 2.º: lotes 0–3b (catálogo por curso, hasta 999, tres cifras, saltos de 10 y 100, reloj con cuartos, dinero y compras, pagar con billetes y monedas, balanzas).
 - Lengua 1.º: lotes 0–5 (sílaba, letra, fono, palabra, orto, frase, escritura con pauta Lamela y letras de trazo, lectura) más «Leo y dibujo» y «Miro y escribo».
+- Letra Escolar_G (ligada) en las fichas de caligrafía de Lengua 1.º: opción `grafia`, contornos en `src/lengua/escolar.js` (generado por `tools/escolar.py` desde `referencia/fuentes/Escolar_G.ttf`), sin punto de inicio ni flechas (22-11-2026).
 - Mapa de letras de Lengua 1.º con letras obligatorias (pulsación larga), válido en favoritas, nube, Tabula y Fori.
 - `geometria.lineas` v2 con opciones en orden aleatorio.
 Detalle de cada paso: `HISTORIAL.md`.
 
 ## Pendiente de Iván
+- Probar en el Android la letra **Escolar (ligada)** (22-11-2026, opción «Grafía» en Repasa y escribe la letra, Copia palabras, Copia la frase, Escribe una frase y Miro y escribo): imprimir y mirar en papel si los rabos de una fila tocan las astas de la siguiente y si la «L» roza la etiqueta en «Escribe una frase»; en «Miro y escribo» las casillas salen pequeñas y las mayúsculas de Escolar son casi de imprenta. Comprobar que la licencia de Escolar_G (© Antonio Herrera Infantes) permite usarla en una app pública.
 - Probar en el Android (lote 6, 2.º): bloque «Multiplicar y repartir»: ¿vale escribir «3 grupos de 4» como 3 × 4 (o lo preferís al revés)? En «Problemas de multiplicar» y «Reparte», ¿cabe el texto en la tarjeta? En «Grupos iguales» con 5 grupos, ¿se leen bien los 5 sumandos?
 - Probar en el Android (lote 5, 2.º): «Problemas de dos operaciones» (¿cabe bien la fila de las dos operaciones?), «Problemas de compras» y en «Problemas de sumar/restar» la situación «Variadas, también las nuevas»; trucos de 2.º (los encadenados van en 2 columnas); «Problemas de dos operaciones» con barra dibujada y en blanco (3 por página, 1 en media): ¿se entiende la parte que se quita (borde discontinuo y «−n»)?
 - Probar en el Android (lote 4, 2.º): «Lados y vértices»; «Sigue el camino» en sus 3 tareas (¿se entiende la S y la L? ¿cabe dibujar el camino con el dedo o el lápiz?); «El gráfico de barras» con escala de 2 en 2 o de 5 en 5 y «¿Cuántos más?».

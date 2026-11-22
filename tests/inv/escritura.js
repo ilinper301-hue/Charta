@@ -10,6 +10,7 @@ import { llevaLetra, sinTildes } from "../../src/lengua/reglas.js";
 import { hayTrazo, trazoACurvas } from "../../src/lengua/trazos.js";
 import { LEXICO } from "../../src/lengua/lexico.js";
 import { frasePorId } from "../../src/tipos/_frase.js";
+import { hayEscolar } from "../../src/lengua/escolar_dibujo.js";
 import { FAMILIAS_TRAZO, filasDe, cabeEnLinea, CAP_MM, ETIQUETA_MM } from "../../src/tipos/_escritura.js";
 import { renglonesDictado } from "../../src/tipos/escritura.dictado.js";
 import { TEMAS } from "../../src/tipos/escritura.libre.js";
@@ -18,7 +19,7 @@ import { render } from "../../src/render/actividad.js";
 
 const mmDe = (a) => a.params.pauta ?? 5;
 const sinCorreccion = (es) => es.forEach((e) => assert.deepEqual(e.solucion.huecos, [], "este tipo no tiene corrección"));
-const trazable = (t, q = "texto") => assert.ok([...t].every(hayTrazo), `${q}: «${t}» tiene un carácter sin letra de trazo`);
+const trazable = (t, q = "texto", g = null) => assert.ok([...t].every(g === "escolar" ? hayEscolar : hayTrazo), `${q}: «${t}» tiene un carácter sin letra ${g === "escolar" ? "escolar" : "de trazo"}`);
 const palabrasDe = (f) => f.toLowerCase().replace(/\.$/, "").split(" ");
 /** Renglones totales de los bloques: caben en el panel (filasDe) y llenan la página. */
 function renglonesOk(a, tam, guiadas, libres) {
@@ -75,7 +76,7 @@ export default {
     const es = act.ejercicios, p = act.params, caso = p.caso || null, N = filasDe(tam, mmDe(act)), pedidas = p.filas ?? 2;
     const B = es.length;
     for (const { datos: d } of es) {
-      assert.match(d.letra, /^[a-zñ]$/); assert.equal(d.texto, textoLetra(d.letra, caso)); trazable(d.texto, "modelo");
+      assert.match(d.letra, /^[a-zñ]$/); assert.equal(d.texto, textoLetra(d.letra, caso)); trazable(d.texto, "modelo", p.grafia);
       assert.ok(["sueltas", "juntas"].includes(d.forma));
       assert.ok(d.repaso >= 0 && d.repaso <= pedidas, "más repaso del pedido");
     }
@@ -102,9 +103,9 @@ export default {
     unicos(es, (e) => e.datos.palabra, "palabras repetidas");
     for (const { datos: d } of es) {
       const m = enCaso(d.palabra, p.caso, "palabra");
-      palabraValida(m, { ...p, largo: null }, { largos: [1, 2, 3] }); trazable(d.palabra, "palabra");
+      palabraValida(m, { ...p, largo: null }, { largos: [1, 2, 3] }); trazable(d.palabra, "palabra", p.grafia);
       if (p.letra) assert.ok(llevaLetra(m, p.letra), `«${m}» no lleva la «${p.letra}»`);
-      assert.ok(cabeEnLinea(d.palabra, tam, mmDe(act)), `«${d.palabra}» no cabe en una línea`);
+      assert.ok(cabeEnLinea(d.palabra, tam, mmDe(act), p.grafia), `«${d.palabra}» no cabe en una línea`);
     }
     sinCorreccion(es); renglonesOk(act, tam, () => 2);
   },
@@ -114,10 +115,10 @@ export default {
     cuantos(es, tam === "media" ? 2 : 4);
     unicos(es, (e) => e.datos.frase, "frases repetidas");
     for (const { datos: d } of es) {
-      assert.match(d.frase, /^[A-ZÁÉÍÓÚÑ][A-Za-záéíóúüñÁÉÍÓÚÑ ]+\.$/, "no es «Mayúscula… punto.»"); trazable(d.frase, "frase");
+      assert.match(d.frase, /^[A-ZÁÉÍÓÚÑ][A-Za-záéíóúüñÁÉÍÓÚÑ ]+\.$/, "no es «Mayúscula… punto.»"); trazable(d.frase, "frase", p.grafia);
       const ws = palabrasDe(d.frase); analiza(ws); assert.ok(frasePorId(ws.join(" ")), `«${d.frase}» no es una frase del banco`);
       if (Number.isInteger(p.palabras)) assert.equal(ws.length, p.palabras, "palabras de la frase"); else assert.ok(ws.length >= 3 && ws.length <= 5);
-      assert.ok(cabeEnLinea(d.frase, tam, mmDe(act)), `«${d.frase}» no cabe en una línea`);
+      assert.ok(cabeEnLinea(d.frase, tam, mmDe(act), p.grafia), `«${d.frase}» no cabe en una línea`);
     }
     sinCorreccion(es); renglonesOk(act, tam, () => 2);
   },
@@ -143,9 +144,11 @@ export default {
     }
     // la palabra solo sale en el SVG de la solución (una vez cada una, en rojo); en el papel no se imprime
     const papel = render(act, "papel").svg, sol = render(act, "solucion").svg;
+    // con letra escolar la palabra de la solución es un relleno rojo (path), no un <text>: la solución tiene tantos rellenos rojos más como palabras
+    if (p.grafia === "escolar") assert.equal((sol.match(/<path d="[^"]*" fill="#C62828"/g) || []).length - (papel.match(/<path d="[^"]*" fill="#C62828"/g) || []).length, es.length, "la solución no lleva una palabra roja por ejercicio");
     for (const e of es) {
       assert.ok(!papel.includes(`>${e.datos.palabra}</text>`), `«${e.datos.palabra}» se imprime en el papel`);
-      assert.ok(sol.includes(`>${e.datos.palabra}</text>`), `«${e.datos.palabra}» no sale en la solución`);
+      if (p.grafia !== "escolar") assert.ok(sol.includes(`>${e.datos.palabra}</text>`), `«${e.datos.palabra}» no sale en la solución`);
     }
   },
 
@@ -181,7 +184,7 @@ export default {
       assert.ok(Number.isInteger(d.filas) && d.filas >= 2, "menos de 2 renglones"); assert.deepEqual(s, { huecos: [] }); assert.equal(typeof d.ejemplo, "string");
       if (tema) { assert.equal(d.inicio, null); assert.ok(TEMAS.some(([t, q, e]) => d.pregunta === `${t}: ${q}` && d.ejemplo === e), "tema desconocido"); }
       else {
-        assert.match(d.inicio, /^(El|La|Los|Las) [a-záéíóúüñ]+$/); trazable(d.inicio, "inicio");
+        assert.match(d.inicio, /^(El|La|Los|Las) [a-záéíóúüñ]+$/); trazable(d.inicio, "inicio", act.params.grafia);
         assert.ok(d.ejemplo.startsWith(d.inicio + " "), "el ejemplo no empieza por el comienzo"); const ws = palabrasDe(d.ejemplo); analiza(ws);
         assert.ok(frasePorId(ws.join(" ")), "el ejemplo no es una frase del banco");
         assert.match(d.pregunta, /^¿Qué hacen? (el|la|los|las) [a-záéíóúüñ]+\?$/); assert.equal(/^Los|^Las/.test(d.inicio), /hacen/.test(d.pregunta), "hace / hacen");

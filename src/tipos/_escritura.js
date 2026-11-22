@@ -5,7 +5,8 @@
 // el panel quedase más pequeño de lo previsto (los renglones guiados siempre se dibujan).
 import { ZONA } from "../render/papel.js";
 import { cabenRenglones, PAUTA_POR_DEFECTO } from "../lengua/pauta.js";
-import { escribirTrazos, anchoTrazos, trazoACurvas, VERDE_INICIO } from "../lengua/trazos.js";
+import { escribirTrazos, anchoTrazos, trazoACurvas, VERDE_INICIO, hayTrazo } from "../lengua/trazos.js";
+import { escribirEscolar, anchoEscolar, hayEscolar } from "../lengua/escolar_dibujo.js";
 
 /** Alto (mm) de pauta que se usa para planificar, con margen: completa ≈ 229 mm reales y media ≈ 98 mm con un enunciado de una línea. */
 export const CAP_MM = { completa: 210, media: 92 };
@@ -20,8 +21,12 @@ export const mmDe = (params) => params?.pauta ?? PAUTA_POR_DEFECTO;
 export const filasDe = (tamano, mm) => Math.floor(CAP_MM[tamano] / (3 * mm) + 1e-9);
 /** Ancho útil de un renglón en cuerpos (unidades de la pauta). */
 export const anchoDe = (tamano, mm) => (ANCHO_MM[tamano] - 3) / mm;
+/** Ancho de un texto en cuerpos con la grafía elegida: letras de trazo (por defecto) o «escolar» (letra ligada Escolar_G). */
+export const anchoTexto = (texto, grafia = null) => (grafia === "escolar" ? anchoEscolar(texto) : anchoTrazos(texto));
+/** ¿Hay letra de esa grafía para el carácter? */
+export const hayLetra = (ch, grafia = null) => (grafia === "escolar" ? hayEscolar(ch) : hayTrazo(ch));
 /** Un texto cabe en una sola línea (con margen a los lados). */
-export const cabeEnLinea = (texto, tamano, mm) => anchoTrazos(texto) <= anchoDe(tamano, mm) - 1.2;
+export const cabeEnLinea = (texto, tamano, mm, grafia = null) => anchoTexto(texto, grafia) <= anchoDe(tamano, mm) - 1.2;
 
 /** Reparte los renglones libres que sobran entre los bloques (los que sobran del reparto, a los primeros). */
 export function repartirLibres(total, guiadas) {
@@ -46,15 +51,17 @@ export function recortar(libres, guiadas, caben) {
 }
 
 /** Texto con letras de trazo: el modelo lleva punto verde de inicio (y flechas si el cuerpo es grande); el repaso (gris / punteado) también lleva el punto. */
-export function escribir(p, texto, x, base, c, estilo = "modelo") {
+/** Con grafía «escolar» el modelo es un relleno sin punto ni flechas (la fuente no tiene trazos con dirección). */
+export function escribir(p, texto, x, base, c, estilo = "modelo", grafia = null) {
+  if (grafia === "escolar") return escribirEscolar(p, texto, x, base, c, { estilo });
   return escribirTrazos(p, texto, x, base, c, estilo === "modelo" ? { estilo } : { estilo, punto: true });
 }
 
 /** Copias del texto repetidas a lo ancho de x a x1 (separadas `sep` cuerpos). Devuelve cuántas caben. */
-export function repetir(p, texto, x, x1, base, c, estilo, { sep = 1.2, max = 99 } = {}) {
-  const w = anchoTrazos(texto), paso = w + sep;
+export function repetir(p, texto, x, x1, base, c, estilo, { sep = 1.2, max = 99, grafia = null } = {}) {
+  const w = anchoTexto(texto, grafia), paso = w + sep;
   const n = Math.max(1, Math.min(max, Math.floor(((x1 - x) / c + sep) / paso + 1e-9)));
-  for (let k = 0; k < n; k++) escribir(p, texto, x + k * paso * c, base, c, estilo);
+  for (let k = 0; k < n; k++) escribir(p, texto, x + k * paso * c, base, c, estilo, grafia);
   return n;
 }
 

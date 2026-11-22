@@ -6,7 +6,7 @@
 // Reglas: completa 4 bloques, media 2. Frase empezada: frases de acción de _frase.js (verbos de hacer, no «es» ni «está»), sujetos distintos, con el sujeto
 //         («El gato», «Los niños») como comienzo. Tema: 12 temas con su pregunta (banco TEMAS), sin repetir. Renglones por bloque: los que quepan tras la etiqueta
 //         (ETIQUETA_MM = 9 mm), repartidos entre los bloques (≥ 2 siempre; el primero del bloque lleva el comienzo).
-// Opciones: cómo empieza (frase empezada / tema para escribir) · pauta (5, 4, 3,5 mm).
+// Opciones: cómo empieza (frase empezada / tema para escribir) · grafía (trazo / escolar ligada) · pauta (5, 4, 3,5 mm).
 import { registrar } from "../nucleo/tipos.js";
 import { cuantas, ajusta } from "./_lengua.js";
 import { elegirFrases, largosFrase, textoFrase } from "./_frase.js";
@@ -72,7 +72,7 @@ export default registrar({
       const fs = ajusta(p, (q) => p.ancho(pregunta, "PB", q), x1 - x0 - 2 * c, 0.5 * H, 9);
       p.text(x0 + c, by + h / 2 - fs * 0.35, pregunta, fs, { f: "PB", gris: 0.2 });
       const { bases } = renglones(p, x0, x1, y - H, filas[i], { mm: ctx.mm });
-      if (inicio) escribir(p, inicio, x0 + 0.6 * c, bases[0], c, "modelo");
+      if (inicio) escribir(p, inicio, x0 + 0.6 * c, bases[0], c, "modelo", act.params.grafia);
       y -= H + filas[i] * paso;
     }));
   },

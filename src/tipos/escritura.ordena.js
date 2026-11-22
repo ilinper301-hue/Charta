@@ -6,17 +6,19 @@
 //         No exige solución única entre anagramas (sol/los): la palabra la fija el dibujo que pegue la maestra.
 // Aspecto (idéntico a la ficha de Iván): tarjeta de borde verde azulado, casillas de borde rojo con la letra y pauta Lamela de cuatro líneas
 //         (las dos del cuerpo negras y las de las astas y los rabos grises).
-// Opciones: casillas de cada palabra (3 a 6 variadas / 3 / 4 / 5 / 6) · tipo de sílabas · letra (minúscula / MAYÚSCULA) · pauta (5, 4, 3,5 mm).
+// Opciones: casillas de cada palabra (3 a 6 variadas / 3 / 4 / 5 / 6) · tipo de sílabas · letra (minúscula / MAYÚSCULA) · grafía (trazo / escolar ligada: letras de las casillas y palabra de la solución en Escolar) · pauta (5, 4, 3,5 mm).
 import { registrar } from "../nucleo/tipos.js";
 import { TOP, COLOR_SOLUCION, INK } from "../render/papel.js";
 import { cuantas, candidatas } from "./_lengua.js";
 import { avisoVistas } from "../lengua/vistas.js";
-import { mmDe } from "./_escritura.js";
+import { mmDe, anchoTexto } from "./_escritura.js";
 import { pautaLamela } from "../lengua/pauta.js";
+import { escribirEscolar } from "../lengua/escolar_dibujo.js";
 import { VERDE_RECUADRO } from "./palabra.dibuja.js";
 
 /** Rojo de las casillas de letras de la ficha de Iván. */
 export const ROJO_CASILLA = "#E34C38";
+const CE = 6.5;   // cuerpo de la letra escolar dentro de las casillas (x = 6,5 pt, asta a 13 pt: cabe en 22)
 const TAM_CASILLA = 22, SEP_CASILLA = 7, PAD = 12;
 
 /** Casillas de una palabra: «qu», «ch», «ll», «rr» y «gu» ante e/i juntas; el resto, letra a letra. queso → [qu, e, s, o]. */
@@ -60,20 +62,24 @@ export default registrar({
     };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 2, 4, 18, 8), c = p.mm(mmDe(act.params));
+    const { cel, cw, ch } = p.celdas(TOP, 2, 4, 18, 8), c = p.mm(mmDe(act.params)), esc = act.params.grafia === "escolar";
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], ls = e.datos.letras;
       p.rrect(x, y, cw, ch, 14, { lw: 1.1, fill: 1, stroke: VERDE_RECUADRO });
       // pauta abajo: la base queda a un cuerpo de la línea gris de abajo
       const base = y + PAD + c;
       pautaLamela(p, x + PAD, x + cw - PAD, base, c);
-      if (p.solucion) p.text(x + PAD + 0.6 * c, base, e.solucion.huecos[0], 1.75 * c, { f: "PR", gris: COLOR_SOLUCION });
+      if (p.solucion) {
+        if (esc) escribirEscolar(p, e.solucion.huecos[0], x + PAD + 0.6 * c, base, c, { color: COLOR_SOLUCION });
+        else p.text(x + PAD + 0.6 * c, base, e.solucion.huecos[0], 1.75 * c, { f: "PR", gris: COLOR_SOLUCION });
+      }
       // letras desordenadas justo encima de la pauta (y, sobre ellas, el espacio en blanco del dibujo)
-      const ws = ls.map((l) => Math.max(TAM_CASILLA, p.ancho(l, "PR", 15) + 10)), total = ws.reduce((a, b) => a + b, 0) + (ls.length - 1) * SEP_CASILLA;
+      const ws = ls.map((l) => Math.max(TAM_CASILLA, (esc ? anchoTexto(l, "escolar") * CE : p.ancho(l, "PR", 15)) + 10)), total = ws.reduce((a, b) => a + b, 0) + (ls.length - 1) * SEP_CASILLA;
       let cx = x + (cw - total) / 2; const ty = base + 2 * c + 12;
       ls.forEach((l, k) => {
         p.rrect(cx, ty, ws[k], TAM_CASILLA, 6, { lw: 1, fill: 1, stroke: ROJO_CASILLA });
-        p.text(cx + ws[k] / 2, ty + TAM_CASILLA / 2 - 15 * 0.35, l, 15, { f: "PR", anchor: "middle", gris: INK });
+        if (esc) escribirEscolar(p, l, cx + (ws[k] - anchoTexto(l, "escolar") * CE) / 2, ty + TAM_CASILLA / 2 - CE / 2, CE, { color: INK });
+        else p.text(cx + ws[k] / 2, ty + TAM_CASILLA / 2 - 15 * 0.35, l, 15, { f: "PR", anchor: "middle", gris: INK });
         cx += ws[k] + SEP_CASILLA;
       });
     }));

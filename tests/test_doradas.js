@@ -40,6 +40,8 @@ const CASOS = [
   { nombre: "2.º barras con escala", semilla: 8, opciones: { actividades: [{ tipo: "estadistica.barras", curso: 2, params: { modo: "lee", escala: 5, pregunta: "mas" } }] } },
   { nombre: "2.º euros y masa", semilla: 8, opciones: { actividades: [{ tipo: "medida.euros", curso: 2, params: { rango: 200 } }, { tipo: "medida.masa", curso: 2, params: {} }] } },
   { nombre: "nombres y B/N", semilla: 5, nombres: ["Ana", "Luis", "Marta"], bn: true, opciones: { variantes: 2, actividades: [{ tipo: "rep.dado", params: { lectura: true } }, { tipo: "rep.marco", params: { rango: 20 } }] } },
+  // Lengua 1.º · letra escolar ligada (Escolar_G) en las fichas de caligrafía
+  ...[["palabras", "frase"], ["letra", "ordena"], ["libre"]].map((ts) => ({ nombre: "1.º escolar " + ts.join(" + "), semilla: 5, opciones: { actividades: ts.map((t) => ({ tipo: "escritura." + t, curso: 1, params: { grafia: "escolar" } })) } })),
 ];
 
 function calcular(c) {
