@@ -32,21 +32,21 @@ export function anchoEscolar(texto) {
 
 /**
  * Escribe `texto` con la letra escolar en (x, base), cuerpo c (unidades del papel). Devuelve la x final.
- * color: relleno del modelo (gris 0–1 o "#rrggbb"; por defecto oscuro). estilo: "modelo" (relleno oscuro) · "repaso" (relleno gris claro) · "punteado" (solo contorno discontinuo).
+ * color: relleno del modelo (gris 0–1 o "#rrggbb"; por defecto oscuro). estilo: "modelo" (relleno oscuro) · "repaso" (relleno gris claro) · "punteado" (una línea de puntos por el centro del trazo).
  */
 export function escribirEscolar(p, texto, x, base, c, { estilo = "modelo", color = 0.1 } = {}) {
   if (!["modelo", "repaso", "punteado"].includes(estilo)) throw new Error(`Estilo de letra escolar desconocido: ${estilo}`);
   const k = c / UNIDADES, cm = [];
   let u = 0;
   for (const ch of texto) {
-    const [av, d] = glifo(ch);
-    for (const [t, ...v] of comandos(d)) cm.push([t, ...v.map((n, i) => (i % 2 ? base + n * k : x + (u + n) * k))]);
+    const [av, d, centro] = glifo(ch);
+    for (const [t, ...v] of comandos(estilo === "punteado" ? centro : d)) cm.push([t, ...v.map((n, i) => (i % 2 ? base + n * k : x + (u + n) * k))]);
     u += av;
   }
   if (cm.length) {
     if (estilo === "modelo") p.path(cm, { fill: color, stroke: null });
     else if (estilo === "repaso") p.path(cm, { fill: "#c4c4c4", stroke: null });
-    else p.path(cm, { lw: 0.05 * c, stroke: 0.45, fill: null, dash: [0.001 * c, 0.11 * c] });
+    else p.path(cm, { lw: 0.09 * c, stroke: 0.45, fill: null, dash: [0.001 * c, 0.17 * c] });   // una sola línea de puntos por la línea central (como el punteado de trazo)
   }
   return x + (u * k);
 }
