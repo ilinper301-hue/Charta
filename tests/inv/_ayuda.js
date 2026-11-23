@@ -21,8 +21,15 @@ export function rep(nombre) {
       ent(e.datos.n, lo, hi, "n");
       assert.ok(e.datos.n <= R, "n > rango");
       assert.equal(e.datos.centenas, R > 100 ? true : undefined, "centenas solo con rango > 100");
+      assert.equal(e.datos.millares, R > 1000 ? true : undefined, "millares solo con rango > 1000");
       if (nombre === "letras") { const t = nombreNumero(e.datos.n); assert.ok(typeof t === "string" && t && !/\d|undefined/.test(t), `nombreNumero(${e.datos.n}) = ${t}`); }
       assert.deepEqual(e.solucion.huecos, e.datos.accion === "leer" ? [e.datos.n] : []);
+    }
+    if (nombre === "recta" && R > 1000) {   // 3.º: tramos de 100 en 100 y de 10 en 10 (un tercio de cada)
+      const ns = act.ejercicios.map((e) => e.datos.n), k = Math.floor(ns.length / 3);
+      unicos(act.ejercicios, (e) => e.datos.n, "recta con números repetidos");
+      assert.ok(ns.filter((n) => n % 100 === 0).length >= k, "faltan centenas exactas en la recta");
+      assert.ok(ns.filter((n) => n % 10 === 0 && n % 100).length >= k - 1 || ns.filter((n) => n % 10 === 0).length >= 2 * k, "faltan decenas exactas en la recta");
     }
   };
 }

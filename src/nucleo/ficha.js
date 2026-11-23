@@ -106,9 +106,13 @@ const TITULO_2 = { "valor.agrupa": { _: "AGRUPA EN CENTENAS" }, "sumar.dobles": 
 /** 2.º (lote 3): títulos de los modos que solo salen en 2.º (modelos sin rango). */
 const TITULO_MODO_2 = { "medida.tiempo": { equivalencias: "LAS MEDIDAS DEL TIEMPO", horas: "ANTES Y DESPUÉS" },
                         "medida.longitud": { regla: "MIDE CON LA REGLA", mcm: "¿METROS O CENTÍMETROS?" } };
+/** 3.º (MATES_3.md, lote 0): títulos y nombres que cambian con millares. */
+const TITULO_3 = { "rep.du": "MILLARES, CENTENAS, DECENAS Y UNIDADES" };
+const NOMBRE_3 = { "rep.du": "Millares, centenas, decenas y unidades" };
 const NOMBRE_2 = { "valor.agrupa": "Agrupa en decenas y centenas", "sumar.dobles": "Los dobles y las mitades", "medida.longitud": "Mide longitudes" };
 
 export function tituloModelo(m, p = {}) {
+  if (p.rango > 1000 && TITULO_3[m.id]) return TITULO_3[m.id];
   const t2 = p.rango >= 100 && TITULO_2[m.id], t2v = t2 && (t2[p.operacion] ?? t2._);
   if (t2v) return t2v;
   const tm = TITULO_MODO_2[m.id]?.[p.modo];
@@ -120,6 +124,7 @@ export function tituloModelo(m, p = {}) {
 /** Nombre del modelo en el selector de un curso: en 2.º, «hasta 100» → «hasta» el rango mayor del curso. */
 export function nombreEnCurso(m, curso) {
   if (String(curso) === "2" && NOMBRE_2[m.id]) return NOMBRE_2[m.id];
+  if (String(curso) === "3" && NOMBRE_3[m.id]) return NOMBRE_3[m.id];
   const rg = m.cursos?.[curso]?.rangos, mx = rg?.length ? Math.max(...rg) : 0;
   return mx > 100 ? m.nombre.replace(/hasta 100\b/, `hasta ${mx}`).replace(/\bD y U\b/, "C, D y U") : m.nombre;
 }

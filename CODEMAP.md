@@ -11,10 +11,12 @@ INICIO_CHAT.md        mensaje para empezar un chat nuevo
 PLAN-DISENO.md        análisis del sistema y de la interfaz (12-11-2026) y plan de mejora por fases (una por chat)
 LENGUA_1.md           guion de tipología de Lengua de 1.º (bloques, modelos, pauta Lamela, lotes)
 MATES_2.md            guion de tipología de Matemáticas de 2.º (♻/🔧/✨, catálogo por curso, lotes)
+MATES_3.md            (en los documentos del proyecto de Claude) guion de tipología de Matemáticas de 3.º (aprobado 23-11-2026; lotes 0–8)
 motor/generador_fichas.py   motor de REFERENCIA (Python + ReportLab), ~2.700 líneas: diseño aprobado y reglas
 motor/modelos_app.py  modelos SOLO de la app (bloque 8 problemas…): MODELOS_APP con titulo y color; tools/catalogo.py los añade tras los del motor
 motor/metadatos.py    META: dificultad, minutos y etiquetas de cada modelo (también los de la app)
 motor/modelos_2.py    Matemáticas de 2.º: CURSO, RANGOS_2 (100…999), EN_2 {id de 1.º: (rmin, rmax, defecto) | None = rangos de 1.º} → `cursos: {"2": {rangos, rango}}` en el catálogo (un modelo en varios cursos); OPCIONES_2 (opciones y valores con `rmin`: solo con tres cifras; `rmax`: solo hasta ese rango, p. ej. dobles con dibujos; un valor de OPCIONES_2 con el mismo `valor` que uno de 1.º solo le añade campos; `visible(x, rango)` en ficha.js, la app las oculta, validar() no las guarda si no se ven; `curso`: solo desde ese curso, para modelos sin rango como el reloj, `visible(x, rango, curso)`); MODELOS_2 (nuevos de 2.º)
+motor/modelos_3.py    Matemáticas de 3.º (MATES_3.md): CURSO 3, RANGOS_3 (1000…9000, 9999), EN_3 {id: (rmin, rmax, defecto)} → `cursos: {"3": …}` (tools/catalogo.py junta 2.º y 3.º), MODELOS_3 (nuevos de 3.º, `_n3()` con lista de rangos propia; lote 0: rep.romanos). Cuatro cifras SIN punto de millares
 motor/modelos.py      catálogo MODELOS para la app (solo datos): menu(), por_defecto(), validar(), a_json()
 tests/test_motor.py   regresión: genera todo y comprueba la aritmética
 referencia/ficha_muestra.pdf  ficha de muestra de Iván (marco a imitar)
@@ -54,7 +56,7 @@ src/nucleo/tipos.js   registro: registrar(t), tipo(id), hayTipo, listaTipos
 src/nucleo/ficha.js   modelo, cursosDe(m), rangosDe(id, curso), rangosTodos(id), cursoDe(id, {curso, rango, params}), porDefecto(id, curso), validar (acepta los rangos de todos los cursos), capitalizar, tituloModelo, tituloPagina, coloresPagina, generar(opciones, semilla)
 src/nucleo/lector.js  erroresFicha(f), paginasVariante(f, v), letraVariante — sin dependencias (Tabula/Fori)
 src/nucleo/catalogo.js  GENERADO por tools/catalogo.py (MODELOS + titulo + color); no editar (fase 7: JSON compacto, un modelo por línea; 123 KB)
-src/rep/index.js      16 representaciones en SVG: rep(nombre, n, {i, vacio, rango}) y plantilla() → {w, h, svg} (caja en puntos PDF, y hacia abajo, centrada como el motor); svgCompleto(), nombreNumero(). Anchuras de Andika incrustadas
+src/rep/index.js      3.º: `millares` (rango > 1000; RANGOS_M, rangosPara(R)): bloques con cubos de mil (`cubo`, `_bloquesM`), ábaco de 4 varillas (`abaco4`), UM/C/D/U, letras hasta 9999, recta de 1, 10 o 100 en 100 según n (`pasoRecta`, `inicioTramoM`), descomp de 4 cifras en dos líneas · 16 representaciones en SVG: rep(nombre, n, {i, vacio, rango}) y plantilla() → {w, h, svg} (caja en puntos PDF, y hacia abajo, centrada como el motor); svgCompleto(), nombreNumero(). Anchuras de Andika incrustadas
 tests/test_rep.js     pruebas de las representaciones · tools/comparar_rep.py: hoja motor vs JS en PNG
 src/tipos/_problemas.js  problemas del bloque 8: NOMBRES, OBJETOS, SITUACIONES, generarProblemas(), dibujarProblemas() (tipos problemas.suma/resta/mixtos)
 src/tipos/_tres.js     2.º (rango > 100): sumasVert/restasVert/vertical3 (verticales C/D/U, niveles u·d·ud, 3 sumandos, llevada, prueba), decenasSuma3/decenasResta3; paresSuma3/paresResta3(R, nivel, cnt, azar), llevaSuma3/llevaResta3 (llevada en cualquier columna); lo usan sumar.h100/hueco, restar.r100/hueco/familia, juegos.une y problemas

@@ -21,6 +21,9 @@ const CASOS = [
   { nombre: "dos actividades", semilla: 7, opciones: { actividades: [{ tipo: "sumar.h20", params: { nivel: "con" } }, { tipo: "restar.recta", params: { rango: 20 } }] } },
   { nombre: "mismo color corregido", semilla: 3, opciones: { actividades: [{ tipo: "orden.signos", color: "rosa" }, { tipo: "conteo.serie1", color: "rosa" }] } },
   { nombre: "variantes y título", semilla: 42, opciones: { titulo: "Repaso del lunes", variantes: 3, actividades: [{ tipo: "sumar.vertical", params: { nivel: "mezcla", rango: 100 } }, { tipo: "medida.reloj", params: { modo: "media" } }] } },
+  // Matemáticas 3.º · lote 0 (millares)
+  { nombre: "3.º bloques y recta hasta 9999", semilla: 8, opciones: { actividades: [{ tipo: "rep.bloques", curso: 3, params: { rango: 9999 } }, { tipo: "rep.recta", curso: 3, params: { rango: 9999 } }] } },
+  { nombre: "3.º ¿Qué número es? hasta 9999", semilla: 8, opciones: { actividades: [{ tipo: "combinada.combinada", curso: 3, params: { rango: 9999 } }] } },
   // Matemáticas 2.º · lote 2 (tres cifras)
   { nombre: "2.º sumas en vertical", semilla: 8, opciones: { actividades: [{ tipo: "sumar.vertical", params: { rango: 999, nivel: "ud", sumandos: 3 } }] } },
   { nombre: "2.º restas con prueba", semilla: 8, opciones: { actividades: [{ tipo: "restar.vertical", params: { rango: 999, nivel: "con", prueba: true } }] } },

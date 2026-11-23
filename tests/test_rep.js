@@ -1,6 +1,6 @@
 // Charta · pruebas de las 16 representaciones SVG (paso 2.2).  Uso: node tests/test_rep.js
 import assert from "node:assert/strict";
-import { REPS, RANGOS, RANGOS_C, rep, plantilla, svgCompleto, nombreNumero, inicioTramo } from "../src/rep/index.js";
+import { REPS, RANGOS, RANGOS_C, RANGOS_M, rep, plantilla, svgCompleto, nombreNumero, inicioTramo, inicioTramoM, pasoRecta } from "../src/rep/index.js";
 import "../src/tipos/index.js";
 import { tipo } from "../src/nucleo/tipos.js";
 import { crearAzar } from "../src/nucleo/azar.js";
@@ -215,6 +215,37 @@ prueba("centenas: bloques (placas + barras + cubos), ábaco (≤ 9 por varilla),
   assert.equal((plantilla("descomp", 345).svg.match(/<line /g) || []).length, 3);
   assert.equal((plantilla("descomp", 345).svg.match(/>\+</g) || []).length, 2);
   assert.equal((plantilla("du", 345).svg.match(/<line /g) || []).length, 3);
+});
+
+// 3.º (MATES_3.md, lote 0): millares hasta 9999.
+prueba("millares: letras, descomposición, UM/C/D/U, ábaco, bloques y recta", () => {
+  const L = { 1000: "mil", 1001: "mil uno", 1100: "mil cien", 1016: "mil dieciséis", 2021: "dos mil veintiuno", 3100: "tres mil cien",
+    7877: "siete mil ochocientos setenta y siete", 9999: "nueve mil novecientos noventa y nueve", 5600: "cinco mil seiscientos", 1222: "mil doscientos veintidós" };
+  for (const [k, t] of Object.entries(L)) assert.equal(nombreNumero(+k), t);
+  const M = ["bloques", "abaco", "du", "letras", "recta", "descomp"];
+  for (const nom of M) assert.equal(RANGOS_M[nom][1], 9999, nom);
+  const muestra = [1000, 1001, 1010, 1100, 2345, 3005, 4000, 4350, 4357, 5600, 7086, 9900, 9990, 9999];
+  for (const nom of M) for (const k of muestra) {
+    sano(rep(nom, k, { i: k % 7, millares: true }), `${nom} ${k}`);
+    const t = plantilla(nom, k, { i: 1, millares: true }); if (t) sano(t, `plantilla ${nom} ${k}`);
+  }
+  const dsc = (k) => [...rep("descomp", k, { millares: true }).svg.matchAll(/>([\d +]+)<\/text>/g)].map((m) => m[1]).join(" ").replace(/\+ /g, "+ ").replace(/\s+/g, " ");
+  for (const k of muestra.filter((v) => v > 1000)) assert.equal(dsc(k).split(" + ").reduce((a, b) => a + +b, 0), k, `descomp ${k}`);
+  assert.equal(dsc(4352), "4000 + 300 + 50 + 2"); assert.equal(dsc(3005), "3000 + 5"); assert.equal(dsc(6000), "5000 + 1000");
+  assert.ok(rep("du", 1203).svg.includes(">unidad de millar<") && rep("du", 2203).svg.includes(">unidades de millar<"));
+  assert.equal(cuenta(plantilla("abaco", 4352, { millares: true }), "varilla"), 4);
+  assert.equal(cuenta(rep("abaco", 4352), "cuenta"), 14);
+  assert.equal((plantilla("du", 4352, { millares: true }).svg.match(/<line /g) || []).length, 4);
+  assert.equal((plantilla("descomp", 4352, { millares: true }).svg.match(/<line /g) || []).length, 4);
+  for (const [k, um, c, d, u] of [[9999, 9, 9, 9, 9], [3405, 3, 4, 0, 5], [1000, 1, 0, 0, 0]]) {
+    const r = rep("bloques", k);
+    assert.deepEqual([cuenta(r, "millar"), cuenta(r, "placa"), cuenta(r, "decena"), cuenta(r, "unidad")], [um, c, d, u], `bloques ${k}`);
+  }
+  for (let k = 1; k <= 9999; k += 7) for (const i of [0, 1, 2]) {   // el tramo contiene n, sin pasar de 10000
+    const q = pasoRecta(k), s = inicioTramoM(k, i, q);
+    assert.ok(s >= 0 && s + 30 * q <= 10000 && k >= s && k <= s + 30 * q && (k - s) % q === 0, `recta ${k}`);
+  }
+  assert.equal(cuenta(rep("recta", 4357), "marca"), 31);
 });
 
 console.log(`test_rep: ${n} pruebas OK`);

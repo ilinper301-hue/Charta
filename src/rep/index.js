@@ -19,8 +19,12 @@ export const RANGOS = {
  *  RANGOS conserva el 99 de bloques, ábaco y du porque suma.suma y combinada lo leen con Math.min(R, máx) y, con R = 100,
  *  pasar a 100 cambiaría las fichas de 1.º. Las fichas de rango > 100 usan RANGOS_C (vía maximo()). */
 export const RANGOS_C = { ...RANGOS, bloques: [1, 999], abaco: [1, 999], du: [1, 999] };
+/** 3.º (millares, MATES_3.md lote 0): las seis representaciones de 2.º hasta 9999. Solo con rango > 1000. */
+export const RANGOS_M = { ...RANGOS_C, bloques: [1, 9999], abaco: [1, 9999], du: [1, 9999], letras: [1, 9999], recta: [1, 9999], descomp: [2, 9999] };
+/** Rangos que valen en una ficha de rango R. */
+export const rangosPara = (R) => R > 1000 ? RANGOS_M : R > 100 ? RANGOS_C : RANGOS;
 /** Máximo efectivo de la representación en una ficha de rango R. */
-export const maximo = (nombre, R) => Math.min(R, (R > 100 ? RANGOS_C : RANGOS)[nombre][1]);
+export const maximo = (nombre, R) => Math.min(R, rangosPara(R)[nombre][1]);
 /** Representaciones con versión vacía "V(f)" y/o plantilla propia (columna TPL de CAT). */
 export const VACIAS = ["dado", "domino", "marco", "recta", "cuadricula"];
 export const PLANTILLAS = ["dado", "domino", "marco", "descomp", "letras", "recta", "cuadricula", "abaco", "du"];
@@ -268,7 +272,12 @@ function r_regletas(c, n) {
 }
 
 // ---------------------------------------------------------------- DESCOMPOSICIÓN
-function descompTxt(n, i, cen) {
+function descompTxt(n, i, cen, mil) {
+  if (mil && n >= 1000) {   // cuatro cifras: «4000 + 300 + 50 + 2», sin sumandos 0; los miles redondos: «3000 → 2000 + 1000»
+    const [um, r] = div(n, 1000), [cc, r2] = div(r, 100), [dd, uu] = div(r2, 10);
+    if (!r) return n === 1000 ? "900 + 100" : `${n - 1000} + 1000`;
+    return [um * 1000, cc * 100, dd * 10, uu].filter((v) => v).join(" + ");
+  }
   if (cen && n >= 100 && n !== 100) {
     // tres cifras: «300 + 40 + 5», sin sumandos 0 (305 → «300 + 5»); los cientos redondos: «200 → 100 + 100»
     const [cc, r] = div(n, 100), [dd, uu] = div(r, 10);
@@ -279,13 +288,28 @@ function descompTxt(n, i, cen) {
   if (n % 10 === 0) return n === 20 ? "10 + 10" : `${n - 10} + 10`;
   return `${Math.floor(n / 10) * 10} + ${n % 10}`;
 }
-function r_descomp(c, n, i, vacio, rango, cen) {
-  const t = descompTxt(n, i, cen);
+function r_descomp(c, n, i, vacio, rango, cen, mil) {
+  const t = descompTxt(n, i, cen, mil);
   let fs = 40;
+  if (mil && ancho(t, true, 24) > 140 && t.split(" + ").length > 2) {   // millares: en dos líneas («4000 + 300 +» / «50 + 2»)
+    const ps = t.split(" + "), lin = [ps.slice(0, 2).join(" + ") + " +", ps.slice(2).join(" + ")];
+    fs = 30;
+    while (Math.max(...lin.map((x) => ancho(x, true, fs))) > 140) fs -= 1;
+    lin.forEach((x, k) => c.text(0, -fs * 0.33 + fs * 0.6 - k * fs * 1.2, x, fs, { negrita: true, cls: "descomp" }));
+    return;
+  }
   while (ancho(t, true, fs) > 140) fs -= 1;
   c.text(0, -fs * 0.33, t, fs, { negrita: true, cls: "descomp" });
 }
-function t_descomp(c, n, i, cen) {
+function t_descomp(c, n, i, cen, mil) {
+  if (mil && n >= 1000) {   // cuatro huecos en dos filas: «__ + __ +» / «__ + __»
+    for (const [y, fin] of [[14, true], [-20, false]]) {
+      for (const x of [-36, 36]) c.line(x - 24, y - 4, x + 24, y - 4, 1.4);
+      c.text(0, y, "+", 24, { negrita: true });
+      if (fin) c.text(72, y, "+", 24, { negrita: true });
+    }
+    return;
+  }
   if (cen && n >= 100) {   // tres huecos y dos «+»
     for (const x of [-26, 26]) c.text(x, -8, "+", 26, { negrita: true });
     for (const x of [-52, 0, 52]) c.line(x - 17, -12, x + 17, -12, 1.4);
@@ -307,12 +331,29 @@ export function nombreNumero(n) {
   if (n < 30) return U[n];
   if (n === 100) return "cien";
   if (n > 100 && n < 1000) { const [cc, r] = div(n, 100); return C[cc] + (r ? " " + nombreNumero(r) : ""); }
+  if (n >= 1000 && n < 10000) { const [m, r] = div(n, 1000); return (m === 1 ? "mil" : U[m] + " mil") + (r ? " " + nombreNumero(r) : ""); }
   const [d, u] = div(n, 10);
   return (D[d] ?? String(n)) + (u ? " y " + U[u] : "");
+}
+/** Líneas del número de tres cifras (o menos) en letras: «ciento» / «cuarenta» / «y cinco». */
+function lineasCentenas(r) {
+  if (!r) return [];
+  if (r >= 100) { const [cc, r2] = div(r, 100); return [r === 100 ? "cien" : C[cc], ...lineasCentenas(r2)]; }
+  const t = nombreNumero(r);
+  if (t.includes(" y ")) { const p = t.split(" y "); return [p[0], "y " + p[1]]; }
+  return [t];
 }
 function r_letras(c, n) {
   const t = nombreNumero(n);
   let lineas = [t], fs = 40;
+  if (n >= 1000) {   // millares: «siete mil» / «ochocientos» / «setenta» / «y siete» (hasta 4 líneas)
+    const [m, r] = div(n, 1000);
+    lineas = [m === 1 ? "mil" : U[m] + " mil", ...lineasCentenas(r)];
+    fs = [0, 34, 30, 25, 21][lineas.length];
+    while (Math.max(...lineas.map((x) => ancho(x, true, fs))) > 140) fs -= 1;
+    lineas.forEach((x, k) => c.text(0, -fs * 0.33 + (lineas.length - 1) * fs * 0.55 - k * fs * 1.1, x, fs, { negrita: true, cls: "letras" }));
+    return;
+  }
   if (n > 100) {   // centenas: «ciento» / «cuarenta» / «y cinco» (hasta 3 líneas)
     const [cc, r] = div(n, 100), resto = r ? nombreNumero(r) : "";
     lineas = [C[cc]];
@@ -324,7 +365,8 @@ function r_letras(c, n) {
   while (Math.max(...lineas.map((x) => ancho(x, true, fs))) > lim) fs -= 1;
   lineas.forEach((x, k) => c.text(0, -fs * 0.33 + (lineas.length - 1) * fs * 0.55 - k * fs * 1.1, x, fs, { negrita: true, cls: "letras" }));
 }
-function t_letras(c, n, i, cen) {
+function t_letras(c, n, i, cen, mil) {
+  if (mil && n >= 1000) { for (const y of [22, -6, -34]) c.line(-66, y, 66, y, 1.4); return; }   // tres renglones
   if (cen && n >= 100) { c.line(-66, 6, 66, 6, 1.4); c.line(-66, -22, 66, -22, 1.4); }   // dos renglones
   else c.line(-66, -8, 66, -8, 1.4);
 }
@@ -337,7 +379,17 @@ export function inicioTramo(n, i) {
   if (!cand.length) for (let s = s0 - 20; s <= s0; s += 10) if (s >= 0 && s <= 970 && n - s <= 30) cand.push(s);
   return cand[(i + Math.floor(n / 10)) % cand.length];
 }
-function r_recta(c, n, i, vacio, rango, cen) {
+/** Millares: inicio del tramo de 30 marcas de `paso` en `paso` (1, 10 o 100) que contiene n, sin pasar de 10000. */
+export function inicioTramoM(n, i, paso) {
+  const g = 10 * paso, s0 = Math.floor(n / g) * g, cand = [];
+  for (let s = s0 - 2 * g; s <= s0; s += g) if (s >= 0 && s + 30 * paso <= 10000 && n - s >= 3 * paso && n - s <= 27 * paso) cand.push(s);
+  if (!cand.length) for (let s = s0 - 2 * g; s <= s0; s += g) if (s >= 0 && s + 30 * paso <= 10000 && n - s <= 30 * paso) cand.push(s);
+  return cand[(i + Math.floor(n / g)) % cand.length];
+}
+/** Paso de la recta de millares: de 100 en 100 si n es una centena exacta, de 10 en 10 si es decena, si no de 1 en 1. */
+export const pasoRecta = (n) => n % 100 === 0 ? 100 : n % 10 === 0 ? 10 : 1;
+function r_recta(c, n, i, vacio, rango, cen, mil) {
+  if (mil) return r_recta_tramo(c, n, i, vacio, pasoRecta(n));
   if (cen) return r_recta_tramo(c, n, i, vacio);
   const lw = 1.6, maxn = rango > 30 ? 100 : 30, w = 144, step = w / maxn, x0 = -w / 2, y = -8;
   c.line(x0 - 6, y, x0 + w + 6, y, lw);
@@ -357,19 +409,20 @@ function r_recta(c, n, i, vacio, rango, cen) {
   }
 }
 
-/** Recta de tres cifras: tramo de 30 números (marcas de 1 en 1, rotuladas cada 5) que empieza en una decena. */
-function r_recta_tramo(c, n, i, vacio) {
-  const lw = 1.6, w = 144, step = w / 30, x0 = -w / 2, y = -8, s = inicioTramo(n, i);
+/** Recta de tres cifras: tramo de 30 números (marcas de 1 en 1, rotuladas cada 5) que empieza en una decena.
+ *  Con `paso` (millares): 30 marcas de `paso` en `paso`, rotuladas cada 5 marcas. */
+function r_recta_tramo(c, n, i, vacio, paso = 0) {
+  const lw = 1.6, w = 144, step = w / 30, x0 = -w / 2, y = -8, s = paso ? inicioTramoM(n, i, paso) : inicioTramo(n, i), q = paso || 1;
   c.line(x0 - 6, y, x0 + w + 6, y, lw);
   for (const [sgn, xe] of [[-1, x0 - 6], [1, x0 + w + 6]])
     c.poly([[xe + sgn * 5, y], [xe, y + 3.5], [xe, y - 3.5]], { fill: INK, stroke: false });
   for (let k = 0; k <= 30; k++) {
     const big = k % 5 === 0, a = big ? 5.5 : 3;
     c.line(x0 + k * step, y - a, x0 + k * step, y + a, big ? 1.3 : 0.9, "marca");
-    if (big) c.text(x0 + k * step, y - 18, String(s + k), 7.5);
+    if (big) c.text(x0 + k * step, y - 18, String(s + k * q), paso ? 7 : 7.5);
   }
   if (!vacio) {
-    const mx = x0 + (n - s) * step;
+    const mx = x0 + (n - s) / q * step;
     c.line(mx, y + 34, mx, y + 14, 2, "flecha");
     c.poly([[mx, y + 8], [mx - 6, y + 18], [mx + 6, y + 18]], { fill: INK, stroke: false, cls: "flecha" });
   }
@@ -430,7 +483,62 @@ function _bloquesC(c, n) {
     c.rect(x + col * (cubo + cg), y0 + (cubo + cg) * r_, cubo, cubo, { lw: 1.4, cls: "unidad" });
   }
 }
-function r_bloques(c, n, i, vacio, rango, cen) {
+/** Cubo de mil en perspectiva (cara delantera s × s, fondo k), con la cuadrícula de 10 × 10 en gris. (x, y) = esquina inferior izquierda. */
+function cubo(c, x, y, s, k) {
+  const g = s / 10;
+  c.abrir("millar");
+  c.poly([[x, y + s], [x + k, y + s + k], [x + s + k, y + s + k], [x + s, y + s]], { lw: 1.2, fill: BLANCO });   // arriba
+  c.poly([[x + s, y], [x + s + k, y + k], [x + s + k, y + s + k], [x + s, y + s]], { lw: 1.2, fill: BLANCO });   // derecha
+  for (let j = 1; j < 10; j++) {
+    c.lineGris(x + j * g, y, x + j * g, y + s); c.lineGris(x, y + j * g, x + s, y + j * g);                          // delante
+    c.lineGris(x + j * g, y + s, x + j * g + k, y + s + k); c.lineGris(x + j * k / 10, y + s + j * k / 10, x + s + j * k / 10, y + s + j * k / 10);   // arriba
+    c.lineGris(x + s, y + j * g, x + s + k, y + j * g + k); c.lineGris(x + s + j * k / 10, y + j * k / 10, x + s + j * k / 10, y + s + j * k / 10);   // derecha
+  }
+  c.rect(x, y, s, s, { lw: 1.2 });
+  c.cerrar();
+}
+/** Rejilla de hasta 3 × 3 piezas: posiciones (esquina inferior izquierda) de q piezas de w × h, de arriba abajo. */
+function rejilla3(q, w, h, gap) {
+  const filas = Math.ceil(q / 3), cols = Math.min(q, 3), pos = [];
+  for (let k = 0; k < q; k++) pos.push([(k % 3) * (w + gap), (filas - 1 - Math.floor(k / 3)) * (h + gap)]);
+  return { pos, W: cols ? cols * w + (cols - 1) * gap : 0, H: filas ? filas * h + (filas - 1) * gap : 0 };
+}
+/** Bloques con millares: arriba cubos de mil y placas de cien (rejillas de 3 × 3); abajo barras de diez y cubitos. */
+function _bloquesM(c, n) {
+  const [um, r] = div(n, 1000), [cc, r2] = div(r, 100), [d, u] = div(r2, 10);
+  const s = 14, k = 5, pl = 14, gp = 3, bw = 6, ub = 3, bh = 10 * ub, gap = 2.5, cub = 7, cg = 2, sep = 10;
+  const A = rejilla3(um, s + k, s + k, gp), B = rejilla3(cc, pl, pl, gp);
+  const hTop = Math.max(A.H, B.H), nu = Math.min(u, 3);
+  const hBot = d ? bh : u ? Math.ceil(u / 3) * (cub + cg) - cg : 0, sepV = hTop && hBot ? 8 : 0, alto = hTop + sepV + hBot;
+  const wTop = A.W + (um && cc ? sep : 0) + B.W;
+  let x = -wTop / 2;
+  const yT = alto / 2 - hTop;   // base de la fila de arriba
+  A.pos.forEach(([px, py]) => cubo(c, x + px, yT + (hTop - A.H) + py, s, k));
+  if (um) x += A.W + (cc ? sep : 0);
+  B.pos.forEach(([px, py]) => {
+    const X = x + px, Y = yT + (hTop - B.H) + py;
+    c.abrir("placa");
+    c.rect(X, Y, pl, pl, { lw: 1.2 });
+    for (let j = 1; j < 10; j++) { c.lineGris(X + j * pl / 10, Y, X + j * pl / 10, Y + pl); c.lineGris(X, Y + j * pl / 10, X + pl, Y + j * pl / 10); }
+    c.cerrar();
+  });
+  const y0 = -alto / 2, wBot = (d ? d * bw + (d - 1) * gap : 0) + (d && u ? sep : 0) + (u ? nu * cub + (nu - 1) * cg : 0);
+  x = -wBot / 2;
+  for (let q = 0; q < d; q++) {
+    c.abrir("decena");
+    c.rect(x, y0, bw, bh, { lw: 1.2 });
+    for (let j = 1; j < 10; j++) c.line(x, y0 + j * ub, x + bw, y0 + j * ub, 0.4);
+    c.cerrar();
+    x += bw + gap;
+  }
+  if (d) x += sep - gap;
+  for (let q = 0; q < u; q++) { const [r_, col] = div(q, 3); c.rect(x + col * (cub + cg), y0 + (cub + cg) * r_, cub, cub, { lw: 1.2, cls: "unidad" }); }
+}
+function r_bloques(c, n, i, vacio, rango, cen, mil) {
+  if (mil) {   // pocas piezas: más grandes (hasta 1,5 veces), sin pasar de 140 × 105
+    const m = new Lienzo(); _bloquesM(m, n); const { w, h } = m.resultado();
+    return c.grupo(0, 0, Math.min(1.5, 140 / Math.max(w, 1), 105 / Math.max(h, 1)), 0, () => _bloquesM(c, n));
+  }
   if (cen) return _bloquesC(c, n);
   const [d, u] = div(n, 10);
   const total = (d ? d * 11 + (d - 1) * 5 : 0) + (d && u ? 24 : 0) + (u ? Math.min(u, 3) * 10 + (Math.min(u, 3) - 1) * 3 : 0);
@@ -515,14 +623,40 @@ function abaco3(c, cc, d, u, cuentas = true) {
   }
   c.cerrar();
 }
-function r_abaco(c, n, i, vacio, rango, cen) {
+/** Ábaco de cuatro varillas UM, C, D, U. */
+function abaco4(c, m, cc, d, u, cuentas = true) {
+  const fw = 196, fh = 100, x = -fw / 2, y = -fh / 2;
+  c.abrir("abaco");
+  c.rrect(x, y, fw, fh, 8, { lw: 1.8, cls: "marco-abaco" });
+  for (const [xr, k, lab] of [[-69, m, "UM"], [-23, cc, "C"], [23, d, "D"], [69, u, "U"]]) {
+    c.abrir("varilla");
+    c.line(xr, y + 14, xr, y + fh - 5, 1.6);
+    if (cuentas) for (let j = 0; j < k; j++) c.circle(xr, y + 14 + 4.4 + j * 8.8, 4.4, { lw: 1.6, fill: INK, cls: "cuenta" });
+    c.text(xr, y + 4, lab, 8.5);
+    c.cerrar();
+  }
+  c.cerrar();
+}
+function r_abaco(c, n, i, vacio, rango, cen, mil) {
+  if (mil) { const [m, r] = div(n, 1000), [cc, r2] = div(r, 100), [d, u] = div(r2, 10); c.grupo(0, 0, 0.7, 0, () => abaco4(c, m, cc, d, u)); return; }
   if (cen) { const [cc, r] = div(n, 100), [d, u] = div(r, 10); c.grupo(0, 0, 0.7, 0, () => abaco3(c, cc, d, u)); return; }
   const [d, u] = div(n, 10); c.grupo(0, 0, 0.7, 0, () => abaco(c, d, u));
 }
-function t_abaco(c, n, i, cen) { c.grupo(0, 0, 0.7, 0, () => cen ? abaco3(c, 0, 0, 0, false) : abaco(c, 0, 0, false)); }
+function t_abaco(c, n, i, cen, mil) { c.grupo(0, 0, 0.7, 0, () => mil ? abaco4(c, 0, 0, 0, 0, false) : cen ? abaco3(c, 0, 0, 0, false) : abaco(c, 0, 0, false)); }
 
 // ---------------------------------------------------------------- DECENAS Y UNIDADES
-function r_du(c, n, i, vacio, rango, cen) {
+/** Millares: «4 unidades de millar», «3 centenas», «5 decenas», «2 unidades» (singular/plural), en 4 filas. */
+const FILAS_M = [["unidades de millar", "unidad de millar"], ["centenas", "centena"], ["decenas", "decena"], ["unidades", "unidad"]];
+function r_du(c, n, i, vacio, rango, cen, mil) {
+  if (mil) {
+    const [m, r] = div(n, 1000), [cc, r2] = div(r, 100), [d, u] = div(r2, 10);
+    [m, cc, d, u].forEach((num, k) => {
+      const txt = FILAS_M[k][num === 1 ? 1 : 0], yy = 36 - k * 24, wn = ancho(String(num), true, 21), wt = ancho(txt, false, 13), x = -(wn + 6 + wt) / 2;
+      c.text(x, yy - 8, String(num), 21, { negrita: true, anchor: "start", cls: "du-numero" });
+      c.text(x + wn + 6, yy - 7, txt, 13, { anchor: "start", cls: "du-texto" });
+    });
+    return;
+  }
   if (cen) {   // «3 centenas 4 decenas 5 unidades» (singular/plural)
     const [cc, r] = div(n, 100), [d, u] = div(r, 10);
     [[cc, cc !== 1 ? "centenas" : "centena"], [d, d !== 1 ? "decenas" : "decena"], [u, u !== 1 ? "unidades" : "unidad"]].forEach(([num, txt], k) => {
@@ -540,7 +674,15 @@ function r_du(c, n, i, vacio, rango, cen) {
     c.text(x + wn + 8, yy - 7, txt, 18, { anchor: "start", cls: "du-texto" });
   });
 }
-function t_du(c, n, i, cen) {
+function t_du(c, n, i, cen, mil) {
+  if (mil) {
+    FILAS_M.forEach(([txt], k) => {
+      const yy = 36 - k * 24, wt = ancho(txt, false, 12), lw = 22, x = -(lw + 5 + wt) / 2;
+      c.line(x, yy - 6, x + lw, yy - 6, 1.4);
+      c.text(x + lw + 5, yy - 6, txt, 12, { anchor: "start" });
+    });
+    return;
+  }
   if (cen) {
     ["centenas", "decenas", "unidades"].forEach((txt, k) => {
       const yy = 30 - k * 30, wt = ancho(txt, false, 16), lw = 34, x = -(lw + 8 + wt) / 2;
@@ -594,22 +736,24 @@ function comprobar(nombre) { if (!DIBUJO[nombre]) throw new Error(`Representaci�
  * Representación del número n. `i` desambigua variantes (descomposición, dominó, objetos…).
  * `vacio` solo afecta a dado, domino, marco, recta y cuadricula.
  * `centenas` (modo centenas: ficha de rango > 100; implícito si n > 100): ábaco C/D/U, du con centenas, bloques con placas, recta de tramo, descomp de 3 cifras.
+ * `millares` (3.º, ficha de rango > 1000; implícito si n > 999): bloques con cubos de mil, ábaco y du de 4 órdenes, letras,
+ * recta de 1 en 1, de 10 en 10 o de 100 en 100 (según n) y descomp de 4 cifras.
  * `rango` (solo recta): 30 o 100 (en el motor es RANGO = R de la ficha); por defecto 30 si n ≤ 30, si no 100.
  */
-export function rep(nombre, n, { i = 0, vacio = false, rango, centenas = false } = {}) {
+export function rep(nombre, n, { i = 0, vacio = false, rango, centenas = false, millares = false } = {}) {
   comprobar(nombre);
-  const c = new Lienzo();
-  DIBUJO[nombre](c, n, i, vacio, rango ?? (n <= 30 ? 30 : 100), centenas || n > 100);
+  const c = new Lienzo(), mil = millares || n > 999;
+  DIBUJO[nombre](c, n, i, vacio, rango ?? (n <= 30 ? 30 : 100), centenas || mil || n > 100, mil);
   return c.resultado();
 }
 
 /** Columna TPL de CAT: plantilla vacía para que el alumno dibuje; null si no hay. */
-export function plantilla(nombre, n, { i = 0, rango, centenas = false } = {}) {
+export function plantilla(nombre, n, { i = 0, rango, centenas = false, millares = false } = {}) {
   comprobar(nombre);
-  if (VACIAS.includes(nombre)) return rep(nombre, n, { i, vacio: true, rango, centenas });
+  if (VACIAS.includes(nombre)) return rep(nombre, n, { i, vacio: true, rango, centenas, millares });
   if (!TPL[nombre]) return null;
-  const c = new Lienzo();
-  TPL[nombre](c, n, i, centenas || n > 100);
+  const c = new Lienzo(), mil = millares || n > 999;
+  TPL[nombre](c, n, i, centenas || mil || n > 100, mil);
   return c.resultado();
 }
 

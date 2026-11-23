@@ -23048,6 +23048,285 @@
    "a919ec637c8bc4f7"
   ]
  },
+ "rep.romanos": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Los números romanos",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "rep.romanos",
+       "tipoVersion": 1,
+       "params": {
+        "modo": null,
+        "ayuda": true,
+        "rango": 100
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Escribe con cifras o con números romanos,\nsegún corresponda.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "n": 59,
+          "romano": "LIX",
+          "sentido": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           59
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "n": 86,
+          "romano": "LXXXVI",
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           "LXXXVI"
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "n": 10,
+          "romano": "X",
+          "sentido": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "n": 15,
+          "romano": "XV",
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           "XV"
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "n": 32,
+          "romano": "XXXII",
+          "sentido": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           32
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "n": 99,
+          "romano": "XCIX",
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           "XCIX"
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "n": 61,
+          "romano": "LXI",
+          "sentido": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           61
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "n": 89,
+          "romano": "LXXXIX",
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           "LXXXIX"
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "n": 36,
+          "romano": "XXXVI",
+          "sentido": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           36
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "n": 53,
+          "romano": "LIII",
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           "LIII"
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "n": 76,
+          "romano": "LXXVI",
+          "sentido": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           76
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "n": 19,
+          "romano": "XIX",
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           "XIX"
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "n": 82,
+          "romano": "LXXXII",
+          "sentido": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           82
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "n": 22,
+          "romano": "XXII",
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           "XXII"
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "n": 45,
+          "romano": "XLV",
+          "sentido": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           45
+          ]
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "n": 68,
+          "romano": "LXVIII",
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           "LXVIII"
+          ]
+         }
+        },
+        {
+         "id": "a1e17",
+         "datos": {
+          "n": 40,
+          "romano": "XL",
+          "sentido": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           40
+          ]
+         }
+        },
+        {
+         "id": "a1e18",
+         "datos": {
+          "n": 1,
+          "romano": "I",
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           "I"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "988d8518c7f4d02b"
+  ],
+  "svgSolucion": [
+   "70f6f95d52372af6"
+  ]
+ },
  "restar.decenas": {
   "ficha": {
    "schemaVersion": 1,
@@ -40410,6 +40689,432 @@
   ],
   "svgSolucion": [
    "78c5df4dabfb7a70"
+  ]
+ },
+ "3.º bloques y recta hasta 9999": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Los bloques de base diez y la recta numérica",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 8,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "rep.bloques",
+       "tipoVersion": 1,
+       "params": {
+        "lectura": false,
+        "rango": 9999
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Escribe en el cuadrito el número que representa cada casilla.\nEn la última fila te toca a ti: haz lo que dice cada casilla.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "rep": "bloques",
+          "n": 2511,
+          "accion": "leer",
+          "centenas": true,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           2511
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "rep": "bloques",
+          "n": 3785,
+          "accion": "leer",
+          "centenas": true,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           3785
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "rep": "bloques",
+          "n": 9987,
+          "accion": "leer",
+          "centenas": true,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           9987
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "rep": "bloques",
+          "n": 8663,
+          "accion": "dibujar",
+          "centenas": true,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "rep": "bloques",
+          "n": 2174,
+          "accion": "dibujar",
+          "centenas": true,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "rep": "bloques",
+          "n": 6053,
+          "accion": "dibujar",
+          "centenas": true,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": []
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "rep.recta",
+       "tipoVersion": 1,
+       "params": {
+        "lectura": false,
+        "rango": 9999
+       },
+       "tamano": "media",
+       "color": "verde",
+       "enunciado": "Escribe en el cuadrito el número que representa cada casilla.\nEn la última fila te toca a ti: haz lo que dice cada casilla.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "rep": "recta",
+          "n": 1100,
+          "accion": "leer",
+          "centenas": true,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           1100
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "rep": "recta",
+          "n": 5050,
+          "accion": "leer",
+          "centenas": true,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           5050
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "rep": "recta",
+          "n": 9439,
+          "accion": "leer",
+          "centenas": true,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           9439
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "rep": "recta",
+          "n": 4300,
+          "accion": "dibujar",
+          "centenas": true,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "rep": "recta",
+          "n": 9830,
+          "accion": "dibujar",
+          "centenas": true,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a2e6",
+         "datos": {
+          "rep": "recta",
+          "n": 1086,
+          "accion": "dibujar",
+          "centenas": true,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": []
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "8cd27a8f80eab0d2"
+  ],
+  "svgSolucion": [
+   "314544390ed90b21"
+  ]
+ },
+ "3.º ¿Qué número es? hasta 9999": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "¿Qué número es?",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 8,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "combinada.combinada",
+       "tipoVersion": 1,
+       "params": {
+        "rango": 9999
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Observa cada casilla y escribe en el cuadrito el número que representa.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "rep": "bloques",
+          "n": 4971,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           4971
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "rep": "letras",
+          "n": 9276,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           9276
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "rep": "abaco",
+          "n": 7480,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           7480
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "rep": "descomp",
+          "n": 939,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           939
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "rep": "du",
+          "n": 4271,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           4271
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "rep": "recta",
+          "n": 4971,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           4971
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "rep": "letras",
+          "n": 4971,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           4971
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "rep": "recta",
+          "n": 7480,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           7480
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "rep": "bloques",
+          "n": 2808,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           2808
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "rep": "du",
+          "n": 1858,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           1858
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "rep": "abaco",
+          "n": 4271,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           4271
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "rep": "descomp",
+          "n": 4212,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           4212
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "e9e0a358ff37198a"
+  ],
+  "svgSolucion": [
+   "9eade3809096cc71"
   ]
  },
  "2.º sumas en vertical": {

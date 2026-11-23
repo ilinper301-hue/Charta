@@ -10,6 +10,7 @@ import metadatos as META
 import modelos_app as APP
 import modelos_lengua as LEN
 import modelos_2 as M2
+import modelos_3 as M3
 
 def titulo(m):
     modo = next((o for o in m["opciones"] if o["id"] == "modo" and o["tipo"] == "opcion"), None)
@@ -22,14 +23,15 @@ modelos = [{**m, "tamanos": list(m["tamanos"]), "titulo": titulo(m), "color": g.
 modelos += [{**m, "tamanos": list(m["tamanos"]), "metadatos": META.metadatos(m["id"])} for m in APP.MODELOS_APP]
 modelos += [{**m, "tamanos": list(m["tamanos"]), "metadatos": META.metadatos(m["id"])} for m in LEN.MODELOS_LENGUA]
 modelos += [{**m, "tamanos": list(m["tamanos"]), "metadatos": META.metadatos(m["id"])} for m in M2.MODELOS_2]
+modelos += [{**m, "tamanos": list(m["tamanos"]), "metadatos": META.metadatos(m["id"])} for m in M3.MODELOS_3]
 # Un modelo en varios cursos (MATES_2.md): los de 1.º que sirven en 2.º llevan sus rangos de 2.º.
 for m in modelos:
-    extra = M2.cursos_extra(m)
+    extra = {**M2.cursos_extra(m), **M3.cursos_extra(m)}   # 2.º y 3.º (MATES_3.md)
     if extra: m["cursos"] = extra
     m["opciones"] = M2.opciones_2(m)   # 2.º: opciones solo con tres cifras (rmin)
 # Bloques por materia (cada materia numera los suyos) y letra por defecto de cada materia (Andika si no se dice).
-datos = {"cursos": {**MOD.CURSOS, M2.CURSO: M2.NOMBRE}, "materias": {**MOD.MATERIAS, LEN.MATERIA: LEN.NOMBRE},
-         "bloques": {"matematicas": dict(sorted({**MOD.BLOQUES, **APP.BLOQUES, **M2.BLOQUES_2}.items())), LEN.MATERIA: LEN.BLOQUES},
+datos = {"cursos": {**MOD.CURSOS, M2.CURSO: M2.NOMBRE, M3.CURSO: M3.NOMBRE}, "materias": {**MOD.MATERIAS, LEN.MATERIA: LEN.NOMBRE},
+         "bloques": {"matematicas": dict(sorted({**MOD.BLOQUES, **APP.BLOQUES, **M2.BLOQUES_2, **M3.BLOQUES_3}.items())), LEN.MATERIA: LEN.BLOQUES},
          "fuentes": {LEN.MATERIA: LEN.FUENTE}, "modelos": modelos}
 # Fase 7 (R9): JSON compacto (sin espacios ni sangrías, −36 %); un modelo por línea para que los cambios se lean en git.
 compacto = lambda x: json.dumps(x, ensure_ascii=False, separators=(",", ":"))

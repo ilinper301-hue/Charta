@@ -6,10 +6,12 @@
 // casillas vecinas (también en diagonal) nunca repiten número y se repiten al menos 3 números.
 import { registrar } from "../nucleo/tipos.js";
 import { H, M, W } from "../render/papel.js";
-import { RANGOS } from "../rep/index.js";
+import { rangosPara } from "../rep/index.js";
 import { tercios } from "./_rep.js";
 
 export const COMB_30 = ["dedos", "marco", "descomp", "dado", "palotes", "recta", "regletas", "letras", "objetos", "marco", "domino", "domino"];
+/** 3.º (rango > 1000): las seis representaciones con millares, dos veces (la media página las tiene todas). */
+export const COMB_1000 = ["bloques", "letras", "abaco", "descomp", "du", "recta", "letras", "recta", "bloques", "du", "abaco", "descomp"];
 export const COMB_100 = ["bloques", "cuadricula", "monedas", "letras", "descomp", "recta", "palotes", "regletas", "abaco", "du", "cuadricula", "atados"];
 /** Nombre de cada representación (columna NOM de CAT del motor). */
 export const NOMBRES = {
@@ -18,8 +20,14 @@ export const NOMBRES = {
   cuadricula: "Cuadrícula de 100", monedas: "Monedas", abaco: "Ábaco", du: "Decenas y unidades", atados: "Palitos y atados",
 };
 
+/** Con millares, la etiqueta de «du». */
+const NOMBRES_M = { du: "UM, C, D y U", bloques: "Bloques" };
+/** Representaciones de la ficha según el rango. */
+export const clavesComb = (R) => R > 1000 ? COMB_1000 : R <= 30 ? COMB_30 : COMB_100;
+
 /** nums_combinada(): un número por casilla, con los repetidos del reto. */
 function numsCombinada(keys, R, azar) {
+  const RANGOS = rangosPara(R);
   const th = tercios(1, R);
   let mejor = null;
   for (let it = 0; it < 20000; it++) {
@@ -47,12 +55,12 @@ export default registrar({
   id: "combinada.combinada",
   version: 1,
   generar(params, azar, { tamano }) {
-    const R = params.rango ?? 20, claves = R <= 30 ? COMB_30 : COMB_100, nums = numsCombinada(claves, R, azar);
+    const R = params.rango ?? 20, claves = clavesComb(R), nums = numsCombinada(claves, R, azar), mil = R > 1000;
     if (!nums) throw new Error("Esta ficha necesita un rango máximo mayor.");
     const cnt = tamano === "media" ? 6 : 12;
     return {
       enunciado: "Observa cada casilla y escribe en el cuadrito el número que representa.",
-      ejercicios: claves.slice(0, cnt).map((rep, i) => ({ datos: { rep, n: nums[i] }, solucion: { huecos: [nums[i]] } })),
+      ejercicios: claves.slice(0, cnt).map((rep, i) => ({ datos: { rep, n: nums[i], ...(mil ? { millares: true } : {}) }, solucion: { huecos: [nums[i]] } })),
     };
   },
   dibujar(p, act) {
@@ -61,9 +69,11 @@ export default registrar({
     act.ejercicios.forEach((e, idx) => p.ejercicio(e.id, () => {
       const r = Math.floor(idx / 3), col = idx % 3, x = M + col * (cw + GX), y = top - (r + 1) * ch - r * GY, { rep, n } = e.datos;
       p.tarjeta(x, y, cw, ch);
-      p.text(x + 12, y + ch - 17, NOMBRES[rep].toUpperCase(), 8.5, { f: "PM", gris: 0.3 });
-      p.cuadrito(x, y, cw, ch, 30, e.solucion.huecos[0]);
-      p.rep(rep, n, x + cw / 2, y + ch * 0.40, { i: idx, rango: R });
+      const mil = !!e.datos.millares;
+      p.text(x + 12, y + ch - 17, ((mil && NOMBRES_M[rep]) || NOMBRES[rep]).toUpperCase(), 8.5, { f: "PM", gris: 0.3 });
+      if (mil) p.caja(x + cw - 9 - 58, y + ch - 9 - 30, 58, 30, null, 18, e.solucion.huecos[0]);   // hueco para 4 cifras
+      else p.cuadrito(x, y, cw, ch, 30, e.solucion.huecos[0]);
+      p.rep(rep, n, x + cw / 2, y + ch * 0.40, { i: idx, rango: R, millares: mil, escala: mil && rep === "bloques" ? 0.8 : 1 });   // celdas más bajas que en rep.*
     }));
     if (act.tamano === "media") return;
     p.tarjeta(M, M, W - 2 * M, RETO_H);

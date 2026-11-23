@@ -141,6 +141,7 @@ META = {
     "multiplicar.tablas": (2, 12, "multiplicar tablas cálculo_mental factor"),
     "multiplicar.problemas": (3, 15, "multiplicar problemas texto razonamiento grupos_iguales"),
     "multiplicar.reparto": (3, 10, "repartir mitad tercio partes_iguales división"),
+    "rep.romanos": (3, 10, "números romanos numeración_romana símbolos"),
     # Bloque 11 · estadística y patrones
     "estadistica.pictograma": (2, 12, "estadística pictograma datos"),
     "estadistica.recuento": (1, 10, "estadística recuento datos contar"),

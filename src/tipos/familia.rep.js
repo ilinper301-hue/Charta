@@ -15,3 +15,4 @@ import "./rep.monedas.js";
 import "./rep.abaco.js";
 import "./rep.du.js";
 import "./rep.atados.js";
+import "./rep.romanos.js";

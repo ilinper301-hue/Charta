@@ -1,10 +1,11 @@
 // Charta · invariantes de la familia «combinada» y de «suma» (ver tests/invariantes.js).
 import assert from "node:assert/strict";
-import { RANGOS } from "../../src/rep/index.js";
+import { RANGOS, RANGOS_M } from "../../src/rep/index.js";
 import { ent, unicos, cuantos } from "./_ayuda.js";
 
 const COMB_30 = ["dedos", "marco", "descomp", "dado", "palotes", "recta", "regletas", "letras", "objetos", "marco", "domino", "domino"];
 const COMB_100 = ["bloques", "cuadricula", "monedas", "letras", "descomp", "recta", "palotes", "regletas", "abaco", "du", "cuadricula", "atados"];
+const COMB_1000 = ["bloques", "letras", "abaco", "descomp", "du", "recta", "letras", "recta", "bloques", "du", "abaco", "descomp"];
 const RES_30 = ["marco", "palotes", "recta", "regletas", "objetos", "domino"];
 const POOL_30 = ["dedos", "dado", "marco", "objetos", "domino", "regletas", "palotes", "letras", "recta"];
 const RES_100 = ["abaco", "bloques", "cuadricula", "monedas", "du", "recta"];
@@ -12,11 +13,13 @@ const POOL_100 = ["bloques", "monedas", "cuadricula", "letras", "recta", "atados
 
 export default {
   "combinada.combinada"(act, tam) {
-    const R = act.params.rango ?? 20, claves = R <= 30 ? COMB_30 : COMB_100, es = act.ejercicios;
+    const R = act.params.rango ?? 20, mil = R > 1000, claves = mil ? COMB_1000 : R <= 30 ? COMB_30 : COMB_100, es = act.ejercicios;
     cuantos(es, tam === "media" ? 6 : 12);
-    es.forEach(({ datos: { rep, n }, solucion }, i) => {
+    if (tam === "media" && mil) assert.equal(new Set(es.map((e) => e.datos.rep)).size, 6, "media con millares: las seis representaciones");
+    es.forEach(({ datos: { rep, n, millares }, solucion }, i) => {
       assert.equal(rep, claves[i], "representación de la casilla");
-      const [lo, max] = RANGOS[rep]; ent(n, lo, Math.min(max, R), `n (${rep})`);
+      assert.equal(millares, mil ? true : undefined, "millares solo con rango > 1000");
+      const [lo, max] = (mil ? RANGOS_M : RANGOS)[rep]; ent(n, lo, Math.min(max, R), `n (${rep})`);
       assert.deepEqual(solucion.huecos, [n]);
     });
     es.forEach((a, i) => es.slice(i + 1).forEach((b, k) => {

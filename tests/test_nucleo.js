@@ -49,7 +49,7 @@ prueba("mezclar y azar", () => {
 });
 
 prueba("catálogo generado desde modelos.py y modelos_app.py", () => {
-  assert.equal(CATALOGO.modelos.length, 172);   // 94 del motor + 12 solo de la app (4 de problemas y 8 trucos de Calculi) + 34 de Lengua (lote 1: 6 letra.* y 5 silaba.*; lote 2: 6 fono.*, 8 palabra.* y 2 orto.*; lote 3: 5 frase.*; lote 4: 6 escritura.*; lote 5: 5 lectura.*; petición de Iván 12-11-2026: palabra.dibuja y escritura.ordena)   // lote 3b de 2.º: + medida.euros y medida.masa (153); lote 4: + geometria.lados e itinerario (155); lote 5: + problemas.dospasos, problemas.dinero y 10 trucos de 2.º (167); lote 6: + 5 multiplicar.* (172)
+  assert.equal(CATALOGO.modelos.length, 173);   // 94 del motor + 12 solo de la app (4 de problemas y 8 trucos de Calculi) + 34 de Lengua (lote 1: 6 letra.* y 5 silaba.*; lote 2: 6 fono.*, 8 palabra.* y 2 orto.*; lote 3: 5 frase.*; lote 4: 6 escritura.*; lote 5: 5 lectura.*; petición de Iván 12-11-2026: palabra.dibuja y escritura.ordena)   // lote 3b de 2.º: + medida.euros y medida.masa (153); lote 4: + geometria.lados e itinerario (155); lote 5: + problemas.dospasos, problemas.dinero y 10 trucos de 2.º (167); lote 6: + 5 multiplicar.* (172); 3.º lote 0: + rep.romanos (173)
   for (const m of CATALOGO.modelos) {
     assert.ok(["amarillo", "rosa", "azul", "verde"].includes(m.color), m.id);
     assert.ok(m.titulo, m.id);
@@ -150,7 +150,7 @@ prueba("build.py: dist/index.html autocontenido y el paquete funciona", () => {
 
 prueba("un modelo en varios cursos (MATES_2.md): rangos y curso de la ficha", () => {
   const m = POR_ID["rep.letras"];
-  assert.deepEqual(cursosDe(m), [1, 2]);
+  assert.deepEqual(cursosDe(m), [1, 2, 3]);
   assert.deepEqual(cursosDe(POR_ID["rep.dedos"]), [1]);
   assert.deepEqual(rangosDe("rep.letras", 1), m.rangos);
   assert.deepEqual(rangosDe("rep.letras", 2), [100, 200, 300, 400, 500, 600, 700, 800, 900, 999]);
@@ -169,6 +169,20 @@ prueba("un modelo en varios cursos (MATES_2.md): rangos y curso de la ficha", ()
   assert.equal(a.curso, 1); assert.equal(b.curso, 2);
   assert.deepEqual({ ...b, curso: 1 }, a);
   assert.equal(generar({ actividades: [{ tipo: "rep.dedos", curso: 2 }] }, 5).curso, 1);
+});
+
+prueba("3.º (MATES_3.md, lote 0): millares y romanos", () => {
+  assert.equal(CATALOGO.cursos[3], "3.º de Primaria");
+  assert.deepEqual(rangosDe("rep.letras", 3), [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 9999]);
+  assert.equal(porDefecto("rep.letras", 3).rango, 9999);
+  assert.equal(cursoDe("rep.letras", { rango: 4000 }), 3);
+  assert.deepEqual(rangosDe("combinada.combinada", 3)[0], 2000);
+  assert.deepEqual(cursosDe(POR_ID["rep.romanos"]), [3]);
+  assert.equal(generar({ actividades: [{ tipo: "rep.du", curso: 3, params: { rango: 9999 } }] }, 5).titulo, "Millares, centenas, decenas y unidades");
+  const f = generar({ actividades: [{ tipo: "rep.letras", curso: 3, params: { rango: 9999 } }] }, 5);
+  assert.equal(f.curso, 3);
+  assert.ok(f.paginas[0].actividades[0].ejercicios.every((e) => e.datos.millares === true && e.datos.n <= 9999));
+  assert.ok(!JSON.stringify(f).match(/\d\.\d{3}\b/), "sin punto de millares");
 });
 
 prueba("opciones solo con tres cifras (rmin, 2.º)", () => {
