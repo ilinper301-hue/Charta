@@ -21,7 +21,8 @@ Sin cambios de código. El plan y el estado de sus fases están en **`PLAN-DISEN
 
 ## Variantes «solo el orden» (23-11-2026)
 - [x] Alumnos → «Las variantes cambian: Los ejercicios | Solo el orden» (visible si no son «Todas iguales»). Con «Solo el orden», B, C… = la A con los ejercicios cambiados de sitio (ninguno en el mismo sitio), en 115 tipos (`ORDEN_LIBRE` de `src/nucleo/orden.js`); los demás salen iguales y la app lo avisa. Composición `orden: true`, ficha `variantesOrden: true`. `tests/test_orden.js` (en `npm test` y `test:rapido`); `npm run test:rapido` y `tests/navegador.py` en verde.
-- [ ] Siguiente posible: orden **dentro** del ejercicio (las 4 palabras de «La que no es del grupo», las opciones de «Elige la letra», el banco de «Cada palabra en su caja», las figuras de «Lee y colorea», las columnas de las fichas de unir) y orden por grupos en los que alternan (rep.*, series, problemas mixtos).
+- [x] Orden **dentro** de cada ejercicio (23-11-2026, `DENTRO` y `UNIR` de `orden.js`): opciones de elegir (letra/sílaba/palabra que falta, ortografía, figuras, cuerpos, líneas, preguntas de elegir), rodear una (sonido inicial, la más larga, la intrusa), piezas para ordenar (sílabas, letras de «Miro y escribo», palabras de la frase, números, frases de la historia; nunca ya ordenadas), dos números (entre, mayor, signos), fila de «Busca la letra», banco de «Cada palabra en su caja», figuras de «Lee y colorea», pistas del número oculto, figuras de contar y recuento, pares e impares, días y meses, vasos; en las de unir (operaciones, mayúsculas, rimas, contrarios) las dos columnas por separado. Soluciones recalculadas. 124 de 172 tipos cambian algo (antes 115).
+- [ ] Siguiente posible: orden por grupos en los que alternan (rep.*, series, problemas mixtos) y sumandos (a + b → b + a).
 
 ## Resumen de lo hecho
 - Motor de referencia en Python (Fase 1) con compositor de página y API `generar(spec)`; `tests/test_motor.py` en verde.
