@@ -50,29 +50,31 @@ export function niveles3(pares, nivel, lleva, q = "") {
 
 // Lote 2 · sumas y restas en vertical (columnas C, D, U), niveles «u», «d», «ud». Comprobación independiente de _tres.js:
 // llevadas columna a columna con las cifras, como se hace a mano.
-const cif = (n) => [n % 10, Math.floor(n / 10) % 10, Math.floor(n / 100) % 10];
-/** Suma de xs: [llevada de U a D, llevada de D a C] (cantidades). */
+const cif = (n) => [n % 10, Math.floor(n / 10) % 10, Math.floor(n / 100) % 10, Math.floor(n / 1000) % 10];
+/** Suma de xs: [llevada de U a D, de D a C, de C a UM] (cantidades; la tercera solo con 4 cifras). */
 export function colsSuma(xs) {
   let c = 0; const out = [];
-  for (const k of [0, 1]) { const s = xs.reduce((t, v) => t + cif(v)[k], c); c = (s - (s % 10)) / 10; out.push(c); }
+  for (const k of [0, 1, 2]) { const s = xs.reduce((t, v) => t + cif(v)[k], c); c = (s - (s % 10)) / 10; out.push(c); }
   return out;
 }
-/** a − b: [¿se pide en U?, ¿se pide en D?]. */
+/** a − b: [¿se pide en U?, ¿se pide en D?, ¿se pide en C?]. */
 export function colsResta(a, b) {
-  const x = cif(a), y = cif(b), pu = y[0] > x[0];
-  return [pu, y[1] + (pu ? 1 : 0) > x[1]];
+  const x = cif(a), y = cif(b), pu = y[0] > x[0], pd = y[1] + (pu ? 1 : 0) > x[1];
+  return [pu, pd, y[2] + (pd ? 1 : 0) > x[2]];
 }
 /** Nivel en vertical: llevs = [[¿U?, ¿D?], …] por ejercicio (booleanos). sin · con · mezcla · u · d · ud. */
 export function nivelesV(llevs, nivel, q = "") {
   nivel = nivel || "sin";
-  const alguna = ([u, d]) => u || d;
+  const alguna = ([u, d, c]) => u || d || c;
   const todos = (f, m) => assert.ok(llevs.every(f), `${nivel}: ${m} ${q}`);
   if (nivel === "sin") todos((l) => !alguna(l), "hay llevadas");
   if (nivel === "con") todos(alguna, "falta llevada");
   if (nivel === "mezcla") assert.equal(llevs.filter(alguna).length, llevs.length / 2, `mezcla: no hay mitad y mitad ${q}`);
-  if (nivel === "u") todos(([u, d]) => u && !d, "debe llevar solo en U");
-  if (nivel === "d") todos(([u, d]) => !u && d, "debe llevar solo en D");
-  if (nivel === "ud") todos(([u, d]) => u && d, "debe llevar en U y en D");
+  if (nivel === "u") todos(([u, d, c]) => u && !d && !c, "debe llevar solo en U");
+  if (nivel === "d") todos(([u, d, c]) => !u && d && !c, "debe llevar solo en D");
+  if (nivel === "ud") todos(([u, d, c]) => u && d && !c, "debe llevar en U y en D");
 }
 /** Las tres cifras (C, D, U) de t ≤ 999. */
 export const cdu = (t) => [Math.floor(t / 100), Math.floor(t / 10) % 10, t % 10];
+/** Las cuatro cifras (UM, C, D, U) de t ≤ 9999. */
+export const umcdu = (t) => [Math.floor(t / 1000), ...cdu(t % 1000)];

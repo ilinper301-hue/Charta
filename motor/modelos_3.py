@@ -32,6 +32,12 @@ EN_3 = {
         "juegos.laberinto", "juegos.une", "juegos.cadena", "juegos.oculto",
         "problemas.suma", "problemas.resta", "problemas.mixtos", "problemas.barras",
         "trucos.sumar9", "trucos.masmenos10")},
+    # Lote 2 · 🔧 valor posicional con millares (con 1000, el de 2.º) y comparar con cuatro cifras
+    **{i: (1000, 9999, 9999) for i in ("orden.signos", "valor.descdu", "valor.dunum", "valor.cifra", "valor.canje", "valor.pares")},
+    # Lote 2 · 🔧 sumas y restas en vertical con cuatro cifras (UM, C, D, U): tres sumandos y prueba de la resta incluidos
+    **{i: (1000, 9999, 9999) for i in ("sumar.vertical", "restar.vertical")},
+    # Lote 2 · 🔧 centenas y millares redondos, recta y encadenadas con saltos de 10, 100 y 1000
+    **{i: (1000, 9999, 9999) for i in ("sumar.decenas", "restar.decenas", "sumar.recta", "restar.recta", "sumar.encadenadas", "restar.encadenadas")},
     # Lote 1 · ♻ sin rango o con sus rangos de 1.º (None = los mismos que en 1.º)
     **{i: None for i in (
         "geometria.figuras", "geometria.cuerpos", "geometria.posiciones", "geometria.simetria", "geometria.copia",
@@ -47,6 +53,14 @@ def _n3(bloque, familia, clave, nombre, descripcion, opciones, titulo, color, ra
 
 
 MODELOS_3 = [
+    # Lote 2 · redondeo y estimación (3.º; con millares: desde rango 2000 y 3000)
+    _n3(3, "orden", "redondea", "Redondea", "Redondear números de cuatro cifras a la decena, a la centena o al millar.",
+        [op("a", "Redondea a", [(None, "Mezcla (decena, centena y millar)"), ("decena", "La decena"), ("centena", "La centena"), ("millar", "El millar")])],
+        "REDONDEA", "amarillo", rangos_=rangos(2000), rango=9999, tam=AMBOS),
+    _n3(3, "orden", "estima", "Estima", "Redondear los números y sumar o restar para dar un resultado aproximado.",
+        [op("a", "Redondea", [(None, "Al millar"), ("centena", "A la centena")]),
+         op("op", "Operación", [(None, "Sumas y restas"), ("suma", "Solo sumas"), ("resta", "Solo restas")])],
+        "ESTIMA", "azul", rangos_=rangos(3000), rango=9999, tam=AMBOS),
     # Lote 0 · números romanos hasta 100 (I, V, X, L, C)
     _n3(1, "rep", "romanos", "Los números romanos", "Pasar de números romanos (I, V, X, L, C) a números y al revés, hasta 100.",
         [op("modo", "Tarea", [(None, "Los dos sentidos"), ("leer", "Romano → número (XIV = 14)"), ("escribir", "Número → romano (14 = XIV)")]),

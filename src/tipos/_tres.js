@@ -63,19 +63,20 @@ export function paresSuma3(R, nivel, cnt, azar) { return sortear(SUMA, ([a, b], 
 export function paresResta3(R, nivel, cnt, azar) { return sortear(RESTA, ([a, b], R) => a <= R && b < a, R, nivel, cnt, azar); }
 
 // ---------------------------------------------------------------- Lote 2 · sumas y restas en vertical (columnas C, D, U)
-/** Llevadas de una suma de varios números: [unidades → decenas, decenas → centenas] (con tres sumandos pueden ser 2). */
+/** Llevadas de una suma de varios números: [unidades → decenas, decenas → centenas, centenas → millares] (con tres sumandos pueden ser 2; la tercera solo con 4 cifras). */
 export function llevadasSuma(xs) {
   const cu = Math.floor(xs.reduce((t, v) => t + (v % 10), 0) / 10);
   const cd = Math.floor((xs.reduce((t, v) => t + (Math.floor(v / 10) % 10), 0) + cu) / 10);
-  return [cu, cd];
+  const cc = Math.floor((xs.reduce((t, v) => t + (Math.floor(v / 100) % 10), 0) + cd) / 10);
+  return [cu, cd, cc];
 }
-/** Restas «pidiendo»: [en las unidades, en las decenas] (b2 > a2; b1 + 1 > a1 si se pidió en las unidades). */
+/** Restas «pidiendo»: [en las unidades, en las decenas, en las centenas] (b2 > a2; b1 + 1 > a1 si se pidió en las unidades; la tercera solo con 4 cifras). */
 export function llevadasResta(a, b) {
-  const pu = b % 10 > a % 10;
-  return [pu, (Math.floor(b / 10) % 10) + (pu ? 1 : 0) > Math.floor(a / 10) % 10];
+  const pu = b % 10 > a % 10, pd = (Math.floor(b / 10) % 10) + (pu ? 1 : 0) > Math.floor(a / 10) % 10;
+  return [pu, pd, (Math.floor(b / 100) % 10) + (pd ? 1 : 0) > Math.floor(a / 100) % 10];
 }
-/** ¿[en U, en D] cumple el nivel? sin = ninguna · con = alguna · u = solo U · d = solo D · ud = las dos. */
-const cumple = (nivel, [u, d]) => (nivel === "sin" ? !u && !d : nivel === "con" ? u || d : nivel === "u" ? u && !d : nivel === "d" ? !u && d : u && d);
+/** ¿[en U, en D, en C] cumple el nivel? sin = ninguna · con = alguna · u = solo U · d = solo D · ud = U y D (y no en C). */
+const cumple = (nivel, [u, d, c = false]) => (nivel === "sin" ? !u && !d && !c : nivel === "con" ? u || d || c : nivel === "u" ? u && !d && !c : nivel === "d" ? !u && d && !c : u && d && !c);
 
 const VSUMA2 = [
   (R, z) => { const a = z.entero(100, R - 1); return [a, z.entero(1, Math.min(9, R - a))]; },
@@ -91,6 +92,25 @@ const VRESTA = [
   (R, z) => [z.entero(101, R), z.entero(1, 9)],
   (R, z) => [z.entero(110, R), z.entero(10, 99)],
   (R, z) => (R < 201 ? null : (() => { const a = z.entero(201, R); return [a, z.entero(100, a - 1)]; })()),
+];
+
+// 3.º (rango > 1000): cuatro cifras. El primero (a) tiene 4; los demás, de 1 a 4 (mismo orden de grupos que en 3 cifras).
+const VSUMA2_4 = [
+  (R, z) => [z.entero(1000, R - 10), z.entero(10, 99)],
+  (R, z) => [z.entero(1000, R - 100), z.entero(100, 999)],
+  (R, z) => (R < 2000 ? null : (() => { const a = z.entero(1000, R - 1000); return [a, z.entero(1000, Math.max(1000, R - a))]; })()),
+  (R, z) => { const a = z.entero(1000, R - 1); return [a, z.entero(1, Math.min(9, R - a))]; },
+];
+const VSUMA3_4 = [
+  (R, z) => [z.entero(1000, R - 1100), z.entero(100, 999), z.entero(10, 99)],
+  (R, z) => [z.entero(1000, R - 220), z.entero(10, 99), z.entero(10, 99)],
+  (R, z) => [z.entero(1000, R - 1100), z.entero(100, 999), z.entero(1, 9)],
+];
+const VRESTA_4 = [
+  (R, z) => [z.entero(1001, R), z.entero(10, 99)],
+  (R, z) => [z.entero(1100, R), z.entero(100, 999)],
+  (R, z) => (R < 2001 ? null : (() => { const a = z.entero(2001, R); return [a, z.entero(1000, a - 1)]; })()),
+  (R, z) => [z.entero(1001, R), z.entero(1, 9)],
 ];
 
 function sortearV(G, ok, nivelDe, R, nivel, cnt, azar) {
@@ -116,11 +136,11 @@ function sortearV(G, ok, nivelDe, R, nivel, cnt, azar) {
 }
 /** cnt sumas en vertical de 2 o 3 sumandos [mayor, …] (el primero de 3 cifras, suma ≤ R), sin repetir, del nivel dado. */
 export function sumasVert(R, nivel, sumandos, cnt, azar) {
-  return sortearV(sumandos === 3 ? VSUMA3 : VSUMA2, (q, R) => q.reduce((t, v) => t + v, 0) <= R, (q) => llevadasSuma(q).map((c) => c > 0), R, nivel, cnt, azar);
+  return sortearV(R > 1000 ? (sumandos === 3 ? VSUMA3_4 : VSUMA2_4) : sumandos === 3 ? VSUMA3 : VSUMA2, (q, R) => q.reduce((t, v) => t + v, 0) <= R && (R <= 1000 || q[0] >= 1000), (q) => llevadasSuma(q).map((c) => c > 0), R, nivel, cnt, azar);
 }
 /** cnt restas en vertical [a, b] (101 ≤ a ≤ R, 1 ≤ b < a), sin repetir, del nivel dado. */
 export function restasVert(R, nivel, cnt, azar) {
-  return sortearV(VRESTA, ([a, b], R) => a <= R && b < a, (q) => llevadasResta(...q), R, nivel, cnt, azar);
+  return sortearV(R > 1000 ? VRESTA_4 : VRESTA, ([a, b], R) => a <= R && b < a && (R <= 1000 || a >= 1000), (q) => llevadasResta(...q), R, nivel, cnt, azar);
 }
 
 /**
@@ -132,37 +152,36 @@ export function restasVert(R, nivel, cnt, azar) {
  */
 export function vertical3(p, act, resta) {
   const prueba = resta && !!act.params.prueba;
-  const { cel, cw, ch } = p.celdas(TOP, 3, 4);
+  const { cel, cw, ch } = p.celdas(TOP, 3, 4), cols = act.params.rango > 1000 ? 4 : 3;   // 4: UM, C, D, U (3.º)
+  const ETQ = cols === 4 ? ["UM", "C", "D", "U"] : ["C", "D", "U"];
   act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
     const [x, y] = cel[i], nums = [e.datos.a, e.datos.b, e.datos.c].filter((v) => v !== undefined), n = nums.length, cx = x + cw / 2;
-    const xs = [cx - 36, cx, cx + 36], fs = n === 3 ? 22 : 24;
+    const sep = cols === 4 ? 30 : 36, xs = Array.from({ length: cols }, (_, k) => cx + (k - (cols - 1) / 2) * sep), fs = n === 3 ? 22 : 24;
     // alturas (desde la base de la tarjeta)
     const paso = n === 3 ? 26 : resta ? (prueba ? 28 : 32) : 30;
     const r0 = resta ? ch - (prueba ? 52 : 60) : ch - (n === 3 ? 62 : 64);
     const rl = r0 - (n - 1) * paso, yl = rl - (prueba ? 7 : 8);
     p.marco(x, y, cw, ch, i);
-    ["C", "D", "U"].forEach((l, k) => p.text(xs[k], y + ch - (resta ? 18 : 16), l, 9, { f: "PM", anchor: "middle", gris: 0.3 }));
+    ETQ.forEach((l, k) => p.text(xs[k], y + ch - (resta ? 18 : 16), l, 9, { f: "PM", anchor: "middle", gris: 0.3 }));
     nums.forEach((v, j) => {
       const yy = y + r0 - j * paso;
-      if (v >= 100) p.text(xs[0], yy, String(Math.floor(v / 100)), fs, { anchor: "middle" });
-      if (v >= 10) p.text(xs[1], yy, String(Math.floor(v / 10) % 10), fs, { anchor: "middle" });
-      p.text(xs[2], yy, String(v % 10), fs, { anchor: "middle" });
+      for (let k = 0; k < cols; k++) { const pot = 10 ** (cols - 1 - k); if (v >= pot || k === cols - 1) p.text(xs[k], yy, String(Math.floor(v / pot) % 10), fs, { anchor: "middle" }); }
     });
-    p.text(xs[0] - 34, y + rl, resta ? MENOS : "+", fs, { anchor: "middle" });
-    p.line(xs[0] - 26, y + yl, xs[2] + 26, y + yl, { lw: 1.6 });
+    p.text(xs[0] - (cols === 4 ? 28 : 34), y + rl, resta ? MENOS : "+", fs, { anchor: "middle" });
+    p.line(xs[0] - 26, y + yl, xs[cols - 1] + 26, y + yl, { lw: 1.6 });
     if (!resta) {
       const ll = llevadasSuma(nums);
-      [1, 0].forEach((k, q) => {                   // sobre D: llevada de U · sobre C: llevada de D
+      (cols === 4 ? [2, 1, 0] : [1, 0]).forEach((k, q) => {   // sobre D: llevada de U · sobre C: llevada de D (· sobre UM: llevada de C)
         p.rrect(xs[k] - 11, y + ch - 42, 22, 16, 4, { lw: 0.9, fill: 1, stroke: 0.55 });
         // «#c62828» = COLOR_SOLUCION en minúsculas: es la llevada, no un hueco (test_tipos cuenta los fill="#C62828" de los huecos)
         if (p.solucion && ll[q] > 0) p.text(xs[k], y + ch - 38, String(ll[q]), 12, { anchor: "middle", gris: COLOR_SOLUCION.toLowerCase() });
       });
     }
     const hb = n === 3 ? 34 : 40, yb = prueba ? 46 : n === 3 ? 8 : resta ? 14 : 12, hh = prueba ? 32 : hb;
-    e.solucion.huecos.slice(0, 3).forEach((s, k) => p.caja(xs[k] - 15, y + yb, 30, hh, null, 22, s));
+    e.solucion.huecos.slice(0, cols).forEach((s, k) => p.caja(xs[k] - (cols === 4 ? 13 : 15), y + yb, cols === 4 ? 26 : 30, hh, null, 22, s));
     if (prueba) {
       p.line(x + 14, y + 41, x + cw - 14, y + 41, { lw: 0.6, gris: 0.7, dash: [3, 3] });
-      p.linea(x, y + 8, cw, 28, [B(54, 28, e.solucion.huecos[3]), T(`+ ${e.datos.b} = ${e.datos.a}`, 15)], 6);
+      p.linea(x, y + 8, cw, 28, [B(54, 28, e.solucion.huecos[cols]), T(`+ ${e.datos.b} = ${e.datos.a}`, 15)], 6);
     }
   }));
 }
@@ -182,6 +201,14 @@ function repartir(clases, n, azar) {
 const pasos = (a, b, d = 10) => { const l = []; for (let v = a; v <= b; v += d) l.push(v); return l; };
 /** Sumas de decenas y centenas (R > 100): 40 + 30 · 300 + 400 · 250 + 30, a + b ≤ R. Hasta 24 [a, b, forma]. */
 export function decenasSuma3(R, azar) {
+  if (R > 1000) {   // 3.º: centenas (400 + 500), millares (3000 + 2000), millares con centenas (3000 + 400) y centenas con millares (3400 + 200)
+    const Bc = [], Mi = [], MC = [], MD = [];
+    for (const a of pasos(100, 900, 100)) for (const b of pasos(100, 900, 100)) if (a + b <= R) Bc.push([a, b]);
+    for (const a of pasos(1000, R, 1000)) for (const b of pasos(1000, R, 1000)) if (a + b <= R) Mi.push([a, b]);
+    for (const a of pasos(1000, R, 1000)) for (const b of pasos(100, 900, 100)) if (a + b <= R) MC.push([a, b]);
+    for (const a of pasos(1100, R, 100)) if (a % 1000) for (const b of pasos(100, 900, 100)) if (a + b <= R) MD.push([a, b]);
+    return repartir([Bc, Mi, MC, MD], 24, azar);
+  }
   const A = [], Bc = [], C = [];
   for (const a of pasos(10, 90)) for (const b of pasos(10, 90)) if (a + b <= R) A.push([a, b]);
   for (const a of pasos(100, R, 100)) for (const b of pasos(100, R, 100)) if (a + b <= R) Bc.push([a, b]);
@@ -190,6 +217,14 @@ export function decenasSuma3(R, azar) {
 }
 /** Restas de decenas y centenas (R > 100): 70 − 30 · 700 − 300 · 450 − 20. Hasta 24 [a, b, forma]. */
 export function decenasResta3(R, azar) {
+  if (R > 1000) {   // 3.º: 700 − 300, 5000 − 2000, 5000 − 300 y 5200 − 300
+    const Bc = [], Mi = [], MC = [], MD = [];
+    for (const a of pasos(200, 900, 100)) for (const b of pasos(100, a - 100, 100)) Bc.push([a, b]);
+    for (const a of pasos(2000, R, 1000)) for (const b of pasos(1000, a - 1000, 1000)) Mi.push([a, b]);
+    for (const a of pasos(2000, R, 1000)) for (const b of pasos(100, 900, 100)) MC.push([a, b]);
+    for (const a of pasos(1100, R, 100)) if (a % 1000) for (const b of pasos(100, 900, 100)) MD.push([a, b]);
+    return repartir([Bc, Mi, MC, MD], 24, azar);
+  }
   const A = [], Bc = [], C = [];
   for (const a of pasos(20, 100)) for (const b of pasos(10, a - 10)) A.push([a, b]);
   for (const a of pasos(200, R, 100)) for (const b of pasos(100, a - 100, 100)) Bc.push([a, b]);

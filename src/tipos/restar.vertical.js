@@ -3,6 +3,7 @@
 // solucion: { huecos: [decenas, unidades] del resultado }   (hueco de D, después el de U; D puede ser 0)
 // Opción nivel: null/"sin" (sin llevadas: unidades de b ≤ unidades de a), "con" (con llevada: b%10 > a%10), "mezcla" (alternadas).
 // Completa: 12 restas (4 filas × 3); media: 6.
+// 3.º (rango > 1000, columnas UM, C, D, U): a de cuatro cifras; solucion { huecos: [UM, C, D, U] } (+ resultado con prueba).
 // 2.º (rango > 100, columnas C, D, U; ver _tres.js):
 //   datos:    { a, b }   (101 ≤ a ≤ rango ≤ 999, 1 ≤ b < a)
 //   solucion: { huecos: [C, D, U] del resultado }  (C o D pueden ser 0 y se escriben) · con prueba: { huecos: [C, D, U, resultado] }
@@ -20,10 +21,11 @@ export default registrar({
   generar(params, azar, { tamano }) {
     const R = params.rango ?? 30;
     if (R > 100) {
+      const mil = R > 1000;   // con rango 1000 (repaso de 2.º), tres cifras y hasta 999
       return {
-        enunciado: params.prueba ? "Resta y comprueba con la suma de abajo." : "Resta primero las unidades, después las decenas y las centenas.",
-        ejercicios: restasVert(R, params.nivel, tamano === "media" ? 6 : 12, azar).map(([a, b]) => {
-          const t = a - b, h = [Math.floor(t / 100), Math.floor(t / 10) % 10, t % 10];
+        enunciado: params.prueba ? "Resta y comprueba con la suma de abajo." : mil ? "Resta primero las unidades, después las decenas, las centenas y los millares." : "Resta primero las unidades, después las decenas y las centenas.",
+        ejercicios: restasVert(mil ? R : Math.min(R, 999), params.nivel, tamano === "media" ? 6 : 12, azar).map(([a, b]) => {
+          const t = a - b, h = [...(mil ? [Math.floor(t / 1000)] : []), Math.floor(t / 100) % 10, Math.floor(t / 10) % 10, t % 10];
           return { datos: { a, b }, solucion: { huecos: params.prueba ? [...h, t] : h } };
         }),
       };

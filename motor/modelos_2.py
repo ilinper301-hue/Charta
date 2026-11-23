@@ -72,10 +72,12 @@ OPCIONES_2 = {
 
 
 SALTO = {"id": "salto", "etiqueta": "Saltos", "tipo": "opcion", "defecto": None, "rmin": 100,
-         "valores": [{"valor": None, "etiqueta": "De 10 en 10"}, {"valor": 100, "etiqueta": "De 100 en 100", "rmin": 500}]}
+         "valores": [{"valor": None, "etiqueta": "De 10 en 10"}, {"valor": 100, "etiqueta": "De 100 en 100", "rmin": 500},
+                     {"valor": 1000, "etiqueta": "De 1000 en 1000", "rmin": 4000}]}   # 3.º: de 1000 en 1000 desde rango 4000
 # Encadenadas: el primer número es una decena (o centena) cualquiera y los demás, saltos de 10–90 (o 100–900).
 CIFRAS = {**SALTO, "valores": [{"valor": None, "etiqueta": "De 10 en 10 (350 + 20 + 40)"},
-                              {"valor": 100, "etiqueta": "De 100 en 100 (300 + 200 + 100)", "rmin": 700}]}
+                              {"valor": 100, "etiqueta": "De 100 en 100 (300 + 200 + 100)", "rmin": 700},
+                              {"valor": 1000, "etiqueta": "De 1000 en 1000 (3000 + 2000 + 1000)", "rmin": 7000}]}   # 3.º: con menos rango no hay combinaciones distintas
 OPCIONES_2.update({
     "sumar.recta": {"nuevas": [SALTO]},
     "restar.recta": {"nuevas": [SALTO]},
@@ -83,7 +85,8 @@ OPCIONES_2.update({
                                               "rmin": 100, "valores": [{"valor": None, "etiqueta": "Tres"},
                                                                        {"valor": 4, "etiqueta": "Cuatro"}]}]},
     "restar.encadenadas": {"nuevas": [{**CIFRAS, "valores": [{**CIFRAS["valores"][0], "etiqueta": "De 10 en 10 (350 − 20 − 40)"},
-                                                             {**CIFRAS["valores"][1], "etiqueta": "De 100 en 100 (900 − 300 − 200)"}]}]},
+                                                             {**CIFRAS["valores"][1], "etiqueta": "De 100 en 100 (900 − 300 − 200)"},
+                                                             {**CIFRAS["valores"][2], "etiqueta": "De 1000 en 1000 (9000 − 3000 − 2000)"}]}]},
     "sumar.dobles": {"valores": {"modo": [{"valor": "dibujo", "rmax": 20}]},   # rmax: se aplica al valor de 1.º
                      "nuevas": [{"id": "operacion", "etiqueta": "Calcula", "tipo": "opcion", "defecto": None, "rmin": 100,
                                  "valores": [{"valor": None, "etiqueta": "Dobles"}, {"valor": "mitades", "etiqueta": "Mitades"},

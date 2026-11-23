@@ -106,10 +106,14 @@ export class Papel {
   caja(x, y, w, h, val = null, fs = 22, sol = null) {
     if (val === null) {
       this.rrect(x, y, w, h, 7, { lw: 1.5, fill: 0.9, stroke: INK });
-      if (this.solucion && sol !== null && sol !== undefined) this.solucionEn(x + w / 2, y + h / 2, sol, Math.min(fs, h * 0.6));
+      if (this.solucion && sol !== null && sol !== undefined) {
+        const f0 = Math.min(fs, h * 0.6), tw = this.ancho(String(sol), "PB", f0);
+        this.solucionEn(x + w / 2, y + h / 2, sol, tw > w - 6 ? f0 * (w - 6) / tw : f0);
+      }
     } else {
       this.rrect(x, y, w, h, 7, { lw: 1.5, fill: 1, stroke: INK });
-      this.text(x + w / 2, y + h / 2 - fs * 0.35, String(val), fs, { f: "PB", anchor: "middle" });
+      const tw = this.ancho(String(val), "PB", fs), f2 = tw > w - 6 ? fs * (w - 6) / tw : fs;   // cuatro cifras en una caja de tres: la letra se reduce
+      this.text(x + w / 2, y + h / 2 - f2 * 0.35, String(val), f2, { f: "PB", anchor: "middle" });
     }
   }
   /** Respuesta centrada en (cx, cy) en el color de la solución. */

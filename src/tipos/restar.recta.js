@@ -3,6 +3,7 @@
 // solucion: { huecos: [a − b] }
 // 2.º (rango ≥ 100, opción salto 10 | 100): datos { a, b, N, desde, paso } — recta de N tramos de `paso` desde `desde`
 //   (de 10 en 10: un tramo de 100, p. ej. 300–400; de 100 en 100: de 0 a la centena del rango); a y b, múltiplos de paso.
+// 3.º (rango > 1000, opción salto 10 | 100 | 1000): de 10 en 10 desde una centena (4300–4400), de 100 en 100 desde un millar (4000–5000) y de 1000 en 1000 desde 0 (hasta el millar del rango; salto 1000 desde rango 4000).
 // Ficha: solo el punto de partida; el salto aparece en soluciones.
 // Completa: 6 restas (una por fila); media: 3.
 import { registrar } from "../nucleo/tipos.js";
@@ -21,9 +22,12 @@ export function salto(p, xa, xb, y0, etiqueta) {
 /** 2.º: recta de N tramos de `paso` (a, b y el resultado sobre las marcas). Mismas reglas que en 1.º en tramos:
  *  2 ≤ b ≤ min(9, N − 2); suma: 1 ≤ a ≤ N − b; resta: b < a ≤ N. Devuelve los ejercicios con valores reales. */
 export function recta2(params, azar, tamano, resta) {
-  const R = params.rango, paso = params.salto === 100 ? 100 : 10, ejercicios = [];
+  const R = params.rango, paso = params.salto === 1000 ? 1000 : params.salto === 100 ? 100 : 10, ejercicios = [];
+  // 3.º (rango > 1000): de 10 en 10 (desde una centena), de 100 en 100 (desde un millar: 3000, 3100…) y de 1000 en 1000 (desde 0); siempre ≤ 10 marcas
+  const mil = R > 1000;
   for (let i = 0; i < (tamano === "media" ? 3 : 6); i++) {
-    const N = paso === 10 ? 10 : Math.floor(R / 100), desde = paso === 10 ? 100 * azar.entero(0, Math.floor(R / 100) - 1) : 0;
+    const N = paso === 1000 ? Math.floor(R / 1000) : paso === 10 || mil ? 10 : Math.floor(R / 100);
+    const desde = paso === 1000 ? 0 : paso === 10 ? 100 * azar.entero(0, Math.floor(R / 100) - 1) : mil ? 1000 * azar.entero(0, Math.floor(R / 1000) - 1) : 0;
     const b = azar.entero(2, Math.min(9, N - 2)), a = resta ? azar.entero(b + 1, N) : azar.entero(1, N - b);
     const A = desde + a * paso, Bv = b * paso;
     ejercicios.push({ datos: { a: A, b: Bv, N, desde, paso }, solucion: { huecos: [resta ? A - Bv : A + Bv] } });

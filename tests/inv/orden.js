@@ -19,7 +19,34 @@ const ordena = (desc) => (act, tam) => {
   }
 };
 
+// Redondeo escrito a mano, sin importar de orden.redondea.js: se mira la cifra que se pierde.
+const redond = (n, u) => { const r = n % u; return n - r + (r >= u / 2 ? u : 0); };
+
 export default {
+  "orden.redondea"(act, tam) {
+    const R = act.params.rango, es = act.ejercicios, us = act.params.a ? [act.params.a] : ["decena", "centena", "millar"], U = { decena: 10, centena: 100, millar: 1000 };
+    cuantos(es, tam === "media" ? 6 : 15); unicos(es, (e) => e.datos.n, "números repetidos");
+    for (const { datos: { n, u }, solucion } of es) {
+      assert.ok(us.includes(u), "unidad no pedida"); ent(n, 1000, R, "n"); assert.notEqual(n % U[u], 0, "ya está redondeado");
+      assert.deepEqual(solucion.huecos, [redond(n, U[u])]); ent(solucion.huecos[0], 1000, 9999, "redondeado");
+    }
+    for (const u of us) {   // reparto: igual de cada unidad (±1) y, dentro de cada una, igual de subir que de bajar (±1)
+      const e = es.filter((x) => x.datos.u === u), sube = e.filter((x) => x.datos.n % U[u] >= U[u] / 2).length;
+      assert.ok(Math.abs(e.length - es.length / us.length) < 1, `reparto de ${u}`); assert.ok(Math.abs(sube - (e.length - sube)) <= 1, `subir y bajar en ${u}`);
+    }
+  },
+  "orden.estima"(act, tam) {
+    const R = act.params.rango, es = act.ejercicios, u = act.params.a === "centena" ? 100 : 1000, op = act.params.op;
+    cuantos(es, tam === "media" ? 6 : 12); unicos(es, (e) => e.datos.a + "," + e.datos.b, "parejas repetidas");
+    for (const { datos: { a, b, op: o, u: nu, ra, rb }, solucion } of es) {
+      assert.equal(nu, u === 100 ? "centena" : "millar"); ent(a, 1000, R, "a"); ent(b, 1000, R, "b");
+      assert.notEqual(a % u, 0); assert.notEqual(b % u, 0); assert.equal(ra, redond(a, u)); assert.equal(rb, redond(b, u)); ent(ra, 1000, 9999, "ra"); ent(rb, 1000, 9999, "rb");
+      if (o === "+") { assert.ok(a + b <= R, "suma fuera del rango"); assert.deepEqual(solucion.huecos, [ra, rb, ra + rb]); ent(ra + rb, 2000, 9999, "resultado"); }
+      else { assert.equal(o, "-"); assert.ok(a > b && ra > rb, "resta"); assert.deepEqual(solucion.huecos, [ra, rb, ra - rb]); }
+      assert.ok(op === "suma" ? o === "+" : op === "resta" ? o === "-" : true, "operación no pedida");
+    }
+    if (!op) assert.equal(es.filter((e) => e.datos.op === "-").length, es.length / 2, "mitad sumas y mitad restas");
+  },
   "orden.mayor"(act, tam) {
     const R = rango(act), modo = act.params.modo || "mezcla", es = act.ejercicios, cnt = tam === "media" ? 6 : 15;
     cuantos(es, cnt);

@@ -7,3 +7,5 @@ import "./orden.ordena2.js";
 import "./orden.entre.js";
 import "./orden.ordinales.js";
 import "./orden.cantidad.js";
+import "./orden.redondea.js";
+import "./orden.estima.js";

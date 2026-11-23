@@ -15896,6 +15896,267 @@
    "c06a56ff1bf7bdc4"
   ]
  },
+ "orden.estima": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Estima",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "orden.estima",
+       "tipoVersion": 1,
+       "params": {
+        "a": null,
+        "op": null,
+        "rango": 9999
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Redondea cada número al millar y calcula el resultado aproximado.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "a": 5604,
+          "b": 2971,
+          "op": "-",
+          "u": "millar",
+          "ra": 6000,
+          "rb": 3000
+         },
+         "solucion": {
+          "huecos": [
+           6000,
+           3000,
+           3000
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "a": 3407,
+          "b": 3732,
+          "op": "+",
+          "u": "millar",
+          "ra": 3000,
+          "rb": 4000
+         },
+         "solucion": {
+          "huecos": [
+           3000,
+           4000,
+           7000
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "a": 9087,
+          "b": 2680,
+          "op": "-",
+          "u": "millar",
+          "ra": 9000,
+          "rb": 3000
+         },
+         "solucion": {
+          "huecos": [
+           9000,
+           3000,
+           6000
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": 6709,
+          "b": 3948,
+          "op": "-",
+          "u": "millar",
+          "ra": 7000,
+          "rb": 4000
+         },
+         "solucion": {
+          "huecos": [
+           7000,
+           4000,
+           3000
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "a": 7335,
+          "b": 2244,
+          "op": "+",
+          "u": "millar",
+          "ra": 7000,
+          "rb": 2000
+         },
+         "solucion": {
+          "huecos": [
+           7000,
+           2000,
+           9000
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": 1484,
+          "b": 6327,
+          "op": "+",
+          "u": "millar",
+          "ra": 1000,
+          "rb": 6000
+         },
+         "solucion": {
+          "huecos": [
+           1000,
+           6000,
+           7000
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "a": 4134,
+          "b": 3314,
+          "op": "-",
+          "u": "millar",
+          "ra": 4000,
+          "rb": 3000
+         },
+         "solucion": {
+          "huecos": [
+           4000,
+           3000,
+           1000
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "a": 4344,
+          "b": 1901,
+          "op": "+",
+          "u": "millar",
+          "ra": 4000,
+          "rb": 2000
+         },
+         "solucion": {
+          "huecos": [
+           4000,
+           2000,
+           6000
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "a": 2951,
+          "b": 1369,
+          "op": "-",
+          "u": "millar",
+          "ra": 3000,
+          "rb": 1000
+         },
+         "solucion": {
+          "huecos": [
+           3000,
+           1000,
+           2000
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "a": 2981,
+          "b": 1536,
+          "op": "+",
+          "u": "millar",
+          "ra": 3000,
+          "rb": 2000
+         },
+         "solucion": {
+          "huecos": [
+           3000,
+           2000,
+           5000
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "a": 8606,
+          "b": 3279,
+          "op": "-",
+          "u": "millar",
+          "ra": 9000,
+          "rb": 3000
+         },
+         "solucion": {
+          "huecos": [
+           9000,
+           3000,
+           6000
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "a": 2444,
+          "b": 1781,
+          "op": "+",
+          "u": "millar",
+          "ra": 2000,
+          "rb": 2000
+         },
+         "solucion": {
+          "huecos": [
+           2000,
+           2000,
+           4000
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "3e0c01f3d03d43e5"
+  ],
+  "svgSolucion": [
+   "c487eb40f2355a71"
+  ]
+ },
  "orden.grupo": {
   "ficha": {
    "schemaVersion": 1,
@@ -16786,6 +17047,230 @@
   ],
   "svgSolucion": [
    "48c93f4892642281"
+  ]
+ },
+ "orden.redondea": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Redondea",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "orden.redondea",
+       "tipoVersion": 1,
+       "params": {
+        "a": null,
+        "rango": 9999
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Redondea cada número como pide cada casilla.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "n": 8426,
+          "u": "decena"
+         },
+         "solucion": {
+          "huecos": [
+           8430
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "n": 8606,
+          "u": "millar"
+         },
+         "solucion": {
+          "huecos": [
+           9000
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "n": 4344,
+          "u": "millar"
+         },
+         "solucion": {
+          "huecos": [
+           4000
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "n": 9087,
+          "u": "centena"
+         },
+         "solucion": {
+          "huecos": [
+           9100
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "n": 7335,
+          "u": "centena"
+         },
+         "solucion": {
+          "huecos": [
+           7300
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "n": 1369,
+          "u": "centena"
+         },
+         "solucion": {
+          "huecos": [
+           1400
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "n": 2444,
+          "u": "centena"
+         },
+         "solucion": {
+          "huecos": [
+           2400
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "n": 1781,
+          "u": "centena"
+         },
+         "solucion": {
+          "huecos": [
+           1800
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "n": 5604,
+          "u": "decena"
+         },
+         "solucion": {
+          "huecos": [
+           5600
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "n": 2971,
+          "u": "millar"
+         },
+         "solucion": {
+          "huecos": [
+           3000
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "n": 6313,
+          "u": "millar"
+         },
+         "solucion": {
+          "huecos": [
+           6000
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "n": 1638,
+          "u": "decena"
+         },
+         "solucion": {
+          "huecos": [
+           1640
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "n": 6381,
+          "u": "decena"
+         },
+         "solucion": {
+          "huecos": [
+           6380
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "n": 3865,
+          "u": "decena"
+         },
+         "solucion": {
+          "huecos": [
+           3870
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "n": 6717,
+          "u": "millar"
+         },
+         "solucion": {
+          "huecos": [
+           7000
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "05cc204d400c1db9"
+  ],
+  "svgSolucion": [
+   "4e7337394fec9d62"
   ]
  },
  "orden.signos": {
@@ -32985,7 +33470,7 @@
    "e0c886a154c193df"
   ],
   "svgSolucion": [
-   "3d55d0931bf3d479"
+   "a6e859467c3a0724"
   ]
  },
  "trucos.compensar2": {

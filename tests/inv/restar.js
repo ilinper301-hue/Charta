@@ -1,6 +1,6 @@
 // Charta · invariantes de la familia «restar» (ver tests/invariantes.js). restar.recta está en tests/invariantes.js.
 import assert from "node:assert/strict";
-import { colsResta, nivelesV, cdu, ent, unicos, cuantos, mitad, tope, llevaS3, llevaR3, niveles3 } from "./_ayuda.js";
+import { colsResta, nivelesV, cdu, umcdu, ent, unicos, cuantos, mitad, tope, llevaS3, llevaR3, niveles3 } from "./_ayuda.js";
 
 import { encadenadas2 } from "./sumar.js";
 /** ¿La resta a − b lleva (necesita "pedir")? Misma definición que _pares_resta() del motor. */
@@ -54,8 +54,21 @@ export default {
   "restar.vertical"(act, tam) {
     const es = act.ejercicios, cap = Math.min(act.params.rango ?? 30, 99), nivel = act.params.nivel || "sin";
     cuantos(es, tam === "media" ? 6 : 12);
-    if ((act.params.rango ?? 30) > 100) {      // 2.º: columnas C, D, U (+ prueba: [C, D, U, resultado])
+    if ((act.params.rango ?? 30) > 1000) {     // 3.º: columnas UM, C, D, U (+ prueba: [UM, C, D, U, resultado])
       const R = act.params.rango, prueba = !!act.params.prueba;
+      unicos(es, (e) => e.datos.a + "-" + e.datos.b);
+      for (const { datos, solucion } of es) {
+        assert.deepEqual(Object.keys(datos), ["a", "b"], "claves de datos");
+        const { a, b } = datos, t = a - b;
+        ent(a, 1001, R, "a"); ent(b, 1, a - 1, "b"); ent(t, 1, 9998, "resultado");
+        assert.deepEqual(solucion.huecos, prueba ? [...umcdu(t), t] : umcdu(t), "huecos");
+        if (prueba) assert.equal(solucion.huecos[4] + b, a, "prueba: resultado + sustraendo = minuendo");
+      }
+      nivelesV(es.map((e) => colsResta(e.datos.a, e.datos.b)), nivel, `(R ${R})`);
+      return;
+    }
+    if ((act.params.rango ?? 30) > 100) {      // 2.º: columnas C, D, U (+ prueba: [C, D, U, resultado])
+      const R = Math.min(act.params.rango, 999), prueba = !!act.params.prueba;
       unicos(es, (e) => e.datos.a + "-" + e.datos.b);
       for (const { datos, solucion } of es) {
         assert.deepEqual(Object.keys(datos), ["a", "b"], "claves de datos");
@@ -114,15 +127,20 @@ export default {
   "restar.decenas"(act, tam) {
     const es = act.ejercicios, cap = Math.min(act.params.rango ?? 30, 100), bloques = act.params.modo === "bloques";
     if ((act.params.rango ?? 30) > 100 && !bloques) {      // 2.º: decenas (70 − 30), centenas (700 − 300), centenas con decenas (450 − 20)
-      const R = act.params.rango, clase = (a, b) => (a <= 100 ? "A" : a % 100 === 0 && b % 100 === 0 ? "B" : b <= 90 ? "C" : "?");
+      const R = act.params.rango, mil = R > 1000;
+      // 3.º (rango > 1000): B centenas (700 − 300), M millares (5000 − 2000), N millares − centenas (5000 − 300), D centenas con millares (5200 − 300)
+      const clase = mil ? (a, b) => (a <= 900 ? "B" : a % 1000 === 0 && b % 1000 === 0 ? "M" : a % 1000 === 0 ? "N" : "D")
+        : (a, b) => (a <= 100 ? "A" : a % 100 === 0 && b % 100 === 0 ? "B" : b <= 90 ? "C" : "?");
       cuantos(es, tam === "media" ? 12 : 24);
       unicos(es, (e) => [e.datos.a, e.datos.b, e.datos.forma].join());
       for (const { datos: { a, b, forma }, solucion } of es) {
         assert.equal(a % 10, 0); assert.equal(b % 10, 0); ent(a, 20, R, "a"); ent(b, 10, a - 10, "b"); ent(forma, 0, 2, "forma");
+        if (mil) assert.ok(a % 100 === 0 && b % 100 === 0, "centenas completas");
         assert.notEqual(clase(a, b), "?", `clase de ${a} − ${b}`);
         assert.deepEqual(solucion.huecos, [[a - b], [b], [a]][forma]);
       }
-      if (tam === "completa" && R >= 300) for (const c of "ABC") assert.ok(es.filter((e) => clase(e.datos.a, e.datos.b) === c).length >= 6, `pocas de la clase ${c}`);
+      if (tam === "completa" && R >= 300 && !mil) for (const c of "ABC") assert.ok(es.filter((e) => clase(e.datos.a, e.datos.b) === c).length >= 6, `pocas de la clase ${c}`);
+      if (tam === "completa" && R >= 5000) for (const c of "BMND") assert.ok(es.filter((e) => clase(e.datos.a, e.datos.b) === c).length >= 6, `pocas de la clase ${c}`);
       return;
     }
     let np = 0; for (let a = 20; a <= cap; a += 10) for (let b = 10; b < a; b += 10) np++;

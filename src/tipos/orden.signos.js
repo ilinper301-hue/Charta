@@ -48,10 +48,11 @@ export default registrar({
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], { a, b } = e.datos;
       p.marco(x, y, cw, ch, i);
-      const g = 8, bx = x + (cw - 132 - 2 * g) / 2, by = y + (ch - 46 - 10) / 2;
-      p.caja(bx, by, 46, 46, a, 22);
-      p.caja(bx + 46 + g, by, 40, 46, null, 22, e.solucion.huecos[0]);
-      p.caja(bx + 86 + 2 * g, by, 46, 46, b, 22);
+      const cuatro = Math.max(a, b) > 999, w = cuatro ? 56 : 46, fs = cuatro ? 17 : 22, g = cuatro ? 6 : 8, tw = 2 * w + 40 + 2 * g;   // 3.º: cuatro cifras
+      const bx = x + (cw - tw) / 2, by = y + (ch - 46 - 10) / 2;
+      p.caja(bx, by, w, 46, a, fs);
+      p.caja(bx + w + g, by, 40, 46, null, 22, e.solucion.huecos[0]);
+      p.caja(bx + w + 40 + 2 * g, by, w, 46, b, fs);
     }));
   },
 });

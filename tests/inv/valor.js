@@ -3,7 +3,17 @@ import assert from "node:assert/strict";
 import { ent, unicos, cuantos, tope } from "./_ayuda.js";
 
 const cap = (act) => Math.min(act.params.rango, 99);
-const tres = (act) => act.params.rango > 100;
+const cuatro = (act) => act.params.rango > 1000;   // 3.º: millares
+const tres = (act) => act.params.rango > 100 && !cuatro(act);
+const cif4 = (n) => [Math.floor(n / 1000), Math.floor(n / 100) % 10, Math.floor(n / 10) % 10, n % 10];
+/** 3.º: números de 1000..R sin repetir; null = sin ceros; «completas» = mitad (redondeando arriba) con algún cero; millares: true. */
+function nivelUMCDU(act, es) {
+  const ns = es.map((e) => e.datos.n), R = act.params.rango;
+  ns.forEach((n) => ent(n, 1000, R, "n"));
+  es.forEach((e) => assert.equal(e.datos.millares, true, "millares: true"));
+  unicos(es, (e) => e.datos.n, "números repetidos");
+  assert.equal(ns.filter((n) => cif4(n).includes(0)).length, act.params.nivel === "completas" ? Math.ceil(ns.length / 2) : 0, "nº de números con cero");
+}
 const cif = (n) => [Math.floor(n / 100), Math.floor(n / 10) % 10, n % 10];
 const hayCero = (n) => cif(n).includes(0);
 /** 2.º: números de 100..R; null = sin ceros; «completas» = mitad (redondeando arriba) con algún cero; centenas: true; sin repetir. */
@@ -45,6 +55,17 @@ export default {
   "valor.canje"(act, tam) {
     const es = act.ejercicios, C = cap(act);
     cuantos(es, tam === "media" ? 4 : 8);
+    if (cuatro(act)) {
+      const cnt = (f) => es.filter((e) => e.datos.forma === f).length;
+      assert.deepEqual(["dc", "cd", "cu"].map(cnt), tam === "media" ? [2, 1, 1] : [5, 2, 1], "reparto de formas");
+      es.forEach(({ datos: { forma, n, millares }, solucion }) => {
+        assert.equal(millares, true, "millares: true");
+        if (forma === "dc") { ent(n, 10, 99, "n"); assert.deepEqual(solucion.huecos, [Math.floor(n / 10), n % 10]); assert.equal(n % 10 === 0, act.params.nivel === "completas"); }
+        else { ent(n, 1, 9, "n"); assert.deepEqual(solucion.huecos, [n * (forma === "cd" ? 10 : 1000)]); }
+      });
+      ["dc", "cd", "cu"].forEach((f) => unicos(es.filter((e) => e.datos.forma === f), (e) => e.datos.n, `repetidos en ${f}`));
+      return;
+    }
     if (tres(act)) {
       const cnt = (f) => es.filter((e) => e.datos.forma === f).length;
       assert.deepEqual(["dc", "cd", "cu"].map(cnt), tam === "media" ? [2, 1, 1] : [5, 2, 1], "reparto de formas");
@@ -65,6 +86,16 @@ export default {
   "valor.descdu"(act, tam) {
     const es = act.ejercicios, C = cap(act), suma = act.params.modo === "suma";
     cuantos(es, tam === "media" ? 6 : 15);
+    if (cuatro(act)) {
+      nivelUMCDU(act, es);
+      es.forEach(({ datos: { n, suma: s }, solucion }) => {
+        assert.equal(s, suma);
+        const [m, c, d, u] = cif4(n);
+        assert.deepEqual(solucion.huecos, suma ? [m * 1000, c * 100, d * 10, u] : [m, c, d, u]);
+        assert.equal(solucion.huecos.reduce((a, b, i) => a + b * (suma ? 1 : [1000, 100, 10, 1][i]), 0), n);
+      });
+      return;
+    }
     if (tres(act)) {
       nivelCDU(act, es);
       es.forEach(({ datos: { n, suma: s }, solucion }) => {
@@ -86,6 +117,12 @@ export default {
   "valor.dunum"(act, tam) {
     const es = act.ejercicios, C = cap(act), cnt = tam === "media" ? 6 : 12;
     cuantos(es, cnt);
+    if (cuatro(act)) {
+      nivelUMCDU(act, es);
+      assert.equal(es.filter((e) => e.datos.orden === "a").length, cnt / 2, "mitad y mitad");
+      es.forEach(({ datos: { n, orden }, solucion }) => { assert.ok(orden === "a" || orden === "b"); assert.deepEqual(solucion.huecos, [n]); });
+      return;
+    }
     if (tres(act)) {
       nivelCDU(act, es);
       assert.equal(es.filter((e) => e.datos.orden === "a").length, cnt / 2, "mitad y mitad");
@@ -116,6 +153,15 @@ export default {
     const es = act.ejercicios, C = cap(act);
     cuantos(es, tam === "media" ? 4 : 8);
     unicos(es, (e) => e.datos.n, "números repetidos");
+    if (cuatro(act)) {
+      es.forEach(({ datos: { n, millares }, solucion }) => {
+        ent(n, 1000, act.params.rango, "n"); assert.equal(millares, true, "millares: true");
+        const a = cif4(n);
+        assert.ok(!a.includes(0) && new Set(a).size === 4, "cifras iguales o con cero");
+        assert.deepEqual(solucion.huecos, a.map((c, i) => c * 10 ** (3 - i)));
+      });
+      return;
+    }
     if (tres(act)) {
       es.forEach(({ datos: { n, centenas }, solucion }) => {
         ent(n, 100, tope(act.params.rango), "n"); assert.equal(centenas, true, "centenas: true");

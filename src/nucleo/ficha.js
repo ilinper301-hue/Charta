@@ -96,7 +96,7 @@ export function validar(id, params = {}, tamano = "completa", curso) {
 
 /** "SUMAS HASTA 20" → "Sumas hasta 20" (como _titulo() del motor). */
 export function capitalizar(t) {
-  const s = t.toLowerCase().replace(" c, d y u", " C, D y U").replace(" d y u", " D y U");
+  const s = t.toLowerCase().replace(" um, c, d y u", " UM, C, D y U").replace(" c, d y u", " C, D y U").replace(" d y u", " D y U");
   const k = s.search(/\p{L}/u);
   return k < 0 ? s : s.slice(0, k) + s[k].toUpperCase() + s.slice(k + 1);
 }
@@ -107,8 +107,8 @@ const TITULO_2 = { "valor.agrupa": { _: "AGRUPA EN CENTENAS" }, "sumar.dobles": 
 const TITULO_MODO_2 = { "medida.tiempo": { equivalencias: "LAS MEDIDAS DEL TIEMPO", horas: "ANTES Y DESPUÉS" },
                         "medida.longitud": { regla: "MIDE CON LA REGLA", mcm: "¿METROS O CENTÍMETROS?" } };
 /** 3.º (MATES_3.md, lote 0): títulos y nombres que cambian con millares. */
-const TITULO_3 = { "rep.du": "MILLARES, CENTENAS, DECENAS Y UNIDADES" };
-const NOMBRE_3 = { "rep.du": "Millares, centenas, decenas y unidades" };
+const TITULO_3 = { "rep.du": "MILLARES, CENTENAS, DECENAS Y UNIDADES", "sumar.decenas": "SUMAS DE CENTENAS Y MILLARES", "restar.decenas": "RESTAS DE CENTENAS Y MILLARES" };
+const NOMBRE_3 = { "rep.du": "Millares, centenas, decenas y unidades", "sumar.decenas": "Sumas de centenas y millares", "restar.decenas": "Restas de centenas y millares" };
 const NOMBRE_2 = { "valor.agrupa": "Agrupa en decenas y centenas", "sumar.dobles": "Los dobles y las mitades", "medida.longitud": "Mide longitudes" };
 
 export function tituloModelo(m, p = {}) {
@@ -118,7 +118,7 @@ export function tituloModelo(m, p = {}) {
   const tm = TITULO_MODO_2[m.id]?.[p.modo];
   if (tm) return tm;
   const t0 = m.titulo, t = typeof t0 === "string" ? t0 : t0[p.modo ?? "_"] ?? t0._;
-  return p.rango > 100 ? t.replace(/(HASTA|hasta) 100\b/, `$1 ${p.rango}`).replace(/\bD (Y|y) U\b/, "C, D $1 U") : t;   // 2.º: «Sumas hasta 999»
+  return p.rango > 100 ? t.replace(/(HASTA|hasta) 100\b/, `$1 ${p.rango}`).replace(/\bD (Y|y) U\b/, p.rango > 1000 ? "UM, C, D $1 U" : "C, D $1 U") : t;   // 2.º: «Sumas hasta 999»
 }
 
 /** Nombre del modelo en el selector de un curso: en 2.º, «hasta 100» → «hasta» el rango mayor del curso. */

@@ -4,6 +4,7 @@
 // solucion: { huecos: [a + b] | [b] | [a] }
 // Opción modo: null (rejillas de 3 columnas, 3 formas) | "bloques" (varillas de decena; 2 columnas × 5 filas).
 // Sin bloques — completa: min(24, 3·pares) (filas de 3; la rejilla es la de 8 filas); media: la mitad de filas.
+// 3.º (rango > 1000): cuatro clases (400 + 500, 3000 + 2000, 3000 + 400 y 3400 + 200); con rango 1000 salen las de 2.º.
 // Con bloques — completa: n pares (par, ≤ 10); media: hasta 4.
 // 2.º (rango > 100, sin bloques; ver _tres.js): mismos datos y solucion, con a y b múltiplos de 10, a + b ≤ rango ≤ 999.
 //   Tres clases a partes iguales (8 de 24; en media, 12 mezclados): decenas (40 + 30, sumas de 100 o más incluidas),
@@ -25,7 +26,7 @@ export default registrar({
     if ((params.rango ?? 30) > 100 && params.modo !== "bloques") {
       const es = decenasSuma3(params.rango, azar).slice(0, tamano === "media" ? 12 : 24);
       return {
-        enunciado: "Suma las decenas y las centenas y escribe el resultado.",
+        enunciado: params.rango > 1000 ? "Suma las centenas y los millares y escribe el resultado." : "Suma las decenas y las centenas y escribe el resultado.",
         ejercicios: es.map(([a, b, forma]) => ({ datos: { a, b, forma }, solucion: { huecos: [forma === 0 ? a + b : forma === 1 ? b : a] } })),
       };
     }
@@ -69,7 +70,7 @@ export default registrar({
       const r = Math.floor(i / 3), k = i % 3, x = M + k * (cw + GX), y = TOP - (r + 1) * ch - r * GY;
       const { a, b, forma } = e.datos, t = a + b, s = e.solucion.huecos[0];
       p.marco(x, y, cw, ch);
-      const tres = (act.params.rango ?? 30) > 100, f = tres ? 15 : 19, w = tres ? 52 : 44;   // 2.º: tres cifras
+      const tres = (act.params.rango ?? 30) > 100, cuatro = (act.params.rango ?? 30) > 1000, f = cuatro ? 14 : tres ? 15 : 19, w = cuatro ? 58 : tres ? 52 : 44;   // 2.º: tres cifras
       p.linea(x, y, cw, ch, forma === 0 ? [T(`${a} + ${b} =`, f), B(w, 38, s)] : forma === 1 ? [T(`${a} +`, f), B(w, 38, s), T(`= ${t}`, f)] : [B(w, 38, s), T(`+ ${b} = ${t}`, f)], tres ? 6 : 8);
     }));
   },

@@ -42,6 +42,8 @@ META = {
     "orden.ordena1": (2, 12, "orden ordenar menor_a_mayor"),
     "orden.ordena2": (2, 12, "orden ordenar mayor_a_menor"),
     "orden.entre": (3, 10, "orden número_entre_dos"),
+    "orden.redondea": (2, 10, "orden redondeo decena centena millar"),
+    "orden.estima": (3, 12, "orden estimación redondeo cálculo_aproximado"),
     "orden.ordinales": (2, 10, "orden ordinales primero segundo"),
     "orden.cantidad": (1, 8, "orden comparar más_menos_igual cantidad"),
     # Bloque 4 · valor posicional

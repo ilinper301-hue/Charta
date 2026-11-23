@@ -3,6 +3,8 @@
 // solucion: { huecos: [decenas, unidades] del resultado }   (hueco de D, después el de U)
 // Opción nivel: null/"sin" (sin llevadas), "con" (con llevada en las unidades), "mezcla" (alternadas).
 // Completa: 12 sumas (4 filas × 3); media: 6.
+// 3.º (rango > 1000, columnas UM, C, D, U; sin punto de millares): a de cuatro cifras, suma ≤ rango; solucion { huecos: [UM, C, D, U] }; llevadas sobre D, C y UM (en la solución).
+//   Con rango 1000 (repaso de 2.º), tres cifras y hasta 999.
 // 2.º (rango > 100, columnas C, D, U; ver _tres.js):
 //   datos:    { a, b } o, con sumandos: 3, { a, b, c }   (a ≥ b ≥ c, a de tres cifras, suma ≤ rango ≤ 999)
 //   solucion: { huecos: [centenas, decenas, unidades] del resultado }   (las llevadas no son huecos: se calculan al dibujar)
@@ -18,12 +20,13 @@ export default registrar({
   version: 1,
   generar(params, azar, { tamano }) {
     if ((params.rango ?? 30) > 100) {
-      const k = params.sumandos === 3 ? 3 : 2, ps = sumasVert(params.rango, params.nivel, k, tamano === "media" ? 6 : 12, azar);
+      const mil = params.rango > 1000, R = mil ? params.rango : Math.min(params.rango, 999);   // con rango 1000 (repaso de 2.º), hasta 999
+      const k = params.sumandos === 3 ? 3 : 2, ps = sumasVert(R, params.nivel, k, tamano === "media" ? 6 : 12, azar);
       return {
-        enunciado: "Suma primero las unidades, después las decenas y las centenas.",
+        enunciado: mil ? "Suma primero las unidades, después las decenas, las centenas y los millares." : "Suma primero las unidades, después las decenas y las centenas.",
         ejercicios: ps.map(([a, b, c]) => {
           const t = a + b + (c ?? 0);
-          return { datos: c === undefined ? { a, b } : { a, b, c }, solucion: { huecos: [Math.floor(t / 100), Math.floor(t / 10) % 10, t % 10] } };
+          return { datos: c === undefined ? { a, b } : { a, b, c }, solucion: { huecos: [...(mil ? [Math.floor(t / 1000)] : []), Math.floor(t / 100) % 10, Math.floor(t / 10) % 10, t % 10] } };
         }),
       };
     }

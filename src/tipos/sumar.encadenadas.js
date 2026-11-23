@@ -9,7 +9,7 @@ import { TOP, T, B, MENOS } from "../render/papel.js";
 
 /** 2.º: primer número = múltiplo de u (10 o 100) hasta el rango; los demás, de 1u a 9u; resultado entre u y el rango. */
 export function encadenadas2(params, azar, cnt, resta) {
-  const R = params.rango, u = params.salto === 100 ? 100 : 10, k = resta ? 3 : (params.sumandos ?? 3), tope = Math.floor(R / u);
+  const R = params.rango, u = params.salto === 1000 ? 1000 : params.salto === 100 ? 100 : 10, k = resta ? 3 : (params.sumandos ?? 3), tope = Math.floor(R / u);
   const vistos = new Set(), ejercicios = [];
   for (let n = 0; n < 5000 && ejercicios.length < cnt; n++) {
     const sal = Array.from({ length: k - 1 }, () => azar.entero(1, 9)), s = sal.reduce((x, y) => x + y, 0);

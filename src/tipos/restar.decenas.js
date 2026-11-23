@@ -68,7 +68,7 @@ export default registrar({
       const { a, b, forma } = e.datos, s = e.solucion.huecos[0], r = Math.floor(i / cols), k = i % cols;
       const x = M + k * (cw + GX), y = TOP - (r + 1) * ch - r * GY, t = a - b;
       p.marco(x, y, cw, ch);
-      const tres = (act.params.rango ?? 30) > 100, f = tres ? 15 : 19, w = tres ? 52 : 44;   // 2.º: tres cifras
+      const tres = (act.params.rango ?? 30) > 100, cuatro = (act.params.rango ?? 30) > 1000, f = cuatro ? 14 : tres ? 15 : 19, w = cuatro ? 58 : tres ? 52 : 44;   // 2.º: tres cifras
       p.linea(x, y, cw, ch, forma === 0 ? [T(`${a} ${MENOS} ${b} =`, f), B(w, 38, s)]
         : forma === 1 ? [T(`${a} ${MENOS}`, f), B(w, 38, s), T(`= ${t}`, f)] : [B(w, 38, s), T(`${MENOS} ${b} = ${t}`, f)], tres ? 6 : 8);
     }));

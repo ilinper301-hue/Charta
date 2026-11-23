@@ -3,7 +3,7 @@
 // Tipos nuevos: su regla va en tests/inv/<familia>.js (export default { "<id>"(act, tam) {…} }), con los ayudantes
 // de tests/inv/_ayuda.js (ent, unicos, cuantos, mitad, rep). Todo tipo registrado DEBE tener aquí su invariante (test_invariantes.js lo exige): al portar uno nuevo, añadirla.
 import assert from "node:assert/strict";
-import { ent, unicos, cuantos, mitad, rep, colsSuma, nivelesV, cdu } from "./inv/_ayuda.js";
+import { ent, unicos, cuantos, mitad, rep, colsSuma, nivelesV, cdu, umcdu } from "./inv/_ayuda.js";
 import inv_rep from "./inv/rep.js";
 import inv_combinada from "./inv/combinada.js";
 import inv_conteo from "./inv/conteo.js";
@@ -49,8 +49,22 @@ export const INVARIANTES = {
     const es = act.ejercicios, nivel = act.params.nivel || "sin", cap = Math.min(act.params.rango ?? 30, 99);
     const lleva = ({ datos: { a, b } }) => (a % 10) + (b % 10) >= 10;
     cuantos(es, tam === "media" ? 6 : 12);
-    if ((act.params.rango ?? 30) > 100) {      // 2.º: columnas C, D, U (R ≥ 200 para u/d/ud y 3 sumandos)
+    if ((act.params.rango ?? 30) > 1000) {     // 3.º: columnas UM, C, D, U
       const R = act.params.rango, k = act.params.sumandos === 3 ? 3 : 2;
+      unicos(es, (e) => Object.values(e.datos).sort().join("+"));
+      for (const { datos, solucion } of es) {
+        const xs = Object.values(datos);
+        assert.deepEqual(Object.keys(datos), ["a", "b", "c"].slice(0, k), "claves de datos");
+        ent(xs[0], 1000, R, "primer sumando"); xs.slice(1).forEach((v) => ent(v, 1, R, "sumando"));
+        assert.deepEqual([...xs].sort((p, q) => q - p), xs, "de mayor a menor");
+        const t = xs.reduce((s, v) => s + v, 0);
+        ent(t, 1001, R, "suma"); assert.deepEqual(solucion.huecos, umcdu(t), "huecos UM, C, D, U");
+      }
+      nivelesV(es.map((e) => colsSuma(Object.values(e.datos)).map((c) => c > 0)), nivel, `(R ${R})`);
+      return;
+    }
+    if ((act.params.rango ?? 30) > 100) {      // 2.º: columnas C, D, U (R ≥ 200 para u/d/ud y 3 sumandos)
+      const R = Math.min(act.params.rango, 999), k = act.params.sumandos === 3 ? 3 : 2;
       unicos(es, (e) => Object.values(e.datos).sort().join("+"));
       for (const { datos, solucion } of es) {
         const xs = Object.values(datos);

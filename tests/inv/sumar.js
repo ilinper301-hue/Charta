@@ -25,12 +25,12 @@ function horiz(R, tam, act, hastaCap) {
 }
 
 export function recta2(act, tam, resta) {
-  const R = act.params.rango, paso = act.params.salto === 100 ? 100 : 10;
+  const R = act.params.rango, paso = act.params.salto === 1000 ? 1000 : act.params.salto === 100 ? 100 : 10, mil = R > 1000;
   cuantos(act.ejercicios, tam === "media" ? 3 : 6);
   for (const { datos: { a, b, N, desde, paso: ps }, solucion } of act.ejercicios) {
-    assert.equal(ps, paso, "paso"); assert.equal(N, paso === 10 ? 10 : Math.floor(R / 100), "nº de tramos");
-    assert.equal(desde % 100, 0); assert.ok(desde >= 0 && desde + N * paso <= Math.max(R, 100), "recta fuera del rango");
-    if (paso === 100) assert.equal(desde, 0);
+    assert.equal(ps, paso, "paso"); assert.equal(N, paso === 1000 ? Math.floor(R / 1000) : paso === 10 || mil ? 10 : Math.floor(R / 100), "nº de tramos");
+    assert.equal(desde % (paso === 100 && mil ? 1000 : 100), 0); assert.ok(desde >= 0 && desde + N * paso <= Math.max(R, 100), "recta fuera del rango");
+    if (paso === 1000 || (paso === 100 && !mil)) assert.equal(desde, 0);
     for (const v of [a, b]) assert.equal(v % paso, 0, "fuera de las marcas");
     ent(b / paso, 2, Math.min(9, N - 2), "salto");
     const r = resta ? a - b : a + b;
@@ -40,7 +40,7 @@ export function recta2(act, tam, resta) {
 }
 
 export function encadenadas2(act, tam, resta) {
-  const R = act.params.rango, u = act.params.salto === 100 ? 100 : 10, k = resta ? 3 : (act.params.sumandos ?? 3), es = act.ejercicios;
+  const R = act.params.rango, u = act.params.salto === 1000 ? 1000 : act.params.salto === 100 ? 100 : 10, k = resta ? 3 : (act.params.sumandos ?? 3), es = act.ejercicios;
   cuantos(es, tam === "media" ? 8 : 16);
   const ns = (d) => resta ? [d.a, d.b, d.c] : ["x", "y", "z", "w"].filter((c) => d[c] !== undefined).map((c) => d[c]);
   unicos(es, (e) => ns(e.datos).join());
@@ -145,15 +145,20 @@ export default {
   "sumar.decenas"(act, tam) {
     const cap = Math.min(act.params.rango ?? 30, 100), bloques = act.params.modo === "bloques", es = act.ejercicios;
     if ((act.params.rango ?? 30) > 100 && !bloques) {      // 2.º: decenas (40 + 30), centenas (300 + 400), centenas con decenas (250 + 30)
-      const R = act.params.rango, clase = (a, b) => (a <= 90 && b <= 90 ? "A" : a % 100 === 0 && b % 100 === 0 ? "B" : a >= 100 && b <= 90 ? "C" : "?");
+      const R = act.params.rango, mil = R > 1000;
+      // 3.º (rango > 1000): B centenas (400 + 500), M millares (3000 + 2000), N millares + centenas (3000 + 400), D centenas + millares (3400 + 200)
+      const clase = mil ? (a, b) => (a <= 900 ? "B" : a % 1000 === 0 && b % 1000 === 0 ? "M" : a % 1000 === 0 ? "N" : "D")
+        : (a, b) => (a <= 90 && b <= 90 ? "A" : a % 100 === 0 && b % 100 === 0 ? "B" : a >= 100 && b <= 90 ? "C" : "?");
       cuantos(es, tam === "media" ? 12 : 24);
       unicos(es, (e) => `${e.datos.a}+${e.datos.b}/${e.datos.forma}`);
       for (const { datos: { a, b, forma }, solucion } of es) {
         assert.equal(a % 10, 0); assert.equal(b % 10, 0); ent(a, 10, R - 10, "a"); ent(b, 10, R - 10, "b"); ent(a + b, 20, R, "a + b"); ent(forma, 0, 2, "forma");
+        if (mil) assert.ok(a % 100 === 0 && b % 100 === 0, "centenas completas");
         assert.notEqual(clase(a, b), "?", `clase de ${a} + ${b}`);
         assert.deepEqual(solucion.huecos, [forma === 0 ? a + b : forma === 1 ? b : a]);
       }
-      if (tam === "completa" && R >= 300) for (const c of "ABC") assert.ok(es.filter((e) => clase(e.datos.a, e.datos.b) === c).length >= 6, `pocas de la clase ${c}`);
+      if (tam === "completa" && R >= 300 && !mil) for (const c of "ABC") assert.ok(es.filter((e) => clase(e.datos.a, e.datos.b) === c).length >= 6, `pocas de la clase ${c}`);
+      if (tam === "completa" && R >= 5000) for (const c of "BMND") assert.ok(es.filter((e) => clase(e.datos.a, e.datos.b) === c).length >= 6, `pocas de la clase ${c}`);
       return;
     }
     let npares = 0; for (let a = 10; a < cap; a += 10) for (let b = 10; b < cap; b += 10) if (a + b <= cap) npares++;
