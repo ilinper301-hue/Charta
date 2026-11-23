@@ -26,6 +26,7 @@ Sin cambios de código. El plan y el estado de sus fases están en **`PLAN-DISEN
 Detalle de cada paso: `HISTORIAL.md`.
 
 ## Pendiente de Iván
+- Probar en el Android (3.º, lote 1): Crear ficha → 3.º → Matemáticas: «Sumas hasta 9999», «Sumas con hueco», «Restas hasta 9999», «Restas con hueco» y «Familias de operaciones» con llevadas; mirar que las operaciones de cuatro cifras caben y se leen (la letra se reduce un poco en las más largas); revisar también «Problemas», «Series» y «Ordena» con millares.
 - Probar en el Android (3.º, lote 0): Crear ficha → 3.º → Matemáticas → bloque 1: «Los bloques de base diez» (¿se reconoce el cubo de mil?), «El ábaco», «Millares, centenas, decenas y unidades», «El número en letras», «La recta numérica» (de 1, 10 o 100 en 100), «La descomposición», «¿Qué número es?» y «Los números romanos» (¿os sirve la tabla de símbolos arriba?).
 - Probar en el Android la letra **Escolar (ligada)** (22-11-2026, opción «Grafía» en Repasa y escribe la letra, Copia palabras, Copia la frase, Escribe una frase y Miro y escribo): imprimir y mirar en papel si los rabos de una fila tocan las astas de la siguiente y si la «L» roza la etiqueta en «Escribe una frase»; en «Miro y escribo» las casillas salen pequeñas y las mayúsculas de Escolar son casi de imprenta. Comprobar que la licencia de Escolar_G (© Antonio Herrera Infantes) permite usarla en una app pública.
 - Probar en el Android (lote 6, 2.º): bloque «Multiplicar y repartir»: ¿vale escribir «3 grupos de 4» como 3 × 4 (o lo preferís al revés)? En «Problemas de multiplicar» y «Reparte», ¿cabe el texto en la tarjeta? En «Grupos iguales» con 5 grupos, ¿se leen bien los 5 sumandos?
@@ -60,7 +61,7 @@ Detalle de cada paso: `HISTORIAL.md`.
   - [x] Matemáticas 2.º · Lotes 0–6 completos (8 a 22-11-2026; guion en `MATES_2.md`, detalle en HISTORIAL.md). Último: lote 6, multiplicar y repartir (bloque 13: `multiplicar.grupos`, `.filas`, `.tablas`, `.problemas`, `.reparto`; «3 grupos de 4» = 3 × 4).
   - [ ] Matemáticas 3.º (guion **aprobado** en `MATES_3.md`, 23-11-2026: hasta 9999 por defecto y **sin punto de millares**, romanos hasta 100, multiplicar por una cifra, caja española con resto, con pensamiento computacional).
     - [x] Lote 0 (23-11-2026): catálogo de 3.º (`motor/modelos_3.py`, rangos 1000…9999), bloques con cubo de mil, ábaco de 4 varillas, UM/C/D/U, letras hasta 9999, recta de 1, 10 o 100 en 100, descomposición de 4 cifras, «¿Qué número es?» (2000–9999) y ✨ `rep.romanos` (hasta 100). 198 doradas. Detalle en HISTORIAL.md.
-    - [ ] Lote 1: ♻ reutilizados hasta 9999. (Sonnet)
+    - [x] Lote 1 (23-11-2026): ♻ reutilizados hasta 9999 (conteo, orden, sumar/restar con hueco, familia, tabla, pirámide, juegos, problemas, 2 trucos; geometría, calendario y patrones con sus rangos). Detalle en HISTORIAL.md.
     - [ ] Lote 2: valor posicional, sumas y restas de cuatro cifras, redondeo y estimación. (Sonnet)
     - [ ] Lote 3: multiplicar. (Sonnet)
     - [ ] Lote 4: dividir (la caja con Opus).

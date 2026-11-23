@@ -22,6 +22,20 @@ EN_3 = {
     # Lote 0 · representaciones con millares (con 1000, las de centenas de 2.º: repaso)
     **{i: (1000, 9999, 9999) for i in ("rep.bloques", "rep.abaco", "rep.du", "rep.letras", "rep.recta", "rep.descomp")},
     "combinada.combinada": (2000, 9999, 9999),   # ¿Qué número es? solo con millares (sus 6 representaciones llegan a 9999)
+    # Lote 1 · ♻ reutilizados tal cual: de 1000 a 9999, por defecto 9999 (con 1000, el repaso de 2.º)
+    **{i: (1000, 9999, 9999) for i in (
+        "conteo.anterior", "conteo.falta", "conteo.serie2", "conteo.serie5", "conteo.serie10", "conteo.series",
+        "conteo.camino",
+        "orden.mayor", "orden.ordena1", "orden.ordena2", "orden.entre", "orden.grupo",
+        "sumar.h100", "sumar.hueco", "sumar.piramide", "sumar.tabla",
+        "restar.r100", "restar.hueco", "restar.familia",
+        "juegos.laberinto", "juegos.une", "juegos.cadena", "juegos.oculto",
+        "problemas.suma", "problemas.resta", "problemas.mixtos", "problemas.barras",
+        "trucos.sumar9", "trucos.masmenos10")},
+    # Lote 1 · ♻ sin rango o con sus rangos de 1.º (None = los mismos que en 1.º)
+    **{i: None for i in (
+        "geometria.figuras", "geometria.cuerpos", "geometria.posiciones", "geometria.simetria", "geometria.copia",
+        "medida.calendario", "juegos.cuadrado", "juegos.colorea", "estadistica.patrones")},
 }
 
 
@@ -44,6 +58,7 @@ MODELOS_3 = [
 def cursos_extra(m):
     """{"3": {"rangos", "rango"}} si el modelo (dict del catálogo) también está en 3.º; {} si no."""
     if m["id"] not in EN_3: return {}
+    if EN_3[m["id"]] is None: return {str(CURSO): {"rangos": list(m.get("rangos") or []), "rango": m.get("rango")}}
     lo, hi, d = EN_3[m["id"]]
     rg = rangos(lo, hi)
     return {str(CURSO): {"rangos": rg, "rango": d if d in rg else rg[0]}}

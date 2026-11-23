@@ -224,3 +224,10 @@ Pasos ya cerrados, movidos desde ESTADO.md el 12-11-2026. No hace falta leerlo a
 - ✨ `rep.romanos` (Sonnet): I, V, X, L, C hasta 20, 50 o 100; `modo` los dos sentidos · romano → número · número → romano; `ayuda` (tabla de símbolos, por defecto sí). 18 tarjetas (3 × 6), media 9; al menos un tercio con resta (IV, IX, XL, XC; con rango 20 solo hay 4). `aRomano`/`deRomano`.
 - Fichas de 1.º y 2.º idénticas; 198 doradas (3 nuevas); `npm test`, `test_motor.py` y `tests/navegador.py` en verde; revisado en PNG.
 - Límites: con millares, los números < 1000 salen con «0 unidades de millar» y el ábaco de 4 varillas; la recta de 1 en 1 rotula con letra de 7 pt.
+
+## Matemáticas 3.º · Lote 1: ♻ reutilizados hasta 9999 (23-11-2026)
+- `motor/modelos_3.py`: `EN_3` con 29 modelos de 1000 a 9999 (por defecto 9999; con 1000, repaso de 2.º: conteo.anterior/falta/series/serie2/5/10/camino, orden.mayor/ordena1/ordena2/entre/grupo, sumar.h100/hueco/piramide/tabla, restar.r100/hueco/familia, juegos.laberinto/une/cadena/oculto, problemas.suma/resta/mixtos/barras, trucos.sumar9/masmenos10) y 9 con `None` (sus rangos de 1.º: geometría, calendario, juegos.cuadrado/colorea, patrones). `cursos_extra` admite `None`. `orden.signos`, `conteo.tabla`, `restar.mitades`, `multiplicar.*` quedan para sus lotes.
+- `src/tipos/_tres.js`: `llevaSuma3`/`llevaResta3` por suma de cifras (valen con cualquier número de columnas) y grupos de pares de cuatro cifras (`SUMA4`, `RESTA4`) solo con rango ≥ 1000: 2.º no cambia.
+- `src/render/papel.js`: `linea(…, ajustar = true)` reduce letra y cajas si la fila no cabe en la tarjeta (4 cifras ± 4 cifras). `restar.mitades` (1.º) lo desactiva para no cambiar sus fichas.
+- 198 doradas iguales; `npm run test:rapido`, `test_motor.py` y `navegador.py` en verde. Límite: las filas largas salen con letra algo menor que las cortas en la misma hoja.
+

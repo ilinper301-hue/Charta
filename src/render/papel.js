@@ -127,13 +127,16 @@ export class Papel {
     return { cel, cw, ch };
   }
   /** _linea(): fila centrada de textos T() y huecos B() (B(w, h, sol) muestra sol en modo solución). */
-  linea(x, y, w, h, items, gap = 8) {
+  linea(x, y, w, h, items, gap = 8, ajustar = true) {
     const ws = items.map((it) => (it.t === "t" ? this.ancho(it.s, it.f, it.fs) : it.w));
-    let cx = x + (w - ws.reduce((a, b) => a + b, 0) - gap * (items.length - 1)) / 2;
+    const total = ws.reduce((a, b) => a + b, 0) + gap * (items.length - 1);
+    // Si no cabe en la tarjeta (4 cifras en 3.º), todo se reduce a la proporción justa (letra, cajas y huecos); si cabe, igual que siempre.
+    const k0 = ajustar && total > w - 10 ? (w - 10) / total : 1;
+    let cx = x + (w - total * k0) / 2;
     items.forEach((it, k) => {
-      if (it.t === "t") this.text(cx, y + h / 2 - it.fs * 0.33, it.s, it.fs, { f: it.f });
-      else this.caja(cx, y + (h - it.h) / 2, it.w, it.h, null, 20, it.sol);
-      cx += ws[k] + gap;
+      if (it.t === "t") this.text(cx, y + h / 2 - it.fs * k0 * 0.33, it.s, it.fs * k0, { f: it.f });
+      else this.caja(cx, y + (h - it.h * k0) / 2, it.w * k0, it.h * k0, null, 20, it.sol);
+      cx += (ws[k] + gap) * k0;
     });
   }
   /** _pintar(): rejilla de operaciones; filas = [items de linea()…] (ya recortadas a _n(rows)·cols). */

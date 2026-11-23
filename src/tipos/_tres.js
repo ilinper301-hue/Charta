@@ -7,11 +7,11 @@
 
 import { TOP, MENOS, T, B, COLOR_SOLUCION } from "../render/papel.js";
 
-const cifras = (n) => [n % 10, Math.floor(n / 10) % 10, Math.floor(n / 100) % 10];
-/** ¿a + b lleva en alguna columna? */
-export function llevaSuma3(a, b) { const x = cifras(a), y = cifras(b); return x[0] + y[0] >= 10 || x[1] + y[1] + (x[0] + y[0] >= 10 ? 1 : 0) >= 10; };
+const sc = (n) => String(n).split("").reduce((t, c) => t + Number(c), 0);   // suma de cifras (vale con cualquier número de columnas)
+/** ¿a + b lleva en alguna columna? (la suma de cifras no se conserva) */
+export function llevaSuma3(a, b) { return sc(a) + sc(b) !== sc(a + b); };
 /** ¿a − b necesita «pedir» en alguna columna? */
-export function llevaResta3(a, b) { const x = cifras(a), y = cifras(b); return y[0] > x[0] || y[1] + (y[0] > x[0] ? 1 : 0) > x[1]; };
+export function llevaResta3(a, b) { return sc(a - b) + sc(b) !== sc(a); };
 
 const SUMA = [
   (R, z) => { const a = 10 * z.entero(10, Math.floor((R - 10) / 10)); return [a, 10 * z.entero(1, Math.max(1, Math.floor((R - a) / 10)))]; },
@@ -26,8 +26,19 @@ const RESTA = [
   (R, z) => (R < 201 ? null : (() => { const a = z.entero(201, R); return [a, z.entero(100, a - 1)]; })()),
 ];
 
-function sortear(G, ok, R, nivel, cnt, azar) {
+// 3.º (rango ≥ 1000): se añaden grupos con cuatro cifras. Con rango < 1000 no se usan (las fichas de 2.º no cambian).
+const SUMA4 = [
+  (R, z) => [z.entero(1000, R - 100), z.entero(100, 999)],
+  (R, z) => (R < 2000 ? null : (() => { const a = z.entero(1000, R - 1000); return [a, z.entero(1000, Math.max(1000, R - a))]; })()),
+];
+const RESTA4 = [
+  (R, z) => [z.entero(1000, R), z.entero(100, 999)],
+  (R, z) => (R < 2000 ? null : (() => { const a = z.entero(2000, R); return [a, z.entero(1000, a - 1)]; })()),
+];
+
+function sortear(G0, ok, R, nivel, cnt, azar) {
   nivel = nivel || "sin";
+  const G = R >= 1000 ? [...G0, ...(G0 === SUMA ? SUMA4 : RESTA4)] : G0;
   const vistos = new Set(), out = [];
   for (let i = 0; out.length < cnt && i < cnt * 4; i++) {
     const con = nivel === "con" || (nivel === "mezcla" && out.length % 2 === 1);
@@ -37,7 +48,7 @@ function sortear(G, ok, R, nivel, cnt, azar) {
       for (let k = 0; k < 300; k++) {
         const q = gen(R, azar);
         if (!q) break;
-        if (ok(q, R) && q[1] >= 1 && !vistos.has(q.join()) && con === (G === SUMA ? llevaSuma3 : llevaResta3)(...q)) { p = q; break; }
+        if (ok(q, R) && q[1] >= 1 && !vistos.has(q.join()) && con === (G0 === SUMA ? llevaSuma3 : llevaResta3)(...q)) { p = q; break; }
       }
     }
     if (!p) break;

@@ -31,8 +31,8 @@ export default registrar({
           p.circle(x0 + j * pitch, y + 128 + pitch / 2, r, { fill: INK, stroke: null });
           p.circle(x0 + j * pitch, y + 128 - pitch / 2, r, { fill: INK, stroke: null });
         }
-        p.linea(x, y + 10, cw, 60, it, 8);
-      } else p.linea(x, y, cw, ch, it, 8);
+        p.linea(x, y + 10, cw, 60, it, 8, false);
+      } else p.linea(x, y, cw, ch, it, 8, false);
     }));
   },
 });
