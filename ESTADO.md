@@ -26,6 +26,7 @@ Sin cambios de código. El plan y el estado de sus fases están en **`PLAN-DISEN
 Detalle de cada paso: `HISTORIAL.md`.
 
 ## Pendiente de Iván
+- Comprobar que las fichas nuevas salen en blanco y negro (si alguna vez quieres color: en la ficha, Impresión → quitar «Blanco y negro», o en Ajustes para siempre).
 - Probar en el Android (3.º, lote 2): «Millares, centenas…» de valor posicional (Descomposición, «El número» y «El valor de la cifra» con 4 cifras, «Los canjes»); «Sumas en vertical» y «Restas en vertical» con 4 columnas (¿se leen las casillas de llevada sobre UM, C y D?, ¿cabe la prueba de la resta?); «Sumas/Restas de centenas y millares»; recta de 100 en 100 y de 1000 en 1000; ✨ «Redondea» y ✨ «Estima» (¿vale redondear 4350 a 4400?, ¿se entiende el «≈»?).
 - Probar en el Android (3.º, lote 1): Crear ficha → 3.º → Matemáticas: «Sumas hasta 9999», «Sumas con hueco», «Restas hasta 9999», «Restas con hueco» y «Familias de operaciones» con llevadas; mirar que las operaciones de cuatro cifras caben y se leen (la letra se reduce un poco en las más largas); revisar también «Problemas», «Series» y «Ordena» con millares.
 - Probar en el Android (3.º, lote 0): Crear ficha → 3.º → Matemáticas → bloque 1: «Los bloques de base diez» (¿se reconoce el cubo de mil?), «El ábaco», «Millares, centenas, decenas y unidades», «El número en letras», «La recta numérica» (de 1, 10 o 100 en 100), «La descomposición», «¿Qué número es?» y «Los números romanos» (¿os sirve la tabla de símbolos arriba?).
@@ -56,6 +57,20 @@ Detalle de cada paso: `HISTORIAL.md`.
 - Probar en el Android (fase 3): «⋯» de la cabecera → Ajustes (entrar con Google, tema), Atrás cierra el menú y la hoja; en Diseño, «⋯» → Nueva ficha; borrar una ficha de la nube pregunta con la ventana nueva.
 - Probar en el Android (fase 2, sin cambios visibles): iniciar sesión, «Guardar en la nube», «Enviar a Tabula», «Proyectar en Fori» y abrir una ficha de la nube; si algo falla, avisar.
 - Probar en el Android (fase 1): componer una ficha con alumnos, cerrar la app desde multitarea y volver → «Seguir con la última» la recupera; Atrás con el selector abierto lo cierra.
+
+## Espacio en la ficha (23-11-2026) · en curso
+Iván: «las fichas dejan mucho blanco». Medido en las 175 fichas (por defecto, completa y media):
+- **Marco**: márgenes de 12 mm + cabecera + franja del enunciado (57 pt) + separación de 12 pt → la actividad usa el 64 % de la hoja (completa) y el 51 % (dos medias); en media, escala 0,82 (limita el alto) y ≈ 15 mm vacíos a cada lado.
+- **Tarjetas**: su alto sale de repartir la página en filas fijas (`p.celdas(TOP, cols, rows)`), no del contenido. «Mayor o menor»: tarjeta de 134 pt para 80 de contenido; en media, `_n()` redondea abajo (2 filas de 2,5) → hueco al final.
+- **Sueltas**: `conteo.tabla` y `conteo.camino` con rango 10 (92 % y 71 % vacío), `lectura.texto` y `sumar.tabla` (⅓ vacío), `juegos.colorea`.
+- **Letra**: 87 de 320 combinaciones con texto < 9 pt impreso (etiquetas «RODEA EL MAYOR» 7,8 pt; `problemas.dospasos` 3,3 pt).
+Pasos (cambian las doradas: `--actualizar` y subir `version` de los tipos tocados; Iván revisa en papel):
+- [x] Blanco y negro por defecto (`preferencias.bnDefecto`: activado salvo `charta:bnDefecto` = "0"; `tests/navegador.py` ajustado).
+- [ ] 1 · Marco compacto (Sonnet, medio). Probado en una copia: `PANEL = { x: 22, y: 18, w: W − 44, h: H − 84 − 18, gap: 8 }`; en `escalaPanel` 57 → 46; en `hoja.js` Nombre/Fecha a H − 36 (líneas a H − 38, Fecha en x 380 hasta 573, nombre hasta 352), título a H − 68, franja `yT − 36` y `yB + 10`, círculo `(x + 22, yT − 19, r 10)`, enunciado en x + 40. Resultado: escala 0,82 → 0,90 en media (+21 % de superficie) y 0,917 → 0,965 en completa. Márgenes de 7,8 mm (`@page margin: 0`): comprobar que la pauta y la regla siguen midiendo bien (`tests/test_pauta.js`) y los renglones de `filasDe` caben.
+- [ ] 2 · Rejilla elástica + opción **«Cantidad: Más grandes | Más ejercicios»** (Opus, alto; decidido por Iván: que se pueda elegir según el alumnado). Núcleo: `p.rejilla(top, cols, minAlto)` (filas = las que caben en `ZONA.alto × parte` con tarjetas ≥ `minAlto`; `ch` reparte el alto) y una función sin Papel para que `generar()` sepa cuántos ejercicios caben; la opción va en las opciones de la ficha (entra en `claveGeneracion`; ESQUEMA.md, por defecto «Más grandes» = la cantidad de hoy con casillas y números que crecen con `ch`). Piloto: `orden.mayor` (prototipo: `minAlto` 86, `bh = min(66, ch − 34)`, `bw = 1,1·bh` → 9 en media y 21 en completa, antes 6 y 15).
+- [ ] 3 · Resto de tipos con `p.celdas`/`p.pintar` (≈ 85) por familias (Sonnet, medio; 4–5 lotes).
+- [ ] 4 · Letra mínima de 9 pt impresa (etiquetas de tarjeta, rótulos de las representaciones). (Sonnet, medio)
+- [ ] 5 · Sueltas: tabla de números y camino con rango 10, Lee y responde, Tabla de sumar, Colorea y descubre. (Sonnet, medio)
 
 ## Fase 7 · Ampliación de contenidos (en curso)
 - [ ] Otros cursos de Matemáticas (2.º a 6.º) y Lengua.

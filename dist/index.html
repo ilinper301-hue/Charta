@@ -17871,14 +17871,15 @@ const ICONOS = {
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get enfocables() { return enfocables; }, get modal() { return modal; }, get abrirHoja() { return abrirHoja; }, get abrirMenu() { return abrirMenu; }, get avisar() { return avisar; }, get confirmar() { return confirmar; }, get prepararPestanas() { return prepararPestanas; }, get marcarPestana() { return marcarPestana; }, get ICONOS() { return ICONOS; } }));
 },
 "ui/preferencias.js": (__exp) => {
-// Charta · pequeñas preferencias del dispositivo: último modelo elegido y blanco y negro por defecto.
+// Charta · pequeñas preferencias del dispositivo: último modelo elegido y blanco y negro por defecto (activado si no se ha tocado).
 const { hayTipo } = __req("nucleo/tipos.js");
 const ULTIMO = "charta:ultimoModelo";
 function guardarUltimo(id) { try { localStorage.setItem(ULTIMO, id); } catch {} }
 function leerUltimo() { try { const id = localStorage.getItem(ULTIMO); return id && hayTipo(id) ? id : null; } catch { return null; } }
 
 const BN_DEFECTO = "charta:bnDefecto";
-const bnDefecto = () => { try { return localStorage.getItem(BN_DEFECTO) === "1"; } catch { return false; } };
+// Por defecto, blanco y negro (23-11-2026, petición de Iván): solo el color si se quita en Ajustes ("0").
+const bnDefecto = () => { try { return localStorage.getItem(BN_DEFECTO) !== "0"; } catch { return true; } };
 function ponerBnDefecto(v) { try { localStorage.setItem(BN_DEFECTO, v ? "1" : "0"); } catch {} }
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get guardarUltimo() { return guardarUltimo; }, get leerUltimo() { return leerUltimo; }, get bnDefecto() { return bnDefecto; }, get ponerBnDefecto() { return ponerBnDefecto; } }));

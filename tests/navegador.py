@@ -267,7 +267,7 @@ async def main():
         comprobar(medida['alto'] < 4, f"diseño con 25 alumnos: {medida['alto']:.1f} pantallas (menos de 4)")
         comprobar(medida['nodos'] < 2500, f"diseño con 25 alumnos: {medida['nodos']} nodos (menos de 2.500)")
         comprobar(await pg.locator('#guardadas').count() == 0 and await pg.locator('text=Más acciones').count() == 0, 'sin Favoritas/Recientes ni «Más acciones» en el diseño')
-        comprobar(await pg.inner_text('#resImpresion') == 'Color · Andika', 'resumen de Impresión: ' + await pg.inner_text('#resImpresion'))
+        comprobar(await pg.inner_text('#resImpresion') == 'Blanco y negro · Andika', 'resumen de Impresión: ' + await pg.inner_text('#resImpresion'))   # B/N por defecto (23-11-2026)
 
         print('Fase 4: «Ver ficha» y «⋯» de la actividad')
         await pg.click('#verFicha'); await pg.wait_for_selector('.hoja-inf.pantalla'); await pg.wait_for_timeout(300)
