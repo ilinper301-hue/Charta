@@ -50,6 +50,10 @@ const CASOS = [
   ...["orden.cantidad", "orden.entre", "orden.grupo", "orden.signos", "orden.redondea"].map((t) => ({ nombre: "más ejercicios: " + t, semilla: 4, opciones: { cantidad: "mas", actividades: [{ tipo: t, ...(t === "orden.redondea" ? { curso: 3, params: { rango: 9999 } } : {}) }] } })),
   { nombre: "más ejercicios en media: entre, grupo y cantidad", semilla: 4, opciones: { cantidad: "mas", actividades: [{ tipo: "orden.entre" }, { tipo: "orden.grupo" }] } },
   { nombre: "más ejercicios en media: cantidad y redondea", semilla: 4, opciones: { cantidad: "mas", actividades: [{ tipo: "orden.cantidad" }, { tipo: "orden.redondea", curso: 3, params: { rango: 9999 } }] } },
+  // Espacio en la ficha · paso 3, lote 2 (familia conteo)
+  ...["conteo.anterior", "conteo.cuenta", "conteo.falta", "conteo.serie1", "conteo.serie2", "conteo.serie5", "conteo.serie10", "conteo.series"].map((t) => ({ nombre: "más ejercicios: " + t, semilla: 4, opciones: { cantidad: "mas", actividades: [{ tipo: t }] } })),
+  { nombre: "más ejercicios en media: anterior y cuenta", semilla: 4, opciones: { cantidad: "mas", actividades: [{ tipo: "conteo.anterior" }, { tipo: "conteo.cuenta" }] } },
+  { nombre: "más ejercicios en media: falta y serie1", semilla: 4, opciones: { cantidad: "mas", actividades: [{ tipo: "conteo.falta" }, { tipo: "conteo.serie1" }] } },
   { nombre: "mayor o menor en media", semilla: 4, opciones: { actividades: [{ tipo: "orden.mayor" }, { tipo: "conteo.serie1" }] } },
   // Lengua 1.º · letra escolar ligada (Escolar_G) en las fichas de caligrafía
   ...[["palabras", "frase"], ["letra", "ordena"], ["libre"]].map((ts) => ({ nombre: "1.º escolar " + ts.join(" + "), semilla: 5, opciones: { actividades: ts.map((t) => ({ tipo: "escritura." + t, curso: 1, params: { grafia: "escolar" } })) } })),

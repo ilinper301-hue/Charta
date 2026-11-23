@@ -206,7 +206,7 @@
       {
        "n": 1,
        "tipo": "conteo.anterior",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "modo": null,
         "rango": 10
@@ -419,10 +419,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "14a3807357dd91a7"
+   "613a434d5c08a0cf"
   ],
   "svgSolucion": [
-   "8e6684cb601ca090"
+   "2d2e2589b0dbd545"
   ]
  },
  "conteo.camino": {
@@ -508,7 +508,7 @@
       {
        "n": 1,
        "tipo": "conteo.cuenta",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "rango": 10
        },
@@ -1101,10 +1101,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "bb7090356c013ba6"
+   "a9338a8e97cb7a0e"
   ],
   "svgSolucion": [
-   "cc3b084577e4586c"
+   "596d025d71d632f6"
   ]
  },
  "conteo.falta": {
@@ -1127,7 +1127,7 @@
       {
        "n": 1,
        "tipo": "conteo.falta",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "huecos": 1,
         "rango": 10
@@ -1369,10 +1369,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "63acacccd48b2b26"
+   "f79b1057670b4c91"
   ],
   "svgSolucion": [
-   "4a4302072d0fb35b"
+   "cc652c2bb631230e"
   ]
  },
  "conteo.serie1": {
@@ -1395,7 +1395,7 @@
       {
        "n": 1,
        "tipo": "conteo.serie1",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "huecos": 3,
         "rango": 10
@@ -1629,10 +1629,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "7fb79be4a67946c8"
+   "1acaf3a4ca9d075c"
   ],
   "svgSolucion": [
-   "50ef54539b7e3e82"
+   "1b1fa5094e2a58d5"
   ]
  },
  "conteo.serie10": {
@@ -1655,7 +1655,7 @@
       {
        "n": 1,
        "tipo": "conteo.serie10",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "huecos": 3,
         "rango": 20
@@ -1833,10 +1833,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "b9a8aa4287b04641"
+   "5e6d1a6bca016948"
   ],
   "svgSolucion": [
-   "eb46e84f58a8aa1a"
+   "31ddd3223173a0e4"
   ]
  },
  "conteo.serie2": {
@@ -1859,7 +1859,7 @@
       {
        "n": 1,
        "tipo": "conteo.serie2",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "huecos": 3,
         "rango": 10
@@ -2093,10 +2093,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "092ac43af44a5bec"
+   "865bcd47091446df"
   ],
   "svgSolucion": [
-   "23537a93af58c98a"
+   "25f6f6de5efb8562"
   ]
  },
  "conteo.serie5": {
@@ -2119,7 +2119,7 @@
       {
        "n": 1,
        "tipo": "conteo.serie5",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "huecos": 3,
         "rango": 10
@@ -2297,10 +2297,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "ead24e0d9ea313dd"
+   "767362426cffb99a"
   ],
   "svgSolucion": [
-   "5ca4c00dced32b13"
+   "82b1602c4591b4fe"
   ]
  },
  "conteo.series": {
@@ -2323,7 +2323,7 @@
       {
        "n": 1,
        "tipo": "conteo.series",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "huecos": 3,
         "rango": 10
@@ -2550,10 +2550,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "8edcb77e9b7822e9"
+   "2ff8c3f214d5e546"
   ],
   "svgSolucion": [
-   "6c2a9632bbad5ce4"
+   "c65007c6076b39cd"
   ]
  },
  "conteo.tabla": {
@@ -40438,7 +40438,7 @@
       {
        "n": 2,
        "tipo": "conteo.serie1",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "huecos": 3,
         "rango": 10
@@ -40564,10 +40564,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "101c77fb8f36bb38"
+   "3962ef9261948f39"
   ],
   "svgSolucion": [
-   "ec10ebe554a6902d"
+   "ce98ce5cd55ead0e"
   ]
  },
  "variantes y título": {
@@ -48491,6 +48491,3790 @@
    "5452b4871bc02497"
   ]
  },
+ "más ejercicios: conteo.anterior": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Anterior y posterior",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "conteo.anterior",
+       "tipoVersion": 2,
+       "params": {
+        "modo": null,
+        "rango": 10
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Escribe el número anterior y el posterior de cada número.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "n": 8,
+          "patron": "hnh"
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "n": 5,
+          "patron": "hnh"
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "n": 2,
+          "patron": "hnh"
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "n": 9,
+          "patron": "hnh"
+         },
+         "solucion": {
+          "huecos": [
+           8,
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "n": 4,
+          "patron": "hnh"
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "n": 3,
+          "patron": "hnh"
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "n": 7,
+          "patron": "hnh"
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "n": 1,
+          "patron": "hnh"
+         },
+         "solucion": {
+          "huecos": [
+           0,
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "n": 6,
+          "patron": "hnh"
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "n": 4,
+          "patron": "hnh"
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "n": 2,
+          "patron": "hnh"
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "n": 4,
+          "patron": "hnh"
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "n": 5,
+          "patron": "hnh"
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "n": 7,
+          "patron": "hnh"
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "n": 8,
+          "patron": "hnh"
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "n": 1,
+          "patron": "hnh"
+         },
+         "solucion": {
+          "huecos": [
+           0,
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e17",
+         "datos": {
+          "n": 5,
+          "patron": "hnh"
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e18",
+         "datos": {
+          "n": 8,
+          "patron": "hnh"
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e19",
+         "datos": {
+          "n": 4,
+          "patron": "hnh"
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e20",
+         "datos": {
+          "n": 1,
+          "patron": "hnh"
+         },
+         "solucion": {
+          "huecos": [
+           0,
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e21",
+         "datos": {
+          "n": 2,
+          "patron": "hnh"
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           3
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "791ef378f0ac747d"
+  ],
+  "svgSolucion": [
+   "9d6623df7f9f32a1"
+  ]
+ },
+ "más ejercicios: conteo.cuenta": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Cuenta y escribe",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "conteo.cuenta",
+       "tipoVersion": 2,
+       "params": {
+        "rango": 10
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Cuenta los dibujos de cada casilla y escribe el número en el cuadrito.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "n": 4,
+          "forma": "c",
+          "cols": 3,
+          "filas": 2,
+          "pos": [
+           [
+            0,
+            2,
+            0.044,
+            -0.102
+           ],
+           [
+            1,
+            1,
+            -0.146,
+            0.419
+           ],
+           [
+            0,
+            1,
+            -0.3,
+            0.776
+           ],
+           [
+            1,
+            2,
+            0.656,
+            -0.896
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "n": 2,
+          "forma": "s",
+          "cols": 2,
+          "filas": 1,
+          "pos": [
+           [
+            0,
+            0,
+            0.312,
+            0.129
+           ],
+           [
+            0,
+            1,
+            0.864,
+            -0.833
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "n": 7,
+          "forma": "q",
+          "cols": 4,
+          "filas": 2,
+          "pos": [
+           [
+            0,
+            3,
+            0.703,
+            0.845
+           ],
+           [
+            1,
+            0,
+            -0.399,
+            -0.978
+           ],
+           [
+            1,
+            3,
+            0.047,
+            -0.977
+           ],
+           [
+            0,
+            0,
+            -0.051,
+            -0.955
+           ],
+           [
+            0,
+            1,
+            0.721,
+            -0.93
+           ],
+           [
+            1,
+            2,
+            0.997,
+            -0.042
+           ],
+           [
+            0,
+            2,
+            -0.489,
+            -0.454
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "n": 3,
+          "forma": "t",
+          "cols": 3,
+          "filas": 1,
+          "pos": [
+           [
+            0,
+            0,
+            -0.559,
+            0.495
+           ],
+           [
+            0,
+            2,
+            0.133,
+            0.72
+           ],
+           [
+            0,
+            1,
+            -0.668,
+            0.658
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "n": 10,
+          "forma": "c",
+          "cols": 5,
+          "filas": 2,
+          "pos": [
+           [
+            1,
+            0,
+            -0.988,
+            -0.24
+           ],
+           [
+            0,
+            3,
+            0.272,
+            0.189
+           ],
+           [
+            0,
+            4,
+            -0.357,
+            -0.46
+           ],
+           [
+            1,
+            3,
+            0.247,
+            0.413
+           ],
+           [
+            1,
+            4,
+            0.708,
+            -0.356
+           ],
+           [
+            1,
+            1,
+            -0.791,
+            0.409
+           ],
+           [
+            1,
+            2,
+            -0.691,
+            0.073
+           ],
+           [
+            0,
+            0,
+            -0.71,
+            -0.157
+           ],
+           [
+            0,
+            2,
+            0.992,
+            -0.249
+           ],
+           [
+            0,
+            1,
+            -0.779,
+            -0.545
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "n": 4,
+          "forma": "s",
+          "cols": 3,
+          "filas": 2,
+          "pos": [
+           [
+            1,
+            0,
+            -0.038,
+            -0.881
+           ],
+           [
+            1,
+            1,
+            0.129,
+            -0.802
+           ],
+           [
+            0,
+            1,
+            0.468,
+            -0.327
+           ],
+           [
+            0,
+            0,
+            0.568,
+            0.074
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "n": 6,
+          "forma": "q",
+          "cols": 4,
+          "filas": 2,
+          "pos": [
+           [
+            0,
+            2,
+            0.741,
+            0.314
+           ],
+           [
+            0,
+            1,
+            0.12,
+            0.088
+           ],
+           [
+            1,
+            1,
+            -0.794,
+            -0.72
+           ],
+           [
+            1,
+            2,
+            -0.041,
+            0.481
+           ],
+           [
+            1,
+            0,
+            0.122,
+            -0.558
+           ],
+           [
+            1,
+            3,
+            0.506,
+            0.358
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "n": 5,
+          "forma": "t",
+          "cols": 4,
+          "filas": 2,
+          "pos": [
+           [
+            0,
+            2,
+            -0.152,
+            -0.291
+           ],
+           [
+            1,
+            0,
+            -0.733,
+            0.468
+           ],
+           [
+            0,
+            3,
+            0.874,
+            -0.263
+           ],
+           [
+            1,
+            1,
+            -0.776,
+            -0.3
+           ],
+           [
+            1,
+            2,
+            -0.993,
+            0.709
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "n": 3,
+          "forma": "c",
+          "cols": 3,
+          "filas": 1,
+          "pos": [
+           [
+            0,
+            0,
+            0.165,
+            0.328
+           ],
+           [
+            0,
+            1,
+            -0.55,
+            -0.689
+           ],
+           [
+            0,
+            2,
+            0.004,
+            0.237
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "n": 5,
+          "forma": "s",
+          "cols": 4,
+          "filas": 2,
+          "pos": [
+           [
+            1,
+            0,
+            0.025,
+            0.203
+           ],
+           [
+            1,
+            2,
+            0.558,
+            -0.468
+           ],
+           [
+            1,
+            1,
+            -0.561,
+            -0.688
+           ],
+           [
+            0,
+            0,
+            -0.019,
+            -0.418
+           ],
+           [
+            0,
+            2,
+            -0.625,
+            0.374
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "n": 8,
+          "forma": "q",
+          "cols": 4,
+          "filas": 2,
+          "pos": [
+           [
+            0,
+            0,
+            0.022,
+            -0.088
+           ],
+           [
+            1,
+            3,
+            -0.222,
+            -0.896
+           ],
+           [
+            0,
+            3,
+            -0.014,
+            -0.672
+           ],
+           [
+            1,
+            0,
+            0.577,
+            0.645
+           ],
+           [
+            1,
+            1,
+            0.714,
+            0.498
+           ],
+           [
+            0,
+            1,
+            -0.506,
+            0.492
+           ],
+           [
+            1,
+            2,
+            -0.381,
+            0.32
+           ],
+           [
+            0,
+            2,
+            0.508,
+            -0.409
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "n": 9,
+          "forma": "t",
+          "cols": 5,
+          "filas": 2,
+          "pos": [
+           [
+            1,
+            2,
+            0.935,
+            -0.424
+           ],
+           [
+            1,
+            3,
+            0.057,
+            0.657
+           ],
+           [
+            0,
+            0,
+            0.482,
+            -0.37
+           ],
+           [
+            0,
+            2,
+            -0.471,
+            -0.072
+           ],
+           [
+            1,
+            0,
+            -0.904,
+            0.461
+           ],
+           [
+            0,
+            4,
+            -0.361,
+            -0.719
+           ],
+           [
+            1,
+            4,
+            -0.118,
+            -0.522
+           ],
+           [
+            1,
+            1,
+            -0.798,
+            -0.269
+           ],
+           [
+            0,
+            3,
+            -0.499,
+            -0.344
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "n": 1,
+          "forma": "c",
+          "cols": 2,
+          "filas": 1,
+          "pos": [
+           [
+            0,
+            1,
+            -0.093,
+            -0.727
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "n": 5,
+          "forma": "s",
+          "cols": 4,
+          "filas": 2,
+          "pos": [
+           [
+            0,
+            2,
+            0.346,
+            0.344
+           ],
+           [
+            0,
+            3,
+            -0.863,
+            0.093
+           ],
+           [
+            0,
+            0,
+            0.12,
+            0.004
+           ],
+           [
+            1,
+            3,
+            -0.378,
+            0.82
+           ],
+           [
+            0,
+            1,
+            -0.902,
+            -0.283
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "n": 8,
+          "forma": "q",
+          "cols": 4,
+          "filas": 2,
+          "pos": [
+           [
+            1,
+            2,
+            -0.059,
+            0.458
+           ],
+           [
+            0,
+            3,
+            0.519,
+            0.577
+           ],
+           [
+            1,
+            3,
+            -0.2,
+            0.459
+           ],
+           [
+            1,
+            1,
+            0.414,
+            0.84
+           ],
+           [
+            0,
+            1,
+            0.414,
+            0.959
+           ],
+           [
+            1,
+            0,
+            -0.041,
+            0.081
+           ],
+           [
+            0,
+            2,
+            0.558,
+            -0.452
+           ],
+           [
+            0,
+            0,
+            -0.984,
+            0.853
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           8
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "a7e502c98389985e"
+  ],
+  "svgSolucion": [
+   "a6b9debb314992ee"
+  ]
+ },
+ "más ejercicios: conteo.falta": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "El número que falta",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "conteo.falta",
+       "tipoVersion": 2,
+       "params": {
+        "huecos": 1,
+        "rango": 10
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Escribe en cada cuadro gris el número que falta.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "a": 5,
+          "huecos": [
+           4
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "a": 3,
+          "huecos": [
+           2
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "a": 2,
+          "huecos": [
+           2
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": 6,
+          "huecos": [
+           0
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "a": 1,
+          "huecos": [
+           4
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": 4,
+          "huecos": [
+           0
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "a": 4,
+          "huecos": [
+           3
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "a": 3,
+          "huecos": [
+           3
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "a": 5,
+          "huecos": [
+           1
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "a": 3,
+          "huecos": [
+           4
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "a": 2,
+          "huecos": [
+           1
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "a": 3,
+          "huecos": [
+           0
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "a": 3,
+          "huecos": [
+           0
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "a": 5,
+          "huecos": [
+           1
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "a": 6,
+          "huecos": [
+           1
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "a": 1,
+          "huecos": [
+           3
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e17",
+         "datos": {
+          "a": 4,
+          "huecos": [
+           3
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e18",
+         "datos": {
+          "a": 5,
+          "huecos": [
+           0
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e19",
+         "datos": {
+          "a": 3,
+          "huecos": [
+           4
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e20",
+         "datos": {
+          "a": 1,
+          "huecos": [
+           3
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "ae2a22e75029b8bc"
+  ],
+  "svgSolucion": [
+   "753bf24bb892c1ef"
+  ]
+ },
+ "más ejercicios: conteo.serie1": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Series de 1 en 1",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "conteo.serie1",
+       "tipoVersion": 2,
+       "params": {
+        "huecos": 3,
+        "rango": 10
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Completa cada serie escribiendo los números que faltan en los cuadros grises.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "paso": 1,
+          "valores": [
+           4,
+           5,
+           6,
+           7,
+           8,
+           9
+          ],
+          "huecos": [
+           2,
+           3,
+           5
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           7,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "paso": 1,
+          "valores": [
+           7,
+           6,
+           5,
+           4,
+           3,
+           2
+          ],
+          "huecos": [
+           1,
+           3,
+           5
+          ],
+          "sube": false
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           4,
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "paso": 1,
+          "valores": [
+           5,
+           6,
+           7,
+           8,
+           9,
+           10
+          ],
+          "huecos": [
+           1,
+           3,
+           4
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           8,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "paso": 1,
+          "valores": [
+           6,
+           5,
+           4,
+           3,
+           2,
+           1
+          ],
+          "huecos": [
+           1,
+           2,
+           5
+          ],
+          "sube": false
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           4,
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "paso": 1,
+          "valores": [
+           3,
+           4,
+           5,
+           6,
+           7,
+           8
+          ],
+          "huecos": [
+           1,
+           3,
+           4
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           6,
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "paso": 1,
+          "valores": [
+           8,
+           7,
+           6,
+           5,
+           4,
+           3
+          ],
+          "huecos": [
+           0,
+           4,
+           5
+          ],
+          "sube": false
+         },
+         "solucion": {
+          "huecos": [
+           8,
+           4,
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "paso": 1,
+          "valores": [
+           5,
+           6,
+           7,
+           8,
+           9,
+           10
+          ],
+          "huecos": [
+           1,
+           3,
+           5
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           8,
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "paso": 1,
+          "valores": [
+           10,
+           9,
+           8,
+           7,
+           6,
+           5
+          ],
+          "huecos": [
+           2,
+           4,
+           5
+          ],
+          "sube": false
+         },
+         "solucion": {
+          "huecos": [
+           8,
+           6,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "paso": 1,
+          "valores": [
+           1,
+           2,
+           3,
+           4,
+           5,
+           6
+          ],
+          "huecos": [
+           0,
+           1,
+           5
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           2,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "paso": 1,
+          "valores": [
+           6,
+           5,
+           4,
+           3,
+           2,
+           1
+          ],
+          "huecos": [
+           2,
+           4,
+           5
+          ],
+          "sube": false
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           2,
+           1
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "ffdbe0dd393e9838"
+  ],
+  "svgSolucion": [
+   "7c4c3f1cfe63c654"
+  ]
+ },
+ "más ejercicios: conteo.serie2": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Series de 2 en 2",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "conteo.serie2",
+       "tipoVersion": 2,
+       "params": {
+        "huecos": 3,
+        "rango": 10
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Completa cada serie escribiendo los números que faltan en los cuadros grises.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "paso": 2,
+          "valores": [
+           0,
+           2,
+           4,
+           6,
+           8,
+           10
+          ],
+          "huecos": [
+           2,
+           3,
+           5
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           6,
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "paso": 2,
+          "valores": [
+           10,
+           8,
+           6,
+           4,
+           2,
+           0
+          ],
+          "huecos": [
+           1,
+           3,
+           5
+          ],
+          "sube": false
+         },
+         "solucion": {
+          "huecos": [
+           8,
+           4,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "paso": 2,
+          "valores": [
+           0,
+           2,
+           4,
+           6,
+           8,
+           10
+          ],
+          "huecos": [
+           1,
+           3,
+           4
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           6,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "paso": 2,
+          "valores": [
+           10,
+           8,
+           6,
+           4,
+           2,
+           0
+          ],
+          "huecos": [
+           1,
+           2,
+           5
+          ],
+          "sube": false
+         },
+         "solucion": {
+          "huecos": [
+           8,
+           6,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "paso": 2,
+          "valores": [
+           0,
+           2,
+           4,
+           6,
+           8,
+           10
+          ],
+          "huecos": [
+           1,
+           3,
+           4
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           6,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "paso": 2,
+          "valores": [
+           10,
+           8,
+           6,
+           4,
+           2,
+           0
+          ],
+          "huecos": [
+           0,
+           4,
+           5
+          ],
+          "sube": false
+         },
+         "solucion": {
+          "huecos": [
+           10,
+           2,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "paso": 2,
+          "valores": [
+           0,
+           2,
+           4,
+           6,
+           8,
+           10
+          ],
+          "huecos": [
+           1,
+           3,
+           5
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           6,
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "paso": 2,
+          "valores": [
+           10,
+           8,
+           6,
+           4,
+           2,
+           0
+          ],
+          "huecos": [
+           2,
+           4,
+           5
+          ],
+          "sube": false
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           2,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "paso": 2,
+          "valores": [
+           0,
+           2,
+           4,
+           6,
+           8,
+           10
+          ],
+          "huecos": [
+           0,
+           1,
+           5
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           0,
+           2,
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "paso": 2,
+          "valores": [
+           10,
+           8,
+           6,
+           4,
+           2,
+           0
+          ],
+          "huecos": [
+           2,
+           4,
+           5
+          ],
+          "sube": false
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           2,
+           0
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "e03599011654bc78"
+  ],
+  "svgSolucion": [
+   "41120ee09bb4c195"
+  ]
+ },
+ "más ejercicios: conteo.serie5": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Series de 5 en 5",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "conteo.serie5",
+       "tipoVersion": 2,
+       "params": {
+        "huecos": 3,
+        "rango": 10
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Completa cada serie escribiendo los números que faltan en los cuadros grises.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "paso": 5,
+          "valores": [
+           0,
+           5,
+           10
+          ],
+          "huecos": [
+           2
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "paso": 5,
+          "valores": [
+           10,
+           5,
+           0
+          ],
+          "huecos": [
+           0
+          ],
+          "sube": false
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "paso": 5,
+          "valores": [
+           0,
+           5,
+           10
+          ],
+          "huecos": [
+           1
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "paso": 5,
+          "valores": [
+           10,
+           5,
+           0
+          ],
+          "huecos": [
+           2
+          ],
+          "sube": false
+         },
+         "solucion": {
+          "huecos": [
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "paso": 5,
+          "valores": [
+           0,
+           5,
+           10
+          ],
+          "huecos": [
+           1
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "paso": 5,
+          "valores": [
+           10,
+           5,
+           0
+          ],
+          "huecos": [
+           1
+          ],
+          "sube": false
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "paso": 5,
+          "valores": [
+           0,
+           5,
+           10
+          ],
+          "huecos": [
+           2
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "paso": 5,
+          "valores": [
+           10,
+           5,
+           0
+          ],
+          "huecos": [
+           1
+          ],
+          "sube": false
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "paso": 5,
+          "valores": [
+           0,
+           5,
+           10
+          ],
+          "huecos": [
+           2
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "paso": 5,
+          "valores": [
+           10,
+           5,
+           0
+          ],
+          "huecos": [
+           0
+          ],
+          "sube": false
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "2700ff98c8870ee7"
+  ],
+  "svgSolucion": [
+   "ecb5dc79a69fe859"
+  ]
+ },
+ "más ejercicios: conteo.serie10": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Series de 10 en 10",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "conteo.serie10",
+       "tipoVersion": 2,
+       "params": {
+        "huecos": 3,
+        "rango": 20
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Completa cada serie escribiendo los números que faltan en los cuadros grises.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "paso": 10,
+          "valores": [
+           0,
+           10,
+           20
+          ],
+          "huecos": [
+           2
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           20
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "paso": 10,
+          "valores": [
+           20,
+           10,
+           0
+          ],
+          "huecos": [
+           0
+          ],
+          "sube": false
+         },
+         "solucion": {
+          "huecos": [
+           20
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "paso": 10,
+          "valores": [
+           0,
+           10,
+           20
+          ],
+          "huecos": [
+           1
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "paso": 10,
+          "valores": [
+           20,
+           10,
+           0
+          ],
+          "huecos": [
+           2
+          ],
+          "sube": false
+         },
+         "solucion": {
+          "huecos": [
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "paso": 10,
+          "valores": [
+           0,
+           10,
+           20
+          ],
+          "huecos": [
+           1
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "paso": 10,
+          "valores": [
+           20,
+           10,
+           0
+          ],
+          "huecos": [
+           1
+          ],
+          "sube": false
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "paso": 10,
+          "valores": [
+           0,
+           10,
+           20
+          ],
+          "huecos": [
+           2
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           20
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "paso": 10,
+          "valores": [
+           20,
+           10,
+           0
+          ],
+          "huecos": [
+           1
+          ],
+          "sube": false
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "paso": 10,
+          "valores": [
+           0,
+           10,
+           20
+          ],
+          "huecos": [
+           2
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           20
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "paso": 10,
+          "valores": [
+           20,
+           10,
+           0
+          ],
+          "huecos": [
+           0
+          ],
+          "sube": false
+         },
+         "solucion": {
+          "huecos": [
+           20
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "7dcc9425fa12d1db"
+  ],
+  "svgSolucion": [
+   "67228d84fe0faf6a"
+  ]
+ },
+ "más ejercicios: conteo.series": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Series mixtas",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "conteo.series",
+       "tipoVersion": 2,
+       "params": {
+        "huecos": 3,
+        "rango": 10
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Fíjate en el salto de cada serie y escribe los números que faltan.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "paso": 2,
+          "valores": [
+           0,
+           2,
+           4,
+           6,
+           8,
+           10
+          ],
+          "huecos": [
+           0,
+           1,
+           4
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           0,
+           2,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "paso": 5,
+          "valores": [
+           10,
+           5,
+           0
+          ],
+          "huecos": [
+           1
+          ],
+          "sube": false
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "paso": 2,
+          "valores": [
+           0,
+           2,
+           4,
+           6,
+           8,
+           10
+          ],
+          "huecos": [
+           1,
+           3,
+           4
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           6,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "paso": 1,
+          "valores": [
+           6,
+           5,
+           4,
+           3,
+           2,
+           1
+          ],
+          "huecos": [
+           0,
+           1,
+           2
+          ],
+          "sube": false
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           5,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "paso": 1,
+          "valores": [
+           4,
+           5,
+           6,
+           7,
+           8,
+           9
+          ],
+          "huecos": [
+           1,
+           3,
+           5
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           7,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "paso": 2,
+          "valores": [
+           10,
+           8,
+           6,
+           4,
+           2,
+           0
+          ],
+          "huecos": [
+           0,
+           2,
+           5
+          ],
+          "sube": false
+         },
+         "solucion": {
+          "huecos": [
+           10,
+           6,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "paso": 2,
+          "valores": [
+           0,
+           2,
+           4,
+           6,
+           8,
+           10
+          ],
+          "huecos": [
+           1,
+           2,
+           5
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           4,
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "paso": 2,
+          "valores": [
+           10,
+           8,
+           6,
+           4,
+           2,
+           0
+          ],
+          "huecos": [
+           1,
+           4,
+           5
+          ],
+          "sube": false
+         },
+         "solucion": {
+          "huecos": [
+           8,
+           2,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "paso": 1,
+          "valores": [
+           2,
+           3,
+           4,
+           5,
+           6,
+           7
+          ],
+          "huecos": [
+           2,
+           4,
+           5
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           6,
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "paso": 1,
+          "valores": [
+           10,
+           9,
+           8,
+           7,
+           6,
+           5
+          ],
+          "huecos": [
+           0,
+           3,
+           5
+          ],
+          "sube": false
+         },
+         "solucion": {
+          "huecos": [
+           10,
+           7,
+           5
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "aeb67306bf0be562"
+  ],
+  "svgSolucion": [
+   "5a537c6ee858924e"
+  ]
+ },
+ "más ejercicios en media: anterior y cuenta": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Anterior y posterior y cuenta y escribe",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "conteo.anterior",
+       "tipoVersion": 2,
+       "params": {
+        "modo": null,
+        "rango": 10
+       },
+       "tamano": "media",
+       "color": "amarillo",
+       "enunciado": "Escribe el número anterior y el posterior de cada número.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "n": 8,
+          "patron": "hnh"
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "n": 5,
+          "patron": "hnh"
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "n": 2,
+          "patron": "hnh"
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "n": 9,
+          "patron": "hnh"
+         },
+         "solucion": {
+          "huecos": [
+           8,
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "n": 4,
+          "patron": "hnh"
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "n": 3,
+          "patron": "hnh"
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "n": 7,
+          "patron": "hnh"
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "n": 1,
+          "patron": "hnh"
+         },
+         "solucion": {
+          "huecos": [
+           0,
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "n": 6,
+          "patron": "hnh"
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           7
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "conteo.cuenta",
+       "tipoVersion": 2,
+       "params": {
+        "rango": 10
+       },
+       "tamano": "media",
+       "color": "rosa",
+       "enunciado": "Cuenta los dibujos de cada casilla y escribe el número en el cuadrito.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "n": 4,
+          "forma": "c",
+          "cols": 4,
+          "filas": 1,
+          "pos": [
+           [
+            0,
+            1,
+            0.72,
+            0.652
+           ],
+           [
+            0,
+            0,
+            0.462,
+            0.497
+           ],
+           [
+            0,
+            3,
+            0.086,
+            -0.439
+           ],
+           [
+            0,
+            2,
+            0.468,
+            0.855
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "n": 1,
+          "forma": "s",
+          "cols": 2,
+          "filas": 1,
+          "pos": [
+           [
+            0,
+            1,
+            0.742,
+            0.613
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           1
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "n": 3,
+          "forma": "q",
+          "cols": 3,
+          "filas": 1,
+          "pos": [
+           [
+            0,
+            2,
+            0.881,
+            -0.505
+           ],
+           [
+            0,
+            0,
+            0.05,
+            -0.165
+           ],
+           [
+            0,
+            1,
+            0.573,
+            -0.357
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "n": 10,
+          "forma": "t",
+          "cols": 6,
+          "filas": 2,
+          "pos": [
+           [
+            1,
+            1,
+            0.182,
+            -0.537
+           ],
+           [
+            1,
+            0,
+            0.555,
+            0.323
+           ],
+           [
+            1,
+            5,
+            -0.047,
+            0.058
+           ],
+           [
+            1,
+            3,
+            -0.401,
+            -0.645
+           ],
+           [
+            0,
+            2,
+            0.059,
+            -0.837
+           ],
+           [
+            1,
+            4,
+            0.545,
+            -0.815
+           ],
+           [
+            0,
+            4,
+            0.091,
+            -0.687
+           ],
+           [
+            0,
+            1,
+            0.067,
+            -0.261
+           ],
+           [
+            1,
+            2,
+            0.621,
+            -0.826
+           ],
+           [
+            0,
+            3,
+            0.72,
+            0.936
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "n": 4,
+          "forma": "c",
+          "cols": 4,
+          "filas": 1,
+          "pos": [
+           [
+            0,
+            0,
+            0.309,
+            -0.998
+           ],
+           [
+            0,
+            3,
+            0.827,
+            -0.754
+           ],
+           [
+            0,
+            2,
+            -0.581,
+            0.86
+           ],
+           [
+            0,
+            1,
+            0.142,
+            0.526
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a2e6",
+         "datos": {
+          "n": 5,
+          "forma": "s",
+          "cols": 4,
+          "filas": 2,
+          "pos": [
+           [
+            0,
+            2,
+            0.384,
+            0.585
+           ],
+           [
+            1,
+            3,
+            -0.529,
+            0.304
+           ],
+           [
+            0,
+            0,
+            -0.709,
+            0.386
+           ],
+           [
+            1,
+            1,
+            -0.723,
+            -0.946
+           ],
+           [
+            0,
+            1,
+            -0.976,
+            -0.634
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a2e7",
+         "datos": {
+          "n": 9,
+          "forma": "q",
+          "cols": 6,
+          "filas": 2,
+          "pos": [
+           [
+            0,
+            1,
+            0.846,
+            0.911
+           ],
+           [
+            1,
+            0,
+            0.342,
+            -0.542
+           ],
+           [
+            0,
+            2,
+            -0.588,
+            0.325
+           ],
+           [
+            0,
+            0,
+            -0.453,
+            0.755
+           ],
+           [
+            1,
+            3,
+            -0.28,
+            -0.444
+           ],
+           [
+            0,
+            3,
+            0.948,
+            -0.178
+           ],
+           [
+            1,
+            5,
+            -0.691,
+            0.439
+           ],
+           [
+            1,
+            2,
+            0.576,
+            0.114
+           ],
+           [
+            1,
+            4,
+            -0.151,
+            0.631
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        },
+        {
+         "id": "a2e8",
+         "datos": {
+          "n": 6,
+          "forma": "t",
+          "cols": 5,
+          "filas": 2,
+          "pos": [
+           [
+            0,
+            3,
+            0.792,
+            0.565
+           ],
+           [
+            1,
+            4,
+            0.052,
+            0.476
+           ],
+           [
+            1,
+            3,
+            -0.175,
+            -0.861
+           ],
+           [
+            1,
+            1,
+            0.144,
+            0.063
+           ],
+           [
+            0,
+            4,
+            -0.538,
+            0.611
+           ],
+           [
+            0,
+            0,
+            0.981,
+            -0.816
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a2e9",
+         "datos": {
+          "n": 7,
+          "forma": "c",
+          "cols": 5,
+          "filas": 2,
+          "pos": [
+           [
+            1,
+            4,
+            0.243,
+            0.907
+           ],
+           [
+            0,
+            4,
+            -0.634,
+            -0.825
+           ],
+           [
+            1,
+            2,
+            -0.04,
+            -0.088
+           ],
+           [
+            1,
+            3,
+            -0.407,
+            -0.948
+           ],
+           [
+            1,
+            0,
+            -0.699,
+            -0.285
+           ],
+           [
+            1,
+            1,
+            0.485,
+            -0.692
+           ],
+           [
+            0,
+            2,
+            0.353,
+            0.338
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "3dc3296d4769f1c0"
+  ],
+  "svgSolucion": [
+   "514634dc7aef4cb4"
+  ]
+ },
+ "más ejercicios en media: falta y serie1": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "El número que falta y series de 1 en 1",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "conteo.falta",
+       "tipoVersion": 2,
+       "params": {
+        "huecos": 1,
+        "rango": 10
+       },
+       "tamano": "media",
+       "color": "amarillo",
+       "enunciado": "Escribe en cada cuadro gris el número que falta.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "a": 5,
+          "huecos": [
+           4
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "a": 3,
+          "huecos": [
+           4
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "a": 2,
+          "huecos": [
+           2
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": 6,
+          "huecos": [
+           2
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "a": 1,
+          "huecos": [
+           0
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": 4,
+          "huecos": [
+           4
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "a": 4,
+          "huecos": [
+           0
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "a": 3,
+          "huecos": [
+           3
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "a": 5,
+          "huecos": [
+           3
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "a": 3,
+          "huecos": [
+           1
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "conteo.serie1",
+       "tipoVersion": 2,
+       "params": {
+        "huecos": 3,
+        "rango": 10
+       },
+       "tamano": "media",
+       "color": "rosa",
+       "enunciado": "Completa cada serie escribiendo los números que faltan en los cuadros grises.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "paso": 1,
+          "valores": [
+           1,
+           2,
+           3,
+           4,
+           5,
+           6
+          ],
+          "huecos": [
+           0,
+           2,
+           4
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           3,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "paso": 1,
+          "valores": [
+           9,
+           8,
+           7,
+           6,
+           5,
+           4
+          ],
+          "huecos": [
+           2,
+           4,
+           5
+          ],
+          "sube": false
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           5,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "paso": 1,
+          "valores": [
+           5,
+           6,
+           7,
+           8,
+           9,
+           10
+          ],
+          "huecos": [
+           0,
+           1,
+           5
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           6,
+           10
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "paso": 1,
+          "valores": [
+           7,
+           6,
+           5,
+           4,
+           3,
+           2
+          ],
+          "huecos": [
+           1,
+           4,
+           5
+          ],
+          "sube": false
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           3,
+           2
+          ]
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "paso": 1,
+          "valores": [
+           3,
+           4,
+           5,
+           6,
+           7,
+           8
+          ],
+          "huecos": [
+           0,
+           1,
+           5
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           4,
+           8
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "3f8ab8e0907f5034"
+  ],
+  "svgSolucion": [
+   "f000e7336999df01"
+  ]
+ },
  "mayor o menor en media": {
   "ficha": {
    "schemaVersion": 1,
@@ -48599,7 +52383,7 @@
       {
        "n": 2,
        "tipo": "conteo.serie1",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "huecos": 3,
         "rango": 10
@@ -48725,10 +52509,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "059f8c399aa9b984"
+   "34bc90d79a3feac6"
   ],
   "svgSolucion": [
-   "10f040b2493bc41d"
+   "96c97b3f89f85a50"
   ]
  },
  "1.º escolar palabras + frase": {
