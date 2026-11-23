@@ -34,7 +34,7 @@ src/ui/compositor.js  crearCompositor(ctx) → { editores, cuentas (get/set), re
 src/ui/letras_vista.js  crearLetrasVista(ctx) → { marcadas, obligatorias, misFrases(), pintarLetras, pintarMisFrases, actividadesBase(), actividades() }: mapa de letras y «Mis frases»
 src/ui/fuentes_vista.js  crearFuentesVista(ctx) → { elegirFuente(id) }: selector de letra y letras subidas
 src/ui/previa.js      fase 4: crearPrevia(ctx) → { pintar() (con retardo), ahora() (lo pendiente, ya), nombres(), copias(), imprimir(), otraVariante(), ver(), ficha (lectura: hace lo pendiente) }: dibuja solo la hoja visible (paginador, flechas, deslizar; Ficha|Soluciones); genera solo si cambia claveGeneracion; «Ver ficha» = #previa en abrirHoja({clase: "pantalla"}); imprimir dibuja todas
-src/ui/previa_datos.js  fase 4, sin DOM: resumenAlumnos, resumenImpresion, etiquetaHoja, listaSoluciones, etiquetaSolucion, solucionDe, claveGeneracion (actividades + variantes + semilla), conPresentacion(base, {titulo, presentacion}) (= generar con ellos)
+src/ui/previa_datos.js  fase 4, sin DOM: avisoOrden(tipos) (actividades que no cambian de orden), resumenAlumnos, resumenImpresion, etiquetaHoja, listaSoluciones, etiquetaSolucion, solucionDe, claveGeneracion (actividades + variantes + semilla), conPresentacion(base, {titulo, presentacion}) (= generar con ellos)
 src/ui/lista_fichas.js  disponible, nombresModelos, etiquetasPestanas, fechaDMA (comunes con inicio_vista.js) y crearListaFichas(ctx) → { pintar() (refresca Inicio), esFavorita(), alternarFavorita() } (fase 4: la tarjeta de Diseño ya no existe)
 src/ui/nube_vista.js  crearNubeVista(ctx) → { nube, avisoNube (→ avisar()), leerNube, guardarEnNube, idUrl, aFori }: cuenta, Guardar en la nube (desde «⋯» de la barra), `?ficha=`; la lista leída está en `ctx.enNube`
 src/ui/enlaces.js     crearEnlaces(ctx) → { entrada, enviarTabula(), proyectar() }: grupos de Tabula, Enviar a Tabula y Proyectar en Fori (desde «⋯» de la barra)
@@ -49,6 +49,7 @@ src/ui/inicio_vista.js  paso 4.8, DOM (fase 6: filas con «⋯» → cb.abrir/du
 tests/test_ui.js      navegación: todos los tipos alcanzables, miniaturas limpias; también alumnos, guardadas, Tabula, inicio, páginas, borrador
 package.json          `npm test` (todo, 5 min) · `npm run test:rapido` (test_tipos/test_invariantes con --rapido: una semilla y muestra de combinaciones; 30 s) para cambios de interfaz
 src/nucleo/azar.js    mulberry32, mezclar(...ns) (semillas derivadas), crearAzar(s): entero, elegir, barajar, muestra, hijo
+src/nucleo/orden.js   variantes «mismo contenido, otro orden» (23-11-2026): ORDEN_LIBRE (tipos cuyos ejercicios pueden cambiar de sitio; el porqué de los que no, en la cabecera), seReordena, permutacion (sin puntos fijos; ACEPTA = condiciones de orden de algunos tipos, p. ej. frase.verdad), reordenarPaginas; la usa generar() con `opciones.orden` · tests/test_orden.js
 src/nucleo/tipos.js   registro: registrar(t), tipo(id), hayTipo, listaTipos
 src/nucleo/ficha.js   modelo, cursosDe(m), rangosDe(id, curso), rangosTodos(id), cursoDe(id, {curso, rango, params}), porDefecto(id, curso), validar (acepta los rangos de todos los cursos), capitalizar, tituloModelo, tituloPagina, coloresPagina, generar(opciones, semilla)
 src/nucleo/lector.js  erroresFicha(f), paginasVariante(f, v), letraVariante — sin dependencias (Tabula/Fori)

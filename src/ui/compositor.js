@@ -78,7 +78,7 @@ export function crearCompositor(ctx) {
     let acts; try { acts = L.actividadesBase(); } catch { acts = editores.map((e) => e.leer()); }
     const fr = hayFrases(acts) ? L.misFrases() : [];
     return { actividades: acts, ...(cuentas.length > 1 && { paginas: [...cuentas] }), semilla: ctx.semilla, titulo: $("titulo").value.trim(),
-      variaciones: $("variaciones").value, bn: $("bn").checked, grande: $("grande").checked, facil: $("facil").checked, fuente: $("fuente").value,
+      variaciones: $("variaciones").value, ...($("ordenVar").value === "orden" && { orden: true }), bn: $("bn").checked, grande: $("grande").checked, facil: $("facil").checked, fuente: $("fuente").value,
       ...(fr.length && { misFrases: fr }) };
   };
   /** Abre una composición; `extra` (solo el borrador): { alumnos, copias, grupo } de este dispositivo. */
@@ -89,7 +89,7 @@ export function crearCompositor(ctx) {
     for (const a of c.actividades) editores.push(crearEditor(a.tipo));
     recolocar();
     c.actividades.forEach((a, i) => editores[i].poner(a.tipo, a.params, a.curso));
-    ctx.semilla = c.semilla || 1; $("titulo").value = c.titulo || ""; $("variaciones").value = c.variaciones || "iguales"; $("bn").checked = !!c.bn; $("grande").checked = !!c.grande; $("facil").checked = !!c.facil;
+    ctx.semilla = c.semilla || 1; $("titulo").value = c.titulo || ""; $("variaciones").value = c.variaciones || "iguales"; $("ordenVar").value = c.orden ? "orden" : ""; $("bn").checked = !!c.bn; $("grande").checked = !!c.grande; $("facil").checked = !!c.facil;
     if (!c.fuente || fuentePorId(c.fuente).id === c.fuente) ctx.fuentes.elegirFuente(c.fuente || "andika");
     else { ctx.fuentes.elegirFuente("andika"); $("infoFuente").textContent = `Esta ficha usaba la letra «${c.fuente.replace("usuario:", "")}», que no está en este dispositivo: se usa Andika. Puedes subirla otra vez.`; }
     materia1 = materiaDe(editores[0].id);

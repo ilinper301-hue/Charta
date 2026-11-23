@@ -319,6 +319,7 @@ import { hayTipo as existeTipo } from "../src/nucleo/tipos.js";
   assert.ok(b.guardar(comp, { alumnos: "Ana Pérez\nLuis Gil", copias: 4, grupo: "g1" }));
   const r = b.leer(existeTipo);
   assert.equal(r.alumnos, "Ana Pérez\nLuis Gil"); assert.equal(r.copias, 4); assert.equal(r.grupo, "g1");
+  assert.deepEqual(limp({ ...comp, orden: true }).orden, true); assert.ok(!("orden" in limp(comp)), "sin «orden», la composición no cambia (favoritas antiguas)");
   assert.deepEqual(r.composicion, limp(comp)); assert.ok(!JSON.stringify(r.composicion).includes("Colada"), "nada fuera de limpiar()");
   assert.deepEqual(Object.keys(alm.m), [CLAVE_BORRADOR], "una sola clave");
   assert.ok(!JSON.stringify(JSON.parse(alm.m[CLAVE_BORRADOR]).composicion).includes("Ana"), "los nombres van aparte de la composición");
@@ -330,7 +331,7 @@ import { hayTipo as existeTipo } from "../src/nucleo/tipos.js";
 
 // Fase 4 de PLAN-DISENO · vista previa de una hoja: lista sin dibujar, resúmenes, etiquetas y «no regenerar».
 import { listaHojas, dibujarHoja } from "../src/render/hoja.js";
-import { resumenAlumnos, resumenImpresion, etiquetaHoja, listaSoluciones, etiquetaSolucion, claveGeneracion, conPresentacion, solucionDe } from "../src/ui/previa_datos.js";
+import { resumenAlumnos, resumenImpresion, etiquetaHoja, listaSoluciones, etiquetaSolucion, claveGeneracion, conPresentacion, solucionDe, avisoOrden } from "../src/ui/previa_datos.js";
 {
   const pags = [{ actividades: [{ tipo: "sumar.h20" }] }, { actividades: [{ tipo: "restar.r20" }, { tipo: "sumar.h10" }] }];
   const md = metadatosDe(pags.map((p) => p.actividades.map((a) => a.tipo)));
@@ -358,6 +359,13 @@ import { resumenAlumnos, resumenImpresion, etiquetaHoja, listaSoluciones, etique
   assert.equal(solucionDe(s, l[5]), 5); assert.equal(etiquetaSolucion({ variante: 0, pagina: 0, total: 1 }), "Soluciones");
   assert.equal(resumenAlumnos({ alumnos: 25, variaciones: "2" }), "25 alumnos · variantes A y B");
   assert.equal(resumenAlumnos({ alumnos: 1 }), "1 alumno · todas iguales");
+  // Variantes «solo el orden» (23-11-2026)
+  assert.equal(resumenAlumnos({ alumnos: 20, variaciones: "3", orden: true }), "20 alumnos · variantes A, B y C (otro orden)");
+  assert.equal(resumenAlumnos({ alumnos: 20, variaciones: "iguales", orden: true }), "20 alumnos · todas iguales");
+  assert.notEqual(claveGeneracion({ paginas: [], variantes: 2, semilla: 7, orden: true }), claveGeneracion({ paginas: [], variantes: 2, semilla: 7 }));
+  assert.equal(claveGeneracion({ paginas: [], variantes: 2, semilla: 7, orden: false }), claveGeneracion({ paginas: [], variantes: 2, semilla: 7 }));
+  assert.equal(avisoOrden(["palabra.dibuja", "escritura.ordena"]), "");
+  assert.match(avisoOrden(["palabra.dibuja", "rep.dedos", "rep.dedos"]), /^«[^»]+» sale igual en todas las variantes/);
   assert.equal(resumenAlumnos({ copias: 1 }), "Sin nombres · 1 copia");
   assert.equal(resumenAlumnos({ copias: 4, variaciones: "distintas" }), "Sin nombres · 4 copias · una distinta para cada copia");
   assert.equal(resumenImpresion({ fuente: "Andika" }), "Color · Andika");

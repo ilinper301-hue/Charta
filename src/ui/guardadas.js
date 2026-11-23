@@ -20,7 +20,7 @@ export function limpiar(c) {
       return { tipo: a.tipo, ...(Number.isInteger(a.curso) && { curso: a.curso }), params };
     }),
     ...(cuentasDe(c).length > 1 && { paginas: cuentasDe(c) }),                  // varias páginas: actividades de cada una
-    semilla: c.semilla | 0, titulo: c.titulo || "", variaciones: c.variaciones || "iguales", bn: !!c.bn, grande: !!c.grande, facil: !!c.facil,
+    semilla: c.semilla | 0, titulo: c.titulo || "", variaciones: c.variaciones || "iguales", ...(c.orden && { orden: true }), bn: !!c.bn, grande: !!c.grande, facil: !!c.facil,
     ...(c.fuente && c.fuente !== "andika" && { fuente: String(c.fuente) }),     // solo el nombre; la letra no viaja
     ...(frases && { misFrases: frases }),                                        // «Mis frases» (Lengua 1.º), una vez para toda la ficha
   };

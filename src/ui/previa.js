@@ -10,7 +10,7 @@ import { fuentePorId } from "../render/fuentes.js";
 import { leerAlumnos, numVariantes, MAX_ALUMNOS } from "./alumnos.js";
 import { hayLengua1, hayFrases } from "./letras.js";
 import { agrupar } from "./paginas.js";
-import { resumenAlumnos, resumenImpresion, etiquetaHoja, listaSoluciones, etiquetaSolucion, claveGeneracion, conPresentacion, solucionDe } from "./previa_datos.js";
+import { resumenAlumnos, resumenImpresion, etiquetaHoja, listaSoluciones, etiquetaSolucion, claveGeneracion, conPresentacion, solucionDe, avisoOrden } from "./previa_datos.js";
 import { abrirHoja, avisar, prepararPestanas, marcarPestana, ICONOS } from "./piezas.js";
 import { $, el } from "./dom.js";
 
@@ -27,7 +27,7 @@ export function crearPrevia(ctx) {
     $("filaCopias").hidden = n > 0;
     $("cuenta").textContent = !n ? "Sin alumnos: la ficha sale con la línea del nombre en blanco."
       : `${n} alumno${n > 1 ? "s" : ""}: una ficha con su nombre para cada uno.` + (todos.length > MAX_ALUMNOS ? ` (máximo ${MAX_ALUMNOS}; sobran ${todos.length - MAX_ALUMNOS})` : "");
-    $("resAlumnos").textContent = resumenAlumnos({ alumnos: n, copias: copias(), variaciones: $("variaciones").value });
+    $("resAlumnos").textContent = resumenAlumnos({ alumnos: n, copias: copias(), variaciones: $("variaciones").value, orden: $("ordenVar").value === "orden" });
   }
   const resumenImp = () => { $("resImpresion").textContent = resumenImpresion({ bn: $("bn").checked, fuente: fuentePorId($("fuente").value).nombre, grande: $("grande").checked, facil: $("facil").checked }); };
 
@@ -46,9 +46,13 @@ export function crearPrevia(ctx) {
       $("secLetras").hidden = !hayLengua1(leidas); $("cajaMisFrases").hidden = !hayFrases(leidas);
       ctx.letras.pintarMisFrases();
       const acts = ctx.letras.actividades(), pags = agrupar(acts, ctx.comp.cuentas), variantes = numVariantes($("variaciones").value, total);
-      const k = claveGeneracion({ paginas: pags, variantes, semilla: ctx.semilla });
+      const orden = variantes > 1 && $("ordenVar").value === "orden";
+      $("filaOrden").hidden = $("variaciones").value === "iguales";
+      const aviso = orden ? avisoOrden(acts.map((a) => a.tipo)) : "";
+      $("infoOrden").textContent = aviso; $("infoOrden").hidden = !aviso;
+      const k = claveGeneracion({ paginas: pags, variantes, semilla: ctx.semilla, orden });
       if (k !== clave) {
-        base = generar({ paginas: pags, metadatos: metadatosDe(pags.map((p) => p.actividades.map((a) => a.tipo))), variantes }, ctx.semilla);
+        base = generar({ paginas: pags, metadatos: metadatosDe(pags.map((p) => p.actividades.map((a) => a.tipo))), variantes, ...(orden && { orden }) }, ctx.semilla);
         clave = k;
       }
       ficha = conPresentacion(base, {
@@ -127,7 +131,7 @@ export function crearPrevia(ctx) {
   });
   $("hojas").addEventListener("pointercancel", () => { x0 = null; });
 
-  for (const id of ["alumnos", "copias", "variaciones", "bn", "grande", "facil", "titulo"]) $(id).addEventListener("change", pintar);
+  for (const id of ["alumnos", "copias", "variaciones", "ordenVar", "bn", "grande", "facil", "titulo"]) $(id).addEventListener("change", pintar);
   $("alumnos").addEventListener("input", contar);
   $("titulo").addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); $("titulo").blur(); } });
 

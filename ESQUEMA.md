@@ -22,7 +22,8 @@
   "paginas": [                       // variante A; las demás en "variantesDatos" si variantes > 1
     { "actividades": [ /* Actividad */ ] }   // 1 a 10 páginas de 1 o 2 actividades (1 = página completa, 2 = media cada una)
   ],
-  "variantesDatos": []               // [{ "semilla": …, "paginas": [...] }, …]
+  "variantesDatos": [],              // [{ "semilla": …, "paginas": [...] }, …]
+  "variantesOrden": true             // opcional: las variantes B, C… son la A con los ejercicios en otro orden (src/nucleo/orden.js)
 }
 ```
 - **Sin datos de alumnos.** Los nombres solo se usan en el dispositivo al imprimir (cabecera con nombre o línea en blanco) y nunca se guardan.
@@ -70,6 +71,7 @@ descomposición, letras, recta, bloques, cuadrícula, monedas, ábaco, D/U, atad
   "ficha": "{…JSON de la ficha…}",      // texto: Firestore no admite listas dentro de listas
   "composicion": "{…}" }                // actividades ({tipo, curso?, params}) + paginas? ([2, 1, 1] = actividades de cada página; sin él, una) + opciones, semilla, título, variaciones, B/N, misFrases? (para reabrirla en Charta)
 ```
+- **Composición**: `orden: true` (solo si se eligió «Las variantes cambian: solo el orden»; sin el campo, como siempre).
 - **Composición** (favoritas, recientes, nube, `?comp=`, Tabula): «Mis frases» van **una vez** en `misFrases: [...]` (fase 1); al generar se ponen en `params.misFrases` de cada actividad que las usa. Las composiciones antiguas las llevan en cada actividad y se leen igual.
 - `tipos` es un índice: se recorta a 10 (regla). Antes de enviar, `aDocumento()` comprueba los límites de las reglas (título ≤ 200, variantes ≤ 30, composición ≤ 20.000, ficha ≤ 900.000) para dar un aviso claro.
 - **Borrador** (solo en el dispositivo): `localStorage["charta:borrador"] = { v: 1, composicion, alumnos, copias, grupo?, fecha }`. Es lo único que guarda nombres (texto de la caja de alumnos); nunca sale del dispositivo.
@@ -81,7 +83,7 @@ Definida en `src/api.js`; la usa Tabula desde un iframe oculto (`../Charta/dist/
 ```js
 Charta = { contrato: 1, generar, hojas, modelo, erroresFicha, listaTipos, CATALOGO }
 ```
-- `generar(opciones, semilla) → ficha` (esquema de arriba). `opciones` = `{ actividades: [{tipo, params}] }` o `{ paginas: [{ actividades }, …], variantes?, titulo?, presentacion?, metadatos? }`. Mismas opciones + semilla = misma ficha. Lanza `Error` con mensaje legible.
+- `generar(opciones, semilla) → ficha` (esquema de arriba). `opciones` = `{ actividades: [{tipo, params}] }` o `{ paginas: [{ actividades }, …], variantes?, orden?, titulo?, presentacion?, metadatos? }` (`orden: true` = variantes con los mismos ejercicios en otro orden, solo en los tipos de `ORDEN_LIBRE`; los demás, iguales en todas). Mismas opciones + semilla = misma ficha. Lanza `Error` con mensaje legible.
 - `hojas(ficha, { nombres = [], copias = 1, bn = false, modo = "papel" | "solucion" }) → [{ nombre, variante, pagina, total, svg }]` (SVG A4, una por alumno o copia y página). Los nombres solo se usan aquí.
 - `modelo(id)`, `listaTipos()`, `erroresFicha(ficha) → [mensajes]` (vacío = válida), `CATALOGO` (solo lectura).
 - Cambios compatibles: añadir campos o funciones. Quitar o cambiar la forma de algo → subir `contrato` y avisar a Tabula (su prueba cruzada falla).

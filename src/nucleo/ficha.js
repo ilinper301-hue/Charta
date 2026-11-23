@@ -3,6 +3,7 @@
 import { POR_ID } from "./catalogo.js";
 import { crearAzar, mezclar } from "./azar.js";
 import { tipo } from "./tipos.js";
+import { reordenarPaginas } from "./orden.js";
 import { normalizarVistas, conVistas, normalizarObligatorias, conObligatorias } from "../lengua/vistas.js";
 import { normalizarPropias, conPropias, USA_FRASES } from "../lengua/frases.js";
 
@@ -180,7 +181,7 @@ export const MAX_PAGINAS = 10;
  * opciones = {
  *   actividades: [{ tipo: "sumar.h20", params?: {…}, color?: "azul" }, …]   (1 o 2: una página)
  *   o paginas: [{ actividades: [1 o 2] }, …]   (varias páginas: hasta MAX_PAGINAS; las actividades se numeran seguidas: 1, 2, 3…),
- *   titulo?, variantes?: 1 (N = variantes A, B, C…), presentacion?: { color, lecturaFacil, pictogramas },
+ *   titulo?, variantes?: 1 (N = variantes A, B, C…), orden?: true (las variantes B, C… = la A con los ejercicios en otro orden; orden.js), presentacion?: { color, lecturaFacil, pictogramas },
  *   metadatos?: { dificultad, minutos, etiquetas }
  * }
  * Determinista: no pone id, creada ni autor (se añaden al guardar en Firestore).
@@ -217,10 +218,12 @@ export function generar(opciones, semilla = 1) {
     paginas: paginasDe(semillaVariante(0)),
     variantesDatos: [],
   };
+  const orden = !!opciones.orden && variantes > 1;
+  if (orden) ficha.variantesOrden = true;
   if (opciones.metadatos) ficha.metadatos = { ...opciones.metadatos };
   for (let v = 1; v < variantes; v++) {
     const s = semillaVariante(v);
-    ficha.variantesDatos.push({ semilla: s, paginas: paginasDe(s) });
+    ficha.variantesDatos.push({ semilla: s, paginas: orden ? reordenarPaginas(ficha.paginas, s) : paginasDe(s) });
   }
   // Normalizada a JSON (−0 → 0…): la ficha en memoria es idéntica a la guardada en Firestore o leída por Tabula/Fori.
   return JSON.parse(JSON.stringify(ficha));

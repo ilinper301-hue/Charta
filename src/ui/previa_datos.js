@@ -1,12 +1,14 @@
 // Charta · lógica sin DOM de la pantalla de diseño (fase 4 de PLAN-DISENO): resúmenes de las secciones plegadas, etiquetas
 // del paginador y la clave que decide si hay que volver a generar la ficha o basta con volver a dibujarla.
 import { letraVariante } from "../nucleo/lector.js";
+import { seReordena } from "../nucleo/orden.js";
+import { modelo } from "../nucleo/ficha.js";
 
 const VARIACIONES = { iguales: "todas iguales", 2: "variantes A y B", 3: "variantes A, B y C", distintas: "una distinta para cada uno" };
 
 /** «25 alumnos · variantes A y B» / «Sin nombres · 3 copias · todas iguales». */
-export function resumenAlumnos({ alumnos = 0, copias = 1, variaciones = "iguales" }) {
-  const v = VARIACIONES[variaciones] ?? VARIACIONES.iguales;
+export function resumenAlumnos({ alumnos = 0, copias = 1, variaciones = "iguales", orden = false }) {
+  const v = (VARIACIONES[variaciones] ?? VARIACIONES.iguales) + (orden && variaciones !== "iguales" ? " (otro orden)" : "");
   if (alumnos) return `${alumnos} alumno${alumnos > 1 ? "s" : ""} · ${v}`;
   return `Sin nombres · ${copias} copia${copias > 1 ? "s" : ""}` + (copias > 1 ? ` · ${variaciones === "distintas" ? "una distinta para cada copia" : v}` : "");
 }
@@ -36,7 +38,7 @@ export const etiquetaSolucion = (s, variantes = 1) =>
  * Lo único que cambia el contenido de la ficha: actividades (con sus páginas), nº de variantes y semilla. Título,
  * color, letra y lectura solo cambian la presentación, y nombres o copias solo las hojas: con la misma clave no se genera.
  */
-export const claveGeneracion = ({ paginas, variantes, semilla }) => JSON.stringify([paginas, variantes, semilla]);
+export const claveGeneracion = ({ paginas, variantes, semilla, orden = false }) => JSON.stringify([paginas, variantes, semilla, ...(orden ? ["orden"] : [])]);
 
 /** La ficha generada (`base`, sin título ni presentación propios) con el título y la presentación de ahora. */
 export const conPresentacion = (base, { titulo, presentacion = {} }) =>
@@ -44,3 +46,10 @@ export const conPresentacion = (base, { titulo, presentacion = {} }) =>
 
 /** Índice de la hoja de soluciones que corresponde a una hoja del alumnado (misma variante y página). */
 export const solucionDe = (sols, h) => Math.max(0, sols.findIndex((s) => s.variante === h.variante && s.pagina === h.pagina));
+
+/** Con variantes «solo el orden»: aviso de las actividades que salen iguales en todas (su orden forma parte de la ficha); "" si no hay. */
+export function avisoOrden(tipos) {
+  const fijas = [...new Set(tipos.filter((id) => !seReordena(id)))].map((id) => `«${modelo(id).nombre}»`);
+  if (!fijas.length) return "";
+  return `${fijas.join(", ")} ${fijas.length > 1 ? "salen iguales" : "sale igual"} en todas las variantes: ahí el orden forma parte de la ficha.`;
+}

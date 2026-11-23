@@ -452,6 +452,10 @@ body.con-selector, body.con-capa { overflow: hidden; }
         <option value="3">Tres variantes (A, B y C), alternas</option>
         <option value="distintas">Una distinta para cada ficha</option></select></label>
     </div>
+    <label id="filaOrden" class="campo" hidden><span>Las variantes cambian</span><select id="ordenVar">
+      <option value="">Los ejercicios (otras palabras y números)</option>
+      <option value="orden">Solo el orden (mismas palabras y números)</option></select></label>
+    <p id="infoOrden" class="info" hidden></p>
     </div>
   </details>
   <details class="tarjeta plegable" id="secImpresion">
@@ -3747,6 +3751,7 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get CATALOGO()
 const { POR_ID } = __req("nucleo/catalogo.js");
 const { crearAzar, mezclar } = __req("nucleo/azar.js");
 const { tipo } = __req("nucleo/tipos.js");
+const { reordenarPaginas } = __req("nucleo/orden.js");
 const { normalizarVistas, conVistas, normalizarObligatorias, conObligatorias } = __req("lengua/vistas.js");
 const { normalizarPropias, conPropias, USA_FRASES } = __req("lengua/frases.js");
 const SCHEMA_VERSION = 1;
@@ -3923,7 +3928,7 @@ const MAX_PAGINAS = 10;
  * opciones = {
  *   actividades: [{ tipo: "sumar.h20", params?: {…}, color?: "azul" }, …]   (1 o 2: una página)
  *   o paginas: [{ actividades: [1 o 2] }, …]   (varias páginas: hasta MAX_PAGINAS; las actividades se numeran seguidas: 1, 2, 3…),
- *   titulo?, variantes?: 1 (N = variantes A, B, C…), presentacion?: { color, lecturaFacil, pictogramas },
+ *   titulo?, variantes?: 1 (N = variantes A, B, C…), orden?: true (las variantes B, C… = la A con los ejercicios en otro orden; orden.js), presentacion?: { color, lecturaFacil, pictogramas },
  *   metadatos?: { dificultad, minutos, etiquetas }
  * }
  * Determinista: no pone id, creada ni autor (se añaden al guardar en Firestore).
@@ -3960,10 +3965,12 @@ function generar(opciones, semilla = 1) {
     paginas: paginasDe(semillaVariante(0)),
     variantesDatos: [],
   };
+  const orden = !!opciones.orden && variantes > 1;
+  if (orden) ficha.variantesOrden = true;
   if (opciones.metadatos) ficha.metadatos = { ...opciones.metadatos };
   for (let v = 1; v < variantes; v++) {
     const s = semillaVariante(v);
-    ficha.variantesDatos.push({ semilla: s, paginas: paginasDe(s) });
+    ficha.variantesDatos.push({ semilla: s, paginas: orden ? reordenarPaginas(ficha.paginas, s) : paginasDe(s) });
   }
   // Normalizada a JSON (−0 → 0…): la ficha en memoria es idéntica a la guardada en Firestore o leída por Tabula/Fori.
   return JSON.parse(JSON.stringify(ficha));
@@ -4032,6 +4039,80 @@ function fichaDeDocumento(datos, id) {
 }
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get VERSIONES_LEIDAS() { return VERSIONES_LEIDAS; }, get erroresFicha() { return erroresFicha; }, get paginasVariante() { return paginasVariante; }, get letraVariante() { return letraVariante; }, get fichaDeDocumento() { return fichaDeDocumento; } }));
+},
+"nucleo/orden.js": (__exp) => {
+// Charta · variantes «mismo contenido, otro orden» (petición de Iván, 23-11-2026: que los alumnos no se copien).
+// Con `opciones.orden` en generar(), las variantes B, C… llevan los MISMOS ejercicios que la A, cambiados de sitio.
+// Solo en los tipos de ORDEN_LIBRE: ejercicios independientes cuyo dibujo no depende del puesto (comprobado al darles
+// la vuelta: invariantes y dibujo; tests/test_orden.js). El resto sale igual en todas las variantes.
+// Fuera (el puesto forma parte del diseño): rep.* (primero leer, después dibujar), combinada, conteo.cuenta y series
+// (alternan), juegos.une, letra.parejas, fono.rimas y palabra.contrarios (columnas emparejadas), multiplicar.tablas (en
+// orden), medida.calendario/tiempo/capacidad, orden.cantidad/ordinales, valor.agrupa, sumar.dibujos, restar.quita,
+// problemas.mixtos/barras/dospasos (alternan), escritura.* de copia y dictado, lectura.texto y fluidez, y los de 1–2 ejercicios.
+const { crearAzar, mezclar } = __req("nucleo/azar.js");
+const ORDEN_LIBRE = new Set([
+  // Matemáticas
+  "conteo.anterior", "conteo.falta",
+  "orden.entre", "orden.grupo", "orden.mayor", "orden.ordena1", "orden.ordena2", "orden.signos",
+  "valor.canje", "valor.cifra", "valor.descdu", "valor.dunum", "valor.pares",
+  "sumar.comp10", "sumar.comp20", "sumar.decenas", "sumar.dobles", "sumar.encadenadas", "sumar.h10", "sumar.h20", "sumar.h100",
+  "sumar.hueco", "sumar.piramide", "sumar.recta", "sumar.vertical", "suma.suma",
+  "restar.decenas", "restar.encadenadas", "restar.faltan", "restar.familia", "restar.hueco", "restar.mitades",
+  "restar.r10", "restar.r20", "restar.r100", "restar.recta", "restar.vertical",
+  "juegos.cadena", "juegos.cuadrado", "juegos.oculto",
+  "problemas.suma", "problemas.resta", "problemas.dinero",
+  "trucos.amigos100", "trucos.casidobles", "trucos.centenas", "trucos.compensar2", "trucos.descomponer", "trucos.descomponer2",
+  "trucos.masmenos1", "trucos.masmenos10", "trucos.orden", "trucos.pasardecena2", "trucos.restadecenas", "trucos.restar919",
+  "trucos.restaradelante", "trucos.restarsumando", "trucos.sumadecenas", "trucos.sumar9", "trucos.sumar919", "trucos.usar5",
+  "geometria.copia", "geometria.cuerpos", "geometria.figuras", "geometria.itinerario", "geometria.lados", "geometria.lineas",
+  "geometria.posiciones", "geometria.rueda", "geometria.simetria",
+  "medida.dinero", "medida.euros", "medida.longitud", "medida.masa", "medida.precios", "medida.reloj", "medida.reloj2",
+  "estadistica.patrones",
+  "multiplicar.filas", "multiplicar.grupos", "multiplicar.problemas", "multiplicar.reparto",
+  // Lengua
+  "letra.abecedario", "letra.busca", "letra.enpalabras", "letra.falta", "letra.vocales",
+  "silaba.falta", "silaba.junta", "silaba.ordena", "silaba.separa", "silaba.tabla",
+  "fono.inicial", "fono.larga", "fono.posicion", "fono.quita", "fono.silabas",
+  "palabra.articulo", "palabra.clasifica", "palabra.cuenta", "palabra.dibuja", "palabra.intrusa", "palabra.letras", "palabra.plural",
+  "orto.elige", "orto.mayuscula",
+  "frase.completa", "frase.ordena", "frase.puntua", "frase.separa", "frase.verdad",
+  "lectura.adivinanza", "lectura.instrucciones", "lectura.ordena",
+  "escritura.ordena",
+]);
+
+/** Condiciones de algunos tipos sobre el orden (las mismas que comprueban sus invariantes). */
+const ACEPTA = {
+  "frase.verdad": (es) => !/^0+1+$|^1+0+$/.test(es.map((e) => e.solucion.rodea).join("")),   // Sí y No mezclados
+};
+
+/** ¿Cambian de sitio los ejercicios de este tipo en las variantes «otro orden»? */
+const seReordena = (id) => ORDEN_LIBRE.has(id);
+
+/** Permutación de 0..n−1 sin ningún índice en su sitio (si n ≥ 2) que cumpla `vale(p)`, determinista con `azar`. */
+function permutacion(n, azar, vale = () => true) {
+  const base = Array.from({ length: n }, (_, i) => i);
+  if (n < 2) return base;
+  for (let t = 0; t < 200; t++) {
+    const p = azar.barajar(base);
+    if (p.every((x, i) => x !== i) && vale(p)) return p;
+  }
+  return base.map((_, i) => (i + 1) % n);   // rotación: nunca debería hacer falta
+}
+
+/** Páginas de la variante con semilla `s`: las de la A con los ejercicios cambiados de sitio (ids por posición, como generar()). */
+function reordenarPaginas(paginas, s) {
+  return paginas.map((pag) => ({
+    ...pag,
+    actividades: pag.actividades.map((a) => {
+      if (!seReordena(a.tipo) || a.ejercicios.length < 2) return a;
+      const ok = ACEPTA[a.tipo], vale = ok ? (p) => ok(p.map((j) => a.ejercicios[j])) : undefined;
+      const p = permutacion(a.ejercicios.length, crearAzar(mezclar(s, a.n, 77)), vale);
+      return { ...a, ejercicios: p.map((j, k) => ({ ...a.ejercicios[j], id: `a${a.n}e${k + 1}` })) };
+    }),
+  }));
+}
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get ORDEN_LIBRE() { return ORDEN_LIBRE; }, get seReordena() { return seReordena; }, get permutacion() { return permutacion; }, get reordenarPaginas() { return reordenarPaginas; } }));
 },
 "nucleo/tipos.js": (__exp) => {
 // Charta · registro de tipos de ejercicio. Cada tipo es un módulo con:
@@ -15825,7 +15906,7 @@ function crearCompositor(ctx) {
     let acts; try { acts = L.actividadesBase(); } catch { acts = editores.map((e) => e.leer()); }
     const fr = hayFrases(acts) ? L.misFrases() : [];
     return { actividades: acts, ...(cuentas.length > 1 && { paginas: [...cuentas] }), semilla: ctx.semilla, titulo: $("titulo").value.trim(),
-      variaciones: $("variaciones").value, bn: $("bn").checked, grande: $("grande").checked, facil: $("facil").checked, fuente: $("fuente").value,
+      variaciones: $("variaciones").value, ...($("ordenVar").value === "orden" && { orden: true }), bn: $("bn").checked, grande: $("grande").checked, facil: $("facil").checked, fuente: $("fuente").value,
       ...(fr.length && { misFrases: fr }) };
   };
   /** Abre una composición; `extra` (solo el borrador): { alumnos, copias, grupo } de este dispositivo. */
@@ -15836,7 +15917,7 @@ function crearCompositor(ctx) {
     for (const a of c.actividades) editores.push(crearEditor(a.tipo));
     recolocar();
     c.actividades.forEach((a, i) => editores[i].poner(a.tipo, a.params, a.curso));
-    ctx.semilla = c.semilla || 1; $("titulo").value = c.titulo || ""; $("variaciones").value = c.variaciones || "iguales"; $("bn").checked = !!c.bn; $("grande").checked = !!c.grande; $("facil").checked = !!c.facil;
+    ctx.semilla = c.semilla || 1; $("titulo").value = c.titulo || ""; $("variaciones").value = c.variaciones || "iguales"; $("ordenVar").value = c.orden ? "orden" : ""; $("bn").checked = !!c.bn; $("grande").checked = !!c.grande; $("facil").checked = !!c.facil;
     if (!c.fuente || fuentePorId(c.fuente).id === c.fuente) ctx.fuentes.elegirFuente(c.fuente || "andika");
     else { ctx.fuentes.elegirFuente("andika"); $("infoFuente").textContent = `Esta ficha usaba la letra «${c.fuente.replace("usuario:", "")}», que no está en este dispositivo: se usa Andika. Puedes subirla otra vez.`; }
     materia1 = materiaDe(editores[0].id);
@@ -16318,7 +16399,7 @@ function limpiar(c) {
       return { tipo: a.tipo, ...(Number.isInteger(a.curso) && { curso: a.curso }), params };
     }),
     ...(cuentasDe(c).length > 1 && { paginas: cuentasDe(c) }),                  // varias páginas: actividades de cada una
-    semilla: c.semilla | 0, titulo: c.titulo || "", variaciones: c.variaciones || "iguales", bn: !!c.bn, grande: !!c.grande, facil: !!c.facil,
+    semilla: c.semilla | 0, titulo: c.titulo || "", variaciones: c.variaciones || "iguales", ...(c.orden && { orden: true }), bn: !!c.bn, grande: !!c.grande, facil: !!c.facil,
     ...(c.fuente && c.fuente !== "andika" && { fuente: String(c.fuente) }),     // solo el nombre; la letra no viaja
     ...(frases && { misFrases: frases }),                                        // «Mis frases» (Lengua 1.º), una vez para toda la ficha
   };
@@ -17194,7 +17275,7 @@ const { fuentePorId } = __req("render/fuentes.js");
 const { leerAlumnos, numVariantes, MAX_ALUMNOS } = __req("ui/alumnos.js");
 const { hayLengua1, hayFrases } = __req("ui/letras.js");
 const { agrupar } = __req("ui/paginas.js");
-const { resumenAlumnos, resumenImpresion, etiquetaHoja, listaSoluciones, etiquetaSolucion, claveGeneracion, conPresentacion, solucionDe } = __req("ui/previa_datos.js");
+const { resumenAlumnos, resumenImpresion, etiquetaHoja, listaSoluciones, etiquetaSolucion, claveGeneracion, conPresentacion, solucionDe, avisoOrden } = __req("ui/previa_datos.js");
 const { abrirHoja, avisar, prepararPestanas, marcarPestana, ICONOS } = __req("ui/piezas.js");
 const { $, el } = __req("ui/dom.js");
 const RETARDO = 120;   // ms: varios cambios seguidos se pintan una sola vez
@@ -17210,7 +17291,7 @@ function crearPrevia(ctx) {
     $("filaCopias").hidden = n > 0;
     $("cuenta").textContent = !n ? "Sin alumnos: la ficha sale con la línea del nombre en blanco."
       : `${n} alumno${n > 1 ? "s" : ""}: una ficha con su nombre para cada uno.` + (todos.length > MAX_ALUMNOS ? ` (máximo ${MAX_ALUMNOS}; sobran ${todos.length - MAX_ALUMNOS})` : "");
-    $("resAlumnos").textContent = resumenAlumnos({ alumnos: n, copias: copias(), variaciones: $("variaciones").value });
+    $("resAlumnos").textContent = resumenAlumnos({ alumnos: n, copias: copias(), variaciones: $("variaciones").value, orden: $("ordenVar").value === "orden" });
   }
   const resumenImp = () => { $("resImpresion").textContent = resumenImpresion({ bn: $("bn").checked, fuente: fuentePorId($("fuente").value).nombre, grande: $("grande").checked, facil: $("facil").checked }); };
 
@@ -17229,9 +17310,13 @@ function crearPrevia(ctx) {
       $("secLetras").hidden = !hayLengua1(leidas); $("cajaMisFrases").hidden = !hayFrases(leidas);
       ctx.letras.pintarMisFrases();
       const acts = ctx.letras.actividades(), pags = agrupar(acts, ctx.comp.cuentas), variantes = numVariantes($("variaciones").value, total);
-      const k = claveGeneracion({ paginas: pags, variantes, semilla: ctx.semilla });
+      const orden = variantes > 1 && $("ordenVar").value === "orden";
+      $("filaOrden").hidden = $("variaciones").value === "iguales";
+      const aviso = orden ? avisoOrden(acts.map((a) => a.tipo)) : "";
+      $("infoOrden").textContent = aviso; $("infoOrden").hidden = !aviso;
+      const k = claveGeneracion({ paginas: pags, variantes, semilla: ctx.semilla, orden });
       if (k !== clave) {
-        base = generar({ paginas: pags, metadatos: metadatosDe(pags.map((p) => p.actividades.map((a) => a.tipo))), variantes }, ctx.semilla);
+        base = generar({ paginas: pags, metadatos: metadatosDe(pags.map((p) => p.actividades.map((a) => a.tipo))), variantes, ...(orden && { orden }) }, ctx.semilla);
         clave = k;
       }
       ficha = conPresentacion(base, {
@@ -17310,7 +17395,7 @@ function crearPrevia(ctx) {
   });
   $("hojas").addEventListener("pointercancel", () => { x0 = null; });
 
-  for (const id of ["alumnos", "copias", "variaciones", "bn", "grande", "facil", "titulo"]) $(id).addEventListener("change", pintar);
+  for (const id of ["alumnos", "copias", "variaciones", "ordenVar", "bn", "grande", "facil", "titulo"]) $(id).addEventListener("change", pintar);
   $("alumnos").addEventListener("input", contar);
   $("titulo").addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); $("titulo").blur(); } });
 
@@ -17351,11 +17436,13 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get crearPrevi
 // Charta · lógica sin DOM de la pantalla de diseño (fase 4 de PLAN-DISENO): resúmenes de las secciones plegadas, etiquetas
 // del paginador y la clave que decide si hay que volver a generar la ficha o basta con volver a dibujarla.
 const { letraVariante } = __req("nucleo/lector.js");
+const { seReordena } = __req("nucleo/orden.js");
+const { modelo } = __req("nucleo/ficha.js");
 const VARIACIONES = { iguales: "todas iguales", 2: "variantes A y B", 3: "variantes A, B y C", distintas: "una distinta para cada uno" };
 
 /** «25 alumnos · variantes A y B» / «Sin nombres · 3 copias · todas iguales». */
-function resumenAlumnos({ alumnos = 0, copias = 1, variaciones = "iguales" }) {
-  const v = VARIACIONES[variaciones] ?? VARIACIONES.iguales;
+function resumenAlumnos({ alumnos = 0, copias = 1, variaciones = "iguales", orden = false }) {
+  const v = (VARIACIONES[variaciones] ?? VARIACIONES.iguales) + (orden && variaciones !== "iguales" ? " (otro orden)" : "");
   if (alumnos) return `${alumnos} alumno${alumnos > 1 ? "s" : ""} · ${v}`;
   return `Sin nombres · ${copias} copia${copias > 1 ? "s" : ""}` + (copias > 1 ? ` · ${variaciones === "distintas" ? "una distinta para cada copia" : v}` : "");
 }
@@ -17385,7 +17472,7 @@ const etiquetaSolucion = (s, variantes = 1) =>
  * Lo único que cambia el contenido de la ficha: actividades (con sus páginas), nº de variantes y semilla. Título,
  * color, letra y lectura solo cambian la presentación, y nombres o copias solo las hojas: con la misma clave no se genera.
  */
-const claveGeneracion = ({ paginas, variantes, semilla }) => JSON.stringify([paginas, variantes, semilla]);
+const claveGeneracion = ({ paginas, variantes, semilla, orden = false }) => JSON.stringify([paginas, variantes, semilla, ...(orden ? ["orden"] : [])]);
 
 /** La ficha generada (`base`, sin título ni presentación propios) con el título y la presentación de ahora. */
 const conPresentacion = (base, { titulo, presentacion = {} }) =>
@@ -17394,7 +17481,14 @@ const conPresentacion = (base, { titulo, presentacion = {} }) =>
 /** Índice de la hoja de soluciones que corresponde a una hoja del alumnado (misma variante y página). */
 const solucionDe = (sols, h) => Math.max(0, sols.findIndex((s) => s.variante === h.variante && s.pagina === h.pagina));
 
-Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get resumenAlumnos() { return resumenAlumnos; }, get resumenImpresion() { return resumenImpresion; }, get etiquetaHoja() { return etiquetaHoja; }, get listaSoluciones() { return listaSoluciones; }, get etiquetaSolucion() { return etiquetaSolucion; }, get claveGeneracion() { return claveGeneracion; }, get conPresentacion() { return conPresentacion; }, get solucionDe() { return solucionDe; } }));
+/** Con variantes «solo el orden»: aviso de las actividades que salen iguales en todas (su orden forma parte de la ficha); "" si no hay. */
+function avisoOrden(tipos) {
+  const fijas = [...new Set(tipos.filter((id) => !seReordena(id)))].map((id) => `«${modelo(id).nombre}»`);
+  if (!fijas.length) return "";
+  return `${fijas.join(", ")} ${fijas.length > 1 ? "salen iguales" : "sale igual"} en todas las variantes: ahí el orden forma parte de la ficha.`;
+}
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get resumenAlumnos() { return resumenAlumnos; }, get resumenImpresion() { return resumenImpresion; }, get etiquetaHoja() { return etiquetaHoja; }, get listaSoluciones() { return listaSoluciones; }, get etiquetaSolucion() { return etiquetaSolucion; }, get claveGeneracion() { return claveGeneracion; }, get conPresentacion() { return conPresentacion; }, get solucionDe() { return solucionDe; }, get avisoOrden() { return avisoOrden; } }));
 },
 "ui/selector.js": (__exp) => {
 // Charta · selector de actividad a pantalla completa (paso 4.1).
