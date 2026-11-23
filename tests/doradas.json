@@ -16392,7 +16392,7 @@
       {
        "n": 1,
        "tipo": "orden.mayor",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "modo": null,
         "cerca": false,
@@ -16591,10 +16591,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "a1461cdea231a032"
+   "b4277bf02228a91f"
   ],
   "svgSolucion": [
-   "827f3e68e8294626"
+   "ffb62e44241fe35d"
   ]
  },
  "orden.ordena1": {
@@ -45243,6 +45243,786 @@
    "0f5d4a99b9b62746",
    "21555ef6a67d32d6",
    "141d4aa1b136f598"
+  ]
+ },
+ "más ejercicios: mayor o menor": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Mayor o menor",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "orden.mayor",
+       "tipoVersion": 3,
+       "params": {
+        "modo": null,
+        "cerca": false,
+        "rango": 10
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Mira lo que pide cada casilla y rodea el número mayor o el menor.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "a": 4,
+          "b": 9,
+          "pide": "mayor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 9
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "a": 2,
+          "b": 7,
+          "pide": "mayor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 7
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "a": 3,
+          "b": 7,
+          "pide": "menor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 3
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": 6,
+          "b": 10,
+          "pide": "mayor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 10
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "a": 7,
+          "b": 2,
+          "pide": "menor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 2
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": 7,
+          "b": 1,
+          "pide": "menor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 1
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "a": 6,
+          "b": 1,
+          "pide": "mayor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 6
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "a": 3,
+          "b": 5,
+          "pide": "menor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 3
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "a": 9,
+          "b": 3,
+          "pide": "menor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 3
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "a": 4,
+          "b": 7,
+          "pide": "mayor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 7
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "a": 7,
+          "b": 5,
+          "pide": "menor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 5
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "a": 5,
+          "b": 2,
+          "pide": "menor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 2
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "a": 1,
+          "b": 6,
+          "pide": "menor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 1
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "a": 1,
+          "b": 5,
+          "pide": "mayor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 5
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "a": 5,
+          "b": 1,
+          "pide": "menor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 1
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "a": 3,
+          "b": 1,
+          "pide": "mayor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 3
+         }
+        },
+        {
+         "id": "a1e17",
+         "datos": {
+          "a": 6,
+          "b": 8,
+          "pide": "menor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 6
+         }
+        },
+        {
+         "id": "a1e18",
+         "datos": {
+          "a": 6,
+          "b": 7,
+          "pide": "mayor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 7
+         }
+        },
+        {
+         "id": "a1e19",
+         "datos": {
+          "a": 1,
+          "b": 3,
+          "pide": "mayor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 3
+         }
+        },
+        {
+         "id": "a1e20",
+         "datos": {
+          "a": 10,
+          "b": 1,
+          "pide": "mayor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 10
+         }
+        },
+        {
+         "id": "a1e21",
+         "datos": {
+          "a": 6,
+          "b": 4,
+          "pide": "mayor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 6
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "37f36c22eb5f6565"
+  ],
+  "svgSolucion": [
+   "bcde49e2469df41b"
+  ]
+ },
+ "más ejercicios: mayor o menor en media": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Mayor o menor y los signos < > =",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "orden.mayor",
+       "tipoVersion": 3,
+       "params": {
+        "modo": null,
+        "cerca": false,
+        "rango": 9999
+       },
+       "tamano": "media",
+       "color": "verde",
+       "enunciado": "Mira lo que pide cada casilla y rodea el número mayor o el menor.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "a": 7404,
+          "b": 8593,
+          "pide": "mayor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 8593
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "a": 9195,
+          "b": 5513,
+          "pide": "mayor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 9195
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "a": 8050,
+          "b": 8837,
+          "pide": "mayor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 8837
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": 4828,
+          "b": 185,
+          "pide": "menor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 185
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "a": 7621,
+          "b": 2775,
+          "pide": "mayor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 7621
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": 7174,
+          "b": 9547,
+          "pide": "mayor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 9547
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "a": 9566,
+          "b": 5996,
+          "pide": "menor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 5996
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "a": 6557,
+          "b": 4262,
+          "pide": "menor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 4262
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "a": 4126,
+          "b": 4414,
+          "pide": "menor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 4126
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "orden.signos",
+       "tipoVersion": 1,
+       "params": {
+        "modo": null,
+        "cerca": false,
+        "rango": 10
+       },
+       "tamano": "media",
+       "color": "amarillo",
+       "enunciado": "Escribe <, > o = en el cuadro gris.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "a": 10,
+          "b": 9
+         },
+         "solucion": {
+          "huecos": [
+           ">"
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "a": 10,
+          "b": 10
+         },
+         "solucion": {
+          "huecos": [
+           "="
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "a": 5,
+          "b": 2
+         },
+         "solucion": {
+          "huecos": [
+           ">"
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "a": 3,
+          "b": 8
+         },
+         "solucion": {
+          "huecos": [
+           "<"
+          ]
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "a": 4,
+          "b": 8
+         },
+         "solucion": {
+          "huecos": [
+           "<"
+          ]
+         }
+        },
+        {
+         "id": "a2e6",
+         "datos": {
+          "a": 10,
+          "b": 8
+         },
+         "solucion": {
+          "huecos": [
+           ">"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "936d98a07bf44143"
+  ],
+  "svgSolucion": [
+   "909861171cd0d41f"
+  ]
+ },
+ "mayor o menor en media": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Mayor o menor y series de 1 en 1",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "orden.mayor",
+       "tipoVersion": 3,
+       "params": {
+        "modo": null,
+        "cerca": false,
+        "rango": 10
+       },
+       "tamano": "media",
+       "color": "verde",
+       "enunciado": "Mira lo que pide cada casilla y rodea el número mayor o el menor.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "a": 4,
+          "b": 9,
+          "pide": "menor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 4
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "a": 2,
+          "b": 7,
+          "pide": "menor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 2
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "a": 3,
+          "b": 7,
+          "pide": "mayor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 7
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": 6,
+          "b": 10,
+          "pide": "menor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 6
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "a": 7,
+          "b": 2,
+          "pide": "mayor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 7
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": 7,
+          "b": 1,
+          "pide": "mayor"
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": 7
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "conteo.serie1",
+       "tipoVersion": 1,
+       "params": {
+        "huecos": 3,
+        "rango": 10
+       },
+       "tamano": "media",
+       "color": "amarillo",
+       "enunciado": "Completa cada serie escribiendo los números que faltan en los cuadros grises.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "paso": 1,
+          "valores": [
+           1,
+           2,
+           3,
+           4,
+           5,
+           6
+          ],
+          "huecos": [
+           0,
+           2,
+           4
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           3,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "paso": 1,
+          "valores": [
+           9,
+           8,
+           7,
+           6,
+           5,
+           4
+          ],
+          "huecos": [
+           2,
+           4,
+           5
+          ],
+          "sube": false
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           5,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "paso": 1,
+          "valores": [
+           5,
+           6,
+           7,
+           8,
+           9,
+           10
+          ],
+          "huecos": [
+           0,
+           1,
+           5
+          ],
+          "sube": true
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           6,
+           10
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "paso": 1,
+          "valores": [
+           7,
+           6,
+           5,
+           4,
+           3,
+           2
+          ],
+          "huecos": [
+           1,
+           4,
+           5
+          ],
+          "sube": false
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           3,
+           2
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "059f8c399aa9b984"
+  ],
+  "svgSolucion": [
+   "10f040b2493bc41d"
   ]
  },
  "1.º escolar palabras + frase": {

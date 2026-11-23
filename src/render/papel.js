@@ -22,6 +22,20 @@ export const MM = 72 / 25.4;
 /** Panel de la página (x, yAbajo, w, h) y separación entre dos medias: los usa hoja.js. */
 export const PANEL = { x: 22, y: 18, w: W - 44, h: H - 84 - 18, gap: 8 };
 /** Escala con que el panel encaja la zona (como panel() de hoja.js). extra = alto de las líneas de enunciado de más. */
+/** Cantidad de ejercicios de la ficha (opción «Cantidad»): "grandes" (la de siempre, tarjetas que llenan el panel) o "mas" (las filas que caben). */
+export const CANTIDADES = ["grandes", "mas"];
+/** Alto de la zona de una rejilla que empieza en `top` (hasta el pie de la zona: la mitad en media página). */
+export const altoRejilla = (parte = 1, top = TOP) => top - (ZONA.yArriba - ZONA.alto * parte);
+/** Rejilla elástica, sin Papel (para que generar() sepa cuántos caben): filas de alto ≥ minAlto que caben. */
+export function filasRejilla(parte, minAlto, top = TOP, GY = 10) {
+  return Math.max(1, Math.floor((altoRejilla(parte, top) + GY) / (minAlto + GY)));
+}
+/** Ejercicios de una rejilla: «Más grandes» = `fijo` = [completa, media] (los de siempre); «Más ejercicios» = cols × filas que caben con tarjetas ≥ minAlto. */
+export function cuantosRejilla({ tamano, cantidad } = {}, cols, minAlto, fijo) {
+  const parte = tamano === "media" ? 0.5 : 1;
+  return cantidad === "mas" ? cols * filasRejilla(parte, minAlto) : fijo[parte < 1 ? 1 : 0];
+}
+
 export function escalaPanel(parte = 1, extra = 0) {
   const h = parte < 1 ? (PANEL.h - PANEL.gap) / 2 : PANEL.h;
   return Math.min((PANEL.w - 31) / ZONA.w, (h - 46 - extra) / (ZONA.alto * parte));
@@ -128,6 +142,12 @@ export class Papel {
   celdas(top, cols, rows, GX = 10, GY = 10) {
     const cw = (W - 2 * M - (cols - 1) * GX) / cols, ch = (top - M - (rows - 1) * GY) / rows, cel = [];
     for (let r = 0; r < this.n(rows); r++) for (let k = 0; k < cols; k++) cel.push([M + k * (cw + GX), top - (r + 1) * ch - r * GY]);
+    return { cel, cw, ch };
+  }
+  /** Rejilla elástica: `filas` × cols que llenan la zona desde `top` (la mitad en media página); el alto de las tarjetas sale del sitio, no de filas fijas. */
+  rejilla(top, cols, filas, GX = 10, GY = 10) {
+    const cw = (W - 2 * M - (cols - 1) * GX) / cols, ch = (altoRejilla(this.parte, top) - (filas - 1) * GY) / filas, cel = [];
+    for (let r = 0; r < filas; r++) for (let k = 0; k < cols; k++) cel.push([M + k * (cw + GX), top - (r + 1) * ch - r * GY]);
     return { cel, cw, ch };
   }
   /** _linea(): fila centrada de textos T() y huecos B() (B(w, h, sol) muestra sol en modo solución). */

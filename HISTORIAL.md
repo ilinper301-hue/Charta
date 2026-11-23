@@ -241,3 +241,11 @@ Pasos ya cerrados, movidos desde ESTADO.md el 12-11-2026. No hace falta leerlo a
 - `papel.js`: `linea(…, ajustar)` (lote 1) y `caja()` reducen la letra si el número no cabe (cuatro cifras en cajas de tres; también en la solución). Cambió la dorada de `trucos.centenas` (una solución de cuatro cifras en un hueco pequeño ahora cabe).
 - Límites: `conteo.tabla` y `orden.ordinales` (hasta 99.º) quedan para otros lotes. `orden.cerca` con cuatro cifras sigue significando la misma decena.
 
+
+## Espacio en la ficha · paso 2: rejilla elástica + «Cantidad» (23-11-2026)
+- `papel.js`: `CANTIDADES`, `altoRejilla(parte, top)`, `filasRejilla(parte, minAlto)`, `cuantosRejilla(ctx, cols, minAlto, [completa, media])` (sin Papel) y `p.rejilla(top, cols, filas)` (las filas llenan la zona; en media, la mitad).
+- `ficha.js`: `opciones.cantidad` ("grandes" por defecto | "mas"; otro valor → error), pasa `{ tamano, cantidad }` al `generar` del tipo y deja `ficha.cantidad = "mas"` solo si se elige (las doradas de siempre no cambian).
+- Interfaz: selector «Ejercicios» (#filaCantidad/#cantidad) en Impresión, visible si alguna actividad tiene `cantidad: true`; entra en `claveGeneracion`, la composición (`cantidad: "mas"`), `limpiar()` y `opcionesDeComp()`.
+- Piloto `orden.mayor` v3: «Más ejercicios» = filas de 3 con tarjeta ≥ 86 pt (21 en completa, 9 en media); «Más grandes» = 15 y 6 con tarjetas que llenan el panel; cajas `bh = min(ch − 34, ancho)`, `bw = 1,1·bh`, letra 0,48·bh.
+- `tools/ver_tipo.js --mas`. Pruebas: 3 doradas nuevas (203) y una en `test_copia.js`.
+- Límites: Tabula (`chartaOpciones`) no pasa `cantidad`; con «Más grandes» en media las tarjetas de «Mayor o menor» quedan altas (las cajas las limita el ancho).

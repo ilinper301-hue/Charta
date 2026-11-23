@@ -4,6 +4,7 @@
 // título, color, letra o lectura solo vuelven a dibujar. Al imprimir se dibujan todas, como antes.
 // crearPrevia(ctx) → { pintar(), ahora(), nombres(), copias(), imprimir(), otraVariante(), ver(), ficha (lectura) }
 import { generar, metadatosDe } from "../nucleo/ficha.js";
+import { tipo } from "../nucleo/tipos.js";
 import { paginasVariante } from "../nucleo/lector.js";
 import { hoja, hojas, listaHojas, dibujarHoja, estiloLectura } from "../render/hoja.js";
 import { fuentePorId } from "../render/fuentes.js";
@@ -50,9 +51,11 @@ export function crearPrevia(ctx) {
       $("filaOrden").hidden = $("variaciones").value === "iguales";
       const aviso = orden ? avisoOrden(acts.map((a) => a.tipo)) : "";
       $("infoOrden").textContent = aviso; $("infoOrden").hidden = !aviso;
-      const k = claveGeneracion({ paginas: pags, variantes, semilla: ctx.semilla, orden });
+      $("filaCantidad").hidden = !acts.some((a) => tipo(a.tipo)?.cantidad);
+      const cantidad = !$("filaCantidad").hidden && $("cantidad").value === "mas" ? "mas" : "grandes";
+      const k = claveGeneracion({ paginas: pags, variantes, semilla: ctx.semilla, orden, cantidad });
       if (k !== clave) {
-        base = generar({ paginas: pags, metadatos: metadatosDe(pags.map((p) => p.actividades.map((a) => a.tipo))), variantes, ...(orden && { orden }) }, ctx.semilla);
+        base = generar({ paginas: pags, metadatos: metadatosDe(pags.map((p) => p.actividades.map((a) => a.tipo))), variantes, ...(orden && { orden }), ...(cantidad === "mas" && { cantidad }) }, ctx.semilla);
         clave = k;
       }
       ficha = conPresentacion(base, {
@@ -131,7 +134,7 @@ export function crearPrevia(ctx) {
   });
   $("hojas").addEventListener("pointercancel", () => { x0 = null; });
 
-  for (const id of ["alumnos", "copias", "variaciones", "ordenVar", "bn", "grande", "facil", "titulo"]) $(id).addEventListener("change", pintar);
+  for (const id of ["alumnos", "copias", "variaciones", "ordenVar", "cantidad", "bn", "grande", "facil", "titulo"]) $(id).addEventListener("change", pintar);
   $("alumnos").addEventListener("input", contar);
   $("titulo").addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); $("titulo").blur(); } });
 

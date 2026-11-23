@@ -38,7 +38,7 @@ export const etiquetaSolucion = (s, variantes = 1) =>
  * Lo único que cambia el contenido de la ficha: actividades (con sus páginas), nº de variantes y semilla. Título,
  * color, letra y lectura solo cambian la presentación, y nombres o copias solo las hojas: con la misma clave no se genera.
  */
-export const claveGeneracion = ({ paginas, variantes, semilla, orden = false }) => JSON.stringify([paginas, variantes, semilla, ...(orden ? ["orden"] : [])]);
+export const claveGeneracion = ({ paginas, variantes, semilla, orden = false, cantidad = "grandes" }) => JSON.stringify([paginas, variantes, semilla, ...(orden ? ["orden"] : []), ...(cantidad === "mas" ? ["mas"] : [])]);
 
 /** La ficha generada (`base`, sin título ni presentación propios) con el título y la presentación de ahora. */
 export const conPresentacion = (base, { titulo, presentacion = {} }) =>

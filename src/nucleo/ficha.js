@@ -4,6 +4,9 @@ import { POR_ID } from "./catalogo.js";
 import { crearAzar, mezclar } from "./azar.js";
 import { tipo } from "./tipos.js";
 import { reordenarPaginas } from "./orden.js";
+
+/** Opción «Cantidad» de la ficha (igual que CANTIDADES de render/papel.js). */
+const CANTIDADES = ["grandes", "mas"];
 import { normalizarVistas, conVistas, normalizarObligatorias, conObligatorias } from "../lengua/vistas.js";
 import { normalizarPropias, conPropias, USA_FRASES } from "../lengua/frases.js";
 
@@ -152,11 +155,11 @@ export function coloresPagina(acts) {
 }
 
 /** Una página: sus actividades se numeran desde `n0 + 1` (la numeración sigue de una página a otra) y su semilla es la de su número. */
-function pagina(acts, tamano, colores, semilla, n0 = 0) {
+function pagina(acts, tamano, colores, semilla, n0 = 0, cantidad = "grandes") {
   return {
     actividades: acts.map((a, j) => {
       const T = tipo(a.tipo), i = n0 + j;
-      const res = conPropias(a.params.misFrases || null, () => conVistas(a.params.vistas || null, () => conObligatorias(a.params.obligatorias || null, () => T.generar(a.params, crearAzar(mezclar(semilla, i + 1)), { tamano }))));
+      const res = conPropias(a.params.misFrases || null, () => conVistas(a.params.vistas || null, () => conObligatorias(a.params.obligatorias || null, () => T.generar(a.params, crearAzar(mezclar(semilla, i + 1)), { tamano, cantidad }))));
       const n = i + 1;
       return {
         n, tipo: a.tipo, tipoVersion: T.version, params: a.params, tamano, color: colores[j],
@@ -186,6 +189,7 @@ export const MAX_PAGINAS = 10;
  * opciones = {
  *   actividades: [{ tipo: "sumar.h20", params?: {…}, color?: "azul" }, …]   (1 o 2: una página)
  *   o paginas: [{ actividades: [1 o 2] }, …]   (varias páginas: hasta MAX_PAGINAS; las actividades se numeran seguidas: 1, 2, 3…),
+ *   cantidad?: "grandes" (por defecto: los ejercicios de siempre, tarjetas que llenan el panel) | "mas" (los que caben; solo los tipos con `cantidad: true`),
  *   titulo?, variantes?: 1 (N = variantes A, B, C…), orden?: true (las variantes B, C… = la A con los ejercicios en otro orden; orden.js), presentacion?: { color, lecturaFacil, pictogramas },
  *   metadatos?: { dificultad, minutos, etiquetas }
  * }
@@ -209,10 +213,12 @@ export function generar(opciones, semilla = 1) {
     return { acts, tamano, colores: coloresPagina(acts) };
   });
   const todas = pags.flatMap((p) => p.acts);
+  const cantidad = opciones.cantidad ?? "grandes";
+  if (!CANTIDADES.includes(cantidad)) throw new Error(`Cantidad no válida: «${cantidad}»`);
   const variantes = opciones.variantes ?? 1;
   if (!Number.isInteger(variantes) || variantes < 1 || variantes > 30) throw new Error("variantes: de 1 a 30.");
   const semillaVariante = (v) => (v === 0 ? semilla >>> 0 : mezclar(semilla, v));
-  const paginasDe = (s) => { let n0 = 0; return pags.map((p) => { const r = pagina(p.acts, p.tamano, p.colores, s, n0); n0 += p.acts.length; return r; }); };
+  const paginasDe = (s) => { let n0 = 0; return pags.map((p) => { const r = pagina(p.acts, p.tamano, p.colores, s, n0, cantidad); n0 += p.acts.length; return r; }); };
   const m0 = modelo(todas[0].tipo);
   const ficha = {
     schemaVersion: SCHEMA_VERSION, app: "charta",
@@ -225,6 +231,7 @@ export function generar(opciones, semilla = 1) {
   };
   const orden = !!opciones.orden && variantes > 1;
   if (orden) ficha.variantesOrden = true;
+  if (cantidad !== "grandes") ficha.cantidad = cantidad;
   if (opciones.metadatos) ficha.metadatos = { ...opciones.metadatos };
   for (let v = 1; v < variantes; v++) {
     const s = semillaVariante(v);

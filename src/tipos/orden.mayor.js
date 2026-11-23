@@ -2,9 +2,10 @@
 // datos:    { a, b, pide: "mayor" | "menor" }
 // solucion: { huecos: [], rodea: max(a, b) si pide "mayor", min(a, b) si pide "menor" }   (se rodea, no se escribe)
 // Opciones: modo null (mezclado) | "mayor" | "menor"; cerca (si_no): números de la misma decena (desde rango 20).
-// Completa: 15 parejas (5 filas × 3); media: 6. En «mezclado», mitad «mayor» y mitad «menor» (8+7 de 15; 3+3 de 6), en orden barajado.
+// Cantidad (opción de la ficha): «Más grandes» = 15 parejas en completa y 6 en media (tarjetas que llenan el panel);
+// «Más ejercicios» = las filas de 3 que caben con tarjetas ≥ 86 pt (21 y 9). Rejilla elástica (p.rejilla). En «mezclado», mitad «mayor» y mitad «menor» (8+7 de 15; 3+3 de 6), en orden barajado.
 import { registrar } from "../nucleo/tipos.js";
-import { TOP, COLOR_SOLUCION } from "../render/papel.js";
+import { TOP, COLOR_SOLUCION, cuantosRejilla } from "../render/papel.js";
 import { pares } from "./orden.signos.js";
 
 const TXT = {
@@ -13,11 +14,14 @@ const TXT = {
   mezcla: "Mira lo que pide cada casilla y rodea el número mayor o el menor.",
 };
 
+const MIN_ALTO = 86;   // alto mínimo de tarjeta con «Más ejercicios»
+
 export default registrar({
   id: "orden.mayor",
-  version: 2,
-  generar(params, azar, { tamano }) {
-    const R = params.rango ?? 10, cnt = tamano === "media" ? 6 : 15, modo = params.modo || "mezcla";
+  version: 3,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const R = params.rango ?? 10, cnt = cuantosRejilla(ctx, 3, MIN_ALTO, [15, 6]), modo = params.modo || "mezcla";
     const ps = pares(cnt, R, azar, !!params.cerca);
     let t = modo === "mayor" ? Array(cnt).fill("mayor") : modo === "menor" ? Array(cnt).fill("menor")
       : [...Array(Math.ceil(cnt / 2)).fill("mayor"), ...Array(Math.floor(cnt / 2)).fill("menor")];
@@ -31,13 +35,13 @@ export default registrar({
     };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 3, 5);
-    const bw = 60, bh = 54, g = 16;
+    const { cel, cw, ch } = p.rejilla(TOP, 3, Math.ceil(act.ejercicios.length / 3));
+    const g = 16, bh = Math.min(ch - 34, (cw - 20 - g) / 2 / 1.1), bw = 1.1 * bh, fs = 0.48 * bh;   // las cajas crecen con la tarjeta
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], { a, b, pide } = e.datos;
       p.marco(x, y, cw, ch, i, "RODEA EL " + pide.toUpperCase());
       const bx = x + (cw - 2 * bw - g) / 2;
-      [a, b].forEach((v, j) => p.caja(bx + j * (bw + g), y + (ch - 26 - bh) / 2, bw, bh, v, 26));
+      [a, b].forEach((v, j) => p.caja(bx + j * (bw + g), y + (ch - 26 - bh) / 2, bw, bh, v, fs));
       // Solución: el número rodeado en rojo.
       if (p.solucion) [a, b].forEach((v, j) => { if (v === e.solucion.rodea) p.rrect(bx + j * (bw + g) - 5, y + (ch - 26 - bh) / 2 - 5, bw + 10, bh + 10, 12, { lw: 2.4, stroke: COLOR_SOLUCION }); });
     }));

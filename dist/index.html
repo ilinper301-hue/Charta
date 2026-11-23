@@ -461,6 +461,9 @@ body.con-selector, body.con-capa { overflow: hidden; }
   <details class="tarjeta plegable" id="secImpresion">
     <summary><h2>Impresión</h2><small id="resImpresion"></small></summary>
     <div class="plegable-cuerpo">
+    <label id="filaCantidad" class="campo" hidden><span>Ejercicios <em>En las actividades que lo admiten</em></span><select id="cantidad">
+      <option value="">Más grandes (los de siempre)</option>
+      <option value="mas">Más ejercicios en la hoja</option></select></label>
     <div class="interruptores">
       <label class="check"><input type="checkbox" id="bn"> <span>Blanco y negro <em>Ahorro de tinta</em></span></label>
       <label class="check"><input type="checkbox" id="grande"> <span>Letra grande <em>Cabecera y enunciado</em></span></label>
@@ -3755,6 +3758,8 @@ const { POR_ID } = __req("nucleo/catalogo.js");
 const { crearAzar, mezclar } = __req("nucleo/azar.js");
 const { tipo } = __req("nucleo/tipos.js");
 const { reordenarPaginas } = __req("nucleo/orden.js");
+/** Opción «Cantidad» de la ficha (igual que CANTIDADES de render/papel.js). */
+const CANTIDADES = ["grandes", "mas"];
 const { normalizarVistas, conVistas, normalizarObligatorias, conObligatorias } = __req("lengua/vistas.js");
 const { normalizarPropias, conPropias, USA_FRASES } = __req("lengua/frases.js");
 const SCHEMA_VERSION = 1;
@@ -3902,11 +3907,11 @@ function coloresPagina(acts) {
 }
 
 /** Una página: sus actividades se numeran desde `n0 + 1` (la numeración sigue de una página a otra) y su semilla es la de su número. */
-function pagina(acts, tamano, colores, semilla, n0 = 0) {
+function pagina(acts, tamano, colores, semilla, n0 = 0, cantidad = "grandes") {
   return {
     actividades: acts.map((a, j) => {
       const T = tipo(a.tipo), i = n0 + j;
-      const res = conPropias(a.params.misFrases || null, () => conVistas(a.params.vistas || null, () => conObligatorias(a.params.obligatorias || null, () => T.generar(a.params, crearAzar(mezclar(semilla, i + 1)), { tamano }))));
+      const res = conPropias(a.params.misFrases || null, () => conVistas(a.params.vistas || null, () => conObligatorias(a.params.obligatorias || null, () => T.generar(a.params, crearAzar(mezclar(semilla, i + 1)), { tamano, cantidad }))));
       const n = i + 1;
       return {
         n, tipo: a.tipo, tipoVersion: T.version, params: a.params, tamano, color: colores[j],
@@ -3936,6 +3941,7 @@ const MAX_PAGINAS = 10;
  * opciones = {
  *   actividades: [{ tipo: "sumar.h20", params?: {…}, color?: "azul" }, …]   (1 o 2: una página)
  *   o paginas: [{ actividades: [1 o 2] }, …]   (varias páginas: hasta MAX_PAGINAS; las actividades se numeran seguidas: 1, 2, 3…),
+ *   cantidad?: "grandes" (por defecto: los ejercicios de siempre, tarjetas que llenan el panel) | "mas" (los que caben; solo los tipos con `cantidad: true`),
  *   titulo?, variantes?: 1 (N = variantes A, B, C…), orden?: true (las variantes B, C… = la A con los ejercicios en otro orden; orden.js), presentacion?: { color, lecturaFacil, pictogramas },
  *   metadatos?: { dificultad, minutos, etiquetas }
  * }
@@ -3959,10 +3965,12 @@ function generar(opciones, semilla = 1) {
     return { acts, tamano, colores: coloresPagina(acts) };
   });
   const todas = pags.flatMap((p) => p.acts);
+  const cantidad = opciones.cantidad ?? "grandes";
+  if (!CANTIDADES.includes(cantidad)) throw new Error(`Cantidad no válida: «${cantidad}»`);
   const variantes = opciones.variantes ?? 1;
   if (!Number.isInteger(variantes) || variantes < 1 || variantes > 30) throw new Error("variantes: de 1 a 30.");
   const semillaVariante = (v) => (v === 0 ? semilla >>> 0 : mezclar(semilla, v));
-  const paginasDe = (s) => { let n0 = 0; return pags.map((p) => { const r = pagina(p.acts, p.tamano, p.colores, s, n0); n0 += p.acts.length; return r; }); };
+  const paginasDe = (s) => { let n0 = 0; return pags.map((p) => { const r = pagina(p.acts, p.tamano, p.colores, s, n0, cantidad); n0 += p.acts.length; return r; }); };
   const m0 = modelo(todas[0].tipo);
   const ficha = {
     schemaVersion: SCHEMA_VERSION, app: "charta",
@@ -3975,6 +3983,7 @@ function generar(opciones, semilla = 1) {
   };
   const orden = !!opciones.orden && variantes > 1;
   if (orden) ficha.variantesOrden = true;
+  if (cantidad !== "grandes") ficha.cantidad = cantidad;
   if (opciones.metadatos) ficha.metadatos = { ...opciones.metadatos };
   for (let v = 1; v < variantes; v++) {
     const s = semillaVariante(v);
@@ -4516,6 +4525,20 @@ const MM = 72 / 25.4;
 /** Panel de la página (x, yAbajo, w, h) y separación entre dos medias: los usa hoja.js. */
 const PANEL = { x: 22, y: 18, w: W - 44, h: H - 84 - 18, gap: 8 };
 /** Escala con que el panel encaja la zona (como panel() de hoja.js). extra = alto de las líneas de enunciado de más. */
+/** Cantidad de ejercicios de la ficha (opción «Cantidad»): "grandes" (la de siempre, tarjetas que llenan el panel) o "mas" (las filas que caben). */
+const CANTIDADES = ["grandes", "mas"];
+/** Alto de la zona de una rejilla que empieza en `top` (hasta el pie de la zona: la mitad en media página). */
+const altoRejilla = (parte = 1, top = TOP) => top - (ZONA.yArriba - ZONA.alto * parte);
+/** Rejilla elástica, sin Papel (para que generar() sepa cuántos caben): filas de alto ≥ minAlto que caben. */
+function filasRejilla(parte, minAlto, top = TOP, GY = 10) {
+  return Math.max(1, Math.floor((altoRejilla(parte, top) + GY) / (minAlto + GY)));
+}
+/** Ejercicios de una rejilla: «Más grandes» = `fijo` = [completa, media] (los de siempre); «Más ejercicios» = cols × filas que caben con tarjetas ≥ minAlto. */
+function cuantosRejilla({ tamano, cantidad } = {}, cols, minAlto, fijo) {
+  const parte = tamano === "media" ? 0.5 : 1;
+  return cantidad === "mas" ? cols * filasRejilla(parte, minAlto) : fijo[parte < 1 ? 1 : 0];
+}
+
 function escalaPanel(parte = 1, extra = 0) {
   const h = parte < 1 ? (PANEL.h - PANEL.gap) / 2 : PANEL.h;
   return Math.min((PANEL.w - 31) / ZONA.w, (h - 46 - extra) / (ZONA.alto * parte));
@@ -4624,6 +4647,12 @@ class Papel {
     for (let r = 0; r < this.n(rows); r++) for (let k = 0; k < cols; k++) cel.push([M + k * (cw + GX), top - (r + 1) * ch - r * GY]);
     return { cel, cw, ch };
   }
+  /** Rejilla elástica: `filas` × cols que llenan la zona desde `top` (la mitad en media página); el alto de las tarjetas sale del sitio, no de filas fijas. */
+  rejilla(top, cols, filas, GX = 10, GY = 10) {
+    const cw = (W - 2 * M - (cols - 1) * GX) / cols, ch = (altoRejilla(this.parte, top) - (filas - 1) * GY) / filas, cel = [];
+    for (let r = 0; r < filas; r++) for (let k = 0; k < cols; k++) cel.push([M + k * (cw + GX), top - (r + 1) * ch - r * GY]);
+    return { cel, cw, ch };
+  }
   /** _linea(): fila centrada de textos T() y huecos B() (B(w, h, sol) muestra sol en modo solución). */
   linea(x, y, w, h, items, gap = 8, ajustar = true) {
     const ws = items.map((it) => (it.t === "t" ? this.ancho(it.s, it.f, it.fs) : it.w));
@@ -4655,7 +4684,7 @@ class Papel {
   }
 }
 
-Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get W() { return W; }, get H() { return H; }, get M() { return M; }, get TOP() { return TOP; }, get TOP_REP() { return TOP_REP; }, get ZONA() { return ZONA; }, get INK() { return INK; }, get COLOR_SOLUCION() { return COLOR_SOLUCION; }, get FUENTE() { return FUENTE; }, get MENOS() { return MENOS; }, get MM() { return MM; }, get PANEL() { return PANEL; }, get escalaPanel() { return escalaPanel; }, get color() { return color; }, get T() { return T; }, get B() { return B; }, get Papel() { return Papel; } }));
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get W() { return W; }, get H() { return H; }, get M() { return M; }, get TOP() { return TOP; }, get TOP_REP() { return TOP_REP; }, get ZONA() { return ZONA; }, get INK() { return INK; }, get COLOR_SOLUCION() { return COLOR_SOLUCION; }, get FUENTE() { return FUENTE; }, get MENOS() { return MENOS; }, get MM() { return MM; }, get PANEL() { return PANEL; }, get CANTIDADES() { return CANTIDADES; }, get altoRejilla() { return altoRejilla; }, get filasRejilla() { return filasRejilla; }, get cuantosRejilla() { return cuantosRejilla; }, get escalaPanel() { return escalaPanel; }, get color() { return color; }, get T() { return T; }, get B() { return B; }, get Papel() { return Papel; } }));
 },
 "rep/index.js": (__exp) => {
 // Charta · paso 2.2 · las 16 representaciones del número como SVG.
@@ -12512,9 +12541,10 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() 
 // datos:    { a, b, pide: "mayor" | "menor" }
 // solucion: { huecos: [], rodea: max(a, b) si pide "mayor", min(a, b) si pide "menor" }   (se rodea, no se escribe)
 // Opciones: modo null (mezclado) | "mayor" | "menor"; cerca (si_no): números de la misma decena (desde rango 20).
-// Completa: 15 parejas (5 filas × 3); media: 6. En «mezclado», mitad «mayor» y mitad «menor» (8+7 de 15; 3+3 de 6), en orden barajado.
+// Cantidad (opción de la ficha): «Más grandes» = 15 parejas en completa y 6 en media (tarjetas que llenan el panel);
+// «Más ejercicios» = las filas de 3 que caben con tarjetas ≥ 86 pt (21 y 9). Rejilla elástica (p.rejilla). En «mezclado», mitad «mayor» y mitad «menor» (8+7 de 15; 3+3 de 6), en orden barajado.
 const { registrar } = __req("nucleo/tipos.js");
-const { TOP, COLOR_SOLUCION } = __req("render/papel.js");
+const { TOP, COLOR_SOLUCION, cuantosRejilla } = __req("render/papel.js");
 const { pares } = __req("tipos/orden.signos.js");
 const TXT = {
   mayor: "Rodea el número mayor de cada pareja.",
@@ -12522,11 +12552,14 @@ const TXT = {
   mezcla: "Mira lo que pide cada casilla y rodea el número mayor o el menor.",
 };
 
+const MIN_ALTO = 86;   // alto mínimo de tarjeta con «Más ejercicios»
+
 const __default = registrar({
   id: "orden.mayor",
-  version: 2,
-  generar(params, azar, { tamano }) {
-    const R = params.rango ?? 10, cnt = tamano === "media" ? 6 : 15, modo = params.modo || "mezcla";
+  version: 3,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const R = params.rango ?? 10, cnt = cuantosRejilla(ctx, 3, MIN_ALTO, [15, 6]), modo = params.modo || "mezcla";
     const ps = pares(cnt, R, azar, !!params.cerca);
     let t = modo === "mayor" ? Array(cnt).fill("mayor") : modo === "menor" ? Array(cnt).fill("menor")
       : [...Array(Math.ceil(cnt / 2)).fill("mayor"), ...Array(Math.floor(cnt / 2)).fill("menor")];
@@ -12540,13 +12573,13 @@ const __default = registrar({
     };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 3, 5);
-    const bw = 60, bh = 54, g = 16;
+    const { cel, cw, ch } = p.rejilla(TOP, 3, Math.ceil(act.ejercicios.length / 3));
+    const g = 16, bh = Math.min(ch - 34, (cw - 20 - g) / 2 / 1.1), bw = 1.1 * bh, fs = 0.48 * bh;   // las cajas crecen con la tarjeta
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], { a, b, pide } = e.datos;
       p.marco(x, y, cw, ch, i, "RODEA EL " + pide.toUpperCase());
       const bx = x + (cw - 2 * bw - g) / 2;
-      [a, b].forEach((v, j) => p.caja(bx + j * (bw + g), y + (ch - 26 - bh) / 2, bw, bh, v, 26));
+      [a, b].forEach((v, j) => p.caja(bx + j * (bw + g), y + (ch - 26 - bh) / 2, bw, bh, v, fs));
       // Solución: el número rodeado en rojo.
       if (p.solucion) [a, b].forEach((v, j) => { if (v === e.solucion.rodea) p.rrect(bx + j * (bw + g) - 5, y + (ch - 26 - bh) / 2 - 5, bw + 10, bh + 10, 12, { lw: 2.4, stroke: COLOR_SOLUCION }); });
     }));
@@ -16527,7 +16560,7 @@ function crearCompositor(ctx) {
     let acts; try { acts = L.actividadesBase(); } catch { acts = editores.map((e) => e.leer()); }
     const fr = hayFrases(acts) ? L.misFrases() : [];
     return { actividades: acts, ...(cuentas.length > 1 && { paginas: [...cuentas] }), semilla: ctx.semilla, titulo: $("titulo").value.trim(),
-      variaciones: $("variaciones").value, ...($("ordenVar").value === "orden" && { orden: true }), bn: $("bn").checked, grande: $("grande").checked, facil: $("facil").checked, fuente: $("fuente").value,
+      variaciones: $("variaciones").value, ...($("ordenVar").value === "orden" && { orden: true }), ...($("cantidad").value === "mas" && { cantidad: "mas" }), bn: $("bn").checked, grande: $("grande").checked, facil: $("facil").checked, fuente: $("fuente").value,
       ...(fr.length && { misFrases: fr }) };
   };
   /** Abre una composición; `extra` (solo el borrador): { alumnos, copias, grupo } de este dispositivo. */
@@ -16538,7 +16571,7 @@ function crearCompositor(ctx) {
     for (const a of c.actividades) editores.push(crearEditor(a.tipo));
     recolocar();
     c.actividades.forEach((a, i) => editores[i].poner(a.tipo, a.params, a.curso));
-    ctx.semilla = c.semilla || 1; $("titulo").value = c.titulo || ""; $("variaciones").value = c.variaciones || "iguales"; $("ordenVar").value = c.orden ? "orden" : ""; $("bn").checked = !!c.bn; $("grande").checked = !!c.grande; $("facil").checked = !!c.facil;
+    ctx.semilla = c.semilla || 1; $("titulo").value = c.titulo || ""; $("variaciones").value = c.variaciones || "iguales"; $("ordenVar").value = c.orden ? "orden" : ""; $("cantidad").value = c.cantidad === "mas" ? "mas" : ""; $("bn").checked = !!c.bn; $("grande").checked = !!c.grande; $("facil").checked = !!c.facil;
     if (!c.fuente || fuentePorId(c.fuente).id === c.fuente) ctx.fuentes.elegirFuente(c.fuente || "andika");
     else { ctx.fuentes.elegirFuente("andika"); $("infoFuente").textContent = `Esta ficha usaba la letra «${c.fuente.replace("usuario:", "")}», que no está en este dispositivo: se usa Andika. Puedes subirla otra vez.`; }
     materia1 = materiaDe(editores[0].id);
@@ -16641,7 +16674,7 @@ function opcionesDeComp(comp, hayTipo = () => true) {
   let i = 0;
   const paginas = cuentas.map((n) => { const p = { actividades: acts.slice(i, i + n) }; i += n; return p; });
   const bn = !!c.bn;
-  return { semilla: Number.isInteger(c.semilla) ? c.semilla : 1, bn, opciones: { paginas, variantes: 1, ...(c.titulo ? { titulo: String(c.titulo) } : {}),
+  return { semilla: Number.isInteger(c.semilla) ? c.semilla : 1, bn, opciones: { paginas, variantes: 1, ...(c.cantidad === "mas" ? { cantidad: "mas" } : {}), ...(c.titulo ? { titulo: String(c.titulo) } : {}),
     presentacion: { color: !bn, ...(c.fuente && c.fuente !== "andika" ? { fuente: c.fuente } : {}), ...(c.grande ? { letraGrande: true } : {}), ...(c.facil ? { lecturaFacil: true } : {}) } } };
 }
 
@@ -17020,7 +17053,7 @@ function limpiar(c) {
       return { tipo: a.tipo, ...(Number.isInteger(a.curso) && { curso: a.curso }), params };
     }),
     ...(cuentasDe(c).length > 1 && { paginas: cuentasDe(c) }),                  // varias páginas: actividades de cada una
-    semilla: c.semilla | 0, titulo: c.titulo || "", variaciones: c.variaciones || "iguales", ...(c.orden && { orden: true }), bn: !!c.bn, grande: !!c.grande, facil: !!c.facil,
+    semilla: c.semilla | 0, titulo: c.titulo || "", variaciones: c.variaciones || "iguales", ...(c.orden && { orden: true }), ...(c.cantidad === "mas" && { cantidad: "mas" }), bn: !!c.bn, grande: !!c.grande, facil: !!c.facil,
     ...(c.fuente && c.fuente !== "andika" && { fuente: String(c.fuente) }),     // solo el nombre; la letra no viaja
     ...(frases && { misFrases: frases }),                                        // «Mis frases» (Lengua 1.º), una vez para toda la ficha
   };
@@ -17891,6 +17924,7 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get guardarUlt
 // título, color, letra o lectura solo vuelven a dibujar. Al imprimir se dibujan todas, como antes.
 // crearPrevia(ctx) → { pintar(), ahora(), nombres(), copias(), imprimir(), otraVariante(), ver(), ficha (lectura) }
 const { generar, metadatosDe } = __req("nucleo/ficha.js");
+const { tipo } = __req("nucleo/tipos.js");
 const { paginasVariante } = __req("nucleo/lector.js");
 const { hoja, hojas, listaHojas, dibujarHoja, estiloLectura } = __req("render/hoja.js");
 const { fuentePorId } = __req("render/fuentes.js");
@@ -17936,9 +17970,11 @@ function crearPrevia(ctx) {
       $("filaOrden").hidden = $("variaciones").value === "iguales";
       const aviso = orden ? avisoOrden(acts.map((a) => a.tipo)) : "";
       $("infoOrden").textContent = aviso; $("infoOrden").hidden = !aviso;
-      const k = claveGeneracion({ paginas: pags, variantes, semilla: ctx.semilla, orden });
+      $("filaCantidad").hidden = !acts.some((a) => tipo(a.tipo)?.cantidad);
+      const cantidad = !$("filaCantidad").hidden && $("cantidad").value === "mas" ? "mas" : "grandes";
+      const k = claveGeneracion({ paginas: pags, variantes, semilla: ctx.semilla, orden, cantidad });
       if (k !== clave) {
-        base = generar({ paginas: pags, metadatos: metadatosDe(pags.map((p) => p.actividades.map((a) => a.tipo))), variantes, ...(orden && { orden }) }, ctx.semilla);
+        base = generar({ paginas: pags, metadatos: metadatosDe(pags.map((p) => p.actividades.map((a) => a.tipo))), variantes, ...(orden && { orden }), ...(cantidad === "mas" && { cantidad }) }, ctx.semilla);
         clave = k;
       }
       ficha = conPresentacion(base, {
@@ -18017,7 +18053,7 @@ function crearPrevia(ctx) {
   });
   $("hojas").addEventListener("pointercancel", () => { x0 = null; });
 
-  for (const id of ["alumnos", "copias", "variaciones", "ordenVar", "bn", "grande", "facil", "titulo"]) $(id).addEventListener("change", pintar);
+  for (const id of ["alumnos", "copias", "variaciones", "ordenVar", "cantidad", "bn", "grande", "facil", "titulo"]) $(id).addEventListener("change", pintar);
   $("alumnos").addEventListener("input", contar);
   $("titulo").addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); $("titulo").blur(); } });
 
@@ -18094,7 +18130,7 @@ const etiquetaSolucion = (s, variantes = 1) =>
  * Lo único que cambia el contenido de la ficha: actividades (con sus páginas), nº de variantes y semilla. Título,
  * color, letra y lectura solo cambian la presentación, y nombres o copias solo las hojas: con la misma clave no se genera.
  */
-const claveGeneracion = ({ paginas, variantes, semilla, orden = false }) => JSON.stringify([paginas, variantes, semilla, ...(orden ? ["orden"] : [])]);
+const claveGeneracion = ({ paginas, variantes, semilla, orden = false, cantidad = "grandes" }) => JSON.stringify([paginas, variantes, semilla, ...(orden ? ["orden"] : []), ...(cantidad === "mas" ? ["mas"] : [])]);
 
 /** La ficha generada (`base`, sin título ni presentación propios) con el título y la presentación de ahora. */
 const conPresentacion = (base, { titulo, presentacion = {} }) =>

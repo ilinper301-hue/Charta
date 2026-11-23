@@ -66,6 +66,6 @@ export function opcionesDeComp(comp, hayTipo = () => true) {
   let i = 0;
   const paginas = cuentas.map((n) => { const p = { actividades: acts.slice(i, i + n) }; i += n; return p; });
   const bn = !!c.bn;
-  return { semilla: Number.isInteger(c.semilla) ? c.semilla : 1, bn, opciones: { paginas, variantes: 1, ...(c.titulo ? { titulo: String(c.titulo) } : {}),
+  return { semilla: Number.isInteger(c.semilla) ? c.semilla : 1, bn, opciones: { paginas, variantes: 1, ...(c.cantidad === "mas" ? { cantidad: "mas" } : {}), ...(c.titulo ? { titulo: String(c.titulo) } : {}),
     presentacion: { color: !bn, ...(c.fuente && c.fuente !== "andika" ? { fuente: c.fuente } : {}), ...(c.grande ? { letraGrande: true } : {}), ...(c.facil ? { lecturaFacil: true } : {}) } } };
 }

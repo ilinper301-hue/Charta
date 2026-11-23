@@ -23,7 +23,8 @@
     { "actividades": [ /* Actividad */ ] }   // 1 a 10 páginas de 1 o 2 actividades (1 = página completa, 2 = media cada una)
   ],
   "variantesDatos": [],              // [{ "semilla": …, "paginas": [...] }, …]
-  "variantesOrden": true             // opcional: las variantes B, C… son la A con los ejercicios en otro orden (src/nucleo/orden.js)
+  "variantesOrden": true,            // opcional: las variantes B, C… son la A con los ejercicios en otro orden (src/nucleo/orden.js)
+  "cantidad": "mas"                  // opcional (23-11-2026): «Más ejercicios» (los que caben); sin él, «Más grandes» (los de siempre). Solo cambia los tipos con `cantidad: true`
 }
 ```
 - **Sin datos de alumnos.** Los nombres solo se usan en el dispositivo al imprimir (cabecera con nombre o línea en blanco) y nunca se guardan.
@@ -83,7 +84,7 @@ Definida en `src/api.js`; la usa Tabula desde un iframe oculto (`../Charta/dist/
 ```js
 Charta = { contrato: 1, generar, hojas, modelo, erroresFicha, listaTipos, CATALOGO }
 ```
-- `generar(opciones, semilla) → ficha` (esquema de arriba). `opciones` = `{ actividades: [{tipo, params}] }` o `{ paginas: [{ actividades }, …], variantes?, orden?, titulo?, presentacion?, metadatos? }` (`orden: true` = variantes con los mismos ejercicios en otro orden, solo en los tipos de `ORDEN_LIBRE`; los demás, iguales en todas). Mismas opciones + semilla = misma ficha. Lanza `Error` con mensaje legible.
+- `generar(opciones, semilla) → ficha` (esquema de arriba). `opciones` = `{ actividades: [{tipo, params}] }` o `{ paginas: [{ actividades }, …], variantes?, orden?, cantidad?, titulo?, presentacion?, metadatos? }` (`cantidad: "grandes"` por defecto o `"mas"`: en los tipos con `cantidad: true`, tantos ejercicios como caben con la tarjeta mínima; los demás no cambian. `orden: true` = variantes con los mismos ejercicios en otro orden, solo en los tipos de `ORDEN_LIBRE`; los demás, iguales en todas). Mismas opciones + semilla = misma ficha. Lanza `Error` con mensaje legible.
 - `hojas(ficha, { nombres = [], copias = 1, bn = false, modo = "papel" | "solucion" }) → [{ nombre, variante, pagina, total, svg }]` (SVG A4, una por alumno o copia y página). Los nombres solo se usan aquí.
 - `modelo(id)`, `listaTipos()`, `erroresFicha(ficha) → [mensajes]` (vacío = válida), `CATALOGO` (solo lectura).
 - Cambios compatibles: añadir campos o funciones. Quitar o cambiar la forma de algo → subir `contrato` y avisar a Tabula (su prueba cruzada falla).
