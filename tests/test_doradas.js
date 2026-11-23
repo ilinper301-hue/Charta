@@ -46,6 +46,10 @@ const CASOS = [
   // Espacio en la ficha · paso 2: rejilla elástica y «Más ejercicios»
   { nombre: "más ejercicios: mayor o menor", semilla: 4, opciones: { cantidad: "mas", actividades: [{ tipo: "orden.mayor" }] } },
   { nombre: "más ejercicios: mayor o menor en media", semilla: 4, opciones: { cantidad: "mas", actividades: [{ tipo: "orden.mayor", params: { rango: 9999 }, curso: 3 }, { tipo: "orden.signos" }] } },
+  // Espacio en la ficha · paso 3, lote 1 (familia orden)
+  ...["orden.cantidad", "orden.entre", "orden.grupo", "orden.signos", "orden.redondea"].map((t) => ({ nombre: "más ejercicios: " + t, semilla: 4, opciones: { cantidad: "mas", actividades: [{ tipo: t, ...(t === "orden.redondea" ? { curso: 3, params: { rango: 9999 } } : {}) }] } })),
+  { nombre: "más ejercicios en media: entre, grupo y cantidad", semilla: 4, opciones: { cantidad: "mas", actividades: [{ tipo: "orden.entre" }, { tipo: "orden.grupo" }] } },
+  { nombre: "más ejercicios en media: cantidad y redondea", semilla: 4, opciones: { cantidad: "mas", actividades: [{ tipo: "orden.cantidad" }, { tipo: "orden.redondea", curso: 3, params: { rango: 9999 } }] } },
   { nombre: "mayor o menor en media", semilla: 4, opciones: { actividades: [{ tipo: "orden.mayor" }, { tipo: "conteo.serie1" }] } },
   // Lengua 1.º · letra escolar ligada (Escolar_G) en las fichas de caligrafía
   ...[["palabras", "frase"], ["letra", "ordena"], ["libre"]].map((ts) => ({ nombre: "1.º escolar " + ts.join(" + "), semilla: 5, opciones: { actividades: ts.map((t) => ({ tipo: "escritura." + t, curso: 1, params: { grafia: "escolar" } })) } })),

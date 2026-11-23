@@ -4,13 +4,15 @@
 //           (fila, columna) y su desvío aleatorio (jx, jy en −1..1, × 10 % del paso). Las posiciones se fijan al generar.
 // solucion: { huecos: [], rodea: "a" | "b" | "ambos" }   (se rodea, no se escribe; «ambos» si a = b)
 // Opciones: modo null (mezclado) | "mayor" (siempre «más») | "menor" (siempre «menos»).
-// Completa: 8 casillas (4 filas × 2); media: 4. Iguales: 2 de 8 (1 de 4).
+// Cantidad (opción de la ficha): «Más grandes» = 8 casillas en completa y 4 en media (iguales: 2 y 1); «Más ejercicios» = las filas de 2 que caben con tarjetas ≥ 120 pt (10 y 4; iguales: un cuarto). Rejilla elástica (p.rejilla).
+//           Las posiciones se reparten con la rejilla de AW × AH (fija), así los datos no dependen del tamaño de la tarjeta; al dibujar solo cambia el paso.
 import { registrar } from "../nucleo/tipos.js";
-import { TOP, M, W, INK, COLOR_SOLUCION } from "../render/papel.js";
+import { TOP, M, W, INK, COLOR_SOLUCION, cuantosRejilla } from "../render/papel.js";
 
 const GX = 10, GY = 10, COLS = 2, ROWS = 4;
 const CW = (W - 2 * M - (COLS - 1) * GX) / COLS, CH = (TOP - M - (ROWS - 1) * GY) / ROWS;
 const AW = CW / 2 - 24, AH = CH - 56;
+const MIN_ALTO = 120;   // alto mínimo de tarjeta con «Más ejercicios»
 
 /** Rejilla de _dispersa(): columnas y filas para n dibujos en aw × ah. */
 function rejilla(n, aw, ah) {
@@ -42,10 +44,11 @@ function dispersar(n, azar) {
 
 export default registrar({
   id: "orden.cantidad",
-  version: 2,
-  generar(params, azar, { tamano }) {
+  version: 3,
+  cantidad: true,
+  generar(params, azar, ctx) {
     const R = params.rango ?? 10, mx = Math.min(R, 12), modo = params.modo || "mezcla";
-    const cnt = tamano === "media" ? 4 : 8, nIg = tamano === "media" ? 1 : 2;
+    const cnt = cuantosRejilla(ctx, COLS, MIN_ALTO, [8, 4]), nIg = Math.round(cnt / 4);
     const eq = new Set(azar.muestra([...Array(cnt).keys()], nIg));
     let t = modo === "mayor" ? Array(cnt).fill("más") : modo === "menor" ? Array(cnt).fill("menos")
       : [...Array(cnt / 2).fill("más"), ...Array(cnt / 2).fill("menos")];
@@ -61,14 +64,14 @@ export default registrar({
     return { enunciado: "Compara los grupos. Si hay la misma cantidad, rodea los dos.", ejercicios };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, COLS, ROWS);
+    const { cel, cw, ch } = p.rejilla(TOP, COLS, Math.ceil(act.ejercicios.length / COLS));
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], { a, b, pide, forma: kind, pos } = e.datos;
       p.marco(x, y, cw, ch, i, "RODEA EL GRUPO QUE TIENE " + pide.toUpperCase());
       p.line(x + cw / 2, y + 14, x + cw / 2, y + ch - 40, { lw: 1.2 });
       [a, b].forEach((v, j) => {
         const ax = x + 12 + j * cw / 2, ay = y + 14, aw = cw / 2 - 24, ah = ch - 56;
-        const { cols, rows, sp } = rejilla(v, aw, ah), r = Math.min(11, sp * 0.3), jit = sp * 0.1;
+        const { cols, rows } = rejilla(v, AW, AH), sp = Math.min(aw / cols, ah / rows), r = Math.min(11, sp * 0.3), jit = sp * 0.1;
         for (const [ri, ci, jx, jy] of pos[j])
           forma(p, kind, ax + aw / 2 + (ci - (cols - 1) / 2) * sp + jx * jit, ay + ah / 2 + ((rows - 1) / 2 - ri) * sp + jy * jit, r);
         // Solución: el grupo rodeado en rojo (los dos si hay la misma cantidad).

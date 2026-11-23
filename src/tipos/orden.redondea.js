@@ -2,9 +2,11 @@
 // datos:    { n, u: "decena" | "centena" | "millar" }   (n = 1000..rango, nunca un múltiplo de u; el redondeo no pasa de 9999)
 // solucion: { huecos: [n redondeado] }   (regla de siempre: la cifra siguiente de 5 a 9 sube; de 0 a 4 se queda)
 // Opción a: null (mezcla: un tercio de cada) | "decena" | "centena" | "millar".
-// Completa: 15 (3 columnas × 5 filas); media: 6. Con una sola unidad, la mitad sube y la otra mitad baja; sin repetir.
+// Cantidad (opción de la ficha): «Más grandes» = 15 en completa y 6 en media; «Más ejercicios» = las filas de 3 que caben con tarjetas ≥ 86 pt (21 y 9). Rejilla elástica (p.rejilla). Con una sola unidad, la mitad sube y la otra mitad baja; sin repetir.
 import { registrar } from "../nucleo/tipos.js";
-import { TOP, MENOS, T } from "../render/papel.js";
+import { TOP, MENOS, T, cuantosRejilla } from "../render/papel.js";
+
+const MIN_ALTO = 86;   // alto mínimo de tarjeta con «Más ejercicios»
 
 export const UNIDAD = { decena: 10, centena: 100, millar: 1000 };
 export const ARTICULO = { decena: "la decena", centena: "la centena", millar: "el millar" };
@@ -19,9 +21,10 @@ export function flecha(p, x, y, w = 24) {
 
 export default registrar({
   id: "orden.redondea",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    const R = params.rango ?? 9999, cnt = tamano === "media" ? 6 : 15, us = params.a ? [params.a] : ["decena", "centena", "millar"];
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const R = params.rango ?? 9999, cnt = cuantosRejilla(ctx, 3, MIN_ALTO, [15, 6]), us = params.a ? [params.a] : ["decena", "centena", "millar"];
     const vistos = new Set(), unidades = [];
     for (let i = 0; i < cnt; i++) unidades.push(us[i % us.length]);
     const cuenta = {};
@@ -42,14 +45,14 @@ export default registrar({
     };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 3, 5);
-    const w = 56, h = 46, g = 8, tw = 2 * w + 24 + 2 * g;
+    const { cel, cw, ch } = p.rejilla(TOP, 3, Math.ceil(act.ejercicios.length / 3));
+    const k = Math.max(1, Math.min(1.4, (ch - 26) * 0.5 / 46, (cw - 8) / (2 * 56 + 24 + 16))), w = 56 * k, h = 46 * k, g = 8 * k, tw = 2 * w + 24 * k + 2 * g;   // las cajas crecen con la tarjeta
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], by = y + (ch - 26 - h) / 2, bx = x + (cw - tw) / 2;
       p.marco(x, y, cw, ch, i, (e.datos.u === "millar" ? "AL " : "A LA ") + e.datos.u.toUpperCase());
-      p.caja(bx, by, w, h, e.datos.n, 20);
-      flecha(p, bx + w + g, by + h / 2);
-      p.caja(bx + w + 24 + 2 * g, by, w, h, null, 20, e.solucion.huecos[0]);
+      p.caja(bx, by, w, h, e.datos.n, 20 * k);
+      flecha(p, bx + w + g, by + h / 2, 24 * k);
+      p.caja(bx + w + 24 * k + 2 * g, by, w, h, null, 20 * k, e.solucion.huecos[0]);
     }));
   },
 });

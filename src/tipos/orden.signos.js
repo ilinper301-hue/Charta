@@ -2,9 +2,11 @@
 // datos:    { a, b }
 // solucion: { huecos: ["<" | ">" | "="] }
 // Opciones: modo null (con 3 parejas iguales) | "sin" (sin iguales); cerca (si_no): números de la misma decena (desde rango 20).
-// Completa: 15 parejas (5 filas × 3); media: 6 (con 1 igual: se conserva la proporción 3 de 15).
+// Cantidad (opción de la ficha): «Más grandes» = 15 parejas en completa y 6 en media (3 y 1 iguales, un quinto); «Más ejercicios» = las filas de 3 que caben con tarjetas ≥ 86 pt (21 y 9). Rejilla elástica (p.rejilla).
 import { registrar } from "../nucleo/tipos.js";
-import { TOP, B } from "../render/papel.js";
+import { TOP, B, cuantosRejilla } from "../render/papel.js";
+
+const MIN_ALTO = 86;   // alto mínimo de tarjeta con «Más ejercicios»
 
 /** _grupo(k): k números distintos de 1..R (con «cerca», de una misma decena si R ≥ 20). */
 export function grupo(k, R, azar, cerca) {
@@ -33,9 +35,10 @@ export function pares(cnt, R, azar, cerca, iguales = 0) {
 
 export default registrar({
   id: "orden.signos",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    const R = params.rango ?? 10, cnt = tamano === "media" ? 6 : 15, iguales = params.modo === "sin" ? 0 : Math.round(cnt / 5);
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const R = params.rango ?? 10, cnt = cuantosRejilla(ctx, 3, MIN_ALTO, [15, 6]), iguales = params.modo === "sin" ? 0 : Math.round(cnt / 5);
     return {
       enunciado: "Escribe <, > o = en el cuadro gris.",
       ejercicios: pares(cnt, R, azar, !!params.cerca, iguales).map(([a, b]) => ({
@@ -44,15 +47,16 @@ export default registrar({
     };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 3, 5);
+    const { cel, cw, ch } = p.rejilla(TOP, 3, Math.ceil(act.ejercicios.length / 3));
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], { a, b } = e.datos;
       p.marco(x, y, cw, ch, i);
-      const cuatro = Math.max(a, b) > 999, w = cuatro ? 56 : 46, fs = cuatro ? 17 : 22, g = cuatro ? 6 : 8, tw = 2 * w + 40 + 2 * g;   // 3.º: cuatro cifras
-      const bx = x + (cw - tw) / 2, by = y + (ch - 46 - 10) / 2;
-      p.caja(bx, by, w, 46, a, fs);
-      p.caja(bx + w + g, by, 40, 46, null, 22, e.solucion.huecos[0]);
-      p.caja(bx + w + 40 + 2 * g, by, w, 46, b, fs);
+      const cuatro = Math.max(a, b) > 999, w0 = cuatro ? 56 : 46, g0 = cuatro ? 6 : 8;   // 3.º: cuatro cifras
+      const k = Math.max(1, Math.min(1.4, (ch - 26) * 0.5 / 46, (cw - 8) / (2 * w0 + 40 + 2 * g0))), w = w0 * k, g = g0 * k, bh = 46 * k, fs = (cuatro ? 17 : 22) * k, tw = 2 * w + 40 * k + 2 * g;   // las cajas crecen con la tarjeta
+      const bx = x + (cw - tw) / 2, by = y + (ch - 26 - bh) / 2;
+      p.caja(bx, by, w, bh, a, fs);
+      p.caja(bx + w + g, by, 40 * k, bh, null, 22 * k, e.solucion.huecos[0]);
+      p.caja(bx + w + 40 * k + 2 * g, by, w, bh, b, fs);
     }));
   },
 });

@@ -1,15 +1,18 @@
 // orden.entre · Un número entre dos (port de _o_entre() del motor).
 // datos:    { a, b }   (|a − b| = d con 2 ≤ d ≤ max(4, R/5); a y b en 1..R; se muestran en este orden)
 // solucion: { huecos: [m], entre: [min + 1, max − 1] }   (vale cualquier número del intervalo `entre`; m es el central, para mostrar)
-// Completa: 15 parejas (5 filas × 3); media: 6. Sin repetir (a menor, d).
+// Cantidad (opción de la ficha): «Más grandes» = 15 parejas en completa y 6 en media; «Más ejercicios» = las filas de 3 que caben con tarjetas ≥ 86 pt (21 y 9). Rejilla elástica (p.rejilla). Sin repetir (a menor, d).
 import { registrar } from "../nucleo/tipos.js";
-import { TOP } from "../render/papel.js";
+import { TOP, cuantosRejilla } from "../render/papel.js";
+
+const MIN_ALTO = 86;   // alto mínimo de tarjeta con «Más ejercicios»
 
 export default registrar({
   id: "orden.entre",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    const R = params.rango ?? 10, cnt = tamano === "media" ? 6 : 15, dmax = Math.max(4, Math.floor(R / 5));
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const R = params.rango ?? 10, cnt = cuantosRejilla(ctx, 3, MIN_ALTO, [15, 6]), dmax = Math.max(4, Math.floor(R / 5));
     const vistos = new Set(), ejercicios = [];
     for (let i = 0; i < cnt; i++) {
       let a, d;
@@ -24,15 +27,16 @@ export default registrar({
     return { enunciado: "Escribe un número que esté entre los dos.", ejercicios };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 3, 5);
+    const { cel, cw, ch } = p.rejilla(TOP, 3, Math.ceil(act.ejercicios.length / 3));
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], { a, b } = e.datos;
       p.marco(x, y, cw, ch, i);
-      const cuatro = Math.max(a, b) > 999, w = cuatro ? 50 : 46, wh = cuatro ? 56 : 40, g = cuatro ? 6 : 8;   // 3.º: el hueco admite cuatro cifras
-      const bx = x + (cw - 2 * w - wh - 2 * g) / 2, by = y + (ch - 46 - 10) / 2;
-      p.caja(bx, by, w, 46, a, 22);
-      p.caja(bx + w + g, by, wh, 46, null, 22, e.solucion.huecos[0]);
-      p.caja(bx + w + wh + 2 * g, by, w, 46, b, 22);
+      const cuatro = Math.max(a, b) > 999, w0 = cuatro ? 50 : 46, wh0 = cuatro ? 56 : 40, g0 = cuatro ? 6 : 8;   // 3.º: el hueco admite cuatro cifras
+      const k = Math.max(1, Math.min(1.4, (ch - 26) * 0.5 / 46, (cw - 8) / (2 * w0 + wh0 + 2 * g0))), w = w0 * k, wh = wh0 * k, g = g0 * k, bh = 46 * k, fs = 22 * k;   // las cajas crecen con la tarjeta
+      const bx = x + (cw - 2 * w - wh - 2 * g) / 2, by = y + (ch - 26 - bh) / 2;
+      p.caja(bx, by, w, bh, a, fs);
+      p.caja(bx + w + g, by, wh, bh, null, fs, e.solucion.huecos[0]);
+      p.caja(bx + w + wh + 2 * g, by, w, bh, b, fs);
     }));
   },
 });
