@@ -26,19 +26,19 @@ function tituloMotor(t) {
 
 function encabezado(p, titulo, nombre, bn, grande) {
   const fe = grande ? 13 : 10.5;
-  p.text(34, H - 46, "Nombre:", fe, { f: "PR" }); p.text(360, H - 46, "Fecha:", fe, { f: "PR" });
-  const x0 = 34 + p.ancho("Nombre: ", "PR", fe);
-  p.line(x0, H - 48, 332, H - 48, { lw: 0.8, gris: 0 });
-  p.line(360 + p.ancho("Fecha: ", "PR", fe), H - 48, 533, H - 48, { lw: 0.8, gris: 0 });
+  p.text(22, H - 36, "Nombre:", fe, { f: "PR" }); p.text(380, H - 36, "Fecha:", fe, { f: "PR" });
+  const x0 = 22 + p.ancho("Nombre: ", "PR", fe);
+  p.line(x0, H - 38, 352, H - 38, { lw: 0.8, gris: 0 });
+  p.line(380 + p.ancho("Fecha: ", "PR", fe), H - 38, 573, H - 38, { lw: 0.8, gris: 0 });
   if (nombre) {
     let fs = grande ? 14 : 12;
-    while (p.ancho(nombre, "PM", fs) > 332 - x0 - 8 && fs > 7) fs -= 0.5;
-    p.text(x0 + 4, H - 45, nombre, fs, { f: "PM" });
+    while (p.ancho(nombre, "PM", fs) > 352 - x0 - 8 && fs > 7) fs -= 0.5;
+    p.text(x0 + 4, H - 35, nombre, fs, { f: "PM" });
   }
   const tt = tituloMotor(titulo);
   let fs = grande ? 20 : 16;
   while (p.ancho(tt, "PB", fs) > W - 80 && fs > 10) fs -= 0.5;
-  p.text(W / 2, H - 86, tt, fs, { f: "PB", anchor: "middle", gris: bn ? INK : AZUL });
+  p.text(W / 2, H - 68, tt, fs, { f: "PB", anchor: "middle", gris: bn ? INK : AZUL });
 }
 
 /** Líneas del enunciado. Normal: las del motor. Grande: letra mayor, partiendo las líneas largas por palabras.
@@ -66,18 +66,18 @@ function panel(p, act, rect, { bn, modo, clip, grande, facil, fuente }) {
   const lineas = en.lineas, extra = en.lh * (lineas.length - 1);
   const [fill, borde] = bn ? ["#ffffff", "#8c8c8c"] : PALETA[act.color];
   p.rrect(x, yB, w, h, 14, { lw: 1, fill, stroke: borde });
-  if (bn) p.circle(x + 24, yT - 22, 11, { lw: 1.4, fill: 1, stroke: INK });
-  else p.circle(x + 24, yT - 22, 11, { fill: AZUL, stroke: null });
-  p.text(x + 24, yT - 26, String(act.n), 11, { f: "PB", anchor: "middle", gris: bn ? INK : 1 });
+  if (bn) p.circle(x + 22, yT - 19, 10, { lw: 1.4, fill: 1, stroke: INK });
+  else p.circle(x + 22, yT - 19, 10, { fill: AZUL, stroke: null });
+  p.text(x + 22, yT - 23, String(act.n), 10.5, { f: "PB", anchor: "middle", gris: bn ? INK : 1 });
   let fs = en.fs || 11.5;
   while (lineas.some((t) => p.ancho(t, "PR", fs) > w - 59) && fs > 8) fs -= 0.5;
-  lineas.forEach((t, j) => p.text(x + 45, yT - 26 - j * en.lh, t, fs, { f: "PR" }));
+  lineas.forEach((t, j) => p.text(x + 40, yT - 23 - j * en.lh, t, fs, { f: "PR" }));
   // Encaje de la zona de página (como panel()): punto (X, Y) → (sc·X + e, sc·Y + fy), y hacia arriba.
   const parte = act.tamano === "media" ? 0.5 : 1;
-  const hi = (yT - 43 - extra) - (yB + 14), alto = ZONA.alto * parte, base = ZONA.yArriba - alto;
+  const hi = (yT - 36 - extra) - (yB + 10), alto = ZONA.alto * parte, base = ZONA.yArriba - alto;
   const sc = Math.min((w - 31) / ZONA.w, hi / alto);
   const z = render(act, modo, fuente, sc);
-  const e = x + w / 2 - ZONA.w * sc / 2 - sc * M, fy = (yB + 14) + (parte < 1 ? hi - alto * sc : 0) - sc * base;
+  const e = x + w / 2 - ZONA.w * sc / 2 - sc * M, fy = (yB + 10) + (parte < 1 ? hi - alto * sc : 0) - sc * base;
   p.o.push(`<clipPath id="${clip}"><rect x="${f2(x)}" y="${f2(H - yT)}" width="${f2(w)}" height="${f2(h)}" rx="14"/></clipPath>`);
   p.o.push(`<g clip-path="url(#${clip})" class="actividad" data-n="${act.n}"><g transform="translate(${f2(e)} ${f2(H - fy - sc * H)}) scale(${f2(sc)})">${z.svg}</g></g>`);
 }

@@ -20,11 +20,11 @@ export const MENOS = "−";
 /** Puntos por milímetro (1 pt = 1/72 in). */
 export const MM = 72 / 25.4;
 /** Panel de la página (x, yAbajo, w, h) y separación entre dos medias: los usa hoja.js. */
-export const PANEL = { x: 34, y: 26, w: W - 68, h: H - 108 - 26, gap: 12 };
+export const PANEL = { x: 22, y: 18, w: W - 44, h: H - 84 - 18, gap: 8 };
 /** Escala con que el panel encaja la zona (como panel() de hoja.js). extra = alto de las líneas de enunciado de más. */
 export function escalaPanel(parte = 1, extra = 0) {
   const h = parte < 1 ? (PANEL.h - PANEL.gap) / 2 : PANEL.h;
-  return Math.min((PANEL.w - 31) / ZONA.w, (h - 57 - extra) / (ZONA.alto * parte));
+  return Math.min((PANEL.w - 31) / ZONA.w, (h - 46 - extra) / (ZONA.alto * parte));
 }
 
 const f2 = (x) => { const v = Math.round(x * 100) / 100; return String(Object.is(v, -0) ? 0 : v); };
