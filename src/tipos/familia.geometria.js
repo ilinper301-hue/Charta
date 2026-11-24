@@ -9,3 +9,6 @@ import "./geometria.simetria.js";
 import "./geometria.copia.js";
 import "./geometria.lados.js";
 import "./geometria.itinerario.js";
+import "./geometria.angulos.js";
+import "./geometria.perimetro.js";
+import "./geometria.traslada.js";

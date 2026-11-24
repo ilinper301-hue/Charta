@@ -160,6 +160,11 @@ META = {
     "medida.equivale": (2, 10, "medida unidades equivalencias km m cm mm kg g l ml"),
     "medida.unidad": (1, 8, "medida unidades elegir longitud masa capacidad"),
     "medida.duracion": (3, 12, "medida tiempo duración horas minutos"),
+    # 3.º · lote 7 · geometría y estadística
+    "geometria.angulos": (2, 8, "geometría ángulos recto agudo obtuso clasificar"),
+    "geometria.perimetro": (3, 12, "geometría perímetro lados sumar cuadrícula medida"),
+    "geometria.traslada": (3, 12, "geometría traslación movimientos cuadrícula flechas"),
+    "estadistica.probable": (2, 8, "estadística probabilidad seguro posible imposible azar"),
     "fraccion.compara": (3, 10, "fracciones comparar mayor_menor"),
     "fraccion.de": (3, 15, "fracciones fracción_de_un_número dividir grupos"),
     "fraccion.recta": (3, 10, "fracciones recta_numérica"),

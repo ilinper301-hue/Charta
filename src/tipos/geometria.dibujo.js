@@ -101,3 +101,38 @@ export function chips(p, cx, y, opts, fs = 10.5, correcta = null, h = 22, gap = 
     x += ws[i] + gap;
   });
 }
+
+// ---- 3.º (lote 7): cuerpos con sus aristas ocultas (discontinuas) y un punto en cada vértice, para contar caras, aristas y vértices.
+const caja3 = (w, h, dx, dy) => ({
+  v: [[0, 0], [w, 0], [w, h], [0, h], [dx, dy], [w + dx, dy], [w + dx, h + dy], [dx, h + dy]],
+  e: [[0, 1], [1, 2], [2, 3], [3, 0], [5, 6], [6, 7], [1, 5], [2, 6], [3, 7], [4, 0, 1], [4, 5, 1], [4, 7, 1]],
+});
+/** Cuerpos de caras planas en perspectiva (unidades; y hacia arriba). e: [vértice, vértice, 1 si está oculta]. */
+export const GEOM_CUERPOS = {
+  cubo: caja3(0.62, 0.62, 0.28, 0.28),
+  prisma_rect: caja3(0.85, 0.45, 0.3, 0.28),
+  prisma_tri: {
+    v: [[0, 0], [0.7, 0], [0.35, 0.75], [0.3, 0.26], [1, 0.26], [0.65, 1.01]],
+    e: [[0, 1], [1, 2], [2, 0], [1, 4], [2, 5], [4, 5], [0, 3, 1], [3, 4, 1], [3, 5, 1]],
+  },
+  piramide_cuad: {
+    v: [[0, 0], [0.75, 0], [1.05, 0.3], [0.3, 0.3], [0.525, 0.95]],
+    e: [[0, 1], [1, 2], [0, 4], [1, 4], [2, 4], [2, 3, 1], [3, 0, 1], [3, 4, 1]],
+  },
+  piramide_tri: {
+    v: [[0, 0.15], [0.5, 0], [0.9, 0.3], [0.42, 0.85]],
+    e: [[0, 1], [1, 2], [3, 0], [3, 1], [3, 2], [0, 2, 1]],
+  },
+};
+
+/** Dibuja un cuerpo de GEOM_CUERPOS dentro de la caja (cx, cy, aw, ah) a la mayor escala que quepa (hasta smax pt por unidad). */
+export function cuerpoElementos(p, kind, cx, cy, aw, ah, smax = 80) {
+  const g = GEOM_CUERPOS[kind], xs = g.v.map((q) => q[0]), ys = g.v.map((q) => q[1]);
+  const x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys), s = Math.min(smax, aw / (x1 - x0), ah / (y1 - y0));
+  const P = ([a, b]) => [cx + (a - (x0 + x1) / 2) * s, cy + (b - (y0 + y1) / 2) * s];
+  for (const [i, j, oc] of g.e) {
+    const [a, b] = P(g.v[i]), [c, d] = P(g.v[j]);
+    if (oc) lineaDash(p, a, b, c, d, { lw: 1.4, dash: "3 2.5" }); else p.line(a, b, c, d, { lw: 2 });
+  }
+  for (const q of g.v) { const [a, b] = P(q); p.circle(a, b, 2.5, { lw: 0.6, fill: INK }); }
+}

@@ -3,3 +3,4 @@ import "./estadistica.pictograma.js";
 import "./estadistica.recuento.js";
 import "./estadistica.barras.js";
 import "./estadistica.patrones.js";
+import "./estadistica.probable.js";

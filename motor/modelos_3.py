@@ -44,6 +44,8 @@ EN_3 = {
     **{i: None for i in (
         "geometria.figuras", "geometria.cuerpos", "geometria.posiciones", "geometria.simetria", "geometria.copia",
         "medida.calendario", "medida.reloj", "medida.reloj2", "medida.tiempo", "medida.longitud", "medida.capacidad", "medida.masa", "medida.dinero", "medida.precios", "juegos.cuadrado", "juegos.colorea", "estadistica.patrones")},
+    # Lote 7 · geometría y estadística: líneas, cuerpos (caras, aristas y vértices), barras, pictograma y recuento (opciones con `curso`)
+    **{i: None for i in ("geometria.lineas", "estadistica.barras", "estadistica.pictograma", "estadistica.recuento")},
 }
 
 
@@ -55,6 +57,16 @@ def _n3(bloque, familia, clave, nombre, descripcion, opciones, titulo, color, ra
 
 
 MODELOS_3 = [
+    # Lote 7 · geometría (bloque 9) y estadística (bloque 11; sin rango)
+    _n3(9, "geometria", "angulos", "Los ángulos", "Clasificar ángulos dibujados en distintas posiciones: recto, agudo u obtuso.", [],
+        "LOS ÁNGULOS", "azul"),
+    _n3(9, "geometria", "perimetro", "El perímetro", "Calcular el perímetro de polígonos sumando sus lados, o contando los lados de los cuadraditos.",
+        [op("modo", "Figuras", [(None, "Polígonos con la medida de cada lado"), ("cuadricula", "En la cuadrícula (cada cuadradito = 1 cm)")])],
+        "EL PERÍMETRO", "verde"),
+    _n3(9, "geometria", "traslada", "Traslada la figura", "Dibujar en la cuadrícula la figura trasladada según unas flechas (→ 4, ↓ 2).", [],
+        "TRASLADA LA FIGURA", "rosa"),
+    _n3(11, "estadistica", "probable", "¿Seguro, posible o imposible?", "Decidir si un suceso (sacar una bola de una bolsa, parar en una ruleta) es seguro, posible o imposible.", [],
+        "¿SEGURO, POSIBLE O IMPOSIBLE?", "amarillo"),
     # Lote 6 · medida (bloque 10; sin rango): equivalencias, unidad adecuada y duraciones
     _n3(10, "medida", "equivale", "Cambia de unidad", "Pasar de una unidad a otra: km, m, cm y mm; kg y g; l y ml (también ½, ¼ y ¾).",
         [op("magnitud", "Medidas", [(None, "Longitud, masa y capacidad"), ("longitud", "Longitud (km, m, cm, mm)"), ("masa", "Masa (kg y g)"), ("capacidad", "Capacidad (l y ml)")]),

@@ -4752,6 +4752,267 @@
    "b3d29ce35fe1ce27"
   ]
  },
+ "estadistica.probable": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "¿Seguro, posible o imposible?",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "estadistica.probable",
+       "tipoVersion": 1,
+       "params": {
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Rodea si cada suceso es seguro, posible o imposible.\nLas bolas se sacan de la bolsa sin mirar.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "aparato": "ruleta",
+          "fills": [
+           "gris",
+           "negra",
+           "gris",
+           "negra"
+          ],
+          "obj": [
+           "negra",
+           "gris"
+          ],
+          "opciones": [
+           "seguro",
+           "posible",
+           "imposible"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "seguro"
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "aparato": "ruleta",
+          "fills": [
+           "blanca",
+           "negra",
+           "gris",
+           "blanca",
+           "blanca",
+           "negra"
+          ],
+          "obj": [
+           "blanca",
+           "gris"
+          ],
+          "opciones": [
+           "seguro",
+           "posible",
+           "imposible"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "posible"
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "aparato": "bolsa",
+          "fills": [
+           "blanca",
+           "blanca",
+           "gris",
+           "gris",
+           "gris",
+           "blanca",
+           "gris",
+           "gris"
+          ],
+          "obj": [
+           "blanca",
+           "gris"
+          ],
+          "opciones": [
+           "seguro",
+           "posible",
+           "imposible"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "seguro"
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "aparato": "ruleta",
+          "fills": [
+           "negra",
+           "negra",
+           "negra",
+           "negra",
+           "negra",
+           "negra",
+           "negra",
+           "negra"
+          ],
+          "obj": [
+           "blanca",
+           "gris"
+          ],
+          "opciones": [
+           "seguro",
+           "posible",
+           "imposible"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "imposible"
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "aparato": "bolsa",
+          "fills": [
+           "negra",
+           "gris",
+           "blanca",
+           "negra",
+           "blanca",
+           "gris",
+           "gris"
+          ],
+          "obj": [
+           "gris"
+          ],
+          "opciones": [
+           "seguro",
+           "posible",
+           "imposible"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "posible"
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "aparato": "bolsa",
+          "fills": [
+           "gris",
+           "gris",
+           "negra",
+           "negra",
+           "gris",
+           "gris",
+           "negra"
+          ],
+          "obj": [
+           "blanca"
+          ],
+          "opciones": [
+           "seguro",
+           "posible",
+           "imposible"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "imposible"
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "aparato": "bolsa",
+          "fills": [
+           "blanca",
+           "blanca",
+           "blanca",
+           "negra",
+           "negra"
+          ],
+          "obj": [
+           "negra",
+           "gris"
+          ],
+          "opciones": [
+           "seguro",
+           "posible",
+           "imposible"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "posible"
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "aparato": "ruleta",
+          "fills": [
+           "negra",
+           "negra",
+           "negra",
+           "negra",
+           "negra",
+           "negra",
+           "negra",
+           "negra"
+          ],
+          "obj": [
+           "negra"
+          ],
+          "opciones": [
+           "seguro",
+           "posible",
+           "imposible"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "seguro"
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "dd5e0def42027856"
+  ],
+  "svgSolucion": [
+   "74c6c9d7a00fdc0e"
+  ]
+ },
  "estadistica.recuento": {
   "ficha": {
    "schemaVersion": 1,
@@ -8697,6 +8958,277 @@
    "71230d8b04fed025"
   ]
  },
+ "geometria.angulos": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Los ángulos",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "geometria.angulos",
+       "tipoVersion": 1,
+       "params": {
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Mira cada ángulo y rodea si es recto, agudo u obtuso.\nPuedes comprobarlo con la escuadra.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "clase": "recto",
+          "ang": 90,
+          "giro": 65,
+          "l1": 0.87,
+          "l2": 0.98,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "recto"
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "clase": "obtuso",
+          "ang": 145,
+          "giro": 75,
+          "l1": 0.87,
+          "l2": 0.86,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "obtuso"
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "clase": "agudo",
+          "ang": 35,
+          "giro": 75,
+          "l1": 0.86,
+          "l2": 0.93,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "agudo"
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "clase": "recto",
+          "ang": 90,
+          "giro": 25,
+          "l1": 0.98,
+          "l2": 0.94,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "recto"
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "clase": "obtuso",
+          "ang": 160,
+          "giro": 225,
+          "l1": 0.94,
+          "l2": 0.9,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "obtuso"
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "clase": "obtuso",
+          "ang": 130,
+          "giro": 225,
+          "l1": 0.88,
+          "l2": 0.86,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "obtuso"
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "clase": "agudo",
+          "ang": 60,
+          "giro": 300,
+          "l1": 0.88,
+          "l2": 0.88,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "agudo"
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "clase": "agudo",
+          "ang": 50,
+          "giro": 235,
+          "l1": 0.92,
+          "l2": 0.91,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "agudo"
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "clase": "recto",
+          "ang": 90,
+          "giro": 50,
+          "l1": 0.97,
+          "l2": 0.98,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "recto"
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "clase": "obtuso",
+          "ang": 140,
+          "giro": 230,
+          "l1": 0.99,
+          "l2": 0.98,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "obtuso"
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "clase": "agudo",
+          "ang": 50,
+          "giro": 165,
+          "l1": 0.98,
+          "l2": 0.89,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "agudo"
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "clase": "recto",
+          "ang": 90,
+          "giro": 335,
+          "l1": 0.98,
+          "l2": 0.98,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "recto"
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "82a8a7f9dfb51ab9"
+  ],
+  "svgSolucion": [
+   "8c71dc19005c9ef4"
+  ]
+ },
  "geometria.copia": {
   "ficha": {
    "schemaVersion": 1,
@@ -10463,6 +10995,270 @@
    "70d7a6ce3dbd5840"
   ]
  },
+ "geometria.perimetro": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "El perímetro",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "geometria.perimetro",
+       "tipoVersion": 1,
+       "params": {
+        "modo": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Suma las medidas de los lados y escribe el perímetro de cada figura.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "forma": "casa",
+          "pts": [
+           [
+            0,
+            0
+           ],
+           [
+            8,
+            0
+           ],
+           [
+            8,
+            4
+           ],
+           [
+            4,
+            8.472
+           ],
+           [
+            0,
+            4
+           ]
+          ],
+          "lados": [
+           8,
+           4,
+           6,
+           6,
+           4
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           28
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "forma": "rectangulo",
+          "pts": [
+           [
+            0,
+            0
+           ],
+           [
+            8,
+            0
+           ],
+           [
+            8,
+            6
+           ],
+           [
+            0,
+            6
+           ]
+          ],
+          "lados": [
+           8,
+           6,
+           8,
+           6
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           28
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "forma": "cuadrado",
+          "pts": [
+           [
+            0,
+            0
+           ],
+           [
+            8,
+            0
+           ],
+           [
+            8,
+            8
+           ],
+           [
+            0,
+            8
+           ]
+          ],
+          "lados": [
+           8,
+           8,
+           8,
+           8
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           32
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "forma": "triangulo",
+          "pts": [
+           [
+            0,
+            0
+           ],
+           [
+            5,
+            0
+           ],
+           [
+            -1.4,
+            4.8
+           ]
+          ],
+          "lados": [
+           5,
+           8,
+           5
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           18
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "forma": "ele",
+          "pts": [
+           [
+            0,
+            0
+           ],
+           [
+            5,
+            0
+           ],
+           [
+            5,
+            3
+           ],
+           [
+            3,
+            3
+           ],
+           [
+            3,
+            8
+           ],
+           [
+            0,
+            8
+           ]
+          ],
+          "lados": [
+           5,
+           3,
+           2,
+           5,
+           3,
+           8
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           26
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "forma": "trapecio",
+          "pts": [
+           [
+            0,
+            0
+           ],
+           [
+            6,
+            0
+           ],
+           [
+            5,
+            2.828
+           ],
+           [
+            1,
+            2.828
+           ]
+          ],
+          "lados": [
+           6,
+           3,
+           4,
+           3
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           16
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "bb7b2ee962695f63"
+  ],
+  "svgSolucion": [
+   "22674dcb7a9d6d73"
+  ]
+ },
  "geometria.posiciones": {
   "ficha": {
    "schemaVersion": 1,
@@ -10943,6 +11739,177 @@
   ],
   "svgSolucion": [
    "9fcb8fc6da84540b"
+  ]
+ },
+ "geometria.traslada": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Traslada la figura",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "geometria.traslada",
+       "tipoVersion": 1,
+       "params": {
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Mira las flechas y dibuja la figura trasladada.\nCada número dice cuántos cuadraditos te mueves.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "gc": 12,
+          "gr": 10,
+          "celdas": [
+           [
+            3,
+            1
+           ],
+           [
+            4,
+            0
+           ],
+           [
+            4,
+            1
+           ],
+           [
+            4,
+            2
+           ],
+           [
+            5,
+            1
+           ]
+          ],
+          "pasos": [
+           [
+            "R",
+            4
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "celdas": [
+           [
+            7,
+            1
+           ],
+           [
+            8,
+            0
+           ],
+           [
+            8,
+            1
+           ],
+           [
+            8,
+            2
+           ],
+           [
+            9,
+            1
+           ]
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "gc": 12,
+          "gr": 10,
+          "celdas": [
+           [
+            7,
+            4
+           ],
+           [
+            7,
+            5
+           ],
+           [
+            8,
+            3
+           ],
+           [
+            8,
+            4
+           ],
+           [
+            8,
+            5
+           ],
+           [
+            9,
+            4
+           ]
+          ],
+          "pasos": [
+           [
+            "L",
+            4
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "celdas": [
+           [
+            3,
+            4
+           ],
+           [
+            3,
+            5
+           ],
+           [
+            4,
+            3
+           ],
+           [
+            4,
+            4
+           ],
+           [
+            4,
+            5
+           ],
+           [
+            5,
+            4
+           ]
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "243de283b5d52310"
+  ],
+  "svgSolucion": [
+   "05bfd55960b7cdfd"
   ]
  },
  "juegos.cadena": {
@@ -86429,6 +87396,5425 @@
   ],
   "svgSolucion": [
    "1d496acadd15b749"
+  ]
+ },
+ "3.º los ángulos": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Los ángulos",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "geometria.angulos",
+       "tipoVersion": 1,
+       "params": {
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Mira cada ángulo y rodea si es recto, agudo u obtuso.\nPuedes comprobarlo con la escuadra.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "clase": "agudo",
+          "ang": 70,
+          "giro": 230,
+          "l1": 0.96,
+          "l2": 0.91,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "agudo"
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "clase": "agudo",
+          "ang": 40,
+          "giro": 170,
+          "l1": 0.96,
+          "l2": 0.89,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "agudo"
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "clase": "agudo",
+          "ang": 30,
+          "giro": 290,
+          "l1": 0.88,
+          "l2": 0.94,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "agudo"
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "clase": "obtuso",
+          "ang": 155,
+          "giro": 50,
+          "l1": 0.91,
+          "l2": 0.97,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "obtuso"
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "clase": "recto",
+          "ang": 90,
+          "giro": 240,
+          "l1": 1,
+          "l2": 0.94,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "recto"
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "clase": "agudo",
+          "ang": 55,
+          "giro": 180,
+          "l1": 0.88,
+          "l2": 0.98,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "agudo"
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "clase": "recto",
+          "ang": 90,
+          "giro": 35,
+          "l1": 0.93,
+          "l2": 0.92,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "recto"
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "clase": "recto",
+          "ang": 90,
+          "giro": 150,
+          "l1": 0.86,
+          "l2": 0.91,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "recto"
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "clase": "obtuso",
+          "ang": 160,
+          "giro": 230,
+          "l1": 0.99,
+          "l2": 0.92,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "obtuso"
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "clase": "obtuso",
+          "ang": 140,
+          "giro": 5,
+          "l1": 0.93,
+          "l2": 0.88,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "obtuso"
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "clase": "recto",
+          "ang": 90,
+          "giro": 0,
+          "l1": 0.9,
+          "l2": 0.9,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "recto"
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "clase": "obtuso",
+          "ang": 125,
+          "giro": 195,
+          "l1": 0.91,
+          "l2": 1,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "obtuso"
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "76217aa9dd39d2af"
+  ],
+  "svgSolucion": [
+   "c7f1e11905dde9f3"
+  ]
+ },
+ "3.º los ángulos más ejercicios en media": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Los ángulos",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "geometria.angulos",
+       "tipoVersion": 1,
+       "params": {
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Mira cada ángulo y rodea si es recto, agudo u obtuso.\nPuedes comprobarlo con la escuadra.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "clase": "recto",
+          "ang": 90,
+          "giro": 300,
+          "l1": 0.85,
+          "l2": 0.99,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "recto"
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "clase": "agudo",
+          "ang": 65,
+          "giro": 265,
+          "l1": 0.88,
+          "l2": 0.97,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "agudo"
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "clase": "agudo",
+          "ang": 65,
+          "giro": 330,
+          "l1": 0.98,
+          "l2": 0.87,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "agudo"
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "clase": "obtuso",
+          "ang": 145,
+          "giro": 170,
+          "l1": 0.91,
+          "l2": 0.95,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "obtuso"
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "clase": "recto",
+          "ang": 90,
+          "giro": 205,
+          "l1": 0.87,
+          "l2": 0.88,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "recto"
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "clase": "obtuso",
+          "ang": 150,
+          "giro": 50,
+          "l1": 0.97,
+          "l2": 0.91,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "obtuso"
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "geometria.angulos",
+       "tipoVersion": 1,
+       "params": {
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "verde",
+       "enunciado": "Mira cada ángulo y rodea si es recto, agudo u obtuso.\nPuedes comprobarlo con la escuadra.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "clase": "obtuso",
+          "ang": 160,
+          "giro": 185,
+          "l1": 0.96,
+          "l2": 0.96,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "obtuso"
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "clase": "recto",
+          "ang": 90,
+          "giro": 10,
+          "l1": 0.87,
+          "l2": 0.93,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "recto"
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "clase": "agudo",
+          "ang": 30,
+          "giro": 40,
+          "l1": 0.92,
+          "l2": 0.91,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "agudo"
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "clase": "agudo",
+          "ang": 35,
+          "giro": 235,
+          "l1": 0.9,
+          "l2": 0.95,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "agudo"
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "clase": "recto",
+          "ang": 90,
+          "giro": 325,
+          "l1": 0.86,
+          "l2": 0.94,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "recto"
+         }
+        },
+        {
+         "id": "a2e6",
+         "datos": {
+          "clase": "obtuso",
+          "ang": 115,
+          "giro": 75,
+          "l1": 0.94,
+          "l2": 0.87,
+          "opciones": [
+           "agudo",
+           "recto",
+           "obtuso"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "obtuso"
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "fb9fd96299a43cbb"
+  ],
+  "svgSolucion": [
+   "6cd5ad83a70180d8"
+  ]
+ },
+ "3.º el perímetro con las medidas de los lados": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "El perímetro",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "geometria.perimetro",
+       "tipoVersion": 1,
+       "params": {
+        "modo": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Suma las medidas de los lados y escribe el perímetro de cada figura.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "forma": "ele",
+          "pts": [
+           [
+            0,
+            0
+           ],
+           [
+            9,
+            0
+           ],
+           [
+            9,
+            5
+           ],
+           [
+            3,
+            5
+           ],
+           [
+            3,
+            8
+           ],
+           [
+            0,
+            8
+           ]
+          ],
+          "lados": [
+           9,
+           5,
+           6,
+           3,
+           3,
+           8
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           34
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "forma": "triangulo",
+          "pts": [
+           [
+            0,
+            0
+           ],
+           [
+            8,
+            0
+           ],
+           [
+            4,
+            6.928
+           ]
+          ],
+          "lados": [
+           8,
+           8,
+           8
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           24
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "forma": "trapecio",
+          "pts": [
+           [
+            0,
+            0
+           ],
+           [
+            10,
+            0
+           ],
+           [
+            9,
+            5.916
+           ],
+           [
+            1,
+            5.916
+           ]
+          ],
+          "lados": [
+           10,
+           6,
+           8,
+           6
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           30
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "forma": "rectangulo",
+          "pts": [
+           [
+            0,
+            0
+           ],
+           [
+            7,
+            0
+           ],
+           [
+            7,
+            4
+           ],
+           [
+            0,
+            4
+           ]
+          ],
+          "lados": [
+           7,
+           4,
+           7,
+           4
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           22
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "forma": "cuadrado",
+          "pts": [
+           [
+            0,
+            0
+           ],
+           [
+            6,
+            0
+           ],
+           [
+            6,
+            6
+           ],
+           [
+            0,
+            6
+           ]
+          ],
+          "lados": [
+           6,
+           6,
+           6,
+           6
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           24
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "forma": "casa",
+          "pts": [
+           [
+            0,
+            0
+           ],
+           [
+            5,
+            0
+           ],
+           [
+            5,
+            5
+           ],
+           [
+            2.5,
+            6.658
+           ],
+           [
+            0,
+            5
+           ]
+          ],
+          "lados": [
+           5,
+           5,
+           3,
+           3,
+           5
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           21
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "fdc9f2197b759f44"
+  ],
+  "svgSolucion": [
+   "c7d461b2af9930ec"
+  ]
+ },
+ "3.º el perímetro en la cuadrícula (completa y media)": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "El perímetro",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "geometria.perimetro",
+       "tipoVersion": 1,
+       "params": {
+        "modo": "cuadricula",
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Cada lado de un cuadradito mide 1 cm.\nCuenta y escribe el perímetro de cada figura.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "forma": "cuadricula",
+          "celdas": [
+           [
+            0,
+            0
+           ],
+           [
+            0,
+            1
+           ],
+           [
+            0,
+            2
+           ],
+           [
+            1,
+            0
+           ],
+           [
+            2,
+            0
+           ],
+           [
+            3,
+            0
+           ],
+           [
+            4,
+            0
+           ]
+          ],
+          "bw": 5,
+          "bh": 3
+         },
+         "solucion": {
+          "huecos": [
+           16
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "forma": "cuadricula",
+          "celdas": [
+           [
+            0,
+            0
+           ],
+           [
+            0,
+            1
+           ],
+           [
+            0,
+            2
+           ],
+           [
+            1,
+            0
+           ],
+           [
+            1,
+            1
+           ],
+           [
+            1,
+            2
+           ]
+          ],
+          "bw": 2,
+          "bh": 3
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "forma": "cuadricula",
+          "celdas": [
+           [
+            0,
+            0
+           ],
+           [
+            0,
+            1
+           ],
+           [
+            0,
+            2
+           ],
+           [
+            0,
+            3
+           ],
+           [
+            0,
+            4
+           ],
+           [
+            1,
+            0
+           ],
+           [
+            1,
+            1
+           ],
+           [
+            1,
+            2
+           ],
+           [
+            1,
+            3
+           ],
+           [
+            1,
+            4
+           ],
+           [
+            2,
+            4
+           ],
+           [
+            3,
+            4
+           ]
+          ],
+          "bw": 4,
+          "bh": 5
+         },
+         "solucion": {
+          "huecos": [
+           18
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "forma": "cuadricula",
+          "celdas": [
+           [
+            0,
+            0
+           ],
+           [
+            0,
+            1
+           ],
+           [
+            0,
+            2
+           ],
+           [
+            0,
+            3
+           ],
+           [
+            1,
+            0
+           ],
+           [
+            1,
+            3
+           ]
+          ],
+          "bw": 2,
+          "bh": 4
+         },
+         "solucion": {
+          "huecos": [
+           14
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "forma": "cuadricula",
+          "celdas": [
+           [
+            0,
+            0
+           ],
+           [
+            0,
+            1
+           ],
+           [
+            0,
+            2
+           ],
+           [
+            1,
+            0
+           ],
+           [
+            1,
+            1
+           ],
+           [
+            1,
+            2
+           ],
+           [
+            2,
+            0
+           ],
+           [
+            2,
+            1
+           ],
+           [
+            2,
+            2
+           ]
+          ],
+          "bw": 3,
+          "bh": 3
+         },
+         "solucion": {
+          "huecos": [
+           12
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "forma": "cuadricula",
+          "celdas": [
+           [
+            0,
+            4
+           ],
+           [
+            1,
+            0
+           ],
+           [
+            1,
+            4
+           ],
+           [
+            2,
+            0
+           ],
+           [
+            2,
+            1
+           ],
+           [
+            2,
+            2
+           ],
+           [
+            2,
+            3
+           ],
+           [
+            2,
+            4
+           ]
+          ],
+          "bw": 3,
+          "bh": 5
+         },
+         "solucion": {
+          "huecos": [
+           18
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "actividades": [
+      {
+       "n": 2,
+       "tipo": "geometria.perimetro",
+       "tipoVersion": 1,
+       "params": {
+        "modo": null,
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "verde",
+       "enunciado": "Suma las medidas de los lados y escribe el perímetro de cada figura.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "forma": "triangulo",
+          "pts": [
+           [
+            0,
+            0
+           ],
+           [
+            7,
+            0
+           ],
+           [
+            7.5,
+            4.975
+           ]
+          ],
+          "lados": [
+           7,
+           5,
+           9
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           21
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "forma": "casa",
+          "pts": [
+           [
+            0,
+            0
+           ],
+           [
+            7,
+            0
+           ],
+           [
+            7,
+            6
+           ],
+           [
+            3.5,
+            10.873
+           ],
+           [
+            0,
+            6
+           ]
+          ],
+          "lados": [
+           7,
+           6,
+           6,
+           6,
+           6
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           31
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "forma": "cuadrado",
+          "pts": [
+           [
+            0,
+            0
+           ],
+           [
+            5,
+            0
+           ],
+           [
+            5,
+            5
+           ],
+           [
+            0,
+            5
+           ]
+          ],
+          "lados": [
+           5,
+           5,
+           5,
+           5
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           20
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "forma": "trapecio",
+          "pts": [
+           [
+            0,
+            0
+           ],
+           [
+            6,
+            0
+           ],
+           [
+            4,
+            2.236
+           ],
+           [
+            2,
+            2.236
+           ]
+          ],
+          "lados": [
+           6,
+           3,
+           2,
+           3
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           14
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 3,
+       "tipo": "geometria.perimetro",
+       "tipoVersion": 1,
+       "params": {
+        "modo": "cuadricula",
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "amarillo",
+       "enunciado": "Cada lado de un cuadradito mide 1 cm.\nCuenta y escribe el perímetro de cada figura.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a3e1",
+         "datos": {
+          "forma": "cuadricula",
+          "celdas": [
+           [
+            0,
+            0
+           ],
+           [
+            0,
+            1
+           ],
+           [
+            0,
+            2
+           ],
+           [
+            0,
+            3
+           ],
+           [
+            1,
+            0
+           ],
+           [
+            1,
+            1
+           ],
+           [
+            1,
+            2
+           ],
+           [
+            1,
+            3
+           ],
+           [
+            2,
+            0
+           ],
+           [
+            2,
+            1
+           ],
+           [
+            2,
+            2
+           ],
+           [
+            2,
+            3
+           ],
+           [
+            3,
+            0
+           ],
+           [
+            3,
+            1
+           ],
+           [
+            3,
+            2
+           ],
+           [
+            3,
+            3
+           ],
+           [
+            4,
+            0
+           ],
+           [
+            4,
+            1
+           ],
+           [
+            4,
+            2
+           ],
+           [
+            4,
+            3
+           ],
+           [
+            5,
+            0
+           ],
+           [
+            5,
+            1
+           ],
+           [
+            5,
+            2
+           ],
+           [
+            5,
+            3
+           ]
+          ],
+          "bw": 6,
+          "bh": 4
+         },
+         "solucion": {
+          "huecos": [
+           20
+          ]
+         }
+        },
+        {
+         "id": "a3e2",
+         "datos": {
+          "forma": "cuadricula",
+          "celdas": [
+           [
+            0,
+            3
+           ],
+           [
+            1,
+            0
+           ],
+           [
+            1,
+            1
+           ],
+           [
+            1,
+            2
+           ],
+           [
+            1,
+            3
+           ],
+           [
+            2,
+            3
+           ]
+          ],
+          "bw": 3,
+          "bh": 4
+         },
+         "solucion": {
+          "huecos": [
+           14
+          ]
+         }
+        },
+        {
+         "id": "a3e3",
+         "datos": {
+          "forma": "cuadricula",
+          "celdas": [
+           [
+            0,
+            3
+           ],
+           [
+            1,
+            2
+           ],
+           [
+            1,
+            3
+           ],
+           [
+            2,
+            1
+           ],
+           [
+            2,
+            2
+           ],
+           [
+            2,
+            3
+           ],
+           [
+            3,
+            0
+           ],
+           [
+            3,
+            1
+           ],
+           [
+            3,
+            2
+           ],
+           [
+            3,
+            3
+           ]
+          ],
+          "bw": 4,
+          "bh": 4
+         },
+         "solucion": {
+          "huecos": [
+           16
+          ]
+         }
+        },
+        {
+         "id": "a3e4",
+         "datos": {
+          "forma": "cuadricula",
+          "celdas": [
+           [
+            0,
+            0
+           ],
+           [
+            0,
+            1
+           ],
+           [
+            1,
+            0
+           ],
+           [
+            2,
+            0
+           ],
+           [
+            2,
+            1
+           ]
+          ],
+          "bw": 3,
+          "bh": 2
+         },
+         "solucion": {
+          "huecos": [
+           12
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "6b2f0360ca7dd957",
+   "f8f1064fca8d6bd1"
+  ],
+  "svgSolucion": [
+   "0839274164e3fada",
+   "a799125d991e0de2"
+  ]
+ },
+ "3.º el perímetro: más ejercicios": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "El perímetro",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "geometria.perimetro",
+       "tipoVersion": 1,
+       "params": {
+        "modo": "cuadricula",
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Cada lado de un cuadradito mide 1 cm.\nCuenta y escribe el perímetro de cada figura.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "forma": "cuadricula",
+          "celdas": [
+           [
+            0,
+            0
+           ],
+           [
+            0,
+            1
+           ],
+           [
+            0,
+            2
+           ],
+           [
+            1,
+            0
+           ],
+           [
+            2,
+            0
+           ],
+           [
+            3,
+            0
+           ],
+           [
+            4,
+            0
+           ]
+          ],
+          "bw": 5,
+          "bh": 3
+         },
+         "solucion": {
+          "huecos": [
+           16
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "forma": "cuadricula",
+          "celdas": [
+           [
+            0,
+            0
+           ],
+           [
+            0,
+            1
+           ],
+           [
+            0,
+            2
+           ],
+           [
+            1,
+            0
+           ],
+           [
+            1,
+            1
+           ],
+           [
+            1,
+            2
+           ]
+          ],
+          "bw": 2,
+          "bh": 3
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "forma": "cuadricula",
+          "celdas": [
+           [
+            0,
+            0
+           ],
+           [
+            0,
+            1
+           ],
+           [
+            0,
+            2
+           ],
+           [
+            0,
+            3
+           ],
+           [
+            0,
+            4
+           ],
+           [
+            1,
+            0
+           ],
+           [
+            1,
+            1
+           ],
+           [
+            1,
+            2
+           ],
+           [
+            1,
+            3
+           ],
+           [
+            1,
+            4
+           ],
+           [
+            2,
+            4
+           ],
+           [
+            3,
+            4
+           ]
+          ],
+          "bw": 4,
+          "bh": 5
+         },
+         "solucion": {
+          "huecos": [
+           18
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "forma": "cuadricula",
+          "celdas": [
+           [
+            0,
+            0
+           ],
+           [
+            0,
+            1
+           ],
+           [
+            0,
+            2
+           ],
+           [
+            0,
+            3
+           ],
+           [
+            1,
+            0
+           ],
+           [
+            1,
+            3
+           ]
+          ],
+          "bw": 2,
+          "bh": 4
+         },
+         "solucion": {
+          "huecos": [
+           14
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "forma": "cuadricula",
+          "celdas": [
+           [
+            0,
+            0
+           ],
+           [
+            0,
+            1
+           ],
+           [
+            0,
+            2
+           ],
+           [
+            1,
+            0
+           ],
+           [
+            1,
+            1
+           ],
+           [
+            1,
+            2
+           ],
+           [
+            2,
+            0
+           ],
+           [
+            2,
+            1
+           ],
+           [
+            2,
+            2
+           ]
+          ],
+          "bw": 3,
+          "bh": 3
+         },
+         "solucion": {
+          "huecos": [
+           12
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "forma": "cuadricula",
+          "celdas": [
+           [
+            0,
+            4
+           ],
+           [
+            1,
+            0
+           ],
+           [
+            1,
+            4
+           ],
+           [
+            2,
+            0
+           ],
+           [
+            2,
+            1
+           ],
+           [
+            2,
+            2
+           ],
+           [
+            2,
+            3
+           ],
+           [
+            2,
+            4
+           ]
+          ],
+          "bw": 3,
+          "bh": 5
+         },
+         "solucion": {
+          "huecos": [
+           18
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "forma": "cuadricula",
+          "celdas": [
+           [
+            0,
+            0
+           ],
+           [
+            0,
+            1
+           ],
+           [
+            0,
+            2
+           ],
+           [
+            0,
+            3
+           ],
+           [
+            1,
+            1
+           ],
+           [
+            1,
+            2
+           ],
+           [
+            1,
+            3
+           ],
+           [
+            2,
+            2
+           ],
+           [
+            2,
+            3
+           ],
+           [
+            3,
+            3
+           ]
+          ],
+          "bw": 4,
+          "bh": 4
+         },
+         "solucion": {
+          "huecos": [
+           16
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "forma": "cuadricula",
+          "celdas": [
+           [
+            0,
+            0
+           ],
+           [
+            0,
+            1
+           ],
+           [
+            0,
+            2
+           ],
+           [
+            0,
+            3
+           ],
+           [
+            1,
+            0
+           ],
+           [
+            1,
+            1
+           ],
+           [
+            1,
+            2
+           ],
+           [
+            1,
+            3
+           ],
+           [
+            2,
+            0
+           ],
+           [
+            2,
+            1
+           ],
+           [
+            2,
+            2
+           ],
+           [
+            2,
+            3
+           ]
+          ],
+          "bw": 3,
+          "bh": 4
+         },
+         "solucion": {
+          "huecos": [
+           14
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "0957ff7ea5cb1107"
+  ],
+  "svgSolucion": [
+   "67e30f9beb04a1b6"
+  ]
+ },
+ "3.º traslada la figura (completa y media)": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Traslada la figura",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "geometria.traslada",
+       "tipoVersion": 1,
+       "params": {
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Mira las flechas y dibuja la figura trasladada.\nCada número dice cuántos cuadraditos te mueves.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "gc": 12,
+          "gr": 10,
+          "celdas": [
+           [
+            7,
+            7
+           ],
+           [
+            8,
+            7
+           ],
+           [
+            8,
+            8
+           ],
+           [
+            9,
+            7
+           ],
+           [
+            9,
+            8
+           ]
+          ],
+          "pasos": [
+           [
+            "L",
+            2
+           ],
+           [
+            "D",
+            4
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "celdas": [
+           [
+            5,
+            3
+           ],
+           [
+            6,
+            3
+           ],
+           [
+            6,
+            4
+           ],
+           [
+            7,
+            3
+           ],
+           [
+            7,
+            4
+           ]
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "gc": 12,
+          "gr": 10,
+          "celdas": [
+           [
+            7,
+            5
+           ],
+           [
+            7,
+            6
+           ],
+           [
+            8,
+            5
+           ],
+           [
+            9,
+            4
+           ],
+           [
+            9,
+            5
+           ]
+          ],
+          "pasos": [
+           [
+            "L",
+            3
+           ],
+           [
+            "D",
+            4
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "celdas": [
+           [
+            4,
+            1
+           ],
+           [
+            4,
+            2
+           ],
+           [
+            5,
+            1
+           ],
+           [
+            6,
+            0
+           ],
+           [
+            6,
+            1
+           ]
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "actividades": [
+      {
+       "n": 2,
+       "tipo": "geometria.traslada",
+       "tipoVersion": 1,
+       "params": {
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "rosa",
+       "enunciado": "Mira las flechas y dibuja la figura trasladada.\nCada número dice cuántos cuadraditos te mueves.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "gc": 12,
+          "gr": 10,
+          "celdas": [
+           [
+            1,
+            1
+           ],
+           [
+            1,
+            2
+           ],
+           [
+            2,
+            1
+           ]
+          ],
+          "pasos": [
+           [
+            "R",
+            6
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "celdas": [
+           [
+            7,
+            1
+           ],
+           [
+            7,
+            2
+           ],
+           [
+            8,
+            1
+           ]
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 3,
+       "tipo": "geometria.traslada",
+       "tipoVersion": 1,
+       "params": {
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Mira las flechas y dibuja la figura trasladada.\nCada número dice cuántos cuadraditos te mueves.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a3e1",
+         "datos": {
+          "gc": 12,
+          "gr": 10,
+          "celdas": [
+           [
+            9,
+            3
+           ],
+           [
+            9,
+            4
+           ],
+           [
+            9,
+            5
+           ]
+          ],
+          "pasos": [
+           [
+            "L",
+            4
+           ],
+           [
+            "U",
+            1
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "celdas": [
+           [
+            5,
+            4
+           ],
+           [
+            5,
+            5
+           ],
+           [
+            5,
+            6
+           ]
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "0aa88bb8c21ee03d",
+   "45a9818481f76c96"
+  ],
+  "svgSolucion": [
+   "732465add360b9be",
+   "056267170be52988"
+  ]
+ },
+ "3.º traslada la figura: más ejercicios": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Traslada la figura",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "geometria.traslada",
+       "tipoVersion": 1,
+       "params": {
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Mira las flechas y dibuja la figura trasladada.\nCada número dice cuántos cuadraditos te mueves.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "gc": 12,
+          "gr": 10,
+          "celdas": [
+           [
+            7,
+            7
+           ],
+           [
+            8,
+            7
+           ],
+           [
+            8,
+            8
+           ],
+           [
+            9,
+            7
+           ],
+           [
+            9,
+            8
+           ]
+          ],
+          "pasos": [
+           [
+            "L",
+            2
+           ],
+           [
+            "D",
+            4
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "celdas": [
+           [
+            5,
+            3
+           ],
+           [
+            6,
+            3
+           ],
+           [
+            6,
+            4
+           ],
+           [
+            7,
+            3
+           ],
+           [
+            7,
+            4
+           ]
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "gc": 12,
+          "gr": 10,
+          "celdas": [
+           [
+            7,
+            5
+           ],
+           [
+            7,
+            6
+           ],
+           [
+            8,
+            5
+           ],
+           [
+            9,
+            4
+           ],
+           [
+            9,
+            5
+           ]
+          ],
+          "pasos": [
+           [
+            "L",
+            3
+           ],
+           [
+            "D",
+            4
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "celdas": [
+           [
+            4,
+            1
+           ],
+           [
+            4,
+            2
+           ],
+           [
+            5,
+            1
+           ],
+           [
+            6,
+            0
+           ],
+           [
+            6,
+            1
+           ]
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "gc": 12,
+          "gr": 10,
+          "celdas": [
+           [
+            1,
+            2
+           ],
+           [
+            1,
+            3
+           ],
+           [
+            2,
+            2
+           ],
+           [
+            2,
+            3
+           ],
+           [
+            3,
+            2
+           ],
+           [
+            3,
+            3
+           ]
+          ],
+          "pasos": [
+           [
+            "R",
+            4
+           ],
+           [
+            "D",
+            2
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "celdas": [
+           [
+            5,
+            0
+           ],
+           [
+            5,
+            1
+           ],
+           [
+            6,
+            0
+           ],
+           [
+            6,
+            1
+           ],
+           [
+            7,
+            0
+           ],
+           [
+            7,
+            1
+           ]
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "14e4f94d2fa6d493"
+  ],
+  "svgSolucion": [
+   "f31738565a4442cc"
+  ]
+ },
+ "3.º líneas paralelas, perpendiculares y oblicuas": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Las líneas",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "geometria.lineas",
+       "tipoVersion": 2,
+       "params": {
+        "modo": "paralelas",
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Mira las dos líneas de cada casilla.\nRodea si son paralelas, perpendiculares u oblicuas.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "tipo": "paralelas",
+          "tipos": [
+           "oblicuas",
+           "paralelas",
+           "perpendiculares"
+          ],
+          "a1": 165,
+          "a2": 165,
+          "u": 1,
+          "v": 9
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "paralelas"
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "tipo": "paralelas",
+          "tipos": [
+           "perpendiculares",
+           "oblicuas",
+           "paralelas"
+          ],
+          "a1": 120,
+          "a2": 120,
+          "u": -1,
+          "v": 9
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "paralelas"
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "tipo": "paralelas",
+          "tipos": [
+           "paralelas",
+           "oblicuas",
+           "perpendiculares"
+          ],
+          "a1": 90,
+          "a2": 90,
+          "u": 2,
+          "v": 11
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "paralelas"
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "tipo": "oblicuas",
+          "tipos": [
+           "oblicuas",
+           "paralelas",
+           "perpendiculares"
+          ],
+          "a1": 15,
+          "a2": 150,
+          "u": 0,
+          "v": 1
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "oblicuas"
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "tipo": "perpendiculares",
+          "tipos": [
+           "oblicuas",
+           "paralelas",
+           "perpendiculares"
+          ],
+          "a1": 150,
+          "a2": 60,
+          "u": 0,
+          "v": 0
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "perpendiculares"
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "tipo": "paralelas",
+          "tipos": [
+           "paralelas",
+           "perpendiculares",
+           "oblicuas"
+          ],
+          "a1": 0,
+          "a2": 0,
+          "u": -1,
+          "v": 9
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "paralelas"
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "tipo": "perpendiculares",
+          "tipos": [
+           "paralelas",
+           "oblicuas",
+           "perpendiculares"
+          ],
+          "a1": 75,
+          "a2": 165,
+          "u": -1,
+          "v": 2
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "perpendiculares"
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "tipo": "perpendiculares",
+          "tipos": [
+           "perpendiculares",
+           "oblicuas",
+           "paralelas"
+          ],
+          "a1": 90,
+          "a2": 0,
+          "u": -2,
+          "v": -3
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "perpendiculares"
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "tipo": "oblicuas",
+          "tipos": [
+           "paralelas",
+           "oblicuas",
+           "perpendiculares"
+          ],
+          "a1": 0,
+          "a2": 60,
+          "u": -1,
+          "v": 3
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "oblicuas"
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "tipo": "oblicuas",
+          "tipos": [
+           "paralelas",
+           "perpendiculares",
+           "oblicuas"
+          ],
+          "a1": 165,
+          "a2": 120,
+          "u": 1,
+          "v": -1
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "oblicuas"
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "tipo": "perpendiculares",
+          "tipos": [
+           "paralelas",
+           "perpendiculares",
+           "oblicuas"
+          ],
+          "a1": 15,
+          "a2": 105,
+          "u": 3,
+          "v": -1
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "perpendiculares"
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "tipo": "oblicuas",
+          "tipos": [
+           "oblicuas",
+           "perpendiculares",
+           "paralelas"
+          ],
+          "a1": 0,
+          "a2": 120,
+          "u": 2,
+          "v": 0
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "oblicuas"
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "e185ca2486fdc46c"
+  ],
+  "svgSolucion": [
+   "0b221dea11d813ad"
+  ]
+ },
+ "3.º recta, semirrecta y segmento (media)": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Las líneas",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "geometria.lineas",
+       "tipoVersion": 2,
+       "params": {
+        "modo": "rectas",
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "rosa",
+       "enunciado": "Rodea si cada línea es una recta, una semirrecta o un segmento.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "tipo": "semirrecta",
+          "tipos": [
+           "segmento",
+           "semirrecta",
+           "recta"
+          ],
+          "ang": 150,
+          "inv": 1
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "semirrecta"
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "tipo": "recta",
+          "tipos": [
+           "segmento",
+           "semirrecta",
+           "recta"
+          ],
+          "ang": 120,
+          "inv": 1
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "recta"
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "tipo": "recta",
+          "tipos": [
+           "semirrecta",
+           "recta",
+           "segmento"
+          ],
+          "ang": 165,
+          "inv": 1
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "recta"
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "tipo": "segmento",
+          "tipos": [
+           "recta",
+           "segmento",
+           "semirrecta"
+          ],
+          "ang": 45,
+          "inv": 1
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "segmento"
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "tipo": "semirrecta",
+          "tipos": [
+           "semirrecta",
+           "segmento",
+           "recta"
+          ],
+          "ang": 15,
+          "inv": 0
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "semirrecta"
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "tipo": "segmento",
+          "tipos": [
+           "recta",
+           "segmento",
+           "semirrecta"
+          ],
+          "ang": 135,
+          "inv": 0
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "segmento"
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "geometria.lineas",
+       "tipoVersion": 2,
+       "params": {
+        "modo": "paralelas",
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Mira las dos líneas de cada casilla.\nRodea si son paralelas, perpendiculares u oblicuas.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "tipo": "oblicuas",
+          "tipos": [
+           "paralelas",
+           "perpendiculares",
+           "oblicuas"
+          ],
+          "a1": 165,
+          "a2": 105,
+          "u": 1,
+          "v": 2
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "oblicuas"
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "tipo": "perpendiculares",
+          "tipos": [
+           "perpendiculares",
+           "oblicuas",
+           "paralelas"
+          ],
+          "a1": 15,
+          "a2": 105,
+          "u": 0,
+          "v": -3
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "perpendiculares"
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "tipo": "paralelas",
+          "tipos": [
+           "oblicuas",
+           "perpendiculares",
+           "paralelas"
+          ],
+          "a1": 60,
+          "a2": 60,
+          "u": -3,
+          "v": 8
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "paralelas"
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "tipo": "paralelas",
+          "tipos": [
+           "perpendiculares",
+           "paralelas",
+           "oblicuas"
+          ],
+          "a1": 105,
+          "a2": 105,
+          "u": -3,
+          "v": 10
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "paralelas"
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "tipo": "perpendiculares",
+          "tipos": [
+           "paralelas",
+           "perpendiculares",
+           "oblicuas"
+          ],
+          "a1": 105,
+          "a2": 15,
+          "u": -2,
+          "v": -2
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "perpendiculares"
+         }
+        },
+        {
+         "id": "a2e6",
+         "datos": {
+          "tipo": "oblicuas",
+          "tipos": [
+           "paralelas",
+           "perpendiculares",
+           "oblicuas"
+          ],
+          "a1": 15,
+          "a2": 150,
+          "u": 3,
+          "v": 2
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "oblicuas"
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "96ada17e5bbe51bd"
+  ],
+  "svgSolucion": [
+   "25a71c3706449dff"
+  ]
+ },
+ "3.º cuerpos: caras, aristas y vértices (completa y media)": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Los cuerpos geométricos",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "geometria.cuerpos",
+       "tipoVersion": 1,
+       "params": {
+        "modo": "elementos",
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Cuenta las caras, las aristas y los vértices (los puntos) de cada cuerpo.\nLas líneas discontinuas son aristas que no se ven.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "cuerpo": "prisma_tri"
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           9,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "cuerpo": "piramide_tri"
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           6,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "cuerpo": "piramide_cuad"
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           8,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "cuerpo": "piramide_tri"
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           6,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "cuerpo": "prisma_rect"
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           12,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "cuerpo": "prisma_tri"
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           9,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "cuerpo": "piramide_cuad"
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           8,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "cuerpo": "cubo"
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           12,
+           8
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "actividades": [
+      {
+       "n": 2,
+       "tipo": "geometria.cuerpos",
+       "tipoVersion": 1,
+       "params": {
+        "modo": "elementos",
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "rosa",
+       "enunciado": "Cuenta las caras, las aristas y los vértices (los puntos) de cada cuerpo.\nLas líneas discontinuas son aristas que no se ven.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "cuerpo": "piramide_cuad"
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           8,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "cuerpo": "prisma_rect"
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           12,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "cuerpo": "cubo"
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           12,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "cuerpo": "prisma_tri"
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           9,
+           6
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 3,
+       "tipo": "geometria.cuerpos",
+       "tipoVersion": 1,
+       "params": {
+        "modo": null,
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Rodea el nombre de cada cuerpo geométrico.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a3e1",
+         "datos": {
+          "cuerpo": "cubo",
+          "opciones": [
+           "cubo",
+           "cono",
+           "esfera"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "cubo"
+         }
+        },
+        {
+         "id": "a3e2",
+         "datos": {
+          "cuerpo": "piramide",
+          "opciones": [
+           "cilindro",
+           "cono",
+           "pirámide"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "pirámide"
+         }
+        },
+        {
+         "id": "a3e3",
+         "datos": {
+          "cuerpo": "esfera",
+          "opciones": [
+           "pirámide",
+           "cilindro",
+           "esfera"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "esfera"
+         }
+        },
+        {
+         "id": "a3e4",
+         "datos": {
+          "cuerpo": "cilindro",
+          "opciones": [
+           "esfera",
+           "cono",
+           "cilindro"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "cilindro"
+         }
+        },
+        {
+         "id": "a3e5",
+         "datos": {
+          "cuerpo": "piramide",
+          "opciones": [
+           "pirámide",
+           "cubo",
+           "cono"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "pirámide"
+         }
+        },
+        {
+         "id": "a3e6",
+         "datos": {
+          "cuerpo": "cono",
+          "opciones": [
+           "esfera",
+           "cubo",
+           "cono"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "cono"
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "7164514073527da8",
+   "e860cbed79c00fe5"
+  ],
+  "svgSolucion": [
+   "c13c49b4ead0cf20",
+   "e353ea0d8d90c72c"
+  ]
+ },
+ "3.º ¿seguro, posible o imposible?": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "¿Seguro, posible o imposible?",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "estadistica.probable",
+       "tipoVersion": 1,
+       "params": {
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Rodea si cada suceso es seguro, posible o imposible.\nLas bolas se sacan de la bolsa sin mirar.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "aparato": "ruleta",
+          "fills": [
+           "blanca",
+           "blanca",
+           "blanca",
+           "blanca"
+          ],
+          "obj": [
+           "negra",
+           "gris"
+          ],
+          "opciones": [
+           "seguro",
+           "posible",
+           "imposible"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "imposible"
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "aparato": "ruleta",
+          "fills": [
+           "blanca",
+           "negra",
+           "negra",
+           "negra",
+           "negra",
+           "blanca"
+          ],
+          "obj": [
+           "blanca",
+           "gris"
+          ],
+          "opciones": [
+           "seguro",
+           "posible",
+           "imposible"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "posible"
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "aparato": "bolsa",
+          "fills": [
+           "gris",
+           "blanca",
+           "negra",
+           "blanca",
+           "blanca",
+           "blanca",
+           "blanca"
+          ],
+          "obj": [
+           "gris"
+          ],
+          "opciones": [
+           "seguro",
+           "posible",
+           "imposible"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "posible"
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "aparato": "bolsa",
+          "fills": [
+           "negra",
+           "blanca",
+           "blanca",
+           "gris",
+           "gris",
+           "gris",
+           "gris"
+          ],
+          "obj": [
+           "blanca",
+           "gris"
+          ],
+          "opciones": [
+           "seguro",
+           "posible",
+           "imposible"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "posible"
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "aparato": "ruleta",
+          "fills": [
+           "gris",
+           "gris",
+           "gris",
+           "gris"
+          ],
+          "obj": [
+           "blanca",
+           "negra"
+          ],
+          "opciones": [
+           "seguro",
+           "posible",
+           "imposible"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "imposible"
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "aparato": "ruleta",
+          "fills": [
+           "gris",
+           "gris",
+           "gris",
+           "gris",
+           "gris",
+           "gris",
+           "gris",
+           "gris"
+          ],
+          "obj": [
+           "gris"
+          ],
+          "opciones": [
+           "seguro",
+           "posible",
+           "imposible"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "seguro"
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "aparato": "bolsa",
+          "fills": [
+           "blanca",
+           "negra",
+           "negra",
+           "negra",
+           "blanca",
+           "negra"
+          ],
+          "obj": [
+           "blanca",
+           "negra"
+          ],
+          "opciones": [
+           "seguro",
+           "posible",
+           "imposible"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "seguro"
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "aparato": "bolsa",
+          "fills": [
+           "gris",
+           "gris",
+           "gris",
+           "gris"
+          ],
+          "obj": [
+           "gris"
+          ],
+          "opciones": [
+           "seguro",
+           "posible",
+           "imposible"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "seguro"
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "6a85227aaee2d8c7"
+  ],
+  "svgSolucion": [
+   "b0ac35ad6dfb43dc"
+  ]
+ },
+ "3.º ¿seguro, posible o imposible? más ejercicios en media": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "¿Seguro, posible o imposible?",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "estadistica.probable",
+       "tipoVersion": 1,
+       "params": {
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "amarillo",
+       "enunciado": "Rodea si cada suceso es seguro, posible o imposible.\nLas bolas se sacan de la bolsa sin mirar.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "aparato": "bolsa",
+          "fills": [
+           "gris",
+           "blanca",
+           "gris",
+           "negra",
+           "negra",
+           "gris",
+           "blanca"
+          ],
+          "obj": [
+           "negra",
+           "gris"
+          ],
+          "opciones": [
+           "seguro",
+           "posible",
+           "imposible"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "posible"
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "aparato": "ruleta",
+          "fills": [
+           "gris",
+           "gris",
+           "gris",
+           "gris",
+           "gris",
+           "negra"
+          ],
+          "obj": [
+           "blanca"
+          ],
+          "opciones": [
+           "seguro",
+           "posible",
+           "imposible"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "imposible"
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "aparato": "ruleta",
+          "fills": [
+           "negra",
+           "negra",
+           "gris",
+           "gris",
+           "gris",
+           "negra"
+          ],
+          "obj": [
+           "negra",
+           "gris"
+          ],
+          "opciones": [
+           "seguro",
+           "posible",
+           "imposible"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "seguro"
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "aparato": "bolsa",
+          "fills": [
+           "negra",
+           "blanca",
+           "negra",
+           "gris"
+          ],
+          "obj": [
+           "negra"
+          ],
+          "opciones": [
+           "seguro",
+           "posible",
+           "imposible"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "posible"
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "estadistica.probable",
+       "tipoVersion": 1,
+       "params": {
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "rosa",
+       "enunciado": "Rodea si cada suceso es seguro, posible o imposible.\nLas bolas se sacan de la bolsa sin mirar.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "aparato": "ruleta",
+          "fills": [
+           "blanca",
+           "blanca",
+           "blanca",
+           "blanca"
+          ],
+          "obj": [
+           "blanca"
+          ],
+          "opciones": [
+           "seguro",
+           "posible",
+           "imposible"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "seguro"
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "aparato": "bolsa",
+          "fills": [
+           "negra",
+           "negra",
+           "negra",
+           "blanca",
+           "blanca",
+           "blanca",
+           "blanca"
+          ],
+          "obj": [
+           "gris"
+          ],
+          "opciones": [
+           "seguro",
+           "posible",
+           "imposible"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "imposible"
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "aparato": "bolsa",
+          "fills": [
+           "gris",
+           "gris",
+           "gris",
+           "negra",
+           "gris"
+          ],
+          "obj": [
+           "blanca",
+           "negra"
+          ],
+          "opciones": [
+           "seguro",
+           "posible",
+           "imposible"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "posible"
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "aparato": "ruleta",
+          "fills": [
+           "blanca",
+           "blanca",
+           "blanca",
+           "blanca"
+          ],
+          "obj": [
+           "negra",
+           "gris"
+          ],
+          "opciones": [
+           "seguro",
+           "posible",
+           "imposible"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "imposible"
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "7466dbd48e50318a"
+  ],
+  "svgSolucion": [
+   "5a069dc77c9fa3b3"
+  ]
+ },
+ "3.º gráfico de barras: la moda": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "El gráfico de barras",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "estadistica.barras",
+       "tipoVersion": 1,
+       "params": {
+        "modo": "lee",
+        "escala": null,
+        "pregunta": null,
+        "moda": true,
+        "grupos": null,
+        "rango": 10
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Mira el gráfico, escribe los datos y contesta.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "lee": true,
+          "kinds": [
+           "t",
+           "q",
+           "s",
+           "c"
+          ],
+          "v": [
+           1,
+           3,
+           2,
+           4
+          ],
+          "par": [
+           1,
+           2
+          ],
+          "moda": true
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           3,
+           2,
+           4,
+           5
+          ],
+          "elegir": [
+           "círculos"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "3d816a4f80a80cb8"
+  ],
+  "svgSolucion": [
+   "417cfe99240f565a"
+  ]
+ },
+ "3.º gráfico de barras de dos clases (escala de 2)": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "El gráfico de barras",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "estadistica.barras",
+       "tipoVersion": 1,
+       "params": {
+        "modo": null,
+        "escala": 2,
+        "pregunta": null,
+        "moda": false,
+        "grupos": "dos",
+        "rango": 10
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Cada casilla del gráfico vale 2.\nMira el gráfico de las dos clases y contesta.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "lee": true,
+          "kinds": [
+           "t",
+           "q",
+           "s",
+           "c"
+          ],
+          "v": [
+           20,
+           14,
+           8,
+           2
+          ],
+          "w": [
+           14,
+           4,
+           20,
+           6
+          ],
+          "grupos": 2,
+          "esc": 2,
+          "preguntas": [
+           {
+            "tp": "c",
+            "txt": "¿En qué clase hay más triángulos?",
+            "op": [
+             "Clase A",
+             "Clase B"
+            ]
+           },
+           {
+            "tp": "b",
+            "txt": "¿Cuántos círculos más hay en la clase B que en la A?"
+           },
+           {
+            "tp": "b",
+            "txt": "¿Cuántas figuras hay en total en la clase A?"
+           },
+           {
+            "tp": "b",
+            "txt": "¿Cuántas figuras hay en total en la clase B?"
+           }
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           44,
+           44
+          ],
+          "elegir": [
+           "Clase A"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "213d375b20b8e747"
+  ],
+  "svgSolucion": [
+   "64359d7fd6466d90"
+  ]
+ },
+ "3.º gráfico de barras de dos clases con la moda": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "El gráfico de barras",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "estadistica.barras",
+       "tipoVersion": 1,
+       "params": {
+        "modo": null,
+        "escala": null,
+        "pregunta": null,
+        "moda": true,
+        "grupos": "dos",
+        "rango": 10
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Mira el gráfico de las dos clases y contesta.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "lee": true,
+          "kinds": [
+           "t",
+           "q",
+           "s",
+           "c"
+          ],
+          "v": [
+           10,
+           7,
+           4,
+           1
+          ],
+          "w": [
+           7,
+           2,
+           10,
+           3
+          ],
+          "grupos": 2,
+          "preguntas": [
+           {
+            "tp": "c",
+            "txt": "¿En qué clase hay más triángulos?",
+            "op": [
+             "Clase A",
+             "Clase B"
+            ]
+           },
+           {
+            "tp": "b",
+            "txt": "¿Cuántos círculos más hay en la clase B que en la A?"
+           },
+           {
+            "tp": "c",
+            "txt": "¿Cuál es la moda de la clase A?",
+            "op": [
+             "triángulos",
+             "cuadrados",
+             "estrellas",
+             "círculos"
+            ]
+           },
+           {
+            "tp": "c",
+            "txt": "¿Cuál es la moda de la clase B?",
+            "op": [
+             "triángulos",
+             "cuadrados",
+             "estrellas",
+             "círculos"
+            ]
+           }
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           2
+          ],
+          "elegir": [
+           "Clase A",
+           "triángulos",
+           "estrellas"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "4bfd268e420720b8"
+  ],
+  "svgSolucion": [
+   "60c13110de016de0"
+  ]
+ },
+ "3.º pictograma con la moda": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "El pictograma",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "estadistica.pictograma",
+       "tipoVersion": 1,
+       "params": {
+        "modo": null,
+        "moda": true,
+        "grupos": null,
+        "rango": 10
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Mira el pictograma y contesta las preguntas.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "dos": false,
+          "kinds": [
+           "t",
+           "q",
+           "s",
+           "c"
+          ],
+          "v": [
+           1,
+           3,
+           2,
+           4
+          ],
+          "moda": true,
+          "preguntas": [
+           {
+            "tp": "b",
+            "txt": "¿Cuántos votos tienen los cuadrados?"
+           },
+           {
+            "tp": "b",
+            "txt": "¿Cuántos votos tienen los estrellas?"
+           },
+           {
+            "tp": "c",
+            "txt": "¿Cuál es la moda? (la figura que más se repite)"
+           },
+           {
+            "tp": "c",
+            "txt": "¿Qué figura tiene menos votos?"
+           },
+           {
+            "tp": "b",
+            "txt": "¿Cuántos votos más tienen los cuadrados que los estrellas?"
+           },
+           {
+            "tp": "b",
+            "txt": "¿Cuántos votos hay en total?"
+           }
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           2,
+           1,
+           10
+          ],
+          "elegir": [
+           "círculos",
+           "triángulos"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "4563590e4dde0b33"
+  ],
+  "svgSolucion": [
+   "df53b3c4b6c5e699"
+  ]
+ },
+ "3.º pictograma de dos clases (cada punto vale 2)": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "El pictograma",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "estadistica.pictograma",
+       "tipoVersion": 1,
+       "params": {
+        "modo": "dos",
+        "moda": false,
+        "grupos": "dos",
+        "rango": 10
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Mira los pictogramas (cada punto vale 2 votos) y contesta.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "dos": true,
+          "kinds": [
+           "t",
+           "q",
+           "s",
+           "c"
+          ],
+          "v": [
+           6,
+           4,
+           2,
+           8
+          ],
+          "w": [
+           4,
+           2,
+           6,
+           10
+          ],
+          "grupos": 2,
+          "preguntas": [
+           {
+            "tp": "c",
+            "txt": "¿En qué clase hay más votos de círculos?",
+            "op": [
+             "Clase A",
+             "Clase B"
+            ]
+           },
+           {
+            "tp": "b",
+            "txt": "¿Cuántos votos más de estrellas hay en la clase B que en la A?"
+           },
+           {
+            "tp": "b",
+            "txt": "¿Cuántos votos hay en total en la clase A?"
+           },
+           {
+            "tp": "b",
+            "txt": "¿Cuántos votos hay en total en la clase B?"
+           }
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           20,
+           22
+          ],
+          "elegir": [
+           "Clase B"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "08f46260fbab12cd"
+  ],
+  "svgSolucion": [
+   "30950129fff3dc64"
+  ]
+ },
+ "3.º pictograma de dos clases con la moda": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "El pictograma",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "estadistica.pictograma",
+       "tipoVersion": 1,
+       "params": {
+        "modo": null,
+        "moda": true,
+        "grupos": "dos",
+        "rango": 10
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Mira los dos pictogramas y contesta las preguntas.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "dos": false,
+          "kinds": [
+           "t",
+           "q",
+           "s",
+           "c"
+          ],
+          "v": [
+           10,
+           7,
+           4,
+           1
+          ],
+          "w": [
+           7,
+           2,
+           10,
+           3
+          ],
+          "grupos": 2,
+          "preguntas": [
+           {
+            "tp": "c",
+            "txt": "¿En qué clase hay más votos de triángulos?",
+            "op": [
+             "Clase A",
+             "Clase B"
+            ]
+           },
+           {
+            "tp": "b",
+            "txt": "¿Cuántos votos más de círculos hay en la clase B que en la A?"
+           },
+           {
+            "tp": "c",
+            "txt": "¿Cuál es la moda de la clase A?",
+            "op": [
+             "triángulos",
+             "cuadrados",
+             "estrellas",
+             "círculos"
+            ]
+           },
+           {
+            "tp": "c",
+            "txt": "¿Cuál es la moda de la clase B?",
+            "op": [
+             "triángulos",
+             "cuadrados",
+             "estrellas",
+             "círculos"
+            ]
+           }
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           2
+          ],
+          "elegir": [
+           "Clase A",
+           "triángulos",
+           "estrellas"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "06630fa054787467"
+  ],
+  "svgSolucion": [
+   "4fec3d8f3befeabc"
+  ]
+ },
+ "3.º cuenta y anota con la moda": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Cuenta y anota",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "estadistica.recuento",
+       "tipoVersion": 1,
+       "params": {
+        "moda": true,
+        "grupos": null,
+        "rango": 10
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Haz palotes para contar cada figura y escribe el número.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "v": [
+           2,
+           4,
+           9,
+           2
+          ],
+          "items": [
+           [
+            "t",
+            0.08,
+            -0.023
+           ],
+           [
+            "q",
+            0.061,
+            -0.07
+           ],
+           [
+            "q",
+            0.098,
+            -0.062
+           ],
+           [
+            "q",
+            -0.009,
+            -0.119
+           ],
+           [
+            "s",
+            -0.107,
+            0.022
+           ],
+           [
+            "t",
+            0.125,
+            0.1
+           ],
+           [
+            "q",
+            -0.03,
+            0.085
+           ],
+           [
+            "q",
+            -0.142,
+            0.141
+           ],
+           [
+            "q",
+            0.027,
+            0.052
+           ],
+           [
+            "q",
+            0.036,
+            -0.097
+           ],
+           [
+            "q",
+            0.139,
+            0.004
+           ],
+           [
+            "q",
+            0.012,
+            -0.005
+           ],
+           [
+            "c",
+            -0.156,
+            -0.127
+           ],
+           [
+            "c",
+            -0.037,
+            -0.022
+           ],
+           [
+            "s",
+            0.195,
+            0.135
+           ],
+           [
+            "s",
+            -0.018,
+            -0.054
+           ],
+           [
+            "s",
+            0.129,
+            0.042
+           ]
+          ],
+          "moda": true
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           4,
+           9,
+           2
+          ],
+          "elegir": [
+           "cuadrados"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "9152a364b0d2a685"
+  ],
+  "svgSolucion": [
+   "f7bc7d02e443417d"
+  ]
+ },
+ "3.º cuenta y anota de dos clases": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Cuenta y anota",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "estadistica.recuento",
+       "tipoVersion": 1,
+       "params": {
+        "moda": false,
+        "grupos": "dos",
+        "rango": 10
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Haz palotes para contar las figuras de cada clase, escribe los números y contesta.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "v": [
+           9,
+           8,
+           5,
+           6
+          ],
+          "w": [
+           3,
+           7,
+           4,
+           5
+          ],
+          "grupos": 2,
+          "items": [
+           [
+            "c",
+            -0.007,
+            -0.117
+           ],
+           [
+            "t",
+            -0.169,
+            -0.028
+           ],
+           [
+            "t",
+            -0.029,
+            0.147
+           ],
+           [
+            "s",
+            0.18,
+            -0.013
+           ],
+           [
+            "c",
+            -0.072,
+            0.097
+           ],
+           [
+            "s",
+            0.056,
+            0.039
+           ],
+           [
+            "c",
+            0.023,
+            -0.094
+           ],
+           [
+            "c",
+            -0.189,
+            -0.058
+           ],
+           [
+            "s",
+            -0.07,
+            -0.147
+           ],
+           [
+            "t",
+            -0.078,
+            -0.034
+           ],
+           [
+            "q",
+            0.193,
+            0.016
+           ],
+           [
+            "q",
+            0.016,
+            0.129
+           ],
+           [
+            "s",
+            0.136,
+            0.027
+           ],
+           [
+            "s",
+            -0.051,
+            0.089
+           ],
+           [
+            "q",
+            0.078,
+            -0.121
+           ],
+           [
+            "c",
+            0.15,
+            -0.052
+           ],
+           [
+            "c",
+            0.128,
+            0.115
+           ],
+           [
+            "c",
+            -0.196,
+            0.07
+           ],
+           [
+            "q",
+            0.091,
+            -0.017
+           ],
+           [
+            "t",
+            -0.127,
+            0.125
+           ],
+           [
+            "c",
+            -0.138,
+            0.076
+           ],
+           [
+            "s",
+            0.137,
+            -0.049
+           ],
+           [
+            "s",
+            -0.079,
+            -0.079
+           ],
+           [
+            "s",
+            0.009,
+            0.012
+           ],
+           [
+            "t",
+            -0.025,
+            -0.001
+           ],
+           [
+            "c",
+            0.018,
+            -0.052
+           ],
+           [
+            "t",
+            0.148,
+            -0.042
+           ],
+           [
+            "q",
+            -0.049,
+            0.055
+           ]
+          ],
+          "items2": [
+           [
+            "t",
+            0.013,
+            0.136
+           ],
+           [
+            "c",
+            0.066,
+            -0.027
+           ],
+           [
+            "q",
+            -0.086,
+            -0.145
+           ],
+           [
+            "q",
+            0.141,
+            -0.063
+           ],
+           [
+            "t",
+            -0.145,
+            0.137
+           ],
+           [
+            "s",
+            -0.078,
+            0.106
+           ],
+           [
+            "s",
+            -0.126,
+            -0.132
+           ],
+           [
+            "s",
+            -0.008,
+            0.112
+           ],
+           [
+            "s",
+            -0.01,
+            0.13
+           ],
+           [
+            "q",
+            0.136,
+            -0.12
+           ],
+           [
+            "q",
+            0.094,
+            -0.1
+           ],
+           [
+            "t",
+            -0.012,
+            0.01
+           ],
+           [
+            "c",
+            -0.157,
+            0.123
+           ],
+           [
+            "s",
+            -0.095,
+            0.13
+           ],
+           [
+            "s",
+            -0.072,
+            -0.01
+           ],
+           [
+            "s",
+            -0.06,
+            -0.101
+           ],
+           [
+            "t",
+            0.151,
+            -0.094
+           ],
+           [
+            "t",
+            -0.082,
+            -0.109
+           ],
+           [
+            "c",
+            -0.086,
+            -0.129
+           ]
+          ],
+          "preguntas": [
+           {
+            "tp": "c",
+            "txt": "¿En qué clase hay más triángulos?",
+            "op": [
+             "Clase A",
+             "Clase B"
+            ]
+           },
+           {
+            "tp": "b",
+            "txt": "¿Cuántos cuadrados más hay en la clase A que en la B?"
+           },
+           {
+            "tp": "b",
+            "txt": "¿Cuántas figuras hay en total en la clase A?"
+           },
+           {
+            "tp": "b",
+            "txt": "¿Cuántas figuras hay en total en la clase B?"
+           }
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           9,
+           3,
+           8,
+           7,
+           5,
+           4,
+           6,
+           5,
+           1,
+           28,
+           19
+          ],
+          "elegir": [
+           "Clase A"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "6e987630071dea99"
+  ],
+  "svgSolucion": [
+   "065de268b924995f"
+  ]
+ },
+ "3.º cuenta y anota de dos clases con la moda": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Cuenta y anota",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "estadistica.recuento",
+       "tipoVersion": 1,
+       "params": {
+        "moda": true,
+        "grupos": "dos",
+        "rango": 10
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Haz palotes para contar las figuras de cada clase, escribe los números y contesta.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "v": [
+           9,
+           8,
+           5,
+           6
+          ],
+          "w": [
+           3,
+           7,
+           4,
+           5
+          ],
+          "grupos": 2,
+          "items": [
+           [
+            "c",
+            -0.007,
+            -0.117
+           ],
+           [
+            "t",
+            -0.169,
+            -0.028
+           ],
+           [
+            "t",
+            -0.029,
+            0.147
+           ],
+           [
+            "s",
+            0.18,
+            -0.013
+           ],
+           [
+            "c",
+            -0.072,
+            0.097
+           ],
+           [
+            "s",
+            0.056,
+            0.039
+           ],
+           [
+            "c",
+            0.023,
+            -0.094
+           ],
+           [
+            "c",
+            -0.189,
+            -0.058
+           ],
+           [
+            "s",
+            -0.07,
+            -0.147
+           ],
+           [
+            "t",
+            -0.078,
+            -0.034
+           ],
+           [
+            "q",
+            0.193,
+            0.016
+           ],
+           [
+            "q",
+            0.016,
+            0.129
+           ],
+           [
+            "s",
+            0.136,
+            0.027
+           ],
+           [
+            "s",
+            -0.051,
+            0.089
+           ],
+           [
+            "q",
+            0.078,
+            -0.121
+           ],
+           [
+            "c",
+            0.15,
+            -0.052
+           ],
+           [
+            "c",
+            0.128,
+            0.115
+           ],
+           [
+            "c",
+            -0.196,
+            0.07
+           ],
+           [
+            "q",
+            0.091,
+            -0.017
+           ],
+           [
+            "t",
+            -0.127,
+            0.125
+           ],
+           [
+            "c",
+            -0.138,
+            0.076
+           ],
+           [
+            "s",
+            0.137,
+            -0.049
+           ],
+           [
+            "s",
+            -0.079,
+            -0.079
+           ],
+           [
+            "s",
+            0.009,
+            0.012
+           ],
+           [
+            "t",
+            -0.025,
+            -0.001
+           ],
+           [
+            "c",
+            0.018,
+            -0.052
+           ],
+           [
+            "t",
+            0.148,
+            -0.042
+           ],
+           [
+            "q",
+            -0.049,
+            0.055
+           ]
+          ],
+          "items2": [
+           [
+            "t",
+            0.013,
+            0.136
+           ],
+           [
+            "c",
+            0.066,
+            -0.027
+           ],
+           [
+            "q",
+            -0.086,
+            -0.145
+           ],
+           [
+            "q",
+            0.141,
+            -0.063
+           ],
+           [
+            "t",
+            -0.145,
+            0.137
+           ],
+           [
+            "s",
+            -0.078,
+            0.106
+           ],
+           [
+            "s",
+            -0.126,
+            -0.132
+           ],
+           [
+            "s",
+            -0.008,
+            0.112
+           ],
+           [
+            "s",
+            -0.01,
+            0.13
+           ],
+           [
+            "q",
+            0.136,
+            -0.12
+           ],
+           [
+            "q",
+            0.094,
+            -0.1
+           ],
+           [
+            "t",
+            -0.012,
+            0.01
+           ],
+           [
+            "c",
+            -0.157,
+            0.123
+           ],
+           [
+            "s",
+            -0.095,
+            0.13
+           ],
+           [
+            "s",
+            -0.072,
+            -0.01
+           ],
+           [
+            "s",
+            -0.06,
+            -0.101
+           ],
+           [
+            "t",
+            0.151,
+            -0.094
+           ],
+           [
+            "t",
+            -0.082,
+            -0.109
+           ],
+           [
+            "c",
+            -0.086,
+            -0.129
+           ]
+          ],
+          "preguntas": [
+           {
+            "tp": "c",
+            "txt": "¿En qué clase hay más triángulos?",
+            "op": [
+             "Clase A",
+             "Clase B"
+            ]
+           },
+           {
+            "tp": "b",
+            "txt": "¿Cuántos cuadrados más hay en la clase A que en la B?"
+           },
+           {
+            "tp": "c",
+            "txt": "¿Cuál es la moda de la clase A?",
+            "op": [
+             "círculos",
+             "estrellas",
+             "cuadrados",
+             "triángulos"
+            ]
+           },
+           {
+            "tp": "c",
+            "txt": "¿Cuál es la moda de la clase B?",
+            "op": [
+             "círculos",
+             "estrellas",
+             "cuadrados",
+             "triángulos"
+            ]
+           }
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           9,
+           3,
+           8,
+           7,
+           5,
+           4,
+           6,
+           5,
+           1
+          ],
+          "elegir": [
+           "Clase A",
+           "círculos",
+           "estrellas"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "1a8f480569ab972f"
+  ],
+  "svgSolucion": [
+   "2da62840ef34ddfb"
   ]
  },
  "3.º divisiones con la caja (2 cifras, exactas)": {

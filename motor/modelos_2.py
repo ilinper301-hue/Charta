@@ -137,6 +137,21 @@ OPCIONES_2.update({
     "medida.dinero": {"valores": {"modo": [{"valor": "mixto", "etiqueta": "Euros y céntimos juntos (2,70 €)", "curso": 3}]}},
 })
 
+# 3.º · lote 7: geometría y estadística (opciones y valores solo desde 3.º)
+MODA_3 = {"id": "moda", "etiqueta": "Con la pregunta de la moda (¿cuál es la moda?)", "tipo": "si_no", "defecto": False, "curso": 3}
+GRUPOS_3 = {"id": "grupos", "etiqueta": "Datos", "tipo": "opcion", "defecto": None, "curso": 3,
+            "valores": [{"valor": None, "etiqueta": "De un grupo"}, {"valor": "dos", "etiqueta": "De dos clases (comparar)"}]}
+OPCIONES_2.update({
+    "geometria.lineas": {"valores": {"modo": [{"valor": "paralelas", "etiqueta": "Paralelas, perpendiculares u oblicuas", "curso": 3},
+                                              {"valor": "rectas", "etiqueta": "Recta, semirrecta o segmento", "curso": 3}]}},
+    "geometria.cuerpos": {"nuevas": [{"id": "modo", "etiqueta": "Tarea", "tipo": "opcion", "defecto": None, "curso": 3,
+                                      "valores": [{"valor": None, "etiqueta": "Reconocer el cuerpo"},
+                                                  {"valor": "elementos", "etiqueta": "Caras, aristas y vértices"}]}]},
+    "estadistica.pictograma": {"nuevas": [MODA_3, GRUPOS_3]},
+    "estadistica.recuento": {"nuevas": [MODA_3, GRUPOS_3]},
+})
+OPCIONES_2["estadistica.barras"]["nuevas"] += [MODA_3, GRUPOS_3]
+
 
 def opciones_2(m):
     """Opciones del modelo (dict del catálogo) con las de tres cifras añadidas (lista nueva; m no cambia)."""
