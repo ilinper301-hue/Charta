@@ -5,9 +5,11 @@
 // Opciones: tablas (None = 2, 5 y 10; "2", "3", "4", "5", "10"; "todas") · modo (None = Resultado, "hueco", "orden").
 // En una operación al menos un factor es de la tabla y el otro va de 1 a 10. Sin repetir operaciones (salvo en "orden").
 // Resultado y hueco: rejilla de 3 columnas × 8 filas (24; media 12). Con una sola tabla hay solo 19–20 operaciones distintas: 6 filas (18; media 9).
+// Cantidad (rejilla elástica, solo en Resultado y Hueco; «Orden» no cambia): «Más grandes» = 24 y 12 (18 y 9 con una tabla); «Más ejercicios» = las filas de 3 que caben con tarjetas ≥ 54 pt (33 y 15; con una tabla, las operaciones distintas que hay).
 // Orden: una columna por tabla (hasta 3; con «todas» se sortean 3 de las 5), de ×1 a ×10; la media página, de ×1 a ×5.
 import { registrar } from "../nucleo/tipos.js";
 import { TOP, T, B, W, M } from "../render/papel.js";
+import { cuantos, pintarEl, MIN_OP } from "./_elastica.js";
 import { POR, tablasDe } from "./_multiplicar.js";
 
 /** Parejas ordenadas (a, b) con al menos un factor de las tablas elegidas y los dos entre 1 y 10. */
@@ -19,9 +21,10 @@ export function parejas(tablas) {
 
 export default registrar({
   id: "multiplicar.tablas",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    const media = tamano === "media", tablas = tablasDe(params), modo = params.modo ?? null;
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const media = ctx.tamano === "media", tablas = tablasDe(params), modo = params.modo ?? null;
     if (modo === "orden") {
       const elegidas = tablas.length > 3 ? azar.muestra(tablas, 3).sort((u, v) => u - v) : tablas;
       const hasta = media ? 5 : 10;
@@ -32,8 +35,8 @@ export default registrar({
         }))),
       };
     }
-    const pool = parejas(tablas), filas = pool.length >= 24 ? 8 : 6, cnt = (media ? Math.floor(filas / 2) : filas) * 3;
-    const ejercicios = azar.muestra(pool.filter(([a, b]) => a !== 1 || b !== 1), cnt).map(([a, b]) => {
+    const pool = parejas(tablas).filter(([a, b]) => a !== 1 || b !== 1), filas = pool.length >= 24 ? 8 : 6, cnt = cuantos(ctx, 3, MIN_OP, [filas * 3, Math.floor(filas / 2) * 3], pool.length);
+    const ejercicios = azar.muestra(pool, cnt).map(([a, b]) => {
       const falta = modo === "hueco" ? azar.entero(0, 1) : null;
       return { datos: { a, b, falta }, solucion: { huecos: [falta === null ? a * b : falta === 0 ? a : b] } };
     });
@@ -51,9 +54,7 @@ export default registrar({
       return [T(`${a} ${POR} ${b} =`, 19), B(48, 38, h)];
     };
     if (!orden) {
-      // filas totales: 24 operaciones → 8 filas; 18 → 6 (la media página dibuja la mitad)
-      const filas = (act.tamano === "media" ? es.length * 2 : es.length) / 3;
-      p.pintar(TOP, 3, filas, es.map(items), es.map((e) => e.id));
+      pintarEl(p, 3, es.map(items), es.map((e) => e.id), es.length / 3);   // rejilla elástica: la operación crece con la tarjeta
       return;
     }
     // La tabla en orden: una columna por tabla, 10 filas (la media, 5), centradas

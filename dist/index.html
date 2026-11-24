@@ -11470,14 +11470,18 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get MESES() { 
 // datos:    { niv: [a, b, c] (tres niveles distintos de 1–5), asc (true: de menos a más) }
 // solucion: { huecos: [puesto de cada vaso (1–3) según el orden pedido] }
 // Sin opciones. Alterna «de menos a más» / «de más a menos» (empieza por menos a más). Completa: 8 tarjetas (2 × 4); media: 4.
+// Cantidad (rejilla elástica, 2 columnas): «Más grandes» = 8 y 4 (tarjetas que llenan el panel; el vaso crece de 66 a 86 pt); «Más ejercicios» = las filas que caben con tarjetas ≥ 132 pt (10 y 4).
 const { registrar } = __req("nucleo/tipos.js");
-const { TOP } = __req("render/papel.js");
+const { TOP, cuantosRejilla } = __req("render/papel.js");
+const MIN_ALTO = 132;   // alto mínimo de tarjeta con «Más ejercicios» (casilla de 34, vaso de 52 y etiqueta)
+
 const __default = registrar({
   id: "medida.capacidad",
-  version: 1,
-  generar(params, azar, { tamano }) {
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
     const ejercicios = [];
-    for (let i = 0; i < (tamano === "media" ? 4 : 8); i++) {
+    for (let i = 0, cnt = cuantosRejilla(ctx, 2, MIN_ALTO, [8, 4]); i < cnt; i++) {
       const niv = azar.muestra([1, 2, 3, 4, 5], 3), asc = i % 2 === 0;
       const orden = [...niv].sort((a, b) => (asc ? a - b : b - a));
       ejercicios.push({ datos: { niv, asc }, solucion: { huecos: niv.map((v) => orden.indexOf(v) + 1) } });
@@ -11485,17 +11489,18 @@ const __default = registrar({
     return { enunciado: "Ordena los vasos según el líquido que tienen, como dice cada casilla.", ejercicios };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 2, 4);
+    const { cel, cw, ch } = p.rejilla(TOP, 2, Math.ceil(act.ejercicios.length / 2));
+    const gh = Math.max(52, Math.min(86, ch - 82)), s = gh / 66;   // el vaso crece con la tarjeta (hasta ×1,3)
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], { niv, asc } = e.datos;
       p.marco(x, y, cw, ch, i);
-      p.text(x + 34, y + ch - 21, asc ? "DE MENOS A MÁS" : "DE MÁS A MENOS", 9.5, { f: "PM", gris: 0.3 });
-      const gw = 40, gh = 66, g = 30, gx0 = x + (cw - (3 * gw + 2 * g)) / 2;
+      p.text(x + 34, y + ch - 20, asc ? "DE MENOS A MÁS" : "DE MÁS A MENOS", 9.5, { f: "PM", gris: 0.3 });
+      const gw = 40 * s, g = 30 * s, gx0 = x + (cw - (3 * gw + 2 * g)) / 2;
       niv.forEach((lv, j) => {
-        const gx = gx0 + j * (gw + g), gy = y + 64;
+        const gx = gx0 + j * (gw + g), gy = y + 56;
         p.rrect(gx + 0.8, gy + 0.8, gw - 1.6, gh * 0.18 * lv, 0, { fill: 0.72, stroke: null });
         p.path([["M", gx, gy + gh], ["L", gx, gy], ["L", gx + gw, gy], ["L", gx + gw, gy + gh]], { lw: 1.9 });
-        p.caja(gx, y + 16, gw, 34, null, 22, e.solucion.huecos[j]);
+        p.caja(gx + gw / 2 - 20, y + 14, 40, 34, null, 22, e.solucion.huecos[j]);
       });
     }));
   },
@@ -11636,8 +11641,10 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get valores() 
 // 2.º (lote 3c, valores con `curso`):
 //   "regla" → datos { nombre, cm } (tira de 2–10 cm REALES, dibujada con Papel.mm(); sin repetir longitudes) · solucion { huecos: [cm] }
 //   "mcm"   → datos { objeto } · solucion { huecos: [], unidad: "m" | "cm" } (se rodea la unidad; en la solución, en rojo). Completa: 12 (2 × 6); media: 6.
+// Cantidad (rejilla elástica, solo en "regla" y "mcm"; medir y comparar con cubitos ya están en su mínimo y no cambian): «Más grandes» = los de siempre (tarjetas que llenan el panel);
+//   «Más ejercicios» = las filas que caben: regla (tarjetas ≥ 70 pt, la tira sigue midiendo lo mismo en mm reales) 6/3 → 8/4; mcm (tarjetas ≥ 54 pt) 12/6 → 22/10.
 const { registrar } = __req("nucleo/tipos.js");
-const { TOP, W, M } = __req("render/papel.js");
+const { TOP, W, M, cuantosRejilla } = __req("render/papel.js");
 const { chips } = __req("tipos/medida.tiempo.js");
 /** ¿m o cm? Objetos sin duda posible para un niño de 2.º. */
 const UNIDADES = {
@@ -11649,14 +11656,16 @@ const UNIDADES = {
 const ART = { cinta: "La", tira: "La", cuerda: "La", pajita: "La", regla: "La", hoja: "La" };
 const ROJO = "#C62828";
 
-function generar2(modo, azar, tamano) {
+const MIN_REGLA = 70, MIN_MCM = 54;   // alto mínimo de tarjeta con «Más ejercicios»
+
+function generar2(modo, azar, ctx) {
   if (modo === "regla") {
-    const n = tamano === "media" ? 3 : 6, nombres = azar.barajar(["cinta", "tira", "cuerda", "pajita", "palo", "lazo", "cordón", "lápiz"]);
+    const n = Math.min(8, cuantosRejilla(ctx, 1, MIN_REGLA, [6, 3])), nombres = azar.barajar(["cinta", "tira", "cuerda", "pajita", "palo", "lazo", "cordón", "lápiz"]);
     const cms = azar.muestra([2, 3, 4, 5, 6, 7, 8, 9, 10], n);
     return { enunciado: "Mide cada tira con tu regla y escribe cuántos centímetros mide.\nPon el 0 de la regla al principio de la tira.",
              ejercicios: cms.map((cm, i) => ({ datos: { nombre: nombres[i], cm }, solucion: { huecos: [cm] } })) };
   }
-  const n = tamano === "media" ? 6 : 12, nm = azar.entero(Math.floor(n * 0.4), Math.ceil(n * 0.6));
+  const n = Math.min(26, cuantosRejilla(ctx, 2, MIN_MCM, [12, 6])), nm = azar.entero(Math.max(Math.floor(n * 0.4), n - UNIDADES.cm.length), Math.min(Math.ceil(n * 0.6), UNIDADES.m.length));
   const lista = azar.barajar([...azar.muestra(UNIDADES.m, nm).map((o) => [o, "m"]), ...azar.muestra(UNIDADES.cm, n - nm).map((o) => [o, "cm"])]);
   return { enunciado: "¿Lo medirías en metros (m) o en centímetros (cm)? Rodea.",
            ejercicios: lista.map(([objeto, unidad]) => ({ datos: { objeto }, solucion: { huecos: [], unidad } })) };
@@ -11664,9 +11673,11 @@ function generar2(modo, azar, tamano) {
 
 const __default = registrar({
   id: "medida.longitud",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    if (params.modo === "regla" || params.modo === "mcm") return generar2(params.modo, azar, tamano);
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const { tamano } = ctx;
+    if (params.modo === "regla" || params.modo === "mcm") return generar2(params.modo, azar, ctx);
     const compara = params.modo === "compara", nombres = azar.barajar(["lápiz", "cinta", "tira", "palo", "cuerda", "pajita", "regla", "hoja"]), ejercicios = [];
     for (let i = 0; i < (tamano === "media" ? 3 : 6); i++) {
       const n1 = azar.entero(2, 12), n2 = azar.elegir([2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].filter((v) => v !== n1));
@@ -11701,9 +11712,9 @@ const __default = registrar({
 
 /** Tiras de longitud real: 1 cm en el papel impreso al 100 % = 1 cm de la regla. */
 function dibujarRegla(p, act) {
-  const top = TOP, rows = 6, GY = 10, rh = (top - M - (rows - 1) * GY) / rows, gx = M + 22;
+  const { cel, ch: rh } = p.rejilla(TOP, 1, act.ejercicios.length), gx = M + 22;
   act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
-    const y = top - (i + 1) * rh - i * GY, { nombre, cm } = e.datos, alto = p.mm(6);
+    const y = cel[i][1], { nombre, cm } = e.datos, alto = p.mm(6);
     p.marco(M, y, W - 2 * M, rh);
     p.text(gx, y + rh - 26, `${ART[nombre] ?? "El"} ${nombre}`, 12, { f: "PM" });
     const by = y + rh / 2 - alto / 2 - 8;
@@ -11715,7 +11726,7 @@ function dibujarRegla(p, act) {
 
 /** ¿m o cm?: objeto a la izquierda y las dos unidades para rodear a la derecha. */
 function dibujarMcm(p, act) {
-  const { cel, cw, ch } = p.celdas(TOP, 2, 6);
+  const { cel, cw, ch } = p.rejilla(TOP, 2, Math.ceil(act.ejercicios.length / 2));
   act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
     const [x, y] = cel[i];
     p.marco(x, y, cw, ch, i);
@@ -11735,16 +11746,20 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get UNIDADES()
 // solucion: { huecos: ["<" | ">" | "="] } (compara el plato izquierdo con el derecho; 1 kg = 2 medios)
 // Sin opciones. Cada plato lleva de 1 a 4 pesas (de 1 a 8 medios kilos). Un tercio de las balanzas, aproximadamente, está equilibrado (con pesas distintas).
 // Completa: 8 balanzas (2 × 4); media: 4. La balanza se dibuja nivelada: la respuesta no se ve.
+// Cantidad (rejilla elástica, 2 columnas): «Más grandes» = 8 y 4 (tarjetas que llenan el panel; las pesas crecen hasta ×1,3); «Más ejercicios» = las filas que caben con tarjetas ≥ 100 pt (12 y 6).
 const { registrar } = __req("nucleo/tipos.js");
-const { TOP } = __req("render/papel.js");
+const { TOP, cuantosRejilla } = __req("render/papel.js");
+const MIN_ALTO = 100;   // alto mínimo de tarjeta con «Más ejercicios» (cuatro pesas apiladas y la casilla)
+
 const medios = ([k, m]) => 2 * k + m;
 const plato = (azar) => { for (;;) { const k = azar.entero(0, 3), m = azar.entero(0, 3); if (k + m >= 1 && k + m <= 4) return [k, m]; } };
 
 const __default = registrar({
   id: "medida.masa",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    const cnt = tamano === "media" ? 4 : 8, vistos = new Set(), ejercicios = [];
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const cnt = cuantosRejilla(ctx, 2, MIN_ALTO, [8, 4]), vistos = new Set(), ejercicios = [];
     for (let i = 0; i < cnt; i++) {
       const igual = i % 3 === 2;
       let izq, der, ok = false;
@@ -11761,7 +11776,7 @@ const __default = registrar({
     return { enunciado: "Compara lo que pesan los dos platos y escribe <, > o =.\n1 kg pesa lo mismo que dos pesas de ½ kg.", ejercicios };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 2, 4);
+    const { cel, cw, ch } = p.rejilla(TOP, 2, Math.ceil(act.ejercicios.length / 2)), esc = Math.max(1, Math.min(1.3, ch / 140));   // las pesas crecen con la tarjeta
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], { izq, der } = e.datos;
       p.marco(x, y, cw, ch, i);
@@ -11773,9 +11788,9 @@ const __default = registrar({
       [izq, der].forEach(([k, m], s) => {
         let yy = base + 1.5;
         for (let j = 0; j < k + m; j++) {   // primero las de 1 kg (abajo) y encima las de ½ kg
-          const grande = j < k, w = grande ? 40 : 30, h = grande ? 14 : 11;
+          const grande = j < k, w = (grande ? 40 : 30) * esc, h = (grande ? 14 : 11) * esc;
           p.rrect(cx[s] - w / 2, yy, w, h, 2, { lw: 1.3 });
-          p.text(cx[s], yy + h / 2 - 3, grande ? "1 kg" : "½ kg", grande ? 9 : 8, { f: "PB", anchor: "middle" });
+          p.text(cx[s], yy + h / 2 - 3 * esc, grande ? "1 kg" : "½ kg", (grande ? 9 : 8) * esc, { f: "PB", anchor: "middle" });
           yy += h + 1;
         }
       });
@@ -11793,28 +11808,32 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() 
 // Opciones: modo null (total de la compra) | "cambio" (la vuelta de un billete de 5, 10 o 20 €); rango 10 | 20 (tope de la suma / billete).
 // 2.º (rango 100): productos más caros (hasta 60 €), total hasta 100 € y billetes de 20, 50 y 100 €.
 // Completa: 10 tarjetas (2 × 5); media: 4 (2 filas).
+// Cantidad (rejilla elástica, 2 columnas): «Más grandes» = 10 y 4 (tarjetas que llenan el panel; las etiquetas crecen hasta ×1,3); «Más ejercicios» = las filas que caben con tarjetas ≥ 100 pt (12 y 6).
 const { registrar } = __req("nucleo/tipos.js");
-const { TOP, T, B } = __req("render/papel.js");
+const { TOP, T, B, cuantosRejilla } = __req("render/papel.js");
 const { itemDinero } = __req("tipos/medida.dinero.js");
 /** 2.º (lote 3, rango 100): precios en euros enteros hasta 100 €; la vuelta de billetes de 20, 50 y 100 €. */
 const PRODUCTOS_2 = { estuche: [5, 12], camiseta: [8, 16], muñeca: [10, 20], libro: [9, 18], balón: [12, 25], "juego de mesa": [15, 30], mochila: [18, 35], zapatillas: [25, 45], patinete: [35, 60], cometa: [6, 14] };
+const MIN_ALTO = 100;   // alto mínimo de tarjeta con «Más ejercicios» (etiqueta de 50 y la línea de la respuesta)
+
 const PRODUCTOS = { "lápiz": [1, 3], goma: [1, 2], sacapuntas: [1, 2], regla: [2, 3], pegamento: [2, 4], cuaderno: [3, 5], pelota: [4, 8], libro: [5, 9], mochila: [8, 12] };
 
 /** _etiqueta(): rótulo con el nombre y el precio. */
-function etiqueta(p, x, y, nom, precio, w = 104, h = 50) {
+function etiqueta(p, x, y, nom, precio, s = 1, w = 104 * s, h = 50 * s) {
   p.rrect(x, y, w, h, 8, { lw: 1.5 });
-  p.text(x + w / 2, y + h - 18, nom, 12, { f: "PM", anchor: "middle" });
-  p.text(x + w / 2, y + 9, `${precio} €`, 16, { f: "PB", anchor: "middle" });
+  p.text(x + w / 2, y + h - 18 * s, nom, 12 * s, { f: "PM", anchor: "middle" });
+  p.text(x + w / 2, y + 9 * s, `${precio} €`, 16 * s, { f: "PB", anchor: "middle" });
 }
 
 const __default = registrar({
   id: "medida.precios",
-  version: 1,
-  generar(params, azar, { tamano }) {
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
     const R = params.rango ?? 20;
     if (R < 10) throw new Error("Este modelo necesita un rango máximo de al menos 10.");
     const dos = R > 20, P = dos ? PRODUCTOS_2 : PRODUCTOS, pagos = dos ? [20, 50, 100] : [5, 10, 20];
-    const cap = dos ? R : Math.min(R, 20), cambio = params.modo === "cambio", cnt = tamano === "media" ? 4 : 10, nombres = Object.keys(P), ejercicios = [];
+    const cap = dos ? R : Math.min(R, 20), cambio = params.modo === "cambio", cnt = cuantosRejilla(ctx, 2, MIN_ALTO, [10, 4]), nombres = Object.keys(P), ejercicios = [];
     for (let i = 0; i < cnt; i++) {
       if (cambio) {
         const pago = azar.elegir(pagos.filter((v) => v <= cap));
@@ -11834,19 +11853,19 @@ const __default = registrar({
     return { enunciado: cambio ? "Calcula cuánto dinero te devuelven y escríbelo." : "Calcula cuánto cuesta lo que compras y escribe el total.", ejercicios };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 2, 5);
+    const { cel, cw, ch } = p.rejilla(TOP, 2, Math.ceil(act.ejercicios.length / 2)), s = Math.max(1, Math.min(1.3, (ch - 56) / 62)), ew = 104 * s, eh = 50 * s;   // las etiquetas crecen con la tarjeta; debajo, la línea de la respuesta (≈ 52)
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], d = e.datos, sol = e.solucion.huecos[0];
       p.marco(x, y, cw, ch, i);
       if (d.pago !== undefined) {
-        etiqueta(p, x + 26, y + ch - 66, d.nom, d.precio);
-        p.text(x + 142, y + ch - 36, "Pago con", 12, { f: "PM" });
-        itemDinero(p, "b", d.pago, x + 195, y + ch - 56, "€");
+        etiqueta(p, x + 26, y + ch - 14 - eh, d.nom, d.precio, s);
+        p.text(x + 38 + ew, y + ch - 14 - eh / 2 - 4, "Pago con", 12, { f: "PM" });
+        itemDinero(p, "b", d.pago, x + 91 + ew, y + ch - 14 - eh / 2, "€");
         p.linea(x, y + 8, cw, 40, [T("Me devuelven", 13, "PM"), B(46, 34, sol), T("€", 14, "PM")], 8);
       } else {
-        etiqueta(p, x + 20, y + ch - 66, d.a[0], d.a[1]);
-        etiqueta(p, x + cw - 124, y + ch - 66, d.b[0], d.b[1]);
-        p.text(x + cw / 2, y + ch - 50, "+", 22, { f: "PB", anchor: "middle" });
+        etiqueta(p, x + 20, y + ch - 14 - eh, d.a[0], d.a[1], s);
+        etiqueta(p, x + cw - 20 - ew, y + ch - 14 - eh, d.b[0], d.b[1], s);
+        p.text(x + cw / 2, y + ch - 14 - eh / 2 - 8, "+", 22, { f: "PB", anchor: "middle" });
         p.linea(x, y + 8, cw, 40, [T("Cuesta en total", 13, "PM"), B(46, 34, sol), T("€", 14, "PM")], 8);
       }
     }));
@@ -11966,13 +11985,17 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() 
 //           2.º · equivalencias → { tipo: "equiv", a: [n, unidad], b: unidad } («1 hora = ▢ minutos») · huecos: [n']
 //           2.º · horas → { tipo: "hora", h, m (0 | 30), k (1–3), dentro (bool) } (sin pasar de las 12) · huecos: [h', "00" | "30"]
 // Opción modo: null (días de la semana) | "meses" · 2.º: "equivalencias" (12; media 6) | "horas" (antes y después: 8; media 4). Días: 6 filas (media 3). Meses: ordenar los 12 + 6 preguntas «después de…» (media: solo ordenar).
+// Cantidad (rejilla elástica; «meses» no cambia: es un bloque fijo): «Más grandes» = los de siempre (tarjetas que llenan el panel; la operación y el reloj crecen hasta ×1,3);
+//   «Más ejercicios» = las filas que caben: días (tarjetas ≥ 80 pt) 6/3 → 7/4; equivalencias (≥ 54 pt) 12/6 → 22/10; horas (≥ 132 pt) 8/4 → 10/4.
 const { registrar } = __req("nucleo/tipos.js");
-const { TOP, W, M, T, B } = __req("render/papel.js");
+const { TOP, W, M, T, B, cuantosRejilla } = __req("render/papel.js");
+const { cuantos, pintarEl, MIN_OP } = __req("tipos/_elastica.js");
 const { dibujarReloj } = __req("tipos/medida.reloj.js");
 const { MESES } = __req("tipos/medida.calendario.js");
 /** Equivalencias de 2.º: [unidad mayor (sing., pl.), unidad menor (sing., pl.), cuántas, multiplicadores]. */
 const EQUIV = [[["hora", "horas"], ["minuto", "minutos"], 60, [1, 2, 3]], [["día", "días"], ["hora", "horas"], 24, [1, 2]],
   [["semana", "semanas"], ["día", "días"], 7, [1, 2, 3, 4]], [["año", "años"], ["mes", "meses"], 12, [1, 2]]];
+const MIN_DIAS = 80, MIN_HORAS = 132;   // alto mínimo de tarjeta con «Más ejercicios»
 const unidad = ([s, pl], n) => (n === 1 ? s : pl);
 /** Todas las equivalencias: «k mayor = ▢ menor» y al revés; más «media hora = 30 minutos». */
 function equivalencias() {
@@ -11988,7 +12011,7 @@ function equivalencias() {
 function generar2(modo, azar, cnt) {
   if (modo === "equivalencias") {
     const todas = equivalencias(), base = todas.filter((e) => e.base), resto = todas.filter((e) => !e.base);
-    const nb = cnt >= 12 ? 4 : 2, sel = azar.barajar([...azar.muestra(base, nb), ...azar.muestra(resto, cnt - nb)]);
+    const nb = cnt > 12 ? Math.max(4, cnt - resto.length) : cnt >= 12 ? 4 : 2, sel = azar.barajar([...azar.muestra(base, nb), ...azar.muestra(resto, cnt - nb)]);
     return { enunciado: "Escribe el número que falta.",
       ejercicios: sel.map(({ a, b, sol }) => ({ datos: { tipo: "equiv", a, b }, solucion: { huecos: [sol] } })) };
   }
@@ -12025,10 +12048,12 @@ function chips2(p, cx, y, opts, maxw, fs = 10.5) {
 
 const __default = registrar({
   id: "medida.tiempo",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    if (params.modo === "equivalencias") return generar2(params.modo, azar, tamano === "media" ? 6 : 12);
-    if (params.modo === "horas") return generar2(params.modo, azar, tamano === "media" ? 4 : 8);
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const { tamano } = ctx;
+    if (params.modo === "equivalencias") return generar2(params.modo, azar, cuantos(ctx, 2, MIN_OP, [12, 6], equivalencias().length));
+    if (params.modo === "horas") return generar2(params.modo, azar, cuantosRejilla(ctx, 2, MIN_HORAS, [8, 4]));
     if (params.modo === "meses") {
       const orden = azar.barajar([...Array(12).keys()]);
       const ejercicios = [{ datos: { tipo: "orden", orden }, solucion: { huecos: orden.map((m) => m + 1) } }];
@@ -12042,7 +12067,7 @@ const __default = registrar({
       return { enunciado: "Escribe el orden de los meses y rodea el mes que viene después.", ejercicios };
     }
     const ejercicios = [];
-    for (let i = 0; i < (tamano === "media" ? 3 : 6); i++) {
+    for (let i = 0, cnt = cuantosRejilla(ctx, 1, MIN_DIAS, [6, 3]); i < cnt; i++) {
       let ds;
       do ds = azar.barajar([0, 1, 2, 3, 4, 5, 6]); while (ds.every((d, k) => d === k));
       ejercicios.push({ datos: { orden: ds }, solucion: { huecos: ds.map((d) => d + 1) } });
@@ -12052,18 +12077,13 @@ const __default = registrar({
   dibujar(p, act) {
     const top = TOP, es = act.ejercicios, t0 = es[0].datos.tipo;
     if (t0 === "equiv") {
-      const { cel, cw, ch } = p.celdas(top, 2, 6);
-      es.forEach((e, i) => p.ejercicio(e.id, () => {
-        const [x, y] = cel[i], { a, b } = e.datos;
-        p.marco(x, y, cw, ch);
-        p.linea(x, y, cw, ch, [T(`${a[0]} ${a[1]} =`, 16, "PM"), B(58, 36, e.solucion.huecos[0]), T(b, 16, "PM")], 8);
-      }));
+      pintarEl(p, 2, es.map((e) => [T(`${e.datos.a[0]} ${e.datos.a[1]} =`, 16, "PM"), B(58, 36, e.solucion.huecos[0]), T(e.datos.b, 16, "PM")]), es.map((e) => e.id), es.length / 2);
       return;
     }
     if (t0 === "hora") {
-      const { cel, cw, ch } = p.celdas(top, 2, 4);
+      const { cel, cw, ch } = p.rejilla(top, 2, Math.ceil(es.length / 2));
       es.forEach((e, i) => p.ejercicio(e.id, () => {
-        const [x, y] = cel[i], { h, m, k, dentro } = e.datos, [sh, sm] = e.solucion.huecos, r = Math.min(46, ch * 0.3);
+        const [x, y] = cel[i], { h, m, k, dentro } = e.datos, [sh, sm] = e.solucion.huecos, r = Math.min(60, ch * 0.3);   // el reloj crece con la tarjeta (hasta ×1,3)
         p.marco(x, y, cw, ch, i);
         dibujarReloj(p, x + 18 + r, y + ch / 2 - 6, r, h, m);
         const xt = x + 30 + 2 * r, wt = cw - (xt - x) - 8;
@@ -12094,14 +12114,15 @@ const __default = registrar({
       }
       return;
     }
-    const rows = 6, GY = 10, rh = (top - M - (rows - 1) * GY) / rows, colw = (W - 2 * M - 20) / 7;
+    const { cel, ch: rh } = p.rejilla(top, 1, es.length), colw = (W - 2 * M - 20) / 7;
+    const f = Math.max(1, Math.min(1.25, (rh - 30) / 80)), bh = 36 * f, off = (rh - bh - 22 * f) / 2;   // casilla y nombre del día, centrados en la tarjeta (crecen hasta ×1,25)
     es.forEach((e, i) => p.ejercicio(e.id, () => {
-      const y = top - (i + 1) * rh - i * GY;
+      const y = cel[i][1];
       p.marco(M, y, W - 2 * M, rh);
       e.datos.orden.forEach((d, j) => {
         const x = M + 10 + j * colw;
-        p.text(x + colw / 2, y + rh - 32, DIAS[d], 12.5, { f: "PM", anchor: "middle" });
-        p.caja(x + colw / 2 - 20, y + 16, 40, 36, null, 22, e.solucion.huecos[j]);
+        p.text(x + colw / 2, y + off + bh + 9 * f, DIAS[d], 12.5 * f, { f: "PM", anchor: "middle" });
+        p.caja(x + colw / 2 - 20 * f, y + off, 40 * f, bh, null, 22, e.solucion.huecos[j]);
       });
     }));
   },
@@ -12177,17 +12198,21 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() 
 //           modo "mult" → huecos [k, n, k·n]
 // Opción modo: None = «Suma y multiplicación» · "mult" = «Solo la multiplicación». `tablas` no se usa (n ≤ 5).
 // Completa: 6 tarjetas (una por fila; así la media página son 3); sin repetir (k, n).
+// Cantidad (rejilla elástica, 1 columna): «Más grandes» = 6 y 3 (tarjetas que llenan el panel); «Más ejercicios» = las filas que caben con tarjetas ≥ 80 pt (7 y 4).
 const { registrar } = __req("nucleo/tipos.js");
-const { TOP, T, B } = __req("render/papel.js");
+const { TOP, T, B, cuantosRejilla } = __req("render/papel.js");
 const { POR, puntosDado } = __req("tipos/_multiplicar.js");
+const MIN_ALTO = 80;   // alto mínimo de tarjeta con «Más ejercicios» (óvalos de 66 pt)
+
 const PARES = [];
 for (let k = 2; k <= 5; k++) for (let n = 2; n <= 5; n++) PARES.push([k, n]);
 
 const __default = registrar({
   id: "multiplicar.grupos",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    const cnt = tamano === "media" ? 3 : 6, mult = params.modo === "mult";
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const cnt = cuantosRejilla(ctx, 1, MIN_ALTO, [6, 3]), mult = params.modo === "mult";
     const ejercicios = azar.muestra(PARES, cnt).map(([k, n]) => ({
       datos: { k, n },
       solucion: { huecos: mult ? [k, n, k * n] : [...Array(k).fill(n), k * n, k, n, k * n] },
@@ -12199,7 +12224,7 @@ const __default = registrar({
     };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 1, 6), mult = act.params.modo === "mult";
+    const { cel, cw, ch } = p.rejilla(TOP, 1, act.ejercicios.length), mult = act.params.modo === "mult";
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], { k, n } = e.datos, h = e.solucion.huecos;
       p.marco(x, y, cw, ch, i);
@@ -12368,9 +12393,11 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() 
 // Opciones: tablas (None = 2, 5 y 10; "2", "3", "4", "5", "10"; "todas") · modo (None = Resultado, "hueco", "orden").
 // En una operación al menos un factor es de la tabla y el otro va de 1 a 10. Sin repetir operaciones (salvo en "orden").
 // Resultado y hueco: rejilla de 3 columnas × 8 filas (24; media 12). Con una sola tabla hay solo 19–20 operaciones distintas: 6 filas (18; media 9).
+// Cantidad (rejilla elástica, solo en Resultado y Hueco; «Orden» no cambia): «Más grandes» = 24 y 12 (18 y 9 con una tabla); «Más ejercicios» = las filas de 3 que caben con tarjetas ≥ 54 pt (33 y 15; con una tabla, las operaciones distintas que hay).
 // Orden: una columna por tabla (hasta 3; con «todas» se sortean 3 de las 5), de ×1 a ×10; la media página, de ×1 a ×5.
 const { registrar } = __req("nucleo/tipos.js");
 const { TOP, T, B, W, M } = __req("render/papel.js");
+const { cuantos, pintarEl, MIN_OP } = __req("tipos/_elastica.js");
 const { POR, tablasDe } = __req("tipos/_multiplicar.js");
 /** Parejas ordenadas (a, b) con al menos un factor de las tablas elegidas y los dos entre 1 y 10. */
 function parejas(tablas) {
@@ -12381,9 +12408,10 @@ function parejas(tablas) {
 
 const __default = registrar({
   id: "multiplicar.tablas",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    const media = tamano === "media", tablas = tablasDe(params), modo = params.modo ?? null;
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const media = ctx.tamano === "media", tablas = tablasDe(params), modo = params.modo ?? null;
     if (modo === "orden") {
       const elegidas = tablas.length > 3 ? azar.muestra(tablas, 3).sort((u, v) => u - v) : tablas;
       const hasta = media ? 5 : 10;
@@ -12394,8 +12422,8 @@ const __default = registrar({
         }))),
       };
     }
-    const pool = parejas(tablas), filas = pool.length >= 24 ? 8 : 6, cnt = (media ? Math.floor(filas / 2) : filas) * 3;
-    const ejercicios = azar.muestra(pool.filter(([a, b]) => a !== 1 || b !== 1), cnt).map(([a, b]) => {
+    const pool = parejas(tablas).filter(([a, b]) => a !== 1 || b !== 1), filas = pool.length >= 24 ? 8 : 6, cnt = cuantos(ctx, 3, MIN_OP, [filas * 3, Math.floor(filas / 2) * 3], pool.length);
+    const ejercicios = azar.muestra(pool, cnt).map(([a, b]) => {
       const falta = modo === "hueco" ? azar.entero(0, 1) : null;
       return { datos: { a, b, falta }, solucion: { huecos: [falta === null ? a * b : falta === 0 ? a : b] } };
     });
@@ -12413,9 +12441,7 @@ const __default = registrar({
       return [T(`${a} ${POR} ${b} =`, 19), B(48, 38, h)];
     };
     if (!orden) {
-      // filas totales: 24 operaciones → 8 filas; 18 → 6 (la media página dibuja la mitad)
-      const filas = (act.tamano === "media" ? es.length * 2 : es.length) / 3;
-      p.pintar(TOP, 3, filas, es.map(items), es.map((e) => e.id));
+      pintarEl(p, 3, es.map(items), es.map((e) => e.id), es.length / 3);   // rejilla elástica: la operación crece con la tarjeta
       return;
     }
     // La tabla en orden: una columna por tabla, 10 filas (la media, 5), centradas

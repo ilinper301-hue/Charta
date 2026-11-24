@@ -5,8 +5,10 @@
 // 2.º (lote 3c, valores con `curso`):
 //   "regla" → datos { nombre, cm } (tira de 2–10 cm REALES, dibujada con Papel.mm(); sin repetir longitudes) · solucion { huecos: [cm] }
 //   "mcm"   → datos { objeto } · solucion { huecos: [], unidad: "m" | "cm" } (se rodea la unidad; en la solución, en rojo). Completa: 12 (2 × 6); media: 6.
+// Cantidad (rejilla elástica, solo en "regla" y "mcm"; medir y comparar con cubitos ya están en su mínimo y no cambian): «Más grandes» = los de siempre (tarjetas que llenan el panel);
+//   «Más ejercicios» = las filas que caben: regla (tarjetas ≥ 70 pt, la tira sigue midiendo lo mismo en mm reales) 6/3 → 8/4; mcm (tarjetas ≥ 54 pt) 12/6 → 22/10.
 import { registrar } from "../nucleo/tipos.js";
-import { TOP, W, M } from "../render/papel.js";
+import { TOP, W, M, cuantosRejilla } from "../render/papel.js";
 import { chips } from "./medida.tiempo.js";
 
 /** ¿m o cm? Objetos sin duda posible para un niño de 2.º. */
@@ -19,14 +21,16 @@ export const UNIDADES = {
 const ART = { cinta: "La", tira: "La", cuerda: "La", pajita: "La", regla: "La", hoja: "La" };
 const ROJO = "#C62828";
 
-function generar2(modo, azar, tamano) {
+const MIN_REGLA = 70, MIN_MCM = 54;   // alto mínimo de tarjeta con «Más ejercicios»
+
+function generar2(modo, azar, ctx) {
   if (modo === "regla") {
-    const n = tamano === "media" ? 3 : 6, nombres = azar.barajar(["cinta", "tira", "cuerda", "pajita", "palo", "lazo", "cordón", "lápiz"]);
+    const n = Math.min(8, cuantosRejilla(ctx, 1, MIN_REGLA, [6, 3])), nombres = azar.barajar(["cinta", "tira", "cuerda", "pajita", "palo", "lazo", "cordón", "lápiz"]);
     const cms = azar.muestra([2, 3, 4, 5, 6, 7, 8, 9, 10], n);
     return { enunciado: "Mide cada tira con tu regla y escribe cuántos centímetros mide.\nPon el 0 de la regla al principio de la tira.",
              ejercicios: cms.map((cm, i) => ({ datos: { nombre: nombres[i], cm }, solucion: { huecos: [cm] } })) };
   }
-  const n = tamano === "media" ? 6 : 12, nm = azar.entero(Math.floor(n * 0.4), Math.ceil(n * 0.6));
+  const n = Math.min(26, cuantosRejilla(ctx, 2, MIN_MCM, [12, 6])), nm = azar.entero(Math.max(Math.floor(n * 0.4), n - UNIDADES.cm.length), Math.min(Math.ceil(n * 0.6), UNIDADES.m.length));
   const lista = azar.barajar([...azar.muestra(UNIDADES.m, nm).map((o) => [o, "m"]), ...azar.muestra(UNIDADES.cm, n - nm).map((o) => [o, "cm"])]);
   return { enunciado: "¿Lo medirías en metros (m) o en centímetros (cm)? Rodea.",
            ejercicios: lista.map(([objeto, unidad]) => ({ datos: { objeto }, solucion: { huecos: [], unidad } })) };
@@ -34,9 +38,11 @@ function generar2(modo, azar, tamano) {
 
 export default registrar({
   id: "medida.longitud",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    if (params.modo === "regla" || params.modo === "mcm") return generar2(params.modo, azar, tamano);
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const { tamano } = ctx;
+    if (params.modo === "regla" || params.modo === "mcm") return generar2(params.modo, azar, ctx);
     const compara = params.modo === "compara", nombres = azar.barajar(["lápiz", "cinta", "tira", "palo", "cuerda", "pajita", "regla", "hoja"]), ejercicios = [];
     for (let i = 0; i < (tamano === "media" ? 3 : 6); i++) {
       const n1 = azar.entero(2, 12), n2 = azar.elegir([2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].filter((v) => v !== n1));
@@ -71,9 +77,9 @@ export default registrar({
 
 /** Tiras de longitud real: 1 cm en el papel impreso al 100 % = 1 cm de la regla. */
 function dibujarRegla(p, act) {
-  const top = TOP, rows = 6, GY = 10, rh = (top - M - (rows - 1) * GY) / rows, gx = M + 22;
+  const { cel, ch: rh } = p.rejilla(TOP, 1, act.ejercicios.length), gx = M + 22;
   act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
-    const y = top - (i + 1) * rh - i * GY, { nombre, cm } = e.datos, alto = p.mm(6);
+    const y = cel[i][1], { nombre, cm } = e.datos, alto = p.mm(6);
     p.marco(M, y, W - 2 * M, rh);
     p.text(gx, y + rh - 26, `${ART[nombre] ?? "El"} ${nombre}`, 12, { f: "PM" });
     const by = y + rh / 2 - alto / 2 - 8;
@@ -85,7 +91,7 @@ function dibujarRegla(p, act) {
 
 /** ¿m o cm?: objeto a la izquierda y las dos unidades para rodear a la derecha. */
 function dibujarMcm(p, act) {
-  const { cel, cw, ch } = p.celdas(TOP, 2, 6);
+  const { cel, cw, ch } = p.rejilla(TOP, 2, Math.ceil(act.ejercicios.length / 2));
   act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
     const [x, y] = cel[i];
     p.marco(x, y, cw, ch, i);

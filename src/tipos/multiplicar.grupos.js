@@ -4,18 +4,22 @@
 //           modo "mult" → huecos [k, n, k·n]
 // Opción modo: None = «Suma y multiplicación» · "mult" = «Solo la multiplicación». `tablas` no se usa (n ≤ 5).
 // Completa: 6 tarjetas (una por fila; así la media página son 3); sin repetir (k, n).
+// Cantidad (rejilla elástica, 1 columna): «Más grandes» = 6 y 3 (tarjetas que llenan el panel); «Más ejercicios» = las filas que caben con tarjetas ≥ 80 pt (7 y 4).
 import { registrar } from "../nucleo/tipos.js";
-import { TOP, T, B } from "../render/papel.js";
+import { TOP, T, B, cuantosRejilla } from "../render/papel.js";
 import { POR, puntosDado } from "./_multiplicar.js";
+
+const MIN_ALTO = 80;   // alto mínimo de tarjeta con «Más ejercicios» (óvalos de 66 pt)
 
 const PARES = [];
 for (let k = 2; k <= 5; k++) for (let n = 2; n <= 5; n++) PARES.push([k, n]);
 
 export default registrar({
   id: "multiplicar.grupos",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    const cnt = tamano === "media" ? 3 : 6, mult = params.modo === "mult";
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const cnt = cuantosRejilla(ctx, 1, MIN_ALTO, [6, 3]), mult = params.modo === "mult";
     const ejercicios = azar.muestra(PARES, cnt).map(([k, n]) => ({
       datos: { k, n },
       solucion: { huecos: mult ? [k, n, k * n] : [...Array(k).fill(n), k * n, k, n, k * n] },
@@ -27,7 +31,7 @@ export default registrar({
     };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 1, 6), mult = act.params.modo === "mult";
+    const { cel, cw, ch } = p.rejilla(TOP, 1, act.ejercicios.length), mult = act.params.modo === "mult";
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], { k, n } = e.datos, h = e.solucion.huecos;
       p.marco(x, y, cw, ch, i);

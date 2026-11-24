@@ -13103,7 +13103,7 @@
       {
        "n": 1,
        "tipo": "medida.capacidad",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "rango": null
        },
@@ -13264,10 +13264,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "c0016e6d78b5b5f3"
+   "44dde8198f7bd4fd"
   ],
   "svgSolucion": [
-   "6a8346e458f09556"
+   "62f4ff3dbf5eb7e5"
   ]
  },
  "medida.dinero": {
@@ -13773,7 +13773,7 @@
       {
        "n": 1,
        "tipo": "medida.longitud",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "modo": null,
         "rango": null
@@ -13901,7 +13901,7 @@
       {
        "n": 1,
        "tipo": "medida.masa",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "rango": null
        },
@@ -14062,10 +14062,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "b84ac8d947fff5d2"
+   "ae6bf6a96e90e8d2"
   ],
   "svgSolucion": [
-   "26726d6b4dd15fcf"
+   "a27dff12a935f079"
   ]
  },
  "medida.precios": {
@@ -14088,7 +14088,7 @@
       {
        "n": 1,
        "tipo": "medida.precios",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "modo": null,
         "rango": 20
@@ -14286,10 +14286,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "5a7ac6675d799ca0"
+   "a6d140a2b51abc49"
   ],
   "svgSolucion": [
-   "66536357de2890a0"
+   "75b6ce2b3860519e"
   ]
  },
  "medida.reloj": {
@@ -14676,7 +14676,7 @@
       {
        "n": 1,
        "tipo": "medida.tiempo",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "modo": null,
         "rango": null
@@ -14844,10 +14844,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "ffcb0bb8efd4ceae"
+   "3d37fd746add9b1b"
   ],
   "svgSolucion": [
-   "1b0738286b30abd6"
+   "f4a88f0df45507b7"
   ]
  },
  "multiplicar.filas": {
@@ -15010,7 +15010,7 @@
       {
        "n": 1,
        "tipo": "multiplicar.grupos",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "modo": null,
         "rango": null
@@ -15386,7 +15386,7 @@
       {
        "n": 1,
        "tipo": "multiplicar.tablas",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "tablas": null,
         "modo": null,
@@ -15717,10 +15717,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "11b943308d491d3c"
+   "667cb70cd80721db"
   ],
   "svgSolucion": [
-   "7e380ca67e22d0f7"
+   "14188cace83b6663"
   ]
  },
  "orden.cantidad": {
@@ -45514,7 +45514,7 @@
       {
        "n": 1,
        "tipo": "medida.tiempo",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "modo": "equivalencias",
         "rango": null
@@ -45625,7 +45625,7 @@
       {
        "n": 2,
        "tipo": "medida.tiempo",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "modo": "horas",
         "rango": null
@@ -45707,10 +45707,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "8cd7e3502c41b8d5"
+   "edfb9e5c6f3e25ad"
   ],
   "svgSolucion": [
-   "b4dcdfee99cefcf9"
+   "93bd0c7d985dcdca"
   ]
  },
  "2.º dinero y compras": {
@@ -45876,7 +45876,7 @@
       {
        "n": 2,
        "tipo": "medida.precios",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "modo": "cambio",
         "rango": 100
@@ -45946,10 +45946,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "225cfcbd2c988456"
+   "98c6ec8d74a0d31d"
   ],
   "svgSolucion": [
-   "f45ffa0d44ed55be"
+   "af4f928e9a9fcdd8"
   ]
  },
  "2.º regla y ¿m o cm?": {
@@ -45972,7 +45972,7 @@
       {
        "n": 1,
        "tipo": "medida.longitud",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "modo": "regla",
         "rango": null
@@ -46023,7 +46023,7 @@
       {
        "n": 2,
        "tipo": "medida.longitud",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "modo": "mcm",
         "rango": null
@@ -46101,10 +46101,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "245b6ede171f9979"
+   "cf8d0477a2694f8f"
   ],
   "svgSolucion": [
-   "b760be8ffb40a14a"
+   "78af1c8c3b5358f4"
   ]
  },
  "2.º lados (dos actividades)": {
@@ -46777,7 +46777,7 @@
       {
        "n": 2,
        "tipo": "medida.masa",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "rango": null
        },
@@ -46866,10 +46866,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "1f48e3ef48bc57fc"
+   "9557f5271e4f57b3"
   ],
   "svgSolucion": [
-   "448f813ddbd6e5c0"
+   "8bc55de928a8dae9"
   ]
  },
  "nombres y B/N": {
@@ -78876,6 +78876,4264 @@
   ],
   "svgSolucion": [
    "20bdb894dc69d001"
+  ]
+ },
+ "más ejercicios: multiplicar.grupos": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Grupos iguales",
+   "curso": 2,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "multiplicar.grupos",
+       "tipoVersion": 2,
+       "params": {
+        "modo": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Cuenta los grupos y los puntos de cada grupo. Escribe la suma y la multiplicación.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "k": 4,
+          "n": 2
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           2,
+           2,
+           2,
+           8,
+           4,
+           2,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "k": 5,
+          "n": 4
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           4,
+           4,
+           4,
+           4,
+           20,
+           5,
+           4,
+           20
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "k": 3,
+          "n": 5
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           5,
+           5,
+           15,
+           3,
+           5,
+           15
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "k": 3,
+          "n": 2
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           2,
+           2,
+           6,
+           3,
+           2,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "k": 5,
+          "n": 5
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           5,
+           5,
+           5,
+           5,
+           25,
+           5,
+           5,
+           25
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "k": 2,
+          "n": 4
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           4,
+           8,
+           2,
+           4,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "k": 2,
+          "n": 3
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           3,
+           6,
+           2,
+           3,
+           6
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "71ed68a7ec2ca241"
+  ],
+  "svgSolucion": [
+   "2ca24677da17d11d"
+  ]
+ },
+ "más ejercicios: multiplicar.tablas": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Las tablas",
+   "curso": 2,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "multiplicar.tablas",
+       "tipoVersion": 2,
+       "params": {
+        "tablas": null,
+        "modo": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Calcula y escribe el resultado en el cuadro gris.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "a": 2,
+          "b": 7,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           14
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "a": 8,
+          "b": 10,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           80
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "a": 6,
+          "b": 5,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           30
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": 2,
+          "b": 4,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "a": 9,
+          "b": 2,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           18
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": 5,
+          "b": 7,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           35
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "a": 2,
+          "b": 2,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "a": 9,
+          "b": 10,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           90
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "a": 10,
+          "b": 6,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           60
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "a": 10,
+          "b": 8,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           80
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "a": 10,
+          "b": 5,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           50
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "a": 4,
+          "b": 5,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           20
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "a": 6,
+          "b": 2,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           12
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "a": 5,
+          "b": 10,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           50
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "a": 3,
+          "b": 2,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "a": 2,
+          "b": 3,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e17",
+         "datos": {
+          "a": 2,
+          "b": 10,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           20
+          ]
+         }
+        },
+        {
+         "id": "a1e18",
+         "datos": {
+          "a": 2,
+          "b": 5,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e19",
+         "datos": {
+          "a": 5,
+          "b": 2,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e20",
+         "datos": {
+          "a": 7,
+          "b": 10,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           70
+          ]
+         }
+        },
+        {
+         "id": "a1e21",
+         "datos": {
+          "a": 10,
+          "b": 1,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e22",
+         "datos": {
+          "a": 7,
+          "b": 5,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           35
+          ]
+         }
+        },
+        {
+         "id": "a1e23",
+         "datos": {
+          "a": 9,
+          "b": 5,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           45
+          ]
+         }
+        },
+        {
+         "id": "a1e24",
+         "datos": {
+          "a": 1,
+          "b": 2,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e25",
+         "datos": {
+          "a": 3,
+          "b": 5,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           15
+          ]
+         }
+        },
+        {
+         "id": "a1e26",
+         "datos": {
+          "a": 10,
+          "b": 9,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           90
+          ]
+         }
+        },
+        {
+         "id": "a1e27",
+         "datos": {
+          "a": 10,
+          "b": 10,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           100
+          ]
+         }
+        },
+        {
+         "id": "a1e28",
+         "datos": {
+          "a": 2,
+          "b": 8,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           16
+          ]
+         }
+        },
+        {
+         "id": "a1e29",
+         "datos": {
+          "a": 5,
+          "b": 3,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           15
+          ]
+         }
+        },
+        {
+         "id": "a1e30",
+         "datos": {
+          "a": 5,
+          "b": 5,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           25
+          ]
+         }
+        },
+        {
+         "id": "a1e31",
+         "datos": {
+          "a": 5,
+          "b": 4,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           20
+          ]
+         }
+        },
+        {
+         "id": "a1e32",
+         "datos": {
+          "a": 8,
+          "b": 5,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           40
+          ]
+         }
+        },
+        {
+         "id": "a1e33",
+         "datos": {
+          "a": 1,
+          "b": 5,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "41740b440356ae1e"
+  ],
+  "svgSolucion": [
+   "e0a830f7cb4a85fe"
+  ]
+ },
+ "más ejercicios: medida.capacidad": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "¿Cuánto líquido hay?",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "medida.capacidad",
+       "tipoVersion": 2,
+       "params": {
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Ordena los vasos según el líquido que tienen, como dice cada casilla.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "niv": [
+           2,
+           5,
+           3
+          ],
+          "asc": true
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           3,
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "niv": [
+           1,
+           5,
+           2
+          ],
+          "asc": false
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           1,
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "niv": [
+           5,
+           4,
+           2
+          ],
+          "asc": true
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           2,
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "niv": [
+           3,
+           2,
+           1
+          ],
+          "asc": false
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           2,
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "niv": [
+           5,
+           3,
+           1
+          ],
+          "asc": true
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           2,
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "niv": [
+           2,
+           1,
+           3
+          ],
+          "asc": false
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           3,
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "niv": [
+           3,
+           4,
+           2
+          ],
+          "asc": true
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           3,
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "niv": [
+           1,
+           4,
+           2
+          ],
+          "asc": false
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           1,
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "niv": [
+           4,
+           1,
+           5
+          ],
+          "asc": true
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           1,
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "niv": [
+           3,
+           2,
+           1
+          ],
+          "asc": false
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           2,
+           3
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "5c27308a0d1c8a57"
+  ],
+  "svgSolucion": [
+   "a6c774dc98b77e29"
+  ]
+ },
+ "más ejercicios: medida.masa": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "¿Cuánto pesa?",
+   "curso": 2,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "medida.masa",
+       "tipoVersion": 2,
+       "params": {
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Compara lo que pesan los dos platos y escribe <, > o =.\n1 kg pesa lo mismo que dos pesas de ½ kg.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "izq": [
+           2,
+           0
+          ],
+          "der": [
+           3,
+           1
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "<"
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "izq": [
+           1,
+           2
+          ],
+          "der": [
+           1,
+           0
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           ">"
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "izq": [
+           2,
+           0
+          ],
+          "der": [
+           1,
+           2
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "="
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "izq": [
+           1,
+           1
+          ],
+          "der": [
+           2,
+           1
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "<"
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "izq": [
+           0,
+           2
+          ],
+          "der": [
+           2,
+           2
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "<"
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "izq": [
+           1,
+           1
+          ],
+          "der": [
+           0,
+           3
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "="
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "izq": [
+           3,
+           1
+          ],
+          "der": [
+           0,
+           2
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           ">"
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "izq": [
+           0,
+           1
+          ],
+          "der": [
+           0,
+           3
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "<"
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "izq": [
+           2,
+           2
+          ],
+          "der": [
+           3,
+           0
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "="
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "izq": [
+           3,
+           0
+          ],
+          "der": [
+           1,
+           2
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           ">"
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "izq": [
+           1,
+           3
+          ],
+          "der": [
+           0,
+           1
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           ">"
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "izq": [
+           0,
+           2
+          ],
+          "der": [
+           1,
+           0
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "="
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "cf52174a547585cc"
+  ],
+  "svgSolucion": [
+   "a1fe22ccf597770b"
+  ]
+ },
+ "más ejercicios: medida.precios": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Las compras",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "medida.precios",
+       "tipoVersion": 2,
+       "params": {
+        "modo": null,
+        "rango": 20
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Calcula cuánto cuesta lo que compras y escribe el total.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "a": [
+           "libro",
+           7
+          ],
+          "b": [
+           "pegamento",
+           2
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "a": [
+           "goma",
+           1
+          ],
+          "b": [
+           "pelota",
+           4
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "a": [
+           "libro",
+           9
+          ],
+          "b": [
+           "regla",
+           3
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           12
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": [
+           "lápiz",
+           1
+          ],
+          "b": [
+           "libro",
+           8
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "a": [
+           "sacapuntas",
+           1
+          ],
+          "b": [
+           "mochila",
+           11
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           12
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": [
+           "cuaderno",
+           3
+          ],
+          "b": [
+           "regla",
+           3
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "a": [
+           "pelota",
+           7
+          ],
+          "b": [
+           "mochila",
+           10
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           17
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "a": [
+           "pegamento",
+           3
+          ],
+          "b": [
+           "sacapuntas",
+           2
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "a": [
+           "goma",
+           2
+          ],
+          "b": [
+           "mochila",
+           11
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           13
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "a": [
+           "goma",
+           2
+          ],
+          "b": [
+           "regla",
+           2
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "a": [
+           "pelota",
+           4
+          ],
+          "b": [
+           "pegamento",
+           3
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "a": [
+           "libro",
+           9
+          ],
+          "b": [
+           "regla",
+           3
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           12
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "ce78375c0e8c73e0"
+  ],
+  "svgSolucion": [
+   "06f1efe7ef8d3ef7"
+  ]
+ },
+ "más ejercicios: 2.º regla, ¿m o cm?, equivalencias, horas y días": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Mide con la regla y ¿Metros o centímetros?",
+   "curso": 2,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "medida.longitud",
+       "tipoVersion": 2,
+       "params": {
+        "modo": "regla",
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Mide cada tira con tu regla y escribe cuántos centímetros mide.\nPon el 0 de la regla al principio de la tira.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "nombre": "palo",
+          "cm": 10
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "nombre": "cordón",
+          "cm": 2
+         },
+         "solucion": {
+          "huecos": [
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "nombre": "tira",
+          "cm": 9
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "nombre": "pajita",
+          "cm": 6
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "nombre": "cuerda",
+          "cm": 7
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "nombre": "lápiz",
+          "cm": 4
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "nombre": "cinta",
+          "cm": 3
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "nombre": "lazo",
+          "cm": 5
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "actividades": [
+      {
+       "n": 2,
+       "tipo": "medida.longitud",
+       "tipoVersion": 2,
+       "params": {
+        "modo": "mcm",
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "¿Lo medirías en metros (m) o en centímetros (cm)? Rodea.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "objeto": "Tu mano"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "cm"
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "objeto": "El patio"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "m"
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "objeto": "Una pajita"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "cm"
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "objeto": "Una goma"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "cm"
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "objeto": "Un lápiz"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "cm"
+         }
+        },
+        {
+         "id": "a2e6",
+         "datos": {
+          "objeto": "La pista de atletismo"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "m"
+         }
+        },
+        {
+         "id": "a2e7",
+         "datos": {
+          "objeto": "Un estuche"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "cm"
+         }
+        },
+        {
+         "id": "a2e8",
+         "datos": {
+          "objeto": "Una ballena"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "m"
+         }
+        },
+        {
+         "id": "a2e9",
+         "datos": {
+          "objeto": "Un camión"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "m"
+         }
+        },
+        {
+         "id": "a2e10",
+         "datos": {
+          "objeto": "Un cepillo de dientes"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "cm"
+         }
+        },
+        {
+         "id": "a2e11",
+         "datos": {
+          "objeto": "Una hoja de papel"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "cm"
+         }
+        },
+        {
+         "id": "a2e12",
+         "datos": {
+          "objeto": "Un autobús"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "m"
+         }
+        },
+        {
+         "id": "a2e13",
+         "datos": {
+          "objeto": "Una calle"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "m"
+         }
+        },
+        {
+         "id": "a2e14",
+         "datos": {
+          "objeto": "Un tenedor"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "cm"
+         }
+        },
+        {
+         "id": "a2e15",
+         "datos": {
+          "objeto": "Una cuchara"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "cm"
+         }
+        },
+        {
+         "id": "a2e16",
+         "datos": {
+          "objeto": "La valla del cole"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "m"
+         }
+        },
+        {
+         "id": "a2e17",
+         "datos": {
+          "objeto": "Un clip"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "cm"
+         }
+        },
+        {
+         "id": "a2e18",
+         "datos": {
+          "objeto": "Una llave"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "cm"
+         }
+        },
+        {
+         "id": "a2e19",
+         "datos": {
+          "objeto": "Un campo de fútbol"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "m"
+         }
+        },
+        {
+         "id": "a2e20",
+         "datos": {
+          "objeto": "Unas tijeras"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "cm"
+         }
+        },
+        {
+         "id": "a2e21",
+         "datos": {
+          "objeto": "Un libro"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "cm"
+         }
+        },
+        {
+         "id": "a2e22",
+         "datos": {
+          "objeto": "Un zapato"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "cm"
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "actividades": [
+      {
+       "n": 3,
+       "tipo": "medida.tiempo",
+       "tipoVersion": 2,
+       "params": {
+        "modo": "equivalencias",
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Escribe el número que falta.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a3e1",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           3,
+           "horas"
+          ],
+          "b": "minutos"
+         },
+         "solucion": {
+          "huecos": [
+           180
+          ]
+         }
+        },
+        {
+         "id": "a3e2",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           24,
+           "meses"
+          ],
+          "b": "años"
+         },
+         "solucion": {
+          "huecos": [
+           2
+          ]
+         }
+        },
+        {
+         "id": "a3e3",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           120,
+           "minutos"
+          ],
+          "b": "horas"
+         },
+         "solucion": {
+          "huecos": [
+           2
+          ]
+         }
+        },
+        {
+         "id": "a3e4",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           3,
+           "semanas"
+          ],
+          "b": "días"
+         },
+         "solucion": {
+          "huecos": [
+           21
+          ]
+         }
+        },
+        {
+         "id": "a3e5",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           4,
+           "semanas"
+          ],
+          "b": "días"
+         },
+         "solucion": {
+          "huecos": [
+           28
+          ]
+         }
+        },
+        {
+         "id": "a3e6",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           14,
+           "días"
+          ],
+          "b": "semanas"
+         },
+         "solucion": {
+          "huecos": [
+           2
+          ]
+         }
+        },
+        {
+         "id": "a3e7",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           2,
+           "semanas"
+          ],
+          "b": "días"
+         },
+         "solucion": {
+          "huecos": [
+           14
+          ]
+         }
+        },
+        {
+         "id": "a3e8",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           2,
+           "años"
+          ],
+          "b": "meses"
+         },
+         "solucion": {
+          "huecos": [
+           24
+          ]
+         }
+        },
+        {
+         "id": "a3e9",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           1,
+           "hora"
+          ],
+          "b": "minutos"
+         },
+         "solucion": {
+          "huecos": [
+           60
+          ]
+         }
+        },
+        {
+         "id": "a3e10",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           21,
+           "días"
+          ],
+          "b": "semanas"
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a3e11",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           1,
+           "año"
+          ],
+          "b": "meses"
+         },
+         "solucion": {
+          "huecos": [
+           12
+          ]
+         }
+        },
+        {
+         "id": "a3e12",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           1,
+           "semana"
+          ],
+          "b": "días"
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a3e13",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           48,
+           "horas"
+          ],
+          "b": "días"
+         },
+         "solucion": {
+          "huecos": [
+           2
+          ]
+         }
+        },
+        {
+         "id": "a3e14",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           180,
+           "minutos"
+          ],
+          "b": "horas"
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a3e15",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           60,
+           "minutos"
+          ],
+          "b": "hora"
+         },
+         "solucion": {
+          "huecos": [
+           1
+          ]
+         }
+        },
+        {
+         "id": "a3e16",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           2,
+           "días"
+          ],
+          "b": "horas"
+         },
+         "solucion": {
+          "huecos": [
+           48
+          ]
+         }
+        },
+        {
+         "id": "a3e17",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           24,
+           "horas"
+          ],
+          "b": "día"
+         },
+         "solucion": {
+          "huecos": [
+           1
+          ]
+         }
+        },
+        {
+         "id": "a3e18",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           2,
+           "horas"
+          ],
+          "b": "minutos"
+         },
+         "solucion": {
+          "huecos": [
+           120
+          ]
+         }
+        },
+        {
+         "id": "a3e19",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           12,
+           "meses"
+          ],
+          "b": "año"
+         },
+         "solucion": {
+          "huecos": [
+           1
+          ]
+         }
+        },
+        {
+         "id": "a3e20",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           7,
+           "días"
+          ],
+          "b": "semana"
+         },
+         "solucion": {
+          "huecos": [
+           1
+          ]
+         }
+        },
+        {
+         "id": "a3e21",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           28,
+           "días"
+          ],
+          "b": "semanas"
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a3e22",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           1,
+           "día"
+          ],
+          "b": "horas"
+         },
+         "solucion": {
+          "huecos": [
+           24
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "actividades": [
+      {
+       "n": 4,
+       "tipo": "medida.tiempo",
+       "tipoVersion": 2,
+       "params": {
+        "modo": "horas",
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Mira el reloj y escribe qué hora será o qué hora era.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a4e1",
+         "datos": {
+          "tipo": "hora",
+          "h": 2,
+          "m": 0,
+          "k": 1,
+          "dentro": true
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           "00"
+          ]
+         }
+        },
+        {
+         "id": "a4e2",
+         "datos": {
+          "tipo": "hora",
+          "h": 9,
+          "m": 0,
+          "k": 1,
+          "dentro": false
+         },
+         "solucion": {
+          "huecos": [
+           8,
+           "00"
+          ]
+         }
+        },
+        {
+         "id": "a4e3",
+         "datos": {
+          "tipo": "hora",
+          "h": 11,
+          "m": 30,
+          "k": 2,
+          "dentro": false
+         },
+         "solucion": {
+          "huecos": [
+           9,
+           "30"
+          ]
+         }
+        },
+        {
+         "id": "a4e4",
+         "datos": {
+          "tipo": "hora",
+          "h": 1,
+          "m": 30,
+          "k": 3,
+          "dentro": true
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           "30"
+          ]
+         }
+        },
+        {
+         "id": "a4e5",
+         "datos": {
+          "tipo": "hora",
+          "h": 5,
+          "m": 30,
+          "k": 1,
+          "dentro": false
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           "30"
+          ]
+         }
+        },
+        {
+         "id": "a4e6",
+         "datos": {
+          "tipo": "hora",
+          "h": 8,
+          "m": 0,
+          "k": 2,
+          "dentro": true
+         },
+         "solucion": {
+          "huecos": [
+           10,
+           "00"
+          ]
+         }
+        },
+        {
+         "id": "a4e7",
+         "datos": {
+          "tipo": "hora",
+          "h": 12,
+          "m": 30,
+          "k": 1,
+          "dentro": false
+         },
+         "solucion": {
+          "huecos": [
+           11,
+           "30"
+          ]
+         }
+        },
+        {
+         "id": "a4e8",
+         "datos": {
+          "tipo": "hora",
+          "h": 7,
+          "m": 30,
+          "k": 1,
+          "dentro": true
+         },
+         "solucion": {
+          "huecos": [
+           8,
+           "30"
+          ]
+         }
+        },
+        {
+         "id": "a4e9",
+         "datos": {
+          "tipo": "hora",
+          "h": 4,
+          "m": 30,
+          "k": 3,
+          "dentro": false
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           "30"
+          ]
+         }
+        },
+        {
+         "id": "a4e10",
+         "datos": {
+          "tipo": "hora",
+          "h": 5,
+          "m": 0,
+          "k": 3,
+          "dentro": true
+         },
+         "solucion": {
+          "huecos": [
+           8,
+           "00"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "actividades": [
+      {
+       "n": 5,
+       "tipo": "medida.tiempo",
+       "tipoVersion": 2,
+       "params": {
+        "modo": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Escribe el número de orden de cada día, empezando por el lunes.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a5e1",
+         "datos": {
+          "orden": [
+           6,
+           2,
+           4,
+           1,
+           3,
+           0,
+           5
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           3,
+           5,
+           2,
+           4,
+           1,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a5e2",
+         "datos": {
+          "orden": [
+           1,
+           2,
+           5,
+           4,
+           0,
+           3,
+           6
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           3,
+           6,
+           5,
+           1,
+           4,
+           7
+          ]
+         }
+        },
+        {
+         "id": "a5e3",
+         "datos": {
+          "orden": [
+           1,
+           3,
+           4,
+           2,
+           0,
+           5,
+           6
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           4,
+           5,
+           3,
+           1,
+           6,
+           7
+          ]
+         }
+        },
+        {
+         "id": "a5e4",
+         "datos": {
+          "orden": [
+           4,
+           1,
+           5,
+           3,
+           0,
+           2,
+           6
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           2,
+           6,
+           4,
+           1,
+           3,
+           7
+          ]
+         }
+        },
+        {
+         "id": "a5e5",
+         "datos": {
+          "orden": [
+           5,
+           1,
+           3,
+           0,
+           4,
+           6,
+           2
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           2,
+           4,
+           1,
+           5,
+           7,
+           3
+          ]
+         }
+        },
+        {
+         "id": "a5e6",
+         "datos": {
+          "orden": [
+           4,
+           0,
+           5,
+           2,
+           6,
+           3,
+           1
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           1,
+           6,
+           3,
+           7,
+           4,
+           2
+          ]
+         }
+        },
+        {
+         "id": "a5e7",
+         "datos": {
+          "orden": [
+           0,
+           5,
+           4,
+           3,
+           2,
+           6,
+           1
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           6,
+           5,
+           4,
+           3,
+           7,
+           2
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "f5f64658e66ec033",
+   "4e8ce299f7e0f3ac",
+   "ae763cb74b3be3c3",
+   "6da75e97bbb18ec5",
+   "a53977431dac2d8b"
+  ],
+  "svgSolucion": [
+   "4d577ed16a5006e7",
+   "5d6cc4e2488acb0a",
+   "e4ee916550c5669b",
+   "a13ac4b86b40ae4b",
+   "80bcc47b6e47ccac"
+  ]
+ },
+ "más ejercicios: tablas con hueco y una sola tabla": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Las tablas",
+   "curso": 2,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "multiplicar.tablas",
+       "tipoVersion": 2,
+       "params": {
+        "tablas": "todas",
+        "modo": "hueco",
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Escribe el número que falta en cada multiplicación.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "a": 2,
+          "b": 3,
+          "falta": 0
+         },
+         "solucion": {
+          "huecos": [
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "a": 10,
+          "b": 3,
+          "falta": 0
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "a": 5,
+          "b": 3,
+          "falta": 0
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": 6,
+          "b": 3,
+          "falta": 0
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "a": 7,
+          "b": 5,
+          "falta": 0
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": 4,
+          "b": 9,
+          "falta": 1
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "a": 2,
+          "b": 1,
+          "falta": 0
+         },
+         "solucion": {
+          "huecos": [
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "a": 10,
+          "b": 5,
+          "falta": 1
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "a": 4,
+          "b": 2,
+          "falta": 0
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "a": 2,
+          "b": 8,
+          "falta": 0
+         },
+         "solucion": {
+          "huecos": [
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "a": 10,
+          "b": 8,
+          "falta": 1
+         },
+         "solucion": {
+          "huecos": [
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "a": 10,
+          "b": 9,
+          "falta": 1
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "a": 5,
+          "b": 4,
+          "falta": 0
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "a": 3,
+          "b": 1,
+          "falta": 0
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "a": 3,
+          "b": 2,
+          "falta": 1
+         },
+         "solucion": {
+          "huecos": [
+           2
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "multiplicar.tablas",
+       "tipoVersion": 2,
+       "params": {
+        "tablas": "3",
+        "modo": null,
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "verde",
+       "enunciado": "Calcula y escribe el resultado en el cuadro gris.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "a": 1,
+          "b": 3,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "a": 3,
+          "b": 5,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           15
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "a": 9,
+          "b": 3,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           27
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "a": 3,
+          "b": 9,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           27
+          ]
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "a": 3,
+          "b": 3,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        },
+        {
+         "id": "a2e6",
+         "datos": {
+          "a": 3,
+          "b": 1,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a2e7",
+         "datos": {
+          "a": 3,
+          "b": 10,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           30
+          ]
+         }
+        },
+        {
+         "id": "a2e8",
+         "datos": {
+          "a": 3,
+          "b": 7,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           21
+          ]
+         }
+        },
+        {
+         "id": "a2e9",
+         "datos": {
+          "a": 3,
+          "b": 4,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           12
+          ]
+         }
+        },
+        {
+         "id": "a2e10",
+         "datos": {
+          "a": 5,
+          "b": 3,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           15
+          ]
+         }
+        },
+        {
+         "id": "a2e11",
+         "datos": {
+          "a": 8,
+          "b": 3,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           24
+          ]
+         }
+        },
+        {
+         "id": "a2e12",
+         "datos": {
+          "a": 7,
+          "b": 3,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           21
+          ]
+         }
+        },
+        {
+         "id": "a2e13",
+         "datos": {
+          "a": 3,
+          "b": 6,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           18
+          ]
+         }
+        },
+        {
+         "id": "a2e14",
+         "datos": {
+          "a": 6,
+          "b": 3,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           18
+          ]
+         }
+        },
+        {
+         "id": "a2e15",
+         "datos": {
+          "a": 10,
+          "b": 3,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           30
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "3c9079908154813b"
+  ],
+  "svgSolucion": [
+   "f09daf425729288a"
+  ]
+ },
+ "más ejercicios en media: grupos y tablas": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Grupos iguales y las tablas",
+   "curso": 2,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "multiplicar.grupos",
+       "tipoVersion": 2,
+       "params": {
+        "modo": "mult",
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "amarillo",
+       "enunciado": "Cuenta los grupos y los puntos de cada grupo. Escribe la multiplicación.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "k": 4,
+          "n": 2
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           2,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "k": 5,
+          "n": 4
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           4,
+           20
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "k": 3,
+          "n": 5
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           5,
+           15
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "k": 3,
+          "n": 2
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           2,
+           6
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "multiplicar.tablas",
+       "tipoVersion": 2,
+       "params": {
+        "tablas": null,
+        "modo": null,
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Calcula y escribe el resultado en el cuadro gris.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "a": 2,
+          "b": 5,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "a": 9,
+          "b": 2,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           18
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "a": 10,
+          "b": 8,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           80
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "a": 10,
+          "b": 7,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           70
+          ]
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "a": 1,
+          "b": 5,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a2e6",
+         "datos": {
+          "a": 2,
+          "b": 9,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           18
+          ]
+         }
+        },
+        {
+         "id": "a2e7",
+         "datos": {
+          "a": 5,
+          "b": 2,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a2e8",
+         "datos": {
+          "a": 2,
+          "b": 2,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a2e9",
+         "datos": {
+          "a": 3,
+          "b": 10,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           30
+          ]
+         }
+        },
+        {
+         "id": "a2e10",
+         "datos": {
+          "a": 5,
+          "b": 5,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           25
+          ]
+         }
+        },
+        {
+         "id": "a2e11",
+         "datos": {
+          "a": 8,
+          "b": 2,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           16
+          ]
+         }
+        },
+        {
+         "id": "a2e12",
+         "datos": {
+          "a": 10,
+          "b": 1,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a2e13",
+         "datos": {
+          "a": 7,
+          "b": 5,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           35
+          ]
+         }
+        },
+        {
+         "id": "a2e14",
+         "datos": {
+          "a": 10,
+          "b": 6,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           60
+          ]
+         }
+        },
+        {
+         "id": "a2e15",
+         "datos": {
+          "a": 4,
+          "b": 5,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           20
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "3fa0a7a191a7d9ae"
+  ],
+  "svgSolucion": [
+   "b82b7c538f33154e"
+  ]
+ },
+ "más ejercicios en media: capacidad y masa": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "¿Cuánto líquido hay? y ¿Cuánto pesa?",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "medida.capacidad",
+       "tipoVersion": 2,
+       "params": {
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Ordena los vasos según el líquido que tienen, como dice cada casilla.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "niv": [
+           2,
+           5,
+           3
+          ],
+          "asc": true
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           3,
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "niv": [
+           1,
+           5,
+           2
+          ],
+          "asc": false
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           1,
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "niv": [
+           5,
+           4,
+           2
+          ],
+          "asc": true
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           2,
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "niv": [
+           3,
+           2,
+           1
+          ],
+          "asc": false
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           2,
+           3
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "medida.masa",
+       "tipoVersion": 2,
+       "params": {
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "verde",
+       "enunciado": "Compara lo que pesan los dos platos y escribe <, > o =.\n1 kg pesa lo mismo que dos pesas de ½ kg.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "izq": [
+           0,
+           2
+          ],
+          "der": [
+           0,
+           3
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "<"
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "izq": [
+           2,
+           2
+          ],
+          "der": [
+           1,
+           0
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           ">"
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "izq": [
+           2,
+           2
+          ],
+          "der": [
+           3,
+           0
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "="
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "izq": [
+           0,
+           1
+          ],
+          "der": [
+           1,
+           3
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "<"
+          ]
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "izq": [
+           2,
+           0
+          ],
+          "der": [
+           3,
+           0
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "<"
+          ]
+         }
+        },
+        {
+         "id": "a2e6",
+         "datos": {
+          "izq": [
+           1,
+           3
+          ],
+          "der": [
+           2,
+           1
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "="
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "170a06adae5f8e8a"
+  ],
+  "svgSolucion": [
+   "92ca2441f8b8ebec"
+  ]
+ },
+ "más ejercicios en media: precios y regla": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Las compras y mide con la regla",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "medida.precios",
+       "tipoVersion": 2,
+       "params": {
+        "modo": "cambio",
+        "rango": 20
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Calcula cuánto dinero te devuelven y escríbelo.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "nom": "lápiz",
+          "precio": 3,
+          "pago": 10
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "nom": "pelota",
+          "precio": 6,
+          "pago": 10
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "nom": "pelota",
+          "precio": 6,
+          "pago": 10
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "nom": "sacapuntas",
+          "precio": 1,
+          "pago": 5
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "nom": "libro",
+          "precio": 5,
+          "pago": 20
+         },
+         "solucion": {
+          "huecos": [
+           15
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "nom": "libro",
+          "precio": 6,
+          "pago": 10
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "medida.longitud",
+       "tipoVersion": 2,
+       "params": {
+        "modo": "regla",
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "verde",
+       "enunciado": "Mide cada tira con tu regla y escribe cuántos centímetros mide.\nPon el 0 de la regla al principio de la tira.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "nombre": "cuerda",
+          "cm": 8
+         },
+         "solucion": {
+          "huecos": [
+           8
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "nombre": "lazo",
+          "cm": 9
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "nombre": "palo",
+          "cm": 3
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "nombre": "lápiz",
+          "cm": 6
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "aedb200930d24e66"
+  ],
+  "svgSolucion": [
+   "1cfb3c6d371fcc44"
+  ]
+ },
+ "más ejercicios en media: ¿m o cm? y equivalencias": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "¿Metros o centímetros? y las medidas del tiempo",
+   "curso": 2,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "medida.longitud",
+       "tipoVersion": 2,
+       "params": {
+        "modo": "mcm",
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "¿Lo medirías en metros (m) o en centímetros (cm)? Rodea.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "objeto": "Un zapato"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "cm"
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "objeto": "Un cepillo de dientes"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "cm"
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "objeto": "Un campo de fútbol"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "m"
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "objeto": "Una ballena"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "m"
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "objeto": "El patio"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "m"
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "objeto": "La valla del cole"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "m"
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "objeto": "Una pajita"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "cm"
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "objeto": "Un estuche"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "cm"
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "objeto": "Un libro"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "cm"
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "objeto": "Un autobús"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "m"
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "medida.tiempo",
+       "tipoVersion": 2,
+       "params": {
+        "modo": "equivalencias",
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "verde",
+       "enunciado": "Escribe el número que falta.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           2,
+           "años"
+          ],
+          "b": "meses"
+         },
+         "solucion": {
+          "huecos": [
+           24
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           1,
+           "año"
+          ],
+          "b": "meses"
+         },
+         "solucion": {
+          "huecos": [
+           12
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           24,
+           "horas"
+          ],
+          "b": "día"
+         },
+         "solucion": {
+          "huecos": [
+           1
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           2,
+           "días"
+          ],
+          "b": "horas"
+         },
+         "solucion": {
+          "huecos": [
+           48
+          ]
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           4,
+           "semanas"
+          ],
+          "b": "días"
+         },
+         "solucion": {
+          "huecos": [
+           28
+          ]
+         }
+        },
+        {
+         "id": "a2e6",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           60,
+           "minutos"
+          ],
+          "b": "hora"
+         },
+         "solucion": {
+          "huecos": [
+           1
+          ]
+         }
+        },
+        {
+         "id": "a2e7",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           21,
+           "días"
+          ],
+          "b": "semanas"
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a2e8",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           "media",
+           "hora"
+          ],
+          "b": "minutos"
+         },
+         "solucion": {
+          "huecos": [
+           30
+          ]
+         }
+        },
+        {
+         "id": "a2e9",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           1,
+           "semana"
+          ],
+          "b": "días"
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a2e10",
+         "datos": {
+          "tipo": "equiv",
+          "a": [
+           14,
+           "días"
+          ],
+          "b": "semanas"
+         },
+         "solucion": {
+          "huecos": [
+           2
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "7c9e285a19b72c4f"
+  ],
+  "svgSolucion": [
+   "628a90a698dc588a"
+  ]
+ },
+ "más ejercicios en media: horas y días": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Antes y después y los días de la semana",
+   "curso": 2,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "medida.tiempo",
+       "tipoVersion": 2,
+       "params": {
+        "modo": "horas",
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Mira el reloj y escribe qué hora será o qué hora era.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "tipo": "hora",
+          "h": 6,
+          "m": 30,
+          "k": 2,
+          "dentro": true
+         },
+         "solucion": {
+          "huecos": [
+           8,
+           "30"
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "tipo": "hora",
+          "h": 5,
+          "m": 30,
+          "k": 1,
+          "dentro": true
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           "30"
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "tipo": "hora",
+          "h": 9,
+          "m": 0,
+          "k": 2,
+          "dentro": false
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           "00"
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "tipo": "hora",
+          "h": 8,
+          "m": 30,
+          "k": 2,
+          "dentro": false
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           "30"
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "medida.tiempo",
+       "tipoVersion": 2,
+       "params": {
+        "modo": null,
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "verde",
+       "enunciado": "Escribe el número de orden de cada día, empezando por el lunes.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "orden": [
+           4,
+           2,
+           6,
+           5,
+           1,
+           3,
+           0
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           3,
+           7,
+           6,
+           2,
+           4,
+           1
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "orden": [
+           5,
+           2,
+           6,
+           0,
+           1,
+           3,
+           4
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           3,
+           7,
+           1,
+           2,
+           4,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "orden": [
+           0,
+           6,
+           1,
+           3,
+           4,
+           2,
+           5
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           7,
+           2,
+           4,
+           5,
+           3,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "orden": [
+           4,
+           1,
+           5,
+           3,
+           6,
+           0,
+           2
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           2,
+           6,
+           4,
+           7,
+           1,
+           3
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "172612266549f583"
+  ],
+  "svgSolucion": [
+   "6b2be397b964a02f"
   ]
  },
  "mayor o menor en media": {

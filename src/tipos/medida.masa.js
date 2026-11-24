@@ -3,17 +3,21 @@
 // solucion: { huecos: ["<" | ">" | "="] } (compara el plato izquierdo con el derecho; 1 kg = 2 medios)
 // Sin opciones. Cada plato lleva de 1 a 4 pesas (de 1 a 8 medios kilos). Un tercio de las balanzas, aproximadamente, está equilibrado (con pesas distintas).
 // Completa: 8 balanzas (2 × 4); media: 4. La balanza se dibuja nivelada: la respuesta no se ve.
+// Cantidad (rejilla elástica, 2 columnas): «Más grandes» = 8 y 4 (tarjetas que llenan el panel; las pesas crecen hasta ×1,3); «Más ejercicios» = las filas que caben con tarjetas ≥ 100 pt (12 y 6).
 import { registrar } from "../nucleo/tipos.js";
-import { TOP } from "../render/papel.js";
+import { TOP, cuantosRejilla } from "../render/papel.js";
+
+const MIN_ALTO = 100;   // alto mínimo de tarjeta con «Más ejercicios» (cuatro pesas apiladas y la casilla)
 
 const medios = ([k, m]) => 2 * k + m;
 const plato = (azar) => { for (;;) { const k = azar.entero(0, 3), m = azar.entero(0, 3); if (k + m >= 1 && k + m <= 4) return [k, m]; } };
 
 export default registrar({
   id: "medida.masa",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    const cnt = tamano === "media" ? 4 : 8, vistos = new Set(), ejercicios = [];
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const cnt = cuantosRejilla(ctx, 2, MIN_ALTO, [8, 4]), vistos = new Set(), ejercicios = [];
     for (let i = 0; i < cnt; i++) {
       const igual = i % 3 === 2;
       let izq, der, ok = false;
@@ -30,7 +34,7 @@ export default registrar({
     return { enunciado: "Compara lo que pesan los dos platos y escribe <, > o =.\n1 kg pesa lo mismo que dos pesas de ½ kg.", ejercicios };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 2, 4);
+    const { cel, cw, ch } = p.rejilla(TOP, 2, Math.ceil(act.ejercicios.length / 2)), esc = Math.max(1, Math.min(1.3, ch / 140));   // las pesas crecen con la tarjeta
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], { izq, der } = e.datos;
       p.marco(x, y, cw, ch, i);
@@ -42,9 +46,9 @@ export default registrar({
       [izq, der].forEach(([k, m], s) => {
         let yy = base + 1.5;
         for (let j = 0; j < k + m; j++) {   // primero las de 1 kg (abajo) y encima las de ½ kg
-          const grande = j < k, w = grande ? 40 : 30, h = grande ? 14 : 11;
+          const grande = j < k, w = (grande ? 40 : 30) * esc, h = (grande ? 14 : 11) * esc;
           p.rrect(cx[s] - w / 2, yy, w, h, 2, { lw: 1.3 });
-          p.text(cx[s], yy + h / 2 - 3, grande ? "1 kg" : "½ kg", grande ? 9 : 8, { f: "PB", anchor: "middle" });
+          p.text(cx[s], yy + h / 2 - 3 * esc, grande ? "1 kg" : "½ kg", (grande ? 9 : 8) * esc, { f: "PB", anchor: "middle" });
           yy += h + 1;
         }
       });

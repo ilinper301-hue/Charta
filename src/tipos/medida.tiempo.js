@@ -5,14 +5,18 @@
 //           2.º · equivalencias → { tipo: "equiv", a: [n, unidad], b: unidad } («1 hora = ▢ minutos») · huecos: [n']
 //           2.º · horas → { tipo: "hora", h, m (0 | 30), k (1–3), dentro (bool) } (sin pasar de las 12) · huecos: [h', "00" | "30"]
 // Opción modo: null (días de la semana) | "meses" · 2.º: "equivalencias" (12; media 6) | "horas" (antes y después: 8; media 4). Días: 6 filas (media 3). Meses: ordenar los 12 + 6 preguntas «después de…» (media: solo ordenar).
+// Cantidad (rejilla elástica; «meses» no cambia: es un bloque fijo): «Más grandes» = los de siempre (tarjetas que llenan el panel; la operación y el reloj crecen hasta ×1,3);
+//   «Más ejercicios» = las filas que caben: días (tarjetas ≥ 80 pt) 6/3 → 7/4; equivalencias (≥ 54 pt) 12/6 → 22/10; horas (≥ 132 pt) 8/4 → 10/4.
 import { registrar } from "../nucleo/tipos.js";
-import { TOP, W, M, T, B } from "../render/papel.js";
+import { TOP, W, M, T, B, cuantosRejilla } from "../render/papel.js";
+import { cuantos, pintarEl, MIN_OP } from "./_elastica.js";
 import { dibujarReloj } from "./medida.reloj.js";
 import { MESES } from "./medida.calendario.js";
 
 /** Equivalencias de 2.º: [unidad mayor (sing., pl.), unidad menor (sing., pl.), cuántas, multiplicadores]. */
 const EQUIV = [[["hora", "horas"], ["minuto", "minutos"], 60, [1, 2, 3]], [["día", "días"], ["hora", "horas"], 24, [1, 2]],
   [["semana", "semanas"], ["día", "días"], 7, [1, 2, 3, 4]], [["año", "años"], ["mes", "meses"], 12, [1, 2]]];
+const MIN_DIAS = 80, MIN_HORAS = 132;   // alto mínimo de tarjeta con «Más ejercicios»
 const unidad = ([s, pl], n) => (n === 1 ? s : pl);
 /** Todas las equivalencias: «k mayor = ▢ menor» y al revés; más «media hora = 30 minutos». */
 function equivalencias() {
@@ -28,7 +32,7 @@ function equivalencias() {
 function generar2(modo, azar, cnt) {
   if (modo === "equivalencias") {
     const todas = equivalencias(), base = todas.filter((e) => e.base), resto = todas.filter((e) => !e.base);
-    const nb = cnt >= 12 ? 4 : 2, sel = azar.barajar([...azar.muestra(base, nb), ...azar.muestra(resto, cnt - nb)]);
+    const nb = cnt > 12 ? Math.max(4, cnt - resto.length) : cnt >= 12 ? 4 : 2, sel = azar.barajar([...azar.muestra(base, nb), ...azar.muestra(resto, cnt - nb)]);
     return { enunciado: "Escribe el número que falta.",
       ejercicios: sel.map(({ a, b, sol }) => ({ datos: { tipo: "equiv", a, b }, solucion: { huecos: [sol] } })) };
   }
@@ -65,10 +69,12 @@ export function chips2(p, cx, y, opts, maxw, fs = 10.5) {
 
 export default registrar({
   id: "medida.tiempo",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    if (params.modo === "equivalencias") return generar2(params.modo, azar, tamano === "media" ? 6 : 12);
-    if (params.modo === "horas") return generar2(params.modo, azar, tamano === "media" ? 4 : 8);
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const { tamano } = ctx;
+    if (params.modo === "equivalencias") return generar2(params.modo, azar, cuantos(ctx, 2, MIN_OP, [12, 6], equivalencias().length));
+    if (params.modo === "horas") return generar2(params.modo, azar, cuantosRejilla(ctx, 2, MIN_HORAS, [8, 4]));
     if (params.modo === "meses") {
       const orden = azar.barajar([...Array(12).keys()]);
       const ejercicios = [{ datos: { tipo: "orden", orden }, solucion: { huecos: orden.map((m) => m + 1) } }];
@@ -82,7 +88,7 @@ export default registrar({
       return { enunciado: "Escribe el orden de los meses y rodea el mes que viene después.", ejercicios };
     }
     const ejercicios = [];
-    for (let i = 0; i < (tamano === "media" ? 3 : 6); i++) {
+    for (let i = 0, cnt = cuantosRejilla(ctx, 1, MIN_DIAS, [6, 3]); i < cnt; i++) {
       let ds;
       do ds = azar.barajar([0, 1, 2, 3, 4, 5, 6]); while (ds.every((d, k) => d === k));
       ejercicios.push({ datos: { orden: ds }, solucion: { huecos: ds.map((d) => d + 1) } });
@@ -92,18 +98,13 @@ export default registrar({
   dibujar(p, act) {
     const top = TOP, es = act.ejercicios, t0 = es[0].datos.tipo;
     if (t0 === "equiv") {
-      const { cel, cw, ch } = p.celdas(top, 2, 6);
-      es.forEach((e, i) => p.ejercicio(e.id, () => {
-        const [x, y] = cel[i], { a, b } = e.datos;
-        p.marco(x, y, cw, ch);
-        p.linea(x, y, cw, ch, [T(`${a[0]} ${a[1]} =`, 16, "PM"), B(58, 36, e.solucion.huecos[0]), T(b, 16, "PM")], 8);
-      }));
+      pintarEl(p, 2, es.map((e) => [T(`${e.datos.a[0]} ${e.datos.a[1]} =`, 16, "PM"), B(58, 36, e.solucion.huecos[0]), T(e.datos.b, 16, "PM")]), es.map((e) => e.id), es.length / 2);
       return;
     }
     if (t0 === "hora") {
-      const { cel, cw, ch } = p.celdas(top, 2, 4);
+      const { cel, cw, ch } = p.rejilla(top, 2, Math.ceil(es.length / 2));
       es.forEach((e, i) => p.ejercicio(e.id, () => {
-        const [x, y] = cel[i], { h, m, k, dentro } = e.datos, [sh, sm] = e.solucion.huecos, r = Math.min(46, ch * 0.3);
+        const [x, y] = cel[i], { h, m, k, dentro } = e.datos, [sh, sm] = e.solucion.huecos, r = Math.min(60, ch * 0.3);   // el reloj crece con la tarjeta (hasta ×1,3)
         p.marco(x, y, cw, ch, i);
         dibujarReloj(p, x + 18 + r, y + ch / 2 - 6, r, h, m);
         const xt = x + 30 + 2 * r, wt = cw - (xt - x) - 8;
@@ -134,14 +135,15 @@ export default registrar({
       }
       return;
     }
-    const rows = 6, GY = 10, rh = (top - M - (rows - 1) * GY) / rows, colw = (W - 2 * M - 20) / 7;
+    const { cel, ch: rh } = p.rejilla(top, 1, es.length), colw = (W - 2 * M - 20) / 7;
+    const f = Math.max(1, Math.min(1.25, (rh - 30) / 80)), bh = 36 * f, off = (rh - bh - 22 * f) / 2;   // casilla y nombre del día, centrados en la tarjeta (crecen hasta ×1,25)
     es.forEach((e, i) => p.ejercicio(e.id, () => {
-      const y = top - (i + 1) * rh - i * GY;
+      const y = cel[i][1];
       p.marco(M, y, W - 2 * M, rh);
       e.datos.orden.forEach((d, j) => {
         const x = M + 10 + j * colw;
-        p.text(x + colw / 2, y + rh - 32, DIAS[d], 12.5, { f: "PM", anchor: "middle" });
-        p.caja(x + colw / 2 - 20, y + 16, 40, 36, null, 22, e.solucion.huecos[j]);
+        p.text(x + colw / 2, y + off + bh + 9 * f, DIAS[d], 12.5 * f, { f: "PM", anchor: "middle" });
+        p.caja(x + colw / 2 - 20 * f, y + off, 40 * f, bh, null, 22, e.solucion.huecos[j]);
       });
     }));
   },
