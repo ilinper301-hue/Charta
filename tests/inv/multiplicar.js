@@ -3,8 +3,9 @@ import assert from "node:assert/strict";
 import { ent, unicos, cuantos } from "./_ayuda.js";
 
 const X = "×";
-/** Tablas de la opción `tablas` (None = 2, 5 y 10; "todas" = 2, 3, 4, 5 y 10; "n" = solo la n). */
-const tablas = (v) => (v == null ? [2, 5, 10] : v === "todas" ? [2, 3, 4, 5, 10] : [Number(v)]);
+/** Tablas de la opción `tablas` (None = 2, 5 y 10; "todas" = 2, 3, 4, 5 y 10; "2a10" = del 2 al 10; "n" = solo la n). */
+const tablas = (v) => (v == null ? [2, 5, 10] : v === "todas" ? [2, 3, 4, 5, 10] : v === "2a10" ? [2, 3, 4, 5, 6, 7, 8, 9, 10] : [Number(v)]);
+const cifras = (n) => String(n).split("").map(Number);
 
 export default {
   "multiplicar.grupos"(act, tam) {
@@ -97,6 +98,61 @@ export default {
       ent(k, 2, 5, "niños"); ent(q, 2, 6, "a cada uno"); ent(k * q, 4, 30, "total");
       assert.deepEqual(huecos, [q]);
       assert.ok(texto.includes(`Reparte ${k * q} ${obj} entre ${k} `) && texto.endsWith("a cada uno?") && !/[÷:]/.test(texto), "texto: " + texto);
+    }
+  },
+  // ---- 3.º · lote 3
+  "multiplicar.vertical"(act, tam) {
+    const es = act.ejercicios, n = act.params.cifras === 3 ? 3 : 2, nivel = act.params.nivel || "sin", cnt = tam === "media" ? 6 : 12;
+    cuantos(es, cnt);
+    unicos(es, (e) => e.datos.a + "," + e.datos.b, "operación repetida");
+    const lleva = (a, b) => { let c = 0; const l = cifras(a).reverse().map((d) => (c = Math.floor((d * b + c) / 10))); return l.slice(0, -1).some((v) => v > 0); };
+    for (const { datos: { a, b }, solucion: { huecos } } of es) {
+      ent(a, n === 2 ? 11 : 102, n === 2 ? 99 : 999, "a"); ent(b, 2, 9, "b");
+      assert.notEqual(a % 10, 0, "a acaba en cero");
+      assert.equal(String(a).length, n, "cifras de a");
+      assert.deepEqual(huecos, cifras(a * b), "cifras del producto");
+      assert.ok(huecos.length === n || huecos.length === n + 1, "columnas del producto");
+      const con = cifras(a).some((d) => d * b >= 10);   // alguna cifra por b ≥ 10 ⇒ hay llevada (la de la última cifra sale en el producto)
+      if (nivel === "sin") assert.ok(!con && !lleva(a, b), `con llevada en «sin»: ${a} ${X} ${b}`);
+      if (nivel === "con") assert.ok(lleva(a, b), `sin llevada escrita en «con»: ${a} ${X} ${b}`);
+    }
+    if (nivel === "mezcla") assert.equal(es.filter((e) => lleva(e.datos.a, e.datos.b)).length, cnt / 2, "mezcla: mitad con llevada");
+    const porB = {}; for (const e of es) porB[e.datos.b] = (porB[e.datos.b] ?? 0) + 1;
+    assert.ok(Math.max(...Object.values(porB)) <= Math.ceil(cnt / Object.keys(porB).length) + 1 || Object.keys(porB).length < 3, "un b se repite demasiado");
+  },
+  "multiplicar.por10"(act, tam) {
+    const es = act.ejercicios, modo = act.params.modo ?? null, por = act.params.por == null ? null : Number(act.params.por), media = tam === "media";
+    assert.ok(es.length >= (media ? 8 : 16) && es.length % 2 === 0, `ejercicios: ${es.length}`);
+    unicos(es, (e) => e.datos.a + "," + e.datos.f, "operación repetida");
+    const fs = new Set();
+    for (const { datos: { a, f, falta }, solucion: { huecos } } of es) {
+      assert.ok([10, 100, 1000].includes(f), "factor"); fs.add(f);
+      if (por) assert.equal(f, por, "factor distinto del pedido");
+      ent(a, 2, f === 10 ? 999 : f === 100 ? 99 : 9, "a");
+      assert.ok(a < 11 || a % 10 !== 0, "a acaba en cero");
+      ent(a * f, 20, 9999, "resultado");
+      assert.equal(huecos.length, 1);
+      if (modo === "hueco") { assert.ok(falta === 0 || falta === 1); assert.deepEqual(huecos, [falta === 0 ? a : f]); }
+      else { assert.equal(falta, null); assert.deepEqual(huecos, [a * f]); }
+    }
+    if (!por) assert.equal(fs.size, 3, "mezcla: los tres factores");
+  },
+  "multiplicar.dobletriple"(act, tam) {
+    const es = act.ejercicios, modo = act.params.modo ?? null, media = tam === "media";
+    const permitidas = modo === "todo" ? ["doble", "triple", "mitad", "tercio"] : modo === "mitad" ? ["mitad", "tercio"] : ["doble", "triple"];
+    assert.ok(es.length >= (media ? 8 : 16) && es.length % 2 === 0, `ejercicios: ${es.length}`);
+    unicos(es, (e) => e.datos.tarea + e.datos.n, "repetido");
+    const veces = {}; for (const e of es) veces[e.datos.tarea] = (veces[e.datos.tarea] ?? 0) + 1;
+    assert.deepEqual(Object.keys(veces).sort(), [...permitidas].sort(), "tareas");
+    assert.ok(Math.max(...Object.values(veces)) - Math.min(...Object.values(veces)) <= 1, "tareas repartidas por turnos");
+    for (const { datos: { tarea, n }, solucion: { huecos } } of es) {
+      assert.ok(permitidas.includes(tarea));
+      assert.equal(huecos.length, 1);
+      if (tarea === "doble") { ent(n, 11, 4900, "n"); assert.equal(huecos[0], n * 2); }
+      if (tarea === "triple") { ent(n, 11, 3300, "n"); assert.equal(huecos[0], n * 3); }
+      if (tarea === "mitad") { ent(n, 12, 9800, "n"); assert.equal(n % 2, 0); assert.equal(huecos[0] * 2, n); }
+      if (tarea === "tercio") { ent(n, 12, 9900, "n"); assert.equal(n % 3, 0); assert.equal(huecos[0] * 3, n); }
+      ent(huecos[0], 4, 9999, "resultado");
     }
   },
 };

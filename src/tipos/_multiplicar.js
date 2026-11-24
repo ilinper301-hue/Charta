@@ -5,14 +5,17 @@ import { INK, COLOR_SOLUCION } from "../render/papel.js";
 export const POR = "×";
 /** Tablas que se trabajan en 2.º. */
 export const TABLAS = [2, 3, 4, 5, 10];
+/** 3.º (MATES_3.md, lote 3): todas las tablas, del 2 al 10. */
+export const TABLAS_3 = [2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-/** Opción `tablas` → lista de tablas: None = 2, 5 y 10; "todas" = 2, 3, 4, 5 y 10; "3" = solo la del 3. */
+/** Opción `tablas` → lista de tablas: None = 2, 5 y 10; "todas" = 2, 3, 4, 5 y 10; "2a10" = del 2 al 10 (3.º); "3" = solo la del 3 (en 3.º, también 6–9). */
 export function tablasDe(params) {
   const v = params?.tablas ?? null;
   if (v === null || v === undefined) return [2, 5, 10];
   if (v === "todas") return [...TABLAS];
+  if (v === "2a10") return [...TABLAS_3];
   const n = Number(v);
-  if (!TABLAS.includes(n)) throw new Error(`Tabla no permitida: ${v}`);
+  if (!TABLAS_3.includes(n)) throw new Error(`Tabla no permitida: ${v}`);
   return [n];
 }
 

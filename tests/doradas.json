@@ -14960,6 +14960,242 @@
    "f4a88f0df45507b7"
   ]
  },
+ "multiplicar.dobletriple": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Doble, triple, mitad y tercio",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "multiplicar.dobletriple",
+       "tipoVersion": 1,
+       "params": {
+        "modo": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Calcula y escribe el resultado en el cuadro gris.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "tarea": "doble",
+          "n": 32
+         },
+         "solucion": {
+          "huecos": [
+           64
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "tarea": "triple",
+          "n": 21
+         },
+         "solucion": {
+          "huecos": [
+           63
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "tarea": "doble",
+          "n": 171
+         },
+         "solucion": {
+          "huecos": [
+           342
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "tarea": "triple",
+          "n": 125
+         },
+         "solucion": {
+          "huecos": [
+           375
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "tarea": "doble",
+          "n": 2000
+         },
+         "solucion": {
+          "huecos": [
+           4000
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "tarea": "triple",
+          "n": 3000
+         },
+         "solucion": {
+          "huecos": [
+           9000
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "tarea": "doble",
+          "n": 13
+         },
+         "solucion": {
+          "huecos": [
+           26
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "tarea": "triple",
+          "n": 25
+         },
+         "solucion": {
+          "huecos": [
+           75
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "tarea": "doble",
+          "n": 166
+         },
+         "solucion": {
+          "huecos": [
+           332
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "tarea": "triple",
+          "n": 139
+         },
+         "solucion": {
+          "huecos": [
+           417
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "tarea": "doble",
+          "n": 4800
+         },
+         "solucion": {
+          "huecos": [
+           9600
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "tarea": "triple",
+          "n": 1800
+         },
+         "solucion": {
+          "huecos": [
+           5400
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "tarea": "doble",
+          "n": 30
+         },
+         "solucion": {
+          "huecos": [
+           60
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "tarea": "triple",
+          "n": 29
+         },
+         "solucion": {
+          "huecos": [
+           87
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "tarea": "doble",
+          "n": 421
+         },
+         "solucion": {
+          "huecos": [
+           842
+          ]
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "tarea": "triple",
+          "n": 311
+         },
+         "solucion": {
+          "huecos": [
+           933
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "3ac8a1edc17abbf4"
+  ],
+  "svgSolucion": [
+   "0d274e0ce3da7159"
+  ]
+ },
  "multiplicar.filas": {
   "ficha": {
    "schemaVersion": 1,
@@ -15254,6 +15490,259 @@
   ],
   "svgSolucion": [
    "62f7daa4169072a0"
+  ]
+ },
+ "multiplicar.por10": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Por 10, 100 y 1000",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "multiplicar.por10",
+       "tipoVersion": 1,
+       "params": {
+        "por": null,
+        "modo": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Calcula y escribe el resultado en el cuadro gris.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "a": 9,
+          "f": 100,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           900
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "a": 4,
+          "f": 10,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           40
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "a": 33,
+          "f": 100,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           3300
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": 47,
+          "f": 10,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           470
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "a": 4,
+          "f": 100,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           400
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": 38,
+          "f": 10,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           380
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "a": 42,
+          "f": 10,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           420
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "a": 791,
+          "f": 10,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           7910
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "a": 54,
+          "f": 100,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           5400
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "a": 6,
+          "f": 10,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           60
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "a": 8,
+          "f": 1000,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           8000
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "a": 9,
+          "f": 1000,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           9000
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "a": 4,
+          "f": 1000,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           4000
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "a": 8,
+          "f": 10,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           80
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "a": 5,
+          "f": 100,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           500
+          ]
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "a": 149,
+          "f": 10,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           1490
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "df354a1973d46f26"
+  ],
+  "svgSolucion": [
+   "303696d97be390ec"
   ]
  },
  "multiplicar.problemas": {
@@ -15831,6 +16320,207 @@
   ],
   "svgSolucion": [
    "14188cace83b6663"
+  ]
+ },
+ "multiplicar.vertical": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Multiplicaciones en vertical",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "multiplicar.vertical",
+       "tipoVersion": 1,
+       "params": {
+        "cifras": null,
+        "nivel": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Multiplica de derecha a izquierda y escribe las llevadas.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "a": 11,
+          "b": 6
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "a": 21,
+          "b": 2
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "a": 13,
+          "b": 3
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": 23,
+          "b": 2
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "a": 22,
+          "b": 4
+         },
+         "solucion": {
+          "huecos": [
+           8,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": 32,
+          "b": 3
+         },
+         "solucion": {
+          "huecos": [
+           9,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "a": 11,
+          "b": 9
+         },
+         "solucion": {
+          "huecos": [
+           9,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "a": 12,
+          "b": 3
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "a": 11,
+          "b": 7
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "a": 21,
+          "b": 4
+         },
+         "solucion": {
+          "huecos": [
+           8,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "a": 11,
+          "b": 5
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "a": 42,
+          "b": 2
+         },
+         "solucion": {
+          "huecos": [
+           8,
+           4
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "32a2d6f9c4fc384c"
+  ],
+  "svgSolucion": [
+   "d26b7d340d7abb1d"
   ]
  },
  "orden.cantidad": {
@@ -78986,6 +79676,2045 @@
   ],
   "svgSolucion": [
    "27518928e9ffcc0f"
+  ]
+ },
+ "3.º multiplicar vertical (3 cifras, mezcla)": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Multiplicaciones en vertical",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "multiplicar.vertical",
+       "tipoVersion": 1,
+       "params": {
+        "cifras": 3,
+        "nivel": "mezcla",
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Multiplica de derecha a izquierda y escribe las llevadas.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "a": 858,
+          "b": 5
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           2,
+           9,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "a": 109,
+          "b": 6
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           5,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "a": 448,
+          "b": 6
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           6,
+           8,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": 332,
+          "b": 3
+         },
+         "solucion": {
+          "huecos": [
+           9,
+           9,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "a": 132,
+          "b": 2
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           6,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": 123,
+          "b": 3
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           6,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "a": 247,
+          "b": 6
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           4,
+           8,
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "a": 111,
+          "b": 5
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           5,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "a": 211,
+          "b": 2
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           2,
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "a": 122,
+          "b": 5
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           1,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "a": 441,
+          "b": 2
+         },
+         "solucion": {
+          "huecos": [
+           8,
+           8,
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "a": 102,
+          "b": 9
+         },
+         "solucion": {
+          "huecos": [
+           9,
+           1,
+           8
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "0ddf2c830eb50f6a"
+  ],
+  "svgSolucion": [
+   "bc918a91742a369b"
+  ]
+ },
+ "3.º multiplicar vertical y por 10 en media": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Multiplicaciones en vertical y por 10, 100 y 1000",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "multiplicar.vertical",
+       "tipoVersion": 1,
+       "params": {
+        "cifras": null,
+        "nivel": "con",
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Multiplica de derecha a izquierda y escribe las llevadas.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "a": 25,
+          "b": 8
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           0,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "a": 46,
+          "b": 6
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           7,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "a": 12,
+          "b": 8
+         },
+         "solucion": {
+          "huecos": [
+           9,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": 34,
+          "b": 6
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           0,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "a": 29,
+          "b": 4
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           1,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": 98,
+          "b": 4
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           9,
+           2
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "multiplicar.por10",
+       "tipoVersion": 1,
+       "params": {
+        "por": null,
+        "modo": null,
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "verde",
+       "enunciado": "Calcula y escribe el resultado en el cuadro gris.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "a": 82,
+          "f": 10,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           820
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "a": 9,
+          "f": 10,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           90
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "a": 3,
+          "f": 100,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           300
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "a": 6,
+          "f": 1000,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           6000
+          ]
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "a": 961,
+          "f": 10,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           9610
+          ]
+         }
+        },
+        {
+         "id": "a2e6",
+         "datos": {
+          "a": 5,
+          "f": 10,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           50
+          ]
+         }
+        },
+        {
+         "id": "a2e7",
+         "datos": {
+          "a": 57,
+          "f": 100,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           5700
+          ]
+         }
+        },
+        {
+         "id": "a2e8",
+         "datos": {
+          "a": 4,
+          "f": 100,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           400
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "6bf884f8e659bdfc"
+  ],
+  "svgSolucion": [
+   "15c6fde4528ce87b"
+  ]
+ },
+ "3.º por 10, 100 y 1000 con hueco": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Por 10, 100 y 1000",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "multiplicar.por10",
+       "tipoVersion": 1,
+       "params": {
+        "por": null,
+        "modo": "hueco",
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Escribe el número que falta.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "a": 9,
+          "f": 100,
+          "falta": 0
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "a": 8,
+          "f": 10,
+          "falta": 0
+         },
+         "solucion": {
+          "huecos": [
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "a": 3,
+          "f": 100,
+          "falta": 1
+         },
+         "solucion": {
+          "huecos": [
+           100
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": 42,
+          "f": 10,
+          "falta": 0
+         },
+         "solucion": {
+          "huecos": [
+           42
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "a": 23,
+          "f": 10,
+          "falta": 1
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": 5,
+          "f": 10,
+          "falta": 0
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "a": 8,
+          "f": 100,
+          "falta": 1
+         },
+         "solucion": {
+          "huecos": [
+           100
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "a": 3,
+          "f": 10,
+          "falta": 0
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "a": 22,
+          "f": 100,
+          "falta": 0
+         },
+         "solucion": {
+          "huecos": [
+           22
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "a": 769,
+          "f": 10,
+          "falta": 0
+         },
+         "solucion": {
+          "huecos": [
+           769
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "a": 962,
+          "f": 10,
+          "falta": 1
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "a": 5,
+          "f": 1000,
+          "falta": 1
+         },
+         "solucion": {
+          "huecos": [
+           1000
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "a": 3,
+          "f": 1000,
+          "falta": 0
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "a": 8,
+          "f": 1000,
+          "falta": 1
+         },
+         "solucion": {
+          "huecos": [
+           1000
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "a": 48,
+          "f": 100,
+          "falta": 1
+         },
+         "solucion": {
+          "huecos": [
+           100
+          ]
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "a": 92,
+          "f": 10,
+          "falta": 1
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "16705edaee25cce0"
+  ],
+  "svgSolucion": [
+   "43ec0dfb4060c1f2"
+  ]
+ },
+ "3.º más ejercicios: por 10 y doble/triple": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Por 10, 100 y 1000",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "multiplicar.por10",
+       "tipoVersion": 1,
+       "params": {
+        "por": "100",
+        "modo": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Calcula y escribe el resultado en el cuadro gris.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "a": 18,
+          "f": 100,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           1800
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "a": 12,
+          "f": 100,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           1200
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "a": 85,
+          "f": 100,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           8500
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": 69,
+          "f": 100,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           6900
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "a": 8,
+          "f": 100,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           800
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": 5,
+          "f": 100,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           500
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "a": 6,
+          "f": 100,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           600
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "a": 11,
+          "f": 100,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           1100
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "a": 7,
+          "f": 100,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           700
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "a": 84,
+          "f": 100,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           8400
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "a": 53,
+          "f": 100,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           5300
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "a": 2,
+          "f": 100,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           200
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "a": 9,
+          "f": 100,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           900
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "a": 4,
+          "f": 100,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           400
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "a": 96,
+          "f": 100,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           9600
+          ]
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "a": 72,
+          "f": 100,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           7200
+          ]
+         }
+        },
+        {
+         "id": "a1e17",
+         "datos": {
+          "a": 83,
+          "f": 100,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           8300
+          ]
+         }
+        },
+        {
+         "id": "a1e18",
+         "datos": {
+          "a": 19,
+          "f": 100,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           1900
+          ]
+         }
+        },
+        {
+         "id": "a1e19",
+         "datos": {
+          "a": 3,
+          "f": 100,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           300
+          ]
+         }
+        },
+        {
+         "id": "a1e20",
+         "datos": {
+          "a": 45,
+          "f": 100,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           4500
+          ]
+         }
+        },
+        {
+         "id": "a1e21",
+         "datos": {
+          "a": 94,
+          "f": 100,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           9400
+          ]
+         }
+        },
+        {
+         "id": "a1e22",
+         "datos": {
+          "a": 42,
+          "f": 100,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           4200
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "67e0d89b33b5c1e9"
+  ],
+  "svgSolucion": [
+   "a62618b84b025d05"
+  ]
+ },
+ "3.º doble, triple, mitad y tercio": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Doble, triple, mitad y tercio",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "multiplicar.dobletriple",
+       "tipoVersion": 1,
+       "params": {
+        "modo": "todo",
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Calcula y escribe el resultado en el cuadro gris.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "tarea": "doble",
+          "n": 19
+         },
+         "solucion": {
+          "huecos": [
+           38
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "tarea": "triple",
+          "n": 19
+         },
+         "solucion": {
+          "huecos": [
+           57
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "tarea": "mitad",
+          "n": 96
+         },
+         "solucion": {
+          "huecos": [
+           48
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "tarea": "tercio",
+          "n": 12
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "tarea": "doble",
+          "n": 156
+         },
+         "solucion": {
+          "huecos": [
+           312
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "tarea": "triple",
+          "n": 81
+         },
+         "solucion": {
+          "huecos": [
+           243
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "tarea": "mitad",
+          "n": 422
+         },
+         "solucion": {
+          "huecos": [
+           211
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "tarea": "tercio",
+          "n": 117
+         },
+         "solucion": {
+          "huecos": [
+           39
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "tarea": "doble",
+          "n": 1500
+         },
+         "solucion": {
+          "huecos": [
+           3000
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "tarea": "triple",
+          "n": 1000
+         },
+         "solucion": {
+          "huecos": [
+           3000
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "tarea": "mitad",
+          "n": 9600
+         },
+         "solucion": {
+          "huecos": [
+           4800
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "tarea": "tercio",
+          "n": 8700
+         },
+         "solucion": {
+          "huecos": [
+           2900
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "tarea": "doble",
+          "n": 43
+         },
+         "solucion": {
+          "huecos": [
+           86
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "tarea": "triple",
+          "n": 15
+         },
+         "solucion": {
+          "huecos": [
+           45
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "tarea": "mitad",
+          "n": 78
+         },
+         "solucion": {
+          "huecos": [
+           39
+          ]
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "tarea": "tercio",
+          "n": 78
+         },
+         "solucion": {
+          "huecos": [
+           26
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "9ef560c7706b66a0"
+  ],
+  "svgSolucion": [
+   "30e2f2161f5ca846"
+  ]
+ },
+ "3.º más ejercicios en media: doble/triple y mitad/tercio": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Doble, triple, mitad y tercio",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "multiplicar.dobletriple",
+       "tipoVersion": 1,
+       "params": {
+        "modo": null,
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "rosa",
+       "enunciado": "Calcula y escribe el resultado en el cuadro gris.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "tarea": "doble",
+          "n": 19
+         },
+         "solucion": {
+          "huecos": [
+           38
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "tarea": "triple",
+          "n": 19
+         },
+         "solucion": {
+          "huecos": [
+           57
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "tarea": "doble",
+          "n": 488
+         },
+         "solucion": {
+          "huecos": [
+           976
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "tarea": "triple",
+          "n": 36
+         },
+         "solucion": {
+          "huecos": [
+           108
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "tarea": "doble",
+          "n": 1900
+         },
+         "solucion": {
+          "huecos": [
+           3800
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "tarea": "triple",
+          "n": 1300
+         },
+         "solucion": {
+          "huecos": [
+           3900
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "tarea": "doble",
+          "n": 25
+         },
+         "solucion": {
+          "huecos": [
+           50
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "tarea": "triple",
+          "n": 11
+         },
+         "solucion": {
+          "huecos": [
+           33
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "tarea": "doble",
+          "n": 109
+         },
+         "solucion": {
+          "huecos": [
+           218
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "tarea": "triple",
+          "n": 34
+         },
+         "solucion": {
+          "huecos": [
+           102
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "multiplicar.dobletriple",
+       "tipoVersion": 1,
+       "params": {
+        "modo": "mitad",
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Calcula y escribe el resultado en el cuadro gris.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "tarea": "mitad",
+          "n": 92
+         },
+         "solucion": {
+          "huecos": [
+           46
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "tarea": "tercio",
+          "n": 30
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "tarea": "mitad",
+          "n": 554
+         },
+         "solucion": {
+          "huecos": [
+           277
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "tarea": "tercio",
+          "n": 828
+         },
+         "solucion": {
+          "huecos": [
+           276
+          ]
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "tarea": "mitad",
+          "n": 4000
+         },
+         "solucion": {
+          "huecos": [
+           2000
+          ]
+         }
+        },
+        {
+         "id": "a2e6",
+         "datos": {
+          "tarea": "tercio",
+          "n": 5700
+         },
+         "solucion": {
+          "huecos": [
+           1900
+          ]
+         }
+        },
+        {
+         "id": "a2e7",
+         "datos": {
+          "tarea": "mitad",
+          "n": 96
+         },
+         "solucion": {
+          "huecos": [
+           48
+          ]
+         }
+        },
+        {
+         "id": "a2e8",
+         "datos": {
+          "tarea": "tercio",
+          "n": 54
+         },
+         "solucion": {
+          "huecos": [
+           18
+          ]
+         }
+        },
+        {
+         "id": "a2e9",
+         "datos": {
+          "tarea": "mitad",
+          "n": 406
+         },
+         "solucion": {
+          "huecos": [
+           203
+          ]
+         }
+        },
+        {
+         "id": "a2e10",
+         "datos": {
+          "tarea": "tercio",
+          "n": 957
+         },
+         "solucion": {
+          "huecos": [
+           319
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "f0cefd0f289d2dbd"
+  ],
+  "svgSolucion": [
+   "81351325c5da7be9"
+  ]
+ },
+ "3.º tablas del 6 al 9 y todas": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Las tablas",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "multiplicar.tablas",
+       "tipoVersion": 2,
+       "params": {
+        "tablas": "7",
+        "modo": null,
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Calcula y escribe el resultado en el cuadro gris.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "a": 7,
+          "b": 4,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           28
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "a": 7,
+          "b": 2,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           14
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "a": 7,
+          "b": 7,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           49
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": 7,
+          "b": 8,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           56
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "a": 7,
+          "b": 9,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           63
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": 7,
+          "b": 5,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           35
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "a": 6,
+          "b": 7,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           42
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "a": 9,
+          "b": 7,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           63
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "a": 7,
+          "b": 3,
+          "falta": null
+         },
+         "solucion": {
+          "huecos": [
+           21
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "multiplicar.tablas",
+       "tipoVersion": 2,
+       "params": {
+        "tablas": "2a10",
+        "modo": "hueco",
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "verde",
+       "enunciado": "Escribe el número que falta en cada multiplicación.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "a": 8,
+          "b": 5,
+          "falta": 1
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "a": 2,
+          "b": 10,
+          "falta": 0
+         },
+         "solucion": {
+          "huecos": [
+           2
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "a": 1,
+          "b": 7,
+          "falta": 0
+         },
+         "solucion": {
+          "huecos": [
+           1
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "a": 4,
+          "b": 8,
+          "falta": 1
+         },
+         "solucion": {
+          "huecos": [
+           8
+          ]
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "a": 8,
+          "b": 6,
+          "falta": 1
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a2e6",
+         "datos": {
+          "a": 9,
+          "b": 9,
+          "falta": 0
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        },
+        {
+         "id": "a2e7",
+         "datos": {
+          "a": 5,
+          "b": 4,
+          "falta": 1
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a2e8",
+         "datos": {
+          "a": 9,
+          "b": 8,
+          "falta": 1
+         },
+         "solucion": {
+          "huecos": [
+           8
+          ]
+         }
+        },
+        {
+         "id": "a2e9",
+         "datos": {
+          "a": 6,
+          "b": 1,
+          "falta": 0
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a2e10",
+         "datos": {
+          "a": 5,
+          "b": 2,
+          "falta": 0
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a2e11",
+         "datos": {
+          "a": 3,
+          "b": 3,
+          "falta": 1
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a2e12",
+         "datos": {
+          "a": 4,
+          "b": 1,
+          "falta": 1
+         },
+         "solucion": {
+          "huecos": [
+           1
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "9ce546dd56159504"
+  ],
+  "svgSolucion": [
+   "9657f6da3d3446fc"
+  ]
+ },
+ "3.º problemas de multiplicar con la tabla del 8": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Problemas de multiplicar",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "multiplicar.problemas",
+       "tipoVersion": 1,
+       "params": {
+        "tablas": "8",
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Lee, escribe la operación y contesta.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "texto": "En cada mesa se sientan 8 niños. Hay 10 mesas. ¿Cuántos niños hay en total?",
+          "a": 10,
+          "b": 8,
+          "op": "×",
+          "obj": "niños"
+         },
+         "solucion": {
+          "huecos": [
+           10,
+           "×",
+           8,
+           80,
+           80
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "texto": "Un paquete trae 10 lápices. ¿Cuántos lápices hay en 8 paquetes?",
+          "a": 8,
+          "b": 10,
+          "op": "×",
+          "obj": "lápices"
+         },
+         "solucion": {
+          "huecos": [
+           8,
+           "×",
+           10,
+           80,
+           80
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "texto": "En el salón hay 8 filas de 5 sillas. ¿Cuántas sillas hay en total?",
+          "a": 8,
+          "b": 5,
+          "op": "×",
+          "obj": "sillas"
+         },
+         "solucion": {
+          "huecos": [
+           8,
+           "×",
+           5,
+           40,
+           40
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "texto": "Cada niño tiene 4 juguetes y hay 8 niños. ¿Cuántos juguetes tienen entre todos?",
+          "a": 8,
+          "b": 4,
+          "op": "×",
+          "obj": "juguetes"
+         },
+         "solucion": {
+          "huecos": [
+           8,
+           "×",
+           4,
+           32,
+           32
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "753a95ab85ac66b0"
+  ],
+  "svgSolucion": [
+   "5655de0ce978dee9"
   ]
  },
  "más ejercicios: multiplicar.grupos": {

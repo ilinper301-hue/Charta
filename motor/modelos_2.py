@@ -119,6 +119,14 @@ OPCIONES_2.update({
 EN_2["estadistica.barras"] = None
 
 
+# 3.º · lote 3: todas las tablas (del 6 al 9 y «del 2 al 10»); solo desde 3.º (`curso`)
+TABLAS_3 = [{"valor": str(t), "etiqueta": f"Del {t}", "curso": 3} for t in (6, 7, 8, 9)] + [{"valor": "2a10", "etiqueta": "Todas, del 2 al 10", "curso": 3}]
+OPCIONES_2.update({
+    "multiplicar.tablas": {"valores": {"tablas": TABLAS_3}},
+    "multiplicar.problemas": {"valores": {"tablas": TABLAS_3}},
+})
+
+
 def opciones_2(m):
     """Opciones del modelo (dict del catálogo) con las de tres cifras añadidas (lista nueva; m no cambia)."""
     extra = OPCIONES_2.get(m["id"])

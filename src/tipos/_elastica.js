@@ -24,13 +24,13 @@ export function sinRepetir(ctx, lista, cols, fijo, clave) {
 /** Los items de p.linea() ampliados ×k (letra, cajas y huecos a la par); k = 1 no toca nada. */
 export const crecer = (its, k) => (k === 1 ? its : its.map((it) => (it.t === "t" ? { ...it, fs: it.fs * k } : { ...it, w: it.w * k, h: it.h * k })));
 
-/** Rejilla elástica de operaciones: filas = [items de linea()…]; filasOrig = filas de la rejilla de siempre (p.n(): la mitad en media), para no estirar las tarjetas de un banco corto. */
-export function pintarEl(p, cols, filas, ids, filasOrig, GY = 8, gap = 8) {
+/** Rejilla elástica de operaciones: filas = [items de linea()…]; filasOrig = filas de la rejilla de siempre (p.n(): la mitad en media), para no estirar las tarjetas de un banco corto; kMax = tope de crecimiento (1,3; 1 = la letra no crece, deja aire en los renglones largos). */
+export function pintarEl(p, cols, filas, ids, filasOrig, GY = 8, gap = 8, kMax = 1.3) {
   const rows = Math.max(Math.ceil(filas.length / cols), p.n(filasOrig));
   const { cel, cw, ch } = p.rejilla(TOP, cols, rows, 10, GY);
   const ancho = (its) => its.reduce((t, it) => t + (it.t === "t" ? p.ancho(it.s, it.f, it.fs) : it.w), 0);
   const cabe = Math.min(...filas.map((its) => (cw - 10 - gap * (its.length - 1)) / ancho(its)));
-  const k = Math.max(1, Math.min(1.3, (ch - 24) / 38, cabe));   // la operación crece con la tarjeta (letra y casilla a la par), nunca por debajo de la de siempre
+  const k = Math.max(1, Math.min(kMax, (ch - 24) / 38, cabe));   // la operación crece con la tarjeta (letra y casilla a la par), nunca por debajo de la de siempre
   const gr = (its) => crecer(its, k);
   filas.forEach((its, i) => p.ejercicio(ids[i], () => {
     const [x, y] = cel[i];

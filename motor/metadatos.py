@@ -143,6 +143,10 @@ META = {
     "multiplicar.tablas": (2, 12, "multiplicar tablas cálculo_mental factor"),
     "multiplicar.problemas": (3, 15, "multiplicar problemas texto razonamiento grupos_iguales"),
     "multiplicar.reparto": (3, 10, "repartir mitad tercio partes_iguales división"),
+    # 3.º · lote 3 · multiplicar
+    "multiplicar.vertical": (3, 15, "multiplicar vertical llevadas algoritmo una_cifra"),
+    "multiplicar.por10": (3, 10, "multiplicar por_10 por_100 por_1000 ceros cálculo_mental"),
+    "multiplicar.dobletriple": (3, 10, "doble triple mitad tercio cálculo_mental multiplicar"),
     "rep.romanos": (3, 10, "números romanos numeración_romana símbolos"),
     # Bloque 11 · estadística y patrones
     "estadistica.pictograma": (2, 12, "estadística pictograma datos"),

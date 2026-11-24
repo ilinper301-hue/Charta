@@ -252,3 +252,13 @@ Pasos ya cerrados, movidos desde ESTADO.md el 12-11-2026. No hace falta leerlo a
 
 ## Espacio en la ficha · paso 5 (24-11-2026)
 Sueltas: `conteo.tabla` v2 (R ≤ 10: `NTAB` = 5 tablas, un ejercicio cada una), `conteo.camino` v3 (L ≤ 12: `NCAM` = 3 caminos), `sumar.tabla` v2 (casilla hasta 100 pt, letra ×1,25), `juegos.colorea` v2 (casilla hasta 112 pt), `lectura.texto` v2 (k hasta 2,6). Invariantes de tabla y camino recorren todos los ejercicios. Límites: con R > 10 la tabla y el camino siguen siendo uno solo.
+
+## Matemáticas 3.º · Lote 3: multiplicar (24-11-2026)
+- **Tablas**: `multiplicar.tablas` y `.problemas` admiten en 3.º las tablas del 6, 7, 8 y 9 y «Todas, del 2 al 10» (`tablas: "2a10"`; opciones con `curso: 3` en `TABLAS_3` de `motor/modelos_2.py`; `tablasDe()` en `_multiplicar.js`). Sin la tabla del 0. Los 5 modelos de 2.º (grupos, filas, tablas, problemas, reparto) también están en 3.º, sin rango (`EN_3` = None). Las fichas de 2.º no cambian.
+- ✨ `multiplicar.vertical` (bloque 13): a de 2 o 3 cifras (sin cero final) por b de 2 a 9; opciones `cifras` (2 · 3) y `nivel` (sin llevadas · con · mezcla). «Sin»: cada cifra por b < 10; «con»: al menos una llevada escrita (la de la cifra de más a la izquierda ya es una cifra del producto). Sin repetir la operación; ningún b más de ⌈n/nº de b⌉ + 1 veces. 12 (media 6); `solucion.huecos` = cifras del producto. Llevadas en casillas sobre las cifras de a (rojas en la solución).
+- ✨ `multiplicar.por10`: ×10, ×100 y ×1000 (`por`: mezcla · 10 · 100; `modo`: resultado · factor que falta). a sin cero final: ×10 → 2–9, 11–99, 101–999; ×100 → 2–9, 11–99; ×1000 → 2–9; resultado ≤ 9999. Mezcla = `PATRON` (½ ×10, ⅓ ×100, ⅙ ×1000). 2 columnas, 16 (media 8); «Más ejercicios» con `cuantos()`.
+- ✨ `multiplicar.dobletriple`: doble, triple, mitad y tercio (`modo`: doble y triple · mitad y tercio · los cuatro, por turnos), con números de dos, tres y cuatro cifras (los de cuatro cifras, centenas exactas). 2 columnas, 16 (media 8), `pintarEl(…, kMax = 1)` para que la letra no crezca y los renglones largos tengan aire.
+- `pintarEl()` (`_elastica.js`) gana el parámetro `kMax` (por defecto 1,3: nada cambia en lo anterior).
+- 178 modelos, 335 doradas (las 324 anteriores iguales), `test:rapido` en verde. `medir_letra.js`: 0 tipos < 9 pt.
+- **Límites**: `multiplicar.por10` con ×1000 tiene solo 8 números (2–9): en la mezcla, con «Más ejercicios», se reparte entre los otros factores; `multiplicar.vertical` «sin llevadas» de 2 cifras solo tiene 29 operaciones (b = 2, 3 y 4).
+

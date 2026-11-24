@@ -49,7 +49,7 @@ prueba("mezclar y azar", () => {
 });
 
 prueba("catálogo generado desde modelos.py y modelos_app.py", () => {
-  assert.equal(CATALOGO.modelos.length, 175);   // 94 del motor + 12 solo de la app (4 de problemas y 8 trucos de Calculi) + 34 de Lengua (lote 1: 6 letra.* y 5 silaba.*; lote 2: 6 fono.*, 8 palabra.* y 2 orto.*; lote 3: 5 frase.*; lote 4: 6 escritura.*; lote 5: 5 lectura.*; petición de Iván 12-11-2026: palabra.dibuja y escritura.ordena)   // lote 3b de 2.º: + medida.euros y medida.masa (153); lote 4: + geometria.lados e itinerario (155); lote 5: + problemas.dospasos, problemas.dinero y 10 trucos de 2.º (167); lote 6: + 5 multiplicar.* (172); 3.º lote 0: + rep.romanos (173); lote 2: + orden.redondea y orden.estima (175)
+  assert.equal(CATALOGO.modelos.length, 178);   // 94 del motor + 12 solo de la app (4 de problemas y 8 trucos de Calculi) + 34 de Lengua (lote 1: 6 letra.* y 5 silaba.*; lote 2: 6 fono.*, 8 palabra.* y 2 orto.*; lote 3: 5 frase.*; lote 4: 6 escritura.*; lote 5: 5 lectura.*; petición de Iván 12-11-2026: palabra.dibuja y escritura.ordena)   // lote 3b de 2.º: + medida.euros y medida.masa (153); lote 4: + geometria.lados e itinerario (155); lote 5: + problemas.dospasos, problemas.dinero y 10 trucos de 2.º (167); lote 6: + 5 multiplicar.* (172); 3.º lote 0: + rep.romanos (173); lote 2: + orden.redondea y orden.estima (175); lote 3: + multiplicar.vertical, .por10 y .dobletriple (178)
   for (const m of CATALOGO.modelos) {
     assert.ok(["amarillo", "rosa", "azul", "verde"].includes(m.color), m.id);
     assert.ok(m.titulo, m.id);

@@ -26,6 +26,7 @@ Sin cambios de código. El plan y el estado de sus fases están en **`PLAN-DISEN
 Detalle de cada paso: `HISTORIAL.md`.
 
 ## Pendiente de Iván
+- Probar en el Android (3.º, lote 3): Crear ficha → 3.º → Matemáticas → «Multiplicar y repartir»: «Multiplicaciones en vertical» (¿se entiende dónde van las llevadas?, ¿caben las cuatro casillas del producto?), «Por 10, 100 y 1000», «Doble, triple, mitad y tercio» (¿se lee bien «La mitad de 9600 =» junto a la casilla?) y «Las tablas» con la del 6 al 9 o «Todas».
 - Probar en el Android (Espacio, paso 5): «La tabla de números» y «El camino de números» con rango 10 (ahora 5 tablas y 3 caminos: ¿te parece bien o prefieres menos?), «Tabla de sumar» con rango 10 (casillas más grandes), «Colorea y descubre» y «Lee y responde» (¿la letra y las tarjetas crecidas se ven bien?).
 - Probar en el Android (Espacio, paso 4): etiquetas de tarjeta («RODEA EL MAYOR»…), recta numérica, ábaco, monedas, «Dibuja con…» y «Problemas de dos operaciones»: ¿la letra más grande cabe bien? En «Precios» el «+» se monta sobre los nombres y tapa medio número de ejercicio (parece que ya venía así): decir si pasa en papel.
 - Probar en el Android (Espacio, paso 3, último lote): con Impresión → «Más ejercicios», «Ordena la frase» y «Completa la frase» (¿se leen las palabras a ≈ 13 pt?), «¿Qué letra falta?» (¿el hueco roza la letra vecina?), «Sigue las instrucciones» (¿la figura sale demasiado pequeña?) y «Los números romanos».
@@ -83,7 +84,7 @@ Pasos (cambian las doradas: `--actualizar` y subir `version` de los tipos tocado
     - [x] Lote 0 (23-11-2026): catálogo de 3.º (`motor/modelos_3.py`, rangos 1000…9999), bloques con cubo de mil, ábaco de 4 varillas, UM/C/D/U, letras hasta 9999, recta de 1, 10 o 100 en 100, descomposición de 4 cifras, «¿Qué número es?» (2000–9999) y ✨ `rep.romanos` (hasta 100). 198 doradas. Detalle en HISTORIAL.md.
     - [x] Lote 1 (23-11-2026): ♻ reutilizados hasta 9999 (conteo, orden, sumar/restar con hueco, familia, tabla, pirámide, juegos, problemas, 2 trucos; geometría, calendario y patrones con sus rangos). Detalle en HISTORIAL.md.
     - [x] Lote 2 (23-11-2026): valor posicional con millares (descdu, dunum, cifra, canje, pares), sumas y restas en vertical de cuatro cifras (UM, C, D, U; tres sumandos y prueba), centenas y millares redondos, recta y encadenadas (saltos 10, 100 y 1000), `orden.signos` con cuatro cifras y ✨ `orden.redondea` y `orden.estima` (175 modelos). Detalle en HISTORIAL.md.
-    - [ ] Lote 3: multiplicar. (Sonnet)
+    - [x] Lote 3 (24-11-2026): multiplicar. `multiplicar.tablas` y `.problemas` con las tablas del 6 al 9 y «Todas, del 2 al 10» (solo desde 3.º); ✨ `multiplicar.vertical` (2 o 3 cifras por una, sin / con llevadas / mezcla, 12 y 6; llevadas en casillas sobre las cifras), ✨ `multiplicar.por10` (×10, ×100 y ×1000: resultado o factor que falta; 16 y 8, con «Cantidad») y ✨ `multiplicar.dobletriple` (doble, triple, mitad y tercio; 16 y 8, con «Cantidad»); los 5 de 2.º, también en 3.º (sin rango). 178 modelos, 335 doradas (las 324 de antes no cambian). Detalle en HISTORIAL.md. Sin la tabla del 0 (no aporta ficha). Falta mirarlo en papel.
     - [ ] Lote 4: dividir (la caja con Opus).
     - [ ] Lote 5: fracciones. (Opus)
     - [ ] Lote 6: medida. (Sonnet)

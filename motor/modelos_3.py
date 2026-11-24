@@ -38,6 +38,8 @@ EN_3 = {
     **{i: (1000, 9999, 9999) for i in ("sumar.vertical", "restar.vertical")},
     # Lote 2 · 🔧 centenas y millares redondos, recta y encadenadas con saltos de 10, 100 y 1000
     **{i: (1000, 9999, 9999) for i in ("sumar.decenas", "restar.decenas", "sumar.recta", "restar.recta", "sumar.encadenadas", "restar.encadenadas")},
+    # Lote 3 · multiplicar: las de 2.º también en 3.º (sin rango; las tablas del 6 al 9 solo desde 3.º)
+    **{i: None for i in ("multiplicar.grupos", "multiplicar.filas", "multiplicar.tablas", "multiplicar.problemas", "multiplicar.reparto")},
     # Lote 1 · ♻ sin rango o con sus rangos de 1.º (None = los mismos que en 1.º)
     **{i: None for i in (
         "geometria.figuras", "geometria.cuerpos", "geometria.posiciones", "geometria.simetria", "geometria.copia",
@@ -53,6 +55,18 @@ def _n3(bloque, familia, clave, nombre, descripcion, opciones, titulo, color, ra
 
 
 MODELOS_3 = [
+    # Lote 3 · multiplicar (bloque 13; sin rango)
+    _n3(13, "multiplicar", "vertical", "Multiplicaciones en vertical", "Multiplicar un número de 2 o 3 cifras por una cifra, con o sin llevadas.",
+        [op("cifras", "Cifras del número", [(None, "Dos cifras"), (3, "Tres cifras")]),
+         op("nivel", "Llevadas", [(None, "Sin llevadas"), ("con", "Con llevadas"), ("mezcla", "Mezcla")])],
+        "MULTIPLICACIONES EN VERTICAL", "azul", tam=AMBOS),
+    _n3(13, "multiplicar", "por10", "Por 10, 100 y 1000", "Multiplicar por 10, por 100 y por 1000 (añadir ceros).",
+        [op("por", "Multiplicar por", [(None, "10, 100 y 1000"), ("10", "10"), ("100", "100")]),
+         op("modo", "Tarea", [(None, "El resultado"), ("hueco", "El factor que falta")])],
+        "POR 10, 100 Y 1000", "verde", tam=AMBOS),
+    _n3(13, "multiplicar", "dobletriple", "Doble, triple, mitad y tercio", "Calcular el doble y el triple, la mitad y el tercio de un número.",
+        [op("modo", "Calcula", [(None, "El doble y el triple"), ("mitad", "La mitad y el tercio"), ("todo", "Doble, triple, mitad y tercio")])],
+        "DOBLE, TRIPLE, MITAD Y TERCIO", "rosa", tam=AMBOS),
     # Lote 2 · redondeo y estimación (3.º; con millares: desde rango 2000 y 3000)
     _n3(3, "orden", "redondea", "Redondea", "Redondear números de cuatro cifras a la decena, a la centena o al millar.",
         [op("a", "Redondea a", [(None, "Mezcla (decena, centena y millar)"), ("decena", "La decena"), ("centena", "La centena"), ("millar", "El millar")])],
