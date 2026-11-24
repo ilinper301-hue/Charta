@@ -284,3 +284,12 @@ Sueltas: `conteo.tabla` v2 (R ≤ 10: `NTAB` = 5 tablas, un ejercicio cada una),
 - 188 modelos, 361 doradas (las 348 anteriores iguales); `npm test` y `test_motor.py` en verde; `medir_letra.js`: 0 < 9 pt en los tipos nuevos.
 - **Límites**: sin fracciones impropias ni equivalentes; en «Compara» no sale «=»; en la recta, con doceavos, las casillas son estrechas (≈ 8 mm); los nombres del 11 y el 12 son «onceavo» y «doceavo».
 
+## Matemáticas 3.º · Lote 6: medida (24-11-2026)
+- ✨ `medida.equivale` (bloque 10, sin rango): «3 km = ▢ m» y «3000 m = ▢ km»; pares km–m, m–cm, cm–mm, kg–g y l–ml (también ½, ¼ y ¾ de kg y de l: 500, 250 y 750). Opciones `magnitud` (mezcla · longitud · masa · capacidad) y `modo` (los dos sentidos · mayor · menor). Sin repetir; con «Cantidad» (12/6 → las que caben, sin pasar del banco, siempre filas de 2). `banco(mag)` exportado para las pruebas.
+- ✨ `medida.unidad`: objeto + las unidades como píldoras (km, m, cm, mm / kg, g / l, ml); la correcta se rodea en rojo en la solución. Banco `UNIDADES_3` (5–6 objetos por unidad); las unidades salen por turnos (±1) y no se repite objeto.
+- ✨ `medida.duracion`: «De las 6:25 a las 7:40: ▢ h ▢ min» o «Empieza a las 9:15 y dura 1 h 25 min. Termina a las ▢:▢». Opciones `tarea` (dura · fin · mezcla) y `paso` (5 · 15 · 1). Inicio 1:00–10:55, duración 15 min–3 h 55 min, fin ≤ 11:59 (sin a. m. ni p. m.); al menos la mitad con minutos; 1 columna.
+- 🔧 `medida.reloj` y `medida.reloj2`: modos `cinco` (minutos de 5 en 5, todos distintos) y `minuto` (de 1 en 1, sin múltiplos de 5); `dibujarReloj(…, minutos)` añade una marca por minuto. Opciones con `curso: 3`.
+- 🔧 `medida.dinero`: modo `mixto` (monedas de 2 €, 1 €, 50, 20, 10 y 5 c; 3–6 piezas con euros y con céntimos; total ≤ min(rango, 10) €; respuesta «3,70»; items `["m", valor, "€" | "c"]`). 🔧 `medida.precios`: opción `centimos` (precios en céntimos múltiplos de 5, `datos.c = true`; total ≤ rango o vuelta de 5, 10 o 20 €; respuesta «3,85»; `euros(c)` exportado).
+- Los de 2.º `medida.reloj/reloj2/tiempo/longitud/capacidad/masa/dinero/precios` quedan también en 3.º (`EN_3` = None: sin rango propio; precios y dinero con los rangos de 1.º).
+- 191 modelos, 373 doradas (+12; las 361 de antes no cambian), `test:rapido` y `test_invariantes` (completo) en verde. Falta mirarlo en papel.
+

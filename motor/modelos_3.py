@@ -43,7 +43,7 @@ EN_3 = {
     # Lote 1 · ♻ sin rango o con sus rangos de 1.º (None = los mismos que en 1.º)
     **{i: None for i in (
         "geometria.figuras", "geometria.cuerpos", "geometria.posiciones", "geometria.simetria", "geometria.copia",
-        "medida.calendario", "juegos.cuadrado", "juegos.colorea", "estadistica.patrones")},
+        "medida.calendario", "medida.reloj", "medida.reloj2", "medida.tiempo", "medida.longitud", "medida.capacidad", "medida.masa", "medida.dinero", "medida.precios", "juegos.cuadrado", "juegos.colorea", "estadistica.patrones")},
 }
 
 
@@ -55,6 +55,18 @@ def _n3(bloque, familia, clave, nombre, descripcion, opciones, titulo, color, ra
 
 
 MODELOS_3 = [
+    # Lote 6 · medida (bloque 10; sin rango): equivalencias, unidad adecuada y duraciones
+    _n3(10, "medida", "equivale", "Cambia de unidad", "Pasar de una unidad a otra: km, m, cm y mm; kg y g; l y ml (también ½, ¼ y ¾).",
+        [op("magnitud", "Medidas", [(None, "Longitud, masa y capacidad"), ("longitud", "Longitud (km, m, cm, mm)"), ("masa", "Masa (kg y g)"), ("capacidad", "Capacidad (l y ml)")]),
+         op("modo", "Sentido", [(None, "Los dos sentidos"), ("mayor", "De la unidad grande a la pequeña (3 km = ☐ m)"), ("menor", "De la pequeña a la grande (3000 m = ☐ km)")])],
+        "CAMBIA DE UNIDAD", "amarillo", tam=AMBOS),
+    _n3(10, "medida", "unidad", "¿Qué unidad usarías?", "Elegir la unidad adecuada para medir un objeto: km, m, cm, mm · kg, g · l, ml.",
+        [op("magnitud", "Medidas", [(None, "Longitud, masa y capacidad"), ("longitud", "Longitud (km, m, cm, mm)"), ("masa", "Masa (kg y g)"), ("capacidad", "Capacidad (l y ml)")])],
+        "¿QUÉ UNIDAD USARÍAS?", "verde", tam=AMBOS),
+    _n3(10, "medida", "duracion", "¿Cuánto dura?", "Calcular cuánto dura una actividad entre dos horas, o a qué hora termina.",
+        [op("tarea", "Tarea", [(None, "¿Cuánto dura? (de las 9:15 a las 10:40)"), ("fin", "¿A qué hora termina?"), ("mezcla", "Las dos")]),
+         op("paso", "Minutos", [(None, "De 5 en 5"), (15, "Cuartos de hora"), (1, "De 1 en 1")])],
+        "¿CUÁNTO DURA?", "azul", tam=AMBOS),
     # Lote 5 · fracciones (bloque 15; sin rango): propias, denominador hasta 12
     _n3(15, "fraccion", "lee", "¿Qué parte está coloreada?", "Escribir la fracción de la parte coloreada de círculos, rectángulos y tiras (y cómo se lee).",
         [op("figura", "Figuras", [(None, "Mezcla"), ("circulo", "Círculos"), ("rect", "Rectángulos"), ("tira", "Tiras")]), op("den", "Denominador", [(None, "Hasta 12"), (6, "Hasta 6 (medios a sextos)"), (10, "Hasta 10")]),

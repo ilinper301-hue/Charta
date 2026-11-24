@@ -95,6 +95,16 @@ const CASOS = [
   { nombre: "3.º más ejercicios en media: doble/triple y mitad/tercio", semilla: 7, opciones: { cantidad: "mas", actividades: [{ tipo: "multiplicar.dobletriple", curso: 3 }, { tipo: "multiplicar.dobletriple", curso: 3, params: { modo: "mitad" } }] } },
   { nombre: "3.º tablas del 6 al 9 y todas", semilla: 7, opciones: { actividades: [{ tipo: "multiplicar.tablas", curso: 3, params: { tablas: "7" } }, { tipo: "multiplicar.tablas", curso: 3, params: { tablas: "2a10", modo: "hueco" } }] } },
   { nombre: "3.º problemas de multiplicar con la tabla del 8", semilla: 7, opciones: { actividades: [{ tipo: "multiplicar.problemas", curso: 3, params: { tablas: "8" } }] } },
+  // 3.º · lote 6 (medida): cambiar de unidad, unidad adecuada, duración, reloj con minutos, euros y céntimos
+  { nombre: "3.º cambia de unidad (mezcla) y qué unidad usarías", semilla: 7, opciones: { actividades: [{ tipo: "medida.equivale", curso: 3 }, { tipo: "medida.unidad", curso: 3 }] } },
+  { nombre: "3.º cambia de unidad: masa, de pequeña a grande", semilla: 7, opciones: { actividades: [{ tipo: "medida.equivale", curso: 3, params: { magnitud: "masa", modo: "menor" } }] } },
+  { nombre: "3.º más ejercicios: unidad (longitud) y equivalencias", semilla: 7, opciones: { cantidad: "mas", actividades: [{ tipo: "medida.unidad", curso: 3, params: { magnitud: "longitud" } }, { tipo: "medida.equivale", curso: 3, params: { magnitud: "longitud" } }] } },
+  { nombre: "3.º cuánto dura (mezcla, cuartos)", semilla: 7, opciones: { actividades: [{ tipo: "medida.duracion", curso: 3, params: { tarea: "mezcla", paso: 15 } }] } },
+  { nombre: "3.º a qué hora termina y más ejercicios", semilla: 7, opciones: { cantidad: "mas", actividades: [{ tipo: "medida.duracion", curso: 3, params: { tarea: "fin" } }] } },
+  { nombre: "3.º relojes con minutos (de 5 en 5 y de 1 en 1)", semilla: 7, opciones: { actividades: [{ tipo: "medida.reloj", curso: 3, params: { modo: "cinco" } }] } },
+  { nombre: "3.º dibuja las agujas con minutos de 1 en 1", semilla: 7, opciones: { actividades: [{ tipo: "medida.reloj2", curso: 3, params: { modo: "minuto" } }] } },
+  { nombre: "3.º euros y céntimos y compras con céntimos", semilla: 7, opciones: { actividades: [{ tipo: "medida.dinero", curso: 3, params: { modo: "mixto" } }, { tipo: "medida.precios", curso: 3, params: { centimos: true } }] } },
+  { nombre: "3.º la vuelta con céntimos", semilla: 7, opciones: { actividades: [{ tipo: "medida.precios", curso: 3, params: { centimos: true, modo: "cambio" } }] } },
   // 3.º · lote 4 (dividir): la caja, de la tabla, la familia, problemas y el reparto con ÷
   { nombre: "3.º divisiones con la caja (2 cifras, exactas)", semilla: 7, opciones: { actividades: [{ tipo: "dividir.vertical", curso: 3 }] } },
   { nombre: "3.º divisiones con la caja (3 cifras, mezcla, prueba)", semilla: 7, opciones: { actividades: [{ tipo: "dividir.vertical", curso: 3, params: { cifras: 3, nivel: "mezcla", prueba: true } }] } },

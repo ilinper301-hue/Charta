@@ -97,9 +97,12 @@ OPCIONES_2.update({
 # Lote 3 · modelos sin rango: valores que solo salen en 2.º (`curso`; visible() en ficha.js).
 CUARTOS = [{"valor": "cuarto", "etiqueta": "Solo y cuarto y menos cuarto", "curso": CURSO},
            {"valor": "todas", "etiqueta": "En punto, y media, y cuarto y menos cuarto", "curso": CURSO}]
+# 3.º · lote 6: minutos de 5 en 5 y de 1 en 1 (solo desde 3.º)
+MINUTOS_3 = [{"valor": "cinco", "etiqueta": "Minutos de 5 en 5 (las 4:35)", "curso": 3},
+             {"valor": "minuto", "etiqueta": "Minutos de 1 en 1 (las 4:37)", "curso": 3}]
 OPCIONES_2.update({
-    "medida.reloj": {"valores": {"modo": CUARTOS}},
-    "medida.reloj2": {"valores": {"modo": CUARTOS}},
+    "medida.reloj": {"valores": {"modo": CUARTOS + MINUTOS_3}},
+    "medida.reloj2": {"valores": {"modo": CUARTOS + MINUTOS_3}},
     "medida.tiempo": {"valores": {"modo": [{"valor": "equivalencias", "etiqueta": "Horas, minutos, días, semanas y meses", "curso": CURSO},
                                            {"valor": "horas", "etiqueta": "Antes y después de una hora", "curso": CURSO}]}},
     # Lote 3c · regla en centímetros reales y ¿m o cm?
@@ -126,6 +129,12 @@ OPCIONES_2.update({
     "multiplicar.problemas": {"valores": {"tablas": TABLAS_3}},
     # 3.º · lote 4: el reparto con el signo ÷ (solo desde 3.º)
     "multiplicar.reparto": {"nuevas": [{"id": "signo", "etiqueta": "Con el signo ÷ (12 ÷ 3 = 4)", "tipo": "si_no", "defecto": False, "curso": 3}]},
+})
+
+# 3.º · lote 6: precios con céntimos (2,50 €) y monedas de euros y céntimos juntas (solo desde 3.º)
+OPCIONES_2.update({
+    "medida.precios": {"nuevas": [{"id": "centimos", "etiqueta": "Con céntimos (2,50 €)", "tipo": "si_no", "defecto": False, "curso": 3}]},
+    "medida.dinero": {"valores": {"modo": [{"valor": "mixto", "etiqueta": "Euros y céntimos juntos (2,70 €)", "curso": 3}]}},
 })
 
 

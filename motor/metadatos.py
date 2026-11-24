@@ -156,6 +156,10 @@ META = {
     "fraccion.lee": (2, 10, "fracciones partes figuras numerador denominador"),
     "fraccion.colorea": (1, 10, "fracciones colorear partes figuras"),
     "fraccion.letras": (2, 10, "fracciones lectura escritura nombres"),
+    # 3.º · lote 6 · medida
+    "medida.equivale": (2, 10, "medida unidades equivalencias km m cm mm kg g l ml"),
+    "medida.unidad": (1, 8, "medida unidades elegir longitud masa capacidad"),
+    "medida.duracion": (3, 12, "medida tiempo duración horas minutos"),
     "fraccion.compara": (3, 10, "fracciones comparar mayor_menor"),
     "fraccion.de": (3, 15, "fracciones fracción_de_un_número dividir grupos"),
     "fraccion.recta": (3, 10, "fracciones recta_numérica"),

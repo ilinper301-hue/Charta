@@ -9,3 +9,6 @@ import "./medida.longitud.js";
 import "./medida.capacidad.js";
 import "./medida.euros.js";
 import "./medida.masa.js";
+import "./medida.equivale.js";
+import "./medida.unidad.js";
+import "./medida.duracion.js";

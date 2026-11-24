@@ -3653,14 +3653,14 @@ const CATALOGO = {"cursos":{"1":"1.º de Primaria","2":"2.º de Primaria","3":"3
 {"id":"geometria.posiciones","curso":1,"materia":"matematicas","bloque":9,"familia":"geometria","clave":"posiciones","nombre":"Encima, debajo, izquierda y derecha","descripcion":"Situar un objeto respecto a otro.","opciones":[],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"ENCIMA, DEBAJO, IZQUIERDA Y DERECHA","color":"rosa","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["geometría","posiciones","espacio","lateralidad"]},"cursos":{"2":{"rangos":[],"rango":null},"3":{"rangos":[],"rango":null}}},
 {"id":"geometria.simetria","curso":1,"materia":"matematicas","bloque":9,"familia":"geometria","clave":"simetria","nombre":"La simetría","descripcion":"Completar la mitad simétrica de un dibujo.","opciones":[{"id":"n","etiqueta":"Tamaño del dibujo","tipo":"numero","min":3,"max":5,"defecto":4}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"LA SIMETRÍA","color":"rosa","metadatos":{"dificultad":3,"minutos":12,"etiquetas":["geometría","simetría"]},"cursos":{"2":{"rangos":[],"rango":null},"3":{"rangos":[],"rango":null}}},
 {"id":"geometria.copia","curso":1,"materia":"matematicas","bloque":9,"familia":"geometria","clave":"copia","nombre":"Copia el dibujo","descripcion":"Copiar un dibujo en la cuadrícula.","opciones":[],"rangos":[],"rango":null,"tamanos":["completa"],"titulo":"COPIA EL DIBUJO","color":"rosa","metadatos":{"dificultad":2,"minutos":12,"etiquetas":["geometría","copiar","dibujo","cuadrícula"]},"cursos":{"2":{"rangos":[],"rango":null},"3":{"rangos":[],"rango":null}}},
-{"id":"medida.dinero","curso":1,"materia":"matematicas","bloque":10,"familia":"medida","clave":"dinero","nombre":"Cuenta el dinero","descripcion":"Contar monedas y billetes.","opciones":[{"id":"modo","etiqueta":"Unidad","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Euros"},{"valor":"centimos","etiqueta":"Céntimos"}]}],"rangos":[10,20,30,40,50,60,70,80,90,100],"rango":20,"tamanos":["completa","media"],"titulo":"CUENTA EL DINERO","color":"azul","metadatos":{"dificultad":2,"minutos":12,"etiquetas":["medida","dinero","monedas","euros"]},"cursos":{"2":{"rangos":[200,300,400,500],"rango":200}}},
-{"id":"medida.precios","curso":1,"materia":"matematicas","bloque":10,"familia":"medida","clave":"precios","nombre":"Las compras","descripcion":"Calcular el total de una compra o la vuelta.","opciones":[{"id":"modo","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Total de la compra"},{"valor":"cambio","etiqueta":"La vuelta"}]}],"rangos":[10,20],"rango":20,"tamanos":["completa","media"],"titulo":"LAS COMPRAS","color":"azul","metadatos":{"dificultad":3,"minutos":12,"etiquetas":["medida","dinero","compras","precios"]},"cursos":{"2":{"rangos":[100],"rango":100}}},
-{"id":"medida.reloj","curso":1,"materia":"matematicas","bloque":10,"familia":"medida","clave":"reloj","nombre":"Los relojes","descripcion":"Leer la hora en relojes de agujas.","opciones":[{"id":"modo","etiqueta":"Horas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"En punto e y media"},{"valor":"punto","etiqueta":"Solo en punto"},{"valor":"media","etiqueta":"Solo y media"},{"valor":"cuarto","etiqueta":"Solo y cuarto y menos cuarto","curso":2},{"valor":"todas","etiqueta":"En punto, y media, y cuarto y menos cuarto","curso":2}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"LOS RELOJES","color":"azul","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["medida","reloj","hora"]},"cursos":{"2":{"rangos":[],"rango":null}}},
-{"id":"medida.reloj2","curso":1,"materia":"matematicas","bloque":10,"familia":"medida","clave":"reloj2","nombre":"Dibuja las agujas","descripcion":"Dibujar las agujas para marcar una hora.","opciones":[{"id":"modo","etiqueta":"Horas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"En punto e y media"},{"valor":"punto","etiqueta":"Solo en punto"},{"valor":"media","etiqueta":"Solo y media"},{"valor":"cuarto","etiqueta":"Solo y cuarto y menos cuarto","curso":2},{"valor":"todas","etiqueta":"En punto, y media, y cuarto y menos cuarto","curso":2}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"DIBUJA LAS AGUJAS","color":"azul","metadatos":{"dificultad":3,"minutos":12,"etiquetas":["medida","reloj","hora","agujas"]},"cursos":{"2":{"rangos":[],"rango":null}}},
+{"id":"medida.dinero","curso":1,"materia":"matematicas","bloque":10,"familia":"medida","clave":"dinero","nombre":"Cuenta el dinero","descripcion":"Contar monedas y billetes.","opciones":[{"id":"modo","etiqueta":"Unidad","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Euros"},{"valor":"centimos","etiqueta":"Céntimos"},{"valor":"mixto","etiqueta":"Euros y céntimos juntos (2,70 €)","curso":3}]}],"rangos":[10,20,30,40,50,60,70,80,90,100],"rango":20,"tamanos":["completa","media"],"titulo":"CUENTA EL DINERO","color":"azul","metadatos":{"dificultad":2,"minutos":12,"etiquetas":["medida","dinero","monedas","euros"]},"cursos":{"2":{"rangos":[200,300,400,500],"rango":200},"3":{"rangos":[10,20,30,40,50,60,70,80,90,100],"rango":20}}},
+{"id":"medida.precios","curso":1,"materia":"matematicas","bloque":10,"familia":"medida","clave":"precios","nombre":"Las compras","descripcion":"Calcular el total de una compra o la vuelta.","opciones":[{"id":"modo","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Total de la compra"},{"valor":"cambio","etiqueta":"La vuelta"}]},{"id":"centimos","etiqueta":"Con céntimos (2,50 €)","tipo":"si_no","defecto":false,"curso":3}],"rangos":[10,20],"rango":20,"tamanos":["completa","media"],"titulo":"LAS COMPRAS","color":"azul","metadatos":{"dificultad":3,"minutos":12,"etiquetas":["medida","dinero","compras","precios"]},"cursos":{"2":{"rangos":[100],"rango":100},"3":{"rangos":[10,20],"rango":20}}},
+{"id":"medida.reloj","curso":1,"materia":"matematicas","bloque":10,"familia":"medida","clave":"reloj","nombre":"Los relojes","descripcion":"Leer la hora en relojes de agujas.","opciones":[{"id":"modo","etiqueta":"Horas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"En punto e y media"},{"valor":"punto","etiqueta":"Solo en punto"},{"valor":"media","etiqueta":"Solo y media"},{"valor":"cuarto","etiqueta":"Solo y cuarto y menos cuarto","curso":2},{"valor":"todas","etiqueta":"En punto, y media, y cuarto y menos cuarto","curso":2},{"valor":"cinco","etiqueta":"Minutos de 5 en 5 (las 4:35)","curso":3},{"valor":"minuto","etiqueta":"Minutos de 1 en 1 (las 4:37)","curso":3}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"LOS RELOJES","color":"azul","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["medida","reloj","hora"]},"cursos":{"2":{"rangos":[],"rango":null},"3":{"rangos":[],"rango":null}}},
+{"id":"medida.reloj2","curso":1,"materia":"matematicas","bloque":10,"familia":"medida","clave":"reloj2","nombre":"Dibuja las agujas","descripcion":"Dibujar las agujas para marcar una hora.","opciones":[{"id":"modo","etiqueta":"Horas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"En punto e y media"},{"valor":"punto","etiqueta":"Solo en punto"},{"valor":"media","etiqueta":"Solo y media"},{"valor":"cuarto","etiqueta":"Solo y cuarto y menos cuarto","curso":2},{"valor":"todas","etiqueta":"En punto, y media, y cuarto y menos cuarto","curso":2},{"valor":"cinco","etiqueta":"Minutos de 5 en 5 (las 4:35)","curso":3},{"valor":"minuto","etiqueta":"Minutos de 1 en 1 (las 4:37)","curso":3}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"DIBUJA LAS AGUJAS","color":"azul","metadatos":{"dificultad":3,"minutos":12,"etiquetas":["medida","reloj","hora","agujas"]},"cursos":{"2":{"rangos":[],"rango":null},"3":{"rangos":[],"rango":null}}},
 {"id":"medida.calendario","curso":1,"materia":"matematicas","bloque":10,"familia":"medida","clave":"calendario","nombre":"El calendario","descripcion":"Leer un calendario mensual y contestar.","opciones":[{"id":"n","etiqueta":"Mes","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Al azar"},{"valor":1,"etiqueta":"Enero"},{"valor":2,"etiqueta":"Febrero"},{"valor":3,"etiqueta":"Marzo"},{"valor":4,"etiqueta":"Abril"},{"valor":5,"etiqueta":"Mayo"},{"valor":6,"etiqueta":"Junio"},{"valor":7,"etiqueta":"Julio"},{"valor":8,"etiqueta":"Agosto"},{"valor":9,"etiqueta":"Septiembre"},{"valor":10,"etiqueta":"Octubre"},{"valor":11,"etiqueta":"Noviembre"},{"valor":12,"etiqueta":"Diciembre"}]}],"rangos":[],"rango":null,"tamanos":["completa"],"titulo":"EL CALENDARIO","color":"azul","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["medida","calendario","tiempo"]},"cursos":{"2":{"rangos":[],"rango":null},"3":{"rangos":[],"rango":null}}},
-{"id":"medida.tiempo","curso":1,"materia":"matematicas","bloque":10,"familia":"medida","clave":"tiempo","nombre":"Días y meses","descripcion":"Orden de los días de la semana o de los meses.","opciones":[{"id":"modo","etiqueta":"Tema","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Días de la semana"},{"valor":"meses","etiqueta":"Meses del año"},{"valor":"equivalencias","etiqueta":"Horas, minutos, días, semanas y meses","curso":2},{"valor":"horas","etiqueta":"Antes y después de una hora","curso":2}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":{"_":"LOS DÍAS DE LA SEMANA","meses":"LOS MESES DEL AÑO"},"color":"azul","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["medida","tiempo","días","meses"]},"cursos":{"2":{"rangos":[],"rango":null}}},
-{"id":"medida.longitud","curso":1,"materia":"matematicas","bloque":10,"familia":"medida","clave":"longitud","nombre":"Mide con cubitos","descripcion":"Medir longitudes con cubitos.","opciones":[{"id":"modo","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Medir y escribir"},{"valor":"compara","etiqueta":"Medir y rodear el más largo"},{"valor":"regla","etiqueta":"Mide con la regla (cm)","curso":2},{"valor":"mcm","etiqueta":"¿Metros o centímetros?","curso":2}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"MIDE CON CUBITOS","color":"azul","metadatos":{"dificultad":1,"minutos":8,"etiquetas":["medida","longitud","comparar"]},"cursos":{"2":{"rangos":[],"rango":null}}},
-{"id":"medida.capacidad","curso":1,"materia":"matematicas","bloque":10,"familia":"medida","clave":"capacidad","nombre":"¿Cuánto líquido hay?","descripcion":"Ordenar vasos según el líquido.","opciones":[],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"¿CUÁNTO LÍQUIDO HAY?","color":"azul","metadatos":{"dificultad":1,"minutos":8,"etiquetas":["medida","capacidad","líquido"]},"cursos":{"2":{"rangos":[],"rango":null}}},
+{"id":"medida.tiempo","curso":1,"materia":"matematicas","bloque":10,"familia":"medida","clave":"tiempo","nombre":"Días y meses","descripcion":"Orden de los días de la semana o de los meses.","opciones":[{"id":"modo","etiqueta":"Tema","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Días de la semana"},{"valor":"meses","etiqueta":"Meses del año"},{"valor":"equivalencias","etiqueta":"Horas, minutos, días, semanas y meses","curso":2},{"valor":"horas","etiqueta":"Antes y después de una hora","curso":2}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":{"_":"LOS DÍAS DE LA SEMANA","meses":"LOS MESES DEL AÑO"},"color":"azul","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["medida","tiempo","días","meses"]},"cursos":{"2":{"rangos":[],"rango":null},"3":{"rangos":[],"rango":null}}},
+{"id":"medida.longitud","curso":1,"materia":"matematicas","bloque":10,"familia":"medida","clave":"longitud","nombre":"Mide con cubitos","descripcion":"Medir longitudes con cubitos.","opciones":[{"id":"modo","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Medir y escribir"},{"valor":"compara","etiqueta":"Medir y rodear el más largo"},{"valor":"regla","etiqueta":"Mide con la regla (cm)","curso":2},{"valor":"mcm","etiqueta":"¿Metros o centímetros?","curso":2}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"MIDE CON CUBITOS","color":"azul","metadatos":{"dificultad":1,"minutos":8,"etiquetas":["medida","longitud","comparar"]},"cursos":{"2":{"rangos":[],"rango":null},"3":{"rangos":[],"rango":null}}},
+{"id":"medida.capacidad","curso":1,"materia":"matematicas","bloque":10,"familia":"medida","clave":"capacidad","nombre":"¿Cuánto líquido hay?","descripcion":"Ordenar vasos según el líquido.","opciones":[],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"¿CUÁNTO LÍQUIDO HAY?","color":"azul","metadatos":{"dificultad":1,"minutos":8,"etiquetas":["medida","capacidad","líquido"]},"cursos":{"2":{"rangos":[],"rango":null},"3":{"rangos":[],"rango":null}}},
 {"id":"estadistica.pictograma","curso":1,"materia":"matematicas","bloque":11,"familia":"estadistica","clave":"pictograma","nombre":"El pictograma","descripcion":"Leer un pictograma y contestar.","opciones":[{"id":"modo","etiqueta":"Valor del dibujo","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Cada dibujo vale 1"},{"valor":"dos","etiqueta":"Cada dibujo vale 2"}]}],"rangos":[10],"rango":10,"tamanos":["completa"],"titulo":"EL PICTOGRAMA","color":"verde","metadatos":{"dificultad":2,"minutos":12,"etiquetas":["estadística","pictograma","datos"]},"cursos":{"2":{"rangos":[10],"rango":10}}},
 {"id":"estadistica.recuento","curso":1,"materia":"matematicas","bloque":11,"familia":"estadistica","clave":"recuento","nombre":"Cuenta y anota","descripcion":"Contar con palotes y escribir el número.","opciones":[],"rangos":[10,20,30],"rango":10,"tamanos":["completa"],"titulo":"CUENTA Y ANOTA","color":"verde","metadatos":{"dificultad":1,"minutos":10,"etiquetas":["estadística","recuento","datos","contar"]},"cursos":{"2":{"rangos":[10,20,30],"rango":10}}},
 {"id":"estadistica.barras","curso":1,"materia":"matematicas","bloque":11,"familia":"estadistica","clave":"barras","nombre":"El gráfico de barras","descripcion":"Hacer o leer un gráfico de barras.","opciones":[{"id":"modo","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Colorear el gráfico"},{"valor":"lee","etiqueta":"Leer el gráfico"}]},{"id":"escala","etiqueta":"Escala del gráfico","tipo":"opcion","defecto":null,"curso":2,"valores":[{"valor":null,"etiqueta":"De 1 en 1"},{"valor":2,"etiqueta":"De 2 en 2"},{"valor":5,"etiqueta":"De 5 en 5"}]},{"id":"pregunta","etiqueta":"Pregunta final","tipo":"opcion","defecto":null,"curso":2,"valores":[{"valor":null,"etiqueta":"¿Cuántos hay en total?"},{"valor":"mas","etiqueta":"¿Cuántos más hay?"}]}],"rangos":[10],"rango":10,"tamanos":["completa"],"titulo":"EL GRÁFICO DE BARRAS","color":"verde","metadatos":{"dificultad":2,"minutos":12,"etiquetas":["estadística","gráfico de barras","datos"]},"cursos":{"2":{"rangos":[10],"rango":10}}},
@@ -3723,7 +3723,7 @@ const CATALOGO = {"cursos":{"1":"1.º de Primaria","2":"2.º de Primaria","3":"3
 {"id":"escritura.libre","curso":1,"materia":"lengua","bloque":8,"familia":"escritura","clave":"libre","nombre":"Escribe una frase","descripcion":"Renglones libres con la frase empezada (El gato…) o con un tema para escribir. Corrección abierta.","opciones":[{"id":"inicio","etiqueta":"Cómo empieza","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Con la frase empezada (El gato…)"},{"valor":"tema","etiqueta":"Con un tema para escribir"}]},{"id":"grafia","etiqueta":"Tipo de letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Letra de trazo (con flechas)"},{"valor":"escolar","etiqueta":"Escolar (ligada)"}]},{"id":"pauta","etiqueta":"Tamaño de pauta","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"5 mm"},{"valor":4,"etiqueta":"4 mm"},{"valor":3.5,"etiqueta":"3,5 mm"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"ESCRIBE UNA FRASE","color":"amarillo","metadatos":{"dificultad":3,"minutos":15,"etiquetas":["lengua","escritura","expresión escrita","frases","libre","pauta"]}},
 {"id":"escritura.ordena","curso":1,"materia":"lengua","bloque":8,"familia":"escritura","clave":"ordena","nombre":"Miro y escribo","descripcion":"Una tarjeta con espacio en blanco para pegar el dibujo, las letras desordenadas del nombre (qu, ch, ll, rr y gu en una casilla) y la pauta: ordenar las letras y escribir la palabra.","opciones":[{"id":"letras","etiqueta":"Casillas de cada palabra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"3 a 6 (variadas)"},{"valor":3,"etiqueta":"3 casillas"},{"valor":4,"etiqueta":"4 casillas"},{"valor":5,"etiqueta":"5 casillas"},{"valor":6,"etiqueta":"6 casillas"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"mayus","etiqueta":"MAYÚSCULA"}]},{"id":"grafia","etiqueta":"Tipo de letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Letra de trazo (con flechas)"},{"valor":"escolar","etiqueta":"Escolar (ligada)"}]},{"id":"pauta","etiqueta":"Tamaño de pauta","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"5 mm"},{"valor":4,"etiqueta":"4 mm"},{"valor":3.5,"etiqueta":"3,5 mm"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"MIRO Y ESCRIBO","color":"azul","metadatos":{"dificultad":2,"minutos":12,"etiquetas":["lengua","escritura","palabras","letras","ordenar","pauta","dibujo"]}},
 {"id":"medida.euros","curso":2,"materia":"matematicas","bloque":10,"familia":"medida","clave":"euros","nombre":"Paga con billetes y monedas","descripcion":"Pagar una cantidad con el menor número de billetes y monedas (hasta 500 €).","opciones":[],"rangos":[100,200,300,400,500],"rango":200,"tamanos":["completa","media"],"titulo":"PAGA CON BILLETES Y MONEDAS","color":"verde","metadatos":{"dificultad":3,"minutos":12,"etiquetas":["medida","dinero","euros","billetes","monedas","pagar"]}},
-{"id":"medida.masa","curso":2,"materia":"matematicas","bloque":10,"familia":"medida","clave":"masa","nombre":"¿Cuánto pesa?","descripcion":"Balanza con pesas de 1 kg y de medio kilo: pesa más, menos o igual.","opciones":[],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"¿CUÁNTO PESA?","color":"azul","metadatos":{"dificultad":2,"minutos":8,"etiquetas":["medida","masa","kilo","peso","balanza"]}},
+{"id":"medida.masa","curso":2,"materia":"matematicas","bloque":10,"familia":"medida","clave":"masa","nombre":"¿Cuánto pesa?","descripcion":"Balanza con pesas de 1 kg y de medio kilo: pesa más, menos o igual.","opciones":[],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"¿CUÁNTO PESA?","color":"azul","metadatos":{"dificultad":2,"minutos":8,"etiquetas":["medida","masa","kilo","peso","balanza"]},"cursos":{"3":{"rangos":[],"rango":null}}},
 {"id":"geometria.lados","curso":2,"materia":"matematicas","bloque":9,"familia":"geometria","clave":"lados","nombre":"Lados y vértices","descripcion":"Contar los lados y los vértices de polígonos dibujados.","opciones":[],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"LADOS Y VÉRTICES","color":"amarillo","metadatos":{"dificultad":1,"minutos":8,"etiquetas":["geometría","polígonos","lados","vértices"]}},
 {"id":"geometria.itinerario","curso":2,"materia":"matematicas","bloque":9,"familia":"geometria","clave":"itinerario","nombre":"Sigue el camino","descripcion":"Seguir flechas en una cuadrícula, o escribir las flechas de un camino.","opciones":[{"id":"modo","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Dibuja el camino"},{"valor":"llega","etiqueta":"¿Dónde llegas?"},{"valor":"flechas","etiqueta":"Escribe las flechas"}]}],"rangos":[],"rango":null,"tamanos":["completa"],"titulo":"SIGUE EL CAMINO","color":"rosa","metadatos":{"dificultad":2,"minutos":12,"etiquetas":["geometría","itinerario","flechas","cuadrícula","orientación"]}},
 {"id":"trucos.amigos100","curso":2,"materia":"matematicas","bloque":12,"familia":"trucos","clave":"amigos100","nombre":"Amigos del 100","descripcion":"Truco: buscar el amigo del 100 (30 + 70, 45 + 55).","opciones":[{"id":"modo","etiqueta":"Números","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Decenas exactas y otros números"},{"valor":"decenas","etiqueta":"Solo decenas exactas (30 + 70)"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"AMIGOS DEL 100","color":"amarillo","metadatos":{"dificultad":2,"minutos":8,"etiquetas":["cálculo mental","truco","amigos del 100","sumar"]}},
@@ -3743,6 +3743,9 @@ const CATALOGO = {"cursos":{"1":"1.º de Primaria","2":"2.º de Primaria","3":"3
 {"id":"multiplicar.tablas","curso":2,"materia":"matematicas","bloque":13,"familia":"multiplicar","clave":"tablas","nombre":"Las tablas","descripcion":"Multiplicaciones de las tablas del 2, 3, 4, 5 y 10: el resultado, el factor que falta o la tabla en orden.","opciones":[{"id":"tablas","etiqueta":"Tablas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Del 2, 5 y 10"},{"valor":"2","etiqueta":"Del 2"},{"valor":"3","etiqueta":"Del 3"},{"valor":"4","etiqueta":"Del 4"},{"valor":"5","etiqueta":"Del 5"},{"valor":"10","etiqueta":"Del 10"},{"valor":"todas","etiqueta":"Del 2, 3, 4, 5 y 10"},{"valor":"6","etiqueta":"Del 6","curso":3},{"valor":"7","etiqueta":"Del 7","curso":3},{"valor":"8","etiqueta":"Del 8","curso":3},{"valor":"9","etiqueta":"Del 9","curso":3},{"valor":"2a10","etiqueta":"Todas, del 2 al 10","curso":3}]},{"id":"modo","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Resultado"},{"valor":"hueco","etiqueta":"El factor que falta"},{"valor":"orden","etiqueta":"La tabla en orden"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"LAS TABLAS","color":"azul","metadatos":{"dificultad":2,"minutos":12,"etiquetas":["multiplicar","tablas","cálculo mental","factor"]},"cursos":{"3":{"rangos":[],"rango":null}}},
 {"id":"multiplicar.problemas","curso":2,"materia":"matematicas","bloque":13,"familia":"multiplicar","clave":"problemas","nombre":"Problemas de multiplicar","descripcion":"Problemas de grupos iguales (cajas, bolsas, filas de sillas…) con su operación y su respuesta.","opciones":[{"id":"tablas","etiqueta":"Tablas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Del 2, 5 y 10"},{"valor":"2","etiqueta":"Del 2"},{"valor":"3","etiqueta":"Del 3"},{"valor":"4","etiqueta":"Del 4"},{"valor":"5","etiqueta":"Del 5"},{"valor":"10","etiqueta":"Del 10"},{"valor":"todas","etiqueta":"Del 2, 3, 4, 5 y 10"},{"valor":"6","etiqueta":"Del 6","curso":3},{"valor":"7","etiqueta":"Del 7","curso":3},{"valor":"8","etiqueta":"Del 8","curso":3},{"valor":"9","etiqueta":"Del 9","curso":3},{"valor":"2a10","etiqueta":"Todas, del 2 al 10","curso":3}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"PROBLEMAS DE MULTIPLICAR","color":"rosa","metadatos":{"dificultad":3,"minutos":15,"etiquetas":["multiplicar","problemas","texto","razonamiento","grupos iguales"]},"cursos":{"3":{"rangos":[],"rango":null}}},
 {"id":"multiplicar.reparto","curso":2,"materia":"matematicas","bloque":13,"familia":"multiplicar","clave":"reparto","nombre":"Reparte","descripcion":"Repartir en partes iguales con dibujo, y la mitad y el tercio de un número.","opciones":[{"id":"modo","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Repartir en partes iguales"},{"valor":"mitad","etiqueta":"La mitad y el tercio"}]},{"id":"signo","etiqueta":"Con el signo ÷ (12 ÷ 3 = 4)","tipo":"si_no","defecto":false,"curso":3}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"REPARTE","color":"amarillo","metadatos":{"dificultad":3,"minutos":10,"etiquetas":["repartir","mitad","tercio","partes iguales","división"]},"cursos":{"3":{"rangos":[],"rango":null}}},
+{"id":"medida.equivale","curso":3,"materia":"matematicas","bloque":10,"familia":"medida","clave":"equivale","nombre":"Cambia de unidad","descripcion":"Pasar de una unidad a otra: km, m, cm y mm; kg y g; l y ml (también ½, ¼ y ¾).","opciones":[{"id":"magnitud","etiqueta":"Medidas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Longitud, masa y capacidad"},{"valor":"longitud","etiqueta":"Longitud (km, m, cm, mm)"},{"valor":"masa","etiqueta":"Masa (kg y g)"},{"valor":"capacidad","etiqueta":"Capacidad (l y ml)"}]},{"id":"modo","etiqueta":"Sentido","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Los dos sentidos"},{"valor":"mayor","etiqueta":"De la unidad grande a la pequeña (3 km = ☐ m)"},{"valor":"menor","etiqueta":"De la pequeña a la grande (3000 m = ☐ km)"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"CAMBIA DE UNIDAD","color":"amarillo","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["medida","unidades","equivalencias","km","m","cm","mm","kg","g","l","ml"]}},
+{"id":"medida.unidad","curso":3,"materia":"matematicas","bloque":10,"familia":"medida","clave":"unidad","nombre":"¿Qué unidad usarías?","descripcion":"Elegir la unidad adecuada para medir un objeto: km, m, cm, mm · kg, g · l, ml.","opciones":[{"id":"magnitud","etiqueta":"Medidas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Longitud, masa y capacidad"},{"valor":"longitud","etiqueta":"Longitud (km, m, cm, mm)"},{"valor":"masa","etiqueta":"Masa (kg y g)"},{"valor":"capacidad","etiqueta":"Capacidad (l y ml)"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"¿QUÉ UNIDAD USARÍAS?","color":"verde","metadatos":{"dificultad":1,"minutos":8,"etiquetas":["medida","unidades","elegir","longitud","masa","capacidad"]}},
+{"id":"medida.duracion","curso":3,"materia":"matematicas","bloque":10,"familia":"medida","clave":"duracion","nombre":"¿Cuánto dura?","descripcion":"Calcular cuánto dura una actividad entre dos horas, o a qué hora termina.","opciones":[{"id":"tarea","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"¿Cuánto dura? (de las 9:15 a las 10:40)"},{"valor":"fin","etiqueta":"¿A qué hora termina?"},{"valor":"mezcla","etiqueta":"Las dos"}]},{"id":"paso","etiqueta":"Minutos","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"De 5 en 5"},{"valor":15,"etiqueta":"Cuartos de hora"},{"valor":1,"etiqueta":"De 1 en 1"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"¿CUÁNTO DURA?","color":"azul","metadatos":{"dificultad":3,"minutos":12,"etiquetas":["medida","tiempo","duración","horas","minutos"]}},
 {"id":"fraccion.lee","curso":3,"materia":"matematicas","bloque":15,"familia":"fraccion","clave":"lee","nombre":"¿Qué parte está coloreada?","descripcion":"Escribir la fracción de la parte coloreada de círculos, rectángulos y tiras (y cómo se lee).","opciones":[{"id":"figura","etiqueta":"Figuras","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Mezcla"},{"valor":"circulo","etiqueta":"Círculos"},{"valor":"rect","etiqueta":"Rectángulos"},{"valor":"tira","etiqueta":"Tiras"}]},{"id":"den","etiqueta":"Denominador","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Hasta 12"},{"valor":6,"etiqueta":"Hasta 6 (medios a sextos)"},{"valor":10,"etiqueta":"Hasta 10"}]},{"id":"modo","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Escribe la fracción"},{"valor":"lee","etiqueta":"La fracción y cómo se lee"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"¿QUÉ PARTE ESTÁ COLOREADA?","color":"amarillo","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["fracciones","partes","figuras","numerador","denominador"]}},
 {"id":"fraccion.colorea","curso":3,"materia":"matematicas","bloque":15,"familia":"fraccion","clave":"colorea","nombre":"Colorea la fracción","descripcion":"Colorear en la figura partida la parte que indica la fracción.","opciones":[{"id":"figura","etiqueta":"Figuras","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Mezcla"},{"valor":"circulo","etiqueta":"Círculos"},{"valor":"rect","etiqueta":"Rectángulos"},{"valor":"tira","etiqueta":"Tiras"}]},{"id":"den","etiqueta":"Denominador","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Hasta 12"},{"valor":6,"etiqueta":"Hasta 6 (medios a sextos)"},{"valor":10,"etiqueta":"Hasta 10"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"COLOREA LA FRACCIÓN","color":"verde","metadatos":{"dificultad":1,"minutos":10,"etiquetas":["fracciones","colorear","partes","figuras"]}},
 {"id":"fraccion.letras","curso":3,"materia":"matematicas","bloque":15,"familia":"fraccion","clave":"letras","nombre":"La fracción en letras","descripcion":"Escribir cómo se lee una fracción (3/5, tres quintos) y al revés.","opciones":[{"id":"modo","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Los dos sentidos"},{"valor":"leer","etiqueta":"Fracción → letras (3/5 = tres quintos)"},{"valor":"escribir","etiqueta":"Letras → fracción (tres quintos = 3/5)"}]},{"id":"den","etiqueta":"Denominador","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Hasta 12"},{"valor":6,"etiqueta":"Hasta 6 (medios a sextos)"},{"valor":10,"etiqueta":"Hasta 10"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"LA FRACCIÓN EN LETRAS","color":"azul","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["fracciones","lectura","escritura","nombres"]}},
@@ -9313,6 +9316,9 @@ __req("tipos/medida.longitud.js");
 __req("tipos/medida.capacidad.js");
 __req("tipos/medida.euros.js");
 __req("tipos/medida.masa.js");
+__req("tipos/medida.equivale.js");
+__req("tipos/medida.unidad.js");
+__req("tipos/medida.duracion.js");
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({  }));
 },
 "tipos/familia.multiplicar.js": (__exp) => {
@@ -12350,11 +12356,13 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() 
 // medida.dinero · Cuenta el dinero (port de _m_dinero() e _item_dinero() del motor; dibuja sus propias monedas y billetes).
 // datos:    { u: "€" | "c", items: [["m" | "b", valor], …] (de mayor a menor valor) }
 // solucion: { huecos: [total] }
+// 3.º (lote 6, modo "mixto"): monedas de 2 €, 1 €, 50, 20, 10 y 5 c juntas (3–6 piezas, con euros y con céntimos); datos { u: "m", items: [["m", valor, "€" | "c"]] }; total ≤ min(rango, 10) €; respuesta con coma («3,70»).
 // Opciones: modo null (euros: monedas de 1 y 2 € y billetes de 5, 10 y 20 € hasta el rango; 2.º, rango 200–500: también 50 y 100 €) | "centimos" (monedas de 1 a 50 c).
 // rango (10, 20, 30, 100): tope del total (euros ≤ 50, céntimos ≤ 99); totales entre 3 y el tope, sin repetir.
 // Completa: 8 cuentas (2 × 4); media: 4.
 const { registrar } = __req("nucleo/tipos.js");
 const { TOP, T, B } = __req("render/papel.js");
+const { euros } = __req("tipos/medida.precios.js");
 const BILLETES = { 5: [52, 28], 10: [56, 28], 20: [60, 28], 50: [64, 28], 100: [70, 28] };
 const RADIO = { "€": { 1: 15, 2: 17 }, c: { 1: 12.5, 2: 14, 5: 16.5, 10: 16, 20: 17.5, 50: 18.5 } };   // monedas de céntimos más grandes: rótulo de ≥ 9 pt impresos
 
@@ -12376,12 +12384,32 @@ function itemDinero(p, kind, v, x, y, u) {
 const topeDinero = (R, cent) => cent ? Math.min(R, 99) : R > 100 ? R : Math.min(R, 50);
 const billetes = (R) => R > 100 ? [5, 10, 20, 50, 100] : [5, 10, 20];
 
+/** 3.º (lote 6): euros y céntimos juntos. Piezas [tipo, valor, unidad] de mayor a menor valor; total en céntimos, con céntimos (no es un número exacto de euros), ≤ min(rango, 10) €. */
+const MIXTAS = [["m", 2, "€"], ["m", 1, "€"], ["m", 50, "c"], ["m", 20, "c"], ["m", 10, "c"], ["m", 5, "c"]];
+const centimos = ([, v, u]) => (u === "€" ? 100 * v : v);
+function generarMixto(params, azar, tamano) {
+  const R = params.rango ?? 20, cap = Math.min(R, 10) * 100, cnt = tamano === "media" ? 4 : 8, vistos = new Set(), ejercicios = [];
+  for (let i = 0; i < cnt; i++) {
+    let its, tot, ok = false;
+    for (let k = 0; k < 20000 && !ok; k++) {
+      its = Array.from({ length: azar.entero(3, 6) }, () => azar.elegir(MIXTAS)).sort((a, b) => centimos(b) - centimos(a));
+      tot = its.reduce((t, it) => t + centimos(it), 0);
+      ok = its.some((it) => it[2] === "€") && its.some((it) => it[2] === "c") && tot % 100 !== 0 && tot >= 150 && tot <= cap && !vistos.has(tot);
+    }
+    if (!ok) throw new Error("Este modelo necesita un rango máximo mayor para tantas cuentas distintas.");
+    vistos.add(tot);
+    ejercicios.push({ datos: { u: "m", items: its }, solucion: { huecos: [euros(tot)] } });
+  }
+  return { enunciado: "Cuenta las monedas y escribe el total en euros.", ejercicios };
+}
+
 const __default = registrar({
   id: "medida.dinero",
   version: 2,
   generar(params, azar, { tamano }) {
     const R = params.rango ?? 20;
     if (R < 10) throw new Error("Este modelo necesita un rango máximo de al menos 10.");
+    if (params.modo === "mixto") return generarMixto(params, azar, tamano);
     const cent = params.modo === "centimos", u = cent ? "c" : "€", cap = topeDinero(R, cent);
     const vals = cent ? [1, 2, 5, 10, 20, 50].map((v) => ["m", v]) : [["m", 1], ["m", 2], ...billetes(R).filter((v) => v <= cap).map((v) => ["b", v])];
     const cnt = tamano === "media" ? 4 : 8, vistos = new Set(), ejercicios = [];
@@ -12403,7 +12431,8 @@ const __default = registrar({
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], { u, items } = e.datos;
       p.marco(x, y, cw, ch, i);
-      const ws = items.map(([k, v]) => (k === "m" ? 2 * RADIO[u][v] : BILLETES[v][0])), lin = [[]];
+      const mixto = u === "m", uu = (it) => it[2] ?? u;
+      const ws = items.map((it) => (it[0] === "m" ? 2 * RADIO[uu(it)][it[1]] : BILLETES[it[1]][0])), lin = [[]];
       let cur = 0;
       items.forEach((it, j) => {
         if (cur + ws[j] > cw - 28 && lin[lin.length - 1].length) { lin.push([]); cur = 0; }
@@ -12413,15 +12442,129 @@ const __default = registrar({
       for (const ln of lin) {
         const tw = ln.reduce((s, [, w]) => s + w, 0) + 8 * (ln.length - 1);
         let xx = x + (cw - tw) / 2;
-        for (const [[k, v], w] of ln) { itemDinero(p, k, v, xx + w / 2, yc, u); xx += w + 8; }
+        for (const [it, w] of ln) { itemDinero(p, it[0], it[1], xx + w / 2, yc, uu(it)); xx += w + 8; }
         yc -= 36;
       }
-      p.linea(x, y + 8, cw, 44, [T("Total =", 14, "PM"), B(54, 36, e.solucion.huecos[0]), T(u === "€" ? "€" : "cent.", 14, "PM")], 8);
+      p.linea(x, y + 8, cw, 44, [T("Total =", 14, "PM"), B(mixto ? 74 : 54, 36, e.solucion.huecos[0]), T(u === "c" ? "cent." : "€", 14, "PM")], 8);
     }));
   },
 });
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get BILLETES() { return BILLETES; }, get RADIO() { return RADIO; }, get itemDinero() { return itemDinero; }, get topeDinero() { return topeDinero; }, get billetes() { return billetes; }, get default() { return __default; } }));
+},
+"tipos/medida.duracion.js": (__exp) => {
+// medida.duracion · ¿Cuánto dura? (3.º, lote 6, bloque 10; solo curso 3, sin rango).
+// datos:    { h, m (hora de inicio, 1:00–11:55), d (minutos que dura), tarea: "dura" | "fin" }   (siempre entre las 12:00 y las 12:00 sin pasar de las 11:59: sin a. m. ni p. m.)
+// solucion: dura → { huecos: [horas, minutos] } («de las 9:15 a las 10:40 → 1 h 25 min») · fin → { huecos: [h, "mm"] } («empieza a las 9:15 y dura 1 h 25 min → 10:40»)
+// Opciones: tarea (None = ¿cuánto dura? · "fin" = ¿a qué hora termina? · "mezcla" = mitad y mitad) · paso (None = los minutos de 5 en 5 · 15 = cuartos de hora · 1 = de 1 en 1).
+// Duración entre 15 min y 3 h 55 min, siempre con minutos distintos de 0 en al menos la mitad. Sin repetir (inicio, duración).
+// Rejilla elástica de 1 columna con «Cantidad»: «Más grandes» = 8 y 4; «Más ejercicios» = las filas que caben con tarjetas ≥ 54 pt.
+const { registrar } = __req("nucleo/tipos.js");
+const { T, B } = __req("render/papel.js");
+const { cuantos, pintarEl, MIN_OP } = __req("tipos/_elastica.js");
+const hm = (h, m) => `${h}:${String(m).padStart(2, "0")}`;
+const dura = (d) => (d >= 60 ? `${Math.floor(d / 60)} h${d % 60 ? ` ${d % 60} min` : ""}` : `${d} min`);
+
+const __default = registrar({
+  id: "medida.duracion",
+  version: 1,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const paso = params.paso ?? 5, tarea = params.tarea ?? null, cnt = cuantos(ctx, 1, MIN_OP, [8, 4]);
+    const vistos = new Set(), ejercicios = [];
+    for (let i = 0; i < cnt; i++) {
+      let h, m, d, ok = false;
+      for (let k = 0; k < 5000 && !ok; k++) {
+        h = azar.entero(1, 10); m = paso * azar.entero(0, Math.floor(59 / paso)); d = paso * azar.entero(Math.ceil(15 / paso), Math.floor(235 / paso));
+        const fin = h * 60 + m + d;
+        ok = fin <= 11 * 60 + 59 && !vistos.has(`${h}:${m}:${d}`) && (d % 60 !== 0 || i % 2 === 0);
+      }
+      if (!ok) throw new Error("No hay duraciones distintas suficientes.");
+      vistos.add(`${h}:${m}:${d}`);
+      const t = tarea === "mezcla" ? (i % 2 ? "fin" : "dura") : (tarea ?? "dura"), fin = h * 60 + m + d;
+      ejercicios.push({ datos: { h, m, d, tarea: t }, solucion: { huecos: t === "dura" ? [Math.floor(d / 60), d % 60] : [Math.floor(fin / 60), String(fin % 60).padStart(2, "0")] } });
+    }
+    return {
+      enunciado: tarea === "fin" ? "Calcula a qué hora termina y escríbela."
+        : tarea === "mezcla" ? "Calcula cuánto dura o a qué hora termina."
+        : "Calcula cuánto dura cada actividad. Escribe las horas y los minutos.",
+      ejercicios,
+    };
+  },
+  dibujar(p, act) {
+    const es = act.ejercicios;
+    const items = (e) => {
+      const { h, m, d, tarea } = e.datos, [a, b] = e.solucion.huecos, fin = h * 60 + m + d;
+      if (tarea === "dura") return [T(`De las ${hm(h, m)} a las ${hm(Math.floor(fin / 60), fin % 60)}:`, 17), B(44, 38, a), T("h", 17), B(48, 38, b), T("min", 17)];
+      return [T(`Empieza a las ${hm(h, m)} y dura ${dura(d)}. Termina a las`, 17), B(44, 38, a), T(":", 19), B(48, 38, b)];
+    };
+    pintarEl(p, 1, es.map(items), es.map((e) => e.id), es.length, 8, 8, 1.15);
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/medida.equivale.js": (__exp) => {
+// medida.equivale · Cambia de unidad (3.º, lote 6, bloque 10; solo curso 3, sin rango).
+// datos:    { a: [cantidad (texto), unidad], b: unidad, mag: "longitud" | "masa" | "capacidad" }   («3 km = ▢ m», «2000 g = ▢ kg», «½ l = ▢ ml»)
+// solucion: { huecos: [n] }
+// Equivalencias: 1 km = 1000 m · 1 m = 100 cm · 1 cm = 10 mm · 1 kg = 1000 g · 1 l = 1000 ml; también ½, ¼ y ¾ de kg y de l (500, 250 y 750).
+// Opciones: magnitud (None = longitud, masa y capacidad por turnos · "longitud" · "masa" · "capacidad") · modo (None = los dos sentidos · "mayor" = de la unidad grande a la pequeña · "menor" = al revés).
+// Sin repetir ejercicio. Rejilla elástica de 2 columnas con «Cantidad»: «Más grandes» = 12 y 6; «Más ejercicios» = las filas que caben (tarjetas ≥ 54 pt) sin pasar del banco.
+const { registrar } = __req("nucleo/tipos.js");
+const { T, B } = __req("render/papel.js");
+const { cuantos, pintarEl, MIN_OP } = __req("tipos/_elastica.js");
+/** [unidad grande, unidad pequeña, cuántas pequeñas caben en una grande, múltiplos (de la grande) que se piden, fracciones] por par. */
+const PARES = {
+  longitud: [["km", "m", 1000, [1, 2, 3, 4, 5, 6, 8, 9], false], ["m", "cm", 100, [1, 2, 3, 4, 5, 6, 7, 8, 9], false], ["cm", "mm", 10, [1, 2, 3, 4, 5, 6, 7, 8, 9], false]],
+  masa: [["kg", "g", 1000, [1, 2, 3, 4, 5, 6, 8, 9], true]],
+  capacidad: [["l", "ml", 1000, [1, 2, 3, 4, 5, 6, 8, 9], true]],
+};
+const FRAC = [["½", 1 / 2], ["¼", 1 / 4], ["¾", 3 / 4]];
+const ORDEN = ["longitud", "masa", "capacidad"];
+
+/** Todos los ejercicios de una magnitud: {a: [texto, unidad], b, sol, sentido, mag}. */
+function banco(mag) {
+  const out = [];
+  for (const [g, c, f, ks, frac] of PARES[mag]) {
+    for (const k of ks) {
+      out.push({ a: [String(k), g], b: c, sol: k * f, sentido: "mayor", mag });
+      out.push({ a: [String(k * f), c], b: g, sol: k, sentido: "menor", mag });
+    }
+    if (frac) for (const [t, v] of FRAC) out.push({ a: [t, g], b: c, sol: v * f, sentido: "mayor", mag });
+  }
+  return out;
+}
+
+const __default = registrar({
+  id: "medida.equivale",
+  version: 1,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const mags = params.magnitud ? [params.magnitud] : ORDEN, modo = params.modo ?? null;
+    const colas = mags.map((m) => azar.barajar(banco(m).filter((e) => !modo || e.sentido === modo)));
+    const total = colas.reduce((t, c) => t + c.length, 0);
+    const cnt = Math.min(cuantos(ctx, 2, MIN_OP, [12, 6], total), Math.floor(total / 2) * 2);   // filas de 2 completas
+    const sel = [];
+    for (let i = 0; sel.length < cnt; i++) {   // una magnitud por turno; si a una no le quedan, la siguiente
+      const cola = colas[i % colas.length];
+      if (cola.length) sel.push(cola.shift());
+      else if (!colas.some((c) => c.length)) break;
+    }
+    const ejercicios = azar.barajar(sel).map((e) => ({ datos: { a: e.a, b: e.b, mag: e.mag }, solucion: { huecos: [e.sol] } }));
+    return { enunciado: "Escribe el número que falta.", ejercicios };
+  },
+  dibujar(p, act) {
+    const es = act.ejercicios;
+    const items = (e) => {
+      const { a: [n, u], b } = e.datos, h = e.solucion.huecos[0];
+      return [T(`${n} ${u} =`, 19), B(Math.max(60, 14 * String(h).length + 22), 38, h), T(b, 19)];
+    };
+    pintarEl(p, 2, es.map(items), es.map((e) => e.id), es.length / 2, 8, 14);
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get PARES() { return PARES; }, get banco() { return banco; }, get default() { return __default; } }));
 },
 "tipos/medida.euros.js": (__exp) => {
 // medida.euros · Paga con el menor número de billetes y monedas (2.º, lote 3b).
@@ -12646,6 +12789,7 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() 
 // solucion: { huecos: [a + b] } o { huecos: [pago − precio] }
 // Opciones: modo null (total de la compra) | "cambio" (la vuelta de un billete de 5, 10 o 20 €); rango 10 | 20 (tope de la suma / billete).
 // 2.º (rango 100): productos más caros (hasta 60 €), total hasta 100 € y billetes de 20, 50 y 100 €.
+// 3.º (lote 6, opción `centimos`): precios con céntimos (múltiplos de 5 c, ≤ 15 €), total ≤ rango y vuelta de 5, 10 o 20 €; datos con `c: true` y precios en céntimos; la respuesta es texto con coma («3,85»).
 // Completa: 10 tarjetas (2 × 5); media: 4 (2 filas).
 // Cantidad (rejilla elástica, 2 columnas): «Más grandes» = 10 y 4 (tarjetas que llenan el panel; las etiquetas crecen hasta ×1,3); «Más ejercicios» = las filas que caben con tarjetas ≥ 100 pt (12 y 6).
 const { registrar } = __req("nucleo/tipos.js");
@@ -12653,15 +12797,19 @@ const { TOP, T, B, cuantosRejilla } = __req("render/papel.js");
 const { itemDinero } = __req("tipos/medida.dinero.js");
 /** 2.º (lote 3, rango 100): precios en euros enteros hasta 100 €; la vuelta de billetes de 20, 50 y 100 €. */
 const PRODUCTOS_2 = { estuche: [5, 12], camiseta: [8, 16], muñeca: [10, 20], libro: [9, 18], balón: [12, 25], "juego de mesa": [15, 30], mochila: [18, 35], zapatillas: [25, 45], patinete: [35, 60], cometa: [6, 14] };
+/** 3.º (lote 6): precios con céntimos (múltiplos de 5 c, en céntimos): total de dos compras y vuelta de un billete de 5, 10 o 20 €. */
+const PRODUCTOS_C = { "lápiz": [60, 150], goma: [40, 120], sacapuntas: [50, 120], regla: [90, 250], pegamento: [120, 290], cuaderno: [150, 380], pelota: [250, 650], libro: [450, 950], mochila: [800, 1500] };
+/** 1235 → «12,35» (coma decimal). */
+const euros = (c) => `${Math.floor(c / 100)},${String(c % 100).padStart(2, "0")}`;
 const MIN_ALTO = 100;   // alto mínimo de tarjeta con «Más ejercicios» (etiqueta de 50 y la línea de la respuesta)
 
 const PRODUCTOS = { "lápiz": [1, 3], goma: [1, 2], sacapuntas: [1, 2], regla: [2, 3], pegamento: [2, 4], cuaderno: [3, 5], pelota: [4, 8], libro: [5, 9], mochila: [8, 12] };
 
 /** _etiqueta(): rótulo con el nombre y el precio. */
-function etiqueta(p, x, y, nom, precio, s = 1, w = 104 * s, h = 50 * s) {
+function etiqueta(p, x, y, nom, precio, s = 1, w = 104 * s, h = 50 * s, c = false) {
   p.rrect(x, y, w, h, 8, { lw: 1.5 });
   p.text(x + w / 2, y + h - 18 * s, nom, 12 * s, { f: "PM", anchor: "middle" });
-  p.text(x + w / 2, y + 9 * s, `${precio} €`, 16 * s, { f: "PB", anchor: "middle" });
+  p.text(x + w / 2, y + 9 * s, `${c ? euros(precio) : precio} €`, 16 * s, { f: "PB", anchor: "middle" });
 }
 
 const __default = registrar({
@@ -12671,9 +12819,26 @@ const __default = registrar({
   generar(params, azar, ctx) {
     const R = params.rango ?? 20;
     if (R < 10) throw new Error("Este modelo necesita un rango máximo de al menos 10.");
-    const dos = R > 20, P = dos ? PRODUCTOS_2 : PRODUCTOS, pagos = dos ? [20, 50, 100] : [5, 10, 20];
-    const cap = dos ? R : Math.min(R, 20), cambio = params.modo === "cambio", cnt = cuantosRejilla(ctx, 2, MIN_ALTO, [10, 4]), nombres = Object.keys(P), ejercicios = [];
+    const cent = !!params.centimos, dos = R > 20 && !cent, P = cent ? PRODUCTOS_C : dos ? PRODUCTOS_2 : PRODUCTOS, pagos = dos ? [20, 50, 100] : [5, 10, 20];
+    const cap = dos ? R : Math.min(R, 20), cambio = params.modo === "cambio", cnt = cuantosRejilla(ctx, 2, MIN_ALTO, [10, 4]), nombres = Object.keys(P), ejercicios = [], vistos = new Set();
     for (let i = 0; i < cnt; i++) {
+      if (cent) {   // en céntimos (enteros); al menos un precio con céntimos y resultado distinto en cada tarjeta
+        let d, sol, ok = false;
+        for (let k = 0; k < 5000 && !ok; k++) {
+          const c5 = ([lo, hi]) => 5 * azar.entero(lo / 5, hi / 5);
+          if (cambio) {
+            const pago = azar.elegir(pagos.filter((v) => v <= cap)), nom = azar.elegir(nombres.filter((n) => P[n][0] < pago * 100)), precio = c5([P[nom][0], Math.min(P[nom][1], pago * 100 - 5)]);
+            d = { nom, precio, pago, c: true }; sol = pago * 100 - precio; ok = precio % 100 !== 0;
+          } else {
+            const [a, b] = azar.muestra(nombres, 2), pa = c5(P[a]), pb = c5(P[b]);
+            d = { a: [a, pa], b: [b, pb], c: true }; sol = pa + pb; ok = sol <= cap * 100 && (pa % 100 !== 0 || pb % 100 !== 0);
+          }
+          ok = ok && !vistos.has(sol);
+        }
+        if (!ok) throw new Error("No hay compras distintas suficientes.");
+        vistos.add(sol); ejercicios.push({ datos: d, solucion: { huecos: [euros(sol)] } });
+        continue;
+      }
       if (cambio) {
         const pago = azar.elegir(pagos.filter((v) => v <= cap));
         const nom = azar.elegir(nombres.filter((k) => P[k][0] < pago)), [lo, hi] = P[nom];
@@ -12697,34 +12862,39 @@ const __default = registrar({
       const [x, y] = cel[i], d = e.datos, sol = e.solucion.huecos[0];
       p.marco(x, y, cw, ch, i);
       if (d.pago !== undefined) {
-        etiqueta(p, x + 26, y + ch - 14 - eh, d.nom, d.precio, s);
+        etiqueta(p, x + 26, y + ch - 14 - eh, d.nom, d.precio, s, undefined, undefined, d.c);
         p.text(x + 38 + ew, y + ch - 14 - eh / 2 - 4, "Pago con", 12, { f: "PM" });
         itemDinero(p, "b", d.pago, x + 91 + ew, y + ch - 14 - eh / 2, "€");
-        p.linea(x, y + 8, cw, 40, [T("Me devuelven", 13, "PM"), B(46, 34, sol), T("€", 14, "PM")], 8);
+        p.linea(x, y + 8, cw, 40, [T("Me devuelven", 13, "PM"), B(d.c ? 70 : 46, 34, sol), T("€", 14, "PM")], 8);
       } else {
-        etiqueta(p, x + 20, y + ch - 14 - eh, d.a[0], d.a[1], s);
-        etiqueta(p, x + cw - 20 - ew, y + ch - 14 - eh, d.b[0], d.b[1], s);
+        etiqueta(p, x + 20, y + ch - 14 - eh, d.a[0], d.a[1], s, undefined, undefined, d.c);
+        etiqueta(p, x + cw - 20 - ew, y + ch - 14 - eh, d.b[0], d.b[1], s, undefined, undefined, d.c);
         p.text(x + cw / 2, y + ch - 14 - eh / 2 - 8, "+", 22, { f: "PB", anchor: "middle" });
-        p.linea(x, y + 8, cw, 40, [T("Cuesta en total", 13, "PM"), B(46, 34, sol), T("€", 14, "PM")], 8);
+        p.linea(x, y + 8, cw, 40, [T("Cuesta en total", 13, "PM"), B(d.c ? 70 : 46, 34, sol), T("€", 14, "PM")], 8);
       }
     }));
   },
 });
 
-Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get euros() { return euros; }, get default() { return __default; } }));
 },
 "tipos/medida.reloj.js": (__exp) => {
 // medida.reloj · Los relojes de agujas (port de _reloj(), _horas() y _m_reloj() del motor).
 // datos:    { h (1–12), m (0, 15, 30 o 45; «menos cuarto» = h:45) }
 // solucion: { huecos: [h, "00" | "15" | "30" | "45"] }
-// Opción modo: null (en punto y y media, mitad y mitad) | "punto" | "media" · 2.º: "cuarto" | "todas".
+// Opción modo: null (en punto y y media, mitad y mitad) | "punto" | "media" · 2.º: "cuarto" | "todas" · 3.º (lote 6): "cinco" (minutos de 5 en 5, todos distintos) | "minuto" (de 1 en 1, sin múltiplos de 5; con una marca por minuto en la esfera).
 // Completa: 12 relojes (4 filas × 3, horas distintas por grupo); media: 6.
 const { registrar } = __req("nucleo/tipos.js");
 const { TOP, T, B, INK } = __req("render/papel.js");
 /** _reloj(): esfera con marcas, números y (si manos) las agujas. Ángulos como en el motor (12 arriba, sentido horario). */
-function dibujarReloj(p, cx, cy, r, h, m, manos = true) {
+function dibujarReloj(p, cx, cy, r, h, m, manos = true, minutos = false) {
   p.circle(cx, cy, r, { lw: 2.0 });
   const rad = (g) => g * Math.PI / 180;
+  if (minutos) for (let k = 0; k < 60; k++) {   // 3.º: una marca por minuto (las de las horas, más largas, van después)
+    if (k % 5 === 0) continue;
+    const a = rad(90 - 6 * k);
+    p.line(cx + (r - 2.2) * Math.cos(a), cy + (r - 2.2) * Math.sin(a), cx + r * Math.cos(a), cy + r * Math.sin(a), { lw: 0.6 });
+  }
   for (let k = 0; k < 12; k++) {
     const a = rad(90 - 30 * k);
     p.line(cx + (r - 4) * Math.cos(a), cy + (r - 4) * Math.sin(a), cx + r * Math.cos(a), cy + r * Math.sin(a), { lw: 1.0 });
@@ -12747,6 +12917,11 @@ const horas = (k, azar) => azar.muestra(Array.from({ length: 12 }, (_, i) => i +
 const MINUTOS = { punto: [0], media: [30], mezcla: [0, 30], cuarto: [15, 45], todas: [0, 15, 30, 45] };
 /** [h, m] de cada reloj: los grupos de minutos a partes iguales (el resto, a los primeros), horas distintas en cada grupo. */
 function horasModo(modo, cnt, azar) {
+  if (modo === "cinco" || modo === "minuto") {   // 3.º: minutos distintos en cada reloj (de 5 en 5, o los que no son múltiplos de 5)
+    const lista = modo === "cinco" ? Array.from({ length: 12 }, (_, i) => 5 * i) : Array.from({ length: 59 }, (_, i) => i + 1).filter((v) => v % 5);
+    const ms = azar.muestra(lista, cnt), hs = modo === "cinco" ? horas(cnt, azar) : ms.map(() => azar.entero(1, 12));
+    return ms.map((m, i) => [hs[i], m]);
+  }
   const ms = MINUTOS[modo || "mezcla"];
   if (ms.length === 1) return horas(cnt, azar).map((h) => [h, ms[0]]);
   const hs = ms.flatMap((m, k) => horas(Math.floor(cnt / ms.length) + (k < cnt % ms.length ? 1 : 0), azar).map((h) => [h, m]));
@@ -12765,11 +12940,11 @@ const __default = registrar({
     };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 3, 4);
+    const { cel, cw, ch } = p.celdas(TOP, 3, 4), minutos = act.params?.modo === "cinco" || act.params?.modo === "minuto";
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], { h, m } = e.datos, [sh, sm] = e.solucion.huecos;
       p.marco(x, y, cw, ch, i);
-      dibujarReloj(p, x + cw / 2, y + ch * 0.6, 44, h, m);
+      dibujarReloj(p, x + cw / 2, y + ch * 0.6, 44, h, m, true, minutos);
       p.linea(x, y + 8, cw, 46, [B(42, 34, sh), T(":", 22), B(42, 34, sm)], 8);
     }));
   },
@@ -12797,12 +12972,12 @@ const __default = registrar({
     };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 3, 4);
+    const { cel, cw, ch } = p.celdas(TOP, 3, 4), minutos = act.params?.modo === "cinco" || act.params?.modo === "minuto";
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], { h, m } = e.datos, cx = x + cw / 2, cy = y + (ch - 48) / 2, r = 46;
       p.marco(x, y, cw, ch, i);
       p.text(cx, y + ch - 36, `${h}:${String(m).padStart(2, "0")}`, 26, { f: "PB", anchor: "middle" });
-      dibujarReloj(p, cx, cy, r, h, m, false);
+      dibujarReloj(p, cx, cy, r, h, m, false, minutos);
       if (p.solucion) {
         const rad = (g) => g * Math.PI / 180;
         let a = rad(90 - (30 * (h % 12) + m * 0.5));
@@ -12968,6 +13143,68 @@ const __default = registrar({
 });
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get chips() { return chips; }, get chips2() { return chips2; }, get default() { return __default; } }));
+},
+"tipos/medida.unidad.js": (__exp) => {
+// medida.unidad · ¿Qué unidad usarías? (3.º, lote 6, bloque 10; solo curso 3, sin rango).
+// datos:    { objeto, unidades: ["km", "m", "cm", "mm"] | ["kg", "g"] | ["l", "ml"], mag }
+// solucion: { huecos: [], unidad } (se rodea la unidad; en la solución, en rojo)
+// Opción magnitud: None = longitud, masa y capacidad por turnos · "longitud" (km, m, cm, mm) · "masa" (kg, g) · "capacidad" (l, ml).
+// Cada unidad sale el mismo número de veces (±1) y ningún objeto se repite. Objetos sin duda posible para un niño de 3.º.
+// Rejilla elástica de 2 columnas con «Cantidad»: «Más grandes» = 12 y 6; «Más ejercicios» = las filas que caben con tarjetas ≥ 62 pt, sin pasar del banco.
+const { registrar } = __req("nucleo/tipos.js");
+const { TOP, cuantosRejilla } = __req("render/papel.js");
+const { chips } = __req("tipos/medida.tiempo.js");
+const UNIDADES_3 = {
+  longitud: { km: ["La distancia de Sevilla a Madrid", "Un viaje en coche a otra ciudad", "La vuelta ciclista a España", "La carrera de un maratón", "La distancia de la Tierra a la Luna"],
+              m: ["El largo del patio", "La altura de una casa", "El largo de una piscina", "El largo de un autobús", "La altura de un árbol", "El ancho de la clase"],
+              cm: ["El largo de un lápiz", "El ancho de tu mano", "El largo de una goma", "La altura de un vaso", "El largo de tu pie", "El ancho de un libro"],
+              mm: ["El grosor de una moneda", "El largo de una hormiga", "El grosor de una hoja de papel", "El largo de un grano de arroz", "El grosor de una uña"] },
+  masa: { kg: ["Una sandía", "Una mochila llena", "Un saco de patatas", "Un perro grande", "Un niño de tu edad", "Un melón"],
+          g: ["Una moneda", "Un lápiz", "Una goma", "Una cuchara", "Una pluma", "Un sacapuntas"] },
+  capacidad: { l: ["Una garrafa de agua", "Una bañera", "Un cubo de fregar", "El depósito de un coche", "Una botella grande de refresco", "Un acuario"],
+               ml: ["Una cucharada de jarabe", "Un yogur", "Un vaso de zumo", "Una gota de colonia", "Una cucharilla de café", "Un frasco de perfume"] },
+};
+const MAGS = ["longitud", "masa", "capacidad"];
+const ROJO = "#C62828", MIN_ALTO = 62;
+
+const __default = registrar({
+  id: "medida.unidad",
+  version: 1,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const mags = params.magnitud ? [params.magnitud] : MAGS;
+    // una cola de objetos por unidad; el orden de turnos reparte las magnitudes y las unidades
+    const colas = [];
+    const maxU = Math.max(...mags.map((m) => Object.keys(UNIDADES_3[m]).length));
+    for (let u = 0; u < maxU; u++) for (const m of mags) {
+      const us = Object.keys(UNIDADES_3[m]);
+      if (u < us.length) colas.push({ mag: m, unidad: us[u], objetos: azar.barajar(UNIDADES_3[m][us[u]]) });
+    }
+    const banco = colas.reduce((t, c) => t + c.objetos.length, 0);
+    const cnt = Math.min(cuantosRejilla(ctx, 2, MIN_ALTO, [12, 6]), Math.floor(banco / 2) * 2), sel = [];
+    for (let i = 0; sel.length < cnt; i++) {
+      const c = colas[i % colas.length];
+      if (c.objetos.length) sel.push({ objeto: c.objetos.shift(), unidad: c.unidad, mag: c.mag });
+    }
+    return {
+      enunciado: "¿Qué unidad usarías para medirlo? Rodéala.",
+      ejercicios: azar.barajar(sel).map(({ objeto, unidad, mag }) => ({ datos: { objeto, unidades: Object.keys(UNIDADES_3[mag]), mag }, solucion: { huecos: [], unidad } })),
+    };
+  },
+  dibujar(p, act) {
+    const { cel, cw, ch } = p.rejilla(TOP, 2, Math.ceil(act.ejercicios.length / 2));
+    act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
+      const [x, y] = cel[i], { objeto, unidades } = e.datos;
+      p.marco(x, y, cw, ch, i);
+      let fs = 13; while (p.ancho(objeto, "PM", fs) > cw - 84 && fs > 9.5) fs -= 0.5;
+      p.text(x + cw / 2, y + ch - 18 - fs * 0.33, objeto, fs, { f: "PM", anchor: "middle" });
+      const pos = chips(p, x + cw / 2, y + 10, unidades, 14, 26, 8);
+      if (p.solucion) { const [cx, w] = pos[unidades.indexOf(e.solucion.unidad)]; p.rrect(cx - 3, y + 7, w + 6, 32, 12, { lw: 1.6, stroke: ROJO }); }
+    }));
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get UNIDADES_3() { return UNIDADES_3; }, get default() { return __default; } }));
 },
 "tipos/multiplicar.dobletriple.js": (__exp) => {
 // multiplicar.dobletriple · El doble, el triple, la mitad y el tercio (3.º, lote 3, bloque 13; solo curso 3, sin rango).

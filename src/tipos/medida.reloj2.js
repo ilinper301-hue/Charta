@@ -19,12 +19,12 @@ export default registrar({
     };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 3, 4);
+    const { cel, cw, ch } = p.celdas(TOP, 3, 4), minutos = act.params?.modo === "cinco" || act.params?.modo === "minuto";
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], { h, m } = e.datos, cx = x + cw / 2, cy = y + (ch - 48) / 2, r = 46;
       p.marco(x, y, cw, ch, i);
       p.text(cx, y + ch - 36, `${h}:${String(m).padStart(2, "0")}`, 26, { f: "PB", anchor: "middle" });
-      dibujarReloj(p, cx, cy, r, h, m, false);
+      dibujarReloj(p, cx, cy, r, h, m, false, minutos);
       if (p.solucion) {
         const rad = (g) => g * Math.PI / 180;
         let a = rad(90 - (30 * (h % 12) + m * 0.5));

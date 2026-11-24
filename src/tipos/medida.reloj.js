@@ -1,15 +1,20 @@
 // medida.reloj · Los relojes de agujas (port de _reloj(), _horas() y _m_reloj() del motor).
 // datos:    { h (1–12), m (0, 15, 30 o 45; «menos cuarto» = h:45) }
 // solucion: { huecos: [h, "00" | "15" | "30" | "45"] }
-// Opción modo: null (en punto y y media, mitad y mitad) | "punto" | "media" · 2.º: "cuarto" | "todas".
+// Opción modo: null (en punto y y media, mitad y mitad) | "punto" | "media" · 2.º: "cuarto" | "todas" · 3.º (lote 6): "cinco" (minutos de 5 en 5, todos distintos) | "minuto" (de 1 en 1, sin múltiplos de 5; con una marca por minuto en la esfera).
 // Completa: 12 relojes (4 filas × 3, horas distintas por grupo); media: 6.
 import { registrar } from "../nucleo/tipos.js";
 import { TOP, T, B, INK } from "../render/papel.js";
 
 /** _reloj(): esfera con marcas, números y (si manos) las agujas. Ángulos como en el motor (12 arriba, sentido horario). */
-export function dibujarReloj(p, cx, cy, r, h, m, manos = true) {
+export function dibujarReloj(p, cx, cy, r, h, m, manos = true, minutos = false) {
   p.circle(cx, cy, r, { lw: 2.0 });
   const rad = (g) => g * Math.PI / 180;
+  if (minutos) for (let k = 0; k < 60; k++) {   // 3.º: una marca por minuto (las de las horas, más largas, van después)
+    if (k % 5 === 0) continue;
+    const a = rad(90 - 6 * k);
+    p.line(cx + (r - 2.2) * Math.cos(a), cy + (r - 2.2) * Math.sin(a), cx + r * Math.cos(a), cy + r * Math.sin(a), { lw: 0.6 });
+  }
   for (let k = 0; k < 12; k++) {
     const a = rad(90 - 30 * k);
     p.line(cx + (r - 4) * Math.cos(a), cy + (r - 4) * Math.sin(a), cx + r * Math.cos(a), cy + r * Math.sin(a), { lw: 1.0 });
@@ -32,6 +37,11 @@ const horas = (k, azar) => azar.muestra(Array.from({ length: 12 }, (_, i) => i +
 export const MINUTOS = { punto: [0], media: [30], mezcla: [0, 30], cuarto: [15, 45], todas: [0, 15, 30, 45] };
 /** [h, m] de cada reloj: los grupos de minutos a partes iguales (el resto, a los primeros), horas distintas en cada grupo. */
 export function horasModo(modo, cnt, azar) {
+  if (modo === "cinco" || modo === "minuto") {   // 3.º: minutos distintos en cada reloj (de 5 en 5, o los que no son múltiplos de 5)
+    const lista = modo === "cinco" ? Array.from({ length: 12 }, (_, i) => 5 * i) : Array.from({ length: 59 }, (_, i) => i + 1).filter((v) => v % 5);
+    const ms = azar.muestra(lista, cnt), hs = modo === "cinco" ? horas(cnt, azar) : ms.map(() => azar.entero(1, 12));
+    return ms.map((m, i) => [hs[i], m]);
+  }
   const ms = MINUTOS[modo || "mezcla"];
   if (ms.length === 1) return horas(cnt, azar).map((h) => [h, ms[0]]);
   const hs = ms.flatMap((m, k) => horas(Math.floor(cnt / ms.length) + (k < cnt % ms.length ? 1 : 0), azar).map((h) => [h, m]));
@@ -50,11 +60,11 @@ export default registrar({
     };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 3, 4);
+    const { cel, cw, ch } = p.celdas(TOP, 3, 4), minutos = act.params?.modo === "cinco" || act.params?.modo === "minuto";
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], { h, m } = e.datos, [sh, sm] = e.solucion.huecos;
       p.marco(x, y, cw, ch, i);
-      dibujarReloj(p, x + cw / 2, y + ch * 0.6, 44, h, m);
+      dibujarReloj(p, x + cw / 2, y + ch * 0.6, 44, h, m, true, minutos);
       p.linea(x, y + 8, cw, 46, [B(42, 34, sh), T(":", 22), B(42, 34, sm)], 8);
     }));
   },

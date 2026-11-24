@@ -15597,6 +15597,408 @@
    "73af7f89e4e2aea0"
   ]
  },
+ "medida.duracion": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "¿Cuánto dura?",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "medida.duracion",
+       "tipoVersion": 1,
+       "params": {
+        "tarea": null,
+        "paso": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Calcula cuánto dura cada actividad. Escribe las horas y los minutos.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "h": 6,
+          "m": 25,
+          "d": 75,
+          "tarea": "dura"
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           15
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "h": 4,
+          "m": 15,
+          "d": 205,
+          "tarea": "dura"
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           25
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "h": 1,
+          "m": 35,
+          "d": 70,
+          "tarea": "dura"
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "h": 4,
+          "m": 55,
+          "d": 90,
+          "tarea": "dura"
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           30
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "h": 5,
+          "m": 45,
+          "d": 200,
+          "tarea": "dura"
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           20
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "h": 4,
+          "m": 5,
+          "d": 215,
+          "tarea": "dura"
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           35
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "h": 2,
+          "m": 40,
+          "d": 45,
+          "tarea": "dura"
+         },
+         "solucion": {
+          "huecos": [
+           0,
+           45
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "h": 1,
+          "m": 10,
+          "d": 50,
+          "tarea": "dura"
+         },
+         "solucion": {
+          "huecos": [
+           0,
+           50
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "d8bd7be8b35b0de8"
+  ],
+  "svgSolucion": [
+   "5e416bf5a5c47f2a"
+  ]
+ },
+ "medida.equivale": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Cambia de unidad",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "medida.equivale",
+       "tipoVersion": 1,
+       "params": {
+        "magnitud": null,
+        "modo": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Escribe el número que falta.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "a": [
+           "4000",
+           "ml"
+          ],
+          "b": "l",
+          "mag": "capacidad"
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "a": [
+           "9000",
+           "m"
+          ],
+          "b": "km",
+          "mag": "longitud"
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "a": [
+           "3",
+           "m"
+          ],
+          "b": "cm",
+          "mag": "longitud"
+         },
+         "solucion": {
+          "huecos": [
+           300
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": [
+           "1",
+           "l"
+          ],
+          "b": "ml",
+          "mag": "capacidad"
+         },
+         "solucion": {
+          "huecos": [
+           1000
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "a": [
+           "500",
+           "cm"
+          ],
+          "b": "m",
+          "mag": "longitud"
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": [
+           "1",
+           "kg"
+          ],
+          "b": "g",
+          "mag": "masa"
+         },
+         "solucion": {
+          "huecos": [
+           1000
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "a": [
+           "1000",
+           "g"
+          ],
+          "b": "kg",
+          "mag": "masa"
+         },
+         "solucion": {
+          "huecos": [
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "a": [
+           "8000",
+           "g"
+          ],
+          "b": "kg",
+          "mag": "masa"
+         },
+         "solucion": {
+          "huecos": [
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "a": [
+           "8",
+           "l"
+          ],
+          "b": "ml",
+          "mag": "capacidad"
+         },
+         "solucion": {
+          "huecos": [
+           8000
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "a": [
+           "6",
+           "l"
+          ],
+          "b": "ml",
+          "mag": "capacidad"
+         },
+         "solucion": {
+          "huecos": [
+           6000
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "a": [
+           "6000",
+           "g"
+          ],
+          "b": "kg",
+          "mag": "masa"
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "a": [
+           "5000",
+           "m"
+          ],
+          "b": "km",
+          "mag": "longitud"
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "fddb354e5d4a4456"
+  ],
+  "svgSolucion": [
+   "6477f4888889723e"
+  ]
+ },
  "medida.euros": {
   "ficha": {
    "schemaVersion": 1,
@@ -16891,6 +17293,242 @@
   ],
   "svgSolucion": [
    "f4a88f0df45507b7"
+  ]
+ },
+ "medida.unidad": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "¿Qué unidad usarías?",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "medida.unidad",
+       "tipoVersion": 1,
+       "params": {
+        "magnitud": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "¿Qué unidad usarías para medirlo? Rodéala.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "objeto": "Un perro grande",
+          "unidades": [
+           "kg",
+           "g"
+          ],
+          "mag": "masa"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "kg"
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "objeto": "Un acuario",
+          "unidades": [
+           "l",
+           "ml"
+          ],
+          "mag": "capacidad"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "l"
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "objeto": "El grosor de una uña",
+          "unidades": [
+           "km",
+           "m",
+           "cm",
+           "mm"
+          ],
+          "mag": "longitud"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "mm"
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "objeto": "El largo del patio",
+          "unidades": [
+           "km",
+           "m",
+           "cm",
+           "mm"
+          ],
+          "mag": "longitud"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "m"
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "objeto": "Un lápiz",
+          "unidades": [
+           "kg",
+           "g"
+          ],
+          "mag": "masa"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "g"
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "objeto": "La altura de un vaso",
+          "unidades": [
+           "km",
+           "m",
+           "cm",
+           "mm"
+          ],
+          "mag": "longitud"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "cm"
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "objeto": "Un saco de patatas",
+          "unidades": [
+           "kg",
+           "g"
+          ],
+          "mag": "masa"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "kg"
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "objeto": "La distancia de la Tierra a la Luna",
+          "unidades": [
+           "km",
+           "m",
+           "cm",
+           "mm"
+          ],
+          "mag": "longitud"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "km"
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "objeto": "Un vaso de zumo",
+          "unidades": [
+           "l",
+           "ml"
+          ],
+          "mag": "capacidad"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "ml"
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "objeto": "El largo de una piscina",
+          "unidades": [
+           "km",
+           "m",
+           "cm",
+           "mm"
+          ],
+          "mag": "longitud"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "m"
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "objeto": "La carrera de un maratón",
+          "unidades": [
+           "km",
+           "m",
+           "cm",
+           "mm"
+          ],
+          "mag": "longitud"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "km"
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "objeto": "Una garrafa de agua",
+          "unidades": [
+           "l",
+           "ml"
+          ],
+          "mag": "capacidad"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "l"
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "b5418f59d6ac0c61"
+  ],
+  "svgSolucion": [
+   "eb91fb4dd27c0694"
   ]
  },
  "multiplicar.dobletriple": {
@@ -83789,6 +84427,2008 @@
   ],
   "svgSolucion": [
    "5655de0ce978dee9"
+  ]
+ },
+ "3.º cambia de unidad (mezcla) y qué unidad usarías": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Cambia de unidad y ¿Qué unidad usarías?",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "medida.equivale",
+       "tipoVersion": 1,
+       "params": {
+        "magnitud": null,
+        "modo": null,
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "amarillo",
+       "enunciado": "Escribe el número que falta.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "a": [
+           "4",
+           "km"
+          ],
+          "b": "m",
+          "mag": "longitud"
+         },
+         "solucion": {
+          "huecos": [
+           4000
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "a": [
+           "1000",
+           "m"
+          ],
+          "b": "km",
+          "mag": "longitud"
+         },
+         "solucion": {
+          "huecos": [
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "a": [
+           "1000",
+           "g"
+          ],
+          "b": "kg",
+          "mag": "masa"
+         },
+         "solucion": {
+          "huecos": [
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": [
+           "5",
+           "l"
+          ],
+          "b": "ml",
+          "mag": "capacidad"
+         },
+         "solucion": {
+          "huecos": [
+           5000
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "a": [
+           "¼",
+           "l"
+          ],
+          "b": "ml",
+          "mag": "capacidad"
+         },
+         "solucion": {
+          "huecos": [
+           250
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": [
+           "5000",
+           "g"
+          ],
+          "b": "kg",
+          "mag": "masa"
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "medida.unidad",
+       "tipoVersion": 1,
+       "params": {
+        "magnitud": null,
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "verde",
+       "enunciado": "¿Qué unidad usarías para medirlo? Rodéala.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "objeto": "Un niño de tu edad",
+          "unidades": [
+           "kg",
+           "g"
+          ],
+          "mag": "masa"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "kg"
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "objeto": "Una garrafa de agua",
+          "unidades": [
+           "l",
+           "ml"
+          ],
+          "mag": "capacidad"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "l"
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "objeto": "La carrera de un maratón",
+          "unidades": [
+           "km",
+           "m",
+           "cm",
+           "mm"
+          ],
+          "mag": "longitud"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "km"
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "objeto": "La altura de una casa",
+          "unidades": [
+           "km",
+           "m",
+           "cm",
+           "mm"
+          ],
+          "mag": "longitud"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "m"
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "objeto": "Un frasco de perfume",
+          "unidades": [
+           "l",
+           "ml"
+          ],
+          "mag": "capacidad"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "ml"
+         }
+        },
+        {
+         "id": "a2e6",
+         "datos": {
+          "objeto": "Un lápiz",
+          "unidades": [
+           "kg",
+           "g"
+          ],
+          "mag": "masa"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "g"
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "839a334b636e115a"
+  ],
+  "svgSolucion": [
+   "47ddf44d4ac78894"
+  ]
+ },
+ "3.º cambia de unidad: masa, de pequeña a grande": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Cambia de unidad",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "medida.equivale",
+       "tipoVersion": 1,
+       "params": {
+        "magnitud": "masa",
+        "modo": "menor",
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Escribe el número que falta.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "a": [
+           "8000",
+           "g"
+          ],
+          "b": "kg",
+          "mag": "masa"
+         },
+         "solucion": {
+          "huecos": [
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "a": [
+           "6000",
+           "g"
+          ],
+          "b": "kg",
+          "mag": "masa"
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "a": [
+           "4000",
+           "g"
+          ],
+          "b": "kg",
+          "mag": "masa"
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": [
+           "5000",
+           "g"
+          ],
+          "b": "kg",
+          "mag": "masa"
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "a": [
+           "1000",
+           "g"
+          ],
+          "b": "kg",
+          "mag": "masa"
+         },
+         "solucion": {
+          "huecos": [
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": [
+           "3000",
+           "g"
+          ],
+          "b": "kg",
+          "mag": "masa"
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "a": [
+           "2000",
+           "g"
+          ],
+          "b": "kg",
+          "mag": "masa"
+         },
+         "solucion": {
+          "huecos": [
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "a": [
+           "9000",
+           "g"
+          ],
+          "b": "kg",
+          "mag": "masa"
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "3ef998acdbd7442f"
+  ],
+  "svgSolucion": [
+   "e07c7225e51bc113"
+  ]
+ },
+ "3.º más ejercicios: unidad (longitud) y equivalencias": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "¿Qué unidad usarías? y cambia de unidad",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "medida.unidad",
+       "tipoVersion": 1,
+       "params": {
+        "magnitud": "longitud",
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "verde",
+       "enunciado": "¿Qué unidad usarías para medirlo? Rodéala.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "objeto": "La distancia de Sevilla a Madrid",
+          "unidades": [
+           "km",
+           "m",
+           "cm",
+           "mm"
+          ],
+          "mag": "longitud"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "km"
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "objeto": "El largo de una hormiga",
+          "unidades": [
+           "km",
+           "m",
+           "cm",
+           "mm"
+          ],
+          "mag": "longitud"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "mm"
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "objeto": "La carrera de un maratón",
+          "unidades": [
+           "km",
+           "m",
+           "cm",
+           "mm"
+          ],
+          "mag": "longitud"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "km"
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "objeto": "El ancho de un libro",
+          "unidades": [
+           "km",
+           "m",
+           "cm",
+           "mm"
+          ],
+          "mag": "longitud"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "cm"
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "objeto": "La altura de un árbol",
+          "unidades": [
+           "km",
+           "m",
+           "cm",
+           "mm"
+          ],
+          "mag": "longitud"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "m"
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "objeto": "El grosor de una moneda",
+          "unidades": [
+           "km",
+           "m",
+           "cm",
+           "mm"
+          ],
+          "mag": "longitud"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "mm"
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "objeto": "El ancho de tu mano",
+          "unidades": [
+           "km",
+           "m",
+           "cm",
+           "mm"
+          ],
+          "mag": "longitud"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "cm"
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "objeto": "El largo de una piscina",
+          "unidades": [
+           "km",
+           "m",
+           "cm",
+           "mm"
+          ],
+          "mag": "longitud"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "m"
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "objeto": "La vuelta ciclista a España",
+          "unidades": [
+           "km",
+           "m",
+           "cm",
+           "mm"
+          ],
+          "mag": "longitud"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "km"
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "objeto": "El largo de un autobús",
+          "unidades": [
+           "km",
+           "m",
+           "cm",
+           "mm"
+          ],
+          "mag": "longitud"
+         },
+         "solucion": {
+          "huecos": [],
+          "unidad": "m"
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "medida.equivale",
+       "tipoVersion": 1,
+       "params": {
+        "magnitud": "longitud",
+        "modo": null,
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "amarillo",
+       "enunciado": "Escribe el número que falta.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "a": [
+           "900",
+           "cm"
+          ],
+          "b": "m",
+          "mag": "longitud"
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "a": [
+           "2",
+           "m"
+          ],
+          "b": "cm",
+          "mag": "longitud"
+         },
+         "solucion": {
+          "huecos": [
+           200
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "a": [
+           "3000",
+           "m"
+          ],
+          "b": "km",
+          "mag": "longitud"
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "a": [
+           "5",
+           "km"
+          ],
+          "b": "m",
+          "mag": "longitud"
+         },
+         "solucion": {
+          "huecos": [
+           5000
+          ]
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "a": [
+           "4000",
+           "m"
+          ],
+          "b": "km",
+          "mag": "longitud"
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a2e6",
+         "datos": {
+          "a": [
+           "6000",
+           "m"
+          ],
+          "b": "km",
+          "mag": "longitud"
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a2e7",
+         "datos": {
+          "a": [
+           "600",
+           "cm"
+          ],
+          "b": "m",
+          "mag": "longitud"
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a2e8",
+         "datos": {
+          "a": [
+           "6",
+           "m"
+          ],
+          "b": "cm",
+          "mag": "longitud"
+         },
+         "solucion": {
+          "huecos": [
+           600
+          ]
+         }
+        },
+        {
+         "id": "a2e9",
+         "datos": {
+          "a": [
+           "4",
+           "km"
+          ],
+          "b": "m",
+          "mag": "longitud"
+         },
+         "solucion": {
+          "huecos": [
+           4000
+          ]
+         }
+        },
+        {
+         "id": "a2e10",
+         "datos": {
+          "a": [
+           "10",
+           "mm"
+          ],
+          "b": "cm",
+          "mag": "longitud"
+         },
+         "solucion": {
+          "huecos": [
+           1
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "865edcce190bed1d"
+  ],
+  "svgSolucion": [
+   "bca17620e17e6eb3"
+  ]
+ },
+ "3.º cuánto dura (mezcla, cuartos)": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "¿Cuánto dura?",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "medida.duracion",
+       "tipoVersion": 1,
+       "params": {
+        "tarea": "mezcla",
+        "paso": 15,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Calcula cuánto dura o a qué hora termina.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "h": 3,
+          "m": 15,
+          "d": 225,
+          "tarea": "dura"
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           45
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "h": 1,
+          "m": 0,
+          "d": 45,
+          "tarea": "fin"
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           "45"
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "h": 4,
+          "m": 0,
+          "d": 30,
+          "tarea": "dura"
+         },
+         "solucion": {
+          "huecos": [
+           0,
+           30
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "h": 1,
+          "m": 45,
+          "d": 195,
+          "tarea": "fin"
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           "00"
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "h": 2,
+          "m": 45,
+          "d": 165,
+          "tarea": "dura"
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           45
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "h": 2,
+          "m": 0,
+          "d": 135,
+          "tarea": "fin"
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           "15"
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "h": 9,
+          "m": 45,
+          "d": 105,
+          "tarea": "dura"
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           45
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "h": 8,
+          "m": 0,
+          "d": 225,
+          "tarea": "fin"
+         },
+         "solucion": {
+          "huecos": [
+           11,
+           "45"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "f872242c40083887"
+  ],
+  "svgSolucion": [
+   "4a37e14ba01bd526"
+  ]
+ },
+ "3.º a qué hora termina y más ejercicios": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "¿Cuánto dura?",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "medida.duracion",
+       "tipoVersion": 1,
+       "params": {
+        "tarea": "fin",
+        "paso": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Calcula a qué hora termina y escríbela.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "h": 3,
+          "m": 20,
+          "d": 230,
+          "tarea": "fin"
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           "10"
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "h": 1,
+          "m": 10,
+          "d": 50,
+          "tarea": "fin"
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           "00"
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "h": 4,
+          "m": 0,
+          "d": 40,
+          "tarea": "fin"
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           "40"
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "h": 1,
+          "m": 55,
+          "d": 200,
+          "tarea": "fin"
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           "15"
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "h": 2,
+          "m": 55,
+          "d": 170,
+          "tarea": "fin"
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           "45"
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "h": 5,
+          "m": 35,
+          "d": 70,
+          "tarea": "fin"
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           "45"
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "h": 8,
+          "m": 15,
+          "d": 120,
+          "tarea": "fin"
+         },
+         "solucion": {
+          "huecos": [
+           10,
+           "15"
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "h": 2,
+          "m": 10,
+          "d": 140,
+          "tarea": "fin"
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           "30"
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "h": 9,
+          "m": 45,
+          "d": 110,
+          "tarea": "fin"
+         },
+         "solucion": {
+          "huecos": [
+           11,
+           "35"
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "h": 8,
+          "m": 5,
+          "d": 230,
+          "tarea": "fin"
+         },
+         "solucion": {
+          "huecos": [
+           11,
+           "55"
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "h": 6,
+          "m": 40,
+          "d": 145,
+          "tarea": "fin"
+         },
+         "solucion": {
+          "huecos": [
+           9,
+           "05"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "520310f18d997d09"
+  ],
+  "svgSolucion": [
+   "9289e220d9daaa26"
+  ]
+ },
+ "3.º relojes con minutos (de 5 en 5 y de 1 en 1)": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Los relojes",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "medida.reloj",
+       "tipoVersion": 1,
+       "params": {
+        "modo": "cinco",
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Escribe la hora que marca cada reloj.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "h": 2,
+          "m": 25
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           "25"
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "h": 5,
+          "m": 30
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           "30"
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "h": 12,
+          "m": 15
+         },
+         "solucion": {
+          "huecos": [
+           12,
+           "15"
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "h": 4,
+          "m": 50
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           "50"
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "h": 1,
+          "m": 40
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           "40"
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "h": 7,
+          "m": 55
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           "55"
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "h": 9,
+          "m": 35
+         },
+         "solucion": {
+          "huecos": [
+           9,
+           "35"
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "h": 6,
+          "m": 5
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           "05"
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "h": 8,
+          "m": 0
+         },
+         "solucion": {
+          "huecos": [
+           8,
+           "00"
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "h": 3,
+          "m": 45
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           "45"
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "h": 10,
+          "m": 20
+         },
+         "solucion": {
+          "huecos": [
+           10,
+           "20"
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "h": 11,
+          "m": 10
+         },
+         "solucion": {
+          "huecos": [
+           11,
+           "10"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "741399dbbae8447d"
+  ],
+  "svgSolucion": [
+   "421badd742b93be0"
+  ]
+ },
+ "3.º dibuja las agujas con minutos de 1 en 1": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Dibuja las agujas",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "medida.reloj2",
+       "tipoVersion": 1,
+       "params": {
+        "modo": "minuto",
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Dibuja las agujas para marcar la hora.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "h": 6,
+          "m": 11
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "h": 12,
+          "m": 34
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "h": 12,
+          "m": 12
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "h": 6,
+          "m": 48
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "h": 4,
+          "m": 17
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "h": 10,
+          "m": 23
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "h": 8,
+          "m": 44
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "h": 8,
+          "m": 32
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "h": 7,
+          "m": 2
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "h": 3,
+          "m": 49
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "h": 1,
+          "m": 43
+         },
+         "solucion": {
+          "huecos": []
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "h": 4,
+          "m": 19
+         },
+         "solucion": {
+          "huecos": []
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "2dea0e5657c7dc6e"
+  ],
+  "svgSolucion": [
+   "177a4709db9ddbb3"
+  ]
+ },
+ "3.º euros y céntimos y compras con céntimos": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Cuenta el dinero y las compras",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "medida.dinero",
+       "tipoVersion": 2,
+       "params": {
+        "modo": "mixto",
+        "rango": 20
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Cuenta las monedas y escribe el total en euros.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "u": "m",
+          "items": [
+           [
+            "m",
+            2,
+            "€"
+           ],
+           [
+            "m",
+            50,
+            "c"
+           ],
+           [
+            "m",
+            5,
+            "c"
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "2,55"
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "u": "m",
+          "items": [
+           [
+            "m",
+            2,
+            "€"
+           ],
+           [
+            "m",
+            2,
+            "€"
+           ],
+           [
+            "m",
+            50,
+            "c"
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "4,50"
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "u": "m",
+          "items": [
+           [
+            "m",
+            2,
+            "€"
+           ],
+           [
+            "m",
+            5,
+            "c"
+           ],
+           [
+            "m",
+            5,
+            "c"
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "2,10"
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "u": "m",
+          "items": [
+           [
+            "m",
+            2,
+            "€"
+           ],
+           [
+            "m",
+            1,
+            "€"
+           ],
+           [
+            "m",
+            10,
+            "c"
+           ],
+           [
+            "m",
+            10,
+            "c"
+           ],
+           [
+            "m",
+            10,
+            "c"
+           ],
+           [
+            "m",
+            5,
+            "c"
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "3,35"
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "medida.precios",
+       "tipoVersion": 3,
+       "params": {
+        "modo": null,
+        "centimos": true,
+        "rango": 20
+       },
+       "tamano": "media",
+       "color": "verde",
+       "enunciado": "Calcula cuánto cuesta lo que compras y escribe el total.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "a": [
+           "cuaderno",
+           225
+          ],
+          "b": [
+           "lápiz",
+           150
+          ],
+          "c": true
+         },
+         "solucion": {
+          "huecos": [
+           "3,75"
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "a": [
+           "mochila",
+           815
+          ],
+          "b": [
+           "regla",
+           170
+          ],
+          "c": true
+         },
+         "solucion": {
+          "huecos": [
+           "9,85"
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "a": [
+           "pegamento",
+           275
+          ],
+          "b": [
+           "cuaderno",
+           185
+          ],
+          "c": true
+         },
+         "solucion": {
+          "huecos": [
+           "4,60"
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "a": [
+           "regla",
+           210
+          ],
+          "b": [
+           "pelota",
+           650
+          ],
+          "c": true
+         },
+         "solucion": {
+          "huecos": [
+           "8,60"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "55599c246ce4d13a"
+  ],
+  "svgSolucion": [
+   "e29e69fdd457502f"
+  ]
+ },
+ "3.º la vuelta con céntimos": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Las compras",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "medida.precios",
+       "tipoVersion": 3,
+       "params": {
+        "modo": "cambio",
+        "centimos": true,
+        "rango": 20
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Calcula cuánto dinero te devuelven y escríbelo.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "nom": "regla",
+          "precio": 250,
+          "pago": 5,
+          "c": true
+         },
+         "solucion": {
+          "huecos": [
+           "2,50"
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "nom": "goma",
+          "precio": 50,
+          "pago": 5,
+          "c": true
+         },
+         "solucion": {
+          "huecos": [
+           "4,50"
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "nom": "lápiz",
+          "precio": 70,
+          "pago": 10,
+          "c": true
+         },
+         "solucion": {
+          "huecos": [
+           "9,30"
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "nom": "libro",
+          "precio": 490,
+          "pago": 5,
+          "c": true
+         },
+         "solucion": {
+          "huecos": [
+           "0,10"
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "nom": "goma",
+          "precio": 105,
+          "pago": 20,
+          "c": true
+         },
+         "solucion": {
+          "huecos": [
+           "18,95"
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "nom": "libro",
+          "precio": 870,
+          "pago": 20,
+          "c": true
+         },
+         "solucion": {
+          "huecos": [
+           "11,30"
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "nom": "libro",
+          "precio": 485,
+          "pago": 5,
+          "c": true
+         },
+         "solucion": {
+          "huecos": [
+           "0,15"
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "nom": "cuaderno",
+          "precio": 210,
+          "pago": 10,
+          "c": true
+         },
+         "solucion": {
+          "huecos": [
+           "7,90"
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "nom": "sacapuntas",
+          "precio": 85,
+          "pago": 20,
+          "c": true
+         },
+         "solucion": {
+          "huecos": [
+           "19,15"
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "nom": "goma",
+          "precio": 85,
+          "pago": 5,
+          "c": true
+         },
+         "solucion": {
+          "huecos": [
+           "4,15"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "bb5a215a9f1dc8e1"
+  ],
+  "svgSolucion": [
+   "1d496acadd15b749"
   ]
  },
  "3.º divisiones con la caja (2 cifras, exactas)": {
