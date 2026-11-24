@@ -6,8 +6,11 @@
 //   (cubos); el alumno rodea cada fila de 10 barras. solucion: { huecos: [centenas, decenas, unidades] }.
 //   n de 100 a min(R, 299); una única centena exacta.
 // Completa: 6 casillas (3 filas × 2); media: 2 (1 decena completa y 1 con unidades).
+// Cantidad (solo 1.º; rejilla elástica de 2 columnas): «Más grandes» = 6 y 2 (tarjetas que llenan el panel; separación de los dibujos hasta 36 pt);
+//   «Más ejercicios» = las filas que caben con tarjetas ≥ 92 + 26 pt por fila de dibujos (hay que poder rodear cada fila de 10; solo gana el rango 20: 8 y 4; con 30 o más, 6 y 2), sin pasar de los números distintos del banco.
+//   El de 2.º (barras de diez) ya está en su alto mínimo: sigue con 6 y 2.
 import { registrar } from "../nucleo/tipos.js";
-import { TOP } from "../render/papel.js";
+import { TOP, cuantosRejilla } from "../render/papel.js";
 import { forma } from "./orden.cantidad.js";
 
 /** 2.º: barras de diez (filas de 10) y cubos a la derecha; abajo, C, D y U con su rótulo encima. */
@@ -33,9 +36,11 @@ function celda2(p, e, i, x, y, cw, ch) {
 
 export default registrar({
   id: "valor.agrupa",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    const R = params.rango ?? 20, cap = Math.min(R, 49), cnt = tamano === "media" ? 2 : 6;
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const R = params.rango ?? 20, cap = Math.min(R, 49), fijo = ctx.tamano === "media" ? 2 : 6;
+    let cnt = fijo;
     if (R >= 100) {
       const c2 = Math.min(R, 299), exactas = [], otros = [];
       for (let v = 100; v <= c2; v++) (v % 100 ? otros : exactas).push(v);
@@ -49,6 +54,7 @@ export default registrar({
     if (cap < 20) throw new Error("Agrupa en decenas necesita un rango máximo de al menos 20.");
     const mult = [], rest = [];
     for (let v = 10; v <= cap; v++) (v % 10 ? rest : mult).push(v);
+    if (ctx.cantidad === "mas") cnt = Math.max(fijo, Math.min(cuantosRejilla(ctx, 2, 92 + 26 * Math.ceil(cap / 10), [6, 2]), 2 * Math.floor((1 + rest.length) / 2)));   // una única decena completa + el resto con unidades, sin repetir
     // rest incluye 11..cap sin múltiplos de 10
     const nums = azar.barajar([azar.elegir(mult), ...azar.muestra(rest, cnt - 1)]);
     const r2 = (v) => Math.round(v * 100) / 100 + 0;   // + 0: sin −0 (no sobrevive a JSON)
@@ -61,13 +67,13 @@ export default registrar({
     };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 2, 3);
+    const { cel, cw, ch } = p.rejilla(TOP, 2, Math.ceil(act.ejercicios.length / 2));
     if (act.ejercicios[0]?.datos.centenas) return act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => celda2(p, e, i, ...cel[i], cw, ch)));
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], { n, forma: kind, jit } = e.datos;
       p.marco(x, y, cw, ch, i);
       const ax = x + 16, aw = cw - 32, rows = Math.ceil(n / 10);
-      const sx = aw / 10, sy = Math.min(26, (ch - 92) / rows), r = Math.min(7, sx * 0.3);
+      const sx = aw / 10, sy = Math.min(36, (ch - 92) / rows), r = Math.min(7, sx * 0.3);
       const ytop = y + ch - 38 - sy / 2 - ((ch - 92) - rows * sy) / 2;
       for (let k = 0; k < n; k++) {
         const rr = Math.floor(k / 10), cc = k % 10;

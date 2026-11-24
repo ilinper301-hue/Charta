@@ -11,13 +11,23 @@
 // 3.º (rango > 1000): datos { forma, n, millares: true }, mismas tres formas un nivel más arriba (dc: «n C = ▢ UM y ▢ C», cd: «n UM = ▢ C», cu: «n UM = ▢ U»). Con rango 1000 sale el de 2.º (hasta 999).
 // Ayudantes compartidos con los demás tipos de «valor»: muestra(), numsDU(), numsCDU().
 import { registrar } from "../nucleo/tipos.js";
-import { TOP, M, W, T, B } from "../render/papel.js";
+import { T, B } from "../render/papel.js";
+import { MIN_OP, cuantos, pintarEl } from "./_elastica.js";
+
+/** [dc, cd, cu] de n ejercicios en 2.º y 3.º: 5·2·1 de 8 y 2·1·1 de 4 (lo de siempre), y la misma proporción con más. */
+const reparto = (n) => { const b = Math.round(n / 4), c = Math.max(1, Math.round(n / 8)); return [n - b - c, b, c]; };
 
 /** _muestra(): k elementos distintos del pool; si no llegan, completa repitiendo al azar. */
 export function muestra(pool, k, azar) {
   const out = azar.barajar(pool).slice(0, k);
   while (out.length < k) out.push(azar.elegir(pool));
   return out;
+}
+
+/** Números distintos que da numsDU() de 1.º: decenas completas («completas»/«ceros») o 2 completas + el resto con unidades. */
+export function bancoDU(R, nivel) {
+  const cap = Math.min(R, 99), mult = Math.floor(cap / 10), rest = cap - 10 + 1 - mult;
+  return nivel === "completas" || nivel === "ceros" ? mult : Math.min(2, mult) + rest;
 }
 
 /** _nums_du(): cnt números de 10..min(R, 99): decenas completas («completas») o 2 completas + el resto con unidades. */
@@ -49,12 +59,15 @@ export function numsUMCDU(cnt, R, azar, nivel) {
 
 export default registrar({
   id: "valor.canje",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    const R = params.rango ?? 20, cnt = tamano === "media" ? 4 : 8;
-    if (Math.min(R, 99) < 20) throw new Error("Los canjes necesitan un rango máximo de al menos 20.");
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const R = params.rango ?? 20, cap = Math.min(R, 99);
+    if (cap < 20) throw new Error("Los canjes necesitan un rango máximo de al menos 20.");
+    // banco de números distintos (solo 1.º; en 2.º y 3.º cada forma tiene de sobra)
+    const cnt = cuantos(ctx, 1, MIN_OP, [8, 4], R > 100 ? Infinity : bancoDU(R, params.nivel));
     if (R > 1000) {   // 3.º: un nivel más (UM, C, D): «n C = ▢ UM y ▢ C», «n UM = ▢ C», «n UM = ▢ U»
-      const [a, b, c] = tamano === "media" ? [2, 1, 1] : [5, 2, 1], pool = [], uno = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+      const [a, b, c] = reparto(cnt), pool = [], uno = [1, 2, 3, 4, 5, 6, 7, 8, 9];
       for (let v = params.nivel === "completas" ? 10 : 11; v <= 99; v += params.nivel === "completas" ? 10 : 1) if (params.nivel === "completas" || v % 10) pool.push(v);
       return {
         enunciado: "Cambia centenas y millares: escribe cuántos millares, centenas o unidades son.",
@@ -66,7 +79,7 @@ export default registrar({
       };
     }
     if (R > 100) {
-      const [a, b, c] = tamano === "media" ? [2, 1, 1] : [5, 2, 1], pool = [];
+      const [a, b, c] = reparto(cnt), pool = [];
       for (let v = params.nivel === "completas" ? 10 : 11; v <= 99; v += params.nivel === "completas" ? 10 : 1) if (params.nivel === "completas" || v % 10) pool.push(v);
       const uno = [1, 2, 3, 4, 5, 6, 7, 8, 9];
       return {
@@ -84,24 +97,14 @@ export default registrar({
     };
   },
   dibujar(p, act) {
-    const rows = 8, GY = 8, rh = (TOP - M - (rows - 1) * GY) / rows;
-    act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
-      const { n, forma } = e.datos, y = TOP - (i + 1) * rh - i * GY, [d, u] = e.solucion.huecos;
-      p.marco(M, y, W - 2 * M, rh);
-      if (e.datos.millares) {
-        const it = forma === "dc" ? [T(`${n} centenas`, 17), T("=", 17), B(52, 38, d), T("UM", 13, "PM"), T("y", 13, "PM"), B(44, 38, u), T("C", 13, "PM")]
-          : [T(`${n} UM`, 17), T("=", 17), B(66, 38, d), T(forma === "cd" ? "C" : "U", 13, "PM")];
-        p.linea(M, y, W - 2 * M, rh, it, 12);
-        return;
-      }
-      if (e.datos.centenas) {
-        const it = forma === "dc" ? [T(`${n} decenas`, 17), T("=", 17), B(56, 38, d), T("C", 13, "PM"), T("y", 13, "PM"), B(44, 38, u), T("D", 13, "PM")]
-          : [T(`${n} C`, 17), T("=", 17), B(60, 38, d), T(forma === "cd" ? "D" : "U", 13, "PM")];
-        p.linea(M, y, W - 2 * M, rh, it, 12);
-        return;
-      }
-      p.linea(M, y, W - 2 * M, rh, [T(`${n} unidades`, 17), T("=", 17), B(44, 38, d), T("decena(s)", 13, "PM"), T("y", 13, "PM"),
-        B(44, 38, u), T("unidad(es)", 13, "PM")], 12);
-    }));
+    const filas = act.ejercicios.map((e) => {
+      const { n, forma } = e.datos, [d, u] = e.solucion.huecos;
+      if (e.datos.millares) return forma === "dc" ? [T(`${n} centenas`, 17), T("=", 17), B(52, 38, d), T("UM", 13, "PM"), T("y", 13, "PM"), B(44, 38, u), T("C", 13, "PM")]
+        : [T(`${n} UM`, 17), T("=", 17), B(66, 38, d), T(forma === "cd" ? "C" : "U", 13, "PM")];
+      if (e.datos.centenas) return forma === "dc" ? [T(`${n} decenas`, 17), T("=", 17), B(56, 38, d), T("C", 13, "PM"), T("y", 13, "PM"), B(44, 38, u), T("D", 13, "PM")]
+        : [T(`${n} C`, 17), T("=", 17), B(60, 38, d), T(forma === "cd" ? "D" : "U", 13, "PM")];
+      return [T(`${n} unidades`, 17), T("=", 17), B(44, 38, d), T("decena(s)", 13, "PM"), T("y", 13, "PM"), B(44, 38, u), T("unidad(es)", 13, "PM")];
+    });
+    pintarEl(p, 1, filas, act.ejercicios.map((e) => e.id), 8, 8, 12);
   },
 });

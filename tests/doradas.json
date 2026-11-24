@@ -7885,7 +7885,7 @@
       {
        "n": 1,
        "tipo": "geometria.lados",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "rango": null
        },
@@ -8579,7 +8579,7 @@
       {
        "n": 1,
        "tipo": "geometria.rueda",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "rango": null
        },
@@ -8716,10 +8716,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "12740a8ecec67eaa"
+   "478cc38835b93926"
   ],
   "svgSolucion": [
-   "674ddce60ae29e00"
+   "5d5eaa323d177891"
   ]
  },
  "geometria.simetria": {
@@ -9444,7 +9444,7 @@
       {
        "n": 1,
        "tipo": "juegos.cuadrado",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "n": 4,
         "rango": 10
@@ -9756,10 +9756,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "f198e05de1fb4ca5"
+   "fdf8f590e4adb667"
   ],
   "svgSolucion": [
-   "ab3b80be2b39b919"
+   "4bae8848c4f92e64"
   ]
  },
  "juegos.laberinto": {
@@ -10026,7 +10026,7 @@
       {
        "n": 1,
        "tipo": "juegos.oculto",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "rango": 10
        },
@@ -40735,7 +40735,7 @@
       {
        "n": 1,
        "tipo": "valor.agrupa",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "rango": 20
        },
@@ -41230,10 +41230,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "68af123d23a9fea4"
+   "8d1cce38e5307e39"
   ],
   "svgSolucion": [
-   "b3af331e6d13479b"
+   "499c6a8e72c9f579"
   ]
  },
  "valor.canje": {
@@ -41256,7 +41256,7 @@
       {
        "n": 1,
        "tipo": "valor.canje",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "nivel": null,
         "rango": 20
@@ -41370,10 +41370,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "fab6c3493b7f1fe1"
+   "e534c44fbc079584"
   ],
   "svgSolucion": [
-   "1c94da70a9cdb933"
+   "79c02bc61db175b6"
   ]
  },
  "valor.cifra": {
@@ -41396,7 +41396,7 @@
       {
        "n": 1,
        "tipo": "valor.cifra",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "rango": 30
        },
@@ -41509,10 +41509,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "d35e1b61eeed47a4"
+   "1c5448856f0dbcf7"
   ],
   "svgSolucion": [
-   "5168a69fc86f8e3e"
+   "c61ec56de5a3ae6b"
   ]
  },
  "valor.descdu": {
@@ -41535,7 +41535,7 @@
       {
        "n": 1,
        "tipo": "valor.descdu",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "modo": null,
         "nivel": null,
@@ -41775,7 +41775,7 @@
       {
        "n": 1,
        "tipo": "valor.dunum",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "nivel": null,
         "rango": 30
@@ -41963,7 +41963,7 @@
       {
        "n": 1,
        "tipo": "valor.pares",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "modo": null,
         "rango": 10
@@ -42101,10 +42101,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "677e2abc178b6db2"
+   "f66c51537d8fe514"
   ],
   "svgSolucion": [
-   "83ca7cd312346f0b"
+   "4f30dc1bcfcbeee2"
   ]
  },
  "dos actividades": {
@@ -44102,7 +44102,7 @@
       {
        "n": 1,
        "tipo": "valor.descdu",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "modo": "suma",
         "nivel": null,
@@ -44208,7 +44208,7 @@
       {
        "n": 2,
        "tipo": "valor.canje",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "nivel": null,
         "rango": 500
@@ -44280,10 +44280,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "1647f2958ee3e29b"
+   "348444412d8deb7c"
   ],
   "svgSolucion": [
-   "50d3fd29035b9128"
+   "232ec061d29b8941"
   ]
  },
  "2.º recta de 10 en 10 y de 100 en 100": {
@@ -44920,7 +44920,7 @@
       {
        "n": 1,
        "tipo": "valor.agrupa",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "rango": 300
        },
@@ -45218,7 +45218,7 @@
       {
        "n": 2,
        "tipo": "valor.cifra",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "rango": 999
        },
@@ -45291,10 +45291,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "68d2e9bb2b3ce6aa"
+   "bc4edebe94dd129a"
   ],
   "svgSolucion": [
-   "ac476b7a08c90128"
+   "f3f063ee88e23fd0"
   ]
  },
  "2.º reloj con cuartos": {
@@ -46127,7 +46127,7 @@
       {
        "n": 1,
        "tipo": "geometria.lados",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "rango": null
        },
@@ -46273,7 +46273,7 @@
       {
        "n": 2,
        "tipo": "geometria.lados",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "rango": null
        },
@@ -46422,10 +46422,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "4890012417802a14"
+   "699625ef6769872c"
   ],
   "svgSolucion": [
-   "821e40c63cb69eb0"
+   "c58bf7bbd1ac4130"
   ]
  },
  "2.º itinerario con flechas": {
@@ -73320,6 +73320,5562 @@
   ],
   "svgSolucion": [
    "fbee73868d1d92c1"
+  ]
+ },
+ "más ejercicios: valor.agrupa": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Agrupa en decenas",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "valor.agrupa",
+       "tipoVersion": 2,
+       "params": {
+        "rango": 20
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Rodea grupos de 10 y escribe cuántas decenas y unidades hay.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "n": 17,
+          "forma": "c",
+          "jit": [
+           [
+            0.9,
+            -0.47
+           ],
+           [
+            -1.38,
+            -1.14
+           ],
+           [
+            0.66,
+            0.82
+           ],
+           [
+            0.75,
+            -0.34
+           ],
+           [
+            -1.35,
+            -1.21
+           ],
+           [
+            0.18,
+            -1.47
+           ],
+           [
+            1.01,
+            0.04
+           ],
+           [
+            -0.29,
+            0.07
+           ],
+           [
+            -0.15,
+            -0.22
+           ],
+           [
+            0.63,
+            -0.45
+           ],
+           [
+            1.16,
+            0.98
+           ],
+           [
+            -1.34,
+            0.43
+           ],
+           [
+            0.47,
+            0.19
+           ],
+           [
+            1.3,
+            -1.25
+           ],
+           [
+            0.54,
+            -0.49
+           ],
+           [
+            -0.36,
+            -0.47
+           ],
+           [
+            -1.03,
+            0.85
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "n": 13,
+          "forma": "s",
+          "jit": [
+           [
+            0.09,
+            1.06
+           ],
+           [
+            1.27,
+            -0.6
+           ],
+           [
+            -1.47,
+            0.07
+           ],
+           [
+            -1.47,
+            -0.08
+           ],
+           [
+            -1.43,
+            1.08
+           ],
+           [
+            -1.4,
+            1.5
+           ],
+           [
+            -0.06,
+            -0.73
+           ],
+           [
+            -0.68,
+            0.32
+           ],
+           [
+            0.02,
+            -0.84
+           ],
+           [
+            0.74,
+            0.2
+           ],
+           [
+            1.08,
+            -1
+           ],
+           [
+            0.99,
+            -1
+           ],
+           [
+            -0.81,
+            -1.19
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "n": 20,
+          "forma": "q",
+          "jit": [
+           [
+            -1.35,
+            -1.31
+           ],
+           [
+            -0.36,
+            0.29
+           ],
+           [
+            -0.07,
+            0.88
+           ],
+           [
+            -1.48,
+            -0.36
+           ],
+           [
+            0.41,
+            0.28
+           ],
+           [
+            -0.53,
+            -0.69
+           ],
+           [
+            0.37,
+            0.62
+           ],
+           [
+            1.06,
+            -0.53
+           ],
+           [
+            -1.19,
+            0.61
+           ],
+           [
+            -1.04,
+            0.11
+           ],
+           [
+            -1.06,
+            -0.24
+           ],
+           [
+            1.49,
+            -0.37
+           ],
+           [
+            -1.17,
+            -0.82
+           ],
+           [
+            1.07,
+            0.13
+           ],
+           [
+            -1.02,
+            -0.04
+           ],
+           [
+            1.06,
+            -0.06
+           ],
+           [
+            -1.32,
+            0.19
+           ],
+           [
+            -1.2,
+            0.7
+           ],
+           [
+            -0.49,
+            0.85
+           ],
+           [
+            0.11,
+            -1.16
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "n": 12,
+          "forma": "t",
+          "jit": [
+           [
+            0.03,
+            -1.14
+           ],
+           [
+            0.91,
+            0.75
+           ],
+           [
+            -0.56,
+            0.43
+           ],
+           [
+            1.11,
+            0.47
+           ],
+           [
+            0.18,
+            0.13
+           ],
+           [
+            -1.19,
+            -1.08
+           ],
+           [
+            -0.06,
+            0.72
+           ],
+           [
+            0.18,
+            -0.84
+           ],
+           [
+            0.76,
+            0.54
+           ],
+           [
+            1.5,
+            -1.08
+           ],
+           [
+            -0.98,
+            -0.93
+           ],
+           [
+            -0.18,
+            -0.14
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "n": 16,
+          "forma": "c",
+          "jit": [
+           [
+            -0.01,
+            -0.23
+           ],
+           [
+            -0.44,
+            -1.1
+           ],
+           [
+            0.7,
+            1.31
+           ],
+           [
+            -0.39,
+            -1.16
+           ],
+           [
+            -0.45,
+            -1.49
+           ],
+           [
+            1.06,
+            1.16
+           ],
+           [
+            0.9,
+            0.25
+           ],
+           [
+            0.49,
+            -0.83
+           ],
+           [
+            -1.03,
+            0.01
+           ],
+           [
+            0.36,
+            1.48
+           ],
+           [
+            0.05,
+            -0.74
+           ],
+           [
+            -0.28,
+            -1.28
+           ],
+           [
+            -0.32,
+            -0.29
+           ],
+           [
+            0.04,
+            0.3
+           ],
+           [
+            0.84,
+            -0.7
+           ],
+           [
+            -0.84,
+            -1.03
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "n": 15,
+          "forma": "s",
+          "jit": [
+           [
+            -0.03,
+            -0.63
+           ],
+           [
+            -0.94,
+            0.56
+           ],
+           [
+            -0.57,
+            1.13
+           ],
+           [
+            -0.59,
+            -0.47
+           ],
+           [
+            -0.16,
+            -0.23
+           ],
+           [
+            0.09,
+            0.03
+           ],
+           [
+            -0.13,
+            -0.33
+           ],
+           [
+            -1.34,
+            -0.02
+           ],
+           [
+            -1.01,
+            0.87
+           ],
+           [
+            0.97,
+            1.07
+           ],
+           [
+            0.75,
+            -0.76
+           ],
+           [
+            0.74,
+            -0.57
+           ],
+           [
+            0.48,
+            0.76
+           ],
+           [
+            -0.61,
+            -1.03
+           ],
+           [
+            -0.22,
+            1.04
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "n": 19,
+          "forma": "q",
+          "jit": [
+           [
+            -0.66,
+            0.92
+           ],
+           [
+            1.19,
+            0.14
+           ],
+           [
+            -0.6,
+            -1.44
+           ],
+           [
+            1.4,
+            -0.64
+           ],
+           [
+            0.09,
+            0.99
+           ],
+           [
+            0.72,
+            -0.55
+           ],
+           [
+            -0.71,
+            -0.11
+           ],
+           [
+            -1.36,
+            0.69
+           ],
+           [
+            -0.54,
+            -1.08
+           ],
+           [
+            -0.18,
+            -0.78
+           ],
+           [
+            -1.2,
+            -0.4
+           ],
+           [
+            -0.75,
+            -0.52
+           ],
+           [
+            -1.47,
+            -0.14
+           ],
+           [
+            -1.09,
+            0.64
+           ],
+           [
+            0.25,
+            0.93
+           ],
+           [
+            -0.62,
+            -0.02
+           ],
+           [
+            -0.98,
+            0.3
+           ],
+           [
+            0.52,
+            0.52
+           ],
+           [
+            -1.29,
+            0.14
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "n": 14,
+          "forma": "t",
+          "jit": [
+           [
+            0.18,
+            0.01
+           ],
+           [
+            -0.57,
+            1.23
+           ],
+           [
+            -1.35,
+            -0.42
+           ],
+           [
+            -1.37,
+            -0.38
+           ],
+           [
+            0.67,
+            -0.68
+           ],
+           [
+            -0.08,
+            -0.62
+           ],
+           [
+            0.98,
+            -0.09
+           ],
+           [
+            0.69,
+            0.78
+           ],
+           [
+            0.87,
+            -0.3
+           ],
+           [
+            0.69,
+            0.62
+           ],
+           [
+            1.26,
+            0.62
+           ],
+           [
+            1.44,
+            -0.06
+           ],
+           [
+            0.12,
+            0.84
+           ],
+           [
+            -0.68,
+            -1.48
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           4
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "0e84751fdbdd97b9"
+  ],
+  "svgSolucion": [
+   "5eb4ed142f932c5b"
+  ]
+ },
+ "más ejercicios: valor.descdu": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Descomposición en D y U",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "valor.descdu",
+       "tipoVersion": 2,
+       "params": {
+        "modo": null,
+        "nivel": null,
+        "rango": 30
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Descompón cada número en decenas (D) y unidades (U).",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "n": 16,
+          "suma": false
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "n": 23,
+          "suma": false
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "n": 26,
+          "suma": false
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "n": 21,
+          "suma": false
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "n": 25,
+          "suma": false
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "n": 29,
+          "suma": false
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "n": 24,
+          "suma": false
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "n": 12,
+          "suma": false
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "n": 11,
+          "suma": false
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "n": 15,
+          "suma": false
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "n": 22,
+          "suma": false
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "n": 10,
+          "suma": false
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "n": 30,
+          "suma": false
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "n": 27,
+          "suma": false
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "n": 14,
+          "suma": false
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "n": 18,
+          "suma": false
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e17",
+         "datos": {
+          "n": 13,
+          "suma": false
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e18",
+         "datos": {
+          "n": 19,
+          "suma": false
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           9
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "1e0909be60627d08"
+  ],
+  "svgSolucion": [
+   "9d856dcf20cac96a"
+  ]
+ },
+ "más ejercicios: valor.dunum": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Decenas, unidades y número",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "valor.dunum",
+       "tipoVersion": 2,
+       "params": {
+        "nivel": null,
+        "rango": 30
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Completa cada casilla con el número o con sus decenas y unidades.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "n": 14,
+          "orden": "a"
+         },
+         "solucion": {
+          "huecos": [
+           14
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "n": 18,
+          "orden": "b"
+         },
+         "solucion": {
+          "huecos": [
+           18
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "n": 25,
+          "orden": "a"
+         },
+         "solucion": {
+          "huecos": [
+           25
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "n": 24,
+          "orden": "a"
+         },
+         "solucion": {
+          "huecos": [
+           24
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "n": 15,
+          "orden": "b"
+         },
+         "solucion": {
+          "huecos": [
+           15
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "n": 28,
+          "orden": "a"
+         },
+         "solucion": {
+          "huecos": [
+           28
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "n": 26,
+          "orden": "a"
+         },
+         "solucion": {
+          "huecos": [
+           26
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "n": 12,
+          "orden": "b"
+         },
+         "solucion": {
+          "huecos": [
+           12
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "n": 29,
+          "orden": "a"
+         },
+         "solucion": {
+          "huecos": [
+           29
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "n": 27,
+          "orden": "b"
+         },
+         "solucion": {
+          "huecos": [
+           27
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "n": 23,
+          "orden": "a"
+         },
+         "solucion": {
+          "huecos": [
+           23
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "n": 21,
+          "orden": "b"
+         },
+         "solucion": {
+          "huecos": [
+           21
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "n": 11,
+          "orden": "a"
+         },
+         "solucion": {
+          "huecos": [
+           11
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "n": 10,
+          "orden": "b"
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "n": 30,
+          "orden": "b"
+         },
+         "solucion": {
+          "huecos": [
+           30
+          ]
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "n": 22,
+          "orden": "b"
+         },
+         "solucion": {
+          "huecos": [
+           22
+          ]
+         }
+        },
+        {
+         "id": "a1e17",
+         "datos": {
+          "n": 13,
+          "orden": "a"
+         },
+         "solucion": {
+          "huecos": [
+           13
+          ]
+         }
+        },
+        {
+         "id": "a1e18",
+         "datos": {
+          "n": 17,
+          "orden": "b"
+         },
+         "solucion": {
+          "huecos": [
+           17
+          ]
+         }
+        },
+        {
+         "id": "a1e19",
+         "datos": {
+          "n": 16,
+          "orden": "b"
+         },
+         "solucion": {
+          "huecos": [
+           16
+          ]
+         }
+        },
+        {
+         "id": "a1e20",
+         "datos": {
+          "n": 19,
+          "orden": "a"
+         },
+         "solucion": {
+          "huecos": [
+           19
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "3421590c5eefcbce"
+  ],
+  "svgSolucion": [
+   "4e6c11d26a70f232"
+  ]
+ },
+ "más ejercicios: valor.pares": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Pares e impares",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "valor.pares",
+       "tipoVersion": 3,
+       "params": {
+        "modo": null,
+        "rango": 10
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Cuenta los puntos de cada casilla y rodea si el número es par o impar.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "n": 6
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": "par"
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "n": 5
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": "impar"
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "n": 3
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": "impar"
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "n": 9
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": "impar"
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "n": 10
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": "par"
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "n": 3
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": "impar"
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "n": 2
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": "par"
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "n": 4
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": "par"
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "n": 1
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": "impar"
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "n": 7
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": "impar"
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "n": 8
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": "par"
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "n": 8
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": "par"
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "b9a6e621c86aad46"
+  ],
+  "svgSolucion": [
+   "ffbb833e6abef019"
+  ]
+ },
+ "más ejercicios: valor.canje": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Los canjes",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "valor.canje",
+       "tipoVersion": 2,
+       "params": {
+        "nivel": null,
+        "rango": 20
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Cambia las unidades por decenas y escribe cuántas decenas y unidades son.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "n": 13
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "n": 17
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "n": 20
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "n": 18
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "n": 11
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "n": 10
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "n": 15
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "n": 12
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "n": 16
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "n": 19
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "n": 14
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           4
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "d6a854c764bae4b2"
+  ],
+  "svgSolucion": [
+   "797f38a08fe31900"
+  ]
+ },
+ "más ejercicios: valor.cifra": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "El valor de la cifra",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "valor.cifra",
+       "tipoVersion": 2,
+       "params": {
+        "rango": 30
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Escribe cuánto vale cada cifra.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "n": 21
+         },
+         "solucion": {
+          "huecos": [
+           20,
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "n": 28
+         },
+         "solucion": {
+          "huecos": [
+           20,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "n": 19
+         },
+         "solucion": {
+          "huecos": [
+           10,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "n": 16
+         },
+         "solucion": {
+          "huecos": [
+           10,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "n": 29
+         },
+         "solucion": {
+          "huecos": [
+           20,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "n": 14
+         },
+         "solucion": {
+          "huecos": [
+           10,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "n": 13
+         },
+         "solucion": {
+          "huecos": [
+           10,
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "n": 25
+         },
+         "solucion": {
+          "huecos": [
+           20,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "n": 18
+         },
+         "solucion": {
+          "huecos": [
+           10,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "n": 15
+         },
+         "solucion": {
+          "huecos": [
+           10,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "n": 27
+         },
+         "solucion": {
+          "huecos": [
+           20,
+           7
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "dcb10be6a0bce14a"
+  ],
+  "svgSolucion": [
+   "0996f114bfd698d6"
+  ]
+ },
+ "más ejercicios: juegos.cuadrado": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Cuadrados mágicos",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "juegos.cuadrado",
+       "tipoVersion": 2,
+       "params": {
+        "n": 4,
+        "rango": 10
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Completa el cuadrado: filas, columnas y diagonales suman lo mismo.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "S": 15,
+          "m": [
+           [
+            6,
+            7,
+            2
+           ],
+           [
+            1,
+            5,
+            9
+           ],
+           [
+            8,
+            3,
+            4
+           ]
+          ],
+          "vac": [
+           [
+            0,
+            1
+           ],
+           [
+            1,
+            0
+           ],
+           [
+            2,
+            1
+           ],
+           [
+            2,
+            2
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           1,
+           3,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "S": 15,
+          "m": [
+           [
+            8,
+            1,
+            6
+           ],
+           [
+            3,
+            5,
+            7
+           ],
+           [
+            4,
+            9,
+            2
+           ]
+          ],
+          "vac": [
+           [
+            0,
+            1
+           ],
+           [
+            0,
+            2
+           ],
+           [
+            1,
+            1
+           ],
+           [
+            1,
+            2
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           6,
+           5,
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "S": 18,
+          "m": [
+           [
+            7,
+            2,
+            9
+           ],
+           [
+            8,
+            6,
+            4
+           ],
+           [
+            3,
+            10,
+            5
+           ]
+          ],
+          "vac": [
+           [
+            0,
+            0
+           ],
+           [
+            1,
+            2
+           ],
+           [
+            2,
+            0
+           ],
+           [
+            2,
+            1
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           4,
+           3,
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "S": 15,
+          "m": [
+           [
+            8,
+            3,
+            4
+           ],
+           [
+            1,
+            5,
+            9
+           ],
+           [
+            6,
+            7,
+            2
+           ]
+          ],
+          "vac": [
+           [
+            0,
+            1
+           ],
+           [
+            0,
+            2
+           ],
+           [
+            1,
+            1
+           ],
+           [
+            2,
+            0
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           4,
+           5,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "S": 18,
+          "m": [
+           [
+            9,
+            2,
+            7
+           ],
+           [
+            4,
+            6,
+            8
+           ],
+           [
+            5,
+            10,
+            3
+           ]
+          ],
+          "vac": [
+           [
+            0,
+            0
+           ],
+           [
+            0,
+            2
+           ],
+           [
+            2,
+            0
+           ],
+           [
+            2,
+            1
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           9,
+           7,
+           5,
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "S": 15,
+          "m": [
+           [
+            4,
+            9,
+            2
+           ],
+           [
+            3,
+            5,
+            7
+           ],
+           [
+            8,
+            1,
+            6
+           ]
+          ],
+          "vac": [
+           [
+            0,
+            1
+           ],
+           [
+            0,
+            2
+           ],
+           [
+            1,
+            2
+           ],
+           [
+            2,
+            0
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           9,
+           2,
+           7,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "S": 18,
+          "m": [
+           [
+            3,
+            8,
+            7
+           ],
+           [
+            10,
+            6,
+            2
+           ],
+           [
+            5,
+            4,
+            9
+           ]
+          ],
+          "vac": [
+           [
+            0,
+            0
+           ],
+           [
+            1,
+            2
+           ],
+           [
+            2,
+            0
+           ],
+           [
+            2,
+            1
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           2,
+           5,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "S": 18,
+          "m": [
+           [
+            3,
+            10,
+            5
+           ],
+           [
+            8,
+            6,
+            4
+           ],
+           [
+            7,
+            2,
+            9
+           ]
+          ],
+          "vac": [
+           [
+            0,
+            2
+           ],
+           [
+            1,
+            0
+           ],
+           [
+            1,
+            1
+           ],
+           [
+            1,
+            2
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           8,
+           6,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "S": 15,
+          "m": [
+           [
+            6,
+            1,
+            8
+           ],
+           [
+            7,
+            5,
+            3
+           ],
+           [
+            2,
+            9,
+            4
+           ]
+          ],
+          "vac": [
+           [
+            0,
+            2
+           ],
+           [
+            1,
+            1
+           ],
+           [
+            2,
+            0
+           ],
+           [
+            2,
+            1
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           8,
+           5,
+           2,
+           9
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "b850efc97c587300"
+  ],
+  "svgSolucion": [
+   "40e4d87653e02a5d"
+  ]
+ },
+ "más ejercicios: juegos.oculto": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "El número oculto",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "juegos.oculto",
+       "tipoVersion": 2,
+       "params": {
+        "rango": 20
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Lee las pistas y escribe qué número soy.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "t": 14,
+          "pistas": [
+           "Soy par.",
+           "Tengo 1 decena.",
+           "Tengo 4 unidades."
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           14
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "t": 4,
+          "pistas": [
+           "Soy menor que 5.",
+           "Soy mayor que 1.",
+           "Tengo 4 unidades."
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "t": 10,
+          "pistas": [
+           "Tengo 0 unidades.",
+           "Soy menor que 13."
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "t": 18,
+          "pistas": [
+           "Soy mayor que 14.",
+           "Tengo 1 decena.",
+           "Tengo 8 unidades."
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           18
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "t": 7,
+          "pistas": [
+           "Soy menor que 11.",
+           "Soy mayor que 4.",
+           "Tengo 7 unidades."
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "t": 11,
+          "pistas": [
+           "Tengo 1 decena.",
+           "Soy menor que 14.",
+           "Tengo 1 unidad."
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           11
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "t": 15,
+          "pistas": [
+           "Tengo 5 unidades.",
+           "Tengo 1 decena."
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           15
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "t": 5,
+          "pistas": [
+           "Soy menor que 6.",
+           "Soy mayor que 3.",
+           "Vengo después del 4."
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "t": 3,
+          "pistas": [
+           "Soy impar.",
+           "Tengo 3 unidades.",
+           "Vengo después del 2."
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "t": 19,
+          "pistas": [
+           "Soy mayor que 14.",
+           "Soy impar.",
+           "Tengo 9 unidades."
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           19
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "t": 9,
+          "pistas": [
+           "Soy mayor que 3.",
+           "Tengo 9 unidades.",
+           "Vengo después del 8."
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "t": 6,
+          "pistas": [
+           "Soy menor que 7.",
+           "Soy par.",
+           "Tengo 6 unidades."
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "13e41886b1e39ddc"
+  ],
+  "svgSolucion": [
+   "0d0dc78b637ad0d8"
+  ]
+ },
+ "más ejercicios: geometria.lados": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Lados y vértices",
+   "curso": 2,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "geometria.lados",
+       "tipoVersion": 2,
+       "params": {
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Cuenta los lados y los vértices (los puntos) de cada figura.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "forma": "hexagono",
+          "pts": [
+           [
+            -0.463,
+            0.713
+           ],
+           [
+            -0.849,
+            -0.044
+           ],
+           [
+            -0.386,
+            -0.757
+           ],
+           [
+            0.463,
+            -0.713
+           ],
+           [
+            0.849,
+            0.044
+           ],
+           [
+            0.386,
+            0.757
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "forma": "rectangulo",
+          "pts": [
+           [
+            -0.9,
+            -0.55
+           ],
+           [
+            0.9,
+            -0.55
+           ],
+           [
+            0.9,
+            0.55
+           ],
+           [
+            -0.9,
+            0.55
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "forma": "rectangulo",
+          "pts": [
+           [
+            -0.9,
+            -0.55
+           ],
+           [
+            0.9,
+            -0.55
+           ],
+           [
+            0.9,
+            0.55
+           ],
+           [
+            -0.9,
+            0.55
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "forma": "cuadrado",
+          "pts": [
+           [
+            -0.7,
+            -0.7
+           ],
+           [
+            0.7,
+            -0.7
+           ],
+           [
+            0.7,
+            0.7
+           ],
+           [
+            -0.7,
+            0.7
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "forma": "triangulo",
+          "pts": [
+           [
+            -0.9,
+            -0.5
+           ],
+           [
+            0.7,
+            -0.5
+           ],
+           [
+            0.3,
+            0.8
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "forma": "pentagono",
+          "pts": [
+           [
+            0.118,
+            -0.842
+           ],
+           [
+            0.837,
+            -0.148
+           ],
+           [
+            0.399,
+            0.751
+           ],
+           [
+            -0.59,
+            0.611
+           ],
+           [
+            -0.764,
+            -0.373
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "forma": "cuadrado",
+          "pts": [
+           [
+            -0.7,
+            -0.7
+           ],
+           [
+            0.7,
+            -0.7
+           ],
+           [
+            0.7,
+            0.7
+           ],
+           [
+            -0.7,
+            0.7
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "forma": "triangulo",
+          "pts": [
+           [
+            -0.7,
+            0.6
+           ],
+           [
+            0.8,
+            0.6
+           ],
+           [
+            0,
+            -0.8
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "forma": "hexagono",
+          "pts": [
+           [
+            -0.642,
+            0.558
+           ],
+           [
+            -0.804,
+            -0.277
+           ],
+           [
+            -0.162,
+            -0.834
+           ],
+           [
+            0.642,
+            -0.558
+           ],
+           [
+            0.804,
+            0.277
+           ],
+           [
+            0.162,
+            0.834
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "forma": "pentagono",
+          "pts": [
+           [
+            0.808,
+            0.263
+           ],
+           [
+            0,
+            0.85
+           ],
+           [
+            -0.808,
+            0.263
+           ],
+           [
+            -0.5,
+            -0.688
+           ],
+           [
+            0.5,
+            -0.688
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           5
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "9d83be3cc2e0ce8b"
+  ],
+  "svgSolucion": [
+   "c8d3275f07732684"
+  ]
+ },
+ "más ejercicios: geometria.rueda": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "¿Rueda o no rueda?",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "geometria.rueda",
+       "tipoVersion": 2,
+       "params": {
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Rodea si cada cuerpo rueda o no rueda.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "cuerpo": "esfera"
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "rueda"
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "cuerpo": "cilindro"
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "rueda"
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "cuerpo": "cubo"
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "no rueda"
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "cuerpo": "cubo"
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "no rueda"
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "cuerpo": "cono"
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "rueda"
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "cuerpo": "cono"
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "rueda"
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "cuerpo": "esfera"
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "rueda"
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "cuerpo": "cilindro"
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "rueda"
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "cuerpo": "cubo"
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "no rueda"
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "cuerpo": "esfera"
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "rueda"
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "cuerpo": "cilindro"
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "rueda"
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "cuerpo": "piramide"
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "no rueda"
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "cuerpo": "piramide"
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "no rueda"
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "cuerpo": "cono"
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "rueda"
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "cuerpo": "piramide"
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "no rueda"
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "c4c6bf7ec70b7a43"
+  ],
+  "svgSolucion": [
+   "679372b358a2d121"
+  ]
+ },
+ "más ejercicios: 3.º descomposición, número y canje con millares": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Descomposición en UM, C, D y U y los canjes",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "valor.descdu",
+       "tipoVersion": 2,
+       "params": {
+        "modo": "suma",
+        "nivel": null,
+        "rango": 9999
+       },
+       "tamano": "media",
+       "color": "rosa",
+       "enunciado": "Descompón cada número en una suma de millares, centenas, decenas y unidades.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "n": 1354,
+          "suma": true,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           1000,
+           300,
+           50,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "n": 4725,
+          "suma": true,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           4000,
+           700,
+           20,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "n": 1883,
+          "suma": true,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           1000,
+           800,
+           80,
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "n": 6157,
+          "suma": true,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           6000,
+           100,
+           50,
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "n": 1874,
+          "suma": true,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           1000,
+           800,
+           70,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "n": 6127,
+          "suma": true,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           6000,
+           100,
+           20,
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "n": 3729,
+          "suma": true,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           3000,
+           700,
+           20,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "n": 9278,
+          "suma": true,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           9000,
+           200,
+           70,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "n": 9993,
+          "suma": true,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           9000,
+           900,
+           90,
+           3
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "valor.canje",
+       "tipoVersion": 2,
+       "params": {
+        "nivel": null,
+        "rango": 9999
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Cambia centenas y millares: escribe cuántos millares, centenas o unidades son.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "forma": "dc",
+          "n": 59,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "forma": "dc",
+          "n": 71,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           1
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "forma": "cu",
+          "n": 3,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           3000
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "forma": "dc",
+          "n": 37,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           7
+          ]
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "forma": "cd",
+          "n": 6,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           60
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "1183381fc2e7be64"
+  ],
+  "svgSolucion": [
+   "edc4e757587334d1"
+  ]
+ },
+ "más ejercicios: 3.º decenas y unidades, y valor de la cifra": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Decenas, unidades y número y el valor de la cifra",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "valor.dunum",
+       "tipoVersion": 2,
+       "params": {
+        "nivel": "completas",
+        "rango": 9999
+       },
+       "tamano": "media",
+       "color": "rosa",
+       "enunciado": "Completa cada casilla con el número o con sus decenas y unidades.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "n": 7009,
+          "orden": "a",
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           7009
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "n": 1444,
+          "orden": "b",
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           1444
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "n": 3094,
+          "orden": "b",
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           3094
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "n": 9091,
+          "orden": "a",
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           9091
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "n": 6035,
+          "orden": "a",
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           6035
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "n": 8588,
+          "orden": "b",
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           8588
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "n": 9325,
+          "orden": "a",
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           9325
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "n": 1822,
+          "orden": "b",
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           1822
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "n": 3007,
+          "orden": "b",
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           3007
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "n": 4993,
+          "orden": "a",
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           4993
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "valor.cifra",
+       "tipoVersion": 2,
+       "params": {
+        "rango": 9999
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Escribe cuánto vale cada cifra.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "n": 1294,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           1000,
+           200,
+           90,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "n": 4175,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           4000,
+           100,
+           70,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "n": 6245,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           6000,
+           200,
+           40,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "n": 6895,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           6000,
+           800,
+           90,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "n": 1425,
+          "millares": true
+         },
+         "solucion": {
+          "huecos": [
+           1000,
+           400,
+           20,
+           5
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "9a632b1ed14f46ce"
+  ],
+  "svgSolucion": [
+   "6bdcca8e61da3e32"
+  ]
+ },
+ "más ejercicios: 2.º descomposición con ceros y canje": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Descomposición en C, D y U y el valor de la cifra",
+   "curso": 2,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "valor.descdu",
+       "tipoVersion": 2,
+       "params": {
+        "modo": null,
+        "nivel": "completas",
+        "rango": 999
+       },
+       "tamano": "media",
+       "color": "rosa",
+       "enunciado": "Descompón cada número en centenas (C), decenas (D) y unidades (U).",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "n": 722,
+          "suma": false,
+          "centenas": true
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           2,
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "n": 420,
+          "suma": false,
+          "centenas": true
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           2,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "n": 140,
+          "suma": false,
+          "centenas": true
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           4,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "n": 308,
+          "suma": false,
+          "centenas": true
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           0,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "n": 700,
+          "suma": false,
+          "centenas": true
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           0,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "n": 392,
+          "suma": false,
+          "centenas": true
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           9,
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "n": 671,
+          "suma": false,
+          "centenas": true
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           7,
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "n": 300,
+          "suma": false,
+          "centenas": true
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           0,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "n": 113,
+          "suma": false,
+          "centenas": true
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           1,
+           3
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "valor.cifra",
+       "tipoVersion": 2,
+       "params": {
+        "rango": 999
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Escribe cuánto vale cada cifra.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "n": 745,
+          "centenas": true
+         },
+         "solucion": {
+          "huecos": [
+           700,
+           40,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "n": 536,
+          "centenas": true
+         },
+         "solucion": {
+          "huecos": [
+           500,
+           30,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "n": 984,
+          "centenas": true
+         },
+         "solucion": {
+          "huecos": [
+           900,
+           80,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "n": 154,
+          "centenas": true
+         },
+         "solucion": {
+          "huecos": [
+           100,
+           50,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "n": 659,
+          "centenas": true
+         },
+         "solucion": {
+          "huecos": [
+           600,
+           50,
+           9
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "115e1ce6c6695c6f"
+  ],
+  "svgSolucion": [
+   "3bf425940519e0a1"
+  ]
+ },
+ "más ejercicios en media: agrupa y pares": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Agrupa en decenas y pares e impares",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "valor.agrupa",
+       "tipoVersion": 2,
+       "params": {
+        "rango": 30
+       },
+       "tamano": "media",
+       "color": "rosa",
+       "enunciado": "Rodea grupos de 10 y escribe cuántas decenas y unidades hay.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "n": 28,
+          "forma": "c",
+          "jit": [
+           [
+            0.82,
+            0.75
+           ],
+           [
+            -0.34,
+            -1.35
+           ],
+           [
+            -1.21,
+            0.18
+           ],
+           [
+            -1.47,
+            1.01
+           ],
+           [
+            0.04,
+            -0.29
+           ],
+           [
+            0.07,
+            -0.15
+           ],
+           [
+            -0.22,
+            0.63
+           ],
+           [
+            -0.45,
+            1.16
+           ],
+           [
+            0.98,
+            -1.34
+           ],
+           [
+            0.43,
+            0.47
+           ],
+           [
+            0.19,
+            1.3
+           ],
+           [
+            -1.25,
+            0.54
+           ],
+           [
+            -0.49,
+            -0.36
+           ],
+           [
+            -0.47,
+            -1.03
+           ],
+           [
+            0.85,
+            0.09
+           ],
+           [
+            1.06,
+            1.27
+           ],
+           [
+            -0.6,
+            -1.47
+           ],
+           [
+            0.07,
+            -1.47
+           ],
+           [
+            -0.08,
+            -1.43
+           ],
+           [
+            1.08,
+            -1.4
+           ],
+           [
+            1.5,
+            -0.06
+           ],
+           [
+            -0.73,
+            -0.68
+           ],
+           [
+            0.32,
+            0.02
+           ],
+           [
+            -0.84,
+            0.74
+           ],
+           [
+            0.2,
+            1.08
+           ],
+           [
+            -1,
+            0.99
+           ],
+           [
+            -1,
+            -0.81
+           ],
+           [
+            -1.19,
+            -1.35
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "n": 12,
+          "forma": "s",
+          "jit": [
+           [
+            -1.31,
+            -0.36
+           ],
+           [
+            0.29,
+            -0.07
+           ],
+           [
+            0.88,
+            -1.48
+           ],
+           [
+            -0.36,
+            0.41
+           ],
+           [
+            0.28,
+            -0.53
+           ],
+           [
+            -0.69,
+            0.37
+           ],
+           [
+            0.62,
+            1.06
+           ],
+           [
+            -0.53,
+            -1.19
+           ],
+           [
+            0.61,
+            -1.04
+           ],
+           [
+            0.11,
+            -1.06
+           ],
+           [
+            -0.24,
+            1.49
+           ],
+           [
+            -0.37,
+            -1.17
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "n": 25,
+          "forma": "q",
+          "jit": [
+           [
+            -0.82,
+            1.07
+           ],
+           [
+            0.13,
+            -1.02
+           ],
+           [
+            -0.04,
+            1.06
+           ],
+           [
+            -0.06,
+            -1.32
+           ],
+           [
+            0.19,
+            -1.2
+           ],
+           [
+            0.7,
+            -0.49
+           ],
+           [
+            0.85,
+            0.11
+           ],
+           [
+            -1.16,
+            0.03
+           ],
+           [
+            -1.14,
+            0.91
+           ],
+           [
+            0.75,
+            -0.56
+           ],
+           [
+            0.43,
+            1.11
+           ],
+           [
+            0.47,
+            0.18
+           ],
+           [
+            0.13,
+            -1.19
+           ],
+           [
+            -1.08,
+            -0.06
+           ],
+           [
+            0.72,
+            0.18
+           ],
+           [
+            -0.84,
+            0.76
+           ],
+           [
+            0.54,
+            1.5
+           ],
+           [
+            -1.08,
+            -0.98
+           ],
+           [
+            -0.93,
+            -0.18
+           ],
+           [
+            -0.14,
+            -0.01
+           ],
+           [
+            -0.23,
+            -0.44
+           ],
+           [
+            -1.1,
+            0.7
+           ],
+           [
+            1.31,
+            -0.39
+           ],
+           [
+            -1.16,
+            -0.45
+           ],
+           [
+            -1.49,
+            1.06
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "n": 20,
+          "forma": "t",
+          "jit": [
+           [
+            1.16,
+            0.9
+           ],
+           [
+            0.25,
+            0.49
+           ],
+           [
+            -0.83,
+            -1.03
+           ],
+           [
+            0.01,
+            0.36
+           ],
+           [
+            1.48,
+            0.05
+           ],
+           [
+            -0.74,
+            -0.28
+           ],
+           [
+            -1.28,
+            -0.32
+           ],
+           [
+            -0.29,
+            0.04
+           ],
+           [
+            0.3,
+            0.84
+           ],
+           [
+            -0.7,
+            -0.84
+           ],
+           [
+            -1.03,
+            -0.03
+           ],
+           [
+            -0.63,
+            -0.94
+           ],
+           [
+            0.56,
+            -0.57
+           ],
+           [
+            1.13,
+            -0.59
+           ],
+           [
+            -0.47,
+            -0.16
+           ],
+           [
+            -0.23,
+            0.09
+           ],
+           [
+            0.03,
+            -0.13
+           ],
+           [
+            -0.33,
+            -1.34
+           ],
+           [
+            -0.02,
+            -1.01
+           ],
+           [
+            0.87,
+            0.97
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           0
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "valor.pares",
+       "tipoVersion": 3,
+       "params": {
+        "modo": null,
+        "rango": 20
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Cuenta los puntos de cada casilla y rodea si el número es par o impar.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "n": 13
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": "impar"
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "n": 18
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": "par"
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "n": 7
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": "impar"
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "n": 19
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": "impar"
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "n": 1
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": "impar"
+         }
+        },
+        {
+         "id": "a2e6",
+         "datos": {
+          "n": 6
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": "par"
+         }
+        },
+        {
+         "id": "a2e7",
+         "datos": {
+          "n": 8
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": "par"
+         }
+        },
+        {
+         "id": "a2e8",
+         "datos": {
+          "n": 16
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": "par"
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "84e3578dc6387f3a"
+  ],
+  "svgSolucion": [
+   "825ede42aef7a219"
+  ]
+ },
+ "más ejercicios en media: descomposición y número (1.º)": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Descomposición en D y U y decenas, unidades y número",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "valor.descdu",
+       "tipoVersion": 2,
+       "params": {
+        "modo": null,
+        "nivel": "completas",
+        "rango": 50
+       },
+       "tamano": "media",
+       "color": "rosa",
+       "enunciado": "Descompón cada número en decenas (D) y unidades (U).",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "n": 20,
+          "suma": false
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "n": 50,
+          "suma": false
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "n": 30,
+          "suma": false
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "n": 10,
+          "suma": false
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "n": 40,
+          "suma": false
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "n": 40,
+          "suma": false
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           0
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "valor.dunum",
+       "tipoVersion": 2,
+       "params": {
+        "nivel": null,
+        "rango": 90
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Completa cada casilla con el número o con sus decenas y unidades.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "n": 16,
+          "orden": "a"
+         },
+         "solucion": {
+          "huecos": [
+           16
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "n": 40,
+          "orden": "b"
+         },
+         "solucion": {
+          "huecos": [
+           40
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "n": 49,
+          "orden": "b"
+         },
+         "solucion": {
+          "huecos": [
+           49
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "n": 28,
+          "orden": "a"
+         },
+         "solucion": {
+          "huecos": [
+           28
+          ]
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "n": 37,
+          "orden": "a"
+         },
+         "solucion": {
+          "huecos": [
+           37
+          ]
+         }
+        },
+        {
+         "id": "a2e6",
+         "datos": {
+          "n": 21,
+          "orden": "b"
+         },
+         "solucion": {
+          "huecos": [
+           21
+          ]
+         }
+        },
+        {
+         "id": "a2e7",
+         "datos": {
+          "n": 36,
+          "orden": "a"
+         },
+         "solucion": {
+          "huecos": [
+           36
+          ]
+         }
+        },
+        {
+         "id": "a2e8",
+         "datos": {
+          "n": 34,
+          "orden": "b"
+         },
+         "solucion": {
+          "huecos": [
+           34
+          ]
+         }
+        },
+        {
+         "id": "a2e9",
+         "datos": {
+          "n": 31,
+          "orden": "a"
+         },
+         "solucion": {
+          "huecos": [
+           31
+          ]
+         }
+        },
+        {
+         "id": "a2e10",
+         "datos": {
+          "n": 30,
+          "orden": "b"
+         },
+         "solucion": {
+          "huecos": [
+           30
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "c54e242c8d82cbb2"
+  ],
+  "svgSolucion": [
+   "50d62a671e9e7f16"
+  ]
+ },
+ "más ejercicios en media: canje, cifra, oculto y cuadrado": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Los canjes y el valor de la cifra",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "valor.canje",
+       "tipoVersion": 2,
+       "params": {
+        "nivel": null,
+        "rango": 50
+       },
+       "tamano": "media",
+       "color": "rosa",
+       "enunciado": "Cambia las unidades por decenas y escribe cuántas decenas y unidades son.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "n": 20
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "n": 28
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "n": 50
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "n": 43
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "n": 24
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           4
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "valor.cifra",
+       "tipoVersion": 2,
+       "params": {
+        "rango": 50
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Escribe cuánto vale cada cifra.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "n": 23
+         },
+         "solucion": {
+          "huecos": [
+           20,
+           3
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "n": 43
+         },
+         "solucion": {
+          "huecos": [
+           40,
+           3
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "n": 21
+         },
+         "solucion": {
+          "huecos": [
+           20,
+           1
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "n": 13
+         },
+         "solucion": {
+          "huecos": [
+           10,
+           3
+          ]
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "n": 46
+         },
+         "solucion": {
+          "huecos": [
+           40,
+           6
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "actividades": [
+      {
+       "n": 3,
+       "tipo": "juegos.oculto",
+       "tipoVersion": 2,
+       "params": {
+        "rango": 30
+       },
+       "tamano": "media",
+       "color": "amarillo",
+       "enunciado": "Lee las pistas y escribe qué número soy.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a3e1",
+         "datos": {
+          "t": 9,
+          "pistas": [
+           "Soy mayor que 7.",
+           "Tengo 9 unidades.",
+           "Vengo después del 8."
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        },
+        {
+         "id": "a3e2",
+         "datos": {
+          "t": 3,
+          "pistas": [
+           "Tengo 3 unidades.",
+           "Soy mayor que 2.",
+           "Vengo antes del 4."
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a3e3",
+         "datos": {
+          "t": 19,
+          "pistas": [
+           "Soy impar.",
+           "Tengo 9 unidades.",
+           "Vengo después del 18."
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           19
+          ]
+         }
+        },
+        {
+         "id": "a3e4",
+         "datos": {
+          "t": 18,
+          "pistas": [
+           "Soy mayor que 17.",
+           "Soy par.",
+           "Tengo 8 unidades.",
+           "Vengo antes del 19."
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           18
+          ]
+         }
+        },
+        {
+         "id": "a3e5",
+         "datos": {
+          "t": 11,
+          "pistas": [
+           "Tengo 1 unidad.",
+           "Soy impar.",
+           "Vengo después del 10."
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           11
+          ]
+         }
+        },
+        {
+         "id": "a3e6",
+         "datos": {
+          "t": 10,
+          "pistas": [
+           "Soy menor que 11.",
+           "Tengo 0 unidades."
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 4,
+       "tipo": "juegos.cuadrado",
+       "tipoVersion": 2,
+       "params": {
+        "n": 4,
+        "rango": 20
+       },
+       "tamano": "media",
+       "color": "rosa",
+       "enunciado": "Completa el cuadrado: filas, columnas y diagonales suman lo mismo.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a4e1",
+         "datos": {
+          "S": 18,
+          "m": [
+           [
+            9,
+            4,
+            5
+           ],
+           [
+            2,
+            6,
+            10
+           ],
+           [
+            7,
+            8,
+            3
+           ]
+          ],
+          "vac": [
+           [
+            0,
+            0
+           ],
+           [
+            0,
+            1
+           ],
+           [
+            2,
+            1
+           ],
+           [
+            2,
+            2
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           9,
+           4,
+           8,
+           3
+          ]
+         }
+        },
+        {
+         "id": "a4e2",
+         "datos": {
+          "S": 18,
+          "m": [
+           [
+            3,
+            8,
+            7
+           ],
+           [
+            10,
+            6,
+            2
+           ],
+           [
+            5,
+            4,
+            9
+           ]
+          ],
+          "vac": [
+           [
+            0,
+            0
+           ],
+           [
+            0,
+            1
+           ],
+           [
+            1,
+            1
+           ],
+           [
+            2,
+            2
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           8,
+           6,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a4e3",
+         "datos": {
+          "S": 27,
+          "m": [
+           [
+            10,
+            5,
+            12
+           ],
+           [
+            11,
+            9,
+            7
+           ],
+           [
+            6,
+            13,
+            8
+           ]
+          ],
+          "vac": [
+           [
+            0,
+            2
+           ],
+           [
+            1,
+            1
+           ],
+           [
+            1,
+            2
+           ],
+           [
+            2,
+            0
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           12,
+           9,
+           7,
+           6
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "a6b4cf887b6ed08c",
+   "a3dc4544ad995299"
+  ],
+  "svgSolucion": [
+   "da3a5e48f257a740",
+   "59c6f4596fff9de9"
+  ]
+ },
+ "más ejercicios en media: lados y rueda": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Lados y vértices y ¿Rueda o no rueda?",
+   "curso": 2,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "geometria.lados",
+       "tipoVersion": 2,
+       "params": {
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "amarillo",
+       "enunciado": "Cuenta los lados y los vértices (los puntos) de cada figura.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "forma": "rectangulo",
+          "pts": [
+           [
+            -0.55,
+            -0.9
+           ],
+           [
+            0.55,
+            -0.9
+           ],
+           [
+            0.55,
+            0.9
+           ],
+           [
+            -0.55,
+            0.9
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "forma": "cuadrado",
+          "pts": [
+           [
+            -0.7,
+            -0.7
+           ],
+           [
+            0.7,
+            -0.7
+           ],
+           [
+            0.7,
+            0.7
+           ],
+           [
+            -0.7,
+            0.7
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "forma": "hexagono",
+          "pts": [
+           [
+            -0.764,
+            0.373
+           ],
+           [
+            -0.705,
+            -0.475
+           ],
+           [
+            0.059,
+            -0.848
+           ],
+           [
+            0.764,
+            -0.373
+           ],
+           [
+            0.705,
+            0.475
+           ],
+           [
+            -0.059,
+            0.848
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "forma": "triangulo",
+          "pts": [
+           [
+            -0.8,
+            -0.6
+           ],
+           [
+            0.8,
+            -0.6
+           ],
+           [
+            0,
+            0.8
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           3
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "geometria.rueda",
+       "tipoVersion": 2,
+       "params": {
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "rosa",
+       "enunciado": "Rodea si cada cuerpo rueda o no rueda.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "cuerpo": "esfera"
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "rueda"
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "cuerpo": "cono"
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "rueda"
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "cuerpo": "cilindro"
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "rueda"
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "cuerpo": "piramide"
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "no rueda"
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "cuerpo": "cono"
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "rueda"
+         }
+        },
+        {
+         "id": "a2e6",
+         "datos": {
+          "cuerpo": "cubo"
+         },
+         "solucion": {
+          "huecos": [],
+          "correcta": "no rueda"
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "a53f21f67b071da0"
+  ],
+  "svgSolucion": [
+   "6ea25eef6c95b9eb"
+  ]
+ },
+ "más ejercicios: oculto con rango 10 (sin más banco) y pares con rango 10": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "El número oculto y pares e impares",
+   "curso": 1,
+   "area": "matematicas",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "juegos.oculto",
+       "tipoVersion": 2,
+       "params": {
+        "rango": 10
+       },
+       "tamano": "media",
+       "color": "amarillo",
+       "enunciado": "Lee las pistas y escribe qué número soy.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "t": 6,
+          "pistas": [
+           "Tengo 6 unidades.",
+           "Soy mayor que 2."
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "t": 8,
+          "pistas": [
+           "Soy mayor que 2.",
+           "Tengo 8 unidades."
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "t": 3,
+          "pistas": [
+           "Soy menor que 4.",
+           "Soy mayor que 1.",
+           "Tengo 3 unidades."
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "t": 5,
+          "pistas": [
+           "Soy mayor que 2.",
+           "Soy menor que 6.",
+           "Tengo 5 unidades."
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "t": 4,
+          "pistas": [
+           "Soy par.",
+           "Tengo 4 unidades."
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "t": 9,
+          "pistas": [
+           "Soy impar.",
+           "Soy mayor que 6.",
+           "Tengo 9 unidades."
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "valor.pares",
+       "tipoVersion": 3,
+       "params": {
+        "modo": null,
+        "rango": 10
+       },
+       "tamano": "media",
+       "color": "rosa",
+       "enunciado": "Cuenta los puntos de cada casilla y rodea si el número es par o impar.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "n": 3
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": "impar"
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "n": 9
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": "impar"
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "n": 4
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": "par"
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "n": 7
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": "impar"
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "n": 5
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": "impar"
+         }
+        },
+        {
+         "id": "a2e6",
+         "datos": {
+          "n": 6
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": "par"
+         }
+        },
+        {
+         "id": "a2e7",
+         "datos": {
+          "n": 8
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": "par"
+         }
+        },
+        {
+         "id": "a2e8",
+         "datos": {
+          "n": 10
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": "par"
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "095892509ae74b3e"
+  ],
+  "svgSolucion": [
+   "20bdb894dc69d001"
   ]
  },
  "mayor o menor en media": {

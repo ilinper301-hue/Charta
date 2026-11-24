@@ -3,9 +3,12 @@
 //           S = suma mágica = 15 + 3k; m = cuadrado base (2,7,6/9,5,1/4,3,8) girado/reflejado y sumado k (k ≤ min(rango − 9, 4)).
 // solucion: { huecos: [m[r][q] de cada casilla vacía, por filas] }
 // Completa: 6 cuadrados (2 columnas × 3 filas); media: 2 (una fila). Opción n = casillas vacías (3–5, defecto 4).
+// Cantidad: «Más grandes» = 6 y 2 en 2 columnas (tarjetas que llenan el panel; casillas hasta 52,8 pt); «Más ejercicios» = 3 columnas (el cuadrado mide 144 pt y cabe en 173), 9 y 3 (tarjetas ≥ 196 pt).
+//   dibujar() sabe las columnas por el nº de ejercicios: más de los de siempre (6 o 2) = 3 columnas.
 // Las casillas vacías siempre se pueden deducir de las líneas (fila/columna/diagonal con una sola incógnita, en cadena).
 import { registrar } from "../nucleo/tipos.js";
-import { TOP, M } from "../render/papel.js";
+import { TOP } from "../render/papel.js";
+import { cuantos } from "./_elastica.js";
 
 const BASE = [[2, 7, 6], [9, 5, 1], [4, 3, 8]];
 const CELDAS = [0, 1, 2].flatMap((r) => [0, 1, 2].map((q) => [r, q]));
@@ -36,13 +39,15 @@ export function resoluble(conocidas) {
 
 export default registrar({
   id: "juegos.cuadrado",
-  version: 1,
-  generar(params, azar, { tamano }) {
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
     const R = params.rango ?? 10;
     if (R < 10) throw new Error("Los cuadrados mágicos necesitan un rango máximo de al menos 10.");
-    const h = Math.max(3, Math.min(5, params.n || 4)), cnt = tamano === "media" ? 2 : 6;
+    const h = Math.max(3, Math.min(5, params.n || 4));
     const combos = [];
     for (let s = 0; s < 8; s++) for (let k = 0; k <= Math.min(R - 9, 4); k++) combos.push([s, k]);
+    const cnt = cuantos(ctx, 3, 196, [6, 2], combos.length);
     const ejercicios = azar.muestra(combos, cnt).map(([s, k]) => {
       const m = sim(BASE, s).map((r) => r.map((v) => v + k));
       let vac;
@@ -56,12 +61,13 @@ export default registrar({
     return { enunciado: "Completa el cuadrado: filas, columnas y diagonales suman lo mismo.", ejercicios };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 2, 3);
+    const n = act.ejercicios.length, cols = n > (act.tamano === "media" ? 2 : 6) ? 3 : 2;
+    const { cel, cw, ch } = p.rejilla(TOP, cols, Math.ceil(n / cols)), bs = Math.max(44, Math.min(52.8, (ch - 60) / 3 - 6, (cw - 32) / 3));
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], { S, m, vac } = e.datos;
       p.marco(x, y, cw, ch, i);
       p.text(x + cw / 2, y + ch - 30, `Suma mágica: ${S}`, 14, { f: "PB", anchor: "middle" });
-      const bs = 44, g = 6, gx = x + (cw - (3 * bs + 2 * g)) / 2;
+      const g = 6, gx = x + (cw - (3 * bs + 2 * g)) / 2;
       for (let r = 0; r < 3; r++) for (let q = 0; q < 3; q++) {
         const k = vac.findIndex((d) => d[0] === r && d[1] === q);
         p.caja(gx + q * (bs + g), y + 14 + (2 - r) * (bs + g), bs, bs, k >= 0 ? null : m[r][q], 20, k >= 0 ? e.solucion.huecos[k] : null);

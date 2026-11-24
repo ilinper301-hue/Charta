@@ -1,18 +1,22 @@
 // valor.pares · Pares e impares (port de _v_pares() del motor).
 // Modo null («rodear»):  datos { n }  → solucion { huecos: [], rodea: "par" | "impar" }   (n = 1..min(R, 20); se cuentan los puntos y se rodea)
-//   Completa: 12 casillas (3 filas × 4), 6 pares y 6 impares barajados; media: 6.
+//   Completa: 12 casillas (4 filas × 3), 6 pares y 6 impares barajados; media: 6. Cantidad (rejilla elástica, p.rejilla): «Más grandes» = 12 y 6 (tarjetas que llenan el panel, puntos hasta 22 pt);
+//   «Más ejercicios» = las filas de 3 que caben con tarjetas ≥ 104 pt (18 y 8: pares e impares a partes iguales, así que siempre un número par, y sin pasar de los números distintos del banco).
 // Modo "clasifica" (solo completa): UN ejercicio  datos { numeros: [..], pares: k, impares: k' }  (k, k' = min(6, nº de pares/impares ≤ R))
 //   solucion { huecos: [pares ordenados…, impares ordenados…] }   (primero los cuadros de la columna PARES, de arriba abajo; luego los de IMPARES)
 import { registrar } from "../nucleo/tipos.js";
 import { TOP, M, W, INK, COLOR_SOLUCION } from "../render/papel.js";
+import { cuantos } from "./_elastica.js";
 import { muestra } from "./valor.canje.js";
 
 const orden = (l) => l.slice().sort((a, b) => a - b);
 
 export default registrar({
   id: "valor.pares",
-  version: 2,
-  generar(params, azar, { tamano }) {
+  version: 3,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const { tamano } = ctx;
     const R = params.rango ?? 10;
     if (params.modo === "clasifica") {
       if (tamano === "media") throw new Error("Clasificar pares e impares solo en página completa.");
@@ -24,8 +28,10 @@ export default registrar({
         ejercicios: [{ datos: { numeros: azar.barajar([...E, ...O]), pares: E.length, impares: O.length }, solucion: { huecos: [...orden(E), ...orden(O)] } }],
       };
     }
-    const cap = Math.min(R, 20), cnt = tamano === "media" ? 6 : 12, ev = [], od = [];
+    const cap = Math.min(R, 20), ev = [], od = [];
     for (let v = 1; v <= cap; v++) (v % 2 ? od : ev).push(v);
+    let cnt = cuantos(ctx, 3, 104, [12, 6], 2 * Math.min(ev.length, od.length));
+    cnt -= cnt % 2;   // mitad pares y mitad impares (una tarjeta menos si la rejilla sale impar)
     const nums = azar.barajar([...muestra(ev, cnt / 2, azar), ...muestra(od, cnt / 2, azar)]);
     return {
       enunciado: "Cuenta los puntos de cada casilla y rodea si el número es par o impar.",
@@ -34,12 +40,12 @@ export default registrar({
   },
   dibujar(p, act) {
     if (act.ejercicios[0]?.datos.numeros) return clasifica(p, act);
-    const { cel, cw, ch } = p.celdas(TOP, 3, 4);
+    const { cel, cw, ch } = p.rejilla(TOP, 3, Math.ceil(act.ejercicios.length / 3));
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], { n } = e.datos;
       p.marco(x, y, cw, ch, i);
       const cols = Math.ceil(n / 2), pitch = Math.min(22, (cw - 36) / cols), r = Math.min(6, pitch * 0.32);
-      const x0 = x + cw / 2 - (cols - 1) * pitch / 2, yc = y + ch * 0.60;
+      const x0 = x + cw / 2 - (cols - 1) * pitch / 2, yc = y + 52 + (ch - 52 - 24) / 2;   // los puntos, entre las casillas PAR/IMPAR y el borde de arriba
       for (let k = 0; k < n; k++) p.circle(x0 + Math.floor(k / 2) * pitch, yc + pitch / 2 - (k % 2) * pitch, r, { fill: INK, stroke: null });
       ["PAR", "IMPAR"].forEach((lab, j) => {
         const bx = x + cw / 2 + (j - 1) * 70 + 3;

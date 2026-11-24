@@ -2,8 +2,9 @@
 // datos:    { forma: "triangulo"|"cuadrado"|"rectangulo"|"pentagono"|"hexagono", pts: [[x, y]…] (vértices en unidades −1…1, y hacia arriba) }
 // solucion: { huecos: [lados, vértices] }  (los dos iguales: el polígono tiene tantos lados como vértices)
 // Sin opciones. Completa: 8 polígonos (2 × 4), recorriendo las 5 clases; media: 4. Cada vértice lleva un punto para contarlos.
+// Cantidad (rejilla elástica de 2 columnas): «Más grandes» = 8 y 4 (tarjetas que llenan el panel); «Más ejercicios» = las filas que caben con tarjetas ≥ 124 pt (10 y 4; el polígono se reduce con la tarjeta, nunca los cuadros ni la letra).
 import { registrar } from "../nucleo/tipos.js";
-import { TOP, INK } from "../render/papel.js";
+import { TOP, INK, cuantosRejilla } from "../render/papel.js";
 import { poli, ciclo } from "./geometria.dibujo.js";
 
 export const FORMAS = ["triangulo", "cuadrado", "rectangulo", "pentagono", "hexagono"];
@@ -23,16 +24,17 @@ function vertices(forma, azar) {
 
 export default registrar({
   id: "geometria.lados",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    const cnt = tamano === "media" ? 4 : 8;
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const cnt = cuantosRejilla(ctx, 2, 124, [8, 4]);
     return {
       enunciado: "Cuenta los lados y los vértices (los puntos) de cada figura.",
       ejercicios: ciclo(FORMAS, cnt, azar).map((forma) => ({ datos: { forma, pts: vertices(forma, azar) }, solucion: { huecos: [LADOS[forma], LADOS[forma]] } })),
     };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 2, 4);
+    const { cel, cw, ch } = p.rejilla(TOP, 2, Math.ceil(act.ejercicios.length / 2));
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], s = Math.min(cw * 0.2, ch * 0.34), cx = x + cw * 0.3, cy = y + ch * 0.46;
       p.marco(x, y, cw, ch, i);
