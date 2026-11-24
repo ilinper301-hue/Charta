@@ -400,7 +400,7 @@ function r_recta(c, n, i, vacio, rango, cen, mil) {
     if (maxn === 30) { big = k % 5 === 0; draw = true; lab = big; }
     else { big = k % 10 === 0; draw = big; lab = k === 0 || k === 50 || k === 100; }
     if (draw) { const a = big ? 5.5 : 3; c.line(x0 + k * step, y - a, x0 + k * step, y + a, big ? 1.3 : 0.9, "marca"); }
-    if (lab) c.text(x0 + k * step, y - 18, String(k), 8);
+    if (lab) c.text(x0 + k * step, y - 21, String(k), 12.5);
   }
   if (!vacio) {
     const mx = x0 + n * step;
@@ -419,7 +419,8 @@ function r_recta_tramo(c, n, i, vacio, paso = 0) {
   for (let k = 0; k <= 30; k++) {
     const big = k % 5 === 0, a = big ? 5.5 : 3;
     c.line(x0 + k * step, y - a, x0 + k * step, y + a, big ? 1.3 : 0.9, "marca");
-    if (big) c.text(x0 + k * step, y - 18, String(s + k * q), paso ? 7 : 7.5);
+    // etiquetas de 10,5 pt (≥ 9 pt impresos): con 4 cifras no caben cada 5 marcas, se rotulan cada 10
+    if (k % (String(s + 30 * q).length > 3 ? 10 : 5) === 0) { const t = String(s + k * q); c.text(x0 + k * step, y - 20, t, t.length > 4 ? 10.2 : 10.5); }
   }
   if (!vacio) {
     const mx = x0 + (n - s) / q * step;
@@ -568,71 +569,72 @@ Lienzo.prototype.lineGris = function (x1, y1, x2, y2) {
 
 // ---------------------------------------------------------------- MONEDAS
 function _monedas(c, n) {
-  const [d, u] = div(n, 10), R = 12, r = 7.8, gt = 5, cols = 3, gap = 18, lw = 1.6;
-  const wt = d ? d * 2 * R + (d - 1) * gt : 0, nuc = Math.min(u, cols), wu = u ? nuc * 2 * r + (nuc - 1) * 4 : 0;
+  // las decenas en filas de 3 como máximo (no se encogen: letra ≥ 9 pt impresos)
+  const [d, u] = div(n, 10), R = 12, r = 7.8, gt = 5, cols = 3, gap = 18, lw = 1.6, tc = Math.min(d, 3), trows = Math.ceil(d / 3);
+  const wt = d ? tc * 2 * R + (tc - 1) * gt : 0, nuc = Math.min(u, cols), wu = u ? nuc * 2 * r + (nuc - 1) * 4 : 0;
   const total = wt + (d && u ? gap : 0) + wu;
   let x = -total / 2;
   for (let q = 0; q < d; q++) {
+    const [rr, cc] = div(q, 3);
     c.abrir("moneda-10");
-    c.circle(x + R, 0, R, { lw });
-    c.text(x + R, -4, "10", 11, { negrita: true });
+    c.circle(x + R + cc * (2 * R + gt), ((trows - 1) / 2 - rr) * (2 * R + gt), R, { lw });
+    c.text(x + R + cc * (2 * R + gt), ((trows - 1) / 2 - rr) * (2 * R + gt) - 5, "10", 14.5, { negrita: true });
     c.cerrar();
-    x += 2 * R + gt;
   }
-  if (d) x += gap - gt;
+  if (d) x += wt + gap;
   const rows = u ? Math.ceil(u / cols) : 0;
   for (let k = 0; k < u; k++) {
     const [rr, cc] = div(k, cols), px = x + r + cc * (2 * r + 4), py = (rows - 1) * (r + 2) - rr * (2 * r + 4);
     c.abrir("moneda-1");
     c.circle(px, py, r, { lw });
-    c.text(px, py - 3, "1", 8.5, { negrita: true });
+    c.text(px, py - 4.5, "1", 12.5, { negrita: true });
     c.cerrar();
   }
 }
 function r_monedas(c, n, i) {
-  const [d, u] = div(n, 10);
-  const total = (d ? d * 24 + (d - 1) * 5 : 0) + (d && u ? 18 : 0) + (u ? Math.min(u, 3) * 15.6 + (Math.min(u, 3) - 1) * 4 : 0);
+  const [d, u] = div(n, 10), tc = Math.min(d, 3);
+  const total = (d ? tc * 24 + (tc - 1) * 5 : 0) + (d && u ? 18 : 0) + (u ? Math.min(u, 3) * 15.6 + (Math.min(u, 3) - 1) * 4 : 0);
   c.grupo(0, 0, Math.min(1.3, 150 / Math.max(total, 1)), 0, () => _monedas(c, n, i));
 }
 
 // ---------------------------------------------------------------- ÁBACO
 function abaco(c, d, u, cuentas = true) {
-  const fw = 116, fh = 100, x = -fw / 2, y = -fh / 2;
+  const fw = 116, fh = 107, x = -fw / 2, y = -fh / 2;
   c.abrir("abaco");
   c.rrect(x, y, fw, fh, 8, { lw: 1.8, cls: "marco-abaco" });
   for (const [xr, k, lab] of [[-28, d, "D"], [28, u, "U"]]) {
     c.abrir("varilla");
-    c.line(xr, y + 14, xr, y + fh - 5, 1.6);
-    if (cuentas) for (let j = 0; j < k; j++) c.circle(xr, y + 14 + 4.4 + j * 8.8, 4.4, { lw: 1.6, fill: INK, cls: "cuenta" });
-    c.text(xr, y + 4, lab, 8.5);
+    c.line(xr, y + 21, xr, y + fh - 5, 1.6);
+    if (cuentas) for (let j = 0; j < k; j++) c.circle(xr, y + 21 + 4.4 + j * 8.8, 4.4, { lw: 1.6, fill: INK, cls: "cuenta" });
+    c.text(xr, y + 4, lab, 18);
     c.cerrar();
   }
   c.cerrar();
 }
 /** Ábaco de tres varillas C, D, U (marco más ancho). */
 function abaco3(c, cc, d, u, cuentas = true) {
-  const fw = 156, fh = 100, x = -fw / 2, y = -fh / 2;
+  const fw = 156, fh = 107, x = -fw / 2, y = -fh / 2;
   c.abrir("abaco");
   c.rrect(x, y, fw, fh, 8, { lw: 1.8, cls: "marco-abaco" });
   for (const [xr, k, lab] of [[-48, cc, "C"], [0, d, "D"], [48, u, "U"]]) {
     c.abrir("varilla");
-    c.line(xr, y + 14, xr, y + fh - 5, 1.6);
-    if (cuentas) for (let j = 0; j < k; j++) c.circle(xr, y + 14 + 4.4 + j * 8.8, 4.4, { lw: 1.6, fill: INK, cls: "cuenta" });
-    c.text(xr, y + 4, lab, 8.5);
+    c.line(xr, y + 21, xr, y + fh - 5, 1.6);
+    if (cuentas) for (let j = 0; j < k; j++) c.circle(xr, y + 21 + 4.4 + j * 8.8, 4.4, { lw: 1.6, fill: INK, cls: "cuenta" });
+    c.text(xr, y + 4, lab, 18);
     c.cerrar();
   }
   c.cerrar();
 }
 /** Ábaco de cuatro varillas UM, C, D, U. */
 function abaco4(c, m, cc, d, u, cuentas = true) {
-  const fw = 196, fh = 100, x = -fw / 2, y = -fh / 2;
+  const fw = 196, fh = 107, x = -fw / 2, y = -fh / 2;
   c.abrir("abaco");
   c.rrect(x, y, fw, fh, 8, { lw: 1.8, cls: "marco-abaco" });
   for (const [xr, k, lab] of [[-69, m, "UM"], [-23, cc, "C"], [23, d, "D"], [69, u, "U"]]) {
     c.abrir("varilla");
-    c.line(xr, y + 14, xr, y + fh - 5, 1.6);
-    if (cuentas) for (let j = 0; j < k; j++) c.circle(xr, y + 14 + 4.4 + j * 8.8, 4.4, { lw: 1.6, fill: INK, cls: "cuenta" });
-    c.text(xr, y + 4, lab, 8.5);
+    c.line(xr, y + 21, xr, y + fh - 5, 1.6);
+    if (cuentas) for (let j = 0; j < k; j++) c.circle(xr, y + 21 + 4.4 + j * 8.8, 4.4, { lw: 1.6, fill: INK, cls: "cuenta" });
+    c.text(xr, y + 4, lab, 18);
     c.cerrar();
   }
   c.cerrar();

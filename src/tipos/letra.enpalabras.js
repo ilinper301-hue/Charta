@@ -26,7 +26,7 @@ const memo = new Map();   // palabras buenas por tipo, caso inicial, letra y let
 
 export default registrar({
   id: "letra.enpalabras",
-  version: 2,
+  version: 3,
   cantidad: true,
   generar(params, azar, ctx) {
     const base = cuantas(ctx.tamano, 12), cuenta = params.tarea !== "rodea";
@@ -61,7 +61,7 @@ export default registrar({
       const ancho = cuenta ? cw - 30 - bw - 22 : cw - 56;
       palabraLetras(p, x + 32, y, ancho, ch, e.datos.palabra, { fs: Math.min(28 * k, ch * 0.5), gap: 0.27, rodear: e.solucion.rodea });
       if (cuenta) {
-        p.text(x + cw - 14 - bw / 2, y + ch / 2 + bh / 2 + 4, "veces", 9 * k, { f: "PM", anchor: "middle", gris: 0.3 });
+        p.text(x + cw - 14 - bw / 2, y + ch / 2 + bh / 2 + 4, "veces", Math.max(11, 9 * k), { f: "PM", anchor: "middle", gris: 0.3 });
         p.caja(x + cw - 14 - bw, y + (ch - bh) / 2 - 5, bw, bh, null, 22 * k, e.solucion.huecos[0]);
       }
     }));

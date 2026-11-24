@@ -21,7 +21,7 @@ export function flecha(p, x, y, w = 24) {
 
 export default registrar({
   id: "orden.redondea",
-  version: 2,
+  version: 3,
   cantidad: true,
   generar(params, azar, ctx) {
     const R = params.rango ?? 9999, cnt = cuantosRejilla(ctx, 3, MIN_ALTO, [15, 6]), us = params.a ? [params.a] : ["decena", "centena", "millar"];

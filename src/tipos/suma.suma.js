@@ -16,7 +16,7 @@ const N = 6;   // filas de la ficha: una por representación de resultado
 
 export default registrar({
   id: "suma.suma",
-  version: 1,
+  version: 2,
   generar(params, azar, { tamano }) {
     const R = params.rango ?? 20, [res, pool] = R <= 30 ? SUMA_30 : SUMA_100, usadas = new Set(), filas = [];
     for (const rk of azar.barajar(res)) {
@@ -42,18 +42,20 @@ export default registrar({
       [[d.repA, d.a], [d.repB, d.b]].forEach(([rep, n], j) => {
         const x = xs[j];
         p.tarjeta(x, y, bw, bh);
-        p.text(x + 12, y + bh - 17, NOMBRES[rep].toUpperCase(), 8.5, { f: "PM", gris: 0.3 });
+        p.rotulo(x + 12, y + bh - 17, NOMBRES[rep].toUpperCase(), 11, bw - 12 - 46);   // ≥ 9 pt impresos
         p.cuadrito(x, y, bw, bh, 28, e.solucion.huecos[j]);
         p.rep(rep, n, x + bw / 2, y + 8 + (bh - 8 - 36) / 2, { i: r * 2 + j, rango: R, escala: 0.82 });
       });
       const x = xs[2];
       p.tarjeta(x, y, bw, bh, 1.9);
       const t = "DIBUJA CON: " + NOMBRES[d.repRes].toUpperCase();
-      let fs = 8.5; while (p.ancho(t, "PM", fs) > bw - 24) fs -= 0.1;
-      p.text(x + bw / 2, y + bh - 17, t, fs, { f: "PM", anchor: "middle", gris: 0.3 });
-      p.plantilla(d.repRes, d.total, x + bw / 2, y + 28 + (bh - 52) / 2, { i: r, rango: R, escala: 0.8 });
-      p.text(x + 14, y + 11, "Resultado:", 9.5, { f: "PM" });
-      const tw = p.ancho("Resultado:", "PM", 9.5);
+      const dos = p.ancho(t, "PM", 11) > bw - 24;   // letra fija de 11 pt (≥ 9 pt impresos): si no cabe, «DIBUJA CON:» y el nombre en dos líneas
+      if (dos) p.rotulo(x + bw / 2, y + bh - 15, "DIBUJA CON:", 11, bw, { anchor: "middle" }), p.rotulo(x + bw / 2, y + bh - 15 - 12, t.slice(12), 11, bw - 24, { anchor: "middle" });
+      else p.text(x + bw / 2, y + bh - 17, t, 11, { f: "PM", anchor: "middle", gris: 0.3 });
+      const baja = dos ? 6 : 0;
+      p.plantilla(d.repRes, d.total, x + bw / 2, y + 28 + (bh - 52 - baja) / 2, { i: r, rango: R, escala: dos && ["cuadricula", "abaco", "bloques", "atados"].includes(d.repRes) ? 0.66 : 0.8 });
+      p.text(x + 14, y + 11, "Resultado:", 11, { f: "PM" });
+      const tw = p.ancho("Resultado:", "PM", 11);
       p.line(x + 14 + tw + 8, y + 11, x + bw - 14, y + 11, { lw: 1.2 });
       if (p.solucion) p.solucionEn((x + 14 + tw + 8 + x + bw - 14) / 2, y + 11 + 16 * 0.35 + 3, e.solucion.huecos[2], 16);
       p.text(xs[0] + bw + SYM / 2, y + bh / 2 - 9, "+", 26, { f: "PB", anchor: "middle" });

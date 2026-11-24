@@ -28,7 +28,7 @@ function caminoAzar(azar, n, L) {
 
 export default registrar({
   id: "juegos.laberinto",
-  version: 1,
+  version: 2,
   generar(params, azar) {
     const R = params.rango ?? 10, p = params.n || 1;
     if (![1, 2, 5, 10].includes(p)) throw new Error("El salto debe ser 1, 2, 5 o 10.");
@@ -56,7 +56,7 @@ export default registrar({
       const gx = M + (W - 2 * M - N * cs) / 2, gy = y0 + (350 - N * cs) / 2;
       for (let r = 0; r < N; r++) for (let q = 0; q < N; q++) p.caja(gx + q * cs + 2, gy + (N - 1 - r) * cs + 2, cs - 4, cs - 4, rejilla[r][q], 20);
       [[camino[0], "SALIDA"], [camino[camino.length - 1], "META"]].forEach(([[r, q], tag]) =>
-        p.text(gx + q * cs + cs / 2, gy + (N - 1 - r) * cs + 7, tag, 6.5, { f: "PM", anchor: "middle", gris: 0.3 }));
+        p.text(gx + q * cs + cs / 2, gy + (N - 1 - r) * cs + 7, tag, 10, { f: "PM", anchor: "middle", gris: 0.3 }));
       if (p.solucion) {
         const c = ([r, q]) => [gx + q * cs + cs / 2, gy + (N - 1 - r) * cs + cs / 2];
         for (let j = 1; j < camino.length; j++) p.line(...c(camino[j - 1]), ...c(camino[j]), { lw: 3, gris: COLOR_SOLUCION });

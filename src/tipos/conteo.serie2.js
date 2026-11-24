@@ -7,7 +7,7 @@ import { generarSerie, dibujarSerie } from "./conteo.series.js";
 
 export default registrar({
   id: "conteo.serie2",
-  version: 2,
+  version: 3,
   cantidad: true,
   generar(params, azar, ctx) { return generarSerie([2], params, azar, ctx); },
   dibujar: dibujarSerie,

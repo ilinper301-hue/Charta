@@ -24,7 +24,7 @@ function etiqueta(p, x, y, nom, precio, s = 1, w = 104 * s, h = 50 * s) {
 
 export default registrar({
   id: "medida.precios",
-  version: 2,
+  version: 3,
   cantidad: true,
   generar(params, azar, ctx) {
     const R = params.rango ?? 20;

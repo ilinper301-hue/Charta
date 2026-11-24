@@ -20,7 +20,7 @@ const COMUNES = new Set(NOMBRES.map((x) => x.n.toLowerCase()));
 
 export default registrar({
   id: "orto.mayuscula",
-  version: 2,
+  version: 3,
   cantidad: true,
   generar(params, azar, ctx) {
     return conTope(cuantosRejilla(ctx, 2, MIN_ALTO, [12, 6]), cuantas(ctx.tamano, 12), (n) => elegir(params, azar, n));
@@ -38,7 +38,7 @@ export default registrar({
         const bh = Math.min(38 * k, ch * 0.6), bw = p.ancho(d.nombre, "PB", 20 * k) + 26, zona = cw - 32 - 16 - bw - 14;
         let fs = Math.min(28 * k, ch * 0.5); while (fs > 15 && p.ancho(d.palabra, "PB", fs) > zona) fs -= 1;
         p.text(x + 32, y + ch / 2 - fs * 0.35 + 6, d.palabra, fs, { f: "PB" });
-        p.text(x + 32, y + ch / 2 - fs * 0.35 - 14, `(${d.pista})`, 10 * k, { f: "PM", gris: 0.3 });
+        p.text(x + 32, y + ch / 2 - fs * 0.35 - 14, `(${d.pista})`, Math.max(11, 10 * k), { f: "PM", gris: 0.3 });
         p.caja(x + cw - 14 - bw, y + (ch - bh) / 2, bw, bh, null, 20 * k, e.solucion.huecos[0]);
       }
     }));

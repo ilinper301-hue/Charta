@@ -95,6 +95,17 @@ export class Papel {
       (negrita(f) ? ` font-weight="bold"` : "") + ` fill="${color(gris)}">${esc(t)}</text>`);
   }
   ancho(t, f, fs) { return this.fuente.ancho(String(t), negrita(f), fs); }
+  /** Rótulo de tarjeta a tamaño fijo (≥ 9 pt impresos): si no cabe en `wmax`, lo parte por palabras en varias líneas hacia abajo (interlineado `lh`·fs). Devuelve las líneas. */
+  rotulo(x, y, t, fs, wmax, { f = "PM", anchor = "start", gris = 0.3, lh = 1.15 } = {}) {
+    const lineas = []; let cur = "";
+    for (const w of String(t).split(" ")) {
+      const c = cur ? cur + " " + w : w;
+      if (cur && this.ancho(c, f, fs) > wmax) { lineas.push(cur); cur = w; } else cur = c;
+    }
+    lineas.push(cur);
+    lineas.forEach((l, k) => this.text(x, y - k * lh * fs, l, fs, { f, anchor, gris }));
+    return lineas;
+  }
   /** Representación del número centrada en (cx, cy), como CAT[k][READ](cx, cy, n, i) del motor. */
   rep(nombre, n, cx, cy, { i = 0, vacio = false, rango, escala = 1, centenas = false, millares = false } = {}) { this._svg(repSVG(nombre, n, { i, vacio, rango, centenas, millares }), cx, cy, escala); }
   plantilla(nombre, n, cx, cy, { i = 0, rango, escala = 1, centenas = false, millares = false } = {}) {
@@ -114,7 +125,7 @@ export class Papel {
   marco(x, y, w, h, idx = null, lab = "") {
     this.tarjeta(x, y, w, h);
     if (idx !== null) this.text(x + 14, y + h - 22, String(idx + 1), 11, { f: "PB", gris: 0.3 });
-    if (lab) this.text(x + (idx !== null ? 34 : 14), y + h - 21, lab, 8.5, { f: "PM", gris: 0.3 });
+    if (lab) this.rotulo(x + (idx !== null ? 34 : 14), y + h - 21, lab, 11, w - (idx !== null ? 34 : 14) - 12);   // ≥ 9 pt impresos; si no cabe, en dos líneas
   }
   /** caja(): con valor, tarjeta blanca con el número; sin valor, hueco gris (y la solución en modo solución). */
   caja(x, y, w, h, val = null, fs = 22, sol = null) {

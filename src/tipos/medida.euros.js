@@ -11,7 +11,7 @@ export const voraz = (total, den) => { let r = total; return den.map((v) => { co
 
 export default registrar({
   id: "medida.euros",
-  version: 1,
+  version: 2,
   generar(params, azar, { tamano }) {
     const R = params.rango ?? 200, den = valores(R), tope = R > 100 ? R : 99, cnt = tamano === "media" ? 3 : 6;
     const vistos = new Set(), ejercicios = [];
@@ -36,8 +36,8 @@ export default registrar({
       const n = den.length, ancho = (cw - 90) / n;
       den.forEach((v, j) => {
         const cx = x + 66 + ancho * (j + 0.5), cy = y + ch * 0.6;
-        if (v <= 2) { p.circle(cx, cy, v === 2 ? 14 : 12.5, { lw: 1.5 }); p.text(cx, cy - 3.5, `${v} €`, 9.5, { f: "PB", anchor: "middle" }); }
-        else { p.rrect(cx - 21, cy - 11, 42, 22, 3, { lw: 1.5 }); p.text(cx, cy - 3.5, `${v} €`, 10.5, { f: "PB", anchor: "middle" }); }
+        if (v <= 2) { p.circle(cx, cy, v === 2 ? 14 : 12.5, { lw: 1.5 }); p.text(cx, cy - 3.5, `${v} €`, 11, { f: "PB", anchor: "middle" }); }
+        else { p.rrect(cx - 21, cy - 11, 42, 22, 3, { lw: 1.5 }); p.text(cx, cy - 3.5, `${v} €`, 11.5, { f: "PB", anchor: "middle" }); }
         p.caja(cx - 19, y + 8, 38, 32, null, 18, e.solucion.huecos[j]);
       });
     }));

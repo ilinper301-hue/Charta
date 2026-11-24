@@ -44,7 +44,7 @@ function dispersar(n, azar) {
 
 export default registrar({
   id: "orden.cantidad",
-  version: 3,
+  version: 4,
   cantidad: true,
   generar(params, azar, ctx) {
     const R = params.rango ?? 10, mx = Math.min(R, 12), modo = params.modo || "mezcla";

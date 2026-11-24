@@ -45,14 +45,14 @@ export function filaRecta(p, e, i, signo) {
   p.line(x0 - 8, y0, x0 + L + 8, y0, { lw: 1.4 });
   for (let k = 0; k <= N; k++) {
     p.line(x0 + k * step, y0 - 4, x0 + k * step, y0 + 4, { lw: 1.2 });
-    p.text(x0 + k * step, y0 - 14, String(desde + k * paso), 7.5, { f: "PM", anchor: "middle" });
+    p.text(x0 + k * step, y0 - 15, String(desde + k * paso), 11, { f: "PM", anchor: "middle" });
   }
   salto(p, x(a), x(e.solucion.huecos[0]), y0, `${signo === "+" ? "+" : MENOS}${b}`);
 }
 
 export default registrar({
   id: "restar.recta",
-  version: 1,
+  version: 2,
   generar(params, azar, { tamano }) {
     const R = params.rango ?? 10, N = R <= 10 ? 10 : R <= 20 ? 20 : 30;
     if (R >= 100) return { enunciado: "Salta hacia atrás en la recta y escribe el resultado.", ejercicios: recta2(params, azar, tamano, true) };

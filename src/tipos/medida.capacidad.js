@@ -10,7 +10,7 @@ const MIN_ALTO = 132;   // alto mínimo de tarjeta con «Más ejercicios» (casi
 
 export default registrar({
   id: "medida.capacidad",
-  version: 2,
+  version: 3,
   cantidad: true,
   generar(params, azar, ctx) {
     const ejercicios = [];
@@ -27,7 +27,7 @@ export default registrar({
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], { niv, asc } = e.datos;
       p.marco(x, y, cw, ch, i);
-      p.text(x + 34, y + ch - 20, asc ? "DE MENOS A MÁS" : "DE MÁS A MENOS", 9.5, { f: "PM", gris: 0.3 });
+      p.text(x + 34, y + ch - 20, asc ? "DE MENOS A MÁS" : "DE MÁS A MENOS", 11, { f: "PM", gris: 0.3 });
       const gw = 40 * s, g = 30 * s, gx0 = x + (cw - (3 * gw + 2 * g)) / 2;
       niv.forEach((lv, j) => {
         const gx = gx0 + j * (gw + g), gy = y + 56;

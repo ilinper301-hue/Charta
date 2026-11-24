@@ -18,7 +18,7 @@ const TRIPLES = [[1, 2, 3], [2, 3, 4], [1, 2, 4], [1, 3, 4], [2, 3, 4], [1, 2, 3
 
 export default registrar({
   id: "fono.larga",
-  version: 2,
+  version: 3,
   cantidad: true,
   generar(params, azar, ctx) {
     return conTope(cuantosRejilla(ctx, 2, MIN_ALTO, [20, 10]), cuantas(ctx.tamano, 10), (n) => grupos(params, azar, n));
@@ -26,7 +26,7 @@ export default registrar({
   dibujar(p, act) {
     const { cel, cw, ch } = p.rejilla(TOP, 2, Math.ceil(act.ejercicios.length / 2)), mezcla = act.params.cual === "mezcla";
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
-      const [x, y] = cel[i], ps = e.datos.palabras, gap = 8, rel = 0.3, lb = Math.min(10, ch * 0.2);
+      const [x, y] = cel[i], ps = e.datos.palabras, gap = 8, rel = 0.3, lb = 11;   // ≥ 9 pt impresos
       p.marco(x, y, cw, ch, i);
       if (mezcla) p.text(x + 32, y + ch - 7 - lb, e.datos.cual === "mas" ? "Rodea la que tiene MÁS sílabas" : "Rodea la que tiene MENOS sílabas", lb, { f: "PB", gris: 0.3 });
       const w = cw - 32 - 8, fs = ajusta(p, (q) => ps.reduce((t, s) => t + p.ancho(s, "PB", q) + q * 2 * rel, 0) + gap * 2, w, Math.min(24, ch * (mezcla ? 0.3 : 0.4)), 10);

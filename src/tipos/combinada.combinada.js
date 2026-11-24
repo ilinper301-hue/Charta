@@ -53,7 +53,7 @@ function numsCombinada(keys, R, azar) {
 
 export default registrar({
   id: "combinada.combinada",
-  version: 1,
+  version: 2,
   generar(params, azar, { tamano }) {
     const R = params.rango ?? 20, claves = clavesComb(R), nums = numsCombinada(claves, R, azar), mil = R > 1000;
     if (!nums) throw new Error("Esta ficha necesita un rango máximo mayor.");
@@ -70,7 +70,7 @@ export default registrar({
       const r = Math.floor(idx / 3), col = idx % 3, x = M + col * (cw + GX), y = top - (r + 1) * ch - r * GY, { rep, n } = e.datos;
       p.tarjeta(x, y, cw, ch);
       const mil = !!e.datos.millares;
-      p.text(x + 12, y + ch - 17, ((mil && NOMBRES_M[rep]) || NOMBRES[rep]).toUpperCase(), 8.5, { f: "PM", gris: 0.3 });
+      p.rotulo(x + 12, y + ch - 17, ((mil && NOMBRES_M[rep]) || NOMBRES[rep]).toUpperCase(), 11, cw - 12 - 58);   // ≥ 9 pt impresos
       if (mil) p.caja(x + cw - 9 - 58, y + ch - 9 - 30, 58, 30, null, 18, e.solucion.huecos[0]);   // hueco para 4 cifras
       else p.cuadrito(x, y, cw, ch, 30, e.solucion.huecos[0]);
       p.rep(rep, n, x + cw / 2, y + ch * 0.40, { i: idx, rango: R, millares: mil, escala: mil && rep === "bloques" ? 0.8 : 1 });   // celdas más bajas que en rep.*

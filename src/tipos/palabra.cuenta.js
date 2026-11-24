@@ -16,7 +16,7 @@ const MIN_ALTO = 50;   // alto mínimo de tarjeta con «Más ejercicios»
 
 export default registrar({
   id: "palabra.cuenta",
-  version: 2,
+  version: 3,
   cantidad: true,
   generar(params, azar, ctx) {
     const casillas = params.respuesta === "casillas", n = casillas ? cuantosRejilla(ctx, 1, MIN_ALTO, [10, 5]) : cuantosRejilla(ctx, 2, MIN_ALTO, [20, 10]);
@@ -39,7 +39,7 @@ export default registrar({
       const [x, y] = cel[i], { palabra, n, respuesta } = e.datos;
       p.marco(x, y, cw, ch, i);
       const by = y + (ch - bh) / 2 - 4, bx = x + cw - 12 - bw;
-      p.text(bx + bw / 2, by + bh + 4, "letras", 9, { f: "PM", anchor: "middle", gris: 0.3 });
+      p.text(bx + bw / 2, by + bh + 4, "letras", 11, { f: "PM", anchor: "middle", gris: 0.3 });
       if (respuesta === "casillas") {
         const fs = ajusta(p, (q) => p.ancho(palabra, "PB", q), 150, 28, 16), q = 30, g = 4, qh = Math.min(36, ch - 14), ini = x + tx + 156;
         p.text(x + tx, y + ch / 2 - fs * 0.35, palabra, fs, { f: "PB" });

@@ -77,6 +77,7 @@ src/tipos/medida.euros.js, medida.masa.js  lote 3b de 2.º (solo curso 2, declar
 src/tipos/medida.longitud.js  1.º cubitos; 2.º (lote 3c, `modo` con `curso`): `regla` (tiras de 2–10 cm reales con `p.mm()`; medidas comprobadas en tests/test_pauta.js) y `mcm` (¿m o cm?, banco `UNIDADES`)
 src/tipos/geometria.lados.js, geometria.itinerario.js  lote 4 de 2.º (solo curso 2, `_n2()` en motor/modelos_2.py): polígonos con lados y vértices; cuadrícula 6 × 6 con flechas (`recorrer`, `flecha`; modos null · llega · flechas) · reglas en tests/inv/geometria.js. estadistica.barras: `escala` y `pregunta` (OPCIONES_2)
 src/tipos/_multiplicar.js, multiplicar.{grupos,filas,tablas,problemas,reparto}.js  lote 6 de 2.º (bloque 13 «Multiplicar y repartir», `BLOQUES_2` en motor/modelos_2.py; opción común `tablas`: 2, 5 y 10 · 2…10 · todas); problemas con `dibujarProblemas` (op «×»); reparto con platos (puntos rojos en solución) y modo `mitad` · reglas en tests/inv/multiplicar.js
+tools/medir_letra.js  letra impresa mínima (9 pt) de todos los tipos: `node tools/medir_letra.js [--tipo id] [--todas] [--semillas n]`
 tests/test_doradas.js + doradas.json  fichas doradas (JSON + huella SVG); `--actualizar` solo si el cambio es intencionado (y subir `version` del tipo)
 tools/ver_tipo.js     un tipo en PNG sin motor (2.º): `node tools/ver_tipo.js <id> '{params}' [--media] [--solucion]` → /tmp/ver_<id>….png
 tools/comparar_tipo.py  motor vs JS de un tipo en A4 → /tmp/cmp_<id>_<tamaño>.png (`--media`, `--solucion`)

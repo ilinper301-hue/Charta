@@ -19,7 +19,7 @@
       {
        "n": 1,
        "tipo": "combinada.combinada",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "rango": 20
        },
@@ -180,10 +180,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "f3ed2b760e2dfa4d"
+   "3e80cf860eac3587"
   ],
   "svgSolucion": [
-   "3d81077e0bd18fc8"
+   "097e31048399b0a4"
   ]
  },
  "conteo.anterior": {
@@ -445,7 +445,7 @@
       {
        "n": 1,
        "tipo": "conteo.camino",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "huecos": null,
         "rango": 10
@@ -482,10 +482,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "06947b90476c1f95"
+   "02816ce63b053239"
   ],
   "svgSolucion": [
-   "c8053243d866c7e0"
+   "943d5c74c35d69ad"
   ]
  },
  "conteo.cuenta": {
@@ -1395,7 +1395,7 @@
       {
        "n": 1,
        "tipo": "conteo.serie1",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "huecos": 3,
         "rango": 10
@@ -1629,10 +1629,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "1acaf3a4ca9d075c"
+   "94e929f03f9144a2"
   ],
   "svgSolucion": [
-   "1b1fa5094e2a58d5"
+   "203587ab463ce770"
   ]
  },
  "conteo.serie10": {
@@ -1655,7 +1655,7 @@
       {
        "n": 1,
        "tipo": "conteo.serie10",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "huecos": 3,
         "rango": 20
@@ -1833,10 +1833,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "5e6d1a6bca016948"
+   "b0e7bec391faac45"
   ],
   "svgSolucion": [
-   "31ddd3223173a0e4"
+   "19c3474ace94629e"
   ]
  },
  "conteo.serie2": {
@@ -1859,7 +1859,7 @@
       {
        "n": 1,
        "tipo": "conteo.serie2",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "huecos": 3,
         "rango": 10
@@ -2093,10 +2093,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "865bcd47091446df"
+   "c193d10d46fc8216"
   ],
   "svgSolucion": [
-   "25f6f6de5efb8562"
+   "91f459940a9335ec"
   ]
  },
  "conteo.serie5": {
@@ -2119,7 +2119,7 @@
       {
        "n": 1,
        "tipo": "conteo.serie5",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "huecos": 3,
         "rango": 10
@@ -2297,10 +2297,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "767362426cffb99a"
+   "6060e6a592e9a217"
   ],
   "svgSolucion": [
-   "82b1602c4591b4fe"
+   "69b05f2536079353"
   ]
  },
  "conteo.series": {
@@ -2323,7 +2323,7 @@
       {
        "n": 1,
        "tipo": "conteo.series",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "huecos": 3,
         "rango": 10
@@ -2550,10 +2550,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "2ff8c3f214d5e546"
+   "714eda133c890471"
   ],
   "svgSolucion": [
-   "c65007c6076b39cd"
+   "da1fc9258628e1df"
   ]
  },
  "conteo.tabla": {
@@ -4459,7 +4459,7 @@
       {
        "n": 1,
        "tipo": "fono.larga",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "cual": null,
         "tipo": null,
@@ -4805,7 +4805,7 @@
       {
        "n": 1,
        "tipo": "fono.posicion",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "largo": null,
         "tipo": null,
@@ -5472,7 +5472,7 @@
       {
        "n": 1,
        "tipo": "fono.silabas",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "respuesta": null,
         "largo": null,
@@ -9782,7 +9782,7 @@
       {
        "n": 1,
        "tipo": "juegos.laberinto",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "n": null,
         "rango": 10
@@ -10000,10 +10000,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "ee3cbaa7ff494051"
+   "f38551457932603d"
   ],
   "svgSolucion": [
-   "3de5fb6280cd01ca"
+   "4ed8f290cbc42cf9"
   ]
  },
  "juegos.oculto": {
@@ -10026,7 +10026,7 @@
       {
        "n": 1,
        "tipo": "juegos.oculto",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "rango": 10
        },
@@ -10169,10 +10169,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "c8209b16fc25df0c"
+   "c4042e3a29180dbc"
   ],
   "svgSolucion": [
-   "1ad52877b417b567"
+   "d99852e41ad1356e"
   ]
  },
  "juegos.une": {
@@ -11965,7 +11965,7 @@
       {
        "n": 1,
        "tipo": "letra.enpalabras",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "letra": null,
         "tarea": null,
@@ -12178,10 +12178,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "34bbd79c912da3f1"
+   "6588fb58659f8425"
   ],
   "svgSolucion": [
-   "26e02fecbaec92bc"
+   "9eef6ca04450381b"
   ]
  },
  "letra.falta": {
@@ -13103,7 +13103,7 @@
       {
        "n": 1,
        "tipo": "medida.capacidad",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "rango": null
        },
@@ -13264,10 +13264,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "44dde8198f7bd4fd"
+   "5c58cfb55f8e0b15"
   ],
   "svgSolucion": [
-   "62f4ff3dbf5eb7e5"
+   "14a909b4b2ec9601"
   ]
  },
  "medida.dinero": {
@@ -13290,7 +13290,7 @@
       {
        "n": 1,
        "tipo": "medida.dinero",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "modo": null,
         "rango": 20
@@ -13548,10 +13548,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "e4833dd084d24e3f"
+   "1b56fcb0c8b496e6"
   ],
   "svgSolucion": [
-   "c3733c8d83ce28c3"
+   "73af7f89e4e2aea0"
   ]
  },
  "medida.euros": {
@@ -13574,7 +13574,7 @@
       {
        "n": 1,
        "tipo": "medida.euros",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "rango": 200
        },
@@ -13747,10 +13747,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "bded6773c2af1931"
+   "458e63e46c363d15"
   ],
   "svgSolucion": [
-   "acbe55d64db4951e"
+   "3280ae77ef2d2524"
   ]
  },
  "medida.longitud": {
@@ -13901,7 +13901,7 @@
       {
        "n": 1,
        "tipo": "medida.masa",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "rango": null
        },
@@ -14062,10 +14062,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "ae6bf6a96e90e8d2"
+   "f583114975f58383"
   ],
   "svgSolucion": [
-   "a27dff12a935f079"
+   "123debed4d1a707b"
   ]
  },
  "medida.precios": {
@@ -14088,7 +14088,7 @@
       {
        "n": 1,
        "tipo": "medida.precios",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "modo": null,
         "rango": 20
@@ -15743,7 +15743,7 @@
       {
        "n": 1,
        "tipo": "orden.cantidad",
-       "tipoVersion": 3,
+       "tipoVersion": 4,
        "params": {
         "modo": null,
         "rango": 10
@@ -16549,10 +16549,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "d97ce107f3b5431e"
+   "83e94eae92f3cec5"
   ],
   "svgSolucion": [
-   "1aea4e2307c009f2"
+   "a5c0305f401ff8d1"
   ]
  },
  "orden.entre": {
@@ -17334,7 +17334,7 @@
       {
        "n": 1,
        "tipo": "orden.mayor",
-       "tipoVersion": 3,
+       "tipoVersion": 4,
        "params": {
         "modo": null,
         "cerca": false,
@@ -17533,10 +17533,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "b4277bf02228a91f"
+   "7aacc067877ef10c"
   ],
   "svgSolucion": [
-   "ffb62e44241fe35d"
+   "06377103a1f0f906"
   ]
  },
  "orden.ordena1": {
@@ -17889,7 +17889,7 @@
       {
        "n": 1,
        "tipo": "orden.ordinales",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "modo": null,
         "rango": 10
@@ -17985,10 +17985,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "29da4cfa2f85de32"
+   "fb87c59ba75a6b62"
   ],
   "svgSolucion": [
-   "3c1ad51c11df3565"
+   "9a54fcdad8a81e06"
   ]
  },
  "orden.redondea": {
@@ -18011,7 +18011,7 @@
       {
        "n": 1,
        "tipo": "orden.redondea",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "a": null,
         "rango": 9999
@@ -18209,10 +18209,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "3323bf7295839234"
+   "d877a8afb8324766"
   ],
   "svgSolucion": [
-   "c97d366f0075c521"
+   "a442b30815b370bd"
   ]
  },
  "orden.signos": {
@@ -18794,7 +18794,7 @@
       {
        "n": 1,
        "tipo": "orto.mayuscula",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "tarea": null,
         "nombres": null,
@@ -19554,7 +19554,7 @@
       {
        "n": 1,
        "tipo": "palabra.cuenta",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "letras": null,
         "respuesta": null,
@@ -19835,10 +19835,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "0897cf1c40b3b1f7"
+   "110bbfc892412249"
   ],
   "svgSolucion": [
-   "0920fd78e77e7c1e"
+   "6341d683eaa246a1"
   ]
  },
  "palabra.dibuja": {
@@ -21843,7 +21843,7 @@
       {
        "n": 1,
        "tipo": "rep.abaco",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "lectura": false,
         "rango": 10
@@ -22011,10 +22011,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "57295dee5b65019a"
+   "97d3e09d3cca2a2c"
   ],
   "svgSolucion": [
-   "3c7f06569f76d4fc"
+   "9c80f5db5ed55e0c"
   ]
  },
  "rep.atados": {
@@ -22037,7 +22037,7 @@
       {
        "n": 1,
        "tipo": "rep.atados",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "lectura": false,
         "rango": 10
@@ -22205,10 +22205,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "9141922f2507996d"
+   "2fb0e1835330fe62"
   ],
   "svgSolucion": [
-   "9d5c3ed6f25349ff"
+   "3f1eb20fd5ec94f6"
   ]
  },
  "rep.bloques": {
@@ -22231,7 +22231,7 @@
       {
        "n": 1,
        "tipo": "rep.bloques",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "lectura": false,
         "rango": 10
@@ -22399,10 +22399,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "3946582417b1db5b"
+   "93a28fad82c84a25"
   ],
   "svgSolucion": [
-   "d79ac368788816cf"
+   "c87282af67af2bff"
   ]
  },
  "rep.cuadricula": {
@@ -22425,7 +22425,7 @@
       {
        "n": 1,
        "tipo": "rep.cuadricula",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "lectura": false,
         "rango": 10
@@ -22593,10 +22593,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "9f8dfb8faeecb606"
+   "1d30df40a04e0165"
   ],
   "svgSolucion": [
-   "b0970901bf6a7077"
+   "b23835f62df65276"
   ]
  },
  "rep.dado": {
@@ -22619,7 +22619,7 @@
       {
        "n": 1,
        "tipo": "rep.dado",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "lectura": false,
         "rango": 10
@@ -22787,10 +22787,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "7d7d112449e12880"
+   "890e3214d0123c03"
   ],
   "svgSolucion": [
-   "70f581194ad7c9e8"
+   "10904e81a4eea753"
   ]
  },
  "rep.dedos": {
@@ -22813,7 +22813,7 @@
       {
        "n": 1,
        "tipo": "rep.dedos",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "lectura": false,
         "rango": 10
@@ -22981,10 +22981,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "192bb34ce814d0a8"
+   "04643a81a4acd863"
   ],
   "svgSolucion": [
-   "cf35797c83d097a5"
+   "feccf29b9b0694a6"
   ]
  },
  "rep.descomp": {
@@ -23007,7 +23007,7 @@
       {
        "n": 1,
        "tipo": "rep.descomp",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "lectura": false,
         "rango": 10
@@ -23175,10 +23175,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "30782d817f92f285"
+   "c3d5ada9e4033aa1"
   ],
   "svgSolucion": [
-   "b9ae4d1e4db536bf"
+   "4c22e142aff01566"
   ]
  },
  "rep.domino": {
@@ -23201,7 +23201,7 @@
       {
        "n": 1,
        "tipo": "rep.domino",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "lectura": false,
         "rango": 10
@@ -23369,10 +23369,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "b87cb339d4522dd9"
+   "b5ffb744a07e5c88"
   ],
   "svgSolucion": [
-   "897e682f531fe0f7"
+   "bd6236880fbad244"
   ]
  },
  "rep.du": {
@@ -23395,7 +23395,7 @@
       {
        "n": 1,
        "tipo": "rep.du",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "lectura": false,
         "rango": 10
@@ -23563,10 +23563,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "aee287afa7c585eb"
+   "8df99629a4ad0ed6"
   ],
   "svgSolucion": [
-   "60c83d557a0b9c4a"
+   "71442fac8f2ea354"
   ]
  },
  "rep.letras": {
@@ -23589,7 +23589,7 @@
       {
        "n": 1,
        "tipo": "rep.letras",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "lectura": false,
         "rango": 10
@@ -23757,10 +23757,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "b62d095488aa5783"
+   "d963185189b191cc"
   ],
   "svgSolucion": [
-   "ae3c1734392df10a"
+   "47c7e3230a2623e1"
   ]
  },
  "rep.marco": {
@@ -23783,7 +23783,7 @@
       {
        "n": 1,
        "tipo": "rep.marco",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "lectura": false,
         "rango": 10
@@ -23951,10 +23951,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "a2f34465843d7fed"
+   "6f822c76400f9907"
   ],
   "svgSolucion": [
-   "c31aa48ba50fe25a"
+   "a87d0579c25eb592"
   ]
  },
  "rep.monedas": {
@@ -23977,7 +23977,7 @@
       {
        "n": 1,
        "tipo": "rep.monedas",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "lectura": false,
         "rango": 10
@@ -24145,10 +24145,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "8a03b8eb5c930235"
+   "c60755f33e0d13b3"
   ],
   "svgSolucion": [
-   "6af9d7c7224dbbcf"
+   "d71e8198fe10d14a"
   ]
  },
  "rep.objetos": {
@@ -24171,7 +24171,7 @@
       {
        "n": 1,
        "tipo": "rep.objetos",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "lectura": false,
         "rango": 10
@@ -24339,10 +24339,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "718c48c5e9724f2a"
+   "48b6b86143bbf25f"
   ],
   "svgSolucion": [
-   "4bed32f7b63ffba1"
+   "9d0a311b4f4613a7"
   ]
  },
  "rep.palotes": {
@@ -24365,7 +24365,7 @@
       {
        "n": 1,
        "tipo": "rep.palotes",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "lectura": false,
         "rango": 10
@@ -24533,10 +24533,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "afb827a0a1aa6b6f"
+   "3e9972b797293d62"
   ],
   "svgSolucion": [
-   "c315480fe71c9eb3"
+   "938ebc63ea120e62"
   ]
  },
  "rep.recta": {
@@ -24559,7 +24559,7 @@
       {
        "n": 1,
        "tipo": "rep.recta",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "lectura": false,
         "rango": 10
@@ -24727,10 +24727,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "10fdd749aa52c187"
+   "5b336442124356df"
   ],
   "svgSolucion": [
-   "3d4c6df3c6128a74"
+   "543bf1321c18c322"
   ]
  },
  "rep.regletas": {
@@ -24753,7 +24753,7 @@
       {
        "n": 1,
        "tipo": "rep.regletas",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "lectura": false,
         "rango": 10
@@ -24921,10 +24921,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "77e9f3713401ee18"
+   "7ad04b085f8a23bf"
   ],
   "svgSolucion": [
-   "9f76633198622069"
+   "c2a21aed08b23da0"
   ]
  },
  "rep.romanos": {
@@ -28463,7 +28463,7 @@
       {
        "n": 1,
        "tipo": "restar.recta",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "rango": 10
        },
@@ -28558,10 +28558,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "753be0e95fdf9067"
+   "a7f95cf90966c656"
   ],
   "svgSolucion": [
-   "095f88eef236f91c"
+   "9fc08040c0610d4d"
   ]
  },
  "restar.vertical": {
@@ -28584,7 +28584,7 @@
       {
        "n": 1,
        "tipo": "restar.vertical",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "nivel": null,
         "rango": 30
@@ -28758,10 +28758,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "bf510ce8518eed10"
+   "bc1e62c3468175a1"
   ],
   "svgSolucion": [
-   "de5117c533f0b99e"
+   "817385cfb0bbe256"
   ]
  },
  "silaba.falta": {
@@ -30471,7 +30471,7 @@
       {
        "n": 1,
        "tipo": "suma.suma",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "rango": 20
        },
@@ -30596,10 +30596,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "f144664723371c99"
+   "5d3908973a9ee478"
   ],
   "svgSolucion": [
-   "fcb58cae39c6546e"
+   "f4d2ad38662d1e36"
   ]
  },
  "sumar.comp10": {
@@ -34043,7 +34043,7 @@
       {
        "n": 1,
        "tipo": "sumar.recta",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "rango": 10
        },
@@ -34138,10 +34138,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "bc5c4a138c45276b"
+   "d5c9feecc582a302"
   ],
   "svgSolucion": [
-   "8789270ae93b24d7"
+   "e459b00b6685fa14"
   ]
  },
  "sumar.tabla": {
@@ -34261,7 +34261,7 @@
       {
        "n": 1,
        "tipo": "sumar.vertical",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "nivel": null,
         "rango": 30
@@ -34435,10 +34435,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "a1d744a117266f20"
+   "e6468fbc0784f3d3"
   ],
   "svgSolucion": [
-   "d85fb939400e1df5"
+   "1d9a1cdfdf39bbc1"
   ]
  },
  "trucos.amigos100": {
@@ -40735,7 +40735,7 @@
       {
        "n": 1,
        "tipo": "valor.agrupa",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "rango": 20
        },
@@ -42298,7 +42298,7 @@
       {
        "n": 2,
        "tipo": "restar.recta",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "rango": 20
        },
@@ -42354,10 +42354,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "5575d5297ea10eb6"
+   "880f5692743bfbdd"
   ],
   "svgSolucion": [
-   "0fc48cd98c6d4a04"
+   "0cc47b7639219feb"
   ]
  },
  "mismo color corregido": {
@@ -42468,7 +42468,7 @@
       {
        "n": 2,
        "tipo": "conteo.serie1",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "huecos": 3,
         "rango": 10
@@ -42594,10 +42594,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "3962ef9261948f39"
+   "c7468776482db748"
   ],
   "svgSolucion": [
-   "ce98ce5cd55ead0e"
+   "e8a4c1ed41b0417b"
   ]
  },
  "variantes y título": {
@@ -42620,7 +42620,7 @@
       {
        "n": 1,
        "tipo": "sumar.vertical",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "nivel": "mezcla",
         "rango": 100
@@ -42815,7 +42815,7 @@
         {
          "n": 1,
          "tipo": "sumar.vertical",
-         "tipoVersion": 1,
+         "tipoVersion": 2,
          "params": {
           "nivel": "mezcla",
           "rango": 100
@@ -43010,7 +43010,7 @@
         {
          "n": 1,
          "tipo": "sumar.vertical",
-         "tipoVersion": 1,
+         "tipoVersion": 2,
          "params": {
           "nivel": "mezcla",
           "rango": 100
@@ -43200,10 +43200,10 @@
    ]
   },
   "svgPapel": [
-   "e9b13dda39a494ac"
+   "2e66d83c2a099bd3"
   ],
   "svgSolucion": [
-   "2dce512bc4a25fed"
+   "8e6584584790a893"
   ]
  },
  "3.º bloques y recta hasta 9999": {
@@ -43226,7 +43226,7 @@
       {
        "n": 1,
        "tipo": "rep.bloques",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "lectura": false,
         "rango": 9999
@@ -43325,7 +43325,7 @@
       {
        "n": 2,
        "tipo": "rep.recta",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "lectura": false,
         "rango": 9999
@@ -43427,10 +43427,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "b935e032c8dafec8"
+   "bcccd8b13473bb87"
   ],
   "svgSolucion": [
-   "d95f3073ead15bd8"
+   "1d06efd17b4cadd5"
   ]
  },
  "3.º ¿Qué número es? hasta 9999": {
@@ -43453,7 +43453,7 @@
       {
        "n": 1,
        "tipo": "combinada.combinada",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "rango": 9999
        },
@@ -43626,10 +43626,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "333c58b0b94e0b50"
+   "ef021f0ee9ea3a22"
   ],
   "svgSolucion": [
-   "7030673b63f5426a"
+   "aedf4f90dd17a010"
   ]
  },
  "2.º sumas en vertical": {
@@ -43652,7 +43652,7 @@
       {
        "n": 1,
        "tipo": "sumar.vertical",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "nivel": "ud",
         "sumandos": 3,
@@ -43851,10 +43851,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "9ea21e8cbf79af04"
+   "f93c1128dddc78c8"
   ],
   "svgSolucion": [
-   "5664dc883b2974bc"
+   "b6b41e9193e59f8c"
   ]
  },
  "2.º restas con prueba": {
@@ -43877,7 +43877,7 @@
       {
        "n": 1,
        "tipo": "restar.vertical",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "nivel": "con",
         "prueba": true,
@@ -44076,10 +44076,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "84d7f32083d9b9e3"
+   "832466ce2d91c74d"
   ],
   "svgSolucion": [
-   "5d6d1e25200e6615"
+   "cdbc803a3f83f4c7"
   ]
  },
  "2.º descomposición y canjes": {
@@ -44306,7 +44306,7 @@
       {
        "n": 1,
        "tipo": "sumar.recta",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "salto": null,
         "rango": 999
@@ -44366,7 +44366,7 @@
       {
        "n": 2,
        "tipo": "restar.recta",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "salto": 100,
         "rango": 999
@@ -44429,10 +44429,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "46056b3bf3e1f685"
+   "e985e350c856ff56"
   ],
   "svgSolucion": [
-   "49fff57cd2f6ef44"
+   "f12ca0a5bd571de4"
   ]
  },
  "2.º encadenadas": {
@@ -44920,7 +44920,7 @@
       {
        "n": 1,
        "tipo": "valor.agrupa",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "rango": 300
        },
@@ -45021,10 +45021,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "550a671c611cb52a"
+   "2da2f165afdab870"
   ],
   "svgSolucion": [
-   "0a66d5e93bb9c7c6"
+   "3f8c26628cff74ce"
   ]
  },
  "2.º decenas y cifra": {
@@ -45733,7 +45733,7 @@
       {
        "n": 1,
        "tipo": "medida.dinero",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "modo": null,
         "rango": 300
@@ -45876,7 +45876,7 @@
       {
        "n": 2,
        "tipo": "medida.precios",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "modo": "cambio",
         "rango": 100
@@ -45946,10 +45946,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "98c6ec8d74a0d31d"
+   "15a40d225f63bb14"
   ],
   "svgSolucion": [
-   "af4f928e9a9fcdd8"
+   "6372455918377a9a"
   ]
  },
  "2.º regla y ¿m o cm?": {
@@ -46685,7 +46685,7 @@
       {
        "n": 1,
        "tipo": "medida.euros",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "rango": 200
        },
@@ -46777,7 +46777,7 @@
       {
        "n": 2,
        "tipo": "medida.masa",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "rango": null
        },
@@ -46866,10 +46866,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "9557f5271e4f57b3"
+   "f632946121a9e6e3"
   ],
   "svgSolucion": [
-   "8bc55de928a8dae9"
+   "cc666f1e3c471fc8"
   ]
  },
  "nombres y B/N": {
@@ -46892,7 +46892,7 @@
       {
        "n": 1,
        "tipo": "rep.dado",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "lectura": true,
         "rango": 10
@@ -46985,7 +46985,7 @@
       {
        "n": 2,
        "tipo": "rep.marco",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "lectura": false,
         "rango": 20
@@ -47081,7 +47081,7 @@
         {
          "n": 1,
          "tipo": "rep.dado",
-         "tipoVersion": 1,
+         "tipoVersion": 2,
          "params": {
           "lectura": true,
           "rango": 10
@@ -47174,7 +47174,7 @@
         {
          "n": 2,
          "tipo": "rep.marco",
-         "tipoVersion": 1,
+         "tipoVersion": 2,
          "params": {
           "lectura": false,
           "rango": 20
@@ -47265,14 +47265,14 @@
    ]
   },
   "svgPapel": [
-   "e24eced24a89b34e",
-   "a7a5bf0aed24e546",
-   "b6bb376544f43e88"
+   "ba5819cfa53dd23e",
+   "1bbf8985c70c4c13",
+   "ff704cb25135f7f4"
   ],
   "svgSolucion": [
-   "0f5d4a99b9b62746",
-   "21555ef6a67d32d6",
-   "141d4aa1b136f598"
+   "f2bbea4cb6049bcd",
+   "3f6bf62b2c92b49e",
+   "e20ee4edec10b9cd"
   ]
  },
  "más ejercicios: mayor o menor": {
@@ -47295,7 +47295,7 @@
       {
        "n": 1,
        "tipo": "orden.mayor",
-       "tipoVersion": 3,
+       "tipoVersion": 4,
        "params": {
         "modo": null,
         "cerca": false,
@@ -47567,10 +47567,10 @@
    "cantidad": "mas"
   },
   "svgPapel": [
-   "37f36c22eb5f6565"
+   "a8c61d0f2280b743"
   ],
   "svgSolucion": [
-   "bcde49e2469df41b"
+   "34b5aa46fbe90090"
   ]
  },
  "más ejercicios: mayor o menor en media": {
@@ -47593,7 +47593,7 @@
       {
        "n": 1,
        "tipo": "orden.mayor",
-       "tipoVersion": 3,
+       "tipoVersion": 4,
        "params": {
         "modo": null,
         "cerca": false,
@@ -47845,10 +47845,10 @@
    "cantidad": "mas"
   },
   "svgPapel": [
-   "49ebb4fac2ddf8fc"
+   "659897033c424958"
   ],
   "svgSolucion": [
-   "227b5d990c0634ed"
+   "0f18287bfbe32273"
   ]
  },
  "más ejercicios: orden.cantidad": {
@@ -47871,7 +47871,7 @@
       {
        "n": 1,
        "tipo": "orden.cantidad",
-       "tipoVersion": 3,
+       "tipoVersion": 4,
        "params": {
         "modo": null,
         "rango": 10
@@ -48524,10 +48524,10 @@
    "cantidad": "mas"
   },
   "svgPapel": [
-   "0854aa161c7e3cda"
+   "109aab0991c704a0"
   ],
   "svgSolucion": [
-   "efe5cada32a35f57"
+   "fb11a0d2be1d9fcd"
   ]
  },
  "más ejercicios: orden.entre": {
@@ -49478,7 +49478,7 @@
       {
        "n": 1,
        "tipo": "orden.redondea",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "a": null,
         "rango": 9999
@@ -49749,10 +49749,10 @@
    "cantidad": "mas"
   },
   "svgPapel": [
-   "f7c8ed428e2aa77b"
+   "cc2f9c0e4bc62ded"
   ],
   "svgSolucion": [
-   "d6b57cd0623b69f0"
+   "a5361f11b5a02cb7"
   ]
  },
  "más ejercicios en media: entre, grupo y cantidad": {
@@ -50081,7 +50081,7 @@
       {
        "n": 1,
        "tipo": "orden.cantidad",
-       "tipoVersion": 3,
+       "tipoVersion": 4,
        "params": {
         "modo": null,
         "rango": 10
@@ -50388,7 +50388,7 @@
       {
        "n": 2,
        "tipo": "orden.redondea",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "a": null,
         "rango": 9999
@@ -50515,10 +50515,10 @@
    "cantidad": "mas"
   },
   "svgPapel": [
-   "76e96c7a2ab8a71f"
+   "999c7895cdfdf485"
   ],
   "svgSolucion": [
-   "5452b4871bc02497"
+   "422fa183ab74b75c"
   ]
  },
  "más ejercicios: conteo.anterior": {
@@ -51948,7 +51948,7 @@
       {
        "n": 1,
        "tipo": "conteo.serie1",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "huecos": 3,
         "rango": 10
@@ -52237,10 +52237,10 @@
    "cantidad": "mas"
   },
   "svgPapel": [
-   "ffdbe0dd393e9838"
+   "3bf5a76a1cca6f40"
   ],
   "svgSolucion": [
-   "7c4c3f1cfe63c654"
+   "7d7f6e71482513f7"
   ]
  },
  "más ejercicios: conteo.serie2": {
@@ -52263,7 +52263,7 @@
       {
        "n": 1,
        "tipo": "conteo.serie2",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "huecos": 3,
         "rango": 10
@@ -52552,10 +52552,10 @@
    "cantidad": "mas"
   },
   "svgPapel": [
-   "e03599011654bc78"
+   "4c48357c7bd82bfe"
   ],
   "svgSolucion": [
-   "41120ee09bb4c195"
+   "6a9ab66c655e7a29"
   ]
  },
  "más ejercicios: conteo.serie5": {
@@ -52578,7 +52578,7 @@
       {
        "n": 1,
        "tipo": "conteo.serie5",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "huecos": 3,
         "rango": 10
@@ -52797,10 +52797,10 @@
    "cantidad": "mas"
   },
   "svgPapel": [
-   "2700ff98c8870ee7"
+   "d75b5220cb7e3199"
   ],
   "svgSolucion": [
-   "ecb5dc79a69fe859"
+   "99bb167646a65d0f"
   ]
  },
  "más ejercicios: conteo.serie10": {
@@ -52823,7 +52823,7 @@
       {
        "n": 1,
        "tipo": "conteo.serie10",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "huecos": 3,
         "rango": 20
@@ -53042,10 +53042,10 @@
    "cantidad": "mas"
   },
   "svgPapel": [
-   "7dcc9425fa12d1db"
+   "2a429460ade79dc5"
   ],
   "svgSolucion": [
-   "67228d84fe0faf6a"
+   "f4027a9d5fc2b4c1"
   ]
  },
  "más ejercicios: conteo.series": {
@@ -53068,7 +53068,7 @@
       {
        "n": 1,
        "tipo": "conteo.series",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "huecos": 3,
         "rango": 10
@@ -53350,10 +53350,10 @@
    "cantidad": "mas"
   },
   "svgPapel": [
-   "aeb67306bf0be562"
+   "a478f959664ae818"
   ],
   "svgSolucion": [
-   "5a537c6ee858924e"
+   "d84bb68d97d45120"
   ]
  },
  "más ejercicios en media: anterior y cuenta": {
@@ -54145,7 +54145,7 @@
       {
        "n": 2,
        "tipo": "conteo.serie1",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "huecos": 3,
         "rango": 10
@@ -54299,10 +54299,10 @@
    "cantidad": "mas"
   },
   "svgPapel": [
-   "3f8ab8e0907f5034"
+   "a0946f35f3213790"
   ],
   "svgSolucion": [
-   "f000e7336999df01"
+   "2e479d3c1467c694"
   ]
  },
  "más ejercicios: trucos sumar9 (3.º)": {
@@ -55687,7 +55687,7 @@
       {
        "n": 1,
        "tipo": "palabra.cuenta",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "letras": null,
         "respuesta": null,
@@ -55861,7 +55861,7 @@
       {
        "n": 2,
        "tipo": "palabra.cuenta",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "letras": 6,
         "respuesta": "casillas",
@@ -55997,10 +55997,10 @@
    "cantidad": "mas"
   },
   "svgPapel": [
-   "ea5066b787cf1cd8"
+   "1884a19338baca65"
   ],
   "svgSolucion": [
-   "e2af77b00d8b66fa"
+   "3ff4b3e2b24ed38e"
   ]
  },
  "más ejercicios: fono.inicial": {
@@ -56547,7 +56547,7 @@
       {
        "n": 1,
        "tipo": "fono.posicion",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "largo": null,
         "tipo": null,
@@ -56810,10 +56810,10 @@
    "cantidad": "mas"
   },
   "svgPapel": [
-   "522198af9cb460bb"
+   "52a1e4cb5f37d864"
   ],
   "svgSolucion": [
-   "bed1eea777cfc843"
+   "fc91b8586a4bef3d"
   ]
  },
  "más ejercicios: fono.silabas": {
@@ -56836,7 +56836,7 @@
       {
        "n": 1,
        "tipo": "fono.silabas",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "respuesta": null,
         "largo": null,
@@ -57220,7 +57220,7 @@
       {
        "n": 1,
        "tipo": "fono.larga",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "cual": null,
         "tipo": null,
@@ -61610,7 +61610,7 @@
       {
        "n": 2,
        "tipo": "fono.posicion",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "largo": null,
         "tipo": null,
@@ -61763,10 +61763,10 @@
    "cantidad": "mas"
   },
   "svgPapel": [
-   "fe6d881b413922c3"
+   "0cd7fa028bcb967f"
   ],
   "svgSolucion": [
-   "9e5e5e6868ad10ac"
+   "3549a2ec62e77541"
   ]
  },
  "más ejercicios en media: larga (mezcla) y quita": {
@@ -61789,7 +61789,7 @@
       {
        "n": 1,
        "tipo": "fono.larga",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "cual": "mezcla",
         "tipo": null,
@@ -62166,10 +62166,10 @@
    "cantidad": "mas"
   },
   "svgPapel": [
-   "0d0e1f2235f0aa77"
+   "2cecda17349a08a0"
   ],
   "svgSolucion": [
-   "6c5f2301f3b3f704"
+   "a2c2c7dc7313bc83"
   ]
  },
  "más ejercicios en media: separa (rayas) y ordena": {
@@ -63654,7 +63654,7 @@
       {
        "n": 2,
        "tipo": "fono.silabas",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "respuesta": "numero",
         "largo": null,
@@ -63858,10 +63858,10 @@
    "cantidad": "mas"
   },
   "svgPapel": [
-   "b74b753f9ff755b2"
+   "b99b2643faa50ba0"
   ],
   "svgSolucion": [
-   "71d48c5c492f5708"
+   "61e163f2de154c9c"
   ]
  },
  "más ejercicios: sumar.h10": {
@@ -73342,7 +73342,7 @@
       {
        "n": 1,
        "tipo": "valor.agrupa",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "rango": 20
        },
@@ -75579,7 +75579,7 @@
       {
        "n": 1,
        "tipo": "juegos.oculto",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "rango": 20
        },
@@ -75787,10 +75787,10 @@
    "cantidad": "mas"
   },
   "svgPapel": [
-   "13e41886b1e39ddc"
+   "54e60fddaea4712b"
   ],
   "svgSolucion": [
-   "0d0dc78b637ad0d8"
+   "456936ae18f24a40"
   ]
  },
  "más ejercicios: geometria.lados": {
@@ -77169,7 +77169,7 @@
       {
        "n": 1,
        "tipo": "valor.agrupa",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "rango": 30
        },
@@ -78120,7 +78120,7 @@
       {
        "n": 3,
        "tipo": "juegos.oculto",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "rango": 30
        },
@@ -78397,11 +78397,11 @@
   },
   "svgPapel": [
    "a6b4cf887b6ed08c",
-   "a3dc4544ad995299"
+   "29f1c0c5bf54c69d"
   ],
   "svgSolucion": [
    "da3a5e48f257a740",
-   "59c6f4596fff9de9"
+   "f506d8518a66818e"
   ]
  },
  "más ejercicios en media: lados y rueda": {
@@ -78666,7 +78666,7 @@
       {
        "n": 1,
        "tipo": "juegos.oculto",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "rango": 10
        },
@@ -78872,10 +78872,10 @@
    "cantidad": "mas"
   },
   "svgPapel": [
-   "095892509ae74b3e"
+   "3afcd64f6b912be3"
   ],
   "svgSolucion": [
-   "20bdb894dc69d001"
+   "27518928e9ffcc0f"
   ]
  },
  "más ejercicios: multiplicar.grupos": {
@@ -79547,7 +79547,7 @@
       {
        "n": 1,
        "tipo": "medida.capacidad",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "rango": null
        },
@@ -79745,10 +79745,10 @@
    "cantidad": "mas"
   },
   "svgPapel": [
-   "5c27308a0d1c8a57"
+   "5edfdac8adb5dac4"
   ],
   "svgSolucion": [
-   "a6c774dc98b77e29"
+   "7b2e7a1f0df86970"
   ]
  },
  "más ejercicios: medida.masa": {
@@ -79771,7 +79771,7 @@
       {
        "n": 1,
        "tipo": "medida.masa",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "rango": null
        },
@@ -80005,10 +80005,10 @@
    "cantidad": "mas"
   },
   "svgPapel": [
-   "cf52174a547585cc"
+   "4a15727b86e88532"
   ],
   "svgSolucion": [
-   "a1fe22ccf597770b"
+   "cd822916b5a788f2"
   ]
  },
  "más ejercicios: medida.precios": {
@@ -80031,7 +80031,7 @@
       {
        "n": 1,
        "tipo": "medida.precios",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "modo": null,
         "rango": 20
@@ -82188,7 +82188,7 @@
       {
        "n": 1,
        "tipo": "medida.capacidad",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "rango": null
        },
@@ -82274,7 +82274,7 @@
       {
        "n": 2,
        "tipo": "medida.masa",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "rango": null
        },
@@ -82400,10 +82400,10 @@
    "cantidad": "mas"
   },
   "svgPapel": [
-   "170a06adae5f8e8a"
+   "b2c32f7ef7fed497"
   ],
   "svgSolucion": [
-   "92ca2441f8b8ebec"
+   "c9c60c1700df3d91"
   ]
  },
  "más ejercicios en media: precios y regla": {
@@ -82426,7 +82426,7 @@
       {
        "n": 1,
        "tipo": "medida.precios",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "modo": "cambio",
         "rango": 20
@@ -82586,10 +82586,10 @@
    "cantidad": "mas"
   },
   "svgPapel": [
-   "aedb200930d24e66"
+   "b2d1d4edbf0f9e53"
   ],
   "svgSolucion": [
-   "1cfb3c6d371fcc44"
+   "043b57ccea498172"
   ]
  },
  "más ejercicios en media: ¿m o cm? y equivalencias": {
@@ -84569,7 +84569,7 @@
       {
        "n": 1,
        "tipo": "letra.enpalabras",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "letra": null,
         "tarea": null,
@@ -84879,10 +84879,10 @@
    "cantidad": "mas"
   },
   "svgPapel": [
-   "e17acf88d586d23a"
+   "acc673f2dc98fbd9"
   ],
   "svgSolucion": [
-   "6a197bbcfb64fcdf"
+   "21826baab8edf887"
   ]
  },
  "más ejercicios: letra.falta": {
@@ -86095,7 +86095,7 @@
       {
        "n": 1,
        "tipo": "orto.mayuscula",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "tarea": null,
         "nombres": null,
@@ -89578,7 +89578,7 @@
       {
        "n": 2,
        "tipo": "letra.enpalabras",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "letra": null,
         "tarea": "rodea",
@@ -90393,7 +90393,7 @@
       {
        "n": 2,
        "tipo": "orto.mayuscula",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "tarea": "escribe",
         "nombres": null,
@@ -90543,10 +90543,10 @@
    "cantidad": "mas"
   },
   "svgPapel": [
-   "085963f906b4b4fa"
+   "bf7119e8a352d98e"
   ],
   "svgSolucion": [
-   "a429ce8bd8b492ca"
+   "a81fba9947508e01"
   ]
  },
  "más ejercicios en media: articulo, dibuja e intrusa": {
@@ -91476,7 +91476,7 @@
       {
        "n": 1,
        "tipo": "orden.mayor",
-       "tipoVersion": 3,
+       "tipoVersion": 4,
        "params": {
         "modo": null,
         "cerca": false,
@@ -91564,7 +91564,7 @@
       {
        "n": 2,
        "tipo": "conteo.serie1",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "huecos": 3,
         "rango": 10
@@ -91690,10 +91690,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "34bc90d79a3feac6"
+   "39a1fbabc988193f"
   ],
   "svgSolucion": [
-   "96c97b3f89f85a50"
+   "26e3df71e1838d08"
   ]
  },
  "1.º escolar palabras + frase": {

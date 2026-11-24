@@ -162,7 +162,7 @@ export function vertical3(p, act, resta) {
     const r0 = resta ? ch - (prueba ? 52 : 60) : ch - (n === 3 ? 62 : 64);
     const rl = r0 - (n - 1) * paso, yl = rl - (prueba ? 7 : 8);
     p.marco(x, y, cw, ch, i);
-    ETQ.forEach((l, k) => p.text(xs[k], y + ch - (resta ? 18 : 16), l, 9, { f: "PM", anchor: "middle", gris: 0.3 }));
+    ETQ.forEach((l, k) => p.text(xs[k], y + ch - (resta ? 18 : 16), l, 11, { f: "PM", anchor: "middle", gris: 0.3 }));
     nums.forEach((v, j) => {
       const yy = y + r0 - j * paso;
       for (let k = 0; k < cols; k++) { const pot = 10 ** (cols - 1 - k); if (v >= pot || k === cols - 1) p.text(xs[k], yy, String(Math.floor(v / pot) % 10), fs, { anchor: "middle" }); }

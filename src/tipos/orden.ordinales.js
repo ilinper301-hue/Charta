@@ -34,7 +34,7 @@ const FIGURAS = [flor, coche, nino];
 
 export default registrar({
   id: "orden.ordinales",
-  version: 1,
+  version: 2,
   generar(params, azar, { tamano }) {
     const modo = params.modo || "mezcla", cnt = tamano === "media" ? 3 : 6, ejercicios = [];
     for (let i = 0; i < cnt; i++) {
@@ -59,8 +59,9 @@ export default registrar({
         p.caja(W - M - 62, y + rh - 46, 34, 30, null, 22, e.solucion.huecos[0]);
         p.text(W - M - 25, y + rh - 33, "º", 12, { f: "PM" });
       }
-      p.text(M + 16, y + 7, "EMPIEZA", 7.5, { f: "PM", gris: 0.3 });
-      flecha(p, M + 56, y + 10, M + 84, y + 10, 3.5, 1.0);
+      p.text(M + 16, y + 7, "EMPIEZA", 11, { f: "PM", gris: 0.3 });   // ≥ 9 pt impresos
+      const xa = M + 16 + p.ancho("EMPIEZA", "PM", 11) + 6;
+      flecha(p, xa, y + 10.5, xa + 28, y + 10.5, 3.5, 1.0);
     }));
   },
 });

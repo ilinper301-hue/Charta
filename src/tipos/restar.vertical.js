@@ -17,7 +17,7 @@ import { restasVert, vertical3 } from "./_tres.js";
 
 export default registrar({
   id: "restar.vertical",
-  version: 1,
+  version: 2,
   generar(params, azar, { tamano }) {
     const R = params.rango ?? 30;
     if (R > 100) {
@@ -53,8 +53,8 @@ export default registrar({
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], { a, b } = e.datos, xt = x + cw / 2 - 17, xu = x + cw / 2 + 17;
       p.marco(x, y, cw, ch, i);
-      p.text(xt, y + ch - 20, "D", 9, { f: "PM", anchor: "middle", gris: 0.3 });
-      p.text(xu, y + ch - 20, "U", 9, { f: "PM", anchor: "middle", gris: 0.3 });
+      p.text(xt, y + ch - 20, "D", 11, { f: "PM", anchor: "middle", gris: 0.3 });
+      p.text(xu, y + ch - 20, "U", 11, { f: "PM", anchor: "middle", gris: 0.3 });
       [a, b].forEach((v, j) => {
         const yy = y + ch - 56 - j * 34;
         if (v >= 10) p.text(xt, yy, String(Math.floor(v / 10)), 24, { anchor: "middle" });

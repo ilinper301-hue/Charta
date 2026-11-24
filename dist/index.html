@@ -4598,6 +4598,17 @@ class Papel {
       (negrita(f) ? ` font-weight="bold"` : "") + ` fill="${color(gris)}">${esc(t)}</text>`);
   }
   ancho(t, f, fs) { return this.fuente.ancho(String(t), negrita(f), fs); }
+  /** Rótulo de tarjeta a tamaño fijo (≥ 9 pt impresos): si no cabe en `wmax`, lo parte por palabras en varias líneas hacia abajo (interlineado `lh`·fs). Devuelve las líneas. */
+  rotulo(x, y, t, fs, wmax, { f = "PM", anchor = "start", gris = 0.3, lh = 1.15 } = {}) {
+    const lineas = []; let cur = "";
+    for (const w of String(t).split(" ")) {
+      const c = cur ? cur + " " + w : w;
+      if (cur && this.ancho(c, f, fs) > wmax) { lineas.push(cur); cur = w; } else cur = c;
+    }
+    lineas.push(cur);
+    lineas.forEach((l, k) => this.text(x, y - k * lh * fs, l, fs, { f, anchor, gris }));
+    return lineas;
+  }
   /** Representación del número centrada en (cx, cy), como CAT[k][READ](cx, cy, n, i) del motor. */
   rep(nombre, n, cx, cy, { i = 0, vacio = false, rango, escala = 1, centenas = false, millares = false } = {}) { this._svg(repSVG(nombre, n, { i, vacio, rango, centenas, millares }), cx, cy, escala); }
   plantilla(nombre, n, cx, cy, { i = 0, rango, escala = 1, centenas = false, millares = false } = {}) {
@@ -4617,7 +4628,7 @@ class Papel {
   marco(x, y, w, h, idx = null, lab = "") {
     this.tarjeta(x, y, w, h);
     if (idx !== null) this.text(x + 14, y + h - 22, String(idx + 1), 11, { f: "PB", gris: 0.3 });
-    if (lab) this.text(x + (idx !== null ? 34 : 14), y + h - 21, lab, 8.5, { f: "PM", gris: 0.3 });
+    if (lab) this.rotulo(x + (idx !== null ? 34 : 14), y + h - 21, lab, 11, w - (idx !== null ? 34 : 14) - 12);   // ≥ 9 pt impresos; si no cabe, en dos líneas
   }
   /** caja(): con valor, tarjeta blanca con el número; sin valor, hueco gris (y la solución en modo solución). */
   caja(x, y, w, h, val = null, fs = 22, sol = null) {
@@ -5089,7 +5100,7 @@ function r_recta(c, n, i, vacio, rango, cen, mil) {
     if (maxn === 30) { big = k % 5 === 0; draw = true; lab = big; }
     else { big = k % 10 === 0; draw = big; lab = k === 0 || k === 50 || k === 100; }
     if (draw) { const a = big ? 5.5 : 3; c.line(x0 + k * step, y - a, x0 + k * step, y + a, big ? 1.3 : 0.9, "marca"); }
-    if (lab) c.text(x0 + k * step, y - 18, String(k), 8);
+    if (lab) c.text(x0 + k * step, y - 21, String(k), 12.5);
   }
   if (!vacio) {
     const mx = x0 + n * step;
@@ -5108,7 +5119,8 @@ function r_recta_tramo(c, n, i, vacio, paso = 0) {
   for (let k = 0; k <= 30; k++) {
     const big = k % 5 === 0, a = big ? 5.5 : 3;
     c.line(x0 + k * step, y - a, x0 + k * step, y + a, big ? 1.3 : 0.9, "marca");
-    if (big) c.text(x0 + k * step, y - 18, String(s + k * q), paso ? 7 : 7.5);
+    // etiquetas de 10,5 pt (≥ 9 pt impresos): con 4 cifras no caben cada 5 marcas, se rotulan cada 10
+    if (k % (String(s + 30 * q).length > 3 ? 10 : 5) === 0) { const t = String(s + k * q); c.text(x0 + k * step, y - 20, t, t.length > 4 ? 10.2 : 10.5); }
   }
   if (!vacio) {
     const mx = x0 + (n - s) / q * step;
@@ -5257,71 +5269,72 @@ Lienzo.prototype.lineGris = function (x1, y1, x2, y2) {
 
 // ---------------------------------------------------------------- MONEDAS
 function _monedas(c, n) {
-  const [d, u] = div(n, 10), R = 12, r = 7.8, gt = 5, cols = 3, gap = 18, lw = 1.6;
-  const wt = d ? d * 2 * R + (d - 1) * gt : 0, nuc = Math.min(u, cols), wu = u ? nuc * 2 * r + (nuc - 1) * 4 : 0;
+  // las decenas en filas de 3 como máximo (no se encogen: letra ≥ 9 pt impresos)
+  const [d, u] = div(n, 10), R = 12, r = 7.8, gt = 5, cols = 3, gap = 18, lw = 1.6, tc = Math.min(d, 3), trows = Math.ceil(d / 3);
+  const wt = d ? tc * 2 * R + (tc - 1) * gt : 0, nuc = Math.min(u, cols), wu = u ? nuc * 2 * r + (nuc - 1) * 4 : 0;
   const total = wt + (d && u ? gap : 0) + wu;
   let x = -total / 2;
   for (let q = 0; q < d; q++) {
+    const [rr, cc] = div(q, 3);
     c.abrir("moneda-10");
-    c.circle(x + R, 0, R, { lw });
-    c.text(x + R, -4, "10", 11, { negrita: true });
+    c.circle(x + R + cc * (2 * R + gt), ((trows - 1) / 2 - rr) * (2 * R + gt), R, { lw });
+    c.text(x + R + cc * (2 * R + gt), ((trows - 1) / 2 - rr) * (2 * R + gt) - 5, "10", 14.5, { negrita: true });
     c.cerrar();
-    x += 2 * R + gt;
   }
-  if (d) x += gap - gt;
+  if (d) x += wt + gap;
   const rows = u ? Math.ceil(u / cols) : 0;
   for (let k = 0; k < u; k++) {
     const [rr, cc] = div(k, cols), px = x + r + cc * (2 * r + 4), py = (rows - 1) * (r + 2) - rr * (2 * r + 4);
     c.abrir("moneda-1");
     c.circle(px, py, r, { lw });
-    c.text(px, py - 3, "1", 8.5, { negrita: true });
+    c.text(px, py - 4.5, "1", 12.5, { negrita: true });
     c.cerrar();
   }
 }
 function r_monedas(c, n, i) {
-  const [d, u] = div(n, 10);
-  const total = (d ? d * 24 + (d - 1) * 5 : 0) + (d && u ? 18 : 0) + (u ? Math.min(u, 3) * 15.6 + (Math.min(u, 3) - 1) * 4 : 0);
+  const [d, u] = div(n, 10), tc = Math.min(d, 3);
+  const total = (d ? tc * 24 + (tc - 1) * 5 : 0) + (d && u ? 18 : 0) + (u ? Math.min(u, 3) * 15.6 + (Math.min(u, 3) - 1) * 4 : 0);
   c.grupo(0, 0, Math.min(1.3, 150 / Math.max(total, 1)), 0, () => _monedas(c, n, i));
 }
 
 // ---------------------------------------------------------------- ÁBACO
 function abaco(c, d, u, cuentas = true) {
-  const fw = 116, fh = 100, x = -fw / 2, y = -fh / 2;
+  const fw = 116, fh = 107, x = -fw / 2, y = -fh / 2;
   c.abrir("abaco");
   c.rrect(x, y, fw, fh, 8, { lw: 1.8, cls: "marco-abaco" });
   for (const [xr, k, lab] of [[-28, d, "D"], [28, u, "U"]]) {
     c.abrir("varilla");
-    c.line(xr, y + 14, xr, y + fh - 5, 1.6);
-    if (cuentas) for (let j = 0; j < k; j++) c.circle(xr, y + 14 + 4.4 + j * 8.8, 4.4, { lw: 1.6, fill: INK, cls: "cuenta" });
-    c.text(xr, y + 4, lab, 8.5);
+    c.line(xr, y + 21, xr, y + fh - 5, 1.6);
+    if (cuentas) for (let j = 0; j < k; j++) c.circle(xr, y + 21 + 4.4 + j * 8.8, 4.4, { lw: 1.6, fill: INK, cls: "cuenta" });
+    c.text(xr, y + 4, lab, 18);
     c.cerrar();
   }
   c.cerrar();
 }
 /** Ábaco de tres varillas C, D, U (marco más ancho). */
 function abaco3(c, cc, d, u, cuentas = true) {
-  const fw = 156, fh = 100, x = -fw / 2, y = -fh / 2;
+  const fw = 156, fh = 107, x = -fw / 2, y = -fh / 2;
   c.abrir("abaco");
   c.rrect(x, y, fw, fh, 8, { lw: 1.8, cls: "marco-abaco" });
   for (const [xr, k, lab] of [[-48, cc, "C"], [0, d, "D"], [48, u, "U"]]) {
     c.abrir("varilla");
-    c.line(xr, y + 14, xr, y + fh - 5, 1.6);
-    if (cuentas) for (let j = 0; j < k; j++) c.circle(xr, y + 14 + 4.4 + j * 8.8, 4.4, { lw: 1.6, fill: INK, cls: "cuenta" });
-    c.text(xr, y + 4, lab, 8.5);
+    c.line(xr, y + 21, xr, y + fh - 5, 1.6);
+    if (cuentas) for (let j = 0; j < k; j++) c.circle(xr, y + 21 + 4.4 + j * 8.8, 4.4, { lw: 1.6, fill: INK, cls: "cuenta" });
+    c.text(xr, y + 4, lab, 18);
     c.cerrar();
   }
   c.cerrar();
 }
 /** Ábaco de cuatro varillas UM, C, D, U. */
 function abaco4(c, m, cc, d, u, cuentas = true) {
-  const fw = 196, fh = 100, x = -fw / 2, y = -fh / 2;
+  const fw = 196, fh = 107, x = -fw / 2, y = -fh / 2;
   c.abrir("abaco");
   c.rrect(x, y, fw, fh, 8, { lw: 1.8, cls: "marco-abaco" });
   for (const [xr, k, lab] of [[-69, m, "UM"], [-23, cc, "C"], [23, d, "D"], [69, u, "U"]]) {
     c.abrir("varilla");
-    c.line(xr, y + 14, xr, y + fh - 5, 1.6);
-    if (cuentas) for (let j = 0; j < k; j++) c.circle(xr, y + 14 + 4.4 + j * 8.8, 4.4, { lw: 1.6, fill: INK, cls: "cuenta" });
-    c.text(xr, y + 4, lab, 8.5);
+    c.line(xr, y + 21, xr, y + fh - 5, 1.6);
+    if (cuentas) for (let j = 0; j < k; j++) c.circle(xr, y + 21 + 4.4 + j * 8.8, 4.4, { lw: 1.6, fill: INK, cls: "cuenta" });
+    c.text(xr, y + 4, lab, 18);
     c.cerrar();
   }
   c.cerrar();
@@ -7266,7 +7279,7 @@ function tipoRep(nombre, version = 1) {
           p.rep(nombre, n, gx, gy, { i: idx, centenas, millares });
         } else {
           p.marco(x, y, cw, ch);
-          p.text(x + 14, y + ch - 20, "DIBUJA", 8.5, { f: "PM", gris: 0.3 });
+          p.text(x + 14, y + ch - 20, "DIBUJA", 11, { f: "PM", gris: 0.3 });
           p.text(x + cw - 16, y + ch - 36, String(n), 28, { f: "PB", anchor: "end" });
           p.plantilla(nombre, n, gx, gy, { i: idx, centenas, millares });
         }
@@ -7441,7 +7454,7 @@ function vertical3(p, act, resta) {
     const r0 = resta ? ch - (prueba ? 52 : 60) : ch - (n === 3 ? 62 : 64);
     const rl = r0 - (n - 1) * paso, yl = rl - (prueba ? 7 : 8);
     p.marco(x, y, cw, ch, i);
-    ETQ.forEach((l, k) => p.text(xs[k], y + ch - (resta ? 18 : 16), l, 9, { f: "PM", anchor: "middle", gris: 0.3 }));
+    ETQ.forEach((l, k) => p.text(xs[k], y + ch - (resta ? 18 : 16), l, 11, { f: "PM", anchor: "middle", gris: 0.3 }));
     nums.forEach((v, j) => {
       const yy = y + r0 - j * paso;
       for (let k = 0; k < cols; k++) { const pot = 10 ** (cols - 1 - k); if (v >= pot || k === cols - 1) p.text(xs[k], yy, String(Math.floor(v / pot) % 10), fs, { anchor: "middle" }); }
@@ -7623,7 +7636,7 @@ function numsCombinada(keys, R, azar) {
 
 const __default = registrar({
   id: "combinada.combinada",
-  version: 1,
+  version: 2,
   generar(params, azar, { tamano }) {
     const R = params.rango ?? 20, claves = clavesComb(R), nums = numsCombinada(claves, R, azar), mil = R > 1000;
     if (!nums) throw new Error("Esta ficha necesita un rango máximo mayor.");
@@ -7640,7 +7653,7 @@ const __default = registrar({
       const r = Math.floor(idx / 3), col = idx % 3, x = M + col * (cw + GX), y = top - (r + 1) * ch - r * GY, { rep, n } = e.datos;
       p.tarjeta(x, y, cw, ch);
       const mil = !!e.datos.millares;
-      p.text(x + 12, y + ch - 17, ((mil && NOMBRES_M[rep]) || NOMBRES[rep]).toUpperCase(), 8.5, { f: "PM", gris: 0.3 });
+      p.rotulo(x + 12, y + ch - 17, ((mil && NOMBRES_M[rep]) || NOMBRES[rep]).toUpperCase(), 11, cw - 12 - 58);   // ≥ 9 pt impresos
       if (mil) p.caja(x + cw - 9 - 58, y + ch - 9 - 30, 58, 30, null, 18, e.solucion.huecos[0]);   // hueco para 4 cifras
       else p.cuadrito(x, y, cw, ch, 30, e.solucion.huecos[0]);
       p.rep(rep, n, x + cw / 2, y + ch * 0.40, { i: idx, rango: R, millares: mil, escala: mil && rep === "bloques" ? 0.8 : 1 });   // celdas más bajas que en rep.*
@@ -7732,7 +7745,7 @@ function flecha(p, x1, y1, x2, y2, hd = 4.5) {
 
 const __default = registrar({
   id: "conteo.camino",
-  version: 1,
+  version: 2,
   generar(params, azar) {
     const R = params.rango ?? 10, L = Math.min(36, R), desde = azar.entero(1, R - L + 1);
     const h = Math.min(L - 2, params.huecos ?? Math.max(3, Math.floor(L / 3)));
@@ -7759,8 +7772,8 @@ const __default = registrar({
         const [x, y] = pos(k), vac = huecos.includes(k);
         p.caja(x, y, CW, CH, vac ? null : s + k, 20, vac ? e.solucion.huecos[q++] : null);
       }
-      let [x, y] = pos(0); p.text(x + CW / 2, y + CH + 6, "SALIDA", 8.5, { f: "PM", anchor: "middle", gris: 0.3 });
-      [x, y] = pos(L - 1); p.text(x + CW / 2, y - 12, "META", 8.5, { f: "PM", anchor: "middle", gris: 0.3 });
+      let [x, y] = pos(0); p.text(x + CW / 2, y + CH + 6, "SALIDA", 11, { f: "PM", anchor: "middle", gris: 0.3 });
+      [x, y] = pos(L - 1); p.text(x + CW / 2, y - 12, "META", 11, { f: "PM", anchor: "middle", gris: 0.3 });
     });
   },
 });
@@ -7880,7 +7893,7 @@ const { cuantosRejilla } = __req("render/papel.js");
 const { dibujarSerie, elegirHuecos, MIN_ALTO_SERIE } = __req("tipos/conteo.series.js");
 const __default = registrar({
   id: "conteo.serie1",
-  version: 2,
+  version: 3,
   cantidad: true,
   generar(params, azar, ctx) {
     const R = params.rango ?? 10, h = params.huecos ?? 3, s = 1;
@@ -7913,7 +7926,7 @@ const { registrar } = __req("nucleo/tipos.js");
 const { generarSerie, dibujarSerie } = __req("tipos/conteo.series.js");
 const __default = registrar({
   id: "conteo.serie10",
-  version: 2,
+  version: 3,
   cantidad: true,
   generar(params, azar, ctx) { return generarSerie([10], params, azar, ctx); },
   dibujar: dibujarSerie,
@@ -7930,7 +7943,7 @@ const { registrar } = __req("nucleo/tipos.js");
 const { generarSerie, dibujarSerie } = __req("tipos/conteo.series.js");
 const __default = registrar({
   id: "conteo.serie2",
-  version: 2,
+  version: 3,
   cantidad: true,
   generar(params, azar, ctx) { return generarSerie([2], params, azar, ctx); },
   dibujar: dibujarSerie,
@@ -7947,7 +7960,7 @@ const { registrar } = __req("nucleo/tipos.js");
 const { generarSerie, dibujarSerie } = __req("tipos/conteo.series.js");
 const __default = registrar({
   id: "conteo.serie5",
-  version: 2,
+  version: 3,
   cantidad: true,
   generar(params, azar, ctx) { return generarSerie([5], params, azar, ctx); },
   dibujar: dibujarSerie,
@@ -8002,7 +8015,7 @@ function dibujarSerie(p, act) {
     const y = cel[i][1];
     p.tarjeta(M, y, W - 2 * M, rh);
     p.text(M + 16, y + rh / 2 + 2, `de ${paso} en ${paso}`, 12.5, { f: "PB" });
-    p.text(M + 34, y + rh / 2 - 14, sube ? "sube" : "baja", 9.5, { f: "PM", gris: 0.3 });
+    p.text(M + 34, y + rh / 2 - 14, sube ? "sube" : "baja", 11, { f: "PM", gris: 0.3 });
     const ty = y + rh / 2 - 10.5;
     p.path(sube ? [["M", M + 16, ty - 4], ["L", M + 28, ty - 4], ["L", M + 22, ty + 4], ["Z"]]
                 : [["M", M + 16, ty + 4], ["L", M + 28, ty + 4], ["L", M + 22, ty - 4], ["Z"]], { fill: INK, stroke: null });
@@ -8016,7 +8029,7 @@ function dibujarSerie(p, act) {
 
 const __default = registrar({
   id: "conteo.series",
-  version: 2,
+  version: 3,
   cantidad: true,
   generar(params, azar, ctx) {
     return generarSerie((params.rango ?? 10) >= 20 ? [1, 2, 5, 10] : [1, 2, 5], params, azar, ctx,
@@ -9135,7 +9148,7 @@ const TRIPLES = [[1, 2, 3], [2, 3, 4], [1, 2, 4], [1, 3, 4], [2, 3, 4], [1, 2, 3
 
 const __default = registrar({
   id: "fono.larga",
-  version: 2,
+  version: 3,
   cantidad: true,
   generar(params, azar, ctx) {
     return conTope(cuantosRejilla(ctx, 2, MIN_ALTO, [20, 10]), cuantas(ctx.tamano, 10), (n) => grupos(params, azar, n));
@@ -9143,7 +9156,7 @@ const __default = registrar({
   dibujar(p, act) {
     const { cel, cw, ch } = p.rejilla(TOP, 2, Math.ceil(act.ejercicios.length / 2)), mezcla = act.params.cual === "mezcla";
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
-      const [x, y] = cel[i], ps = e.datos.palabras, gap = 8, rel = 0.3, lb = Math.min(10, ch * 0.2);
+      const [x, y] = cel[i], ps = e.datos.palabras, gap = 8, rel = 0.3, lb = 11;   // ≥ 9 pt impresos
       p.marco(x, y, cw, ch, i);
       if (mezcla) p.text(x + 32, y + ch - 7 - lb, e.datos.cual === "mas" ? "Rodea la que tiene MÁS sílabas" : "Rodea la que tiene MENOS sílabas", lb, { f: "PB", gris: 0.3 });
       const w = cw - 32 - 8, fs = ajusta(p, (q) => ps.reduce((t, s) => t + p.ancho(s, "PB", q) + q * 2 * rel, 0) + gap * 2, w, Math.min(24, ch * (mezcla ? 0.3 : 0.4)), 10);
@@ -9203,7 +9216,7 @@ function letrasPara(p, t) {
 
 const __default = registrar({
   id: "fono.posicion",
-  version: 2,
+  version: 3,
   cantidad: true,
   generar(params, azar, ctx) {
     const ps = conTope(cuantosRejilla(ctx, 2, MIN_ALTO, [20, 10]), cuantas(ctx.tamano, 10), (n) => {
@@ -9231,7 +9244,7 @@ const __default = registrar({
       p.text(x + x0 + q / 2, arriba.y + arriba.h / 2 - lf * 0.35, letra, lf, { f: "PB", anchor: "middle" });
       const wp = w - q - 14, fs = ajusta(p, (f) => p.ancho(palabra, "PB", f), wp, Math.min(26, arriba.h * 0.8), 10);
       p.text(x + x0 + q + 14 + wp / 2, arriba.y + arriba.h / 2 - fs * 0.35, palabra, fs, { f: "PB", anchor: "middle" });
-      const lb = Math.min(11, abajo.h * 0.5);
+      const lb = 11;   // ≥ 9 pt impresos
       ETIQUETAS.forEach((t, k) => {
         const bx = x + x0 + k * (bw + gap), marca = p.solucion && e.solucion.marca === k;
         p.rrect(bx, abajo.y, bw, abajo.h, 7, { lw: marca ? 2.2 : 1.5, fill: marca ? "#F6C9C9" : 1, stroke: marca ? COLOR_SOLUCION : INK });
@@ -9375,7 +9388,7 @@ const MIN_ALTO = 40;   // alto mínimo de tarjeta con «Más ejercicios»
 
 const __default = registrar({
   id: "fono.silabas",
-  version: 2,
+  version: 3,
   cantidad: true,
   generar(params, azar, ctx) {
     const n = cuantosRejilla(ctx, 2, MIN_ALTO, [20, 10]), respuesta = params.respuesta === "numero" ? "numero" : "colorea";
@@ -9394,14 +9407,14 @@ const __default = registrar({
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], { palabra, n, respuesta } = e.datos;
       p.marco(x, y, cw, ch, i);
-      const num = respuesta === "numero", rw = num ? 44 + 5 + p.ancho("sílabas", "PM", 10) : 4 * 24 + 3 * 4;   // ancho de lo que va a la derecha
+      const num = respuesta === "numero", rw = num ? 44 + 5 + p.ancho("sílabas", "PM", 11) : 4 * 24 + 3 * 4;   // ancho de lo que va a la derecha
       const aw = cw - x0 - x1 - rw - 10, fs = ajusta(p, (q) => p.ancho(palabra, "PB", q), aw, Math.min(28, ch * 0.46), 10);
       p.text(x + x0, y + ch / 2 - fs * 0.35, palabra, fs, { f: "PB" });
       const rx = x + cw - x1 - rw;
       if (num) {
         const bh = Math.min(36, ch * 0.7);
         p.caja(rx, y + (ch - bh) / 2, 44, bh, null, 22, n);
-        p.text(rx + 49, y + ch / 2 - 10 * 0.35, "sílabas", 10, { f: "PM", gris: 0.35 });
+        p.text(rx + 49, y + ch / 2 - 10 * 0.35, "sílabas", 11, { f: "PM", gris: 0.35 });
       } else casillas(p, rx, y, rw, ch, 4, { rellenar: n, ancho: 24, alto: qa, gap: 4 });
     }));
   },
@@ -10573,7 +10586,7 @@ function caminoAzar(azar, n, L) {
 
 const __default = registrar({
   id: "juegos.laberinto",
-  version: 1,
+  version: 2,
   generar(params, azar) {
     const R = params.rango ?? 10, p = params.n || 1;
     if (![1, 2, 5, 10].includes(p)) throw new Error("El salto debe ser 1, 2, 5 o 10.");
@@ -10601,7 +10614,7 @@ const __default = registrar({
       const gx = M + (W - 2 * M - N * cs) / 2, gy = y0 + (350 - N * cs) / 2;
       for (let r = 0; r < N; r++) for (let q = 0; q < N; q++) p.caja(gx + q * cs + 2, gy + (N - 1 - r) * cs + 2, cs - 4, cs - 4, rejilla[r][q], 20);
       [[camino[0], "SALIDA"], [camino[camino.length - 1], "META"]].forEach(([[r, q], tag]) =>
-        p.text(gx + q * cs + cs / 2, gy + (N - 1 - r) * cs + 7, tag, 6.5, { f: "PM", anchor: "middle", gris: 0.3 }));
+        p.text(gx + q * cs + cs / 2, gy + (N - 1 - r) * cs + 7, tag, 10, { f: "PM", anchor: "middle", gris: 0.3 }));
       if (p.solucion) {
         const c = ([r, q]) => [gx + q * cs + cs / 2, gy + (N - 1 - r) * cs + cs / 2];
         for (let j = 1; j < camino.length; j++) p.line(...c(camino[j - 1]), ...c(camino[j]), { lw: 3, gris: COLOR_SOLUCION });
@@ -10647,7 +10660,7 @@ function pistas(t, R, azar) {
 
 const __default = registrar({
   id: "juegos.oculto",
-  version: 2,
+  version: 3,
   cantidad: true,
   generar(params, azar, ctx) {
     const R = params.rango ?? 10;
@@ -11243,7 +11256,7 @@ const memo = new Map();   // palabras buenas por tipo, caso inicial, letra y let
 
 const __default = registrar({
   id: "letra.enpalabras",
-  version: 2,
+  version: 3,
   cantidad: true,
   generar(params, azar, ctx) {
     const base = cuantas(ctx.tamano, 12), cuenta = params.tarea !== "rodea";
@@ -11278,7 +11291,7 @@ const __default = registrar({
       const ancho = cuenta ? cw - 30 - bw - 22 : cw - 56;
       palabraLetras(p, x + 32, y, ancho, ch, e.datos.palabra, { fs: Math.min(28 * k, ch * 0.5), gap: 0.27, rodear: e.solucion.rodea });
       if (cuenta) {
-        p.text(x + cw - 14 - bw / 2, y + ch / 2 + bh / 2 + 4, "veces", 9 * k, { f: "PM", anchor: "middle", gris: 0.3 });
+        p.text(x + cw - 14 - bw / 2, y + ch / 2 + bh / 2 + 4, "veces", Math.max(11, 9 * k), { f: "PM", anchor: "middle", gris: 0.3 });
         p.caja(x + cw - 14 - bw, y + (ch - bh) / 2 - 5, bw, bh, null, 22 * k, e.solucion.huecos[0]);
       }
     }));
@@ -11552,7 +11565,7 @@ const MIN_ALTO = 132;   // alto mínimo de tarjeta con «Más ejercicios» (casi
 
 const __default = registrar({
   id: "medida.capacidad",
-  version: 2,
+  version: 3,
   cantidad: true,
   generar(params, azar, ctx) {
     const ejercicios = [];
@@ -11569,7 +11582,7 @@ const __default = registrar({
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], { niv, asc } = e.datos;
       p.marco(x, y, cw, ch, i);
-      p.text(x + 34, y + ch - 20, asc ? "DE MENOS A MÁS" : "DE MÁS A MENOS", 9.5, { f: "PM", gris: 0.3 });
+      p.text(x + 34, y + ch - 20, asc ? "DE MENOS A MÁS" : "DE MÁS A MENOS", 11, { f: "PM", gris: 0.3 });
       const gw = 40 * s, g = 30 * s, gx0 = x + (cw - (3 * gw + 2 * g)) / 2;
       niv.forEach((lv, j) => {
         const gx = gx0 + j * (gw + g), gy = y + 56;
@@ -11593,19 +11606,19 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() 
 const { registrar } = __req("nucleo/tipos.js");
 const { TOP, T, B } = __req("render/papel.js");
 const BILLETES = { 5: [52, 28], 10: [56, 28], 20: [60, 28], 50: [64, 28], 100: [70, 28] };
-const RADIO = { "€": { 1: 15, 2: 17 }, c: { 1: 10, 2: 11.5, 5: 13, 10: 12, 20: 14, 50: 15 } };
+const RADIO = { "€": { 1: 15, 2: 17 }, c: { 1: 12.5, 2: 14, 5: 16.5, 10: 16, 20: 17.5, 50: 18.5 } };   // monedas de céntimos más grandes: rótulo de ≥ 9 pt impresos
 
 /** _item_dinero(): una moneda ("m") o un billete ("b") centrado en (x, y). */
 function itemDinero(p, kind, v, x, y, u) {
   if (kind === "m") {
     const r = RADIO[u][v];
-    p.circle(x, y, r, { lw: 1.6 }); p.circle(x, y, r - 2.8, { lw: 0.7 });
-    p.text(x, y - 3, u === "€" ? `${v} €` : `${v} c`, u === "€" ? 9 : 7.5, { f: "PB", anchor: "middle" });
+    p.circle(x, y, r, { lw: 1.6 }); p.circle(x, y, r - 2.4, { lw: 0.7 });
+    p.text(x, y - 3, u === "€" ? `${v} €` : `${v} c`, u === "€" ? 11 : 10.5, { f: "PB", anchor: "middle" });
   } else {
     const [w, h] = BILLETES[v];
     p.rrect(x - w / 2, y - h / 2, w, h, 4, { lw: 1.6 });
     p.rrect(x - w / 2 + 3, y - h / 2 + 3, w - 6, h - 6, 0, { lw: 0.7 });
-    p.text(x, y - 4, `${v} €`, 11, { f: "PB", anchor: "middle" });
+    p.text(x, y - 4, `${v} €`, 11.5, { f: "PB", anchor: "middle" });
   }
 }
 
@@ -11615,7 +11628,7 @@ const billetes = (R) => R > 100 ? [5, 10, 20, 50, 100] : [5, 10, 20];
 
 const __default = registrar({
   id: "medida.dinero",
-  version: 1,
+  version: 2,
   generar(params, azar, { tamano }) {
     const R = params.rango ?? 20;
     if (R < 10) throw new Error("Este modelo necesita un rango máximo de al menos 10.");
@@ -11673,7 +11686,7 @@ const voraz = (total, den) => { let r = total; return den.map((v) => { const n =
 
 const __default = registrar({
   id: "medida.euros",
-  version: 1,
+  version: 2,
   generar(params, azar, { tamano }) {
     const R = params.rango ?? 200, den = valores(R), tope = R > 100 ? R : 99, cnt = tamano === "media" ? 3 : 6;
     const vistos = new Set(), ejercicios = [];
@@ -11698,8 +11711,8 @@ const __default = registrar({
       const n = den.length, ancho = (cw - 90) / n;
       den.forEach((v, j) => {
         const cx = x + 66 + ancho * (j + 0.5), cy = y + ch * 0.6;
-        if (v <= 2) { p.circle(cx, cy, v === 2 ? 14 : 12.5, { lw: 1.5 }); p.text(cx, cy - 3.5, `${v} €`, 9.5, { f: "PB", anchor: "middle" }); }
-        else { p.rrect(cx - 21, cy - 11, 42, 22, 3, { lw: 1.5 }); p.text(cx, cy - 3.5, `${v} €`, 10.5, { f: "PB", anchor: "middle" }); }
+        if (v <= 2) { p.circle(cx, cy, v === 2 ? 14 : 12.5, { lw: 1.5 }); p.text(cx, cy - 3.5, `${v} €`, 11, { f: "PB", anchor: "middle" }); }
+        else { p.rrect(cx - 21, cy - 11, 42, 22, 3, { lw: 1.5 }); p.text(cx, cy - 3.5, `${v} €`, 11.5, { f: "PB", anchor: "middle" }); }
         p.caja(cx - 19, y + 8, 38, 32, null, 18, e.solucion.huecos[j]);
       });
     }));
@@ -11831,7 +11844,7 @@ const plato = (azar) => { for (;;) { const k = azar.entero(0, 3), m = azar.enter
 
 const __default = registrar({
   id: "medida.masa",
-  version: 2,
+  version: 3,
   cantidad: true,
   generar(params, azar, ctx) {
     const cnt = cuantosRejilla(ctx, 2, MIN_ALTO, [8, 4]), vistos = new Set(), ejercicios = [];
@@ -11865,7 +11878,8 @@ const __default = registrar({
         for (let j = 0; j < k + m; j++) {   // primero las de 1 kg (abajo) y encima las de ½ kg
           const grande = j < k, w = (grande ? 40 : 30) * esc, h = (grande ? 14 : 11) * esc;
           p.rrect(cx[s] - w / 2, yy, w, h, 2, { lw: 1.3 });
-          p.text(cx[s], yy + h / 2 - 3 * esc, grande ? "1 kg" : "½ kg", (grande ? 9 : 8) * esc, { f: "PB", anchor: "middle" });
+          const fs = Math.max(11, (grande ? 9 : 8) * esc);   // ≥ 9 pt impresos
+          p.text(cx[s], yy + h / 2 - 0.35 * fs, grande ? "1 kg" : "½ kg", fs, { f: "PB", anchor: "middle" });
           yy += h + 1;
         }
       });
@@ -11902,7 +11916,7 @@ function etiqueta(p, x, y, nom, precio, s = 1, w = 104 * s, h = 50 * s) {
 
 const __default = registrar({
   id: "medida.precios",
-  version: 2,
+  version: 3,
   cantidad: true,
   generar(params, azar, ctx) {
     const R = params.rango ?? 20;
@@ -12580,7 +12594,7 @@ function dispersar(n, azar) {
 
 const __default = registrar({
   id: "orden.cantidad",
-  version: 3,
+  version: 4,
   cantidad: true,
   generar(params, azar, ctx) {
     const R = params.rango ?? 10, mx = Math.min(R, 12), modo = params.modo || "mezcla";
@@ -12789,7 +12803,7 @@ const MIN_ALTO = 86;   // alto mínimo de tarjeta con «Más ejercicios»
 
 const __default = registrar({
   id: "orden.mayor",
-  version: 3,
+  version: 4,
   cantidad: true,
   generar(params, azar, ctx) {
     const R = params.rango ?? 10, cnt = cuantosRejilla(ctx, 3, MIN_ALTO, [15, 6]), modo = params.modo || "mezcla";
@@ -12912,7 +12926,7 @@ const FIGURAS = [flor, coche, nino];
 
 const __default = registrar({
   id: "orden.ordinales",
-  version: 1,
+  version: 2,
   generar(params, azar, { tamano }) {
     const modo = params.modo || "mezcla", cnt = tamano === "media" ? 3 : 6, ejercicios = [];
     for (let i = 0; i < cnt; i++) {
@@ -12937,8 +12951,9 @@ const __default = registrar({
         p.caja(W - M - 62, y + rh - 46, 34, 30, null, 22, e.solucion.huecos[0]);
         p.text(W - M - 25, y + rh - 33, "º", 12, { f: "PM" });
       }
-      p.text(M + 16, y + 7, "EMPIEZA", 7.5, { f: "PM", gris: 0.3 });
-      flecha(p, M + 56, y + 10, M + 84, y + 10, 3.5, 1.0);
+      p.text(M + 16, y + 7, "EMPIEZA", 11, { f: "PM", gris: 0.3 });   // ≥ 9 pt impresos
+      const xa = M + 16 + p.ancho("EMPIEZA", "PM", 11) + 6;
+      flecha(p, xa, y + 10.5, xa + 28, y + 10.5, 3.5, 1.0);
     }));
   },
 });
@@ -12968,7 +12983,7 @@ function flecha(p, x, y, w = 24) {
 
 const __default = registrar({
   id: "orden.redondea",
-  version: 2,
+  version: 3,
   cantidad: true,
   generar(params, azar, ctx) {
     const R = params.rango ?? 9999, cnt = cuantosRejilla(ctx, 3, MIN_ALTO, [15, 6]), us = params.a ? [params.a] : ["decena", "centena", "millar"];
@@ -13183,7 +13198,7 @@ const COMUNES = new Set(NOMBRES.map((x) => x.n.toLowerCase()));
 
 const __default = registrar({
   id: "orto.mayuscula",
-  version: 2,
+  version: 3,
   cantidad: true,
   generar(params, azar, ctx) {
     return conTope(cuantosRejilla(ctx, 2, MIN_ALTO, [12, 6]), cuantas(ctx.tamano, 12), (n) => elegir(params, azar, n));
@@ -13201,7 +13216,7 @@ const __default = registrar({
         const bh = Math.min(38 * k, ch * 0.6), bw = p.ancho(d.nombre, "PB", 20 * k) + 26, zona = cw - 32 - 16 - bw - 14;
         let fs = Math.min(28 * k, ch * 0.5); while (fs > 15 && p.ancho(d.palabra, "PB", fs) > zona) fs -= 1;
         p.text(x + 32, y + ch / 2 - fs * 0.35 + 6, d.palabra, fs, { f: "PB" });
-        p.text(x + 32, y + ch / 2 - fs * 0.35 - 14, `(${d.pista})`, 10 * k, { f: "PM", gris: 0.3 });
+        p.text(x + 32, y + ch / 2 - fs * 0.35 - 14, `(${d.pista})`, Math.max(11, 10 * k), { f: "PM", gris: 0.3 });
         p.caja(x + cw - 14 - bw, y + (ch - bh) / 2, bw, bh, null, 20 * k, e.solucion.huecos[0]);
       }
     }));
@@ -13479,7 +13494,7 @@ const MIN_ALTO = 50;   // alto mínimo de tarjeta con «Más ejercicios»
 
 const __default = registrar({
   id: "palabra.cuenta",
-  version: 2,
+  version: 3,
   cantidad: true,
   generar(params, azar, ctx) {
     const casillas = params.respuesta === "casillas", n = casillas ? cuantosRejilla(ctx, 1, MIN_ALTO, [10, 5]) : cuantosRejilla(ctx, 2, MIN_ALTO, [20, 10]);
@@ -13502,7 +13517,7 @@ const __default = registrar({
       const [x, y] = cel[i], { palabra, n, respuesta } = e.datos;
       p.marco(x, y, cw, ch, i);
       const by = y + (ch - bh) / 2 - 4, bx = x + cw - 12 - bw;
-      p.text(bx + bw / 2, by + bh + 4, "letras", 9, { f: "PM", anchor: "middle", gris: 0.3 });
+      p.text(bx + bw / 2, by + bh + 4, "letras", 11, { f: "PM", anchor: "middle", gris: 0.3 });
       if (respuesta === "casillas") {
         const fs = ajusta(p, (q) => p.ancho(palabra, "PB", q), 150, 28, 16), q = 30, g = 4, qh = Math.min(36, ch - 14), ini = x + tx + 156;
         p.text(x + tx, y + ch / 2 - fs * 0.35, palabra, fs, { f: "PB" });
@@ -13986,112 +14001,112 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() 
 "tipos/rep.abaco.js": (__exp) => {
 // rep.abaco · Leer y dibujar números con abaco. Ver _rep.js.
 const { tipoRep } = __req("tipos/_rep.js");
-const __default = tipoRep("abaco");
+const __default = tipoRep("abaco", 2);
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
 },
 "tipos/rep.atados.js": (__exp) => {
 // rep.atados · Leer y dibujar números con atados. Ver _rep.js.
 const { tipoRep } = __req("tipos/_rep.js");
-const __default = tipoRep("atados");
+const __default = tipoRep("atados", 2);
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
 },
 "tipos/rep.bloques.js": (__exp) => {
 // rep.bloques · Leer y dibujar números con bloques. Ver _rep.js.
 const { tipoRep } = __req("tipos/_rep.js");
-const __default = tipoRep("bloques");
+const __default = tipoRep("bloques", 2);
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
 },
 "tipos/rep.cuadricula.js": (__exp) => {
 // rep.cuadricula · Leer y dibujar números con cuadricula. Ver _rep.js.
 const { tipoRep } = __req("tipos/_rep.js");
-const __default = tipoRep("cuadricula");
+const __default = tipoRep("cuadricula", 2);
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
 },
 "tipos/rep.dado.js": (__exp) => {
 // rep.dado · El dado: leer y dibujar números con puntos (1–6 un dado, 7–12 dos). Ver _rep.js.
 const { tipoRep } = __req("tipos/_rep.js");
-const __default = tipoRep("dado");
+const __default = tipoRep("dado", 2);
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
 },
 "tipos/rep.dedos.js": (__exp) => {
 // rep.dedos · Leer y dibujar números con dedos. Ver _rep.js.
 const { tipoRep } = __req("tipos/_rep.js");
-const __default = tipoRep("dedos");
+const __default = tipoRep("dedos", 2);
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
 },
 "tipos/rep.descomp.js": (__exp) => {
 // rep.descomp · Leer y dibujar números con descomp. Ver _rep.js.
 const { tipoRep } = __req("tipos/_rep.js");
-const __default = tipoRep("descomp");
+const __default = tipoRep("descomp", 2);
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
 },
 "tipos/rep.domino.js": (__exp) => {
 // rep.domino · Leer y dibujar números con domino. Ver _rep.js.
 const { tipoRep } = __req("tipos/_rep.js");
-const __default = tipoRep("domino");
+const __default = tipoRep("domino", 2);
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
 },
 "tipos/rep.du.js": (__exp) => {
 // rep.du · Leer y dibujar números con du. Ver _rep.js.
 const { tipoRep } = __req("tipos/_rep.js");
-const __default = tipoRep("du");
+const __default = tipoRep("du", 2);
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
 },
 "tipos/rep.letras.js": (__exp) => {
 // rep.letras · Leer y dibujar números con letras. Ver _rep.js.
 const { tipoRep } = __req("tipos/_rep.js");
-const __default = tipoRep("letras");
+const __default = tipoRep("letras", 2);
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
 },
 "tipos/rep.marco.js": (__exp) => {
 // rep.marco · El marco de diez: leer y rellenar marcos (hasta 40). Ver _rep.js.
 const { tipoRep } = __req("tipos/_rep.js");
-const __default = tipoRep("marco");
+const __default = tipoRep("marco", 2);
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
 },
 "tipos/rep.monedas.js": (__exp) => {
 // rep.monedas · Leer y dibujar números con monedas. Ver _rep.js.
 const { tipoRep } = __req("tipos/_rep.js");
-const __default = tipoRep("monedas");
+const __default = tipoRep("monedas", 2);
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
 },
 "tipos/rep.objetos.js": (__exp) => {
 // rep.objetos · Leer y dibujar números con objetos. Ver _rep.js.
 const { tipoRep } = __req("tipos/_rep.js");
-const __default = tipoRep("objetos");
+const __default = tipoRep("objetos", 2);
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
 },
 "tipos/rep.palotes.js": (__exp) => {
 // rep.palotes · Leer y dibujar números con palotes. Ver _rep.js.
 const { tipoRep } = __req("tipos/_rep.js");
-const __default = tipoRep("palotes");
+const __default = tipoRep("palotes", 2);
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
 },
 "tipos/rep.recta.js": (__exp) => {
 // rep.recta · Leer y dibujar números con recta. Ver _rep.js.
 const { tipoRep } = __req("tipos/_rep.js");
-const __default = tipoRep("recta");
+const __default = tipoRep("recta", 2);
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
 },
 "tipos/rep.regletas.js": (__exp) => {
 // rep.regletas · Leer y dibujar números con regletas. Ver _rep.js.
 const { tipoRep } = __req("tipos/_rep.js");
-const __default = tipoRep("regletas");
+const __default = tipoRep("regletas", 2);
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
 },
@@ -14674,14 +14689,14 @@ function filaRecta(p, e, i, signo) {
   p.line(x0 - 8, y0, x0 + L + 8, y0, { lw: 1.4 });
   for (let k = 0; k <= N; k++) {
     p.line(x0 + k * step, y0 - 4, x0 + k * step, y0 + 4, { lw: 1.2 });
-    p.text(x0 + k * step, y0 - 14, String(desde + k * paso), 7.5, { f: "PM", anchor: "middle" });
+    p.text(x0 + k * step, y0 - 15, String(desde + k * paso), 11, { f: "PM", anchor: "middle" });
   }
   salto(p, x(a), x(e.solucion.huecos[0]), y0, `${signo === "+" ? "+" : MENOS}${b}`);
 }
 
 const __default = registrar({
   id: "restar.recta",
-  version: 1,
+  version: 2,
   generar(params, azar, { tamano }) {
     const R = params.rango ?? 10, N = R <= 10 ? 10 : R <= 20 ? 20 : 30;
     if (R >= 100) return { enunciado: "Salta hacia atrás en la recta y escribe el resultado.", ejercicios: recta2(params, azar, tamano, true) };
@@ -14718,7 +14733,7 @@ const { TOP, MENOS } = __req("render/papel.js");
 const { restasVert, vertical3 } = __req("tipos/_tres.js");
 const __default = registrar({
   id: "restar.vertical",
-  version: 1,
+  version: 2,
   generar(params, azar, { tamano }) {
     const R = params.rango ?? 30;
     if (R > 100) {
@@ -14754,8 +14769,8 @@ const __default = registrar({
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], { a, b } = e.datos, xt = x + cw / 2 - 17, xu = x + cw / 2 + 17;
       p.marco(x, y, cw, ch, i);
-      p.text(xt, y + ch - 20, "D", 9, { f: "PM", anchor: "middle", gris: 0.3 });
-      p.text(xu, y + ch - 20, "U", 9, { f: "PM", anchor: "middle", gris: 0.3 });
+      p.text(xt, y + ch - 20, "D", 11, { f: "PM", anchor: "middle", gris: 0.3 });
+      p.text(xu, y + ch - 20, "U", 11, { f: "PM", anchor: "middle", gris: 0.3 });
       [a, b].forEach((v, j) => {
         const yy = y + ch - 56 - j * 34;
         if (v >= 10) p.text(xt, yy, String(Math.floor(v / 10)), 24, { anchor: "middle" });
@@ -15130,7 +15145,7 @@ const N = 6;   // filas de la ficha: una por representación de resultado
 
 const __default = registrar({
   id: "suma.suma",
-  version: 1,
+  version: 2,
   generar(params, azar, { tamano }) {
     const R = params.rango ?? 20, [res, pool] = R <= 30 ? SUMA_30 : SUMA_100, usadas = new Set(), filas = [];
     for (const rk of azar.barajar(res)) {
@@ -15156,18 +15171,20 @@ const __default = registrar({
       [[d.repA, d.a], [d.repB, d.b]].forEach(([rep, n], j) => {
         const x = xs[j];
         p.tarjeta(x, y, bw, bh);
-        p.text(x + 12, y + bh - 17, NOMBRES[rep].toUpperCase(), 8.5, { f: "PM", gris: 0.3 });
+        p.rotulo(x + 12, y + bh - 17, NOMBRES[rep].toUpperCase(), 11, bw - 12 - 46);   // ≥ 9 pt impresos
         p.cuadrito(x, y, bw, bh, 28, e.solucion.huecos[j]);
         p.rep(rep, n, x + bw / 2, y + 8 + (bh - 8 - 36) / 2, { i: r * 2 + j, rango: R, escala: 0.82 });
       });
       const x = xs[2];
       p.tarjeta(x, y, bw, bh, 1.9);
       const t = "DIBUJA CON: " + NOMBRES[d.repRes].toUpperCase();
-      let fs = 8.5; while (p.ancho(t, "PM", fs) > bw - 24) fs -= 0.1;
-      p.text(x + bw / 2, y + bh - 17, t, fs, { f: "PM", anchor: "middle", gris: 0.3 });
-      p.plantilla(d.repRes, d.total, x + bw / 2, y + 28 + (bh - 52) / 2, { i: r, rango: R, escala: 0.8 });
-      p.text(x + 14, y + 11, "Resultado:", 9.5, { f: "PM" });
-      const tw = p.ancho("Resultado:", "PM", 9.5);
+      const dos = p.ancho(t, "PM", 11) > bw - 24;   // letra fija de 11 pt (≥ 9 pt impresos): si no cabe, «DIBUJA CON:» y el nombre en dos líneas
+      if (dos) p.rotulo(x + bw / 2, y + bh - 15, "DIBUJA CON:", 11, bw, { anchor: "middle" }), p.rotulo(x + bw / 2, y + bh - 15 - 12, t.slice(12), 11, bw - 24, { anchor: "middle" });
+      else p.text(x + bw / 2, y + bh - 17, t, 11, { f: "PM", anchor: "middle", gris: 0.3 });
+      const baja = dos ? 6 : 0;
+      p.plantilla(d.repRes, d.total, x + bw / 2, y + 28 + (bh - 52 - baja) / 2, { i: r, rango: R, escala: dos && ["cuadricula", "abaco", "bloques", "atados"].includes(d.repRes) ? 0.66 : 0.8 });
+      p.text(x + 14, y + 11, "Resultado:", 11, { f: "PM" });
+      const tw = p.ancho("Resultado:", "PM", 11);
       p.line(x + 14 + tw + 8, y + 11, x + bw - 14, y + 11, { lw: 1.2 });
       if (p.solucion) p.solucionEn((x + 14 + tw + 8 + x + bw - 14) / 2, y + 11 + 16 * 0.35 + 3, e.solucion.huecos[2], 16);
       p.text(xs[0] + bw + SYM / 2, y + bh / 2 - 9, "+", 26, { f: "PB", anchor: "middle" });
@@ -15780,7 +15797,7 @@ const { registrar } = __req("nucleo/tipos.js");
 const { recta2, filaRecta } = __req("tipos/restar.recta.js");
 const __default = registrar({
   id: "sumar.recta",
-  version: 1,
+  version: 2,
   generar(params, azar, { tamano }) {
     const R = params.rango ?? 10, N = R <= 10 ? 10 : R <= 20 ? 20 : 30, ejercicios = [];
     if (R >= 100) return { enunciado: "Sigue el salto en la recta y escribe el resultado.", ejercicios: recta2(params, azar, tamano, false) };
@@ -15873,7 +15890,7 @@ const { TOP } = __req("render/papel.js");
 const { sumasVert, vertical3 } = __req("tipos/_tres.js");
 const __default = registrar({
   id: "sumar.vertical",
-  version: 1,
+  version: 2,
   generar(params, azar, { tamano }) {
     if ((params.rango ?? 30) > 100) {
       const mil = params.rango > 1000, R = mil ? params.rango : Math.min(params.rango, 999);   // con rango 1000 (repaso de 2.º), hasta 999
@@ -15907,8 +15924,8 @@ const __default = registrar({
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], { a, b } = e.datos, xt = x + cw / 2 - 17, xu = x + cw / 2 + 17;
       p.marco(x, y, cw, ch, i);
-      p.text(xt, y + ch - 20, "D", 9, { f: "PM", anchor: "middle", gris: 0.3 });
-      p.text(xu, y + ch - 20, "U", 9, { f: "PM", anchor: "middle", gris: 0.3 });
+      p.text(xt, y + ch - 20, "D", 11, { f: "PM", anchor: "middle", gris: 0.3 });
+      p.text(xu, y + ch - 20, "U", 11, { f: "PM", anchor: "middle", gris: 0.3 });
       [a, b].forEach((v, j) => {
         const yy = y + ch - 56 - j * 34;
         if (v >= 10) p.text(xt, yy, String(Math.floor(v / 10)), 24, { anchor: "middle" });
@@ -16286,13 +16303,13 @@ function celda2(p, e, i, x, y, cw, ch) {
   ["centenas", "decenas", "unidades"].forEach((lab, j) => {
     const bx = x0 + j * 80;
     p.caja(bx, y + 12, 40, 34, null, 22, e.solucion.huecos[j]);
-    p.text(bx + 20, y + 52, lab, 9.5, { f: "PM", anchor: "middle" });
+    p.text(bx + 20, y + 52, lab, 11, { f: "PM", anchor: "middle" });
   });
 }
 
 const __default = registrar({
   id: "valor.agrupa",
-  version: 2,
+  version: 3,
   cantidad: true,
   generar(params, azar, ctx) {
     const R = params.rango ?? 20, cap = Math.min(R, 49), fijo = ctx.tamano === "media" ? 2 : 6;

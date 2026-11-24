@@ -14,7 +14,7 @@ const plato = (azar) => { for (;;) { const k = azar.entero(0, 3), m = azar.enter
 
 export default registrar({
   id: "medida.masa",
-  version: 2,
+  version: 3,
   cantidad: true,
   generar(params, azar, ctx) {
     const cnt = cuantosRejilla(ctx, 2, MIN_ALTO, [8, 4]), vistos = new Set(), ejercicios = [];
@@ -48,7 +48,8 @@ export default registrar({
         for (let j = 0; j < k + m; j++) {   // primero las de 1 kg (abajo) y encima las de ½ kg
           const grande = j < k, w = (grande ? 40 : 30) * esc, h = (grande ? 14 : 11) * esc;
           p.rrect(cx[s] - w / 2, yy, w, h, 2, { lw: 1.3 });
-          p.text(cx[s], yy + h / 2 - 3 * esc, grande ? "1 kg" : "½ kg", (grande ? 9 : 8) * esc, { f: "PB", anchor: "middle" });
+          const fs = Math.max(11, (grande ? 9 : 8) * esc);   // ≥ 9 pt impresos
+          p.text(cx[s], yy + h / 2 - 0.35 * fs, grande ? "1 kg" : "½ kg", fs, { f: "PB", anchor: "middle" });
           yy += h + 1;
         }
       });

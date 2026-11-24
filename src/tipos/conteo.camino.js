@@ -17,7 +17,7 @@ function flecha(p, x1, y1, x2, y2, hd = 4.5) {
 
 export default registrar({
   id: "conteo.camino",
-  version: 1,
+  version: 2,
   generar(params, azar) {
     const R = params.rango ?? 10, L = Math.min(36, R), desde = azar.entero(1, R - L + 1);
     const h = Math.min(L - 2, params.huecos ?? Math.max(3, Math.floor(L / 3)));
@@ -44,8 +44,8 @@ export default registrar({
         const [x, y] = pos(k), vac = huecos.includes(k);
         p.caja(x, y, CW, CH, vac ? null : s + k, 20, vac ? e.solucion.huecos[q++] : null);
       }
-      let [x, y] = pos(0); p.text(x + CW / 2, y + CH + 6, "SALIDA", 8.5, { f: "PM", anchor: "middle", gris: 0.3 });
-      [x, y] = pos(L - 1); p.text(x + CW / 2, y - 12, "META", 8.5, { f: "PM", anchor: "middle", gris: 0.3 });
+      let [x, y] = pos(0); p.text(x + CW / 2, y + CH + 6, "SALIDA", 11, { f: "PM", anchor: "middle", gris: 0.3 });
+      [x, y] = pos(L - 1); p.text(x + CW / 2, y - 12, "META", 11, { f: "PM", anchor: "middle", gris: 0.3 });
     });
   },
 });

@@ -8,19 +8,19 @@ import { registrar } from "../nucleo/tipos.js";
 import { TOP, T, B } from "../render/papel.js";
 
 export const BILLETES = { 5: [52, 28], 10: [56, 28], 20: [60, 28], 50: [64, 28], 100: [70, 28] };
-export const RADIO = { "€": { 1: 15, 2: 17 }, c: { 1: 10, 2: 11.5, 5: 13, 10: 12, 20: 14, 50: 15 } };
+export const RADIO = { "€": { 1: 15, 2: 17 }, c: { 1: 12.5, 2: 14, 5: 16.5, 10: 16, 20: 17.5, 50: 18.5 } };   // monedas de céntimos más grandes: rótulo de ≥ 9 pt impresos
 
 /** _item_dinero(): una moneda ("m") o un billete ("b") centrado en (x, y). */
 export function itemDinero(p, kind, v, x, y, u) {
   if (kind === "m") {
     const r = RADIO[u][v];
-    p.circle(x, y, r, { lw: 1.6 }); p.circle(x, y, r - 2.8, { lw: 0.7 });
-    p.text(x, y - 3, u === "€" ? `${v} €` : `${v} c`, u === "€" ? 9 : 7.5, { f: "PB", anchor: "middle" });
+    p.circle(x, y, r, { lw: 1.6 }); p.circle(x, y, r - 2.4, { lw: 0.7 });
+    p.text(x, y - 3, u === "€" ? `${v} €` : `${v} c`, u === "€" ? 11 : 10.5, { f: "PB", anchor: "middle" });
   } else {
     const [w, h] = BILLETES[v];
     p.rrect(x - w / 2, y - h / 2, w, h, 4, { lw: 1.6 });
     p.rrect(x - w / 2 + 3, y - h / 2 + 3, w - 6, h - 6, 0, { lw: 0.7 });
-    p.text(x, y - 4, `${v} €`, 11, { f: "PB", anchor: "middle" });
+    p.text(x, y - 4, `${v} €`, 11.5, { f: "PB", anchor: "middle" });
   }
 }
 
@@ -30,7 +30,7 @@ export const billetes = (R) => R > 100 ? [5, 10, 20, 50, 100] : [5, 10, 20];
 
 export default registrar({
   id: "medida.dinero",
-  version: 1,
+  version: 2,
   generar(params, azar, { tamano }) {
     const R = params.rango ?? 20;
     if (R < 10) throw new Error("Este modelo necesita un rango máximo de al menos 10.");

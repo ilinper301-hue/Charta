@@ -79,7 +79,7 @@ export function tipoRep(nombre, version = 1) {
           p.rep(nombre, n, gx, gy, { i: idx, centenas, millares });
         } else {
           p.marco(x, y, cw, ch);
-          p.text(x + 14, y + ch - 20, "DIBUJA", 8.5, { f: "PM", gris: 0.3 });
+          p.text(x + 14, y + ch - 20, "DIBUJA", 11, { f: "PM", gris: 0.3 });
           p.text(x + cw - 16, y + ch - 36, String(n), 28, { f: "PB", anchor: "end" });
           p.plantilla(nombre, n, gx, gy, { i: idx, centenas, millares });
         }

@@ -28,7 +28,7 @@ export function letrasPara(p, t) {
 
 export default registrar({
   id: "fono.posicion",
-  version: 2,
+  version: 3,
   cantidad: true,
   generar(params, azar, ctx) {
     const ps = conTope(cuantosRejilla(ctx, 2, MIN_ALTO, [20, 10]), cuantas(ctx.tamano, 10), (n) => {
@@ -56,7 +56,7 @@ export default registrar({
       p.text(x + x0 + q / 2, arriba.y + arriba.h / 2 - lf * 0.35, letra, lf, { f: "PB", anchor: "middle" });
       const wp = w - q - 14, fs = ajusta(p, (f) => p.ancho(palabra, "PB", f), wp, Math.min(26, arriba.h * 0.8), 10);
       p.text(x + x0 + q + 14 + wp / 2, arriba.y + arriba.h / 2 - fs * 0.35, palabra, fs, { f: "PB", anchor: "middle" });
-      const lb = Math.min(11, abajo.h * 0.5);
+      const lb = 11;   // ≥ 9 pt impresos
       ETIQUETAS.forEach((t, k) => {
         const bx = x + x0 + k * (bw + gap), marca = p.solucion && e.solucion.marca === k;
         p.rrect(bx, abajo.y, bw, abajo.h, 7, { lw: marca ? 2.2 : 1.5, fill: marca ? "#F6C9C9" : 1, stroke: marca ? COLOR_SOLUCION : INK });

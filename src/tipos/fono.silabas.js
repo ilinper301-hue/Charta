@@ -14,7 +14,7 @@ const MIN_ALTO = 40;   // alto mínimo de tarjeta con «Más ejercicios»
 
 export default registrar({
   id: "fono.silabas",
-  version: 2,
+  version: 3,
   cantidad: true,
   generar(params, azar, ctx) {
     const n = cuantosRejilla(ctx, 2, MIN_ALTO, [20, 10]), respuesta = params.respuesta === "numero" ? "numero" : "colorea";
@@ -33,14 +33,14 @@ export default registrar({
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], { palabra, n, respuesta } = e.datos;
       p.marco(x, y, cw, ch, i);
-      const num = respuesta === "numero", rw = num ? 44 + 5 + p.ancho("sílabas", "PM", 10) : 4 * 24 + 3 * 4;   // ancho de lo que va a la derecha
+      const num = respuesta === "numero", rw = num ? 44 + 5 + p.ancho("sílabas", "PM", 11) : 4 * 24 + 3 * 4;   // ancho de lo que va a la derecha
       const aw = cw - x0 - x1 - rw - 10, fs = ajusta(p, (q) => p.ancho(palabra, "PB", q), aw, Math.min(28, ch * 0.46), 10);
       p.text(x + x0, y + ch / 2 - fs * 0.35, palabra, fs, { f: "PB" });
       const rx = x + cw - x1 - rw;
       if (num) {
         const bh = Math.min(36, ch * 0.7);
         p.caja(rx, y + (ch - bh) / 2, 44, bh, null, 22, n);
-        p.text(rx + 49, y + ch / 2 - 10 * 0.35, "sílabas", 10, { f: "PM", gris: 0.35 });
+        p.text(rx + 49, y + ch / 2 - 10 * 0.35, "sílabas", 11, { f: "PM", gris: 0.35 });
       } else casillas(p, rx, y, rw, ch, 4, { rellenar: n, ancho: 24, alto: qa, gap: 4 });
     }));
   },

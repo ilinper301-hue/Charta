@@ -30,13 +30,13 @@ function celda2(p, e, i, x, y, cw, ch) {
   ["centenas", "decenas", "unidades"].forEach((lab, j) => {
     const bx = x0 + j * 80;
     p.caja(bx, y + 12, 40, 34, null, 22, e.solucion.huecos[j]);
-    p.text(bx + 20, y + 52, lab, 9.5, { f: "PM", anchor: "middle" });
+    p.text(bx + 20, y + 52, lab, 11, { f: "PM", anchor: "middle" });
   });
 }
 
 export default registrar({
   id: "valor.agrupa",
-  version: 2,
+  version: 3,
   cantidad: true,
   generar(params, azar, ctx) {
     const R = params.rango ?? 20, cap = Math.min(R, 49), fijo = ctx.tamano === "media" ? 2 : 6;

@@ -10,7 +10,7 @@ import { dibujarSerie, elegirHuecos, MIN_ALTO_SERIE } from "./conteo.series.js";
 
 export default registrar({
   id: "conteo.serie1",
-  version: 2,
+  version: 3,
   cantidad: true,
   generar(params, azar, ctx) {
     const R = params.rango ?? 10, h = params.huecos ?? 3, s = 1;

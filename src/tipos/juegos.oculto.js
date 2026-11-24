@@ -33,7 +33,7 @@ function pistas(t, R, azar) {
 
 export default registrar({
   id: "juegos.oculto",
-  version: 2,
+  version: 3,
   cantidad: true,
   generar(params, azar, ctx) {
     const R = params.rango ?? 10;

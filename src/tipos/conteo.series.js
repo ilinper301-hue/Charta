@@ -45,7 +45,7 @@ export function dibujarSerie(p, act) {
     const y = cel[i][1];
     p.tarjeta(M, y, W - 2 * M, rh);
     p.text(M + 16, y + rh / 2 + 2, `de ${paso} en ${paso}`, 12.5, { f: "PB" });
-    p.text(M + 34, y + rh / 2 - 14, sube ? "sube" : "baja", 9.5, { f: "PM", gris: 0.3 });
+    p.text(M + 34, y + rh / 2 - 14, sube ? "sube" : "baja", 11, { f: "PM", gris: 0.3 });
     const ty = y + rh / 2 - 10.5;
     p.path(sube ? [["M", M + 16, ty - 4], ["L", M + 28, ty - 4], ["L", M + 22, ty + 4], ["Z"]]
                 : [["M", M + 16, ty + 4], ["L", M + 28, ty + 4], ["L", M + 22, ty - 4], ["Z"]], { fill: INK, stroke: null });
@@ -59,7 +59,7 @@ export function dibujarSerie(p, act) {
 
 export default registrar({
   id: "conteo.series",
-  version: 2,
+  version: 3,
   cantidad: true,
   generar(params, azar, ctx) {
     return generarSerie((params.rango ?? 10) >= 20 ? [1, 2, 5, 10] : [1, 2, 5], params, azar, ctx,

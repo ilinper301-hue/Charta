@@ -8,7 +8,7 @@ import { recta2, filaRecta } from "./restar.recta.js";
 
 export default registrar({
   id: "sumar.recta",
-  version: 1,
+  version: 2,
   generar(params, azar, { tamano }) {
     const R = params.rango ?? 10, N = R <= 10 ? 10 : R <= 20 ? 20 : 30, ejercicios = [];
     if (R >= 100) return { enunciado: "Sigue el salto en la recta y escribe el resultado.", ejercicios: recta2(params, azar, tamano, false) };

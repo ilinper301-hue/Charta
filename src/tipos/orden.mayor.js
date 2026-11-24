@@ -18,7 +18,7 @@ const MIN_ALTO = 86;   // alto mínimo de tarjeta con «Más ejercicios»
 
 export default registrar({
   id: "orden.mayor",
-  version: 3,
+  version: 4,
   cantidad: true,
   generar(params, azar, ctx) {
     const R = params.rango ?? 10, cnt = cuantosRejilla(ctx, 3, MIN_ALTO, [15, 6]), modo = params.modo || "mezcla";
