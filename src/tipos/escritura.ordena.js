@@ -2,14 +2,14 @@
 // datos:    { letras: [casillas desordenadas, en el caso elegido], palabra }   (v2: «qu», «ch», «ll», «rr» y «gu» ante e/i van en UNA casilla, como se enseñan)   (cada ejercicio es una tarjeta: ESPACIO EN BLANCO para el dibujo —Charta no hace
 //           dibujos: Iván pega el suyo—, las letras desordenadas en casillas y un renglón de pauta para escribir la palabra)
 // solucion: { huecos: [palabra] }   la palabra solo sale en pantalla (solucionario y Fori), en rojo sobre la pauta; en el papel no se imprime
-// Reglas: nombres del léxico que se pueden dibujar (campo «dibujo») de 3 a 6 casillas, sin tildes ni «ü», y con al menos dos casillas distintas; las letras mostradas nunca están ya en orden. Sin repetir. Completa 8 (2 × 4), media 4 (2 × 2). Respeta el mapa de letras.
+// Reglas: nombres del léxico que se pueden dibujar (campo «dibujo») de 3 a 6 casillas, sin tildes ni «ü», y con al menos dos casillas distintas; las letras mostradas nunca están ya en orden. Sin repetir. Cantidad: «Más grandes» 8 (2 × 4; media 4 = 2 × 2), «Más ejercicios» las que caben con tarjetas ≥ 90 + 8·mm de pauta (130 pt con 5 mm); la tarjeta más alta deja más espacio al dibujo. Respeta el mapa de letras.
 //         No exige solución única entre anagramas (sol/los): la palabra la fija el dibujo que pegue la maestra.
 // Aspecto (idéntico a la ficha de Iván): tarjeta de borde verde azulado, casillas de borde rojo con la letra y pauta Lamela de cuatro líneas
 //         (las dos del cuerpo negras y las de las astas y los rabos grises).
 // Opciones: casillas de cada palabra (3 a 6 variadas / 3 / 4 / 5 / 6) · tipo de sílabas · letra (minúscula / MAYÚSCULA) · grafía (trazo / escolar ligada: letras de las casillas y palabra de la solución en Escolar) · pauta (5, 4, 3,5 mm).
 import { registrar } from "../nucleo/tipos.js";
-import { TOP, COLOR_SOLUCION, INK } from "../render/papel.js";
-import { cuantas, candidatas } from "./_lengua.js";
+import { TOP, COLOR_SOLUCION, INK, cuantosRejilla } from "../render/papel.js";
+import { cuantas, candidatas, conTope } from "./_lengua.js";
 import { avisoVistas } from "../lengua/vistas.js";
 import { mmDe, anchoTexto } from "./_escritura.js";
 import { pautaLamela } from "../lengua/pauta.js";
@@ -18,6 +18,8 @@ import { VERDE_RECUADRO } from "./palabra.dibuja.js";
 
 /** Rojo de las casillas de letras de la ficha de Iván. */
 export const ROJO_CASILLA = "#E34C38";
+/** Alto mínimo de tarjeta con «Más ejercicios»: pauta + casillas + un espacio para el dibujo (crece con la pauta). */
+const minAlto = (params) => Math.round(90 + 8 * mmDe(params));
 const CE = 6.5;   // cuerpo de la letra escolar dentro de las casillas (x = 6,5 pt, asta a 13 pt: cabe en 22)
 const TAM_CASILLA = 22, SEP_CASILLA = 7, PAD = 12;
 
@@ -43,26 +45,13 @@ function elegirPorCasillas(azar, n, lista, largos) {
 
 export default registrar({
   id: "escritura.ordena",
-  version: 2,
-  generar(params, azar, { tamano }) {
-    const n = cuantas(tamano, 8), mayus = params.caso === "mayus";
-    const largos = Number.isInteger(params.letras) ? [params.letras] : [3, 4, 5, 6, 4, 3, 5, 4];
-    const lista = candidatas(params, { cat: "n", dibujo: true, minLetras: 3, maxLetras: 9 }).filter((e) => !/[áéíóúü]/.test(e.p))
-      .map((e) => ({ ...e, p: e.p, cas: casillasDe(e.p) })).filter((e) => e.cas.length >= 3 && e.cas.length <= 6);
-    const ps = elegirPorCasillas(azar, n, lista, largos);
-    return {
-      enunciado: "Ordena las letras y escribe el nombre del dibujo en la pauta.",
-      ejercicios: azar.barajar(ps).map(({ p, cas }) => {
-        const ls = cas;
-        let mez = azar.barajar(ls);
-        while (mez.join("") === p) mez = azar.barajar(ls);   // nunca ya ordenadas
-        const t = (s) => (mayus ? s.toUpperCase() : s);
-        return { datos: { letras: mez.map(t), palabra: t(p) }, solucion: { huecos: [t(p)] } };
-      }),
-    };
+  version: 3,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    return conTope(cuantosRejilla(ctx, 2, minAlto(params), [8, 4]), cuantas(ctx.tamano, 8), (n) => elegir(params, azar, n));
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 2, 4, 18, 8), c = p.mm(mmDe(act.params)), esc = act.params.grafia === "escolar";
+    const { cel, cw, ch } = p.rejilla(TOP, 2, Math.ceil(act.ejercicios.length / 2), 18, 8), c = p.mm(mmDe(act.params)), esc = act.params.grafia === "escolar";
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], ls = e.datos.letras;
       p.rrect(x, y, cw, ch, 14, { lw: 1.1, fill: 1, stroke: VERDE_RECUADRO });
@@ -85,3 +74,21 @@ export default registrar({
     }));
   },
 });
+
+function elegir(params, azar, n) {
+  const mayus = params.caso === "mayus";
+  const largos = Number.isInteger(params.letras) ? [params.letras] : [3, 4, 5, 6, 4, 3, 5, 4];
+  const lista = candidatas(params, { cat: "n", dibujo: true, minLetras: 3, maxLetras: 9 }).filter((e) => !/[áéíóúü]/.test(e.p))
+    .map((e) => ({ ...e, p: e.p, cas: casillasDe(e.p) })).filter((e) => e.cas.length >= 3 && e.cas.length <= 6);
+  const ps = elegirPorCasillas(azar, n, lista, largos);
+  return {
+    enunciado: "Ordena las letras y escribe el nombre del dibujo en la pauta.",
+    ejercicios: azar.barajar(ps).map(({ p, cas }) => {
+      const ls = cas;
+      let mez = azar.barajar(ls);
+      while (mez.join("") === p) mez = azar.barajar(ls);   // nunca ya ordenadas
+      const t = (s) => (mayus ? s.toUpperCase() : s);
+      return { datos: { letras: mez.map(t), palabra: t(p) }, solucion: { huecos: [t(p)] } };
+    }),
+  };
+}

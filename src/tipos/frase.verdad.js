@@ -4,31 +4,38 @@
 // Reglas: la base de _frase.js (hechosVerdad). Sí: lo que hace de verdad cada animal, persona o cosa (los mismos hechos que usan las demás frases);
 //         No: algo imposible sin discusión (La vaca vuela, La mesa corre, El gato lee un libro, La nieve es negra, El gato come una silla).
 //         Mitad Sí y mitad No, mezcladas; frases de 3 a 5 palabras con concordancia; sin repetir frase ni (mientras haya) sujeto.
-// Opciones: letra (minúscula / MAYÚSCULAS). Completa: 12 frases; media: 6.
+// Opciones: letra (minúscula / MAYÚSCULAS). Cantidad: «Más grandes» 12 frases (media: 6), «Más ejercicios» las que caben con tarjetas ≥ 40 pt.
 import { registrar } from "../nucleo/tipos.js";
-import { TOP } from "../render/papel.js";
+import { TOP, cuantosRejilla } from "../render/papel.js";
 import { rodear } from "../lengua/dibujo.js";
-import { cuantas, ajusta } from "./_lengua.js";
+import { cuantas, ajusta, conTope, crece } from "./_lengua.js";
 import { elegirVerdades, textoFrase, frAlCaso } from "./_frase.js";
+
+const MIN_ALTO = 40;   // alto mínimo de tarjeta con «Más ejercicios»
 
 export default registrar({
   id: "frase.verdad",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    const n = cuantas(tamano, 12), mayus = params.caso === "mayus";
-    return {
-      enunciado: mayus ? "LEE LA FRASE. SI ES VERDAD, RODEA SÍ.\nSI NO LO ES, RODEA NO." : "Lee la frase. Si es verdad, rodea Sí.\nSi no lo es, rodea No.",
-      ejercicios: elegirVerdades(azar, n).map((h) => ({ datos: { frase: frAlCaso(textoFrase(h.palabras), params.caso) }, solucion: { huecos: [], rodea: h.verdad ? 0 : 1 } })),
-    };
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    return conTope(cuantosRejilla(ctx, 1, MIN_ALTO, [12, 6]), cuantas(ctx.tamano, 12), (n) => elegir(params, azar, n));
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 1, 12, 10, 8), mayus = act.params.caso === "mayus", ops = mayus ? ["SÍ", "NO"] : ["Sí", "No"];
+    const { cel, cw, ch } = p.rejilla(TOP, 1, act.ejercicios.length), k = crece(ch, 50), mayus = act.params.caso === "mayus", ops = mayus ? ["SÍ", "NO"] : ["Sí", "No"];
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], { frase } = e.datos;
       p.marco(x, y, cw, ch, i);
-      const fs = ajusta(p, (q) => p.ancho(frase, "PB", q), cw - 250, 22);
+      const fs = ajusta(p, (q) => p.ancho(frase, "PB", q), cw - 250 * k, Math.min(22 * k, ch * 0.5));
       p.text(x + 40, y + ch / 2 - fs * 0.35, frase, fs, { f: "PB" });
-      rodear(p, x + cw - 190, y, 170, ch, ops, e.solucion.rodea, { fs: 20, gap: 22 });
+      rodear(p, x + cw - 190 * k, y, 170 * k, ch, ops, e.solucion.rodea, { fs: Math.min(20 * k, ch * 0.45), gap: 22 });
     }));
   },
 });
+
+function elegir(params, azar, n) {
+  const mayus = params.caso === "mayus";
+  return {
+    enunciado: mayus ? "LEE LA FRASE. SI ES VERDAD, RODEA SÍ.\nSI NO LO ES, RODEA NO." : "Lee la frase. Si es verdad, rodea Sí.\nSi no lo es, rodea No.",
+    ejercicios: elegirVerdades(azar, n).map((h) => ({ datos: { frase: frAlCaso(textoFrase(h.palabras), params.caso) }, solucion: { huecos: [], rodea: h.verdad ? 0 : 1 } })),
+  };
+}

@@ -58,6 +58,9 @@ export const largosDe = (params, variadas) => (Number.isInteger(params.largo) ? 
 /** Cantidad de ejercicios: la de la página completa o su mitad en media página. */
 export const cuantas = (tamano, completa) => (tamano === "media" ? completa / 2 : completa);
 
+/** Factor de crecimiento del contenido de una tarjeta: 1 con su alto de referencia (el de «Más grandes» de siempre) y hasta ×1,3 si la tarjeta es más alta. */
+export const crece = (ch, ref) => Math.min(1.3, Math.max(1, ch / ref));
+
 /** 2 columnas (Espacio en la ficha): intenta `n` ejercicios (el doble); si el banco no da, baja de uno en uno hasta `base` (los de siempre) = el máximo sin repetir. */
 export function conTope(n, base, hacer) {
   for (let k = n; ; k--) {

@@ -9,11 +9,11 @@
 // Con letras elegidas (vistas.js) solo entran filas cuyas sílabas se escriben con ellas (todas las letras de la fila); una «letra» concreta de las opciones se
 //   respeta aunque no esté elegida (las demás letras de sus sílabas, p. ej. la coda de «man», sí deben estarlo). Sin «letra», si hay menos de 12 filas
 //   utilizables la tabla lleva menos filas (mínimo 3).
-// 12 filas de 5 sílabas.
+// 12 filas de 5 sílabas; «Más ejercicios»: las filas que caben con alto ≥ 40 pt (17; con tipo inversas o trabadas solo hay 12 filas distintas, y las estira).
 import { registrar } from "../nucleo/tipos.js";
-import { TOP } from "../render/papel.js";
+import { TOP, cuantosRejilla } from "../render/papel.js";
 import { filtrarVistas, permitida, avisoVistas } from "../lengua/vistas.js";
-import { alCaso } from "./_lengua.js";
+import { alCaso, crece } from "./_lengua.js";
 
 const V = [..."aeiou"];
 export const CONSONANTES = ["m", "p", "s", "l", "t", "d", "n", "f", "b", "v", "r", "j", "c", "z", "g", "h", "ñ", "ch", "ll"];
@@ -29,13 +29,14 @@ export function filasDe(tipo) {
   if (tipo === "mixtas") return INICIAL_MIXTA.flatMap((c) => CODAS_MIXTA.map((k) => ({ cons: c, sil: V.map((v) => c + v + k) })));
   return CONSONANTES.map((c) => ({ cons: c, sil: DIRECTA[c] || V.map((v) => c + v) }));
 }
-const FILAS = 12;
+const FILAS = 12, MIN_ALTO = 40;   // filas de siempre · alto mínimo de fila con «Más ejercicios»
 
 export default registrar({
   id: "silaba.tabla",
-  version: 1,
-  generar(params, azar) {
-    const tipo = params.tipo || "directas", mezcla = params.orden === "mezcladas";
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const FILAS_N = cuantosRejilla(ctx, 1, MIN_ALTO, [FILAS, FILAS]), tipo = params.tipo || "directas", mezcla = params.orden === "mezcladas";
     let pool = filasDe(tipo);
     if (params.letra) {
       pool = pool.filter((f) => f.cons === params.letra);
@@ -43,12 +44,12 @@ export default registrar({
       pool = pool.filter((f) => permitida(f.sil.join("").split(params.letra).join("")));
       if (!pool.length) throw new Error(`«silaba.tabla» necesita sílabas ${tipo} con «${params.letra}» escritas con letras elegidas.` + avisoVistas());
     } else pool = filtrarVistas(pool, (f) => f.sil.join(""));
-    const nf = Math.min(FILAS, pool.length);
+    const nf = Math.min(FILAS_N, pool.length);
     if (!params.letra && nf < 3) throw new Error(`«silaba.tabla» necesita al menos 3 filas de sílabas ${tipo}: con esas opciones solo hay ${nf}.` + avisoVistas());
     let filas;
     if (params.letra) {
       const base = pool.length === 1 ? pool : azar.muestra(pool, Math.min(pool.length, 3));   // mixtas/trabadas: varias codas o grupos de la misma letra
-      filas = Array.from({ length: FILAS }, (_, r) => {
+      filas = Array.from({ length: FILAS_N }, (_, r) => {
         const b = base[r % base.length], sil = b.sil;
         return mezcla ? azar.barajar(sil) : [...sil.slice(Math.floor(r / base.length) % 5), ...sil.slice(0, Math.floor(r / base.length) % 5)];
       });
@@ -66,9 +67,9 @@ export default registrar({
     };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 1, FILAS, 10, 6);
+    const { cel, cw, ch } = p.rejilla(TOP, 1, Math.max(act.ejercicios.length, FILAS), 10, 6), k = crece(ch, 51);
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
-      const [x, y] = cel[i], n = e.datos.silabas.length, x0 = x + 50, w = cw - 64, fs = 30;
+      const [x, y] = cel[i], n = e.datos.silabas.length, x0 = x + 50, w = cw - 64, fs = Math.min(30 * k, ch * 0.62);
       p.marco(x, y, cw, ch, i);
       e.datos.silabas.forEach((s, k) => p.text(x0 + (k + 0.5) * (w / n), y + ch / 2 - fs * 0.35, s, fs, { f: "PB", anchor: "middle" }));
     }));
