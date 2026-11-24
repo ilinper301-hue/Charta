@@ -104,6 +104,14 @@ const CASOS = [
   { nombre: "3.º familia de la multiplicación y la división", semilla: 7, opciones: { actividades: [{ tipo: "dividir.familia", curso: 3 }, { tipo: "dividir.familia", curso: 3, params: { modo: "libre" } }] } },
   { nombre: "3.º problemas de dividir", semilla: 7, opciones: { actividades: [{ tipo: "problemas.division", curso: 3 }] } },
   { nombre: "3.º problemas de dividir con resto", semilla: 7, opciones: { actividades: [{ tipo: "problemas.division", curso: 3, params: { modo: "resto" } }] } },
+  // 3.º · lote 5 (fracciones)
+  { nombre: "3.º qué parte está coloreada", semilla: 7, opciones: { actividades: [{ tipo: "fraccion.lee", curso: 3 }] } },
+  { nombre: "3.º qué parte está coloreada y cómo se lee, y colorea la fracción en media", semilla: 7, opciones: { actividades: [{ tipo: "fraccion.lee", curso: 3, params: { modo: "lee" } }, { tipo: "fraccion.colorea", curso: 3, params: { den: 6 } }] } },
+  { nombre: "3.º la fracción en letras", semilla: 7, opciones: { actividades: [{ tipo: "fraccion.letras", curso: 3 }] } },
+  { nombre: "3.º más ejercicios: la fracción en letras", semilla: 7, opciones: { cantidad: "mas", actividades: [{ tipo: "fraccion.letras", curso: 3, params: { modo: "escribir" } }] } },
+  { nombre: "3.º compara fracciones (mezcla, con tiras)", semilla: 7, opciones: { actividades: [{ tipo: "fraccion.compara", curso: 3, params: { modo: "mezcla" } }] } },
+  { nombre: "3.º la fracción de un número y en la recta en media", semilla: 7, opciones: { actividades: [{ tipo: "fraccion.de", curso: 3, params: { tipo: "varias" } }, { tipo: "fraccion.recta", curso: 3 }] } },
+  { nombre: "3.º fracciones en la recta: marca", semilla: 7, opciones: { actividades: [{ tipo: "fraccion.recta", curso: 3, params: { modo: "marca" } }] } },
   { nombre: "3.º reparto con el signo ÷", semilla: 7, opciones: { actividades: [{ tipo: "multiplicar.reparto", curso: 3, params: { signo: true } }, { tipo: "multiplicar.reparto", curso: 3, params: { modo: "mitad", signo: true } }] } },
   // Espacio en la ficha · paso 3, lote 5 (multiplicar y medida)
   ...["multiplicar.grupos", "multiplicar.tablas", "medida.capacidad", "medida.masa", "medida.precios"].map((t) => ({ nombre: "más ejercicios: " + t, semilla: 4, opciones: { cantidad: "mas", actividades: [{ tipo: t }] } })),

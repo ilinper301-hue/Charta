@@ -152,6 +152,13 @@ META = {
     "dividir.vertical": (3, 15, "dividir caja algoritmo resto cociente una_cifra"),
     "dividir.familia": (2, 10, "dividir multiplicar familia operaciones_inversas"),
     "problemas.division": (3, 15, "dividir problemas reparto agrupamiento resto texto razonamiento"),
+    # 3.º · lote 5 · fracciones
+    "fraccion.lee": (2, 10, "fracciones partes figuras numerador denominador"),
+    "fraccion.colorea": (1, 10, "fracciones colorear partes figuras"),
+    "fraccion.letras": (2, 10, "fracciones lectura escritura nombres"),
+    "fraccion.compara": (3, 10, "fracciones comparar mayor_menor"),
+    "fraccion.de": (3, 15, "fracciones fracción_de_un_número dividir grupos"),
+    "fraccion.recta": (3, 10, "fracciones recta_numérica"),
     "rep.romanos": (3, 10, "números romanos numeración_romana símbolos"),
     # Bloque 11 · estadística y patrones
     "estadistica.pictograma": (2, 12, "estadística pictograma datos"),

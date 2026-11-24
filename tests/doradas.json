@@ -6601,6 +6601,1187 @@
    "9dea063ccd0408f6"
   ]
  },
+ "fraccion.colorea": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Colorea la fracción",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "fraccion.colorea",
+       "tipoVersion": 1,
+       "params": {
+        "figura": null,
+        "den": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Colorea la parte de la figura que indica la fracción.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "fig": "rect",
+          "n": 11,
+          "k": 8
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": 8
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "fig": "tira",
+          "n": 8,
+          "k": 3
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": 3
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "fig": "circulo",
+          "n": 6,
+          "k": 3
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": 3
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "fig": "rect",
+          "n": 9,
+          "k": 2
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": 2
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "fig": "tira",
+          "n": 5,
+          "k": 1
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": 1
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "fig": "circulo",
+          "n": 12,
+          "k": 1
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": 1
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "fig": "rect",
+          "n": 8,
+          "k": 7
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": 7
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "fig": "tira",
+          "n": 4,
+          "k": 1
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": 1
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "fig": "circulo",
+          "n": 7,
+          "k": 6
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": 6
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "fig": "rect",
+          "n": 10,
+          "k": 7
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": 7
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "fig": "tira",
+          "n": 3,
+          "k": 1
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": 1
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "fig": "circulo",
+          "n": 2,
+          "k": 1
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": 1
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "ca5f66c0a19a2129"
+  ],
+  "svgSolucion": [
+   "9c26917c6bd98b7f"
+  ]
+ },
+ "fraccion.compara": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Compara fracciones",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "fraccion.compara",
+       "tipoVersion": 1,
+       "params": {
+        "modo": null,
+        "dibujo": true,
+        "den": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Compara las fracciones y escribe < o >.\nLas tiras te ayudan.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "a": [
+           6,
+           11
+          ],
+          "b": [
+           7,
+           11
+          ],
+          "igual": "den",
+          "dibujo": true
+         },
+         "solucion": {
+          "huecos": [
+           "<"
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "a": [
+           3,
+           6
+          ],
+          "b": [
+           5,
+           6
+          ],
+          "igual": "den",
+          "dibujo": true
+         },
+         "solucion": {
+          "huecos": [
+           "<"
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "a": [
+           4,
+           12
+          ],
+          "b": [
+           6,
+           12
+          ],
+          "igual": "den",
+          "dibujo": true
+         },
+         "solucion": {
+          "huecos": [
+           "<"
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": [
+           4,
+           10
+          ],
+          "b": [
+           2,
+           10
+          ],
+          "igual": "den",
+          "dibujo": true
+         },
+         "solucion": {
+          "huecos": [
+           ">"
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "a": [
+           1,
+           9
+          ],
+          "b": [
+           2,
+           9
+          ],
+          "igual": "den",
+          "dibujo": true
+         },
+         "solucion": {
+          "huecos": [
+           "<"
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": [
+           3,
+           7
+          ],
+          "b": [
+           1,
+           7
+          ],
+          "igual": "den",
+          "dibujo": true
+         },
+         "solucion": {
+          "huecos": [
+           ">"
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "a": [
+           2,
+           5
+          ],
+          "b": [
+           1,
+           5
+          ],
+          "igual": "den",
+          "dibujo": true
+         },
+         "solucion": {
+          "huecos": [
+           ">"
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "a": [
+           3,
+           8
+          ],
+          "b": [
+           6,
+           8
+          ],
+          "igual": "den",
+          "dibujo": true
+         },
+         "solucion": {
+          "huecos": [
+           "<"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "d7f12396d3943fca"
+  ],
+  "svgSolucion": [
+   "c7ba556996fcf87e"
+  ]
+ },
+ "fraccion.de": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "La fracción de un número",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "fraccion.de",
+       "tipoVersion": 1,
+       "params": {
+        "tipo": null,
+        "ayuda": true,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Colorea los grupos que indica la fracción y escribe el resultado.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "k": 1,
+          "n": 6,
+          "N": 24,
+          "ayuda": true
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "k": 1,
+          "n": 3,
+          "N": 15,
+          "ayuda": true
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "k": 1,
+          "n": 2,
+          "N": 10,
+          "ayuda": true
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "k": 1,
+          "n": 5,
+          "N": 20,
+          "ayuda": true
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "k": 1,
+          "n": 4,
+          "N": 20,
+          "ayuda": true
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "k": 1,
+          "n": 5,
+          "N": 15,
+          "ayuda": true
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "d7aae4ab5f70b86f"
+  ],
+  "svgSolucion": [
+   "a1084d09ba84d797"
+  ]
+ },
+ "fraccion.lee": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "¿Qué parte está coloreada?",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "fraccion.lee",
+       "tipoVersion": 1,
+       "params": {
+        "figura": null,
+        "den": null,
+        "modo": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "¿Qué parte está coloreada? Escribe la fracción.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "fig": "rect",
+          "n": 11,
+          "k": 8,
+          "llenas": [
+           0,
+           1,
+           2,
+           3,
+           4,
+           5,
+           6,
+           7
+          ],
+          "lee": false
+         },
+         "solucion": {
+          "huecos": [
+           8,
+           11
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "fig": "tira",
+          "n": 8,
+          "k": 3,
+          "llenas": [
+           0,
+           1,
+           2
+          ],
+          "lee": false
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "fig": "circulo",
+          "n": 6,
+          "k": 3,
+          "llenas": [
+           0,
+           1,
+           2
+          ],
+          "lee": false
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "fig": "rect",
+          "n": 9,
+          "k": 2,
+          "llenas": [
+           3,
+           8
+          ],
+          "lee": false
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "fig": "tira",
+          "n": 5,
+          "k": 1,
+          "llenas": [
+           0
+          ],
+          "lee": false
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "fig": "circulo",
+          "n": 12,
+          "k": 1,
+          "llenas": [
+           0
+          ],
+          "lee": false
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           12
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "fig": "rect",
+          "n": 8,
+          "k": 7,
+          "llenas": [
+           1,
+           2,
+           3,
+           4,
+           5,
+           6,
+           7
+          ],
+          "lee": false
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "fig": "tira",
+          "n": 4,
+          "k": 1,
+          "llenas": [
+           0
+          ],
+          "lee": false
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "fig": "circulo",
+          "n": 7,
+          "k": 6,
+          "llenas": [
+           0,
+           1,
+           2,
+           3,
+           4,
+           5
+          ],
+          "lee": false
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "fig": "rect",
+          "n": 10,
+          "k": 7,
+          "llenas": [
+           0,
+           1,
+           3,
+           4,
+           6,
+           7,
+           8
+          ],
+          "lee": false
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "fig": "tira",
+          "n": 3,
+          "k": 1,
+          "llenas": [
+           0
+          ],
+          "lee": false
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "fig": "circulo",
+          "n": 2,
+          "k": 1,
+          "llenas": [
+           0
+          ],
+          "lee": false
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           2
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "7f84ebf8b0283608"
+  ],
+  "svgSolucion": [
+   "464ad17755df0cb8"
+  ]
+ },
+ "fraccion.letras": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "La fracción en letras",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "fraccion.letras",
+       "tipoVersion": 1,
+       "params": {
+        "modo": null,
+        "den": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Escribe cómo se lee cada fracción o escríbela con números.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "k": 8,
+          "n": 11,
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           8,
+           11
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "k": 3,
+          "n": 8,
+          "sentido": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           "tres octavos"
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "k": 3,
+          "n": 6,
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "k": 2,
+          "n": 9,
+          "sentido": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           "dos novenos"
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "k": 1,
+          "n": 5,
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "k": 1,
+          "n": 12,
+          "sentido": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           "un doceavo"
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "k": 7,
+          "n": 8,
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "k": 1,
+          "n": 4,
+          "sentido": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           "un cuarto"
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "k": 6,
+          "n": 7,
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "k": 7,
+          "n": 10,
+          "sentido": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           "siete décimos"
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "k": 1,
+          "n": 3,
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "k": 1,
+          "n": 2,
+          "sentido": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           "un medio"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "dd6721898665412f"
+  ],
+  "svgSolucion": [
+   "d7c4dc288617265c"
+  ]
+ },
+ "fraccion.recta": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Fracciones en la recta",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "fraccion.recta",
+       "tipoVersion": 1,
+       "params": {
+        "modo": null,
+        "den": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Escribe la fracción de cada punto señalado.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "n": 9,
+          "puntos": [
+           2,
+           5
+          ],
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           9,
+           5,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "n": 6,
+          "puntos": [
+           3,
+           5
+          ],
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           6,
+           5,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "n": 12,
+          "puntos": [
+           2,
+           10
+          ],
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           12,
+           10,
+           12
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "n": 3,
+          "puntos": [
+           1,
+           2
+          ],
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           3,
+           2,
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "n": 11,
+          "puntos": [
+           5,
+           8
+          ],
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           11,
+           8,
+           11
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "n": 4,
+          "puntos": [
+           1,
+           3
+          ],
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           4,
+           3,
+           4
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "7618483559c98577"
+  ],
+  "svgSolucion": [
+   "7143522026a95f24"
+  ]
+ },
  "frase.completa": {
   "ficha": {
    "schemaVersion": 1,
@@ -84432,6 +85613,1501 @@
   ],
   "svgSolucion": [
    "26f20cb0539279bd"
+  ]
+ },
+ "3.º qué parte está coloreada": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "¿Qué parte está coloreada?",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "fraccion.lee",
+       "tipoVersion": 1,
+       "params": {
+        "figura": null,
+        "den": null,
+        "modo": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "¿Qué parte está coloreada? Escribe la fracción.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "fig": "circulo",
+          "n": 6,
+          "k": 2,
+          "llenas": [
+           0,
+           1
+          ],
+          "lee": false
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "fig": "rect",
+          "n": 2,
+          "k": 1,
+          "llenas": [
+           0
+          ],
+          "lee": false
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "fig": "tira",
+          "n": 5,
+          "k": 3,
+          "llenas": [
+           0,
+           1,
+           2
+          ],
+          "lee": false
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "fig": "circulo",
+          "n": 8,
+          "k": 6,
+          "llenas": [
+           0,
+           1,
+           2,
+           3,
+           4,
+           5
+          ],
+          "lee": false
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "fig": "rect",
+          "n": 3,
+          "k": 2,
+          "llenas": [
+           0,
+           1
+          ],
+          "lee": false
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "fig": "tira",
+          "n": 7,
+          "k": 6,
+          "llenas": [
+           0,
+           1,
+           2,
+           3,
+           4,
+           5
+          ],
+          "lee": false
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "fig": "circulo",
+          "n": 10,
+          "k": 9,
+          "llenas": [
+           0,
+           1,
+           2,
+           3,
+           4,
+           5,
+           6,
+           7,
+           8
+          ],
+          "lee": false
+         },
+         "solucion": {
+          "huecos": [
+           9,
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "fig": "rect",
+          "n": 9,
+          "k": 1,
+          "llenas": [
+           6
+          ],
+          "lee": false
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "fig": "tira",
+          "n": 12,
+          "k": 4,
+          "llenas": [
+           0,
+           1,
+           2,
+           3
+          ],
+          "lee": false
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           12
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "fig": "circulo",
+          "n": 4,
+          "k": 2,
+          "llenas": [
+           0,
+           1
+          ],
+          "lee": false
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "fig": "rect",
+          "n": 11,
+          "k": 7,
+          "llenas": [
+           0,
+           1,
+           2,
+           3,
+           4,
+           5,
+           6
+          ],
+          "lee": false
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           11
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "fig": "tira",
+          "n": 7,
+          "k": 5,
+          "llenas": [
+           0,
+           1,
+           2,
+           3,
+           4
+          ],
+          "lee": false
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           7
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "8076f9278f313c75"
+  ],
+  "svgSolucion": [
+   "6ed664caff6c1054"
+  ]
+ },
+ "3.º qué parte está coloreada y cómo se lee, y colorea la fracción en media": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "¿Qué parte está coloreada? y colorea la fracción",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "fraccion.lee",
+       "tipoVersion": 1,
+       "params": {
+        "figura": null,
+        "den": null,
+        "modo": "lee",
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "amarillo",
+       "enunciado": "Escribe la fracción de la parte coloreada y cómo se lee.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "fig": "circulo",
+          "n": 7,
+          "k": 6,
+          "llenas": [
+           0,
+           1,
+           2,
+           3,
+           4,
+           5
+          ],
+          "lee": true
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           7,
+           "seis séptimos"
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "fig": "rect",
+          "n": 8,
+          "k": 6,
+          "llenas": [
+           0,
+           1,
+           3,
+           4,
+           6,
+           7
+          ],
+          "lee": true
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           8,
+           "seis octavos"
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "fig": "tira",
+          "n": 5,
+          "k": 3,
+          "llenas": [
+           0,
+           1,
+           2
+          ],
+          "lee": true
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           5,
+           "tres quintos"
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "fig": "circulo",
+          "n": 12,
+          "k": 4,
+          "llenas": [
+           0,
+           1,
+           2,
+           3
+          ],
+          "lee": true
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           12,
+           "cuatro doceavos"
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "fraccion.colorea",
+       "tipoVersion": 1,
+       "params": {
+        "figura": null,
+        "den": 6,
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "verde",
+       "enunciado": "Colorea la parte de la figura que indica la fracción.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "fig": "tira",
+          "n": 2,
+          "k": 1
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": 1
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "fig": "circulo",
+          "n": 3,
+          "k": 2
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": 2
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "fig": "rect",
+          "n": 4,
+          "k": 3
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": 3
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "fig": "tira",
+          "n": 6,
+          "k": 4
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": 4
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "fig": "circulo",
+          "n": 5,
+          "k": 4
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": 4
+         }
+        },
+        {
+         "id": "a2e6",
+         "datos": {
+          "fig": "rect",
+          "n": 6,
+          "k": 3
+         },
+         "solucion": {
+          "huecos": [],
+          "colorea": 3
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "a71628deecca9b47"
+  ],
+  "svgSolucion": [
+   "234c633f0eaf84c8"
+  ]
+ },
+ "3.º la fracción en letras": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "La fracción en letras",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "fraccion.letras",
+       "tipoVersion": 1,
+       "params": {
+        "modo": null,
+        "den": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Escribe cómo se lee cada fracción o escríbela con números.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "k": 2,
+          "n": 6,
+          "sentido": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           "dos sextos"
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "k": 1,
+          "n": 2,
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "k": 3,
+          "n": 5,
+          "sentido": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           "tres quintos"
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "k": 6,
+          "n": 8,
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "k": 2,
+          "n": 3,
+          "sentido": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           "dos tercios"
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "k": 6,
+          "n": 7,
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "k": 9,
+          "n": 10,
+          "sentido": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           "nueve décimos"
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "k": 1,
+          "n": 9,
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "k": 4,
+          "n": 12,
+          "sentido": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           "cuatro doceavos"
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "k": 2,
+          "n": 4,
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "k": 7,
+          "n": 11,
+          "sentido": "leer"
+         },
+         "solucion": {
+          "huecos": [
+           "siete onceavos"
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "k": 5,
+          "n": 7,
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           7
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "bd325201058e500f"
+  ],
+  "svgSolucion": [
+   "0cd2f278f49c58d7"
+  ]
+ },
+ "3.º más ejercicios: la fracción en letras": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "La fracción en letras",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "fraccion.letras",
+       "tipoVersion": 1,
+       "params": {
+        "modo": "escribir",
+        "den": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Escribe la fracción con números.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "k": 6,
+          "n": 8,
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "k": 5,
+          "n": 10,
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "k": 4,
+          "n": 12,
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           12
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "k": 1,
+          "n": 5,
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "k": 5,
+          "n": 7,
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "k": 1,
+          "n": 9,
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "k": 2,
+          "n": 4,
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "k": 3,
+          "n": 5,
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "k": 2,
+          "n": 6,
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "k": 6,
+          "n": 7,
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "k": 2,
+          "n": 3,
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "k": 7,
+          "n": 11,
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           11
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "k": 9,
+          "n": 10,
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           9,
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "k": 1,
+          "n": 2,
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "k": 7,
+          "n": 8,
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "k": 5,
+          "n": 12,
+          "sentido": "escribir"
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           12
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "e6d74565e774c36c"
+  ],
+  "svgSolucion": [
+   "40fe0292d09c3f61"
+  ]
+ },
+ "3.º compara fracciones (mezcla, con tiras)": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Compara fracciones",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "fraccion.compara",
+       "tipoVersion": 1,
+       "params": {
+        "modo": "mezcla",
+        "dibujo": true,
+        "den": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Compara las fracciones y escribe < o >.\nLas tiras te ayudan.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "a": [
+           2,
+           11
+          ],
+          "b": [
+           2,
+           5
+          ],
+          "igual": "num",
+          "dibujo": true
+         },
+         "solucion": {
+          "huecos": [
+           "<"
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "a": [
+           3,
+           11
+          ],
+          "b": [
+           3,
+           12
+          ],
+          "igual": "num",
+          "dibujo": true
+         },
+         "solucion": {
+          "huecos": [
+           ">"
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "a": [
+           5,
+           9
+          ],
+          "b": [
+           8,
+           9
+          ],
+          "igual": "den",
+          "dibujo": true
+         },
+         "solucion": {
+          "huecos": [
+           "<"
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": [
+           2,
+           11
+          ],
+          "b": [
+           10,
+           11
+          ],
+          "igual": "den",
+          "dibujo": true
+         },
+         "solucion": {
+          "huecos": [
+           "<"
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "a": [
+           1,
+           6
+          ],
+          "b": [
+           3,
+           6
+          ],
+          "igual": "den",
+          "dibujo": true
+         },
+         "solucion": {
+          "huecos": [
+           "<"
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": [
+           6,
+           12
+          ],
+          "b": [
+           6,
+           11
+          ],
+          "igual": "num",
+          "dibujo": true
+         },
+         "solucion": {
+          "huecos": [
+           "<"
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "a": [
+           11,
+           12
+          ],
+          "b": [
+           6,
+           12
+          ],
+          "igual": "den",
+          "dibujo": true
+         },
+         "solucion": {
+          "huecos": [
+           ">"
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "a": [
+           1,
+           7
+          ],
+          "b": [
+           1,
+           11
+          ],
+          "igual": "num",
+          "dibujo": true
+         },
+         "solucion": {
+          "huecos": [
+           ">"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "e1f270c852f425ad"
+  ],
+  "svgSolucion": [
+   "35cffd38f1e058eb"
+  ]
+ },
+ "3.º la fracción de un número y en la recta en media": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "La fracción de un número y fracciones en la recta",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "fraccion.de",
+       "tipoVersion": 1,
+       "params": {
+        "tipo": "varias",
+        "ayuda": true,
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "amarillo",
+       "enunciado": "Colorea los grupos que indica la fracción y escribe el resultado.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "k": 4,
+          "n": 5,
+          "N": 10,
+          "ayuda": true
+         },
+         "solucion": {
+          "huecos": [
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "k": 3,
+          "n": 4,
+          "N": 16,
+          "ayuda": true
+         },
+         "solucion": {
+          "huecos": [
+           12
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "k": 4,
+          "n": 6,
+          "N": 24,
+          "ayuda": true
+         },
+         "solucion": {
+          "huecos": [
+           16
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "fraccion.recta",
+       "tipoVersion": 1,
+       "params": {
+        "modo": null,
+        "den": null,
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "verde",
+       "enunciado": "Escribe la fracción de cada punto señalado.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "n": 10,
+          "puntos": [
+           6,
+           9
+          ],
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           10,
+           9,
+           10
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "n": 3,
+          "puntos": [
+           1,
+           2
+          ],
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           3,
+           2,
+           3
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "n": 11,
+          "puntos": [
+           4,
+           10
+          ],
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           11,
+           10,
+           11
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "cebeaf87fc0da954"
+  ],
+  "svgSolucion": [
+   "7515a3ecec1e8d7d"
+  ]
+ },
+ "3.º fracciones en la recta: marca": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Fracciones en la recta",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "fraccion.recta",
+       "tipoVersion": 1,
+       "params": {
+        "modo": "marca",
+        "den": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Marca en la recta el punto de cada fracción.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "n": 6,
+          "puntos": [
+           5
+          ],
+          "modo": "marca"
+         },
+         "solucion": {
+          "huecos": [],
+          "marca": 5
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "n": 12,
+          "puntos": [
+           10
+          ],
+          "modo": "marca"
+         },
+         "solucion": {
+          "huecos": [],
+          "marca": 10
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "n": 11,
+          "puntos": [
+           9
+          ],
+          "modo": "marca"
+         },
+         "solucion": {
+          "huecos": [],
+          "marca": 9
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "n": 7,
+          "puntos": [
+           2
+          ],
+          "modo": "marca"
+         },
+         "solucion": {
+          "huecos": [],
+          "marca": 2
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "n": 8,
+          "puntos": [
+           6
+          ],
+          "modo": "marca"
+         },
+         "solucion": {
+          "huecos": [],
+          "marca": 6
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "n": 9,
+          "puntos": [
+           6
+          ],
+          "modo": "marca"
+         },
+         "solucion": {
+          "huecos": [],
+          "marca": 6
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "2e0f228966ff75e7"
+  ],
+  "svgSolucion": [
+   "d8639ee76081953b"
   ]
  },
  "3.º reparto con el signo ÷": {

@@ -9,7 +9,7 @@ from modelos import M, op, AMBOS, COMPLETA
 
 CURSO = 3
 NOMBRE = "3.º de Primaria"
-BLOQUES_3 = {14: "Dividir"}   # Fracciones y Pensamiento computacional llegan en sus lotes
+BLOQUES_3 = {14: "Dividir", 15: "Fracciones"}   # Pensamiento computacional llega en su lote
 RANGOS_3 = (1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 9999)
 
 
@@ -55,6 +55,31 @@ def _n3(bloque, familia, clave, nombre, descripcion, opciones, titulo, color, ra
 
 
 MODELOS_3 = [
+    # Lote 5 · fracciones (bloque 15; sin rango): propias, denominador hasta 12
+    _n3(15, "fraccion", "lee", "¿Qué parte está coloreada?", "Escribir la fracción de la parte coloreada de círculos, rectángulos y tiras (y cómo se lee).",
+        [op("figura", "Figuras", [(None, "Mezcla"), ("circulo", "Círculos"), ("rect", "Rectángulos"), ("tira", "Tiras")]), op("den", "Denominador", [(None, "Hasta 12"), (6, "Hasta 6 (medios a sextos)"), (10, "Hasta 10")]),
+         op("modo", "Tarea", [(None, "Escribe la fracción"), ("lee", "La fracción y cómo se lee")])],
+        "¿QUÉ PARTE ESTÁ COLOREADA?", "amarillo", tam=AMBOS),
+    _n3(15, "fraccion", "colorea", "Colorea la fracción", "Colorear en la figura partida la parte que indica la fracción.",
+        [op("figura", "Figuras", [(None, "Mezcla"), ("circulo", "Círculos"), ("rect", "Rectángulos"), ("tira", "Tiras")]), op("den", "Denominador", [(None, "Hasta 12"), (6, "Hasta 6 (medios a sextos)"), (10, "Hasta 10")])],
+        "COLOREA LA FRACCIÓN", "verde", tam=AMBOS),
+    _n3(15, "fraccion", "letras", "La fracción en letras", "Escribir cómo se lee una fracción (3/5, tres quintos) y al revés.",
+        [op("modo", "Tarea", [(None, "Los dos sentidos"), ("leer", "Fracción → letras (3/5 = tres quintos)"), ("escribir", "Letras → fracción (tres quintos = 3/5)")]),
+         op("den", "Denominador", [(None, "Hasta 12"), (6, "Hasta 6 (medios a sextos)"), (10, "Hasta 10")])],
+        "LA FRACCIÓN EN LETRAS", "azul", tam=AMBOS),
+    _n3(15, "fraccion", "compara", "Compara fracciones", "Comparar fracciones con el mismo denominador o con el mismo numerador (<, >).",
+        [op("modo", "Fracciones", [(None, "Mismo denominador (2/5 y 4/5)"), ("numerador", "Mismo numerador (2/3 y 2/5)"), ("mezcla", "Mezcla")]),
+         {"id": "dibujo", "etiqueta": "Con las tiras dibujadas como ayuda", "tipo": "si_no", "defecto": True},
+         op("den", "Denominador", [(None, "Hasta 12"), (6, "Hasta 6 (medios a sextos)"), (10, "Hasta 10")])],
+        "COMPARA FRACCIONES", "rosa", tam=AMBOS),
+    _n3(15, "fraccion", "de", "La fracción de un número", "Calcular la fracción de un número (1/3 de 12) con el dibujo de los grupos como ayuda.",
+        [op("tipo", "Fracciones", [(None, "Unitarias (1/3 de 12)"), ("varias", "No unitarias (2/3 de 12)")]),
+         {"id": "ayuda", "etiqueta": "Con el dibujo de los grupos", "tipo": "si_no", "defecto": True}],
+        "LA FRACCIÓN DE UN NÚMERO", "amarillo", tam=AMBOS),
+    _n3(15, "fraccion", "recta", "Fracciones en la recta", "Escribir o marcar fracciones en la recta entre 0 y 1.",
+        [op("modo", "Tarea", [(None, "Escribe la fracción de los puntos"), ("marca", "Marca el punto de la fracción")]),
+         op("den", "Denominador", [(None, "Hasta 12"), (6, "Hasta 6 (medios a sextos)"), (10, "Hasta 10")])],
+        "FRACCIONES EN LA RECTA", "verde", tam=AMBOS),
     # Lote 4 · dividir (bloque 14; sin rango) y problemas de dividir (bloque 8)
     _n3(14, "dividir", "tabla", "Divisiones de la tabla", "Dividir con las tablas de multiplicar (24 ÷ 6 = 4 porque 4 × 6 = 24).",
         [op("tablas", "Divisor", [(None, "Del 2 al 10"), ("2a5", "Del 2 al 5"), ("6a9", "Del 6 al 9")]),

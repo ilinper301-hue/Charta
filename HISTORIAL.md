@@ -273,3 +273,14 @@ Sueltas: `conteo.tabla` v2 (R ≤ 10: `NTAB` = 5 tablas, un ejercicio cada una),
 - 182 modelos, 348 doradas (las 335 anteriores iguales), `npm test` y `test_motor.py` en verde; `medir_letra.js`: 0 < 9 pt en los tipos nuevos.
 - **Límites**: caja de 3 cifras con prueba en media página, justa (escala 0,8); `dividir.tabla` «porque» con la fila apretada; en `dividir.familia` «libre» queda algo de blanco abajo; sin ceros en el cociente (612 ÷ 6 no sale).
 
+## Matemáticas 3.º · Lote 5: fracciones (24-11-2026)
+- Bloque nuevo 15 «Fracciones» (`BLOQUES_3`), familia `fraccion` (`familia.fraccion.js`, `_fraccion.js`: `enLetras` (un tercio, tres quintos; onceavo y doceavo), `denominadores` (opción `den`: hasta 12 · 6 · 10), `figurasDe` (opción `figura`: mezcla · círculo · rectángulo · tira), `fraccionesPropias` (sin repetir y por turnos de denominador), `dibujarFigura` (sectores desde arriba; rectángulo en filas × columnas, los primos en columnas), `fraccion()` (apilada, con números o con dos casillas); invariantes en `tests/inv/fraccion.js`). Las partes coloreadas van en gris (blanco y negro); en la solución de «Colorea», en rojo claro `#ef9a9a` (Fori lo toma como paso).
+- ✨ `fraccion.lee` «¿Qué parte está coloreada?»: 12/6 (3 × 4); con «La fracción y cómo se lee» 8/4 con renglón «Se lee:». Círculo y tira: partes seguidas; rectángulo de varias filas: sueltas.
+- ✨ `fraccion.colorea` «Colorea la fracción»: 12/6; huecos [] y `colorea: k`.
+- ✨ `fraccion.letras` «La fracción en letras»: los dos sentidos (mitad y mitad), «leer» o «escribir»; rejilla elástica con «Cantidad» (12/6; «Más ejercicios» con tarjetas ≥ 74 pt).
+- ✨ `fraccion.compara`: mismo denominador, mismo numerador o mezcla (mitad y mitad); con tiras (opción `dibujo`, 8/4) o sin ellas (12/6); solo < y >.
+- ✨ `fraccion.de` «La fracción de un número»: unitarias o no unitarias (`tipo`); con la ayuda (n 2–6, grupos de 2–5 puntos, 6/3; en la solución los k grupos en rojo) o sin ella (tablas 2–10, 12/6 con «Cantidad»).
+- ✨ `fraccion.recta`: «Escribe» (dos puntos señalados con flecha, no vecinos salvo en tercios; dos casillas debajo de cada uno) o «Marca» (la fracción a la izquierda; punto rojo en la solución); 6/3.
+- 188 modelos, 361 doradas (las 348 anteriores iguales); `npm test` y `test_motor.py` en verde; `medir_letra.js`: 0 < 9 pt en los tipos nuevos.
+- **Límites**: sin fracciones impropias ni equivalentes; en «Compara» no sale «=»; en la recta, con doceavos, las casillas son estrechas (≈ 8 mm); los nombres del 11 y el 12 son «onceavo» y «doceavo».
+

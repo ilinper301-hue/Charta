@@ -3570,7 +3570,7 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get mulberry32
 },
 "nucleo/catalogo.js": (__exp) => {
 // GENERADO por tools/catalogo.py desde motor/modelos.py. No editar a mano.
-const CATALOGO = {"cursos":{"1":"1.º de Primaria","2":"2.º de Primaria","3":"3.º de Primaria"},"materias":{"matematicas":"Matemáticas","lengua":"Lengua"},"bloques":{"matematicas":{"1":"Los números y sus representaciones","2":"Contar y series","3":"Orden y comparación","4":"Valor posicional","5":"Sumar","6":"Restar","7":"Juegos numéricos","8":"Problemas","9":"Geometría","10":"Medida","11":"Estadística y patrones","12":"Trucos de cálculo mental","13":"Multiplicar y repartir","14":"Dividir"},"lengua":{"1":"Conciencia fonológica","2":"Letras y sonidos","3":"Sílabas","4":"Palabras","5":"Frases","6":"Ortografía básica","7":"Comprensión lectora","8":"Escritura y caligrafía"}},"fuentes":{"lengua":"fredoka"},"modelos":[
+const CATALOGO = {"cursos":{"1":"1.º de Primaria","2":"2.º de Primaria","3":"3.º de Primaria"},"materias":{"matematicas":"Matemáticas","lengua":"Lengua"},"bloques":{"matematicas":{"1":"Los números y sus representaciones","2":"Contar y series","3":"Orden y comparación","4":"Valor posicional","5":"Sumar","6":"Restar","7":"Juegos numéricos","8":"Problemas","9":"Geometría","10":"Medida","11":"Estadística y patrones","12":"Trucos de cálculo mental","13":"Multiplicar y repartir","14":"Dividir","15":"Fracciones"},"lengua":{"1":"Conciencia fonológica","2":"Letras y sonidos","3":"Sílabas","4":"Palabras","5":"Frases","6":"Ortografía básica","7":"Comprensión lectora","8":"Escritura y caligrafía"}},"fuentes":{"lengua":"fredoka"},"modelos":[
 {"id":"rep.dedos","curso":1,"materia":"matematicas","bloque":1,"familia":"rep","clave":"dedos","nombre":"Los dedos","descripcion":"Leer y dibujar números con los dedos de las manos.","opciones":[{"id":"lectura","etiqueta":"Solo leer (sin la fila de dibujar)","tipo":"si_no","defecto":false}],"rangos":[10],"rango":10,"tamanos":["completa","media"],"titulo":"LOS DEDOS","color":"azul","metadatos":{"dificultad":1,"minutos":8,"etiquetas":["números","representación","dedos"]}},
 {"id":"rep.dado","curso":1,"materia":"matematicas","bloque":1,"familia":"rep","clave":"dado","nombre":"El dado","descripcion":"Leer y dibujar números con puntos de uno o dos dados.","opciones":[{"id":"lectura","etiqueta":"Solo leer (sin la fila de dibujar)","tipo":"si_no","defecto":false}],"rangos":[10,20],"rango":10,"tamanos":["completa","media"],"titulo":"EL DADO","color":"azul","metadatos":{"dificultad":1,"minutos":8,"etiquetas":["números","representación","dado","puntos"]}},
 {"id":"rep.domino","curso":1,"materia":"matematicas","bloque":1,"familia":"rep","clave":"domino","nombre":"El dominó","descripcion":"Leer y dibujar números como fichas de dominó.","opciones":[{"id":"lectura","etiqueta":"Solo leer (sin la fila de dibujar)","tipo":"si_no","defecto":false}],"rangos":[10,20],"rango":10,"tamanos":["completa","media"],"titulo":"EL DOMINÓ","color":"azul","metadatos":{"dificultad":1,"minutos":10,"etiquetas":["números","representación","dominó","puntos"]}},
@@ -3743,6 +3743,12 @@ const CATALOGO = {"cursos":{"1":"1.º de Primaria","2":"2.º de Primaria","3":"3
 {"id":"multiplicar.tablas","curso":2,"materia":"matematicas","bloque":13,"familia":"multiplicar","clave":"tablas","nombre":"Las tablas","descripcion":"Multiplicaciones de las tablas del 2, 3, 4, 5 y 10: el resultado, el factor que falta o la tabla en orden.","opciones":[{"id":"tablas","etiqueta":"Tablas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Del 2, 5 y 10"},{"valor":"2","etiqueta":"Del 2"},{"valor":"3","etiqueta":"Del 3"},{"valor":"4","etiqueta":"Del 4"},{"valor":"5","etiqueta":"Del 5"},{"valor":"10","etiqueta":"Del 10"},{"valor":"todas","etiqueta":"Del 2, 3, 4, 5 y 10"},{"valor":"6","etiqueta":"Del 6","curso":3},{"valor":"7","etiqueta":"Del 7","curso":3},{"valor":"8","etiqueta":"Del 8","curso":3},{"valor":"9","etiqueta":"Del 9","curso":3},{"valor":"2a10","etiqueta":"Todas, del 2 al 10","curso":3}]},{"id":"modo","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Resultado"},{"valor":"hueco","etiqueta":"El factor que falta"},{"valor":"orden","etiqueta":"La tabla en orden"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"LAS TABLAS","color":"azul","metadatos":{"dificultad":2,"minutos":12,"etiquetas":["multiplicar","tablas","cálculo mental","factor"]},"cursos":{"3":{"rangos":[],"rango":null}}},
 {"id":"multiplicar.problemas","curso":2,"materia":"matematicas","bloque":13,"familia":"multiplicar","clave":"problemas","nombre":"Problemas de multiplicar","descripcion":"Problemas de grupos iguales (cajas, bolsas, filas de sillas…) con su operación y su respuesta.","opciones":[{"id":"tablas","etiqueta":"Tablas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Del 2, 5 y 10"},{"valor":"2","etiqueta":"Del 2"},{"valor":"3","etiqueta":"Del 3"},{"valor":"4","etiqueta":"Del 4"},{"valor":"5","etiqueta":"Del 5"},{"valor":"10","etiqueta":"Del 10"},{"valor":"todas","etiqueta":"Del 2, 3, 4, 5 y 10"},{"valor":"6","etiqueta":"Del 6","curso":3},{"valor":"7","etiqueta":"Del 7","curso":3},{"valor":"8","etiqueta":"Del 8","curso":3},{"valor":"9","etiqueta":"Del 9","curso":3},{"valor":"2a10","etiqueta":"Todas, del 2 al 10","curso":3}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"PROBLEMAS DE MULTIPLICAR","color":"rosa","metadatos":{"dificultad":3,"minutos":15,"etiquetas":["multiplicar","problemas","texto","razonamiento","grupos iguales"]},"cursos":{"3":{"rangos":[],"rango":null}}},
 {"id":"multiplicar.reparto","curso":2,"materia":"matematicas","bloque":13,"familia":"multiplicar","clave":"reparto","nombre":"Reparte","descripcion":"Repartir en partes iguales con dibujo, y la mitad y el tercio de un número.","opciones":[{"id":"modo","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Repartir en partes iguales"},{"valor":"mitad","etiqueta":"La mitad y el tercio"}]},{"id":"signo","etiqueta":"Con el signo ÷ (12 ÷ 3 = 4)","tipo":"si_no","defecto":false,"curso":3}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"REPARTE","color":"amarillo","metadatos":{"dificultad":3,"minutos":10,"etiquetas":["repartir","mitad","tercio","partes iguales","división"]},"cursos":{"3":{"rangos":[],"rango":null}}},
+{"id":"fraccion.lee","curso":3,"materia":"matematicas","bloque":15,"familia":"fraccion","clave":"lee","nombre":"¿Qué parte está coloreada?","descripcion":"Escribir la fracción de la parte coloreada de círculos, rectángulos y tiras (y cómo se lee).","opciones":[{"id":"figura","etiqueta":"Figuras","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Mezcla"},{"valor":"circulo","etiqueta":"Círculos"},{"valor":"rect","etiqueta":"Rectángulos"},{"valor":"tira","etiqueta":"Tiras"}]},{"id":"den","etiqueta":"Denominador","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Hasta 12"},{"valor":6,"etiqueta":"Hasta 6 (medios a sextos)"},{"valor":10,"etiqueta":"Hasta 10"}]},{"id":"modo","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Escribe la fracción"},{"valor":"lee","etiqueta":"La fracción y cómo se lee"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"¿QUÉ PARTE ESTÁ COLOREADA?","color":"amarillo","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["fracciones","partes","figuras","numerador","denominador"]}},
+{"id":"fraccion.colorea","curso":3,"materia":"matematicas","bloque":15,"familia":"fraccion","clave":"colorea","nombre":"Colorea la fracción","descripcion":"Colorear en la figura partida la parte que indica la fracción.","opciones":[{"id":"figura","etiqueta":"Figuras","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Mezcla"},{"valor":"circulo","etiqueta":"Círculos"},{"valor":"rect","etiqueta":"Rectángulos"},{"valor":"tira","etiqueta":"Tiras"}]},{"id":"den","etiqueta":"Denominador","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Hasta 12"},{"valor":6,"etiqueta":"Hasta 6 (medios a sextos)"},{"valor":10,"etiqueta":"Hasta 10"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"COLOREA LA FRACCIÓN","color":"verde","metadatos":{"dificultad":1,"minutos":10,"etiquetas":["fracciones","colorear","partes","figuras"]}},
+{"id":"fraccion.letras","curso":3,"materia":"matematicas","bloque":15,"familia":"fraccion","clave":"letras","nombre":"La fracción en letras","descripcion":"Escribir cómo se lee una fracción (3/5, tres quintos) y al revés.","opciones":[{"id":"modo","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Los dos sentidos"},{"valor":"leer","etiqueta":"Fracción → letras (3/5 = tres quintos)"},{"valor":"escribir","etiqueta":"Letras → fracción (tres quintos = 3/5)"}]},{"id":"den","etiqueta":"Denominador","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Hasta 12"},{"valor":6,"etiqueta":"Hasta 6 (medios a sextos)"},{"valor":10,"etiqueta":"Hasta 10"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"LA FRACCIÓN EN LETRAS","color":"azul","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["fracciones","lectura","escritura","nombres"]}},
+{"id":"fraccion.compara","curso":3,"materia":"matematicas","bloque":15,"familia":"fraccion","clave":"compara","nombre":"Compara fracciones","descripcion":"Comparar fracciones con el mismo denominador o con el mismo numerador (<, >).","opciones":[{"id":"modo","etiqueta":"Fracciones","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Mismo denominador (2/5 y 4/5)"},{"valor":"numerador","etiqueta":"Mismo numerador (2/3 y 2/5)"},{"valor":"mezcla","etiqueta":"Mezcla"}]},{"id":"dibujo","etiqueta":"Con las tiras dibujadas como ayuda","tipo":"si_no","defecto":true},{"id":"den","etiqueta":"Denominador","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Hasta 12"},{"valor":6,"etiqueta":"Hasta 6 (medios a sextos)"},{"valor":10,"etiqueta":"Hasta 10"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"COMPARA FRACCIONES","color":"rosa","metadatos":{"dificultad":3,"minutos":10,"etiquetas":["fracciones","comparar","mayor menor"]}},
+{"id":"fraccion.de","curso":3,"materia":"matematicas","bloque":15,"familia":"fraccion","clave":"de","nombre":"La fracción de un número","descripcion":"Calcular la fracción de un número (1/3 de 12) con el dibujo de los grupos como ayuda.","opciones":[{"id":"tipo","etiqueta":"Fracciones","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Unitarias (1/3 de 12)"},{"valor":"varias","etiqueta":"No unitarias (2/3 de 12)"}]},{"id":"ayuda","etiqueta":"Con el dibujo de los grupos","tipo":"si_no","defecto":true}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"LA FRACCIÓN DE UN NÚMERO","color":"amarillo","metadatos":{"dificultad":3,"minutos":15,"etiquetas":["fracciones","fracción de un número","dividir","grupos"]}},
+{"id":"fraccion.recta","curso":3,"materia":"matematicas","bloque":15,"familia":"fraccion","clave":"recta","nombre":"Fracciones en la recta","descripcion":"Escribir o marcar fracciones en la recta entre 0 y 1.","opciones":[{"id":"modo","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Escribe la fracción de los puntos"},{"valor":"marca","etiqueta":"Marca el punto de la fracción"}]},{"id":"den","etiqueta":"Denominador","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Hasta 12"},{"valor":6,"etiqueta":"Hasta 6 (medios a sextos)"},{"valor":10,"etiqueta":"Hasta 10"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"FRACCIONES EN LA RECTA","color":"verde","metadatos":{"dificultad":3,"minutos":10,"etiquetas":["fracciones","recta numérica"]}},
 {"id":"dividir.tabla","curso":3,"materia":"matematicas","bloque":14,"familia":"dividir","clave":"tabla","nombre":"Divisiones de la tabla","descripcion":"Dividir con las tablas de multiplicar (24 ÷ 6 = 4 porque 4 × 6 = 24).","opciones":[{"id":"tablas","etiqueta":"Divisor","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Del 2 al 10"},{"valor":"2a5","etiqueta":"Del 2 al 5"},{"valor":"6a9","etiqueta":"Del 6 al 9"}]},{"id":"modo","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"El cociente (24 ÷ 6 = ☐)"},{"valor":"porque","etiqueta":"Con su multiplicación (porque ☐ × 6 = 24)"},{"valor":"hueco","etiqueta":"El número que falta (24 ÷ ☐ = 4)"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"DIVISIONES DE LA TABLA","color":"amarillo","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["dividir","tablas","cociente","multiplicación","cálculo mental"]}},
 {"id":"dividir.vertical","curso":3,"materia":"matematicas","bloque":14,"familia":"dividir","clave":"vertical","nombre":"Divisiones con la caja","descripcion":"Dividir un número de 2 o 3 cifras entre una cifra con la caja, exactas o con resto.","opciones":[{"id":"cifras","etiqueta":"Cifras del dividendo","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Dos cifras (84 ÷ 4)"},{"valor":3,"etiqueta":"Tres cifras (756 ÷ 6)"}]},{"id":"nivel","etiqueta":"Divisiones","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Exactas"},{"valor":"resto","etiqueta":"Con resto"},{"valor":"mezcla","etiqueta":"Mezcla"}]},{"id":"prueba","etiqueta":"Con la prueba (cociente × divisor + resto = dividendo)","tipo":"si_no","defecto":false}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"DIVISIONES CON LA CAJA","color":"azul","metadatos":{"dificultad":3,"minutos":15,"etiquetas":["dividir","caja","algoritmo","resto","cociente","una cifra"]}},
 {"id":"dividir.familia","curso":3,"materia":"matematicas","bloque":14,"familia":"dividir","clave":"familia","nombre":"La familia de la multiplicación y la división","descripcion":"Con tres números, las dos multiplicaciones y las dos divisiones (3 × 4, 4 × 3, 12 ÷ 3, 12 ÷ 4).","opciones":[{"id":"tablas","etiqueta":"Tablas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Del 2 al 10"},{"valor":"2a5","etiqueta":"Del 2 al 5"},{"valor":"6a9","etiqueta":"Del 6 al 9"}]},{"id":"modo","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Completa las cuatro operaciones"},{"valor":"libre","etiqueta":"Escribe las cuatro operaciones"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"LA FAMILIA DE LA MULTIPLICACIÓN Y LA DIVISIÓN","color":"verde","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["dividir","multiplicar","familia","operaciones inversas"]}},
@@ -5739,6 +5745,115 @@ function elegirIdx(azar, n, params, largos, intento, { extra = {}, id = "este mo
 }
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get repartir() { return repartir; }, get elegirIdx() { return elegirIdx; } }));
+},
+"tipos/_fraccion.js": (__exp) => {
+// Charta · núcleo común de «fraccion.*» (3.º, lote 5, bloque 15 «Fracciones»): nombres, denominadores, figuras partidas y la fracción apilada.
+// Figuras: "circulo" (sectores desde arriba, en el sentido del reloj), "rect" (rectángulo en filas × columnas: 12 = 3 × 4; los primos, en columnas)
+// y "tira" (barra de n partes). Las partes coloreadas van en gris (se ve en blanco y negro); en la solución de «Colorea», en rojo claro.
+const { INK, COLOR_SOLUCION } = __req("render/papel.js");
+const GRIS_PARTE = 0.72;                              // parte coloreada en el papel
+const ROJO_PARTE = "#ef9a9a";                         // parte coloreada en la solución (no es un hueco; Fori la reconoce como paso)
+const ROJO = COLOR_SOLUCION.toLowerCase();             // trazos y puntos rojos de la solución que no son huecos (test_tipos cuenta fill="#C62828")
+
+const UNIDADES = ["", "un", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez", "once"];
+const PARTES = {
+  2: ["medio", "medios"], 3: ["tercio", "tercios"], 4: ["cuarto", "cuartos"], 5: ["quinto", "quintos"], 6: ["sexto", "sextos"],
+  7: ["séptimo", "séptimos"], 8: ["octavo", "octavos"], 9: ["noveno", "novenos"], 10: ["décimo", "décimos"],
+  11: ["onceavo", "onceavos"], 12: ["doceavo", "doceavos"],
+};
+/** 3/5 → «tres quintos»; 1/3 → «un tercio». */
+const enLetras = (a, b) => `${UNIDADES[a]} ${PARTES[b][a === 1 ? 0 : 1]}`;
+
+/** Opción `den` → denominadores: None = del 2 al 12 · 6 · 10. */
+function denominadores(params) {
+  const h = params?.den ?? 12;
+  if (![6, 10, 12].includes(h)) throw new Error(`Denominador no permitido: ${h}`);
+  return Array.from({ length: h - 1 }, (_, i) => i + 2);
+}
+const FIGURAS = ["circulo", "rect", "tira"];
+/** Opción `figura` → lista de figuras: None = mezcla. */
+function figurasDe(params) {
+  const v = params?.figura ?? null;
+  if (v === null) return FIGURAS;
+  if (!FIGURAS.includes(v)) throw new Error(`Figura no permitida: ${v}`);
+  return [v];
+}
+const FILAS_RECT = { 4: [2, 2], 6: [2, 3], 8: [2, 4], 9: [3, 3], 10: [2, 5], 12: [3, 4] };
+/** Rectángulo de n partes → [filas, columnas]; los primos (y el 2) en una fila de columnas. */
+const rejillaRect = (n) => FILAS_RECT[n] ?? [1, n];
+
+/** Partes coloreadas (índices): en el círculo y la tira, seguidas desde el principio; en el rectángulo de varias filas, sueltas al azar. */
+function partesColoreadas(azar, fig, n, k) {
+  if (fig === "rect" && rejillaRect(n)[0] > 1) return azar.muestra(Array.from({ length: n }, (_, i) => i), k).sort((a, b) => a - b);
+  return Array.from({ length: k }, (_, i) => i);
+}
+
+/** Fracciones propias distintas (k/n, 1 ≤ k < n) repartidas por turnos entre los denominadores: [[k, n]…]. `vale(k, n)` filtra. */
+function fraccionesPropias(azar, dens, cnt, vale = () => true) {
+  const colas = new Map(azar.barajar(dens).map((n) => [n, azar.barajar(Array.from({ length: n - 1 }, (_, i) => i + 1).filter((k) => vale(k, n)))]));
+  const orden = [...colas.keys()], out = [];
+  for (let i = 0; out.length < cnt && orden.some((n) => colas.get(n).length); i++) {
+    const n = orden[i % orden.length];
+    if (colas.get(n).length) out.push([colas.get(n).pop(), n]);
+  }
+  if (out.length < cnt) throw new Error(`Esta ficha necesita más fracciones: elige un denominador mayor.`);
+  return azar.barajar(out);
+}
+
+/** Tamaño (w, h) que ocupa la figura en una caja de aw × ah. */
+function medidaFigura(fig, n, aw, ah) {
+  if (fig === "circulo") { const d = Math.min(aw, ah); return [d, d]; }
+  if (fig === "tira") { const w = aw, h = Math.min(ah, Math.max(24, Math.min(40, w / n * 1.4))); return [w, h]; }
+  const [f, c] = rejillaRect(n), asp = f === 1 ? 1.5 : c / f * 1.1;   // celdas casi cuadradas
+  let w = aw, h = w / asp; if (h > ah) { h = ah; w = h * asp; }
+  return [w, h];
+}
+
+/** Dibuja la figura de n partes centrada en (cx, cy) dentro de aw × ah. `llenas` = índices coloreados; `fill` = su color. */
+function dibujarFigura(p, fig, n, llenas, cx, cy, aw, ah, { fill = GRIS_PARTE, lw = 1.4 } = {}) {
+  const [w, h] = medidaFigura(fig, n, aw, ah), on = new Set(llenas);
+  if (fig === "circulo") {
+    const r = w / 2, paso = (2 * Math.PI) / n;
+    for (let i = 0; i < n; i++) {
+      const a0 = Math.PI / 2 - i * paso, a1 = a0 - paso, seg = Math.max(4, Math.ceil(paso / 0.06)), cmds = [["M", cx, cy]];
+      for (let s = 0; s <= seg; s++) { const a = a0 + (a1 - a0) * (s / seg); cmds.push(["L", cx + r * Math.cos(a), cy + r * Math.sin(a)]); }
+      cmds.push(["Z"]);
+      p.path(cmds, { lw, fill: on.has(i) ? fill : 1, stroke: INK });
+    }
+    return [w, h];
+  }
+  const [f, c] = fig === "tira" ? [1, n] : rejillaRect(n), cw = w / c, chh = h / f, x0 = cx - w / 2, y0 = cy + h / 2;
+  for (let i = 0; i < n; i++) {
+    const r = Math.floor(i / c), k = i % c;
+    p.rrect(x0 + k * cw, y0 - (r + 1) * chh, cw, chh, 0, { lw, fill: on.has(i) ? fill : 1, stroke: INK });
+  }
+  return [w, h];
+}
+
+/** Alto y ancho de una fracción apilada (número o hueco) con letra fs: { w, h }. */
+function medidaFraccion(p, num, den, fs, hueco = null) {
+  if (hueco) return { w: hueco.w + 8, h: hueco.h * 2 + 10 };
+  const w = Math.max(p.ancho(String(num), "PB", fs), p.ancho(String(den), "PB", fs)) + 8;
+  return { w, h: fs * 2.1 };
+}
+/** Fracción apilada centrada en (cx, cy): numerador, raya y denominador. `hueco` = { w, h, sol: [num, den] } para dos casillas;
+ *  `huecoNum`/`huecoDen` = solo una casilla (la otra cifra, escrita). */
+function fraccion(p, cx, cy, num, den, fs = 22, { hueco = null, gris = INK } = {}) {
+  if (hueco) {
+    const { w, h, sol } = hueco, bw = w + 8;
+    p.line(cx - bw / 2, cy, cx + bw / 2, cy, { lw: 1.8, gris });
+    p.caja(cx - w / 2, cy + 5, w, h, null, Math.min(fs, 22), sol[0]);
+    p.caja(cx - w / 2, cy - 5 - h, w, h, null, Math.min(fs, 22), sol[1]);
+    return bw;
+  }
+  const bw = Math.max(p.ancho(String(num), "PB", fs), p.ancho(String(den), "PB", fs)) + 8;
+  p.line(cx - bw / 2, cy, cx + bw / 2, cy, { lw: 1.8, gris });
+  p.text(cx, cy + fs * 0.28, String(num), fs, { anchor: "middle", gris });
+  p.text(cx, cy - fs * 1.02, String(den), fs, { anchor: "middle", gris });
+  return bw;
+}
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get GRIS_PARTE() { return GRIS_PARTE; }, get ROJO_PARTE() { return ROJO_PARTE; }, get ROJO() { return ROJO; }, get PARTES() { return PARTES; }, get enLetras() { return enLetras; }, get denominadores() { return denominadores; }, get FIGURAS() { return FIGURAS; }, get figurasDe() { return figurasDe; }, get rejillaRect() { return rejillaRect; }, get partesColoreadas() { return partesColoreadas; }, get fraccionesPropias() { return fraccionesPropias; }, get medidaFigura() { return medidaFigura; }, get dibujarFigura() { return dibujarFigura; }, get medidaFraccion() { return medidaFraccion; }, get fraccion() { return fraccion; } }));
 },
 "tipos/_frase.js": (__exp) => {
 // Charta · ayudantes de los tipos frase.* (Lengua 1.º, lote 3; LENGUA_1.md §3, bloque 5). Sin DOM.
@@ -9124,6 +9239,16 @@ __req("tipos/fono.quita.js");
 __req("tipos/fono.larga.js");
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({  }));
 },
+"tipos/familia.fraccion.js": (__exp) => {
+// Charta · tipos de la familia «fraccion» (3.º, lote 5, bloque 15). Añadir aquí cada módulo nuevo de la familia.
+__req("tipos/fraccion.lee.js");
+__req("tipos/fraccion.colorea.js");
+__req("tipos/fraccion.letras.js");
+__req("tipos/fraccion.compara.js");
+__req("tipos/fraccion.de.js");
+__req("tipos/fraccion.recta.js");
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({  }));
+},
 "tipos/familia.frase.js": (__exp) => {
 // Charta · tipos de la familia «frase» (Lengua 1.º, lote 3). Añadir aquí cada módulo nuevo de la familia.
 __req("tipos/frase.ordena.js");
@@ -9699,6 +9824,346 @@ const __default = registrar({
         p.caja(rx, y + (ch - bh) / 2, 44, bh, null, 22, n);
         p.text(rx + 49, y + ch / 2 - 10 * 0.35, "sílabas", 11, { f: "PM", gris: 0.35 });
       } else casillas(p, rx, y, rw, ch, 4, { rellenar: n, ancho: 24, alto: qa, gap: 4 });
+    }));
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/fraccion.colorea.js": (__exp) => {
+// fraccion.colorea · Colorea la fracción (3.º, lote 5, bloque 15; solo curso 3, sin rango).
+// datos:    { fig: "circulo" | "rect" | "tira", n, k }   (fracción propia k/n, n = 2…12; la figura sale partida en n partes iguales, en blanco)
+// solucion: { huecos: [], colorea: k }   (en la solución, k partes en rojo claro: las primeras; vale cualquier k partes)
+// Opciones: figura (None = mezcla · circulo · rect · tira) · den (None = hasta 12 · 6 · 10).
+// Reglas: sin repetir fracción; denominadores por turnos; en la mezcla, las figuras se alternan.
+// Dibujo: 3 × 4 tarjetas (12; media 6): la fracción arriba y la figura debajo.
+const { registrar } = __req("nucleo/tipos.js");
+const { TOP } = __req("render/papel.js");
+const { denominadores, figurasDe, fraccionesPropias, dibujarFigura, fraccion, ROJO_PARTE } = __req("tipos/_fraccion.js");
+const __default = registrar({
+  id: "fraccion.colorea",
+  version: 1,
+  generar(params, azar, { tamano }) {
+    const cnt = tamano === "media" ? 6 : 12, figs = figurasDe(params), salida = azar.entero(0, figs.length - 1);
+    const ejercicios = fraccionesPropias(azar, denominadores(params), cnt).map(([k, n], i) => ({
+      datos: { fig: figs[(i + salida) % figs.length], n, k },
+      solucion: { huecos: [], colorea: k },
+    }));
+    return { enunciado: "Colorea la parte de la figura que indica la fracción.", ejercicios };
+  },
+  dibujar(p, act) {
+    const es = act.ejercicios, { cel, cw, ch } = p.rejilla(TOP, 3, p.parte < 1 ? 2 : 4);
+    es.forEach((e, i) => p.ejercicio(e.id, () => {
+      const [x, y] = cel[i], { fig, n, k } = e.datos, fs = 20, alto = fs * 2.1;
+      p.marco(x, y, cw, ch, i);
+      fraccion(p, x + cw / 2, y + ch - 14 - alto / 2, k, n, fs);
+      const zona = ch - 30 - alto - 14, llenas = p.solucion ? Array.from({ length: k }, (_, j) => j) : [];
+      dibujarFigura(p, fig, n, llenas, x + cw / 2, y + 12 + zona / 2, cw - 36, zona, { fill: ROJO_PARTE });
+    }));
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/fraccion.compara.js": (__exp) => {
+// fraccion.compara · Compara fracciones (3.º, lote 5, bloque 15; solo curso 3, sin rango).
+// datos:    { a: [k, n], b: [k, n], igual: "den" | "num", dibujo: bool }   (dos fracciones propias distintas con el mismo denominador o el mismo numerador)
+// solucion: { huecos: ["<" | ">"] }
+// Opciones: modo (None = mismo denominador · "numerador" = mismo numerador · "mezcla" = mitad y mitad) · dibujo (si_no: dos tiras iguales partidas,
+//           con su parte en gris) · den (None = hasta 12 · 6 · 10).
+// Reglas: sin repetir pareja; mismo denominador: gana el numerador mayor; mismo numerador: gana el denominador menor (partes más grandes).
+//         Ni «=» ni fracciones iguales.
+// Dibujo: 2 columnas; con tiras, 8 (media 4); sin tiras, 12 (media 6).
+const { registrar } = __req("nucleo/tipos.js");
+const { TOP } = __req("render/papel.js");
+const { denominadores, fraccion, dibujarFigura } = __req("tipos/_fraccion.js");
+const valor = ([k, n]) => k / n;
+
+const __default = registrar({
+  id: "fraccion.compara",
+  version: 1,
+  generar(params, azar, { tamano }) {
+    const modo = params.modo ?? null, dibujo = params.dibujo ?? true, dens = denominadores(params), media = tamano === "media";
+    const cnt = dibujo ? (media ? 4 : 8) : media ? 6 : 12;
+    const parejas = (igual) => {   // todas las parejas posibles de ese tipo, sin orden
+      const out = [];
+      if (igual === "den") for (const n of dens) for (let k1 = 1; k1 < n; k1++) for (let k2 = k1 + 1; k2 < n; k2++) out.push([[k1, n], [k2, n]]);
+      else for (const n1 of dens) for (const n2 of dens) if (n1 < n2) for (let k = 1; k < n1; k++) out.push([[k, n1], [k, n2]]);
+      return out;
+    };
+    const tipos = modo === "numerador" ? ["num"] : modo === "mezcla" ? azar.barajar(["den", "num"]) : ["den"];
+    const bancos = tipos.map((t) => azar.barajar(parejas(t)));
+    // en la mezcla, por turnos (mitad y mitad); mismo denominador: los denominadores también por turnos
+    const usados = new Set(), elegidas = [];
+    for (let i = 0; elegidas.length < cnt && bancos.some((b) => b.length); i++) {
+      const t = i % tipos.length, b = bancos[t];
+      if (!b.length) continue;
+      const cuenta = new Map(); elegidas.filter((e) => e.igual === tipos[t]).forEach((e) => cuenta.set(e.a[1], (cuenta.get(e.a[1]) ?? 0) + 1));
+      const min = Math.min(...b.map((q) => cuenta.get(q[0][1]) ?? 0));
+      const j = tipos[t] === "den" ? b.findIndex((q) => (cuenta.get(q[0][1]) ?? 0) === min) : 0;
+      const [x, y] = b.splice(j, 1)[0], clave = `${x}|${y}`;
+      if (usados.has(clave)) continue;
+      usados.add(clave);
+      elegidas.push({ ...(azar.entero(0, 1) ? { a: x, b: y } : { a: y, b: x }), igual: tipos[t] });
+    }
+    if (elegidas.length < cnt) throw new Error("Esta ficha necesita más fracciones: elige un denominador mayor.");
+    const ejercicios = azar.barajar(elegidas).map((e) => ({
+      datos: { a: e.a, b: e.b, igual: e.igual, dibujo },
+      solucion: { huecos: [valor(e.a) > valor(e.b) ? ">" : "<"] },
+    }));
+    return { enunciado: "Compara las fracciones y escribe < o >." + (dibujo ? "\nLas tiras te ayudan." : ""), ejercicios };
+  },
+  dibujar(p, act) {
+    const es = act.ejercicios, dibujo = act.params.dibujo ?? true, filas = (dibujo ? 4 : 6) * (p.parte < 1 ? 0.5 : 1);
+    const { cel, cw, ch } = p.rejilla(TOP, 2, filas);
+    es.forEach((e, i) => p.ejercicio(e.id, () => {
+      const [x, y] = cel[i], { a, b } = e.datos, fs = 20, alto = fs * 2.1;
+      p.marco(x, y, cw, ch, i);
+      const cy = dibujo ? y + ch - 18 - alto / 2 : y + ch / 2 - 2, cx = x + cw / 2, sep = 58;
+      fraccion(p, cx - sep, cy, a[0], a[1], fs);
+      p.caja(cx - 20, cy - 19, 40, 38, null, 22, e.solucion.huecos[0]);
+      fraccion(p, cx + sep, cy, b[0], b[1], fs);
+      if (!dibujo) return;
+      const zona = cy - alto / 2 - 10 - (y + 12), th = Math.min(30, (zona - 10) / 2), tw = cw - 60;
+      [a, b].forEach(([k, n], j) => {
+        const ty = y + 12 + zona - th / 2 - j * (th + 10);
+        dibujarFigura(p, "tira", n, Array.from({ length: k }, (_, q) => q), x + 30 + tw / 2, ty, tw, th);
+      });
+    }));
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/fraccion.de.js": (__exp) => {
+// fraccion.de · La fracción de un número (3.º, lote 5, bloque 15; solo curso 3, sin rango).
+// datos:    { k, n, N, ayuda: bool }   (k/n de N; N = n × m; resultado k × m)
+// solucion: { huecos: [k × m] }   (con la ayuda, en la solución los k grupos coloreados en rojo)
+// Opciones: tipo (None = unitarias, k = 1 · "varias" = no unitarias: 2/3, 3/4…) · ayuda (si_no: los N puntos repartidos en n grupos).
+// Reglas: n y m de las tablas (2–10); con la ayuda, n 2–6 y m 2–5 (N ≤ 30, que se cuentan). Sin repetir (k, n, N).
+// Dibujo: 2 columnas; con la ayuda, 6 (media 3) con «⅓ de 12 = ☐» arriba y los grupos debajo; sin ayuda, rejilla elástica con «Cantidad»: 12 (media 6).
+const { registrar } = __req("nucleo/tipos.js");
+const { TOP, INK, cuantosRejilla } = __req("render/papel.js");
+const { fraccion, ROJO } = __req("tipos/_fraccion.js");
+const __default = registrar({
+  id: "fraccion.de",
+  version: 1,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const varias = params.tipo === "varias", ayuda = params.ayuda ?? true;
+    const ns = ayuda ? [2, 3, 4, 5, 6] : [2, 3, 4, 5, 6, 7, 8, 9, 10], ms = ayuda ? [2, 3, 4, 5] : [2, 3, 4, 5, 6, 7, 8, 9, 10];
+    const banco = [];
+    for (const n of ns) for (const m of ms) for (let k = 1; k < n; k++) if (varias ? k > 1 : k === 1) banco.push([k, n, m]);
+    let cnt = cuantosRejilla(ctx, 2, ayuda ? 150 : 72, ayuda ? [6, 3] : [12, 6]);
+    cnt = Math.min(cnt, Math.max(ctx.tamano === "media" ? (ayuda ? 3 : 6) : ayuda ? 6 : 12, Math.floor(banco.length / 2) * 2));
+    // denominadores por turnos (cada uno con sus casos barajados)
+    const colas = new Map(azar.barajar(ns).map((n) => [n, azar.barajar(banco.filter((b) => b[1] === n))]));
+    const orden = [...colas.keys()], elegidos = [];
+    for (let i = 0; elegidos.length < cnt && orden.some((n) => colas.get(n).length); i++) {
+      const c = colas.get(orden[i % orden.length]);
+      if (c.length) elegidos.push(c.pop());
+    }
+    const ejercicios = azar.barajar(elegidos).map(([k, n, m]) => ({ datos: { k, n, N: n * m, ayuda }, solucion: { huecos: [k * m] } }));
+    return {
+      enunciado: ayuda ? "Colorea los grupos que indica la fracción y escribe el resultado."
+        : "Calcula la fracción de cada número.",
+      ejercicios,
+    };
+  },
+  dibujar(p, act) {
+    const es = act.ejercicios, ayuda = act.params.ayuda ?? true;
+    const filas = Math.max(Math.ceil(es.length / 2), p.n(ayuda ? 3 : 6));
+    const { cel, cw, ch } = p.rejilla(TOP, 2, filas);
+    es.forEach((e, i) => p.ejercicio(e.id, () => {
+      const [x, y] = cel[i], { k, n, N } = e.datos, m = N / n, fs = 20, alto = fs * 2.1;
+      p.marco(x, y, cw, ch, i);
+      const cy = ayuda ? y + ch - 16 - alto / 2 : y + ch / 2 - 2;
+      const t = `de ${N} =`, tw = p.ancho(t, "PB", fs), total = 30 + 8 + tw + 8 + 50, x0 = x + (cw - total) / 2 + 10;
+      const bw = fraccion(p, x0 + 15, cy, k, n, fs);
+      p.text(x0 + 15 + bw / 2 + 8, cy - fs * 0.35, t, fs);
+      p.caja(x0 + 15 + bw / 2 + 16 + tw, cy - 19, 50, 38, null, 22, e.solucion.huecos[0]);
+      if (!ayuda) return;
+      // n grupos (recuadros discontinuos) con m puntos cada uno; en la solución, los k primeros en rojo
+      const zona = cy - alto / 2 - 10 - (y + 10), gw = Math.min(58, (cw - 28 - (n - 1) * 8) / n), r = Math.min(8, gw / 5);
+      const paso = Math.min(r * 2.8, (zona - 12) / m), gh = paso * m + 8, gx0 = x + (cw - (n * gw + (n - 1) * 8)) / 2, gy = y + 10 + (zona - gh) / 2;
+      for (let g = 0; g < n; g++) {
+        const gx = gx0 + g * (gw + 8), rojo = p.solucion && g < k;
+        p.rrect(gx, gy, gw, gh, 6, { lw: 1, fill: null, stroke: 0.55 });
+        for (let q = 0; q < m; q++) p.circle(gx + gw / 2, gy + gh - 4 - paso * (q + 0.5), r, { lw: 1.2, fill: rojo ? ROJO : 1, stroke: rojo ? ROJO : INK });
+      }
+    }));
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/fraccion.lee.js": (__exp) => {
+// fraccion.lee · ¿Qué parte está coloreada? (3.º, lote 5, bloque 15; solo curso 3, sin rango).
+// datos:    { fig: "circulo" | "rect" | "tira", n, k, llenas: [índices coloreados], lee: bool }   (fracción propia k/n, n = 2…12)
+// solucion: { huecos: [k, n] } · con «Y cómo se lee»: [k, n, «tres quintos»]
+// Opciones: figura (None = mezcla · circulo · rect · tira) · den (None = hasta 12 · 6 · 10) · modo (None = escribe la fracción · "lee" = y cómo se lee).
+// Reglas: sin repetir fracción; denominadores por turnos; en la mezcla, las figuras se alternan. Círculo y tira: partes seguidas; rectángulo de varias filas: sueltas.
+// Dibujo: 3 × 4 tarjetas (12; media 6) con la figura arriba y la fracción (dos casillas) abajo; con «lee», 2 × 4 (8; media 4): figura a la izquierda,
+// fracción a la derecha y «Se lee:» con su renglón debajo.
+const { registrar } = __req("nucleo/tipos.js");
+const { TOP } = __req("render/papel.js");
+const { denominadores, figurasDe, fraccionesPropias, partesColoreadas, dibujarFigura, fraccion, enLetras } = __req("tipos/_fraccion.js");
+const __default = registrar({
+  id: "fraccion.lee",
+  version: 1,
+  generar(params, azar, { tamano }) {
+    const lee = params.modo === "lee", media = tamano === "media";
+    const cnt = lee ? (media ? 4 : 8) : media ? 6 : 12, figs = figurasDe(params), salida = azar.entero(0, figs.length - 1);
+    const fr = fraccionesPropias(azar, denominadores(params), cnt);
+    const ejercicios = fr.map(([k, n], i) => {
+      const fig = figs[(i + salida) % figs.length];
+      return { datos: { fig, n, k, llenas: partesColoreadas(azar, fig, n, k), lee }, solucion: { huecos: lee ? [k, n, enLetras(k, n)] : [k, n] } };
+    });
+    return { enunciado: lee ? "Escribe la fracción de la parte coloreada y cómo se lee." : "¿Qué parte está coloreada? Escribe la fracción.", ejercicios };
+  },
+  dibujar(p, act) {
+    const es = act.ejercicios, lee = act.params.modo === "lee", cols = lee ? 2 : 3, filas = p.parte < 1 ? 2 : 4;
+    const { cel, cw, ch } = p.rejilla(TOP, cols, filas);
+    es.forEach((e, i) => p.ejercicio(e.id, () => {
+      const [x, y] = cel[i], { fig, n, llenas } = e.datos, h = e.solucion.huecos;
+      p.marco(x, y, cw, ch, i);
+      if (!lee) {
+        const hb = Math.min(30, (ch - 40) * 0.2), wb = hb * 1.25, alto = hb * 2 + 10, zona = ch - 30 - alto - 14;
+        dibujarFigura(p, fig, n, llenas, x + cw / 2, y + alto + 12 + zona / 2, cw - 36, zona);
+        fraccion(p, x + cw / 2, y + 6 + alto / 2, null, null, 20, { hueco: { w: wb, h: hb, sol: [h[0], h[1]] } });
+        return;
+      }
+      const lin = 34, zona = ch - 30 - lin, fw = cw * 0.55;
+      dibujarFigura(p, fig, n, llenas, x + 14 + fw / 2, y + lin + zona / 2, fw - 14, zona - 8);
+      const hb = Math.min(32, zona * 0.3);
+      fraccion(p, x + fw + (cw - fw) / 2, y + lin + zona / 2, null, null, 20, { hueco: { w: hb * 1.25, h: hb, sol: [h[0], h[1]] } });
+      p.text(x + 14, y + 13, "Se lee:", 13, { f: "PM", gris: 0.3 });
+      const x0 = x + 14 + p.ancho("Se lee:", "PM", 13) + 8;
+      p.line(x0, y + 11, x + cw - 14, y + 11, { lw: 1, gris: 0.55 });
+      if (p.solucion) p.solucionEn((x0 + x + cw - 14) / 2, y + 22, h[2], 15);
+    }));
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/fraccion.letras.js": (__exp) => {
+// fraccion.letras · La fracción en letras (3.º, lote 5, bloque 15; solo curso 3, sin rango).
+// datos:    { k, n, sentido: "leer" | "escribir" }   (fracción propia k/n, n = 2…12)
+// solucion: { huecos: ["tres quintos"] } (leer: 3/5 = ______) · [k, n] (escribir: «tres quintos =» y la fracción en dos casillas)
+// Opciones: modo (None = los dos sentidos, alternados · "leer" · "escribir") · den (None = hasta 12 · 6 · 10).
+// Reglas: sin repetir fracción; denominadores por turnos; en «los dos sentidos», mitad y mitad.
+// Dibujo: rejilla elástica de 2 columnas con «Cantidad»: «Más grandes» 12 (media 6); «Más ejercicios», las que caben con tarjetas ≥ 74 pt.
+const { registrar } = __req("nucleo/tipos.js");
+const { TOP, cuantosRejilla } = __req("render/papel.js");
+const { denominadores, fraccionesPropias, fraccion, enLetras } = __req("tipos/_fraccion.js");
+const MIN_ALTO = 74;
+
+const __default = registrar({
+  id: "fraccion.letras",
+  version: 1,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const modo = params.modo ?? null, dens = denominadores(params), banco = dens.reduce((t, n) => t + n - 1, 0);
+    const cnt = Math.min(cuantosRejilla(ctx, 2, MIN_ALTO, [12, 6]), Math.floor(banco / 2) * 2);
+    const empieza = azar.entero(0, 1);
+    const ejercicios = fraccionesPropias(azar, dens, cnt).map(([k, n], i) => {
+      const sentido = modo ?? ((i + empieza) % 2 ? "escribir" : "leer");
+      return { datos: { k, n, sentido }, solucion: { huecos: sentido === "leer" ? [enLetras(k, n)] : [k, n] } };
+    });
+    return {
+      enunciado: modo === "leer" ? "Escribe cómo se lee cada fracción." : modo === "escribir" ? "Escribe la fracción con números."
+        : "Escribe cómo se lee cada fracción o escríbela con números.",
+      ejercicios,
+    };
+  },
+  dibujar(p, act) {
+    const es = act.ejercicios, filas = Math.max(Math.ceil(es.length / 2), p.n(6));
+    const { cel, cw, ch } = p.rejilla(TOP, 2, filas);
+    const k = Math.max(1, Math.min(1.3, (ch - 14) / 64)), fs = 20 * k, hb = 24 * k;
+    const largos = es.filter((e) => e.datos.sentido === "escribir").map((e) => p.ancho(`${enLetras(e.datos.k, e.datos.n)} =`, "PB", 17));
+    const ft = Math.min(17 * k, ...largos.map((w) => 17 * (cw - 44 - 16 - (hb * 1.3 + 8)) / w));
+    es.forEach((e, i) => p.ejercicio(e.id, () => {
+      const [x, y] = cel[i], { k: a, n, sentido } = e.datos, h = e.solucion.huecos, cy = y + ch / 2 - 4;
+      p.marco(x, y, cw, ch, i);
+      const x0 = x + 38;
+      if (sentido === "leer") {
+        const bw = fraccion(p, x0 + 14 * k, cy, a, n, fs);
+        const xi = x0 + 14 * k + bw / 2 + 8;
+        p.text(xi, cy - fs * 0.35, "=", fs);
+        const xl = xi + p.ancho("=", "PB", fs) + 8, yl = cy - hb / 2;
+        p.line(xl, yl, x + cw - 14, yl, { lw: 1, gris: 0.55 });
+        if (p.solucion) {
+          const sf = Math.min(15 * k, 15 * (x + cw - 18 - xl) / p.ancho(h[0], "PB", 15));
+          p.solucionEn((xl + x + cw - 14) / 2, yl + 4 + sf * 0.45, h[0], sf);
+        }
+        return;
+      }
+      const t = `${enLetras(a, n)} =`, tw = p.ancho(t, "PB", ft), fw = hb * 1.3 + 8, total = tw + 16 + fw, xi = x + 30 + (cw - 44 - total) / 2;
+      p.text(xi + tw, cy - ft * 0.35, t, ft, { anchor: "end" });   // anclado a la derecha: el hueco hasta la fracción no depende del ancho medido
+      fraccion(p, xi + tw + 16 + fw / 2, cy, null, null, fs, { hueco: { w: hb * 1.3, h: hb, sol: [h[0], h[1]] } });
+    }));
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/fraccion.recta.js": (__exp) => {
+// fraccion.recta · Fracciones en la recta (3.º, lote 5, bloque 15; solo curso 3, sin rango).
+// datos:    { n, puntos: [k…] (ordenados), modo: null | "marca" }   (recta de 0 a 1 partida en n partes iguales)
+// solucion: { huecos: [k1, n, k2, n] } (escribe: dos puntos señalados, cada uno con su fracción en dos casillas debajo)
+//           · "marca": { huecos: [], marca: k } (la fracción k/n a la izquierda; se marca el punto: en la solución, punto rojo)
+// Opciones: modo (None = escribe la fracción de los puntos · "marca") · den (None = hasta 12 · 6 · 10).
+// Reglas: denominadores distintos en la ficha mientras se pueda (por turnos); en «escribe», dos puntos de 1…n−1 no vecinos (salvo en tercios).
+// Dibujo: una recta por tarjeta, 6 (media 3).
+const { registrar } = __req("nucleo/tipos.js");
+const { TOP, INK } = __req("render/papel.js");
+const { denominadores, fraccion, ROJO } = __req("tipos/_fraccion.js");
+const __default = registrar({
+  id: "fraccion.recta",
+  version: 1,
+  generar(params, azar, { tamano }) {
+    const marca = params.modo === "marca", cnt = tamano === "media" ? 3 : 6, dens = denominadores(params).filter((n) => marca || n >= 3);
+    const ns = [];
+    while (ns.length < cnt) ns.push(...azar.barajar(dens));
+    const usados = new Set();
+    const ejercicios = ns.slice(0, cnt).map((n) => {
+      // todas las opciones válidas (en «escribe», dos puntos no vecinos salvo en tercios: sus casillas se tocarían); primero las no usadas
+      const todas = [];
+      for (let a = 1; a < n; a++) if (marca) todas.push([a]); else for (let b = a + (n > 3 ? 2 : 1); b < n; b++) todas.push([a, b]);
+      const libres = todas.filter((q) => !usados.has(n + ":" + q)), puntos = azar.elegir(libres.length ? libres : todas);
+      usados.add(n + ":" + puntos);
+      return {
+        datos: { n, puntos, modo: marca ? "marca" : null },
+        solucion: marca ? { huecos: [], marca: puntos[0] } : { huecos: [puntos[0], n, puntos[1], n] },
+      };
+    });
+    return { enunciado: marca ? "Marca en la recta el punto de cada fracción." : "Escribe la fracción de cada punto señalado.", ejercicios };
+  },
+  dibujar(p, act) {
+    const es = act.ejercicios, { cel, cw, ch } = p.rejilla(TOP, 1, p.parte < 1 ? 3 : 6);
+    es.forEach((e, i) => p.ejercicio(e.id, () => {
+      const [x, y] = cel[i], { n, puntos, modo } = e.datos, marca = modo === "marca";
+      p.marco(x, y, cw, ch, i);
+      const xa = x + (marca ? 110 : 48), xb = x + cw - 40, paso = (xb - xa) / n;
+      const ly = marca ? y + ch / 2 + 6 : y + ch - 26, X = (k) => xa + k * paso;
+      if (marca) fraccion(p, x + 66, ly, puntos[0], n, 20);
+      p.line(xa, ly, xb, ly, { lw: 1.8 });
+      for (let k = 0; k <= n; k++) p.line(X(k), ly - (k % n ? 7 : 11), X(k), ly + (k % n ? 7 : 11), { lw: k % n ? 1.4 : 1.8 });
+      p.text(xa, ly - 28, "0", 15, { anchor: "middle" });
+      p.text(xb, ly - 28, "1", 15, { anchor: "middle" });
+      if (marca) {
+        if (p.solucion) p.circle(X(puntos[0]), ly, 5, { lw: 1.2, fill: ROJO, stroke: ROJO });
+        return;
+      }
+      const hb = Math.min(28, (ly - 14 - (y + 8) - 10) / 2), wb = Math.min(hb * 1.2, (n > 3 ? 2 : 1) * paso - 10);
+      puntos.forEach((k, j) => {
+        // flecha hacia el punto (desde arriba) y su fracción en dos casillas debajo
+        p.path([["M", X(k), ly + 8], ["L", X(k) - 5, ly + 17], ["L", X(k) + 5, ly + 17], ["Z"]], { lw: 1, fill: INK, stroke: INK });
+        p.line(X(k), ly + 17, X(k), ly + 24, { lw: 1.6 });
+        const h = e.solucion.huecos;
+        fraccion(p, X(k), ly - 14 - hb - 5, null, null, 20, { hueco: { w: wb, h: hb, sol: [h[2 * j], h[2 * j + 1]] } });
+      });
     }));
   },
 });
@@ -10630,6 +11095,7 @@ __req("tipos/familia.trucos.js");
 __req("tipos/familia.geometria.js");
 __req("tipos/familia.multiplicar.js");
 __req("tipos/familia.dividir.js");
+__req("tipos/familia.fraccion.js");
 __req("tipos/familia.medida.js");
 __req("tipos/familia.estadistica.js");
 __req("tipos/familia.letra.js");
