@@ -7731,10 +7731,11 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get unicosEn()
 // datos:    { desde, L, huecos: [k…] }   camino en serpiente de L casillas (6 por fila) con los números desde, desde+1, …;
 //           huecos = posiciones vacías 1..L−1 (ordenadas; la de salida nunca está vacía)
 // solucion: { huecos: [desde + k de cada hueco, en orden] }
-// Opciones: huecos (3–20; por defecto máx(3, L/3)); como mucho L − 2. L = mín(36, R). Una sola ficha (solo tamaño completa).
+// Opciones: huecos (3–20; por defecto máx(3, L/3)); como mucho L − 2. L = mín(36, R). Solo tamaño completa. Con L ≤ 12 (dos filas) salen NCAM = 3 caminos, cada uno con su salida y sus huecos (un ejercicio por camino); si no, uno.
 const { registrar } = __req("nucleo/tipos.js");
 const { TOP, M, W, INK } = __req("render/papel.js");
 const COLS = 6, CW = 58, CH = 52;
+const NCAM = 3;   // caminos por ficha cuando L ≤ 12
 
 function flecha(p, x1, y1, x2, y2, hd = 4.5) {
   p.line(x1, y1, x2, y2, { lw: 1.5 });
@@ -7745,20 +7746,27 @@ function flecha(p, x1, y1, x2, y2, hd = 4.5) {
 
 const __default = registrar({
   id: "conteo.camino",
-  version: 2,
+  version: 3,
   generar(params, azar) {
     const R = params.rango ?? 10, L = Math.min(36, R), desde = azar.entero(1, R - L + 1);
     const h = Math.min(L - 2, params.huecos ?? Math.max(3, Math.floor(L / 3)));
-    const huecos = azar.muestra(Array.from({ length: L - 1 }, (_, i) => i + 1), h).sort((a, b) => a - b);
+    const n = L <= 12 ? NCAM : 1;
+    const uno = (i) => {
+      const d = i === 0 ? desde : azar.entero(1, R - L + 1);
+      const huecos = azar.muestra(Array.from({ length: L - 1 }, (_, j) => j + 1), h).sort((a, b) => a - b);
+      return { datos: { desde: d, L, huecos }, solucion: { huecos: huecos.map((k) => d + k) } };
+    };
     return {
-      enunciado: "Sigue las flechas y escribe los números que faltan.",
-      ejercicios: [{ datos: { desde, L, huecos }, solucion: { huecos: huecos.map((k) => desde + k) } }],
+      enunciado: n > 1 ? "Sigue las flechas y escribe los números que faltan en cada camino." : "Sigue las flechas y escribe los números que faltan.",
+      ejercicios: Array.from({ length: n }, (_, i) => uno(i)),
     };
   },
   dibujar(p, act) {
-    const e = act.ejercicios[0], { desde: s, L, huecos } = e.datos, rows = Math.ceil(L / COLS);
-    const px = (W - 2 * M - CW) / (COLS - 1), py = rows > 1 ? Math.min(118, (TOP - M - CH - 40) / (rows - 1)) : 0;
-    const pos = (k) => { const r = Math.floor(k / COLS); let c = k % COLS; if (r % 2) c = COLS - 1 - c; return [M + c * px, TOP - 26 - r * py - CH]; };
+    const nc = act.ejercicios.length, slot = (TOP - M) / nc, L0 = act.ejercicios[0].datos.L, rows = Math.ceil(L0 / COLS);
+    const px = (W - 2 * M - CW) / (COLS - 1), py = rows > 1 ? Math.min(118, (slot - CH - 40) / (rows - 1)) : 0;
+    act.ejercicios.forEach((e, t) => {
+    const { desde: s, L, huecos } = e.datos, top = TOP - t * slot;
+    const pos = (k) => { const r = Math.floor(k / COLS); let c = k % COLS; if (r % 2) c = COLS - 1 - c; return [M + c * px, top - 26 - r * py - CH]; };
     p.ejercicio(e.id, () => {
       for (let k = 0; k < L - 1; k++) {
         const [x1, y1] = pos(k), [x2, y2] = pos(k + 1);
@@ -7775,10 +7783,11 @@ const __default = registrar({
       let [x, y] = pos(0); p.text(x + CW / 2, y + CH + 6, "SALIDA", 11, { f: "PM", anchor: "middle", gris: 0.3 });
       [x, y] = pos(L - 1); p.text(x + CW / 2, y - 12, "META", 11, { f: "PM", anchor: "middle", gris: 0.3 });
     });
+    });
   },
 });
 
-Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get NCAM() { return NCAM; }, get default() { return __default; } }));
 },
 "tipos/conteo.cuenta.js": (__exp) => {
 // conteo.cuenta · Cuenta y escribe (port de _c_cuenta() del motor).
@@ -8044,34 +8053,39 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get elegirHuec
 // conteo.tabla · La tabla de números (port de _c_tabla() del motor).
 // datos:    { R, huecos: [n…] }   tabla de 1..R en filas de 10 (R = mín(rango, 100)); huecos = los números que faltan (ordenados)
 // solucion: { huecos: [los mismos números, en el orden de la tabla] }
-// Opciones: huecos (3–30; por defecto máx(3, R/5)); como mucho R − 1. Una sola tabla por ficha (solo tamaño completa).
+// Opciones: huecos (3–30; por defecto máx(3, R/5)); como mucho R − 1. Solo tamaño completa. Con R ≤ 10 (una sola fila) salen NTAB = 5 tablas seguidas, cada una con sus huecos (un ejercicio por tabla);
+//           con R > 10, una sola.
 const { registrar } = __req("nucleo/tipos.js");
 const { TOP, M, W } = __req("render/papel.js");
+const NTAB = 5;   // tablas de una fila (R ≤ 10) por ficha
+
 const __default = registrar({
   id: "conteo.tabla",
-  version: 1,
+  version: 2,
   generar(params, azar) {
     const R = Math.min(params.rango ?? 10, 100);
     const h = Math.min(30, params.huecos ?? Math.max(3, Math.floor(R / 5)));
-    const huecos = azar.muestra(Array.from({ length: R }, (_, i) => i + 1), Math.min(h, R - 1)).sort((a, b) => a - b);
+    const una = () => { const huecos = azar.muestra(Array.from({ length: R }, (_, i) => i + 1), Math.min(h, R - 1)).sort((a, b) => a - b); return { datos: { R, huecos }, solucion: { huecos: [...huecos] } }; };
+    const n = R <= 10 ? NTAB : 1;
     return {
-      enunciado: "Completa la tabla escribiendo los números que faltan.",
-      ejercicios: [{ datos: { R, huecos }, solucion: { huecos: [...huecos] } }],
+      enunciado: n > 1 ? "Completa las tablas escribiendo los números que faltan." : "Completa la tabla escribiendo los números que faltan.",
+      ejercicios: Array.from({ length: n }, una),
     };
   },
   dibujar(p, act) {
-    const e = act.ejercicios[0], { R, huecos } = e.datos;
-    const rows = Math.ceil(R / 10), cw = (W - 2 * M) / 10, chh = Math.min(62, (TOP - M) / rows);
-    p.ejercicio(e.id, () => {
+    const R = act.ejercicios[0].datos.R, nt = act.ejercicios.length;
+    const rows = Math.ceil(R / 10), cw = (W - 2 * M) / 10, slot = (TOP - M) / nt, chh = Math.min(nt > 1 ? 80 : 62, slot / rows);
+    act.ejercicios.forEach((e, t) => p.ejercicio(e.id, () => {
+      const { huecos } = e.datos, top = TOP - t * slot - (slot - chh * rows) / 2;   // varias tablas: cada una centrada en su franja
       for (let n = 1; n <= R; n++) {
         const r = Math.floor((n - 1) / 10), k = (n - 1) % 10, vac = huecos.includes(n);
-        p.caja(M + k * cw + 2, TOP - (r + 1) * chh + 2, cw - 4, chh - 4, vac ? null : n, 17, vac ? n : null);
+        p.caja(M + k * cw + 2, top - (r + 1) * chh + 2, cw - 4, chh - 4, vac ? null : n, nt > 1 ? 20 : 17, vac ? n : null);
       }
-    });
+    }));
   },
 });
 
-Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get NTAB() { return NTAB; }, get default() { return __default; } }));
 },
 "tipos/escritura.dictado.js": (__exp) => {
 // escritura.dictado · Hoja de dictado (Lengua 1.º, lote 4; LENGUA_1.md §3, bloque 8).
@@ -10435,7 +10449,7 @@ function opValor(v, cap, resta, R, nivel, azar) {
 
 const __default = registrar({
   id: "juegos.colorea",
-  version: 1,
+  version: 2,
   generar(params, azar) {
     const R = params.rango ?? 10, resta = params.modo === "resta", cap = Math.min(R, 99), nivel = params.nivel;
     const forma = params.n ? Object.keys(SHAPES)[(params.n - 1) % 4] : azar.elegir(Object.keys(SHAPES)), mapa = SHAPES[forma];
@@ -10459,7 +10473,7 @@ const __default = registrar({
   dibujar(p, act) {
     const e = act.ejercicios[0], { resta, tgt, celdas } = e.datos, top = TOP;
     p.ejercicio(e.id, () => {
-      const rows = celdas.length / 6, g = 6, cw = (W - 2 * M - 5 * g) / 6, chh = Math.min(84, (top - M - 70 - (rows - 1) * g) / rows);
+      const rows = celdas.length / 6, g = 6, cw = (W - 2 * M - 5 * g) / 6, chh = Math.min(112, (top - M - 70 - (rows - 1) * g) / rows);
       p.text(W / 2, top - 26, `Colorea las casillas que dan ${tgt}`, 18, { f: "PB", anchor: "middle" });
       const gy = top - 56;
       celdas.forEach((c, i) => {
@@ -11071,7 +11085,7 @@ function montar(params, azar, { tamano }) {
 
 const __default = registrar({
   id: "lectura.texto",
-  version: 1,
+  version: 2,
   generar(params, azar, ctx) {
     if (!vistasActivas()) return montar(params, azar, ctx);
     // con letras elegidas: personajes y cosas del texto solo entre los permitidos; se descarta el intento si algo (frases fijas, preguntas, opciones) usa otra letra
@@ -11091,7 +11105,7 @@ const __default = registrar({
     const textoCard = (fs) => { const l = texto.map((f) => ajustaLineas(p, f, w - 84, fs, 2, fs)); const lineas = l.reduce((t, x) => t + x.lineas.length, 0); return { lineas: l.flatMap((x) => x.lineas), h: lineas * fs * 1.45 + 26 }; };
     let fs = 28, tc = textoCard(fs);
     while (fs > 16 && tc.h + sumaMin + gap * nQ > alto) { fs -= 1; tc = textoCard(fs); }
-    const libre = alto - tc.h - gap * nQ, k = Math.min(1.7, Math.max(1, libre / sumaMin));
+    const libre = alto - tc.h - gap * nQ, k = Math.min(2.6, Math.max(1, libre / sumaMin));
     let y = TOP - tc.h;
     p.tarjeta(M, y, w, tc.h);
     parrafo(p, M + 26, y, tc.h, tc.lineas, fs, { k: 1.45 });
@@ -15828,7 +15842,7 @@ const ordenado = (l) => l.slice().sort((a, b) => a - b);
 
 const __default = registrar({
   id: "sumar.tabla",
-  version: 1,
+  version: 2,
   generar(params, azar) {
     const R = params.rango ?? 10;
     let filas, columnas;
@@ -15851,10 +15865,11 @@ const __default = registrar({
   },
   dibujar(p, act) {
     const e = act.ejercicios[0], { filas, columnas, vac } = e.datos, kr = filas.length, kc = columnas.length;
-    const cs = Math.min(78, (W - 2 * M) / (kc + 1), (TOP - M - 10) / (kr + 1)), x0 = M + (W - 2 * M - (kc + 1) * cs) / 2, y0 = TOP - 10;
+    const cs = Math.min(100, (W - 2 * M) / (kc + 1), (TOP - M - 10) / (kr + 1)), x0 = M + (W - 2 * M - (kc + 1) * cs) / 2, y0 = TOP - 10;
     const cab = (x, y, t) => {
       p.rrect(x + 2, y + 2, cs - 4, cs - 4, 8, { lw: 2.4, fill: 1, stroke: INK });
-      p.text(x + cs / 2, y + cs / 2 - 6.5, String(t), 18, { anchor: "middle" });
+      const f = 18 * Math.min(1.25, cs / 78);
+      p.text(x + cs / 2, y + cs / 2 - f * 0.36, String(t), f, { anchor: "middle" });
     };
     p.ejercicio(e.id, () => {
       p.circle(x0 + cs / 2, y0 - cs / 2, cs * 0.3, { lw: 2.4 });
@@ -15863,7 +15878,7 @@ const __default = registrar({
       filas.forEach((v, i) => cab(x0, y0 - (i + 2) * cs, v));
       filas.forEach((rv, i) => columnas.forEach((cv, j) => {
         const hueco = vac.includes(i * kc + j);
-        p.caja(x0 + (j + 1) * cs + 2, y0 - (i + 2) * cs + 2, cs - 4, cs - 4, hueco ? null : rv + cv, 18, hueco ? rv + cv : null);
+        p.caja(x0 + (j + 1) * cs + 2, y0 - (i + 2) * cs + 2, cs - 4, cs - 4, hueco ? null : rv + cv, 18 * Math.min(1.25, cs / 78), hueco ? rv + cv : null);
       }));
     });
   },

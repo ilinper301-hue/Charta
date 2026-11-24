@@ -58,7 +58,7 @@ function montar(params, azar, { tamano }) {
 
 export default registrar({
   id: "lectura.texto",
-  version: 1,
+  version: 2,
   generar(params, azar, ctx) {
     if (!vistasActivas()) return montar(params, azar, ctx);
     // con letras elegidas: personajes y cosas del texto solo entre los permitidos; se descarta el intento si algo (frases fijas, preguntas, opciones) usa otra letra
@@ -78,7 +78,7 @@ export default registrar({
     const textoCard = (fs) => { const l = texto.map((f) => ajustaLineas(p, f, w - 84, fs, 2, fs)); const lineas = l.reduce((t, x) => t + x.lineas.length, 0); return { lineas: l.flatMap((x) => x.lineas), h: lineas * fs * 1.45 + 26 }; };
     let fs = 28, tc = textoCard(fs);
     while (fs > 16 && tc.h + sumaMin + gap * nQ > alto) { fs -= 1; tc = textoCard(fs); }
-    const libre = alto - tc.h - gap * nQ, k = Math.min(1.7, Math.max(1, libre / sumaMin));
+    const libre = alto - tc.h - gap * nQ, k = Math.min(2.6, Math.max(1, libre / sumaMin));
     let y = TOP - tc.h;
     p.tarjeta(M, y, w, tc.h);
     parrafo(p, M + 26, y, tc.h, tc.lineas, fs, { k: 1.45 });

@@ -29,7 +29,7 @@ function opValor(v, cap, resta, R, nivel, azar) {
 
 export default registrar({
   id: "juegos.colorea",
-  version: 1,
+  version: 2,
   generar(params, azar) {
     const R = params.rango ?? 10, resta = params.modo === "resta", cap = Math.min(R, 99), nivel = params.nivel;
     const forma = params.n ? Object.keys(SHAPES)[(params.n - 1) % 4] : azar.elegir(Object.keys(SHAPES)), mapa = SHAPES[forma];
@@ -53,7 +53,7 @@ export default registrar({
   dibujar(p, act) {
     const e = act.ejercicios[0], { resta, tgt, celdas } = e.datos, top = TOP;
     p.ejercicio(e.id, () => {
-      const rows = celdas.length / 6, g = 6, cw = (W - 2 * M - 5 * g) / 6, chh = Math.min(84, (top - M - 70 - (rows - 1) * g) / rows);
+      const rows = celdas.length / 6, g = 6, cw = (W - 2 * M - 5 * g) / 6, chh = Math.min(112, (top - M - 70 - (rows - 1) * g) / rows);
       p.text(W / 2, top - 26, `Colorea las casillas que dan ${tgt}`, 18, { f: "PB", anchor: "middle" });
       const gy = top - 56;
       celdas.forEach((c, i) => {

@@ -249,3 +249,6 @@ Pasos ya cerrados, movidos desde ESTADO.md el 12-11-2026. No hace falta leerlo a
 - Piloto `orden.mayor` v3: «Más ejercicios» = filas de 3 con tarjeta ≥ 86 pt (21 en completa, 9 en media); «Más grandes» = 15 y 6 con tarjetas que llenan el panel; cajas `bh = min(ch − 34, ancho)`, `bw = 1,1·bh`, letra 0,48·bh.
 - `tools/ver_tipo.js --mas`. Pruebas: 3 doradas nuevas (203) y una en `test_copia.js`.
 - Límites: Tabula (`chartaOpciones`) no pasa `cantidad`; con «Más grandes» en media las tarjetas de «Mayor o menor» quedan altas (las cajas las limita el ancho).
+
+## Espacio en la ficha · paso 5 (24-11-2026)
+Sueltas: `conteo.tabla` v2 (R ≤ 10: `NTAB` = 5 tablas, un ejercicio cada una), `conteo.camino` v3 (L ≤ 12: `NCAM` = 3 caminos), `sumar.tabla` v2 (casilla hasta 100 pt, letra ×1,25), `juegos.colorea` v2 (casilla hasta 112 pt), `lectura.texto` v2 (k hasta 2,6). Invariantes de tabla y camino recorren todos los ejercicios. Límites: con R > 10 la tabla y el camino siguen siendo uno solo.

@@ -12,7 +12,7 @@ const ordenado = (l) => l.slice().sort((a, b) => a - b);
 
 export default registrar({
   id: "sumar.tabla",
-  version: 1,
+  version: 2,
   generar(params, azar) {
     const R = params.rango ?? 10;
     let filas, columnas;
@@ -35,10 +35,11 @@ export default registrar({
   },
   dibujar(p, act) {
     const e = act.ejercicios[0], { filas, columnas, vac } = e.datos, kr = filas.length, kc = columnas.length;
-    const cs = Math.min(78, (W - 2 * M) / (kc + 1), (TOP - M - 10) / (kr + 1)), x0 = M + (W - 2 * M - (kc + 1) * cs) / 2, y0 = TOP - 10;
+    const cs = Math.min(100, (W - 2 * M) / (kc + 1), (TOP - M - 10) / (kr + 1)), x0 = M + (W - 2 * M - (kc + 1) * cs) / 2, y0 = TOP - 10;
     const cab = (x, y, t) => {
       p.rrect(x + 2, y + 2, cs - 4, cs - 4, 8, { lw: 2.4, fill: 1, stroke: INK });
-      p.text(x + cs / 2, y + cs / 2 - 6.5, String(t), 18, { anchor: "middle" });
+      const f = 18 * Math.min(1.25, cs / 78);
+      p.text(x + cs / 2, y + cs / 2 - f * 0.36, String(t), f, { anchor: "middle" });
     };
     p.ejercicio(e.id, () => {
       p.circle(x0 + cs / 2, y0 - cs / 2, cs * 0.3, { lw: 2.4 });
@@ -47,7 +48,7 @@ export default registrar({
       filas.forEach((v, i) => cab(x0, y0 - (i + 2) * cs, v));
       filas.forEach((rv, i) => columnas.forEach((cv, j) => {
         const hueco = vac.includes(i * kc + j);
-        p.caja(x0 + (j + 1) * cs + 2, y0 - (i + 2) * cs + 2, cs - 4, cs - 4, hueco ? null : rv + cv, 18, hueco ? rv + cv : null);
+        p.caja(x0 + (j + 1) * cs + 2, y0 - (i + 2) * cs + 2, cs - 4, cs - 4, hueco ? null : rv + cv, 18 * Math.min(1.25, cs / 78), hueco ? rv + cv : null);
       }));
     });
   },

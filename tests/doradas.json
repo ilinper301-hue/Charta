@@ -445,14 +445,14 @@
       {
        "n": 1,
        "tipo": "conteo.camino",
-       "tipoVersion": 2,
+       "tipoVersion": 3,
        "params": {
         "huecos": null,
         "rango": 10
        },
        "tamano": "completa",
        "color": "amarillo",
-       "enunciado": "Sigue las flechas y escribe los números que faltan.",
+       "enunciado": "Sigue las flechas y escribe los números que faltan en cada camino.",
        "ejemplo": null,
        "ejercicios": [
         {
@@ -473,6 +473,44 @@
            8
           ]
          }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "desde": 1,
+          "L": 10,
+          "huecos": [
+           1,
+           2,
+           8
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           3,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "desde": 1,
+          "L": 10,
+          "huecos": [
+           3,
+           4,
+           7
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           5,
+           8
+          ]
+         }
         }
        ]
       }
@@ -482,10 +520,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "02816ce63b053239"
+   "2500a52d0c8eac31"
   ],
   "svgSolucion": [
-   "943d5c74c35d69ad"
+   "8c447d042a30b246"
   ]
  },
  "conteo.cuenta": {
@@ -2576,14 +2614,14 @@
       {
        "n": 1,
        "tipo": "conteo.tabla",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "huecos": null,
         "rango": 10
        },
        "tamano": "completa",
        "color": "amarillo",
-       "enunciado": "Completa la tabla escribiendo los números que faltan.",
+       "enunciado": "Completa las tablas escribiendo los números que faltan.",
        "ejemplo": null,
        "ejercicios": [
         {
@@ -2603,6 +2641,78 @@
            10
           ]
          }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "R": 10,
+          "huecos": [
+           1,
+           2,
+           8
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           2,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "R": 10,
+          "huecos": [
+           3,
+           7,
+           10
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           7,
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "R": 10,
+          "huecos": [
+           3,
+           8,
+           9
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           8,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "R": 10,
+          "huecos": [
+           5,
+           6,
+           10
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           6,
+           10
+          ]
+         }
         }
        ]
       }
@@ -2612,10 +2722,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "39906937be953938"
+   "8fcce8701ecf0ffa"
   ],
   "svgSolucion": [
-   "ef138373851eb2b8"
+   "b4cd6512fdb953ea"
   ]
  },
  "escritura.dictado": {
@@ -9147,7 +9257,7 @@
       {
        "n": 1,
        "tipo": "juegos.colorea",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "modo": null,
         "nivel": null,
@@ -9418,10 +9528,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "0136594fa2c31b8f"
+   "ea2da236f51abe13"
   ],
   "svgSolucion": [
-   "85beeba01bbe4bc8"
+   "504130dfe2991456"
   ]
  },
  "juegos.cuadrado": {
@@ -11012,7 +11122,7 @@
       {
        "n": 1,
        "tipo": "lectura.texto",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "nivel": null,
         "preguntas": null,
@@ -11087,10 +11197,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "fc02fcd98ad62415"
+   "70a2e80fb163749d"
   ],
   "svgSolucion": [
-   "3e3b4b5e8bd88357"
+   "7bf677cbe7cce238"
   ]
  },
  "letra.abecedario": {
@@ -34164,7 +34274,7 @@
       {
        "n": 1,
        "tipo": "sumar.tabla",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "huecos": null,
         "rango": 10
@@ -34235,10 +34345,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "70eca44bb9ae32fa"
+   "e4c58826e86b581d"
   ],
   "svgSolucion": [
-   "7afe1637b1f91cad"
+   "844130083496f9d5"
   ]
  },
  "sumar.vertical": {

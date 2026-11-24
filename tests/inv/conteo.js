@@ -73,23 +73,25 @@ export default {
 
   "conteo.tabla"(act, tam) {
     const R = Math.min(act.params.rango ?? 10, 100), h = Math.min(30, act.params.huecos ?? Math.max(3, Math.floor(R / 5)));
-    assert.equal(tam, "completa"); cuantos(act.ejercicios, 1);
-    const { datos: { R: r, huecos }, solucion } = act.ejercicios[0];
-    assert.equal(r, R, "tamaño de la tabla");
-    assert.equal(huecos.length, Math.min(h, R - 1), "nº de huecos");
-    assert.deepEqual(huecos, [...new Set(huecos)].sort((x, y) => x - y), "huecos ordenados y distintos");
-    huecos.forEach((n) => ent(n, 1, R, "número que falta"));
-    assert.deepEqual(solucion.huecos, huecos);
+    assert.equal(tam, "completa"); cuantos(act.ejercicios, R <= 10 ? 5 : 1);
+    for (const { datos: { R: r, huecos }, solucion } of act.ejercicios) {
+      assert.equal(r, R, "tamaño de la tabla");
+      assert.equal(huecos.length, Math.min(h, R - 1), "nº de huecos");
+      assert.deepEqual(huecos, [...new Set(huecos)].sort((x, y) => x - y), "huecos ordenados y distintos");
+      huecos.forEach((n) => ent(n, 1, R, "número que falta"));
+      assert.deepEqual(solucion.huecos, huecos);
+    }
   },
 
   "conteo.camino"(act, tam) {
     const R = act.params.rango ?? 10, L = Math.min(36, R), h = Math.min(L - 2, act.params.huecos ?? Math.max(3, Math.floor(L / 3)));
-    assert.equal(tam, "completa"); cuantos(act.ejercicios, 1);
-    const { datos: { desde, L: l, huecos }, solucion } = act.ejercicios[0];
-    assert.equal(l, L, "longitud del camino"); ent(desde, 1, R - L + 1, "primer número"); ent(desde + L - 1, L, R, "último número");
-    assert.equal(huecos.length, h, "nº de huecos");
-    assert.deepEqual(huecos, [...new Set(huecos)].sort((x, y) => x - y), "huecos ordenados y distintos");
-    huecos.forEach((k) => ent(k, 1, L - 1, "posición del hueco (la salida nunca va vacía)"));
-    assert.deepEqual(solucion.huecos, huecos.map((k) => desde + k));
+    assert.equal(tam, "completa"); cuantos(act.ejercicios, L <= 12 ? 3 : 1);
+    for (const { datos: { desde, L: l, huecos }, solucion } of act.ejercicios) {
+      assert.equal(l, L, "longitud del camino"); ent(desde, 1, R - L + 1, "primer número"); ent(desde + L - 1, L, R, "último número");
+      assert.equal(huecos.length, h, "nº de huecos");
+      assert.deepEqual(huecos, [...new Set(huecos)].sort((x, y) => x - y), "huecos ordenados y distintos");
+      huecos.forEach((k) => ent(k, 1, L - 1, "posición del hueco (la salida nunca va vacía)"));
+      assert.deepEqual(solucion.huecos, huecos.map((k) => desde + k));
+    }
   },
 };
