@@ -3,28 +3,33 @@
 //           forma 0: «a − b = ☐»; forma 1: «a − ☐ = t»; forma 2: «☐ − b = t» (t = a − b). Con bloques, siempre forma 0.
 // solucion: { huecos: [a − b] } (forma 0) · [b] (forma 1) · [a] (forma 2)
 // Opción modo: null (solo números) o "bloques" (varillas de 10; se tachan las b/10 últimas).
-// Solo números: con 3 formas por pareja, min(24, 3·parejas) ejercicios en filas de 3 (media: la mitad de filas, como el motor).
+// Solo números: «Más grandes» = con 3 formas por pareja, min(24, 3·parejas) ejercicios en filas de 3 (media: la mitad de filas, como el motor); «Más ejercicios»: 33 y 15 (tarjetas ≥ 54 pt, rejilla elástica; con tope en las distintas que dé el rango).
+// Con bloques (varillas) la opción «Cantidad» no cambia nada.
 // Bloques: parejas distintas, máx. 10 pares (2×5 tarjetas); media: 4 tarjetas como máximo. Con rango 30 solo hay 3 parejas.
 // 2.º (rango > 100, sin bloques; ver _tres.js): mismos datos y solucion, con a y b múltiplos de 10, 10 ≤ b < a ≤ rango ≤ 999.
 //   Tres clases a partes iguales (8 de 24; en media, 12 mezclados): decenas (70 − 30), centenas (700 − 300) y
 //   centenas con decenas (450 − 20, b < 100). Tres formas de hueco como en 1.º; letra de 15 y hueco de 52 para que quepan 3 cifras.
 //   Con «bloques» y rango > 100 se limita a decenas hasta 100 (no se dibujan placas de cien): sale igual que con rango 100.
 import { registrar } from "../nucleo/tipos.js";
-import { TOP, M, W, MENOS, T, B } from "../render/papel.js";
+import { TOP, MENOS, T, B } from "../render/papel.js";
+import { MIN_OP, cuantos, pintarEl } from "./_elastica.js";
 import { decenasResta3 } from "./_tres.js";
 
 const filasMedia = (filas, tamano) => (tamano === "media" ? Math.max(1, Math.floor(filas * 0.5)) : filas);
 
 export default registrar({
   id: "restar.decenas",
-  version: 1,
-  generar(params, azar, { tamano }) {
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const { tamano } = ctx;
     const R = params.rango ?? 30;
     if (R < 30) throw new Error("Restas de decenas necesita un rango máximo de al menos 30.");
     if (R > 100 && params.modo !== "bloques") {
+      const fijo = [24, 12], n = cuantos(ctx, 3, MIN_OP, fijo), todas = decenasResta3(R, azar, Math.max(24, n));   // repartir() da hasta n distintas
       return {
         enunciado: "Resta las decenas y las centenas y escribe el resultado.",
-        ejercicios: decenasResta3(R, azar).slice(0, tamano === "media" ? 12 : 24).map(([a, b, forma]) => ({ datos: { a, b, forma }, solucion: { huecos: [[a - b], [b], [a]][forma] } })),
+        ejercicios: todas.slice(0, ctx.cantidad === "mas" ? Math.max(fijo[tamano === "media" ? 1 : 0], Math.floor(Math.min(n, todas.length) / 3) * 3) : n).map(([a, b, forma]) => ({ datos: { a, b, forma }, solucion: { huecos: [[a - b], [b], [a]][forma] } })),
       };
     }
     const cap = Math.min(R, 100), pool = [];
@@ -36,7 +41,12 @@ export default registrar({
         ejercicios: azar.muestra(pool, n).slice(0, celdas).map(([a, b]) => ({ datos: { a, b, forma: 0 }, solucion: { huecos: [a - b] } })),
       };
     }
-    const ex = azar.muestra(pool.flatMap(([a, b]) => [0, 1, 2].map((f) => [a, b, f])), Math.min(24, pool.length * 3));
+    const todos = pool.flatMap(([a, b]) => [0, 1, 2].map((f) => [a, b, f])), base = Math.min(24, pool.length * 3);
+    if (ctx.cantidad === "mas") {   // todas las filas que caben (nunca menos que antes ni más de las distintas que hay)
+      const m = cuantos(ctx, 3, MIN_OP, [base, filasMedia(base / 3, "media") * 3], todos.length);
+      return { enunciado: "Resta las decenas y escribe el resultado.", ejercicios: azar.muestra(todos, m).map(([a, b, forma]) => ({ datos: { a, b, forma }, solucion: { huecos: [[a - b], [b], [a]][forma] } })) };
+    }
+    const ex = azar.muestra(todos, base);
     const filas = ex.length / 3, n = filasMedia(filas, tamano) * 3;
     return {
       enunciado: "Resta las decenas y escribe el resultado.",
@@ -62,15 +72,12 @@ export default registrar({
       }));
       return;
     }
-    // _pintar(top, 3, filas, es, 8): la altura de fila sale de 8 filas aunque haya menos
-    const cols = 3, GX = 10, GY = 8, rr = 8, cw = (W - 2 * M - (cols - 1) * GX) / cols, ch = (TOP - M - (rr - 1) * GY) / rr;
-    es.forEach((e, i) => p.ejercicio(e.id, () => {
-      const { a, b, forma } = e.datos, s = e.solucion.huecos[0], r = Math.floor(i / cols), k = i % cols;
-      const x = M + k * (cw + GX), y = TOP - (r + 1) * ch - r * GY, t = a - b;
-      p.marco(x, y, cw, ch);
-      const tres = (act.params.rango ?? 30) > 100, cuatro = (act.params.rango ?? 30) > 1000, f = cuatro ? 14 : tres ? 15 : 19, w = cuatro ? 58 : tres ? 52 : 44;   // 2.º: tres cifras
-      p.linea(x, y, cw, ch, forma === 0 ? [T(`${a} ${MENOS} ${b} =`, f), B(w, 38, s)]
-        : forma === 1 ? [T(`${a} ${MENOS}`, f), B(w, 38, s), T(`= ${t}`, f)] : [B(w, 38, s), T(`${MENOS} ${b} = ${t}`, f)], tres ? 6 : 8);
-    }));
+    // rejilla elástica de 3 columnas (la de 8 filas de siempre si hay pocas)
+    const tres = (act.params.rango ?? 30) > 100, cuatro = (act.params.rango ?? 30) > 1000, f = cuatro ? 14 : tres ? 15 : 19, w = cuatro ? 58 : tres ? 52 : 44;   // 2.º: tres cifras
+    pintarEl(p, 3, es.map((e) => {
+      const { a, b, forma } = e.datos, s = e.solucion.huecos[0], t = a - b;
+      return forma === 0 ? [T(`${a} ${MENOS} ${b} =`, f), B(w, 38, s)]
+        : forma === 1 ? [T(`${a} ${MENOS}`, f), B(w, 38, s), T(`= ${t}`, f)] : [B(w, 38, s), T(`${MENOS} ${b} = ${t}`, f)];
+    }), es.map((e) => e.id), 8, 8, tres ? 6 : 8);
   },
 });

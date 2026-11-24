@@ -2,9 +2,10 @@
 // datos:    { a, b, op: "+" }
 // solucion: { huecos: [a + b] }
 // Opción nivel: null/"sin" (sin llevadas), "con" (con llevada), "mezcla" (mitad y mitad). Rango 30 o 100.
-// Completa: 24 sumas (8 filas × 3); media: 12. Exporta paresSuma() para sumar.h10 y sumar.hueco.
+// «Más grandes»: 24 sumas en completa (8 filas × 3) y 12 en media; «Más ejercicios»: 33 y 15 (rejilla elástica, _elastica.js). Exporta paresSuma() para sumar.h10 y sumar.hueco.
 import { registrar } from "../nucleo/tipos.js";
-import { TOP, T, B } from "../render/papel.js";
+import { T, B } from "../render/papel.js";
+import { MIN_OP, cuantos, sinRepetir, pintarEl } from "./_elastica.js";
 import { pares } from "./sumar.h20.js";
 import { paresSuma3 } from "./_tres.js";
 
@@ -36,17 +37,22 @@ export function paresSuma(R, nivel, cnt, azar) {
   return pares(grupos, cnt, azar);
 }
 
-/** Dibujo común de las sumas horizontales (_pintar 3 × 8). */
+export const FIJO = [24, 12];
+/** Pares de una rejilla de sumas horizontales (con «Más ejercicios», sin repetidos). */
+export const parejas = (ctx, R, nivel, azar) => sinRepetir(ctx, paresSuma(R, nivel, cuantos(ctx, 3, MIN_OP, FIJO), azar), 3, FIJO, (q) => q.join());
+
+/** Dibujo común de las sumas horizontales (rejilla elástica de 3 columnas; 8 filas de siempre). */
 export function dibujarHoriz(p, act) {
   const es = act.ejercicios;
-  p.pintar(TOP, 3, 8, es.map((e) => [T(`${e.datos.a} + ${e.datos.b} =`, 19), B(42, 38, e.solucion.huecos[0])]), es.map((e) => e.id));
+  pintarEl(p, 3, es.map((e) => [T(`${e.datos.a} + ${e.datos.b} =`, 19), B(42, 38, e.solucion.huecos[0])]), es.map((e) => e.id), 8);
 }
 
 export default registrar({
   id: "sumar.h100",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    const ps = paresSuma(params.rango ?? 30, params.nivel, tamano === "media" ? 12 : 24, azar);
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const ps = parejas(ctx, params.rango ?? 30, params.nivel, azar);
     return {
       enunciado: "Calcula y escribe el resultado en el cuadro gris.",
       ejercicios: ps.map(([a, b]) => ({ datos: { a, b, op: "+" }, solucion: { huecos: [a + b] } })),

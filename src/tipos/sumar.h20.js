@@ -1,9 +1,12 @@
 // sumar.h20 · Sumas hasta 20 (port de _pares_suma(20, nivel) del motor).
 // datos:    { a, b, op: "+" }
 // solucion: { huecos: [a + b] }
-// Completa: 24 sumas (8 filas × 3); media: 12 (la mitad de filas). Dibujo: _s_horiz() → _pintar().
+// «Más grandes»: 24 sumas en completa (8 filas × 3) y 12 en media; «Más ejercicios»: las filas de 3 que caben con tarjetas ≥ 54 pt (33 y 15; menos si el banco no da para más sin repetir). Rejilla elástica (_elastica.js).
 import { registrar } from "../nucleo/tipos.js";
-import { TOP, T, B } from "../render/papel.js";
+import { T, B } from "../render/papel.js";
+import { MIN_OP, cuantos, sinRepetir, pintarEl } from "./_elastica.js";
+
+const FIJO = [24, 12];
 
 const SIN = [], CON = [];
 for (let a = 1; a < 20; a++) for (let b = 1; b < 20; b++)
@@ -29,10 +32,11 @@ export function pares(grupos, cnt, azar) {
 
 export default registrar({
   id: "sumar.h20",
-  version: 1,
-  generar(params, azar, { tamano }) {
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
     const grupos = { sin: [SIN], con: [CON], mezcla: [SIN, CON] }[params.nivel || "sin"];
-    const ps = pares(grupos, tamano === "media" ? 12 : 24, azar);
+    const ps = sinRepetir(ctx, pares(grupos, cuantos(ctx, 3, MIN_OP, FIJO), azar), 3, FIJO, (q) => q.join());
     return {
       enunciado: "Calcula y escribe el resultado en el cuadro gris.",
       ejercicios: ps.map(([a, b]) => ({ datos: { a, b, op: "+" }, solucion: { huecos: [a + b] } })),
@@ -40,6 +44,6 @@ export default registrar({
   },
   dibujar(p, act) {
     const es = act.ejercicios;
-    p.pintar(TOP, 3, 8, es.map((e) => [T(`${e.datos.a} + ${e.datos.b} =`, 19), B(42, 38, e.solucion.huecos[0])]), es.map((e) => e.id));
+    pintarEl(p, 3, es.map((e) => [T(`${e.datos.a} + ${e.datos.b} =`, 19), B(42, 38, e.solucion.huecos[0])]), es.map((e) => e.id), 8);
   },
 });

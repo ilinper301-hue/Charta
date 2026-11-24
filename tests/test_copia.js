@@ -117,8 +117,8 @@ prueba("Cantidad «Más ejercicios»: se guarda, viaja a la nube y genera más e
   const o = opcionesDeComp(limpiar(cp), hayTipo), f = generar(o.opciones, o.semilla);
   assert.equal(f.cantidad, "mas"); assert.equal(f.paginas[0].actividades[0].ejercicios.length, 21); assert.deepEqual(erroresFicha(f), []);
   assert.equal(generar({ actividades: [{ tipo: "orden.mayor" }] }, 4).cantidad, undefined);
-  assert.equal(generar({ actividades: [{ tipo: "sumar.h20" }], cantidad: "mas" }, 4).paginas[0].actividades[0].ejercicios.length,
-    generar({ actividades: [{ tipo: "sumar.h20" }] }, 4).paginas[0].actividades[0].ejercicios.length);
+  assert.equal(generar({ actividades: [{ tipo: "sumar.vertical" }], cantidad: "mas" }, 4).paginas[0].actividades[0].ejercicios.length,
+    generar({ actividades: [{ tipo: "sumar.vertical" }] }, 4).paginas[0].actividades[0].ejercicios.length);
   assert.throws(() => generar({ actividades: [{ tipo: "orden.mayor" }], cantidad: "muchos" }, 4), /Cantidad no válida/);
 });
 

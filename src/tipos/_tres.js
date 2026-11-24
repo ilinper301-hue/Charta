@@ -199,35 +199,35 @@ function repartir(clases, n, azar) {
   return azar.barajar(out).slice(0, n);
 }
 const pasos = (a, b, d = 10) => { const l = []; for (let v = a; v <= b; v += d) l.push(v); return l; };
-/** Sumas de decenas y centenas (R > 100): 40 + 30 · 300 + 400 · 250 + 30, a + b ≤ R. Hasta 24 [a, b, forma]. */
-export function decenasSuma3(R, azar) {
+/** Sumas de decenas y centenas (R > 100): 40 + 30 · 300 + 400 · 250 + 30, a + b ≤ R. Hasta n (24) [a, b, forma]. */
+export function decenasSuma3(R, azar, n = 24) {
   if (R > 1000) {   // 3.º: centenas (400 + 500), millares (3000 + 2000), millares con centenas (3000 + 400) y centenas con millares (3400 + 200)
     const Bc = [], Mi = [], MC = [], MD = [];
     for (const a of pasos(100, 900, 100)) for (const b of pasos(100, 900, 100)) if (a + b <= R) Bc.push([a, b]);
     for (const a of pasos(1000, R, 1000)) for (const b of pasos(1000, R, 1000)) if (a + b <= R) Mi.push([a, b]);
     for (const a of pasos(1000, R, 1000)) for (const b of pasos(100, 900, 100)) if (a + b <= R) MC.push([a, b]);
     for (const a of pasos(1100, R, 100)) if (a % 1000) for (const b of pasos(100, 900, 100)) if (a + b <= R) MD.push([a, b]);
-    return repartir([Bc, Mi, MC, MD], 24, azar);
+    return repartir([Bc, Mi, MC, MD], n, azar);
   }
   const A = [], Bc = [], C = [];
   for (const a of pasos(10, 90)) for (const b of pasos(10, 90)) if (a + b <= R) A.push([a, b]);
   for (const a of pasos(100, R, 100)) for (const b of pasos(100, R, 100)) if (a + b <= R) Bc.push([a, b]);
   for (const a of pasos(100, R - 10)) for (const b of pasos(10, 90)) if (a + b <= R) C.push([a, b]);
-  return repartir([A, Bc, C], 24, azar);
+  return repartir([A, Bc, C], n, azar);
 }
-/** Restas de decenas y centenas (R > 100): 70 − 30 · 700 − 300 · 450 − 20. Hasta 24 [a, b, forma]. */
-export function decenasResta3(R, azar) {
+/** Restas de decenas y centenas (R > 100): 70 − 30 · 700 − 300 · 450 − 20. Hasta n (24) [a, b, forma]. */
+export function decenasResta3(R, azar, n = 24) {
   if (R > 1000) {   // 3.º: 700 − 300, 5000 − 2000, 5000 − 300 y 5200 − 300
     const Bc = [], Mi = [], MC = [], MD = [];
     for (const a of pasos(200, 900, 100)) for (const b of pasos(100, a - 100, 100)) Bc.push([a, b]);
     for (const a of pasos(2000, R, 1000)) for (const b of pasos(1000, a - 1000, 1000)) Mi.push([a, b]);
     for (const a of pasos(2000, R, 1000)) for (const b of pasos(100, 900, 100)) MC.push([a, b]);
     for (const a of pasos(1100, R, 100)) if (a % 1000) for (const b of pasos(100, 900, 100)) MD.push([a, b]);
-    return repartir([Bc, Mi, MC, MD], 24, azar);
+    return repartir([Bc, Mi, MC, MD], n, azar);
   }
   const A = [], Bc = [], C = [];
   for (const a of pasos(20, 100)) for (const b of pasos(10, a - 10)) A.push([a, b]);
   for (const a of pasos(200, R, 100)) for (const b of pasos(100, a - 100, 100)) Bc.push([a, b]);
   for (const a of pasos(110, R)) for (const b of pasos(10, 90)) C.push([a, b]);
-  return repartir([A, Bc, C], 24, azar);
+  return repartir([A, Bc, C], n, azar);
 }

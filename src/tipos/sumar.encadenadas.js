@@ -3,9 +3,12 @@
 // solucion: { huecos: [x + y + z] }
 // 2.º (rango ≥ 100): datos { x, y, z[, w] } — x, una decena (o centena, salto 100) hasta el rango; los demás, saltos de
 //   10–90 (o 100–900); suma ≤ rango. Opción sumandos: 3 | 4 (w). Sin repetidos.
-// Completa: 16 (8 filas × 2); media: 8. Tríos distintos.
+// «Más grandes»: 16 en completa (8 filas × 2) y 8 en media; «Más ejercicios»: 22 y 10 (tarjetas ≥ 54 pt, rejilla elástica). Tríos distintos.
 import { registrar } from "../nucleo/tipos.js";
-import { TOP, T, B, MENOS } from "../render/papel.js";
+import { T, B } from "../render/papel.js";
+import { MIN_OP, cuantos, pintarEl } from "./_elastica.js";
+
+export const FIJO = [16, 8];
 
 /** 2.º: primer número = múltiplo de u (10 o 100) hasta el rango; los demás, de 1u a 9u; resultado entre u y el rango. */
 export function encadenadas2(params, azar, cnt, resta) {
@@ -25,9 +28,10 @@ export function encadenadas2(params, azar, cnt, resta) {
 
 export default registrar({
   id: "sumar.encadenadas",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    const cap = (params.rango ?? 10) <= 10 ? 10 : 20, cnt = tamano === "media" ? 8 : 16, vistos = new Set(), ejercicios = [];
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const cap = (params.rango ?? 10) <= 10 ? 10 : 20, cnt = cuantos(ctx, 2, MIN_OP, FIJO), vistos = new Set(), ejercicios = [];
     if ((params.rango ?? 10) >= 100) return { enunciado: "Suma los números y escribe el resultado.", ejercicios: encadenadas2(params, azar, cnt, false) };
     while (ejercicios.length < cnt) {
       let tr, t;
@@ -45,7 +49,7 @@ export default registrar({
   dibujar(p, act) {
     const es = act.ejercicios;
     const fs = es.some((e) => e.datos.w !== undefined) ? 16 : 18, bw = es.some((e) => e.solucion.huecos[0] >= 100) ? 54 : 44;
-    p.pintar(TOP, 2, 8, es.map((e) => [T(["x", "y", "z", "w"].filter((c) => e.datos[c] !== undefined).map((c) => e.datos[c]).join(" + ") + " =", fs),
-      B(bw, 36, e.solucion.huecos[0])]), es.map((e) => e.id));
+    pintarEl(p, 2, es.map((e) => [T(["x", "y", "z", "w"].filter((c) => e.datos[c] !== undefined).map((c) => e.datos[c]).join(" + ") + " =", fs),
+      B(bw, 36, e.solucion.huecos[0])]), es.map((e) => e.id), 8);
   },
 });

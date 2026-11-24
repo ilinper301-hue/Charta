@@ -2,16 +2,18 @@
 // datos:    { a, b, falta: "a" | "b" }   (falta "a": «□ + b = t»; falta "b": «a + □ = t»)
 // solucion: { huecos: [a] | [b] }
 // Opción nivel (R > 10): null/"sin", "con", "mezcla". Rango máx. 99 efectivo.
-// Completa: 24 (8 filas × 3); media: 12.
+// «Más grandes»: 24 en completa (8 filas × 3) y 12 en media; «Más ejercicios»: 33 y 15 (rejilla elástica).
 import { registrar } from "../nucleo/tipos.js";
-import { TOP, T, B } from "../render/papel.js";
-import { paresSuma } from "./sumar.h100.js";
+import { T, B } from "../render/papel.js";
+import { parejas } from "./sumar.h100.js";
+import { pintarEl } from "./_elastica.js";
 
 export default registrar({
   id: "sumar.hueco",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    const ps = paresSuma(((R) => (R > 100 ? R : Math.min(R, 99)))(params.rango ?? 10), params.nivel, tamano === "media" ? 12 : 24, azar);
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const ps = parejas(ctx, ((R) => (R > 100 ? R : Math.min(R, 99)))(params.rango ?? 10), params.nivel, azar);
     return {
       enunciado: "Escribe el número que falta.",
       ejercicios: ps.map(([a, b]) => {
@@ -22,9 +24,9 @@ export default registrar({
   },
   dibujar(p, act) {
     const es = act.ejercicios;
-    p.pintar(TOP, 3, 8, es.map((e) => {
+    pintarEl(p, 3, es.map((e) => {
       const { a, b, falta } = e.datos, t = a + b, s = e.solucion.huecos[0];
       return falta === "a" ? [B(44, 38, s), T(`+ ${b} = ${t}`)] : [T(`${a} +`), B(44, 38, s), T(`= ${t}`)];
-    }), es.map((e) => e.id));
+    }), es.map((e) => e.id), 8);
   },
 });

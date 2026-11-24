@@ -1,10 +1,11 @@
 // restar.r10 · Restas hasta 10 (port de _r_horiz(…, 10) y _pares_resta() del motor).
 // datos:    { a, b, op: "−" }     (2 ≤ a ≤ 10, 1 ≤ b < a)
 // solucion: { huecos: [a − b] }
-// Completa: 24 restas (8 filas × 3); media: 12. Sin opción de llevadas (hasta 10 no hay).
+// «Más grandes»: 24 restas en completa (8 filas × 3) y 12 en media; «Más ejercicios»: 33 y 15 (rejilla elástica, _elastica.js). Sin opción de llevadas (hasta 10 no hay).
 // Exporta paresResta() para los demás tipos de la familia (r20, r100, hueco).
 import { registrar } from "../nucleo/tipos.js";
-import { TOP, T, B, MENOS } from "../render/papel.js";
+import { T, B, MENOS } from "../render/papel.js";
+import { MIN_OP, cuantos, sinRepetir, pintarEl } from "./_elastica.js";
 import { pares } from "./sumar.h20.js";
 import { paresResta3 } from "./_tres.js";
 
@@ -28,17 +29,21 @@ export function gruposResta(R, nivel) {
   con.lleva = true;   // pares(): no rellenar con otro tipo de grupo
   return { sin: [dd, du, dudu], con: [con], mezcla: [dd, du, dudu, con] }[nivel];
 }
+export const FIJO = [24, 12];
+/** Pares de una rejilla de restas horizontales (con «Más ejercicios», sin repetidos). */
+export const parejasResta = (ctx, R, nivel, azar) => sinRepetir(ctx, paresResta(R, nivel, cuantos(ctx, 3, MIN_OP, FIJO), azar), 3, FIJO, (q) => q.join());
 export const paresResta = (R, nivel, cnt, azar) => (R > 100 ? paresResta3(R, nivel, cnt, azar) : pares(gruposResta(R, nivel), cnt, azar));   // 2.º: tres cifras
 
 /** Tipo de restas horizontales hasta R fijo (R = null: usa params.rango). */
 export function restasHoriz(id, Rfijo, minimo, titulo) {
   return registrar({
     id,
-    version: 1,
-    generar(params, azar, { tamano }) {
+    version: 2,
+    cantidad: true,
+    generar(params, azar, ctx) {
       const R = Rfijo ?? params.rango ?? minimo;
       if (R < minimo) throw new Error(`${titulo} necesita un rango máximo de al menos ${minimo}.`);
-      const ps = paresResta(R, params.nivel, tamano === "media" ? 12 : 24, azar);
+      const ps = parejasResta(ctx, R, params.nivel, azar);
       return {
         enunciado: "Calcula y escribe el resultado en el cuadro gris.",
         ejercicios: ps.map(([a, b]) => ({ datos: { a, b, op: MENOS }, solucion: { huecos: [a - b] } })),
@@ -46,7 +51,7 @@ export function restasHoriz(id, Rfijo, minimo, titulo) {
     },
     dibujar(p, act) {
       const es = act.ejercicios;
-      p.pintar(TOP, 3, 8, es.map((e) => [T(`${e.datos.a} ${MENOS} ${e.datos.b} =`, 19), B(42, 38, e.solucion.huecos[0])]), es.map((e) => e.id));
+      pintarEl(p, 3, es.map((e) => [T(`${e.datos.a} ${MENOS} ${e.datos.b} =`, 19), B(42, 38, e.solucion.huecos[0])]), es.map((e) => e.id), 8);
     },
   });
 }

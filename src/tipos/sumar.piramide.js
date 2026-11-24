@@ -3,9 +3,11 @@
 //           (v[3] = b0 + b1, v[4] = b1 + b2, v[5] = v[3] + v[4]; posiciones 0-2 base, 3-4 medio, 5 cima)
 // solucion: { huecos: [v[j] para j en vac] }   (en orden de posición)
 // Opción huecos (1-4, por defecto 3): casillas vacías. El motor busca una pirámide resoluble (con 4 vacías no hay; queda la última).
-// Completa: 6 pirámides (2 × 3); media: 2.
+// «Más grandes»: 6 pirámides en completa (2 × 3) y 2 en media; «Más ejercicios»: 8 y 4 (tarjetas ≥ 156 pt: la pirámide mide 140; sin bases repetidas). Rejilla elástica; con «Más grandes» la pirámide crece hasta ×1,3 si cabe.
 import { registrar } from "../nucleo/tipos.js";
-import { TOP } from "../render/papel.js";
+import { TOP, cuantosRejilla } from "../render/papel.js";
+
+const MIN_ALTO = 156;   // la pirámide mide 140 pt de alto
 
 function resoluble(conocidos) {
   const k = new Set(conocidos);
@@ -22,16 +24,19 @@ function resoluble(conocidos) {
 
 export default registrar({
   id: "sumar.piramide",
-  version: 1,
-  generar(params, azar, { tamano }) {
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const mas = ctx.cantidad === "mas", vistas = new Set();
     const R = params.rango ?? 10, cap = R <= 20 || R > 100 ? R : Math.min(R, 99), mx = Math.max(2, R > 20 ? Math.floor(cap / 4) : Math.floor(cap / 3));
     const h = Math.max(1, Math.min(4, params.huecos ?? 3)), ejercicios = [];
-    for (let i = 0; i < (tamano === "media" ? 2 : 6); i++) {
+    for (let i = 0, cnt = cuantosRejilla(ctx, 2, MIN_ALTO, [6, 2]); i < cnt; i++) {
       let b = [1, 1, 1];
       for (let k = 0; k < 300; k++) {
         b = [azar.entero(1, mx), azar.entero(1, mx), azar.entero(1, mx)];
-        if (b[0] + 2 * b[1] + b[2] <= cap) break;
+        if (b[0] + 2 * b[1] + b[2] <= cap && !(mas && vistas.has(b.join()))) break;   // «Más ejercicios»: sin bases repetidas
       }
+      vistas.add(b.join());
       const v = [b[0], b[1], b[2], b[0] + b[1], b[1] + b[2], b[0] + 2 * b[1] + b[2]];
       let vac;
       for (let k = 0; k < 300; k++) {
@@ -44,12 +49,13 @@ export default registrar({
     return { enunciado: "Cada casilla es la suma de las dos de abajo. Completa las que faltan.", ejercicios };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 2, 3), bw = 46, bh = 40, g = 6;
+    const { cel, cw, ch } = p.rejilla(TOP, 2, Math.max(Math.ceil(act.ejercicios.length / 2), p.n(3)));   // la de 3 filas de siempre si hay pocas
+    const k = Math.max(1, Math.min(1.3, (ch - 16) / 140, (cw - 20) / (3 * 46 + 12))), bw = 46 * k, bh = 40 * k, g = 6 * k, fs = 18 * k;   // la pirámide crece con la tarjeta
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
-      const [x, y] = cel[i], { v, vac } = e.datos, cx = x + cw / 2, base = y + (ch - 140) / 2;
+      const [x, y] = cel[i], { v, vac } = e.datos, cx = x + cw / 2, base = y + (ch - 140 * k) / 2;
       p.marco(x, y, cw, ch, i);
-      const pos = [0, 1, 2].map((j) => [cx + (j - 1) * (bw + g), base]).concat([0, 1].map((j) => [cx + (j - 0.5) * (bw + g), base + 50]), [[cx, base + 100]]);
-      pos.forEach(([px, py], j) => p.caja(px - bw / 2, py, bw, bh, vac.includes(j) ? null : v[j], 18, vac.includes(j) ? v[j] : null));
+      const pos = [0, 1, 2].map((j) => [cx + (j - 1) * (bw + g), base]).concat([0, 1].map((j) => [cx + (j - 0.5) * (bw + g), base + 50 * k]), [[cx, base + 100 * k]]);
+      pos.forEach(([px, py], j) => p.caja(px - bw / 2, py, bw, bh, vac.includes(j) ? null : v[j], fs, vac.includes(j) ? v[j] : null));
     }));
   },
 });
