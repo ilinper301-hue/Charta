@@ -58,6 +58,7 @@ const CASOS = [
   { nombre: "más ejercicios: trucos sumar9 (3.º)", semilla: 4, opciones: { cantidad: "mas", actividades: [{ tipo: "trucos.sumar9", curso: 3, params: { rango: 9999 } }] } },
   { nombre: "más ejercicios: trucos encadenado 2.º", semilla: 4, opciones: { cantidad: "mas", actividades: [{ tipo: "trucos.sumar919", curso: 2 }] } },
   { nombre: "más ejercicios en media: sumar9 y compensar2", semilla: 4, opciones: { cantidad: "mas", actividades: [{ tipo: "trucos.sumar9", curso: 3, params: { rango: 9999 } }, { tipo: "trucos.compensar2", curso: 2 }] } },
+  { nombre: "más ejercicios: palabra.cuenta (número y casillas)", semilla: 4, opciones: { cantidad: "mas", actividades: [{ tipo: "palabra.cuenta", curso: 1 }, { tipo: "palabra.cuenta", curso: 1, params: { respuesta: "casillas", letras: 6 } }] } },
   { nombre: "mayor o menor en media", semilla: 4, opciones: { actividades: [{ tipo: "orden.mayor" }, { tipo: "conteo.serie1" }] } },
   // Lengua 1.º · letra escolar ligada (Escolar_G) en las fichas de caligrafía
   ...[["palabras", "frase"], ["letra", "ordena"], ["libre"]].map((ts) => ({ nombre: "1.º escolar " + ts.join(" + "), semilla: 5, opciones: { actividades: ts.map((t) => ({ tipo: "escritura." + t, curso: 1, params: { grafia: "escolar" } })) } })),

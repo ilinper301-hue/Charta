@@ -18612,7 +18612,7 @@
       {
        "n": 1,
        "tipo": "palabra.cuenta",
-       "tipoVersion": 1,
+       "tipoVersion": 2,
        "params": {
         "letras": null,
         "respuesta": null,
@@ -18628,26 +18628,26 @@
         {
          "id": "a1e1",
          "datos": {
-          "palabra": "rayo",
-          "n": 4,
+          "palabra": "cuchara",
+          "n": 7,
           "respuesta": "numero"
          },
          "solucion": {
           "huecos": [
-           4
+           7
           ]
          }
         },
         {
          "id": "a1e2",
          "datos": {
-          "palabra": "lleno",
-          "n": 5,
+          "palabra": "vela",
+          "n": 4,
           "respuesta": "numero"
          },
          "solucion": {
           "huecos": [
-           5
+           4
           ]
          }
         },
@@ -18667,7 +18667,20 @@
         {
          "id": "a1e4",
          "datos": {
-          "palabra": "pesado",
+          "palabra": "mejilla",
+          "n": 7,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "palabra": "ceniza",
           "n": 6,
           "respuesta": "numero"
          },
@@ -18678,7 +18691,33 @@
          }
         },
         {
-         "id": "a1e5",
+         "id": "a1e6",
+         "datos": {
+          "palabra": "rayo",
+          "n": 4,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "palabra": "higo",
+          "n": 4,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
          "datos": {
           "palabra": "piano",
           "n": 5,
@@ -18691,48 +18730,9 @@
          }
         },
         {
-         "id": "a1e6",
-         "datos": {
-          "palabra": "lechuga",
-          "n": 7,
-          "respuesta": "numero"
-         },
-         "solucion": {
-          "huecos": [
-           7
-          ]
-         }
-        },
-        {
-         "id": "a1e7",
-         "datos": {
-          "palabra": "tío",
-          "n": 3,
-          "respuesta": "numero"
-         },
-         "solucion": {
-          "huecos": [
-           3
-          ]
-         }
-        },
-        {
-         "id": "a1e8",
-         "datos": {
-          "palabra": "mejilla",
-          "n": 7,
-          "respuesta": "numero"
-         },
-         "solucion": {
-          "huecos": [
-           7
-          ]
-         }
-        },
-        {
          "id": "a1e9",
          "datos": {
-          "palabra": "rey",
+          "palabra": "uña",
           "n": 3,
           "respuesta": "numero"
          },
@@ -18745,13 +18745,143 @@
         {
          "id": "a1e10",
          "datos": {
-          "palabra": "vela",
+          "palabra": "pesado",
+          "n": 6,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "palabra": "rey",
+          "n": 3,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "palabra": "año",
+          "n": 3,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "palabra": "gallo",
+          "n": 5,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "palabra": "zumo",
           "n": 4,
           "respuesta": "numero"
          },
          "solucion": {
           "huecos": [
            4
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "palabra": "tío",
+          "n": 3,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "palabra": "mañana",
+          "n": 6,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e17",
+         "datos": {
+          "palabra": "lleno",
+          "n": 5,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e18",
+         "datos": {
+          "palabra": "lechuga",
+          "n": 7,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e19",
+         "datos": {
+          "palabra": "labio",
+          "n": 5,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e20",
+         "datos": {
+          "palabra": "caballo",
+          "n": 7,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           7
           ]
          }
         }
@@ -18763,10 +18893,10 @@
    "variantesDatos": []
   },
   "svgPapel": [
-   "f808353df90e75e1"
+   "0897cf1c40b3b1f7"
   ],
   "svgSolucion": [
-   "cc80333127788ab7"
+   "0920fd78e77e7c1e"
   ]
  },
  "palabra.dibuja": {
@@ -53635,6 +53765,342 @@
   ],
   "svgSolucion": [
    "d203693d2f9213c9"
+  ]
+ },
+ "más ejercicios: palabra.cuenta (número y casillas)": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "¿Cuántas letras?",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "palabra.cuenta",
+       "tipoVersion": 2,
+       "params": {
+        "letras": null,
+        "respuesta": null,
+        "tipo": null,
+        "caso": null,
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "amarillo",
+       "enunciado": "Cuenta las letras de cada palabra\ny escribe cuántas tiene.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "palabra": "oso",
+          "n": 3,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "palabra": "quesito",
+          "n": 7,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "palabra": "pareja",
+          "n": 6,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "palabra": "babi",
+          "n": 4,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "palabra": "ruidoso",
+          "n": 7,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "palabra": "mamá",
+          "n": 4,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "palabra": "tía",
+          "n": 3,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "palabra": "vecino",
+          "n": 6,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "palabra": "zoo",
+          "n": 3,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "palabra": "ficha",
+          "n": 5,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "palabra": "abeja",
+          "n": 5,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "palabra": "ayuda",
+          "n": 5,
+          "respuesta": "numero"
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "palabra.cuenta",
+       "tipoVersion": 2,
+       "params": {
+        "letras": 6,
+        "respuesta": "casillas",
+        "tipo": null,
+        "caso": null,
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "rosa",
+       "enunciado": "Escribe cada letra de la palabra en una casilla\ny cuenta cuántas letras tiene.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "palabra": "pijama",
+          "n": 6,
+          "respuesta": "casillas"
+         },
+         "solucion": {
+          "huecos": [
+           "p",
+           "i",
+           "j",
+           "a",
+           "m",
+           "a",
+           6
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "palabra": "filete",
+          "n": 6,
+          "respuesta": "casillas"
+         },
+         "solucion": {
+          "huecos": [
+           "f",
+           "i",
+           "l",
+           "e",
+           "t",
+           "e",
+           6
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "palabra": "abuelo",
+          "n": 6,
+          "respuesta": "casillas"
+         },
+         "solucion": {
+          "huecos": [
+           "a",
+           "b",
+           "u",
+           "e",
+           "l",
+           "o",
+           6
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "palabra": "nevera",
+          "n": 6,
+          "respuesta": "casillas"
+         },
+         "solucion": {
+          "huecos": [
+           "n",
+           "e",
+           "v",
+           "e",
+           "r",
+           "a",
+           6
+          ]
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "palabra": "semana",
+          "n": 6,
+          "respuesta": "casillas"
+         },
+         "solucion": {
+          "huecos": [
+           "s",
+           "e",
+           "m",
+           "a",
+           "n",
+           "a",
+           6
+          ]
+         }
+        },
+        {
+         "id": "a2e6",
+         "datos": {
+          "palabra": "helado",
+          "n": 6,
+          "respuesta": "casillas"
+         },
+         "solucion": {
+          "huecos": [
+           "h",
+           "e",
+           "l",
+           "a",
+           "d",
+           "o",
+           6
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "ea5066b787cf1cd8"
+  ],
+  "svgSolucion": [
+   "e2af77b00d8b66fa"
   ]
  },
  "mayor o menor en media": {

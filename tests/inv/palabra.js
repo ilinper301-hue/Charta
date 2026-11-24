@@ -98,7 +98,7 @@ export default {
 
   "palabra.cuenta"(act, tam) {
     const es = act.ejercicios, p = act.params, cas = p.respuesta === "casillas";
-    cuantos(es, tam === "media" ? 5 : 10);
+    cuantos(es, cas ? (tam === "media" ? 5 : 10) : (tam === "media" ? 10 : 20));   // «Más ejercicios» (24/12 y 12/6) lo cubre la dorada
     unicos(es, (e) => e.datos.palabra.toLowerCase(), "palabras repetidas");
     for (const e of es) {
       const m = enCaso(e.datos.palabra, p.caso, "palabra"), ls = [...e.datos.palabra];
