@@ -1,6 +1,6 @@
 // Charta · invariantes de la familia «silaba» (Lengua 1.º, bloque 3; ver tests/invariantes.js).
 import assert from "node:assert/strict";
-import { unicos, cuantos } from "./_ayuda.js";
+import { unicos, cuantos, cuantosEntre } from "./_ayuda.js";
 import { enCaso, palabraValida, otrasQueEncajan, permutaciones, PALABRAS } from "./_lengua.js";
 import { silabas, tipoSilaba, sinTildes } from "../../src/lengua/reglas.js";
 
@@ -52,7 +52,7 @@ export default {
       }
       assert.notDeepEqual(es.map((e) => e.solucion.une), es.map((_, i) => i), "columnas sin mezclar");
     } else {
-      cuantos(es, tam === "media" ? 5 : 10);
+      cuantos(es, tam === "media" ? 10 : 20);
       unicos(es, (e) => e.datos.palabra.toLowerCase(), "palabras repetidas");
       for (const e of es) {
         const m = enCaso(e.datos.palabra, p.caso, "palabra");
@@ -66,7 +66,7 @@ export default {
 
   "silaba.separa"(act, tam) {
     const es = act.ejercicios, p = act.params, rayas = p.modo === "rayas";
-    cuantos(es, tam === "media" ? 5 : 10);
+    cuantos(es, tam === "media" ? 10 : 20);
     unicos(es, (e) => e.datos.palabra.toLowerCase(), "palabras repetidas");
     for (const e of es) {
       const m = enCaso(e.datos.palabra, p.caso, "palabra"), ss = silabas(m);
@@ -85,7 +85,7 @@ export default {
 
   "silaba.ordena"(act, tam) {
     const es = act.ejercicios, p = act.params;
-    cuantos(es, tam === "media" ? 5 : 10);
+    cuantos(es, tam === "media" ? 10 : 20);
     unicos(es, (e) => e.datos.palabra.toLowerCase(), "palabras repetidas");
     for (const e of es) {
       const m = enCaso(e.datos.palabra, p.caso, "palabra"), ss = silabas(m);
@@ -103,7 +103,7 @@ export default {
 
   "silaba.falta"(act, tam) {
     const es = act.ejercicios, p = act.params, ayuda = p.ayuda !== "sin";
-    cuantos(es, tam === "media" ? 5 : 10);
+    cuantosEntre(es, tam === "media" ? 10 : 20, tam === "media" ? 5 : 10);
     unicos(es, (e) => e.datos.palabra.toLowerCase(), "palabras repetidas");
     for (const e of es) {
       const { palabra, pos, largo, opciones } = e.datos, m = enCaso(palabra, p.caso, "palabra"), ss = silabas(m);

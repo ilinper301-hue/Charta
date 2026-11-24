@@ -1,6 +1,6 @@
 // Charta · invariantes de la familia «palabra» (Lengua 1.º, bloque 4; ver tests/invariantes.js).
 import assert from "node:assert/strict";
-import { unicos, cuantos } from "./_ayuda.js";
+import { unicos, cuantos, cuantosEntre } from "./_ayuda.js";
 import { enCaso, palabraValida, PALABRAS } from "./_lengua.js";
 import { LEXICO } from "../../src/lengua/lexico.js";
 import { articulo, plural, sinTildes } from "../../src/lengua/reglas.js";
@@ -74,7 +74,7 @@ export default {
 
   "palabra.letras"(act, tam) {
     const es = act.ejercicios, p = act.params, marca = p.marca === "primera";
-    cuantos(es, tam === "media" ? 5 : 10);
+    cuantosEntre(es, tam === "media" ? 10 : 20, tam === "media" ? 5 : 10);
     unicos(es, (e) => e.datos.palabra.toLowerCase(), "palabras repetidas");
     for (const e of es) {
       const m = enCaso(e.datos.palabra, p.caso, "palabra"), ls = e.datos.letras;
@@ -130,7 +130,7 @@ export default {
   },
 
   "palabra.plural"(act, tam) {
-    const es = act.ejercicios, p = act.params, reves = p.sentido === "alreves", conEs = p.plural === "es", n = tam === "media" ? 6 : 12;
+    const es = act.ejercicios, p = act.params, reves = p.sentido === "alreves", conEs = p.plural === "es", n = tam === "media" ? 12 : 24;
     cuantos(es, n);
     const sing = [];
     for (const e of es) {
@@ -152,7 +152,7 @@ export default {
     for (const [a, b] of BANCO) { enLexico(a, "banco"); enLexico(b, "banco"); }
     assert.equal(new Set(BANCO.map(([a, b]) => [a, b].sort().join())).size, BANCO.length, "pares repetidos en el banco");
     const par = (a, b) => BANCO.find(([x, y]) => (x === a && y === b) || (x === b && y === a));
-    cuantos(es, une ? (tam === "media" ? 4 : 8) : (tam === "media" ? 6 : 12));
+    cuantos(es, une ? (tam === "media" ? 4 : 8) : (tam === "media" ? 12 : 24));
     const pares = [];
     if (une) {
       const izq = es.map((e) => enCaso(e.datos.izq, p.caso, "izq")), der = es.map((e) => enCaso(e.datos.derecha, p.caso, "derecha"));

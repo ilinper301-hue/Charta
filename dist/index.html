@@ -889,10 +889,10 @@ function casillas(p, x, y, w, h, n, { sol = null, rellenar = null, ancho = 46, a
 }
 
 /** Opciones para rodear, en fila y centradas (letras, sílabas o palabras). En la solución, la correcta rodeada en rojo.
- *  correcta: índice o lista de índices. Devuelve las cajas [{ x, y, w, h }] por si el tipo quiere dibujar algo encima. */
-function rodear(p, x, y, w, h, opciones, correcta, { fs = FS, gap = 22, tarjeta = false } = {}) {
+ *  correcta: índice o lista de índices; relleno: margen a cada lado como fracción de fs (0,45; menos en media tarjeta). Devuelve las cajas [{ x, y, w, h }] por si el tipo quiere dibujar algo encima. */
+function rodear(p, x, y, w, h, opciones, correcta, { fs = FS, gap = 22, tarjeta = false, relleno = 0.45 } = {}) {
   const ok = new Set([].concat(correcta ?? []));
-  const pad = fs * 0.45, ws = opciones.map((o) => anchoB(p, o, fs) + 2 * pad);
+  const pad = fs * relleno, ws = opciones.map((o) => anchoB(p, o, fs) + 2 * pad);
   const total = ws.reduce((a, b) => a + b, 0) + gap * (opciones.length - 1), bh = fs * 1.55;
   let cx = x + (w - total) / 2; const by = y + (h - bh) / 2, cajas = [];
   opciones.forEach((o, k) => {
@@ -6478,6 +6478,18 @@ const largosDe = (params, variadas) => (Number.isInteger(params.largo) ? [params
 /** Cantidad de ejercicios: la de la página completa o su mitad en media página. */
 const cuantas = (tamano, completa) => (tamano === "media" ? completa / 2 : completa);
 
+/** 2 columnas (Espacio en la ficha): intenta `n` ejercicios (el doble); si el banco no da, baja de uno en uno hasta `base` (los de siempre) = el máximo sin repetir. */
+function conTope(n, base, hacer) {
+  for (let k = n; ; k--) {
+    try { return hacer(k); } catch (e) { if (k <= base || !/necesita/.test(e.message)) throw e; }
+  }
+}
+/** Tarjeta de media columna con dos filas: {arriba, abajo} = {y, h} de cada una (la de abajo = hueco o botones). */
+function dosFilas(y, ch, bajo = 0.34) {
+  const pad = ch * 0.07, g = ch * 0.05, hb = ch * bajo;
+  return { arriba: { y: y + pad + hb + g, h: ch - 2 * pad - hb - g }, abajo: { y: y + pad, h: hb } };
+}
+
 // ---------------------------------------------------------------- huecos con solución única
 const porLargo = new Map();
 function delLargo(n) {
@@ -6532,7 +6544,7 @@ function pildoras(p, x, y, h, textos, fs = 22, gap = 10) {
 }
 const anchoPildoras = (p, textos, fs = 22, gap = 10) => textos.reduce((t, s) => t + p.ancho(s, "PB", fs) + fs * 0.9, 0) + gap * (textos.length - 1);
 
-Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get CATS() { return CATS; }, get VOCALES() { return VOCALES; }, get cap() { return cap; }, get alCaso() { return alCaso; }, get trozosCaso() { return trozosCaso; }, get candidatas() { return candidatas; }, get elegirPalabras() { return elegirPalabras; }, get largosDe() { return largosDe; }, get cuantas() { return cuantas; }, get patronUnico() { return patronUnico; }, get unidades() { return unidades; }, get ajusta() { return ajusta; }, get palabraLetras() { return palabraLetras; }, get pildoras() { return pildoras; }, get anchoPildoras() { return anchoPildoras; } }));
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get CATS() { return CATS; }, get VOCALES() { return VOCALES; }, get cap() { return cap; }, get alCaso() { return alCaso; }, get trozosCaso() { return trozosCaso; }, get candidatas() { return candidatas; }, get elegirPalabras() { return elegirPalabras; }, get largosDe() { return largosDe; }, get cuantas() { return cuantas; }, get conTope() { return conTope; }, get dosFilas() { return dosFilas; }, get patronUnico() { return patronUnico; }, get unidades() { return unidades; }, get ajusta() { return ajusta; }, get palabraLetras() { return palabraLetras; }, get pildoras() { return pildoras; }, get anchoPildoras() { return anchoPildoras; } }));
 },
 "tipos/_multiplicar.js": (__exp) => {
 // Charta · núcleo común de «multiplicar.*» (2.º, bloque 13, lote 6): tablas permitidas y dibujo de puntos.
@@ -8988,22 +9000,24 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({  }));
 // Reglas: palabra del léxico y la ÚNICA del léxico que encaja con ese hueco (patronUnico); la letra es suelta y sin tilde (no ch, ll, rr, qu, gu; ni h, k, w, x, y);
 //         las otras 2 letras no forman otra palabra del léxico; «vocales» / «consonantes» = las 3 letras son del mismo tipo; sin repetir palabras. Palabras de hasta 8 letras.
 //         Con «Mayúscula inicial» (letra al principio) las opciones van en mayúscula, sin «I».
-// Opciones: letra que falta (principio / final) · letras (todas / vocales / consonantes) · tipo de sílabas · caso. Completa: 10 palabras; media: 5.
+// Opciones: letra que falta (principio / final) · letras (todas / vocales / consonantes) · tipo de sílabas · caso. Cantidad: 2 columnas; «Más grandes» 20 palabras (media: 10), «Más ejercicios» las que caben con tarjetas ≥ 40 pt.
 const { registrar } = __req("nucleo/tipos.js");
-const { TOP, INK } = __req("render/papel.js");
+const { TOP, INK, cuantosRejilla } = __req("render/papel.js");
 const { rodear } = __req("lengua/dibujo.js");
 const { LEXICO } = __req("lengua/lexico.js");
 const { permitida } = __req("lengua/vistas.js");
-const { alCaso, cuantas, elegirPalabras, largosDe, patronUnico, unidades } = __req("tipos/_lengua.js");
+const { alCaso, cuantas, elegirPalabras, largosDe, patronUnico, unidades, conTope, ajusta } = __req("tipos/_lengua.js");
 const PALABRAS = new Set(LEXICO.map((e) => e.p));
 const VOC = [..."aeiou"], CON = [..."bcdfgjlmnprstvz"];
+const MIN_ALTO = 40;   // alto mínimo de tarjeta con «Más ejercicios»
 const cambia = (p, i, c) => p.slice(0, i) + c + p.slice(i + 1);
 
 const __default = registrar({
   id: "fono.inicial",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    const n = cuantas(tamano, 10), fin = params.posicion === "final", tipoL = params.letras === "vocales" || params.letras === "consonantes" ? params.letras : "todas";
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const n = cuantosRejilla(ctx, 2, MIN_ALTO, [20, 10]), fin = params.posicion === "final", tipoL = params.letras === "vocales" || params.letras === "consonantes" ? params.letras : "todas";
     const ok = (e, az) => {
       const p = e.p, u = fin ? unidades(p).at(-1) : unidades(p)[0], pos = fin ? p.length - 1 : 0;
       if (u.length !== 1 || !/[a-z]/.test(u) || "hkwxyq".includes(u)) return null;
@@ -9015,7 +9029,7 @@ const __default = registrar({
       if (malas.length < 2) return null;
       return { pos, opciones: az.barajar([u, malas[0], malas[1]]) };
     };
-    const ps = elegirPalabras(azar, n, params, largosDe(params, [2, 3, 2, 3, 1, 4]), { extra: { maxLetras: 8 }, ok, id: "fono.inicial" });
+    const ps = conTope(n, cuantas(ctx.tamano, 10), (k) => elegirPalabras(azar, k, params, largosDe(params, [2, 3, 2, 3, 1, 4]), { extra: { maxLetras: 8 }, ok, id: "fono.inicial" }));
     return {
       enunciado: fin ? "Rodea la letra que falta al final de la palabra." : "Rodea la letra que falta al principio de la palabra.",
       ejercicios: ps.map(({ p: w, r }) => {
@@ -9026,18 +9040,22 @@ const __default = registrar({
     };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 1, 10, 10, 8);
+    const { cel, cw, ch } = p.rejilla(TOP, 2, Math.ceil(act.ejercicios.length / 2));
+    const fo = Math.min(20, ch * 0.34), x0 = 32, x1 = 10;   // letra de las opciones; margen izquierdo (tras el número) y derecho
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], { palabra, pos, opciones } = e.datos;
       p.marco(x, y, cw, ch, i);
-      // palabra con el hueco gris (sin la letra en rojo: la solución es la letra rodeada)
-      const fs = 28, a = palabra.slice(0, pos), b = palabra.slice(pos + 1), g = fs * 0.2, hw = 34, wa = a ? p.ancho(a, "PB", fs) + g : 0;
-      let cx = x + 30 + (cw * 0.4 - (wa + hw + (b ? g + p.ancho(b, "PB", fs) : 0))) / 2;
+      // opciones a la derecha (en tarjetas pequeñas) y, a su izquierda, la palabra con el hueco gris (la solución es la letra rodeada)
+      const gap = 7, ow = opciones.reduce((t, o) => t + p.ancho(o, "PB", fo) + fo * 0.7, 0) + gap * (opciones.length - 1);
+      const aw = cw - x0 - x1 - ow - 26, a = palabra.slice(0, pos), b = palabra.slice(pos + 1);
+      const anchoP = (f) => (a ? p.ancho(a, "PB", f) + f * 0.2 : 0) + f * 1.2 + (b ? f * 0.2 + p.ancho(b, "PB", f) : 0);
+      const fs = ajusta(p, anchoP, aw, Math.min(28, ch * 0.46), 10), g = fs * 0.2, hw = fs * 1.2, wa = a ? p.ancho(a, "PB", fs) + g : 0;
+      let cx = x + x0 + (aw - anchoP(fs)) / 2;
       if (a) p.text(cx, y + ch / 2 - fs * 0.35, a, fs, { f: "PB" });
       p.rrect(cx + wa, y + (ch - fs * 1.3) / 2, hw, fs * 1.3, 7, { lw: 1.5, fill: 0.9, stroke: INK });
       if (b) p.text(cx + wa + hw + g, y + ch / 2 - fs * 0.35, b, fs, { f: "PB" });
-      p.text(x + cw * 0.5, y + ch / 2 - 7, "→", 20, { f: "PB", anchor: "middle", gris: 0.4 });
-      rodear(p, x + cw * 0.55, y, cw * 0.43, ch, opciones, e.solucion.rodea, { fs: 26, gap: 22, tarjeta: true });
+      p.text(x + x0 + aw + 13, y + ch / 2 - 16 * 0.35, "→", 16, { f: "PB", anchor: "middle", gris: 0.4 });
+      rodear(p, x + cw - x1 - ow, y, ow, ch, opciones, e.solucion.rodea, { fs: fo, gap, tarjeta: true, relleno: 0.35 });
     }));
   },
 });
@@ -9051,47 +9069,54 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() 
 // Reglas: palabras del léxico; las 3 tienen un número de sílabas distinto (silabas() de reglas.js), así que la respuesta es única;
 //         la correcta no va siempre en el mismo sitio; sin palabras repetidas. Palabras de hasta 9 letras.
 //         «mezcla» = la mitad pide la que tiene más y la otra mitad la que tiene menos (cada grupo lo dice en su tarjeta).
-// Opciones: rodear la que tiene (más / menos / mezcla) · tipo de sílabas · caso. Completa: 10 grupos; media: 5.
+// Opciones: rodear la que tiene (más / menos / mezcla) · tipo de sílabas · caso. Cantidad: 2 columnas; «Más grandes» 20 grupos (media: 10), «Más ejercicios» los que caben con tarjetas ≥ 44 pt. Las 3 palabras van en una fila de media tarjeta: la letra baja hasta que caben (palabras de 9 letras ≈ 11 pt).
 const { registrar } = __req("nucleo/tipos.js");
-const { TOP } = __req("render/papel.js");
+const { TOP, cuantosRejilla } = __req("render/papel.js");
 const { silabas } = __req("lengua/reglas.js");
 const { rodear } = __req("lengua/dibujo.js");
 const { avisoVistas } = __req("lengua/vistas.js");
-const { alCaso, candidatas, cuantas, ajusta } = __req("tipos/_lengua.js");
+const { alCaso, candidatas, cuantas, ajusta, conTope } = __req("tipos/_lengua.js");
 const { repartir } = __req("tipos/_fono.js");
+const MIN_ALTO = 44;   // alto mínimo de tarjeta con «Más ejercicios»
 const TRIPLES = [[1, 2, 3], [2, 3, 4], [1, 2, 4], [1, 3, 4], [2, 3, 4], [1, 2, 3]];
 
 const __default = registrar({
   id: "fono.larga",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    const n = cuantas(tamano, 10), cuales = params.cual === "menos" ? Array(n).fill("menos") : params.cual === "mezcla" ? repartir(azar, n, ["mas", "menos"]) : Array(n).fill("mas");
-    const bolsas = {};
-    for (const l of [1, 2, 3, 4]) bolsas[l] = azar.barajar(candidatas(params, { nSilabas: l, maxLetras: 9 }));
-    const ejercicios = [];
-    for (let i = 0; i < n; i++) {
-      const posibles = TRIPLES.filter((t) => t.every((l) => bolsas[l].length));
-      if (!posibles.length) throw new Error(`«fono.larga» necesita más palabras: con esas opciones solo hay ${i} grupos y hacen falta ${n}. Prueba con otro tipo de sílabas.` + avisoVistas());
-      const ws = azar.barajar(azar.elegir(posibles).map((l) => bolsas[l].pop().p)), cuenta = ws.map((w) => silabas(w).length);
-      const objetivo = cuales[i] === "mas" ? Math.max(...cuenta) : Math.min(...cuenta);
-      ejercicios.push({ datos: { palabras: ws.map((w) => alCaso(w, params.caso)), cual: cuales[i] }, solucion: { huecos: [], rodea: cuenta.indexOf(objetivo) } });
-    }
-    return {
-      enunciado: params.cual === "mezcla" ? "Lee lo que pide cada recuadro\ny rodea la palabra." : params.cual === "menos" ? "Rodea la palabra que tiene MENOS sílabas." : "Rodea la palabra que tiene MÁS sílabas.",
-      ejercicios,
-    };
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    return conTope(cuantosRejilla(ctx, 2, MIN_ALTO, [20, 10]), cuantas(ctx.tamano, 10), (n) => grupos(params, azar, n));
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 1, 10, 10, 8), mezcla = act.params.cual === "mezcla";
+    const { cel, cw, ch } = p.rejilla(TOP, 2, Math.ceil(act.ejercicios.length / 2)), mezcla = act.params.cual === "mezcla";
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
-      const [x, y] = cel[i], ps = e.datos.palabras, gap = 22;
+      const [x, y] = cel[i], ps = e.datos.palabras, gap = 8, rel = 0.3, lb = Math.min(10, ch * 0.2);
       p.marco(x, y, cw, ch, i);
-      if (mezcla) p.text(x + 34, y + ch - 19, e.datos.cual === "mas" ? "Rodea la que tiene MÁS sílabas" : "Rodea la que tiene MENOS sílabas", 10, { f: "PB", gris: 0.3 });
-      const fs = ajusta(p, (q) => ps.reduce((t, w) => t + p.ancho(w, "PB", q) + q * 0.9, 0) + gap * 2, cw - 40, mezcla ? 20 : 26);
-      rodear(p, x + 10, y - (mezcla ? 10 : 0), cw - 20, ch, ps, e.solucion.rodea, { fs, gap });
+      if (mezcla) p.text(x + 32, y + ch - 7 - lb, e.datos.cual === "mas" ? "Rodea la que tiene MÁS sílabas" : "Rodea la que tiene MENOS sílabas", lb, { f: "PB", gris: 0.3 });
+      const w = cw - 32 - 8, fs = ajusta(p, (q) => ps.reduce((t, s) => t + p.ancho(s, "PB", q) + q * 2 * rel, 0) + gap * 2, w, Math.min(24, ch * (mezcla ? 0.3 : 0.4)), 10);
+      rodear(p, x + 32, y - (mezcla ? lb * 0.6 : 0), w, ch, ps, e.solucion.rodea, { fs, gap, relleno: rel });
     }));
   },
 });
+
+/** n grupos de 3 palabras (con la regla de siempre). */
+function grupos(params, azar, n) {
+  const cuales = params.cual === "menos" ? Array(n).fill("menos") : params.cual === "mezcla" ? repartir(azar, n, ["mas", "menos"]) : Array(n).fill("mas");
+  const bolsas = {};
+  for (const l of [1, 2, 3, 4]) bolsas[l] = azar.barajar(candidatas(params, { nSilabas: l, maxLetras: 9 }));
+  const ejercicios = [];
+  for (let i = 0; i < n; i++) {
+    const posibles = TRIPLES.filter((t) => t.every((l) => bolsas[l].length));
+    if (!posibles.length) throw new Error(`«fono.larga» necesita más palabras: con esas opciones solo hay ${i} grupos y hacen falta ${n}. Prueba con otro tipo de sílabas.` + avisoVistas());
+    const ws = azar.barajar(azar.elegir(posibles).map((l) => bolsas[l].pop().p)), cuenta = ws.map((w) => silabas(w).length);
+    const objetivo = cuales[i] === "mas" ? Math.max(...cuenta) : Math.min(...cuenta);
+    ejercicios.push({ datos: { palabras: ws.map((w) => alCaso(w, params.caso)), cual: cuales[i] }, solucion: { huecos: [], rodea: cuenta.indexOf(objetivo) } });
+  }
+  return {
+    enunciado: params.cual === "mezcla" ? "Lee lo que pide cada recuadro\ny rodea la palabra." : params.cual === "menos" ? "Rodea la palabra que tiene MENOS sílabas." : "Rodea la palabra que tiene MÁS sílabas.",
+    ejercicios,
+  };
+}
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
 },
@@ -9101,12 +9126,13 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() 
 // solucion: { huecos: [], marca: 0 | 1 | 2 }   0 = principio, 1 = en medio, 2 = al final (la casilla se colorea en rojo en la solución)
 // Reglas: palabra del léxico; la letra pedida sale UNA sola vez en la palabra (sin tilde: «a» y «á» son la misma), es una letra suelta
 //         (no forma parte de ch, ll, rr, qu, gu) y no es h, k, w, x, y, q; posiciones repartidas a partes iguales (principio / en medio / al final);
-//         palabras de 3 a 9 letras, sin repetir. Opciones: sílabas (variadas, 2, 3 o 4) · tipo de sílabas · caso. Completa: 10 palabras; media: 5.
+//         palabras de 3 a 9 letras, sin repetir. Opciones: sílabas (variadas, 2, 3 o 4) · tipo de sílabas · caso. Cantidad: 2 columnas (letra y palabra arriba, los tres botones debajo); «Más grandes» 20 palabras (media: 10), «Más ejercicios» las que caben con tarjetas ≥ 50 pt.
 const { registrar } = __req("nucleo/tipos.js");
-const { TOP, INK, COLOR_SOLUCION } = __req("render/papel.js");
+const { TOP, INK, COLOR_SOLUCION, cuantosRejilla } = __req("render/papel.js");
 const { sinTildes } = __req("lengua/reglas.js");
-const { alCaso, cuantas, largosDe, unidades, ajusta } = __req("tipos/_lengua.js");
+const { alCaso, cuantas, largosDe, unidades, ajusta, conTope, dosFilas } = __req("tipos/_lengua.js");
 const { elegirIdx, repartir } = __req("tipos/_fono.js");
+const MIN_ALTO = 50;   // alto mínimo de tarjeta con «Más ejercicios»
 const ETIQUETAS = ["principio", "en medio", "al final"];
 
 /** Letras de la palabra que se pueden pedir para la posición t (0, 1, 2): sueltas, únicas en la palabra y sin h k w x y q. */
@@ -9124,11 +9150,14 @@ function letrasPara(p, t) {
 
 const __default = registrar({
   id: "fono.posicion",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    const n = cuantas(tamano, 10), objetivos = repartir(azar, n, [0, 1, 2]);
-    const intento = (e, i, az) => { const ls = letrasPara(e.p, objetivos[i]); return ls.length ? { letra: az.elegir(ls), marca: objetivos[i] } : null; };
-    const ps = elegirIdx(azar, n, params, largosDe(params, [2, 3, 2, 3, 4]), intento, { extra: { minLetras: 3, maxLetras: 9 }, id: "fono.posicion" });
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const ps = conTope(cuantosRejilla(ctx, 2, MIN_ALTO, [20, 10]), cuantas(ctx.tamano, 10), (n) => {
+      const objetivos = repartir(azar, n, [0, 1, 2]);
+      const intento = (e, i, az) => { const ls = letrasPara(e.p, objetivos[i]); return ls.length ? { letra: az.elegir(ls), marca: objetivos[i] } : null; };
+      return elegirIdx(azar, n, params, largosDe(params, [2, 3, 2, 3, 4]), intento, { extra: { minLetras: 3, maxLetras: 9 }, id: "fono.posicion" });
+    });
     return {
       enunciado: "Lee la palabra y marca con una cruz\ndónde está la letra del cuadro.",
       ejercicios: ps.map(({ p, r }) => ({
@@ -9138,18 +9167,22 @@ const __default = registrar({
     };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 1, 10, 10, 8);
+    const { cel, cw, ch } = p.rejilla(TOP, 2, Math.ceil(act.ejercicios.length / 2));
+    const x0 = 32, w = cw - x0 - 10, gap = 5, bw = (w - 2 * gap) / 3;
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
-      const [x, y] = cel[i], { palabra, letra } = e.datos, bw = 80, bh = 38, gap = 6;
+      const [x, y] = cel[i], { palabra, letra } = e.datos, { arriba, abajo } = dosFilas(y, ch, 0.38);
       p.marco(x, y, cw, ch, i);
-      p.rrect(x + 36, y + (ch - 44) / 2, 44, 44, 9, { lw: 1.5, fill: 0.9, stroke: INK });
-      p.text(x + 58, y + ch / 2 - 28 * 0.35, letra, 28, { f: "PB", anchor: "middle" });
-      const wp = cw - 14 - 3 * bw - 2 * gap - 100 - 14, fs = ajusta(p, (q) => p.ancho(palabra, "PB", q), wp, 26);
-      p.text(x + 100 + wp / 2, y + ch / 2 - fs * 0.35, palabra, fs, { f: "PB", anchor: "middle" });
+      // arriba: la letra del cuadro y la palabra; abajo: los tres botones
+      const q = Math.min(34, arriba.h), lf = q * 0.62;
+      p.rrect(x + x0, arriba.y + (arriba.h - q) / 2, q, q, 8, { lw: 1.5, fill: 0.9, stroke: INK });
+      p.text(x + x0 + q / 2, arriba.y + arriba.h / 2 - lf * 0.35, letra, lf, { f: "PB", anchor: "middle" });
+      const wp = w - q - 14, fs = ajusta(p, (f) => p.ancho(palabra, "PB", f), wp, Math.min(26, arriba.h * 0.8), 10);
+      p.text(x + x0 + q + 14 + wp / 2, arriba.y + arriba.h / 2 - fs * 0.35, palabra, fs, { f: "PB", anchor: "middle" });
+      const lb = Math.min(11, abajo.h * 0.5);
       ETIQUETAS.forEach((t, k) => {
-        const bx = x + cw - 14 - 3 * bw - 2 * gap + k * (bw + gap), by = y + (ch - bh) / 2, marca = p.solucion && e.solucion.marca === k;
-        p.rrect(bx, by, bw, bh, 7, { lw: marca ? 2.2 : 1.5, fill: marca ? "#F6C9C9" : 1, stroke: marca ? COLOR_SOLUCION : INK });
-        p.text(bx + bw / 2, by + bh / 2 - 4, t, 11.5, { f: "PM", anchor: "middle", gris: 0.25 });
+        const bx = x + x0 + k * (bw + gap), marca = p.solucion && e.solucion.marca === k;
+        p.rrect(bx, abajo.y, bw, abajo.h, 7, { lw: marca ? 2.2 : 1.5, fill: marca ? "#F6C9C9" : 1, stroke: marca ? COLOR_SOLUCION : INK });
+        p.text(bx + bw / 2, abajo.y + abajo.h / 2 - lb * 0.35, t, lb, { f: "PM", anchor: "middle", gris: 0.25 });
       });
     }));
   },
@@ -9163,23 +9196,27 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get ETIQUETAS(
 // solucion: { huecos: [lo que queda] }   las demás sílabas juntas; con «Mayúscula inicial» conserva la mayúscula solo si la primera sílaba se queda.
 // Reglas: palabra del léxico con el silabeo de reglas.js (2–4 sílabas); la sílaba que se quita y lo que queda tienen al menos 2 letras y son distintas;
 //         «mezcla» = la mitad quita la primera y la otra mitad la última. Sin repetir palabras. Palabras de hasta 10 letras.
-// Opciones: sílaba que se quita (primera / última / mezcla) · sílabas (variadas, 2, 3 o 4) · tipo de sílabas · caso. Completa: 8 palabras; media: 4.
+// Opciones: sílaba que se quita (primera / última / mezcla) · sílabas (variadas, 2, 3 o 4) · tipo de sílabas · caso. Cantidad: 2 columnas, la frase en tres líneas («Si a ca-sa» / «le quito [ca],» / «queda [   ]»); «Más grandes» 16 palabras (media: 8), «Más ejercicios» las que caben con tarjetas ≥ 60 pt.
 const { registrar } = __req("nucleo/tipos.js");
-const { TOP, INK } = __req("render/papel.js");
+const { TOP, INK, cuantosRejilla } = __req("render/papel.js");
 const { silabas } = __req("lengua/reglas.js");
-const { trozosCaso, cuantas, largosDe } = __req("tipos/_lengua.js");
+const { trozosCaso, cuantas, largosDe, conTope } = __req("tipos/_lengua.js");
 const { elegirIdx, repartir } = __req("tipos/_fono.js");
+const MIN_ALTO = 60;   // alto mínimo de tarjeta con «Más ejercicios»
+
 const __default = registrar({
   id: "fono.quita",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    const n = cuantas(tamano, 8);
-    const objetivos = params.quitar === "ultima" ? Array(n).fill(1) : params.quitar === "mezcla" ? repartir(azar, n, [0, 1]) : Array(n).fill(0);
-    const intento = (e, i) => {
-      const ss = silabas(e.p), k = objetivos[i] ? ss.length - 1 : 0, resto = ss.filter((_, j) => j !== k).join("");
-      return ss[k].length >= 2 && resto.length >= 2 && ss[k] !== resto ? { k } : null;
-    };
-    const ps = elegirIdx(azar, n, params, largosDe(params, [2, 3, 2, 3, 4]), intento, { extra: { maxLetras: 10 }, id: "fono.quita" });
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const ps = conTope(cuantosRejilla(ctx, 2, MIN_ALTO, [16, 8]), cuantas(ctx.tamano, 8), (n) => {
+      const objetivos = params.quitar === "ultima" ? Array(n).fill(1) : params.quitar === "mezcla" ? repartir(azar, n, [0, 1]) : Array(n).fill(0);
+      const intento = (e, i) => {
+        const ss = silabas(e.p), k = objetivos[i] ? ss.length - 1 : 0, resto = ss.filter((_, j) => j !== k).join("");
+        return ss[k].length >= 2 && resto.length >= 2 && ss[k] !== resto ? { k } : null;
+      };
+      return elegirIdx(azar, n, params, largosDe(params, [2, 3, 2, 3, 4]), intento, { extra: { maxLetras: 10 }, id: "fono.quita" });
+    });
     return {
       enunciado: "Quita la sílaba y escribe lo que queda.",
       ejercicios: ps.map(({ p, r }) => {
@@ -9189,23 +9226,25 @@ const __default = registrar({
     };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 1, 8, 10, 8);
-    const bw = 130, textoDe = (e) => { const ss = e.datos.silabas; return { palabra: ss.join("-"), quitada: ss[e.datos.k] }; };
-    // «Si a ca-sa le quito [ca], queda [   ]» en una fila; mismo tamaño de letra en toda la actividad (el que cabe en la fila más larga)
-    const total = (f, { palabra, quitada }) => p.ancho("Si a", "PM", f) + p.ancho(palabra, "PB", f * 1.15) + p.ancho("le quito", "PM", f) + p.ancho(quitada, "PB", f) + f * 1.2 + p.ancho("queda", "PM", f) + bw + f * 4.6;
-    let f = 22; while (f > 13 && act.ejercicios.some((e) => total(f, textoDe(e)) > cw - 56)) f -= 1;
+    const { cel, cw, ch } = p.rejilla(TOP, 2, Math.ceil(act.ejercicios.length / 2));
+    const x0 = 32, w = cw - x0 - 10, lh = (ch - 8) / 3, textoDe = (e) => { const ss = e.datos.silabas; return { palabra: ss.join("-"), quitada: ss[e.datos.k] }; };
+    // «Si a / ca-sa», «le quito [ca],» y «queda [   ]» en tres líneas; mismo tamaño de letra en toda la actividad (el que cabe en la línea más larga)
+    const l1 = (f, { palabra }) => p.ancho("Si a", "PM", f) + p.ancho(palabra, "PB", f * 1.15) + f * 0.5, l2 = (f, { quitada }) => p.ancho("le quito", "PM", f) + p.ancho(quitada, "PB", f) + f * 2.2;
+    let f = Math.min(20, lh * 0.7); while (f > 10 && act.ejercicios.some((e) => Math.max(l1(f, textoDe(e)), l2(f, textoDe(e))) > w)) f -= 1;
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
-      const [x, y] = cel[i], { palabra, quitada } = textoDe(e);
+      const [x, y] = cel[i], { palabra, quitada } = textoDe(e), cy = (k) => y + ch - 4 - lh * (k + 0.5), g = f * 0.5;
       p.marco(x, y, cw, ch, i);
-      let cx = x + 28; const ty = y + ch / 2 - f * 0.35, g = f * 0.5;
-      const t = (s, fnt, fz) => { p.text(cx, ty, s, fz, { f: fnt, gris: INK }); cx += p.ancho(s, fnt, fz) + g; };
-      t("Si a", "PM", f); t(palabra, "PB", f * 1.15); t("le quito", "PM", f);
+      let cx = x + x0; const ty = (k) => cy(k) - f * 0.35;
+      p.text(cx, ty(0), "Si a", f, { f: "PM", gris: INK }); cx += p.ancho("Si a", "PM", f) + g;
+      p.text(cx, ty(0), palabra, f * 1.15, { f: "PB", gris: INK });
+      cx = x + x0; p.text(cx, ty(1), "le quito", f, { f: "PM", gris: INK }); cx += p.ancho("le quito", "PM", f) + g;
       const qw = p.ancho(quitada, "PB", f) + f * 1.2;
-      p.rrect(cx, y + ch / 2 - f * 0.95, qw, f * 1.9, f * 0.95, { lw: 0.8, fill: 1, stroke: 0.55 });
-      p.text(cx + qw / 2, ty, quitada, f, { f: "PB", anchor: "middle" }); cx += qw + g * 0.4;
-      p.text(cx, ty, ",", f, { f: "PM" }); cx += g * 1.2;
-      t("queda", "PM", f);
-      p.caja(cx, y + (ch - 40) / 2, Math.min(bw, x + cw - 14 - cx), 40, null, 22, e.solucion.huecos[0]);
+      p.rrect(cx, cy(1) - f * 0.85, qw, f * 1.7, f * 0.85, { lw: 0.8, fill: 1, stroke: 0.55 });
+      p.text(cx + qw / 2, ty(1), quitada, f, { f: "PB", anchor: "middle" }); cx += qw + g * 0.4;
+      p.text(cx, ty(1), ",", f, { f: "PM" });
+      cx = x + x0; p.text(cx, ty(2), "queda", f, { f: "PM", gris: INK }); cx += p.ancho("queda", "PM", f) + g * 1.6;
+      const bh = Math.min(lh * 0.95, 34);
+      p.caja(cx, cy(2) - bh / 2, x + cw - 10 - cx, bh, null, 20, e.solucion.huecos[0]);
     }));
   },
 });
@@ -9273,18 +9312,21 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get rimanAlgo(
 // solucion: colorea → { huecos: [], colorea: n }   (el alumno colorea n de las 4 casillas, una por palmada; en la solución, en rojo)
 //           numero  → { huecos: [n] }
 // Reglas: palabra del léxico; n = silabas() de reglas.js (1–4); siempre 4 casillas (no delatan el número); sin repetir palabras. Palabras de hasta 10 letras.
-// Opciones: respuesta (colorear / escribir el número) · sílabas (variadas, 1, 2, 3 o 4) · tipo de sílabas · caso. Completa: 10 palabras; media: 5.
+// Opciones: respuesta (colorear / escribir el número) · sílabas (variadas, 1, 2, 3 o 4) · tipo de sílabas · caso. Cantidad: 2 columnas; «Más grandes» 20 palabras (media: 10), «Más ejercicios» las que caben con tarjetas ≥ 40 pt.
 const { registrar } = __req("nucleo/tipos.js");
-const { TOP } = __req("render/papel.js");
+const { TOP, cuantosRejilla } = __req("render/papel.js");
 const { silabas } = __req("lengua/reglas.js");
 const { casillas } = __req("lengua/dibujo.js");
-const { alCaso, cuantas, elegirPalabras, largosDe, ajusta } = __req("tipos/_lengua.js");
+const { alCaso, cuantas, elegirPalabras, largosDe, ajusta, conTope } = __req("tipos/_lengua.js");
+const MIN_ALTO = 40;   // alto mínimo de tarjeta con «Más ejercicios»
+
 const __default = registrar({
   id: "fono.silabas",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    const n = cuantas(tamano, 10), respuesta = params.respuesta === "numero" ? "numero" : "colorea";
-    const ps = elegirPalabras(azar, n, params, largosDe(params, [2, 3, 2, 4, 3, 1]), { extra: { maxLetras: 10 }, id: "fono.silabas" });
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const n = cuantosRejilla(ctx, 2, MIN_ALTO, [20, 10]), respuesta = params.respuesta === "numero" ? "numero" : "colorea";
+    const ps = conTope(n, cuantas(ctx.tamano, 10), (k) => elegirPalabras(azar, k, params, largosDe(params, [2, 3, 2, 4, 3, 1]), { extra: { maxLetras: 10 }, id: "fono.silabas" }));
     return {
       enunciado: respuesta === "numero" ? "Da una palmada por cada sílaba\ny escribe cuántas sílabas tiene la palabra." : "Da una palmada por cada sílaba\ny colorea una casilla por cada palmada.",
       ejercicios: ps.map(({ p }) => {
@@ -9294,16 +9336,20 @@ const __default = registrar({
     };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 1, 10, 10, 8);
+    const { cel, cw, ch } = p.rejilla(TOP, 2, Math.ceil(act.ejercicios.length / 2));
+    const x0 = 32, x1 = 10, qa = Math.min(30, ch * 0.55);   // casillas de colorear: alto
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], { palabra, n, respuesta } = e.datos;
       p.marco(x, y, cw, ch, i);
-      const fs = ajusta(p, (q) => p.ancho(palabra, "PB", q), cw * 0.42 - 10, 30);
-      p.text(x + 40, y + ch / 2 - fs * 0.35, palabra, fs, { f: "PB" });
-      if (respuesta === "numero") {
-        p.caja(x + cw * 0.62, y + (ch - 42) / 2, 56, 42, null, 24, n);
-        p.text(x + cw * 0.62 + 66, y + ch / 2 - 4, "sílabas", 12, { f: "PM", gris: 0.35 });
-      } else casillas(p, x + cw * 0.46, y, cw * 0.52, ch, 4, { rellenar: n, ancho: 46, alto: 38, gap: 8 });
+      const num = respuesta === "numero", rw = num ? 44 + 5 + p.ancho("sílabas", "PM", 10) : 4 * 24 + 3 * 4;   // ancho de lo que va a la derecha
+      const aw = cw - x0 - x1 - rw - 10, fs = ajusta(p, (q) => p.ancho(palabra, "PB", q), aw, Math.min(28, ch * 0.46), 10);
+      p.text(x + x0, y + ch / 2 - fs * 0.35, palabra, fs, { f: "PB" });
+      const rx = x + cw - x1 - rw;
+      if (num) {
+        const bh = Math.min(36, ch * 0.7);
+        p.caja(rx, y + (ch - bh) / 2, 44, bh, null, 22, n);
+        p.text(rx + 49, y + ch / 2 - 10 * 0.35, "sílabas", 10, { f: "PM", gris: 0.35 });
+      } else casillas(p, rx, y, rw, ch, 4, { rellenar: n, ancho: 24, alto: qa, gap: 4 });
     }));
   },
 });
@@ -10998,9 +11044,9 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() 
 // Opciones: letra (al azar o una concreta) · distractoras (al azar / las que se confunden) · caso (minúscula / MAYÚSCULA).
 // Con letras elegidas (vistas.js): la letra al azar y las distractoras salen solo de ellas («confusas» = las que se confunden y están elegidas;
 // si ninguna lo está, cualquiera de las elegidas). Una letra concreta de las opciones se respeta aunque no esté elegida.
-// Completa: 10 filas de 10 letras (3 o 4 veces la pedida cada una); media: 5. Filas distintas.
+// Cantidad: 2 columnas; «Más grandes» 20 filas de 10 letras (3 o 4 veces la pedida cada una; media: 10), «Más ejercicios» las que caben con tarjetas ≥ 40 pt. Filas distintas.
 const { registrar } = __req("nucleo/tipos.js");
-const { TOP } = __req("render/papel.js");
+const { TOP, cuantosRejilla } = __req("render/papel.js");
 const { letrasActivas, permitida, avisoVistas } = __req("lengua/vistas.js");
 const { rodear } = __req("lengua/dibujo.js");
 const { ajusta } = __req("tipos/_lengua.js");
@@ -11010,12 +11056,14 @@ const CONFUSAS = {
   n: "mhurñ", ñ: "nmhr", o: "aecu", p: "bdqg", q: "gpbd", r: "nvfñ", s: "zcxe", t: "flik", u: "nvmo", v: "uywr", w: "vumn", x: "kzvs", y: "vgjq", z: "sxct",
 };
 const NFILA = 10;
+const MIN_ALTO = 40;   // alto mínimo de tarjeta con «Más ejercicios»
 
 const __default = registrar({
   id: "letra.busca",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    const n = tamano === "media" ? 5 : 10, mayus = params.caso === "mayus", fmt = (c) => (mayus ? c.toUpperCase() : c);
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const n = cuantosRejilla(ctx, 2, MIN_ALTO, [20, 10]), mayus = params.caso === "mayus", fmt = (c) => (mayus ? c.toUpperCase() : c);
     const letra = params.letra || azar.elegir(letrasActivas());
     let otras = (params.distractoras === "confusas" ? [...CONFUSAS[letra]] : letrasActivas()).filter((l) => l !== letra && permitida(l));
     if (!otras.length) otras = letrasActivas().filter((l) => l !== letra);   // ninguna confusa elegida: cualquiera de las elegidas
@@ -11035,13 +11083,13 @@ const __default = registrar({
     };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 1, 10, 10, 8);
+    const { cel, cw, ch } = p.rejilla(TOP, 2, Math.ceil(act.ejercicios.length / 2)), rel = 0.22, gap = 2;
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
-      const [x, y] = cel[i], w = cw - 56;
+      const [x, y] = cel[i], w = cw - 32 - 8;
       p.marco(x, y, cw, ch, i);
-      const fila = e.datos.fila, gap = 4;
-      const fs = ajusta(p, (q) => fila.reduce((t, l) => t + p.ancho(l, "PB", q) + q * 0.9, 0) + gap * (fila.length - 1), w, 26);
-      rodear(p, x + 44, y, w, ch, fila, e.solucion.rodea, { fs, gap });
+      const fila = e.datos.fila;
+      const fs = ajusta(p, (q) => fila.reduce((t, l) => t + p.ancho(l, "PB", q) + q * 2 * rel, 0) + gap * (fila.length - 1), w, Math.min(24, ch * 0.45), 10);
+      rodear(p, x + 32, y, w, ch, fila, e.solucion.rodea, { fs, gap, relleno: rel });
     }));
   },
 });
@@ -13153,17 +13201,18 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() 
 // palabra.contrarios · Los contrarios (Lengua 1.º, lote 2; LENGUA_1.md §3, bloque 4).
 // Tarea «une»    (8 filas; media 4): datos { izq: palabra, derecha: palabra de la caja de la derecha de esta fila }
 //                                    solucion { huecos: [], une: índice de la fila cuya caja de la derecha lleva el contrario }
-// Tarea «escribe» (12 filas; media 6): datos { palabra }   solucion { huecos: [el contrario] }
+// Tarea «escribe» (2 columnas; «Más grandes» 24 (media 12), «Más ejercicios» las que caben con tarjetas ≥ 40 pt): datos { palabra }   solucion { huecos: [el contrario] }
 // Banco fijo BANCO de 46 pares [a, b, grupo]; todas las palabras están en el léxico (lo comprueba la prueba). A cada par se le da la vuelta al azar
 // (se ve a o b). Reglas: ninguna palabra sale dos veces en la ficha y de los pares de un mismo `grupo` (palabras casi sinónimas: gordo/grueso, alto/largo…)
 // sale como mucho uno, así cada palabra tiene un solo contrario posible. Con «Mayúscula inicial» no entra ninguna palabra que empiece por «i».
 // Con letras elegidas (vistas.js) solo entran los pares cuyas dos palabras se escriben con ellas (con pocas letras casi no hay: error «necesita»).
 // Opciones: tarea (unir / escribir) · letra.
 const { registrar } = __req("nucleo/tipos.js");
-const { TOP, M, W } = __req("render/papel.js");
+const { TOP, M, W, cuantosRejilla } = __req("render/papel.js");
 const { unir } = __req("lengua/dibujo.js");
 const { filtrarVistas, avisoVistas } = __req("lengua/vistas.js");
-const { alCaso, cuantas, ajusta } = __req("tipos/_lengua.js");
+const { alCaso, cuantas, ajusta, conTope } = __req("tipos/_lengua.js");
+const MIN_ALTO = 40;   // alto mínimo de tarjeta con «Más ejercicios»
 const BANCO = [
   ["grande", "pequeño", "tam"], ["alto", "bajo", "alt"], ["largo", "corto", "alt"], ["gordo", "delgado", "gru"], ["grueso", "fino", "gru"], ["ancho", "estrecho", "gru"],
   ["pesado", "ligero", null], ["lleno", "vacío", null], ["abierto", "cerrado", "abre"], ["abrir", "cerrar", "abre"], ["limpio", "sucio", null], ["mojado", "seco", null],
@@ -13177,30 +13226,11 @@ const BANCO = [
 
 const __default = registrar({
   id: "palabra.contrarios",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    const une = params.tarea !== "escribe", n = cuantas(tamano, une ? 8 : 12), caso = params.caso;
-    const usadas = new Set(), grupos = new Set(), elegidos = [];
-    for (const [a, b, g] of azar.barajar(filtrarVistas(BANCO, ([x, y]) => x + " " + y))) {
-      if (caso === "inicial" && /^[iíì]/.test(a + b)) continue;
-      if (usadas.has(a) || usadas.has(b) || (g && grupos.has(g))) continue;
-      usadas.add(a); usadas.add(b); if (g) grupos.add(g);
-      elegidos.push(azar.real() < 0.5 ? [a, b] : [b, a]);
-      if (elegidos.length === n) break;
-    }
-    if (elegidos.length < n) throw new Error(`«palabra.contrarios» necesita más pares: solo hay ${elegidos.length} y hacen falta ${n}.` + avisoVistas());
-    if (!une) {
-      return {
-        enunciado: "Escribe el contrario de cada palabra.",
-        ejercicios: elegidos.map(([a, b]) => ({ datos: { palabra: alCaso(a, caso) }, solucion: { huecos: [alCaso(b, caso)] } })),
-      };
-    }
-    let der = azar.barajar(elegidos.map(([, b]) => b));
-    while (der.every((b, i) => b === elegidos[i][1])) der = azar.barajar(der);
-    return {
-      enunciado: "Une cada palabra con su contrario.",
-      ejercicios: elegidos.map(([a, b], i) => ({ datos: { izq: alCaso(a, caso), derecha: alCaso(der[i], caso) }, solucion: { huecos: [], une: der.indexOf(b) } })),
-    };
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const une = params.tarea !== "escribe";
+    return une ? pares(params, azar, cuantas(ctx.tamano, 8), true) : conTope(cuantosRejilla(ctx, 2, MIN_ALTO, [24, 12]), cuantas(ctx.tamano, 12), (n) => pares(params, azar, n, false));
   },
   dibujar(p, act) {
     const es = act.ejercicios;
@@ -13209,17 +13239,43 @@ const __default = registrar({
       unir(p, M, TOP - h, W - 2 * M, h, es.map((e) => e.datos.izq), es.map((e) => e.datos.derecha), es.map((e) => e.solucion.une), { fs: 26, ids: es.map((e) => e.id) });
       return;
     }
-    const { cel, cw, ch } = p.celdas(TOP, 1, 12, 10, 6);
+    const { cel, cw, ch } = p.rejilla(TOP, 2, Math.ceil(es.length / 2)), wp = 100, bx = 32 + wp + 20;
     es.forEach((e, i) => p.ejercicio(e.id, () => {
-      const [x, y] = cel[i];
+      const [x, y] = cel[i], bh = Math.min(36, ch * 0.7);
       p.marco(x, y, cw, ch, i);
-      const fs = ajusta(p, (q) => p.ancho(e.datos.palabra, "PB", q), 190, 26, 14);
-      p.text(x + 50, y + ch / 2 - fs * 0.35, e.datos.palabra, fs, { f: "PB" });
-      p.text(x + 262, y + ch / 2 - 8, "→", 22, { f: "PB", anchor: "middle", gris: 0.4 });
-      p.caja(x + 290, y + (ch - 38) / 2, cw - 290 - 20, 38, null, 22, e.solucion.huecos[0]);
+      const fs = ajusta(p, (q) => p.ancho(e.datos.palabra, "PB", q), wp, Math.min(26, ch * 0.5), 10);
+      p.text(x + 32, y + ch / 2 - fs * 0.35, e.datos.palabra, fs, { f: "PB" });
+      p.text(x + bx - 10, y + ch / 2 - 16 * 0.35, "→", 16, { f: "PB", anchor: "middle", gris: 0.4 });
+      p.caja(x + bx, y + (ch - bh) / 2, cw - bx - 10, bh, null, 22, e.solucion.huecos[0]);
     }));
   },
 });
+
+/** n pares del banco: a unir (columna derecha barajada) o a escribir. */
+function pares(params, azar, n, une) {
+  const caso = params.caso;
+  const usadas = new Set(), grupos = new Set(), elegidos = [];
+  for (const [a, b, g] of azar.barajar(filtrarVistas(BANCO, ([x, y]) => x + " " + y))) {
+    if (caso === "inicial" && /^[iíì]/.test(a + b)) continue;
+    if (usadas.has(a) || usadas.has(b) || (g && grupos.has(g))) continue;
+    usadas.add(a); usadas.add(b); if (g) grupos.add(g);
+    elegidos.push(azar.real() < 0.5 ? [a, b] : [b, a]);
+    if (elegidos.length === n) break;
+  }
+  if (elegidos.length < n) throw new Error(`«palabra.contrarios» necesita más pares: solo hay ${elegidos.length} y hacen falta ${n}.` + avisoVistas());
+  if (!une) {
+    return {
+      enunciado: "Escribe el contrario de cada palabra.",
+      ejercicios: elegidos.map(([a, b]) => ({ datos: { palabra: alCaso(a, caso) }, solucion: { huecos: [alCaso(b, caso)] } })),
+    };
+  }
+  let der = azar.barajar(elegidos.map(([, b]) => b));
+  while (der.every((b, i) => b === elegidos[i][1])) der = azar.barajar(der);
+  return {
+    enunciado: "Une cada palabra con su contrario.",
+    ejercicios: elegidos.map(([a, b], i) => ({ datos: { izq: alCaso(a, caso), derecha: alCaso(der[i], caso) }, solucion: { huecos: [], une: der.indexOf(b) } })),
+  };
+}
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get BANCO() { return BANCO; }, get default() { return __default; } }));
 },
@@ -13393,13 +13449,14 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() 
 // Reglas: palabra del léxico de 3 a 5 letras, sin tildes ni ch/ll/rr/qu/gu (cada letra es un sonido); las letras mostradas nunca están ya en orden;
 //         solución única: ninguna otra palabra del léxico se forma con esas letras (con la primera marcada, ninguna otra que empiece por ella).
 //         Sin palabras repetidas. Con «Mayúscula inicial», la letra que va primera se ve ya con mayúscula.
-// Opciones: letras (3 a 5 variadas, 3, 4 o 5) · primera letra (sin marcar / marcada) · tipo de sílabas · letra. Completa: 10 palabras; media: 5.
+// Opciones: letras (3 a 5 variadas, 3, 4 o 5) · primera letra (sin marcar / marcada) · tipo de sílabas · letra. Cantidad: 2 columnas; letras arriba y hueco debajo; «Más grandes» 20 palabras (media: 10), «Más ejercicios» las que caben con tarjetas ≥ 50 pt.
 const { registrar } = __req("nucleo/tipos.js");
-const { TOP } = __req("render/papel.js");
+const { TOP, cuantosRejilla } = __req("render/papel.js");
 const { LEXICO } = __req("lengua/lexico.js");
 const { sinTildes } = __req("lengua/reglas.js");
-const { alCaso, cap, cuantas, candidatas, ajusta } = __req("tipos/_lengua.js");
+const { alCaso, cap, cuantas, candidatas, ajusta, conTope, dosFilas } = __req("tipos/_lengua.js");
 const { elegirPorLetras, fichasLetras, anchoFichas } = __req("tipos/_palabra.js");
+const MIN_ALTO = 50;   // alto mínimo de tarjeta con «Más ejercicios»
 const clave = (p) => [...sinTildes(p)].sort().join("");
 const ANAGRAMAS = new Map();
 for (const e of LEXICO) { const k = clave(e.p); (ANAGRAMAS.get(k) || ANAGRAMAS.set(k, []).get(k)).push(e.p); }
@@ -13408,12 +13465,13 @@ const sinAnagramas = (p, marca) => !ANAGRAMAS.get(clave(p)).some((o) => o !== p 
 
 const __default = registrar({
   id: "palabra.letras",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    const n = cuantas(tamano, 10), marca = params.marca === "primera";
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const n = cuantosRejilla(ctx, 2, MIN_ALTO, [20, 10]), marca = params.marca === "primera";
     const largos = Number.isInteger(params.letras) ? [params.letras] : [3, 4, 5, 4, 3];
     const lista = candidatas(params, { minLetras: 3, maxLetras: 5 }).filter((e) => !/[áéíóúü]|ch|ll|rr|qu|gu[ei]/.test(e.p));
-    const ps = elegirPorLetras(azar, n, lista, largos, (e) => sinAnagramas(e.p, marca) && new Set(marca ? [...e.p].slice(1) : [...e.p]).size >= 2, "palabra.letras");
+    const ps = conTope(n, cuantas(ctx.tamano, 10), (k) => elegirPorLetras(azar, k, lista, largos, (e) => sinAnagramas(e.p, marca) && new Set(marca ? [...e.p].slice(1) : [...e.p]).size >= 2, "palabra.letras"));
     return {
       enunciado: marca ? "Ordena las letras y escribe la palabra.\nLa letra gris va la primera." : "Ordena las letras y escribe la palabra.",
       ejercicios: azar.barajar(ps).map(({ p }) => {
@@ -13428,14 +13486,13 @@ const __default = registrar({
     };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 1, 10, 10, 8), bw = 190, wp = cw - 36 - bw - 40;
+    const { cel, cw, ch } = p.rejilla(TOP, 2, Math.ceil(act.ejercicios.length / 2)), x0 = 32, w = cw - x0 - 10;
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
-      const [x, y] = cel[i], ls = e.datos.letras;
+      const [x, y] = cel[i], ls = e.datos.letras, { arriba, abajo } = dosFilas(y, ch);
       p.marco(x, y, cw, ch, i);
-      const fs = ajusta(p, (q) => anchoFichas(ls.length, q, 8), wp, 26, 14);
-      fichasLetras(p, x + 36, y, ch, ls, { fs, gap: 8, marcada: e.datos.marca ? 0 : -1 });
-      p.text(x + cw - 14 - bw - 20, y + ch / 2 - 8, "→", 20, { f: "PB", anchor: "middle", gris: 0.4 });
-      p.caja(x + cw - 14 - bw, y + (ch - 40) / 2, bw, 40, null, 20, e.solucion.huecos[0]);
+      const fs = ajusta(p, (q) => anchoFichas(ls.length, q, 6), w, Math.min(24, arriba.h / 1.6), 9);
+      fichasLetras(p, x + x0, arriba.y, arriba.h, ls, { fs, gap: 6, marcada: e.datos.marca ? 0 : -1 });
+      p.caja(x + x0, abajo.y, Math.min(w, 170), abajo.h, null, 20, e.solucion.huecos[0]);
     }));
   },
 });
@@ -13448,50 +13505,57 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get sinAnagram
 // solucion: { huecos: [la palabra pedida] }
 // Reglas: nombre del léxico de 3 a 8 letras; el plural es el de reglas.js (plural()) y no cambia de tilde ni es igual al singular (camión → camiones queda fuera).
 //         «Solo -s»: nombres acabados en vocal sin tilde. «-s y -es»: un tercio acaba en consonante (flor → flores, pez → peces, rey → reyes) y el resto en vocal.
-//         Sin repetidos. Completa: 12; media: 6.
+//         Sin repetidos. Cantidad: 2 columnas; «Más grandes» 24 (media: 12), «Más ejercicios» las que caben con tarjetas ≥ 40 pt.
 // Con letras elegidas (vistas.js): el singular y el plural (los dos se leen o se escriben) usan solo ellas.
 // Opciones: plurales (solo -s / -s y -es) · sentido (de uno a muchos / de muchos a uno) · letra (minúscula / MAYÚSCULA).
 const { registrar } = __req("nucleo/tipos.js");
-const { TOP, B, T } = __req("render/papel.js");
+const { TOP, cuantosRejilla } = __req("render/papel.js");
 const { plural } = __req("lengua/reglas.js");
 const { filtrarVistas, avisoVistas } = __req("lengua/vistas.js");
-const { cuantas, ajusta } = __req("tipos/_lengua.js");
+const { cuantas, ajusta, conTope } = __req("tipos/_lengua.js");
 const { NOMBRES } = __req("tipos/_palabra.js");
+const MIN_ALTO = 40;   // alto mínimo de tarjeta con «Más ejercicios»
 const SIMPLES = NOMBRES.filter((e) => e.p.length <= 8);
 const enVocal = (e) => /[aeiou]$/.test(e.p) && plural(e.p) === e.p + "s";
 const enConsonante = (e) => !/[aeiouáéíóú]$/.test(e.p) && /es$/.test(plural(e.p));
 
 const __default = registrar({
   id: "palabra.plural",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    const n = cuantas(tamano, 12), conEs = params.plural === "es", reves = params.sentido === "alreves";
-    const nEs = conEs ? Math.round(n / 3) : 0;
-    const ambos = filtrarVistas(SIMPLES, (e) => e.p + " " + plural(e.p));
-    const conso = azar.barajar(ambos.filter(enConsonante)), vocal = azar.barajar(ambos.filter(enVocal));
-    if (conso.length < nEs || vocal.length < n - nEs) throw new Error("«palabra.plural» necesita más nombres en el léxico para esas opciones." + avisoVistas());
-    const elegidos = [...conso.slice(0, nEs), ...vocal.slice(0, n - nEs)];
-    const mayus = params.caso === "mayus", f = (t) => (mayus ? t.toUpperCase() : t);
-    return {
-      enunciado: reves ? "Escribe cada palabra en singular:\nuna sola cosa." : "Escribe cada palabra en plural:\nmuchas cosas.",
-      ejercicios: azar.barajar(elegidos).map((e) => {
-        const pl = plural(e.p);
-        return reves ? { datos: { palabra: f(pl), sentido: "singular" }, solucion: { huecos: [f(e.p)] } } : { datos: { palabra: f(e.p), sentido: "plural" }, solucion: { huecos: [f(pl)] } };
-      }),
-    };
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    return conTope(cuantosRejilla(ctx, 2, MIN_ALTO, [24, 12]), cuantas(ctx.tamano, 12), (n) => elegir(params, azar, n));
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 1, 12, 10, 6);
+    const { cel, cw, ch } = p.rejilla(TOP, 2, Math.ceil(act.ejercicios.length / 2)), wp = 96, bx = 32 + wp + 20;
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
-      const [x, y] = cel[i];
+      const [x, y] = cel[i], bh = Math.min(36, ch * 0.7);
       p.marco(x, y, cw, ch, i);
-      const fs = ajusta(p, (q) => p.ancho(e.datos.palabra, "PB", q), 170, 26, 14);
-      p.text(x + 50, y + ch / 2 - fs * 0.35, e.datos.palabra, fs, { f: "PB" });
-      p.text(x + 250, y + ch / 2 - 8, "→", 22, { f: "PB", anchor: "middle", gris: 0.4 });
-      p.caja(x + 280, y + (ch - 38) / 2, cw - 280 - 20, 38, null, 22, e.solucion.huecos[0]);
+      const fs = ajusta(p, (q) => p.ancho(e.datos.palabra, "PB", q), wp, Math.min(26, ch * 0.5), 10);
+      p.text(x + 32, y + ch / 2 - fs * 0.35, e.datos.palabra, fs, { f: "PB" });
+      p.text(x + bx - 10, y + ch / 2 - 16 * 0.35, "→", 16, { f: "PB", anchor: "middle", gris: 0.4 });
+      p.caja(x + bx, y + (ch - bh) / 2, cw - bx - 10, bh, null, 22, e.solucion.huecos[0]);
     }));
   },
 });
+
+/** n nombres y su plural (n/3 en -es con «-s y -es»). */
+function elegir(params, azar, n) {
+  const conEs = params.plural === "es", reves = params.sentido === "alreves";
+  const nEs = conEs ? Math.round(n / 3) : 0;
+  const ambos = filtrarVistas(SIMPLES, (e) => e.p + " " + plural(e.p));
+  const conso = azar.barajar(ambos.filter(enConsonante)), vocal = azar.barajar(ambos.filter(enVocal));
+  if (conso.length < nEs || vocal.length < n - nEs) throw new Error("«palabra.plural» necesita más nombres en el léxico para esas opciones." + avisoVistas());
+  const elegidos = [...conso.slice(0, nEs), ...vocal.slice(0, n - nEs)];
+  const mayus = params.caso === "mayus", f = (t) => (mayus ? t.toUpperCase() : t);
+  return {
+    enunciado: reves ? "Escribe cada palabra en singular:\nuna sola cosa." : "Escribe cada palabra en plural:\nmuchas cosas.",
+    ejercicios: azar.barajar(elegidos).map((e) => {
+      const pl = plural(e.p);
+      return reves ? { datos: { palabra: f(pl), sentido: "singular" }, solucion: { huecos: [f(e.p)] } } : { datos: { palabra: f(e.p), sentido: "plural" }, solucion: { huecos: [f(pl)] } };
+    }),
+  };
+}
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
 },
@@ -14496,14 +14560,15 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() 
 // Reglas: palabra del léxico con el silabeo de reglas.js y 2–4 sílabas; es la ÚNICA del léxico con esas otras sílabas (pe__ta no vale si hay otra palabra «pe…ta»);
 //         las 2 sílabas de ayuda son del mismo tipo que la correcta, distintas (sin tildes), sin pistas (llevan tilde solo si la lleva la correcta; sin k, w, x, y, ü salvo la correcta) y no forman otra palabra del léxico. Palabras de hasta 9 letras, sin repetir.
 // Opciones: ayuda (con tres sílabas / sin) · sílaba que falta (cualquiera / primera / última) · sílabas (variadas, 2, 3 o 4) · tipo de sílabas · caso.
-// Completa: 10 palabras; media: 5.
+// Cantidad: 2 columnas; con ayuda, palabra arriba y las 3 sílabas debajo; «Más grandes» 20 palabras (media: 10), «Más ejercicios» las que caben con tarjetas ≥ 50 pt.
 const { registrar } = __req("nucleo/tipos.js");
-const { TOP } = __req("render/papel.js");
+const { TOP, cuantosRejilla } = __req("render/papel.js");
 const { silabas, tipoSilaba, sinTildes } = __req("lengua/reglas.js");
 const { rodear, palabraHuecos } = __req("lengua/dibujo.js");
 const { LEXICO } = __req("lengua/lexico.js");
 const { datosPalabra } = __req("lengua/palabras.js");
-const { alCaso, cuantas, elegirPalabras, largosDe, candidatas } = __req("tipos/_lengua.js");
+const { alCaso, cuantas, elegirPalabras, largosDe, candidatas, conTope, dosFilas } = __req("tipos/_lengua.js");
+const MIN_ALTO = 50;   // alto mínimo de tarjeta con «Más ejercicios»
 const PALABRAS = new Set(LEXICO.map((e) => e.p));
 const ENTRADAS = LEXICO.map((e) => ({ p: e.p, s: datosPalabra(e).s.map(sinTildes) }));
 /** ¿Es la única palabra del léxico con esas otras sílabas (todas menos la k)? */
@@ -14514,9 +14579,10 @@ function unicaSilaba(palabra, k) {
 
 const __default = registrar({
   id: "silaba.falta",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    const n = cuantas(tamano, 10), ayuda = params.ayuda !== "sin", tipo = params.tipo || "directas";
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const n = cuantosRejilla(ctx, 2, MIN_ALTO, [20, 10]), ayuda = params.ayuda !== "sin", tipo = params.tipo || "directas";
     // Sílabas que pueden servir de ayuda, por tipo (de las palabras del léxico que caben en el tipo pedido).
     const reserva = {};
     for (const e of candidatas(params)) for (const s of datosPalabra(e).s) (reserva[tipoSilaba(s)] ??= new Set()).add(s);
@@ -14535,7 +14601,7 @@ const __default = registrar({
       if (malas.length < 2) return null;
       return { k, opciones: az.barajar([real, malas[0], malas[1]]) };
     };
-    const ps = elegirPalabras(azar, n, params, largosDe(params, [2, 3, 2, 3, 4]), { extra: { maxLetras: 9 }, ok, id: "silaba.falta" });
+    const ps = conTope(n, cuantas(ctx.tamano, 10), (k) => elegirPalabras(azar, k, params, largosDe(params, [2, 3, 2, 3, 4]), { extra: { maxLetras: 9 }, ok, id: "silaba.falta" }));
     return {
       enunciado: ayuda ? "Elige la sílaba que falta y escríbela\nen el cuadro gris." : "Escribe la sílaba que falta\nen el cuadro gris.",
       ejercicios: ps.map(({ p: w, r }) => {
@@ -14546,14 +14612,15 @@ const __default = registrar({
     };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 1, 10, 10, 8);
+    const { cel, cw, ch } = p.rejilla(TOP, 2, Math.ceil(act.ejercicios.length / 2)), x0 = 32, w = cw - x0 - 10;
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], { palabra, pos, largo, opciones } = e.datos, hu = [{ pos, largo, sol: e.solucion.huecos[0] }];
       p.marco(x, y, cw, ch, i);
       if (opciones) {
-        palabraHuecos(p, x + 34, y, cw * 0.5 - 20, ch, palabra, hu, { fs: 26 });
-        rodear(p, x + cw * 0.53, y, cw * 0.45, ch, opciones, [], { fs: 20, gap: 12, tarjeta: true });
-      } else palabraHuecos(p, x + 34, y, cw - 48, ch, palabra, hu, { fs: 28 });
+        const { arriba, abajo } = dosFilas(y, ch);
+        palabraHuecos(p, x + x0, arriba.y, w, arriba.h, palabra, hu, { fs: Math.min(26, arriba.h * 0.8) });
+        rodear(p, x + x0, abajo.y, w, abajo.h, opciones, [], { fs: Math.min(20, abajo.h / 1.55), gap: 12, tarjeta: true });
+      } else palabraHuecos(p, x + x0, y, w, ch, palabra, hu, { fs: Math.min(28, ch * 0.45) });
     }));
   },
 });
@@ -14562,33 +14629,36 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get unicaSilab
 },
 "tipos/silaba.junta.js": (__exp) => {
 // silaba.junta · Junta las sílabas (Lengua 1.º, lote 1; LENGUA_1.md §3, bloque 3).
-// Tarea «escribir» (10 filas; media 5): datos { silabas: [2–3 sílabas, en el caso elegido], palabra }  solucion { huecos: [palabra] }
+// Tarea «escribir» (2 columnas: sílabas arriba y hueco debajo; «Más grandes» 20 (media 10), «Más ejercicios» las que caben con tarjetas ≥ 50 pt): datos { silabas: [2–3 sílabas, en el caso elegido], palabra }  solucion { huecos: [palabra] }
 // Tarea «une» (8 filas; media 4; solo palabras de 2 sílabas): datos { izq: primera sílaba, derecha: segunda sílaba de la caja de la derecha de esta fila }
 //                                                        solucion { huecos: [], une: índice de la fila cuya caja de la derecha lleva la segunda sílaba }
 // Reglas: palabra del léxico con el silabeo de reglas.js. Al unir, ninguna primera sílaba forma otra palabra del léxico con la segunda de otra fila
 //         y no se repiten primeras ni segundas sílabas (una sola unión posible por fila).
 // Opciones: tarea · sílabas (2 / 3 / 2 y 3) · tipo de sílabas · caso. Sin palabras repetidas.
 const { registrar } = __req("nucleo/tipos.js");
-const { TOP, M, W, T, B } = __req("render/papel.js");
+const { TOP, M, W, T, B, cuantosRejilla } = __req("render/papel.js");
 const { unir } = __req("lengua/dibujo.js");
 const { LEXICO } = __req("lengua/lexico.js");
 const { silabas } = __req("lengua/reglas.js");
 const { avisoVistas } = __req("lengua/vistas.js");
-const { alCaso, trozosCaso, cuantas, elegirPalabras, candidatas } = __req("tipos/_lengua.js");
+const { alCaso, trozosCaso, cuantas, elegirPalabras, candidatas, conTope, dosFilas } = __req("tipos/_lengua.js");
+const MIN_ALTO = 50;   // alto mínimo de tarjeta con «Más ejercicios»
 const PALABRAS = new Set(LEXICO.map((e) => e.p));
 
 const __default = registrar({
   id: "silaba.junta",
-  version: 1,
-  generar(params, azar, { tamano }) {
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const { tamano } = ctx;
     const une = params.tarea === "une", largo = params.largo ?? 2;
     if (une && largo !== 2) throw new Error("«silaba.junta» necesita palabras de 2 sílabas para unir (con 3 sílabas, escribe la palabra).");
     const largos = largo === "variadas" ? [2, 3] : [largo];
     if (!une) {
-      const n = cuantas(tamano, 10);
+      const n = cuantosRejilla(ctx, 2, MIN_ALTO, [20, 10]);
       return {
         enunciado: "Junta las sílabas y escribe la palabra.",
-        ejercicios: elegirPalabras(azar, n, params, largos, { extra: { maxLetras: 9 }, id: "silaba.junta" }).map(({ p }) => {
+        ejercicios: conTope(n, cuantas(tamano, 10), (k) => elegirPalabras(azar, k, params, largos, { extra: { maxLetras: 9 }, id: "silaba.junta" })).map(({ p }) => {
           const ss = trozosCaso(silabas(p), params.caso);
           return { datos: { silabas: ss, palabra: alCaso(p, params.caso) }, solucion: { huecos: [alCaso(p, params.caso)] } };
         }),
@@ -14622,14 +14692,14 @@ const __default = registrar({
       unir(p, M, TOP - h, W - 2 * M, h, es.map((e) => e.datos.izq), es.map((e) => e.datos.derecha), es.map((e) => e.solucion.une), { fs: 28, ids: es.map((e) => e.id) });
       return;
     }
-    const { cel, cw, ch } = p.celdas(TOP, 1, 10, 10, 8);
+    const { cel, cw, ch } = p.rejilla(TOP, 2, Math.ceil(es.length / 2)), x0 = 32, w = cw - x0 - 10;
     es.forEach((e, i) => p.ejercicio(e.id, () => {
-      const [x, y] = cel[i], ss = e.datos.silabas, fs = 26;
+      const [x, y] = cel[i], ss = e.datos.silabas, { arriba, abajo } = dosFilas(y, ch), fs = Math.min(26, arriba.h * 0.8);
       p.marco(x, y, cw, ch, i);
       const items = [];
-      ss.forEach((s, k) => { if (k) items.push(T("+", 22)); items.push(T(s, fs)); });
-      items.push(T("=", 24), B(210, 40, e.solucion.huecos[0]));
-      p.linea(x + 30, y, cw - 40, ch, items, 12);
+      ss.forEach((s, k) => { if (k) items.push(T("+", fs * 0.85)); items.push(T(s, fs)); });
+      p.linea(x + x0, arriba.y, w, arriba.h, items, 10);
+      p.linea(x + x0, abajo.y, w, abajo.h, [T("=", Math.min(22, abajo.h * 0.8)), B(Math.min(150, w - 30), abajo.h, e.solucion.huecos[0])], 8);
     }));
   },
 });
@@ -14642,12 +14712,14 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() 
 // solucion: { huecos: [palabra] }     con «Mayúscula inicial», la sílaba que va primera se ve ya con mayúscula.
 // Reglas: palabra del léxico con el silabeo de reglas.js; ninguna otra ordenación de esas sílabas forma otra palabra del léxico
 //         (solución única); la palabra tiene al menos 2 sílabas distintas. Palabras de hasta 10 letras, sin repetir.
-// Opciones: sílabas (variadas, 2, 3 o 4) · tipo de sílabas · caso. Completa: 10 palabras; media: 5.
+// Opciones: sílabas (variadas, 2, 3 o 4) · tipo de sílabas · caso. Cantidad: 2 columnas; sílabas arriba y hueco para la palabra debajo; «Más grandes» 20 palabras (media: 10), «Más ejercicios» las que caben con tarjetas ≥ 50 pt.
 const { registrar } = __req("nucleo/tipos.js");
-const { TOP } = __req("render/papel.js");
+const { TOP, cuantosRejilla } = __req("render/papel.js");
 const { silabas } = __req("lengua/reglas.js");
 const { LEXICO } = __req("lengua/lexico.js");
-const { alCaso, trozosCaso, cuantas, elegirPalabras, largosDe, pildoras, anchoPildoras, ajusta } = __req("tipos/_lengua.js");
+const { alCaso, trozosCaso, cuantas, elegirPalabras, largosDe, pildoras, anchoPildoras, ajusta, conTope, dosFilas } = __req("tipos/_lengua.js");
+const MIN_ALTO = 50;   // alto mínimo de tarjeta con «Más ejercicios»
+
 const PALABRAS = new Set(LEXICO.map((e) => e.p));
 /** Todas las ordenaciones de la lista. */
 const permutaciones = (l) => (l.length <= 1 ? [l] : l.flatMap((x, i) => permutaciones([...l.slice(0, i), ...l.slice(i + 1)]).map((r) => [x, ...r])));
@@ -14661,10 +14733,11 @@ function ordenable(p) {
 
 const __default = registrar({
   id: "silaba.ordena",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    const n = cuantas(tamano, 10);
-    const ps = elegirPalabras(azar, n, params, largosDe(params, [2, 3, 2, 3, 4]), { extra: { maxLetras: 10 }, ok: (e) => ordenable(e.p), id: "silaba.ordena" });
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const n = cuantosRejilla(ctx, 2, MIN_ALTO, [20, 10]);
+    const ps = conTope(n, cuantas(ctx.tamano, 10), (k) => elegirPalabras(azar, k, params, largosDe(params, [2, 3, 2, 3, 4]), { extra: { maxLetras: 10 }, ok: (e) => ordenable(e.p), id: "silaba.ordena" }));
     return {
       enunciado: "Ordena las sílabas y escribe la palabra.",
       ejercicios: ps.map(({ p }) => {
@@ -14677,14 +14750,13 @@ const __default = registrar({
     };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 1, 10, 10, 8);
+    const { cel, cw, ch } = p.rejilla(TOP, 2, Math.ceil(act.ejercicios.length / 2)), x0 = 32, w = cw - x0 - 10;
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
-      const [x, y] = cel[i], ss = e.datos.silabas, bw = 190, wp = cw - 36 - bw - 40;
+      const [x, y] = cel[i], ss = e.datos.silabas, { arriba, abajo } = dosFilas(y, ch);
       p.marco(x, y, cw, ch, i);
-      const fs = ajusta(p, (q) => anchoPildoras(p, ss, q, 8), wp, 24, 14);
-      pildoras(p, x + 36, y, ch, ss, fs, 8);
-      p.text(x + cw - 14 - bw - 20, y + ch / 2 - 8, "→", 20, { f: "PB", anchor: "middle", gris: 0.4 });
-      p.caja(x + cw - 14 - bw, y + (ch - 40) / 2, bw, 40, null, 20, e.solucion.huecos[0]);
+      const fs = ajusta(p, (q) => anchoPildoras(p, ss, q, 7), w, Math.min(22, arriba.h / 1.7), 9);
+      pildoras(p, x + x0, arriba.y, arriba.h, ss, fs, 7);
+      p.caja(x + x0, abajo.y, w, abajo.h, null, 20, e.solucion.huecos[0]);
     }));
   },
 });
@@ -14697,18 +14769,21 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get ordenable(
 // solucion: casillas → { huecos: [las sílabas, una por casilla] }
 //           rayas    → { huecos: [], rayas: [nº de letras tras las que va cada raya, de izquierda a derecha] }  (el alumno traza las rayas; en la solución, en rojo)
 // Reglas: palabra del léxico; las sílabas son las de reglas.js (silabas); sin repetir palabras. Palabras de hasta 10 letras.
-// Opciones: cómo se separa (en casillas / con rayas) · sílabas (variadas, 2, 3 o 4) · tipo de sílabas · caso. Completa: 10 palabras; media: 5.
+// Opciones: cómo se separa (en casillas / con rayas) · sílabas (variadas, 2, 3 o 4) · tipo de sílabas · caso. Cantidad: 2 columnas; en casillas, palabra arriba y casillas debajo; «Más grandes» 20 palabras (media: 10), «Más ejercicios» las que caben con tarjetas ≥ 50 pt.
 const { registrar } = __req("nucleo/tipos.js");
-const { TOP } = __req("render/papel.js");
+const { TOP, cuantosRejilla } = __req("render/papel.js");
 const { silabas } = __req("lengua/reglas.js");
 const { casillas } = __req("lengua/dibujo.js");
-const { alCaso, trozosCaso, cuantas, elegirPalabras, largosDe, palabraLetras, ajusta } = __req("tipos/_lengua.js");
+const { alCaso, trozosCaso, cuantas, elegirPalabras, largosDe, palabraLetras, ajusta, conTope, dosFilas } = __req("tipos/_lengua.js");
+const MIN_ALTO = 50;   // alto mínimo de tarjeta con «Más ejercicios»
+
 const __default = registrar({
   id: "silaba.separa",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    const n = cuantas(tamano, 10), modo = params.modo === "rayas" ? "rayas" : "casillas";
-    const ps = elegirPalabras(azar, n, params, largosDe(params, [2, 3, 2, 3, 4]), { extra: { maxLetras: 10 }, id: "silaba.separa" });
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const n = cuantosRejilla(ctx, 2, MIN_ALTO, [20, 10]), modo = params.modo === "rayas" ? "rayas" : "casillas";
+    const ps = conTope(n, cuantas(ctx.tamano, 10), (k) => elegirPalabras(azar, k, params, largosDe(params, [2, 3, 2, 3, 4]), { extra: { maxLetras: 10 }, id: "silaba.separa" }));
     return {
       enunciado: modo === "rayas" ? "Separa cada palabra en sílabas:\ntraza una raya entre ellas." : "Separa cada palabra en sílabas:\nescribe una en cada casilla.",
       ejercicios: ps.map(({ p }) => {
@@ -14720,17 +14795,19 @@ const __default = registrar({
     };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 1, 10, 10, 8);
+    const { cel, cw, ch } = p.rejilla(TOP, 2, Math.ceil(act.ejercicios.length / 2));
+    const x0 = 32, w = cw - x0 - 10;
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], { palabra, modo, n } = e.datos;
       p.marco(x, y, cw, ch, i);
       if (modo === "rayas") {
-        palabraLetras(p, x + 40, y, cw - 56, ch, palabra, { fs: 32, gap: 0.4, rayas: e.solucion.rayas });
+        palabraLetras(p, x + x0, y, w, ch, palabra, { fs: Math.min(32, ch * 0.5), gap: 0.4, rayas: e.solucion.rayas });
         return;
       }
-      const w1 = cw * 0.42, fs = ajusta(p, (q) => p.ancho(palabra, "PB", q), w1 - 10, 28);
-      p.text(x + 36, y + ch / 2 - fs * 0.35, palabra, fs, { f: "PB" });
-      casillas(p, x + cw * 0.46, y, cw * 0.52, ch, n, { sol: e.solucion.huecos, ancho: 56, alto: 38, gap: 8, fs: 18 });
+      const { arriba, abajo } = dosFilas(y, ch), fs = ajusta(p, (q) => p.ancho(palabra, "PB", q), w, Math.min(28, arriba.h * 0.8), 10);
+      p.text(x + x0, arriba.y + arriba.h / 2 - fs * 0.35, palabra, fs, { f: "PB" });
+      const g = 6, qw = Math.min(56, (w - (n - 1) * g) / n);
+      casillas(p, x + x0, abajo.y, w, abajo.h, n, { sol: e.solucion.huecos, ancho: qw, alto: abajo.h, gap: g, fs: Math.min(18, abajo.h * 0.6) });
     }));
   },
 });

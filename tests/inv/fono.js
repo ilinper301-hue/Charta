@@ -1,16 +1,16 @@
 // Charta · invariantes de la familia «fono» (Lengua 1.º, bloque 1; ver tests/invariantes.js).
 import assert from "node:assert/strict";
-import { unicos, cuantos } from "./_ayuda.js";
+import { unicos, cuantos, cuantosEntre } from "./_ayuda.js";
 import { enCaso, palabraValida, otrasQueEncajan, PALABRAS } from "./_lengua.js";
 import { silabas, sinTildes, rima, riman } from "../../src/lengua/reglas.js";
 
-const VOC = [..."aeiou"], N = (tam, c) => (tam === "media" ? c / 2 : c);
+const VOC = [..."aeiou"], N = (tam, c) => (tam === "media" ? c / 2 : c);   // 2 columnas (Espacio en la ficha): el doble por defecto; «Más ejercicios» lo cubren las doradas
 const unidades = (m) => m.match(/ch|ll|rr|qu|gu(?=[eéií])|./g);
 
 export default {
   "fono.silabas"(act, tam) {
     const es = act.ejercicios, p = act.params, num = p.respuesta === "numero";
-    cuantos(es, N(tam, 10));
+    cuantosEntre(es, N(tam, 20), N(tam, 10));
     unicos(es, (e) => e.datos.palabra.toLowerCase(), "palabras repetidas");
     for (const e of es) {
       const m = enCaso(e.datos.palabra, p.caso, "palabra"), n = silabas(m).length;
@@ -22,7 +22,7 @@ export default {
 
   "fono.inicial"(act, tam) {
     const es = act.ejercicios, p = act.params, fin = p.posicion === "final", tl = p.letras;
-    cuantos(es, N(tam, 10));
+    cuantosEntre(es, N(tam, 20), N(tam, 10));
     unicos(es, (e) => e.datos.palabra.toLowerCase(), "palabras repetidas");
     for (const e of es) {
       const { palabra, pos, opciones } = e.datos, m = enCaso(palabra, p.caso, "palabra");
@@ -47,7 +47,7 @@ export default {
   },
 
   "fono.posicion"(act, tam) {
-    const es = act.ejercicios, p = act.params, n = N(tam, 10);
+    const es = act.ejercicios, p = act.params, n = N(tam, 20);
     cuantos(es, n);
     unicos(es, (e) => e.datos.palabra.toLowerCase(), "palabras repetidas");
     const cuenta = [0, 0, 0];
@@ -85,7 +85,7 @@ export default {
 
   "fono.quita"(act, tam) {
     const es = act.ejercicios, p = act.params;
-    cuantos(es, N(tam, 8));
+    cuantos(es, N(tam, 16));
     unicos(es, (e) => e.datos.silabas.join("").toLowerCase(), "palabras repetidas");
     let primeras = 0;
     for (const e of es) {
@@ -104,7 +104,7 @@ export default {
 
   "fono.larga"(act, tam) {
     const es = act.ejercicios, p = act.params;
-    cuantos(es, N(tam, 10));
+    cuantos(es, N(tam, 20));
     const todas = es.flatMap((e) => e.datos.palabras.map((w) => w.toLowerCase())); assert.equal(new Set(todas).size, todas.length, "palabras repetidas");
     const sitios = new Set();
     for (const e of es) {

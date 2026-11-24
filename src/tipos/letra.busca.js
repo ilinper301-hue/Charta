@@ -4,9 +4,9 @@
 // Opciones: letra (al azar o una concreta) · distractoras (al azar / las que se confunden) · caso (minúscula / MAYÚSCULA).
 // Con letras elegidas (vistas.js): la letra al azar y las distractoras salen solo de ellas («confusas» = las que se confunden y están elegidas;
 // si ninguna lo está, cualquiera de las elegidas). Una letra concreta de las opciones se respeta aunque no esté elegida.
-// Completa: 10 filas de 10 letras (3 o 4 veces la pedida cada una); media: 5. Filas distintas.
+// Cantidad: 2 columnas; «Más grandes» 20 filas de 10 letras (3 o 4 veces la pedida cada una; media: 10), «Más ejercicios» las que caben con tarjetas ≥ 40 pt. Filas distintas.
 import { registrar } from "../nucleo/tipos.js";
-import { TOP } from "../render/papel.js";
+import { TOP, cuantosRejilla } from "../render/papel.js";
 import { letrasActivas, permitida, avisoVistas } from "../lengua/vistas.js";
 import { rodear } from "../lengua/dibujo.js";
 import { ajusta } from "./_lengua.js";
@@ -17,12 +17,14 @@ export const CONFUSAS = {
   n: "mhurñ", ñ: "nmhr", o: "aecu", p: "bdqg", q: "gpbd", r: "nvfñ", s: "zcxe", t: "flik", u: "nvmo", v: "uywr", w: "vumn", x: "kzvs", y: "vgjq", z: "sxct",
 };
 export const NFILA = 10;
+const MIN_ALTO = 40;   // alto mínimo de tarjeta con «Más ejercicios»
 
 export default registrar({
   id: "letra.busca",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    const n = tamano === "media" ? 5 : 10, mayus = params.caso === "mayus", fmt = (c) => (mayus ? c.toUpperCase() : c);
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const n = cuantosRejilla(ctx, 2, MIN_ALTO, [20, 10]), mayus = params.caso === "mayus", fmt = (c) => (mayus ? c.toUpperCase() : c);
     const letra = params.letra || azar.elegir(letrasActivas());
     let otras = (params.distractoras === "confusas" ? [...CONFUSAS[letra]] : letrasActivas()).filter((l) => l !== letra && permitida(l));
     if (!otras.length) otras = letrasActivas().filter((l) => l !== letra);   // ninguna confusa elegida: cualquiera de las elegidas
@@ -42,13 +44,13 @@ export default registrar({
     };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 1, 10, 10, 8);
+    const { cel, cw, ch } = p.rejilla(TOP, 2, Math.ceil(act.ejercicios.length / 2)), rel = 0.22, gap = 2;
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
-      const [x, y] = cel[i], w = cw - 56;
+      const [x, y] = cel[i], w = cw - 32 - 8;
       p.marco(x, y, cw, ch, i);
-      const fila = e.datos.fila, gap = 4;
-      const fs = ajusta(p, (q) => fila.reduce((t, l) => t + p.ancho(l, "PB", q) + q * 0.9, 0) + gap * (fila.length - 1), w, 26);
-      rodear(p, x + 44, y, w, ch, fila, e.solucion.rodea, { fs, gap });
+      const fila = e.datos.fila;
+      const fs = ajusta(p, (q) => fila.reduce((t, l) => t + p.ancho(l, "PB", q) + q * 2 * rel, 0) + gap * (fila.length - 1), w, Math.min(24, ch * 0.45), 10);
+      rodear(p, x + 32, y, w, ch, fila, e.solucion.rodea, { fs, gap, relleno: rel });
     }));
   },
 });

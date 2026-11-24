@@ -5,6 +5,8 @@ import { RANGOS, maximo, nombreNumero } from "../../src/rep/index.js";
 export const ent = (v, lo, hi, q) => assert.ok(Number.isInteger(v) && v >= lo && v <= hi, `${q} = ${v} fuera de ${lo}..${hi}`);
 export const unicos = (es, f, q = "repetidos") => assert.equal(new Set(es.map(f)).size, es.length, q);
 export const cuantos = (es, n) => assert.equal(es.length, n, `ejercicios: ${es.length} ≠ ${n}`);
+/** 2 columnas: el doble (`max`) salvo que el banco de palabras no dé para tanto sin repetir; entonces, lo que quepa, nunca menos de lo de siempre (`min`). */
+export const cuantosEntre = (es, max, min) => assert.ok(es.length >= min && es.length <= max, `ejercicios: ${es.length} fuera de ${min}..${max}`);
 /** Nivel «mezcla»: exactamente la mitad con llevada. */
 export const mitad = (es, lleva) => assert.equal(es.filter(lleva).length, es.length / 2, "mezcla: no hay mitad y mitad");
 

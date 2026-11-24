@@ -4,15 +4,16 @@
 // Reglas: palabra del léxico con el silabeo de reglas.js y 2–4 sílabas; es la ÚNICA del léxico con esas otras sílabas (pe__ta no vale si hay otra palabra «pe…ta»);
 //         las 2 sílabas de ayuda son del mismo tipo que la correcta, distintas (sin tildes), sin pistas (llevan tilde solo si la lleva la correcta; sin k, w, x, y, ü salvo la correcta) y no forman otra palabra del léxico. Palabras de hasta 9 letras, sin repetir.
 // Opciones: ayuda (con tres sílabas / sin) · sílaba que falta (cualquiera / primera / última) · sílabas (variadas, 2, 3 o 4) · tipo de sílabas · caso.
-// Completa: 10 palabras; media: 5.
+// Cantidad: 2 columnas; con ayuda, palabra arriba y las 3 sílabas debajo; «Más grandes» 20 palabras (media: 10), «Más ejercicios» las que caben con tarjetas ≥ 50 pt.
 import { registrar } from "../nucleo/tipos.js";
-import { TOP } from "../render/papel.js";
+import { TOP, cuantosRejilla } from "../render/papel.js";
 import { silabas, tipoSilaba, sinTildes } from "../lengua/reglas.js";
 import { rodear, palabraHuecos } from "../lengua/dibujo.js";
 import { LEXICO } from "../lengua/lexico.js";
 import { datosPalabra } from "../lengua/palabras.js";
-import { alCaso, cuantas, elegirPalabras, largosDe, candidatas } from "./_lengua.js";
+import { alCaso, cuantas, elegirPalabras, largosDe, candidatas, conTope, dosFilas } from "./_lengua.js";
 
+const MIN_ALTO = 50;   // alto mínimo de tarjeta con «Más ejercicios»
 const PALABRAS = new Set(LEXICO.map((e) => e.p));
 const ENTRADAS = LEXICO.map((e) => ({ p: e.p, s: datosPalabra(e).s.map(sinTildes) }));
 /** ¿Es la única palabra del léxico con esas otras sílabas (todas menos la k)? */
@@ -23,9 +24,10 @@ export function unicaSilaba(palabra, k) {
 
 export default registrar({
   id: "silaba.falta",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    const n = cuantas(tamano, 10), ayuda = params.ayuda !== "sin", tipo = params.tipo || "directas";
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const n = cuantosRejilla(ctx, 2, MIN_ALTO, [20, 10]), ayuda = params.ayuda !== "sin", tipo = params.tipo || "directas";
     // Sílabas que pueden servir de ayuda, por tipo (de las palabras del léxico que caben en el tipo pedido).
     const reserva = {};
     for (const e of candidatas(params)) for (const s of datosPalabra(e).s) (reserva[tipoSilaba(s)] ??= new Set()).add(s);
@@ -44,7 +46,7 @@ export default registrar({
       if (malas.length < 2) return null;
       return { k, opciones: az.barajar([real, malas[0], malas[1]]) };
     };
-    const ps = elegirPalabras(azar, n, params, largosDe(params, [2, 3, 2, 3, 4]), { extra: { maxLetras: 9 }, ok, id: "silaba.falta" });
+    const ps = conTope(n, cuantas(ctx.tamano, 10), (k) => elegirPalabras(azar, k, params, largosDe(params, [2, 3, 2, 3, 4]), { extra: { maxLetras: 9 }, ok, id: "silaba.falta" }));
     return {
       enunciado: ayuda ? "Elige la sílaba que falta y escríbela\nen el cuadro gris." : "Escribe la sílaba que falta\nen el cuadro gris.",
       ejercicios: ps.map(({ p: w, r }) => {
@@ -55,14 +57,15 @@ export default registrar({
     };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 1, 10, 10, 8);
+    const { cel, cw, ch } = p.rejilla(TOP, 2, Math.ceil(act.ejercicios.length / 2)), x0 = 32, w = cw - x0 - 10;
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], { palabra, pos, largo, opciones } = e.datos, hu = [{ pos, largo, sol: e.solucion.huecos[0] }];
       p.marco(x, y, cw, ch, i);
       if (opciones) {
-        palabraHuecos(p, x + 34, y, cw * 0.5 - 20, ch, palabra, hu, { fs: 26 });
-        rodear(p, x + cw * 0.53, y, cw * 0.45, ch, opciones, [], { fs: 20, gap: 12, tarjeta: true });
-      } else palabraHuecos(p, x + 34, y, cw - 48, ch, palabra, hu, { fs: 28 });
+        const { arriba, abajo } = dosFilas(y, ch);
+        palabraHuecos(p, x + x0, arriba.y, w, arriba.h, palabra, hu, { fs: Math.min(26, arriba.h * 0.8) });
+        rodear(p, x + x0, abajo.y, w, abajo.h, opciones, [], { fs: Math.min(20, abajo.h / 1.55), gap: 12, tarjeta: true });
+      } else palabraHuecos(p, x + x0, y, w, ch, palabra, hu, { fs: Math.min(28, ch * 0.45) });
     }));
   },
 });

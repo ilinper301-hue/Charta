@@ -3,19 +3,22 @@
 // solucion: colorea → { huecos: [], colorea: n }   (el alumno colorea n de las 4 casillas, una por palmada; en la solución, en rojo)
 //           numero  → { huecos: [n] }
 // Reglas: palabra del léxico; n = silabas() de reglas.js (1–4); siempre 4 casillas (no delatan el número); sin repetir palabras. Palabras de hasta 10 letras.
-// Opciones: respuesta (colorear / escribir el número) · sílabas (variadas, 1, 2, 3 o 4) · tipo de sílabas · caso. Completa: 10 palabras; media: 5.
+// Opciones: respuesta (colorear / escribir el número) · sílabas (variadas, 1, 2, 3 o 4) · tipo de sílabas · caso. Cantidad: 2 columnas; «Más grandes» 20 palabras (media: 10), «Más ejercicios» las que caben con tarjetas ≥ 40 pt.
 import { registrar } from "../nucleo/tipos.js";
-import { TOP } from "../render/papel.js";
+import { TOP, cuantosRejilla } from "../render/papel.js";
 import { silabas } from "../lengua/reglas.js";
 import { casillas } from "../lengua/dibujo.js";
-import { alCaso, cuantas, elegirPalabras, largosDe, ajusta } from "./_lengua.js";
+import { alCaso, cuantas, elegirPalabras, largosDe, ajusta, conTope } from "./_lengua.js";
+
+const MIN_ALTO = 40;   // alto mínimo de tarjeta con «Más ejercicios»
 
 export default registrar({
   id: "fono.silabas",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    const n = cuantas(tamano, 10), respuesta = params.respuesta === "numero" ? "numero" : "colorea";
-    const ps = elegirPalabras(azar, n, params, largosDe(params, [2, 3, 2, 4, 3, 1]), { extra: { maxLetras: 10 }, id: "fono.silabas" });
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const n = cuantosRejilla(ctx, 2, MIN_ALTO, [20, 10]), respuesta = params.respuesta === "numero" ? "numero" : "colorea";
+    const ps = conTope(n, cuantas(ctx.tamano, 10), (k) => elegirPalabras(azar, k, params, largosDe(params, [2, 3, 2, 4, 3, 1]), { extra: { maxLetras: 10 }, id: "fono.silabas" }));
     return {
       enunciado: respuesta === "numero" ? "Da una palmada por cada sílaba\ny escribe cuántas sílabas tiene la palabra." : "Da una palmada por cada sílaba\ny colorea una casilla por cada palmada.",
       ejercicios: ps.map(({ p }) => {
@@ -25,16 +28,20 @@ export default registrar({
     };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 1, 10, 10, 8);
+    const { cel, cw, ch } = p.rejilla(TOP, 2, Math.ceil(act.ejercicios.length / 2));
+    const x0 = 32, x1 = 10, qa = Math.min(30, ch * 0.55);   // casillas de colorear: alto
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
       const [x, y] = cel[i], { palabra, n, respuesta } = e.datos;
       p.marco(x, y, cw, ch, i);
-      const fs = ajusta(p, (q) => p.ancho(palabra, "PB", q), cw * 0.42 - 10, 30);
-      p.text(x + 40, y + ch / 2 - fs * 0.35, palabra, fs, { f: "PB" });
-      if (respuesta === "numero") {
-        p.caja(x + cw * 0.62, y + (ch - 42) / 2, 56, 42, null, 24, n);
-        p.text(x + cw * 0.62 + 66, y + ch / 2 - 4, "sílabas", 12, { f: "PM", gris: 0.35 });
-      } else casillas(p, x + cw * 0.46, y, cw * 0.52, ch, 4, { rellenar: n, ancho: 46, alto: 38, gap: 8 });
+      const num = respuesta === "numero", rw = num ? 44 + 5 + p.ancho("sílabas", "PM", 10) : 4 * 24 + 3 * 4;   // ancho de lo que va a la derecha
+      const aw = cw - x0 - x1 - rw - 10, fs = ajusta(p, (q) => p.ancho(palabra, "PB", q), aw, Math.min(28, ch * 0.46), 10);
+      p.text(x + x0, y + ch / 2 - fs * 0.35, palabra, fs, { f: "PB" });
+      const rx = x + cw - x1 - rw;
+      if (num) {
+        const bh = Math.min(36, ch * 0.7);
+        p.caja(rx, y + (ch - bh) / 2, 44, bh, null, 22, n);
+        p.text(rx + 49, y + ch / 2 - 10 * 0.35, "sílabas", 10, { f: "PM", gris: 0.35 });
+      } else casillas(p, rx, y, rw, ch, 4, { rellenar: n, ancho: 24, alto: qa, gap: 4 });
     }));
   },
 });

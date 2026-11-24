@@ -4,14 +4,15 @@
 // Reglas: palabra del léxico de 3 a 5 letras, sin tildes ni ch/ll/rr/qu/gu (cada letra es un sonido); las letras mostradas nunca están ya en orden;
 //         solución única: ninguna otra palabra del léxico se forma con esas letras (con la primera marcada, ninguna otra que empiece por ella).
 //         Sin palabras repetidas. Con «Mayúscula inicial», la letra que va primera se ve ya con mayúscula.
-// Opciones: letras (3 a 5 variadas, 3, 4 o 5) · primera letra (sin marcar / marcada) · tipo de sílabas · letra. Completa: 10 palabras; media: 5.
+// Opciones: letras (3 a 5 variadas, 3, 4 o 5) · primera letra (sin marcar / marcada) · tipo de sílabas · letra. Cantidad: 2 columnas; letras arriba y hueco debajo; «Más grandes» 20 palabras (media: 10), «Más ejercicios» las que caben con tarjetas ≥ 50 pt.
 import { registrar } from "../nucleo/tipos.js";
-import { TOP } from "../render/papel.js";
+import { TOP, cuantosRejilla } from "../render/papel.js";
 import { LEXICO } from "../lengua/lexico.js";
 import { sinTildes } from "../lengua/reglas.js";
-import { alCaso, cap, cuantas, candidatas, ajusta } from "./_lengua.js";
+import { alCaso, cap, cuantas, candidatas, ajusta, conTope, dosFilas } from "./_lengua.js";
 import { elegirPorLetras, fichasLetras, anchoFichas } from "./_palabra.js";
 
+const MIN_ALTO = 50;   // alto mínimo de tarjeta con «Más ejercicios»
 const clave = (p) => [...sinTildes(p)].sort().join("");
 const ANAGRAMAS = new Map();
 for (const e of LEXICO) { const k = clave(e.p); (ANAGRAMAS.get(k) || ANAGRAMAS.set(k, []).get(k)).push(e.p); }
@@ -20,12 +21,13 @@ export const sinAnagramas = (p, marca) => !ANAGRAMAS.get(clave(p)).some((o) => o
 
 export default registrar({
   id: "palabra.letras",
-  version: 1,
-  generar(params, azar, { tamano }) {
-    const n = cuantas(tamano, 10), marca = params.marca === "primera";
+  version: 2,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const n = cuantosRejilla(ctx, 2, MIN_ALTO, [20, 10]), marca = params.marca === "primera";
     const largos = Number.isInteger(params.letras) ? [params.letras] : [3, 4, 5, 4, 3];
     const lista = candidatas(params, { minLetras: 3, maxLetras: 5 }).filter((e) => !/[áéíóúü]|ch|ll|rr|qu|gu[ei]/.test(e.p));
-    const ps = elegirPorLetras(azar, n, lista, largos, (e) => sinAnagramas(e.p, marca) && new Set(marca ? [...e.p].slice(1) : [...e.p]).size >= 2, "palabra.letras");
+    const ps = conTope(n, cuantas(ctx.tamano, 10), (k) => elegirPorLetras(azar, k, lista, largos, (e) => sinAnagramas(e.p, marca) && new Set(marca ? [...e.p].slice(1) : [...e.p]).size >= 2, "palabra.letras"));
     return {
       enunciado: marca ? "Ordena las letras y escribe la palabra.\nLa letra gris va la primera." : "Ordena las letras y escribe la palabra.",
       ejercicios: azar.barajar(ps).map(({ p }) => {
@@ -40,14 +42,13 @@ export default registrar({
     };
   },
   dibujar(p, act) {
-    const { cel, cw, ch } = p.celdas(TOP, 1, 10, 10, 8), bw = 190, wp = cw - 36 - bw - 40;
+    const { cel, cw, ch } = p.rejilla(TOP, 2, Math.ceil(act.ejercicios.length / 2)), x0 = 32, w = cw - x0 - 10;
     act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
-      const [x, y] = cel[i], ls = e.datos.letras;
+      const [x, y] = cel[i], ls = e.datos.letras, { arriba, abajo } = dosFilas(y, ch);
       p.marco(x, y, cw, ch, i);
-      const fs = ajusta(p, (q) => anchoFichas(ls.length, q, 8), wp, 26, 14);
-      fichasLetras(p, x + 36, y, ch, ls, { fs, gap: 8, marcada: e.datos.marca ? 0 : -1 });
-      p.text(x + cw - 14 - bw - 20, y + ch / 2 - 8, "→", 20, { f: "PB", anchor: "middle", gris: 0.4 });
-      p.caja(x + cw - 14 - bw, y + (ch - 40) / 2, bw, 40, null, 20, e.solucion.huecos[0]);
+      const fs = ajusta(p, (q) => anchoFichas(ls.length, q, 6), w, Math.min(24, arriba.h / 1.6), 9);
+      fichasLetras(p, x + x0, arriba.y, arriba.h, ls, { fs, gap: 6, marcada: e.datos.marca ? 0 : -1 });
+      p.caja(x + x0, abajo.y, Math.min(w, 170), abajo.h, null, 20, e.solucion.huecos[0]);
     }));
   },
 });

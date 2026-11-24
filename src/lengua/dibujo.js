@@ -46,10 +46,10 @@ export function casillas(p, x, y, w, h, n, { sol = null, rellenar = null, ancho 
 }
 
 /** Opciones para rodear, en fila y centradas (letras, sílabas o palabras). En la solución, la correcta rodeada en rojo.
- *  correcta: índice o lista de índices. Devuelve las cajas [{ x, y, w, h }] por si el tipo quiere dibujar algo encima. */
-export function rodear(p, x, y, w, h, opciones, correcta, { fs = FS, gap = 22, tarjeta = false } = {}) {
+ *  correcta: índice o lista de índices; relleno: margen a cada lado como fracción de fs (0,45; menos en media tarjeta). Devuelve las cajas [{ x, y, w, h }] por si el tipo quiere dibujar algo encima. */
+export function rodear(p, x, y, w, h, opciones, correcta, { fs = FS, gap = 22, tarjeta = false, relleno = 0.45 } = {}) {
   const ok = new Set([].concat(correcta ?? []));
-  const pad = fs * 0.45, ws = opciones.map((o) => anchoB(p, o, fs) + 2 * pad);
+  const pad = fs * relleno, ws = opciones.map((o) => anchoB(p, o, fs) + 2 * pad);
   const total = ws.reduce((a, b) => a + b, 0) + gap * (opciones.length - 1), bh = fs * 1.55;
   let cx = x + (w - total) / 2; const by = y + (h - bh) / 2, cajas = [];
   opciones.forEach((o, k) => {

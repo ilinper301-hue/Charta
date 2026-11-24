@@ -58,6 +58,18 @@ export const largosDe = (params, variadas) => (Number.isInteger(params.largo) ? 
 /** Cantidad de ejercicios: la de la página completa o su mitad en media página. */
 export const cuantas = (tamano, completa) => (tamano === "media" ? completa / 2 : completa);
 
+/** 2 columnas (Espacio en la ficha): intenta `n` ejercicios (el doble); si el banco no da, baja de uno en uno hasta `base` (los de siempre) = el máximo sin repetir. */
+export function conTope(n, base, hacer) {
+  for (let k = n; ; k--) {
+    try { return hacer(k); } catch (e) { if (k <= base || !/necesita/.test(e.message)) throw e; }
+  }
+}
+/** Tarjeta de media columna con dos filas: {arriba, abajo} = {y, h} de cada una (la de abajo = hueco o botones). */
+export function dosFilas(y, ch, bajo = 0.34) {
+  const pad = ch * 0.07, g = ch * 0.05, hb = ch * bajo;
+  return { arriba: { y: y + pad + hb + g, h: ch - 2 * pad - hb - g }, abajo: { y: y + pad, h: hb } };
+}
+
 // ---------------------------------------------------------------- huecos con solución única
 const porLargo = new Map();
 function delLargo(n) {

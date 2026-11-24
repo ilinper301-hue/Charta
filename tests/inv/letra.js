@@ -11,7 +11,7 @@ const GRUPO_BDPQ = new Set("bdpq"), VOC = new Set("aeiou");
 export default {
   "letra.busca"(act, tam) {
     const es = act.ejercicios, p = act.params, mayus = p.caso === "mayus";
-    cuantos(es, tam === "media" ? 5 : 10);
+    cuantos(es, tam === "media" ? 10 : 20);
     unicos(es, (e) => e.datos.fila.join(""), "filas repetidas");
     const letra = es[0].datos.letra.toLowerCase();
     if (p.letra) assert.equal(letra, p.letra);
