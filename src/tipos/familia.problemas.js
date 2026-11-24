@@ -5,3 +5,4 @@ import "./problemas.mixtos.js";
 import "./problemas.barras.js";
 import "./problemas.dospasos.js";
 import "./problemas.dinero.js";
+import "./problemas.division.js";

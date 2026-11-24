@@ -90,7 +90,44 @@ function dinero(act, tam) {
   }
 }
 
+/** problemas.division (3.º, lote 4): repartir / agrupar, exactos o con resto; aritmética con a = b·c + r comprobada aquí. */
+function division(act, tam) {
+  const es = act.ejercicios, modo = act.params.modo ?? null, resto = modo === "resto", div = [2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const T = act.params.tablas == null ? div : act.params.tablas === "2a5" ? [2, 3, 4, 5] : [6, 7, 8, 9];
+  cuantos(es, tam === "media" ? 2 : 4);
+  unicos(es, (e) => e.datos.a + "," + e.datos.b, "división repetida");
+  unicos(es, (e) => e.datos.obj, "objeto repetido");
+  unicos(es, (e) => e.datos.plan, "plantilla repetida");
+  const NOMB = /\b(Ana|Luis|Marta|Pablo|Lucía|Hugo|Sara|Daniel|Carla|Mario|Paula|Diego|Elena|Leo|Irene|Nico|Julia|Pedro|Alba|Sofía|Martín|Laura|Noa)\b/;
+  const nombres = es.map((e) => e.datos.texto.match(NOMB)?.[0]).filter(Boolean);
+  assert.equal(new Set(nombres).size, nombres.length, "nombre repetido");
+  es.forEach(({ datos: d, solucion }, i) => {
+    assert.equal(d.op, "÷");
+    const esperada = modo === "reparto" ? "reparto" : modo === "agrupa" ? "agrupa" : i % 2 === 0 ? "reparto" : "agrupa";
+    assert.equal(d.sit, esperada, "reparto / agrupa");
+    ent(d.b, 2, 10, "divisor"); assert.ok(T.includes(d.b), `divisor ${d.b} fuera de las tablas`);
+    ent(d.c, 2, resto ? 9 : 10, "cociente"); ent(d.a, 4, 100, "dividendo");
+    if (resto) { ent(d.r, 1, d.b - 1, "resto"); assert.ok(d.r < d.b); } else assert.equal(d.r, 0, "exacto");
+    assert.equal(d.b * d.c + d.r, d.a, "dividendo = divisor · cociente + resto");
+    assert.equal(Math.floor(d.a / d.b), d.c, "cociente"); assert.equal(d.a % d.b, d.r, "resto");
+    assert.deepEqual(solucion.huecos, [d.a, "÷", d.b, d.c, d.c, ...(resto ? [d.r] : [])], "orden de los huecos: dividendo, ÷, divisor, cociente, respuesta, sobran");
+    assert.ok(palabra(d.texto, d.a) && palabra(d.texto, d.b), "el enunciado debe nombrar el dividendo y el divisor: " + d.texto);
+    assert.ok(!palabra(d.texto, d.c) || d.c === d.b, "el enunciado no debe dar el cociente: " + d.texto);
+    assert.ok(d.texto.includes(d.obj) && /^[A-ZÁÉÍÓÚ¿]/.test(d.texto) && d.texto.endsWith("?"), "texto: " + d.texto);
+    assert.ok(!/undefined|NaN|\s{2}/.test(d.texto), "texto: " + d.texto);
+    if (d.sit === "reparto") assert.equal(d.resp, d.obj, "reparto: la respuesta cuenta lo repartido");
+    else assert.ok(["cajas", "bolsas", "paquetes", "filas", "montones"].includes(d.resp) && d.texto.includes(d.resp.replace(/s$/, "")), "agrupa: " + d.texto);
+    assert.ok(d.texto.length <= 125, "enunciado demasiado largo (más de 2 líneas): " + d.texto);
+    // concordancia de género: lo que se pregunta del objeto («cuántas galletas», «cuántos sobran») lleva -as con objetos femeninos (plural en -as, o «flores») y -os con masculinos
+    const fem = /(as|ores)$/.test(d.obj), ref = [...d.texto.matchAll(new RegExp(`[Cc]uánt(os|as) (?=${d.obj}|sobran)`, "g"))].map((m) => m[1]);
+    assert.ok(ref.every((t) => t === (fem ? "as" : "os")), `concordancia con ${d.obj}: ${d.texto}`);
+    assert.ok(d.sit === "agrupa" && !resto ? true : ref.length >= 1, "falta «cuántos»: " + d.texto);
+    if (resto) assert.ok(/y cuánt(os|as) sobran\?$/.test(d.texto), "resto: falta la pregunta de lo que sobra: " + d.texto); else assert.ok(!/sobr/.test(d.texto), "exacto: no debe preguntar lo que sobra");
+  });
+}
+
 export default {
+  "problemas.division": division,
   "problemas.dospasos": dospasos,
   "problemas.dinero": dinero,
   "problemas.barras": barras,

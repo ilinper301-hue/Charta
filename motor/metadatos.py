@@ -147,6 +147,11 @@ META = {
     "multiplicar.vertical": (3, 15, "multiplicar vertical llevadas algoritmo una_cifra"),
     "multiplicar.por10": (3, 10, "multiplicar por_10 por_100 por_1000 ceros cálculo_mental"),
     "multiplicar.dobletriple": (3, 10, "doble triple mitad tercio cálculo_mental multiplicar"),
+    # 3.º · lote 4 · dividir
+    "dividir.tabla": (2, 10, "dividir tablas cociente multiplicación cálculo_mental"),
+    "dividir.vertical": (3, 15, "dividir caja algoritmo resto cociente una_cifra"),
+    "dividir.familia": (2, 10, "dividir multiplicar familia operaciones_inversas"),
+    "problemas.division": (3, 15, "dividir problemas reparto agrupamiento resto texto razonamiento"),
     "rep.romanos": (3, 10, "números romanos numeración_romana símbolos"),
     # Bloque 11 · estadística y patrones
     "estadistica.pictograma": (2, 12, "estadística pictograma datos"),

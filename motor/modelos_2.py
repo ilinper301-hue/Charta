@@ -124,6 +124,8 @@ TABLAS_3 = [{"valor": str(t), "etiqueta": f"Del {t}", "curso": 3} for t in (6, 7
 OPCIONES_2.update({
     "multiplicar.tablas": {"valores": {"tablas": TABLAS_3}},
     "multiplicar.problemas": {"valores": {"tablas": TABLAS_3}},
+    # 3.º · lote 4: el reparto con el signo ÷ (solo desde 3.º)
+    "multiplicar.reparto": {"nuevas": [{"id": "signo", "etiqueta": "Con el signo ÷ (12 ÷ 3 = 4)", "tipo": "si_no", "defecto": False, "curso": 3}]},
 })
 
 

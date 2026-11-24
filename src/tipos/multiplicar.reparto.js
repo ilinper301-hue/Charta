@@ -1,4 +1,5 @@
-// multiplicar.reparto · Reparte (2.º, lote 6, bloque 13): repartir en partes iguales, y la mitad y el tercio. Sin el signo ÷.
+// multiplicar.reparto · Reparte (2.º, lote 6, bloque 13): repartir en partes iguales, y la mitad y el tercio. Sin el signo ÷ (salvo `signo`, solo 3.º).
+// Opción `signo` (si_no, por defecto false; 3.º): repartir → la línea final es «12 ÷ 3 = ☐»; mitad y tercio → «8 ÷ 2 = ☐» y «9 ÷ 3 = ☐». Los datos y la solución no cambian; sin `signo` la ficha sale idéntica.
 // modo None = «Repartir en partes iguales»:
 //   datos:    { texto, k, q, obj }   (reparte k·q objetos entre k niños: a cada uno le tocan q; k 2–5, q 2–6, reparto exacto)
 //   solucion: { huecos: [q] }  · en modo solución se dibujan además en rojo q puntos dentro de cada plato.
@@ -11,6 +12,7 @@ import { registrar } from "../nucleo/tipos.js";
 import { TOP, T, B, INK } from "../render/papel.js";
 import { partir, OBJETOS } from "./_problemas.js";
 import { puntosFilas, puntoRojo } from "./_multiplicar.js";
+import { DIV } from "./_dividir.js";
 
 const REPARTIDOS = ["niños", "amigos", "primos", "hermanos"];
 const MITADES = Array.from({ length: 10 }, (_, i) => 2 * (i + 1));
@@ -27,7 +29,7 @@ export default registrar({
       const orden = [];
       for (let i = 0; i < Math.max(ms.length, ts.length); i++) { if (ms[i]) orden.push(ms[i]); if (ts[i]) orden.push(ts[i]); }
       return {
-        enunciado: "Mira los puntos y escribe la mitad o el tercio.",
+        enunciado: params.signo ? "Mira los puntos y escribe la división." : "Mira los puntos y escribe la mitad o el tercio.",
         ejercicios: orden.map(([kind, n]) => ({ datos: { kind, n }, solucion: { huecos: [kind === "mitad" ? n / 2 : n / 3] } })),
       };
     }
@@ -39,7 +41,7 @@ export default registrar({
       const texto = `Reparte ${k * q} ${obj} entre ${k} ${pl}. ¿${g === "f" ? "Cuántas" : "Cuántos"} ${obj} le tocan a cada uno?`;
       return { datos: { texto, k, q, obj }, solucion: { huecos: [q] } };
     });
-    return { enunciado: "Dibuja el reparto en los platos y escribe cuántos le tocan a cada uno.", ejercicios };
+    return { enunciado: params.signo ? "Dibuja el reparto en los platos y escribe la división." : "Dibuja el reparto en los platos y escribe cuántos le tocan a cada uno.", ejercicios };
   },
   dibujar(p, act) {
     if (act.params.modo === "mitad") return dibujarMitad(p, act);
@@ -59,7 +61,9 @@ export default registrar({
         p.circle(cx, cy, pr - 5, { lw: 0.8, fill: null, stroke: 0.6 });
         if (p.solucion) puntosFilas(p, cx - 18, cy - 18, 36, 36, q, q > 3 ? 3 : 2, 0, 11, (a, b) => puntoRojo(p, a, b));
       }
-      p.linea(x + 20, y + 8, cw - 40, 40, [T("A cada uno le tocan", 14.5, "PR"), B(52, 34, e.solucion.huecos[0])], 18);
+      p.linea(x + 20, y + 8, cw - 40, 40, act.params.signo
+        ? [T(`${k * q} ${DIV} ${k} =`, 20, "PB"), B(52, 34, e.solucion.huecos[0])]
+        : [T("A cada uno le tocan", 14.5, "PR"), B(52, 34, e.solucion.huecos[0])], 18);
     }));
   },
 });
@@ -73,7 +77,7 @@ function dibujarMitad(p, act) {
     const porFila = n > 10 ? 10 : n, filas = Math.ceil(n / porFila), bw = 10 * 17 + 20, bh = 74;
     p.rrect(x + 44, y + (ch - bh) / 2 - 2, bw, bh, 10, { lw: 1.2, fill: 1, stroke: 0.55 });
     puntosFilas(p, x + 44, y + (ch - bh) / 2 - 2, bw, bh, n, porFila, 5.5, 17);
-    const texto = kind === "mitad" ? "La mitad de" : "Un tercio de";
-    p.linea(x + 44 + bw + 10, y + (ch - 40) / 2 - 2, cw - bw - 44 - 18, 40, [T(`${texto} ${n} es`, 18, "PB"), B(52, 36, e.solucion.huecos[0])], 10);
+    const texto = act.params.signo ? `${n} ${DIV} ${kind === "mitad" ? 2 : 3} =` : `${kind === "mitad" ? "La mitad de" : "Un tercio de"} ${n} es`;
+    p.linea(x + 44 + bw + 10, y + (ch - 40) / 2 - 2, cw - bw - 44 - 18, 40, [T(texto, 18, "PB"), B(52, 36, e.solucion.huecos[0])], 10);
   }));
 }

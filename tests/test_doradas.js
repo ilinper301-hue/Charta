@@ -95,6 +95,16 @@ const CASOS = [
   { nombre: "3.º más ejercicios en media: doble/triple y mitad/tercio", semilla: 7, opciones: { cantidad: "mas", actividades: [{ tipo: "multiplicar.dobletriple", curso: 3 }, { tipo: "multiplicar.dobletriple", curso: 3, params: { modo: "mitad" } }] } },
   { nombre: "3.º tablas del 6 al 9 y todas", semilla: 7, opciones: { actividades: [{ tipo: "multiplicar.tablas", curso: 3, params: { tablas: "7" } }, { tipo: "multiplicar.tablas", curso: 3, params: { tablas: "2a10", modo: "hueco" } }] } },
   { nombre: "3.º problemas de multiplicar con la tabla del 8", semilla: 7, opciones: { actividades: [{ tipo: "multiplicar.problemas", curso: 3, params: { tablas: "8" } }] } },
+  // 3.º · lote 4 (dividir): la caja, de la tabla, la familia, problemas y el reparto con ÷
+  { nombre: "3.º divisiones con la caja (2 cifras, exactas)", semilla: 7, opciones: { actividades: [{ tipo: "dividir.vertical", curso: 3 }] } },
+  { nombre: "3.º divisiones con la caja (3 cifras, mezcla, prueba)", semilla: 7, opciones: { actividades: [{ tipo: "dividir.vertical", curso: 3, params: { cifras: 3, nivel: "mezcla", prueba: true } }] } },
+  { nombre: "3.º caja con resto y divisiones de la tabla en media", semilla: 7, opciones: { actividades: [{ tipo: "dividir.vertical", curso: 3, params: { nivel: "resto" } }, { tipo: "dividir.tabla", curso: 3, params: { modo: "porque" } }] } },
+  { nombre: "3.º divisiones de la tabla", semilla: 7, opciones: { actividades: [{ tipo: "dividir.tabla", curso: 3 }] } },
+  { nombre: "3.º más ejercicios: divisiones de la tabla con hueco", semilla: 7, opciones: { cantidad: "mas", actividades: [{ tipo: "dividir.tabla", curso: 3, params: { modo: "hueco", tablas: "6a9" } }] } },
+  { nombre: "3.º familia de la multiplicación y la división", semilla: 7, opciones: { actividades: [{ tipo: "dividir.familia", curso: 3 }, { tipo: "dividir.familia", curso: 3, params: { modo: "libre" } }] } },
+  { nombre: "3.º problemas de dividir", semilla: 7, opciones: { actividades: [{ tipo: "problemas.division", curso: 3 }] } },
+  { nombre: "3.º problemas de dividir con resto", semilla: 7, opciones: { actividades: [{ tipo: "problemas.division", curso: 3, params: { modo: "resto" } }] } },
+  { nombre: "3.º reparto con el signo ÷", semilla: 7, opciones: { actividades: [{ tipo: "multiplicar.reparto", curso: 3, params: { signo: true } }, { tipo: "multiplicar.reparto", curso: 3, params: { modo: "mitad", signo: true } }] } },
   // Espacio en la ficha · paso 3, lote 5 (multiplicar y medida)
   ...["multiplicar.grupos", "multiplicar.tablas", "medida.capacidad", "medida.masa", "medida.precios"].map((t) => ({ nombre: "más ejercicios: " + t, semilla: 4, opciones: { cantidad: "mas", actividades: [{ tipo: t }] } })),
   { nombre: "más ejercicios: 2.º regla, ¿m o cm?, equivalencias, horas y días", semilla: 4, opciones: { cantidad: "mas", paginas: [{ actividades: [{ tipo: "medida.longitud", curso: 2, params: { modo: "regla" } }] }, { actividades: [{ tipo: "medida.longitud", curso: 2, params: { modo: "mcm" } }] }, { actividades: [{ tipo: "medida.tiempo", curso: 2, params: { modo: "equivalencias" } }] }, { actividades: [{ tipo: "medida.tiempo", curso: 2, params: { modo: "horas" } }] }, { actividades: [{ tipo: "medida.tiempo" }] }] } },

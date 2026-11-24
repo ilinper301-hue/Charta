@@ -131,7 +131,9 @@ export function dibujarProblemas(p, act) {
     // «Operación:  [a] [+] [b] = [resultado]»
     p.linea(x + 20, y + 56, cw - 40, hb + 4, [T("Operación:", 13, "PR"), B(46, hb, h[0]), B(36, hb, h[1]), B(46, hb, h[2]), T("=", 19), B(52, hb, h[3])], 10);
     // «Respuesta:  [resultado] manzanas»
-    p.linea(x + 20, y + 8, cw - 40, hb + 4, [T("Respuesta:", 13, "PR"), B(52, hb, h[4]), T(d.obj, 13, "PR")], 10);
+    // división con resto (problemas.division): un hueco más → «Sobran ☐»; la respuesta puede contar otra cosa que `obj` (cajas, bolsas…)
+    p.linea(x + 20, y + 8, cw - 40, hb + 4, [T("Respuesta:", 13, "PR"), B(52, hb, h[4]), T((d.resp ?? d.obj) + (h.length > 5 ? "." : ""), 13, "PR"),
+      ...(h.length > 5 ? [T("Sobran", 13, "PR"), B(40, hb, h[5])] : [])], 10);
   }));
 }
 

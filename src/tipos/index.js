@@ -11,6 +11,7 @@ import "./familia.problemas.js";
 import "./familia.trucos.js";
 import "./familia.geometria.js";
 import "./familia.multiplicar.js";
+import "./familia.dividir.js";
 import "./familia.medida.js";
 import "./familia.estadistica.js";
 import "./familia.letra.js";

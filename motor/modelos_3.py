@@ -9,7 +9,7 @@ from modelos import M, op, AMBOS, COMPLETA
 
 CURSO = 3
 NOMBRE = "3.º de Primaria"
-BLOQUES_3 = {}   # Dividir, Fracciones y Pensamiento computacional llegan en sus lotes
+BLOQUES_3 = {14: "Dividir"}   # Fracciones y Pensamiento computacional llegan en sus lotes
 RANGOS_3 = (1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 9999)
 
 
@@ -55,6 +55,24 @@ def _n3(bloque, familia, clave, nombre, descripcion, opciones, titulo, color, ra
 
 
 MODELOS_3 = [
+    # Lote 4 · dividir (bloque 14; sin rango) y problemas de dividir (bloque 8)
+    _n3(14, "dividir", "tabla", "Divisiones de la tabla", "Dividir con las tablas de multiplicar (24 ÷ 6 = 4 porque 4 × 6 = 24).",
+        [op("tablas", "Divisor", [(None, "Del 2 al 10"), ("2a5", "Del 2 al 5"), ("6a9", "Del 6 al 9")]),
+         op("modo", "Tarea", [(None, "El cociente (24 ÷ 6 = ☐)"), ("porque", "Con su multiplicación (porque ☐ × 6 = 24)"), ("hueco", "El número que falta (24 ÷ ☐ = 4)")])],
+        "DIVISIONES DE LA TABLA", "amarillo", tam=AMBOS),
+    _n3(14, "dividir", "vertical", "Divisiones con la caja", "Dividir un número de 2 o 3 cifras entre una cifra con la caja, exactas o con resto.",
+        [op("cifras", "Cifras del dividendo", [(None, "Dos cifras (84 ÷ 4)"), (3, "Tres cifras (756 ÷ 6)")]),
+         op("nivel", "Divisiones", [(None, "Exactas"), ("resto", "Con resto"), ("mezcla", "Mezcla")]),
+         {"id": "prueba", "etiqueta": "Con la prueba (cociente × divisor + resto = dividendo)", "tipo": "si_no", "defecto": False}],
+        "DIVISIONES CON LA CAJA", "azul", tam=AMBOS),
+    _n3(14, "dividir", "familia", "La familia de la multiplicación y la división", "Con tres números, las dos multiplicaciones y las dos divisiones (3 × 4, 4 × 3, 12 ÷ 3, 12 ÷ 4).",
+        [op("tablas", "Tablas", [(None, "Del 2 al 10"), ("2a5", "Del 2 al 5"), ("6a9", "Del 6 al 9")]),
+         op("modo", "Tarea", [(None, "Completa las cuatro operaciones"), ("libre", "Escribe las cuatro operaciones")])],
+        "LA FAMILIA DE LA MULTIPLICACIÓN Y LA DIVISIÓN", "verde", tam=AMBOS),
+    _n3(8, "problemas", "division", "Problemas de dividir", "Problemas de repartir y de agrupar, también con lo que sobra.",
+        [op("modo", "Problemas", [(None, "Repartir y agrupar"), ("reparto", "Solo repartir"), ("agrupa", "Solo agrupar"), ("resto", "¿Cuántos sobran? (con resto)")]),
+         op("tablas", "Divisor", [(None, "Del 2 al 10"), ("2a5", "Del 2 al 5"), ("6a9", "Del 6 al 9")])],
+        "PROBLEMAS DE DIVIDIR", "rosa", tam=AMBOS),
     # Lote 3 · multiplicar (bloque 13; sin rango)
     _n3(13, "multiplicar", "vertical", "Multiplicaciones en vertical", "Multiplicar un número de 2 o 3 cifras por una cifra, con o sin llevadas.",
         [op("cifras", "Cifras del número", [(None, "Dos cifras"), (3, "Tres cifras")]),

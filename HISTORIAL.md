@@ -262,3 +262,14 @@ Sueltas: `conteo.tabla` v2 (R ≤ 10: `NTAB` = 5 tablas, un ejercicio cada una),
 - 178 modelos, 335 doradas (las 324 anteriores iguales), `test:rapido` en verde. `medir_letra.js`: 0 tipos < 9 pt.
 - **Límites**: `multiplicar.por10` con ×1000 tiene solo 8 números (2–9): en la mezcla, con «Más ejercicios», se reparte entre los otros factores; `multiplicar.vertical` «sin llevadas» de 2 cifras solo tiene 29 operaciones (b = 2, 3 y 4).
 
+## Matemáticas 3.º · Lote 4: dividir (24-11-2026)
+- Bloque nuevo 14 «Dividir» (`BLOQUES_3`), familia `dividir` (`familia.dividir.js`, `_dividir.js`: `DIV` = «÷», `divisoresDe(params)`; invariantes en `tests/inv/dividir.js`).
+- ✨ `dividir.vertical` · «Divisiones con la caja» (Opus): caja española (divisor arriba a la derecha, cociente bajo la raya). Dividendo de 2 o 3 cifras (`cifras`), divisor 2–9; `nivel` exactas · con resto · mezcla (mitad y mitad); `prueba` (si_no: «☐ × ☐ + ☐ = ☐» al pie). Cociente ≥ 2 y sin ceros; por turnos, la primera cifra vale (cociente de n cifras) o no (se toman dos). `pasosCaja(D, d)` da los restos parciales con la cifra bajada («04»), en blanco en el papel y en rojo en la solución; el resto final va en su hueco bajo la última cifra. Huecos: [cociente, resto] (+ [c, d, r, D] con prueba). Rejilla de 3 × 4 (12; media 6); la caja crece igual en todas las tarjetas (×0,8–×1,4) con el sitio que deja la más larga.
+- ✨ `dividir.tabla` (Sonnet): `tablas` (divisor 2–10 · 2a5 · 6a9) y `modo` (cociente · «porque ☐ × d = D» · divisor que falta); cociente 2–10, exactas, sin repetir; 2 columnas con «Cantidad» (16/8; «porque» 12/6).
+- ✨ `dividir.familia` (Sonnet): tres números (a < b, 2–10); «Completa» (6/4: cuatro filas con un hueco de solución única) o «libre» (4/2: los tres números arriba y cuatro filas en blanco; solución canónica a × b, b × a, c ÷ a, c ÷ b).
+- ✨ `problemas.division` (Sonnet, bloque 8): repartir y agrupar alternados, solo uno de los dos, o con resto («Sobran ☐»; `dibujarProblemas` admite un sexto hueco y `datos.resp`). 4/2, sin repetir plantilla, nombre ni objeto.
+- 🔧 `multiplicar.reparto`: opción «Con el signo ÷» (`signo`, `curso: 3` en `OPCIONES_2`): «12 ÷ 3 = ☐», «8 ÷ 2 = ☐»; sin ella, igual que antes (versión 1).
+- `tools/ver_tipo.js` acepta `curso` dentro del JSON de parámetros.
+- 182 modelos, 348 doradas (las 335 anteriores iguales), `npm test` y `test_motor.py` en verde; `medir_letra.js`: 0 < 9 pt en los tipos nuevos.
+- **Límites**: caja de 3 cifras con prueba en media página, justa (escala 0,8); `dividir.tabla` «porque» con la fila apretada; en `dividir.familia` «libre» queda algo de blanco abajo; sin ceros en el cociente (612 ÷ 6 no sale).
+

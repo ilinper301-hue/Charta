@@ -78,7 +78,11 @@ export default {
     }
   },
   "multiplicar.reparto"(act, tam) {
-    const es = act.ejercicios, media = tam === "media";
+    const es = act.ejercicios, media = tam === "media", signo = act.params.signo === true;   // 3.º: con el signo ÷ la línea final es «a ÷ k = ☐» (los datos y la solución no cambian)
+    assert.ok(act.params.signo == null || act.params.signo === false || signo, "signo: sí/no");
+    assert.ok(!/[÷]/.test(act.enunciado ?? ""), "el enunciado no lleva el signo");
+    if (signo) assert.ok(/división/.test(act.enunciado ?? ""), "con signo, el enunciado habla de la división: " + act.enunciado);
+    else assert.ok(!/división/.test(act.enunciado ?? ""), "sin signo, el enunciado de siempre: " + act.enunciado);
     if (act.params.modo === "mitad") {
       cuantos(es, media ? 3 : 6);
       unicos(es, (e) => e.datos.kind + e.datos.n, "repetidos");

@@ -2728,6 +2728,758 @@
    "b4cd6512fdb953ea"
   ]
  },
+ "dividir.familia": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "La familia de la multiplicación y la división",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "dividir.familia",
+       "tipoVersion": 1,
+       "params": {
+        "tablas": null,
+        "modo": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Completa las cuatro operaciones de cada familia.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "a": 2,
+          "b": 6,
+          "c": 12,
+          "f": [
+           [
+            2,
+            "×",
+            6,
+            null
+           ],
+           [
+            6,
+            "×",
+            null,
+            12
+           ],
+           [
+            12,
+            "÷",
+            2,
+            null
+           ],
+           [
+            12,
+            "÷",
+            null,
+            2
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           12,
+           2,
+           6,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "a": 5,
+          "b": 7,
+          "c": 35,
+          "f": [
+           [
+            5,
+            "×",
+            7,
+            null
+           ],
+           [
+            5,
+            "×",
+            null,
+            35
+           ],
+           [
+            35,
+            "÷",
+            7,
+            null
+           ],
+           [
+            35,
+            "÷",
+            null,
+            7
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           35,
+           7,
+           5,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "a": 5,
+          "b": 6,
+          "c": 30,
+          "f": [
+           [
+            5,
+            "×",
+            6,
+            null
+           ],
+           [
+            5,
+            "×",
+            null,
+            30
+           ],
+           [
+            30,
+            "÷",
+            6,
+            null
+           ],
+           [
+            30,
+            "÷",
+            null,
+            6
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           30,
+           6,
+           5,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": 5,
+          "b": 9,
+          "c": 45,
+          "f": [
+           [
+            5,
+            "×",
+            9,
+            null
+           ],
+           [
+            5,
+            "×",
+            null,
+            45
+           ],
+           [
+            45,
+            "÷",
+            9,
+            null
+           ],
+           [
+            45,
+            "÷",
+            null,
+            9
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           45,
+           9,
+           5,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "a": 7,
+          "b": 10,
+          "c": 70,
+          "f": [
+           [
+            10,
+            "×",
+            7,
+            null
+           ],
+           [
+            7,
+            "×",
+            null,
+            70
+           ],
+           [
+            70,
+            "÷",
+            10,
+            null
+           ],
+           [
+            70,
+            "÷",
+            null,
+            10
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           70,
+           10,
+           7,
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "a": 2,
+          "b": 8,
+          "c": 16,
+          "f": [
+           [
+            8,
+            "×",
+            2,
+            null
+           ],
+           [
+            8,
+            "×",
+            null,
+            16
+           ],
+           [
+            16,
+            "÷",
+            2,
+            null
+           ],
+           [
+            16,
+            "÷",
+            null,
+            8
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           16,
+           2,
+           8,
+           2
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "c11c86e2954b03b2"
+  ],
+  "svgSolucion": [
+   "fcfc884f84eaa765"
+  ]
+ },
+ "dividir.tabla": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Divisiones de la tabla",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "dividir.tabla",
+       "tipoVersion": 1,
+       "params": {
+        "tablas": null,
+        "modo": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Divide y escribe el resultado en el cuadro gris.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "d": 8,
+          "c": 5,
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "d": 4,
+          "c": 10,
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "d": 6,
+          "c": 5,
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "d": 8,
+          "c": 7,
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "d": 10,
+          "c": 7,
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "d": 5,
+          "c": 7,
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "d": 6,
+          "c": 9,
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "d": 9,
+          "c": 2,
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "d": 3,
+          "c": 5,
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "d": 7,
+          "c": 10,
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "d": 9,
+          "c": 9,
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "d": 4,
+          "c": 4,
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "d": 2,
+          "c": 3,
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "d": 10,
+          "c": 4,
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "d": 2,
+          "c": 2,
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "d": 3,
+          "c": 7,
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "b4c0a52adf445f21"
+  ],
+  "svgSolucion": [
+   "5dbaec953950d2b8"
+  ]
+ },
+ "dividir.vertical": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Divisiones con la caja",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "dividir.vertical",
+       "tipoVersion": 1,
+       "params": {
+        "cifras": null,
+        "nivel": null,
+        "prueba": false,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Divide con la caja y escribe el cociente y el resto.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "D": 28,
+          "d": 4
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "D": 27,
+          "d": 3
+         },
+         "solucion": {
+          "huecos": [
+           9,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "D": 51,
+          "d": 3
+         },
+         "solucion": {
+          "huecos": [
+           17,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "D": 20,
+          "d": 4
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "D": 74,
+          "d": 2
+         },
+         "solucion": {
+          "huecos": [
+           37,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "D": 35,
+          "d": 5
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "D": 52,
+          "d": 4
+         },
+         "solucion": {
+          "huecos": [
+           13,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "D": 30,
+          "d": 2
+         },
+         "solucion": {
+          "huecos": [
+           15,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "D": 24,
+          "d": 6
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "D": 99,
+          "d": 3
+         },
+         "solucion": {
+          "huecos": [
+           33,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "D": 54,
+          "d": 2
+         },
+         "solucion": {
+          "huecos": [
+           27,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "D": 54,
+          "d": 9
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           0
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "819cd2025989c51b"
+  ],
+  "svgSolucion": [
+   "84909bf01b0abe61"
+  ]
+ },
  "escritura.dictado": {
   "ficha": {
    "schemaVersion": 1,
@@ -22097,6 +22849,147 @@
   ],
   "svgSolucion": [
    "86a8a7cff7cd9798"
+  ]
+ },
+ "problemas.division": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Problemas de dividir",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "problemas.division",
+       "tipoVersion": 1,
+       "params": {
+        "modo": null,
+        "tablas": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Lee, escribe la operación y contesta.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "texto": "Marta reparte 24 bombones en partes iguales entre 4 amigos. ¿Cuántos bombones recibe cada amigo?",
+          "a": 24,
+          "b": 4,
+          "c": 6,
+          "r": 0,
+          "op": "÷",
+          "obj": "bombones",
+          "resp": "bombones",
+          "sit": "reparto",
+          "plan": "partes"
+         },
+         "solucion": {
+          "huecos": [
+           24,
+           "÷",
+           4,
+           6,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "texto": "Hay 54 lápices y en cada caja caben 6. ¿Cuántas cajas se llenan?",
+          "a": 54,
+          "b": 6,
+          "c": 9,
+          "r": 0,
+          "op": "÷",
+          "obj": "lápices",
+          "resp": "cajas",
+          "sit": "agrupa",
+          "plan": "cajas"
+         },
+         "solucion": {
+          "huecos": [
+           54,
+           "÷",
+           6,
+           9,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "texto": "Reparte 8 cartas entre 2 amigos. ¿Cuántas cartas le tocan a cada uno?",
+          "a": 8,
+          "b": 2,
+          "c": 4,
+          "r": 0,
+          "op": "÷",
+          "obj": "cartas",
+          "resp": "cartas",
+          "sit": "reparto",
+          "plan": "reparte"
+         },
+         "solucion": {
+          "huecos": [
+           8,
+           "÷",
+           2,
+           4,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "texto": "Nico guarda 54 botones en bolsas de 9. ¿Cuántas bolsas llena?",
+          "a": 54,
+          "b": 9,
+          "c": 6,
+          "r": 0,
+          "op": "÷",
+          "obj": "botones",
+          "resp": "bolsas",
+          "sit": "agrupa",
+          "plan": "bolsas"
+         },
+         "solucion": {
+          "huecos": [
+           54,
+           "÷",
+           9,
+           6,
+           6
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "b94da71a54cfe112"
+  ],
+  "svgSolucion": [
+   "55ae1bd37f54ef65"
   ]
  },
  "problemas.dospasos": {
@@ -81715,6 +82608,1955 @@
   ],
   "svgSolucion": [
    "5655de0ce978dee9"
+  ]
+ },
+ "3.º divisiones con la caja (2 cifras, exactas)": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Divisiones con la caja",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "dividir.vertical",
+       "tipoVersion": 1,
+       "params": {
+        "cifras": null,
+        "nivel": null,
+        "prueba": false,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Divide con la caja y escribe el cociente y el resto.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "D": 56,
+          "d": 8
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "D": 10,
+          "d": 2
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "D": 24,
+          "d": 4
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "D": 96,
+          "d": 8
+         },
+         "solucion": {
+          "huecos": [
+           12,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "D": 51,
+          "d": 3
+         },
+         "solucion": {
+          "huecos": [
+           17,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "D": 48,
+          "d": 3
+         },
+         "solucion": {
+          "huecos": [
+           16,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "D": 15,
+          "d": 5
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "D": 39,
+          "d": 3
+         },
+         "solucion": {
+          "huecos": [
+           13,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "D": 60,
+          "d": 5
+         },
+         "solucion": {
+          "huecos": [
+           12,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "D": 12,
+          "d": 2
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "D": 98,
+          "d": 7
+         },
+         "solucion": {
+          "huecos": [
+           14,
+           0
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "D": 10,
+          "d": 5
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           0
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "4d5db140ef3c8fec"
+  ],
+  "svgSolucion": [
+   "1c4a9811f908a1ab"
+  ]
+ },
+ "3.º divisiones con la caja (3 cifras, mezcla, prueba)": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Divisiones con la caja",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "dividir.vertical",
+       "tipoVersion": 1,
+       "params": {
+        "cifras": 3,
+        "nivel": "mezcla",
+        "prueba": true,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Divide con la caja, escribe el cociente y el resto\ny haz la prueba.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "D": 618,
+          "d": 8
+         },
+         "solucion": {
+          "huecos": [
+           77,
+           2,
+           77,
+           8,
+           2,
+           618
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "D": 104,
+          "d": 7
+         },
+         "solucion": {
+          "huecos": [
+           14,
+           6,
+           14,
+           7,
+           6,
+           104
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "D": 703,
+          "d": 4
+         },
+         "solucion": {
+          "huecos": [
+           175,
+           3,
+           175,
+           4,
+           3,
+           703
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "D": 736,
+          "d": 8
+         },
+         "solucion": {
+          "huecos": [
+           92,
+           0,
+           92,
+           8,
+           0,
+           736
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "D": 508,
+          "d": 2
+         },
+         "solucion": {
+          "huecos": [
+           254,
+           0,
+           254,
+           2,
+           0,
+           508
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "D": 488,
+          "d": 4
+         },
+         "solucion": {
+          "huecos": [
+           122,
+           0,
+           122,
+           4,
+           0,
+           488
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "D": 523,
+          "d": 3
+         },
+         "solucion": {
+          "huecos": [
+           174,
+           1,
+           174,
+           3,
+           1,
+           523
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "D": 405,
+          "d": 3
+         },
+         "solucion": {
+          "huecos": [
+           135,
+           0,
+           135,
+           3,
+           0,
+           405
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "D": 225,
+          "d": 9
+         },
+         "solucion": {
+          "huecos": [
+           25,
+           0,
+           25,
+           9,
+           0,
+           225
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "D": 109,
+          "d": 6
+         },
+         "solucion": {
+          "huecos": [
+           18,
+           1,
+           18,
+           6,
+           1,
+           109
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "D": 776,
+          "d": 8
+         },
+         "solucion": {
+          "huecos": [
+           97,
+           0,
+           97,
+           8,
+           0,
+           776
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "D": 225,
+          "d": 2
+         },
+         "solucion": {
+          "huecos": [
+           112,
+           1,
+           112,
+           2,
+           1,
+           225
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "0f8e7e64f39f0bce"
+  ],
+  "svgSolucion": [
+   "38279954ac80644d"
+  ]
+ },
+ "3.º caja con resto y divisiones de la tabla en media": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Divisiones con la caja y divisiones de la tabla",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "dividir.vertical",
+       "tipoVersion": 1,
+       "params": {
+        "cifras": null,
+        "nivel": "resto",
+        "prueba": false,
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Divide con la caja y escribe el cociente y el resto.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "D": 21,
+          "d": 9
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "D": 31,
+          "d": 7
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "D": 11,
+          "d": 2
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "D": 64,
+          "d": 5
+         },
+         "solucion": {
+          "huecos": [
+           12,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "D": 57,
+          "d": 5
+         },
+         "solucion": {
+          "huecos": [
+           11,
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "D": 99,
+          "d": 2
+         },
+         "solucion": {
+          "huecos": [
+           49,
+           1
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "dividir.tabla",
+       "tipoVersion": 1,
+       "params": {
+        "tablas": null,
+        "modo": "porque",
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "amarillo",
+       "enunciado": "Divide y comprueba con la multiplicación.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "d": 4,
+          "c": 3,
+          "modo": "porque"
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           3
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "d": 2,
+          "c": 7,
+          "modo": "porque"
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           7
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "d": 6,
+          "c": 5,
+          "modo": "porque"
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "d": 9,
+          "c": 9,
+          "modo": "porque"
+         },
+         "solucion": {
+          "huecos": [
+           9,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "d": 8,
+          "c": 8,
+          "modo": "porque"
+         },
+         "solucion": {
+          "huecos": [
+           8,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a2e6",
+         "datos": {
+          "d": 7,
+          "c": 5,
+          "modo": "porque"
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           5
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "8c2f5edc80725a1b"
+  ],
+  "svgSolucion": [
+   "ae262dd06a2e2ddc"
+  ]
+ },
+ "3.º divisiones de la tabla": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Divisiones de la tabla",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "dividir.tabla",
+       "tipoVersion": 1,
+       "params": {
+        "tablas": null,
+        "modo": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Divide y escribe el resultado en el cuadro gris.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "d": 10,
+          "c": 9,
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "d": 4,
+          "c": 3,
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "d": 2,
+          "c": 10,
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "d": 8,
+          "c": 2,
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "d": 3,
+          "c": 2,
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "d": 8,
+          "c": 3,
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "d": 9,
+          "c": 8,
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "d": 9,
+          "c": 9,
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "d": 10,
+          "c": 6,
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "d": 7,
+          "c": 5,
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "d": 6,
+          "c": 4,
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "d": 4,
+          "c": 2,
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "d": 2,
+          "c": 9,
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "d": 7,
+          "c": 8,
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "d": 6,
+          "c": 8,
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "d": 5,
+          "c": 6,
+          "modo": null
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "775294762c614516"
+  ],
+  "svgSolucion": [
+   "6f8bdc6e1b64804a"
+  ]
+ },
+ "3.º más ejercicios: divisiones de la tabla con hueco": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Divisiones de la tabla",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "dividir.tabla",
+       "tipoVersion": 1,
+       "params": {
+        "tablas": "6a9",
+        "modo": "hueco",
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Escribe el número que falta.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "d": 7,
+          "c": 3,
+          "modo": "hueco"
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "d": 6,
+          "c": 7,
+          "modo": "hueco"
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "d": 8,
+          "c": 8,
+          "modo": "hueco"
+         },
+         "solucion": {
+          "huecos": [
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "d": 7,
+          "c": 10,
+          "modo": "hueco"
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "d": 8,
+          "c": 3,
+          "modo": "hueco"
+         },
+         "solucion": {
+          "huecos": [
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "d": 9,
+          "c": 4,
+          "modo": "hueco"
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "d": 8,
+          "c": 5,
+          "modo": "hueco"
+         },
+         "solucion": {
+          "huecos": [
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "d": 9,
+          "c": 10,
+          "modo": "hueco"
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "d": 6,
+          "c": 8,
+          "modo": "hueco"
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "d": 7,
+          "c": 4,
+          "modo": "hueco"
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "d": 9,
+          "c": 3,
+          "modo": "hueco"
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "d": 9,
+          "c": 2,
+          "modo": "hueco"
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "d": 8,
+          "c": 9,
+          "modo": "hueco"
+         },
+         "solucion": {
+          "huecos": [
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "d": 7,
+          "c": 7,
+          "modo": "hueco"
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "d": 6,
+          "c": 3,
+          "modo": "hueco"
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "d": 9,
+          "c": 9,
+          "modo": "hueco"
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e17",
+         "datos": {
+          "d": 7,
+          "c": 5,
+          "modo": "hueco"
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e18",
+         "datos": {
+          "d": 6,
+          "c": 2,
+          "modo": "hueco"
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e19",
+         "datos": {
+          "d": 9,
+          "c": 6,
+          "modo": "hueco"
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e20",
+         "datos": {
+          "d": 8,
+          "c": 6,
+          "modo": "hueco"
+         },
+         "solucion": {
+          "huecos": [
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e21",
+         "datos": {
+          "d": 6,
+          "c": 6,
+          "modo": "hueco"
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e22",
+         "datos": {
+          "d": 8,
+          "c": 7,
+          "modo": "hueco"
+         },
+         "solucion": {
+          "huecos": [
+           8
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "849d12214164220d"
+  ],
+  "svgSolucion": [
+   "24b4ded3f44d91ca"
+  ]
+ },
+ "3.º familia de la multiplicación y la división": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "La familia de la multiplicación y la división",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "dividir.familia",
+       "tipoVersion": 1,
+       "params": {
+        "tablas": null,
+        "modo": null,
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "verde",
+       "enunciado": "Completa las cuatro operaciones de cada familia.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "a": 6,
+          "b": 10,
+          "c": 60,
+          "f": [
+           [
+            10,
+            "×",
+            6,
+            null
+           ],
+           [
+            10,
+            "×",
+            null,
+            60
+           ],
+           [
+            60,
+            "÷",
+            10,
+            null
+           ],
+           [
+            60,
+            "÷",
+            null,
+            10
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           60,
+           6,
+           6,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "a": 4,
+          "b": 6,
+          "c": 24,
+          "f": [
+           [
+            4,
+            "×",
+            6,
+            null
+           ],
+           [
+            6,
+            "×",
+            null,
+            24
+           ],
+           [
+            24,
+            "÷",
+            6,
+            null
+           ],
+           [
+            24,
+            "÷",
+            null,
+            6
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           24,
+           4,
+           4,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "a": 2,
+          "b": 5,
+          "c": 10,
+          "f": [
+           [
+            2,
+            "×",
+            5,
+            null
+           ],
+           [
+            2,
+            "×",
+            null,
+            10
+           ],
+           [
+            10,
+            "÷",
+            2,
+            null
+           ],
+           [
+            10,
+            "÷",
+            null,
+            2
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           10,
+           5,
+           5,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "a": 7,
+          "b": 9,
+          "c": 63,
+          "f": [
+           [
+            7,
+            "×",
+            9,
+            null
+           ],
+           [
+            9,
+            "×",
+            null,
+            63
+           ],
+           [
+            63,
+            "÷",
+            9,
+            null
+           ],
+           [
+            63,
+            "÷",
+            null,
+            7
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           63,
+           7,
+           7,
+           9
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "dividir.familia",
+       "tipoVersion": 1,
+       "params": {
+        "tablas": null,
+        "modo": "libre",
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "amarillo",
+       "enunciado": "Con los tres números, escribe las dos multiplicaciones y las dos divisiones.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "a": 5,
+          "b": 8,
+          "c": 40
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           8,
+           40,
+           8,
+           5,
+           40,
+           40,
+           5,
+           8,
+           40,
+           8,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "a": 4,
+          "b": 5,
+          "c": 20
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           5,
+           20,
+           5,
+           4,
+           20,
+           20,
+           4,
+           5,
+           20,
+           5,
+           4
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "a6b78714807abd32"
+  ],
+  "svgSolucion": [
+   "76b3742a7865331b"
+  ]
+ },
+ "3.º problemas de dividir": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Problemas de dividir",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "problemas.division",
+       "tipoVersion": 1,
+       "params": {
+        "modo": null,
+        "tablas": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Lee, escribe la operación y contesta.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "texto": "En una bolsa hay 8 globos. Mario los reparte entre 4 primos. ¿Cuántos globos le tocan a cada uno?",
+          "a": 8,
+          "b": 4,
+          "c": 2,
+          "r": 0,
+          "op": "÷",
+          "obj": "globos",
+          "resp": "globos",
+          "sit": "reparto",
+          "plan": "bolsa"
+         },
+         "solucion": {
+          "huecos": [
+           8,
+           "÷",
+           4,
+           2,
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "texto": "Con 36 botones se hacen montones de 9. ¿Cuántos montones se completan?",
+          "a": 36,
+          "b": 9,
+          "c": 4,
+          "r": 0,
+          "op": "÷",
+          "obj": "botones",
+          "resp": "montones",
+          "sit": "agrupa",
+          "plan": "montones"
+         },
+         "solucion": {
+          "huecos": [
+           36,
+           "÷",
+           9,
+           4,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "texto": "Entre 6 hermanos se reparten 24 pelotas en partes iguales. ¿Cuántas pelotas recibe cada hermano?",
+          "a": 24,
+          "b": 6,
+          "c": 4,
+          "r": 0,
+          "op": "÷",
+          "obj": "pelotas",
+          "resp": "pelotas",
+          "sit": "reparto",
+          "plan": "hermanos"
+         },
+         "solucion": {
+          "huecos": [
+           24,
+           "÷",
+           6,
+           4,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "texto": "Hay 14 lápices y en cada caja caben 7. ¿Cuántas cajas se llenan?",
+          "a": 14,
+          "b": 7,
+          "c": 2,
+          "r": 0,
+          "op": "÷",
+          "obj": "lápices",
+          "resp": "cajas",
+          "sit": "agrupa",
+          "plan": "cajas"
+         },
+         "solucion": {
+          "huecos": [
+           14,
+           "÷",
+           7,
+           2,
+           2
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "495d3749b1a94db8"
+  ],
+  "svgSolucion": [
+   "8252e5f799b25002"
+  ]
+ },
+ "3.º problemas de dividir con resto": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Problemas de dividir",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "problemas.division",
+       "tipoVersion": 1,
+       "params": {
+        "modo": "resto",
+        "tablas": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Lee, divide y contesta: ¿cuántos sobran?",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "texto": "En una bolsa hay 9 globos. Mario los reparte entre 4 primos. ¿Cuántos globos le tocan a cada uno y cuántos sobran?",
+          "a": 9,
+          "b": 4,
+          "c": 2,
+          "r": 1,
+          "op": "÷",
+          "obj": "globos",
+          "resp": "globos",
+          "sit": "reparto",
+          "plan": "bolsa"
+         },
+         "solucion": {
+          "huecos": [
+           9,
+           "÷",
+           4,
+           2,
+           2,
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "texto": "Hay 37 botones y en cada caja caben 9. ¿Cuántas cajas se llenan y cuántos sobran?",
+          "a": 37,
+          "b": 9,
+          "c": 4,
+          "r": 1,
+          "op": "÷",
+          "obj": "botones",
+          "resp": "cajas",
+          "sit": "agrupa",
+          "plan": "cajas"
+         },
+         "solucion": {
+          "huecos": [
+           37,
+           "÷",
+           9,
+           4,
+           4,
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "texto": "Reparte 26 pelotas entre 6 amigos. ¿Cuántas pelotas le tocan a cada uno y cuántas sobran?",
+          "a": 26,
+          "b": 6,
+          "c": 4,
+          "r": 2,
+          "op": "÷",
+          "obj": "pelotas",
+          "resp": "pelotas",
+          "sit": "reparto",
+          "plan": "reparte"
+         },
+         "solucion": {
+          "huecos": [
+           26,
+           "÷",
+           6,
+           4,
+           4,
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "texto": "Una tienda envasa 67 lápices en paquetes de 7. ¿Cuántos paquetes completa y cuántos sobran?",
+          "a": 67,
+          "b": 7,
+          "c": 9,
+          "r": 4,
+          "op": "÷",
+          "obj": "lápices",
+          "resp": "paquetes",
+          "sit": "agrupa",
+          "plan": "paquetes"
+         },
+         "solucion": {
+          "huecos": [
+           67,
+           "÷",
+           7,
+           9,
+           9,
+           4
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "9d36e2546ab8532e"
+  ],
+  "svgSolucion": [
+   "26f20cb0539279bd"
+  ]
+ },
+ "3.º reparto con el signo ÷": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Reparte",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "multiplicar.reparto",
+       "tipoVersion": 1,
+       "params": {
+        "modo": null,
+        "signo": true,
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "amarillo",
+       "enunciado": "Dibuja el reparto en los platos y escribe la división.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "texto": "Reparte 8 fresas entre 4 amigos. ¿Cuántas fresas le tocan a cada uno?",
+          "k": 4,
+          "q": 2,
+          "obj": "fresas"
+         },
+         "solucion": {
+          "huecos": [
+           2
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "texto": "Reparte 15 lápices entre 3 niños. ¿Cuántos lápices le tocan a cada uno?",
+          "k": 3,
+          "q": 5,
+          "obj": "lápices"
+         },
+         "solucion": {
+          "huecos": [
+           5
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "multiplicar.reparto",
+       "tipoVersion": 1,
+       "params": {
+        "modo": "mitad",
+        "signo": true,
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "rosa",
+       "enunciado": "Mira los puntos y escribe la división.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "kind": "mitad",
+          "n": 16
+         },
+         "solucion": {
+          "huecos": [
+           8
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "kind": "tercio",
+          "n": 3
+         },
+         "solucion": {
+          "huecos": [
+           1
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "kind": "mitad",
+          "n": 2
+         },
+         "solucion": {
+          "huecos": [
+           1
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "e4b946fd043ac690"
+  ],
+  "svgSolucion": [
+   "5e4b0103af4b7fb7"
   ]
  },
  "más ejercicios: multiplicar.grupos": {
