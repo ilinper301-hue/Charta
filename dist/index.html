@@ -3570,7 +3570,7 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get mulberry32
 },
 "nucleo/catalogo.js": (__exp) => {
 // GENERADO por tools/catalogo.py desde motor/modelos.py. No editar a mano.
-const CATALOGO = {"cursos":{"1":"1.º de Primaria","2":"2.º de Primaria","3":"3.º de Primaria"},"materias":{"matematicas":"Matemáticas","lengua":"Lengua"},"bloques":{"matematicas":{"1":"Los números y sus representaciones","2":"Contar y series","3":"Orden y comparación","4":"Valor posicional","5":"Sumar","6":"Restar","7":"Juegos numéricos","8":"Problemas","9":"Geometría","10":"Medida","11":"Estadística y patrones","12":"Trucos de cálculo mental","13":"Multiplicar y repartir","14":"Dividir","15":"Fracciones"},"lengua":{"1":"Conciencia fonológica","2":"Letras y sonidos","3":"Sílabas","4":"Palabras","5":"Frases","6":"Ortografía básica","7":"Comprensión lectora","8":"Escritura y caligrafía"}},"fuentes":{"lengua":"fredoka"},"modelos":[
+const CATALOGO = {"cursos":{"1":"1.º de Primaria","2":"2.º de Primaria","3":"3.º de Primaria"},"materias":{"matematicas":"Matemáticas","lengua":"Lengua"},"bloques":{"matematicas":{"1":"Los números y sus representaciones","2":"Contar y series","3":"Orden y comparación","4":"Valor posicional","5":"Sumar","6":"Restar","7":"Juegos numéricos","8":"Problemas","9":"Geometría","10":"Medida","11":"Estadística y patrones","12":"Trucos de cálculo mental","13":"Multiplicar y repartir","14":"Dividir","15":"Fracciones","16":"Pensamiento computacional"},"lengua":{"1":"Conciencia fonológica","2":"Letras y sonidos","3":"Sílabas","4":"Palabras","5":"Frases","6":"Ortografía básica","7":"Comprensión lectora","8":"Escritura y caligrafía"}},"fuentes":{"lengua":"fredoka"},"modelos":[
 {"id":"rep.dedos","curso":1,"materia":"matematicas","bloque":1,"familia":"rep","clave":"dedos","nombre":"Los dedos","descripcion":"Leer y dibujar números con los dedos de las manos.","opciones":[{"id":"lectura","etiqueta":"Solo leer (sin la fila de dibujar)","tipo":"si_no","defecto":false}],"rangos":[10],"rango":10,"tamanos":["completa","media"],"titulo":"LOS DEDOS","color":"azul","metadatos":{"dificultad":1,"minutos":8,"etiquetas":["números","representación","dedos"]}},
 {"id":"rep.dado","curso":1,"materia":"matematicas","bloque":1,"familia":"rep","clave":"dado","nombre":"El dado","descripcion":"Leer y dibujar números con puntos de uno o dos dados.","opciones":[{"id":"lectura","etiqueta":"Solo leer (sin la fila de dibujar)","tipo":"si_no","defecto":false}],"rangos":[10,20],"rango":10,"tamanos":["completa","media"],"titulo":"EL DADO","color":"azul","metadatos":{"dificultad":1,"minutos":8,"etiquetas":["números","representación","dado","puntos"]}},
 {"id":"rep.domino","curso":1,"materia":"matematicas","bloque":1,"familia":"rep","clave":"domino","nombre":"El dominó","descripcion":"Leer y dibujar números como fichas de dominó.","opciones":[{"id":"lectura","etiqueta":"Solo leer (sin la fila de dibujar)","tipo":"si_no","defecto":false}],"rangos":[10,20],"rango":10,"tamanos":["completa","media"],"titulo":"EL DOMINÓ","color":"azul","metadatos":{"dificultad":1,"minutos":10,"etiquetas":["números","representación","dominó","puntos"]}},
@@ -3729,13 +3729,13 @@ const CATALOGO = {"cursos":{"1":"1.º de Primaria","2":"2.º de Primaria","3":"3
 {"id":"trucos.amigos100","curso":2,"materia":"matematicas","bloque":12,"familia":"trucos","clave":"amigos100","nombre":"Amigos del 100","descripcion":"Truco: buscar el amigo del 100 (30 + 70, 45 + 55).","opciones":[{"id":"modo","etiqueta":"Números","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Decenas exactas y otros números"},{"valor":"decenas","etiqueta":"Solo decenas exactas (30 + 70)"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"AMIGOS DEL 100","color":"amarillo","metadatos":{"dificultad":2,"minutos":8,"etiquetas":["cálculo mental","truco","amigos del 100","sumar"]}},
 {"id":"trucos.sumadecenas","curso":2,"materia":"matematicas","bloque":12,"familia":"trucos","clave":"sumadecenas","nombre":"Sumar decenas","descripcion":"Truco: al sumar decenas, las unidades no cambian (47 + 30).","opciones":[],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"SUMAR DECENAS","color":"verde","metadatos":{"dificultad":2,"minutos":8,"etiquetas":["cálculo mental","truco","sumar","decenas"]}},
 {"id":"trucos.restadecenas","curso":2,"materia":"matematicas","bloque":12,"familia":"trucos","clave":"restadecenas","nombre":"Restar decenas","descripcion":"Truco: al restar decenas, las unidades no cambian (85 − 40).","opciones":[],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"RESTAR DECENAS","color":"azul","metadatos":{"dificultad":2,"minutos":8,"etiquetas":["cálculo mental","truco","restar","decenas"]}},
-{"id":"trucos.descomponer2","curso":2,"materia":"matematicas","bloque":12,"familia":"trucos","clave":"descomponer2","nombre":"Decenas y unidades","descripcion":"Truco: sumar por separado las decenas y las unidades, sin llevada (34 + 25).","opciones":[],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"DECENAS Y UNIDADES","color":"rosa","metadatos":{"dificultad":3,"minutos":10,"etiquetas":["cálculo mental","truco","sumar","descomposición","decenas","unidades"]}},
-{"id":"trucos.pasardecena2","curso":2,"materia":"matematicas","bloque":12,"familia":"trucos","clave":"pasardecena2","nombre":"Pasar la decena","descripcion":"Truco: completar la decena y sumar lo que sobra (38 + 7 = 40 + 5).","opciones":[],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"PASAR LA DECENA","color":"amarillo","metadatos":{"dificultad":3,"minutos":10,"etiquetas":["cálculo mental","truco","sumar","llevada","completar decena"]}},
-{"id":"trucos.sumar919","curso":2,"materia":"matematicas","bloque":12,"familia":"trucos","clave":"sumar919","nombre":"Sumar 9 y 19","descripcion":"Truco: sumar 10 o 20 y quitar 1 (36 + 19).","opciones":[],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"SUMAR 9 Y 19","color":"verde","metadatos":{"dificultad":3,"minutos":10,"etiquetas":["cálculo mental","truco","sumar","sumar 9","sumar 19"]}},
-{"id":"trucos.restar919","curso":2,"materia":"matematicas","bloque":12,"familia":"trucos","clave":"restar919","nombre":"Restar 9 y 19","descripcion":"Truco: restar 10 o 20 y devolver 1 (52 − 19).","opciones":[],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"RESTAR 9 Y 19","color":"azul","metadatos":{"dificultad":3,"minutos":10,"etiquetas":["cálculo mental","truco","restar","restar 9","restar 19"]}},
-{"id":"trucos.compensar2","curso":2,"materia":"matematicas","bloque":12,"familia":"trucos","clave":"compensar2","nombre":"Redondear y compensar","descripcion":"Truco: redondear a la decena, sumar y quitar lo que sobra (48 + 25).","opciones":[],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"REDONDEAR Y COMPENSAR","color":"rosa","metadatos":{"dificultad":3,"minutos":10,"etiquetas":["cálculo mental","truco","sumar","redondear","compensar"]}},
-{"id":"trucos.centenas","curso":2,"materia":"matematicas","bloque":12,"familia":"trucos","clave":"centenas","nombre":"Sumar y restar centenas","descripcion":"Truco: solo cambian las centenas (340 + 200, 700 − 300).","opciones":[{"id":"modo","etiqueta":"Operaciones","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Sumar y restar"},{"valor":"suma","etiqueta":"Solo sumar"},{"valor":"resta","etiqueta":"Solo restar"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"SUMAR Y RESTAR CENTENAS","color":"amarillo","metadatos":{"dificultad":2,"minutos":8,"etiquetas":["cálculo mental","truco","sumar","restar","centenas"]}},
-{"id":"trucos.restaradelante","curso":2,"materia":"matematicas","bloque":12,"familia":"trucos","clave":"restaradelante","nombre":"Restar hacia delante","descripcion":"Truco: contar cuánto falta del número pequeño al grande (62 − 58).","opciones":[],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"RESTAR HACIA DELANTE","color":"verde","metadatos":{"dificultad":3,"minutos":10,"etiquetas":["cálculo mental","truco","restar","restar sumando","contar hacia delante"]}},
+{"id":"trucos.descomponer2","curso":2,"materia":"matematicas","bloque":12,"familia":"trucos","clave":"descomponer2","nombre":"Decenas y unidades","descripcion":"Truco: sumar por separado las decenas y las unidades, sin llevada (34 + 25).","opciones":[],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"DECENAS Y UNIDADES","color":"rosa","metadatos":{"dificultad":3,"minutos":10,"etiquetas":["cálculo mental","truco","sumar","descomposición","decenas","unidades"]},"cursos":{"3":{"rangos":[],"rango":null}}},
+{"id":"trucos.pasardecena2","curso":2,"materia":"matematicas","bloque":12,"familia":"trucos","clave":"pasardecena2","nombre":"Pasar la decena","descripcion":"Truco: completar la decena y sumar lo que sobra (38 + 7 = 40 + 5).","opciones":[],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"PASAR LA DECENA","color":"amarillo","metadatos":{"dificultad":3,"minutos":10,"etiquetas":["cálculo mental","truco","sumar","llevada","completar decena"]},"cursos":{"3":{"rangos":[],"rango":null}}},
+{"id":"trucos.sumar919","curso":2,"materia":"matematicas","bloque":12,"familia":"trucos","clave":"sumar919","nombre":"Sumar 9 y 19","descripcion":"Truco: sumar 10 o 20 y quitar 1 (36 + 19).","opciones":[],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"SUMAR 9 Y 19","color":"verde","metadatos":{"dificultad":3,"minutos":10,"etiquetas":["cálculo mental","truco","sumar","sumar 9","sumar 19"]},"cursos":{"3":{"rangos":[],"rango":null}}},
+{"id":"trucos.restar919","curso":2,"materia":"matematicas","bloque":12,"familia":"trucos","clave":"restar919","nombre":"Restar 9 y 19","descripcion":"Truco: restar 10 o 20 y devolver 1 (52 − 19).","opciones":[],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"RESTAR 9 Y 19","color":"azul","metadatos":{"dificultad":3,"minutos":10,"etiquetas":["cálculo mental","truco","restar","restar 9","restar 19"]},"cursos":{"3":{"rangos":[],"rango":null}}},
+{"id":"trucos.compensar2","curso":2,"materia":"matematicas","bloque":12,"familia":"trucos","clave":"compensar2","nombre":"Redondear y compensar","descripcion":"Truco: redondear a la decena, sumar y quitar lo que sobra (48 + 25).","opciones":[],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"REDONDEAR Y COMPENSAR","color":"rosa","metadatos":{"dificultad":3,"minutos":10,"etiquetas":["cálculo mental","truco","sumar","redondear","compensar"]},"cursos":{"3":{"rangos":[],"rango":null}}},
+{"id":"trucos.centenas","curso":2,"materia":"matematicas","bloque":12,"familia":"trucos","clave":"centenas","nombre":"Sumar y restar centenas","descripcion":"Truco: solo cambian las centenas (340 + 200, 700 − 300).","opciones":[{"id":"modo","etiqueta":"Operaciones","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Sumar y restar"},{"valor":"suma","etiqueta":"Solo sumar"},{"valor":"resta","etiqueta":"Solo restar"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"SUMAR Y RESTAR CENTENAS","color":"amarillo","metadatos":{"dificultad":2,"minutos":8,"etiquetas":["cálculo mental","truco","sumar","restar","centenas"]},"cursos":{"3":{"rangos":[],"rango":null}}},
+{"id":"trucos.restaradelante","curso":2,"materia":"matematicas","bloque":12,"familia":"trucos","clave":"restaradelante","nombre":"Restar hacia delante","descripcion":"Truco: contar cuánto falta del número pequeño al grande (62 − 58).","opciones":[],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"RESTAR HACIA DELANTE","color":"verde","metadatos":{"dificultad":3,"minutos":10,"etiquetas":["cálculo mental","truco","restar","restar sumando","contar hacia delante"]},"cursos":{"3":{"rangos":[],"rango":null}}},
 {"id":"problemas.dospasos","curso":2,"materia":"matematicas","bloque":8,"familia":"problemas","clave":"dospasos","nombre":"Problemas de dos operaciones","descripcion":"Tenía 45, me dan 20 y gasto 30: dos operaciones y la respuesta.","opciones":[{"id":"operaciones","etiqueta":"Operaciones","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas"},{"valor":"mixtas","etiqueta":"Sumar y restar"},{"valor":"suma","etiqueta":"Sumar dos veces"},{"valor":"resta","etiqueta":"Restar dos veces"}]},{"id":"nivel","etiqueta":"Llevadas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Sin llevadas"},{"valor":"con","etiqueta":"Con llevadas"},{"valor":"mezcla","etiqueta":"Mezcladas"}]},{"id":"barra","etiqueta":"Barra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Sin barra"},{"valor":"dibujada","etiqueta":"Dibujada (con los números)"},{"valor":"blanco","etiqueta":"En blanco (la dibuja el alumno)"}]}],"rangos":[100,200,300,400,500,600,700,800,900,999],"rango":100,"tamanos":["completa","media"],"titulo":"PROBLEMAS DE DOS OPERACIONES","color":"azul","metadatos":{"dificultad":3,"minutos":20,"etiquetas":["problemas","dos operaciones","sumar","restar","texto","razonamiento"]}},
 {"id":"problemas.dinero","curso":2,"materia":"matematicas","bloque":8,"familia":"problemas","clave":"dinero","nombre":"Problemas de compras","descripcion":"Precios en euros: cuánto pago, cuánto me devuelven, cuánto me queda o me falta.","opciones":[{"id":"situacion","etiqueta":"Situaciones","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas"},{"valor":"pagar","etiqueta":"¿Cuánto paga? (sumar precios)"},{"valor":"vuelta","etiqueta":"¿Cuánto le devuelven?"},{"valor":"queda","etiqueta":"¿Cuánto le queda?"},{"valor":"falta","etiqueta":"¿Cuánto le falta?"}]}],"rangos":[100,200,300,400,500],"rango":100,"tamanos":["completa","media"],"titulo":"PROBLEMAS DE COMPRAS","color":"verde","metadatos":{"dificultad":3,"minutos":18,"etiquetas":["problemas","dinero","euros","compras","sumar","restar","razonamiento"]}},
 {"id":"multiplicar.grupos","curso":2,"materia":"matematicas","bloque":13,"familia":"multiplicar","clave":"grupos","nombre":"Grupos iguales","descripcion":"Contar grupos iguales de puntos y escribir la suma repetida y la multiplicación (3 grupos de 4 = 3 × 4).","opciones":[{"id":"modo","etiqueta":"Qué se escribe","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Suma y multiplicación"},{"valor":"mult","etiqueta":"Solo la multiplicación"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"GRUPOS IGUALES","color":"amarillo","metadatos":{"dificultad":1,"minutos":8,"etiquetas":["multiplicar","grupos iguales","suma repetida"]},"cursos":{"3":{"rangos":[],"rango":null}}},
@@ -3743,6 +3743,15 @@ const CATALOGO = {"cursos":{"1":"1.º de Primaria","2":"2.º de Primaria","3":"3
 {"id":"multiplicar.tablas","curso":2,"materia":"matematicas","bloque":13,"familia":"multiplicar","clave":"tablas","nombre":"Las tablas","descripcion":"Multiplicaciones de las tablas del 2, 3, 4, 5 y 10: el resultado, el factor que falta o la tabla en orden.","opciones":[{"id":"tablas","etiqueta":"Tablas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Del 2, 5 y 10"},{"valor":"2","etiqueta":"Del 2"},{"valor":"3","etiqueta":"Del 3"},{"valor":"4","etiqueta":"Del 4"},{"valor":"5","etiqueta":"Del 5"},{"valor":"10","etiqueta":"Del 10"},{"valor":"todas","etiqueta":"Del 2, 3, 4, 5 y 10"},{"valor":"6","etiqueta":"Del 6","curso":3},{"valor":"7","etiqueta":"Del 7","curso":3},{"valor":"8","etiqueta":"Del 8","curso":3},{"valor":"9","etiqueta":"Del 9","curso":3},{"valor":"2a10","etiqueta":"Todas, del 2 al 10","curso":3}]},{"id":"modo","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Resultado"},{"valor":"hueco","etiqueta":"El factor que falta"},{"valor":"orden","etiqueta":"La tabla en orden"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"LAS TABLAS","color":"azul","metadatos":{"dificultad":2,"minutos":12,"etiquetas":["multiplicar","tablas","cálculo mental","factor"]},"cursos":{"3":{"rangos":[],"rango":null}}},
 {"id":"multiplicar.problemas","curso":2,"materia":"matematicas","bloque":13,"familia":"multiplicar","clave":"problemas","nombre":"Problemas de multiplicar","descripcion":"Problemas de grupos iguales (cajas, bolsas, filas de sillas…) con su operación y su respuesta.","opciones":[{"id":"tablas","etiqueta":"Tablas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Del 2, 5 y 10"},{"valor":"2","etiqueta":"Del 2"},{"valor":"3","etiqueta":"Del 3"},{"valor":"4","etiqueta":"Del 4"},{"valor":"5","etiqueta":"Del 5"},{"valor":"10","etiqueta":"Del 10"},{"valor":"todas","etiqueta":"Del 2, 3, 4, 5 y 10"},{"valor":"6","etiqueta":"Del 6","curso":3},{"valor":"7","etiqueta":"Del 7","curso":3},{"valor":"8","etiqueta":"Del 8","curso":3},{"valor":"9","etiqueta":"Del 9","curso":3},{"valor":"2a10","etiqueta":"Todas, del 2 al 10","curso":3}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"PROBLEMAS DE MULTIPLICAR","color":"rosa","metadatos":{"dificultad":3,"minutos":15,"etiquetas":["multiplicar","problemas","texto","razonamiento","grupos iguales"]},"cursos":{"3":{"rangos":[],"rango":null}}},
 {"id":"multiplicar.reparto","curso":2,"materia":"matematicas","bloque":13,"familia":"multiplicar","clave":"reparto","nombre":"Reparte","descripcion":"Repartir en partes iguales con dibujo, y la mitad y el tercio de un número.","opciones":[{"id":"modo","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Repartir en partes iguales"},{"valor":"mitad","etiqueta":"La mitad y el tercio"}]},{"id":"signo","etiqueta":"Con el signo ÷ (12 ÷ 3 = 4)","tipo":"si_no","defecto":false,"curso":3}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"REPARTE","color":"amarillo","metadatos":{"dificultad":3,"minutos":10,"etiquetas":["repartir","mitad","tercio","partes iguales","división"]},"cursos":{"3":{"rangos":[],"rango":null}}},
+{"id":"algoritmo.sigue","curso":3,"materia":"matematicas","bloque":16,"familia":"algoritmo","clave":"sigue","nombre":"Sigue las instrucciones","descripcion":"Seguir un programa de flechas con bucles («repite 3 veces») en una cuadrícula, o escribir el programa de un camino.","opciones":[{"id":"tarea","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Dibuja el camino del programa"},{"valor":"llega","etiqueta":"¿Dónde llegas? (letra y número de la casilla)"},{"valor":"programa","etiqueta":"Escribe el programa de un camino"}]},{"id":"bucles","etiqueta":"Con bucles (repite 3 veces)","tipo":"si_no","defecto":true}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"SIGUE LAS INSTRUCCIONES","color":"rosa","metadatos":{"dificultad":3,"minutos":15,"etiquetas":["pensamiento computacional","algoritmo","programa","bucle","repetición","cuadrícula","flechas"]}},
+{"id":"trucos.sumamillares","curso":3,"materia":"matematicas","bloque":12,"familia":"trucos","clave":"sumamillares","nombre":"Sumar y restar centenas y millares","descripcion":"Truco: cuento en centenas o en millares y añado los ceros (2500 + 300, 4200 + 1000).","opciones":[{"id":"sumando","etiqueta":"Números","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Centenas (2500 + 300)"},{"valor":"mil","etiqueta":"Millares (3450 + 1000)"}]},{"id":"modo","etiqueta":"Operaciones","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Sumar y restar"},{"valor":"suma","etiqueta":"Solo sumar"},{"valor":"resta","etiqueta":"Solo restar"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"SUMAR Y RESTAR CENTENAS Y MILLARES","color":"amarillo","metadatos":{"dificultad":3,"minutos":10,"etiquetas":["cálculo mental","truco","sumar","restar","centenas","millares"]}},
+{"id":"trucos.doblescentenas","curso":3,"materia":"matematicas","bloque":12,"familia":"trucos","clave":"doblescentenas","nombre":"Dobles y mitades de centenas","descripcion":"Truco: doble y mitad con centenas (2 × 300, 800 : 2) y con 50 de más (2 × 350, 700 : 2).","opciones":[{"id":"modo","etiqueta":"Calcula","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Dobles y mitades"},{"valor":"doble","etiqueta":"Solo dobles"},{"valor":"mitad","etiqueta":"Solo mitades"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"DOBLES Y MITADES DE CENTENAS","color":"verde","metadatos":{"dificultad":3,"minutos":10,"etiquetas":["cálculo mental","truco","doble","mitad","centenas"]}},
+{"id":"trucos.por5","curso":3,"materia":"matematicas","bloque":12,"familia":"trucos","clave":"por5","nombre":"Multiplicar por 5","descripcion":"Truco: multiplicar por 10 y calcular la mitad (24 × 5 = 240 : 2).","opciones":[],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"MULTIPLICAR POR 5","color":"azul","metadatos":{"dificultad":3,"minutos":10,"etiquetas":["cálculo mental","truco","multiplicar","por 5","mitad"]}},
+{"id":"trucos.restacentena","curso":3,"materia":"matematicas","bloque":12,"familia":"trucos","clave":"restacentena","nombre":"Restar llegando a la centena","descripcion":"Truco: contar desde el número pequeño hasta la centena y de la centena al grande (503 − 497).","opciones":[],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"RESTAR LLEGANDO A LA CENTENA","color":"rosa","metadatos":{"dificultad":3,"minutos":10,"etiquetas":["cálculo mental","truco","restar","restar hacia delante","centena"]}},
+{"id":"trucos.suma2cifras","curso":3,"materia":"matematicas","bloque":12,"familia":"trucos","clave":"suma2cifras","nombre":"Sumar descomponiendo","descripcion":"Truco: sumar por un lado las decenas y por otro las unidades, con llevada (47 + 36 = 70 + 13).","opciones":[],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"SUMAR DESCOMPONIENDO","color":"amarillo","metadatos":{"dificultad":3,"minutos":10,"etiquetas":["cálculo mental","truco","sumar","descomposición","llevada"]}},
+{"id":"trucos.resta2cifras","curso":3,"materia":"matematicas","bloque":12,"familia":"trucos","clave":"resta2cifras","nombre":"Restar compensando","descripcion":"Truco: restar la decena de al lado y devolver lo que sobra (73 − 28 = 73 − 30 + 2).","opciones":[],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"RESTAR COMPENSANDO","color":"verde","metadatos":{"dificultad":3,"minutos":10,"etiquetas":["cálculo mental","truco","restar","compensar"]}},
+{"id":"trucos.multdecenas","curso":3,"materia":"matematicas","bloque":12,"familia":"trucos","clave":"multdecenas","nombre":"Multiplicar decenas y centenas","descripcion":"Truco: multiplicar las decenas (o centenas) y añadir los ceros (3 × 40 = 12 × 10).","opciones":[],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"MULTIPLICAR DECENAS Y CENTENAS","color":"azul","metadatos":{"dificultad":3,"minutos":10,"etiquetas":["cálculo mental","truco","multiplicar","decenas","centenas","ceros"]}},
+{"id":"trucos.multdescomp","curso":3,"materia":"matematicas","bloque":12,"familia":"trucos","clave":"multdescomp","nombre":"Multiplicar partiendo","descripcion":"Truco: partir el número en 10 y lo que sobra, multiplicar cada parte y sumar (6 × 14 = 60 + 24).","opciones":[],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"MULTIPLICAR PARTIENDO","color":"rosa","metadatos":{"dificultad":3,"minutos":12,"etiquetas":["cálculo mental","truco","multiplicar","descomposición","propiedad distributiva"]}},
 {"id":"geometria.angulos","curso":3,"materia":"matematicas","bloque":9,"familia":"geometria","clave":"angulos","nombre":"Los ángulos","descripcion":"Clasificar ángulos dibujados en distintas posiciones: recto, agudo u obtuso.","opciones":[],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"LOS ÁNGULOS","color":"azul","metadatos":{"dificultad":2,"minutos":8,"etiquetas":["geometría","ángulos","recto","agudo","obtuso","clasificar"]}},
 {"id":"geometria.perimetro","curso":3,"materia":"matematicas","bloque":9,"familia":"geometria","clave":"perimetro","nombre":"El perímetro","descripcion":"Calcular el perímetro de polígonos sumando sus lados, o contando los lados de los cuadraditos.","opciones":[{"id":"modo","etiqueta":"Figuras","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Polígonos con la medida de cada lado"},{"valor":"cuadricula","etiqueta":"En la cuadrícula (cada cuadradito = 1 cm)"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"EL PERÍMETRO","color":"verde","metadatos":{"dificultad":3,"minutos":12,"etiquetas":["geometría","perímetro","lados","sumar","cuadrícula","medida"]}},
 {"id":"geometria.traslada","curso":3,"materia":"matematicas","bloque":9,"familia":"geometria","clave":"traslada","nombre":"Traslada la figura","descripcion":"Dibujar en la cuadrícula la figura trasladada según unas flechas (→ 4, ↓ 2).","opciones":[],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"TRASLADA LA FIGURA","color":"rosa","metadatos":{"dificultad":3,"minutos":12,"etiquetas":["geometría","traslación","movimientos","cuadrícula","flechas"]}},
@@ -7730,6 +7739,132 @@ function trucoTipo({ id, enunciado, filas = 8, pool, version = 2, columnas = 3 }
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get M() { return M; }, get fila() { return fila; }, get trucoTipo() { return trucoTipo; } }));
 },
+"tipos/algoritmo.sigue.js": (__exp) => {
+// algoritmo.sigue · Sigue las instrucciones (3.º, lote 8, bloque 16 «Pensamiento computacional»; solo curso 3, sin rango).
+// Programas de flechas (cada flecha = una casilla) con bucles sencillos («repite 3 veces: → ↑») sobre la cuadrícula 6 × 6 de geometria.itinerario (N, DIR, recorrer, flecha).
+// datos:    { inicio: [c, r], programa: [bloque…], fin: [c, r], ruta?: [[c, r]…] (solo tarea «programa»: el camino dibujado) }
+//           bloque = { cuerpo: ["R", "U"…] } (flechas sueltas, una vez) · { rep: n, cuerpo: [dirs] } (repite n veces el cuerpo, n = 2…4, 1…3 flechas)
+//           dir: "R" → · "L" ← · "U" ↑ · "D" ↓ (r crece hacia arriba). Desarrollo = cada bloque con su cuerpo repetido `rep` veces; recorrer(inicio, desarrollo) = ruta.
+// Opción tarea: null «Dibuja el camino» (solucion: huecos [], ruta en rojo) · "llega" «¿Dónde llegas?» (cuadrícula con letras A–F y números 1–6; huecos [letra, número])
+//   · "programa" «Escribe el programa» (camino gris de la S a la L y casillas: huecos = [dir…] y, en cada bucle, [n, dir…]; el programa en rojo en la solución).
+// Opción bucles (si_no, por defecto sí): con bucles = 0–2 flechas sueltas + «repite» + 0–2 flechas sueltas (6–12 pasos); sin bucles = 6–8 flechas sueltas.
+// El camino nunca se sale de la cuadrícula ni pasa dos veces por una casilla. Rejilla elástica de 1 columna con «Cantidad»: «Más grandes» = 3 y 1; «Más ejercicios» = las filas que caben con tarjetas ≥ 200 pt.
+const { registrar } = __req("nucleo/tipos.js");
+const { TOP, M, W, INK, COLOR_SOLUCION, cuantosRejilla } = __req("render/papel.js");
+const { N, DIR, recorrer, flecha } = __req("tipos/geometria.itinerario.js");
+const MIN_ALTO = 200;
+const OPUESTA = { R: "L", L: "R", U: "D", D: "U" };
+const COLS = "ABCDEF";
+/** Las flechas que hace el programa, una por casilla. */
+const desarrollo = (programa) => programa.flatMap((b) => Array.from({ length: b.rep ?? 1 }, () => b.cuerpo).flat());
+/** Los huecos de la tarea «programa»: las flechas en orden y, en cada bucle, antes el número de veces. */
+const huecosPrograma = (programa) => programa.flatMap((b) => (b.rep ? [b.rep, ...b.cuerpo] : b.cuerpo));
+
+function flechas(azar, n, prev = null) {
+  const out = [];
+  while (out.length < n) {
+    const d = azar.elegir(["R", "L", "U", "D"]);
+    if (d === OPUESTA[out.length ? out[out.length - 1] : prev]) continue;   // sin dar la vuelta en el sitio
+    out.push(d);
+  }
+  return out;
+}
+
+function programaNuevo(azar, bucles) {
+  for (let t = 0; t < 5000; t++) {
+    let prog;
+    if (!bucles) prog = [{ cuerpo: flechas(azar, azar.entero(6, 8)) }];
+    else {
+      const pre = flechas(azar, azar.entero(0, 2)), cuerpo = flechas(azar, azar.elegir([1, 2, 2, 2, 3, 3]), pre.at(-1) ?? null), rep = azar.entero(2, 4);
+      const post = flechas(azar, azar.entero(0, 2), cuerpo.at(-1));
+      if (cuerpo.length > 1 && cuerpo[0] === OPUESTA[cuerpo.at(-1)]) continue;   // al repetir el cuerpo no se da la vuelta en el sitio
+      prog = [...(pre.length ? [{ cuerpo: pre }] : []), { rep, cuerpo }, ...(post.length ? [{ cuerpo: post }] : [])];
+    }
+    const des = desarrollo(prog);
+    if (des.length < 6 || des.length > 12 || new Set(des).size < 2) continue;
+    const inicio = [azar.entero(0, N - 1), azar.entero(0, N - 1)], ruta = recorrer(inicio, des.map((d) => [d, 1]));
+    if (ruta) return { inicio, programa: prog, fin: ruta.at(-1), ruta };
+  }
+  throw new Error("No se encontró un programa.");
+}
+
+const __default = registrar({
+  id: "algoritmo.sigue",
+  version: 1,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const tarea = params.tarea ?? null, bucles = params.bucles ?? true, cnt = cuantosRejilla(ctx, 1, MIN_ALTO, [3, 1]), vistos = new Set(), ejercicios = [];
+    while (ejercicios.length < cnt) {
+      const { inicio, programa, fin, ruta } = programaNuevo(azar, bucles), clave = JSON.stringify([inicio, programa]);
+      if (vistos.has(clave)) continue;
+      vistos.add(clave);
+      if (tarea === "programa") ejercicios.push({ datos: { inicio, programa, fin, ruta }, solucion: { huecos: huecosPrograma(programa) } });
+      else if (tarea === "llega") ejercicios.push({ datos: { inicio, programa, fin }, solucion: { huecos: [COLS[fin[0]], fin[1] + 1] } });
+      else ejercicios.push({ datos: { inicio, programa, fin }, solucion: { huecos: [], ruta } });
+    }
+    const enunciado = {
+      llega: "Sal de la S y sigue el programa: cada flecha es una casilla.\nEscribe la letra y el número de la casilla donde llegas.",
+      programa: bucles ? "Mira el camino que va de la S a la L y escribe el programa con flechas.\nSi algo se repite, usa «repite»." : "Mira el camino que va de la S a la L.\nEscribe una flecha por cada casilla que avanzas.",
+    }[tarea] ?? "Sal de la S y sigue el programa: cada flecha es una casilla.\nDibuja el camino que haces. «Repite» quiere decir que haces lo de dentro varias veces.";
+    return { enunciado, ejercicios };
+  },
+  dibujar(p, act) {
+    const tarea = act.params?.tarea ?? null, { cel: celdas, cw, ch } = p.rejilla(TOP, 1, act.ejercicios.length);
+    act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
+      const [x, y] = celdas[i], d = e.datos, cel = Math.min(40, (ch - 44) / N), g = cel * N, gx = x + 46, gy = y + (ch - g) / 2 + (tarea === "llega" ? 4 : -2);
+      const ctr = ([c, r]) => [gx + (c + 0.5) * cel, gy + (r + 0.5) * cel], trazo = (ruta, o) => p.path(ruta.map(ctr).map((q, k) => [k ? "L" : "M", ...q]), o);
+      p.marco(x, y, cw, ch, i);
+      for (let c = 0; c < N; c++) for (let r = 0; r < N; r++) p.rrect(gx + c * cel, gy + r * cel, cel, cel, 0, { lw: 0.8, stroke: 0.55 });
+      if (tarea === "llega") {
+        for (let c = 0; c < N; c++) p.text(gx + (c + 0.5) * cel, gy - 15, COLS[c], 12, { f: "PB", anchor: "middle", gris: 0.3 });
+        for (let r = 0; r < N; r++) p.text(gx - 12, gy + (r + 0.5) * cel - 4.2, String(r + 1), 12, { f: "PB", anchor: "middle", gris: 0.3 });
+      }
+      if (tarea === "programa") trazo(d.ruta, { lw: 3, stroke: 0.35 });
+      if (p.solucion && tarea === null) trazo(e.solucion.ruta, { lw: 3, stroke: COLOR_SOLUCION });
+      const [sx, sy] = ctr(d.inicio), [lx, ly] = ctr(d.fin);
+      if (p.solucion && tarea === "llega") p.circle(lx, ly, cel * 0.42, { lw: 2.4, stroke: COLOR_SOLUCION });
+      p.circle(sx, sy, cel * 0.36, { lw: 1, fill: INK });
+      p.text(sx, sy - 4.2, "S", 12, { f: "PB", anchor: "middle", gris: 1 });
+      if (tarea === "programa") { p.circle(lx, ly, cel * 0.36, { lw: 2, fill: 1 }); p.text(lx, ly - 4.2, "L", 12, { f: "PB", anchor: "middle" }); }
+      // ---- el programa (a la derecha) ----
+      const rx = gx + g + 30, rw = x + cw - 14 - rx, caja = tarea === "programa", PASO = caja ? 38 : 30, K = caja ? 4 : 7;
+      const lineas = [];   // {k: "f" flechas sueltas | "r" repite | "c" cuerpo del bucle, dirs, n}
+      for (const b of d.programa) {
+        if (b.rep) { lineas.push({ k: "r", n: b.rep }); lineas.push({ k: "c", dirs: b.cuerpo }); }
+        else for (let k = 0; k < b.cuerpo.length; k += K) lineas.push({ k: "f", dirs: b.cuerpo.slice(k, k + K) });
+      }
+      const llega = tarea === "llega", libre = ch - 28 - (llega ? 62 : 0), pitch = Math.min(caja ? 46 : 34, libre / lineas.length), bloque = pitch * lineas.length;
+      const top = llega ? y + ch - 24 : y + ch / 2 + bloque / 2;
+      let hu = 0;   // índice de huecos (tarea «programa»)
+      lineas.forEach((l, k) => {
+        const cy = top - (k + 0.5) * pitch, x0 = rx + 6 + (l.k === "c" ? 24 : 0);
+        if (l.k === "r") {
+          if (caja) {
+            const fs = 13, t1 = "repite", w1 = p.ancho(t1, "PM", fs);
+            p.text(x0, cy - fs * 0.35, t1, fs, { f: "PM" }); p.caja(x0 + w1 + 6, cy - 17, 34, 34, null, 20, e.solucion.huecos[hu++]);
+            p.text(x0 + w1 + 46, cy - fs * 0.35, "veces:", fs, { f: "PM" });
+          } else p.text(x0, cy - 4.5, `repite ${l.n} veces:`, 14, { f: "PB" });
+          return;
+        }
+        if (l.k === "c") p.line(rx + 14, cy - pitch / 2 + 3, rx + 14, cy + pitch / 2 - 3, { lw: 1.6, gris: 0.35 });
+        l.dirs.forEach((dir, j) => {
+          if (caja) {
+            const bx = x0 + j * PASO; p.caja(bx, cy - 17, 34, 34, null, 20, null); hu++;
+            if (p.solucion) flecha(p, bx + 17, cy, dir, 11, COLOR_SOLUCION);
+          } else flecha(p, x0 + 12 + j * PASO, cy, dir, 11);
+        });
+      });
+      if (llega) {
+        const t = "Llegas a la casilla", fs = 13.5, w = p.ancho(t, "PM", fs), x0 = rx + 6, cy = y + 36;
+        p.text(x0, cy - fs * 0.35, t, fs, { f: "PM" });
+        p.caja(x0 + w + 22, cy - 18, 36, 36, null, 22, e.solucion.huecos[0]); p.caja(x0 + w + 64, cy - 18, 36, 36, null, 22, e.solucion.huecos[1]);
+      }
+    }));
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get desarrollo() { return desarrollo; }, get huecosPrograma() { return huecosPrograma; }, get default() { return __default; } }));
+},
 "tipos/combinada.combinada.js": (__exp) => {
 // combinada.combinada · ¿Qué número es? (port de nums_combinada() y ficha_combinada() del motor).
 // datos:    { rep, n }   casilla i: representación `rep` (de COMB_30 si rango ≤ 30, si no de COMB_100) del número n
@@ -9435,6 +9570,11 @@ const __default = registrar({
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
 },
+"tipos/familia.algoritmo.js": (__exp) => {
+// Charta · tipos de la familia «algoritmo» (bloque 16: pensamiento computacional).
+__req("tipos/algoritmo.sigue.js");
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({  }));
+},
 "tipos/familia.combinada.js": (__exp) => {
 // Charta · tipos de la familia «combinada». Añadir aquí cada módulo nuevo de la familia.
 __req("tipos/combinada.combinada.js");
@@ -9714,6 +9854,14 @@ __req("tipos/trucos.restar919.js");
 __req("tipos/trucos.compensar2.js");
 __req("tipos/trucos.centenas.js");
 __req("tipos/trucos.restaradelante.js");
+__req("tipos/trucos.sumamillares.js");
+__req("tipos/trucos.doblescentenas.js");
+__req("tipos/trucos.por5.js");
+__req("tipos/trucos.restacentena.js");
+__req("tipos/trucos.suma2cifras.js");
+__req("tipos/trucos.resta2cifras.js");
+__req("tipos/trucos.multdecenas.js");
+__req("tipos/trucos.multdescomp.js");
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({  }));
 },
 "tipos/familia.valor.js": (__exp) => {
@@ -11760,6 +11908,7 @@ __req("tipos/familia.dividir.js");
 __req("tipos/familia.fraccion.js");
 __req("tipos/familia.medida.js");
 __req("tipos/familia.estadistica.js");
+__req("tipos/familia.algoritmo.js");
 __req("tipos/familia.letra.js");
 __req("tipos/familia.silaba.js");
 __req("tipos/familia.fono.js");
@@ -17956,6 +18105,32 @@ const __default = trucoTipo({
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
 },
+"tipos/trucos.doblescentenas.js": (__exp) => {
+// trucos.doblescentenas · Dobles y mitades de centenas (guion de 3.º, lote 8): el doble de 3 centenas son 6 centenas.
+// Filas «2 × 300 = [600]», «2 × 350 = [600] + [100] = [700]», «800 : 2 = [400]» y «700 : 2 = [300] + [50] = [350]» (se parte lo que no se reparte en dos).
+// (Las filas con trozos solo con números de tres cifras, para que quepan grandes.) Opción modo: null = dobles y mitades · "doble" · "mitad". Sin repetir. Ver _trucos.js (2 columnas: las filas encadenadas son anchas).
+const { trucoTipo, fila } = __req("tipos/_trucos.js");
+const __default = trucoTipo({
+  id: "trucos.doblescentenas",
+  enunciado: "Truco: calculo con centenas y después añado los ceros.\nEscribe los números que faltan.",
+  filas: 8,
+  columnas: 2,
+  pool({ modo }) {
+    const out = [];
+    if (modo !== "mitad") {
+      for (let n = 100; n <= 4900; n += 100) out.push(fila([`2 × ${n} =`, null], 2 * n));
+      for (let n = 150; n <= 950; n += 100) out.push(fila([`2 × ${n} =`, null, "+", null, "=", null], 2 * (n - 50), 100, 2 * n));
+    }
+    if (modo !== "doble") {
+      for (let n = 200; n <= 9800; n += 200) out.push(fila([`${n} : 2 =`, null], n / 2));
+      for (let n = 100; n <= 900; n += 200) out.push(fila([`${n} : 2 =`, null, "+", null, "=", null], (n - 100) / 2, 50, n / 2));
+    }
+    return out;
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
 "tipos/trucos.masmenos1.js": (__exp) => {
 // trucos.masmenos1 · Uno más, uno menos (truco de Calculi para 1.º; modelo propio de la app). Ver _trucos.js.
 const { trucoTipo, fila, M } = __req("tipos/_trucos.js");
@@ -17984,6 +18159,45 @@ const __default = trucoTipo({
     const out = [];
     if (modo !== "resta") for (let a = 11; a + 10 <= rango; a++) out.push(fila([`${a} + 10 =`, null], a + 10), fila([`10 + ${a} =`, null], a + 10));
     if (modo !== "suma") for (let a = 21; a <= rango; a++) out.push(fila([`${a} ${M} 10 =`, null], a - 10));
+    return out;
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/trucos.multdecenas.js": (__exp) => {
+// trucos.multdecenas · Multiplicar decenas y centenas (truco de Calculi para 3.º, c3/12): 3 × 40 son 3 × 4 = 12 decenas, es decir, 120.
+// Fila encadenada «3 × 40 = [12] × 10 = [120]» (y «4 × 300 = [12] × 100 = [1200]»). Factor de 2 a 9 por decenas de 20 a 90 o centenas de 200 a 900. Ver _trucos.js (2 columnas).
+const { trucoTipo, fila } = __req("tipos/_trucos.js");
+const __default = trucoTipo({
+  id: "trucos.multdecenas",
+  enunciado: "Truco: multiplico las decenas (o centenas) y añado los ceros.\nEscribe los números que faltan.",
+  filas: 8,
+  columnas: 2,
+  pool() {
+    const out = [];
+    for (let a = 2; a <= 9; a++) for (let t = 2; t <= 9; t++) {
+      out.push(fila([`${a} × ${10 * t} =`, null, "× 10 =", null], a * t, a * t * 10));
+      out.push(fila([`${a} × ${100 * t} =`, null, "× 100 =", null], a * t, a * t * 100));
+    }
+    return out;
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/trucos.multdescomp.js": (__exp) => {
+// trucos.multdescomp · Multiplicar partiendo (truco de Calculi para 3.º, c3/13): 6 × 14 = 6 × 10 + 6 × 4.
+// Fila encadenada «6 × 14 = [60] + [24] = [84]». Factor de 3 a 9 por un número de 12 a 19. Ver _trucos.js (2 columnas).
+const { trucoTipo, fila } = __req("tipos/_trucos.js");
+const __default = trucoTipo({
+  id: "trucos.multdescomp",
+  enunciado: "Truco: parto el número en 10 y lo que sobra, multiplico cada parte y sumo.\nEscribe los números que faltan.",
+  filas: 8,
+  columnas: 2,
+  pool() {
+    const out = [];
+    for (let a = 3; a <= 9; a++) for (let b = 12; b <= 19; b++) out.push(fila([`${a} × ${b} =`, null, "+", null, "=", null], a * 10, a * (b - 10), a * b));
     return out;
   },
 });
@@ -18023,6 +18237,69 @@ const __default = trucoTipo({
     for (let da = 1; da <= 8; da++) for (let ua = 5; ua <= 9; ua++) for (let b = 3; b <= 9; b++) {
       if (ua + b < 11) continue;   // siempre con llevada (y sin caer justo en la decena)
       out.push(fila([`${10 * da + ua} + ${b} = ${10 * (da + 1)} +`, null, "=", null], ua + b - 10, 10 * da + ua + b));
+    }
+    return out;
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/trucos.por5.js": (__exp) => {
+// trucos.por5 · Multiplicar por 5 (guion de 3.º, lote 8; en Calculi es de 4.º): por 10 y la mitad.
+// Fila encadenada «24 × 5 = [240] : 2 = [120]». Números de dos cifras de 12 a 98 que no son decenas exactas. Ver _trucos.js (2 columnas).
+const { trucoTipo, fila } = __req("tipos/_trucos.js");
+const __default = trucoTipo({
+  id: "trucos.por5",
+  enunciado: "Truco: multiplico por 10 y calculo la mitad. Escribe los números que faltan.",
+  filas: 8,
+  columnas: 2,
+  pool() {
+    const out = [];
+    for (let n = 12; n <= 98; n++) if (n % 10) out.push(fila([`${n} × 5 =`, null, ": 2 =", null], 10 * n, 5 * n));
+    return out;
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/trucos.resta2cifras.js": (__exp) => {
+// trucos.resta2cifras · Restar compensando (truco de Calculi para 3.º, c3/11): resto la decena redonda de al lado y devuelvo lo que me pasé.
+// Fila encadenada «73 − 28 = 73 − 30 + [2] = [45]». b acaba en 6–9 (k = lo que falta para la decena, 1–4), a de 41 a 199, resultado ≥ 10. Ver _trucos.js (2 columnas).
+const { trucoTipo, fila, M } = __req("tipos/_trucos.js");
+const __default = trucoTipo({
+  id: "trucos.resta2cifras",
+  enunciado: "Truco: resto la decena de al lado y devuelvo lo que me pasé.\nEscribe los números que faltan.",
+  filas: 8,
+  columnas: 2,
+  pool() {
+    const out = [];
+    for (let t = 2; t <= 9; t++) for (let k = 1; k <= 4; k++) for (let a = 41; a <= 199; a++) {
+      const b = 10 * t - k;
+      if (a - b < 10) continue;
+      out.push(fila([`${a} ${M} ${b} = ${a} ${M} ${10 * t} +`, null, "=", null], k, a - b));
+    }
+    return out;
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/trucos.restacentena.js": (__exp) => {
+// trucos.restacentena · Restar llegando a la centena (guion de 3.º, lote 8): 503 − 497, cuento desde 497 hasta 500 y de 500 a 503.
+// Fila encadenada «503 − 497 = [3] + [3] = [6]» (lo que falta para la centena + lo que se pasa). b = 100k − d (d 1..9), a = 100k + e (e 1..9), k 2..9.
+// Ver _trucos.js (2 columnas).
+const { trucoTipo, fila, M } = __req("tipos/_trucos.js");
+const __default = trucoTipo({
+  id: "trucos.restacentena",
+  enunciado: "Truco: cuento desde el número pequeño hasta la centena y de la centena al grande.\nEscribe los números que faltan.",
+  filas: 8,
+  columnas: 2,
+  pool() {
+    const out = [];
+    for (let k = 2; k <= 9; k++) for (let d = 1; d <= 9; d++) for (let e = 1; e <= 9; e++) {
+      const b = 100 * k - d, a = 100 * k + e;
+      if (a > 999) continue;
+      out.push(fila([`${a} ${M} ${b} =`, null, "+", null, "=", null], d, e, d + e));
     }
     return out;
   },
@@ -18100,6 +18377,28 @@ const __default = trucoTipo({
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
 },
+"tipos/trucos.suma2cifras.js": (__exp) => {
+// trucos.suma2cifras · Sumar descomponiendo (truco de Calculi para 3.º, c3/10): sumo decenas por un lado y unidades por otro; las unidades pasan de 10 (hay llevada).
+// Fila encadenada «47 + 36 = [70] + [13] = [83]». Ver _trucos.js (2 columnas).
+const { trucoTipo, fila } = __req("tipos/_trucos.js");
+const __default = trucoTipo({
+  id: "trucos.suma2cifras",
+  enunciado: "Truco: sumo las decenas por un lado y las unidades por otro.\nEscribe los números que faltan.",
+  filas: 8,
+  columnas: 2,
+  pool() {
+    const out = [];
+    for (let a = 12; a <= 99; a++) for (let b = 12; b <= 99; b++) {
+      const ua = a % 10, ub = b % 10;
+      if (!ua || !ub || ua + ub < 10 || a + b > 150) continue;
+      out.push(fila([`${a} + ${b} =`, null, "+", null, "=", null], a - ua + b - ub, ua + ub, a + b));
+    }
+    return out;
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
 "tipos/trucos.sumadecenas.js": (__exp) => {
 // trucos.sumadecenas · Sumar decenas (truco de Calculi para 2.º, c2/02): las unidades no cambian. Ver _trucos.js.
 const { trucoTipo, fila } = __req("tipos/_trucos.js");
@@ -18112,6 +18411,36 @@ const __default = trucoTipo({
     for (let da = 1; da <= 8; da++) for (let ua = 1; ua <= 9; ua++) for (let k = 1; da + k <= 9; k++) {
       const a = 10 * da + ua, b = 10 * k;
       out.push(fila([`${a} + ${b} =`, null], a + b), fila([`${b} + ${a} =`, null], a + b));
+    }
+    return out;
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() { return __default; } }));
+},
+"tipos/trucos.sumamillares.js": (__exp) => {
+// trucos.sumamillares · Sumar y restar centenas y millares (truco de Calculi para 3.º, c3/14): cuento en centenas (o en millares) y añado los ceros.
+// Filas «2500 + 300 = [2800]» y «5800 − 1000 = [4800]». Opción sumando: null = centenas redondas (a y b múltiplos de 100, b sin ser millar exacto) ·
+// "mil" = un número cualquiera de 4 cifras y 1000, 2000 o 3000 (solo cambia la cifra de los millares). Opción modo: suma / resta / las dos. Ver _trucos.js.
+const { trucoTipo, fila, M } = __req("tipos/_trucos.js");
+const __default = trucoTipo({
+  id: "trucos.sumamillares",
+  enunciado: "Truco: cuento en centenas o en millares y añado los ceros.\nEscribe el número que falta en el cuadro gris.",
+  filas: 8,
+  pool({ modo, sumando }) {
+    const out = [], suma = modo !== "resta", resta = modo !== "suma";
+    if (sumando === "mil") {
+      for (let a = 1000; a <= 9999; a += 3) for (const b of [1000, 2000, 3000]) {   // de 3 en 3: pool amplio sin ser enorme
+        if (a % 100 === 0) continue;   // el primer número no es redondo del todo
+        if (suma && a + b <= 9999) out.push(fila([`${a} + ${b} =`, null], a + b));
+        if (resta && a - b >= 1000) out.push(fila([`${a} ${M} ${b} =`, null], a - b));
+      }
+    } else {
+      for (let a = 1000; a <= 9800; a += 100) for (let b = 100; b <= 4900; b += 100) {
+        if (b % 1000 === 0 || a % 1000 === 0) continue;   // los redondos de verdad (3000 + 500) se ven con «Millares»
+        if (suma && a + b <= 9900) out.push(fila([`${a} + ${b} =`, null], a + b));
+        if (resta && a - b >= 1000) out.push(fila([`${a} ${M} ${b} =`, null], a - b));
+      }
     }
     return out;
   },

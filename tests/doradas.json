@@ -1,4 +1,255 @@
 {
+ "algoritmo.sigue": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Sigue las instrucciones",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "algoritmo.sigue",
+       "tipoVersion": 1,
+       "params": {
+        "tarea": null,
+        "bucles": true,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Sal de la S y sigue el programa: cada flecha es una casilla.\nDibuja el camino que haces. «Repite» quiere decir que haces lo de dentro varias veces.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "inicio": [
+           0,
+           0
+          ],
+          "programa": [
+           {
+            "cuerpo": [
+             "R"
+            ]
+           },
+           {
+            "rep": 2,
+            "cuerpo": [
+             "R",
+             "U",
+             "R"
+            ]
+           }
+          ],
+          "fin": [
+           5,
+           2
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "ruta": [
+           [
+            0,
+            0
+           ],
+           [
+            1,
+            0
+           ],
+           [
+            2,
+            0
+           ],
+           [
+            2,
+            1
+           ],
+           [
+            3,
+            1
+           ],
+           [
+            4,
+            1
+           ],
+           [
+            4,
+            2
+           ],
+           [
+            5,
+            2
+           ]
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "inicio": [
+           0,
+           3
+          ],
+          "programa": [
+           {
+            "cuerpo": [
+             "D"
+            ]
+           },
+           {
+            "rep": 3,
+            "cuerpo": [
+             "R",
+             "U"
+            ]
+           }
+          ],
+          "fin": [
+           3,
+           5
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "ruta": [
+           [
+            0,
+            3
+           ],
+           [
+            0,
+            2
+           ],
+           [
+            1,
+            2
+           ],
+           [
+            1,
+            3
+           ],
+           [
+            2,
+            3
+           ],
+           [
+            2,
+            4
+           ],
+           [
+            3,
+            4
+           ],
+           [
+            3,
+            5
+           ]
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "inicio": [
+           5,
+           5
+          ],
+          "programa": [
+           {
+            "rep": 4,
+            "cuerpo": [
+             "D",
+             "L"
+            ]
+           },
+           {
+            "cuerpo": [
+             "U",
+             "U"
+            ]
+           }
+          ],
+          "fin": [
+           1,
+           3
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "ruta": [
+           [
+            5,
+            5
+           ],
+           [
+            5,
+            4
+           ],
+           [
+            4,
+            4
+           ],
+           [
+            4,
+            3
+           ],
+           [
+            3,
+            3
+           ],
+           [
+            3,
+            2
+           ],
+           [
+            2,
+            2
+           ],
+           [
+            2,
+            1
+           ],
+           [
+            1,
+            1
+           ],
+           [
+            1,
+            2
+           ],
+           [
+            1,
+            3
+           ]
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "decbec4ac405242a"
+  ],
+  "svgSolucion": [
+   "ad1cbdcbe4f27797"
+  ]
+ },
  "combinada.combinada": {
   "ficha": {
    "schemaVersion": 1,
@@ -41055,6 +41306,280 @@
    "3ce17eab5098e59f"
   ]
  },
+ "trucos.doblescentenas": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Dobles y mitades de centenas",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "trucos.doblescentenas",
+       "tipoVersion": 2,
+       "params": {
+        "modo": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Truco: calculo con centenas y después añado los ceros.\nEscribe los números que faltan.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "fila": [
+           "2400 : 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           1200
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "fila": [
+           "2 × 1600 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3200
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "fila": [
+           "1400 : 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           700
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "fila": [
+           "1800 : 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           900
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "fila": [
+           "2 × 2000 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4000
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "fila": [
+           "2 × 250 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           400,
+           100,
+           500
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "fila": [
+           "9200 : 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4600
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "fila": [
+           "400 : 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           200
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "fila": [
+           "2 × 3100 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           6200
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "fila": [
+           "7200 : 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3600
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "fila": [
+           "6000 : 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3000
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "fila": [
+           "2 × 4500 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           9000
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "fila": [
+           "9400 : 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4700
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "fila": [
+           "5400 : 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           2700
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "fila": [
+           "2 × 300 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           600
+          ]
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "fila": [
+           "2 × 200 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           400
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "6050b00babbf0509"
+  ],
+  "svgSolucion": [
+   "31f133e6e226d761"
+  ]
+ },
  "trucos.masmenos1": {
   "ficha": {
    "schemaVersion": 1,
@@ -41645,6 +42170,684 @@
   ],
   "svgSolucion": [
    "b66f45324572f1d5"
+  ]
+ },
+ "trucos.multdecenas": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Multiplicar decenas y centenas",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "trucos.multdecenas",
+       "tipoVersion": 2,
+       "params": {
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Truco: multiplico las decenas (o centenas) y añado los ceros.\nEscribe los números que faltan.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "fila": [
+           "2 × 500 =",
+           null,
+           "× 100 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           10,
+           1000
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "fila": [
+           "8 × 800 =",
+           null,
+           "× 100 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           64,
+           6400
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "fila": [
+           "3 × 500 =",
+           null,
+           "× 100 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           15,
+           1500
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "fila": [
+           "7 × 500 =",
+           null,
+           "× 100 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           35,
+           3500
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "fila": [
+           "8 × 20 =",
+           null,
+           "× 10 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           16,
+           160
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "fila": [
+           "2 × 700 =",
+           null,
+           "× 100 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           14,
+           1400
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "fila": [
+           "3 × 700 =",
+           null,
+           "× 100 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           21,
+           2100
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "fila": [
+           "4 × 900 =",
+           null,
+           "× 100 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           36,
+           3600
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "fila": [
+           "4 × 40 =",
+           null,
+           "× 10 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           16,
+           160
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "fila": [
+           "7 × 300 =",
+           null,
+           "× 100 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           21,
+           2100
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "fila": [
+           "7 × 900 =",
+           null,
+           "× 100 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           63,
+           6300
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "fila": [
+           "9 × 900 =",
+           null,
+           "× 100 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           81,
+           8100
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "fila": [
+           "3 × 30 =",
+           null,
+           "× 10 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           9,
+           90
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "fila": [
+           "9 × 400 =",
+           null,
+           "× 100 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           36,
+           3600
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "fila": [
+           "4 × 50 =",
+           null,
+           "× 10 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           20,
+           200
+          ]
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "fila": [
+           "7 × 700 =",
+           null,
+           "× 100 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           49,
+           4900
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "a2c71c41b116f932"
+  ],
+  "svgSolucion": [
+   "77749debee9d72c7"
+  ]
+ },
+ "trucos.multdescomp": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Multiplicar partiendo",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "trucos.multdescomp",
+       "tipoVersion": 2,
+       "params": {
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Truco: parto el número en 10 y lo que sobra, multiplico cada parte y sumo.\nEscribe los números que faltan.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "fila": [
+           "3 × 19 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           30,
+           27,
+           57
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "fila": [
+           "4 × 15 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           40,
+           20,
+           60
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "fila": [
+           "8 × 18 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           80,
+           64,
+           144
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "fila": [
+           "3 × 12 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           30,
+           6,
+           36
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "fila": [
+           "9 × 18 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           90,
+           72,
+           162
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "fila": [
+           "5 × 16 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           50,
+           30,
+           80
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "fila": [
+           "9 × 12 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           90,
+           18,
+           108
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "fila": [
+           "5 × 14 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           50,
+           20,
+           70
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "fila": [
+           "5 × 13 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           50,
+           15,
+           65
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "fila": [
+           "7 × 18 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           70,
+           56,
+           126
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "fila": [
+           "6 × 12 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           60,
+           12,
+           72
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "fila": [
+           "5 × 15 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           50,
+           25,
+           75
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "fila": [
+           "6 × 16 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           60,
+           36,
+           96
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "fila": [
+           "4 × 14 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           40,
+           16,
+           56
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "fila": [
+           "4 × 13 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           40,
+           12,
+           52
+          ]
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "fila": [
+           "6 × 14 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           60,
+           24,
+           84
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "00eb1814d1b02afb"
+  ],
+  "svgSolucion": [
+   "68b528ee80a9704e"
   ]
  },
  "trucos.orden": {
@@ -42347,6 +43550,999 @@
   ],
   "svgSolucion": [
    "72fb5e187580082e"
+  ]
+ },
+ "trucos.por5": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Multiplicar por 5",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "trucos.por5",
+       "tipoVersion": 2,
+       "params": {
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "azul",
+       "enunciado": "Truco: multiplico por 10 y calculo la mitad. Escribe los números que faltan.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "fila": [
+           "76 × 5 =",
+           null,
+           ": 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           760,
+           380
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "fila": [
+           "49 × 5 =",
+           null,
+           ": 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           490,
+           245
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "fila": [
+           "12 × 5 =",
+           null,
+           ": 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           120,
+           60
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "fila": [
+           "13 × 5 =",
+           null,
+           ": 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           130,
+           65
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "fila": [
+           "55 × 5 =",
+           null,
+           ": 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           550,
+           275
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "fila": [
+           "26 × 5 =",
+           null,
+           ": 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           260,
+           130
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "fila": [
+           "73 × 5 =",
+           null,
+           ": 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           730,
+           365
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "fila": [
+           "45 × 5 =",
+           null,
+           ": 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           450,
+           225
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "fila": [
+           "35 × 5 =",
+           null,
+           ": 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           350,
+           175
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "fila": [
+           "98 × 5 =",
+           null,
+           ": 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           980,
+           490
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "fila": [
+           "29 × 5 =",
+           null,
+           ": 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           290,
+           145
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "fila": [
+           "44 × 5 =",
+           null,
+           ": 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           440,
+           220
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "fila": [
+           "51 × 5 =",
+           null,
+           ": 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           510,
+           255
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "fila": [
+           "74 × 5 =",
+           null,
+           ": 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           740,
+           370
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "fila": [
+           "57 × 5 =",
+           null,
+           ": 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           570,
+           285
+          ]
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "fila": [
+           "97 × 5 =",
+           null,
+           ": 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           970,
+           485
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "cca3ba28c7300ef4"
+  ],
+  "svgSolucion": [
+   "397bd5ea3456b061"
+  ]
+ },
+ "trucos.resta2cifras": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Restar compensando",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "trucos.resta2cifras",
+       "tipoVersion": 2,
+       "params": {
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "verde",
+       "enunciado": "Truco: resto la decena de al lado y devuelvo lo que me pasé.\nEscribe los números que faltan.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "fila": [
+           "78 − 57 = 78 − 60 +",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           21
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "fila": [
+           "180 − 76 = 180 − 80 +",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           104
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "fila": [
+           "189 − 76 = 189 − 80 +",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           113
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "fila": [
+           "70 − 16 = 70 − 20 +",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           54
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "fila": [
+           "110 − 16 = 110 − 20 +",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           94
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "fila": [
+           "169 − 27 = 169 − 30 +",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           142
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "fila": [
+           "88 − 39 = 88 − 40 +",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           49
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "fila": [
+           "155 − 88 = 155 − 90 +",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           67
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "fila": [
+           "79 − 58 = 79 − 60 +",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           21
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "fila": [
+           "89 − 39 = 89 − 40 +",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           50
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "fila": [
+           "123 − 76 = 123 − 80 +",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           47
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "fila": [
+           "152 − 77 = 152 − 80 +",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           75
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "fila": [
+           "133 − 17 = 133 − 20 +",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           116
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "fila": [
+           "125 − 37 = 125 − 40 +",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           88
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "fila": [
+           "111 − 77 = 111 − 80 +",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           34
+          ]
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "fila": [
+           "100 − 37 = 100 − 40 +",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           63
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "81a0f527392b554f"
+  ],
+  "svgSolucion": [
+   "78e9c2f2f150b054"
+  ]
+ },
+ "trucos.restacentena": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Restar llegando a la centena",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "trucos.restacentena",
+       "tipoVersion": 2,
+       "params": {
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Truco: cuento desde el número pequeño hasta la centena y de la centena al grande.\nEscribe los números que faltan.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "fila": [
+           "809 − 799 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           9,
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "fila": [
+           "702 − 696 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           2,
+           6
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "fila": [
+           "501 − 494 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           1,
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "fila": [
+           "702 − 697 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           2,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "fila": [
+           "809 − 798 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           9,
+           11
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "fila": [
+           "601 − 597 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           1,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "fila": [
+           "204 − 199 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           4,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "fila": [
+           "504 − 491 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           9,
+           4,
+           13
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "fila": [
+           "501 − 497 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           1,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "fila": [
+           "905 − 891 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           9,
+           5,
+           14
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "fila": [
+           "808 − 796 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           8,
+           12
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "fila": [
+           "409 − 398 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           9,
+           11
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "fila": [
+           "405 − 398 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           5,
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "fila": [
+           "701 − 693 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           1,
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "fila": [
+           "902 − 898 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           2,
+           4
+          ]
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "fila": [
+           "406 − 395 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           6,
+           11
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "1a14e3093b492984"
+  ],
+  "svgSolucion": [
+   "1ffd6b7ea3a680c4"
   ]
  },
  "trucos.restadecenas": {
@@ -43825,6 +46021,369 @@
    "12726634fb4926e6"
   ]
  },
+ "trucos.suma2cifras": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Sumar descomponiendo",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "trucos.suma2cifras",
+       "tipoVersion": 2,
+       "params": {
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Truco: sumo las decenas por un lado y las unidades por otro.\nEscribe los números que faltan.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "fila": [
+           "57 + 59 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           100,
+           16,
+           116
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "fila": [
+           "61 + 19 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           70,
+           10,
+           80
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "fila": [
+           "29 + 86 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           100,
+           15,
+           115
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "fila": [
+           "84 + 39 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           110,
+           13,
+           123
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "fila": [
+           "59 + 15 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           60,
+           14,
+           74
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "fila": [
+           "49 + 19 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           50,
+           18,
+           68
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "fila": [
+           "49 + 36 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           70,
+           15,
+           85
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "fila": [
+           "71 + 79 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           140,
+           10,
+           150
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "fila": [
+           "36 + 65 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           90,
+           11,
+           101
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "fila": [
+           "55 + 17 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           60,
+           12,
+           72
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "fila": [
+           "79 + 45 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           110,
+           14,
+           124
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "fila": [
+           "75 + 59 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           120,
+           14,
+           134
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "fila": [
+           "19 + 91 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           100,
+           10,
+           110
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "fila": [
+           "35 + 48 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           70,
+           13,
+           83
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "fila": [
+           "88 + 54 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           130,
+           12,
+           142
+          ]
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "fila": [
+           "72 + 39 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           100,
+           11,
+           111
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "bc139fda71df40ee"
+  ],
+  "svgSolucion": [
+   "8c2732a1921c5101"
+  ]
+ },
  "trucos.sumadecenas": {
   "ficha": {
    "schemaVersion": 1,
@@ -44202,6 +46761,387 @@
   ],
   "svgSolucion": [
    "36937d7e6c8f2e19"
+  ]
+ },
+ "trucos.sumamillares": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Sumar y restar centenas y millares",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "trucos.sumamillares",
+       "tipoVersion": 2,
+       "params": {
+        "sumando": null,
+        "modo": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Truco: cuento en centenas o en millares y añado los ceros.\nEscribe el número que falta en el cuadro gris.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "fila": [
+           "3200 − 300 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           2900
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "fila": [
+           "5800 + 2500 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           8300
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "fila": [
+           "6900 − 2400 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4500
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "fila": [
+           "3100 + 300 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3400
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "fila": [
+           "5900 + 500 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           6400
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "fila": [
+           "1600 + 200 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           1800
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "fila": [
+           "5300 − 4100 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           1200
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "fila": [
+           "9700 − 100 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           9600
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "fila": [
+           "3600 + 4200 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           7800
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "fila": [
+           "4300 + 2200 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           6500
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "fila": [
+           "2300 + 2400 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4700
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "fila": [
+           "5700 + 2900 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           8600
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "fila": [
+           "9800 − 1700 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           8100
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "fila": [
+           "7300 − 4100 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3200
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "fila": [
+           "5300 + 200 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           5500
+          ]
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "fila": [
+           "3400 + 800 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4200
+          ]
+         }
+        },
+        {
+         "id": "a1e17",
+         "datos": {
+          "fila": [
+           "6900 − 4200 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           2700
+          ]
+         }
+        },
+        {
+         "id": "a1e18",
+         "datos": {
+          "fila": [
+           "1200 + 4600 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           5800
+          ]
+         }
+        },
+        {
+         "id": "a1e19",
+         "datos": {
+          "fila": [
+           "1700 + 3200 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4900
+          ]
+         }
+        },
+        {
+         "id": "a1e20",
+         "datos": {
+          "fila": [
+           "8700 − 1400 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           7300
+          ]
+         }
+        },
+        {
+         "id": "a1e21",
+         "datos": {
+          "fila": [
+           "9100 − 2700 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           6400
+          ]
+         }
+        },
+        {
+         "id": "a1e22",
+         "datos": {
+          "fila": [
+           "2700 + 3400 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           6100
+          ]
+         }
+        },
+        {
+         "id": "a1e23",
+         "datos": {
+          "fila": [
+           "4400 − 2400 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           2000
+          ]
+         }
+        },
+        {
+         "id": "a1e24",
+         "datos": {
+          "fila": [
+           "6600 + 200 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           6800
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "7bd9f0033be2a6b1"
+  ],
+  "svgSolucion": [
+   "4ecca27f943c3fa5"
   ]
  },
  "trucos.sumar9": {
@@ -92815,6 +95755,3676 @@
   ],
   "svgSolucion": [
    "2da62840ef34ddfb"
+  ]
+ },
+ "3.º truco sumar millares (solo restas de 1000)": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Sumar y restar centenas y millares",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "trucos.sumamillares",
+       "tipoVersion": 2,
+       "params": {
+        "sumando": "mil",
+        "modo": "resta",
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Truco: cuento en centenas o en millares y añado los ceros.\nEscribe el número que falta en el cuadro gris.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "fila": [
+           "6517 − 1000 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           5517
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "fila": [
+           "4519 − 3000 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           1519
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "fila": [
+           "5803 − 1000 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4803
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "fila": [
+           "9322 − 2000 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           7322
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "fila": [
+           "7789 − 3000 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4789
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "fila": [
+           "5335 − 2000 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3335
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "fila": [
+           "4864 − 2000 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           2864
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "fila": [
+           "6559 − 3000 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3559
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "fila": [
+           "9970 − 2000 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           7970
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "fila": [
+           "8455 − 2000 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           6455
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "fila": [
+           "9079 − 2000 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           7079
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "fila": [
+           "5869 − 1000 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4869
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "fila": [
+           "4384 − 3000 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           1384
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "fila": [
+           "4807 − 1000 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3807
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "fila": [
+           "4072 − 2000 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           2072
+          ]
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "fila": [
+           "9283 − 3000 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           6283
+          ]
+         }
+        },
+        {
+         "id": "a1e17",
+         "datos": {
+          "fila": [
+           "5488 − 2000 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3488
+          ]
+         }
+        },
+        {
+         "id": "a1e18",
+         "datos": {
+          "fila": [
+           "6016 − 1000 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           5016
+          ]
+         }
+        },
+        {
+         "id": "a1e19",
+         "datos": {
+          "fila": [
+           "6418 − 3000 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3418
+          ]
+         }
+        },
+        {
+         "id": "a1e20",
+         "datos": {
+          "fila": [
+           "8863 − 3000 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           5863
+          ]
+         }
+        },
+        {
+         "id": "a1e21",
+         "datos": {
+          "fila": [
+           "6091 − 2000 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4091
+          ]
+         }
+        },
+        {
+         "id": "a1e22",
+         "datos": {
+          "fila": [
+           "6580 − 2000 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4580
+          ]
+         }
+        },
+        {
+         "id": "a1e23",
+         "datos": {
+          "fila": [
+           "6616 − 2000 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4616
+          ]
+         }
+        },
+        {
+         "id": "a1e24",
+         "datos": {
+          "fila": [
+           "6169 − 1000 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           5169
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "025f8cb294ad456e"
+  ],
+  "svgSolucion": [
+   "0906ac04a22eec83"
+  ]
+ },
+ "3.º trucos dobles de centenas y por 5 en media": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Dobles y mitades de centenas y multiplicar por 5",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "trucos.doblescentenas",
+       "tipoVersion": 2,
+       "params": {
+        "modo": "doble",
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "verde",
+       "enunciado": "Truco: calculo con centenas y después añado los ceros.\nEscribe los números que faltan.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "fila": [
+           "2 × 600 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           1200
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "fila": [
+           "2 × 850 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           1600,
+           100,
+           1700
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "fila": [
+           "2 × 1400 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           2800
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "fila": [
+           "2 × 3000 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           6000
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "fila": [
+           "2 × 2100 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4200
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "fila": [
+           "2 × 1100 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           2200
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "fila": [
+           "2 × 300 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           600
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "fila": [
+           "2 × 350 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           600,
+           100,
+           700
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "trucos.por5",
+       "tipoVersion": 2,
+       "params": {
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Truco: multiplico por 10 y calculo la mitad. Escribe los números que faltan.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "fila": [
+           "27 × 5 =",
+           null,
+           ": 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           270,
+           135
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "fila": [
+           "12 × 5 =",
+           null,
+           ": 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           120,
+           60
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "fila": [
+           "42 × 5 =",
+           null,
+           ": 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           420,
+           210
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "fila": [
+           "98 × 5 =",
+           null,
+           ": 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           980,
+           490
+          ]
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "fila": [
+           "57 × 5 =",
+           null,
+           ": 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           570,
+           285
+          ]
+         }
+        },
+        {
+         "id": "a2e6",
+         "datos": {
+          "fila": [
+           "43 × 5 =",
+           null,
+           ": 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           430,
+           215
+          ]
+         }
+        },
+        {
+         "id": "a2e7",
+         "datos": {
+          "fila": [
+           "86 × 5 =",
+           null,
+           ": 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           860,
+           430
+          ]
+         }
+        },
+        {
+         "id": "a2e8",
+         "datos": {
+          "fila": [
+           "15 × 5 =",
+           null,
+           ": 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           150,
+           75
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "cf2d9294dcc01aa7"
+  ],
+  "svgSolucion": [
+   "a4eb481590f11390"
+  ]
+ },
+ "3.º trucos más ejercicios: mitades y restar a la centena": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Dobles y mitades de centenas y restar llegando a la centena",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "trucos.doblescentenas",
+       "tipoVersion": 2,
+       "params": {
+        "modo": "mitad",
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "verde",
+       "enunciado": "Truco: calculo con centenas y después añado los ceros.\nEscribe los números que faltan.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "fila": [
+           "5600 : 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           2800
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "fila": [
+           "9800 : 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4900
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "fila": [
+           "7800 : 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3900
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "fila": [
+           "3200 : 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           1600
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "fila": [
+           "1000 : 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           500
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "fila": [
+           "9600 : 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4800
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "fila": [
+           "5000 : 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           2500
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "fila": [
+           "7200 : 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3600
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "fila": [
+           "9000 : 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4500
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "fila": [
+           "400 : 2 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           200
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "trucos.restacentena",
+       "tipoVersion": 2,
+       "params": {
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "rosa",
+       "enunciado": "Truco: cuento desde el número pequeño hasta la centena y de la centena al grande.\nEscribe los números que faltan.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "fila": [
+           "203 − 198 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           3,
+           5
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "fila": [
+           "707 − 697 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           7,
+           10
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "fila": [
+           "505 − 491 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           9,
+           5,
+           14
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "fila": [
+           "405 − 393 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           5,
+           12
+          ]
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "fila": [
+           "606 − 597 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           6,
+           9
+          ]
+         }
+        },
+        {
+         "id": "a2e6",
+         "datos": {
+          "fila": [
+           "904 − 893 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           7,
+           4,
+           11
+          ]
+         }
+        },
+        {
+         "id": "a2e7",
+         "datos": {
+          "fila": [
+           "501 − 491 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           9,
+           1,
+           10
+          ]
+         }
+        },
+        {
+         "id": "a2e8",
+         "datos": {
+          "fila": [
+           "209 − 192 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           8,
+           9,
+           17
+          ]
+         }
+        },
+        {
+         "id": "a2e9",
+         "datos": {
+          "fila": [
+           "907 − 895 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           5,
+           7,
+           12
+          ]
+         }
+        },
+        {
+         "id": "a2e10",
+         "datos": {
+          "fila": [
+           "309 − 296 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           9,
+           13
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "fd6b9e338c2217e7"
+  ],
+  "svgSolucion": [
+   "6014063eed2372da"
+  ]
+ },
+ "3.º trucos: sumar descomponiendo, compensar y multiplicar": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Sumar descomponiendo y restar compensando",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "trucos.suma2cifras",
+       "tipoVersion": 2,
+       "params": {
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Truco: sumo las decenas por un lado y las unidades por otro.\nEscribe los números que faltan.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "fila": [
+           "38 + 35 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           60,
+           13,
+           73
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "fila": [
+           "47 + 13 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           50,
+           10,
+           60
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "fila": [
+           "86 + 29 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           100,
+           15,
+           115
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "fila": [
+           "82 + 49 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           120,
+           11,
+           131
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "fila": [
+           "56 + 39 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           80,
+           15,
+           95
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "fila": [
+           "57 + 56 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           100,
+           13,
+           113
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "fila": [
+           "19 + 78 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           80,
+           17,
+           97
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "fila": [
+           "58 + 37 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           80,
+           15,
+           95
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "fila": [
+           "39 + 62 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           90,
+           11,
+           101
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "fila": [
+           "36 + 65 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           90,
+           11,
+           101
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "fila": [
+           "49 + 61 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           100,
+           10,
+           110
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "fila": [
+           "49 + 29 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           60,
+           18,
+           78
+          ]
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "fila": [
+           "31 + 99 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           120,
+           10,
+           130
+          ]
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "fila": [
+           "89 + 56 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           130,
+           15,
+           145
+          ]
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "fila": [
+           "67 + 19 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           70,
+           16,
+           86
+          ]
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "fila": [
+           "76 + 44 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           110,
+           10,
+           120
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "actividades": [
+      {
+       "n": 2,
+       "tipo": "trucos.resta2cifras",
+       "tipoVersion": 2,
+       "params": {
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "verde",
+       "enunciado": "Truco: resto la decena de al lado y devuelvo lo que me pasé.\nEscribe los números que faltan.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "fila": [
+           "131 − 26 = 131 − 30 +",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           105
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "fila": [
+           "195 − 17 = 195 − 20 +",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           178
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "fila": [
+           "177 − 16 = 177 − 20 +",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           161
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "fila": [
+           "48 − 28 = 48 − 30 +",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           20
+          ]
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "fila": [
+           "97 − 68 = 97 − 70 +",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           29
+          ]
+         }
+        },
+        {
+         "id": "a2e6",
+         "datos": {
+          "fila": [
+           "102 − 77 = 102 − 80 +",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           25
+          ]
+         }
+        },
+        {
+         "id": "a2e7",
+         "datos": {
+          "fila": [
+           "118 − 28 = 118 − 30 +",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           90
+          ]
+         }
+        },
+        {
+         "id": "a2e8",
+         "datos": {
+          "fila": [
+           "89 − 56 = 89 − 60 +",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           4,
+           33
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 3,
+       "tipo": "trucos.multdescomp",
+       "tipoVersion": 2,
+       "params": {
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "rosa",
+       "enunciado": "Truco: parto el número en 10 y lo que sobra, multiplico cada parte y sumo.\nEscribe los números que faltan.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a3e1",
+         "datos": {
+          "fila": [
+           "5 × 13 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           50,
+           15,
+           65
+          ]
+         }
+        },
+        {
+         "id": "a3e2",
+         "datos": {
+          "fila": [
+           "7 × 13 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           70,
+           21,
+           91
+          ]
+         }
+        },
+        {
+         "id": "a3e3",
+         "datos": {
+          "fila": [
+           "5 × 15 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           50,
+           25,
+           75
+          ]
+         }
+        },
+        {
+         "id": "a3e4",
+         "datos": {
+          "fila": [
+           "3 × 16 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           30,
+           18,
+           48
+          ]
+         }
+        },
+        {
+         "id": "a3e5",
+         "datos": {
+          "fila": [
+           "7 × 12 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           70,
+           14,
+           84
+          ]
+         }
+        },
+        {
+         "id": "a3e6",
+         "datos": {
+          "fila": [
+           "4 × 18 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           40,
+           32,
+           72
+          ]
+         }
+        },
+        {
+         "id": "a3e7",
+         "datos": {
+          "fila": [
+           "5 × 14 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           50,
+           20,
+           70
+          ]
+         }
+        },
+        {
+         "id": "a3e8",
+         "datos": {
+          "fila": [
+           "7 × 18 =",
+           null,
+           "+",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           70,
+           56,
+           126
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "04ba219a28c6e2ab",
+   "338636a04067f1d4"
+  ],
+  "svgSolucion": [
+   "31df1610422a1eae",
+   "c9f65ebbd37dfde6"
+  ]
+ },
+ "3.º truco multiplicar decenas y repaso de 2.º (centenas)": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Multiplicar decenas y centenas y sumar y restar centenas",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "trucos.multdecenas",
+       "tipoVersion": 2,
+       "params": {
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Truco: multiplico las decenas (o centenas) y añado los ceros.\nEscribe los números que faltan.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "fila": [
+           "6 × 40 =",
+           null,
+           "× 10 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           24,
+           240
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "fila": [
+           "4 × 600 =",
+           null,
+           "× 100 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           24,
+           2400
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "fila": [
+           "6 × 60 =",
+           null,
+           "× 10 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           36,
+           360
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "fila": [
+           "8 × 300 =",
+           null,
+           "× 100 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           24,
+           2400
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "fila": [
+           "9 × 300 =",
+           null,
+           "× 100 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           27,
+           2700
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "fila": [
+           "5 × 30 =",
+           null,
+           "× 10 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           15,
+           150
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "fila": [
+           "6 × 50 =",
+           null,
+           "× 10 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           30,
+           300
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "fila": [
+           "2 × 300 =",
+           null,
+           "× 100 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           6,
+           600
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "trucos.centenas",
+       "tipoVersion": 2,
+       "params": {
+        "modo": null,
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "amarillo",
+       "enunciado": "Truco: sumo o resto las centenas. Escribe el número que falta en el cuadro gris.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "fila": [
+           "810 − 100 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           710
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "fila": [
+           "490 + 100 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           590
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "fila": [
+           "660 + 200 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           860
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "fila": [
+           "220 − 100 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           120
+          ]
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "fila": [
+           "110 + 200 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           310
+          ]
+         }
+        },
+        {
+         "id": "a2e6",
+         "datos": {
+          "fila": [
+           "470 + 400 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           870
+          ]
+         }
+        },
+        {
+         "id": "a2e7",
+         "datos": {
+          "fila": [
+           "800 + 100 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           900
+          ]
+         }
+        },
+        {
+         "id": "a2e8",
+         "datos": {
+          "fila": [
+           "330 + 100 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           430
+          ]
+         }
+        },
+        {
+         "id": "a2e9",
+         "datos": {
+          "fila": [
+           "730 − 100 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           630
+          ]
+         }
+        },
+        {
+         "id": "a2e10",
+         "datos": {
+          "fila": [
+           "370 + 300 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           670
+          ]
+         }
+        },
+        {
+         "id": "a2e11",
+         "datos": {
+          "fila": [
+           "560 − 300 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           260
+          ]
+         }
+        },
+        {
+         "id": "a2e12",
+         "datos": {
+          "fila": [
+           "340 + 600 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           940
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "0f1921dc983cbc1e"
+  ],
+  "svgSolucion": [
+   "80a7cd6556aa8001"
+  ]
+ },
+ "3.º repaso de 2.º: restar hacia delante y compensar": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Restar hacia delante y redondear y compensar",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "trucos.restaradelante",
+       "tipoVersion": 2,
+       "params": {
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "verde",
+       "enunciado": "Truco: cuento hacia delante. Escribe el número que falta en el cuadro gris.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "fila": [
+           "41 − 38 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "fila": [
+           "78 +",
+           null,
+           "= 86"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "fila": [
+           "68 − 56 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           12
+          ]
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "fila": [
+           "47 +",
+           null,
+           "= 56"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           9
+          ]
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "fila": [
+           "86 − 79 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           7
+          ]
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "fila": [
+           "47 +",
+           null,
+           "= 57"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           10
+          ]
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "fila": [
+           "28 − 17 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           11
+          ]
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "fila": [
+           "57 +",
+           null,
+           "= 68"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           11
+          ]
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "fila": [
+           "81 − 78 =",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "fila": [
+           "49 +",
+           null,
+           "= 52"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3
+          ]
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "fila": [
+           "36 +",
+           null,
+           "= 44"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           8
+          ]
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "fila": [
+           "57 +",
+           null,
+           "= 63"
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           6
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 2,
+       "tipo": "trucos.compensar2",
+       "tipoVersion": 2,
+       "params": {
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "rosa",
+       "enunciado": "Truco: redondeo a la decena, sumo y compenso. Escribe los números que faltan.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "fila": [
+           "48 + 16 = 50 + 16 −",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           64
+          ]
+         }
+        },
+        {
+         "id": "a2e2",
+         "datos": {
+          "fila": [
+           "57 + 24 = 60 + 24 −",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           81
+          ]
+         }
+        },
+        {
+         "id": "a2e3",
+         "datos": {
+          "fila": [
+           "57 + 12 = 60 + 12 −",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           69
+          ]
+         }
+        },
+        {
+         "id": "a2e4",
+         "datos": {
+          "fila": [
+           "17 + 12 = 20 + 12 −",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           29
+          ]
+         }
+        },
+        {
+         "id": "a2e5",
+         "datos": {
+          "fila": [
+           "59 + 25 = 60 + 25 −",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           84
+          ]
+         }
+        },
+        {
+         "id": "a2e6",
+         "datos": {
+          "fila": [
+           "67 + 13 = 70 + 13 −",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           3,
+           80
+          ]
+         }
+        },
+        {
+         "id": "a2e7",
+         "datos": {
+          "fila": [
+           "29 + 16 = 30 + 16 −",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           1,
+           45
+          ]
+         }
+        },
+        {
+         "id": "a2e8",
+         "datos": {
+          "fila": [
+           "48 + 25 = 50 + 25 −",
+           null,
+           "=",
+           null
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           2,
+           73
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "0c4a8e12f013fb53"
+  ],
+  "svgSolucion": [
+   "2345993d9138784f"
+  ]
+ },
+ "3.º sigue las instrucciones: dibuja el camino (completa y media)": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Sigue las instrucciones",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "algoritmo.sigue",
+       "tipoVersion": 1,
+       "params": {
+        "tarea": null,
+        "bucles": true,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Sal de la S y sigue el programa: cada flecha es una casilla.\nDibuja el camino que haces. «Repite» quiere decir que haces lo de dentro varias veces.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "inicio": [
+           5,
+           3
+          ],
+          "programa": [
+           {
+            "cuerpo": [
+             "L",
+             "D"
+            ]
+           },
+           {
+            "rep": 2,
+            "cuerpo": [
+             "L",
+             "U",
+             "L"
+            ]
+           }
+          ],
+          "fin": [
+           0,
+           4
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "ruta": [
+           [
+            5,
+            3
+           ],
+           [
+            4,
+            3
+           ],
+           [
+            4,
+            2
+           ],
+           [
+            3,
+            2
+           ],
+           [
+            3,
+            3
+           ],
+           [
+            2,
+            3
+           ],
+           [
+            1,
+            3
+           ],
+           [
+            1,
+            4
+           ],
+           [
+            0,
+            4
+           ]
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "inicio": [
+           1,
+           4
+          ],
+          "programa": [
+           {
+            "cuerpo": [
+             "D",
+             "D"
+            ]
+           },
+           {
+            "rep": 2,
+            "cuerpo": [
+             "R",
+             "D"
+            ]
+           }
+          ],
+          "fin": [
+           3,
+           0
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "ruta": [
+           [
+            1,
+            4
+           ],
+           [
+            1,
+            3
+           ],
+           [
+            1,
+            2
+           ],
+           [
+            2,
+            2
+           ],
+           [
+            2,
+            1
+           ],
+           [
+            3,
+            1
+           ],
+           [
+            3,
+            0
+           ]
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "inicio": [
+           5,
+           5
+          ],
+          "programa": [
+           {
+            "cuerpo": [
+             "L",
+             "D"
+            ]
+           },
+           {
+            "rep": 2,
+            "cuerpo": [
+             "D",
+             "D"
+            ]
+           },
+           {
+            "cuerpo": [
+             "R"
+            ]
+           }
+          ],
+          "fin": [
+           5,
+           0
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "ruta": [
+           [
+            5,
+            5
+           ],
+           [
+            4,
+            5
+           ],
+           [
+            4,
+            4
+           ],
+           [
+            4,
+            3
+           ],
+           [
+            4,
+            2
+           ],
+           [
+            4,
+            1
+           ],
+           [
+            4,
+            0
+           ],
+           [
+            5,
+            0
+           ]
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "actividades": [
+      {
+       "n": 2,
+       "tipo": "algoritmo.sigue",
+       "tipoVersion": 1,
+       "params": {
+        "tarea": null,
+        "bucles": true,
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "rosa",
+       "enunciado": "Sal de la S y sigue el programa: cada flecha es una casilla.\nDibuja el camino que haces. «Repite» quiere decir que haces lo de dentro varias veces.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "inicio": [
+           5,
+           0
+          ],
+          "programa": [
+           {
+            "cuerpo": [
+             "L"
+            ]
+           },
+           {
+            "rep": 4,
+            "cuerpo": [
+             "L"
+            ]
+           },
+           {
+            "cuerpo": [
+             "U"
+            ]
+           }
+          ],
+          "fin": [
+           0,
+           1
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "ruta": [
+           [
+            5,
+            0
+           ],
+           [
+            4,
+            0
+           ],
+           [
+            3,
+            0
+           ],
+           [
+            2,
+            0
+           ],
+           [
+            1,
+            0
+           ],
+           [
+            0,
+            0
+           ],
+           [
+            0,
+            1
+           ]
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 3,
+       "tipo": "algoritmo.sigue",
+       "tipoVersion": 1,
+       "params": {
+        "tarea": null,
+        "bucles": false,
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Sal de la S y sigue el programa: cada flecha es una casilla.\nDibuja el camino que haces. «Repite» quiere decir que haces lo de dentro varias veces.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a3e1",
+         "datos": {
+          "inicio": [
+           4,
+           0
+          ],
+          "programa": [
+           {
+            "cuerpo": [
+             "U",
+             "L",
+             "D",
+             "L",
+             "L",
+             "U",
+             "R"
+            ]
+           }
+          ],
+          "fin": [
+           2,
+           1
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "ruta": [
+           [
+            4,
+            0
+           ],
+           [
+            4,
+            1
+           ],
+           [
+            3,
+            1
+           ],
+           [
+            3,
+            0
+           ],
+           [
+            2,
+            0
+           ],
+           [
+            1,
+            0
+           ],
+           [
+            1,
+            1
+           ],
+           [
+            2,
+            1
+           ]
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "0cc86a11502a15b7",
+   "800eba74f3852188"
+  ],
+  "svgSolucion": [
+   "c51b9c3d026bd9ff",
+   "60adca0802118e9e"
+  ]
+ },
+ "3.º sigue las instrucciones: ¿dónde llegas? sin bucles": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Sigue las instrucciones",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "algoritmo.sigue",
+       "tipoVersion": 1,
+       "params": {
+        "tarea": "llega",
+        "bucles": false,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Sal de la S y sigue el programa: cada flecha es una casilla.\nEscribe la letra y el número de la casilla donde llegas.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "inicio": [
+           4,
+           4
+          ],
+          "programa": [
+           {
+            "cuerpo": [
+             "D",
+             "R",
+             "D",
+             "L",
+             "D",
+             "D",
+             "R"
+            ]
+           }
+          ],
+          "fin": [
+           5,
+           0
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "F",
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "inicio": [
+           1,
+           3
+          ],
+          "programa": [
+           {
+            "cuerpo": [
+             "R",
+             "D",
+             "R",
+             "D",
+             "D",
+             "L",
+             "L"
+            ]
+           }
+          ],
+          "fin": [
+           1,
+           0
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "B",
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "inicio": [
+           5,
+           5
+          ],
+          "programa": [
+           {
+            "cuerpo": [
+             "D",
+             "L",
+             "U",
+             "L",
+             "D",
+             "D"
+            ]
+           }
+          ],
+          "fin": [
+           3,
+           3
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "D",
+           4
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "3be746e5187388a4"
+  ],
+  "svgSolucion": [
+   "def147bf8cfb9fa0"
+  ]
+ },
+ "3.º sigue las instrucciones: escribe el programa (completa y media)": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Sigue las instrucciones",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "algoritmo.sigue",
+       "tipoVersion": 1,
+       "params": {
+        "tarea": "programa",
+        "bucles": true,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Mira el camino que va de la S a la L y escribe el programa con flechas.\nSi algo se repite, usa «repite».",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "inicio": [
+           5,
+           3
+          ],
+          "programa": [
+           {
+            "cuerpo": [
+             "L",
+             "D"
+            ]
+           },
+           {
+            "rep": 2,
+            "cuerpo": [
+             "L",
+             "U",
+             "L"
+            ]
+           }
+          ],
+          "fin": [
+           0,
+           4
+          ],
+          "ruta": [
+           [
+            5,
+            3
+           ],
+           [
+            4,
+            3
+           ],
+           [
+            4,
+            2
+           ],
+           [
+            3,
+            2
+           ],
+           [
+            3,
+            3
+           ],
+           [
+            2,
+            3
+           ],
+           [
+            1,
+            3
+           ],
+           [
+            1,
+            4
+           ],
+           [
+            0,
+            4
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "L",
+           "D",
+           2,
+           "L",
+           "U",
+           "L"
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "inicio": [
+           1,
+           4
+          ],
+          "programa": [
+           {
+            "cuerpo": [
+             "D",
+             "D"
+            ]
+           },
+           {
+            "rep": 2,
+            "cuerpo": [
+             "R",
+             "D"
+            ]
+           }
+          ],
+          "fin": [
+           3,
+           0
+          ],
+          "ruta": [
+           [
+            1,
+            4
+           ],
+           [
+            1,
+            3
+           ],
+           [
+            1,
+            2
+           ],
+           [
+            2,
+            2
+           ],
+           [
+            2,
+            1
+           ],
+           [
+            3,
+            1
+           ],
+           [
+            3,
+            0
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "D",
+           "D",
+           2,
+           "R",
+           "D"
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "inicio": [
+           5,
+           5
+          ],
+          "programa": [
+           {
+            "cuerpo": [
+             "L",
+             "D"
+            ]
+           },
+           {
+            "rep": 2,
+            "cuerpo": [
+             "D",
+             "D"
+            ]
+           },
+           {
+            "cuerpo": [
+             "R"
+            ]
+           }
+          ],
+          "fin": [
+           5,
+           0
+          ],
+          "ruta": [
+           [
+            5,
+            5
+           ],
+           [
+            4,
+            5
+           ],
+           [
+            4,
+            4
+           ],
+           [
+            4,
+            3
+           ],
+           [
+            4,
+            2
+           ],
+           [
+            4,
+            1
+           ],
+           [
+            4,
+            0
+           ],
+           [
+            5,
+            0
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "L",
+           "D",
+           2,
+           "D",
+           "D",
+           "R"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "actividades": [
+      {
+       "n": 2,
+       "tipo": "algoritmo.sigue",
+       "tipoVersion": 1,
+       "params": {
+        "tarea": "programa",
+        "bucles": true,
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "rosa",
+       "enunciado": "Mira el camino que va de la S a la L y escribe el programa con flechas.\nSi algo se repite, usa «repite».",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a2e1",
+         "datos": {
+          "inicio": [
+           5,
+           0
+          ],
+          "programa": [
+           {
+            "cuerpo": [
+             "L"
+            ]
+           },
+           {
+            "rep": 4,
+            "cuerpo": [
+             "L"
+            ]
+           },
+           {
+            "cuerpo": [
+             "U"
+            ]
+           }
+          ],
+          "fin": [
+           0,
+           1
+          ],
+          "ruta": [
+           [
+            5,
+            0
+           ],
+           [
+            4,
+            0
+           ],
+           [
+            3,
+            0
+           ],
+           [
+            2,
+            0
+           ],
+           [
+            1,
+            0
+           ],
+           [
+            0,
+            0
+           ],
+           [
+            0,
+            1
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "L",
+           4,
+           "L",
+           "U"
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "n": 3,
+       "tipo": "algoritmo.sigue",
+       "tipoVersion": 1,
+       "params": {
+        "tarea": "programa",
+        "bucles": false,
+        "rango": null
+       },
+       "tamano": "media",
+       "color": "azul",
+       "enunciado": "Mira el camino que va de la S a la L.\nEscribe una flecha por cada casilla que avanzas.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a3e1",
+         "datos": {
+          "inicio": [
+           4,
+           0
+          ],
+          "programa": [
+           {
+            "cuerpo": [
+             "U",
+             "L",
+             "D",
+             "L",
+             "L",
+             "U",
+             "R"
+            ]
+           }
+          ],
+          "fin": [
+           2,
+           1
+          ],
+          "ruta": [
+           [
+            4,
+            0
+           ],
+           [
+            4,
+            1
+           ],
+           [
+            3,
+            1
+           ],
+           [
+            3,
+            0
+           ],
+           [
+            2,
+            0
+           ],
+           [
+            1,
+            0
+           ],
+           [
+            1,
+            1
+           ],
+           [
+            2,
+            1
+           ]
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "U",
+           "L",
+           "D",
+           "L",
+           "L",
+           "U",
+           "R"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "8a510b07257b00d6",
+   "544d5634435eebd5"
+  ],
+  "svgSolucion": [
+   "03850ba5982c9e48",
+   "c3772aec5db13739"
+  ]
+ },
+ "3.º sigue las instrucciones: más ejercicios": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Sigue las instrucciones",
+   "curso": 3,
+   "area": "matematicas",
+   "semilla": 7,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "algoritmo.sigue",
+       "tipoVersion": 1,
+       "params": {
+        "tarea": "llega",
+        "bucles": true,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "rosa",
+       "enunciado": "Sal de la S y sigue el programa: cada flecha es una casilla.\nEscribe la letra y el número de la casilla donde llegas.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "inicio": [
+           5,
+           3
+          ],
+          "programa": [
+           {
+            "cuerpo": [
+             "L",
+             "D"
+            ]
+           },
+           {
+            "rep": 2,
+            "cuerpo": [
+             "L",
+             "U",
+             "L"
+            ]
+           }
+          ],
+          "fin": [
+           0,
+           4
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "A",
+           5
+          ]
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "inicio": [
+           1,
+           4
+          ],
+          "programa": [
+           {
+            "cuerpo": [
+             "D",
+             "D"
+            ]
+           },
+           {
+            "rep": 2,
+            "cuerpo": [
+             "R",
+             "D"
+            ]
+           }
+          ],
+          "fin": [
+           3,
+           0
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "D",
+           1
+          ]
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "inicio": [
+           5,
+           5
+          ],
+          "programa": [
+           {
+            "cuerpo": [
+             "L",
+             "D"
+            ]
+           },
+           {
+            "rep": 2,
+            "cuerpo": [
+             "D",
+             "D"
+            ]
+           },
+           {
+            "cuerpo": [
+             "R"
+            ]
+           }
+          ],
+          "fin": [
+           5,
+           0
+          ]
+         },
+         "solucion": {
+          "huecos": [
+           "F",
+           1
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "40f564333a84757d"
+  ],
+  "svgSolucion": [
+   "2a48ee69785722f5"
   ]
  },
  "3.º divisiones con la caja (2 cifras, exactas)": {

@@ -15,6 +15,7 @@ import "./familia.dividir.js";
 import "./familia.fraccion.js";
 import "./familia.medida.js";
 import "./familia.estadistica.js";
+import "./familia.algoritmo.js";
 import "./familia.letra.js";
 import "./familia.silaba.js";
 import "./familia.fono.js";

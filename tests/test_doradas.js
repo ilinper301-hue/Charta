@@ -127,6 +127,17 @@ const CASOS = [
   { nombre: "3.º cuenta y anota con la moda", semilla: 7, opciones: { actividades: [{ tipo: "estadistica.recuento", curso: 3, params: { moda: true } }] } },
   { nombre: "3.º cuenta y anota de dos clases", semilla: 7, opciones: { actividades: [{ tipo: "estadistica.recuento", curso: 3, params: { grupos: "dos" } }] } },
   { nombre: "3.º cuenta y anota de dos clases con la moda", semilla: 7, opciones: { actividades: [{ tipo: "estadistica.recuento", curso: 3, params: { grupos: "dos", moda: true } }] } },
+  // 3.º · lote 8 (trucos de 3.º y pensamiento computacional)
+  { nombre: "3.º truco sumar millares (solo restas de 1000)", semilla: 7, opciones: { actividades: [{ tipo: "trucos.sumamillares", curso: 3, params: { sumando: "mil", modo: "resta" } }] } },
+  { nombre: "3.º trucos dobles de centenas y por 5 en media", semilla: 7, opciones: { actividades: [{ tipo: "trucos.doblescentenas", curso: 3, params: { modo: "doble" } }, { tipo: "trucos.por5", curso: 3 }] } },
+  { nombre: "3.º trucos más ejercicios: mitades y restar a la centena", semilla: 7, opciones: { cantidad: "mas", actividades: [{ tipo: "trucos.doblescentenas", curso: 3, params: { modo: "mitad" } }, { tipo: "trucos.restacentena", curso: 3 }] } },
+  { nombre: "3.º trucos: sumar descomponiendo, compensar y multiplicar", semilla: 7, opciones: { paginas: [{ actividades: [{ tipo: "trucos.suma2cifras", curso: 3 }] }, { actividades: [{ tipo: "trucos.resta2cifras", curso: 3 }, { tipo: "trucos.multdescomp", curso: 3 }] }] } },
+  { nombre: "3.º truco multiplicar decenas y repaso de 2.º (centenas)", semilla: 7, opciones: { actividades: [{ tipo: "trucos.multdecenas", curso: 3 }, { tipo: "trucos.centenas", curso: 3 }] } },
+  { nombre: "3.º repaso de 2.º: restar hacia delante y compensar", semilla: 7, opciones: { actividades: [{ tipo: "trucos.restaradelante", curso: 3 }, { tipo: "trucos.compensar2", curso: 3 }] } },
+  { nombre: "3.º sigue las instrucciones: dibuja el camino (completa y media)", semilla: 7, opciones: { paginas: [{ actividades: [{ tipo: "algoritmo.sigue", curso: 3 }] }, { actividades: [{ tipo: "algoritmo.sigue", curso: 3 }, { tipo: "algoritmo.sigue", curso: 3, params: { bucles: false } }] }] } },
+  { nombre: "3.º sigue las instrucciones: ¿dónde llegas? sin bucles", semilla: 7, opciones: { actividades: [{ tipo: "algoritmo.sigue", curso: 3, params: { tarea: "llega", bucles: false } }] } },
+  { nombre: "3.º sigue las instrucciones: escribe el programa (completa y media)", semilla: 7, opciones: { paginas: [{ actividades: [{ tipo: "algoritmo.sigue", curso: 3, params: { tarea: "programa" } }] }, { actividades: [{ tipo: "algoritmo.sigue", curso: 3, params: { tarea: "programa" } }, { tipo: "algoritmo.sigue", curso: 3, params: { tarea: "programa", bucles: false } }] }] } },
+  { nombre: "3.º sigue las instrucciones: más ejercicios", semilla: 7, opciones: { cantidad: "mas", actividades: [{ tipo: "algoritmo.sigue", curso: 3, params: { tarea: "llega" } }] } },
   // 3.º · lote 4 (dividir): la caja, de la tabla, la familia, problemas y el reparto con ÷
   { nombre: "3.º divisiones con la caja (2 cifras, exactas)", semilla: 7, opciones: { actividades: [{ tipo: "dividir.vertical", curso: 3 }] } },
   { nombre: "3.º divisiones con la caja (3 cifras, mezcla, prueba)", semilla: 7, opciones: { actividades: [{ tipo: "dividir.vertical", curso: 3, params: { cifras: 3, nivel: "mezcla", prueba: true } }] } },

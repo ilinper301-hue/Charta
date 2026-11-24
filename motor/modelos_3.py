@@ -9,7 +9,7 @@ from modelos import M, op, AMBOS, COMPLETA
 
 CURSO = 3
 NOMBRE = "3.º de Primaria"
-BLOQUES_3 = {14: "Dividir", 15: "Fracciones"}   # Pensamiento computacional llega en su lote
+BLOQUES_3 = {14: "Dividir", 15: "Fracciones", 16: "Pensamiento computacional"}
 RANGOS_3 = (1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 9999)
 
 
@@ -46,6 +46,8 @@ EN_3 = {
         "medida.calendario", "medida.reloj", "medida.reloj2", "medida.tiempo", "medida.longitud", "medida.capacidad", "medida.masa", "medida.dinero", "medida.precios", "juegos.cuadrado", "juegos.colorea", "estadistica.patrones")},
     # Lote 7 · geometría y estadística: líneas, cuerpos (caras, aristas y vértices), barras, pictograma y recuento (opciones con `curso`)
     **{i: None for i in ("geometria.lineas", "estadistica.barras", "estadistica.pictograma", "estadistica.recuento")},
+    # Lote 8 · ♻ trucos de 2.º que sirven de repaso en 3.º (sin rango propio)
+    **{i: None for i in ("trucos.descomponer2", "trucos.pasardecena2", "trucos.sumar919", "trucos.restar919", "trucos.compensar2", "trucos.centenas", "trucos.restaradelante")},
 }
 
 
@@ -57,6 +59,30 @@ def _n3(bloque, familia, clave, nombre, descripcion, opciones, titulo, color, ra
 
 
 MODELOS_3 = [
+    # Lote 8 · pensamiento computacional (bloque 16; sin rango) y trucos de 3.º (bloque 12; sin rango: Calculi c3 y guion)
+    _n3(16, "algoritmo", "sigue", "Sigue las instrucciones", "Seguir un programa de flechas con bucles («repite 3 veces») en una cuadrícula, o escribir el programa de un camino.",
+        [op("tarea", "Tarea", [(None, "Dibuja el camino del programa"), ("llega", "¿Dónde llegas? (letra y número de la casilla)"), ("programa", "Escribe el programa de un camino")]),
+         {"id": "bucles", "etiqueta": "Con bucles (repite 3 veces)", "tipo": "si_no", "defecto": True}],
+        "SIGUE LAS INSTRUCCIONES", "rosa", tam=AMBOS),
+    _n3(12, "trucos", "sumamillares", "Sumar y restar centenas y millares", "Truco: cuento en centenas o en millares y añado los ceros (2500 + 300, 4200 + 1000).",
+        [op("sumando", "Números", [(None, "Centenas (2500 + 300)"), ("mil", "Millares (3450 + 1000)")]),
+         op("modo", "Operaciones", [(None, "Sumar y restar"), ("suma", "Solo sumar"), ("resta", "Solo restar")])],
+        "SUMAR Y RESTAR CENTENAS Y MILLARES", "amarillo"),
+    _n3(12, "trucos", "doblescentenas", "Dobles y mitades de centenas", "Truco: doble y mitad con centenas (2 × 300, 800 : 2) y con 50 de más (2 × 350, 700 : 2).",
+        [op("modo", "Calcula", [(None, "Dobles y mitades"), ("doble", "Solo dobles"), ("mitad", "Solo mitades")])],
+        "DOBLES Y MITADES DE CENTENAS", "verde"),
+    _n3(12, "trucos", "por5", "Multiplicar por 5", "Truco: multiplicar por 10 y calcular la mitad (24 × 5 = 240 : 2).", [],
+        "MULTIPLICAR POR 5", "azul"),
+    _n3(12, "trucos", "restacentena", "Restar llegando a la centena", "Truco: contar desde el número pequeño hasta la centena y de la centena al grande (503 − 497).", [],
+        "RESTAR LLEGANDO A LA CENTENA", "rosa"),
+    _n3(12, "trucos", "suma2cifras", "Sumar descomponiendo", "Truco: sumar por un lado las decenas y por otro las unidades, con llevada (47 + 36 = 70 + 13).", [],
+        "SUMAR DESCOMPONIENDO", "amarillo"),
+    _n3(12, "trucos", "resta2cifras", "Restar compensando", "Truco: restar la decena de al lado y devolver lo que sobra (73 − 28 = 73 − 30 + 2).", [],
+        "RESTAR COMPENSANDO", "verde"),
+    _n3(12, "trucos", "multdecenas", "Multiplicar decenas y centenas", "Truco: multiplicar las decenas (o centenas) y añadir los ceros (3 × 40 = 12 × 10).", [],
+        "MULTIPLICAR DECENAS Y CENTENAS", "azul"),
+    _n3(12, "trucos", "multdescomp", "Multiplicar partiendo", "Truco: partir el número en 10 y lo que sobra, multiplicar cada parte y sumar (6 × 14 = 60 + 24).", [],
+        "MULTIPLICAR PARTIENDO", "rosa"),
     # Lote 7 · geometría (bloque 9) y estadística (bloque 11; sin rango)
     _n3(9, "geometria", "angulos", "Los ángulos", "Clasificar ángulos dibujados en distintas posiciones: recto, agudo u obtuso.", [],
         "LOS ÁNGULOS", "azul"),

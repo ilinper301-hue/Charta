@@ -28,9 +28,10 @@ import inv_palabra from "./inv/palabra.js";
 import inv_frase from "./inv/frase.js";
 import inv_lectura from "./inv/lectura.js";
 import inv_escritura from "./inv/escritura.js";
+import inv_algoritmo from "./inv/algoritmo.js";
 
 export const INVARIANTES = {
-  ...inv_rep, ...inv_combinada, ...inv_conteo, ...inv_orden, ...inv_valor, ...inv_sumar, ...inv_restar, ...inv_juegos, ...inv_problemas, ...inv_trucos, ...inv_geometria, ...inv_multiplicar, ...inv_dividir, ...inv_fraccion, ...inv_medida, ...inv_estadistica, ...inv_letra, ...inv_silaba, ...inv_fono, ...inv_orto, ...inv_palabra, ...inv_frase, ...inv_lectura, ...inv_escritura,
+  ...inv_rep, ...inv_combinada, ...inv_conteo, ...inv_orden, ...inv_valor, ...inv_sumar, ...inv_restar, ...inv_juegos, ...inv_problemas, ...inv_trucos, ...inv_geometria, ...inv_multiplicar, ...inv_dividir, ...inv_fraccion, ...inv_medida, ...inv_estadistica, ...inv_letra, ...inv_silaba, ...inv_fono, ...inv_orto, ...inv_palabra, ...inv_frase, ...inv_lectura, ...inv_escritura, ...inv_algoritmo,
   "rep.dado": rep("dado"),
   "rep.marco": rep("marco"),
 

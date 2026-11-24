@@ -143,6 +143,16 @@ META = {
     "multiplicar.tablas": (2, 12, "multiplicar tablas cálculo_mental factor"),
     "multiplicar.problemas": (3, 15, "multiplicar problemas texto razonamiento grupos_iguales"),
     "multiplicar.reparto": (3, 10, "repartir mitad tercio partes_iguales división"),
+    # 3.º · lote 8 · trucos de 3.º y pensamiento computacional
+    "trucos.sumamillares": (3, 10, "cálculo_mental truco sumar restar centenas millares"),
+    "trucos.doblescentenas": (3, 10, "cálculo_mental truco doble mitad centenas"),
+    "trucos.por5": (3, 10, "cálculo_mental truco multiplicar por_5 mitad"),
+    "trucos.restacentena": (3, 10, "cálculo_mental truco restar restar_hacia_delante centena"),
+    "trucos.suma2cifras": (3, 10, "cálculo_mental truco sumar descomposición llevada"),
+    "trucos.resta2cifras": (3, 10, "cálculo_mental truco restar compensar"),
+    "trucos.multdecenas": (3, 10, "cálculo_mental truco multiplicar decenas centenas ceros"),
+    "trucos.multdescomp": (3, 12, "cálculo_mental truco multiplicar descomposición propiedad_distributiva"),
+    "algoritmo.sigue": (3, 15, "pensamiento_computacional algoritmo programa bucle repetición cuadrícula flechas"),
     # 3.º · lote 3 · multiplicar
     "multiplicar.vertical": (3, 15, "multiplicar vertical llevadas algoritmo una_cifra"),
     "multiplicar.por10": (3, 10, "multiplicar por_10 por_100 por_1000 ceros cálculo_mental"),
