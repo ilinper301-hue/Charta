@@ -3,7 +3,9 @@ import assert from "node:assert/strict";
 import { silabas, cabeTipo, sinTildes } from "../../src/lengua/reglas.js";
 import { LEXICO } from "../../src/lengua/lexico.js";
 
-export const PALABRAS = new Set(LEXICO.map((e) => e.p));
+// Unicidad con el léxico de 1.º (las invariantes generan en 1.º; las palabras de 2.º, n: 2, no salen ahí). LENGUA_2.md, lote 1: por curso.
+export const LEXICO_1 = LEXICO.filter((e) => !e.n);
+export const PALABRAS = new Set(LEXICO_1.map((e) => e.p));
 const cap = (t) => t[0].toUpperCase() + t.slice(1);
 
 /** El texto está escrito en el caso pedido (null = minúscula, "inicial", "mayus") y devuelve su forma en minúscula. */
@@ -28,7 +30,7 @@ export function palabraValida(m, params, { maxLetras = 99, largos = null } = {})
 /** ¿Hay otra palabra del léxico que encaje con la palabra salvo en las posiciones `libres`? (comparando sin tildes). */
 const POR_LARGO = new Map();
 export function otrasQueEncajan(m, libres) {
-  if (!POR_LARGO.has(m.length)) POR_LARGO.set(m.length, LEXICO.filter((o) => o.p.length === m.length).map((o) => ({ p: o.p, s: sinTildes(o.p) })));
+  if (!POR_LARGO.has(m.length)) POR_LARGO.set(m.length, LEXICO_1.filter((o) => o.p.length === m.length).map((o) => ({ p: o.p, s: sinTildes(o.p) })));
   const s = sinTildes(m), L = new Set(libres);
   return POR_LARGO.get(m.length).filter((o) => o.p !== m && [...o.s].every((c, i) => L.has(i) || c === s[i])).map((o) => o.p);
 }

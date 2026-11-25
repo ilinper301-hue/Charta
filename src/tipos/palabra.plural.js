@@ -11,10 +11,11 @@ import { TOP, cuantosRejilla } from "../render/papel.js";
 import { plural } from "../lengua/reglas.js";
 import { filtrarVistas, avisoVistas } from "../lengua/vistas.js";
 import { cuantas, ajusta, conTope } from "./_lengua.js";
-import { NOMBRES } from "./_palabra.js";
+import { nombres } from "./_palabra.js";
+import { porNivelDe } from "../lengua/palabras.js";
 
 const MIN_ALTO = 40;   // alto mínimo de tarjeta con «Más ejercicios»
-const SIMPLES = NOMBRES.filter((e) => e.p.length <= 8);
+const simples = porNivelDe(() => nombres().filter((e) => e.p.length <= 8));
 const enVocal = (e) => /[aeiou]$/.test(e.p) && plural(e.p) === e.p + "s";
 const enConsonante = (e) => !/[aeiouáéíóú]$/.test(e.p) && /es$/.test(plural(e.p));
 
@@ -42,7 +43,7 @@ export default registrar({
 function elegir(params, azar, n) {
   const conEs = params.plural === "es", reves = params.sentido === "alreves";
   const nEs = conEs ? Math.round(n / 3) : 0;
-  const ambos = filtrarVistas(SIMPLES, (e) => e.p + " " + plural(e.p));
+  const ambos = filtrarVistas(simples(), (e) => e.p + " " + plural(e.p));
   const conso = azar.barajar(ambos.filter(enConsonante)), vocal = azar.barajar(ambos.filter(enVocal));
   if (conso.length < nEs || vocal.length < n - nEs) throw new Error("«palabra.plural» necesita más nombres en el léxico para esas opciones." + avisoVistas());
   const elegidos = [...conso.slice(0, nEs), ...vocal.slice(0, n - nEs)];

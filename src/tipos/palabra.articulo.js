@@ -12,7 +12,7 @@ import { TOP, B, T, cuantosRejilla } from "../render/papel.js";
 import { articulo, plural } from "../lengua/reglas.js";
 import { filtrarVistas, permitida, avisoVistas } from "../lengua/vistas.js";
 import { cuantas, ajusta, conTope, crece } from "./_lengua.js";
-import { NOMBRES } from "./_palabra.js";
+import { nombres } from "./_palabra.js";
 
 const MIN_ALTO = 46;   // alto mínimo de tarjeta con «Más ejercicios»
 
@@ -36,7 +36,7 @@ export default registrar({
 
 function elegir(params, azar, n) {
   const mod = params.articulos || "el", indef = mod === "un" || mod === "unplural", conPl = mod === "plural" || mod === "unplural";
-  const lista = filtrarVistas(NOMBRES, (e) => (conPl ? e.p + " " + plural(e.p) : e.p));
+  const lista = filtrarVistas(nombres(), (e) => (conPl ? e.p + " " + plural(e.p) : e.p));
   const bolsa = { m: azar.barajar(lista.filter((e) => e.g === "m")), f: azar.barajar(lista.filter((e) => e.g === "f")) };
   const fichas = [];
   for (let i = 0; i < n; i++) fichas.push({ g: i % 2 ? "f" : "m", pl: conPl && i >= n / 2 });

@@ -7,17 +7,16 @@
 // Opciones: letras (3 a 5 variadas, 3, 4 o 5) · primera letra (sin marcar / marcada) · tipo de sílabas · letra. Cantidad: 2 columnas; letras arriba y hueco debajo; «Más grandes» 20 palabras (media: 10), «Más ejercicios» las que caben con tarjetas ≥ 50 pt.
 import { registrar } from "../nucleo/tipos.js";
 import { TOP, cuantosRejilla } from "../render/papel.js";
-import { LEXICO } from "../lengua/lexico.js";
+import { porNivelDe } from "../lengua/palabras.js";
 import { sinTildes } from "../lengua/reglas.js";
 import { alCaso, cap, cuantas, candidatas, ajusta, conTope, dosFilas } from "./_lengua.js";
 import { elegirPorLetras, fichasLetras, anchoFichas } from "./_palabra.js";
 
 const MIN_ALTO = 50;   // alto mínimo de tarjeta con «Más ejercicios»
 const clave = (p) => [...sinTildes(p)].sort().join("");
-const ANAGRAMAS = new Map();
-for (const e of LEXICO) { const k = clave(e.p); (ANAGRAMAS.get(k) || ANAGRAMAS.set(k, []).get(k)).push(e.p); }
+const anagramas = porNivelDe((L) => { const m = new Map(); for (const e of L) { const k = clave(e.p); (m.get(k) || m.set(k, []).get(k)).push(e.p); } return m; });
 /** ¿Sirve la palabra? Sí si ninguna otra del léxico tiene las mismas letras (con `marca`, las mismas y la misma primera). */
-export const sinAnagramas = (p, marca) => !ANAGRAMAS.get(clave(p)).some((o) => o !== p && (!marca || o[0] === p[0]));
+export const sinAnagramas = (p, marca) => !(anagramas().get(clave(p)) || []).some((o) => o !== p && (!marca || o[0] === p[0]));
 
 export default registrar({
   id: "palabra.letras",

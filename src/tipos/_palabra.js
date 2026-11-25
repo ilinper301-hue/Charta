@@ -3,7 +3,8 @@
 import { LEXICO } from "../lengua/lexico.js";
 import { plural } from "../lengua/reglas.js";
 import { cap } from "./_lengua.js";
-import { filtrarVistas, avisoVistas } from "../lengua/vistas.js";
+import { filtrarVistas, avisoVistas, nivelActivo } from "../lengua/vistas.js";
+import { lexicoActivo, porNivelDe } from "../lengua/palabras.js";
 import { INK } from "../render/papel.js";
 
 /** Campos léxicos que usan intrusa, clasifica y sopa (en este orden; «colores» solo lleva adjetivos). */
@@ -18,10 +19,10 @@ const memo = new Map();
 /** Palabras de un campo: nombres (en «colores», adjetivos) frecuentes, de 3 a maxLetras letras; con «Mayúscula inicial» sin la «i» inicial.
  *  Con letras elegidas (vistas.js) solo las que se escriben con ellas (la caché guarda la lista entera; se filtra al devolverla). */
 export function deCampo(campo, { caso = null, maxLetras = 9, sinTilde = false } = {}) {
-  const clave = `${campo}|${caso === "inicial"}|${maxLetras}|${sinTilde}`;
+  const clave = `${campo}|${caso === "inicial"}|${maxLetras}|${sinTilde}|${nivelActivo()}`;
   if (!memo.has(clave)) {
     const cats = campo === "colores" ? ["a", "n"] : ["n"];
-    memo.set(clave, LEXICO.filter((e) => e.k.includes(campo) && cats.includes(e.c) && e.f <= 2 && e.p.length >= 3 && e.p.length <= maxLetras
+    memo.set(clave, lexicoActivo().filter((e) => e.k.includes(campo) && cats.includes(e.c) && e.f <= 2 && e.p.length >= 3 && e.p.length <= maxLetras
       && !/[\s-]/.test(e.p) && (caso !== "inicial" || !/^[iíì]/.test(e.p)) && (!sinTilde || !/[áéíóúü]/.test(e.p))));
   }
   return filtrarVistas(memo.get(clave), (e) => e.p);   // no modificar: se comparte
@@ -72,6 +73,6 @@ const tildes = (s) => (s.match(/[áéíóú]/g) || []).length;
 /** Nombres que no se usan en plural en 1.º (no contables, deportes, momentos del día…): quedan fuera de artículo y plural. */
 const NO_PLURAL = new Set("pan leche sal arroz nata dinero paz amor miedo frío silencio ruido tiempo sueño lana tela ceniza lava barro polvo hielo nieve lluvia niebla trigo césped hierba carne fruta ajedrez mañana tarde noche fútbol boxeo karate judo ciclismo patinaje esquí música historia verano otoño invierno primavera sábado domingo fin principio favor vez cosa mundo cielo fuego tierra viento sol luna rostro cuerpo ropa gente".split(" "));
 /** Nombres que sirven para poner el artículo o el plural (género conocido; plural de reglas.js sin cambio de tilde). */
-export const NOMBRES = LEXICO.filter((e) => e.c === "n" && e.f <= 2 && (e.g === "m" || e.g === "f") && e.p.length >= 3 && e.p.length <= 9 && !/[\s-]/.test(e.p) && !NO_PLURAL.has(e.p)
-  && !(e.g === "f" && /^h?[aá]/.test(e.p)) && plural(e.p) !== e.p && tildes(plural(e.p)) === tildes(e.p) && plural(e.p).length <= 11);
+export const nombres = porNivelDe((L) => L.filter((e) => e.c === "n" && e.f <= 2 && (e.g === "m" || e.g === "f") && e.p.length >= 3 && e.p.length <= 9 && !/[\s-]/.test(e.p) && !NO_PLURAL.has(e.p)
+  && !(e.g === "f" && /^h?[aá]/.test(e.p)) && plural(e.p) !== e.p && tildes(plural(e.p)) === tildes(e.p) && plural(e.p).length <= 11));
 

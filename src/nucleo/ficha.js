@@ -7,7 +7,7 @@ import { reordenarPaginas } from "./orden.js";
 
 /** Opción «Cantidad» de la ficha (igual que CANTIDADES de render/papel.js). */
 const CANTIDADES = ["grandes", "mas"];
-import { normalizarVistas, conVistas, normalizarObligatorias, conObligatorias } from "../lengua/vistas.js";
+import { normalizarVistas, conVistas, normalizarObligatorias, conObligatorias, conCurso } from "../lengua/vistas.js";
 import { normalizarPropias, conPropias, USA_FRASES } from "../lengua/frases.js";
 
 export const SCHEMA_VERSION = 1;
@@ -42,10 +42,11 @@ export function cursoDe(id, { curso, rango, params } = {}) {
   return m.curso;
 }
 
-/** Parámetros por defecto: { rango, opción: valor, … } (el rango, el del curso si se da). */
+/** Parámetros por defecto: { rango, opción: valor, … } (el rango y los `params` del curso si se da). */
 export function porDefecto(id, curso) {
   const m = modelo(id), p = {};
   for (const o of m.opciones) p[o.id] = o.defecto ?? null;
+  Object.assign(p, m.cursos?.[curso]?.params);   // valores por defecto propios de un curso (Lengua 2.º: pauta de 4 mm)
   p.rango = m.cursos?.[curso]?.rango ?? m.rango;
   return p;
 }
@@ -159,7 +160,7 @@ function pagina(acts, tamano, colores, semilla, n0 = 0, cantidad = "grandes") {
   return {
     actividades: acts.map((a, j) => {
       const T = tipo(a.tipo), i = n0 + j;
-      const res = conPropias(a.params.misFrases || null, () => conVistas(a.params.vistas || null, () => conObligatorias(a.params.obligatorias || null, () => T.generar(a.params, crearAzar(mezclar(semilla, i + 1)), { tamano, cantidad }))));
+      const res = conCurso(a.curso, () => conPropias(a.params.misFrases || null, () => conVistas(a.params.vistas || null, () => conObligatorias(a.params.obligatorias || null, () => T.generar(a.params, crearAzar(mezclar(semilla, i + 1)), { tamano, cantidad })))));
       const n = i + 1;
       return {
         n, tipo: a.tipo, tipoVersion: T.version, params: a.params, tamano, color: colores[j],

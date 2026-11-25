@@ -10,10 +10,10 @@ import { TOP, cuantosRejilla } from "../render/papel.js";
 import { rodear, palabraHuecos } from "../lengua/dibujo.js";
 import { LEXICO } from "../lengua/lexico.js";
 import { permitida } from "../lengua/vistas.js";
+import { esPalabra } from "../lengua/palabras.js";
 import { alCaso, cuantas, elegirPalabras, largosDe, patronUnico, unidades, conTope, crece } from "./_lengua.js";
 
 const MIN_ALTO = { ayuda: 64, sin: 48 };   // alto mínimo de tarjeta con «Más ejercicios»
-const PALABRAS = new Set(LEXICO.map((e) => e.p));
 const VOCALES = [..."aeiou"], CONSONANTES = [..."bcdfgjlmnprstvz"];
 /** Posiciones (índice de letra) que pueden quedar en hueco: letras sueltas sin tilde (no dígrafos, ü ni «y»). */
 export function posiblesHuecos(p) {
@@ -53,7 +53,7 @@ function elegir(params, azar, n) {
     const pos = az.elegir(ps), real = e.p[pos];
     if (!ayuda) return { pos, opciones: null };
     const fam = VOCALES.includes(real) ? VOCALES : CONSONANTES;
-    const malas = az.barajar(fam.filter((c) => c !== real && permitida(c) && !PALABRAS.has(cambia(e.p, pos, c)) && !(pos === 0 && params.caso === "inicial" && c === "i")));
+    const malas = az.barajar(fam.filter((c) => c !== real && permitida(c) && !esPalabra(cambia(e.p, pos, c)) && !(pos === 0 && params.caso === "inicial" && c === "i")));
     if (malas.length < 2) return null;
     return { pos, opciones: az.barajar([real, malas[0], malas[1]]) };
   };

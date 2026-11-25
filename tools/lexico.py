@@ -1,4 +1,5 @@
-"""Genera src/lengua/lexico.js desde datos/lexico_1.tsv (léxico de Lengua de 1.º; Iván puede revisarlo y añadir palabras).
+"""Genera src/lengua/lexico.js desde datos/lexico_1.tsv (léxico de Lengua de 1.º) y datos/lexico_2.tsv (palabras nuevas de 2.º,
+con n: 2; LENGUA_2.md). Iván puede revisarlos y añadir palabras.
 Ejecutar tras cambiar el TSV:  python3 tools/lexico.py
 Columnas: palabra, cat (n v a o), genero (m f -), campos (separados por comas), dibujo (s n), frec (1 2 3), extra (verbos: 3.ª persona)."""
 import os, json, sys
@@ -31,9 +32,16 @@ def leer(ruta=os.path.join(RAIZ, "datos", "lexico_1.tsv")):
 
 if __name__ == "__main__":
     filas = leer()
+    r2 = os.path.join(RAIZ, "datos", "lexico_2.tsv")
+    if os.path.exists(r2):
+        uno = {e["p"] for e in filas}
+        dos = leer(r2)
+        rep = [e["p"] for e in dos if e["p"] in uno]
+        if rep: sys.exit(f"lexico_2.tsv: ya están en lexico_1.tsv: {', '.join(rep[:20])}")
+        filas += [{**e, "n": 2} for e in dos]
     js = ("// GENERADO por tools/lexico.py desde datos/lexico_1.tsv. No editar a mano.\n"
           "// Cada palabra: p (palabra), c (n nombre, v verbo, a adjetivo, o otra), g (género de los nombres), k (campos léxicos),\n"
-          "// d (1 = se puede dibujar), f (frecuencia 1–3), v3 (verbos: 3.ª persona del presente).\n"
+          "// d (1 = se puede dibujar), f (frecuencia 1–3), v3 (verbos: 3.ª persona del presente), n (2 = solo desde 2.º).\n"
           "export const LEXICO = [\n" + ",\n".join(json.dumps(e, ensure_ascii=False, separators=(",", ":")) for e in filas) + "\n];\n")
     with open(os.path.join(RAIZ, "src", "lengua", "lexico.js"), "w", encoding="utf-8") as f: f.write(js)
     print(f"lexico.js: {len(filas)} palabras")

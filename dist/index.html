@@ -1531,7 +1531,7 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get FRASES_1()
 "lengua/lexico.js": (__exp) => {
 // GENERADO por tools/lexico.py desde datos/lexico_1.tsv. No editar a mano.
 // Cada palabra: p (palabra), c (n nombre, v verbo, a adjetivo, o otra), g (género de los nombres), k (campos léxicos),
-// d (1 = se puede dibujar), f (frecuencia 1–3), v3 (verbos: 3.ª persona del presente).
+// d (1 = se puede dibujar), f (frecuencia 1–3), v3 (verbos: 3.ª persona del presente), n (2 = solo desde 2.º).
 const LEXICO = [
 {"p":"gato","c":"n","k":["animales"],"f":1,"g":"m","d":1},
 {"p":"perro","c":"n","k":["animales"],"f":1,"g":"m","d":1},
@@ -2743,7 +2743,696 @@ const LEXICO = [
 {"p":"banqueta","c":"n","k":["casa"],"f":2,"g":"f","d":1},
 {"p":"mar","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
 {"p":"miel","c":"n","k":["comida"],"f":1,"g":"f","d":1},
-{"p":"bebé","c":"n","k":["familia"],"f":1,"g":"m","d":1}
+{"p":"bebé","c":"n","k":["familia"],"f":1,"g":"m","d":1},
+{"p":"cangrejo","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"medusa","c":"n","k":["animales"],"f":2,"g":"f","d":1,"n":2},
+{"p":"langosta","c":"n","k":["animales"],"f":2,"g":"f","d":1,"n":2},
+{"p":"gorrión","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"golondrina","c":"n","k":["animales"],"f":2,"g":"f","d":1,"n":2},
+{"p":"hipopótamo","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"camello","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"tiburón","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"ballena","c":"n","k":["animales"],"f":2,"g":"f","d":1,"n":2},
+{"p":"calamar","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"gaviota","c":"n","k":["animales"],"f":2,"g":"f","d":1,"n":2},
+{"p":"búho","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"flamenco","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"avestruz","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"lagarto","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"culebra","c":"n","k":["animales"],"f":2,"g":"f","d":1,"n":2},
+{"p":"grillo","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"saltamontes","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"libélula","c":"n","k":["animales"],"f":2,"g":"f","d":1,"n":2},
+{"p":"gusano","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"caracol","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"babosa","c":"n","k":["animales"],"f":2,"g":"f","d":1,"n":2},
+{"p":"ardilla","c":"n","k":["animales"],"f":2,"g":"f","d":1,"n":2},
+{"p":"ciervo","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"ternero","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"canario","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"jilguero","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"ruiseñor","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"lechuza","c":"n","k":["animales"],"f":2,"g":"f","d":1,"n":2},
+{"p":"halcón","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"buitre","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"gamba","c":"n","k":["animales"],"f":2,"g":"f","d":1,"n":2},
+{"p":"almeja","c":"n","k":["animales"],"f":2,"g":"f","d":1,"n":2},
+{"p":"trucha","c":"n","k":["animales"],"f":2,"g":"f","d":1,"n":2},
+{"p":"sardina","c":"n","k":["animales"],"f":2,"g":"f","d":1,"n":2},
+{"p":"anguila","c":"n","k":["animales"],"f":2,"g":"f","d":1,"n":2},
+{"p":"leopardo","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"guepardo","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"orangután","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"bisonte","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"alce","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"nutria","c":"n","k":["animales"],"f":2,"g":"f","d":1,"n":2},
+{"p":"mapache","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"hormiguero","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"hormiguita","c":"n","k":["animales"],"f":2,"g":"f","d":1,"n":2},
+{"p":"pingüinito","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"cigüeñita","c":"n","k":["animales"],"f":2,"g":"f","d":1,"n":2},
+{"p":"buey","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"pollito","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"abejorro","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"oruga","c":"n","k":["animales"],"f":2,"g":"f","d":1,"n":2},
+{"p":"cigarra","c":"n","k":["animales"],"f":2,"g":"f","d":1,"n":2},
+{"p":"colibrí","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"borrego","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"burrito","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"rebaño","c":"n","k":["animales"],"f":2,"g":"m","d":1,"n":2},
+{"p":"madriguera","c":"n","k":["animales"],"f":2,"g":"f","d":1,"n":2},
+{"p":"garra","c":"n","k":["animales"],"f":2,"g":"f","d":1,"n":2},
+{"p":"cresta","c":"n","k":["animales"],"f":2,"g":"f","d":1,"n":2},
+{"p":"pezuña","c":"n","k":["animales"],"f":2,"g":"f","d":1,"n":2},
+{"p":"guiso","c":"n","k":["comida"],"f":2,"g":"m","d":1,"n":2},
+{"p":"merengue","c":"n","k":["comida"],"f":2,"g":"m","d":1,"n":2},
+{"p":"hamburguesa","c":"n","k":["comida"],"f":2,"g":"f","d":1,"n":2},
+{"p":"almuerzo","c":"n","k":["comida"],"f":2,"g":"m","d":1,"n":2},
+{"p":"harina","c":"n","k":["comida"],"f":2,"g":"f","d":1,"n":2},
+{"p":"brócoli","c":"n","k":["comida"],"f":2,"g":"m","d":1,"n":2},
+{"p":"azúcar","c":"n","k":["comida"],"f":2,"g":"m","d":1,"n":2},
+{"p":"tortilla","c":"n","k":["comida"],"f":2,"g":"f","d":1,"n":2},
+{"p":"chuleta","c":"n","k":["comida"],"f":2,"g":"f","d":1,"n":2},
+{"p":"chorizo","c":"n","k":["comida"],"f":2,"g":"m","d":1,"n":2},
+{"p":"chicle","c":"n","k":["comida"],"f":2,"g":"m","d":1,"n":2},
+{"p":"chuche","c":"n","k":["comida"],"f":2,"g":"f","d":1,"n":2},
+{"p":"pimiento","c":"n","k":["comida"],"f":2,"g":"m","d":1,"n":2},
+{"p":"berenjena","c":"n","k":["comida"],"f":2,"g":"f","d":1,"n":2},
+{"p":"champiñón","c":"n","k":["comida"],"f":2,"g":"m","d":1,"n":2},
+{"p":"arándano","c":"n","k":["comida"],"f":2,"g":"m","d":1,"n":2},
+{"p":"mandarina","c":"n","k":["comida"],"f":2,"g":"f","d":1,"n":2},
+{"p":"aceituna","c":"n","k":["comida"],"f":2,"g":"f","d":1,"n":2},
+{"p":"aceite","c":"n","k":["comida"],"f":2,"g":"m","d":1,"n":2},
+{"p":"mermelada","c":"n","k":["comida"],"f":2,"g":"f","d":1,"n":2},
+{"p":"bocadillo","c":"n","k":["comida"],"f":2,"g":"m","d":1,"n":2},
+{"p":"tostada","c":"n","k":["comida"],"f":2,"g":"f","d":1,"n":2},
+{"p":"empanada","c":"n","k":["comida"],"f":2,"g":"f","d":1,"n":2},
+{"p":"empanadilla","c":"n","k":["comida"],"f":2,"g":"f","d":1,"n":2},
+{"p":"croqueta","c":"n","k":["comida"],"f":2,"g":"f","d":1,"n":2},
+{"p":"gelatina","c":"n","k":["comida"],"f":2,"g":"f","d":1,"n":2},
+{"p":"natillas","c":"n","k":["comida"],"f":2,"g":"f","d":1,"n":2},
+{"p":"kétchup","c":"n","k":["comida"],"f":2,"g":"m","d":1,"n":2},
+{"p":"lentejas","c":"n","k":["comida"],"f":2,"g":"f","d":1,"n":2},
+{"p":"garbanzos","c":"n","k":["comida"],"f":2,"g":"m","d":1,"n":2},
+{"p":"legumbre","c":"n","k":["comida"],"f":2,"g":"f","d":1,"n":2},
+{"p":"guinda","c":"n","k":["comida"],"f":2,"g":"f","d":1,"n":2},
+{"p":"albóndiga","c":"n","k":["comida"],"f":2,"g":"f","d":1,"n":2},
+{"p":"mazorca","c":"n","k":["comida"],"f":2,"g":"f","d":1,"n":2},
+{"p":"cebada","c":"n","k":["comida"],"f":2,"g":"f","d":1,"n":2},
+{"p":"bombón","c":"n","k":["comida"],"f":2,"g":"m","d":1,"n":2},
+{"p":"ensalada","c":"n","k":["comida"],"f":2,"g":"f","d":1,"n":2},
+{"p":"guisado","c":"n","k":["comida"],"f":3,"g":"m","d":1,"n":2},
+{"p":"turrón","c":"n","k":["comida"],"f":2,"g":"m","d":1,"n":2},
+{"p":"ración","c":"n","k":["comida"],"f":2,"g":"f","d":1,"n":2},
+{"p":"calzado","c":"n","k":["ropa"],"f":2,"g":"m","d":1,"n":2},
+{"p":"calzón","c":"n","k":["ropa"],"f":2,"g":"m","d":1,"n":2},
+{"p":"chubasquero","c":"n","k":["ropa"],"f":2,"g":"m","d":1,"n":2},
+{"p":"sombrilla","c":"n","k":["ropa"],"f":2,"g":"f","d":1,"n":2},
+{"p":"albornoz","c":"n","k":["ropa"],"f":2,"g":"m","d":1,"n":2},
+{"p":"zueco","c":"n","k":["ropa"],"f":2,"g":"m","d":1,"n":2},
+{"p":"pañal","c":"n","k":["ropa"],"f":2,"g":"m","d":1,"n":2},
+{"p":"pulsera","c":"n","k":["ropa"],"f":2,"g":"f","d":1,"n":2},
+{"p":"brazalete","c":"n","k":["ropa"],"f":2,"g":"m","d":1,"n":2},
+{"p":"broche","c":"n","k":["ropa"],"f":2,"g":"m","d":1,"n":2},
+{"p":"paraguas","c":"n","k":["ropa"],"f":2,"g":"m","d":1,"n":2},
+{"p":"paragüero","c":"n","k":["ropa"],"f":2,"g":"m","d":1,"n":2},
+{"p":"blusa","c":"n","k":["ropa"],"f":2,"g":"f","d":1,"n":2},
+{"p":"kimono","c":"n","k":["ropa"],"f":2,"g":"m","d":1,"n":2},
+{"p":"delantal","c":"n","k":["ropa"],"f":2,"g":"m","d":1,"n":2},
+{"p":"lengüeta","c":"n","k":["ropa"],"f":2,"g":"f","d":1,"n":2},
+{"p":"impermeable","c":"n","k":["ropa"],"f":2,"g":"m","d":1,"n":2},
+{"p":"chanclas","c":"n","k":["ropa"],"f":2,"g":"f","d":1,"n":2},
+{"p":"chancleta","c":"n","k":["ropa"],"f":2,"g":"f","d":1,"n":2},
+{"p":"cacerola","c":"n","k":["casa"],"f":2,"g":"f","d":1,"n":2},
+{"p":"cazo","c":"n","k":["casa"],"f":2,"g":"m","d":1,"n":2},
+{"p":"cucharón","c":"n","k":["casa"],"f":2,"g":"m","d":1,"n":2},
+{"p":"tazón","c":"n","k":["casa"],"f":2,"g":"m","d":1,"n":2},
+{"p":"colchón","c":"n","k":["casa"],"f":2,"g":"m","d":1,"n":2},
+{"p":"colcha","c":"n","k":["casa"],"f":2,"g":"f","d":1,"n":2},
+{"p":"cerrojo","c":"n","k":["casa"],"f":2,"g":"m","d":1,"n":2},
+{"p":"hogar","c":"n","k":["casa"],"f":2,"g":"m","d":1,"n":2},
+{"p":"desagüe","c":"n","k":["casa"],"f":2,"g":"m","d":1,"n":2},
+{"p":"cisterna","c":"n","k":["casa"],"f":2,"g":"f","d":1,"n":2},
+{"p":"cajón","c":"n","k":["casa"],"f":2,"g":"m","d":1,"n":2},
+{"p":"litera","c":"n","k":["casa"],"f":2,"g":"f","d":1,"n":2},
+{"p":"despensa","c":"n","k":["casa"],"f":2,"g":"f","d":1,"n":2},
+{"p":"cubierto","c":"n","k":["casa"],"f":2,"g":"m","d":1,"n":2},
+{"p":"servilleta","c":"n","k":["casa"],"f":2,"g":"f","d":1,"n":2},
+{"p":"botiquín","c":"n","k":["casa"],"f":2,"g":"m","d":1,"n":2},
+{"p":"azulejo","c":"n","k":["casa"],"f":2,"g":"m","d":1,"n":2},
+{"p":"zócalo","c":"n","k":["casa"],"f":2,"g":"m","d":1,"n":2},
+{"p":"zaguán","c":"n","k":["casa"],"f":2,"g":"m","d":1,"n":2},
+{"p":"caja","c":"n","k":["casa"],"f":2,"g":"f","d":1,"n":2},
+{"p":"cajita","c":"n","k":["casa"],"f":2,"g":"f","d":1,"n":2},
+{"p":"bibliotecario","c":"n","k":["escuela"],"f":3,"g":"m","d":1,"n":2},
+{"p":"libreta","c":"n","k":["escuela"],"f":2,"g":"f","d":1,"n":2},
+{"p":"brocha","c":"n","k":["escuela"],"f":2,"g":"f","d":1,"n":2},
+{"p":"cartabón","c":"n","k":["escuela"],"f":3,"g":"m","d":1,"n":2},
+{"p":"enciclopedia","c":"n","k":["escuela"],"f":2,"g":"f","d":1,"n":2},
+{"p":"texto","c":"n","k":["escuela"],"f":2,"g":"m","d":1,"n":2},
+{"p":"párrafo","c":"n","k":["escuela"],"f":2,"g":"m","d":1,"n":2},
+{"p":"dictado","c":"n","k":["escuela"],"f":2,"g":"m","d":1,"n":2},
+{"p":"trabalenguas","c":"n","k":["escuela"],"f":2,"g":"m","d":1,"n":2},
+{"p":"refrán","c":"n","k":["escuela"],"f":2,"g":"m","d":1,"n":2},
+{"p":"ejercicio","c":"n","k":["escuela"],"f":2,"g":"m","n":2},
+{"p":"resumen","c":"n","k":["escuela"],"f":2,"g":"m","n":2},
+{"p":"portada","c":"n","k":["escuela"],"f":2,"g":"f","d":1,"n":2},
+{"p":"título","c":"n","k":["escuela"],"f":2,"g":"m","d":1,"n":2},
+{"p":"guion","c":"n","k":["escuela"],"f":2,"g":"m","d":1,"n":2},
+{"p":"guía","c":"n","k":["escuela"],"f":2,"g":"f","d":1,"n":2},
+{"p":"horario","c":"n","k":["escuela"],"f":2,"g":"m","d":1,"n":2},
+{"p":"conserje","c":"n","k":["escuela"],"f":2,"g":"m","d":1,"n":2},
+{"p":"guardería","c":"n","k":["escuela"],"f":2,"g":"f","d":1,"n":2},
+{"p":"excursión","c":"n","k":["escuela"],"f":2,"g":"f","d":1,"n":2},
+{"p":"experimento","c":"n","k":["escuela"],"f":2,"g":"m","d":1,"n":2},
+{"p":"ciencia","c":"n","k":["escuela"],"f":2,"g":"f","n":2},
+{"p":"geografía","c":"n","k":["escuela"],"f":2,"g":"f","n":2},
+{"p":"geometría","c":"n","k":["escuela"],"f":2,"g":"f","n":2},
+{"p":"gimnasia","c":"n","k":["escuela"],"f":2,"g":"f","d":1,"n":2},
+{"p":"inglés","c":"n","k":["escuela"],"f":2,"g":"m","d":1,"n":2},
+{"p":"lección","c":"n","k":["escuela"],"f":2,"g":"f","d":1,"n":2},
+{"p":"diploma","c":"n","k":["escuela"],"f":2,"g":"m","d":1,"n":2},
+{"p":"tableta","c":"n","k":["escuela"],"f":2,"g":"f","d":1,"n":2},
+{"p":"teclado","c":"n","k":["escuela"],"f":2,"g":"m","d":1,"n":2},
+{"p":"web","c":"n","k":["escuela"],"f":2,"g":"f","n":2},
+{"p":"wifi","c":"n","k":["escuela"],"f":2,"g":"m","n":2},
+{"p":"centímetro","c":"n","k":["escuela"],"f":2,"g":"m","d":1,"n":2},
+{"p":"kilo","c":"n","k":["escuela"],"f":2,"g":"m","d":1,"n":2},
+{"p":"kilogramo","c":"n","k":["escuela"],"f":2,"g":"m","d":1,"n":2},
+{"p":"cuadrícula","c":"n","k":["escuela"],"f":2,"g":"f","d":1,"n":2},
+{"p":"cifra","c":"n","k":["escuela"],"f":2,"g":"f","d":1,"n":2},
+{"p":"kilómetro","c":"n","k":["escuela"],"f":2,"g":"m","d":1,"n":2},
+{"p":"sangre","c":"n","k":["cuerpo"],"f":2,"g":"f","d":1,"n":2},
+{"p":"hígado","c":"n","k":["cuerpo"],"f":2,"g":"m","d":1,"n":2},
+{"p":"cicatriz","c":"n","k":["cuerpo"],"f":2,"g":"f","d":1,"n":2},
+{"p":"herida","c":"n","k":["cuerpo"],"f":2,"g":"f","d":1,"n":2},
+{"p":"hipo","c":"n","k":["cuerpo"],"f":2,"g":"m","d":1,"n":2},
+{"p":"lágrima","c":"n","k":["cuerpo"],"f":2,"g":"f","d":1,"n":2},
+{"p":"meñique","c":"n","k":["cuerpo"],"f":2,"g":"m","d":1,"n":2},
+{"p":"cabello","c":"n","k":["cuerpo"],"f":2,"g":"m","d":1,"n":2},
+{"p":"cráneo","c":"n","k":["cuerpo"],"f":2,"g":"m","d":1,"n":2},
+{"p":"mandíbula","c":"n","k":["cuerpo"],"f":2,"g":"f","d":1,"n":2},
+{"p":"lengüetazo","c":"n","k":["cuerpo"],"f":3,"g":"m","d":1,"n":2},
+{"p":"trompo","c":"n","k":["juguetes"],"f":2,"g":"m","d":1,"n":2},
+{"p":"zambomba","c":"n","k":["juguetes"],"f":2,"g":"f","d":1,"n":2},
+{"p":"castañuelas","c":"n","k":["juguetes"],"f":2,"g":"f","d":1,"n":2},
+{"p":"saxofón","c":"n","k":["juguetes"],"f":2,"g":"m","d":1,"n":2},
+{"p":"campana","c":"n","k":["juguetes"],"f":2,"g":"f","d":1,"n":2},
+{"p":"cometa","c":"n","k":["juguetes"],"f":2,"g":"f","d":1,"n":2},
+{"p":"pompa","c":"n","k":["juguetes"],"f":2,"g":"f","d":1,"n":2},
+{"p":"rompecabezas","c":"n","k":["juguetes"],"f":2,"g":"m","d":1,"n":2},
+{"p":"patines","c":"n","k":["juguetes"],"f":2,"g":"m","d":1,"n":2},
+{"p":"canicas","c":"n","k":["juguetes"],"f":2,"g":"f","d":1,"n":2},
+{"p":"karaoke","c":"n","k":["juguetes"],"f":2,"g":"m","d":1,"n":2},
+{"p":"piragua","c":"n","k":["juguetes"],"f":2,"g":"f","d":1,"n":2},
+{"p":"campeón","c":"n","k":["juguetes"],"f":2,"g":"m","d":1,"n":2},
+{"p":"campeonato","c":"n","k":["juguetes"],"f":2,"g":"m","d":1,"n":2},
+{"p":"árbitro","c":"n","k":["juguetes"],"f":2,"g":"m","d":1,"n":2},
+{"p":"entrenador","c":"n","k":["juguetes"],"f":2,"g":"m","d":1,"n":2},
+{"p":"partido","c":"n","k":["juguetes"],"f":2,"g":"m","d":1,"n":2},
+{"p":"camioneta","c":"n","k":["transportes"],"f":2,"g":"f","d":1,"n":2},
+{"p":"ferrocarril","c":"n","k":["transportes"],"f":2,"g":"m","d":1,"n":2},
+{"p":"avioneta","c":"n","k":["transportes"],"f":2,"g":"f","d":1,"n":2},
+{"p":"carril","c":"n","k":["transportes"],"f":2,"g":"m","d":1,"n":2},
+{"p":"autopista","c":"n","k":["transportes"],"f":2,"g":"f","d":1,"n":2},
+{"p":"rotonda","c":"n","k":["transportes"],"f":2,"g":"f","d":1,"n":2},
+{"p":"acera","c":"n","k":["transportes"],"f":2,"g":"f","d":1,"n":2},
+{"p":"equipaje","c":"n","k":["transportes"],"f":2,"g":"m","d":1,"n":2},
+{"p":"autocar","c":"n","k":["transportes"],"f":2,"g":"m","d":1,"n":2},
+{"p":"carro","c":"n","k":["transportes"],"f":2,"g":"m","d":1,"n":2},
+{"p":"carroza","c":"n","k":["transportes"],"f":2,"g":"f","d":1,"n":2},
+{"p":"neumático","c":"n","k":["transportes"],"f":2,"g":"m","d":1,"n":2},
+{"p":"muelle","c":"n","k":["transportes"],"f":2,"g":"m","d":1,"n":2},
+{"p":"convoy","c":"n","k":["transportes"],"f":2,"g":"m","d":1,"n":2},
+{"p":"chubasco","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1,"n":2},
+{"p":"chaparrón","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1,"n":2},
+{"p":"relámpago","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1,"n":2},
+{"p":"bruma","c":"n","k":["naturaleza"],"f":2,"g":"f","d":1,"n":2},
+{"p":"escarcha","c":"n","k":["naturaleza"],"f":2,"g":"f","d":1,"n":2},
+{"p":"granizo","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1,"n":2},
+{"p":"huracán","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1,"n":2},
+{"p":"temporal","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1,"n":2},
+{"p":"clima","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1,"n":2},
+{"p":"cumbre","c":"n","k":["naturaleza"],"f":2,"g":"f","d":1,"n":2},
+{"p":"cima","c":"n","k":["naturaleza"],"f":2,"g":"f","d":1,"n":2},
+{"p":"cerro","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1,"n":2},
+{"p":"llanura","c":"n","k":["naturaleza"],"f":2,"g":"f","d":1,"n":2},
+{"p":"arroyo","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1,"n":2},
+{"p":"laguna","c":"n","k":["naturaleza"],"f":2,"g":"f","d":1,"n":2},
+{"p":"manantial","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1,"n":2},
+{"p":"cráter","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1,"n":2},
+{"p":"terremoto","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1,"n":2},
+{"p":"jazmín","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1,"n":2},
+{"p":"clavel","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1,"n":2},
+{"p":"hongo","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1,"n":2},
+{"p":"helecho","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1,"n":2},
+{"p":"encina","c":"n","k":["naturaleza"],"f":2,"g":"f","d":1,"n":2},
+{"p":"higuera","c":"n","k":["naturaleza"],"f":2,"g":"f","d":1,"n":2},
+{"p":"galaxia","c":"n","k":["naturaleza"],"f":2,"g":"f","d":1,"n":2},
+{"p":"universo","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1,"n":2},
+{"p":"eclipse","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1,"n":2},
+{"p":"llama","c":"n","k":["naturaleza"],"f":2,"g":"f","d":1,"n":2},
+{"p":"chispa","c":"n","k":["naturaleza"],"f":2,"g":"f","d":1,"n":2},
+{"p":"humo","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1,"n":2},
+{"p":"relieve","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1,"n":2},
+{"p":"paisaje","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1,"n":2},
+{"p":"horizonte","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1,"n":2},
+{"p":"arrecife","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1,"n":2},
+{"p":"espuma","c":"n","k":["naturaleza"],"f":2,"g":"f","d":1,"n":2},
+{"p":"cerezo","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1,"n":2},
+{"p":"ciprés","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1,"n":2},
+{"p":"arbusto","c":"n","k":["naturaleza"],"f":2,"g":"m","d":1,"n":2},
+{"p":"zarzamora","c":"n","k":["naturaleza"],"f":2,"g":"f","d":1,"n":2},
+{"p":"zarza","c":"n","k":["naturaleza"],"f":2,"g":"f","d":1,"n":2},
+{"p":"sobrino","c":"n","k":["familia"],"f":2,"g":"m","d":1,"n":2},
+{"p":"cuñado","c":"n","k":["familia"],"f":2,"g":"m","d":1,"n":2},
+{"p":"cuñada","c":"n","k":["familia"],"f":2,"g":"f","d":1,"n":2},
+{"p":"gemela","c":"n","k":["familia"],"f":2,"g":"f","d":1,"n":2},
+{"p":"ahijado","c":"n","k":["familia"],"f":2,"g":"m","d":1,"n":2},
+{"p":"mellizo","c":"n","k":["familia"],"f":2,"g":"m","d":1,"n":2},
+{"p":"amiguito","c":"n","k":["familia"],"f":2,"g":"m","d":1,"n":2},
+{"p":"amiguita","c":"n","k":["familia"],"f":2,"g":"f","d":1,"n":2},
+{"p":"invitado","c":"n","k":["familia"],"f":2,"g":"m","d":1,"n":2},
+{"p":"invitada","c":"n","k":["familia"],"f":2,"g":"f","d":1,"n":2},
+{"p":"visita","c":"n","k":["familia"],"f":2,"g":"f","d":1,"n":2},
+{"p":"anciano","c":"n","k":["familia"],"f":2,"g":"m","d":1,"n":2},
+{"p":"anciana","c":"n","k":["familia"],"f":2,"g":"f","d":1,"n":2},
+{"p":"cariño","c":"n","k":["familia"],"f":2,"g":"m","n":2},
+{"p":"celebración","c":"n","k":["familia"],"f":2,"g":"f","d":1,"n":2},
+{"p":"aniversario","c":"n","k":["familia"],"f":2,"g":"m","d":1,"n":2},
+{"p":"bautizo","c":"n","k":["familia"],"f":2,"g":"m","d":1,"n":2},
+{"p":"villancico","c":"n","k":["familia"],"f":2,"g":"m","d":1,"n":2},
+{"p":"guirnalda","c":"n","k":["familia"],"f":2,"g":"f","d":1,"n":2},
+{"p":"aguinaldo","c":"n","k":["familia"],"f":2,"g":"m","d":1,"n":2},
+{"p":"carnaval","c":"n","k":["familia"],"f":2,"g":"m","d":1,"n":2},
+{"p":"hermanita","c":"n","k":["familia"],"f":2,"g":"f","d":1,"n":2},
+{"p":"pastelero","c":"n","k":["oficios"],"f":2,"g":"m","d":1,"n":2},
+{"p":"ingeniero","c":"n","k":["oficios"],"f":2,"g":"m","d":1,"n":2},
+{"p":"cirujano","c":"n","k":["oficios"],"f":2,"g":"m","d":1,"n":2},
+{"p":"dentista","c":"n","k":["oficios"],"f":2,"g":"m","d":1,"n":2},
+{"p":"policía","c":"n","k":["oficios"],"f":2,"g":"f","d":1,"n":2},
+{"p":"cazador","c":"n","k":["oficios"],"f":2,"g":"m","d":1,"n":2},
+{"p":"leñador","c":"n","k":["oficios"],"f":2,"g":"m","d":1,"n":2},
+{"p":"escultor","c":"n","k":["oficios"],"f":2,"g":"m","d":1,"n":2},
+{"p":"guitarrista","c":"n","k":["oficios"],"f":2,"g":"m","d":1,"n":2},
+{"p":"ciclista","c":"n","k":["oficios"],"f":2,"g":"m","d":1,"n":2},
+{"p":"cantante","c":"n","k":["oficios"],"f":2,"g":"m","d":1,"n":2},
+{"p":"bailarín","c":"n","k":["oficios"],"f":2,"g":"m","d":1,"n":2},
+{"p":"malabarista","c":"n","k":["oficios"],"f":2,"g":"m","d":1,"n":2},
+{"p":"domador","c":"n","k":["oficios"],"f":2,"g":"m","d":1,"n":2},
+{"p":"acróbata","c":"n","k":["oficios"],"f":2,"g":"m","d":1,"n":2},
+{"p":"cajero","c":"n","k":["oficios"],"f":2,"g":"m","d":1,"n":2},
+{"p":"cajera","c":"n","k":["oficios"],"f":2,"g":"f","d":1,"n":2},
+{"p":"vendedor","c":"n","k":["oficios"],"f":2,"g":"m","d":1,"n":2},
+{"p":"dependiente","c":"n","k":["oficios"],"f":2,"g":"m","d":1,"n":2},
+{"p":"gerente","c":"n","k":["oficios"],"f":2,"g":"m","d":1,"n":2},
+{"p":"jefe","c":"n","k":["oficios"],"f":2,"g":"m","d":1,"n":2},
+{"p":"juez","c":"n","k":["oficios"],"f":2,"g":"m","d":1,"n":2},
+{"p":"abogado","c":"n","k":["oficios"],"f":2,"g":"m","d":1,"n":2},
+{"p":"explorador","c":"n","k":["oficios"],"f":2,"g":"m","d":1,"n":2},
+{"p":"astronauta","c":"n","k":["oficios"],"f":2,"g":"m","d":1,"n":2},
+{"p":"arquitecto","c":"n","k":["oficios"],"f":2,"g":"m","d":1,"n":2},
+{"p":"electricista","c":"n","k":["oficios"],"f":2,"g":"m","d":1,"n":2},
+{"p":"relojero","c":"n","k":["oficios"],"f":2,"g":"m","d":1,"n":2},
+{"p":"joyero","c":"n","k":["oficios"],"f":2,"g":"m","d":1,"n":2},
+{"p":"jinete","c":"n","k":["oficios"],"f":2,"g":"m","d":1,"n":2},
+{"p":"portero","c":"n","k":["oficios"],"f":2,"g":"m","d":1,"n":2},
+{"p":"agricultor","c":"n","k":["oficios"],"f":2,"g":"m","d":1,"n":2},
+{"p":"ganadero","c":"n","k":["oficios"],"f":2,"g":"m","d":1,"n":2},
+{"p":"vigilante","c":"n","k":["oficios"],"f":2,"g":"m","d":1,"n":2},
+{"p":"socorrista","c":"n","k":["oficios"],"f":2,"g":"m","d":1,"n":2},
+{"p":"piragüista","c":"n","k":["oficios"],"f":2,"g":"m","d":1,"n":2},
+{"p":"oficina","c":"n","k":["oficios"],"f":2,"g":"f","d":1,"n":2},
+{"p":"trabajo","c":"n","k":["oficios"],"f":2,"g":"m","d":1,"n":2},
+{"p":"barrio","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"rascacielos","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"zoológico","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"muralla","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"catedral","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"establo","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"corral","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"invernadero","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"hucha","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"misterio","c":"n","k":["otros"],"f":2,"g":"m","n":2},
+{"p":"bruja","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"príncipe","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"caballero","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"guerrero","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"fantasma","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"monstruo","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"genio","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"magia","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"ley","c":"n","k":["otros"],"f":2,"g":"f","n":2},
+{"p":"guerra","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"junio","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"julio","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"septiembre","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"octubre","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"noviembre","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"diciembre","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"enero","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"marzo","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"abril","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"agosto","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"imagen","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"origen","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"margen","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"germen","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"joya","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"joyería","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"jugador","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"justicia","c":"n","k":["otros"],"f":2,"g":"f","n":2},
+{"p":"juventud","c":"n","k":["otros"],"f":2,"g":"f","n":2},
+{"p":"juicio","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"junco","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"jeroglífico","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"jeringuilla","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"consejo","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"mensaje","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"ropaje","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"trabajador","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"rejilla","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"reja","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"honra","c":"n","k":["otros"],"f":2,"g":"f","n":2},
+{"p":"honradez","c":"n","k":["otros"],"f":2,"g":"f","n":2},
+{"p":"enredo","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"enredadera","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"alrededores","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"ciclo","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"cebolleta","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"cepillo","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"cerilla","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"celda","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"ciempiés","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"vecindario","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"medicina","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"precio","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"pieza","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"esfuerzo","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"torpeza","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"belleza","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"tristeza","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"riqueza","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"rareza","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"limpieza","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"naturaleza","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"razón","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"zorrillo","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"zanco","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"zancadilla","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"zanja","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"zapateado","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"zumbido","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"zarpa","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"zona","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"zampoña","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"zurrón","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"zamarra","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"danza","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"choza","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"mozo","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"gozo","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"cabezón","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"atrapar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"atrapa","n":2},
+{"p":"elegir","c":"v","k":["acciones"],"f":2,"d":1,"v3":"elige","n":2},
+{"p":"entender","c":"v","k":["acciones"],"f":2,"v3":"entiende","n":2},
+{"p":"escalar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"escala","n":2},
+{"p":"esconder","c":"v","k":["acciones"],"f":2,"d":1,"v3":"esconde","n":2},
+{"p":"explicar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"explica","n":2},
+{"p":"fabricar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"fabrica","n":2},
+{"p":"inventar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"inventa","n":2},
+{"p":"oír","c":"v","k":["acciones"],"f":2,"d":1,"v3":"oye","n":2},
+{"p":"pegar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"pega","n":2},
+{"p":"repetir","c":"v","k":["acciones"],"f":2,"d":1,"v3":"repite","n":2},
+{"p":"seguir","c":"v","k":["acciones"],"f":2,"d":1,"v3":"sigue","n":2},
+{"p":"servir","c":"v","k":["acciones"],"f":2,"d":1,"v3":"sirve","n":2},
+{"p":"huir","c":"v","k":["acciones"],"f":2,"d":1,"v3":"huye","n":2},
+{"p":"creer","c":"v","k":["acciones"],"f":2,"v3":"cree","n":2},
+{"p":"morir","c":"v","k":["acciones"],"f":2,"d":1,"v3":"muere","n":2},
+{"p":"mentir","c":"v","k":["acciones"],"f":2,"v3":"miente","n":2},
+{"p":"vencer","c":"v","k":["acciones"],"f":2,"d":1,"v3":"vence","n":2},
+{"p":"torcer","c":"v","k":["acciones"],"f":2,"d":1,"v3":"tuerce","n":2},
+{"p":"coser","c":"v","k":["acciones"],"f":2,"d":1,"v3":"cose","n":2},
+{"p":"cocer","c":"v","k":["acciones"],"f":2,"d":1,"v3":"cuece","n":2},
+{"p":"resolver","c":"v","k":["acciones"],"f":2,"d":1,"v3":"resuelve","n":2},
+{"p":"devolver","c":"v","k":["acciones"],"f":2,"d":1,"v3":"devuelve","n":2},
+{"p":"volver","c":"v","k":["acciones"],"f":2,"d":1,"v3":"vuelve","n":2},
+{"p":"costar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"cuesta","n":2},
+{"p":"encender","c":"v","k":["acciones"],"f":2,"d":1,"v3":"enciende","n":2},
+{"p":"defender","c":"v","k":["acciones"],"f":2,"d":1,"v3":"defiende","n":2},
+{"p":"atravesar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"atraviesa","n":2},
+{"p":"empezar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"empieza","n":2},
+{"p":"comenzar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"comienza","n":2},
+{"p":"negar","c":"v","k":["acciones"],"f":2,"v3":"niega","n":2},
+{"p":"destruir","c":"v","k":["acciones"],"f":2,"d":1,"v3":"destruye","n":2},
+{"p":"incluir","c":"v","k":["acciones"],"f":2,"v3":"incluye","n":2},
+{"p":"obedecer","c":"v","k":["acciones"],"f":2,"d":1,"v3":"obedece","n":2},
+{"p":"traducir","c":"v","k":["acciones"],"f":2,"d":1,"v3":"traduce","n":2},
+{"p":"producir","c":"v","k":["acciones"],"f":2,"d":1,"v3":"produce","n":2},
+{"p":"reducir","c":"v","k":["acciones"],"f":2,"d":1,"v3":"reduce","n":2},
+{"p":"convencer","c":"v","k":["acciones"],"f":2,"d":1,"v3":"convence","n":2},
+{"p":"ofrecer","c":"v","k":["acciones"],"f":2,"d":1,"v3":"ofrece","n":2},
+{"p":"merecer","c":"v","k":["acciones"],"f":2,"v3":"merece","n":2},
+{"p":"conocer","c":"v","k":["acciones"],"f":2,"d":1,"v3":"conoce","n":2},
+{"p":"parecer","c":"v","k":["acciones"],"f":2,"v3":"parece","n":2},
+{"p":"agradecer","c":"v","k":["acciones"],"f":2,"v3":"agradece","n":2},
+{"p":"aparecer","c":"v","k":["acciones"],"f":2,"d":1,"v3":"aparece","n":2},
+{"p":"desaparecer","c":"v","k":["acciones"],"f":2,"d":1,"v3":"desaparece","n":2},
+{"p":"guisar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"guisa","n":2},
+{"p":"guiñar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"guiña","n":2},
+{"p":"guiar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"guía","n":2},
+{"p":"conseguir","c":"v","k":["acciones"],"f":2,"d":1,"v3":"consigue","n":2},
+{"p":"perseguir","c":"v","k":["acciones"],"f":2,"d":1,"v3":"persigue","n":2},
+{"p":"distinguir","c":"v","k":["acciones"],"f":2,"d":1,"v3":"distingue","n":2},
+{"p":"gruñir","c":"v","k":["acciones"],"f":2,"d":1,"v3":"gruñe","n":2},
+{"p":"chillar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"chilla","n":2},
+{"p":"chupar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"chupa","n":2},
+{"p":"charlar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"charla","n":2},
+{"p":"añadir","c":"v","k":["acciones"],"f":2,"d":1,"v3":"añade","n":2},
+{"p":"engañar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"engaña","n":2},
+{"p":"regañar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"regaña","n":2},
+{"p":"dañar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"daña","n":2},
+{"p":"señalar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"señala","n":2},
+{"p":"pestañear","c":"v","k":["acciones"],"f":2,"d":1,"v3":"pestañea","n":2},
+{"p":"trabajar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"trabaja","n":2},
+{"p":"barajar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"baraja","n":2},
+{"p":"alejar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"aleja","n":2},
+{"p":"tejer","c":"v","k":["acciones"],"f":2,"d":1,"v3":"teje","n":2},
+{"p":"escoger","c":"v","k":["acciones"],"f":2,"d":1,"v3":"escoge","n":2},
+{"p":"proteger","c":"v","k":["acciones"],"f":2,"d":1,"v3":"protege","n":2},
+{"p":"fingir","c":"v","k":["acciones"],"f":2,"d":1,"v3":"finge","n":2},
+{"p":"agitar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"agita","n":2},
+{"p":"vigilar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"vigila","n":2},
+{"p":"cubrir","c":"v","k":["acciones"],"f":2,"d":1,"v3":"cubre","n":2},
+{"p":"descubrir","c":"v","k":["acciones"],"f":2,"d":1,"v3":"descubre","n":2},
+{"p":"bromear","c":"v","k":["acciones"],"f":2,"d":1,"v3":"bromea","n":2},
+{"p":"sembrar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"siembra","n":2},
+{"p":"bloquear","c":"v","k":["acciones"],"f":2,"d":1,"v3":"bloquea","n":2},
+{"p":"cobrar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"cobra","n":2},
+{"p":"comprar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"compra","n":2},
+{"p":"cambiar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"cambia","n":2},
+{"p":"combinar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"combina","n":2},
+{"p":"tumbar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"tumba","n":2},
+{"p":"importar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"importa","n":2},
+{"p":"enredar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"enreda","n":2},
+{"p":"enrollar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"enrolla","n":2},
+{"p":"enroscar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"enrosca","n":2},
+{"p":"honrar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"honra","n":2},
+{"p":"ahorrar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"ahorra","n":2},
+{"p":"ahogar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"ahoga","n":2},
+{"p":"hundir","c":"v","k":["acciones"],"f":2,"d":1,"v3":"hunde","n":2},
+{"p":"herir","c":"v","k":["acciones"],"f":2,"d":1,"v3":"hiere","n":2},
+{"p":"prohibir","c":"v","k":["acciones"],"f":2,"d":1,"v3":"prohíbe","n":2},
+{"p":"deshacer","c":"v","k":["acciones"],"f":2,"d":1,"v3":"deshace","n":2},
+{"p":"exprimir","c":"v","k":["acciones"],"f":2,"d":1,"v3":"exprime","n":2},
+{"p":"explorar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"explora","n":2},
+{"p":"exclamar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"exclama","n":2},
+{"p":"excavar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"excava","n":2},
+{"p":"existir","c":"v","k":["acciones"],"f":2,"d":1,"v3":"existe","n":2},
+{"p":"exagerar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"exagera","n":2},
+{"p":"extender","c":"v","k":["acciones"],"f":2,"d":1,"v3":"extiende","n":2},
+{"p":"exponer","c":"v","k":["acciones"],"f":2,"d":1,"v3":"expone","n":2},
+{"p":"llenar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"llena","n":2},
+{"p":"llorar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"llora","n":2},
+{"p":"arrastrar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"arrastra","n":2},
+{"p":"arreglar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"arregla","n":2},
+{"p":"arrugar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"arruga","n":2},
+{"p":"gozar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"goza","n":2},
+{"p":"rezar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"reza","n":2},
+{"p":"rozar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"roza","n":2},
+{"p":"alzar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"alza","n":2},
+{"p":"alcanzar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"alcanza","n":2},
+{"p":"calzar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"calza","n":2},
+{"p":"cazar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"caza","n":2},
+{"p":"comparar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"compara","n":2},
+{"p":"agarrar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"agarra","n":2},
+{"p":"ágil","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"frágil","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"flexible","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"imposible","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"increíble","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"agradable","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"responsable","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"sensible","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"terrible","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"horrible","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"visible","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"invisible","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"estable","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"inolvidable","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"notable","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"saludable","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"desagradable","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"razonable","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"favorable","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"incómodo","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"rugoso","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"transparente","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"cálido","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"húmedo","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"hondo","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"flaco","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"gigantesco","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"próximo","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"joven","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"antiguo","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"moderno","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"veloz","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"cobarde","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"antipático","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"generoso","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"egoísta","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"honrado","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"sincero","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"mentiroso","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"educado","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"cariñoso","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"cuidadoso","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"descuidado","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"atento","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"distraído","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"inteligente","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"hábil","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"enfermo","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"hambriento","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"sediento","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"triste","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"enojado","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"orgulloso","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"ilusionado","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"gracioso","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"risueño","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"bromista","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"glotón","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"goloso","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"perezoso","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"juguetón","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"soñador","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"gruñón","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"hermoso","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"ordenado","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"desordenado","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"urgente","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"justo","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"injusto","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"extraño","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"cierto","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"completo","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"bilingüe","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"halagüeño","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"sonriente","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"sonrosado","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"cojo","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"zurdo","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"siguiente","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"espeso","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"gordito","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"afilado","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"cortante","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"hueco","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"macizo","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"pegajoso","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"resbaladizo","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"viscoso","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"oloroso","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"picante","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"crujiente","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"imaginario","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"lógico","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"ingenioso","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"vegetal","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"general","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"excelente","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"social","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"principal","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"oficial","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"natural","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"central","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"turquesa","c":"a","k":["colores"],"f":2,"d":1,"n":2},
+{"p":"ahí","c":"o","k":["otros"],"f":2,"n":2},
+{"p":"alrededor","c":"o","k":["otros"],"f":2,"n":2},
+{"p":"enseguida","c":"o","k":["otros"],"f":2,"n":2},
+{"p":"mientras","c":"o","k":["otros"],"f":2,"n":2},
+{"p":"entonces","c":"o","k":["otros"],"f":2,"n":2},
+{"p":"anoche","c":"o","k":["otros"],"f":2,"n":2},
+{"p":"despacio","c":"o","k":["otros"],"f":2,"n":2},
+{"p":"deprisa","c":"o","k":["otros"],"f":2,"n":2},
+{"p":"bastante","c":"o","k":["otros"],"f":2,"n":2},
+{"p":"demasiado","c":"o","k":["otros"],"f":2,"n":2},
+{"p":"junto","c":"o","k":["otros"],"f":2,"n":2},
+{"p":"alguien","c":"o","k":["otros"],"f":2,"n":2},
+{"p":"alguno","c":"o","k":["otros"],"f":2,"n":2},
+{"p":"ninguno","c":"o","k":["otros"],"f":2,"n":2},
+{"p":"cualquiera","c":"o","k":["otros"],"f":2,"n":2},
+{"p":"tras","c":"o","k":["otros"],"f":2,"n":2},
+{"p":"contra","c":"o","k":["otros"],"f":2,"n":2},
+{"p":"mejor","c":"o","k":["otros"],"f":2,"n":2},
+{"p":"además","c":"o","k":["otros"],"f":2,"n":2},
+{"p":"hola","c":"o","k":["otros"],"f":2,"n":2},
+{"p":"gracias","c":"o","k":["otros"],"f":2,"n":2},
+{"p":"hay","c":"o","k":["otros"],"f":2,"n":2},
+{"p":"ay","c":"o","k":["otros"],"f":2,"n":2},
+{"p":"uy","c":"o","k":["otros"],"f":2,"n":2},
+{"p":"hurra","c":"o","k":["otros"],"f":2,"n":2},
+{"p":"caray","c":"o","k":["otros"],"f":2,"n":2},
+{"p":"estoy","c":"o","k":["otros"],"f":2,"n":2},
+{"p":"voy","c":"o","k":["otros"],"f":2,"n":2},
+{"p":"soy","c":"o","k":["otros"],"f":2,"n":2},
+{"p":"doy","c":"o","k":["otros"],"f":2,"n":2},
+{"p":"guirigay","c":"o","k":["otros"],"f":2,"n":2},
+{"p":"virrey","c":"o","k":["otros"],"f":2,"n":2},
+{"p":"sanguijuela","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"aguijón","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"seguridad","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"seguidor","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"ceguera","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"albergue","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"guiñol","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"guindilla","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"juguetero","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"hamburguesería","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"tortuguita","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"lingüista","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"pingüinera","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"bilingüismo","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"antigüedad","c":"n","k":["otros"],"f":2,"g":"f","d":1,"n":2},
+{"p":"piragüismo","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"ungüento","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"extremo","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"taxista","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"boxeador","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"oxígeno","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"enrejado","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"espray","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"carey","c":"n","k":["otros"],"f":2,"g":"m","d":1,"n":2},
+{"p":"guay","c":"o","k":["otros"],"f":2,"n":2},
+{"p":"trilingüe","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"monolingüe","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"exterior","c":"a","k":["cualidades"],"f":2,"n":2},
+{"p":"sonrojar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"sonroja","n":2},
+{"p":"enrojecer","c":"v","k":["acciones"],"f":2,"d":1,"v3":"enrojece","n":2},
+{"p":"enriquecer","c":"v","k":["acciones"],"f":2,"d":1,"v3":"enriquece","n":2},
+{"p":"exacto","c":"a","k":["cualidades"],"f":2,"n":2}
 ];
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get LEXICO() { return LEXICO; } }));
@@ -2753,7 +3442,7 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get LEXICO() {
 // Las sílabas se calculan una vez por palabra (caché). Sin DOM.
 const { LEXICO } = __req("lengua/lexico.js");
 const { silabas, tipoSilaba, TIPOS_SILABA, soloLetras, llevaLetra } = __req("lengua/reglas.js");
-const { permitida, obligada, avisoVistas } = __req("lengua/vistas.js");
+const { permitida, obligada, avisoVistas, nivelActivo } = __req("lengua/vistas.js");
 const info = new Map();
 /** Datos calculados de una palabra del léxico: sílabas y tipos de sílaba. */
 function datosPalabra(e) {
@@ -2761,13 +3450,31 @@ function datosPalabra(e) {
   return info.get(e.p);
 }
 
+/** Léxico del curso activo (conCurso en vistas.js): en 1.º, sin las palabras de 2.º (n: 2). */
+const porNivel = new Map();
+function lexicoActivo() {
+  const nv = nivelActivo();
+  if (!porNivel.has(nv)) porNivel.set(nv, LEXICO.filter((e) => (e.n || 1) <= nv));
+  return porNivel.get(nv);
+}
+/** Caché por curso: f(léxico del curso) se calcula una vez por curso. */
+function porNivelDe(f) {
+  const m = new Map();
+  return () => { const nv = nivelActivo(); if (!m.has(nv)) m.set(nv, f(lexicoActivo())); return m.get(nv); };
+}
+const conjunto = porNivelDe((L) => new Set(L.map((e) => e.p)));
+/** ¿Es una palabra del léxico del curso activo? */
+const esPalabra = (p) => conjunto().has(p);
+
 /** Palabras que cumplen los filtros (todos opcionales):
  *  cat ("n" | "v" | "a" | "o" o lista), campos (lista: alguno), nSilabas (número o lista), tipo ("directas"… "mixtas"),
  *  letras (letras vistas: cadena o lista), conLetra (todas la llevan), dibujo (true: solo dibujables), frec (máxima), sin (palabras a excluir),
  *  minLetras / maxLetras. */
 function buscar({ cat, campos, nSilabas, tipo, letras, conLetra, dibujo, frec, sin, minLetras, maxLetras } = {}) {
   const cats = cat ? [].concat(cat) : null, ns = nSilabas ? [].concat(nSilabas) : null, fuera = sin ? new Set(sin) : null;
+  const nv = nivelActivo();
   return LEXICO.filter((e) => {
+    if ((e.n || 1) > nv) return false;   // palabras de 2.º (lexico_2.tsv) solo desde 2.º
     if (cats && !cats.includes(e.c)) return false;
     if (campos && !campos.some((k) => e.k.includes(k))) return false;
     if (dibujo && !e.d) return false;
@@ -2796,7 +3503,7 @@ function elegirPalabras(azar, k, filtros = {}) {
 const CAMPOS_LEXICOS = ["animales", "comida", "ropa", "casa", "escuela", "cuerpo", "juguetes", "transportes", "familia", "naturaleza", "colores", "oficios"];
 const palabra = (p) => LEXICO.find((e) => e.p === p) || null;
 
-Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get datosPalabra() { return datosPalabra; }, get buscar() { return buscar; }, get elegirPalabras() { return elegirPalabras; }, get CAMPOS_LEXICOS() { return CAMPOS_LEXICOS; }, get palabra() { return palabra; } }));
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get datosPalabra() { return datosPalabra; }, get lexicoActivo() { return lexicoActivo; }, get porNivelDe() { return porNivelDe; }, get esPalabra() { return esPalabra; }, get buscar() { return buscar; }, get elegirPalabras() { return elegirPalabras; }, get CAMPOS_LEXICOS() { return CAMPOS_LEXICOS; }, get palabra() { return palabra; } }));
 },
 "lengua/pauta.js": (__exp) => {
 // Charta · Lengua · pauta Lamela (doble pauta) en SVG (lote 4 de LENGUA_1.md).
@@ -3263,7 +3970,8 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get ESPACIO_LE
 // (las fichas de siempre no cambian). Las vocales con tilde o diéresis cuentan como su vocal; la «y» suelta vale siempre. Sin DOM.
 const { ABECEDARIO, sinTildes } = __req("lengua/reglas.js");
 let activas = null;   // Set de letras o null (todas)
-let obligadas = null; // Set de letras obligatorias o null: cada palabra (o frase) debe llevar al menos una (pulsación larga en el mapa)
+let obligadas = null;
+let nivel = 1;        // curso de la actividad (LENGUA_2.md): las palabras con n: 2 del léxico solo salen desde 2.º // Set de letras obligatorias o null: cada palabra (o frase) debe llevar al menos una (pulsación larga en el mapa)
 
 /** Cadena normalizada (orden del abecedario, sin repetir) o null si están todas o no es válida. */
 function normalizarVistas(v) {
@@ -3290,10 +3998,18 @@ function conObligatorias(o, f) {
   obligadas = o ? new Set(o) : null;
   try { return f(); } finally { obligadas = antes; }
 }
+/** Ejecuta f con el curso de la actividad (1 si no se dice) y lo restaura después. */
+function conCurso(curso, f) {
+  const antes = nivel;
+  nivel = Number(curso) >= 2 ? Number(curso) : 1;
+  try { return f(); } finally { nivel = antes; }
+}
+/** Curso activo (1, 2…): buscar() deja fuera las palabras de cursos superiores. */
+const nivelActivo = () => nivel;
 /** Letras obligatorias activas (cadena) o null. */
 const obligatoriasActivas = () => (obligadas ? [...obligadas].join("") : null);
 /** Clave de caché de las letras: permitidas y obligatorias. */
-const claveLetras = () => `${vistasActivas()}|${obligatoriasActivas()}`;
+const claveLetras = () => `${vistasActivas()}|${obligatoriasActivas()}|${nivel}`;
 /** ¿El texto lleva alguna de las letras obligatorias? (sin obligatorias, siempre). La «qu» se marca con la «q». */
 function obligada(texto) {
   if (!obligadas) return true;
@@ -3318,7 +4034,7 @@ const letrasActivas = () => (activas ? ABECEDARIO.filter((c) => activas.has(c)) 
 const avisoVistas = () => (obligadas ? ` Con la letra obligatoria «${[...obligadas].join("», «")}» no hay bastantes: quítala (mantenla pulsada) o marca más letras en «Letras».`
   : activas ? " Con las letras elegidas no hay bastantes: marca más letras en «Letras»." : "");
 
-Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get normalizarVistas() { return normalizarVistas; }, get conVistas() { return conVistas; }, get normalizarObligatorias() { return normalizarObligatorias; }, get conObligatorias() { return conObligatorias; }, get obligatoriasActivas() { return obligatoriasActivas; }, get claveLetras() { return claveLetras; }, get obligada() { return obligada; }, get vistasActivas() { return vistasActivas; }, get permitida() { return permitida; }, get filtrarVistas() { return filtrarVistas; }, get letrasActivas() { return letrasActivas; }, get avisoVistas() { return avisoVistas; } }));
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get normalizarVistas() { return normalizarVistas; }, get conVistas() { return conVistas; }, get normalizarObligatorias() { return normalizarObligatorias; }, get conObligatorias() { return conObligatorias; }, get conCurso() { return conCurso; }, get nivelActivo() { return nivelActivo; }, get obligatoriasActivas() { return obligatoriasActivas; }, get claveLetras() { return claveLetras; }, get obligada() { return obligada; }, get vistasActivas() { return vistasActivas; }, get permitida() { return permitida; }, get filtrarVistas() { return filtrarVistas; }, get letrasActivas() { return letrasActivas; }, get avisoVistas() { return avisoVistas; } }));
 },
 "nube/config.js": (__exp) => {
 // Charta · configuración de Firebase (paso 5.1)
@@ -3682,49 +4398,49 @@ const CATALOGO = {"cursos":{"1":"1.º de Primaria","2":"2.º de Primaria","3":"3
 {"id":"trucos.masmenos10","curso":1,"materia":"matematicas","bloque":12,"familia":"trucos","clave":"masmenos10","nombre":"Sumar y restar 10","descripcion":"Solo cambia la decena (truco de Calculi).","opciones":[{"id":"modo","etiqueta":"Operaciones","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Sumar y restar 10"},{"valor":"suma","etiqueta":"Solo sumar 10"},{"valor":"resta","etiqueta":"Solo restar 10"}]}],"rangos":[30,40,50,60,70,80,90,100],"rango":50,"tamanos":["completa","media"],"titulo":"SUMAR Y RESTAR 10","color":"verde","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["cálculo mental","truco","sumar","restar","decenas"]},"cursos":{"2":{"rangos":[100,200,300,400,500,600,700,800,900,999],"rango":100},"3":{"rangos":[1000,2000,3000,4000,5000,6000,7000,8000,9000,9999],"rango":9999}}},
 {"id":"letra.busca","curso":1,"materia":"lengua","bloque":2,"familia":"letra","clave":"busca","nombre":"Rodea la letra","descripcion":"Filas de letras sueltas: rodear todas las que son iguales a la pedida.","opciones":[{"id":"letra","etiqueta":"Letra que se busca","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Al azar"},{"valor":"a","etiqueta":"a"},{"valor":"b","etiqueta":"b"},{"valor":"c","etiqueta":"c"},{"valor":"d","etiqueta":"d"},{"valor":"e","etiqueta":"e"},{"valor":"f","etiqueta":"f"},{"valor":"g","etiqueta":"g"},{"valor":"h","etiqueta":"h"},{"valor":"i","etiqueta":"i"},{"valor":"j","etiqueta":"j"},{"valor":"k","etiqueta":"k"},{"valor":"l","etiqueta":"l"},{"valor":"m","etiqueta":"m"},{"valor":"n","etiqueta":"n"},{"valor":"ñ","etiqueta":"ñ"},{"valor":"o","etiqueta":"o"},{"valor":"p","etiqueta":"p"},{"valor":"q","etiqueta":"q"},{"valor":"r","etiqueta":"r"},{"valor":"s","etiqueta":"s"},{"valor":"t","etiqueta":"t"},{"valor":"u","etiqueta":"u"},{"valor":"v","etiqueta":"v"},{"valor":"w","etiqueta":"w"},{"valor":"x","etiqueta":"x"},{"valor":"y","etiqueta":"y"},{"valor":"z","etiqueta":"z"}]},{"id":"distractoras","etiqueta":"Las otras letras","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Al azar"},{"valor":"confusas","etiqueta":"Las que se confunden (b-d-p-q, m-n, u-n…)"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"mayus","etiqueta":"MAYÚSCULA"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"RODEA LA LETRA","color":"amarillo","metadatos":{"dificultad":1,"minutos":8,"etiquetas":["lengua","letras","reconocer","rodear","atención"]}},
 {"id":"letra.enpalabras","curso":1,"materia":"lengua","bloque":2,"familia":"letra","clave":"enpalabras","nombre":"Rodea la letra en las palabras","descripcion":"Una lista de palabras: rodear la letra pedida en cada una y contar cuántas veces sale.","opciones":[{"id":"letra","etiqueta":"Letra que se busca","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Al azar"},{"valor":"a","etiqueta":"a"},{"valor":"b","etiqueta":"b"},{"valor":"c","etiqueta":"c"},{"valor":"d","etiqueta":"d"},{"valor":"e","etiqueta":"e"},{"valor":"f","etiqueta":"f"},{"valor":"g","etiqueta":"g"},{"valor":"h","etiqueta":"h"},{"valor":"i","etiqueta":"i"},{"valor":"j","etiqueta":"j"},{"valor":"l","etiqueta":"l"},{"valor":"m","etiqueta":"m"},{"valor":"n","etiqueta":"n"},{"valor":"ñ","etiqueta":"ñ"},{"valor":"o","etiqueta":"o"},{"valor":"p","etiqueta":"p"},{"valor":"r","etiqueta":"r"},{"valor":"s","etiqueta":"s"},{"valor":"t","etiqueta":"t"},{"valor":"u","etiqueta":"u"},{"valor":"v","etiqueta":"v"},{"valor":"z","etiqueta":"z"}]},{"id":"tarea","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Rodear y contar cuántas veces"},{"valor":"rodea","etiqueta":"Solo rodear"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"RODEA LA LETRA EN LAS PALABRAS","color":"rosa","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","letras","rodear","contar","palabras"]}},
-{"id":"letra.falta","curso":1,"materia":"lengua","bloque":2,"familia":"letra","clave":"falta","nombre":"Pon la letra que falta","descripcion":"Palabras con una letra en hueco (m_sa), con tres letras para elegir o sin ayuda.","opciones":[{"id":"ayuda","etiqueta":"Ayuda","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Con tres letras para elegir"},{"valor":"sin","etiqueta":"Sin ayuda"}]},{"id":"hueco","etiqueta":"Letra que falta","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Cualquier letra"},{"valor":"primera","etiqueta":"La primera"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"largo","etiqueta":"Sílabas de cada palabra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas"},{"valor":1,"etiqueta":"1 sílaba"},{"valor":2,"etiqueta":"2 sílabas"},{"valor":3,"etiqueta":"3 sílabas"},{"valor":4,"etiqueta":"4 sílabas"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"PON LA LETRA QUE FALTA","color":"azul","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","letras","palabras","completar"]}},
+{"id":"letra.falta","curso":1,"materia":"lengua","bloque":2,"familia":"letra","clave":"falta","nombre":"Pon la letra que falta","descripcion":"Palabras con una letra en hueco (m_sa), con tres letras para elegir o sin ayuda.","opciones":[{"id":"ayuda","etiqueta":"Ayuda","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Con tres letras para elegir"},{"valor":"sin","etiqueta":"Sin ayuda"}]},{"id":"hueco","etiqueta":"Letra que falta","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Cualquier letra"},{"valor":"primera","etiqueta":"La primera"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"largo","etiqueta":"Sílabas de cada palabra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas"},{"valor":1,"etiqueta":"1 sílaba"},{"valor":2,"etiqueta":"2 sílabas"},{"valor":3,"etiqueta":"3 sílabas"},{"valor":4,"etiqueta":"4 sílabas"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"PON LA LETRA QUE FALTA","color":"azul","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","letras","palabras","completar"]},"cursos":{"2":{"rangos":[],"rango":null}}},
 {"id":"letra.vocales","curso":1,"materia":"lengua","bloque":2,"familia":"letra","clave":"vocales","nombre":"Completa las vocales","descripcion":"Palabras con las vocales en hueco (p_l_t_): escribirlas.","opciones":[{"id":"faltan","etiqueta":"Vocales que faltan","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Todas"},{"valor":"una","etiqueta":"Una"},{"valor":"azar","etiqueta":"Algunas (al azar)"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"largo","etiqueta":"Sílabas de cada palabra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas"},{"valor":1,"etiqueta":"1 sílaba"},{"valor":2,"etiqueta":"2 sílabas"},{"valor":3,"etiqueta":"3 sílabas"},{"valor":4,"etiqueta":"4 sílabas"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"COMPLETA LAS VOCALES","color":"verde","metadatos":{"dificultad":2,"minutos":12,"etiquetas":["lengua","letras","vocales","palabras","completar"]}},
 {"id":"letra.parejas","curso":1,"materia":"lengua","bloque":2,"familia":"letra","clave":"parejas","nombre":"Mayúscula y minúscula","descripcion":"Unir cada mayúscula con su minúscula, o escribir la que falta.","opciones":[{"id":"tarea","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Unir"},{"valor":"escribe","etiqueta":"Escribir la que falta"}]}],"rangos":[],"rango":null,"tamanos":["completa"],"titulo":"MAYÚSCULA Y MINÚSCULA","color":"amarillo","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","letras","mayúsculas","minúsculas","unir"]}},
-{"id":"letra.abecedario","curso":1,"materia":"lengua","bloque":2,"familia":"letra","clave":"abecedario","nombre":"Antes y después","descripcion":"La letra de antes, la de después o las dos, con el abecedario (con ñ).","opciones":[{"id":"modo","etiqueta":"Letras","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"La de antes y la de después"},{"valor":"anterior","etiqueta":"Solo la de antes"},{"valor":"posterior","etiqueta":"Solo la de después"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"mayus","etiqueta":"MAYÚSCULA"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"ANTES Y DESPUÉS","color":"rosa","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","letras","abecedario","orden","anterior","posterior"]}},
+{"id":"letra.abecedario","curso":1,"materia":"lengua","bloque":2,"familia":"letra","clave":"abecedario","nombre":"Antes y después","descripcion":"La letra de antes, la de después o las dos, con el abecedario (con ñ).","opciones":[{"id":"modo","etiqueta":"Letras","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"La de antes y la de después"},{"valor":"anterior","etiqueta":"Solo la de antes"},{"valor":"posterior","etiqueta":"Solo la de después"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"mayus","etiqueta":"MAYÚSCULA"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"ANTES Y DESPUÉS","color":"rosa","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","letras","abecedario","orden","anterior","posterior"]},"cursos":{"2":{"rangos":[],"rango":null}}},
 {"id":"silaba.tabla","curso":1,"materia":"lengua","bloque":3,"familia":"silaba","clave":"tabla","nombre":"Lee las sílabas","descripcion":"Tabla de lectura de sílabas (ma me mi mo mu…) para leer en voz alta.","opciones":[{"id":"letra","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Todas"},{"valor":"m","etiqueta":"m"},{"valor":"p","etiqueta":"p"},{"valor":"s","etiqueta":"s"},{"valor":"l","etiqueta":"l"},{"valor":"t","etiqueta":"t"},{"valor":"d","etiqueta":"d"},{"valor":"n","etiqueta":"n"},{"valor":"f","etiqueta":"f"},{"valor":"b","etiqueta":"b"},{"valor":"v","etiqueta":"v"},{"valor":"r","etiqueta":"r"},{"valor":"j","etiqueta":"j"},{"valor":"c","etiqueta":"c"},{"valor":"z","etiqueta":"z"},{"valor":"g","etiqueta":"g"},{"valor":"h","etiqueta":"h"},{"valor":"ñ","etiqueta":"ñ"},{"valor":"ch","etiqueta":"ch"},{"valor":"ll","etiqueta":"ll"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"orden","etiqueta":"Orden","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Ordenadas"},{"valor":"mezcladas","etiqueta":"Mezcladas"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"mayus","etiqueta":"MAYÚSCULA"}]}],"rangos":[],"rango":null,"tamanos":["completa"],"titulo":"LEE LAS SÍLABAS","color":"azul","metadatos":{"dificultad":1,"minutos":8,"etiquetas":["lengua","sílabas","lectura","voz alta","fluidez"]}},
-{"id":"silaba.junta","curso":1,"materia":"lengua","bloque":3,"familia":"silaba","clave":"junta","nombre":"Junta las sílabas","descripcion":"Juntar sílabas para formar la palabra (ca + sa), escribiéndola o uniendo columnas.","opciones":[{"id":"tarea","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Escribir la palabra"},{"valor":"une","etiqueta":"Unir las sílabas"}]},{"id":"largo","etiqueta":"Sílabas de cada palabra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"2 sílabas"},{"valor":3,"etiqueta":"3 sílabas"},{"valor":"variadas","etiqueta":"2 y 3 sílabas"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"JUNTA LAS SÍLABAS","color":"verde","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","sílabas","formar palabras","unir","escribir"]}},
-{"id":"silaba.separa","curso":1,"materia":"lengua","bloque":3,"familia":"silaba","clave":"separa","nombre":"Separa en sílabas","descripcion":"Separar cada palabra en sílabas: en casillas o con rayas.","opciones":[{"id":"modo","etiqueta":"Cómo se separa","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"En casillas"},{"valor":"rayas","etiqueta":"Con rayas"}]},{"id":"largo","etiqueta":"Sílabas de cada palabra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas"},{"valor":2,"etiqueta":"2 sílabas"},{"valor":3,"etiqueta":"3 sílabas"},{"valor":4,"etiqueta":"4 sílabas"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"SEPARA EN SÍLABAS","color":"amarillo","metadatos":{"dificultad":2,"minutos":12,"etiquetas":["lengua","sílabas","separar","palabras"]}},
-{"id":"silaba.ordena","curso":1,"materia":"lengua","bloque":3,"familia":"silaba","clave":"ordena","nombre":"Ordena las sílabas","descripcion":"Sílabas desordenadas: escribir la palabra (ta · pe · lo = pelota).","opciones":[{"id":"largo","etiqueta":"Sílabas de cada palabra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas"},{"valor":2,"etiqueta":"2 sílabas"},{"valor":3,"etiqueta":"3 sílabas"},{"valor":4,"etiqueta":"4 sílabas"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"ORDENA LAS SÍLABAS","color":"rosa","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","sílabas","ordenar","palabras"]}},
-{"id":"silaba.falta","curso":1,"materia":"lengua","bloque":3,"familia":"silaba","clave":"falta","nombre":"Pon la sílaba que falta","descripcion":"Palabras con una sílaba en hueco (pe__ta), con tres sílabas para elegir o sin ayuda.","opciones":[{"id":"ayuda","etiqueta":"Ayuda","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Con tres sílabas para elegir"},{"valor":"sin","etiqueta":"Sin ayuda"}]},{"id":"hueco","etiqueta":"Sílaba que falta","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Cualquiera"},{"valor":"primera","etiqueta":"La primera"},{"valor":"ultima","etiqueta":"La última"}]},{"id":"largo","etiqueta":"Sílabas de cada palabra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas"},{"valor":2,"etiqueta":"2 sílabas"},{"valor":3,"etiqueta":"3 sílabas"},{"valor":4,"etiqueta":"4 sílabas"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"PON LA SÍLABA QUE FALTA","color":"azul","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","sílabas","palabras","completar"]}},
-{"id":"fono.silabas","curso":1,"materia":"lengua","bloque":1,"familia":"fono","clave":"silabas","nombre":"Cuenta las sílabas","descripcion":"Una palabra y casillas: una palmada por sílaba; colorear una casilla por palmada o escribir el número.","opciones":[{"id":"respuesta","etiqueta":"Respuesta","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Colorear una casilla por sílaba"},{"valor":"numero","etiqueta":"Escribir el número"}]},{"id":"largo","etiqueta":"Sílabas de cada palabra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas"},{"valor":1,"etiqueta":"1 sílaba"},{"valor":2,"etiqueta":"2 sílabas"},{"valor":3,"etiqueta":"3 sílabas"},{"valor":4,"etiqueta":"4 sílabas"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"CUENTA LAS SÍLABAS","color":"azul","metadatos":{"dificultad":1,"minutos":8,"etiquetas":["lengua","conciencia fonológica","sílabas","palmadas","contar"]}},
+{"id":"silaba.junta","curso":1,"materia":"lengua","bloque":3,"familia":"silaba","clave":"junta","nombre":"Junta las sílabas","descripcion":"Juntar sílabas para formar la palabra (ca + sa), escribiéndola o uniendo columnas.","opciones":[{"id":"tarea","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Escribir la palabra"},{"valor":"une","etiqueta":"Unir las sílabas"}]},{"id":"largo","etiqueta":"Sílabas de cada palabra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"2 sílabas"},{"valor":3,"etiqueta":"3 sílabas"},{"valor":"variadas","etiqueta":"2 y 3 sílabas"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"JUNTA LAS SÍLABAS","color":"verde","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","sílabas","formar palabras","unir","escribir"]},"cursos":{"2":{"rangos":[],"rango":null}}},
+{"id":"silaba.separa","curso":1,"materia":"lengua","bloque":3,"familia":"silaba","clave":"separa","nombre":"Separa en sílabas","descripcion":"Separar cada palabra en sílabas: en casillas o con rayas.","opciones":[{"id":"modo","etiqueta":"Cómo se separa","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"En casillas"},{"valor":"rayas","etiqueta":"Con rayas"}]},{"id":"largo","etiqueta":"Sílabas de cada palabra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas"},{"valor":2,"etiqueta":"2 sílabas"},{"valor":3,"etiqueta":"3 sílabas"},{"valor":4,"etiqueta":"4 sílabas"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"SEPARA EN SÍLABAS","color":"amarillo","metadatos":{"dificultad":2,"minutos":12,"etiquetas":["lengua","sílabas","separar","palabras"]},"cursos":{"2":{"rangos":[],"rango":null}}},
+{"id":"silaba.ordena","curso":1,"materia":"lengua","bloque":3,"familia":"silaba","clave":"ordena","nombre":"Ordena las sílabas","descripcion":"Sílabas desordenadas: escribir la palabra (ta · pe · lo = pelota).","opciones":[{"id":"largo","etiqueta":"Sílabas de cada palabra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas"},{"valor":2,"etiqueta":"2 sílabas"},{"valor":3,"etiqueta":"3 sílabas"},{"valor":4,"etiqueta":"4 sílabas"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"ORDENA LAS SÍLABAS","color":"rosa","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","sílabas","ordenar","palabras"]},"cursos":{"2":{"rangos":[],"rango":null}}},
+{"id":"silaba.falta","curso":1,"materia":"lengua","bloque":3,"familia":"silaba","clave":"falta","nombre":"Pon la sílaba que falta","descripcion":"Palabras con una sílaba en hueco (pe__ta), con tres sílabas para elegir o sin ayuda.","opciones":[{"id":"ayuda","etiqueta":"Ayuda","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Con tres sílabas para elegir"},{"valor":"sin","etiqueta":"Sin ayuda"}]},{"id":"hueco","etiqueta":"Sílaba que falta","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Cualquiera"},{"valor":"primera","etiqueta":"La primera"},{"valor":"ultima","etiqueta":"La última"}]},{"id":"largo","etiqueta":"Sílabas de cada palabra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas"},{"valor":2,"etiqueta":"2 sílabas"},{"valor":3,"etiqueta":"3 sílabas"},{"valor":4,"etiqueta":"4 sílabas"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"PON LA SÍLABA QUE FALTA","color":"azul","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","sílabas","palabras","completar"]},"cursos":{"2":{"rangos":[],"rango":null}}},
+{"id":"fono.silabas","curso":1,"materia":"lengua","bloque":1,"familia":"fono","clave":"silabas","nombre":"Cuenta las sílabas","descripcion":"Una palabra y casillas: una palmada por sílaba; colorear una casilla por palmada o escribir el número.","opciones":[{"id":"respuesta","etiqueta":"Respuesta","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Colorear una casilla por sílaba"},{"valor":"numero","etiqueta":"Escribir el número"}]},{"id":"largo","etiqueta":"Sílabas de cada palabra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas"},{"valor":1,"etiqueta":"1 sílaba"},{"valor":2,"etiqueta":"2 sílabas"},{"valor":3,"etiqueta":"3 sílabas"},{"valor":4,"etiqueta":"4 sílabas"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"CUENTA LAS SÍLABAS","color":"azul","metadatos":{"dificultad":1,"minutos":8,"etiquetas":["lengua","conciencia fonológica","sílabas","palmadas","contar"]},"cursos":{"2":{"rangos":[],"rango":null}}},
 {"id":"fono.inicial","curso":1,"materia":"lengua","bloque":1,"familia":"fono","clave":"inicial","nombre":"¿Con qué letra suena?","descripcion":"Palabra con la primera (o la última) letra en hueco y tres letras para rodear la que falta.","opciones":[{"id":"posicion","etiqueta":"Letra que falta","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"La del principio"},{"valor":"final","etiqueta":"La del final"}]},{"id":"letras","etiqueta":"Letras para elegir","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Todas"},{"valor":"vocales","etiqueta":"Solo vocales"},{"valor":"consonantes","etiqueta":"Solo consonantes"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"¿CON QUÉ LETRA SUENA?","color":"rosa","metadatos":{"dificultad":1,"minutos":8,"etiquetas":["lengua","conciencia fonológica","letras","sonido","inicial","rodear"]}},
 {"id":"fono.posicion","curso":1,"materia":"lengua","bloque":1,"familia":"fono","clave":"posicion","nombre":"¿Dónde está el sonido?","descripcion":"Una palabra y una letra: marcar si está al principio, en medio o al final.","opciones":[{"id":"largo","etiqueta":"Sílabas de cada palabra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas"},{"valor":2,"etiqueta":"2 sílabas"},{"valor":3,"etiqueta":"3 sílabas"},{"valor":4,"etiqueta":"4 sílabas"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"¿DÓNDE ESTÁ EL SONIDO?","color":"verde","metadatos":{"dificultad":2,"minutos":8,"etiquetas":["lengua","conciencia fonológica","letras","sonido","posición"]}},
-{"id":"fono.rimas","curso":1,"materia":"lengua","bloque":1,"familia":"fono","clave":"rimas","nombre":"Une las que riman","descripcion":"Dos columnas de palabras: unir las que terminan igual (gato – pato).","opciones":[{"id":"rima","etiqueta":"Rima","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Misma última sílaba (gato – pato)"},{"valor":"vocal","etiqueta":"Desde la vocal fuerte (ratón – camión)"}]},{"id":"parejas","etiqueta":"Parejas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"5 parejas"},{"valor":4,"etiqueta":"4 parejas"},{"valor":6,"etiqueta":"6 parejas"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa"],"titulo":"UNE LAS QUE RIMAN","color":"amarillo","metadatos":{"dificultad":2,"minutos":8,"etiquetas":["lengua","conciencia fonológica","rimas","unir"]}},
-{"id":"fono.quita","curso":1,"materia":"lengua","bloque":1,"familia":"fono","clave":"quita","nombre":"Quita una sílaba","descripcion":"«Si a ca-sa le quito ca, queda…»: escribir lo que queda al quitar la primera o la última sílaba.","opciones":[{"id":"quitar","etiqueta":"Sílaba que se quita","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"La primera"},{"valor":"ultima","etiqueta":"La última"},{"valor":"mezcla","etiqueta":"La primera o la última"}]},{"id":"largo","etiqueta":"Sílabas de cada palabra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas"},{"valor":2,"etiqueta":"2 sílabas"},{"valor":3,"etiqueta":"3 sílabas"},{"valor":4,"etiqueta":"4 sílabas"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"QUITA UNA SÍLABA","color":"azul","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","conciencia fonológica","sílabas","quitar","palabras"]}},
-{"id":"fono.larga","curso":1,"materia":"lengua","bloque":1,"familia":"fono","clave":"larga","nombre":"La palabra más larga","descripcion":"Grupos de tres palabras: rodear la que tiene más (o menos) sílabas.","opciones":[{"id":"cual","etiqueta":"Rodear la que tiene","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Más sílabas"},{"valor":"menos","etiqueta":"Menos sílabas"},{"valor":"mezcla","etiqueta":"Más o menos (se indica en cada grupo)"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"LA PALABRA MÁS LARGA","color":"rosa","metadatos":{"dificultad":1,"minutos":8,"etiquetas":["lengua","conciencia fonológica","sílabas","comparar","rodear"]}},
-{"id":"palabra.intrusa","curso":1,"materia":"lengua","bloque":4,"familia":"palabra","clave":"intrusa","nombre":"La que no es del grupo","descripcion":"Filas de cuatro palabras de un campo (animales, comida…) con una intrusa: rodearla.","opciones":[{"id":"campo","etiqueta":"Campo de las palabras","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Varios (uno distinto en cada fila)"},{"valor":"animales","etiqueta":"Animales"},{"valor":"comida","etiqueta":"Comida"},{"valor":"ropa","etiqueta":"Ropa"},{"valor":"casa","etiqueta":"Casa"},{"valor":"escuela","etiqueta":"Escuela"},{"valor":"cuerpo","etiqueta":"Cuerpo"},{"valor":"juguetes","etiqueta":"Juguetes"},{"valor":"transportes","etiqueta":"Transportes"},{"valor":"familia","etiqueta":"Familia"},{"valor":"naturaleza","etiqueta":"Naturaleza"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"LA QUE NO ES DEL GRUPO","color":"rosa","metadatos":{"dificultad":2,"minutos":8,"etiquetas":["lengua","palabras","campos léxicos","rodear","clasificar"]}},
-{"id":"palabra.clasifica","curso":1,"materia":"lengua","bloque":4,"familia":"palabra","clave":"clasifica","nombre":"Cada palabra en su caja","descripcion":"Un banco de palabras y dos o tres cajas con el nombre del grupo: escribir cada palabra donde va.","opciones":[{"id":"cajas","etiqueta":"Cajas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"2 cajas"},{"valor":3,"etiqueta":"3 cajas"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa"],"titulo":"CADA PALABRA EN SU CAJA","color":"verde","metadatos":{"dificultad":2,"minutos":12,"etiquetas":["lengua","palabras","campos léxicos","clasificar","escribir"]}},
-{"id":"palabra.letras","curso":1,"materia":"lengua","bloque":4,"familia":"palabra","clave":"letras","nombre":"Ordena las letras","descripcion":"Letras desordenadas (o · g · t · a): escribir la palabra, con la primera letra marcada o sin marcar.","opciones":[{"id":"letras","etiqueta":"Letras de cada palabra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"3 a 5 (variadas)"},{"valor":3,"etiqueta":"3 letras"},{"valor":4,"etiqueta":"4 letras"},{"valor":5,"etiqueta":"5 letras"}]},{"id":"marca","etiqueta":"Primera letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Sin marcar"},{"valor":"primera","etiqueta":"Marcada"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"ORDENA LAS LETRAS","color":"azul","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","palabras","letras","ordenar","escribir"]}},
+{"id":"fono.rimas","curso":1,"materia":"lengua","bloque":1,"familia":"fono","clave":"rimas","nombre":"Une las que riman","descripcion":"Dos columnas de palabras: unir las que terminan igual (gato – pato).","opciones":[{"id":"rima","etiqueta":"Rima","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Misma última sílaba (gato – pato)"},{"valor":"vocal","etiqueta":"Desde la vocal fuerte (ratón – camión)"}]},{"id":"parejas","etiqueta":"Parejas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"5 parejas"},{"valor":4,"etiqueta":"4 parejas"},{"valor":6,"etiqueta":"6 parejas"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa"],"titulo":"UNE LAS QUE RIMAN","color":"amarillo","metadatos":{"dificultad":2,"minutos":8,"etiquetas":["lengua","conciencia fonológica","rimas","unir"]},"cursos":{"2":{"rangos":[],"rango":null}}},
+{"id":"fono.quita","curso":1,"materia":"lengua","bloque":1,"familia":"fono","clave":"quita","nombre":"Quita una sílaba","descripcion":"«Si a ca-sa le quito ca, queda…»: escribir lo que queda al quitar la primera o la última sílaba.","opciones":[{"id":"quitar","etiqueta":"Sílaba que se quita","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"La primera"},{"valor":"ultima","etiqueta":"La última"},{"valor":"mezcla","etiqueta":"La primera o la última"}]},{"id":"largo","etiqueta":"Sílabas de cada palabra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas"},{"valor":2,"etiqueta":"2 sílabas"},{"valor":3,"etiqueta":"3 sílabas"},{"valor":4,"etiqueta":"4 sílabas"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"QUITA UNA SÍLABA","color":"azul","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","conciencia fonológica","sílabas","quitar","palabras"]},"cursos":{"2":{"rangos":[],"rango":null}}},
+{"id":"fono.larga","curso":1,"materia":"lengua","bloque":1,"familia":"fono","clave":"larga","nombre":"La palabra más larga","descripcion":"Grupos de tres palabras: rodear la que tiene más (o menos) sílabas.","opciones":[{"id":"cual","etiqueta":"Rodear la que tiene","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Más sílabas"},{"valor":"menos","etiqueta":"Menos sílabas"},{"valor":"mezcla","etiqueta":"Más o menos (se indica en cada grupo)"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"LA PALABRA MÁS LARGA","color":"rosa","metadatos":{"dificultad":1,"minutos":8,"etiquetas":["lengua","conciencia fonológica","sílabas","comparar","rodear"]},"cursos":{"2":{"rangos":[],"rango":null}}},
+{"id":"palabra.intrusa","curso":1,"materia":"lengua","bloque":4,"familia":"palabra","clave":"intrusa","nombre":"La que no es del grupo","descripcion":"Filas de cuatro palabras de un campo (animales, comida…) con una intrusa: rodearla.","opciones":[{"id":"campo","etiqueta":"Campo de las palabras","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Varios (uno distinto en cada fila)"},{"valor":"animales","etiqueta":"Animales"},{"valor":"comida","etiqueta":"Comida"},{"valor":"ropa","etiqueta":"Ropa"},{"valor":"casa","etiqueta":"Casa"},{"valor":"escuela","etiqueta":"Escuela"},{"valor":"cuerpo","etiqueta":"Cuerpo"},{"valor":"juguetes","etiqueta":"Juguetes"},{"valor":"transportes","etiqueta":"Transportes"},{"valor":"familia","etiqueta":"Familia"},{"valor":"naturaleza","etiqueta":"Naturaleza"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"LA QUE NO ES DEL GRUPO","color":"rosa","metadatos":{"dificultad":2,"minutos":8,"etiquetas":["lengua","palabras","campos léxicos","rodear","clasificar"]},"cursos":{"2":{"rangos":[],"rango":null}}},
+{"id":"palabra.clasifica","curso":1,"materia":"lengua","bloque":4,"familia":"palabra","clave":"clasifica","nombre":"Cada palabra en su caja","descripcion":"Un banco de palabras y dos o tres cajas con el nombre del grupo: escribir cada palabra donde va.","opciones":[{"id":"cajas","etiqueta":"Cajas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"2 cajas"},{"valor":3,"etiqueta":"3 cajas"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa"],"titulo":"CADA PALABRA EN SU CAJA","color":"verde","metadatos":{"dificultad":2,"minutos":12,"etiquetas":["lengua","palabras","campos léxicos","clasificar","escribir"]},"cursos":{"2":{"rangos":[],"rango":null}}},
+{"id":"palabra.letras","curso":1,"materia":"lengua","bloque":4,"familia":"palabra","clave":"letras","nombre":"Ordena las letras","descripcion":"Letras desordenadas (o · g · t · a): escribir la palabra, con la primera letra marcada o sin marcar.","opciones":[{"id":"letras","etiqueta":"Letras de cada palabra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"3 a 5 (variadas)"},{"valor":3,"etiqueta":"3 letras"},{"valor":4,"etiqueta":"4 letras"},{"valor":5,"etiqueta":"5 letras"}]},{"id":"marca","etiqueta":"Primera letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Sin marcar"},{"valor":"primera","etiqueta":"Marcada"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"ORDENA LAS LETRAS","color":"azul","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","palabras","letras","ordenar","escribir"]},"cursos":{"2":{"rangos":[],"rango":null}}},
 {"id":"palabra.cuenta","curso":1,"materia":"lengua","bloque":4,"familia":"palabra","clave":"cuenta","nombre":"¿Cuántas letras?","descripcion":"Una palabra y un hueco para el número de letras, o casillas (una por letra) y el número.","opciones":[{"id":"letras","etiqueta":"Letras de cada palabra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"3 a 7 (variadas)"},{"valor":3,"etiqueta":"3 letras"},{"valor":4,"etiqueta":"4 letras"},{"valor":5,"etiqueta":"5 letras"},{"valor":6,"etiqueta":"6 letras"}]},{"id":"respuesta","etiqueta":"Respuesta","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Solo el número"},{"valor":"casillas","etiqueta":"Casillas y número"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"¿CUÁNTAS LETRAS?","color":"amarillo","metadatos":{"dificultad":1,"minutos":8,"etiquetas":["lengua","palabras","letras","contar"]}},
-{"id":"palabra.articulo","curso":1,"materia":"lengua","bloque":4,"familia":"palabra","clave":"articulo","nombre":"el, la, los, las","descripcion":"Poner el artículo que va con cada nombre (___ gato).","opciones":[{"id":"articulos","etiqueta":"Artículos","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"el, la"},{"valor":"un","etiqueta":"un, una"},{"valor":"plural","etiqueta":"el, la, los, las"},{"valor":"unplural","etiqueta":"un, una, unos, unas"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"mayus","etiqueta":"MAYÚSCULA"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"EL, LA, LOS, LAS","color":"rosa","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","palabras","artículos","género","número"]}},
-{"id":"palabra.plural","curso":1,"materia":"lengua","bloque":4,"familia":"palabra","clave":"plural","nombre":"Uno y muchos","descripcion":"Escribir el plural de cada nombre (gato, gatos; flor, flores), o el singular a partir del plural.","opciones":[{"id":"plural","etiqueta":"Plurales","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Solo -s"},{"valor":"es","etiqueta":"-s y -es"}]},{"id":"sentido","etiqueta":"Sentido","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"De uno a muchos"},{"valor":"alreves","etiqueta":"De muchos a uno"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"mayus","etiqueta":"MAYÚSCULA"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"UNO Y MUCHOS","color":"verde","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","palabras","plural","singular","escribir"]}},
-{"id":"palabra.contrarios","curso":1,"materia":"lengua","bloque":4,"familia":"palabra","clave":"contrarios","nombre":"Los contrarios","descripcion":"Unir cada palabra con su contrario (grande, pequeño) o escribirlo. Banco fijo de unos 40 pares.","opciones":[{"id":"tarea","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Unir con flechas"},{"valor":"escribe","etiqueta":"Escribir el contrario"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"LOS CONTRARIOS","color":"azul","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","palabras","vocabulario","contrarios","unir"]}},
-{"id":"palabra.sopa","curso":1,"materia":"lengua","bloque":4,"familia":"palabra","clave":"sopa","nombre":"Sopa de letras","descripcion":"Una sopa de letras con 6 a 8 palabras de un campo; horizontal y vertical (y diagonal si se quiere).","opciones":[{"id":"campo","etiqueta":"Campo de las palabras","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Al azar"},{"valor":"animales","etiqueta":"Animales"},{"valor":"comida","etiqueta":"Comida"},{"valor":"ropa","etiqueta":"Ropa"},{"valor":"casa","etiqueta":"Casa"},{"valor":"escuela","etiqueta":"Escuela"},{"valor":"cuerpo","etiqueta":"Cuerpo"},{"valor":"juguetes","etiqueta":"Juguetes"},{"valor":"transportes","etiqueta":"Transportes"},{"valor":"familia","etiqueta":"Familia"},{"valor":"naturaleza","etiqueta":"Naturaleza"},{"valor":"colores","etiqueta":"Colores"}]},{"id":"palabras","etiqueta":"Palabras escondidas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"8 palabras"},{"valor":7,"etiqueta":"7 palabras"},{"valor":6,"etiqueta":"6 palabras"}]},{"id":"direcciones","etiqueta":"Direcciones","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Horizontal y vertical"},{"valor":"diagonal","etiqueta":"También en diagonal"}]},{"id":"minus","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"MAYÚSCULAS"},{"valor":"minus","etiqueta":"minúscula"}]}],"rangos":[],"rango":null,"tamanos":["completa"],"titulo":"SOPA DE LETRAS","color":"amarillo","metadatos":{"dificultad":2,"minutos":15,"etiquetas":["lengua","palabras","sopa de letras","vocabulario"]}},
+{"id":"palabra.articulo","curso":1,"materia":"lengua","bloque":4,"familia":"palabra","clave":"articulo","nombre":"el, la, los, las","descripcion":"Poner el artículo que va con cada nombre (___ gato).","opciones":[{"id":"articulos","etiqueta":"Artículos","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"el, la"},{"valor":"un","etiqueta":"un, una"},{"valor":"plural","etiqueta":"el, la, los, las"},{"valor":"unplural","etiqueta":"un, una, unos, unas"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"mayus","etiqueta":"MAYÚSCULA"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"EL, LA, LOS, LAS","color":"rosa","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","palabras","artículos","género","número"]},"cursos":{"2":{"rangos":[],"rango":null}}},
+{"id":"palabra.plural","curso":1,"materia":"lengua","bloque":4,"familia":"palabra","clave":"plural","nombre":"Uno y muchos","descripcion":"Escribir el plural de cada nombre (gato, gatos; flor, flores), o el singular a partir del plural.","opciones":[{"id":"plural","etiqueta":"Plurales","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Solo -s"},{"valor":"es","etiqueta":"-s y -es"}]},{"id":"sentido","etiqueta":"Sentido","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"De uno a muchos"},{"valor":"alreves","etiqueta":"De muchos a uno"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"mayus","etiqueta":"MAYÚSCULA"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"UNO Y MUCHOS","color":"verde","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","palabras","plural","singular","escribir"]},"cursos":{"2":{"rangos":[],"rango":null}}},
+{"id":"palabra.contrarios","curso":1,"materia":"lengua","bloque":4,"familia":"palabra","clave":"contrarios","nombre":"Los contrarios","descripcion":"Unir cada palabra con su contrario (grande, pequeño) o escribirlo. Banco fijo de unos 40 pares.","opciones":[{"id":"tarea","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Unir con flechas"},{"valor":"escribe","etiqueta":"Escribir el contrario"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"LOS CONTRARIOS","color":"azul","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","palabras","vocabulario","contrarios","unir"]},"cursos":{"2":{"rangos":[],"rango":null}}},
+{"id":"palabra.sopa","curso":1,"materia":"lengua","bloque":4,"familia":"palabra","clave":"sopa","nombre":"Sopa de letras","descripcion":"Una sopa de letras con 6 a 8 palabras de un campo; horizontal y vertical (y diagonal si se quiere).","opciones":[{"id":"campo","etiqueta":"Campo de las palabras","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Al azar"},{"valor":"animales","etiqueta":"Animales"},{"valor":"comida","etiqueta":"Comida"},{"valor":"ropa","etiqueta":"Ropa"},{"valor":"casa","etiqueta":"Casa"},{"valor":"escuela","etiqueta":"Escuela"},{"valor":"cuerpo","etiqueta":"Cuerpo"},{"valor":"juguetes","etiqueta":"Juguetes"},{"valor":"transportes","etiqueta":"Transportes"},{"valor":"familia","etiqueta":"Familia"},{"valor":"naturaleza","etiqueta":"Naturaleza"},{"valor":"colores","etiqueta":"Colores"}]},{"id":"palabras","etiqueta":"Palabras escondidas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"8 palabras"},{"valor":7,"etiqueta":"7 palabras"},{"valor":6,"etiqueta":"6 palabras"}]},{"id":"direcciones","etiqueta":"Direcciones","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Horizontal y vertical"},{"valor":"diagonal","etiqueta":"También en diagonal"}]},{"id":"minus","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"MAYÚSCULAS"},{"valor":"minus","etiqueta":"minúscula"}]}],"rangos":[],"rango":null,"tamanos":["completa"],"titulo":"SOPA DE LETRAS","color":"amarillo","metadatos":{"dificultad":2,"minutos":15,"etiquetas":["lengua","palabras","sopa de letras","vocabulario"]},"cursos":{"2":{"rangos":[],"rango":null}}},
 {"id":"palabra.dibuja","curso":1,"materia":"lengua","bloque":4,"familia":"palabra","clave":"dibuja","nombre":"Leo y dibujo","descripcion":"Una palabra y un recuadro vacío: leer la palabra y dibujar lo que dice (solo nombres que se pueden dibujar). Sin corrección.","opciones":[{"id":"largo","etiqueta":"Sílabas de cada palabra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas"},{"valor":1,"etiqueta":"1 sílaba"},{"valor":2,"etiqueta":"2 sílabas"},{"valor":3,"etiqueta":"3 sílabas"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"LEO Y DIBUJO","color":"verde","metadatos":{"dificultad":1,"minutos":8,"etiquetas":["lengua","palabras","leer","dibujar"]}},
-{"id":"orto.elige","curso":1,"materia":"lengua","bloque":6,"familia":"orto","clave":"elige","nombre":"Elige la letra","descripcion":"Palabras con un hueco de ortografía (ca_po, pe_o, _eso): elegir entre dos opciones o escribir sin ayuda.","opciones":[{"id":"regla","etiqueta":"Regla","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Mezcladas"},{"valor":"mpb","etiqueta":"m antes de p y b"},{"valor":"r","etiqueta":"r / rr"},{"valor":"cqu","etiqueta":"c / qu"},{"valor":"ggu","etiqueta":"g / gu"},{"valor":"cz","etiqueta":"c / z"}]},{"id":"ayuda","etiqueta":"Ayuda","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Con las dos opciones para elegir"},{"valor":"sin","etiqueta":"Sin ayuda"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"ELIGE LA LETRA","color":"amarillo","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","ortografía","letras","palabras","completar"]}},
-{"id":"orto.mayuscula","curso":1,"materia":"lengua","bloque":6,"familia":"orto","clave":"mayuscula","nombre":"Nombres con mayúscula","descripcion":"Nombres de personas, mascotas y pueblos: rodear las palabras que llevan mayúscula o escribirlas bien.","opciones":[{"id":"tarea","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Rodear los nombres con mayúscula"},{"valor":"escribe","etiqueta":"Escribirlos con mayúscula"}]},{"id":"nombres","etiqueta":"Nombres","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Mezclados"},{"valor":"personas","etiqueta":"De personas"},{"valor":"mascotas","etiqueta":"De mascotas"},{"valor":"lugares","etiqueta":"De pueblos y ciudades"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"NOMBRES CON MAYÚSCULA","color":"rosa","metadatos":{"dificultad":2,"minutos":8,"etiquetas":["lengua","ortografía","mayúsculas","nombres","propios"]}},
-{"id":"frase.ordena","curso":1,"materia":"lengua","bloque":5,"familia":"frase","clave":"ordena","nombre":"Ordena la frase","descripcion":"Palabras desordenadas (come · gato · el): ordenarlas y escribir la frase.","opciones":[{"id":"palabras","etiqueta":"Palabras de cada frase","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas (3 a 5)"},{"valor":3,"etiqueta":"3 palabras"},{"valor":4,"etiqueta":"4 palabras"},{"valor":5,"etiqueta":"5 palabras"}]},{"id":"marca","etiqueta":"Primera palabra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Con mayúscula (de pista)"},{"valor":"sin","etiqueta":"Sin marcar"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"mayus","etiqueta":"MAYÚSCULA"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"ORDENA LA FRASE","color":"azul","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","frases","ordenar","palabras","escribir"]}},
-{"id":"frase.separa","curso":1,"materia":"lengua","bloque":5,"familia":"frase","clave":"separa","nombre":"Separa las palabras","descripcion":"Frases escritas sin espacios (elgatocome): trazar rayas entre las palabras o reescribirlas separadas.","opciones":[{"id":"tarea","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Trazar rayas entre las palabras"},{"valor":"escribe","etiqueta":"Reescribir separando"}]},{"id":"palabras","etiqueta":"Palabras de cada frase","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas (3 a 5)"},{"valor":3,"etiqueta":"3 palabras"},{"valor":4,"etiqueta":"4 palabras"},{"valor":5,"etiqueta":"5 palabras"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"mayus","etiqueta":"MAYÚSCULA"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"SEPARA LAS PALABRAS","color":"amarillo","metadatos":{"dificultad":2,"minutos":8,"etiquetas":["lengua","frases","separar","palabras"]}},
-{"id":"frase.completa","curso":1,"materia":"lengua","bloque":5,"familia":"frase","clave":"completa","nombre":"Completa la frase","descripcion":"Frases con una palabra que falta (El ___ ladra): elegir entre tres palabras o escribirla sin ayuda.","opciones":[{"id":"falta","etiqueta":"Qué falta","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"El nombre del principio (El ___ ladra)"},{"valor":"objeto","etiqueta":"El nombre del final (El gato come ___)"},{"valor":"mezcla","etiqueta":"Los dos, mezclados"}]},{"id":"ayuda","etiqueta":"Ayuda","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Con tres palabras para elegir"},{"valor":"sin","etiqueta":"Sin ayuda"}]},{"id":"palabras","etiqueta":"Palabras de cada frase","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas (3 a 5)"},{"valor":3,"etiqueta":"3 palabras"},{"valor":4,"etiqueta":"4 palabras"},{"valor":5,"etiqueta":"5 palabras"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"mayus","etiqueta":"MAYÚSCULA"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"COMPLETA LA FRASE","color":"verde","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","frases","completar","palabras"]}},
-{"id":"frase.verdad","curso":1,"materia":"lengua","bloque":5,"familia":"frase","clave":"verdad","nombre":"¿Sí o no?","descripcion":"Frases que son verdad o mentira (El pez nada / La vaca vuela): rodear Sí o No.","opciones":[{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"mayus","etiqueta":"MAYÚSCULA"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"¿SÍ O NO?","color":"rosa","metadatos":{"dificultad":1,"minutos":8,"etiquetas":["lengua","frases","comprensión","verdadero","falso","rodear"]}},
-{"id":"frase.puntua","curso":1,"materia":"lengua","bloque":5,"familia":"frase","clave":"puntua","nombre":"Mayúscula y punto","descripcion":"Frases a las que les falta la mayúscula o el punto (la niña salta): rodear la letra y poner el punto, o escribirlas bien.","opciones":[{"id":"tarea","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Rodear la letra y poner el punto"},{"valor":"escribe","etiqueta":"Escribirla bien"}]},{"id":"falta","etiqueta":"Qué falta","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Las dos (mayúscula y punto)"},{"valor":"mayus","etiqueta":"Solo la mayúscula"},{"valor":"punto","etiqueta":"Solo el punto"}]},{"id":"palabras","etiqueta":"Palabras de cada frase","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas (3 a 5)"},{"valor":3,"etiqueta":"3 palabras"},{"valor":4,"etiqueta":"4 palabras"},{"valor":5,"etiqueta":"5 palabras"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"MAYÚSCULA Y PUNTO","color":"azul","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","frases","mayúsculas","punto","ortografía"]}},
-{"id":"lectura.texto","curso":1,"materia":"lengua","bloque":7,"familia":"lectura","clave":"texto","nombre":"Lee y responde","descripcion":"Texto breve (personaje, mascota, color, lugar, comida…) y preguntas: elegir entre tres, sí o no y completar. En media página, solo el nivel 1.","opciones":[{"id":"nivel","etiqueta":"Nivel del texto","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Nivel 1 · dos frases"},{"valor":2,"etiqueta":"Nivel 2 · cuatro frases","tamanos":["completa"]},{"valor":3,"etiqueta":"Nivel 3 · cuento corto","tamanos":["completa"]}]},{"id":"preguntas","etiqueta":"Preguntas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas (elegir, sí o no, completar)"},{"valor":"elegir","etiqueta":"Elegir entre tres respuestas"},{"valor":"sino","etiqueta":"Sí o no"},{"valor":"completar","etiqueta":"Completar la frase"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"mayus","etiqueta":"MAYÚSCULA"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"LEE Y RESPONDE","color":"azul","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","comprensión lectora","texto","preguntas","leer"]}},
-{"id":"lectura.ordena","curso":1,"materia":"lengua","bloque":7,"familia":"lectura","clave":"ordena","nombre":"Ordena la historia","descripcion":"Tres o cuatro frases de una historia corta (rutinas, recetas, cuentos) para numerar en orden.","opciones":[{"id":"tema","etiqueta":"Tema","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Todos (rutinas, recetas y cuentos)"},{"valor":"rutina","etiqueta":"Rutinas"},{"valor":"receta","etiqueta":"Recetas"},{"valor":"cuento","etiqueta":"Cuentos"}]},{"id":"frases","etiqueta":"Frases de cada historia","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"3 o 4"},{"valor":3,"etiqueta":"3 frases"},{"valor":4,"etiqueta":"4 frases"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"mayus","etiqueta":"MAYÚSCULA"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"ORDENA LA HISTORIA","color":"rosa","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","comprensión lectora","ordenar","historia","secuencia","numerar"]}},
-{"id":"lectura.instrucciones","curso":1,"materia":"lengua","bloque":7,"familia":"lectura","clave":"instrucciones","nombre":"Lee y colorea","descripcion":"Una orden escrita («Colorea de rojo la estrella grande.») y varias figuras: colorear solo la que cumple la orden.","opciones":[{"id":"ordenes","etiqueta":"Órdenes","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Figura y tamaño (la estrella grande)"},{"valor":"figura","etiqueta":"Solo la figura (el círculo)"},{"valor":"dos","etiqueta":"Dos órdenes seguidas"}]},{"id":"colores","etiqueta":"Colores","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Cuatro (rojo, azul, verde y amarillo)"},{"valor":"todos","etiqueta":"Ocho (con naranja, rosa, morado y marrón)"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"mayus","etiqueta":"MAYÚSCULA"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"LEE Y COLOREA","color":"amarillo","metadatos":{"dificultad":1,"minutos":8,"etiquetas":["lengua","comprensión lectora","órdenes","figuras","colorear"]}},
-{"id":"lectura.adivinanza","curso":1,"materia":"lengua","bloque":7,"familia":"lectura","clave":"adivinanza","nombre":"Adivinanzas","descripcion":"Adivinanzas cortas con respuesta de una palabra, escrita en un cuadro o letra a letra.","opciones":[{"id":"ayuda","etiqueta":"Ayuda","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Sin ayuda (escribe la palabra)"},{"valor":"letras","etiqueta":"Una casilla por cada letra"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"mayus","etiqueta":"MAYÚSCULA"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"ADIVINANZAS","color":"verde","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","comprensión lectora","adivinanzas","escribir"]}},
-{"id":"lectura.fluidez","curso":1,"materia":"lengua","bloque":7,"familia":"lectura","clave":"fluidez","nombre":"Lectura rápida","descripcion":"Lista numerada de palabras o frases para leer en un minuto, con la casilla de palabras leídas.","opciones":[{"id":"contenido","etiqueta":"Qué se lee","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Palabras"},{"valor":"frases","etiqueta":"Frases"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"largo","etiqueta":"Sílabas de cada palabra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas"},{"valor":2,"etiqueta":"2 sílabas"},{"valor":3,"etiqueta":"3 sílabas"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa"],"titulo":"LECTURA RÁPIDA","color":"azul","metadatos":{"dificultad":1,"minutos":5,"etiquetas":["lengua","comprensión lectora","fluidez","lectura rápida","palabras"]}},
+{"id":"orto.elige","curso":1,"materia":"lengua","bloque":6,"familia":"orto","clave":"elige","nombre":"Elige la letra","descripcion":"Palabras con un hueco de ortografía (ca_po, pe_o, _eso): elegir entre dos opciones o escribir sin ayuda.","opciones":[{"id":"regla","etiqueta":"Regla","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Mezcladas"},{"valor":"mpb","etiqueta":"m antes de p y b"},{"valor":"r","etiqueta":"r / rr"},{"valor":"cqu","etiqueta":"c / qu"},{"valor":"ggu","etiqueta":"g / gu"},{"valor":"cz","etiqueta":"c / z"}]},{"id":"ayuda","etiqueta":"Ayuda","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Con las dos opciones para elegir"},{"valor":"sin","etiqueta":"Sin ayuda"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"ELIGE LA LETRA","color":"amarillo","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","ortografía","letras","palabras","completar"]},"cursos":{"2":{"rangos":[],"rango":null}}},
+{"id":"orto.mayuscula","curso":1,"materia":"lengua","bloque":6,"familia":"orto","clave":"mayuscula","nombre":"Nombres con mayúscula","descripcion":"Nombres de personas, mascotas y pueblos: rodear las palabras que llevan mayúscula o escribirlas bien.","opciones":[{"id":"tarea","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Rodear los nombres con mayúscula"},{"valor":"escribe","etiqueta":"Escribirlos con mayúscula"}]},{"id":"nombres","etiqueta":"Nombres","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Mezclados"},{"valor":"personas","etiqueta":"De personas"},{"valor":"mascotas","etiqueta":"De mascotas"},{"valor":"lugares","etiqueta":"De pueblos y ciudades"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"NOMBRES CON MAYÚSCULA","color":"rosa","metadatos":{"dificultad":2,"minutos":8,"etiquetas":["lengua","ortografía","mayúsculas","nombres","propios"]},"cursos":{"2":{"rangos":[],"rango":null}}},
+{"id":"frase.ordena","curso":1,"materia":"lengua","bloque":5,"familia":"frase","clave":"ordena","nombre":"Ordena la frase","descripcion":"Palabras desordenadas (come · gato · el): ordenarlas y escribir la frase.","opciones":[{"id":"palabras","etiqueta":"Palabras de cada frase","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas (3 a 5)"},{"valor":3,"etiqueta":"3 palabras"},{"valor":4,"etiqueta":"4 palabras"},{"valor":5,"etiqueta":"5 palabras"}]},{"id":"marca","etiqueta":"Primera palabra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Con mayúscula (de pista)"},{"valor":"sin","etiqueta":"Sin marcar"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"mayus","etiqueta":"MAYÚSCULA"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"ORDENA LA FRASE","color":"azul","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","frases","ordenar","palabras","escribir"]},"cursos":{"2":{"rangos":[],"rango":null}}},
+{"id":"frase.separa","curso":1,"materia":"lengua","bloque":5,"familia":"frase","clave":"separa","nombre":"Separa las palabras","descripcion":"Frases escritas sin espacios (elgatocome): trazar rayas entre las palabras o reescribirlas separadas.","opciones":[{"id":"tarea","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Trazar rayas entre las palabras"},{"valor":"escribe","etiqueta":"Reescribir separando"}]},{"id":"palabras","etiqueta":"Palabras de cada frase","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas (3 a 5)"},{"valor":3,"etiqueta":"3 palabras"},{"valor":4,"etiqueta":"4 palabras"},{"valor":5,"etiqueta":"5 palabras"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"mayus","etiqueta":"MAYÚSCULA"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"SEPARA LAS PALABRAS","color":"amarillo","metadatos":{"dificultad":2,"minutos":8,"etiquetas":["lengua","frases","separar","palabras"]},"cursos":{"2":{"rangos":[],"rango":null}}},
+{"id":"frase.completa","curso":1,"materia":"lengua","bloque":5,"familia":"frase","clave":"completa","nombre":"Completa la frase","descripcion":"Frases con una palabra que falta (El ___ ladra): elegir entre tres palabras o escribirla sin ayuda.","opciones":[{"id":"falta","etiqueta":"Qué falta","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"El nombre del principio (El ___ ladra)"},{"valor":"objeto","etiqueta":"El nombre del final (El gato come ___)"},{"valor":"mezcla","etiqueta":"Los dos, mezclados"}]},{"id":"ayuda","etiqueta":"Ayuda","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Con tres palabras para elegir"},{"valor":"sin","etiqueta":"Sin ayuda"}]},{"id":"palabras","etiqueta":"Palabras de cada frase","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas (3 a 5)"},{"valor":3,"etiqueta":"3 palabras"},{"valor":4,"etiqueta":"4 palabras"},{"valor":5,"etiqueta":"5 palabras"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"mayus","etiqueta":"MAYÚSCULA"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"COMPLETA LA FRASE","color":"verde","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","frases","completar","palabras"]},"cursos":{"2":{"rangos":[],"rango":null}}},
+{"id":"frase.verdad","curso":1,"materia":"lengua","bloque":5,"familia":"frase","clave":"verdad","nombre":"¿Sí o no?","descripcion":"Frases que son verdad o mentira (El pez nada / La vaca vuela): rodear Sí o No.","opciones":[{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"mayus","etiqueta":"MAYÚSCULA"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"¿SÍ O NO?","color":"rosa","metadatos":{"dificultad":1,"minutos":8,"etiquetas":["lengua","frases","comprensión","verdadero","falso","rodear"]},"cursos":{"2":{"rangos":[],"rango":null}}},
+{"id":"frase.puntua","curso":1,"materia":"lengua","bloque":5,"familia":"frase","clave":"puntua","nombre":"Mayúscula y punto","descripcion":"Frases a las que les falta la mayúscula o el punto (la niña salta): rodear la letra y poner el punto, o escribirlas bien.","opciones":[{"id":"tarea","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Rodear la letra y poner el punto"},{"valor":"escribe","etiqueta":"Escribirla bien"}]},{"id":"falta","etiqueta":"Qué falta","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Las dos (mayúscula y punto)"},{"valor":"mayus","etiqueta":"Solo la mayúscula"},{"valor":"punto","etiqueta":"Solo el punto"}]},{"id":"palabras","etiqueta":"Palabras de cada frase","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas (3 a 5)"},{"valor":3,"etiqueta":"3 palabras"},{"valor":4,"etiqueta":"4 palabras"},{"valor":5,"etiqueta":"5 palabras"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"MAYÚSCULA Y PUNTO","color":"azul","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","frases","mayúsculas","punto","ortografía"]},"cursos":{"2":{"rangos":[],"rango":null}}},
+{"id":"lectura.texto","curso":1,"materia":"lengua","bloque":7,"familia":"lectura","clave":"texto","nombre":"Lee y responde","descripcion":"Texto breve (personaje, mascota, color, lugar, comida…) y preguntas: elegir entre tres, sí o no y completar. En media página, solo el nivel 1.","opciones":[{"id":"nivel","etiqueta":"Nivel del texto","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Nivel 1 · dos frases"},{"valor":2,"etiqueta":"Nivel 2 · cuatro frases","tamanos":["completa"]},{"valor":3,"etiqueta":"Nivel 3 · cuento corto","tamanos":["completa"]}]},{"id":"preguntas","etiqueta":"Preguntas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas (elegir, sí o no, completar)"},{"valor":"elegir","etiqueta":"Elegir entre tres respuestas"},{"valor":"sino","etiqueta":"Sí o no"},{"valor":"completar","etiqueta":"Completar la frase"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"mayus","etiqueta":"MAYÚSCULA"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"LEE Y RESPONDE","color":"azul","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","comprensión lectora","texto","preguntas","leer"]},"cursos":{"2":{"rangos":[],"rango":null}}},
+{"id":"lectura.ordena","curso":1,"materia":"lengua","bloque":7,"familia":"lectura","clave":"ordena","nombre":"Ordena la historia","descripcion":"Tres o cuatro frases de una historia corta (rutinas, recetas, cuentos) para numerar en orden.","opciones":[{"id":"tema","etiqueta":"Tema","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Todos (rutinas, recetas y cuentos)"},{"valor":"rutina","etiqueta":"Rutinas"},{"valor":"receta","etiqueta":"Recetas"},{"valor":"cuento","etiqueta":"Cuentos"}]},{"id":"frases","etiqueta":"Frases de cada historia","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"3 o 4"},{"valor":3,"etiqueta":"3 frases"},{"valor":4,"etiqueta":"4 frases"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"mayus","etiqueta":"MAYÚSCULA"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"ORDENA LA HISTORIA","color":"rosa","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","comprensión lectora","ordenar","historia","secuencia","numerar"]},"cursos":{"2":{"rangos":[],"rango":null}}},
+{"id":"lectura.instrucciones","curso":1,"materia":"lengua","bloque":7,"familia":"lectura","clave":"instrucciones","nombre":"Lee y colorea","descripcion":"Una orden escrita («Colorea de rojo la estrella grande.») y varias figuras: colorear solo la que cumple la orden.","opciones":[{"id":"ordenes","etiqueta":"Órdenes","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Figura y tamaño (la estrella grande)"},{"valor":"figura","etiqueta":"Solo la figura (el círculo)"},{"valor":"dos","etiqueta":"Dos órdenes seguidas"}]},{"id":"colores","etiqueta":"Colores","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Cuatro (rojo, azul, verde y amarillo)"},{"valor":"todos","etiqueta":"Ocho (con naranja, rosa, morado y marrón)"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"mayus","etiqueta":"MAYÚSCULA"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"LEE Y COLOREA","color":"amarillo","metadatos":{"dificultad":1,"minutos":8,"etiquetas":["lengua","comprensión lectora","órdenes","figuras","colorear"]},"cursos":{"2":{"rangos":[],"rango":null}}},
+{"id":"lectura.adivinanza","curso":1,"materia":"lengua","bloque":7,"familia":"lectura","clave":"adivinanza","nombre":"Adivinanzas","descripcion":"Adivinanzas cortas con respuesta de una palabra, escrita en un cuadro o letra a letra.","opciones":[{"id":"ayuda","etiqueta":"Ayuda","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Sin ayuda (escribe la palabra)"},{"valor":"letras","etiqueta":"Una casilla por cada letra"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"mayus","etiqueta":"MAYÚSCULA"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"ADIVINANZAS","color":"verde","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","comprensión lectora","adivinanzas","escribir"]},"cursos":{"2":{"rangos":[],"rango":null}}},
+{"id":"lectura.fluidez","curso":1,"materia":"lengua","bloque":7,"familia":"lectura","clave":"fluidez","nombre":"Lectura rápida","descripcion":"Lista numerada de palabras o frases para leer en un minuto, con la casilla de palabras leídas.","opciones":[{"id":"contenido","etiqueta":"Qué se lee","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Palabras"},{"valor":"frases","etiqueta":"Frases"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"largo","etiqueta":"Sílabas de cada palabra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas"},{"valor":2,"etiqueta":"2 sílabas"},{"valor":3,"etiqueta":"3 sílabas"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa"],"titulo":"LECTURA RÁPIDA","color":"azul","metadatos":{"dificultad":1,"minutos":5,"etiquetas":["lengua","comprensión lectora","fluidez","lectura rápida","palabras"]},"cursos":{"2":{"rangos":[],"rango":null}}},
 {"id":"escritura.trazos","curso":1,"materia":"lengua","bloque":8,"familia":"escritura","clave":"trazos","nombre":"Trazos","descripcion":"Grafomotricidad en la pauta: líneas, ondas, bucles, puentes, arcos, zigzag y círculos con punto de inicio, repaso y filas libres.","opciones":[{"id":"trazo","etiqueta":"Tipo de trazo","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variados (uno distinto en cada bloque)"},{"valor":"lineas","etiqueta":"Líneas (horizontales, verticales, inclinadas)"},{"valor":"ondas","etiqueta":"Ondas"},{"valor":"bucles","etiqueta":"Bucles"},{"valor":"puentes","etiqueta":"Puentes"},{"valor":"arcos","etiqueta":"Arcos"},{"valor":"zigzag","etiqueta":"Zigzag"},{"valor":"circulos","etiqueta":"Círculos y óvalos"}]},{"id":"pauta","etiqueta":"Tamaño de pauta","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"5 mm"},{"valor":4,"etiqueta":"4 mm"},{"valor":3.5,"etiqueta":"3,5 mm"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"TRAZOS","color":"verde","metadatos":{"dificultad":1,"minutos":8,"etiquetas":["lengua","escritura","caligrafía","grafomotricidad","trazos","pauta"]}},
-{"id":"escritura.letra","curso":1,"materia":"lengua","bloque":8,"familia":"escritura","clave":"letra","nombre":"Repasa y escribe la letra","descripcion":"Una letra de modelo (con flechas numeradas si la pauta es grande), filas de repaso y filas libres.","opciones":[{"id":"letra","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Al azar"},{"valor":"a","etiqueta":"a"},{"valor":"b","etiqueta":"b"},{"valor":"c","etiqueta":"c"},{"valor":"d","etiqueta":"d"},{"valor":"e","etiqueta":"e"},{"valor":"f","etiqueta":"f"},{"valor":"g","etiqueta":"g"},{"valor":"h","etiqueta":"h"},{"valor":"i","etiqueta":"i"},{"valor":"j","etiqueta":"j"},{"valor":"k","etiqueta":"k"},{"valor":"l","etiqueta":"l"},{"valor":"m","etiqueta":"m"},{"valor":"n","etiqueta":"n"},{"valor":"ñ","etiqueta":"ñ"},{"valor":"o","etiqueta":"o"},{"valor":"p","etiqueta":"p"},{"valor":"q","etiqueta":"q"},{"valor":"r","etiqueta":"r"},{"valor":"s","etiqueta":"s"},{"valor":"t","etiqueta":"t"},{"valor":"u","etiqueta":"u"},{"valor":"v","etiqueta":"v"},{"valor":"w","etiqueta":"w"},{"valor":"x","etiqueta":"x"},{"valor":"y","etiqueta":"y"},{"valor":"z","etiqueta":"z"},{"valor":"palabra","etiqueta":"Las letras de una palabra"}]},{"id":"caso","etiqueta":"Mayúscula o minúscula","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"mayus","etiqueta":"MAYÚSCULA"},{"valor":"ambas","etiqueta":"Las dos (Aa)"}]},{"id":"repaso","etiqueta":"Repaso","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Gris claro"},{"valor":"punteado","etiqueta":"Punteado"}]},{"id":"filas","etiqueta":"Filas de repaso","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"2 filas"},{"valor":1,"etiqueta":"1 fila"},{"valor":3,"etiqueta":"3 filas"}]},{"id":"grafia","etiqueta":"Tipo de letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Letra de trazo (con flechas)"},{"valor":"escolar","etiqueta":"Escolar (ligada)"}]},{"id":"pauta","etiqueta":"Tamaño de pauta","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"5 mm"},{"valor":4,"etiqueta":"4 mm"},{"valor":3.5,"etiqueta":"3,5 mm"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"REPASA Y ESCRIBE LA LETRA","color":"amarillo","metadatos":{"dificultad":1,"minutos":10,"etiquetas":["lengua","escritura","caligrafía","letras","repasar","pauta"]}},
-{"id":"escritura.palabras","curso":1,"materia":"lengua","bloque":8,"familia":"escritura","clave":"palabras","nombre":"Copia palabras","descripcion":"Palabras con la letra trabajada: modelo, repaso y copia libre.","opciones":[{"id":"letra","etiqueta":"Con la letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Todas"},{"valor":"a","etiqueta":"a"},{"valor":"b","etiqueta":"b"},{"valor":"c","etiqueta":"c"},{"valor":"d","etiqueta":"d"},{"valor":"e","etiqueta":"e"},{"valor":"f","etiqueta":"f"},{"valor":"g","etiqueta":"g"},{"valor":"h","etiqueta":"h"},{"valor":"i","etiqueta":"i"},{"valor":"j","etiqueta":"j"},{"valor":"l","etiqueta":"l"},{"valor":"m","etiqueta":"m"},{"valor":"n","etiqueta":"n"},{"valor":"ñ","etiqueta":"ñ"},{"valor":"o","etiqueta":"o"},{"valor":"p","etiqueta":"p"},{"valor":"r","etiqueta":"r"},{"valor":"s","etiqueta":"s"},{"valor":"t","etiqueta":"t"},{"valor":"u","etiqueta":"u"},{"valor":"v","etiqueta":"v"},{"valor":"z","etiqueta":"z"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]},{"id":"grafia","etiqueta":"Tipo de letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Letra de trazo (con flechas)"},{"valor":"escolar","etiqueta":"Escolar (ligada)"}]},{"id":"pauta","etiqueta":"Tamaño de pauta","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"5 mm"},{"valor":4,"etiqueta":"4 mm"},{"valor":3.5,"etiqueta":"3,5 mm"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"COPIA PALABRAS","color":"azul","metadatos":{"dificultad":2,"minutos":12,"etiquetas":["lengua","escritura","caligrafía","palabras","copiar","pauta"]}},
-{"id":"escritura.frase","curso":1,"materia":"lengua","bloque":8,"familia":"escritura","clave":"frase","nombre":"Copia la frase","descripcion":"Frases con mayúscula y punto: modelo, repaso y copia libre.","opciones":[{"id":"palabras","etiqueta":"Palabras de cada frase","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas (3 a 5)"},{"valor":3,"etiqueta":"3 palabras"},{"valor":4,"etiqueta":"4 palabras"},{"valor":5,"etiqueta":"5 palabras"}]},{"id":"repaso","etiqueta":"Repaso","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Gris claro"},{"valor":"punteado","etiqueta":"Punteado"}]},{"id":"grafia","etiqueta":"Tipo de letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Letra de trazo (con flechas)"},{"valor":"escolar","etiqueta":"Escolar (ligada)"}]},{"id":"pauta","etiqueta":"Tamaño de pauta","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"5 mm"},{"valor":4,"etiqueta":"4 mm"},{"valor":3.5,"etiqueta":"3,5 mm"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"COPIA LA FRASE","color":"rosa","metadatos":{"dificultad":2,"minutos":12,"etiquetas":["lengua","escritura","caligrafía","frases","copiar","mayúscula","punto","pauta"]}},
-{"id":"escritura.dictado","curso":1,"materia":"lengua","bloque":8,"familia":"escritura","clave":"dictado","nombre":"Hoja de dictado","descripcion":"Renglones numerados en blanco; la maestra dicta. La lista dictada solo sale en pantalla (solucionario y Fori).","opciones":[{"id":"modo","etiqueta":"Qué se dicta","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Palabras"},{"valor":"frases","etiqueta":"Frases"}]},{"id":"numero","etiqueta":"Renglones","tipo":"numero","min":5,"max":10,"defecto":10},{"id":"letra","etiqueta":"Con la letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Todas"},{"valor":"a","etiqueta":"a"},{"valor":"b","etiqueta":"b"},{"valor":"c","etiqueta":"c"},{"valor":"d","etiqueta":"d"},{"valor":"e","etiqueta":"e"},{"valor":"f","etiqueta":"f"},{"valor":"g","etiqueta":"g"},{"valor":"h","etiqueta":"h"},{"valor":"i","etiqueta":"i"},{"valor":"j","etiqueta":"j"},{"valor":"l","etiqueta":"l"},{"valor":"m","etiqueta":"m"},{"valor":"n","etiqueta":"n"},{"valor":"ñ","etiqueta":"ñ"},{"valor":"o","etiqueta":"o"},{"valor":"p","etiqueta":"p"},{"valor":"r","etiqueta":"r"},{"valor":"s","etiqueta":"s"},{"valor":"t","etiqueta":"t"},{"valor":"u","etiqueta":"u"},{"valor":"v","etiqueta":"v"},{"valor":"z","etiqueta":"z"}]},{"id":"pauta","etiqueta":"Tamaño de pauta","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"5 mm"},{"valor":4,"etiqueta":"4 mm"},{"valor":3.5,"etiqueta":"3,5 mm"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"HOJA DE DICTADO","color":"verde","metadatos":{"dificultad":2,"minutos":15,"etiquetas":["lengua","escritura","dictado","palabras","frases","pauta"]}},
-{"id":"escritura.libre","curso":1,"materia":"lengua","bloque":8,"familia":"escritura","clave":"libre","nombre":"Escribe una frase","descripcion":"Renglones libres con la frase empezada (El gato…) o con un tema para escribir. Corrección abierta.","opciones":[{"id":"inicio","etiqueta":"Cómo empieza","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Con la frase empezada (El gato…)"},{"valor":"tema","etiqueta":"Con un tema para escribir"}]},{"id":"grafia","etiqueta":"Tipo de letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Letra de trazo (con flechas)"},{"valor":"escolar","etiqueta":"Escolar (ligada)"}]},{"id":"pauta","etiqueta":"Tamaño de pauta","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"5 mm"},{"valor":4,"etiqueta":"4 mm"},{"valor":3.5,"etiqueta":"3,5 mm"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"ESCRIBE UNA FRASE","color":"amarillo","metadatos":{"dificultad":3,"minutos":15,"etiquetas":["lengua","escritura","expresión escrita","frases","libre","pauta"]}},
-{"id":"escritura.ordena","curso":1,"materia":"lengua","bloque":8,"familia":"escritura","clave":"ordena","nombre":"Miro y escribo","descripcion":"Una tarjeta con espacio en blanco para pegar el dibujo, las letras desordenadas del nombre (qu, ch, ll, rr y gu en una casilla) y la pauta: ordenar las letras y escribir la palabra.","opciones":[{"id":"letras","etiqueta":"Casillas de cada palabra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"3 a 6 (variadas)"},{"valor":3,"etiqueta":"3 casillas"},{"valor":4,"etiqueta":"4 casillas"},{"valor":5,"etiqueta":"5 casillas"},{"valor":6,"etiqueta":"6 casillas"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"mayus","etiqueta":"MAYÚSCULA"}]},{"id":"grafia","etiqueta":"Tipo de letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Letra de trazo (con flechas)"},{"valor":"escolar","etiqueta":"Escolar (ligada)"}]},{"id":"pauta","etiqueta":"Tamaño de pauta","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"5 mm"},{"valor":4,"etiqueta":"4 mm"},{"valor":3.5,"etiqueta":"3,5 mm"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"MIRO Y ESCRIBO","color":"azul","metadatos":{"dificultad":2,"minutos":12,"etiquetas":["lengua","escritura","palabras","letras","ordenar","pauta","dibujo"]}},
+{"id":"escritura.letra","curso":1,"materia":"lengua","bloque":8,"familia":"escritura","clave":"letra","nombre":"Repasa y escribe la letra","descripcion":"Una letra de modelo (con flechas numeradas si la pauta es grande), filas de repaso y filas libres.","opciones":[{"id":"letra","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Al azar"},{"valor":"a","etiqueta":"a"},{"valor":"b","etiqueta":"b"},{"valor":"c","etiqueta":"c"},{"valor":"d","etiqueta":"d"},{"valor":"e","etiqueta":"e"},{"valor":"f","etiqueta":"f"},{"valor":"g","etiqueta":"g"},{"valor":"h","etiqueta":"h"},{"valor":"i","etiqueta":"i"},{"valor":"j","etiqueta":"j"},{"valor":"k","etiqueta":"k"},{"valor":"l","etiqueta":"l"},{"valor":"m","etiqueta":"m"},{"valor":"n","etiqueta":"n"},{"valor":"ñ","etiqueta":"ñ"},{"valor":"o","etiqueta":"o"},{"valor":"p","etiqueta":"p"},{"valor":"q","etiqueta":"q"},{"valor":"r","etiqueta":"r"},{"valor":"s","etiqueta":"s"},{"valor":"t","etiqueta":"t"},{"valor":"u","etiqueta":"u"},{"valor":"v","etiqueta":"v"},{"valor":"w","etiqueta":"w"},{"valor":"x","etiqueta":"x"},{"valor":"y","etiqueta":"y"},{"valor":"z","etiqueta":"z"},{"valor":"palabra","etiqueta":"Las letras de una palabra"}]},{"id":"caso","etiqueta":"Mayúscula o minúscula","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"mayus","etiqueta":"MAYÚSCULA"},{"valor":"ambas","etiqueta":"Las dos (Aa)"}]},{"id":"repaso","etiqueta":"Repaso","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Gris claro"},{"valor":"punteado","etiqueta":"Punteado"}]},{"id":"filas","etiqueta":"Filas de repaso","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"2 filas"},{"valor":1,"etiqueta":"1 fila"},{"valor":3,"etiqueta":"3 filas"}]},{"id":"grafia","etiqueta":"Tipo de letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Letra de trazo (con flechas)"},{"valor":"escolar","etiqueta":"Escolar (ligada)"}]},{"id":"pauta","etiqueta":"Tamaño de pauta","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"5 mm"},{"valor":4,"etiqueta":"4 mm"},{"valor":3.5,"etiqueta":"3,5 mm"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"REPASA Y ESCRIBE LA LETRA","color":"amarillo","metadatos":{"dificultad":1,"minutos":10,"etiquetas":["lengua","escritura","caligrafía","letras","repasar","pauta"]},"cursos":{"2":{"rangos":[],"rango":null,"params":{"pauta":4}}}},
+{"id":"escritura.palabras","curso":1,"materia":"lengua","bloque":8,"familia":"escritura","clave":"palabras","nombre":"Copia palabras","descripcion":"Palabras con la letra trabajada: modelo, repaso y copia libre.","opciones":[{"id":"letra","etiqueta":"Con la letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Todas"},{"valor":"a","etiqueta":"a"},{"valor":"b","etiqueta":"b"},{"valor":"c","etiqueta":"c"},{"valor":"d","etiqueta":"d"},{"valor":"e","etiqueta":"e"},{"valor":"f","etiqueta":"f"},{"valor":"g","etiqueta":"g"},{"valor":"h","etiqueta":"h"},{"valor":"i","etiqueta":"i"},{"valor":"j","etiqueta":"j"},{"valor":"l","etiqueta":"l"},{"valor":"m","etiqueta":"m"},{"valor":"n","etiqueta":"n"},{"valor":"ñ","etiqueta":"ñ"},{"valor":"o","etiqueta":"o"},{"valor":"p","etiqueta":"p"},{"valor":"r","etiqueta":"r"},{"valor":"s","etiqueta":"s"},{"valor":"t","etiqueta":"t"},{"valor":"u","etiqueta":"u"},{"valor":"v","etiqueta":"v"},{"valor":"z","etiqueta":"z"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]},{"id":"grafia","etiqueta":"Tipo de letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Letra de trazo (con flechas)"},{"valor":"escolar","etiqueta":"Escolar (ligada)"}]},{"id":"pauta","etiqueta":"Tamaño de pauta","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"5 mm"},{"valor":4,"etiqueta":"4 mm"},{"valor":3.5,"etiqueta":"3,5 mm"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"COPIA PALABRAS","color":"azul","metadatos":{"dificultad":2,"minutos":12,"etiquetas":["lengua","escritura","caligrafía","palabras","copiar","pauta"]},"cursos":{"2":{"rangos":[],"rango":null,"params":{"pauta":4}}}},
+{"id":"escritura.frase","curso":1,"materia":"lengua","bloque":8,"familia":"escritura","clave":"frase","nombre":"Copia la frase","descripcion":"Frases con mayúscula y punto: modelo, repaso y copia libre.","opciones":[{"id":"palabras","etiqueta":"Palabras de cada frase","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas (3 a 5)"},{"valor":3,"etiqueta":"3 palabras"},{"valor":4,"etiqueta":"4 palabras"},{"valor":5,"etiqueta":"5 palabras"}]},{"id":"repaso","etiqueta":"Repaso","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Gris claro"},{"valor":"punteado","etiqueta":"Punteado"}]},{"id":"grafia","etiqueta":"Tipo de letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Letra de trazo (con flechas)"},{"valor":"escolar","etiqueta":"Escolar (ligada)"}]},{"id":"pauta","etiqueta":"Tamaño de pauta","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"5 mm"},{"valor":4,"etiqueta":"4 mm"},{"valor":3.5,"etiqueta":"3,5 mm"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"COPIA LA FRASE","color":"rosa","metadatos":{"dificultad":2,"minutos":12,"etiquetas":["lengua","escritura","caligrafía","frases","copiar","mayúscula","punto","pauta"]},"cursos":{"2":{"rangos":[],"rango":null,"params":{"pauta":4}}}},
+{"id":"escritura.dictado","curso":1,"materia":"lengua","bloque":8,"familia":"escritura","clave":"dictado","nombre":"Hoja de dictado","descripcion":"Renglones numerados en blanco; la maestra dicta. La lista dictada solo sale en pantalla (solucionario y Fori).","opciones":[{"id":"modo","etiqueta":"Qué se dicta","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Palabras"},{"valor":"frases","etiqueta":"Frases"}]},{"id":"numero","etiqueta":"Renglones","tipo":"numero","min":5,"max":10,"defecto":10},{"id":"letra","etiqueta":"Con la letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Todas"},{"valor":"a","etiqueta":"a"},{"valor":"b","etiqueta":"b"},{"valor":"c","etiqueta":"c"},{"valor":"d","etiqueta":"d"},{"valor":"e","etiqueta":"e"},{"valor":"f","etiqueta":"f"},{"valor":"g","etiqueta":"g"},{"valor":"h","etiqueta":"h"},{"valor":"i","etiqueta":"i"},{"valor":"j","etiqueta":"j"},{"valor":"l","etiqueta":"l"},{"valor":"m","etiqueta":"m"},{"valor":"n","etiqueta":"n"},{"valor":"ñ","etiqueta":"ñ"},{"valor":"o","etiqueta":"o"},{"valor":"p","etiqueta":"p"},{"valor":"r","etiqueta":"r"},{"valor":"s","etiqueta":"s"},{"valor":"t","etiqueta":"t"},{"valor":"u","etiqueta":"u"},{"valor":"v","etiqueta":"v"},{"valor":"z","etiqueta":"z"}]},{"id":"pauta","etiqueta":"Tamaño de pauta","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"5 mm"},{"valor":4,"etiqueta":"4 mm"},{"valor":3.5,"etiqueta":"3,5 mm"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"HOJA DE DICTADO","color":"verde","metadatos":{"dificultad":2,"minutos":15,"etiquetas":["lengua","escritura","dictado","palabras","frases","pauta"]},"cursos":{"2":{"rangos":[],"rango":null,"params":{"pauta":4}}}},
+{"id":"escritura.libre","curso":1,"materia":"lengua","bloque":8,"familia":"escritura","clave":"libre","nombre":"Escribe una frase","descripcion":"Renglones libres con la frase empezada (El gato…) o con un tema para escribir. Corrección abierta.","opciones":[{"id":"inicio","etiqueta":"Cómo empieza","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Con la frase empezada (El gato…)"},{"valor":"tema","etiqueta":"Con un tema para escribir"}]},{"id":"grafia","etiqueta":"Tipo de letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Letra de trazo (con flechas)"},{"valor":"escolar","etiqueta":"Escolar (ligada)"}]},{"id":"pauta","etiqueta":"Tamaño de pauta","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"5 mm"},{"valor":4,"etiqueta":"4 mm"},{"valor":3.5,"etiqueta":"3,5 mm"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"ESCRIBE UNA FRASE","color":"amarillo","metadatos":{"dificultad":3,"minutos":15,"etiquetas":["lengua","escritura","expresión escrita","frases","libre","pauta"]},"cursos":{"2":{"rangos":[],"rango":null,"params":{"pauta":4}}}},
+{"id":"escritura.ordena","curso":1,"materia":"lengua","bloque":8,"familia":"escritura","clave":"ordena","nombre":"Miro y escribo","descripcion":"Una tarjeta con espacio en blanco para pegar el dibujo, las letras desordenadas del nombre (qu, ch, ll, rr y gu en una casilla) y la pauta: ordenar las letras y escribir la palabra.","opciones":[{"id":"letras","etiqueta":"Casillas de cada palabra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"3 a 6 (variadas)"},{"valor":3,"etiqueta":"3 casillas"},{"valor":4,"etiqueta":"4 casillas"},{"valor":5,"etiqueta":"5 casillas"},{"valor":6,"etiqueta":"6 casillas"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"mayus","etiqueta":"MAYÚSCULA"}]},{"id":"grafia","etiqueta":"Tipo de letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Letra de trazo (con flechas)"},{"valor":"escolar","etiqueta":"Escolar (ligada)"}]},{"id":"pauta","etiqueta":"Tamaño de pauta","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"5 mm"},{"valor":4,"etiqueta":"4 mm"},{"valor":3.5,"etiqueta":"3,5 mm"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"MIRO Y ESCRIBO","color":"azul","metadatos":{"dificultad":2,"minutos":12,"etiquetas":["lengua","escritura","palabras","letras","ordenar","pauta","dibujo"]},"cursos":{"2":{"rangos":[],"rango":null,"params":{"pauta":4}}}},
 {"id":"medida.euros","curso":2,"materia":"matematicas","bloque":10,"familia":"medida","clave":"euros","nombre":"Paga con billetes y monedas","descripcion":"Pagar una cantidad con el menor número de billetes y monedas (hasta 500 €).","opciones":[],"rangos":[100,200,300,400,500],"rango":200,"tamanos":["completa","media"],"titulo":"PAGA CON BILLETES Y MONEDAS","color":"verde","metadatos":{"dificultad":3,"minutos":12,"etiquetas":["medida","dinero","euros","billetes","monedas","pagar"]}},
 {"id":"medida.masa","curso":2,"materia":"matematicas","bloque":10,"familia":"medida","clave":"masa","nombre":"¿Cuánto pesa?","descripcion":"Balanza con pesas de 1 kg y de medio kilo: pesa más, menos o igual.","opciones":[],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"¿CUÁNTO PESA?","color":"azul","metadatos":{"dificultad":2,"minutos":8,"etiquetas":["medida","masa","kilo","peso","balanza"]},"cursos":{"3":{"rangos":[],"rango":null}}},
 {"id":"geometria.lados","curso":2,"materia":"matematicas","bloque":9,"familia":"geometria","clave":"lados","nombre":"Lados y vértices","descripcion":"Contar los lados y los vértices de polígonos dibujados.","opciones":[],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"LADOS Y VÉRTICES","color":"amarillo","metadatos":{"dificultad":1,"minutos":8,"etiquetas":["geometría","polígonos","lados","vértices"]}},
@@ -3792,7 +4508,7 @@ const { tipo } = __req("nucleo/tipos.js");
 const { reordenarPaginas } = __req("nucleo/orden.js");
 /** Opción «Cantidad» de la ficha (igual que CANTIDADES de render/papel.js). */
 const CANTIDADES = ["grandes", "mas"];
-const { normalizarVistas, conVistas, normalizarObligatorias, conObligatorias } = __req("lengua/vistas.js");
+const { normalizarVistas, conVistas, normalizarObligatorias, conObligatorias, conCurso } = __req("lengua/vistas.js");
 const { normalizarPropias, conPropias, USA_FRASES } = __req("lengua/frases.js");
 const SCHEMA_VERSION = 1;
 const COLORES = ["amarillo", "rosa", "azul", "verde"];
@@ -3826,10 +4542,11 @@ function cursoDe(id, { curso, rango, params } = {}) {
   return m.curso;
 }
 
-/** Parámetros por defecto: { rango, opción: valor, … } (el rango, el del curso si se da). */
+/** Parámetros por defecto: { rango, opción: valor, … } (el rango y los `params` del curso si se da). */
 function porDefecto(id, curso) {
   const m = modelo(id), p = {};
   for (const o of m.opciones) p[o.id] = o.defecto ?? null;
+  Object.assign(p, m.cursos?.[curso]?.params);   // valores por defecto propios de un curso (Lengua 2.º: pauta de 4 mm)
   p.rango = m.cursos?.[curso]?.rango ?? m.rango;
   return p;
 }
@@ -3943,7 +4660,7 @@ function pagina(acts, tamano, colores, semilla, n0 = 0, cantidad = "grandes") {
   return {
     actividades: acts.map((a, j) => {
       const T = tipo(a.tipo), i = n0 + j;
-      const res = conPropias(a.params.misFrases || null, () => conVistas(a.params.vistas || null, () => conObligatorias(a.params.obligatorias || null, () => T.generar(a.params, crearAzar(mezclar(semilla, i + 1)), { tamano, cantidad }))));
+      const res = conCurso(a.curso, () => conPropias(a.params.misFrases || null, () => conVistas(a.params.vistas || null, () => conObligatorias(a.params.obligatorias || null, () => T.generar(a.params, crearAzar(mezclar(semilla, i + 1)), { tamano, cantidad })))));
       const n = i + 1;
       return {
         n, tipo: a.tipo, tipoVersion: T.version, params: a.params, tamano, color: colores[j],
@@ -6635,8 +7352,8 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get gen() { re
 // Sin DOM. Elegir palabras del léxico con las opciones comunes (tipo de sílabas, largo, letra), aplicar mayúsculas,
 // comprobar que un hueco tiene una sola solución en el léxico y dibujar palabras letra a letra (rodear, rayas).
 const { LEXICO } = __req("lengua/lexico.js");
-const { buscar } = __req("lengua/palabras.js");
-const { claveLetras, avisoVistas } = __req("lengua/vistas.js");
+const { buscar, lexicoActivo } = __req("lengua/palabras.js");
+const { claveLetras, avisoVistas, nivelActivo } = __req("lengua/vistas.js");
 const { sinTildes } = __req("lengua/reglas.js");
 const { COLOR_SOLUCION } = __req("render/papel.js");
 /** Categorías que se leen en 1.º en estos modelos: nombres, adjetivos y verbos (no las palabras gramaticales). */
@@ -6708,8 +7425,9 @@ function dosFilas(y, ch, bajo = 0.34) {
 // ---------------------------------------------------------------- huecos con solución única
 const porLargo = new Map();
 function delLargo(n) {
-  if (!porLargo.has(n)) porLargo.set(n, LEXICO.filter((e) => e.p.length === n).map((e) => ({ p: e.p, s: sinTildes(e.p) })));
-  return porLargo.get(n);
+  const k = `${nivelActivo()}|${n}`;   // por curso (LENGUA_2.md)
+  if (!porLargo.has(k)) porLargo.set(k, lexicoActivo().filter((e) => e.p.length === n).map((e) => ({ p: e.p, s: sinTildes(e.p) })));
+  return porLargo.get(k);
 }
 /** ¿Es la palabra la única del léxico que encaja con esas letras ocultas (posiciones `ocultas` libres, el resto igual)? */
 function patronUnico(palabra, ocultas) {
@@ -6850,7 +7568,8 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get NINOS() { 
 const { LEXICO } = __req("lengua/lexico.js");
 const { plural } = __req("lengua/reglas.js");
 const { cap } = __req("tipos/_lengua.js");
-const { filtrarVistas, avisoVistas } = __req("lengua/vistas.js");
+const { filtrarVistas, avisoVistas, nivelActivo } = __req("lengua/vistas.js");
+const { lexicoActivo, porNivelDe } = __req("lengua/palabras.js");
 const { INK } = __req("render/papel.js");
 /** Campos léxicos que usan intrusa, clasifica y sopa (en este orden; «colores» solo lleva adjetivos). */
 const CAMPOS_P = ["animales", "comida", "ropa", "casa", "escuela", "cuerpo", "juguetes", "transportes", "familia", "naturaleza", "colores"];
@@ -6864,10 +7583,10 @@ const memo = new Map();
 /** Palabras de un campo: nombres (en «colores», adjetivos) frecuentes, de 3 a maxLetras letras; con «Mayúscula inicial» sin la «i» inicial.
  *  Con letras elegidas (vistas.js) solo las que se escriben con ellas (la caché guarda la lista entera; se filtra al devolverla). */
 function deCampo(campo, { caso = null, maxLetras = 9, sinTilde = false } = {}) {
-  const clave = `${campo}|${caso === "inicial"}|${maxLetras}|${sinTilde}`;
+  const clave = `${campo}|${caso === "inicial"}|${maxLetras}|${sinTilde}|${nivelActivo()}`;
   if (!memo.has(clave)) {
     const cats = campo === "colores" ? ["a", "n"] : ["n"];
-    memo.set(clave, LEXICO.filter((e) => e.k.includes(campo) && cats.includes(e.c) && e.f <= 2 && e.p.length >= 3 && e.p.length <= maxLetras
+    memo.set(clave, lexicoActivo().filter((e) => e.k.includes(campo) && cats.includes(e.c) && e.f <= 2 && e.p.length >= 3 && e.p.length <= maxLetras
       && !/[\s-]/.test(e.p) && (caso !== "inicial" || !/^[iíì]/.test(e.p)) && (!sinTilde || !/[áéíóúü]/.test(e.p))));
   }
   return filtrarVistas(memo.get(clave), (e) => e.p);   // no modificar: se comparte
@@ -6918,11 +7637,11 @@ const tildes = (s) => (s.match(/[áéíóú]/g) || []).length;
 /** Nombres que no se usan en plural en 1.º (no contables, deportes, momentos del día…): quedan fuera de artículo y plural. */
 const NO_PLURAL = new Set("pan leche sal arroz nata dinero paz amor miedo frío silencio ruido tiempo sueño lana tela ceniza lava barro polvo hielo nieve lluvia niebla trigo césped hierba carne fruta ajedrez mañana tarde noche fútbol boxeo karate judo ciclismo patinaje esquí música historia verano otoño invierno primavera sábado domingo fin principio favor vez cosa mundo cielo fuego tierra viento sol luna rostro cuerpo ropa gente".split(" "));
 /** Nombres que sirven para poner el artículo o el plural (género conocido; plural de reglas.js sin cambio de tilde). */
-const NOMBRES = LEXICO.filter((e) => e.c === "n" && e.f <= 2 && (e.g === "m" || e.g === "f") && e.p.length >= 3 && e.p.length <= 9 && !/[\s-]/.test(e.p) && !NO_PLURAL.has(e.p)
-  && !(e.g === "f" && /^h?[aá]/.test(e.p)) && plural(e.p) !== e.p && tildes(plural(e.p)) === tildes(e.p) && plural(e.p).length <= 11);
+const nombres = porNivelDe((L) => L.filter((e) => e.c === "n" && e.f <= 2 && (e.g === "m" || e.g === "f") && e.p.length >= 3 && e.p.length <= 9 && !/[\s-]/.test(e.p) && !NO_PLURAL.has(e.p)
+  && !(e.g === "f" && /^h?[aá]/.test(e.p)) && plural(e.p) !== e.p && tildes(plural(e.p)) === tildes(e.p) && plural(e.p).length <= 11));
 
 
-Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get CAMPOS_P() { return CAMPOS_P; }, get PALABRA_LEXICO() { return PALABRA_LEXICO; }, get PALABRAS_P() { return PALABRAS_P; }, get rotuloCampo() { return rotuloCampo; }, get deCampo() { return deCampo; }, get deTodosCampos() { return deTodosCampos; }, get camposComunes() { return camposComunes; }, get elegirPorLetras() { return elegirPorLetras; }, get fichasLetras() { return fichasLetras; }, get anchoFichas() { return anchoFichas; }, get NOMBRES() { return NOMBRES; } }));
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get CAMPOS_P() { return CAMPOS_P; }, get PALABRA_LEXICO() { return PALABRA_LEXICO; }, get PALABRAS_P() { return PALABRAS_P; }, get rotuloCampo() { return rotuloCampo; }, get deCampo() { return deCampo; }, get deTodosCampos() { return deTodosCampos; }, get camposComunes() { return camposComunes; }, get elegirPorLetras() { return elegirPorLetras; }, get fichasLetras() { return fichasLetras; }, get anchoFichas() { return anchoFichas; }, get nombres() { return nombres; } }));
 },
 "tipos/_problemas.js": (__exp) => {
 // Charta · núcleo común de los problemas de 1.º (bloque 8): plantillas con nombres y objetos, y dibujo.
@@ -9890,8 +10609,8 @@ const { TOP, INK, cuantosRejilla } = __req("render/papel.js");
 const { rodear } = __req("lengua/dibujo.js");
 const { LEXICO } = __req("lengua/lexico.js");
 const { permitida } = __req("lengua/vistas.js");
+const { esPalabra } = __req("lengua/palabras.js");
 const { alCaso, cuantas, elegirPalabras, largosDe, patronUnico, unidades, conTope, ajusta } = __req("tipos/_lengua.js");
-const PALABRAS = new Set(LEXICO.map((e) => e.p));
 const VOC = [..."aeiou"], CON = [..."bcdfgjlmnprstvz"];
 const MIN_ALTO = 40;   // alto mínimo de tarjeta con «Más ejercicios»
 const cambia = (p, i, c) => p.slice(0, i) + c + p.slice(i + 1);
@@ -9909,7 +10628,7 @@ const __default = registrar({
       if ((tipoL === "vocales" && !esV) || (tipoL === "consonantes" && esV)) return null;
       if (!patronUnico(p, [pos])) return null;
       const fam = tipoL === "vocales" ? VOC : tipoL === "consonantes" ? CON : [...VOC, ...CON];
-      const malas = az.barajar(fam.filter((c) => c !== u && permitida(c) && !PALABRAS.has(cambia(p, pos, c)) && !(pos === 0 && params.caso === "inicial" && c === "i")));
+      const malas = az.barajar(fam.filter((c) => c !== u && permitida(c) && !esPalabra(cambia(p, pos, c)) && !(pos === 0 && params.caso === "inicial" && c === "i")));
       if (malas.length < 2) return null;
       return { pos, opciones: az.barajar([u, malas[0], malas[1]]) };
     };
@@ -12877,9 +13596,9 @@ const { TOP, cuantosRejilla } = __req("render/papel.js");
 const { rodear, palabraHuecos } = __req("lengua/dibujo.js");
 const { LEXICO } = __req("lengua/lexico.js");
 const { permitida } = __req("lengua/vistas.js");
+const { esPalabra } = __req("lengua/palabras.js");
 const { alCaso, cuantas, elegirPalabras, largosDe, patronUnico, unidades, conTope, crece } = __req("tipos/_lengua.js");
 const MIN_ALTO = { ayuda: 64, sin: 48 };   // alto mínimo de tarjeta con «Más ejercicios»
-const PALABRAS = new Set(LEXICO.map((e) => e.p));
 const VOCALES = [..."aeiou"], CONSONANTES = [..."bcdfgjlmnprstvz"];
 /** Posiciones (índice de letra) que pueden quedar en hueco: letras sueltas sin tilde (no dígrafos, ü ni «y»). */
 function posiblesHuecos(p) {
@@ -12919,7 +13638,7 @@ function elegir(params, azar, n) {
     const pos = az.elegir(ps), real = e.p[pos];
     if (!ayuda) return { pos, opciones: null };
     const fam = VOCALES.includes(real) ? VOCALES : CONSONANTES;
-    const malas = az.barajar(fam.filter((c) => c !== real && permitida(c) && !PALABRAS.has(cambia(e.p, pos, c)) && !(pos === 0 && params.caso === "inicial" && c === "i")));
+    const malas = az.barajar(fam.filter((c) => c !== real && permitida(c) && !esPalabra(cambia(e.p, pos, c)) && !(pos === 0 && params.caso === "inicial" && c === "i")));
     if (malas.length < 2) return null;
     return { pos, opciones: az.barajar([real, malas[0], malas[1]]) };
   };
@@ -15252,7 +15971,7 @@ const { TOP, B, T, cuantosRejilla } = __req("render/papel.js");
 const { articulo, plural } = __req("lengua/reglas.js");
 const { filtrarVistas, permitida, avisoVistas } = __req("lengua/vistas.js");
 const { cuantas, ajusta, conTope, crece } = __req("tipos/_lengua.js");
-const { NOMBRES } = __req("tipos/_palabra.js");
+const { nombres } = __req("tipos/_palabra.js");
 const MIN_ALTO = 46;   // alto mínimo de tarjeta con «Más ejercicios»
 
 const __default = registrar({
@@ -15275,7 +15994,7 @@ const __default = registrar({
 
 function elegir(params, azar, n) {
   const mod = params.articulos || "el", indef = mod === "un" || mod === "unplural", conPl = mod === "plural" || mod === "unplural";
-  const lista = filtrarVistas(NOMBRES, (e) => (conPl ? e.p + " " + plural(e.p) : e.p));
+  const lista = filtrarVistas(nombres(), (e) => (conPl ? e.p + " " + plural(e.p) : e.p));
   const bolsa = { m: azar.barajar(lista.filter((e) => e.g === "m")), f: azar.barajar(lista.filter((e) => e.g === "f")) };
   const fichas = [];
   for (let i = 0; i < n; i++) fichas.push({ g: i % 2 ? "f" : "m", pl: conPl && i >= n / 2 });
@@ -15644,16 +16363,15 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get default() 
 // Opciones: letras (3 a 5 variadas, 3, 4 o 5) · primera letra (sin marcar / marcada) · tipo de sílabas · letra. Cantidad: 2 columnas; letras arriba y hueco debajo; «Más grandes» 20 palabras (media: 10), «Más ejercicios» las que caben con tarjetas ≥ 50 pt.
 const { registrar } = __req("nucleo/tipos.js");
 const { TOP, cuantosRejilla } = __req("render/papel.js");
-const { LEXICO } = __req("lengua/lexico.js");
+const { porNivelDe } = __req("lengua/palabras.js");
 const { sinTildes } = __req("lengua/reglas.js");
 const { alCaso, cap, cuantas, candidatas, ajusta, conTope, dosFilas } = __req("tipos/_lengua.js");
 const { elegirPorLetras, fichasLetras, anchoFichas } = __req("tipos/_palabra.js");
 const MIN_ALTO = 50;   // alto mínimo de tarjeta con «Más ejercicios»
 const clave = (p) => [...sinTildes(p)].sort().join("");
-const ANAGRAMAS = new Map();
-for (const e of LEXICO) { const k = clave(e.p); (ANAGRAMAS.get(k) || ANAGRAMAS.set(k, []).get(k)).push(e.p); }
+const anagramas = porNivelDe((L) => { const m = new Map(); for (const e of L) { const k = clave(e.p); (m.get(k) || m.set(k, []).get(k)).push(e.p); } return m; });
 /** ¿Sirve la palabra? Sí si ninguna otra del léxico tiene las mismas letras (con `marca`, las mismas y la misma primera). */
-const sinAnagramas = (p, marca) => !ANAGRAMAS.get(clave(p)).some((o) => o !== p && (!marca || o[0] === p[0]));
+const sinAnagramas = (p, marca) => !(anagramas().get(clave(p)) || []).some((o) => o !== p && (!marca || o[0] === p[0]));
 
 const __default = registrar({
   id: "palabra.letras",
@@ -15705,9 +16423,10 @@ const { TOP, cuantosRejilla } = __req("render/papel.js");
 const { plural } = __req("lengua/reglas.js");
 const { filtrarVistas, avisoVistas } = __req("lengua/vistas.js");
 const { cuantas, ajusta, conTope } = __req("tipos/_lengua.js");
-const { NOMBRES } = __req("tipos/_palabra.js");
+const { nombres } = __req("tipos/_palabra.js");
+const { porNivelDe } = __req("lengua/palabras.js");
 const MIN_ALTO = 40;   // alto mínimo de tarjeta con «Más ejercicios»
-const SIMPLES = NOMBRES.filter((e) => e.p.length <= 8);
+const simples = porNivelDe(() => nombres().filter((e) => e.p.length <= 8));
 const enVocal = (e) => /[aeiou]$/.test(e.p) && plural(e.p) === e.p + "s";
 const enConsonante = (e) => !/[aeiouáéíóú]$/.test(e.p) && /es$/.test(plural(e.p));
 
@@ -15735,7 +16454,7 @@ const __default = registrar({
 function elegir(params, azar, n) {
   const conEs = params.plural === "es", reves = params.sentido === "alreves";
   const nEs = conEs ? Math.round(n / 3) : 0;
-  const ambos = filtrarVistas(SIMPLES, (e) => e.p + " " + plural(e.p));
+  const ambos = filtrarVistas(simples(), (e) => e.p + " " + plural(e.p));
   const conso = azar.barajar(ambos.filter(enConsonante)), vocal = azar.barajar(ambos.filter(enVocal));
   if (conso.length < nEs || vocal.length < n - nEs) throw new Error("«palabra.plural» necesita más nombres en el léxico para esas opciones." + avisoVistas());
   const elegidos = [...conso.slice(0, nEs), ...vocal.slice(0, n - nEs)];
@@ -16849,15 +17568,14 @@ const { TOP, cuantosRejilla } = __req("render/papel.js");
 const { silabas, tipoSilaba, sinTildes } = __req("lengua/reglas.js");
 const { rodear, palabraHuecos } = __req("lengua/dibujo.js");
 const { LEXICO } = __req("lengua/lexico.js");
-const { datosPalabra } = __req("lengua/palabras.js");
+const { datosPalabra, esPalabra, porNivelDe } = __req("lengua/palabras.js");
 const { alCaso, cuantas, elegirPalabras, largosDe, candidatas, conTope, dosFilas } = __req("tipos/_lengua.js");
 const MIN_ALTO = 50;   // alto mínimo de tarjeta con «Más ejercicios»
-const PALABRAS = new Set(LEXICO.map((e) => e.p));
-const ENTRADAS = LEXICO.map((e) => ({ p: e.p, s: datosPalabra(e).s.map(sinTildes) }));
+const entradas = porNivelDe((L) => L.map((e) => ({ p: e.p, s: datosPalabra(e).s.map(sinTildes) })));
 /** ¿Es la única palabra del léxico con esas otras sílabas (todas menos la k)? */
 function unicaSilaba(palabra, k) {
   const ss = silabas(palabra).map(sinTildes);
-  return !ENTRADAS.some((o) => o.p !== palabra && o.s.length === ss.length && o.s.every((s, i) => i === k || s === ss[i]));
+  return !entradas().some((o) => o.p !== palabra && o.s.length === ss.length && o.s.every((s, i) => i === k || s === ss[i]));
 }
 
 const __default = registrar({
@@ -16879,7 +17597,7 @@ const __default = registrar({
       if (!ayuda) return { k, opciones: null };
       const real = ss[k], pre = ss.slice(0, k).join(""), post = ss.slice(k + 1).join("");
       const raras = /[kwxyü]/, tilde = (s) => /[áéíóú]/.test(s);
-      const valen = (s) => sinTildes(s) !== sinTildes(real) && !PALABRAS.has(pre + s + post) && tilde(s) === tilde(real) && (!raras.test(s) || raras.test(real)) && s.length > 1 === real.length > 1;   // sin pistas: la tilde y las letras raras no delatan la buena
+      const valen = (s) => sinTildes(s) !== sinTildes(real) && !esPalabra(pre + s + post) && tilde(s) === tilde(real) && (!raras.test(s) || raras.test(real)) && s.length > 1 === real.length > 1;   // sin pistas: la tilde y las letras raras no delatan la buena
       const malas = [...new Map(az.barajar([...reserva[tipoSilaba(real)]].filter(valen)).map((s) => [sinTildes(s), s])).values()];
       if (malas.length < 2) return null;
       return { k, opciones: az.barajar([real, malas[0], malas[1]]) };

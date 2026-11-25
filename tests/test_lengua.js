@@ -60,7 +60,8 @@ import { LEXICO } from "../src/lengua/lexico.js";
 import { buscar, elegirPalabras, datosPalabra, CAMPOS_LEXICOS } from "../src/lengua/palabras.js";
 import { crearAzar } from "../src/nucleo/azar.js";
 {
-  const tsv = readFileSync(new URL("../datos/lexico_1.tsv", import.meta.url), "utf8").split("\n").slice(1).filter((l) => l.trim() && !l.startsWith("#"));
+  const filasDe = (a) => readFileSync(new URL(`../datos/${a}`, import.meta.url), "utf8").split("\n").slice(1).filter((l) => l.trim() && !l.startsWith("#"));
+  const tsv = [...filasDe("lexico_1.tsv"), ...filasDe("lexico_2.tsv")];   // 2.º: LENGUA_2.md
   assert.equal(LEXICO.length, tsv.length, "lexico.js desfasado: ejecutar python3 tools/lexico.py");
   for (const e of LEXICO) {
     const { s } = datosPalabra(e);
@@ -101,4 +102,32 @@ import { palabraHuecos, casillas, rodear, unir, rotulo } from "../src/lengua/dib
     if (modo === "solucion") assert.ok(svg.includes(">gu<") && svg.includes(">rr<") && svg.includes(">lo<"));
   }
   console.log("test_lengua: ayudantes de dibujo (huecos, casillas, rodear, unir) OK");
+}
+
+// LENGUA_2.md, lote 0 · Lengua de 2.º: modelos de 1.º en 2.º, pauta de 4 mm y palabras de lexico_2.tsv solo desde 2.º.
+{
+  await import("../src/tipos/index.js");
+  const { generar: generarFicha, porDefecto, esLengua1, modelo } = await import("../src/nucleo/ficha.js");
+  const { CATALOGO } = await import("../src/nucleo/catalogo.js");
+  const { conCurso } = await import("../src/lengua/vistas.js");
+  const en2 = CATALOGO.modelos.filter((m) => m.materia === "lengua" && m.cursos?.["2"]);
+  assert.ok(en2.length >= 30 && !en2.some((m) => m.id === "silaba.tabla"), "Lengua en 2.º");
+  assert.equal(porDefecto("escritura.frase", 2).pauta, 4);
+  assert.equal(porDefecto("escritura.frase", 1).pauta, null);
+  assert.ok(!esLengua1(modelo("frase.ordena"), 2), "sin mapa de letras en 2.º");
+  const de2 = LEXICO.filter((e) => e.n === 2).map((e) => e.p);
+  if (de2.length) {
+    const s2 = new Set(de2);
+    assert.ok(!buscar({}).some((e) => s2.has(e.p)), "las palabras de 2.º no salen en 1.º");
+    assert.ok(conCurso(2, () => buscar({})).some((e) => s2.has(e.p)), "las palabras de 2.º salen en 2.º");
+  }
+  let vistas2 = 0;
+  for (const m of en2) for (const sem of [1, 2, 3]) {
+    const f = generarFicha({ actividades: [{ tipo: m.id, curso: 2, params: {} }] }, sem);
+    const t = JSON.stringify(f);
+    assert.ok(!/NaN|undefined/.test(t), m.id);
+    vistas2 += de2.filter((p) => t.includes(`"${p}"`)).length;
+  }
+  if (de2.length) assert.ok(vistas2 > 0, "alguna palabra de 2.º en las fichas de 2.º");
+  console.log(`test_lengua: Lengua 2.º (${en2.length} modelos, ${de2.length} palabras de 2.º, ${vistas2} usadas) OK`);
 }

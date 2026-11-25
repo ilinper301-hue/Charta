@@ -2,7 +2,7 @@
 // Las sílabas se calculan una vez por palabra (caché). Sin DOM.
 import { LEXICO } from "./lexico.js";
 import { silabas, tipoSilaba, TIPOS_SILABA, soloLetras, llevaLetra } from "./reglas.js";
-import { permitida, obligada, avisoVistas } from "./vistas.js";
+import { permitida, obligada, avisoVistas, nivelActivo } from "./vistas.js";
 
 const info = new Map();
 /** Datos calculados de una palabra del léxico: sílabas y tipos de sílaba. */
@@ -11,13 +11,31 @@ export function datosPalabra(e) {
   return info.get(e.p);
 }
 
+/** Léxico del curso activo (conCurso en vistas.js): en 1.º, sin las palabras de 2.º (n: 2). */
+const porNivel = new Map();
+export function lexicoActivo() {
+  const nv = nivelActivo();
+  if (!porNivel.has(nv)) porNivel.set(nv, LEXICO.filter((e) => (e.n || 1) <= nv));
+  return porNivel.get(nv);
+}
+/** Caché por curso: f(léxico del curso) se calcula una vez por curso. */
+export function porNivelDe(f) {
+  const m = new Map();
+  return () => { const nv = nivelActivo(); if (!m.has(nv)) m.set(nv, f(lexicoActivo())); return m.get(nv); };
+}
+const conjunto = porNivelDe((L) => new Set(L.map((e) => e.p)));
+/** ¿Es una palabra del léxico del curso activo? */
+export const esPalabra = (p) => conjunto().has(p);
+
 /** Palabras que cumplen los filtros (todos opcionales):
  *  cat ("n" | "v" | "a" | "o" o lista), campos (lista: alguno), nSilabas (número o lista), tipo ("directas"… "mixtas"),
  *  letras (letras vistas: cadena o lista), conLetra (todas la llevan), dibujo (true: solo dibujables), frec (máxima), sin (palabras a excluir),
  *  minLetras / maxLetras. */
 export function buscar({ cat, campos, nSilabas, tipo, letras, conLetra, dibujo, frec, sin, minLetras, maxLetras } = {}) {
   const cats = cat ? [].concat(cat) : null, ns = nSilabas ? [].concat(nSilabas) : null, fuera = sin ? new Set(sin) : null;
+  const nv = nivelActivo();
   return LEXICO.filter((e) => {
+    if ((e.n || 1) > nv) return false;   // palabras de 2.º (lexico_2.tsv) solo desde 2.º
     if (cats && !cats.includes(e.c)) return false;
     if (campos && !campos.some((k) => e.k.includes(k))) return false;
     if (dibujo && !e.d) return false;

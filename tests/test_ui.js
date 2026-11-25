@@ -25,7 +25,9 @@ for (const c of cs) for (const m of materias(c.id)) for (const b of bloques(c.id
 assert.equal(vistos.size, listaTipos().length, "todos los tipos aparecen en el selector");
 // MATES_2.md: un modelo en varios cursos. 2.º sale en el selector solo con Matemáticas; rep.letras está en 1.º y en 2.º.
 assert.deepEqual(cs.map((c) => c.id), [1, 2, 3]);   // MATES_3.md: 3.º desde el lote 0
-for (const c of [2, 3]) assert.deepEqual(materias(c).map((m) => m.id), ["matematicas"]);
+assert.deepEqual(materias(2).map((m) => m.id), ["matematicas", "lengua"]);   // LENGUA_2.md, lote 0
+assert.deepEqual(materias(3).map((m) => m.id), ["matematicas"]);
+assert.ok(modelos(2, "lengua", 3).some((x) => x.id === "silaba.separa") && !modelos(2, "lengua", 3).some((x) => x.id === "silaba.tabla"), "silaba.tabla solo en 1.º");
 assert.equal(modelos(3, "matematicas", 1).find((x) => x.id === "rep.du").nombre, "Millares, centenas, decenas y unidades");
 for (const c of [1, 2, 3]) assert.ok(modelos(c, "matematicas", 1).some((x) => x.id === "rep.letras"), `rep.letras en ${c}.º`);
 assert.ok(!modelos(2, "matematicas", 1).some((x) => x.id === "rep.dedos"), "rep.dedos solo en 1.º");

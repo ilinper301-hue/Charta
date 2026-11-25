@@ -11,6 +11,7 @@ import modelos_app as APP
 import modelos_lengua as LEN
 import modelos_2 as M2
 import modelos_3 as M3
+import modelos_lengua_2 as L2
 
 def titulo(m):
     modo = next((o for o in m["opciones"] if o["id"] == "modo" and o["tipo"] == "opcion"), None)
@@ -24,9 +25,10 @@ modelos += [{**m, "tamanos": list(m["tamanos"]), "metadatos": META.metadatos(m["
 modelos += [{**m, "tamanos": list(m["tamanos"]), "metadatos": META.metadatos(m["id"])} for m in LEN.MODELOS_LENGUA]
 modelos += [{**m, "tamanos": list(m["tamanos"]), "metadatos": META.metadatos(m["id"])} for m in M2.MODELOS_2]
 modelos += [{**m, "tamanos": list(m["tamanos"]), "metadatos": META.metadatos(m["id"])} for m in M3.MODELOS_3]
+modelos += [{**m, "tamanos": list(m["tamanos"]), "metadatos": META.metadatos(m["id"])} for m in L2.MODELOS_LENGUA_2]
 # Un modelo en varios cursos (MATES_2.md): los de 1.º que sirven en 2.º llevan sus rangos de 2.º.
 for m in modelos:
-    extra = {**M2.cursos_extra(m), **M3.cursos_extra(m)}   # 2.º y 3.º (MATES_3.md)
+    extra = {**M2.cursos_extra(m), **M3.cursos_extra(m), **L2.cursos_extra(m)}   # 2.º y 3.º (MATES_3.md); Lengua 2.º (LENGUA_2.md)
     if extra: m["cursos"] = extra
     m["opciones"] = M2.opciones_2(m)   # 2.º: opciones solo con tres cifras (rmin)
 # Bloques por materia (cada materia numera los suyos) y letra por defecto de cada materia (Andika si no se dice).

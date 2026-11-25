@@ -90,7 +90,7 @@ export default {
       if (p.caso === "inicial") { assert.equal(ls.filter((l) => l !== l.toLowerCase()).length, 1); assert.equal(ls.findIndex((l) => l !== l.toLowerCase()) === 0 || !marca, true); assert.ok(ls.includes(m[0].toUpperCase())); }
       if (!p.caso) ls.forEach((l) => assert.equal(l, l.toLowerCase()));
       const clave = (w) => [...sinTildes(w)].sort().join("");
-      const otras = LEXICO.filter((o) => o.p !== m && clave(o.p) === clave(m) && (!marca || o.p[0] === m[0]));
+      const otras = LEXICO.filter((o) => !o.n && o.p !== m && clave(o.p) === clave(m) && (!marca || o.p[0] === m[0]));
       assert.deepEqual(otras.map((o) => o.p), [], "otra palabra se forma con esas letras");
       assert.deepEqual(e.solucion.huecos, [e.datos.palabra]);
     }

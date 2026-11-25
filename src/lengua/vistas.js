@@ -5,7 +5,8 @@
 import { ABECEDARIO, sinTildes } from "./reglas.js";
 
 let activas = null;   // Set de letras o null (todas)
-let obligadas = null; // Set de letras obligatorias o null: cada palabra (o frase) debe llevar al menos una (pulsación larga en el mapa)
+let obligadas = null;
+let nivel = 1;        // curso de la actividad (LENGUA_2.md): las palabras con n: 2 del léxico solo salen desde 2.º // Set de letras obligatorias o null: cada palabra (o frase) debe llevar al menos una (pulsación larga en el mapa)
 
 /** Cadena normalizada (orden del abecedario, sin repetir) o null si están todas o no es válida. */
 export function normalizarVistas(v) {
@@ -32,10 +33,18 @@ export function conObligatorias(o, f) {
   obligadas = o ? new Set(o) : null;
   try { return f(); } finally { obligadas = antes; }
 }
+/** Ejecuta f con el curso de la actividad (1 si no se dice) y lo restaura después. */
+export function conCurso(curso, f) {
+  const antes = nivel;
+  nivel = Number(curso) >= 2 ? Number(curso) : 1;
+  try { return f(); } finally { nivel = antes; }
+}
+/** Curso activo (1, 2…): buscar() deja fuera las palabras de cursos superiores. */
+export const nivelActivo = () => nivel;
 /** Letras obligatorias activas (cadena) o null. */
 export const obligatoriasActivas = () => (obligadas ? [...obligadas].join("") : null);
 /** Clave de caché de las letras: permitidas y obligatorias. */
-export const claveLetras = () => `${vistasActivas()}|${obligatoriasActivas()}`;
+export const claveLetras = () => `${vistasActivas()}|${obligatoriasActivas()}|${nivel}`;
 /** ¿El texto lleva alguna de las letras obligatorias? (sin obligatorias, siempre). La «qu» se marca con la «q». */
 export function obligada(texto) {
   if (!obligadas) return true;

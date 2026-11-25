@@ -10,16 +10,15 @@ import { TOP, cuantosRejilla } from "../render/papel.js";
 import { silabas, tipoSilaba, sinTildes } from "../lengua/reglas.js";
 import { rodear, palabraHuecos } from "../lengua/dibujo.js";
 import { LEXICO } from "../lengua/lexico.js";
-import { datosPalabra } from "../lengua/palabras.js";
+import { datosPalabra, esPalabra, porNivelDe } from "../lengua/palabras.js";
 import { alCaso, cuantas, elegirPalabras, largosDe, candidatas, conTope, dosFilas } from "./_lengua.js";
 
 const MIN_ALTO = 50;   // alto mínimo de tarjeta con «Más ejercicios»
-const PALABRAS = new Set(LEXICO.map((e) => e.p));
-const ENTRADAS = LEXICO.map((e) => ({ p: e.p, s: datosPalabra(e).s.map(sinTildes) }));
+const entradas = porNivelDe((L) => L.map((e) => ({ p: e.p, s: datosPalabra(e).s.map(sinTildes) })));
 /** ¿Es la única palabra del léxico con esas otras sílabas (todas menos la k)? */
 export function unicaSilaba(palabra, k) {
   const ss = silabas(palabra).map(sinTildes);
-  return !ENTRADAS.some((o) => o.p !== palabra && o.s.length === ss.length && o.s.every((s, i) => i === k || s === ss[i]));
+  return !entradas().some((o) => o.p !== palabra && o.s.length === ss.length && o.s.every((s, i) => i === k || s === ss[i]));
 }
 
 export default registrar({
@@ -41,7 +40,7 @@ export default registrar({
       if (!ayuda) return { k, opciones: null };
       const real = ss[k], pre = ss.slice(0, k).join(""), post = ss.slice(k + 1).join("");
       const raras = /[kwxyü]/, tilde = (s) => /[áéíóú]/.test(s);
-      const valen = (s) => sinTildes(s) !== sinTildes(real) && !PALABRAS.has(pre + s + post) && tilde(s) === tilde(real) && (!raras.test(s) || raras.test(real)) && s.length > 1 === real.length > 1;   // sin pistas: la tilde y las letras raras no delatan la buena
+      const valen = (s) => sinTildes(s) !== sinTildes(real) && !esPalabra(pre + s + post) && tilde(s) === tilde(real) && (!raras.test(s) || raras.test(real)) && s.length > 1 === real.length > 1;   // sin pistas: la tilde y las letras raras no delatan la buena
       const malas = [...new Map(az.barajar([...reserva[tipoSilaba(real)]].filter(valen)).map((s) => [sinTildes(s), s])).values()];
       if (malas.length < 2) return null;
       return { k, opciones: az.barajar([real, malas[0], malas[1]]) };

@@ -2,8 +2,8 @@
 // Sin DOM. Elegir palabras del léxico con las opciones comunes (tipo de sílabas, largo, letra), aplicar mayúsculas,
 // comprobar que un hueco tiene una sola solución en el léxico y dibujar palabras letra a letra (rodear, rayas).
 import { LEXICO } from "../lengua/lexico.js";
-import { buscar } from "../lengua/palabras.js";
-import { claveLetras, avisoVistas } from "../lengua/vistas.js";
+import { buscar, lexicoActivo } from "../lengua/palabras.js";
+import { claveLetras, avisoVistas, nivelActivo } from "../lengua/vistas.js";
 import { sinTildes } from "../lengua/reglas.js";
 import { COLOR_SOLUCION } from "../render/papel.js";
 
@@ -76,8 +76,9 @@ export function dosFilas(y, ch, bajo = 0.34) {
 // ---------------------------------------------------------------- huecos con solución única
 const porLargo = new Map();
 function delLargo(n) {
-  if (!porLargo.has(n)) porLargo.set(n, LEXICO.filter((e) => e.p.length === n).map((e) => ({ p: e.p, s: sinTildes(e.p) })));
-  return porLargo.get(n);
+  const k = `${nivelActivo()}|${n}`;   // por curso (LENGUA_2.md)
+  if (!porLargo.has(k)) porLargo.set(k, lexicoActivo().filter((e) => e.p.length === n).map((e) => ({ p: e.p, s: sinTildes(e.p) })));
+  return porLargo.get(k);
 }
 /** ¿Es la palabra la única del léxico que encaja con esas letras ocultas (posiciones `ocultas` libres, el resto igual)? */
 export function patronUnico(palabra, ocultas) {
