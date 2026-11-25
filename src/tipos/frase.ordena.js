@@ -34,7 +34,7 @@ export default registrar({
 
 function elegir(params, azar, n) {
   const mayus = params.caso === "mayus", marca = params.marca !== "sin" && !mayus;
-  const frases = elegirFrases(azar, largosFrase(azar, n, params.palabras), { filtro: (f) => ordenUnico(f, marca), id: "frase.ordena" });
+  const frases = elegirFrases(azar, largosFrase(azar, n, params.palabras, 7), { filtro: (f) => ordenUnico(f, marca), id: "frase.ordena" });
   return {
     enunciado: marca ? "Ordena las palabras y escribe la frase.\nEmpieza por la palabra con mayúscula." : "Ordena las palabras y escribe la frase.",
     ejercicios: frases.map((f) => {

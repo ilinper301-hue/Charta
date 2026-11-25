@@ -31,11 +31,12 @@ function xmlBienFormado(s) {
   assert.deepEqual(pila, [], "etiquetas sin cerrar");
 }
 
-import { combinaciones } from "./comun.js";
+import { combinaciones, cursosDePrueba, tope } from "./comun.js";
 export { combinaciones };
 
-function comprobar(id, params, tam, s) {
-  const acts = tam === "media" ? [{ tipo: id, params }, { tipo: id, params }] : [{ tipo: id, params }];
+function comprobar(id, params, tam, s, curso) {
+  const a1 = curso === 2 ? { tipo: id, params, curso } : { tipo: id, params };   // Lengua 2.º: la actividad lleva su curso
+  const acts = tam === "media" ? [a1, a1] : [a1];
   let f;
   try { f = generar({ actividades: acts }, s); }
   catch (e) { if (/necesita|solo en|no admite/.test(e.message)) return; throw e; }   // combinación no válida (como el motor)
@@ -63,9 +64,9 @@ function comprobar(id, params, tam, s) {
 for (const id of listaTipos().filter((x) => x.startsWith(SOLO))) {
   prueba(id, () => {
     const m = modelo(id);
-    for (const params of muestra(combinaciones(id))) for (const tam of m.tamanos) for (let s = 1; s <= SEMILLAS; s++) {
-      try { comprobar(id, params, tam, s); }
-      catch (e) { e.message = `${id} ${JSON.stringify(params)} ${tam} semilla ${s}: ${e.message}`; throw e; }
+    for (const curso of cursosDePrueba(id)) for (const params of muestra(curso === 2 ? tope(combinaciones(id, curso)) : combinaciones(id, curso))) for (const tam of m.tamanos) for (let s = 1; s <= SEMILLAS; s++) {
+      try { comprobar(id, params, tam, s, curso); }
+      catch (e) { e.message = `${id} ${curso === 2 ? "(2.º) " : ""}${JSON.stringify(params)} ${tam} semilla ${s}: ${e.message}`; throw e; }
     }
   });
 }

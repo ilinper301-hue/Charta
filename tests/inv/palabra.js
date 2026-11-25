@@ -1,10 +1,10 @@
 // Charta · invariantes de la familia «palabra» (Lengua 1.º, bloque 4; ver tests/invariantes.js).
 import assert from "node:assert/strict";
 import { unicos, cuantos, cuantosEntre } from "./_ayuda.js";
-import { enCaso, palabraValida, PALABRAS } from "./_lengua.js";
+import { enCaso, palabraValida, PALABRAS, lexicoCurso, sesion } from "./_lengua.js";
 import { LEXICO } from "../../src/lengua/lexico.js";
 import { articulo, plural, sinTildes } from "../../src/lengua/reglas.js";
-import { BANCO } from "../../src/tipos/palabra.contrarios.js";
+import { BANCO, BANCO_2 } from "../../src/tipos/palabra.contrarios.js";
 
 const ENT = new Map(LEXICO.map((e) => [e.p, e]));
 const CAMPOS = ["animales", "comida", "ropa", "casa", "escuela", "cuerpo", "juguetes", "transportes", "familia", "naturaleza", "colores"];
@@ -90,7 +90,7 @@ export default {
       if (p.caso === "inicial") { assert.equal(ls.filter((l) => l !== l.toLowerCase()).length, 1); assert.equal(ls.findIndex((l) => l !== l.toLowerCase()) === 0 || !marca, true); assert.ok(ls.includes(m[0].toUpperCase())); }
       if (!p.caso) ls.forEach((l) => assert.equal(l, l.toLowerCase()));
       const clave = (w) => [...sinTildes(w)].sort().join("");
-      const otras = LEXICO.filter((o) => !o.n && o.p !== m && clave(o.p) === clave(m) && (!marca || o.p[0] === m[0]));
+      const otras = lexicoCurso().filter((o) => o.p !== m && clave(o.p) === clave(m) && (!marca || o.p[0] === m[0]));
       assert.deepEqual(otras.map((o) => o.p), [], "otra palabra se forma con esas letras");
       assert.deepEqual(e.solucion.huecos, [e.datos.palabra]);
     }
@@ -148,10 +148,17 @@ export default {
 
   "palabra.contrarios"(act, tam) {
     const es = act.ejercicios, p = act.params, une = p.tarea !== "escribe";
-    assert.ok(BANCO.length >= 40, "banco de unos 40 pares");
-    for (const [a, b] of BANCO) { enLexico(a, "banco"); enLexico(b, "banco"); }
-    assert.equal(new Set(BANCO.map(([a, b]) => [a, b].sort().join())).size, BANCO.length, "pares repetidos en el banco");
-    const par = (a, b) => BANCO.find(([x, y]) => (x === a && y === b) || (x === b && y === a));
+    const TODOS = [...BANCO, ...BANCO_2], banco = sesion.curso >= 2 ? TODOS : BANCO;   // los 14 de BANCO_2 solo desde 2.º
+    assert.equal(BANCO.length, 48); assert.equal(BANCO_2.length, 12); assert.equal(TODOS.length, 60, "60 pares en total");
+    for (const [a, b] of TODOS) { enLexico(a, "banco"); enLexico(b, "banco"); assert.ok((ENT.get(a).n || 1) <= 2 && (ENT.get(b).n || 1) <= 2); }
+    for (const [a, b] of BANCO_2) assert.ok(!ENT.get(a).n || ENT.get(a).n === 2, `«${a}»`);
+    assert.equal(new Set(TODOS.map(([a, b]) => [a, b].sort().join())).size, TODOS.length, "pares repetidos en el banco");
+    // un solo contrario por palabra: si una palabra está en dos pares, esos pares son del mismo grupo (casi sinónimos)
+    for (const w of new Set(TODOS.flat().filter((x) => x))) {
+      const ps = TODOS.filter(([a, b]) => a === w || b === w);
+      if (ps.length > 1) assert.ok(ps.every((x) => x[2] && x[2] === ps[0][2]), `«${w}» tiene más de un contrario posible: ${ps.map((x) => x[0] + "–" + x[1])}`);
+    }
+    const par = (a, b) => banco.find(([x, y]) => (x === a && y === b) || (x === b && y === a));
     cuantos(es, une ? (tam === "media" ? 4 : 8) : (tam === "media" ? 12 : 24));
     const pares = [];
     if (une) {

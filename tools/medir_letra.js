@@ -1,5 +1,6 @@
 // Charta · mide la letra impresa de cada tipo (paso 4 de «Espacio en la ficha»: ninguna letra < 9 pt reales).
-// Uso: node tools/medir_letra.js [--tipo id] [--min 9] [--semillas 3] [--sin-mas] [--todas] [--detalle]
+// Uso: node tools/medir_letra.js [--tipo id] [--min 9] [--semillas 3] [--sin-mas] [--todas] [--detalle] [--curso 2]
+//  --curso 2: solo los tipos de Lengua que están también en 2.º, con sus opciones de 2.º (palabras de 5 sílabas, frases de 8 palabras…).
 //  Para cada tipo: completa y media, opciones por defecto, y con cantidad "mas" si el tipo la admite; además una
 //  muestra de combinaciones de opciones (--todas: todas). Dibuja la hoja (render/hoja.js, modo papel) y calcula
 //  el tamaño efectivo de cada <text> = font-size × escalas de los transforms ancestros (translate/scale/rotate/matrix).
@@ -10,11 +11,11 @@ import { generar } from "../src/nucleo/ficha.js";
 import { listaTipos } from "../src/tipos/index.js";
 import { tipo } from "../src/nucleo/tipos.js";
 import { hoja } from "../src/render/hoja.js";
-import { combinaciones } from "../tests/comun.js";
+import { combinaciones, cursosDePrueba } from "../tests/comun.js";
 
 const args = process.argv.slice(2);
 const val = (f, d) => { const i = args.indexOf(f); return i >= 0 ? args[i + 1] : d; };
-const SOLO = val("--tipo"), SEMILLAS = +val("--semillas", 3), MIN = +val("--min", 9), TODAS = args.includes("--todas"), SIN_MAS = args.includes("--sin-mas"), DETALLE = args.includes("--detalle");
+const CURSO = +val("--curso", 0), SOLO = val("--tipo"), SEMILLAS = +val("--semillas", 3), MIN = +val("--min", 9), TODAS = args.includes("--todas"), SIN_MAS = args.includes("--sin-mas"), DETALLE = args.includes("--detalle");
 const EXCLUIR = /^(pega|pegar|dibuja|dibuja aqu)[^a-z]*(aqu|el dibujo)/i;
 
 /** Escala de un transform SVG (translate/scale/rotate/matrix): factor sobre la longitud (sqrt|det|). */
@@ -48,7 +49,7 @@ export function textosSvg(svg) {
   return out;
 }
 
-const ids = listaTipos().filter((id) => !SOLO || id === SOLO);
+const ids = listaTipos().filter((id) => (!SOLO || id === SOLO) && (CURSO !== 2 || cursosDePrueba(id).includes(2)));
 const muestra = (cs) => (TODAS || cs.length <= 4 ? cs : [0, 1, 2, 3].map((i) => cs[Math.floor(i * (cs.length - 1) / 3)]));
 const sinTexto = (e) => !e.s || EXCLUIR.test(e.s);
 let combos = 0, bajo = 0;
@@ -56,10 +57,11 @@ const resumen = [];
 for (const id of ids) {
   const T2 = tipo(id);
   let cs = [{}];
-  try { cs = muestra([{}, ...combinaciones(id).filter((c) => Object.keys(c).length)]); } catch { /* sin combinaciones */ }
+  try { cs = muestra([{}, ...combinaciones(id, CURSO === 2 ? 2 : cursosDePrueba(id)[0]).filter((c) => Object.keys(c).length)]); } catch { /* sin combinaciones */ }
   const malas = new Map(); let min = Infinity, nBajo = 0, n = 0;
   for (const params of cs) for (const tam of ["completa", "media"]) for (const cant of T2?.cantidad && !SIN_MAS ? ["grandes", "mas"] : ["grandes"]) for (let sem = 1; sem <= SEMILLAS; sem++) {
-    const acts = tam === "media" ? [{ tipo: id, params }, { tipo: id, params }] : [{ tipo: id, params }];
+    const a1 = CURSO === 2 ? { tipo: id, params, curso: 2 } : { tipo: id, params };
+    const acts = tam === "media" ? [a1, a1] : [a1];
     let f; try { f = generar({ actividades: acts, cantidad: cant }, sem); } catch { continue; }
     n++; combos++;
     let peor = Infinity;

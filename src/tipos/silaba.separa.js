@@ -3,12 +3,12 @@
 // solucion: casillas → { huecos: [las sílabas, una por casilla] }
 //           rayas    → { huecos: [], rayas: [nº de letras tras las que va cada raya, de izquierda a derecha] }  (el alumno traza las rayas; en la solución, en rojo)
 // Reglas: palabra del léxico; las sílabas son las de reglas.js (silabas); sin repetir palabras. Palabras de hasta 10 letras.
-// Opciones: cómo se separa (en casillas / con rayas) · sílabas (variadas, 2, 3 o 4) · tipo de sílabas · caso. Cantidad: 2 columnas; en casillas, palabra arriba y casillas debajo; «Más grandes» 20 palabras (media: 10), «Más ejercicios» las que caben con tarjetas ≥ 50 pt.
+// Opciones: cómo se separa (en casillas / con rayas) · sílabas (variadas, 2, 3 o 4) (2.º: también 5; «variadas» = 2 a 5, palabras de hasta 12–13 letras) · tipo de sílabas · caso. Cantidad: 2 columnas; en casillas, palabra arriba y casillas debajo; «Más grandes» 20 palabras (media: 10), «Más ejercicios» las que caben con tarjetas ≥ 50 pt.
 import { registrar } from "../nucleo/tipos.js";
 import { TOP, cuantosRejilla } from "../render/papel.js";
 import { silabas } from "../lengua/reglas.js";
 import { casillas } from "../lengua/dibujo.js";
-import { alCaso, trozosCaso, cuantas, elegirPalabras, largosDe, palabraLetras, ajusta, conTope, dosFilas } from "./_lengua.js";
+import { alCaso, trozosCaso, cuantas, elegirPalabras, largosDe, palabraLetras, ajusta, conTope, dosFilas, topeLetras } from "./_lengua.js";
 
 const MIN_ALTO = 50;   // alto mínimo de tarjeta con «Más ejercicios»
 
@@ -18,7 +18,7 @@ export default registrar({
   cantidad: true,
   generar(params, azar, ctx) {
     const n = cuantosRejilla(ctx, 2, MIN_ALTO, [20, 10]), modo = params.modo === "rayas" ? "rayas" : "casillas";
-    const ps = conTope(n, cuantas(ctx.tamano, 10), (k) => elegirPalabras(azar, k, params, largosDe(params, [2, 3, 2, 3, 4]), { extra: { maxLetras: 10 }, id: "silaba.separa" }));
+    const ps = conTope(n, cuantas(ctx.tamano, 10), (k) => elegirPalabras(azar, k, params, largosDe(params, [2, 3, 2, 3, 4], [2, 3, 4, 3, 5, 2, 4, 5]), { extra: { maxLetras: topeLetras(10, 13) }, id: "silaba.separa" }));
     return {
       enunciado: modo === "rayas" ? "Separa cada palabra en sílabas:\ntraza una raya entre ellas." : "Separa cada palabra en sílabas:\nescribe una en cada casilla.",
       ejercicios: ps.map(({ p }) => {

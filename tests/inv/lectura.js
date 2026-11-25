@@ -4,7 +4,7 @@
 import assert from "node:assert/strict";
 import { frasePorId } from "../../src/tipos/_frase.js";
 import { unicos, cuantos } from "./_ayuda.js";
-import { enCaso, PALABRAS } from "./_lengua.js";
+import { enCaso, PALABRAS, sesion } from "./_lengua.js";
 import { analiza as analizaFrase } from "./frase.js";
 import { LEXICO } from "../../src/lengua/lexico.js";
 import { plural, sinTildes, cabeTipo, silabas, tonica } from "../../src/lengua/reglas.js";
@@ -106,10 +106,13 @@ function comprobarBancos() {
   for (const t of TEMAS_SEC) for (const l of [3, 4]) assert.ok((porClase[t + l] || 0) >= 4, `faltan secuencias de ${t} con ${l} frases (${porClase[t + l] || 0}): las opciones «${t}» y «${l} frases» no darían para una ficha`);
   // adivinanzas
   assert.ok(ADIVINANZAS.length >= 30, "menos de 30 adivinanzas");
+  assert.equal(ADIVINANZAS.filter((a) => !a.desde).length, 47, "las 47 de 1.º no cambian"); assert.equal(ADIVINANZAS.filter((a) => a.desde === 2).length, 24, "24 nuevas de 2.º");
+  unicos(ADIVINANZAS, (a) => a.id, "ids repetidos");
   unicos(ADIVINANZAS, (a) => a.respuesta, "respuestas repetidas en el banco");
   unicos(ADIVINANZAS, (a) => a.texto, "adivinanzas repetidas");
   for (const a of ADIVINANZAS) {
-    assert.ok(PALABRAS.has(a.respuesta), `«${a.respuesta}» no está en el léxico`);
+    const lex = LEXICO.find((e) => e.p === a.respuesta);   // las de 2.º pueden llevar una palabra de 2.º; las de 1.º, solo del léxico de 1.º
+    assert.ok(lex && (a.desde || !lex.n), `«${a.respuesta}» no está en el léxico`);
     assert.ok([...a.respuesta].length <= 9, `«${a.respuesta}» pasa de 9 letras`);
     assert.ok(!/^[iíì]/i.test(a.respuesta));
     const frases = a.texto.split(/(?<=\.) /);
@@ -257,7 +260,7 @@ export default {
       const { texto, n, ayuda, id } = e.datos, orig = ADIVINANZAS.find((a) => a.id === id), s = e.solucion;
       if (mayus) assert.equal(texto, texto.toUpperCase()); else assert.equal(texto, orig.texto); assert.equal(texto.toLowerCase(), orig.texto.toLowerCase());
       assert.equal(ayuda, letras ? "letras" : "sin");
-      assert.ok(PALABRAS.has(orig.respuesta)); assert.ok([...orig.respuesta].length <= 9);
+      assert.ok(PALABRAS.has(orig.respuesta)); assert.ok([...orig.respuesta].length <= 9); assert.ok(!orig.desde || sesion.curso >= orig.desde, "adivinanza de 2.º en 1.º");
       if (letras) {
         assert.equal(s.huecos.length, n); assert.equal(n, unidades(orig.respuesta).length);
         assert.equal(s.huecos.join("").toLowerCase(), orig.respuesta); s.huecos.forEach((h) => assert.equal(h, mayus ? h.toUpperCase() : h.toLowerCase()));

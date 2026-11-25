@@ -1,8 +1,9 @@
 // Charta · utilidades comunes de las pruebas (sin efectos al importar).
 import { modelo, rangosTodos, visible, cursoDe } from "../src/nucleo/ficha.js";
 
-/** Todas las combinaciones de opciones (rangos de todos los cursos × valores; números: mín, defecto y máx), sin las que no admite el rango (`rmin`). */
-export function combinaciones(id) {
+/** Todas las combinaciones de opciones (rangos de todos los cursos × valores; números: mín, defecto y máx), sin las que no admite el rango (`rmin`).
+ *  Con `curso` (Lengua, que no tiene rangos): solo las de ese curso: en 1.º, sin las opciones y valores `curso: 2`. */
+export function combinaciones(id, curso) {
   const m = modelo(id);
   let out = [{}];
   const ejes = [];
@@ -19,8 +20,14 @@ export function combinaciones(id) {
     if (!visible(o, p.rango, c)) return p[o.id] === (o.defecto ?? (o.tipo === "si_no" ? false : null));   // `rmin` solo en opciones y sí/no
     return o.tipo !== "opcion" || visible(o.valores.find((v) => v.valor === p[o.id]), p.rango, c);
   }); };
-  return out.filter(ok);
+  return out.filter((p) => ok(p) && (curso == null || curso >= 2 || cursoDe(id, { params: p }) === 1));
 }
+
+/** 2.º: los tipos de 1.º con miles de combinaciones (escritura.*) y sin cambios en 2.º se prueban con una muestra de unas `n` (si no, el doble de tiempo). */
+export const tope = (cs, n = 300) => (cs.length <= n ? cs : cs.filter((_, i) => i % Math.ceil(cs.length / n) === 0));
+
+/** Cursos en los que se prueba un tipo: los de Lengua con 2.º (LENGUA_2.md), uno y otro por separado; el resto, sin curso (como siempre). */
+export const cursosDePrueba = (id) => (modelo(id).materia === "lengua" && modelo(id).cursos?.["2"] ? [1, 2] : [undefined]);
 
 /** Contador de pruebas: prueba(nombre, f) no detiene el resto si una falla. */
 export function contador() {

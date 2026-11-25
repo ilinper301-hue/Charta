@@ -1,7 +1,7 @@
 // Charta · invariantes de la familia «fono» (Lengua 1.º, bloque 1; ver tests/invariantes.js).
 import assert from "node:assert/strict";
 import { unicos, cuantos, cuantosEntre } from "./_ayuda.js";
-import { enCaso, palabraValida, otrasQueEncajan, PALABRAS } from "./_lengua.js";
+import { enCaso, palabraValida, otrasQueEncajan, PALABRAS, cantidadL } from "./_lengua.js";
 import { silabas, sinTildes, rima, riman } from "../../src/lengua/reglas.js";
 
 const VOC = [..."aeiou"], N = (tam, c) => (tam === "media" ? c / 2 : c);   // 2 columnas (Espacio en la ficha): el doble por defecto; «Más ejercicios» lo cubren las doradas
@@ -85,7 +85,7 @@ export default {
 
   "fono.quita"(act, tam) {
     const es = act.ejercicios, p = act.params;
-    cuantos(es, N(tam, 16));
+    cantidadL(es, N(tam, 16));
     unicos(es, (e) => e.datos.silabas.join("").toLowerCase(), "palabras repetidas");
     let primeras = 0;
     for (const e of es) {
@@ -99,12 +99,12 @@ export default {
       assert.deepEqual(e.solucion.huecos, [queda]);
       assert.ok(real[k].length >= 2 && queda.length >= 2 && real[k] !== queda.toLowerCase());
     }
-    if (p.quitar === "mezcla") assert.equal(primeras, es.length / 2, "mezcla: no hay mitad y mitad");
+    if (p.quitar === "mezcla") assert.ok(Math.abs(primeras - es.length / 2) <= 0.5, "mezcla: no hay mitad y mitad");   // (2.º: con pocas palabras el nº puede ser impar)
   },
 
   "fono.larga"(act, tam) {
     const es = act.ejercicios, p = act.params;
-    cuantos(es, N(tam, 20));
+    cantidadL(es, N(tam, 20));
     const todas = es.flatMap((e) => e.datos.palabras.map((w) => w.toLowerCase())); assert.equal(new Set(todas).size, todas.length, "palabras repetidas");
     const sitios = new Set();
     for (const e of es) {

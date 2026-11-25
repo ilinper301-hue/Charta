@@ -3,12 +3,12 @@
 // solucion: { huecos: [palabra] }     con «Mayúscula inicial», la sílaba que va primera se ve ya con mayúscula.
 // Reglas: palabra del léxico con el silabeo de reglas.js; ninguna otra ordenación de esas sílabas forma otra palabra del léxico
 //         (solución única); la palabra tiene al menos 2 sílabas distintas. Palabras de hasta 10 letras, sin repetir.
-// Opciones: sílabas (variadas, 2, 3 o 4) · tipo de sílabas · caso. Cantidad: 2 columnas; sílabas arriba y hueco para la palabra debajo; «Más grandes» 20 palabras (media: 10), «Más ejercicios» las que caben con tarjetas ≥ 50 pt.
+// Opciones: sílabas (variadas, 2, 3 o 4) (2.º: también 5; «variadas» = 2 a 5, palabras de hasta 12–13 letras) · tipo de sílabas · caso. Cantidad: 2 columnas; sílabas arriba y hueco para la palabra debajo; «Más grandes» 20 palabras (media: 10), «Más ejercicios» las que caben con tarjetas ≥ 50 pt.
 import { registrar } from "../nucleo/tipos.js";
 import { TOP, cuantosRejilla } from "../render/papel.js";
 import { silabas } from "../lengua/reglas.js";
 import { LEXICO } from "../lengua/lexico.js";
-import { alCaso, trozosCaso, cuantas, elegirPalabras, largosDe, pildoras, anchoPildoras, ajusta, conTope, dosFilas } from "./_lengua.js";
+import { alCaso, trozosCaso, cuantas, elegirPalabras, largosDe, pildoras, anchoPildoras, ajusta, conTope, dosFilas, topeLetras } from "./_lengua.js";
 
 const MIN_ALTO = 50;   // alto mínimo de tarjeta con «Más ejercicios»
 
@@ -29,7 +29,7 @@ export default registrar({
   cantidad: true,
   generar(params, azar, ctx) {
     const n = cuantosRejilla(ctx, 2, MIN_ALTO, [20, 10]);
-    const ps = conTope(n, cuantas(ctx.tamano, 10), (k) => elegirPalabras(azar, k, params, largosDe(params, [2, 3, 2, 3, 4]), { extra: { maxLetras: 10 }, ok: (e) => ordenable(e.p), id: "silaba.ordena" }));
+    const ps = conTope(n, cuantas(ctx.tamano, 10), (k) => elegirPalabras(azar, k, params, largosDe(params, [2, 3, 2, 3, 4], [2, 3, 4, 3, 5, 2, 4, 5]), { extra: { maxLetras: topeLetras(10, 13) }, ok: (e) => ordenable(e.p), id: "silaba.ordena" }));
     return {
       enunciado: "Ordena las sílabas y escribe la palabra.",
       ejercicios: ps.map(({ p }) => {

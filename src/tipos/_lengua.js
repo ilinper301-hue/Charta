@@ -53,7 +53,11 @@ export function elegirPalabras(azar, n, params, largos, { extra = {}, ok = null,
 }
 
 /** Largos para «Sílabas de cada palabra» con la opción `largo`: un número, o variadas (la secuencia que se dé). */
-export const largosDe = (params, variadas) => (Number.isInteger(params.largo) ? [params.largo] : variadas);
+export const largosDe = (params, variadas, v2 = null) => (Number.isInteger(params.largo) ? [params.largo] : desde2() && v2 ? v2 : variadas);
+/** ¿La actividad es de 2.º o más? (conCurso en vistas.js; LENGUA_2.md: palabras de hasta 5 sílabas y frases más largas). */
+export const desde2 = () => nivelActivo() >= 2;
+/** Tope de letras: `n1` en 1.º y `n2` desde 2.º (palabras más largas). */
+export const topeLetras = (n1, n2) => (desde2() ? n2 : n1);
 
 /** Cantidad de ejercicios: la de la página completa o su mitad en media página. */
 export const cuantas = (tamano, completa) => (tamano === "media" ? completa / 2 : completa);

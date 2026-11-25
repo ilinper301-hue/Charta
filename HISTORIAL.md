@@ -320,3 +320,7 @@ Sueltas: `conteo.tabla` v2 (R ≤ 10: `NTAB` = 5 tablas, un ejercicio cada una),
 - **Frases de la «l»** (`datos/frases_1.tsv`): 11 reescritas («Lola le lee a Lalo» en vez de «Lola lee a Lalo»; fuera «Olía a lila», «Él lo olía», «Él olía a lila»). Solo afectan a fichas con letras elegidas.
 - Límites: `frec` del léxico sigue casi toda a 1; pocas palabras con x y ninguna con w.
 
+
+## Lengua 2.º · Lote 1 (25-11-2026)
+Reutilizados con opciones `curso: 2` (`OPCIONES_L2` en `motor/modelos_lengua_2.py`). fono.silabas/quita/larga/rimas y silaba.separa/ordena/falta hasta 5 sílabas, «mixtas» por defecto; silaba.junta 4, 5 y «De 2 a 4»; palabra.sopa 9 y 10 palabras, diagonal por defecto; palabra.contrarios +12 pares (alegre/triste, valiente/cobarde, ordenado/desordenado, justo/injusto, cuidadoso/descuidado, atento/distraído, sincero/mentiroso, visible/invisible, agradable/desagradable, sano/enfermo, reír/llorar, verano/invierno); frase.ordena 6–7 y separa/completa/puntua 6–8 palabras (frase + complemento de frecuencia); frase.puntua «Dos frases seguidas» (un corte, sujetos distintos; siempre se escribe); lectura.adivinanza +24 (`desde: 2`). Compartido con 1.º sin cambiar sus fichas: `ordenUnico` por índice (8 palabras) y filtro de «i» mayúscula en las dos palabras del par. Invariantes con el léxico del curso de la actividad; `escritura.*` en 2.º muestreados (`tope()`). 444 doradas.
+**Límites**: frase.ordena de 6–7 palabras sin la primera marcada puede admitir el complemento delante; frase.verdad en 2.º sin opción propia.

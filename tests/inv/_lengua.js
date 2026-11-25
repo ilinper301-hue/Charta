@@ -2,10 +2,20 @@
 import assert from "node:assert/strict";
 import { silabas, cabeTipo, sinTildes } from "../../src/lengua/reglas.js";
 import { LEXICO } from "../../src/lengua/lexico.js";
+import { cuantos, cuantosEntre } from "./_ayuda.js";
 
-// Unicidad con el léxico de 1.º (las invariantes generan en 1.º; las palabras de 2.º, n: 2, no salen ahí). LENGUA_2.md, lote 1: por curso.
+// Las invariantes de Lengua comprueban con el léxico del curso de la actividad (LENGUA_2.md, lote 1): en 1.º, sin las palabras de 2.º (n: 2),
+// que solo salen desde 2.º. test_invariantes.js pone `sesion.curso` antes de cada actividad.
+export const sesion = { curso: 1 };
+const dos = () => sesion.curso >= 2;
 export const LEXICO_1 = LEXICO.filter((e) => !e.n);
-export const PALABRAS = new Set(LEXICO_1.map((e) => e.p));
+/** Nº de ejercicios: el pedido en 1.º; en 2.º, de la mitad al pedido (con palabras de 5 sílabas el banco da menos: conTope baja hasta el mínimo sin repetir). */
+export const cantidadL = (es, max, min = max / 2) => (dos() ? cuantosEntre(es, max, min) : cuantos(es, max));
+/** Léxico del curso que se está comprobando. */
+export const lexicoCurso = () => (dos() ? LEXICO : LEXICO_1);
+const P1 = new Set(LEXICO_1.map((e) => e.p)), P2 = new Set(LEXICO.map((e) => e.p));
+/** Palabras del léxico del curso (solo se usa `.has`). */
+export const PALABRAS = { has: (p) => (dos() ? P2 : P1).has(p) };
 const cap = (t) => t[0].toUpperCase() + t.slice(1);
 
 /** El texto está escrito en el caso pedido (null = minúscula, "inicial", "mayus") y devuelve su forma en minúscula. */
@@ -20,19 +30,20 @@ export function enCaso(txt, caso, q = "texto") {
 export function palabraValida(m, params, { maxLetras = 99, largos = null } = {}) {
   assert.ok(PALABRAS.has(m), `«${m}» no está en el léxico`);
   assert.ok(cabeTipo(m, params.tipo || "directas"), `«${m}» no es de sílabas ${params.tipo || "directas"}`);
-  assert.ok([...m].length <= maxLetras, `«${m}» pasa de ${maxLetras} letras`);
+  assert.ok([...m].length <= maxLetras + (dos() ? 4 : 0), `«${m}» pasa de ${maxLetras} letras`);   // 2.º: palabras más largas (hasta 5 sílabas)
   const n = silabas(m).length;
   if (Number.isInteger(params.largo)) assert.equal(n, params.largo, `«${m}»: sílabas ≠ ${params.largo}`);
-  if (largos) assert.ok(largos.includes(n), `«${m}»: ${n} sílabas fuera de ${largos}`);
+  if (largos) { const ok = dos() ? [...new Set([...largos, ...(largos.includes(3) ? [4, 5] : [])])] : largos; assert.ok(ok.includes(n), `«${m}»: ${n} sílabas fuera de ${ok}`); }
   if (params.caso === "inicial") assert.ok(!/^[iíì]/.test(m), `«${m}»: empieza por i con mayúscula inicial (I ≈ l)`);
 }
 
 /** ¿Hay otra palabra del léxico que encaje con la palabra salvo en las posiciones `libres`? (comparando sin tildes). */
 const POR_LARGO = new Map();
 export function otrasQueEncajan(m, libres) {
-  if (!POR_LARGO.has(m.length)) POR_LARGO.set(m.length, LEXICO_1.filter((o) => o.p.length === m.length).map((o) => ({ p: o.p, s: sinTildes(o.p) })));
+  const k = `${sesion.curso}|${m.length}`;
+  if (!POR_LARGO.has(k)) POR_LARGO.set(k, lexicoCurso().filter((o) => o.p.length === m.length).map((o) => ({ p: o.p, s: sinTildes(o.p) })));
   const s = sinTildes(m), L = new Set(libres);
-  return POR_LARGO.get(m.length).filter((o) => o.p !== m && [...o.s].every((c, i) => L.has(i) || c === s[i])).map((o) => o.p);
+  return POR_LARGO.get(k).filter((o) => o.p !== m && [...o.s].every((c, i) => L.has(i) || c === s[i])).map((o) => o.p);
 }
 
 /** Todas las ordenaciones de una lista. */

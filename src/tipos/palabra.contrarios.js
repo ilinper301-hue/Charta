@@ -2,7 +2,7 @@
 // Tarea «une»    (8 filas; media 4): datos { izq: palabra, derecha: palabra de la caja de la derecha de esta fila }
 //                                    solucion { huecos: [], une: índice de la fila cuya caja de la derecha lleva el contrario }
 // Tarea «escribe» (2 columnas; «Más grandes» 24 (media 12), «Más ejercicios» las que caben con tarjetas ≥ 40 pt): datos { palabra }   solucion { huecos: [el contrario] }
-// Banco fijo BANCO de 46 pares [a, b, grupo]; todas las palabras están en el léxico (lo comprueba la prueba). A cada par se le da la vuelta al azar
+// Banco fijo BANCO de 48 pares [a, b, grupo] y BANCO_2 con 12 más solo desde 2.º (60 en total); todas las palabras están en el léxico (lo comprueba la prueba). A cada par se le da la vuelta al azar
 // (se ve a o b). Reglas: ninguna palabra sale dos veces en la ficha y de los pares de un mismo `grupo` (palabras casi sinónimas: gordo/grueso, alto/largo…)
 // sale como mucho uno, así cada palabra tiene un solo contrario posible. Con «Mayúscula inicial» no entra ninguna palabra que empiece por «i».
 // Con letras elegidas (vistas.js) solo entran los pares cuyas dos palabras se escriben con ellas (con pocas letras casi no hay: error «necesita»).
@@ -11,7 +11,7 @@ import { registrar } from "../nucleo/tipos.js";
 import { TOP, M, W, cuantosRejilla } from "../render/papel.js";
 import { unir } from "../lengua/dibujo.js";
 import { filtrarVistas, avisoVistas } from "../lengua/vistas.js";
-import { alCaso, cuantas, ajusta, conTope } from "./_lengua.js";
+import { alCaso, cuantas, ajusta, conTope, desde2 } from "./_lengua.js";
 
 const MIN_ALTO = 40;   // alto mínimo de tarjeta con «Más ejercicios»
 export const BANCO = [
@@ -24,6 +24,15 @@ export const BANCO = [
   ["hoy", "ayer", "tie"], ["siempre", "nunca", null], ["arriba", "abajo", "pos"], ["encima", "debajo", "pos"], ["subir", "bajar", "pos"], ["dentro", "fuera", null],
   ["delante", "detrás", null], ["entrar", "salir", null], ["ganar", "perder", null], ["dar", "quitar", "qui"], ["poner", "quitar", "qui"], ["empujar", "tirar", null],
 ];
+
+/** 12 pares más, solo desde 2.º (LENGUA_2.md, lote 1): cada palabra tiene un solo contrario entre los 60 pares (los casi sinónimos de 1.º no se repiten). */
+export const BANCO_2 = [
+  ["alegre", "triste", null], ["valiente", "cobarde", null], ["ordenado", "desordenado", null], ["justo", "injusto", null], ["cuidadoso", "descuidado", null],
+  ["atento", "distraído", null], ["sincero", "mentiroso", null], ["visible", "invisible", null], ["agradable", "desagradable", null], ["sano", "enfermo", null],
+  ["reír", "llorar", null], ["verano", "invierno", null],
+];
+/** Pares del curso activo: los 48 de siempre y, desde 2.º, los 12 nuevos. */
+export const bancoDe = () => (desde2() ? [...BANCO, ...BANCO_2] : BANCO);
 
 export default registrar({
   id: "palabra.contrarios",
@@ -56,8 +65,8 @@ export default registrar({
 function pares(params, azar, n, une) {
   const caso = params.caso;
   const usadas = new Set(), grupos = new Set(), elegidos = [];
-  for (const [a, b, g] of azar.barajar(filtrarVistas(BANCO, ([x, y]) => x + " " + y))) {
-    if (caso === "inicial" && /^[iíì]/.test(a + b)) continue;
+  for (const [a, b, g] of azar.barajar(filtrarVistas(bancoDe(), ([x, y]) => x + " " + y))) {
+    if (caso === "inicial" && (/^[iíì]/.test(a) || /^[iíì]/.test(b))) continue;   // ninguna de las dos palabras (se ve una u otra) empieza por «i»
     if (usadas.has(a) || usadas.has(b) || (g && grupos.has(g))) continue;
     usadas.add(a); usadas.add(b); if (g) grupos.add(g);
     elegidos.push(azar.real() < 0.5 ? [a, b] : [b, a]);

@@ -4,7 +4,8 @@
 import { generar, modelo } from "../src/nucleo/ficha.js";
 import { listaTipos } from "../src/tipos/index.js";
 import { INVARIANTES, comunes } from "./invariantes.js";
-import { combinaciones, contador } from "./comun.js";
+import { combinaciones, contador, cursosDePrueba, tope } from "./comun.js";
+import { sesion } from "./inv/_lengua.js";
 
 const FULL = process.argv.includes("--full");
 const SOLO = (() => { const i = process.argv.indexOf("--solo"); return i > 0 ? process.argv[i + 1] : ""; })();   // --solo conteo. (prefijo)
@@ -22,14 +23,16 @@ prueba("todos los tipos tienen invariante", () => {
 for (const id of listaTipos().filter((x) => x.startsWith(SOLO))) {
   if (!INVARIANTES[id]) continue;
   prueba(id, () => {
-    for (const params of muestra(combinaciones(id))) for (const tam of modelo(id).tamanos) for (let s = 1; s <= SEMILLAS; s++) {
-      const acts = tam === "media" ? [{ tipo: id, params }, { tipo: id, params }] : [{ tipo: id, params }];
+    for (const curso of cursosDePrueba(id)) for (const params of muestra(curso === 2 ? tope(combinaciones(id, curso)) : combinaciones(id, curso))) for (const tam of modelo(id).tamanos) for (let s = 1; s <= SEMILLAS; s++) {
+      sesion.curso = curso ?? 1;   // Lengua: las invariantes comprueban con el léxico del curso de la actividad
+      const a1 = curso === 2 ? { tipo: id, params, curso } : { tipo: id, params };
+      const acts = tam === "media" ? [a1, a1] : [a1];
       let f;
       try { f = generar({ actividades: acts, variantes: 2 }, s); }
       catch (e) { if (/necesita|solo en|no admite/.test(e.message)) continue; throw e; }
       for (const pag of [...f.paginas, ...f.variantesDatos.flatMap((v) => v.paginas)]) for (const a of pag.actividades) {
         try { comunes(a); INVARIANTES[id](a, tam); }
-        catch (e) { e.message = `${id} ${JSON.stringify(params)} ${tam} semilla ${s}: ${e.message}`; throw e; }
+        catch (e) { e.message = `${id} ${curso === 2 ? "(2.º) " : ""}${JSON.stringify(params)} ${tam} semilla ${s}: ${e.message}`; throw e; }
         actividades++; ejercicios += a.ejercicios.length;
       }
     }

@@ -3,7 +3,7 @@
 // solucion: { huecos: [sílaba] }   en el mismo caso que la palabra.
 // Reglas: palabra del léxico con el silabeo de reglas.js y 2–4 sílabas; es la ÚNICA del léxico con esas otras sílabas (pe__ta no vale si hay otra palabra «pe…ta»);
 //         las 2 sílabas de ayuda son del mismo tipo que la correcta, distintas (sin tildes), sin pistas (llevan tilde solo si la lleva la correcta; sin k, w, x, y, ü salvo la correcta) y no forman otra palabra del léxico. Palabras de hasta 9 letras, sin repetir.
-// Opciones: ayuda (con tres sílabas / sin) · sílaba que falta (cualquiera / primera / última) · sílabas (variadas, 2, 3 o 4) · tipo de sílabas · caso.
+// Opciones: ayuda (con tres sílabas / sin) · sílaba que falta (cualquiera / primera / última) · sílabas (variadas, 2, 3 o 4) (2.º: también 5; «variadas» = 2 a 5, palabras de hasta 12–13 letras) · tipo de sílabas · caso.
 // Cantidad: 2 columnas; con ayuda, palabra arriba y las 3 sílabas debajo; «Más grandes» 20 palabras (media: 10), «Más ejercicios» las que caben con tarjetas ≥ 50 pt.
 import { registrar } from "../nucleo/tipos.js";
 import { TOP, cuantosRejilla } from "../render/papel.js";
@@ -11,7 +11,7 @@ import { silabas, tipoSilaba, sinTildes } from "../lengua/reglas.js";
 import { rodear, palabraHuecos } from "../lengua/dibujo.js";
 import { LEXICO } from "../lengua/lexico.js";
 import { datosPalabra, esPalabra, porNivelDe } from "../lengua/palabras.js";
-import { alCaso, cuantas, elegirPalabras, largosDe, candidatas, conTope, dosFilas } from "./_lengua.js";
+import { alCaso, cuantas, elegirPalabras, largosDe, candidatas, conTope, dosFilas, topeLetras } from "./_lengua.js";
 
 const MIN_ALTO = 50;   // alto mínimo de tarjeta con «Más ejercicios»
 const entradas = porNivelDe((L) => L.map((e) => ({ p: e.p, s: datosPalabra(e).s.map(sinTildes) })));
@@ -45,7 +45,7 @@ export default registrar({
       if (malas.length < 2) return null;
       return { k, opciones: az.barajar([real, malas[0], malas[1]]) };
     };
-    const ps = conTope(n, cuantas(ctx.tamano, 10), (k) => elegirPalabras(azar, k, params, largosDe(params, [2, 3, 2, 3, 4]), { extra: { maxLetras: 9 }, ok, id: "silaba.falta" }));
+    const ps = conTope(n, cuantas(ctx.tamano, 10), (k) => elegirPalabras(azar, k, params, largosDe(params, [2, 3, 2, 3, 4], [2, 3, 4, 3, 5, 2, 4, 5]), { extra: { maxLetras: topeLetras(9, 12) }, ok, id: "silaba.falta" }));
     return {
       enunciado: ayuda ? "Elige la sílaba que falta y escríbela\nen el cuadro gris." : "Escribe la sílaba que falta\nen el cuadro gris.",
       ejercicios: ps.map(({ p: w, r }) => {

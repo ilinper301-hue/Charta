@@ -1,7 +1,7 @@
 // Charta · invariantes de la familia «silaba» (Lengua 1.º, bloque 3; ver tests/invariantes.js).
 import assert from "node:assert/strict";
 import { unicos, cuantos, cuantosEntre } from "./_ayuda.js";
-import { enCaso, palabraValida, otrasQueEncajan, permutaciones, PALABRAS } from "./_lengua.js";
+import { enCaso, palabraValida, otrasQueEncajan, permutaciones, PALABRAS, sesion, cantidadL } from "./_lengua.js";
 import { silabas, tipoSilaba, sinTildes } from "../../src/lengua/reglas.js";
 
 const TIPO_FILA = { directas: "directa", inversas: "inversa", trabadas: "trabada", mixtas: "mixta" };
@@ -39,7 +39,7 @@ export default {
   "silaba.junta"(act, tam) {
     const es = act.ejercicios, p = act.params, une = p.tarea === "une", largo = p.largo ?? 2;
     if (une) {
-      assert.equal(largo, 2); cuantos(es, tam === "media" ? 4 : 8);
+      assert.ok(largo === 2 || largo === "variadas2", "unir: solo palabras de 2 sílabas"); cuantos(es, tam === "media" ? 4 : 8);
       const izq = es.map((e) => e.datos.izq.toLowerCase()), der = es.map((e) => e.datos.derecha.toLowerCase());
       for (const s of [...izq, ...der]) assert.ok(s.length >= 2, `sílaba de una letra «${s}»`);
       unicos(es, (e) => e.datos.izq.toLowerCase(), "primeras sílabas repetidas"); assert.equal(new Set(der).size, der.length, "segundas sílabas repetidas");
@@ -52,11 +52,11 @@ export default {
       }
       assert.notDeepEqual(es.map((e) => e.solucion.une), es.map((_, i) => i), "columnas sin mezclar");
     } else {
-      cuantos(es, tam === "media" ? 10 : 20);
+      sesion.curso >= 2 ? cuantosEntre(es, tam === "media" ? 10 : 20, tam === "media" ? 5 : 10) : cuantos(es, tam === "media" ? 10 : 20);   // 2.º: con 5 sílabas hay menos palabras (conTope)
       unicos(es, (e) => e.datos.palabra.toLowerCase(), "palabras repetidas");
       for (const e of es) {
         const m = enCaso(e.datos.palabra, p.caso, "palabra");
-        palabraValida(m, p, { maxLetras: 9, largos: largo === "variadas" ? [2, 3] : [largo] });
+        palabraValida(m, p, { maxLetras: 9, largos: largo === "variadas" ? [2, 3] : largo === "variadas2" ? [2, 3, 4] : [largo] });
         assert.deepEqual(e.datos.silabas.map((s) => s.toLowerCase()), silabas(m), "sílabas ≠ silabeo");
         assert.equal(e.datos.silabas.join(""), e.datos.palabra);
         assert.deepEqual(e.solucion.huecos, [e.datos.palabra]);
@@ -66,7 +66,7 @@ export default {
 
   "silaba.separa"(act, tam) {
     const es = act.ejercicios, p = act.params, rayas = p.modo === "rayas";
-    cuantos(es, tam === "media" ? 10 : 20);
+    cantidadL(es, tam === "media" ? 10 : 20);
     unicos(es, (e) => e.datos.palabra.toLowerCase(), "palabras repetidas");
     for (const e of es) {
       const m = enCaso(e.datos.palabra, p.caso, "palabra"), ss = silabas(m);
@@ -85,7 +85,7 @@ export default {
 
   "silaba.ordena"(act, tam) {
     const es = act.ejercicios, p = act.params;
-    cuantos(es, tam === "media" ? 10 : 20);
+    sesion.curso >= 2 ? cuantosEntre(es, tam === "media" ? 10 : 20, tam === "media" ? 5 : 10) : cuantos(es, tam === "media" ? 10 : 20);   // 2.º: con 5 sílabas hay menos palabras (conTope)
     unicos(es, (e) => e.datos.palabra.toLowerCase(), "palabras repetidas");
     for (const e of es) {
       const m = enCaso(e.datos.palabra, p.caso, "palabra"), ss = silabas(m);

@@ -4,14 +4,14 @@
 //                                                        solucion { huecos: [], une: índice de la fila cuya caja de la derecha lleva la segunda sílaba }
 // Reglas: palabra del léxico con el silabeo de reglas.js. Al unir, ninguna primera sílaba forma otra palabra del léxico con la segunda de otra fila
 //         y no se repiten primeras ni segundas sílabas (una sola unión posible por fila).
-// Opciones: tarea · sílabas (2 / 3 / 2 y 3) · tipo de sílabas · caso. Sin palabras repetidas.
+// Opciones: tarea · sílabas (2 / 3 / 2 y 3; 2.º: también 4, 5 y «de 2 a 4») · tipo de sílabas · caso. Sin palabras repetidas.
 import { registrar } from "../nucleo/tipos.js";
 import { TOP, M, W, T, B, cuantosRejilla } from "../render/papel.js";
 import { unir } from "../lengua/dibujo.js";
 import { LEXICO } from "../lengua/lexico.js";
 import { silabas } from "../lengua/reglas.js";
 import { avisoVistas } from "../lengua/vistas.js";
-import { alCaso, trozosCaso, cuantas, elegirPalabras, candidatas, conTope, dosFilas } from "./_lengua.js";
+import { alCaso, trozosCaso, cuantas, elegirPalabras, candidatas, conTope, dosFilas, topeLetras } from "./_lengua.js";
 
 const MIN_ALTO = 50;   // alto mínimo de tarjeta con «Más ejercicios»
 const PALABRAS = new Set(LEXICO.map((e) => e.p));
@@ -23,20 +23,21 @@ export default registrar({
   generar(params, azar, ctx) {
     const { tamano } = ctx;
     const une = params.tarea === "une", largo = params.largo ?? 2;
-    if (une && largo !== 2) throw new Error("«silaba.junta» necesita palabras de 2 sílabas para unir (con 3 sílabas, escribe la palabra).");
-    const largos = largo === "variadas" ? [2, 3] : [largo];
+    // 2.º: «variadas2» = de 2 a 4 sílabas (al unir, solo se pueden unir las de 2)
+    if (une && largo !== 2 && largo !== "variadas2") throw new Error("«silaba.junta» necesita palabras de 2 sílabas para unir (con más sílabas, escribe la palabra).");
+    const largos = largo === "variadas" ? [2, 3] : largo === "variadas2" ? [2, 3, 4, 3] : [largo];
     if (!une) {
       const n = cuantosRejilla(ctx, 2, MIN_ALTO, [20, 10]);
       return {
         enunciado: "Junta las sílabas y escribe la palabra.",
-        ejercicios: conTope(n, cuantas(tamano, 10), (k) => elegirPalabras(azar, k, params, largos, { extra: { maxLetras: 9 }, id: "silaba.junta" })).map(({ p }) => {
+        ejercicios: conTope(n, cuantas(tamano, 10), (k) => elegirPalabras(azar, k, params, largos, { extra: { maxLetras: topeLetras(9, 13) }, id: "silaba.junta" })).map(({ p }) => {
           const ss = trozosCaso(silabas(p), params.caso);
           return { datos: { silabas: ss, palabra: alCaso(p, params.caso) }, solucion: { huecos: [alCaso(p, params.caso)] } };
         }),
       };
     }
     const n = cuantas(tamano, 8), usadas = { a: new Set(), b: new Set() }, elegidas = [];
-    for (const e of azar.barajar(candidatas(params, { nSilabas: 2, maxLetras: 9 }))) {
+    for (const e of azar.barajar(candidatas(params, { nSilabas: 2, maxLetras: topeLetras(9, 10) }))) {
       const [a, b] = silabas(e.p);
       if (a.length < 2 || b.length < 2) continue;      // sin sílabas de una sola letra («o», «a»): se leen mal sueltas
       if (usadas.a.has(a) || usadas.b.has(b) || a === b) continue;

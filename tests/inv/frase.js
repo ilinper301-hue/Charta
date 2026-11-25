@@ -4,10 +4,14 @@
 // y es una frase del banco de _frase.js (la cosa hace lo que se dice).
 import assert from "node:assert/strict";
 import { unicos, cuantos } from "./_ayuda.js";
-import { unidadesDe } from "./_lengua.js";
+import { unidadesDe, sesion } from "./_lengua.js";
 import { LEXICO } from "../../src/lengua/lexico.js";
 import { articulo, plural, tonica } from "../../src/lengua/reglas.js";
-import { VERBOS, BANCO, INERTES, NO_COMIBLE, todasFrases, frasePorId } from "../../src/tipos/_frase.js";
+import { VERBOS, BANCO, INERTES, NO_COMIBLE, todasFrases as todasFrasesCurso, frasePorId as frasePorIdCurso, extraDe } from "../../src/tipos/_frase.js";
+import { conCurso } from "../../src/lengua/vistas.js";
+// El banco de frases depende del curso de la actividad (desde 2.º, también las de 6 a 8 palabras): se consulta con el curso de la prueba.
+const todasFrases = () => conCurso(sesion.curso, () => todasFrasesCurso());
+const frasePorId = (id) => conCurso(sesion.curso, () => frasePorIdCurso(id));
 
 const ENT = new Map(LEXICO.map((e) => [e.p, e]));
 const NOMBRE = new Map();            // forma (singular o plural) → { e, num }
@@ -30,10 +34,14 @@ function analizaLibre(palabras) {
   palabras.forEach((w) => assert.match(w, /^[a-záéíóúüñ]+$/i, `«${q}»: «${w}» no es una palabra`));
   return { suj: { lema: q.toLowerCase(), g: null, num: "s" }, verbo: null, forma: null };
 }
-/** Comprueba una frase (palabras en minúscula) y devuelve { suj: { lema, g, num }, verbo }. */
-export function analiza(palabras) {
-  if (frasePorId(palabras.join(" "))?.tipo === "lib") return analizaLibre(palabras);
-  const q = palabras.join(" ");
+/** Comprueba una frase (palabras en minúscula) y devuelve { suj: { lema, g, num }, verbo, forma, n }.
+ *  2.º: una frase de acción puede acabar con un complemento de frecuencia («a veces», «de vez en cuando»…): se comprueba lo anterior (3 a 5 palabras)
+ *  y el total es de 6 a 8; `n` = las palabras de antes del complemento. */
+export function analiza(todas) {
+  if (frasePorId(todas.join(" "))?.tipo === "lib") return analizaLibre(todas);
+  const extra = extraDe(todas), palabras = extra && todas.length - extra.split(" ").length >= 3 ? todas.slice(0, todas.length - extra.split(" ").length) : todas;
+  const q = todas.join(" ");
+  if (palabras !== todas) assert.ok(sesion.curso >= 2 && todas.length >= 6 && todas.length <= 8, `«${q}»: complemento «${extra}» fuera de 2.º o de 6 a 8 palabras`);
   assert.ok(palabras.length >= 3 && palabras.length <= 5, `«${q}»: ${palabras.length} palabras (3 a 5)`);
   assert.ok(!/^[iíì]/.test(palabras[0]), `«${q}» empieza por i`);
   // sujeto: artículo definido + nombre
@@ -67,15 +75,17 @@ export function analiza(palabras) {
     }
     assert.ok(NOMBRE.has(w) || ENT.has(w), `«${q}»: «${w}» no está en el léxico`);   // complemento sin artículo: «pan», «zanahorias», «casa»
   });
-  return { suj: { lema: n1.e.p, g: n1.e.g, num: a0.num }, verbo: lema, forma };
+  return { suj: { lema: n1.e.p, g: n1.e.g, num: a0.num }, verbo: lema, forma, n: palabras.length };
 }
 const sinPunto = (t) => t.replace(/\.$/, "");
 const palabrasDe = (t) => sinPunto(t).toLowerCase().split(" ");
 const BANCO_IDS = () => new Set(todasFrases().map((f) => f.id));
-const largosOk = (es, p, tam, palabrasDe_, minimo = 0) => {
+const largosOk = (es, p, tam, palabrasDe_, minimo = 0, maximo = 0) => {
   const ns = es.map(palabrasDe_);
-  if (Number.isInteger(p.palabras)) ns.forEach((n) => assert.equal(n, p.palabras, "nº de palabras ≠ el pedido"));
+  if (Number.isInteger(p.palabras)) { ns.forEach((n) => assert.equal(n, p.palabras, "nº de palabras ≠ el pedido")); assert.ok(p.palabras <= 5 || sesion.curso >= 2, "frases de más de 5 palabras en 1.º"); }
+  else if (p.palabras === "v2") { assert.ok(sesion.curso >= 2); ns.forEach((n) => assert.ok(n >= 4 && n <= (maximo || 8), `variadas de 2.º: ${n} palabras`)); }
   else ns.forEach((n) => assert.ok(n >= 3 && n <= 5));
+  if (p.palabras === "v2" && ns.length >= 3 && !minimo) assert.equal(new Set(ns).size, Math.min(ns.length, (maximo || 8) - 3), "variadas de 2.º: faltan largos");
   if (!p.palabras && ns.length >= 3) assert.equal(new Set(ns).size, minimo === 4 ? 2 : 3, "variadas: faltan largos");
   if (minimo) ns.forEach((n) => assert.ok(n >= minimo, `frase de ${n} palabras: hacen falta ${minimo} o más`));
 };
@@ -87,9 +97,11 @@ const sinRepetirSujeto = (frases) => {
 };
 
 // El banco entero (se comprueba una vez): todas las frases son válidas y no hay inertes dentro.
-let bancoComprobado = false;
+const bancoComprobado = new Set();   // por curso: desde 2.º el banco incluye las frases de 6 a 8 palabras
 function comprobarBanco() {
-  if (bancoComprobado) return; bancoComprobado = true;
+  if (bancoComprobado.has(sesion.curso)) return; bancoComprobado.add(sesion.curso);
+  const ns = new Set(todasFrases().filter((x) => x.tipo !== "lib").map((f) => f.n));
+  assert.deepEqual([...ns].sort(), sesion.curso >= 2 ? [3, 4, 5, 6, 7, 8] : [3, 4, 5], "largos del banco");
   for (const f of todasFrases().filter((x) => x.tipo !== "lib")) { analiza(f.palabras); assert.ok(!f.palabras.some((w) => INERTES.some((i) => w === i || w === plural(i))), `«${f.id}»: lleva un objeto inerte`); }
   for (const s of BANCO) assert.ok(NOMBRE.has(s.s), `«${s.s}» no está en el léxico`);
 }
@@ -100,8 +112,10 @@ export default {
     const es = act.ejercicios, p = act.params, mayus = p.caso === "mayus", marca = p.marca !== "sin" && !mayus, V = BANCO_IDS();
     cuantos(es, tam === "media" ? 4 : 8);
     unicos(es, (e) => e.solucion.huecos[0], "frases repetidas");
-    largosOk(es, p, tam, (e) => palabrasDe(e.solucion.huecos[0]).length);
+    largosOk(es, p, tam, (e) => palabrasDe(e.solucion.huecos[0]).length, 0, 7);   // 2.º: de 4 a 7 palabras
     sinRepetirSujeto(es.map((e) => analiza(palabrasDe(e.solucion.huecos[0]))));
+    const clave = (ws) => [...ws].sort().join(" "), porPalabras = new Map();   // frases del banco con las mismas palabras (en cualquier orden)
+    for (const id of V) { const k = clave(id.split(" ")); if (!porPalabras.has(k)) porPalabras.set(k, []); porPalabras.get(k).push(id); }
     for (const e of es) {
       const sol = e.solucion.huecos[0], ws = palabrasDe(sol), { palabras: ts } = e.datos;
       assert.deepEqual(e.solucion.huecos.length, 1);
@@ -114,8 +128,7 @@ export default {
       else if (mayus) ts.forEach((w) => enCaso(w, "mayus", "palabra"));
       else ts.forEach((w) => assert.equal(w, w.toLowerCase(), "palabra con mayúscula sin marca"));
       // solución única: ningún otro orden de las palabras es otra frase del banco
-      const perm = (l) => (l.length <= 1 ? [l] : l.flatMap((x, i) => perm([...l.slice(0, i), ...l.slice(i + 1)]).map((r) => [x, ...r])));
-      for (const o of perm(ws)) { const t = o.join(" "); if (t !== ws.join(" ") && (!marca || o[0] === ws[0])) assert.ok(!V.has(t), `«${sol}»: «${t}» también es una frase`); }
+      for (const t of porPalabras.get(clave(ws))) if (t !== ws.join(" ") && (!marca || t.split(" ")[0] === ws[0])) assert.fail(`«${sol}»: «${t}» también es una frase`);   // (= probar todos los órdenes, sin las 40 320 permutaciones de 8 palabras)
     }
   },
 
@@ -164,7 +177,7 @@ export default {
       const hecho = todasFrases().find((x) => x.id === ws.join(" "));
       assert.ok(["i", "im", "ob", "od", "lug"].includes(hecho.tipo), "la frase no es de acción");
       if (fe === "sujeto") { assert.equal(antes.split(" ").length, 1); assert.equal(resp.toLowerCase(), ws[1]); }
-      else { assert.ok(ACCION.includes(f.verbo), `objeto: el verbo «${f.verbo}» no admite distractoras`); assert.equal(resp.toLowerCase(), ws[ws.length - 1]); }
+      else { assert.ok(ACCION.includes(f.verbo), `objeto: el verbo «${f.verbo}» no admite distractoras`); assert.equal(resp.toLowerCase(), ws[f.n - 1]); }   // el nombre del final de la frase de siempre (con complemento de frecuencia, antes de él)
       completas.push(hecho);
       if (sin) { assert.equal(opciones, null); continue; }
       assert.equal(opciones.length, 3); assert.equal(new Set(opciones).size, 3); assert.ok(opciones.includes(resp), "falta la correcta entre las opciones");
@@ -179,7 +192,7 @@ export default {
       }
     }
     unicos(es, (e) => e.datos.antes + "|" + e.solucion.huecos[0] + "|" + e.datos.despues, "frases repetidas");
-    largosOk(es, p, tam, (e) => (e.datos.antes + " _ " + e.datos.despues.replace(/\.$/, "")).trim().split(/\s+/).length, falta === "objeto" ? 4 : 0);
+    largosOk(es, p, tam, (e) => (e.datos.antes + " _ " + e.datos.despues.replace(/\.$/, "")).trim().split(/\s+/).length, falta === "objeto" ? 4 : 0);   // (v2: 4 a 8)
     if (falta === "mezcla") { assert.equal(es.filter((e) => e.datos.falta === "objeto").length, es.length / 2); es.filter((e) => e.datos.falta === "objeto").forEach((e) => assert.ok((e.datos.antes + " _ " + e.datos.despues).split(/\s+/).length >= 4, "objeto en frase de 3 palabras")); }
     sinRepetirSujeto(completas.map((f) => f));
   },
@@ -204,7 +217,7 @@ export default {
         const s = BANCO.find((x) => x.s === f.suj.lema);
         if (s) {
           const dichos = new Set([...s.i, ...s.ob.map((o) => o[0]), ...s.od.map((o) => o[0]), ...s.lug.map((o) => o[0])]);
-          if (["come", "bebe"].includes(f.forma) && ws.length === 5) assert.ok(NO_COMIBLE.includes(NOMBRE.get(ws[4]).e.p), `«${frase}»: lo que se come no es un objeto inerte`);
+          if (["come", "bebe"].includes(f.forma) && f.n === 5) assert.ok(NO_COMIBLE.includes(NOMBRE.get(ws[4]).e.p), `«${frase}»: lo que se come no es un objeto inerte`);
           else if (f.forma !== "es" && f.forma !== "está") assert.ok(!dichos.has(f.forma), `«${frase}» es falso pero ${f.suj.lema} sí hace «${f.forma}»`);
           else for (const a of [...s.ser, ...s.serP, ...s.est]) assert.ok(!ws.some((w) => ADJ.get(w)?.some((x) => x.e.p === a)), `«${frase}»: ${f.suj.lema} sí puede ser «${a}»`);
         }
@@ -218,8 +231,26 @@ export default {
     const es = act.ejercicios, p = act.params, falta = p.falta || "ambos", escribe = p.tarea === "escribe", V = BANCO_IDS();
     cuantos(es, tam === "media" ? 4 : 8);
     unicos(es, (e) => e.datos.frase.toLowerCase().replace(/\.$/, ""), "frases repetidas");
-    largosOk(es, p, tam, (e) => e.datos.frase.split(" ").length);
+    if (falta !== "dos") largosOk(es, p, tam, (e) => e.datos.frase.split(" ").length);
     const fs = [];
+    if (falta === "dos") {   // 2.º: dos frases seguidas, sin mayúsculas ni puntos; se escriben bien (siempre «escribirla bien»)
+      assert.ok(sesion.curso >= 2);
+      const sujs = [];
+      for (const e of es) {
+        const { frase, falta: fe, modo } = e.datos, s = e.solucion; assert.equal(fe, "dos"); assert.equal(modo, "escribe"); assert.equal(s.huecos.length, 1); assert.deepEqual(s.rodea, undefined);
+        assert.match(frase, /^[a-záéíóúüñ ]+$/, "la pareja lleva mayúsculas o puntos");
+        assert.match(s.huecos[0], /^[A-ZÁÉÍÓÚÑ][a-záéíóúüñ ]+\. [A-ZÁÉÍÓÚÑ][a-záéíóúüñ ]+\.$/, "la solución no es «Mayúscula… punto. Mayúscula… punto.»");
+        const [a, b] = s.huecos[0].split(". ").map((t) => palabrasDe(t)), ws = frase.split(" ");
+        assert.deepEqual([...a, ...b], ws, "las dos frases no son la pareja"); assert.ok(a.length >= 3 && a.length <= 5 && b.length >= 3 && b.length <= 5 && ws.length <= 8, "largo de las frases");
+        const fa = analiza(a), fb = analiza(b); assert.ok(V.has(a.join(" ")) && V.has(b.join(" ")), "no son frases del banco");
+        assert.notEqual(fa.suj.lema, fb.suj.lema, "mismo sujeto en las dos frases");
+        let cortes = 0; for (let j = 3; j <= ws.length - 3; j++) if (V.has(ws.slice(0, j).join(" ")) && V.has(ws.slice(j).join(" "))) cortes++;
+        assert.equal(cortes, 1, `«${frase}» se puede partir de otra manera`);
+        sujs.push(fa);
+      }
+      sinRepetirSujeto(sujs);
+      return;
+    }
     for (const e of es) {
       const { frase, falta: fe, modo } = e.datos, s = e.solucion; assert.equal(fe, falta); assert.equal(modo, escribe ? "escribe" : "rodea");
       const buena = escribe ? s.huecos[0] : (falta === "punto" ? frase + "." : frase[0].toUpperCase() + frase.slice(1).replace(/\.?$/, "."));

@@ -5,11 +5,13 @@
 //                      «huecos» = el punto que se escribe en el cuadro gris que hay al final (solo si falta el punto)
 // Reglas: frases de _frase.js (3 a 5 palabras; la primera siempre es el artículo, así que nunca empieza por «I»), sin repetir. Solo falta lo que dice «qué falta».
 // Opciones: tarea (rodear la letra y poner el punto / escribirla bien) · qué falta (las dos / la mayúscula / el punto) · palabras de cada frase (variadas / 3 / 4 / 5).
+// 2.º: palabras de cada frase de 4 a 8 («v2», por defecto) y qué falta = «dos frases seguidas» (solo 2.º; siempre «escribirla bien»): dos frases de 3 a 5 palabras sin mayúsculas ni puntos
+//      ("el niño lee un cuento la niña come pan"), que se escriben con mayúscula al empezar y punto al final de cada una; solo se pueden partir de una manera (comprobado contra el banco) y con sujetos distintos.
 // Cantidad: «Más grandes» 8 frases (media: 4), «Más ejercicios» las que caben con tarjetas ≥ 60 pt (escribir) o 46 pt (rodear).
 import { registrar } from "../nucleo/tipos.js";
 import { TOP, COLOR_SOLUCION, cuantosRejilla } from "../render/papel.js";
 import { cuantas, ajusta, conTope, crece } from "./_lengua.js";
-import { elegirFrases, largosFrase, textoFrase, sinMayusculas } from "./_frase.js";
+import { elegirFrases, largosFrase, textoFrase, sinMayusculas, validas } from "./_frase.js";
 
 const MIN_ALTO = { escribe: 60, rodea: 46 };   // alto mínimo de tarjeta con «Más ejercicios»
 
@@ -18,7 +20,7 @@ export default registrar({
   version: 2,
   cantidad: true,
   generar(params, azar, ctx) {
-    const min = params.tarea === "escribe" ? MIN_ALTO.escribe : MIN_ALTO.rodea;
+    const min = params.tarea === "escribe" || params.falta === "dos" ? MIN_ALTO.escribe : MIN_ALTO.rodea;
     return conTope(cuantosRejilla(ctx, 1, min, [8, 4]), cuantas(ctx.tamano, 8), (n) => elegir(params, azar, n));
   },
   dibujar(p, act) {
@@ -45,7 +47,28 @@ export default registrar({
   },
 });
 
+/** 2.º: n parejas de frases seguidas, sin mayúsculas ni puntos; cada pareja solo se puede partir en dos frases del banco de una manera. */
+const PARES = [[3, 3], [3, 4], [4, 3], [4, 4], [3, 5], [5, 3]];
+function elegirDos(azar, n) {
+  const V = validas(), hechas = [];
+  let ya = new Set(), sujetos = new Set();
+  for (let intento = 0; hechas.length < n; intento++) {
+    if (intento > n * 60) throw new Error("«frase.puntua» necesita más frases: con esas opciones solo hay " + hechas.length + " parejas y hacen falta " + n + ".");
+    const ya2 = new Set(ya), sujetos2 = new Set(sujetos);
+    const [a, b] = azar.elegir(PARES).map((l) => elegirFrases(azar, [l], { id: "frase.puntua", filtro: sinMayusculas, ya: ya2, sujetos: sujetos2 })[0]);
+    const ws = [...a.palabras, ...b.palabras];
+    let cortes = 0; for (let j = 3; j <= ws.length - 3; j++) if (V.has(ws.slice(0, j).join(" ")) && V.has(ws.slice(j).join(" "))) cortes++;
+    if (cortes !== 1 || a.suj.lema === b.suj.lema) continue;
+    ya = ya2; sujetos = sujetos2; hechas.push([a, b]);
+  }
+  return {
+    enunciado: "Escribe bien las dos frases: mayúscula al empezar\ny punto al final de cada una.",
+    ejercicios: hechas.map(([a, b]) => ({ datos: { frase: [...a.palabras, ...b.palabras].join(" "), falta: "dos", modo: "escribe" }, solucion: { huecos: [textoFrase(a.palabras) + " " + textoFrase(b.palabras)] } })),
+  };
+}
+
 function elegir(params, azar, n) {
+  if (params.falta === "dos") return elegirDos(azar, n);
   const falta = params.falta || "ambos", modo = params.tarea === "escribe" ? "escribe" : "rodea";
   const frases = elegirFrases(azar, largosFrase(azar, n, params.palabras), { id: "frase.puntua", filtro: sinMayusculas });
   const enunciado = modo === "escribe" ? "Escribe bien cada frase: mayúscula al empezar\ny punto al final."

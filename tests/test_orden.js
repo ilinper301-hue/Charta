@@ -9,7 +9,8 @@ import { erroresFicha } from "../src/nucleo/lector.js";
 import { listaTipos } from "../src/tipos/index.js";
 import { hojas } from "../src/render/hoja.js";
 import { INVARIANTES, comunes } from "./invariantes.js";
-import { combinaciones, contador } from "./comun.js";
+import { combinaciones, contador, cursosDePrueba } from "./comun.js";
+import { sesion } from "./inv/_lengua.js";
 
 const RAPIDO = process.argv.includes("--rapido");
 const t = contador(), { prueba } = t;
@@ -36,9 +37,10 @@ let actividades = 0;
 for (const id of listaTipos()) {
   prueba(id, () => {
     const libre = ORDEN_LIBRE.has(id) || UNIR.has(id), dentro = id in DENTRO || UNIR.has(id), cambia = seReordena(id);
-    const cs = combinaciones(id);
-    for (const params of RAPIDO ? cs.slice(0, 1) : cs.slice(0, 6)) for (const tam of modelo(id).tamanos) for (const s of RAPIDO ? [1] : [1, 2]) {
-      const acts = tam === "media" ? [{ tipo: id, params }, { tipo: id, params }] : [{ tipo: id, params }];
+    for (const curso of cursosDePrueba(id)) for (const params of ((cs) => (RAPIDO ? cs.slice(0, 1) : cs.slice(0, 6)))(combinaciones(id, curso))) for (const tam of modelo(id).tamanos) for (const s of RAPIDO ? [1] : [1, 2]) {
+      sesion.curso = curso ?? 1;   // Lengua 2.º: la actividad lleva su curso (y las invariantes, su léxico)
+      const a1 = curso === 2 ? { tipo: id, params, curso } : { tipo: id, params };
+      const acts = tam === "media" ? [a1, a1] : [a1];
       let f;
       try { f = generar({ actividades: acts, variantes: 3, orden: true }, s); }
       catch (e) { if (/necesita|solo en|no admite/.test(e.message)) continue; throw e; }

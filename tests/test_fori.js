@@ -8,7 +8,7 @@ import { listaTipos } from "../src/tipos/index.js";
 import { render } from "../src/render/actividad.js";
 import { COLOR_SOLUCION } from "../src/render/papel.js";
 import { marcarPasos, diapositivas, paqueteFori, cssPasos } from "../src/fori/diapositivas.js";
-import { combinaciones, contador } from "./comun.js";
+import { combinaciones, contador, cursosDePrueba } from "./comun.js";
 
 const FULL = process.argv.includes("--full");
 const c = contador(), prueba = c.prueba;
@@ -38,7 +38,7 @@ prueba("racha: arco + flecha = 1 paso; rojo, gris, rojo = 2", () => {
 
 let diapos = 0;
 for (const id of listaTipos()) {
-  const combos = FULL ? combinaciones(id) : [{}];
+  const combos = FULL ? combinaciones(id, cursosDePrueba(id)[0]) : [{}];
   for (const params of combos) for (const tam of ["completa", "media"]) prueba(`${id} ${JSON.stringify(params)} ${tam}`, () => {
     let f;
     try { f = generar({ actividades: tam === "media" ? [{ tipo: id, params }, { tipo: id, params }] : [{ tipo: id, params }] }, 7); }

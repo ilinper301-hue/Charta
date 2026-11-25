@@ -9,7 +9,7 @@
 // (el agua) no entran. Las frases empiezan siempre por el artículo (El, La, Los, Las), nunca por «I».
 import { LEXICO } from "../lengua/lexico.js";
 import { articulo, plural, tonica } from "../lengua/reglas.js";
-import { permitida, obligada, filtrarVistas, avisoVistas, vistasActivas } from "../lengua/vistas.js";
+import { permitida, obligada, filtrarVistas, avisoVistas, vistasActivas, nivelActivo } from "../lengua/vistas.js";
 import { FRASES_1 } from "../lengua/frases_1.js";
 import { propiasActivas, palabrasLibres, nombresDe } from "../lengua/frases.js";
 
@@ -188,13 +188,36 @@ function libresPropias(lista) {
   return lista.map((t) => mkLibre(palabrasLibres(t, nombres), "propia"));
 }
 
-let memo = null;
-const memos = new Map();   // clave (con letras · frases propias) → lista
-/** Todas las frases posibles (singular y plural), sin repetir: las de plantilla y, según el caso, las libres. No modificar: se comparte. */
+// ---------------------------------------------------------------- 2.º: frases de 6 a 8 palabras (LENGUA_2.md, lote 1)
+/** Complementos de frecuencia que se añaden al final de una frase de acción (solo desde 2.º). Débiles, para que lo verdadero siga siendo verdad
+ *  («El gato duerme a veces», «El perro corre de vez en cuando»). */
+export const EXTRAS = [["a", "veces"], ["muchas", "veces"], ["a", "menudo"], ["de", "vez", "en", "cuando"]];
+/** Complementos fuertes: solo para las frases falsas de «¿Sí o no?» (La vaca vuela todos los días sigue siendo falso). */
+const EXTRAS_FALSOS = [...EXTRAS, ["todos", "los", "días"], ["cada", "día"]];
+/** Cuantas más palabras, la misma estructura: sujeto, verbo y complemento no se mueven (el complemento va detrás, en la posición de siempre). */
+function ampliar(base) {
+  const out = [];
+  for (const f of base) {
+    if (!["i", "ob", "od", "lug"].includes(f.tipo)) continue;
+    for (const x of EXTRAS) {
+      const palabras = [...f.palabras, ...x];
+      if (palabras.length >= 6 && palabras.length <= 8) out.push({ ...f, id: palabras.join(" "), n: palabras.length, palabras });
+    }
+  }
+  return out;
+}
+/** Texto del complemento de frecuencia con el que acaba la frase (en minúscula) o null. */
+export const extraDe = (palabras) => EXTRAS_FALSOS.map((x) => x.join(" ")).find((x) => palabras.join(" ").endsWith(" " + x)) || null;
+
+let memo = null, memo2 = null;
+const memos = new Map();   // clave (con letras · frases propias · curso) → lista
+/** Todas las frases posibles (singular y plural), sin repetir: las de plantilla y, según el caso, las libres. No modificar: se comparte.
+ *  Desde 2.º, además las de 6 a 8 palabras (una de acción con un complemento de frecuencia al final). */
 export function todasFrases() {
-  const base = (memo ??= construir()), propias = propiasActivas(), conIniciales = vistasActivas() !== null;
+  const nv = nivelActivo() >= 2 ? 2 : 1, plantilla = (memo ??= construir());
+  const base = nv === 2 ? (memo2 ??= [...plantilla, ...ampliar(plantilla)]) : plantilla, propias = propiasActivas(), conIniciales = vistasActivas() !== null;
   if (!propias && !conIniciales) return base;
-  const clave = (conIniciales ? "1" : "0") + "|" + (propias || []).join("|");
+  const clave = nv + "|" + (conIniciales ? "1" : "0") + "|" + (propias || []).join("|");
   if (!memos.has(clave)) {
     if (memos.size > 20) memos.clear();
     const ids = new Set(base.map((f) => f.id)), extra = [...(propias ? libresPropias(propias) : []), ...(conIniciales ? libres1() : [])];
@@ -219,9 +242,9 @@ export const frAlCaso = (t, caso) => (caso === "mayus" ? t.toUpperCase() : t);
 
 // ---------------------------------------------------------------- elegir frases
 /** Secuencia de largos (nº de palabras) para n frases: un número fijo o variadas (3, 4 y 5 a partes iguales, barajadas). */
-export function largosFrase(azar, n, palabras) {
+export function largosFrase(azar, n, palabras, max = 8) {
   if (Number.isInteger(palabras)) return Array(n).fill(palabras);
-  const l = []; for (let i = 0; i < n; i++) l.push(3 + (i % 3));
+  const l = []; for (let i = 0; i < n; i++) l.push(palabras === "v2" ? 4 + (i % (max - 3)) : 3 + (i % 3));   // «v2» (2.º): de 4 a `max` palabras
   return azar.barajar(l);
 }
 
@@ -248,9 +271,20 @@ export function elegirFrases(azar, largos, { filtro = null, id = "frase", ya = n
 // ---------------------------------------------------------------- orden único (ordena)
 const VALIDAS = new Map();
 /** Textos de todas las frases del banco (en orden normal). */
-const validas = () => { const t = todasFrases(); if (!VALIDAS.has(t)) { if (VALIDAS.size > 20) VALIDAS.clear(); VALIDAS.set(t, new Set(t.map((f) => f.id))); } return VALIDAS.get(t); };
-const permutaciones = (l) => (l.length <= 1 ? [l] : l.flatMap((x, i) => permutaciones([...l.slice(0, i), ...l.slice(i + 1)]).map((r) => [x, ...r])));
+export const validas = () => { const t = todasFrases(); if (!VALIDAS.has(t)) { if (VALIDAS.size > 20) VALIDAS.clear(); VALIDAS.set(t, new Set(t.map((f) => f.id))); } return VALIDAS.get(t); };
 const memoUnico = new Map();
+const INDICES = new Map();
+/** Frases del banco por sus palabras ordenadas: dos frases con las mismas palabras en otro orden comparten clave (para ordenUnico, sin probar todas las permutaciones). */
+function indiceOrden() {
+  const t = todasFrases();
+  if (!INDICES.has(t)) {
+    if (INDICES.size > 20) INDICES.clear();
+    const m = new Map();
+    for (const f of t) { const k = f.palabras.map((w) => w.toLowerCase()).sort().join(" "); if (!m.has(k)) m.set(k, []); m.get(k).push(f.id); }
+    INDICES.set(t, m);
+  }
+  return INDICES.get(t);
+}
 /**
  * ¿La frase solo se puede ordenar de una manera? Ningún otro orden de sus palabras es otra frase del banco
  * (p. ej. «El niño lee un libro» ↔ «Un niño lee el libro» no existe porque los artículos no se mezclan).
@@ -258,10 +292,11 @@ const memoUnico = new Map();
  */
 export function ordenUnico(f, marcada = true) {
   if (f.tipo === "lib" && (!marcada || f.nombres)) return false;   // libres: solo con la primera marcada y sin nombres propios (la mayúscula delataría el orden)
-  const clave = f.id + (marcada ? "|m" : "") + (f.tipo === "lib" ? "|" + todasFrases().length : "");
+  const clave = f.id + (marcada ? "|m" : "") + (f.tipo === "lib" ? "|" + todasFrases().length : "") + "|" + nivelActivo();
   if (!memoUnico.has(clave)) {
-    const V = validas(), ws = f.palabras.map((w) => w.toLowerCase());
-    memoUnico.set(clave, !permutaciones(ws).some((p) => { const t = p.join(" "); return t !== f.id && (!marcada || p[0] === ws[0]) && V.has(t); }));
+    // otra frase del banco con las mismas palabras en otro orden (con la primera marcada, solo si empieza por la misma palabra)
+    const ws = f.palabras.map((w) => w.toLowerCase()), otras = indiceOrden().get([...ws].sort().join(" ")) || [];
+    memoUnico.set(clave, !otras.some((id) => id !== f.id && (!marcada || id.split(" ")[0] === ws[0])));
   }
   return memoUnico.get(clave);
 }
@@ -321,24 +356,29 @@ function construirVerdad() {
   for (const [v, ss] of Object.entries(IMPOSIBLE)) for (const s of ss) for (const num of nums) {
     out.push(mk([art(gen(s), num), sust(s, num), vb(v, num)], s, num, false));
   }
-  for (const [s, a] of FALSO_SER) for (const num of nums) out.push(mk([art(gen(s), num), sust(s, num), num === "p" ? "son" : "es", formaAdj(a, gen(s), num)], s, num, false));
+  for (const [s, a] of FALSO_SER) for (const num of nums) out.push(mk([art(gen(s), num), sust(s, num), num === "p" ? "son" : "es", formaAdj(a, gen(s), num)], s, num, false, { ser: true }));
   // animales que «comen» lo que no se come, o «leen»
   for (const s of ANIMALES_V) for (const n of NO_COMIBLE) for (const num of nums) {
     const nn = "s", gn = gen(n);
     for (const v of ["come", "bebe"]) out.push(mk([art(gen(s), num), sust(s, num), vb(v, num), art(gn, nn, true), n], s, num, false, { falso: [v, n] }));
   }
   for (const s of LISTA("gato perro vaca pez cerdo caballo")) for (const n of ["libro", "cuento"]) for (const num of nums) out.push(mk([art(gen(s), num), sust(s, num), vb("lee", num), art(gen(n), "s", true), n], s, num, false));
+  // 2.º: las falsas de acción también con un complemento de frecuencia («La vaca vuela todos los días»: sigue siendo falso), de 6 a 8 palabras
+  if (nivelActivo() >= 2) for (const h of out.filter((x) => !x.verdad && !x.ser)) for (const x of EXTRAS_FALSOS) {
+    const palabras = [...h.palabras, ...x];
+    if (palabras.length >= 6 && palabras.length <= 8) out.push({ ...h, id: palabras.join(" "), n: palabras.length, palabras });
+  }
   const vistas = new Set();
   return out.filter((f) => !vistas.has(f.id) && vistas.add(f.id));
 }
-let memoV = null;
+const memoV = new Map();
 /** Hechos para «¿Sí o no?»: { id, n, numero, palabras, verdad, suj }. */
-export const hechosVerdad = () => (memoV ??= construirVerdad());
+export const hechosVerdad = () => { const nv = nivelActivo() >= 2 ? 2 : 1; if (!memoV.has(nv)) memoV.set(nv, construirVerdad()); return memoV.get(nv); };
 
 /** n hechos mezclados, mitad verdaderos y mitad falsos (n par), sin repetir ni sujeto (mientras haya de otros). */
 export function elegirVerdades(azar, n, { id = "frase.verdad" } = {}) {
   const todos = hechosVerdad(), usados = new Set(), sujetos = new Map(), out = [];
-  const largos = (k) => { const l = []; for (let i = 0; i < k; i++) l.push(3 + (i % 3)); return azar.barajar(l); };
+  const largos = (k) => { const l = []; for (let i = 0; i < k; i++) l.push(nivelActivo() >= 2 ? 4 + (i % 5) : 3 + (i % 3)); return azar.barajar(l); };   // 2.º: de 4 a 8 palabras
   for (const verdad of [true, false]) {
     for (const l of largos(n / 2)) {
       const libres = todos.filter((h) => h.verdad === verdad && h.n === l && !usados.has(h.id) && permitida(h.id));

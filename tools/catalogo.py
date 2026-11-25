@@ -30,7 +30,7 @@ modelos += [{**m, "tamanos": list(m["tamanos"]), "metadatos": META.metadatos(m["
 for m in modelos:
     extra = {**M2.cursos_extra(m), **M3.cursos_extra(m), **L2.cursos_extra(m)}   # 2.º y 3.º (MATES_3.md); Lengua 2.º (LENGUA_2.md)
     if extra: m["cursos"] = extra
-    m["opciones"] = M2.opciones_2(m)   # 2.º: opciones solo con tres cifras (rmin)
+    m["opciones"] = L2.opciones_l2({**m, "opciones": M2.opciones_2(m)})   # 2.º: opciones solo con tres cifras (rmin); Lengua 2.º: valores `curso: 2`
 # Bloques por materia (cada materia numera los suyos) y letra por defecto de cada materia (Andika si no se dice).
 datos = {"cursos": {**MOD.CURSOS, M2.CURSO: M2.NOMBRE, M3.CURSO: M3.NOMBRE}, "materias": {**MOD.MATERIAS, LEN.MATERIA: LEN.NOMBRE},
          "bloques": {"matematicas": dict(sorted({**MOD.BLOQUES, **APP.BLOQUES, **M2.BLOQUES_2, **M3.BLOQUES_3}.items())), LEN.MATERIA: LEN.BLOQUES},

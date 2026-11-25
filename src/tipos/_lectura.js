@@ -8,7 +8,7 @@
 import { LEXICO } from "../lengua/lexico.js";
 import { articulo } from "../lengua/reglas.js";
 import { formaAdj } from "./_frase.js";
-import { permitida, filtrarVistas, avisoVistas } from "../lengua/vistas.js";
+import { permitida, filtrarVistas, avisoVistas, nivelActivo } from "../lengua/vistas.js";
 
 const fv = (l) => filtrarVistas(l);   // sin letras elegidas devuelve la misma lista
 
@@ -344,12 +344,40 @@ const ADIV = [
   ["payaso", "Está en el circo y hace reír a los niños. Lleva la nariz roja."],
   ["cartero", "Lleva las cartas a las casas y llama a la puerta."],
 ];
-export const ADIVINANZAS = ADIV.map(([r, t], i) => ({ id: i + 1, respuesta: r, texto: t }));
+// Adivinanzas de 2.º (LENGUA_2.md, lote 1): ORIGINALES, sencillas, con una sola respuesta (palabra del léxico de hasta 9 letras); solo desde 2.º.
+const ADIV_2 = [
+  ["cangrejo", "Vive en el mar y en la playa. Camina de lado y es rojo."],
+  ["ballena", "Es el animal más grande del mar. Es enorme y no es un pez."],
+  ["caracol", "Es lento y muy pequeño. Sale cuando llueve y lleva la casa en la espalda."],
+  ["paraguas", "Se abre cuando llueve. Se lleva en la mano y protege la cabeza."],
+  ["bicicleta", "Tiene dos ruedas y una cadena, pero no tiene motor. Se sube a ella para pasear."],
+  ["tiburón", "Vive en el mar y tiene muchos dientes. Es grande y da miedo."],
+  ["cebolla", "Huele fuerte y tiene muchas capas. Si se corta, los ojos lloran."],
+  ["almohada", "Se pone en la cama. La cabeza descansa en ella por la noche."],
+  ["semáforo", "Está en la calle. Tiene una luz roja, otra amarilla y otra verde."],
+  ["autobús", "Es grande y para en las paradas. En él viajan muchas personas."],
+  ["pingüino", "Es un pájaro que no vuela. Nada muy bien y vive en el hielo."],
+  ["mariposa", "Sale de una oruga y vuela de flor en flor. Tiene muchos colores."],
+  ["volcán", "Es una montaña que echa fuego y humo por arriba."],
+  ["arcoíris", "Sale en el cielo cuando llueve y brilla el sol. Tiene siete colores."],
+  ["ardilla", "Es pequeña y trepa a los árboles. Le gustan las nueces."],
+  ["zanahoria", "Es naranja y larga. Crece bajo la tierra y le gusta al conejo."],
+  ["tenedor", "Se usa en la mesa para comer. Tiene cuatro dientes."],
+  ["bañador", "Se lleva en la piscina y en la playa para nadar."],
+  ["tortilla", "Se hace con huevos y patatas. Se hace en la sartén."],
+  ["guitarra", "Tiene cuerdas y se toca con los dedos. Con ella se canta y se baila."],
+  ["sandía", "Es verde por fuera y roja por dentro. Es una fruta grande y fresca."],
+  ["velero", "Es un barco que va por el mar. Lleva velas y el viento lo mueve."],
+  ["castillo", "Es una casa enorme con torres. En él vive el rey."],
+  ["tren", "Va por las vías y para en la estación. Es largo y muy rápido."],
+];
+/** Las 47 de 1.º (`desde` sin poner) y las 24 de 2.º (`desde: 2`, ids a continuación). */
+export const ADIVINANZAS = [...ADIV.map(([r, t], i) => ({ id: i + 1, respuesta: r, texto: t })), ...ADIV_2.map(([r, t], i) => ({ id: ADIV.length + i + 1, respuesta: r, texto: t, desde: 2 }))];
 const PALABRAS_DE = (t) => t.toLowerCase().match(/[a-záéíóúüñ]+/g) || [];
 
 /** n adivinanzas con respuestas distintas; ninguna menciona la respuesta de otra de la misma ficha (se evita si se puede). */
 export function elegirAdivinanzas(azar, n, { maxLetras = 9 } = {}) {
-  const sinI = filtrarVistas(ADIVINANZAS, (a) => a.texto + " " + a.respuesta).filter((a) => a.respuesta.length <= maxLetras);
+  const sinI = filtrarVistas(ADIVINANZAS, (a) => a.texto + " " + a.respuesta).filter((a) => a.respuesta.length <= maxLetras && (!a.desde || nivelActivo() >= a.desde));   // las de 2.º solo desde 2.º
   for (let intento = 0; intento < 40; intento++) {
     const out = [];
     for (const a of azar.barajar(sinI)) {

@@ -2,13 +2,13 @@
 // datos:    { palabra (en el caso elegido), n: nº de sílabas, respuesta: "colorea" | "numero" }
 // solucion: colorea → { huecos: [], colorea: n }   (el alumno colorea n de las 4 casillas, una por palmada; en la solución, en rojo)
 //           numero  → { huecos: [n] }
-// Reglas: palabra del léxico; n = silabas() de reglas.js (1–4); siempre 4 casillas (no delatan el número); sin repetir palabras. Palabras de hasta 10 letras.
+// Reglas: palabra del léxico; n = silabas() de reglas.js (1–4); siempre 4 casillas (no delatan el número); sin repetir palabras. Palabras de hasta 10 letras (2.º: hasta 13 y 5 sílabas; «variadas» = 1 a 5).
 // Opciones: respuesta (colorear / escribir el número) · sílabas (variadas, 1, 2, 3 o 4) · tipo de sílabas · caso. Cantidad: 2 columnas; «Más grandes» 20 palabras (media: 10), «Más ejercicios» las que caben con tarjetas ≥ 40 pt.
 import { registrar } from "../nucleo/tipos.js";
 import { TOP, cuantosRejilla } from "../render/papel.js";
 import { silabas } from "../lengua/reglas.js";
 import { casillas } from "../lengua/dibujo.js";
-import { alCaso, cuantas, elegirPalabras, largosDe, ajusta, conTope } from "./_lengua.js";
+import { alCaso, cuantas, elegirPalabras, largosDe, topeLetras, ajusta, conTope } from "./_lengua.js";
 
 const MIN_ALTO = 40;   // alto mínimo de tarjeta con «Más ejercicios»
 
@@ -18,7 +18,7 @@ export default registrar({
   cantidad: true,
   generar(params, azar, ctx) {
     const n = cuantosRejilla(ctx, 2, MIN_ALTO, [20, 10]), respuesta = params.respuesta === "numero" ? "numero" : "colorea";
-    const ps = conTope(n, cuantas(ctx.tamano, 10), (k) => elegirPalabras(azar, k, params, largosDe(params, [2, 3, 2, 4, 3, 1]), { extra: { maxLetras: 10 }, id: "fono.silabas" }));
+    const ps = conTope(n, cuantas(ctx.tamano, 10), (k) => elegirPalabras(azar, k, params, largosDe(params, [2, 3, 2, 4, 3, 1], [1, 2, 3, 4, 3, 5, 2, 4, 3, 5]), { extra: { maxLetras: topeLetras(10, 13) }, id: "fono.silabas" }));
     return {
       enunciado: respuesta === "numero" ? "Da una palmada por cada sílaba\ny escribe cuántas sílabas tiene la palabra." : "Da una palmada por cada sílaba\ny colorea una casilla por cada palmada.",
       ejercicios: ps.map(({ p }) => {

@@ -5,7 +5,7 @@ import { generar, modelo, validar } from "../src/nucleo/ficha.js";
 import { listaTipos } from "../src/nucleo/tipos.js";
 import { normalizarVistas, conVistas, permitida } from "../src/lengua/vistas.js";
 import { sinTildes } from "../src/lengua/reglas.js";
-import { combinaciones, contador } from "./comun.js";
+import { combinaciones, contador, cursosDePrueba } from "./comun.js";
 import { INVARIANTES, comunes } from "./invariantes.js";
 import { conPropias, USA_FRASES } from "../src/lengua/frases.js";
 import { conLetras, letrasDe, vistasDe, resumenLetras, hayLengua1 } from "../src/ui/letras.js";
@@ -68,7 +68,7 @@ t.prueba("frases iniciales", () => {
 t.prueba("invariantes con frases libres", () => {
   const MIAS = ["Pepa pinta con Pablo.", "Mi mamá me mima.", "Lola sale sola.", "Lalo y Lola leen."];
   let n = 0;
-  for (const id of USA_FRASES) for (const combo of combinaciones(id)) for (const tam of modelo(id).tamanos)
+  for (const id of USA_FRASES) for (const combo of combinaciones(id, cursosDePrueba(id)[0])) for (const tam of modelo(id).tamanos)
     for (const [v, mias] of [["aeioulms", null], ["aeioulmsnhdfp", MIAS], [null, MIAS]]) {
       const params = { ...combo, ...(v && { vistas: v }), ...(mias && { misFrases: mias }) };
       let f; try { f = generar({ actividades: tam === "media" ? [{ tipo: id, params }, { tipo: id, params }] : [{ tipo: id, params }] }, 7); }
@@ -87,7 +87,7 @@ t.prueba("mis frases", () => {
   if ("misFrases" in g.paginas[0].actividades[0].params) throw new Error("frase.verdad no usa frases libres");
 });
 for (const id of ids) t.prueba(id, () => {
-  const m = modelo(id), combos = combinaciones(id), paso = FULL ? 1 : Math.max(1, Math.floor(combos.length / 40));
+  const m = modelo(id), combos = combinaciones(id, cursosDePrueba(id)[0]), paso = FULL ? 1 : Math.max(1, Math.floor(combos.length / 40));
   const fallos = [];
   for (const v of JUEGOS) for (let i = 0; i < combos.length; i += paso) for (const tam of m.tamanos) for (const s of FULL ? [1, 2, 3] : [1]) {
     const act = { tipo: id, params: { ...combos[i], vistas: v } };

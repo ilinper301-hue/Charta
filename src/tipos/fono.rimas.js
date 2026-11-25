@@ -3,14 +3,14 @@
 // solucion: { huecos: [], une: índice de la fila cuya caja de la derecha lleva la palabra que rima con esta }   (líneas rojas en la solución)
 // Reglas: palabras del léxico; cada palabra rima (riman() de reglas.js, con el modo elegido) con su pareja y con NINGUNA otra de la ficha
 //         (ni por la última sílaba ni desde la vocal fuerte); la rima tiene al menos 2 letras; sin palabras repetidas; columna derecha mezclada
-//         (nunca en el mismo orden). Palabras de 1 a 3 sílabas y hasta 8 letras.
+//         (nunca en el mismo orden). Palabras de 1 a 3 sílabas y hasta 8 letras (2.º: de 1 a 5 y hasta 11).
 // Opciones: rima (misma última sílaba / desde la vocal fuerte) · parejas (4, 5 o 6; 5 por defecto) · tipo de sílabas · caso. Completa: 4–6 parejas.
 import { registrar } from "../nucleo/tipos.js";
 import { TOP, M, W } from "../render/papel.js";
 import { unir } from "../lengua/dibujo.js";
 import { avisoVistas } from "../lengua/vistas.js";
 import { rima, silabas } from "../lengua/reglas.js";
-import { alCaso, candidatas } from "./_lengua.js";
+import { alCaso, candidatas, topeLetras, desde2 } from "./_lengua.js";
 
 /** ¿Riman a, b de algún modo (última sílaba o desde la vocal fuerte)? Para no mezclar palabras parecidas de parejas distintas. */
 export const rimanAlgo = (a, b) => a === b || rima(a, "silaba") === rima(b, "silaba") || rima(a, "vocal") === rima(b, "vocal");
@@ -21,7 +21,7 @@ export default registrar({
   generar(params, azar) {
     const modo = params.rima === "vocal" ? "vocal" : "silaba", np = params.parejas ?? 5;
     const grupos = new Map();
-    for (const e of candidatas(params, { nSilabas: [1, 2, 3], maxLetras: 8 })) {
+    for (const e of candidatas(params, { nSilabas: desde2() ? [1, 2, 3, 4, 5] : [1, 2, 3], maxLetras: topeLetras(8, 11) })) {
       const r = rima(e.p, modo);
       if (r.length < 2) continue;
       if (!grupos.has(r)) grupos.set(r, []);

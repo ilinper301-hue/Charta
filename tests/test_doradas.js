@@ -179,6 +179,20 @@ const CASOS = [
   { nombre: "mayor o menor en media", semilla: 4, opciones: { actividades: [{ tipo: "orden.mayor" }, { tipo: "conteo.serie1" }] } },
   // Lengua 1.º · letra escolar ligada (Escolar_G) en las fichas de caligrafía
   ...[["palabras", "frase"], ["letra", "ordena"], ["libre"]].map((ts) => ({ nombre: "1.º escolar " + ts.join(" + "), semilla: 5, opciones: { actividades: ts.map((t) => ({ tipo: "escritura." + t, curso: 1, params: { grafia: "escolar" } })) } })),
+  // Lengua 2.º · lote 1: ♻ reutilizados con las opciones de 2.º (palabras de hasta 5 sílabas, frases de 4 a 8 palabras, banco de contrarios y adivinanzas de 2.º)
+  ...["fono.silabas", "fono.larga", "fono.quita", "fono.rimas", "silaba.junta", "silaba.separa", "silaba.ordena", "silaba.falta", "palabra.contrarios", "palabra.sopa",
+    "frase.ordena", "frase.separa", "frase.completa", "frase.verdad", "frase.puntua", "lectura.adivinanza"].map((t) => ({ nombre: "2.º por defecto: " + t, semilla: 8, opciones: { actividades: [{ tipo: t, curso: 2 }] } })),
+  { nombre: "2.º fono: cuenta (5 sílabas) y quita (5 sílabas)", semilla: 8, opciones: { actividades: [{ tipo: "fono.silabas", curso: 2, params: { largo: 5, tipo: "trabadas" } }, { tipo: "fono.quita", curso: 2, params: { largo: 5, quitar: "mezcla" } }] } },
+  { nombre: "2.º sílabas: separa en rayas (5 sílabas) y ordena", semilla: 8, opciones: { actividades: [{ tipo: "silaba.separa", curso: 2, params: { largo: 5, modo: "rayas" } }, { tipo: "silaba.ordena", curso: 2, params: { largo: 5 } }] } },
+  { nombre: "2.º sílabas: falta (sin ayuda) y junta (4 sílabas)", semilla: 8, opciones: { actividades: [{ tipo: "silaba.falta", curso: 2, params: { largo: 5, ayuda: "sin" } }, { tipo: "silaba.junta", curso: 2, params: { largo: 4 } }] } },
+  { nombre: "2.º silaba.junta: unir con «de 2 a 4 sílabas»", semilla: 8, opciones: { actividades: [{ tipo: "silaba.junta", curso: 2, params: { tarea: "une", largo: "variadas2" } }] } },
+  { nombre: "2.º contrarios (unir) y (escribir)", semilla: 8, opciones: { actividades: [{ tipo: "palabra.contrarios", curso: 2 }, { tipo: "palabra.contrarios", curso: 2, params: { tarea: "escribe" } }] } },
+  { nombre: "2.º sopa de 9 palabras en minúscula", semilla: 8, opciones: { actividades: [{ tipo: "palabra.sopa", curso: 2, params: { palabras: 9, minus: "minus" } }] } },
+  { nombre: "2.º frases de 7 palabras: ordena y completa (el final)", semilla: 8, opciones: { actividades: [{ tipo: "frase.ordena", curso: 2, params: { palabras: 7 } }, { tipo: "frase.completa", curso: 2, params: { palabras: 7, falta: "objeto" } }] } },
+  { nombre: "2.º frases de 8 palabras: separa (reescribir) y puntua (escribir)", semilla: 8, opciones: { actividades: [{ tipo: "frase.separa", curso: 2, params: { palabras: 8, tarea: "escribe" } }, { tipo: "frase.puntua", curso: 2, params: { palabras: 8, tarea: "escribe" } }] } },
+  { nombre: "2.º puntua: dos frases seguidas", semilla: 8, opciones: { actividades: [{ tipo: "frase.puntua", curso: 2, params: { falta: "dos" } }] } },
+  { nombre: "2.º adivinanzas con una casilla por letra y verdad en MAYÚSCULAS", semilla: 8, opciones: { actividades: [{ tipo: "lectura.adivinanza", curso: 2, params: { ayuda: "letras" } }, { tipo: "frase.verdad", curso: 2, params: { caso: "mayus" } }] } },
+  { nombre: "más ejercicios en media: 2.º larga (5 sílabas) y quita", semilla: 4, opciones: { cantidad: "mas", actividades: [{ tipo: "fono.larga", curso: 2, params: { caso: "mayus", cual: "mezcla" } }, { tipo: "fono.quita", curso: 2, params: { largo: 5 } }] } },
 ];
 
 function calcular(c) {

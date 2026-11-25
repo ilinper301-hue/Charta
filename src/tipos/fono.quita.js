@@ -2,12 +2,12 @@
 // datos:    { silabas: [sílabas de la palabra, en el caso elegido], k: índice de la sílaba que se quita (0 = la primera, última = la última) }
 // solucion: { huecos: [lo que queda] }   las demás sílabas juntas; con «Mayúscula inicial» conserva la mayúscula solo si la primera sílaba se queda.
 // Reglas: palabra del léxico con el silabeo de reglas.js (2–4 sílabas); la sílaba que se quita y lo que queda tienen al menos 2 letras y son distintas;
-//         «mezcla» = la mitad quita la primera y la otra mitad la última. Sin repetir palabras. Palabras de hasta 10 letras.
+//         «mezcla» = la mitad quita la primera y la otra mitad la última. Sin repetir palabras. Palabras de hasta 10 letras (2.º: hasta 13 y 5 sílabas; «variadas» = 2 a 5).
 // Opciones: sílaba que se quita (primera / última / mezcla) · sílabas (variadas, 2, 3 o 4) · tipo de sílabas · caso. Cantidad: 2 columnas, la frase en tres líneas («Si a ca-sa» / «le quito [ca],» / «queda [   ]»); «Más grandes» 16 palabras (media: 8), «Más ejercicios» las que caben con tarjetas ≥ 60 pt.
 import { registrar } from "../nucleo/tipos.js";
 import { TOP, INK, cuantosRejilla } from "../render/papel.js";
 import { silabas } from "../lengua/reglas.js";
-import { trozosCaso, cuantas, largosDe, conTope } from "./_lengua.js";
+import { trozosCaso, cuantas, largosDe, topeLetras, conTope } from "./_lengua.js";
 import { elegirIdx, repartir } from "./_fono.js";
 
 const MIN_ALTO = 60;   // alto mínimo de tarjeta con «Más ejercicios»
@@ -23,7 +23,7 @@ export default registrar({
         const ss = silabas(e.p), k = objetivos[i] ? ss.length - 1 : 0, resto = ss.filter((_, j) => j !== k).join("");
         return ss[k].length >= 2 && resto.length >= 2 && ss[k] !== resto ? { k } : null;
       };
-      return elegirIdx(azar, n, params, largosDe(params, [2, 3, 2, 3, 4]), intento, { extra: { maxLetras: 10 }, id: "fono.quita" });
+      return elegirIdx(azar, n, params, largosDe(params, [2, 3, 2, 3, 4], [2, 3, 4, 3, 5, 2, 4, 5]), intento, { extra: { maxLetras: topeLetras(10, 13) }, id: "fono.quita" });
     });
     return {
       enunciado: "Quita la sílaba y escribe lo que queda.",

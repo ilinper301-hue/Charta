@@ -1,7 +1,7 @@
 // lectura.adivinanza · Adivinanzas (Lengua 1.º, lote 5; LENGUA_1.md §3, bloque 7).
 // datos:    { texto: la adivinanza (en el caso elegido), n: nº de letras de la respuesta, ayuda: "sin" | "letras", id: nº en el banco }
 // solucion: sin ayuda → { huecos: ["gato"] } · con una casilla por cada letra → { huecos: ["g", "a", "t", "o"] } (ch, ll, rr, qu y gu van en una sola casilla)
-// Reglas: banco 📚 de ~45 adivinanzas ORIGINALES de _lectura.js (ADIVINANZAS); la respuesta es una palabra del léxico de hasta 9 letras, no sale en la adivinanza, es única en la ficha
+// Reglas: banco 📚 de 47 adivinanzas ORIGINALES de _lectura.js (ADIVINANZAS; y 24 más solo desde 2.º); la respuesta es una palabra del léxico de hasta 9 letras, no sale en la adivinanza, es única en la ficha
 //         y ninguna adivinanza nombra la respuesta de otra de la misma ficha. Cada adivinanza solo encaja con un objeto, animal o persona del léxico.
 // Opciones: ayuda (sin ayuda / una casilla por cada letra) · letra (minúscula / MAYÚSCULAS). Completa: 4; media: 2.
 import { registrar } from "../nucleo/tipos.js";
