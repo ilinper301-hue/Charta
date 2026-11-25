@@ -801,10 +801,10 @@ naranja	n	f	comida,colores	s	1	-
 rosa	n	f	naturaleza,colores	s	1	-
 comer	v	-	acciones	s	1	come
 beber	v	-	acciones	s	1	bebe
-dormir	v	-	acciones	s	1	dorme
+dormir	v	-	acciones	s	1	duerme
 correr	v	-	acciones	s	1	corre
 saltar	v	-	acciones	s	1	salta
-jugar	v	-	acciones	s	1	juga
+jugar	v	-	acciones	s	1	juega
 leer	v	-	acciones	s	1	lee
 escribir	v	-	acciones	s	1	escribe
 dibujar	v	-	acciones	s	1	dibuja
@@ -816,7 +816,7 @@ volar	v	-	acciones	s	1	vuela
 andar	v	-	acciones	s	1	anda
 caminar	v	-	acciones	s	1	camina
 abrir	v	-	acciones	s	1	abre
-cerrar	v	-	acciones	s	1	cerra
+cerrar	v	-	acciones	s	1	cierra
 lavar	v	-	acciones	s	1	lava
 peinar	v	-	acciones	s	1	peina
 vestir	v	-	acciones	s	1	viste
@@ -924,10 +924,10 @@ brincar	v	-	acciones	s	2	brinca
 gatear	v	-	acciones	s	2	gatea
 pisar	v	-	acciones	s	2	pisa
 patinar	v	-	acciones	s	2	patina
-esquiar	v	-	acciones	s	2	esquia
+esquiar	v	-	acciones	s	2	esquía
 pescar	v	-	acciones	s	2	pesca
 ladrar	v	-	acciones	s	2	ladra
-maullar	v	-	acciones	s	2	maulla
+maullar	v	-	acciones	s	2	maúlla
 rugir	v	-	acciones	s	2	ruge
 zumbar	v	-	acciones	s	2	zumba
 bucear	v	-	acciones	s	2	bucea
@@ -1207,3 +1207,6 @@ esqueleto	n	m	cuerpo	s	1	-
 boquerón	n	m	animales	s	2	-
 barquito	n	m	transportes	s	1	-
 banqueta	n	f	casa	s	2	-
+mar	n	m	naturaleza	s	1	-
+miel	n	f	comida	s	1	-
+bebé	n	m	familia	s	1	-

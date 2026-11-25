@@ -8,6 +8,10 @@ import { USA_FRASES, leerPropias } from "../lengua/frases.js";
 
 
 export const VOCALES = "aeiou";
+/** Orden en que Iván enseña las letras en 1.º (la «ll» y la «ch» llegan al final, con la «l», la «c» y la «h» ya vistas). */
+export const ORDEN_CLASE = "aeioulmsnhdfptrbvñykczqgjwx";
+/** Letras hasta `l` (incluida) en el orden de la clase; "" si no es una letra del orden. */
+export const hastaLetra = (l) => { const i = ORDEN_CLASE.indexOf(l); return i < 0 ? "" : ORDEN_CLASE.slice(0, i + 1); };
 export const CLAVE_LETRAS = "charta:letras";   // las últimas marcadas (las que lleva la clase): se proponen en fichas nuevas
 export const CLAVE_OBLIGATORIAS = "charta:letrasObligatorias";   // las obligatorias (pulsación larga): la letra que se está enseñando
 

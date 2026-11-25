@@ -1,14 +1,14 @@
 etapa	frase
 # etapa l
-l	Lola lee a Lalo.
-l	Leo lee a Lola.
-l	Elia lee a Leo.
-l	Lilia lee a Lalo.
+l	Lola le lee a Lalo.
+l	Leo le lee a Lola.
+l	Elia le lee a Leo.
+l	Lili le lee a Lulú.
 l	Lalo oía la ola.
 l	Lía olía la lila.
-l	Eulalia lee a Lilo.
+l	Eulalia le lee al aula.
 l	Lola olía a lila.
-l	Lalo lee a Lía.
+l	Lalo le lee a Lía.
 l	Leo olía el alelí.
 l	Él lo lee.
 l	Él lo leía.
@@ -18,13 +18,13 @@ l	La lila olía a alelí.
 l	El aula olía a lila.
 l	Lola lo lee.
 l	Él olía el alelí.
-l	Olía a lila.
-l	Lía lee a Lola.
-l	Él lo olía.
+l	Lulú olía la lila.
+l	Lía le lee a Lola.
+l	Lulú olía el alelí.
 l	Él olía la lila.
-l	Él olía a lila.
+l	Lola le leía a Lulú.
 l	Lola oía la ola.
-l	Lía lee a Eulalia.
+l	Lía le lee a Eulalia.
 # etapa m
 m	Mi mamá me mima.
 m	Mamá me lee.

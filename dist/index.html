@@ -362,7 +362,7 @@ body.con-selector, body.con-capa { overflow: hidden; }
 .mis-frases summary small { font-weight: 400; color: var(--texto-2); margin-left: 6px; }
 .mis-frases .campo { margin-top: 8px; }
 .letras-atajos { display: flex; gap: 8px; flex-wrap: wrap; }
-.letras-atajos button { height: var(--alto); padding: 0 14px; border-radius: var(--r-sm); border: 1px solid var(--borde); background: var(--superficie-2); color: var(--texto-2); font: inherit; font-size: .85rem; cursor: pointer; }
+.letras-atajos button, .letras-atajos select { height: var(--alto); padding: 0 14px; border-radius: var(--r-sm); border: 1px solid var(--borde); background: var(--superficie-2); color: var(--texto-2); font: inherit; font-size: .85rem; cursor: pointer; }
 
 /* ---------- Piezas comunes (fase 3, src/ui/piezas.js): hoja inferior, menú «⋯» y confirmar ---------- */
 .velo { position: fixed; inset: 0; z-index: 30; background: rgba(20, 20, 19, .42); animation: aparecer .15s ease-out; }
@@ -427,9 +427,9 @@ body.con-selector, body.con-capa { overflow: hidden; }
     <summary><h2>Letras</h2><small id="letrasCuenta">Todas</small></summary>
     <div class="plegable-cuerpo">
     <div id="mapaLetras" class="mapa-letras" role="group" aria-label="Letras que pueden salir"></div>
-    <div class="letras-atajos"><button id="letrasTodas">Todas</button><button id="letrasVocales">Solo vocales</button><button id="letrasNinguna">Ninguna</button></div>
+    <div class="letras-atajos"><button id="letrasTodas">Todas</button><button id="letrasVocales">Solo vocales</button><button id="letrasNinguna">Ninguna</button><select id="letrasHasta" aria-label="Marcar las letras enseñadas hasta una"></select></div>
     <details class="ayuda"><summary>¿Cómo funciona?</summary>
-      <p class="info">Toca una letra para quitarla o ponerla: las palabras, sílabas y frases solo llevarán las letras marcadas. <b>Mantén pulsada</b> una letra para hacerla <b>obligatoria</b>: todas las palabras la llevarán (para la «qu», la «q»).</p></details>
+      <p class="info">Toca una letra para quitarla o ponerla: las palabras, sílabas y frases solo llevarán las letras marcadas. <b>Mantén pulsada</b> una letra para hacerla <b>obligatoria</b>: todas las palabras la llevarán (para la «qu», la «q»). Las letras van en el orden en que se enseñan; con «Hasta la…» se marcan de golpe todas las enseñadas hasta esa.</p></details>
     <details id="cajaMisFrases" class="mis-frases" hidden><summary>Mis frases <small id="misFrasesCuenta"></small></summary>
       <label class="campo"><span>Una frase por línea, de 3 a 5 palabras <em>Se mezclan con las de Charta en las actividades de frases (ordenar, separar, mayúscula y punto, copiar, dictado y lectura rápida) si usan solo las letras marcadas.</em></span>
         <textarea id="misFrases" rows="4" placeholder="Mi mamá me mima.&#10;Lola sale sola."></textarea></label>
@@ -1147,15 +1147,15 @@ Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get USA_FRASES
 // GENERADO por tools/frases.py desde datos/frases_1.tsv. No editar a mano.
 // Frases para las primeras letras de 1.º: e = etapa (letra nueva), w = palabras (minúscula salvo nombres propios).
 const FRASES_1 = [
-{"e":"l","w":["Lola","lee","a","Lalo"]},
-{"e":"l","w":["Leo","lee","a","Lola"]},
-{"e":"l","w":["elia","lee","a","Leo"]},
-{"e":"l","w":["lilia","lee","a","Lalo"]},
+{"e":"l","w":["Lola","le","lee","a","Lalo"]},
+{"e":"l","w":["Leo","le","lee","a","Lola"]},
+{"e":"l","w":["elia","le","lee","a","Leo"]},
+{"e":"l","w":["lili","le","lee","a","Lulú"]},
 {"e":"l","w":["Lalo","oía","la","ola"]},
 {"e":"l","w":["Lía","olía","la","lila"]},
-{"e":"l","w":["Eulalia","lee","a","Lilo"]},
+{"e":"l","w":["Eulalia","le","lee","al","aula"]},
 {"e":"l","w":["Lola","olía","a","lila"]},
-{"e":"l","w":["Lalo","lee","a","Lía"]},
+{"e":"l","w":["Lalo","le","lee","a","Lía"]},
 {"e":"l","w":["Leo","olía","el","alelí"]},
 {"e":"l","w":["él","lo","lee"]},
 {"e":"l","w":["él","lo","leía"]},
@@ -1165,13 +1165,13 @@ const FRASES_1 = [
 {"e":"l","w":["el","aula","olía","a","lila"]},
 {"e":"l","w":["Lola","lo","lee"]},
 {"e":"l","w":["él","olía","el","alelí"]},
-{"e":"l","w":["olía","a","lila"]},
-{"e":"l","w":["Lía","lee","a","Lola"]},
-{"e":"l","w":["él","lo","olía"]},
+{"e":"l","w":["Lulú","olía","la","lila"]},
+{"e":"l","w":["Lía","le","lee","a","Lola"]},
+{"e":"l","w":["Lulú","olía","el","alelí"]},
 {"e":"l","w":["él","olía","la","lila"]},
-{"e":"l","w":["él","olía","a","lila"]},
+{"e":"l","w":["Lola","le","leía","a","Lulú"]},
 {"e":"l","w":["Lola","oía","la","ola"]},
-{"e":"l","w":["Lía","lee","a","Eulalia"]},
+{"e":"l","w":["Lía","le","lee","a","Eulalia"]},
 {"e":"m","w":["mi","mamá","me","mima"]},
 {"e":"m","w":["mamá","me","lee"]},
 {"e":"m","w":["mi","mamá","me","ama"]},
@@ -2335,10 +2335,10 @@ const LEXICO = [
 {"p":"rosa","c":"n","k":["naturaleza","colores"],"f":1,"g":"f","d":1},
 {"p":"comer","c":"v","k":["acciones"],"f":1,"d":1,"v3":"come"},
 {"p":"beber","c":"v","k":["acciones"],"f":1,"d":1,"v3":"bebe"},
-{"p":"dormir","c":"v","k":["acciones"],"f":1,"d":1,"v3":"dorme"},
+{"p":"dormir","c":"v","k":["acciones"],"f":1,"d":1,"v3":"duerme"},
 {"p":"correr","c":"v","k":["acciones"],"f":1,"d":1,"v3":"corre"},
 {"p":"saltar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"salta"},
-{"p":"jugar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"juga"},
+{"p":"jugar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"juega"},
 {"p":"leer","c":"v","k":["acciones"],"f":1,"d":1,"v3":"lee"},
 {"p":"escribir","c":"v","k":["acciones"],"f":1,"d":1,"v3":"escribe"},
 {"p":"dibujar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"dibuja"},
@@ -2350,7 +2350,7 @@ const LEXICO = [
 {"p":"andar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"anda"},
 {"p":"caminar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"camina"},
 {"p":"abrir","c":"v","k":["acciones"],"f":1,"d":1,"v3":"abre"},
-{"p":"cerrar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"cerra"},
+{"p":"cerrar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"cierra"},
 {"p":"lavar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"lava"},
 {"p":"peinar","c":"v","k":["acciones"],"f":1,"d":1,"v3":"peina"},
 {"p":"vestir","c":"v","k":["acciones"],"f":1,"d":1,"v3":"viste"},
@@ -2458,10 +2458,10 @@ const LEXICO = [
 {"p":"gatear","c":"v","k":["acciones"],"f":2,"d":1,"v3":"gatea"},
 {"p":"pisar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"pisa"},
 {"p":"patinar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"patina"},
-{"p":"esquiar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"esquia"},
+{"p":"esquiar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"esquía"},
 {"p":"pescar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"pesca"},
 {"p":"ladrar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"ladra"},
-{"p":"maullar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"maulla"},
+{"p":"maullar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"maúlla"},
 {"p":"rugir","c":"v","k":["acciones"],"f":2,"d":1,"v3":"ruge"},
 {"p":"zumbar","c":"v","k":["acciones"],"f":2,"d":1,"v3":"zumba"},
 {"p":"bucear","c":"v","k":["acciones"],"f":2,"d":1,"v3":"bucea"},
@@ -2740,7 +2740,10 @@ const LEXICO = [
 {"p":"esqueleto","c":"n","k":["cuerpo"],"f":1,"g":"m","d":1},
 {"p":"boquerón","c":"n","k":["animales"],"f":2,"g":"m","d":1},
 {"p":"barquito","c":"n","k":["transportes"],"f":1,"g":"m","d":1},
-{"p":"banqueta","c":"n","k":["casa"],"f":2,"g":"f","d":1}
+{"p":"banqueta","c":"n","k":["casa"],"f":2,"g":"f","d":1},
+{"p":"mar","c":"n","k":["naturaleza"],"f":1,"g":"m","d":1},
+{"p":"miel","c":"n","k":["comida"],"f":1,"g":"f","d":1},
+{"p":"bebé","c":"n","k":["familia"],"f":1,"g":"m","d":1}
 ];
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get LEXICO() { return LEXICO; } }));
@@ -19943,6 +19946,10 @@ const { ABECEDARIO } = __req("lengua/reglas.js");
 const { normalizarVistas, normalizarObligatorias, conVistas, permitida } = __req("lengua/vistas.js");
 const { USA_FRASES, leerPropias } = __req("lengua/frases.js");
 const VOCALES = "aeiou";
+/** Orden en que Iván enseña las letras en 1.º (la «ll» y la «ch» llegan al final, con la «l», la «c» y la «h» ya vistas). */
+const ORDEN_CLASE = "aeioulmsnhdfptrbvñykczqgjwx";
+/** Letras hasta `l` (incluida) en el orden de la clase; "" si no es una letra del orden. */
+const hastaLetra = (l) => { const i = ORDEN_CLASE.indexOf(l); return i < 0 ? "" : ORDEN_CLASE.slice(0, i + 1); };
 const CLAVE_LETRAS = "charta:letras";   // las últimas marcadas (las que lleva la clase): se proponen en fichas nuevas
 const CLAVE_OBLIGATORIAS = "charta:letrasObligatorias";   // las obligatorias (pulsación larga): la letra que se está enseñando
 
@@ -20007,13 +20014,13 @@ function resumenFrases(texto, vistas) {
   return { frases, cuenta: frases.length ? String(frases.length) : "", info: partes.join(" ") };
 }
 
-Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get VOCALES() { return VOCALES; }, get CLAVE_LETRAS() { return CLAVE_LETRAS; }, get CLAVE_OBLIGATORIAS() { return CLAVE_OBLIGATORIAS; }, get hayLengua1() { return hayLengua1; }, get conLetras() { return conLetras; }, get obligatoriasDe() { return obligatoriasDe; }, get letrasDe() { return letrasDe; }, get vistasDe() { return vistasDe; }, get resumenLetras() { return resumenLetras; }, get CLAVE_FRASES() { return CLAVE_FRASES; }, get hayFrases() { return hayFrases; }, get conFrases() { return conFrases; }, get frasesDe() { return frasesDe; }, get resumenFrases() { return resumenFrases; } }));
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get VOCALES() { return VOCALES; }, get ORDEN_CLASE() { return ORDEN_CLASE; }, get hastaLetra() { return hastaLetra; }, get CLAVE_LETRAS() { return CLAVE_LETRAS; }, get CLAVE_OBLIGATORIAS() { return CLAVE_OBLIGATORIAS; }, get hayLengua1() { return hayLengua1; }, get conLetras() { return conLetras; }, get obligatoriasDe() { return obligatoriasDe; }, get letrasDe() { return letrasDe; }, get vistasDe() { return vistasDe; }, get resumenLetras() { return resumenLetras; }, get CLAVE_FRASES() { return CLAVE_FRASES; }, get hayFrases() { return hayFrases; }, get conFrases() { return conFrases; }, get frasesDe() { return frasesDe; }, get resumenFrases() { return resumenFrases; } }));
 },
 "ui/letras_vista.js": (__exp) => {
 // Charta · mapa de letras y «Mis frases» (Lengua de 1.º; fase 2 de PLAN-DISENO, antes en app.js).
 // crearLetrasVista(ctx) → { marcadas, obligatorias, misFrases(), pintarLetras(), pintarMisFrases(), actividadesBase(), actividades() }
 const { ABECEDARIO } = __req("lengua/reglas.js");
-const { VOCALES, CLAVE_LETRAS, CLAVE_OBLIGATORIAS, conLetras, vistasDe, resumenLetras, CLAVE_FRASES, conFrases, resumenFrases } = __req("ui/letras.js");
+const { VOCALES, ORDEN_CLASE, hastaLetra, CLAVE_LETRAS, CLAVE_OBLIGATORIAS, conLetras, vistasDe, resumenLetras, CLAVE_FRASES, conFrases, resumenFrases } = __req("ui/letras.js");
 const { $, el } = __req("ui/dom.js");
 function crearLetrasVista(ctx) {
   const pintar = () => ctx.previa.pintar();
@@ -20023,7 +20030,8 @@ function crearLetrasVista(ctx) {
   // Obligatorias (pulsación larga): todas las palabras y frases llevan al menos una. Siempre están también marcadas.
   const obligatorias = new Set();
   try { for (const l of localStorage.getItem(CLAVE_OBLIGATORIAS) || "") if (ABECEDARIO.includes(l)) { obligatorias.add(l); marcadas.add(l); } } catch {}
-  const teclas = ABECEDARIO.map((l) => {
+  const orden = [...ORDEN_CLASE];   // el mapa sigue el orden en que se enseñan las letras
+  const teclas = orden.map((l) => {
     const b = el("button", { type: "button", textContent: l, className: VOCALES.includes(l) ? "vocal" : "" });
     let reloj = null, larga = false;
     const parar = () => { clearTimeout(reloj); reloj = null; };
@@ -20049,7 +20057,7 @@ function crearLetrasVista(ctx) {
   $("mapaLetras").replaceChildren(...teclas);
   function pintarLetras() {
     teclas.forEach((b, i) => {
-      const l = ABECEDARIO[i], on = marcadas.has(l), ob = obligatorias.has(l);
+      const l = orden[i], on = marcadas.has(l), ob = obligatorias.has(l);
       b.setAttribute("aria-pressed", on); b.classList.toggle("obligatoria", ob);
       b.title = ob ? "Obligatoria: todas las palabras la llevan (toca para que solo pueda salir)" : on ? "Puede salir (toca para quitarla; mantén pulsada para hacerla obligatoria)" : "No sale (toca para ponerla)";
     });
@@ -20062,6 +20070,10 @@ function crearLetrasVista(ctx) {
   }
   const atajo = (id, ls) => { $(id).onclick = () => { marcadas.clear(); for (const l of ls) marcadas.add(l); cambiarLetras(); }; };
   atajo("letrasTodas", ABECEDARIO); atajo("letrasVocales", VOCALES); atajo("letrasNinguna", "");
+  // «Hasta la…»: marca de golpe las letras ya enseñadas (orden de la clase).
+  const hasta = $("letrasHasta");
+  hasta.replaceChildren(el("option", { value: "", textContent: "Hasta la…" }), ...orden.slice(5).map((l) => el("option", { value: l, textContent: `Hasta la ${l}` })));
+  hasta.onchange = () => { const ls = hastaLetra(hasta.value); hasta.value = ""; if (!ls) return; marcadas.clear(); for (const l of ls) marcadas.add(l); cambiarLetras(); };
   pintarLetras();
   // «Mis frases»: las de la clase se recuerdan en el dispositivo; viajan en la composición (params.misFrases).
   try { $("misFrases").value = localStorage.getItem(CLAVE_FRASES) || ""; } catch {}

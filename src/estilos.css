@@ -350,7 +350,7 @@ body.con-selector, body.con-capa { overflow: hidden; }
 .mis-frases summary small { font-weight: 400; color: var(--texto-2); margin-left: 6px; }
 .mis-frases .campo { margin-top: 8px; }
 .letras-atajos { display: flex; gap: 8px; flex-wrap: wrap; }
-.letras-atajos button { height: var(--alto); padding: 0 14px; border-radius: var(--r-sm); border: 1px solid var(--borde); background: var(--superficie-2); color: var(--texto-2); font: inherit; font-size: .85rem; cursor: pointer; }
+.letras-atajos button, .letras-atajos select { height: var(--alto); padding: 0 14px; border-radius: var(--r-sm); border: 1px solid var(--borde); background: var(--superficie-2); color: var(--texto-2); font: inherit; font-size: .85rem; cursor: pointer; }
 
 /* ---------- Piezas comunes (fase 3, src/ui/piezas.js): hoja inferior, menú «⋯» y confirmar ---------- */
 .velo { position: fixed; inset: 0; z-index: 30; background: rgba(20, 20, 19, .42); animation: aparecer .15s ease-out; }

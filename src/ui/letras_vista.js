@@ -1,7 +1,7 @@
 // Charta · mapa de letras y «Mis frases» (Lengua de 1.º; fase 2 de PLAN-DISENO, antes en app.js).
 // crearLetrasVista(ctx) → { marcadas, obligatorias, misFrases(), pintarLetras(), pintarMisFrases(), actividadesBase(), actividades() }
 import { ABECEDARIO } from "../lengua/reglas.js";
-import { VOCALES, CLAVE_LETRAS, CLAVE_OBLIGATORIAS, conLetras, vistasDe, resumenLetras, CLAVE_FRASES, conFrases, resumenFrases } from "./letras.js";
+import { VOCALES, ORDEN_CLASE, hastaLetra, CLAVE_LETRAS, CLAVE_OBLIGATORIAS, conLetras, vistasDe, resumenLetras, CLAVE_FRASES, conFrases, resumenFrases } from "./letras.js";
 import { $, el } from "./dom.js";
 
 export function crearLetrasVista(ctx) {
@@ -12,7 +12,8 @@ export function crearLetrasVista(ctx) {
   // Obligatorias (pulsación larga): todas las palabras y frases llevan al menos una. Siempre están también marcadas.
   const obligatorias = new Set();
   try { for (const l of localStorage.getItem(CLAVE_OBLIGATORIAS) || "") if (ABECEDARIO.includes(l)) { obligatorias.add(l); marcadas.add(l); } } catch {}
-  const teclas = ABECEDARIO.map((l) => {
+  const orden = [...ORDEN_CLASE];   // el mapa sigue el orden en que se enseñan las letras
+  const teclas = orden.map((l) => {
     const b = el("button", { type: "button", textContent: l, className: VOCALES.includes(l) ? "vocal" : "" });
     let reloj = null, larga = false;
     const parar = () => { clearTimeout(reloj); reloj = null; };
@@ -38,7 +39,7 @@ export function crearLetrasVista(ctx) {
   $("mapaLetras").replaceChildren(...teclas);
   function pintarLetras() {
     teclas.forEach((b, i) => {
-      const l = ABECEDARIO[i], on = marcadas.has(l), ob = obligatorias.has(l);
+      const l = orden[i], on = marcadas.has(l), ob = obligatorias.has(l);
       b.setAttribute("aria-pressed", on); b.classList.toggle("obligatoria", ob);
       b.title = ob ? "Obligatoria: todas las palabras la llevan (toca para que solo pueda salir)" : on ? "Puede salir (toca para quitarla; mantén pulsada para hacerla obligatoria)" : "No sale (toca para ponerla)";
     });
@@ -51,6 +52,10 @@ export function crearLetrasVista(ctx) {
   }
   const atajo = (id, ls) => { $(id).onclick = () => { marcadas.clear(); for (const l of ls) marcadas.add(l); cambiarLetras(); }; };
   atajo("letrasTodas", ABECEDARIO); atajo("letrasVocales", VOCALES); atajo("letrasNinguna", "");
+  // «Hasta la…»: marca de golpe las letras ya enseñadas (orden de la clase).
+  const hasta = $("letrasHasta");
+  hasta.replaceChildren(el("option", { value: "", textContent: "Hasta la…" }), ...orden.slice(5).map((l) => el("option", { value: l, textContent: `Hasta la ${l}` })));
+  hasta.onchange = () => { const ls = hastaLetra(hasta.value); hasta.value = ""; if (!ls) return; marcadas.clear(); for (const l of ls) marcadas.add(l); cambiarLetras(); };
   pintarLetras();
   // «Mis frases»: las de la clase se recuerdan en el dispositivo; viajan en la composición (params.misFrases).
   try { $("misFrases").value = localStorage.getItem(CLAVE_FRASES) || ""; } catch {}

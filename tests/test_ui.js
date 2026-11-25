@@ -258,7 +258,13 @@ import { crearGuardadas as crearG, limpiar as limp } from "../src/ui/guardadas.j
 
 // Varias páginas en la composición (cuentas por página) y «Mis frases».
 import { cuentasDe, paginasValidas, agrupar, paginaDe, inicioDe } from "../src/ui/paginas.js";
-import { conFrases, frasesDe, resumenFrases, hayFrases } from "../src/ui/letras.js";
+import { conFrases, frasesDe, resumenFrases, hayFrases, ORDEN_CLASE, hastaLetra } from "../src/ui/letras.js";
+import { ABECEDARIO as ABC_ORDEN } from "../src/lengua/reglas.js";
+{ // orden de la clase (25-11-2026): las 27 letras una vez; «Hasta la n» = a e i o u l m s n
+  if ([...ORDEN_CLASE].sort().join("") !== [...ABC_ORDEN].sort().join("")) throw new Error("ORDEN_CLASE no tiene las 27 letras");
+  if (hastaLetra("n") !== "aeioulmsn" || hastaLetra("x").length !== 27 || hastaLetra("?") !== "") throw new Error("hastaLetra");
+  console.log("test_ui: orden de las letras de la clase OK");
+}
 import { leerPropias } from "../src/lengua/frases.js";
 {
   const A = (tipo) => ({ tipo, params: {} });
