@@ -4397,6 +4397,7 @@ const CATALOGO = {"cursos":{"1":"1.º de Primaria","2":"2.º de Primaria","3":"3
 {"id":"trucos.restarsumando","curso":1,"materia":"matematicas","bloque":12,"familia":"trucos","clave":"restarsumando","nombre":"Restar sumando","descripcion":"Restar contando lo que falta para llegar (truco de Calculi).","opciones":[],"rangos":[20],"rango":20,"tamanos":["completa","media"],"titulo":"RESTAR SUMANDO","color":"rosa","metadatos":{"dificultad":3,"minutos":10,"etiquetas":["cálculo mental","truco","restar","restar sumando"]}},
 {"id":"trucos.masmenos10","curso":1,"materia":"matematicas","bloque":12,"familia":"trucos","clave":"masmenos10","nombre":"Sumar y restar 10","descripcion":"Solo cambia la decena (truco de Calculi).","opciones":[{"id":"modo","etiqueta":"Operaciones","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Sumar y restar 10"},{"valor":"suma","etiqueta":"Solo sumar 10"},{"valor":"resta","etiqueta":"Solo restar 10"}]}],"rangos":[30,40,50,60,70,80,90,100],"rango":50,"tamanos":["completa","media"],"titulo":"SUMAR Y RESTAR 10","color":"verde","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["cálculo mental","truco","sumar","restar","decenas"]},"cursos":{"2":{"rangos":[100,200,300,400,500,600,700,800,900,999],"rango":100},"3":{"rangos":[1000,2000,3000,4000,5000,6000,7000,8000,9000,9999],"rango":9999}}},
 {"id":"letra.busca","curso":1,"materia":"lengua","bloque":2,"familia":"letra","clave":"busca","nombre":"Rodea la letra","descripcion":"Filas de letras sueltas: rodear todas las que son iguales a la pedida.","opciones":[{"id":"letra","etiqueta":"Letra que se busca","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Al azar"},{"valor":"a","etiqueta":"a"},{"valor":"b","etiqueta":"b"},{"valor":"c","etiqueta":"c"},{"valor":"d","etiqueta":"d"},{"valor":"e","etiqueta":"e"},{"valor":"f","etiqueta":"f"},{"valor":"g","etiqueta":"g"},{"valor":"h","etiqueta":"h"},{"valor":"i","etiqueta":"i"},{"valor":"j","etiqueta":"j"},{"valor":"k","etiqueta":"k"},{"valor":"l","etiqueta":"l"},{"valor":"m","etiqueta":"m"},{"valor":"n","etiqueta":"n"},{"valor":"ñ","etiqueta":"ñ"},{"valor":"o","etiqueta":"o"},{"valor":"p","etiqueta":"p"},{"valor":"q","etiqueta":"q"},{"valor":"r","etiqueta":"r"},{"valor":"s","etiqueta":"s"},{"valor":"t","etiqueta":"t"},{"valor":"u","etiqueta":"u"},{"valor":"v","etiqueta":"v"},{"valor":"w","etiqueta":"w"},{"valor":"x","etiqueta":"x"},{"valor":"y","etiqueta":"y"},{"valor":"z","etiqueta":"z"}]},{"id":"distractoras","etiqueta":"Las otras letras","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Al azar"},{"valor":"confusas","etiqueta":"Las que se confunden (b-d-p-q, m-n, u-n…)"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"mayus","etiqueta":"MAYÚSCULA"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"RODEA LA LETRA","color":"amarillo","metadatos":{"dificultad":1,"minutos":8,"etiquetas":["lengua","letras","reconocer","rodear","atención"]}},
+{"id":"letra.dictado","curso":1,"materia":"lengua","bloque":2,"familia":"letra","clave":"dictado","nombre":"Escucho y rodeo","descripcion":"La maestra dice una letra en cada fila y se rodea entre las que se confunden (b, d, p, q, t…).","opciones":[{"id":"grupo","etiqueta":"Letras de cada fila","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"b, d, p, q y t"},{"valor":"bdpq","etiqueta":"b, d, p y q"},{"valor":"mnu","etiqueta":"m, n, ñ y u"},{"valor":"vocales","etiqueta":"Las vocales"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"mayus","etiqueta":"MAYÚSCULA"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"ESCUCHO Y RODEO","color":"amarillo","metadatos":{"dificultad":1,"minutos":10,"etiquetas":["lengua","letras","discriminación","auditiva","visual","dictado","rodear"]}},
 {"id":"letra.enpalabras","curso":1,"materia":"lengua","bloque":2,"familia":"letra","clave":"enpalabras","nombre":"Rodea la letra en las palabras","descripcion":"Una lista de palabras: rodear la letra pedida en cada una y contar cuántas veces sale.","opciones":[{"id":"letra","etiqueta":"Letra que se busca","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Al azar"},{"valor":"a","etiqueta":"a"},{"valor":"b","etiqueta":"b"},{"valor":"c","etiqueta":"c"},{"valor":"d","etiqueta":"d"},{"valor":"e","etiqueta":"e"},{"valor":"f","etiqueta":"f"},{"valor":"g","etiqueta":"g"},{"valor":"h","etiqueta":"h"},{"valor":"i","etiqueta":"i"},{"valor":"j","etiqueta":"j"},{"valor":"l","etiqueta":"l"},{"valor":"m","etiqueta":"m"},{"valor":"n","etiqueta":"n"},{"valor":"ñ","etiqueta":"ñ"},{"valor":"o","etiqueta":"o"},{"valor":"p","etiqueta":"p"},{"valor":"r","etiqueta":"r"},{"valor":"s","etiqueta":"s"},{"valor":"t","etiqueta":"t"},{"valor":"u","etiqueta":"u"},{"valor":"v","etiqueta":"v"},{"valor":"z","etiqueta":"z"}]},{"id":"tarea","etiqueta":"Tarea","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Rodear y contar cuántas veces"},{"valor":"rodea","etiqueta":"Solo rodear"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"RODEA LA LETRA EN LAS PALABRAS","color":"rosa","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","letras","rodear","contar","palabras"]}},
 {"id":"letra.falta","curso":1,"materia":"lengua","bloque":2,"familia":"letra","clave":"falta","nombre":"Pon la letra que falta","descripcion":"Palabras con una letra en hueco (m_sa), con tres letras para elegir o sin ayuda.","opciones":[{"id":"ayuda","etiqueta":"Ayuda","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Con tres letras para elegir"},{"valor":"sin","etiqueta":"Sin ayuda"}]},{"id":"hueco","etiqueta":"Letra que falta","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Cualquier letra"},{"valor":"primera","etiqueta":"La primera"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"largo","etiqueta":"Sílabas de cada palabra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas"},{"valor":1,"etiqueta":"1 sílaba"},{"valor":2,"etiqueta":"2 sílabas"},{"valor":3,"etiqueta":"3 sílabas"},{"valor":4,"etiqueta":"4 sílabas"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"PON LA LETRA QUE FALTA","color":"azul","metadatos":{"dificultad":2,"minutos":10,"etiquetas":["lengua","letras","palabras","completar"]},"cursos":{"2":{"rangos":[],"rango":null}}},
 {"id":"letra.vocales","curso":1,"materia":"lengua","bloque":2,"familia":"letra","clave":"vocales","nombre":"Completa las vocales","descripcion":"Palabras con las vocales en hueco (p_l_t_): escribirlas.","opciones":[{"id":"faltan","etiqueta":"Vocales que faltan","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Todas"},{"valor":"una","etiqueta":"Una"},{"valor":"azar","etiqueta":"Algunas (al azar)"}]},{"id":"tipo","etiqueta":"Tipo de sílabas","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Directas (ma, pe)"},{"valor":"inversas","etiqueta":"Con inversas (al, en)"},{"valor":"trabadas","etiqueta":"Con trabadas (pla, bra)"},{"valor":"mixtas","etiqueta":"Con mixtas (con, sol)"}]},{"id":"largo","etiqueta":"Sílabas de cada palabra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"Variadas"},{"valor":1,"etiqueta":"1 sílaba"},{"valor":2,"etiqueta":"2 sílabas"},{"valor":3,"etiqueta":"3 sílabas"},{"valor":4,"etiqueta":"4 sílabas"}]},{"id":"caso","etiqueta":"Letra","tipo":"opcion","defecto":null,"valores":[{"valor":null,"etiqueta":"minúscula"},{"valor":"inicial","etiqueta":"Mayúscula inicial"},{"valor":"mayus","etiqueta":"MAYÚSCULAS"}]}],"rangos":[],"rango":null,"tamanos":["completa","media"],"titulo":"COMPLETA LAS VOCALES","color":"verde","metadatos":{"dificultad":2,"minutos":12,"etiquetas":["lengua","letras","vocales","palabras","completar"]}},
@@ -4838,7 +4839,7 @@ const ORDEN_LIBRE = new Set([
   "estadistica.patrones",
   "multiplicar.filas", "multiplicar.grupos", "multiplicar.problemas", "multiplicar.reparto",
   // Lengua
-  "letra.abecedario", "letra.busca", "letra.enpalabras", "letra.falta", "letra.vocales",
+  "letra.abecedario", "letra.busca", "letra.dictado", "letra.enpalabras", "letra.falta", "letra.vocales",
   "silaba.falta", "silaba.junta", "silaba.ordena", "silaba.separa", "silaba.tabla",
   "fono.inicial", "fono.larga", "fono.posicion", "fono.quita", "fono.silabas",
   "palabra.articulo", "palabra.clasifica", "palabra.cuenta", "palabra.dibuja", "palabra.intrusa", "palabra.letras", "palabra.plural",
@@ -4850,6 +4851,7 @@ const ORDEN_LIBRE = new Set([
 
 /** Condiciones de algunos tipos sobre el orden (las mismas que comprueban sus invariantes). */
 const ACEPTA = {
+  "letra.dictado": (es) => es.every((e, i) => !i || e.solucion.letra !== es[i - 1].solucion.letra),   // nunca la misma letra dos filas seguidas
   "frase.verdad": (es) => !/^0+1+$|^1+0+$/.test(es.map((e) => e.solucion.rodea).join("")),   // Sí y No mezclados
 };
 
@@ -10489,6 +10491,7 @@ __req("tipos/letra.falta.js");
 __req("tipos/letra.vocales.js");
 __req("tipos/letra.parejas.js");
 __req("tipos/letra.abecedario.js");
+__req("tipos/letra.dictado.js");
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({  }));
 },
 "tipos/familia.medida.js": (__exp) => {
@@ -13619,6 +13622,60 @@ const __default = registrar({
 });
 
 Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get CONFUSAS() { return CONFUSAS; }, get NFILA() { return NFILA; }, get default() { return __default; } }));
+},
+"tipos/letra.dictado.js": (__exp) => {
+// letra.dictado · Escucho y rodeo (Lengua 1.º, bloque 2; petición de Iván 26-11-2026, ficha de discriminación auditiva y visual).
+// La maestra dice una letra en cada fila y el alumno la rodea entre las del grupo (b d p q t…, que se confunden).
+// datos:    { fila: [las letras del grupo, cada una una vez, en otro orden] }
+// solucion: { huecos: [], rodea: [posición de la letra dictada], letra: "d" }   (la letra dictada solo está en la solución: en pantalla, rodeada en rojo)
+// Opciones: grupo (b d p q t / b d p q / m n ñ u / vocales) · caso (minúscula / MAYÚSCULA).
+// Con letras elegidas (vistas.js): solo las del grupo que estén elegidas (al menos 2).
+// Las letras dictadas se reparten por igual (rondas del grupo barajado) y nunca la misma dos filas seguidas.
+// Cantidad: 2 columnas; «Más grandes» 20 filas (media: 10), «Más ejercicios» las que caben con tarjetas ≥ 40 pt. Filas distintas.
+const { registrar } = __req("nucleo/tipos.js");
+const { TOP, cuantosRejilla } = __req("render/papel.js");
+const { permitida, avisoVistas } = __req("lengua/vistas.js");
+const { rodear } = __req("lengua/dibujo.js");
+const { ajusta } = __req("tipos/_lengua.js");
+const GRUPOS = { bdpqt: "bdpqt", bdpq: "bdpq", mnu: "mnñu", vocales: "aeiou" };
+const MIN_ALTO = 40;
+
+const __default = registrar({
+  id: "letra.dictado",
+  version: 1,
+  cantidad: true,
+  generar(params, azar, ctx) {
+    const n = cuantosRejilla(ctx, 2, MIN_ALTO, [20, 10]), mayus = params.caso === "mayus", fmt = (c) => (mayus ? c.toUpperCase() : c);
+    const grupo = [...GRUPOS[params.grupo || "bdpqt"]].filter((l) => permitida(l));
+    if (grupo.length < 2) throw new Error("«letra.dictado» necesita al menos dos letras del grupo entre las elegidas." + avisoVistas());
+    const dictadas = [];
+    while (dictadas.length < n) {
+      const ronda = azar.barajar([...grupo]);
+      if (ronda[0] === dictadas.at(-1)) ronda.push(ronda.shift());
+      dictadas.push(...ronda);
+    }
+    const perms = (l) => (l.length < 2 ? [l] : l.flatMap((c, i) => perms([...l.slice(0, i), ...l.slice(i + 1)]).map((r) => [c, ...r])));
+    let libres = azar.barajar(perms(grupo));   // todas las filas posibles (≤ 120): sin repetir mientras haya
+    const ejercicios = dictadas.slice(0, n).map((letra) => {
+      if (!libres.length) libres = azar.barajar(perms(grupo));   // pocas letras elegidas: se repiten
+      const fila = libres.pop();
+      return { datos: { fila: fila.map(fmt) }, solucion: { huecos: [], rodea: [fila.indexOf(letra)], letra: fmt(letra) } };
+    });
+    return { enunciado: "Escucha el sonido y rodea la letra que has oído.", ejercicios };
+  },
+  dibujar(p, act) {
+    const { cel, cw, ch } = p.rejilla(TOP, 2, Math.ceil(act.ejercicios.length / 2)), rel = 0.3;
+    act.ejercicios.forEach((e, i) => p.ejercicio(e.id, () => {
+      const [x, y] = cel[i], w = cw - 32 - 8, fila = e.datos.fila;
+      p.marco(x, y, cw, ch, i);
+      const gap = (q) => q * 0.9;
+      const fs = ajusta(p, (q) => fila.reduce((t, l) => t + p.ancho(l, "PB", q) + q * 2 * rel, 0) + gap(q) * (fila.length - 1), w, Math.min(28, ch * 0.5), 10);
+      rodear(p, x + 32, y, w, ch, fila, e.solucion.rodea, { fs, gap: gap(fs), relleno: rel });
+    }));
+  },
+});
+
+Object.defineProperties(__exp, Object.getOwnPropertyDescriptors({ get GRUPOS() { return GRUPOS; }, get default() { return __default; } }));
 },
 "tipos/letra.enpalabras.js": (__exp) => {
 // letra.enpalabras · Rodea la letra en las palabras (Lengua 1.º, lote 1; LENGUA_1.md §3, bloque 2).

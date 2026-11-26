@@ -36,6 +36,29 @@ export default {
     if (p.distractoras === "confusas") for (const [a, b] of ["bd", "bp", "bq", "dp", "dq", "pq", "mn", "un"]) assert.ok(CONFUSAS[a].includes(b) && CONFUSAS[b].includes(a), `${a}-${b} deben confundirse`);
   },
 
+  "letra.dictado"(act, tam) {
+    const es = act.ejercicios, p = act.params, mayus = p.caso === "mayus";
+    const grupo = { bdpq: "bdpq", mnu: "mnñu", vocales: "aeiou" }[p.grupo] || "bdpqt";
+    cuantos(es, tam === "media" ? 10 : 20);
+    const k = es[0].datos.fila.length, perms = [...Array(k).keys()].reduce((a, i) => a * (i + 1), 1);
+    if (perms >= es.length) unicos(es, (e) => e.datos.fila.join(""), "filas repetidas");   // con pocas letras elegidas no hay filas para todas
+    assert.ok(act.enunciado.startsWith("Escucha"));
+    let antes = null;
+    for (const e of es) {
+      sinHuecos(e);
+      const f = e.datos.fila.map((c) => c.toLowerCase());
+      assert.ok(f.length >= 2 && new Set(f).size === f.length, "letras repetidas en la fila");
+      for (const c of f) assert.ok(grupo.includes(c), `«${c}» no es del grupo ${grupo}`);
+      for (const c of e.datos.fila) assert.equal(c, mayus ? c.toUpperCase() : c.toLowerCase(), "caso");
+      assert.equal(e.solucion.rodea.length, 1);
+      assert.equal(e.datos.fila[e.solucion.rodea[0]], e.solucion.letra, "rodea ≠ letra dictada");
+      assert.notEqual(e.solucion.letra, antes, "la misma letra dos filas seguidas"); antes = e.solucion.letra;
+    }
+    const veces = {}; for (const e of es) veces[e.solucion.letra] = (veces[e.solucion.letra] || 0) + 1;
+    const vs = Object.values(veces);
+    assert.ok(vs.length === es[0].datos.fila.length && Math.max(...vs) - Math.min(...vs) <= 1, "letras dictadas mal repartidas: " + JSON.stringify(veces));
+  },
+
   "letra.enpalabras"(act, tam) {
     const es = act.ejercicios, p = act.params, cuenta = p.tarea !== "rodea";
     cuantos(es, tam === "media" ? 6 : 12);

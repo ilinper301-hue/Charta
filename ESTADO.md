@@ -19,13 +19,14 @@ Sin cambios de código. El plan y el estado de sus fases están en **`PLAN-DISEN
 - Bloque 8 de problemas, `problemas.barras` (Barri) y 8 trucos de cálculo mental de Calculi en 1.º.
 - Matemáticas 1.º completa; Matemáticas 2.º completa: lotes 0–6 (catálogo por curso, hasta 999, tres cifras, medida, geometría y estadística, problemas y trucos, multiplicar y repartir).
 - Matemáticas 3.º: lote 0 (catálogo de 3.º, números hasta 9999, romanos hasta 100).
-- Lengua 1.º: lotes 0–5 (sílaba, letra, fono, palabra, orto, frase, escritura con pauta Lamela y letras de trazo, lectura) más «Leo y dibujo» y «Miro y escribo».
+- Lengua 1.º: lotes 0–5 (sílaba, letra, fono, palabra, orto, frase, escritura con pauta Lamela y letras de trazo, lectura) más «Leo y dibujo», «Miro y escribo» y «Escucho y rodeo» (`letra.dictado`, 26-11-2026).
 - Letra Escolar_G (ligada) en las fichas de caligrafía de Lengua 1.º: opción `grafia`, contornos en `src/lengua/escolar.js` (generado por `tools/escolar.py` desde `referencia/fuentes/Escolar_G.ttf`), sin punto de inicio ni flechas (22-11-2026).
 - Mapa de letras de Lengua 1.º con letras obligatorias (pulsación larga), válido en favoritas, nube, Tabula y Fori.
 - `geometria.lineas` v2 con opciones en orden aleatorio.
 Detalle de cada paso: `HISTORIAL.md`.
 
 ## Pendiente de Iván
+- Probar en el Android «Escucho y rodeo» (26-11-2026): Crear ficha → 1.º → Lengua → Letras y sonidos. Cada fila trae b, d, p, q y t (o b d p q / m n ñ u / vocales); la letra que hay que dictar en cada fila sale rodeada en rojo en «Soluciones» (solo en pantalla). 20 filas (10 en media); para dos fichas por hoja con línea de corte, ponerla dos veces en media página.
 - Probar en el Android (Lengua 2.º, lote 1): Crear ficha → 2.º → Lengua: «Ordena la frase» con 6–7 palabras (¿sale más de un orden válido?), contrarios y adivinanzas nuevos, «Pon el punto» → «Dos frases seguidas», sopa de letras con 10 palabras y diagonal.
 - Revisar `datos/lexico_2.tsv` (689 palabras nuevas de 2.º: gue/güe, ce/ci, ge/je, br/bl, h, y final, x…): quitar o añadir las que quieras. Probar en el Android: Crear ficha → 2.º → Lengua (35 modelos de 1.º; escritura con pauta de 4 mm).
 - Probar en el Android (Lengua 1.º, remates del 25-11-2026): en «Letras», el mapa sale en tu orden (A E I O U L M S N…) y el desplegable «Hasta la…» marca de golpe las enseñadas; mirar las frases nuevas de la «l» con «Hasta la l» («Lola le lee a Lalo», «Lulú olía la lila»…). «Agua» no entra en el léxico: lleva «el» siendo femenina y confundiría en «Pon el artículo».

@@ -15206,6 +15206,431 @@
    "e2a5f1a72f6e09d5"
   ]
  },
+ "letra.dictado": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Escucho y rodeo",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 1,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "letra.dictado",
+       "tipoVersion": 1,
+       "params": {
+        "grupo": null,
+        "caso": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Escucha el sonido y rodea la letra que has oído.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "fila": [
+           "t",
+           "b",
+           "q",
+           "p",
+           "d"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           2
+          ],
+          "letra": "q"
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "fila": [
+           "p",
+           "b",
+           "d",
+           "q",
+           "t"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           4
+          ],
+          "letra": "t"
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "fila": [
+           "d",
+           "t",
+           "b",
+           "q",
+           "p"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           2
+          ],
+          "letra": "b"
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "fila": [
+           "b",
+           "p",
+           "t",
+           "q",
+           "d"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           4
+          ],
+          "letra": "d"
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "fila": [
+           "t",
+           "d",
+           "p",
+           "b",
+           "q"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           2
+          ],
+          "letra": "p"
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "fila": [
+           "b",
+           "t",
+           "p",
+           "q",
+           "d"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           1
+          ],
+          "letra": "t"
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "fila": [
+           "q",
+           "d",
+           "p",
+           "b",
+           "t"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           3
+          ],
+          "letra": "b"
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "fila": [
+           "b",
+           "q",
+           "p",
+           "t",
+           "d"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           1
+          ],
+          "letra": "q"
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "fila": [
+           "b",
+           "d",
+           "t",
+           "p",
+           "q"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           1
+          ],
+          "letra": "d"
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "fila": [
+           "d",
+           "b",
+           "p",
+           "q",
+           "t"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           2
+          ],
+          "letra": "p"
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "fila": [
+           "b",
+           "q",
+           "t",
+           "p",
+           "d"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           1
+          ],
+          "letra": "q"
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "fila": [
+           "b",
+           "p",
+           "q",
+           "t",
+           "d"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           0
+          ],
+          "letra": "b"
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "fila": [
+           "p",
+           "d",
+           "b",
+           "t",
+           "q"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           0
+          ],
+          "letra": "p"
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "fila": [
+           "b",
+           "t",
+           "q",
+           "p",
+           "d"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           1
+          ],
+          "letra": "t"
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "fila": [
+           "q",
+           "t",
+           "d",
+           "b",
+           "p"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           2
+          ],
+          "letra": "d"
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "fila": [
+           "p",
+           "q",
+           "b",
+           "t",
+           "d"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           2
+          ],
+          "letra": "b"
+         }
+        },
+        {
+         "id": "a1e17",
+         "datos": {
+          "fila": [
+           "b",
+           "p",
+           "d",
+           "t",
+           "q"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           2
+          ],
+          "letra": "d"
+         }
+        },
+        {
+         "id": "a1e18",
+         "datos": {
+          "fila": [
+           "t",
+           "b",
+           "d",
+           "q",
+           "p"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           0
+          ],
+          "letra": "t"
+         }
+        },
+        {
+         "id": "a1e19",
+         "datos": {
+          "fila": [
+           "p",
+           "q",
+           "b",
+           "d",
+           "t"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           1
+          ],
+          "letra": "q"
+         }
+        },
+        {
+         "id": "a1e20",
+         "datos": {
+          "fila": [
+           "d",
+           "p",
+           "q",
+           "b",
+           "t"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           1
+          ],
+          "letra": "p"
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": []
+  },
+  "svgPapel": [
+   "8078f0095ba90357"
+  ],
+  "svgSolucion": [
+   "e620ad96b7e0051b"
+  ]
+ },
  "letra.enpalabras": {
   "ficha": {
    "schemaVersion": 1,
@@ -66203,6 +66628,584 @@
   ],
   "svgSolucion": [
    "4996d8c7407f80c0"
+  ]
+ },
+ "más ejercicios: letra.dictado": {
+  "ficha": {
+   "schemaVersion": 1,
+   "app": "charta",
+   "titulo": "Escucho y rodeo",
+   "curso": 1,
+   "area": "lengua",
+   "semilla": 4,
+   "variantes": 1,
+   "presentacion": {
+    "color": true,
+    "lecturaFacil": false,
+    "pictogramas": false
+   },
+   "paginas": [
+    {
+     "actividades": [
+      {
+       "n": 1,
+       "tipo": "letra.dictado",
+       "tipoVersion": 1,
+       "params": {
+        "grupo": null,
+        "caso": null,
+        "rango": null
+       },
+       "tamano": "completa",
+       "color": "amarillo",
+       "enunciado": "Escucha el sonido y rodea la letra que has oído.",
+       "ejemplo": null,
+       "ejercicios": [
+        {
+         "id": "a1e1",
+         "datos": {
+          "fila": [
+           "b",
+           "p",
+           "d",
+           "q",
+           "t"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           2
+          ],
+          "letra": "d"
+         }
+        },
+        {
+         "id": "a1e2",
+         "datos": {
+          "fila": [
+           "b",
+           "p",
+           "t",
+           "q",
+           "d"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           2
+          ],
+          "letra": "t"
+         }
+        },
+        {
+         "id": "a1e3",
+         "datos": {
+          "fila": [
+           "p",
+           "t",
+           "b",
+           "d",
+           "q"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           0
+          ],
+          "letra": "p"
+         }
+        },
+        {
+         "id": "a1e4",
+         "datos": {
+          "fila": [
+           "b",
+           "d",
+           "p",
+           "t",
+           "q"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           0
+          ],
+          "letra": "b"
+         }
+        },
+        {
+         "id": "a1e5",
+         "datos": {
+          "fila": [
+           "t",
+           "b",
+           "d",
+           "q",
+           "p"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           3
+          ],
+          "letra": "q"
+         }
+        },
+        {
+         "id": "a1e6",
+         "datos": {
+          "fila": [
+           "p",
+           "d",
+           "t",
+           "b",
+           "q"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           3
+          ],
+          "letra": "b"
+         }
+        },
+        {
+         "id": "a1e7",
+         "datos": {
+          "fila": [
+           "d",
+           "t",
+           "q",
+           "b",
+           "p"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           1
+          ],
+          "letra": "t"
+         }
+        },
+        {
+         "id": "a1e8",
+         "datos": {
+          "fila": [
+           "p",
+           "d",
+           "t",
+           "q",
+           "b"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           1
+          ],
+          "letra": "d"
+         }
+        },
+        {
+         "id": "a1e9",
+         "datos": {
+          "fila": [
+           "p",
+           "b",
+           "q",
+           "d",
+           "t"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           0
+          ],
+          "letra": "p"
+         }
+        },
+        {
+         "id": "a1e10",
+         "datos": {
+          "fila": [
+           "d",
+           "t",
+           "q",
+           "p",
+           "b"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           2
+          ],
+          "letra": "q"
+         }
+        },
+        {
+         "id": "a1e11",
+         "datos": {
+          "fila": [
+           "q",
+           "d",
+           "b",
+           "p",
+           "t"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           4
+          ],
+          "letra": "t"
+         }
+        },
+        {
+         "id": "a1e12",
+         "datos": {
+          "fila": [
+           "d",
+           "q",
+           "p",
+           "b",
+           "t"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           1
+          ],
+          "letra": "q"
+         }
+        },
+        {
+         "id": "a1e13",
+         "datos": {
+          "fila": [
+           "q",
+           "t",
+           "p",
+           "d",
+           "b"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           3
+          ],
+          "letra": "d"
+         }
+        },
+        {
+         "id": "a1e14",
+         "datos": {
+          "fila": [
+           "q",
+           "p",
+           "t",
+           "b",
+           "d"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           3
+          ],
+          "letra": "b"
+         }
+        },
+        {
+         "id": "a1e15",
+         "datos": {
+          "fila": [
+           "b",
+           "d",
+           "t",
+           "q",
+           "p"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           4
+          ],
+          "letra": "p"
+         }
+        },
+        {
+         "id": "a1e16",
+         "datos": {
+          "fila": [
+           "p",
+           "t",
+           "b",
+           "q",
+           "d"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           4
+          ],
+          "letra": "d"
+         }
+        },
+        {
+         "id": "a1e17",
+         "datos": {
+          "fila": [
+           "p",
+           "t",
+           "d",
+           "b",
+           "q"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           3
+          ],
+          "letra": "b"
+         }
+        },
+        {
+         "id": "a1e18",
+         "datos": {
+          "fila": [
+           "t",
+           "q",
+           "b",
+           "d",
+           "p"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           0
+          ],
+          "letra": "t"
+         }
+        },
+        {
+         "id": "a1e19",
+         "datos": {
+          "fila": [
+           "t",
+           "d",
+           "q",
+           "p",
+           "b"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           2
+          ],
+          "letra": "q"
+         }
+        },
+        {
+         "id": "a1e20",
+         "datos": {
+          "fila": [
+           "b",
+           "p",
+           "q",
+           "d",
+           "t"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           1
+          ],
+          "letra": "p"
+         }
+        },
+        {
+         "id": "a1e21",
+         "datos": {
+          "fila": [
+           "t",
+           "d",
+           "p",
+           "b",
+           "q"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           0
+          ],
+          "letra": "t"
+         }
+        },
+        {
+         "id": "a1e22",
+         "datos": {
+          "fila": [
+           "d",
+           "p",
+           "q",
+           "t",
+           "b"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           1
+          ],
+          "letra": "p"
+         }
+        },
+        {
+         "id": "a1e23",
+         "datos": {
+          "fila": [
+           "d",
+           "q",
+           "b",
+           "t",
+           "p"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           2
+          ],
+          "letra": "b"
+         }
+        },
+        {
+         "id": "a1e24",
+         "datos": {
+          "fila": [
+           "t",
+           "b",
+           "p",
+           "d",
+           "q"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           3
+          ],
+          "letra": "d"
+         }
+        },
+        {
+         "id": "a1e25",
+         "datos": {
+          "fila": [
+           "b",
+           "q",
+           "p",
+           "d",
+           "t"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           1
+          ],
+          "letra": "q"
+         }
+        },
+        {
+         "id": "a1e26",
+         "datos": {
+          "fila": [
+           "q",
+           "b",
+           "p",
+           "d",
+           "t"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           3
+          ],
+          "letra": "d"
+         }
+        },
+        {
+         "id": "a1e27",
+         "datos": {
+          "fila": [
+           "p",
+           "b",
+           "d",
+           "t",
+           "q"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           1
+          ],
+          "letra": "b"
+         }
+        },
+        {
+         "id": "a1e28",
+         "datos": {
+          "fila": [
+           "q",
+           "d",
+           "b",
+           "t",
+           "p"
+          ]
+         },
+         "solucion": {
+          "huecos": [],
+          "rodea": [
+           4
+          ],
+          "letra": "p"
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "variantesDatos": [],
+   "cantidad": "mas"
+  },
+  "svgPapel": [
+   "1118b814c5d0913d"
+  ],
+  "svgSolucion": [
+   "21e59cef14daece0"
   ]
  },
  "más ejercicios: silaba.separa": {

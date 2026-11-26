@@ -5,3 +5,4 @@ import "./letra.falta.js";
 import "./letra.vocales.js";
 import "./letra.parejas.js";
 import "./letra.abecedario.js";
+import "./letra.dictado.js";

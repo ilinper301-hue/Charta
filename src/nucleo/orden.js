@@ -30,7 +30,7 @@ export const ORDEN_LIBRE = new Set([
   "estadistica.patrones",
   "multiplicar.filas", "multiplicar.grupos", "multiplicar.problemas", "multiplicar.reparto",
   // Lengua
-  "letra.abecedario", "letra.busca", "letra.enpalabras", "letra.falta", "letra.vocales",
+  "letra.abecedario", "letra.busca", "letra.dictado", "letra.enpalabras", "letra.falta", "letra.vocales",
   "silaba.falta", "silaba.junta", "silaba.ordena", "silaba.separa", "silaba.tabla",
   "fono.inicial", "fono.larga", "fono.posicion", "fono.quita", "fono.silabas",
   "palabra.articulo", "palabra.clasifica", "palabra.cuenta", "palabra.dibuja", "palabra.intrusa", "palabra.letras", "palabra.plural",
@@ -42,6 +42,7 @@ export const ORDEN_LIBRE = new Set([
 
 /** Condiciones de algunos tipos sobre el orden (las mismas que comprueban sus invariantes). */
 const ACEPTA = {
+  "letra.dictado": (es) => es.every((e, i) => !i || e.solucion.letra !== es[i - 1].solucion.letra),   // nunca la misma letra dos filas seguidas
   "frase.verdad": (es) => !/^0+1+$|^1+0+$/.test(es.map((e) => e.solucion.rodea).join("")),   // Sí y No mezclados
 };
 

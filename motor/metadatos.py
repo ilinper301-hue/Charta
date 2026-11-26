@@ -186,6 +186,7 @@ META = {
     "estadistica.patrones": (2, 10, "patrones series razonamiento"),
     # Lengua · lote 1 · bloque 2 (letras) y bloque 3 (sílabas)
     "letra.busca": (1, 8, "lengua letras reconocer rodear atención"),
+    "letra.dictado": (1, 10, "lengua letras discriminación auditiva visual dictado rodear"),
     "letra.enpalabras": (2, 10, "lengua letras rodear contar palabras"),
     "letra.falta": (2, 10, "lengua letras palabras completar"),
     "letra.vocales": (2, 12, "lengua letras vocales palabras completar"),
